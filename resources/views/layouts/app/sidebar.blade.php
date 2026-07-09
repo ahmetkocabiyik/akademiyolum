@@ -4,50 +4,83 @@
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-canvas">
-        <flux:sidebar sticky collapsible="mobile" class="sidebar-dark border-e border-white/10 bg-navy [&_[data-flux-sidebar-brand]]:text-white">
-            <flux:sidebar.header>
+        <flux:sidebar sticky collapsible="mobile" class="sidebar-dark border-e border-white/10 bg-navy !gap-0 !p-0">
+            <flux:sidebar.header class="border-b border-white/[0.07] px-5 pt-[18px] pb-4">
                 <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
-            <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Ana Menü')" class="grid">
-                    <flux:sidebar.item icon="squares-2x2" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </flux:sidebar.item>
-                    <flux:sidebar.item icon="document-text" :href="route('yayinlar')" :current="request()->routeIs('yayinlar')" wire:navigate>
-                        {{ __('Yayınlar') }}
-                    </flux:sidebar.item>
-                    <flux:sidebar.item icon="heart" :href="route('toplumsal-katki')" :current="request()->routeIs('toplumsal-katki')" wire:navigate>
-                        {{ __('Toplumsal Katkı') }}
-                    </flux:sidebar.item>
-                </flux:sidebar.group>
+            <nav class="sb-nav">
+                <div class="sb-sect">{{ __('Ana Menü') }}</div>
+                <a href="{{ route('dashboard') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('dashboard')])>
+                    <flux:icon name="squares-2x2" />
+                    <span>{{ __('Dashboard') }}</span>
+                </a>
+                <a href="{{ route('yayinlar') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('yayinlar*')])>
+                    <flux:icon name="document-text" />
+                    <span>{{ __('Yayınlar') }}</span>
+                </a>
+                <a href="{{ route('toplumsal-katki') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('toplumsal-katki')])>
+                    <flux:icon name="heart" />
+                    <span>{{ __('Toplumsal Katkı') }}</span>
+                </a>
 
-                <flux:sidebar.group :heading="__('Analiz')" class="grid">
-                    <flux:sidebar.item icon="document-magnifying-glass" :href="route('yonerge-analizi')" :current="request()->routeIs('yonerge-analizi')" wire:navigate>
-                        {{ __('Yönerge Analizi') }}
-                    </flux:sidebar.item>
-                    <flux:sidebar.item icon="sparkles" :href="route('yz-danisman')" :current="request()->routeIs('yz-danisman')" wire:navigate>
-                        {{ __('YZ Danışman') }}
-                    </flux:sidebar.item>
-                    <flux:sidebar.item icon="scale" :href="route('juri-analizi')" :current="request()->routeIs('juri-analizi')" wire:navigate>
-                        {{ __('YZ Jüri Analizi') }}
-                    </flux:sidebar.item>
-                </flux:sidebar.group>
+                <div class="sb-sect">{{ __('Analiz') }}</div>
+                <a href="{{ route('yonerge-analizi') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('yonerge-analizi')])>
+                    <flux:icon name="document-magnifying-glass" />
+                    <span>{{ __('Yönerge Analizi') }}</span>
+                </a>
+                <a href="{{ route('yz-danisman') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('yz-danisman')])>
+                    <flux:icon name="sparkles" />
+                    <span>{{ __('YZ Danışman') }}</span>
+                </a>
+                <a href="{{ route('juri-analizi') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('juri-analizi')])>
+                    <flux:icon name="scale" />
+                    <span>{{ __('YZ Jüri Analizi') }}</span>
+                </a>
 
-                <flux:sidebar.group :heading="__('Çıktılar')" class="grid">
-                    <flux:sidebar.item icon="identification" :href="route('cv-olusturucu')" :current="request()->routeIs('cv-olusturucu')" wire:navigate>
-                        {{ __('CV Oluşturucu') }}
-                    </flux:sidebar.item>
-                    <flux:sidebar.item icon="arrow-down-tray" :href="route('cikti-yonetimi')" :current="request()->routeIs('cikti-yonetimi')" wire:navigate>
-                        {{ __('Çıktı Yönetimi') }}
-                    </flux:sidebar.item>
-                </flux:sidebar.group>
-            </flux:sidebar.nav>
+                <div class="sb-sect">{{ __('Çıktılar') }}</div>
+                <a href="{{ route('cv-olusturucu') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('cv-olusturucu')])>
+                    <flux:icon name="identification" />
+                    <span>{{ __('CV Oluşturucu') }}</span>
+                </a>
+                <a href="{{ route('cikti-yonetimi') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('cikti-yonetimi')])>
+                    <flux:icon name="arrow-down-tray" />
+                    <span>{{ __('Çıktı Yönetimi') }}</span>
+                </a>
+            </nav>
 
-            <flux:spacer />
+            <flux:dropdown position="top" align="start">
+                <button type="button" class="sb-user" data-test="sidebar-menu-button">
+                    <div class="sb-avatar">{{ auth()->user()->initials() }}</div>
+                    <div class="min-w-0 flex-1">
+                        <div class="sb-name truncate">{{ auth()->user()->name }}</div>
+                        <div class="sb-uni truncate">{{ auth()->user()->universite ?? auth()->user()->email }}</div>
+                    </div>
+                    <flux:icon name="chevron-up-down" class="size-4 shrink-0 text-white/40" />
+                </button>
 
-            <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
+                <flux:menu class="app-user-menu">
+                    <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>
+                        {{ __('Settings') }}
+                    </flux:menu.item>
+
+                    <flux:menu.separator />
+
+                    <form method="POST" action="{{ route('logout') }}" class="w-full">
+                        @csrf
+                        <flux:menu.item
+                            as="button"
+                            type="submit"
+                            icon="arrow-right-start-on-rectangle"
+                            class="w-full cursor-pointer"
+                            data-test="logout-button"
+                        >
+                            {{ __('Log out') }}
+                        </flux:menu.item>
+                    </form>
+                </flux:menu>
+            </flux:dropdown>
         </flux:sidebar>
 
         <!-- Mobile User Menu -->

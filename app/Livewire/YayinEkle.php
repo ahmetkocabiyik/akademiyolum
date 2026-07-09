@@ -14,7 +14,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Layout('layouts.app')]
+#[Layout('layouts.focused')]
 #[Title('Yayın Ekle')]
 class YayinEkle extends Component
 {
@@ -25,11 +25,10 @@ class YayinEkle extends Component
     // Form alanları
     public string $kategori = 'makale';
 
-    public string $tur = '';
-
     public string $baslik = '';
 
-    public string $yazarlar = '';
+    /** @var list<string> */
+    public array $yazarlar = [''];
 
     public string $donem = '';
 
@@ -48,9 +47,10 @@ class YayinEkle extends Component
 
             $this->faaliyet = $faaliyet;
             $this->kategori = $faaliyet->kategori->value;
-            $this->tur = $faaliyet->tur;
             $this->baslik = $faaliyet->baslik;
-            $this->yazarlar = $faaliyet->yazarlar ?? '';
+            $this->yazarlar = $faaliyet->yazarlar
+                ? array_map('trim', explode(',', $faaliyet->yazarlar))
+                : [''];
             $this->donem = $faaliyet->donem ?? '';
             $this->kaynak = $faaliyet->kaynak ?? '';
             $this->yil = (string) ($faaliyet->meta['yil'] ?? '');
@@ -60,13 +60,32 @@ class YayinEkle extends Component
             return;
         }
 
-        $this->tur = Kategori::from($this->kategori)->label();
+        // Dashboard hızlı-ekle bağlantısından gelen kategori ön-seçimi.
+        $kategori = request('kategori');
+        if (is_string($kategori) && Kategori::tryFrom($kategori) !== null) {
+            $this->kategori = $kategori;
+        }
     }
 
     public function updatedKategori(): void
     {
-        $this->tur = Kategori::from($this->kategori)->label();
+        // Kaynaklar kategoriye göre değiştiği için sıfırla.
         $this->kaynak = '';
+    }
+
+    public function yazarEkle(): void
+    {
+        $this->yazarlar[] = '';
+    }
+
+    public function yazarSil(int $index): void
+    {
+        unset($this->yazarlar[$index]);
+        $this->yazarlar = array_values($this->yazarlar);
+
+        if ($this->yazarlar === []) {
+            $this->yazarlar = [''];
+        }
     }
 
     private function ruleSet(): RuleSet
@@ -98,9 +117,9 @@ class YayinEkle extends Component
     {
         $veri = $this->validate([
             'kategori' => ['required', Rule::enum(Kategori::class)],
-            'tur' => ['required', 'string', 'max:255'],
             'baslik' => ['required', 'string', 'max:255'],
-            'yazarlar' => ['nullable', 'string', 'max:255'],
+            'yazarlar' => ['array'],
+            'yazarlar.*' => ['nullable', 'string', 'max:255'],
             'donem' => ['nullable', Rule::in(['tez_disi', 'tezden'])],
             'kaynak' => ['nullable', 'string', 'max:255'],
             'yil' => ['nullable', 'digits:4'],
@@ -108,13 +127,20 @@ class YayinEkle extends Component
             'aciklama' => ['nullable', 'string', 'max:1000'],
         ]);
 
+        $kategori = Kategori::from($veri['kategori']);
+
+        $yazarlar = array_values(array_filter(
+            array_map('trim', $this->yazarlar),
+            fn (string $yazar) => $yazar !== '',
+        ));
+
         $faaliyet = $this->faaliyet ?? new Faaliyet(['durum' => 'onaylandi']);
 
         $faaliyet->fill([
-            'kategori' => $veri['kategori'],
-            'tur' => $veri['tur'],
+            'kategori' => $kategori->value,
+            'tur' => $kategori->label(),
             'baslik' => $veri['baslik'],
-            'yazarlar' => $veri['yazarlar'] ?: null,
+            'yazarlar' => $yazarlar ? implode(', ', $yazarlar) : null,
             'donem' => $veri['donem'] ?: null,
             'kaynak' => $veri['kaynak'] ?: null,
             'meta' => array_filter([

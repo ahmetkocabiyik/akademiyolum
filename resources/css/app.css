@@ -32,6 +32,8 @@
     --color-cat-purple-light: #eeedfe;
     --color-cat-teal: #0f6e56;
     --color-cat-teal-light: #e1f5ee;
+    --color-cat-gray: #5f5e5a;
+    --color-cat-gray-light: #f1efe8;
 
     /* Yüzey / metin */
     --color-canvas: #f4f6fb;
@@ -71,11 +73,169 @@
     }
 }
 
+/* Palet değişkenleri — inline style'larda (var(--color-*)) kullanılıyor.
+   Tailwind @theme değişkenleri utility'de kullanılmazsa elenebildiği için
+   burada authored olarak da tanımlanır; böylece daima çıktıya girerler. */
+:root {
+    --color-brand: #1a56db;
+    --color-brand-light: #e6f1fb;
+    --color-gold: #c9a84c;
+    --color-gold-light: #faeeda;
+    --color-cat-purple: #534ab7;
+    --color-cat-purple-light: #eeedfe;
+    --color-cat-green: #16a34a;
+    --color-cat-green-light: #eaf3de;
+    --color-cat-amber: #b45309;
+    --color-cat-amber-light: #fef3c7;
+    --color-cat-red: #dc2626;
+    --color-cat-red-light: #fcebeb;
+    --color-cat-teal: #0f6e56;
+    --color-cat-teal-light: #e1f5ee;
+    --color-cat-gray: #5f5e5a;
+    --color-cat-gray-light: #f1efe8;
+    --color-ink-subtle: #94a3b8;
+}
+
 /* Marka yazısı — ana sayfa logosuyla aynı (Playfair Display) */
 .brand-wordmark {
     font-family: 'Playfair Display', ui-serif, Georgia, serif;
     font-weight: 700;
     letter-spacing: -0.01em;
+}
+
+/* Kategori ikon tint'leri — 03_yayin_ekleme.html renkleriyle birebir.
+   (Tailwind @theme değişkenleri kullanılmadığında elenebildiği için sabit hex.) */
+.kat-makale { background: #e6f1fb; color: #1a56db; }
+.kat-tez_yayini { background: #eeedfe; color: #534ab7; }
+.kat-kitap { background: #eaf3de; color: #16a34a; }
+.kat-atif { background: #fef3c7; color: #b45309; }
+.kat-egitim_ogretim { background: #e1f5ee; color: #0f6e56; }
+.kat-editorluk { background: #fcebeb; color: #dc2626; }
+.kat-toplumsal_katki { background: #faeeda; color: #c9a84c; }
+.kat-diger { background: #f1efe8; color: #5f5e5a; }
+
+/* Tablo aksiyon ikon butonları (düzenle / sil) */
+.act-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--color-brand) 35%, white);
+    background: var(--color-brand-light);
+    color: var(--color-brand);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.act-btn:hover {
+    border-color: var(--color-brand);
+    background: var(--color-brand);
+    color: #fff;
+}
+.act-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2.1;
+}
+.act-del {
+    border-color: color-mix(in srgb, var(--color-cat-red) 35%, white);
+    background: var(--color-cat-red-light);
+    color: var(--color-cat-red);
+}
+.act-del:hover {
+    border-color: var(--color-cat-red);
+    background: var(--color-cat-red);
+    color: #fff;
+}
+
+/* Sidebar — 05_yonerge_analizi.html prototip stili */
+.sb-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 12px;
+}
+.sb-sect {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    padding: 0 8px;
+    margin: 14px 0 5px;
+}
+.sb-sect:first-child {
+    margin-top: 0;
+}
+.sb-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    border: 1px solid transparent;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+}
+.sb-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+.sb-link.active {
+    background: rgba(26, 86, 219, 0.25);
+    border-color: rgba(26, 86, 219, 0.3);
+}
+.sb-link > svg {
+    width: 15px;
+    height: 15px;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+.sb-link.active > svg {
+    opacity: 1;
+    color: #60a5fa;
+}
+.sb-link span {
+    font-size: 13px;
+    color: inherit;
+}
+.sb-link.active span {
+    color: #fff;
+    font-weight: 500;
+}
+.sb-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    text-align: start;
+}
+.sb-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(201, 168, 76, 0.2);
+    border: 1.5px solid var(--color-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-gold);
+    flex-shrink: 0;
+}
+.sb-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+}
+.sb-uni {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 1px;
 }
 
 /* Profil menüsü popup'ı: navy sidebar'ın koyu (.sidebar-dark) kapsamında

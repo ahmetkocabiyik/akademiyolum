@@ -25,7 +25,7 @@ test('manuel yayın ekler ve puanı kaynaktan hesaplar', function () {
     Livewire::test(YayinEkle::class)
         ->set('kategori', Kategori::Makale->value)
         ->set('baslik', 'Kelam İlminde Yöntem')
-        ->set('tur', 'Dergi Makalesi')
+        ->set('yazarlar', ['Ahmet K.', 'Mehmet Y.'])
         ->set('kaynak', 'SCI/SSCI')
         ->set('yil', '2025')
         ->call('kaydet')
@@ -36,16 +36,54 @@ test('manuel yayın ekler ve puanı kaynaktan hesaplar', function () {
 
     expect($faaliyet->baslik)->toBe('Kelam İlminde Yöntem')
         ->and($faaliyet->kategori)->toBe(Kategori::Makale)
+        ->and($faaliyet->tur)->toBe('Makale') // tür kategori etiketinden türetilir
+        ->and($faaliyet->yazarlar)->toBe('Ahmet K., Mehmet Y.')
         ->and($faaliyet->puan)->toBe(20)
         ->and($faaliyet->durum)->toBe('onaylandi')
         ->and($faaliyet->meta['yil'])->toBe('2025');
 });
 
-test('kategori değişince tür etiketi ve kaynak güncellenir', function () {
+test('yazar eklenip silinebilir ve kaydederken birleştirilir', function () {
+    Livewire::test(YayinEkle::class)
+        ->assertSet('yazarlar', [''])
+        ->call('yazarEkle')
+        ->call('yazarEkle')
+        ->assertCount('yazarlar', 3)
+        ->set('yazarlar.0', 'Yazar Bir')
+        ->set('yazarlar.1', 'Yazar İki')
+        ->call('yazarSil', 1)
+        ->assertCount('yazarlar', 2)
+        ->set('kategori', Kategori::Makale->value)
+        ->set('baslik', 'Çok Yazarlı Makale')
+        ->call('kaydet')
+        ->assertHasNoErrors();
+
+    expect($this->user->faaliyetler()->sole()->yazarlar)->toBe('Yazar Bir');
+});
+
+test('düzenlemede yazarlar diziye ayrıştırılır', function () {
+    $faaliyet = Faaliyet::factory()->for($this->user)->create(['yazarlar' => 'Ali V., Veli A.']);
+
+    Livewire::test(YayinEkle::class, ['faaliyet' => $faaliyet])
+        ->assertSet('yazarlar', ['Ali V.', 'Veli A.']);
+});
+
+test('hızlı-ekle kategori query parametresi ön-seçili gelir', function () {
+    Livewire::withQueryParams(['kategori' => 'tez_yayini'])
+        ->test(YayinEkle::class)
+        ->assertSet('kategori', 'tez_yayini');
+});
+
+test('geçersiz kategori query parametresi varsayılanı korur', function () {
+    Livewire::withQueryParams(['kategori' => 'olmayan'])
+        ->test(YayinEkle::class)
+        ->assertSet('kategori', 'makale');
+});
+
+test('kategori değişince kaynak sıfırlanır', function () {
     Livewire::test(YayinEkle::class)
         ->set('kaynak', 'SCI/SSCI')
         ->set('kategori', Kategori::Kitap->value)
-        ->assertSet('tur', 'Kitap')
         ->assertSet('kaynak', '');
 });
 
@@ -60,9 +98,8 @@ test('canlı tahmini puan kaynağa göre hesaplanır', function () {
 test('zorunlu alanlar doğrulanır', function () {
     Livewire::test(YayinEkle::class)
         ->set('baslik', '')
-        ->set('tur', '')
         ->call('kaydet')
-        ->assertHasErrors(['baslik', 'tur']);
+        ->assertHasErrors(['baslik']);
 
     expect($this->user->faaliyetler()->count())->toBe(0);
 });

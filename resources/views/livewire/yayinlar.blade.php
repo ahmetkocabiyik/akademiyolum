@@ -61,9 +61,13 @@
                                         </flux:badge>
                                     </td>
                                     <td class="px-2 py-2.5">
-                                        <div class="flex justify-end gap-1">
-                                            <flux:button :href="route('yayinlar.duzenle', $f)" wire:navigate size="xs" variant="ghost" icon="pencil-square" inset />
-                                            <flux:button wire:click="sil({{ $f->id }})" wire:confirm="Bu faaliyet silinsin mi?" size="xs" variant="ghost" icon="trash" inset />
+                                        <div class="flex justify-end gap-1.5">
+                                            <a href="{{ route('yayinlar.duzenle', $f) }}" wire:navigate class="act-btn" title="Düzenle" aria-label="Düzenle">
+                                                <flux:icon name="pencil-square" />
+                                            </a>
+                                            <button type="button" wire:click="sil({{ $f->id }})" wire:confirm="Bu faaliyet silinsin mi?" class="act-btn act-del" title="Sil" aria-label="Sil">
+                                                <flux:icon name="trash" />
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>

@@ -1,15 +1,6 @@
 <div>
     <div class="mx-auto flex max-w-3xl flex-col gap-5">
 
-        {{-- Üst başlık --}}
-        <div class="flex items-center justify-between">
-            <div>
-                <flux:heading size="xl">{{ $faaliyet ? 'Yayını Düzenle' : 'Yayın Ekle' }}</flux:heading>
-                <flux:text class="mt-1">Bilgileri doldurun, puan otomatik hesaplanır</flux:text>
-            </div>
-            <flux:button :href="route('yayinlar')" wire:navigate variant="ghost" size="sm" icon="arrow-left">Listeye dön</flux:button>
-        </div>
-
         {{-- Sekme navigasyonu --}}
         <div class="mx-auto flex rounded-full border border-line bg-surface p-1">
             @foreach (['manuel' => 'Manuel Ekle', 'avesis' => "AVESİS'ten Çek", 'scholar' => "Scholar'dan Ara"] as $anahtar => $etiket)
@@ -24,21 +15,34 @@
         {{-- MANUEL --}}
         @if ($sekme === 'manuel')
             <form wire:submit="kaydet" class="flex flex-col gap-5">
-                <flux:card class="flex flex-col gap-5">
-                    {{-- Kategori type grid --}}
-                    <div>
-                        <flux:text class="mb-2 text-sm font-medium text-ink-muted">Kategori</flux:text>
+                <flux:card class="overflow-hidden !p-0">
+                    {{-- Başlık (03_yayin_ekleme.html modal-header stili) --}}
+                    <div class="flex items-start justify-between gap-4 border-b border-line px-6 py-5">
+                        <div>
+                            <flux:heading size="lg">{{ $faaliyet ? 'Yayını Düzenle' : 'Yayın Ekle' }}</flux:heading>
+                            <flux:text class="mt-1">Bilgileri doldurun, puan otomatik hesaplanır</flux:text>
+                        </div>
+                        <a href="{{ route('yayinlar') }}" wire:navigate aria-label="Kapat"
+                            class="flex size-9 shrink-0 items-center justify-center rounded-lg border border-line text-ink-subtle transition hover:border-cat-red hover:bg-cat-red-light hover:text-cat-red">
+                            <flux:icon name="x-mark" variant="solid" class="size-5" />
+                        </a>
+                    </div>
+
+                    {{-- Gövde --}}
+                    <div class="flex flex-col gap-5 p-6">
+                        {{-- Kategori type grid --}}
+                        <div>
+                            <flux:text class="mb-2 text-sm font-medium text-ink-muted">Kategori</flux:text>
                         <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
                             @foreach ($kategoriler as $k)
-                                @php $secili = $kategori === $k->value; $renk = $k->renk(); @endphp
+                                @php $secili = $kategori === $k->value; @endphp
                                 <button type="button" wire:click="$set('kategori', '{{ $k->value }}')" @class([
                                     'flex flex-col items-center gap-2 rounded-xl border p-3 text-center transition',
                                     'border-brand bg-brand-light' => $secili,
                                     'border-line hover:border-brand hover:bg-brand-light/40' => ! $secili,
                                 ])>
-                                    <span class="flex size-8 items-center justify-center rounded-lg"
-                                        style="background: color-mix(in srgb, var(--color-{{ $renk }}) 14%, white); color: var(--color-{{ $renk }})">
-                                        <flux:icon :name="$k->ikon()" class="size-4" />
+                                    <span class="flex size-8 items-center justify-center rounded-lg kat-{{ $k->value }}">
+                                        <x-kategori-icon :kategori="$k" class="size-4" />
                                     </span>
                                     <span @class(['text-xs font-medium', 'text-brand' => $secili, 'text-ink-muted' => ! $secili])>{{ $k->label() }}</span>
                                 </button>
@@ -63,9 +67,29 @@
 
                     <flux:input wire:model="baslik" label="Yayın Başlığı" badge="Zorunlu" placeholder="Yayının tam başlığını girin..." />
 
-                    <flux:input wire:model="yazarlar" label="Yazarlar" placeholder="Örn. Ahmet K., Mehmet Y." />
-
-                    <flux:input wire:model="tur" label="Tür / Alt tür" placeholder="Örn. Dergi Makalesi" />
+                    {{-- Yazarlar (03_yayin_ekleme.html: çoklu yazar listesi) --}}
+                    <div>
+                        <flux:text class="mb-2 text-sm font-medium text-ink-muted">Yazarlar</flux:text>
+                        <div class="flex flex-col gap-2">
+                            @foreach ($yazarlar as $i => $yazar)
+                                <div class="flex items-center gap-2" wire:key="yazar-{{ $i }}">
+                                    <div class="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-light text-[10px] font-semibold text-brand">{{ $i + 1 }}</div>
+                                    <flux:input wire:model="yazarlar.{{ $i }}" placeholder="Yazar adı..." class="flex-1" />
+                                    @if (count($yazarlar) > 1)
+                                        <button type="button" wire:click="yazarSil({{ $i }})" aria-label="Yazarı sil"
+                                            class="flex size-9 shrink-0 items-center justify-center rounded-lg border border-line text-ink-subtle transition hover:border-cat-red hover:bg-cat-red-light hover:text-cat-red">
+                                            <flux:icon name="x-mark" class="size-4" />
+                                        </button>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                        <button type="button" wire:click="yazarEkle"
+                            class="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-dashed border-line-strong px-3 py-1.5 text-xs font-medium text-ink-subtle transition hover:border-brand hover:text-brand">
+                            <flux:icon name="plus" class="size-3.5" />
+                            Yazar Ekle
+                        </button>
+                    </div>
 
                     {{-- Dizin chip'leri --}}
                     @if (count($this->kaynakSecenekleri()))
@@ -100,7 +124,8 @@
 
                     <flux:input wire:model="doi" label="DOI Numarası" placeholder="10.xxxx/xxxxx" />
 
-                    <flux:textarea wire:model="aciklama" label="Kısa Açıklama" placeholder="Yayın hakkında kısa bir not ekleyin..." rows="3" />
+                        <flux:textarea wire:model="aciklama" label="Kısa Açıklama" placeholder="Yayın hakkında kısa bir not ekleyin..." rows="3" />
+                    </div>
                 </flux:card>
 
                 <div class="flex items-center justify-end gap-3">

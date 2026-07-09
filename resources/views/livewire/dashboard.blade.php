@@ -14,7 +14,8 @@
         <div class="flex flex-wrap items-center gap-2 rounded-xl border border-line bg-surface px-4 py-3">
             <span class="text-xs text-ink-subtle">Hızlı Ekle:</span>
             @foreach ([Kategori::Makale, Kategori::TezYayini, Kategori::ToplumsalKatki, Kategori::EgitimOgretim] as $k)
-                <flux:button :href="route('yayinlar.ekle')" wire:navigate size="sm" variant="subtle" :icon="$k->ikon()">
+                <flux:button :href="route('yayinlar.ekle', ['kategori' => $k->value])" wire:navigate size="sm" variant="subtle">
+                    <x-kategori-icon :kategori="$k" class="size-4" />
                     {{ $k->label() }}
                 </flux:button>
             @endforeach
@@ -144,7 +145,7 @@
                     <flux:card class="!p-3.5">
                         <div class="flex size-7 items-center justify-center rounded-lg"
                             style="background: color-mix(in srgb, var(--color-{{ $renk }}) 14%, white); color: var(--color-{{ $renk }})">
-                            <flux:icon :name="$sonuc->kategori->ikon()" class="size-3.5" />
+                            <x-kategori-icon :kategori="$sonuc->kategori" class="size-3.5" />
                         </div>
                         <div class="mt-2 text-xs font-medium text-ink-muted">{{ $sonuc->kategori->label() }}</div>
                         <div class="font-serif text-lg font-bold text-ink">{{ $sonuc->puan }} pt</div>
