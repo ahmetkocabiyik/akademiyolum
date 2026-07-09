@@ -37,6 +37,21 @@ class UserFactory extends Factory
     }
 
     /**
+     * Indicate that the user has completed onboarding.
+     */
+    public function onboarded(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'unvan' => 'Dr. Öğr. Üyesi',
+            'universite' => 'Mersin Üniversitesi',
+            'fakulte' => 'İlahiyat Fakültesi',
+            'alan' => 'Tasavvuf',
+            'yonerge' => 'ÜAK Doçentlik — İlahiyat 2026',
+            'onboarded_at' => now(),
+        ]);
+    }
+
+    /**
      * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static

@@ -1,34 +1,51 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.head')
     </head>
-    <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky collapsible="mobile" class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+    <body class="min-h-screen bg-canvas">
+        <flux:sidebar sticky collapsible="mobile" class="sidebar-dark border-e border-white/10 bg-navy [&_[data-flux-sidebar-brand]]:text-white">
             <flux:sidebar.header>
                 <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
             <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Platform')" class="grid">
-                    <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                <flux:sidebar.group :heading="__('Ana Menü')" class="grid">
+                    <flux:sidebar.item icon="squares-2x2" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="document-text" :href="route('yayinlar')" :current="request()->routeIs('yayinlar')" wire:navigate>
+                        {{ __('Yayınlar') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="heart" :href="route('toplumsal-katki')" :current="request()->routeIs('toplumsal-katki')" wire:navigate>
+                        {{ __('Toplumsal Katkı') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                <flux:sidebar.group :heading="__('Analiz')" class="grid">
+                    <flux:sidebar.item icon="document-magnifying-glass" :href="route('yonerge-analizi')" :current="request()->routeIs('yonerge-analizi')" wire:navigate>
+                        {{ __('Yönerge Analizi') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="sparkles" :href="route('yz-danisman')" :current="request()->routeIs('yz-danisman')" wire:navigate>
+                        {{ __('YZ Danışman') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="scale" :href="route('juri-analizi')" :current="request()->routeIs('juri-analizi')" wire:navigate>
+                        {{ __('YZ Jüri Analizi') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                <flux:sidebar.group :heading="__('Çıktılar')" class="grid">
+                    <flux:sidebar.item icon="identification" :href="route('cv-olusturucu')" :current="request()->routeIs('cv-olusturucu')" wire:navigate>
+                        {{ __('CV Oluşturucu') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="arrow-down-tray" :href="route('cikti-yonetimi')" :current="request()->routeIs('cikti-yonetimi')" wire:navigate>
+                        {{ __('Çıktı Yönetimi') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
-
-            <flux:sidebar.nav>
-                <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                    {{ __('Repository') }}
-                </flux:sidebar.item>
-
-                <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                    {{ __('Documentation') }}
-                </flux:sidebar.item>
-            </flux:sidebar.nav>
 
             <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
         </flux:sidebar>
@@ -41,15 +58,17 @@
 
             <flux:dropdown position="top" align="end">
                 <flux:profile
+                    circle
                     :initials="auth()->user()->initials()"
                     icon-trailing="chevron-down"
                 />
 
-                <flux:menu>
+                <flux:menu class="app-user-menu">
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
                                 <flux:avatar
+                                    circle
                                     :name="auth()->user()->name"
                                     :initials="auth()->user()->initials()"
                                 />

@@ -1,17 +1,18 @@
 @props([
     'sidebar' => false,
+    'href' => null,
 ])
 
-@if($sidebar)
-    <flux:sidebar.brand name="Laravel Starter Kit" {{ $attributes }}>
-        <x-slot name="logo" class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-            <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
-        </x-slot>
-    </flux:sidebar.brand>
-@else
-    <flux:brand name="Laravel Starter Kit" {{ $attributes }}>
-        <x-slot name="logo" class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-            <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
-        </x-slot>
-    </flux:brand>
-@endif
+<a href="{{ $href ?? route('home') }}" {{ $attributes->merge(['class' => 'inline-flex items-center gap-2.5']) }}>
+    <span @class([
+        'flex size-9 shrink-0 items-center justify-center rounded-lg bg-navy text-gold',
+        'ring-1 ring-white/10' => $sidebar,
+    ])>
+        <x-app-logo-icon class="size-5" />
+    </span>
+    <span @class([
+        'brand-wordmark text-xl leading-none',
+        'text-white' => $sidebar,
+        'text-navy' => ! $sidebar,
+    ])>Akademiyolum</span>
+</a>

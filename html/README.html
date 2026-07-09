@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akademiyolum — Proje Dosyaları</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:#f4f6fb;color:#0a1628;padding:40px}
+.container{max-width:800px;margin:0 auto}
+.header{background:#0a1628;border-radius:14px;padding:32px;margin-bottom:32px;display:flex;align-items:center;gap:16px}
+.logo{width:48px;height:48px;background:#c9a84c;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#0a1628;flex-shrink:0}
+.header h1{font-size:24px;font-weight:700;color:#fff;margin-bottom:4px}
+.header p{font-size:14px;color:rgba(255,255,255,.5)}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;margin-bottom:16px}
+.card h2{font-size:16px;font-weight:600;color:#0a1628;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #e2e8f0}
+.file-list{display:flex;flex-direction:column;gap:8px}
+.file-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid #e2e8f0;border-radius:8px;text-decoration:none;transition:all .15s}
+.file-item:hover{border-color:#1a56db;background:#e6f1fb}
+.fi-left{display:flex;align-items:center;gap:12px}
+.fi-num{width:28px;height:28px;border-radius:6px;background:#e6f1fb;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#1a56db;flex-shrink:0}
+.fi-name{font-size:14px;font-weight:500;color:#0a1628}
+.fi-desc{font-size:12px;color:#94a3b8;margin-top:2px}
+.fi-badge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:100px;background:#eaf3de;color:#16a34a}
+.fi-badge.special{background:#0a1628;color:#c9a84c}
+.note{background:#faeeda;border:1px solid rgba(201,168,76,.3);border-radius:8px;padding:16px;font-size:13px;color:#92741a;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">A</div>
+    <div>
+      <h1>Akademiyolum — Prototip Dosyaları</h1>
+      <p>Tüm ekranların HTML/CSS/JS kodları · Nisan 2026</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📁 Ekran Dosyaları</h2>
+    <div class="file-list">
+      <a class="file-item" href="01_landing_page.html" target="_blank">
+        <div class="fi-left"><div class="fi-num">01</div><div><div class="fi-name">Landing Page</div><div class="fi-desc">Ana giriş sayfası, hero, özellikler, fiyatlandırma, footer</div></div></div>
+        <span class="fi-badge">Hazır</span>
+      </a>
+      <a class="file-item" href="02_giris_onboarding.html" target="_blank">
+        <div class="fi-left"><div class="fi-num">02</div><div><div class="fi-name">Giriş & Onboarding</div><div class="fi-desc">Login, kayıt, 3 adımlı onboarding, başarı ekranı</div></div></div>
+        <span class="fi-badge">Hazır</span>
+      </a>
+      <a class="file-item" href="00_tam_sistem.html" target="_blank">
+        <div class="fi-left"><div class="fi-num">★</div><div><div class="fi-name">TAM SİSTEM — Tüm Ekranlar Tek Dosyada</div><div class="fi-desc">Dashboard, Yayınlar, YZ Danışman, Yönerge, Jüri, CV, Çıktı</div></div></div>
+        <span class="fi-badge special">Ana Dosya</span>
+      </a>
+      <a class="file-item" href="03_yayin_ekleme.html" target="_blank">
+        <div class="fi-left"><div class="fi-num">03</div><div><div class="fi-name">Yayın Ekleme Modülü</div><div class="fi-desc">Manuel, AVESİS, Scholar sekmeleri</div></div></div>
+        <span class="fi-badge">Hazır</span>
+      </a>
+      <a class="file-item" href="04_yz_danishman.html" target="_blank">
+        <div class="fi-left"><div class="fi-num">04</div><div><div class="fi-name">YZ Danışman</div><div class="fi-desc">Sohbet arayüzü, profil paneli, öneriler</div></div></div>
+        <span class="fi-badge">Hazır</span>
+      </a>
+      <a class="file-item" href="05_yonerge_analizi.html" target="_blank">
+        <div class="fi-left"><div class="fi-num">05</div><div><div class="fi-name">Yönerge Analizi</div><div class="fi-desc">Üniversite karşılaştırma, filtreler, detay paneli</div></div></div>
+        <span class="fi-badge">Hazır</span>
+      </a>
+      <a class="file-item" href="06_juri_analizi.html" target="_blank">
+        <div class="fi-left"><div class="fi-num">06</div><div><div class="fi-name">YZ Jüri Analizi</div><div class="fi-desc">10 maddelik jüri değerlendirme raporu</div></div></div>
+        <span class="fi-badge">Hazır</span>
+      </a>
+      <a class="file-item" href="07_cikti_yonetimi.html" target="_blank">
+        <div class="fi-left"><div class="fi-num">07</div><div><div class="fi-name">Çıktı Yönetimi</div><div class="fi-desc">Rapor şablonları, PDF önizleme, indirme</div></div></div>
+        <span class="fi-badge">Hazır</span>
+      </a>
+      <a class="file-item" href="08_cv_olusturucu.html" target="_blank">
+        <div class="fi-left"><div class="fi-num">08</div><div><div class="fi-name">CV Oluşturucu</div><div class="fi-desc">Canlı önizleme, şablon seçimi, PDF/Word çıktı</div></div></div>
+        <span class="fi-badge">Hazır</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Geliştirici Notu:</strong> Tüm ekranlar ortak bir tasarım sistemi üzerine inşa edilmiştir. Renk paleti, tipografi ve bileşenler CSS değişkenleriyle merkezi olarak yönetilmektedir. <strong>00_tam_sistem.html</strong> dosyası sidebar navigasyonuyla tüm ekranları birleştirir — geliştirme sürecinde ana referans dosyası olarak kullanınız.
+  </div>
+</div>
+</body>
+</html>

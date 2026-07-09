@@ -7,6 +7,8 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -18,6 +20,15 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 /**
  * @property int $id
  * @property string $name
+ * @property string|null $unvan
+ * @property string|null $universite
+ * @property string|null $fakulte
+ * @property string|null $bolum
+ * @property string|null $alan
+ * @property string|null $orcid
+ * @property string|null $avesis_id
+ * @property string|null $yonerge
+ * @property Carbon|null $onboarded_at
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string $password
@@ -28,7 +39,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'unvan', 'universite', 'fakulte', 'bolum', 'alan', 'orcid', 'avesis_id', 'yonerge', 'yonerge_id', 'onboarded_at', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements PasskeyUser
 {
@@ -44,8 +55,33 @@ class User extends Authenticatable implements PasskeyUser
     {
         return [
             'email_verified_at' => 'datetime',
+            'onboarded_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Determine whether the user has completed onboarding.
+     */
+    public function hasCompletedOnboarding(): bool
+    {
+        return $this->onboarded_at !== null;
+    }
+
+    /**
+     * @return HasMany<Faaliyet, $this>
+     */
+    public function faaliyetler(): HasMany
+    {
+        return $this->hasMany(Faaliyet::class);
+    }
+
+    /**
+     * @return BelongsTo<Yonerge, $this>
+     */
+    public function yonergeModel(): BelongsTo
+    {
+        return $this->belongsTo(Yonerge::class, 'yonerge_id');
     }
 
     /**

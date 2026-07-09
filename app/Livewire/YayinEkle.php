@@ -1,0 +1,142 @@
+<?php
+
+namespace App\Livewire;
+
+use App\Enums\Kategori;
+use App\Models\Faaliyet;
+use App\Services\Scoring\KuralSetiCozucu;
+use App\Services\Scoring\PuanHesaplayici;
+use App\Services\Scoring\RuleSet;
+use Flux\Flux;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Component;
+
+#[Layout('layouts.app')]
+#[Title('Yayın Ekle')]
+class YayinEkle extends Component
+{
+    public ?Faaliyet $faaliyet = null;
+
+    public string $sekme = 'manuel';
+
+    // Form alanları
+    public string $kategori = 'makale';
+
+    public string $tur = '';
+
+    public string $baslik = '';
+
+    public string $yazarlar = '';
+
+    public string $donem = '';
+
+    public string $kaynak = '';
+
+    public string $yil = '';
+
+    public string $doi = '';
+
+    public string $aciklama = '';
+
+    public function mount(?Faaliyet $faaliyet = null): void
+    {
+        if ($faaliyet !== null && $faaliyet->exists) {
+            abort_unless($faaliyet->user_id === Auth::id(), 404);
+
+            $this->faaliyet = $faaliyet;
+            $this->kategori = $faaliyet->kategori->value;
+            $this->tur = $faaliyet->tur;
+            $this->baslik = $faaliyet->baslik;
+            $this->yazarlar = $faaliyet->yazarlar ?? '';
+            $this->donem = $faaliyet->donem ?? '';
+            $this->kaynak = $faaliyet->kaynak ?? '';
+            $this->yil = (string) ($faaliyet->meta['yil'] ?? '');
+            $this->doi = (string) ($faaliyet->meta['doi'] ?? '');
+            $this->aciklama = (string) ($faaliyet->meta['aciklama'] ?? '');
+
+            return;
+        }
+
+        $this->tur = Kategori::from($this->kategori)->label();
+    }
+
+    public function updatedKategori(): void
+    {
+        $this->tur = Kategori::from($this->kategori)->label();
+        $this->kaynak = '';
+    }
+
+    private function ruleSet(): RuleSet
+    {
+        return (new KuralSetiCozucu)->kullaniciIcin(Auth::user());
+    }
+
+    /**
+     * Seçili kategorinin bilinen dizin/kaynakları.
+     *
+     * @return list<string>
+     */
+    public function kaynakSecenekleri(): array
+    {
+        return array_keys($this->ruleSet()->puanlar(Kategori::from($this->kategori)));
+    }
+
+    /**
+     * Girilen bilgilere göre canlı tahmini puan.
+     */
+    public function tahminiPuan(): int
+    {
+        $gecici = new Faaliyet(['kategori' => $this->kategori, 'kaynak' => $this->kaynak ?: null]);
+
+        return (new PuanHesaplayici($this->ruleSet()))->hesapla($gecici);
+    }
+
+    public function kaydet(): void
+    {
+        $veri = $this->validate([
+            'kategori' => ['required', Rule::enum(Kategori::class)],
+            'tur' => ['required', 'string', 'max:255'],
+            'baslik' => ['required', 'string', 'max:255'],
+            'yazarlar' => ['nullable', 'string', 'max:255'],
+            'donem' => ['nullable', Rule::in(['tez_disi', 'tezden'])],
+            'kaynak' => ['nullable', 'string', 'max:255'],
+            'yil' => ['nullable', 'digits:4'],
+            'doi' => ['nullable', 'string', 'max:255'],
+            'aciklama' => ['nullable', 'string', 'max:1000'],
+        ]);
+
+        $faaliyet = $this->faaliyet ?? new Faaliyet(['durum' => 'onaylandi']);
+
+        $faaliyet->fill([
+            'kategori' => $veri['kategori'],
+            'tur' => $veri['tur'],
+            'baslik' => $veri['baslik'],
+            'yazarlar' => $veri['yazarlar'] ?: null,
+            'donem' => $veri['donem'] ?: null,
+            'kaynak' => $veri['kaynak'] ?: null,
+            'meta' => array_filter([
+                'yil' => $veri['yil'] ?: null,
+                'doi' => $veri['doi'] ?: null,
+                'aciklama' => $veri['aciklama'] ?: null,
+            ]),
+        ]);
+
+        $faaliyet->puan = (new PuanHesaplayici($this->ruleSet()))->hesapla($faaliyet);
+
+        Auth::user()->faaliyetler()->save($faaliyet);
+
+        Flux::toast(variant: 'success', text: $this->faaliyet !== null ? 'Yayın güncellendi.' : 'Yayın eklendi.');
+
+        $this->redirectRoute('yayinlar', navigate: true);
+    }
+
+    public function render()
+    {
+        return view('livewire.yayin-ekle', [
+            'kategoriler' => Kategori::cases(),
+        ]);
+    }
+}

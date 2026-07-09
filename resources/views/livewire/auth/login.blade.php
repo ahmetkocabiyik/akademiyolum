@@ -5,8 +5,6 @@
         <!-- Session Status -->
         <x-auth-session-status class="text-center" :status="session('status')" />
 
-        <x-passkey-verify />
-
         <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-6">
             @csrf
 
@@ -55,5 +53,9 @@
             <span>{{ __('Don\'t have an account?') }}</span>
             <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
         </div>
+
+        <flux:button :href="route('home')" variant="subtle" size="sm" icon="arrow-left" class="w-full">
+            {{ __('Ana sayfaya dön') }}
+        </flux:button>
     </div>
 </x-layouts::auth>
