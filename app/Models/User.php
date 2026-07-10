@@ -85,6 +85,14 @@ class User extends Authenticatable implements PasskeyUser
     }
 
     /**
+     * @return HasMany<DanismanMesaj, $this>
+     */
+    public function danismanMesajlari(): HasMany
+    {
+        return $this->hasMany(DanismanMesaj::class);
+    }
+
+    /**
      * Get the user's initials
      */
     public function initials(): string

@@ -1,14 +1,9 @@
 <div>
-    <div class="flex flex-col gap-4">
+    <x-topbar title="Yayınlar" :pill="$faaliyetler->count() . ' kayıt'">
+        <flux:button :href="route('yayinlar.ekle')" wire:navigate variant="primary" size="sm" icon="plus">Yayın Ekle</flux:button>
+    </x-topbar>
 
-        {{-- Başlık --}}
-        <div class="flex items-center justify-between">
-            <div>
-                <flux:heading size="xl">Yayınlar</flux:heading>
-                <flux:text class="mt-1">Yayın ve faaliyet kayıtlarınız, otomatik puanlama ile</flux:text>
-            </div>
-            <flux:button :href="route('yayinlar.ekle')" wire:navigate variant="primary" icon="plus">Yayın Ekle</flux:button>
-        </div>
+    <div class="flex flex-col gap-4">
 
         {{-- Araç çubuğu --}}
         <div class="flex flex-wrap items-center gap-2">

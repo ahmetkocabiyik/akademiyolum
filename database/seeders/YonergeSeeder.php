@@ -28,33 +28,32 @@ class YonergeSeeder extends Seeder
             universite: null,
         );
 
-        // Üniversiteye özel yönergeler (baraj farklı).
-        // Not: Barajlar placeholder — kategori tavanları toplamına (~134) göre
-        // erişilebilir aralıkta tutuldu. Faz 2'de gerçek yönerge verisiyle güncellenecek.
-        $universiteler = [
-            ['ad' => 'Mersin Üniversitesi', 'sehir' => 'Mersin', 'tur' => 'devlet', 'baraj' => 90, 'kadro' => 'docentlik'],
-            ['ad' => 'Necmettin Erbakan Üniversitesi', 'sehir' => 'Konya', 'tur' => 'devlet', 'baraj' => 60, 'kadro' => 'dr_ogr_uyesi'],
-            ['ad' => 'Ankara Üniversitesi', 'sehir' => 'Ankara', 'tur' => 'devlet', 'baraj' => 120, 'kadro' => 'docentlik'],
-            ['ad' => 'Marmara Üniversitesi', 'sehir' => 'İstanbul', 'tur' => 'devlet', 'baraj' => 100, 'kadro' => 'docentlik'],
-            ['ad' => 'İstanbul 29 Mayıs Üniversitesi', 'sehir' => 'İstanbul', 'tur' => 'vakif', 'baraj' => 55, 'kadro' => 'dr_ogr_uyesi'],
-            ['ad' => 'Sakarya Üniversitesi', 'sehir' => 'Sakarya', 'tur' => 'devlet', 'baraj' => 80, 'kadro' => 'docentlik'],
-        ];
+        // Türkiye üniversiteleri. Baraj/kadro/yıl placeholder — üniversite adından
+        // deterministik türetilir (gerçek yönerge verisi ileride girilecek).
+        /** @var list<array{0: string, 1: string, 2: string}> $universiteler */
+        $universiteler = require database_path('data/universiteler.php');
 
-        foreach ($universiteler as $veri) {
+        foreach ($universiteler as [$ad, $sehir, $tur]) {
+            $tohum = crc32($ad);
+            $baraj = 55 + ($tohum % 71);        // 55–125
+            $kadro = $tohum % 3 === 0 ? 'dr_ogr_uyesi' : 'docentlik';
+            $yil = 2024 + ($tohum % 3);         // 2024–2026
+
             $universite = Universite::query()->create([
-                'ad' => $veri['ad'],
-                'sehir' => $veri['sehir'],
-                'tur' => $veri['tur'],
+                'ad' => $ad,
+                'sehir' => $sehir,
+                'tur' => $tur,
             ]);
 
             $this->yonergeOlustur(
-                anahtar: str($veri['ad'])->slug().'-'.$veri['kadro'],
-                ad: $veri['ad'].' — '.($veri['kadro'] === 'docentlik' ? 'Doçentlik' : 'Dr. Öğr. Üyesi'),
-                kadro: $veri['kadro'],
+                anahtar: str($ad)->slug().'-'.$kadro,
+                ad: $ad.' — '.($kadro === 'docentlik' ? 'Doçentlik' : 'Dr. Öğr. Üyesi'),
+                kadro: $kadro,
                 uakHedef: 100,
-                universiteHedef: $veri['baraj'],
+                universiteHedef: $baraj,
                 kategoriKurallari: $kategoriKurallari,
                 universite: $universite,
+                yil: $yil,
             );
         }
     }
@@ -70,13 +69,14 @@ class YonergeSeeder extends Seeder
         int $universiteHedef,
         array $kategoriKurallari,
         ?Universite $universite,
+        int $yil = 2026,
     ): void {
         $yonerge = Yonerge::query()->create([
             'universite_id' => $universite?->id,
             'anahtar' => $anahtar,
             'ad' => $ad,
             'kadro' => $kadro,
-            'yil' => 2026,
+            'yil' => $yil,
             'uak_hedef' => $uakHedef,
             'universite_hedef' => $universiteHedef,
         ]);

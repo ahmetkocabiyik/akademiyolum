@@ -19,11 +19,17 @@ use Livewire\Component;
 #[Title('Yönerge Analizi')]
 class YonergeAnalizi extends Component
 {
+    public string $arama = '';
+
     public string $turFiltre = '';
 
     public string $kadroFiltre = '';
 
     public string $siralama = 'baraj_artan';
+
+    public string $gorunum = 'grid';
+
+    public bool $karsilastirma = false;
 
     /**
      * Kullanıcının onaylı faaliyetleri.
@@ -63,20 +69,30 @@ class YonergeAnalizi extends Component
                 'universite',
                 fn ($u) => $u->where('tur', $this->turFiltre)
             ))
+            ->when($this->arama !== '', fn ($q) => $q->whereHas(
+                'universite',
+                fn ($u) => $u->where('ad', 'like', "%{$this->arama}%")
+                    ->orWhere('sehir', 'like', "%{$this->arama}%")
+            ))
             ->get();
 
         $sonuclar = $yonergeler->map(function (Yonerge $yonerge): array {
             $toplam = $this->yonergeyeGorePuan($yonerge);
             $baraj = $yonerge->universite_hedef;
             $oran = $baraj > 0 ? (int) min(100, round($toplam / $baraj * 100)) : 0;
+            $yapilabilir = $toplam >= $baraj;
+
+            // Üç kademeli durum: uygun / yakın (>=%80) / yetersiz.
+            $durum = $yapilabilir ? 'uygun' : ($oran >= 80 ? 'yakin' : 'yetersiz');
 
             return [
                 'yonerge' => $yonerge,
                 'toplam' => $toplam,
                 'baraj' => $baraj,
                 'oran' => $oran,
-                'yapilabilir' => $toplam >= $baraj,
+                'yapilabilir' => $yapilabilir,
                 'kalan' => max(0, $baraj - $toplam),
+                'durum' => $durum,
             ];
         });
 
@@ -88,6 +104,24 @@ class YonergeAnalizi extends Component
         };
 
         return $sonuclar->values()->all();
+    }
+
+    /**
+     * Sonuçların durum dağılımı (summary bar için).
+     *
+     * @return array{toplam: int, uygun: int, yakin: int, yetersiz: int}
+     */
+    #[Computed]
+    public function ozet(): array
+    {
+        $sonuclar = collect($this->sonuclar);
+
+        return [
+            'toplam' => $sonuclar->count(),
+            'uygun' => $sonuclar->where('durum', 'uygun')->count(),
+            'yakin' => $sonuclar->where('durum', 'yakin')->count(),
+            'yetersiz' => $sonuclar->where('durum', 'yetersiz')->count(),
+        ];
     }
 
     /**

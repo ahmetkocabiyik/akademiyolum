@@ -5,6 +5,7 @@ use App\Livewire\Onboarding;
 use App\Livewire\YayinEkle;
 use App\Livewire\Yayinlar;
 use App\Livewire\YonergeAnalizi;
+use App\Livewire\YzDanisman;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
@@ -28,11 +29,7 @@ Route::middleware(['auth', 'verified', 'onboarded'])->group(function () {
 
     Route::livewire('yonerge-analizi', YonergeAnalizi::class)->name('yonerge-analizi');
 
-    Route::view('yz-danisman', 'modules.placeholder', [
-        'heading' => 'YZ Danışman',
-        'subheading' => 'Yönergeye göre kişiselleştirilmiş yol haritası',
-        'phase' => 'Faz 3',
-    ])->name('yz-danisman');
+    Route::livewire('yz-danisman', YzDanisman::class)->name('yz-danisman');
 
     Route::view('juri-analizi', 'modules.placeholder', [
         'heading' => 'YZ Jüri Analizi',

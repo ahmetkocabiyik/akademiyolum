@@ -2,11 +2,15 @@
 
 namespace App\Providers;
 
+use App\Services\AI\ClaudeSaglayici;
+use App\Services\AI\SohbetSaglayici;
+use App\Services\AI\StubSaglayici;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use RuntimeException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +19,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(SohbetSaglayici::class, function (): SohbetSaglayici {
+            if (config('ai.saglayici') === 'claude') {
+                $anahtar = config('ai.claude.anahtar');
+
+                if (blank($anahtar)) {
+                    throw new RuntimeException('ANTHROPIC_API_KEY tanımlı değil.');
+                }
+
+                return new ClaudeSaglayici(
+                    anahtar: $anahtar,
+                    model: config('ai.claude.model'),
+                    maxTokens: config('ai.claude.max_tokens'),
+                );
+            }
+
+            return new StubSaglayici;
+        });
     }
 
     /**

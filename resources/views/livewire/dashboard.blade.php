@@ -8,6 +8,8 @@
         $gaugeOffset = $gaugeUzunluk * (1 - $rapor->uakYuzde() / 100);
     @endphp
 
+    <x-topbar title="Dashboard" :pill="(auth()->user()->yonerge ?? 'Yönerge yok') . ' aktif'" />
+
     <div class="flex flex-col gap-4">
 
         {{-- Hızlı Ekle --}}

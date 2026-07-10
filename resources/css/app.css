@@ -103,6 +103,15 @@
     letter-spacing: -0.01em;
 }
 
+/* YZ Danışman mesaj içeriği (markdown) */
+.mesaj-icerik p { margin: 0.35rem 0; }
+.mesaj-icerik p:first-child { margin-top: 0; }
+.mesaj-icerik p:last-child { margin-bottom: 0; }
+.mesaj-icerik strong { font-weight: 600; }
+.mesaj-icerik ol { list-style: decimal; padding-inline-start: 1.25rem; margin: 0.4rem 0; }
+.mesaj-icerik ul { list-style: disc; padding-inline-start: 1.25rem; margin: 0.4rem 0; }
+.mesaj-icerik li { margin: 0.15rem 0; }
+
 /* Kategori ikon tint'leri — 03_yayin_ekleme.html renkleriyle birebir.
    (Tailwind @theme değişkenleri kullanılmadığında elenebildiği için sabit hex.) */
 .kat-makale { background: #e6f1fb; color: #1a56db; }

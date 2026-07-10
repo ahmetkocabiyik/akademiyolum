@@ -1,9 +1,10 @@
 <x-layouts::app :title="$heading">
+    <x-topbar :title="$heading" />
+
     <div class="flex flex-col gap-6">
-        <div>
-            <flux:heading size="xl">{{ $heading }}</flux:heading>
-            <flux:text class="mt-1">{{ $subheading ?? '' }}</flux:text>
-        </div>
+        @if (! empty($subheading))
+            <flux:text>{{ $subheading }}</flux:text>
+        @endif
 
         <flux:card class="flex flex-col items-center justify-center gap-3 py-16 text-center">
             <div class="flex size-12 items-center justify-center rounded-xl bg-brand-light text-brand">
