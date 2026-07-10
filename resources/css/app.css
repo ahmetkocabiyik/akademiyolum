@@ -96,6 +96,8 @@
     --color-ink-subtle: #94a3b8;
 }
 
+[x-cloak] { display: none !important; }
+
 /* Marka yazısı — ana sayfa logosuyla aynı (Playfair Display) */
 .brand-wordmark {
     font-family: 'Playfair Display', ui-serif, Georgia, serif;

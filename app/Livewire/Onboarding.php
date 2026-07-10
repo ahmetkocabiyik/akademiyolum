@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Universite;
 use App\Models\Yonerge;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -132,6 +133,8 @@ class Onboarding extends Component
 
     public function render()
     {
-        return view('livewire.onboarding');
+        return view('livewire.onboarding', [
+            'universiteler' => Universite::query()->orderBy('ad')->pluck('ad'),
+        ]);
     }
 }

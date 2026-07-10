@@ -195,6 +195,14 @@
                                             <div class="mt-0.5 text-[10px] text-ink-subtle">Yönerge</div>
                                         </div>
                                     </div>
+
+                                    @if ($uni->yonerge_url)
+                                        <a href="{{ $uni->yonerge_url }}" target="_blank" rel="noopener"
+                                            class="mt-3 flex items-center justify-center gap-1.5 rounded-lg border border-line py-2 text-xs font-medium text-brand transition hover:border-brand hover:bg-brand-light">
+                                            <flux:icon name="document-arrow-down" class="size-3.5" />
+                                            Resmi Yönergeyi Aç
+                                        </a>
+                                    @endif
                                 </div>
                             </flux:card>
                         @endforeach

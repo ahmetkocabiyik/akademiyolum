@@ -13,8 +13,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $ad
  * @property string|null $sehir
  * @property string $tur
+ * @property string|null $yonerge_url
  */
-#[Fillable(['ad', 'sehir', 'tur'])]
+#[Fillable(['ad', 'sehir', 'tur', 'yonerge_url'])]
 class Universite extends Model
 {
     /** @use HasFactory<UniversiteFactory> */
