@@ -23,7 +23,7 @@
             @endforeach
             <div class="ms-auto">
                 <flux:button :href="route('yayinlar.ekle')" wire:navigate size="sm" variant="primary" icon="plus">
-                    Faaliyet Ekle
+                    Yayın Ekle
                 </flux:button>
             </div>
         </div>

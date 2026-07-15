@@ -22,7 +22,7 @@
                 <div class="flex flex-col items-center gap-2 py-12 text-center">
                     <flux:icon name="document-plus" class="size-8 text-ink-subtle" />
                     <flux:text>Kayıt bulunamadı.</flux:text>
-                    <flux:button :href="route('yayinlar.ekle')" wire:navigate size="sm" variant="primary" icon="plus">Faaliyet ekle</flux:button>
+                    <flux:button :href="route('yayinlar.ekle')" wire:navigate size="sm" variant="primary" icon="plus">Yayın ekle</flux:button>
                 </div>
             @else
                 <div class="overflow-x-auto">

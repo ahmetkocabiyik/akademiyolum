@@ -1,5 +1,5 @@
 <div>
-    <x-topbar title="Yönerge Analizi" :pill="count($this->sonuclar) . ' üniversite yüklü'">
+    <x-topbar title="Yönerge Analizi" :pill="count($this->sonuclar) . ' üniversite'">
         <flux:button wire:click="$toggle('karsilastirma')" size="sm" :variant="$karsilastirma ? 'filled' : 'primary'" icon="table-cells">
             {{ $karsilastirma ? 'Kartlara Dön' : 'Üniversite Karşılaştır' }}
         </flux:button>
