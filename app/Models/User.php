@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\TemelAlan;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -24,7 +25,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string|null $universite
  * @property string|null $fakulte
  * @property string|null $bolum
- * @property string|null $alan
+ * @property TemelAlan|null $temel_alan
  * @property string|null $orcid
  * @property string|null $avesis_id
  * @property string|null $yonerge
@@ -39,7 +40,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'unvan', 'universite', 'fakulte', 'bolum', 'alan', 'orcid', 'avesis_id', 'yonerge', 'yonerge_id', 'onboarded_at', 'email', 'password'])]
+#[Fillable(['name', 'unvan', 'universite', 'fakulte', 'bolum', 'temel_alan', 'orcid', 'avesis_id', 'yonerge', 'yonerge_id', 'onboarded_at', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements PasskeyUser
 {
@@ -56,6 +57,7 @@ class User extends Authenticatable implements PasskeyUser
         return [
             'email_verified_at' => 'datetime',
             'onboarded_at' => 'datetime',
+            'temel_alan' => TemelAlan::class,
             'password' => 'hashed',
         ];
     }

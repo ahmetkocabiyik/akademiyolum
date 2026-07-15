@@ -45,7 +45,8 @@ class UserFactory extends Factory
             'unvan' => 'Dr. Öğr. Üyesi',
             'universite' => 'Mersin Üniversitesi',
             'fakulte' => 'İlahiyat Fakültesi',
-            'alan' => 'Tasavvuf',
+            'bolum' => 'Temel İslam Bilimleri',
+            'temel_alan' => 'ilahiyat',
             'yonerge' => 'ÜAK Doçentlik — İlahiyat 2026',
             'onboarded_at' => now(),
         ]);

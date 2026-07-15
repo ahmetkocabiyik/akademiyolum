@@ -29,6 +29,30 @@ test('profile information can be updated', function () {
     expect($user->email_verified_at)->toBeNull();
 });
 
+test('akademik bilgiler güncellenebilir ve fakülte kaskadı çalışır', function () {
+    $user = User::factory()->onboarded()->create();
+
+    $this->actingAs($user);
+
+    Livewire::test(Profile::class)
+        ->assertSet('temelAlan', 'ilahiyat')
+        ->assertSet('fakulte', 'İlahiyat Fakültesi')
+        ->set('temelAlan', 'saglik')            // İlahiyat sağlıkta yok → sıfırlanır
+        ->assertSet('fakulte', '')
+        ->set('fakulte', 'Tıp Fakültesi')
+        ->set('bolum', 'Cerrahi Tıp Bilimleri')
+        ->set('universite', 'Hacettepe Üniversitesi')
+        ->call('updateProfileInformation')
+        ->assertHasNoErrors();
+
+    $user->refresh();
+
+    expect($user->universite)->toBe('Hacettepe Üniversitesi')
+        ->and($user->temel_alan->value)->toBe('saglik')
+        ->and($user->fakulte)->toBe('Tıp Fakültesi')
+        ->and($user->bolum)->toBe('Cerrahi Tıp Bilimleri');
+});
+
 test('email verification status is unchanged when email address is unchanged', function () {
     $user = User::factory()->create();
 

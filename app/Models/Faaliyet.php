@@ -26,7 +26,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['kategori', 'tur', 'baslik', 'yazarlar', 'donem', 'kaynak', 'puan', 'durum', 'meta'])]
+#[Fillable(['kategori', 'tur', 'baslik', 'yazarlar', 'yazar_rolu', 'donem', 'kaynak', 'puan', 'durum', 'meta'])]
 class Faaliyet extends Model
 {
     /** @use HasFactory<FaaliyetFactory> */

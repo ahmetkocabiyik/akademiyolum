@@ -16,8 +16,12 @@
                     <div class="mb-3 text-[10px] font-semibold uppercase tracking-wider text-white/40">Mevcut Profilim</div>
                     <div class="flex flex-col gap-1.5">
                         <div class="flex items-center justify-between gap-2">
-                            <span class="text-xs text-white/55">Alan</span>
-                            <span class="truncate text-xs font-semibold text-white">{{ auth()->user()->alan ?? '—' }}</span>
+                            <span class="text-xs text-white/55">Bölüm</span>
+                            <span class="truncate text-xs font-semibold text-white">{{ auth()->user()->bolum ?? '—' }}</span>
+                        </div>
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-xs text-white/55">Temel Alan</span>
+                            <span class="truncate text-xs font-semibold text-white">{{ auth()->user()->temel_alan?->label() ?? '—' }}</span>
                         </div>
                         <div class="flex items-center justify-between gap-2">
                             <span class="text-xs text-white/55">Unvan</span>
@@ -38,6 +42,12 @@
                 <flux:card class="flex flex-col gap-4">
                     <flux:heading size="sm">Filtreler</flux:heading>
 
+                    <flux:select wire:model.live="hedefKadro" label="Hedef Kadro" size="sm">
+                        @foreach ($kadrolar as $deger => $etiket)
+                            <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
+                        @endforeach
+                    </flux:select>
+
                     <flux:input wire:model.live.debounce.300ms="arama" icon="magnifying-glass" placeholder="Üniversite ara..." size="sm" clearable />
 
                     <flux:select wire:model.live="turFiltre" label="Üniversite Türü" size="sm">
@@ -46,11 +56,7 @@
                         <flux:select.option value="vakif">Vakıf</flux:select.option>
                     </flux:select>
 
-                    <flux:select wire:model.live="kadroFiltre" label="Kadro" size="sm">
-                        <flux:select.option value="">Tümü</flux:select.option>
-                        <flux:select.option value="docentlik">Doçentlik</flux:select.option>
-                        <flux:select.option value="dr_ogr_uyesi">Dr. Öğr. Üyesi</flux:select.option>
-                    </flux:select>
+                    <flux:text class="text-[11px] text-ink-subtle">Analiz <strong>{{ $kadrolar[$hedefKadro] }}</strong> kadrosuna atama kriterlerine göredir.</flux:text>
                 </flux:card>
             </div>
 
@@ -127,10 +133,15 @@
                                     @endphp
                                     <tr class="border-b border-line last:border-0 hover:bg-canvas" wire:key="krs-{{ $s['yonerge']->id }}">
                                         <td class="px-4 py-2.5">
-                                            <div class="font-medium text-ink">{{ $s['yonerge']->universite->ad }}</div>
+                                            <div class="flex items-center gap-1.5">
+                                                <span class="font-medium text-ink">{{ $s['yonerge']->universite->ad }}</span>
+                                                @if ($s['dogrulandi'])
+                                                    <flux:icon name="check-badge" variant="solid" class="size-3.5 text-brand" title="Doğrulandı" />
+                                                @endif
+                                            </div>
                                             <div class="text-[11px] text-ink-subtle">{{ $s['yonerge']->universite->sehir }} · {{ $s['yonerge']->universite->tur === 'vakif' ? 'Vakıf' : 'Devlet' }}</div>
                                         </td>
-                                        <td class="px-4 py-2.5 text-ink-muted">{{ $s['yonerge']->kadro === 'docentlik' ? 'Doçentlik' : 'Dr. Öğr. Üyesi' }}</td>
+                                        <td class="px-4 py-2.5 text-ink-muted">{{ $kadrolar[$hedefKadro] }}</td>
                                         <td class="px-4 py-2.5 font-serif font-bold text-ink">{{ $s['baraj'] }}</td>
                                         <td class="px-4 py-2.5 font-serif font-bold text-ink">{{ $s['toplam'] }}</td>
                                         <td class="px-4 py-2.5 font-serif font-bold" style="color: {{ $renk }}">%{{ $s['oran'] }}</td>
@@ -142,7 +153,7 @@
                         </table>
                     </flux:card>
                 @else
-                    <div @class(['grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' => $gorunum === 'grid', 'flex flex-col gap-2' => $gorunum === 'list'])>
+                    <div @class(['grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4' => $gorunum === 'grid', 'flex flex-col gap-2' => $gorunum === 'list'])>
                         @foreach ($this->sonuclar as $s)
                             @php
                                 $uni = $s['yonerge']->universite;
@@ -166,34 +177,47 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <flux:badge :color="$badgeRenk" size="sm">{{ $badgeMetin }}</flux:badge>
+                                        <div class="flex shrink-0 flex-col items-end gap-1">
+                                            <flux:badge :color="$badgeRenk" size="sm">{{ $badgeMetin }}</flux:badge>
+                                            <span class="inline-flex items-center gap-1 text-[10px] font-medium text-brand">
+                                                <flux:icon name="check-badge" variant="solid" class="size-3" />Doğrulandı
+                                            </span>
+                                        </div>
                                     </div>
 
                                     {{-- Puan karşılaması (eşleşme oranı) --}}
                                     <div class="mt-4">
                                         <div class="mb-1.5 flex items-center justify-between text-xs">
                                             <span class="text-ink-subtle">Puan karşılaması</span>
-                                            <span class="font-semibold text-ink-muted">{{ $s['toplam'] }} / {{ $s['baraj'] }} pt · %{{ $s['oran'] }}</span>
+                                            <span class="font-semibold text-ink-muted">{{ $s['toplam'] }} / {{ $s['baraj'] }} pt · %{{ $s['puan_orani'] }}</span>
                                         </div>
                                         <div class="h-1.5 overflow-hidden rounded-full bg-line">
-                                            <div class="h-full rounded-full" style="width: {{ $s['oran'] }}%; background: {{ $renk }}"></div>
+                                            <div class="h-full rounded-full" style="width: {{ $s['puan_orani'] }}%; background: {{ $renk }}"></div>
                                         </div>
                                     </div>
 
-                                    {{-- istatistikler --}}
-                                    <div class="mt-4 grid grid-cols-3 gap-2">
-                                        <div class="rounded-lg bg-canvas px-3 py-2 text-center">
-                                            <div class="font-serif text-base font-bold text-ink">{{ $s['baraj'] }}</div>
-                                            <div class="mt-0.5 text-[10px] text-ink-subtle">Min. Puan</div>
-                                        </div>
-                                        <div class="rounded-lg bg-canvas px-3 py-2 text-center">
-                                            <div class="font-serif text-base font-bold" style="color: {{ $renk }}">{{ $s['yapilabilir'] ? '+'.($s['toplam'] - $s['baraj']) : '-'.$s['kalan'] }}</div>
-                                            <div class="mt-0.5 text-[10px] text-ink-subtle">{{ $s['yapilabilir'] ? 'Fazla Puan' : 'Eksik Puan' }}</div>
-                                        </div>
-                                        <div class="rounded-lg bg-canvas px-3 py-2 text-center">
-                                            <div class="font-serif text-base font-bold text-ink">{{ $s['yonerge']->yil }}</div>
-                                            <div class="mt-0.5 text-[10px] text-ink-subtle">Yönerge</div>
-                                        </div>
+                                    {{-- Asgari koşullar --}}
+                                    <div class="mt-4 flex flex-col gap-1.5">
+                                        @foreach ($s['sonuc']->kosullar as $kosul)
+                                            <div class="flex items-center justify-between gap-2 text-xs">
+                                                <span class="flex min-w-0 items-center gap-1.5 text-ink-muted">
+                                                    @if ($kosul->bilgi)
+                                                        <flux:icon name="information-circle" class="size-3.5 shrink-0 text-ink-subtle" />
+                                                    @elseif ($kosul->saglandi())
+                                                        <flux:icon name="check-circle" variant="solid" class="size-3.5 shrink-0" style="color: var(--color-cat-green)" />
+                                                    @else
+                                                        <flux:icon name="x-circle" variant="solid" class="size-3.5 shrink-0" style="color: var(--color-cat-red)" />
+                                                    @endif
+                                                    <span class="truncate">{{ $kosul->ad }}</span>
+                                                </span>
+                                                <span @class([
+                                                    'shrink-0 font-semibold',
+                                                    'text-ink-subtle' => $kosul->bilgi,
+                                                    'text-ink' => ! $kosul->bilgi && $kosul->saglandi(),
+                                                    'text-cat-red' => ! $kosul->bilgi && ! $kosul->saglandi(),
+                                                ])>{{ $kosul->bilgi && $kosul->gerekli <= 0 ? 'belge ile' : $kosul->mevcut.' / '.$kosul->gerekli }}</span>
+                                            </div>
+                                        @endforeach
                                     </div>
 
                                     @if ($uni->yonerge_url)

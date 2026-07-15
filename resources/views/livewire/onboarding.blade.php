@@ -1,7 +1,7 @@
 <div class="flex w-full flex-col gap-6">
     {{-- Stepper --}}
     <div class="flex items-center justify-center gap-2">
-        @foreach (['Profil', 'Kurum & Alan', 'Yönerge'] as $i => $label)
+        @foreach (['Profil', 'Kurum & Alan'] as $i => $label)
             @php($n = $i + 1)
             <div class="flex items-center gap-2">
                 <div @class([
@@ -99,30 +99,27 @@
                 </div>
             </div>
 
-            <flux:input wire:model="fakulte" label="Fakülte" placeholder="Örn. İlahiyat Fakültesi" />
-            <flux:input wire:model="bolum" label="Bölüm / Anabilim Dalı (opsiyonel)" placeholder="Örn. Temel İslam Bilimleri" />
-            <flux:input wire:model="alan" label="Akademik Alan" placeholder="Örn. Tasavvuf, Kelam, Hadis" />
-
-            <div class="flex gap-3">
-                <flux:button wire:click="back" class="flex-1">Geri</flux:button>
-                <flux:button variant="primary" wire:click="next" class="flex-1">Devam Et</flux:button>
-            </div>
-        </div>
-    @endif
-
-    {{-- Step 3: Yönerge --}}
-    @if ($step === 3)
-        <div class="flex flex-col gap-5">
-            <div class="text-center">
-                <flux:heading size="lg">Hedef Yönerge</flux:heading>
-                <flux:text class="mt-1">Puanlamanız bu yönergeye göre hesaplanır. Sonradan değiştirebilirsiniz.</flux:text>
-            </div>
-
-            <flux:select wire:model="yonergeId" label="Yönerge" placeholder="Yönerge seçin">
-                @foreach ($this->yonergeler as $y)
-                    <flux:select.option :value="$y->id">{{ $y->ad }}</flux:select.option>
+            <flux:select wire:model.live="temelAlan" label="Temel Alan (yönerge grubu)">
+                @foreach ($temelAlanlar as $deger => $etiket)
+                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
                 @endforeach
             </flux:select>
+
+            <flux:select wire:model.live="fakulte" label="Fakülte" placeholder="Fakülte seçin...">
+                <flux:select.option value="">Seçiniz (opsiyonel)</flux:select.option>
+                @foreach (\App\Enums\TemelAlan::from($temelAlan)->fakulteler() as $f)
+                    <flux:select.option :value="$f">{{ $f }}</flux:select.option>
+                @endforeach
+            </flux:select>
+
+            @if ($fakulte && count($bolumler[$fakulte] ?? []))
+                <flux:select wire:model.live="bolum" label="Bölüm" placeholder="Bölüm seçin...">
+                    <flux:select.option value="">Seçiniz (opsiyonel)</flux:select.option>
+                    @foreach ($bolumler[$fakulte] as $b)
+                        <flux:select.option :value="$b">{{ $b }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+            @endif
 
             <flux:input wire:model="orcid" label="ORCID (opsiyonel)" placeholder="0000-0000-0000-0000" />
 
@@ -132,4 +129,11 @@
             </div>
         </div>
     @endif
+
+    {{-- Alt bilgi: ana sayfa / çıkış --}}
+    <div class="flex items-center justify-center gap-3 text-xs text-zinc-400">
+        <a href="{{ route('home') }}" wire:navigate class="transition hover:text-zinc-600">← Ana sayfa</a>
+        <span class="text-zinc-300">·</span>
+        <button type="button" wire:click="cikis" class="transition hover:text-zinc-600">Çıkış yap</button>
+    </div>
 </div>

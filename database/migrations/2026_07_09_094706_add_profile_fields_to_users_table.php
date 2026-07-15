@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('universite')->nullable()->after('unvan');
             $table->string('fakulte')->nullable()->after('universite');
             $table->string('bolum')->nullable()->after('fakulte');
-            $table->string('alan')->nullable()->after('bolum');
-            $table->string('orcid')->nullable()->after('alan');
+            $table->string('orcid')->nullable()->after('bolum');
             $table->string('avesis_id')->nullable()->after('orcid');
             $table->string('yonerge')->nullable()->after('avesis_id');
             $table->timestamp('onboarded_at')->nullable()->after('yonerge');
@@ -35,7 +34,6 @@ return new class extends Migration
                 'universite',
                 'fakulte',
                 'bolum',
-                'alan',
                 'orcid',
                 'avesis_id',
                 'yonerge',

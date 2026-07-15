@@ -25,7 +25,7 @@ class DanismanContext
 
         $unvan = $user->unvan ?? '—';
         $universite = $user->universite ?? '—';
-        $alan = $user->alan ?? '—';
+        $bolum = $user->bolum ?? '—';
 
         return <<<PROMPT
         Sen "Akademiyolum" platformunun YZ Akademik Danışmanısın. Türk akademisyenlere
@@ -37,7 +37,7 @@ class DanismanContext
         - Ad: {$user->name}
         - Unvan: {$unvan}
         - Üniversite: {$universite}
-        - Alan: {$alan}
+        - Bölüm: {$bolum}
         - Aktif Yönerge: {$ruleSet->ad}
 
         PUAN DURUMU

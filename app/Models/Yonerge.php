@@ -57,4 +57,12 @@ class Yonerge extends Model
     {
         return $this->hasMany(YonergeKural::class);
     }
+
+    /**
+     * @return HasMany<YonergeEsik, $this>
+     */
+    public function esikler(): HasMany
+    {
+        return $this->hasMany(YonergeEsik::class);
+    }
 }

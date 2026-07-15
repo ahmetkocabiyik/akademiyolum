@@ -26,7 +26,7 @@ test('manuel yayın ekler ve puanı kaynaktan hesaplar', function () {
         ->set('kategori', Kategori::Makale->value)
         ->set('baslik', 'Kelam İlminde Yöntem')
         ->set('yazarlar', ['Ahmet K.', 'Mehmet Y.'])
-        ->set('kaynak', 'SCI/SSCI')
+        ->set('kaynak', 'SCIE/SSCI (Q2)')
         ->set('yil', '2025')
         ->call('kaydet')
         ->assertHasNoErrors()
@@ -82,7 +82,7 @@ test('geçersiz kategori query parametresi varsayılanı korur', function () {
 
 test('kategori değişince kaynak sıfırlanır', function () {
     Livewire::test(YayinEkle::class)
-        ->set('kaynak', 'SCI/SSCI')
+        ->set('kaynak', 'SCIE/SSCI (Q2)')
         ->set('kategori', Kategori::Kitap->value)
         ->assertSet('kaynak', '');
 });
@@ -113,7 +113,7 @@ test('mevcut faaliyet düzenlenir ve puan yeniden hesaplanır', function () {
 
     Livewire::test(YayinEkle::class, ['faaliyet' => $faaliyet])
         ->assertSet('baslik', $faaliyet->baslik)
-        ->set('kaynak', 'SCI/SSCI')
+        ->set('kaynak', 'SCIE/SSCI (Q2)')
         ->call('kaydet')
         ->assertHasNoErrors();
 

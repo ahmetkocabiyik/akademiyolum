@@ -36,20 +36,19 @@ test('aynı kategorideki puanları toplar ve adet sayar', function () {
 });
 
 test('kategori tavanı ham puanı sınırlar', function () {
-    // Makale tavanı 40; toplam ham 50 → puan 40'a kırpılır.
+    // Tez Yayını tavanı 20; toplam ham 30 → puan 20'ye kırpılır.
     $rapor = $this->motor->olustur([
-        kayit(Kategori::Makale, 20),
-        kayit(Kategori::Makale, 20),
-        kayit(Kategori::Makale, 10),
+        kayit(Kategori::TezYayini, 20),
+        kayit(Kategori::TezYayini, 10),
     ]);
 
-    $sonuc = $rapor->kategori(Kategori::Makale);
+    $sonuc = $rapor->kategori(Kategori::TezYayini);
 
-    expect($sonuc->hamPuan)->toBe(50)
-        ->and($sonuc->puan)->toBe(40)
+    expect($sonuc->hamPuan)->toBe(30)
+        ->and($sonuc->puan)->toBe(20)
         ->and($sonuc->tavanAsildi())->toBeTrue()
         ->and($sonuc->yuzde())->toBe(100)
-        ->and($rapor->toplamPuan)->toBe(40);
+        ->and($rapor->toplamPuan)->toBe(20);
 });
 
 test('toplam puan tavan uygulanmış kategori puanlarının toplamıdır', function () {

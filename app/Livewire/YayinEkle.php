@@ -30,6 +30,8 @@ class YayinEkle extends Component
     /** @var list<string> */
     public array $yazarlar = [''];
 
+    public bool $baslicaYazar = false;
+
     public string $donem = '';
 
     public string $kaynak = '';
@@ -51,6 +53,7 @@ class YayinEkle extends Component
             $this->yazarlar = $faaliyet->yazarlar
                 ? array_map('trim', explode(',', $faaliyet->yazarlar))
                 : [''];
+            $this->baslicaYazar = $faaliyet->yazar_rolu === 'baslica';
             $this->donem = $faaliyet->donem ?? '';
             $this->kaynak = $faaliyet->kaynak ?? '';
             $this->yil = (string) ($faaliyet->meta['yil'] ?? '');
@@ -134,6 +137,9 @@ class YayinEkle extends Component
             fn (string $yazar) => $yazar !== '',
         ));
 
+        // Yazarlık rolü: tek yazar otomatik; çok yazarda başlıca/ortak seçime bağlı.
+        $yazarRolu = count($yazarlar) <= 1 ? 'tek' : ($this->baslicaYazar ? 'baslica' : 'ortak');
+
         $faaliyet = $this->faaliyet ?? new Faaliyet(['durum' => 'onaylandi']);
 
         $faaliyet->fill([
@@ -141,6 +147,7 @@ class YayinEkle extends Component
             'tur' => $kategori->label(),
             'baslik' => $veri['baslik'],
             'yazarlar' => $yazarlar ? implode(', ', $yazarlar) : null,
+            'yazar_rolu' => $yazarRolu,
             'donem' => $veri['donem'] ?: null,
             'kaynak' => $veri['kaynak'] ?: null,
             'meta' => array_filter([

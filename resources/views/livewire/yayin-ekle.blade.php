@@ -89,6 +89,11 @@
                             <flux:icon name="plus" class="size-3.5" />
                             Yazar Ekle
                         </button>
+
+                        @if (count(array_filter($yazarlar)) > 1)
+                            <flux:checkbox wire:model="baslicaYazar" label="Başlıca (sorumlu) yazarım"
+                                description="Yönerge alt-koşullarında başlıca yazarlık ayrıca değerlendirilir." class="mt-3" />
+                        @endif
                     </div>
 
                     {{-- Dizin chip'leri --}}

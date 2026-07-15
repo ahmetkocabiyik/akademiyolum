@@ -2,8 +2,11 @@
 
 namespace App\Livewire;
 
+use App\Enums\TemelAlan;
 use App\Models\Faaliyet;
 use App\Models\Yonerge;
+use App\Models\YonergeEsik;
+use App\Services\Scoring\EsikDegerlendirici;
 use App\Services\Scoring\KuralSetiCozucu;
 use App\Services\Scoring\PuanHesaplayici;
 use App\Services\Scoring\PuanRaporu;
@@ -23,13 +26,36 @@ class YonergeAnalizi extends Component
 
     public string $turFiltre = '';
 
-    public string $kadroFiltre = '';
+    public string $hedefKadro = 'dr_ogr_uyesi';
 
     public string $siralama = 'baraj_artan';
 
     public string $gorunum = 'grid';
 
     public bool $karsilastirma = false;
+
+    /**
+     * Hedef kadro etiketleri (seçici + başlık için).
+     *
+     * @var array<string, string>
+     */
+    public array $kadrolar = [
+        'dr_ogr_uyesi' => 'Dr. Öğr. Üyesi',
+        'docentlik' => 'Doçent',
+        'profesorluk' => 'Profesör',
+    ];
+
+    /**
+     * Varsayılan hedef kadro: kullanıcının bir üst kadrosu (yükselme hedefi).
+     */
+    public function mount(): void
+    {
+        $this->hedefKadro = match (Auth::user()->unvan) {
+            'Doç. Dr.', 'Prof. Dr.' => 'profesorluk',
+            'Dr. Öğr. Üyesi' => 'docentlik',
+            default => 'dr_ogr_uyesi', // Arş. Gör. / Öğr. Gör.
+        };
+    }
 
     /**
      * Kullanıcının onaylı faaliyetleri.
@@ -62,9 +88,8 @@ class YonergeAnalizi extends Component
     public function sonuclar(): array
     {
         $yonergeler = Yonerge::query()
-            ->with(['universite', 'kurallar'])
+            ->with(['universite', 'kurallar', 'esikler'])
             ->whereNotNull('universite_id')
-            ->when($this->kadroFiltre !== '', fn ($q) => $q->where('kadro', $this->kadroFiltre))
             ->when($this->turFiltre !== '', fn ($q) => $q->whereHas(
                 'universite',
                 fn ($u) => $u->where('tur', $this->turFiltre)
@@ -76,25 +101,41 @@ class YonergeAnalizi extends Component
             ))
             ->get();
 
-        $sonuclar = $yonergeler->map(function (Yonerge $yonerge): array {
-            $toplam = $this->yonergeyeGorePuan($yonerge);
-            $baraj = $yonerge->universite_hedef;
-            $oran = $baraj > 0 ? (int) min(100, round($toplam / $baraj * 100)) : 0;
-            $yapilabilir = $toplam >= $baraj;
+        $oncelik = (Auth::user()->temel_alan ?? TemelAlan::Sosyal)->esikOncelik();
 
-            // Üç kademeli durum: uygun / yakın (>=%80) / yetersiz.
-            $durum = $yapilabilir ? 'uygun' : ($oran >= 80 ? 'yakin' : 'yetersiz');
+        // Yalnızca seçili kadro + temel alan için doğrulanmış eşiği olan üniversiteler.
+        $sonuclar = $yonergeler
+            ->map(function (Yonerge $yonerge) use ($oncelik): ?array {
+                $esik = $this->esikBul($yonerge, $oncelik);
 
-            return [
-                'yonerge' => $yonerge,
-                'toplam' => $toplam,
-                'baraj' => $baraj,
-                'oran' => $oran,
-                'yapilabilir' => $yapilabilir,
-                'kalan' => max(0, $baraj - $toplam),
-                'durum' => $durum,
-            ];
-        });
+                if ($esik === null) {
+                    return null;
+                }
+
+                $ruleSet = RuleSet::fromYonerge($yonerge);
+                $sonuc = (new EsikDegerlendirici($ruleSet))->degerlendir(
+                    $this->yenidenPuanli($ruleSet),
+                    $esik,
+                );
+
+                return [
+                    'yonerge' => $yonerge,
+                    'esik' => $esik,
+                    'sonuc' => $sonuc,
+                    'dogrulandi' => true,
+                    // görünüm kolaylığı için:
+                    'toplam' => $sonuc->toplam,
+                    'baraj' => $esik->min_toplam,
+                    'oran' => $sonuc->oran,
+                    'puan_orani' => $esik->min_toplam > 0
+                        ? (int) min(100, round($sonuc->toplam / $esik->min_toplam * 100))
+                        : 100,
+                    'yapilabilir' => $sonuc->uygun,
+                    'kalan' => max(0, $esik->min_toplam - $sonuc->toplam),
+                    'durum' => $sonuc->durum,
+                ];
+            })
+            ->filter();
 
         $sonuclar = match ($this->siralama) {
             'baraj_azalan' => $sonuclar->sortByDesc('baraj'),
@@ -104,6 +145,44 @@ class YonergeAnalizi extends Component
         };
 
         return $sonuclar->values()->all();
+    }
+
+    /**
+     * Yönergenin eşikleri içinden, temel alan öncelik sırasına göre ilk eşleşen
+     * doğrulanmış eşiği döndürür (ör. ilahiyat yoksa sosyal'e düşer).
+     *
+     * @param  list<string>  $oncelik
+     */
+    private function esikBul(Yonerge $yonerge, array $oncelik): ?YonergeEsik
+    {
+        foreach ($oncelik as $alan) {
+            $esik = $yonerge->esikler->first(
+                fn ($e) => $e->kadro === $this->hedefKadro && $e->alan === $alan
+            );
+
+            if ($esik !== null) {
+                return $esik;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Kullanıcının faaliyetlerini verilen kural setine göre yeniden puanlanmış kopyalar.
+     *
+     * @return Collection<int, Faaliyet>
+     */
+    private function yenidenPuanli(RuleSet $ruleSet): Collection
+    {
+        $hesaplayici = new PuanHesaplayici($ruleSet);
+
+        return $this->faaliyetler->map(function (Faaliyet $faaliyet) use ($hesaplayici): Faaliyet {
+            $kopya = clone $faaliyet;
+            $kopya->puan = $hesaplayici->hesapla($faaliyet);
+
+            return $kopya;
+        });
     }
 
     /**
@@ -122,24 +201,6 @@ class YonergeAnalizi extends Component
             'yakin' => $sonuclar->where('durum', 'yakin')->count(),
             'yetersiz' => $sonuclar->where('durum', 'yetersiz')->count(),
         ];
-    }
-
-    /**
-     * Kullanıcının faaliyetlerini verilen yönergenin kurallarına göre yeniden puanlar.
-     */
-    private function yonergeyeGorePuan(Yonerge $yonerge): int
-    {
-        $ruleSet = RuleSet::fromYonerge($yonerge);
-        $hesaplayici = new PuanHesaplayici($ruleSet);
-
-        $yenidenPuanli = $this->faaliyetler->map(function (Faaliyet $faaliyet) use ($hesaplayici): Faaliyet {
-            $kopya = clone $faaliyet;
-            $kopya->puan = $hesaplayici->hesapla($faaliyet);
-
-            return $kopya;
-        });
-
-        return (new PuanRaporu($ruleSet))->olustur($yenidenPuanli)->toplamPuan;
     }
 
     public function render()

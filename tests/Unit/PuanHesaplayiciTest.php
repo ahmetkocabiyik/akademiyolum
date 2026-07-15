@@ -15,17 +15,18 @@ function faaliyet(Kategori $kategori, ?string $kaynak = null): Faaliyet
 }
 
 test('kaynağa göre eşleşen puanı döndürür', function () {
-    expect($this->hesaplayici->hesapla(faaliyet(Kategori::Makale, 'SCI/SSCI')))->toBe(20)
+    expect($this->hesaplayici->hesapla(faaliyet(Kategori::Makale, 'SCIE/SSCI (Q1)')))->toBe(30)
+        ->and($this->hesaplayici->hesapla(faaliyet(Kategori::Makale, 'SCIE/SSCI (Q2)')))->toBe(20)
         ->and($this->hesaplayici->hesapla(faaliyet(Kategori::Makale, 'TR Dizin')))->toBe(10)
         ->and($this->hesaplayici->hesapla(faaliyet(Kategori::TezYayini, 'TR Dizin')))->toBe(5);
 });
 
 test('kaynak yoksa kategori varsayılanını kullanır', function () {
-    expect($this->hesaplayici->hesapla(faaliyet(Kategori::Makale)))->toBe(5)
-        ->and($this->hesaplayici->hesapla(faaliyet(Kategori::ToplumsalKatki)))->toBe(4)
+    expect($this->hesaplayici->hesapla(faaliyet(Kategori::Makale)))->toBe(4)
+        ->and($this->hesaplayici->hesapla(faaliyet(Kategori::ToplumsalKatki)))->toBe(5)
         ->and($this->hesaplayici->hesapla(faaliyet(Kategori::Atif)))->toBe(1);
 });
 
 test('tanımsız kaynak varsayılana düşer', function () {
-    expect($this->hesaplayici->hesapla(faaliyet(Kategori::Makale, 'Bilinmeyen Dizin')))->toBe(5);
+    expect($this->hesaplayici->hesapla(faaliyet(Kategori::Makale, 'Bilinmeyen Dizin')))->toBe(4);
 });

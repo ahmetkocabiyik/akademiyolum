@@ -28,32 +28,38 @@ class YonergeSeeder extends Seeder
             universite: null,
         );
 
-        // Türkiye üniversiteleri. Baraj/kadro/yıl placeholder — üniversite adından
-        // deterministik türetilir (gerçek yönerge verisi ileride girilecek).
+        // Tüm Türkiye üniversiteleri (onboarding/arama için) — yönergesiz oluşturulur.
         /** @var list<array{0: string, 1: string, 2: string}> $universiteler */
         $universiteler = require database_path('data/universiteler.php');
 
         foreach ($universiteler as [$ad, $sehir, $tur]) {
-            $tohum = crc32($ad);
-            $baraj = 55 + ($tohum % 71);        // 55–125
-            $kadro = $tohum % 3 === 0 ? 'dr_ogr_uyesi' : 'docentlik';
-            $yil = 2024 + ($tohum % 3);         // 2024–2026
+            Universite::query()->create(['ad' => $ad, 'sehir' => $sehir, 'tur' => $tur]);
+        }
 
-            $universite = Universite::query()->create([
-                'ad' => $ad,
-                'sehir' => $sehir,
-                'tur' => $tur,
-            ]);
+        // Üniversiteye özel Ek-1 puan cetvelleri (yoksa ÜAK cetveline düşülür).
+        /** @var array<string, array<string, array{tavan: int, puanlar: array<string, int>, varsayilan: int}>> $cetveller */
+        $cetveller = require database_path('data/cetveller.php');
+
+        // Yönerge yalnızca doğrulanmış eşik verisi olan üniversiteler için oluşturulur;
+        // gerçek eşikler EsikSeeder tarafından bu yönergelere bağlanır. (Tahmini baraj yok.)
+        /** @var list<array<int, mixed>> $esikVerisi */
+        $esikVerisi = require database_path('data/esikler.php');
+
+        foreach (collect($esikVerisi)->pluck(0)->unique() as $ad) {
+            $universite = Universite::query()->where('ad', $ad)->first();
+
+            if ($universite === null) {
+                continue;
+            }
 
             $this->yonergeOlustur(
-                anahtar: str($ad)->slug().'-'.$kadro,
-                ad: $ad.' — '.($kadro === 'docentlik' ? 'Doçentlik' : 'Dr. Öğr. Üyesi'),
-                kadro: $kadro,
+                anahtar: str($ad)->slug().'-yonerge',
+                ad: $ad.' — Akademik Yükseltilme Yönergesi',
+                kadro: 'docentlik',
                 uakHedef: 100,
-                universiteHedef: $baraj,
-                kategoriKurallari: $kategoriKurallari,
+                universiteHedef: 0,
+                kategoriKurallari: $cetveller[$ad] ?? $kategoriKurallari,
                 universite: $universite,
-                yil: $yil,
             );
         }
     }
