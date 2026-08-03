@@ -199,6 +199,57 @@ test('profil toplamı kullanıcının kendi puanını yansıtır', function () {
     expect(Livewire::test(YonergeAnalizi::class)->instance()->profilToplam())->toBe(70);
 });
 
+test('karta tıklayınca detay modalı açılır ve dağılımı gösterir', function () {
+    $yonergeId = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
+        ->first(fn ($s) => $s['yonerge']->universite->ad === 'Ankara Üniversitesi')['yonerge']->id;
+
+    $bilesen = Livewire::test(YonergeAnalizi::class)
+        ->assertSet('detayAcik', false)
+        ->call('detayAc', $yonergeId)
+        ->assertSet('detayAcik', true)
+        ->assertSet('secilenYonergeId', $yonergeId)
+        ->assertSee('Ankara Üniversitesi')
+        ->assertSee('Asgari Koşullar')
+        ->assertSee('Puanımın Dağılımı');
+
+    $detay = $bilesen->instance()->detay();
+
+    // Detay, sonuç satırının üstüne kategori raporunu ekler.
+    expect($detay['baraj'])->toBe(120)
+        ->and($detay['durum'])->toBe('yetersiz')
+        ->and($detay['rapor']->toplamPuan)->toBe(70)
+        ->and($detay['rapor']->kategori(Kategori::Makale)->adet)->toBe(2);
+});
+
+test('detay paneli kapanınca içerik korunur (kapanış animasyonu titremesin)', function () {
+    $yonergeId = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())[0]['yonerge']->id;
+
+    Livewire::test(YonergeAnalizi::class)
+        ->call('detayAc', $yonergeId)
+        ->set('detayAcik', false)
+        ->assertSet('secilenYonergeId', $yonergeId)
+        ->assertSee('Asgari Koşullar');
+});
+
+test('filtre dışında kalan yönergenin detayı boş döner', function () {
+    $yonergeId = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
+        ->first(fn ($s) => $s['yonerge']->universite->ad === 'Ankara Üniversitesi')['yonerge']->id;
+
+    $detay = Livewire::test(YonergeAnalizi::class)
+        ->call('detayAc', $yonergeId)
+        ->set('arama', 'Mersin')
+        ->instance()->detay();
+
+    expect($detay)->toBeNull();
+});
+
+test('detay paneli animasyon için data-detay-flyout kancasını taşır', function () {
+    // app.css'teki [data-flux-modal][data-detay-flyout] > dialog kuralı bu ikiliye bağlı.
+    $html = Livewire::test(YonergeAnalizi::class)->html();
+
+    expect($html)->toMatch('/<ui-modal[^>]*data-detay-flyout[^>]*data-flux-modal/');
+});
+
 test('sayfa render olur ve üniversiteleri gösterir', function () {
     Livewire::test(YonergeAnalizi::class)
         ->assertOk()

@@ -284,6 +284,51 @@ select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
 
+/* Sağdan açılan detay paneli (data-detay-flyout).
+   Flux varsayılanı yalnızca 50px'lik, kısa (açılış 0.15s / kapanış 0.075s) bir
+   geçiş kullanıyor. Panel kendi genişliği kadar kaysın ve iki yönde de yumuşak
+   bir eğriyle gelip gitsin. */
+[data-flux-modal][data-detay-flyout] > dialog {
+    --flux-flyout-translate: translateX(100%);
+    transition:
+        opacity 0.26s cubic-bezier(0.4, 0, 0.7, 1),
+        transform 0.26s cubic-bezier(0.4, 0, 0.7, 1),
+        display 0.26s allow-discrete,
+        overlay 0.26s allow-discrete;
+}
+
+[data-flux-modal][data-detay-flyout] > dialog[open] {
+    transition:
+        opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+        transform 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+        display 0.38s allow-discrete,
+        overlay 0.38s allow-discrete;
+}
+
+/* Perde panelle aynı ritimde koyulaşsın. */
+[data-flux-modal][data-detay-flyout] > dialog::backdrop {
+    background-color: color-mix(in srgb, var(--color-navy) 30%, transparent);
+    transition:
+        opacity 0.26s cubic-bezier(0.4, 0, 0.7, 1),
+        display 0.26s allow-discrete,
+        overlay 0.26s allow-discrete;
+}
+
+[data-flux-modal][data-detay-flyout] > dialog[open]::backdrop {
+    transition:
+        opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+        display 0.38s allow-discrete,
+        overlay 0.38s allow-discrete;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-flux-modal][data-detay-flyout] > dialog,
+    [data-flux-modal][data-detay-flyout] > dialog[open] {
+        --flux-flyout-translate: translateX(0);
+        transition-duration: 0.01ms;
+    }
+}
+
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
