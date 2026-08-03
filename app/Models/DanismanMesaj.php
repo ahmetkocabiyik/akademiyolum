@@ -11,10 +11,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property int $id
  * @property int $user_id
+ * @property int $danisman_sohbet_id
  * @property string $rol
  * @property string $icerik
  */
-#[Fillable(['rol', 'icerik'])]
+#[Fillable(['user_id', 'rol', 'icerik', 'danisman_sohbet_id'])]
 class DanismanMesaj extends Model
 {
     /** @use HasFactory<DanismanMesajFactory> */
@@ -28,5 +29,13 @@ class DanismanMesaj extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return BelongsTo<DanismanSohbet, $this>
+     */
+    public function sohbet(): BelongsTo
+    {
+        return $this->belongsTo(DanismanSohbet::class, 'danisman_sohbet_id');
     }
 }

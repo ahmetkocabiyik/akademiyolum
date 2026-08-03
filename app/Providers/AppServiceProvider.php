@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\AI\ClaudeSaglayici;
+use App\Services\AI\OpenAiSaglayici;
 use App\Services\AI\SohbetSaglayici;
 use App\Services\AI\StubSaglayici;
 use Carbon\CarbonImmutable;
@@ -31,6 +32,20 @@ class AppServiceProvider extends ServiceProvider
                     anahtar: $anahtar,
                     model: config('ai.claude.model'),
                     maxTokens: config('ai.claude.max_tokens'),
+                );
+            }
+
+            if (config('ai.saglayici') === 'openai') {
+                $anahtar = config('ai.openai.anahtar');
+
+                if (blank($anahtar)) {
+                    throw new RuntimeException('OPENAI_API_KEY tanımlı değil.');
+                }
+
+                return new OpenAiSaglayici(
+                    anahtar: $anahtar,
+                    model: config('ai.openai.model'),
+                    maxTokens: config('ai.openai.max_tokens'),
                 );
             }
 

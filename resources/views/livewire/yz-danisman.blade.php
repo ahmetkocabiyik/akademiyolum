@@ -1,7 +1,8 @@
-<div class="flex h-[calc(100dvh-6.5rem)] flex-col"
-    x-data
-    x-on:sohbet-kaydir.window="$nextTick(() => { const el = $refs.akis; if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' }); })">
+<div class="flex h-[calc(100dvh-6.5rem)] gap-4"
+    x-data="{ panelAcik: false }"
+    x-on:sohbet-kaydir.window="panelAcik = false; $nextTick(() => { const el = $refs.akis; if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' }); })">
 
+    {{-- Sohbet alanı --}}
     <flux:card class="flex flex-1 flex-col overflow-hidden !p-0">
 
         {{-- Başlık --}}
@@ -18,11 +19,13 @@
                     </div>
                 </div>
             </div>
-            @if ($this->mesajlar->isNotEmpty())
-                <flux:button wire:click="sohbetiTemizle" wire:confirm="Sohbet geçmişi silinsin mi?" size="sm" variant="subtle" icon="trash">
-                    Temizle
+            <div class="flex items-center gap-2">
+                <flux:button wire:click="yeniSohbet" size="sm" variant="subtle" icon="plus-circle">
+                    Yeni sohbet
                 </flux:button>
-            @endif
+                {{-- Mobilde sohbet listesini açar --}}
+                <flux:button x-on:click="panelAcik = true" size="sm" variant="subtle" icon="chat-bubble-left-right" class="lg:hidden" aria-label="Sohbetler" />
+            </div>
         </div>
 
         {{-- Mesaj akışı --}}
@@ -82,6 +85,13 @@
 
         {{-- Giriş --}}
         <div class="border-t border-line p-4">
+            @if ($hata)
+                <div class="mb-2 flex items-start gap-2 rounded-xl border px-3.5 py-2.5 text-sm"
+                    style="border-color: color-mix(in srgb, var(--color-cat-red) 35%, transparent); background: var(--color-cat-red-light); color: var(--color-cat-red);">
+                    <flux:icon name="exclamation-triangle" class="mt-0.5 size-4 shrink-0" />
+                    <span>{{ $hata }}</span>
+                </div>
+            @endif
             @if ($this->mesajlar->isNotEmpty())
                 <div class="mb-2 flex flex-wrap gap-1.5">
                     @foreach ($oneriler as $oneri)
@@ -98,4 +108,37 @@
             </form>
         </div>
     </flux:card>
+
+    {{-- Sohbet geçmişi — masaüstü panel --}}
+    <flux:card class="hidden w-80 shrink-0 flex-col overflow-hidden !p-0 lg:flex">
+        <div class="flex items-center justify-between gap-2 border-b border-line px-4 py-4">
+            <flux:heading size="sm">Sohbetler</flux:heading>
+            <flux:button wire:click="yeniSohbet" size="xs" variant="subtle" icon="plus" aria-label="Yeni sohbet" />
+        </div>
+
+        @include('livewire.partials.danisman-sohbetler')
+    </flux:card>
+
+    {{-- Sohbet geçmişi — mobil çekmece --}}
+    <div x-cloak x-show="panelAcik" class="fixed inset-0 z-50 lg:hidden" x-on:keydown.escape.window="panelAcik = false">
+        <div class="absolute inset-0 bg-black/40" x-show="panelAcik" x-transition.opacity x-on:click="panelAcik = false"></div>
+        <div class="absolute inset-y-0 end-0 flex w-80 max-w-[85%] flex-col bg-surface shadow-xl"
+            x-show="panelAcik"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="translate-x-full"
+            x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="translate-x-full">
+            <div class="flex items-center justify-between gap-2 border-b border-line px-4 py-4">
+                <flux:heading size="sm">Sohbetler</flux:heading>
+                <div class="flex items-center gap-1">
+                    <flux:button wire:click="yeniSohbet" x-on:click="panelAcik = false" size="xs" variant="subtle" icon="plus" aria-label="Yeni sohbet" />
+                    <flux:button x-on:click="panelAcik = false" size="xs" variant="subtle" icon="x-mark" aria-label="Kapat" />
+                </div>
+            </div>
+
+            @include('livewire.partials.danisman-sohbetler')
+        </div>
+    </div>
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Services\AI;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -18,21 +19,28 @@ class ClaudeSaglayici implements SohbetSaglayici
 
     public function yanitla(string $sistemPrompt, array $mesajlar): string
     {
-        $yanit = Http::withHeaders([
-            'x-api-key' => $this->anahtar,
-            'anthropic-version' => '2023-06-01',
-        ])
-            ->timeout(60)
-            ->post('https://api.anthropic.com/v1/messages', [
-                'model' => $this->model,
-                'max_tokens' => $this->maxTokens,
-                'system' => $sistemPrompt,
-                'messages' => array_map(fn (array $mesaj): array => [
-                    'role' => $mesaj['rol'],
-                    'content' => $mesaj['icerik'],
-                ], array_values($mesajlar)),
+        try {
+            $yanit = Http::withHeaders([
+                'x-api-key' => $this->anahtar,
+                'anthropic-version' => '2023-06-01',
             ])
-            ->throw();
+                ->timeout(60)
+                ->post('https://api.anthropic.com/v1/messages', [
+                    'model' => $this->model,
+                    'max_tokens' => $this->maxTokens,
+                    'system' => $sistemPrompt,
+                    'messages' => array_map(fn (array $mesaj): array => [
+                        'role' => $mesaj['rol'],
+                        'content' => $mesaj['icerik'],
+                    ], array_values($mesajlar)),
+                ]);
+        } catch (ConnectionException) {
+            throw SaglayiciException::ulasilamadi();
+        }
+
+        if ($yanit->failed()) {
+            throw SaglayiciException::httpDurumundan($yanit->status());
+        }
 
         return (string) $yanit->json('content.0.text', '');
     }
