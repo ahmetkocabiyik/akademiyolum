@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\Kategori;
-use App\Livewire\YayinEkle;
+use App\Livewire\FaaliyetEkle;
 use App\Models\Faaliyet;
 use App\Models\User;
 use Livewire\Livewire;
@@ -14,15 +14,15 @@ beforeEach(function () {
 });
 
 test('ekleme sayfası ayrı bir sayfa olarak açılır', function () {
-    $this->get(route('yayinlar.ekle'))
+    $this->get(route('faaliyetler.ekle'))
         ->assertOk()
-        ->assertSee('Yayın Ekle')
+        ->assertSee('Faaliyet Ekle')
         ->assertSee('Manuel Ekle')
         ->assertSee("AVESİS'ten Çek");
 });
 
-test('manuel yayın ekler ve puanı kaynaktan hesaplar', function () {
-    Livewire::test(YayinEkle::class)
+test('manuel faaliyet ekler ve puanı kaynaktan hesaplar', function () {
+    Livewire::test(FaaliyetEkle::class)
         ->set('kategori', Kategori::Makale->value)
         ->set('baslik', 'Kelam İlminde Yöntem')
         ->set('yazarlar', ['Ahmet K.', 'Mehmet Y.'])
@@ -30,7 +30,7 @@ test('manuel yayın ekler ve puanı kaynaktan hesaplar', function () {
         ->set('yil', '2025')
         ->call('kaydet')
         ->assertHasNoErrors()
-        ->assertRedirect(route('yayinlar'));
+        ->assertRedirect(route('faaliyetler'));
 
     $faaliyet = $this->user->faaliyetler()->sole();
 
@@ -44,7 +44,7 @@ test('manuel yayın ekler ve puanı kaynaktan hesaplar', function () {
 });
 
 test('yazar eklenip silinebilir ve kaydederken birleştirilir', function () {
-    Livewire::test(YayinEkle::class)
+    Livewire::test(FaaliyetEkle::class)
         ->assertSet('yazarlar', [''])
         ->call('yazarEkle')
         ->call('yazarEkle')
@@ -64,31 +64,31 @@ test('yazar eklenip silinebilir ve kaydederken birleştirilir', function () {
 test('düzenlemede yazarlar diziye ayrıştırılır', function () {
     $faaliyet = Faaliyet::factory()->for($this->user)->create(['yazarlar' => 'Ali V., Veli A.']);
 
-    Livewire::test(YayinEkle::class, ['faaliyet' => $faaliyet])
+    Livewire::test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
         ->assertSet('yazarlar', ['Ali V.', 'Veli A.']);
 });
 
 test('hızlı-ekle kategori query parametresi ön-seçili gelir', function () {
     Livewire::withQueryParams(['kategori' => 'tez_yayini'])
-        ->test(YayinEkle::class)
+        ->test(FaaliyetEkle::class)
         ->assertSet('kategori', 'tez_yayini');
 });
 
 test('geçersiz kategori query parametresi varsayılanı korur', function () {
     Livewire::withQueryParams(['kategori' => 'olmayan'])
-        ->test(YayinEkle::class)
+        ->test(FaaliyetEkle::class)
         ->assertSet('kategori', 'makale');
 });
 
 test('kategori değişince kaynak sıfırlanır', function () {
-    Livewire::test(YayinEkle::class)
+    Livewire::test(FaaliyetEkle::class)
         ->set('kaynak', 'SCIE/SSCI (Q2)')
         ->set('kategori', Kategori::Kitap->value)
         ->assertSet('kaynak', '');
 });
 
 test('canlı tahmini puan kaynağa göre hesaplanır', function () {
-    $component = Livewire::test(YayinEkle::class)
+    $component = Livewire::test(FaaliyetEkle::class)
         ->set('kategori', Kategori::Makale->value)
         ->set('kaynak', 'TR Dizin');
 
@@ -96,7 +96,7 @@ test('canlı tahmini puan kaynağa göre hesaplanır', function () {
 });
 
 test('zorunlu alanlar doğrulanır', function () {
-    Livewire::test(YayinEkle::class)
+    Livewire::test(FaaliyetEkle::class)
         ->set('baslik', '')
         ->call('kaydet')
         ->assertHasErrors(['baslik']);
@@ -111,7 +111,7 @@ test('mevcut faaliyet düzenlenir ve puan yeniden hesaplanır', function () {
         'puan' => 10,
     ]);
 
-    Livewire::test(YayinEkle::class, ['faaliyet' => $faaliyet])
+    Livewire::test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
         ->assertSet('baslik', $faaliyet->baslik)
         ->set('kaynak', 'SCIE/SSCI (Q2)')
         ->call('kaydet')
@@ -123,5 +123,5 @@ test('mevcut faaliyet düzenlenir ve puan yeniden hesaplanır', function () {
 test('başka kullanıcının faaliyeti düzenlenemez', function () {
     $baskasi = Faaliyet::factory()->for(User::factory())->create();
 
-    $this->get(route('yayinlar.duzenle', $baskasi))->assertNotFound();
+    $this->get(route('faaliyetler.duzenle', $baskasi))->assertNotFound();
 });

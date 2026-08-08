@@ -82,9 +82,9 @@ test('module routes are gated behind onboarding', function () {
 
 test('onboarded user can load a module placeholder page', function () {
     actingAs(User::factory()->onboarded()->create())
-        ->get(route('yayinlar'))
+        ->get(route('faaliyetler'))
         ->assertOk()
-        ->assertSee('Yayınlar');
+        ->assertSee('Faaliyetler');
 });
 
 test('onboarding flow saves profile and completes', function () {

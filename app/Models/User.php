@@ -4,6 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\TemelAlan;
+use App\Services\Scoring\Sart\Profil;
+use App\Services\Scoring\Sart\ProfilCozucu;
+use Carbon\CarbonInterface;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -26,6 +29,14 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string|null $fakulte
  * @property string|null $bolum
  * @property TemelAlan|null $temel_alan
+ * @property CarbonInterface|null $lisans_tarihi
+ * @property CarbonInterface|null $doktora_tarihi
+ * @property CarbonInterface|null $docentlik_tarihi
+ * @property CarbonInterface|null $son_atama_tarihi
+ * @property string|null $program_dili
+ * @property int|null $yds_puani
+ * @property int|null $h_indeksi
+ * @property int|null $yurtdisi_ay
  * @property string|null $orcid
  * @property string|null $avesis_id
  * @property string|null $yonerge
@@ -40,7 +51,13 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'unvan', 'universite', 'fakulte', 'bolum', 'temel_alan', 'orcid', 'avesis_id', 'yonerge', 'yonerge_id', 'onboarded_at', 'email', 'password'])]
+#[Fillable([
+    'name', 'unvan', 'universite', 'fakulte', 'bolum', 'temel_alan', 'orcid', 'avesis_id',
+    'yonerge', 'yonerge_id', 'onboarded_at', 'email', 'password',
+    // Akademik profil — şart ağacının dönem ve metrik yaprakları için.
+    'lisans_tarihi', 'doktora_tarihi', 'docentlik_tarihi', 'son_atama_tarihi',
+    'program_dili', 'yds_puani', 'h_indeksi', 'yurtdisi_ay',
+])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements PasskeyUser
 {
@@ -59,7 +76,44 @@ class User extends Authenticatable implements PasskeyUser
             'onboarded_at' => 'datetime',
             'temel_alan' => TemelAlan::class,
             'password' => 'hashed',
+            'lisans_tarihi' => 'date',
+            'doktora_tarihi' => 'date',
+            'docentlik_tarihi' => 'date',
+            'son_atama_tarihi' => 'date',
+            'yds_puani' => 'integer',
+            'h_indeksi' => 'integer',
+            'yurtdisi_ay' => 'integer',
         ];
+    }
+
+    /**
+     * Şart ağacı motorunun okuduğu akademik profil.
+     *
+     * Atıf, proje ve tez danışmanlığı sayıları burada DEĞİL, kullanıcının
+     * faaliyet kayıtlarından türetilir ({@see ProfilCozucu}).
+     *
+     * @param  iterable<Faaliyet>|null  $faaliyetler  null ise onaylı faaliyetler çekilir
+     */
+    public function sartProfili(?iterable $faaliyetler = null): Profil
+    {
+        return (new ProfilCozucu)->coz($this, $faaliyetler);
+    }
+
+    /**
+     * Akademik profilin doluluk oranı (0-100). Yalnızca kullanıcının elle
+     * girdiği alanlar sayılır; faaliyetlerden türetilen ölçütler bu orana
+     * girmez — onların kaynağı Faaliyetler bölümüdür.
+     */
+    public function profilDoluluk(): int
+    {
+        $alanlar = [
+            'doktora_tarihi', 'docentlik_tarihi', 'son_atama_tarihi',
+            'program_dili', 'yds_puani', 'h_indeksi', 'yurtdisi_ay',
+        ];
+
+        $dolu = count(array_filter($alanlar, fn (string $alan) => $this->{$alan} !== null));
+
+        return (int) round($dolu / count($alanlar) * 100);
     }
 
     /**

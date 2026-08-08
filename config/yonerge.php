@@ -99,29 +99,113 @@ return [
                     ],
                     'varsayilan' => 1,
                 ],
-                // Madde 7 + 10: Bilimsel Araştırma Projesi / Patent (BAP en fazla 20).
-                'toplumsal_katki' => [
+                // Madde 7: Bilimsel Araştırma Projesi (BAP en fazla 20).
+                'proje' => [
+                    'tavan' => 20,
+                    'puanlar' => [
+                        'AB Çerçeve / Ufuk' => 15,
+                        'Diğer Uluslararası Fon' => 12,
+                        'TÜBİTAK' => 10,
+                        'TÜSEB' => 10,
+                        'Diğer Kamu Kurumu' => 5,
+                        'Özel Sektör / STK' => 5,
+                        'BAP (Üniversite)' => 3,
+                        'Öğrenci Projesi (2209 vb.)' => 2,
+                    ],
+                    'varsayilan' => 3,
+                ],
+                // Madde 10: Patent.
+                'patent' => [
                     'tavan' => 20,
                     'puanlar' => [
                         'Uluslararası Patent' => 20,
-                        'AB/TÜBİTAK Koordinatör' => 15,
                         'Ulusal Patent' => 10,
-                        'AB/TÜBİTAK Araştırmacı' => 10,
-                        'Kamu Ar-Ge / Danışman' => 5,
-                        'BAP Yürütücü' => 3,
+                        'Faydalı Model' => 5,
+                        'Endüstriyel Tasarım' => 5,
+                        'Yazılım' => 5,
+                        'Islahçı Hakkı / Çeşit Tescili' => 5,
+                        'Ticarileştirme' => 10,
                     ],
                     'varsayilan' => 5,
                 ],
-                // Madde 6, 8, 11, 13, 14: Danışmanlık / Bildiri / Ödül / Sanatsal / Diğer.
-                'diger' => [
+                // Madde 6: Lisansüstü Tez Danışmanlığı.
+                'tez_danismanligi' => [
+                    'tavan' => 10,
+                    'puanlar' => [
+                        'Doktora Tezi' => 5,
+                        'Tıpta/Diş/Sanatta Yeterlik Tezi' => 5,
+                        'Yüksek Lisans Tezi' => 3,
+                        'Tez İzleme / Jüri Üyeliği' => 1,
+                    ],
+                    'varsayilan' => 3,
+                ],
+                // Madde 8: Bilimsel Toplantı Faaliyeti (bildiri).
+                'bildiri' => [
+                    'tavan' => 10,
+                    'puanlar' => [
+                        'Uluslararası Tam Metin (CPCI)' => 5,
+                        'Uluslararası Tam Metin' => 4,
+                        'Uluslararası Özet/Poster' => 2,
+                        'Ulusal Tam Metin' => 3,
+                        'Ulusal Özet/Poster' => 1,
+                        'Davetli Konuşmacı' => 5,
+                    ],
+                    'varsayilan' => 3,
+                ],
+                // Madde 11: Ödüller.
+                'odul' => [
                     'tavan' => 25,
                     'puanlar' => [
-                        'Ödül (YÖK/TÜBİTAK/TÜBA)' => 25,
-                        'Doktora Tez Danışmanlığı' => 5,
-                        'Uluslararası Bildiri (CPCI)' => 5,
-                        'h-indeksi ≥5 / Yurtdışı Araştırma' => 5,
-                        'Yüksek Lisans Tez Danışmanlığı' => 3,
-                        'Diğer Bildiri' => 3,
+                        'Uluslararası Bilim/Sanat Ödülü' => 25,
+                        'TÜBİTAK / TÜBA Ödülü' => 25,
+                        'Ulusal Bilim/Sanat Ödülü' => 10,
+                        'Yarışma Derecesi / Mansiyon' => 5,
+                        'Burs' => 5,
+                    ],
+                    'varsayilan' => 5,
+                ],
+                // Madde 13: Sanat ve tasarım etkinlikleri (Güzel Sanatlar alanı).
+                'sanatsal_etkinlik' => [
+                    'tavan' => 20,
+                    'puanlar' => [
+                        'Kişisel Etkinlik (Uluslararası)' => 20,
+                        'Kişisel Etkinlik (Ulusal)' => 10,
+                        'Karma/Jürili Etkinlik (Uluslararası)' => 10,
+                        'Karma/Jürili Etkinlik (Ulusal)' => 5,
+                        'Özgün Eser / Beste / Tasarım' => 10,
+                        'Albüm / Konser Kaydı' => 10,
+                        'Eserin Yayında Yer Alması / Satın Alınması' => 5,
+                    ],
+                    'varsayilan' => 5,
+                ],
+                // İdari görevler (yönergelerin ~yarısında puanlanır).
+                'idari_gorev' => [
+                    'tavan' => 10,
+                    'puanlar' => [
+                        'Rektör / Rektör Yardımcısı' => 6,
+                        'Dekan / Enstitü-YO Müdürü' => 6,
+                        'Dekan Yrd. / Müdür Yrd.' => 5,
+                        'Bölüm Başkanı' => 3,
+                        'Anabilim Dalı Başkanı / Koordinatörlük' => 2,
+                        'Kurul / Komisyon Üyeliği' => 2,
+                    ],
+                    'varsayilan' => 2,
+                ],
+                // Madde 14: Toplumsal katkı faaliyetleri.
+                'toplumsal_katki' => [
+                    'tavan' => 10,
+                    'puanlar' => [
+                        'Topluma Hizmet Projesi' => 5,
+                        'Bilim İletişimi / Popüler Yayın' => 3,
+                        'Kamu/STK Danışmanlığı' => 3,
+                    ],
+                    'varsayilan' => 5,
+                ],
+                // Sınıflanamayan diğer akademik faaliyetler.
+                'diger' => [
+                    'tavan' => 10,
+                    'puanlar' => [
+                        'Diğer' => 3,
                     ],
                     'varsayilan' => 3,
                 ],

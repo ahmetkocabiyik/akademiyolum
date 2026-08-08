@@ -74,7 +74,7 @@ class KosulDegerlendirici
             }
 
             if (isset($filtre['yazar'])) {
-                $rol = $f->yazar_rolu;
+                $rol = $f->rol;
 
                 if ($filtre['yazar'] === 'tek' && $rol !== 'tek') {
                     return false;

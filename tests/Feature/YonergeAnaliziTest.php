@@ -5,55 +5,118 @@ use App\Livewire\YonergeAnalizi;
 use App\Models\Faaliyet;
 use App\Models\Universite;
 use App\Models\User;
-use App\Models\Yonerge;
+use App\Services\Scoring\Sart\SartDeposu;
+use Illuminate\Support\Str;
 use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
 
+/**
+ * Test cetveli: kullanıcının 4 faaliyeti tam 70 puan eder.
+ * makale Q2 20 + Q2 20 + kitap 20 + tez 10 = 70.
+ *
+ * @return array<string, array<string, mixed>>
+ */
+function testCetvelleri(): array
+{
+    return [
+        'test-cetvel' => [
+            'maddeler' => [
+                'M1' => ['baslik' => 'Q1 makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 30],
+                'M2' => ['baslik' => 'Q2 makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)', 'AHCI'], 'puan' => 20],
+                'M3' => ['baslik' => 'TR Dizin makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
+                'M4' => ['baslik' => 'ESCI/Scopus makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 10],
+                'K1' => ['baslik' => 'Kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap'], 'puan' => 20],
+                'T1' => ['baslik' => 'Tez yayını', 'kategori' => 'tez_yayini', 'puan' => 10],
+            ],
+            'gruplar' => [
+                'MAKALE' => ['M*'],
+                'YAYIN' => ['M*', 'K*', 'T1'],
+            ],
+        ],
+    ];
+}
+
+/**
+ * Yalnızca toplam puan barajı taşıyan eşik kaydı.
+ *
+ * @param  list<array<string, mixed>>  $ekKosullar
+ * @return array<string, mixed>
+ */
+function testEsik(string $universite, int $baraj, string $kadro = 'dr_ogr_uyesi', string $alan = 'ilahiyat', array $ekKosullar = []): array
+{
+    return [
+        'anahtar' => Str::slug($universite)."-{$kadro}-{$alan}",
+        'universite' => $universite,
+        'kadro' => $kadro,
+        'alan' => $alan,
+        'birim' => null,
+        'cetvel' => 'test-cetvel',
+        'notlar' => "Test eşiği: {$baraj} puan.",
+        'sart' => ['tip' => 've', 'aciklama' => 'Asgari şartlar', 'cocuklar' => array_merge([
+            [
+                'tip' => 'puan',
+                'rol' => 'toplam',
+                'aciklama' => "Tüm faaliyetlerden toplam en az {$baraj} puan",
+                'maddeler' => ['*'],
+                'min_puan' => $baraj,
+            ],
+        ], $ekKosullar)],
+    ];
+}
+
+/**
+ * Verilen eşiklerle depo bağlar (üretim veri dosyalarını devre dışı bırakır).
+ *
+ * @param  list<array<string, mixed>>  $esikler
+ */
+function depoBagla(array $esikler): void
+{
+    app()->instance(SartDeposu::class, new SartDeposu($esikler, testCetvelleri()));
+}
+
 beforeEach(function () {
-    // Kontrollü 6 üniversite yönergesi (belirli barajlar/kadro).
+    // Kontrollü 6 üniversite (belirli barajlar, hepsi Dr. Öğr. Üyesi / ilahiyat).
     $veriler = [
-        ['Mersin Üniversitesi', 'Mersin', 'devlet', 90, 'docentlik'],
-        ['Necmettin Erbakan Üniversitesi', 'Konya', 'devlet', 60, 'dr_ogr_uyesi'],
-        ['Ankara Üniversitesi', 'Ankara', 'devlet', 120, 'docentlik'],
-        ['Marmara Üniversitesi', 'İstanbul', 'devlet', 100, 'docentlik'],
-        ['İstanbul 29 Mayıs Üniversitesi', 'İstanbul', 'vakif', 55, 'dr_ogr_uyesi'],
-        ['Sakarya Üniversitesi', 'Sakarya', 'devlet', 80, 'docentlik'],
+        ['Mersin Üniversitesi', 'Mersin', 'devlet', 90],
+        ['Necmettin Erbakan Üniversitesi', 'Konya', 'devlet', 60],
+        ['Ankara Üniversitesi', 'Ankara', 'devlet', 120],
+        ['Marmara Üniversitesi', 'İstanbul', 'devlet', 100],
+        ['İstanbul 29 Mayıs Üniversitesi', 'İstanbul', 'vakif', 55],
+        ['Sakarya Üniversitesi', 'Sakarya', 'devlet', 80],
     ];
 
+    $esikler = [];
+
     foreach ($veriler as [$ad, $sehir, $tur, $baraj]) {
-        $uni = Universite::factory()->create(['ad' => $ad, 'sehir' => $sehir, 'tur' => $tur]);
-        $yonerge = Yonerge::factory()->ilahiyatKurallari()->create([
-            'universite_id' => $uni->id,
-            'ad' => $ad,
-        ]);
-        // Doğrulanmış Dr. Öğr. Üyesi eşiği. Eşleşme tam alan eşleşmesi olduğu için
-        // satır kullanıcının temel alanıyla (ilahiyat) aynı alanda açılır.
-        $yonerge->esikler()->create([
-            'kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat', 'min_toplam' => $baraj, 'kaynak' => 'pdf',
-        ]);
+        Universite::factory()->create(['ad' => $ad, 'sehir' => $sehir, 'tur' => $tur]);
+        $esikler[] = testEsik($ad, $baraj);
     }
+
+    $this->esikler = $esikler;
+    depoBagla($esikler);
 
     // Arş. Gör. → varsayılan hedef kadro Dr. Öğr. Üyesi (eşiklerle uyumlu).
     $this->user = User::factory()->onboarded()->create(['unvan' => 'Arş. Gör.']);
 
-    // Toplam 70 puan: makale 20+20, kitap 20, tez 10 (yeniden puanlamayla da aynı).
-    Faaliyet::factory()->for($this->user)->create(['kategori' => Kategori::Makale, 'kaynak' => 'SCIE/SSCI (Q2)', 'puan' => 20]);
-    Faaliyet::factory()->for($this->user)->create(['kategori' => Kategori::Makale, 'kaynak' => 'SCIE/SSCI (Q2)', 'puan' => 20]);
-    Faaliyet::factory()->for($this->user)->create(['kategori' => Kategori::Kitap, 'kaynak' => 'Uluslararası/Ulusal Kitap', 'puan' => 20]);
-    Faaliyet::factory()->for($this->user)->create(['kategori' => Kategori::TezYayini, 'kaynak' => 'ESCI / Scopus', 'puan' => 10]);
+    // Toplam 70 puan (test cetveline göre).
+    Faaliyet::factory()->for($this->user)->create(['kategori' => Kategori::Makale, 'kaynak' => 'SCIE/SSCI (Q2)']);
+    Faaliyet::factory()->for($this->user)->create(['kategori' => Kategori::Makale, 'kaynak' => 'SCIE/SSCI (Q2)']);
+    Faaliyet::factory()->for($this->user)->create(['kategori' => Kategori::Kitap, 'kaynak' => 'Uluslararası/Ulusal Kitap']);
+    Faaliyet::factory()->for($this->user)->create(['kategori' => Kategori::TezYayini, 'kaynak' => 'ESCI / Scopus']);
 
     actingAs($this->user);
 });
 
 test('durum sayaçları (özet) doğru hesaplanır', function () {
-    // 70 puan: barajlar 55,60 uygun; 80 yakın; 90,100,120 yetersiz.
+    // 70 puan: barajlar 55,60 uygun; 80 yakın (%88); 90,100,120 yetersiz.
     $ozet = Livewire::test(YonergeAnalizi::class)->instance()->ozet();
 
     expect($ozet['toplam'])->toBe(6)
         ->and($ozet['uygun'])->toBe(2)
         ->and($ozet['yakin'])->toBe(1)
-        ->and($ozet['yetersiz'])->toBe(3);
+        ->and($ozet['yetersiz'])->toBe(3)
+        ->and($ozet['eksik_bilgi'])->toBe(0);
 });
 
 test('görünüm grid ve list arasında değişir', function () {
@@ -81,7 +144,7 @@ test('tüm üniversite yönergelerini listeler', function () {
 
 test('barajı karşılayan yönerge yapılabilir işaretlenir', function () {
     $sonuclar = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
-        ->keyBy(fn ($s) => $s['yonerge']->universite->ad);
+        ->keyBy(fn (array $s) => $s['universite']->ad);
 
     // İstanbul 29 Mayıs barajı 55 → 70 puan yeterli.
     $istanbul = $sonuclar['İstanbul 29 Mayıs Üniversitesi'];
@@ -96,16 +159,15 @@ test('barajı karşılayan yönerge yapılabilir işaretlenir', function () {
 });
 
 test('kullanıcının temel alanına göre doğru eşik seçilir', function () {
-    $uni = Universite::factory()->create(['ad' => 'Alan Test Üni', 'tur' => 'devlet']);
-    $yonerge = Yonerge::factory()->ilahiyatKurallari()->create([
-        'universite_id' => $uni->id, 'ad' => 'Alan Test Üni', 'universite_hedef' => 999,
-    ]);
-    // İlahiyat: min 50 (uygun), Fen: min 150 (yetersiz)
-    $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat', 'min_toplam' => 50, 'kaynak' => 'pdf']);
-    $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'fen', 'min_toplam' => 150, 'kaynak' => 'pdf']);
+    Universite::factory()->create(['ad' => 'Alan Test Üni', 'tur' => 'devlet']);
+
+    depoBagla(array_merge($this->esikler, [
+        testEsik('Alan Test Üni', 50, alan: 'ilahiyat'),
+        testEsik('Alan Test Üni', 150, alan: 'fen'),
+    ]));
 
     $bul = fn () => collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
-        ->first(fn ($s) => $s['yonerge']->universite->ad === 'Alan Test Üni');
+        ->first(fn (array $s) => $s['universite']->ad === 'Alan Test Üni');
 
     // İlahiyat kullanıcı (70 puan): kendi alanının eşiği (min 50) → uygun
     expect($bul()['baraj'])->toBe(50)
@@ -118,40 +180,36 @@ test('kullanıcının temel alanına göre doğru eşik seçilir', function () {
 });
 
 test('eşleşme tam alan eşleşmesidir, başka alana düşülmez', function () {
-    // Gruplama/fallback yok: yönergede o alanın satırı yoksa üniversite listeye girmez.
-    // Yönerge bir eşiği birden çok alan için ortak tanımlıyorsa esikler.php onu
-    // zaten alan başına ayrı satıra açar.
-    $uni = Universite::factory()->create(['ad' => 'Tam Eşleşme Üni', 'tur' => 'devlet']);
-    $yonerge = Yonerge::factory()->ilahiyatKurallari()->create([
-        'universite_id' => $uni->id, 'ad' => 'Tam Eşleşme Üni',
-    ]);
-    $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'sosyal', 'min_toplam' => 60, 'kaynak' => 'pdf']);
+    // Gruplama/fallback yok: yönergede o alanın satırı yoksa üniversite listeye
+    // girmez. Grup satırları veri dosyasında alan başına açılır.
+    Universite::factory()->create(['ad' => 'Tam Eşleşme Üni', 'tur' => 'devlet']);
+
+    depoBagla(array_merge($this->esikler, [testEsik('Tam Eşleşme Üni', 60, alan: 'sosyal')]));
 
     $bul = function (string $alan) {
         $this->user->update(['temel_alan' => $alan]);
 
         return collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
-            ->first(fn ($s) => $s['yonerge']->universite->ad === 'Tam Eşleşme Üni');
+            ->first(fn (array $s) => $s['universite']->ad === 'Tam Eşleşme Üni');
     };
 
     expect($bul('sosyal'))->not->toBeNull()
         ->and($bul('sosyal')['baraj'])->toBe(60)
-        // İlahiyat eskiden sosyal'e düşüyordu; artık düşmüyor.
         ->and($bul('ilahiyat'))->toBeNull()
         ->and($bul('mimarlik'))->toBeNull();
 });
 
 test('hedef kadro değişince o kadronun eşiği kullanılır', function () {
-    $uni = Universite::factory()->create(['ad' => 'Kadro Test Üni', 'tur' => 'devlet']);
-    $yonerge = Yonerge::factory()->ilahiyatKurallari()->create([
-        'universite_id' => $uni->id, 'ad' => 'Kadro Test Üni', 'universite_hedef' => 999,
-    ]);
-    $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat', 'min_toplam' => 50, 'kaynak' => 'pdf']);
-    $yonerge->esikler()->create(['kadro' => 'docentlik', 'alan' => 'ilahiyat', 'min_toplam' => 300, 'kaynak' => 'pdf']);
+    Universite::factory()->create(['ad' => 'Kadro Test Üni', 'tur' => 'devlet']);
+
+    depoBagla(array_merge($this->esikler, [
+        testEsik('Kadro Test Üni', 50, kadro: 'dr_ogr_uyesi'),
+        testEsik('Kadro Test Üni', 300, kadro: 'docentlik'),
+    ]));
 
     $baraj = fn (string $kadro) => collect(
         Livewire::test(YonergeAnalizi::class)->set('hedefKadro', $kadro)->instance()->sonuclar()
-    )->first(fn ($s) => $s['yonerge']->universite->ad === 'Kadro Test Üni')['baraj'];
+    )->first(fn (array $s) => $s['universite']->ad === 'Kadro Test Üni')['baraj'];
 
     expect($baraj('dr_ogr_uyesi'))->toBe(50)
         ->and($baraj('docentlik'))->toBe(300);
@@ -174,7 +232,7 @@ test('üniversite adına göre arama filtreler', function () {
         ->instance()->sonuclar();
 
     expect($sonuclar)->toHaveCount(1)
-        ->and($sonuclar[0]['yonerge']->universite->ad)->toBe('Mersin Üniversitesi');
+        ->and($sonuclar[0]['universite']->ad)->toBe('Mersin Üniversitesi');
 });
 
 test('üniversite türüne göre filtreler', function () {
@@ -183,30 +241,29 @@ test('üniversite türüne göre filtreler', function () {
         ->instance()->sonuclar();
 
     expect($sonuclar)->toHaveCount(1)
-        ->and($sonuclar[0]['yonerge']->universite->ad)->toBe('İstanbul 29 Mayıs Üniversitesi');
+        ->and($sonuclar[0]['universite']->ad)->toBe('İstanbul 29 Mayıs Üniversitesi');
 });
 
-test('doğrulanmış eşik alt-koşulları değerlendirilir', function () {
-    $uni = Universite::factory()->create(['ad' => 'Doğrulanmış Test Üni', 'tur' => 'devlet']);
-    $yonerge = Yonerge::factory()->ilahiyatKurallari()->create([
-        'universite_id' => $uni->id, 'ad' => 'Doğrulanmış Test Üni', 'universite_hedef' => 100,
-    ]);
-    $yonerge->esikler()->create([
-        'kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat',
-        'min_toplam' => 100, 'yayin_min' => 40, 'yds_min' => 55, 'kaynak' => 'pdf',
-    ]);
+test('alt koşullar ağaç olarak değerlendirilir', function () {
+    Universite::factory()->create(['ad' => 'Alt Koşul Üni', 'tur' => 'devlet']);
 
-    $sonuclar = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
-        ->keyBy(fn ($s) => $s['yonerge']->universite->ad);
+    depoBagla(array_merge($this->esikler, [
+        testEsik('Alt Koşul Üni', 100, ekKosullar: [
+            ['tip' => 'puan', 'aciklama' => 'Makalelerden en az 40 puan', 'maddeler' => ['MAKALE'], 'min_puan' => 40],
+            ['tip' => 'adet', 'aciklama' => 'En az 3 yayın', 'maddeler' => ['YAYIN'], 'min_adet' => 3],
+        ]),
+    ]));
 
-    $s = $sonuclar['Doğrulanmış Test Üni'];
-    $kosullar = collect($s['sonuc']->kosullar)->keyBy('ad');
+    $s = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
+        ->first(fn (array $s) => $s['universite']->ad === 'Alt Koşul Üni');
 
-    expect($s['dogrulandi'])->toBeTrue()
-        ->and($s['durum'])->toBe('yetersiz')                                  // toplam 70 < 100
-        ->and($s['sonuc']->toplam)->toBe(70)
-        ->and($kosullar['Toplam puan']->saglandi())->toBeFalse()
-        ->and($kosullar['Yayın puanı (makale/kitap/tez)']->saglandi())->toBeTrue(); // 70 ≥ 40
+    $kosullar = collect($s['sonuc']->cocuklar)->keyBy('aciklama');
+
+    expect($s['durum'])->toBe('yetersiz')                      // toplam 70 < 100
+        ->and($s['toplam'])->toBe(70)
+        ->and($kosullar['Tüm faaliyetlerden toplam en az 100 puan']->saglandi())->toBeFalse()
+        ->and($kosullar['Makalelerden en az 40 puan']->saglandi())->toBeTrue()   // 40 ≥ 40
+        ->and($kosullar['En az 3 yayın']->saglandi())->toBeTrue();               // 4 ≥ 3
 });
 
 test('baraja göre artan sıralar', function () {
@@ -214,53 +271,56 @@ test('baraja göre artan sıralar', function () {
         ->set('siralama', 'baraj_artan')
         ->instance()->sonuclar();
 
-    $barajlar = array_column($sonuclar, 'baraj');
-
-    expect($barajlar)->toBe([55, 60, 80, 90, 100, 120]);
+    expect(array_column($sonuclar, 'baraj'))->toBe([55, 60, 80, 90, 100, 120]);
 });
 
-test('profil toplamı kullanıcının kendi puanını yansıtır', function () {
-    expect(Livewire::test(YonergeAnalizi::class)->instance()->profilToplam())->toBe(70);
+test('profil doluluğu girilen akademik alanlara göre artar', function () {
+    expect(Livewire::test(YonergeAnalizi::class)->instance()->profilDoluluk())->toBe(0);
+
+    // Elle girilen 7 alandan 2'si dolu → %29. Atıf/proje/tez sayaçları bu orana
+    // girmez; onların kaynağı Faaliyetler bölümüdür.
+    $this->user->update(['doktora_tarihi' => '2020-01-01', 'yds_puani' => 75]);
+
+    expect(Livewire::test(YonergeAnalizi::class)->instance()->profilDoluluk())->toBe(29);
 });
 
 test('karta tıklayınca detay modalı açılır ve dağılımı gösterir', function () {
-    $yonergeId = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
-        ->first(fn ($s) => $s['yonerge']->universite->ad === 'Ankara Üniversitesi')['yonerge']->id;
+    $uniId = Universite::query()->where('ad', 'Ankara Üniversitesi')->value('id');
 
     $bilesen = Livewire::test(YonergeAnalizi::class)
         ->assertSet('detayAcik', false)
-        ->call('detayAc', $yonergeId)
+        ->call('detayAc', $uniId)
         ->assertSet('detayAcik', true)
-        ->assertSet('secilenYonergeId', $yonergeId)
+        ->assertSet('secilenUniversiteId', $uniId)
         ->assertSee('Ankara Üniversitesi')
         ->assertSee('Asgari Koşullar')
         ->assertSee('Puanımın Dağılımı');
 
     $detay = $bilesen->instance()->detay();
 
-    // Detay, sonuç satırının üstüne kategori raporunu ekler.
+    // Detay, sonuç satırının üstüne bu cetvele göre kategori dağılımını ekler.
     expect($detay['baraj'])->toBe(120)
         ->and($detay['durum'])->toBe('yetersiz')
-        ->and($detay['rapor']->toplamPuan)->toBe(70)
-        ->and($detay['rapor']->kategori(Kategori::Makale)->adet)->toBe(2);
+        ->and($detay['toplam'])->toBe(70)
+        ->and($detay['dagilim']['makale'])->toBe(['puan' => 40, 'adet' => 2])
+        ->and($detay['dagilim']['kitap'])->toBe(['puan' => 20, 'adet' => 1]);
 });
 
 test('detay paneli kapanınca içerik korunur (kapanış animasyonu titremesin)', function () {
-    $yonergeId = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())[0]['yonerge']->id;
+    $uniId = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())[0]['universite']->id;
 
     Livewire::test(YonergeAnalizi::class)
-        ->call('detayAc', $yonergeId)
+        ->call('detayAc', $uniId)
         ->set('detayAcik', false)
-        ->assertSet('secilenYonergeId', $yonergeId)
+        ->assertSet('secilenUniversiteId', $uniId)
         ->assertSee('Asgari Koşullar');
 });
 
 test('filtre dışında kalan yönergenin detayı boş döner', function () {
-    $yonergeId = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
-        ->first(fn ($s) => $s['yonerge']->universite->ad === 'Ankara Üniversitesi')['yonerge']->id;
+    $uniId = Universite::query()->where('ad', 'Ankara Üniversitesi')->value('id');
 
     $detay = Livewire::test(YonergeAnalizi::class)
-        ->call('detayAc', $yonergeId)
+        ->call('detayAc', $uniId)
         ->set('arama', 'Mersin')
         ->instance()->detay();
 
@@ -279,4 +339,76 @@ test('sayfa render olur ve üniversiteleri gösterir', function () {
         ->assertOk()
         ->assertSee('Mersin Üniversitesi')
         ->assertSee('Mevcut Profilim');
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Üç değerli sonucun ekrana yansıması
+// ─────────────────────────────────────────────────────────────────────────────
+
+test('profil değeri girilmemişse durum "eksik bilgi" olur, yetersiz değil', function () {
+    Universite::factory()->create(['ad' => 'YDS Üni', 'tur' => 'devlet']);
+
+    depoBagla(array_merge($this->esikler, [
+        testEsik('YDS Üni', 50, ekKosullar: [
+            ['tip' => 'metrik', 'aciklama' => 'Yabancı dil sınavından en az 70', 'metrik' => 'yds', 'min' => 70],
+        ]),
+    ]));
+
+    $bul = fn () => collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
+        ->first(fn (array $s) => $s['universite']->ad === 'YDS Üni');
+
+    // Puan barajı (50) aşılıyor ama YDS bilinmiyor → karara bağlanamaz.
+    expect($bul()['durum'])->toBe('eksik_bilgi')
+        ->and($bul()['belirsiz_sayisi'])->toBe(1)
+        ->and($bul()['eksik_sayisi'])->toBe(0);
+
+    // Değer girilince kesin sonuca dönüşür.
+    $this->user->update(['yds_puani' => 75]);
+    expect($bul()['durum'])->toBe('uygun');
+
+    // 60/70 → en zayıf koşulun oranı %86, eşiğe yakın.
+    $this->user->update(['yds_puani' => 60]);
+    expect($bul()['durum'])->toBe('yakin');
+
+    // 30/70 → %43, açık ara yetersiz.
+    $this->user->update(['yds_puani' => 30]);
+    expect($bul()['durum'])->toBe('yetersiz');
+});
+
+test('eksik bilgi kartta gerekçesiyle gösterilir', function () {
+    Universite::factory()->create(['ad' => 'Belirsiz Üni', 'tur' => 'devlet']);
+
+    depoBagla([testEsik('Belirsiz Üni', 50, ekKosullar: [
+        ['tip' => 'metrik', 'aciklama' => 'WoS h-indeksi en az 5', 'metrik' => 'h_indeksi', 'min' => 5],
+    ])]);
+
+    Livewire::test(YonergeAnalizi::class)
+        ->assertSee('Eksik Bilgi')
+        ->assertSee('koşul eksik bilgi yüzünden değerlendirilemedi.');
+});
+
+test('dönem koşulu faaliyet tarihi girilince kesinleşir', function () {
+    Universite::factory()->create(['ad' => 'Dönem Üni', 'tur' => 'devlet']);
+
+    depoBagla([testEsik('Dönem Üni', 50, ekKosullar: [
+        [
+            'tip' => 'adet',
+            'aciklama' => 'Doktora sonrası en az 2 makale',
+            'maddeler' => ['MAKALE'],
+            'min_adet' => 2,
+            'donem' => ['baslangic' => 'doktora', 'son_yil' => null],
+        ],
+    ])]);
+
+    $this->user->update(['doktora_tarihi' => '2020-01-01']);
+
+    $bul = fn () => collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
+        ->first(fn (array $s) => $s['universite']->ad === 'Dönem Üni');
+
+    // Faaliyetlerin tarihi yok → belirsiz.
+    expect($bul()['durum'])->toBe('eksik_bilgi');
+
+    // Tarihler girilince kesinleşir.
+    $this->user->faaliyetler()->where('kategori', Kategori::Makale)->update(['tarih' => '2022-06-01']);
+    expect($bul()['durum'])->toBe('uygun');
 });

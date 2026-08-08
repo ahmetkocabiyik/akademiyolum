@@ -19,10 +19,10 @@
                     {{-- Başlık (03_yayin_ekleme.html modal-header stili) --}}
                     <div class="flex items-start justify-between gap-4 border-b border-line px-6 py-5">
                         <div>
-                            <flux:heading size="lg">{{ $faaliyet ? 'Yayını Düzenle' : 'Yayın Ekle' }}</flux:heading>
+                            <flux:heading size="lg">{{ $faaliyet ? 'Faaliyeti Düzenle' : 'Faaliyet Ekle' }}</flux:heading>
                             <flux:text class="mt-1">Bilgileri doldurun, puan otomatik hesaplanır</flux:text>
                         </div>
-                        <a href="{{ route('yayinlar') }}" wire:navigate aria-label="Kapat"
+                        <a href="{{ route('faaliyetler') }}" wire:navigate aria-label="Kapat"
                             class="flex size-9 shrink-0 items-center justify-center rounded-lg border border-line text-ink-subtle transition hover:border-cat-red hover:bg-cat-red-light hover:text-cat-red">
                             <flux:icon name="x-mark" variant="solid" class="size-5" />
                         </a>
@@ -41,7 +41,10 @@
                                     'border-brand bg-brand-light' => $secili,
                                     'border-line hover:border-brand hover:bg-brand-light/40' => ! $secili,
                                 ])>
-                                    <span class="flex size-8 items-center justify-center rounded-lg kat-{{ $k->value }}">
+                                    {{-- Renk tek kaynaktan: Kategori::renk(). Dashboard'daki
+                                         "Kategori Puan Dağılımı" da aynı token'ı kullanıyor. --}}
+                                    <span class="flex size-8 items-center justify-center rounded-lg"
+                                        style="background: color-mix(in srgb, var(--color-{{ $k->renk() }}) 14%, white); color: var(--color-{{ $k->renk() }})">
                                         <x-kategori-icon :kategori="$k" class="size-4" />
                                     </span>
                                     <span @class(['text-xs font-medium', 'text-brand' => $secili, 'text-ink-muted' => ! $secili])>{{ $k->label() }}</span>
@@ -65,10 +68,18 @@
                         </div>
                     </div>
 
-                    <flux:input wire:model="baslik" label="Yayın Başlığı" badge="Zorunlu" placeholder="Yayının tam başlığını girin..." />
+                    <flux:input wire:model="baslik" label="Başlık" badge="Zorunlu" placeholder="Faaliyetin tam başlığını girin..." />
+
+                    @php
+                        $kat = \App\Enums\Kategori::from($kategori);
+                        $roller = $this->rolSecenekleri();
+                        // Yazar listesi yalnızca yayın türlerinde anlamlı; proje,
+                        // tez danışmanlığı, atıf gibi kategorilerde gösterilmez.
+                        $yazarliMi = isset($roller['tek']);
+                    @endphp
 
                     {{-- Yazarlar (03_yayin_ekleme.html: çoklu yazar listesi) --}}
-                    <div>
+                    <div @class(['hidden' => ! $yazarliMi])>
                         <flux:text class="mb-2 text-sm font-medium text-ink-muted">Yazarlar</flux:text>
                         <div class="flex flex-col gap-2">
                             @foreach ($yazarlar as $i => $yazar)
@@ -90,16 +101,28 @@
                             Yazar Ekle
                         </button>
 
-                        @if (count(array_filter($yazarlar)) > 1)
-                            <flux:checkbox wire:model="baslicaYazar" label="Başlıca (sorumlu) yazarım"
-                                description="Yönerge alt-koşullarında başlıca yazarlık ayrıca değerlendirilir." class="mt-3" />
-                        @endif
                     </div>
 
-                    {{-- Dizin chip'leri --}}
+                    {{-- Rol: yayında yazarlık, projede görev, tezde danışmanlık --}}
+                    @if (count($roller))
+                        <flux:select wire:model="rol"
+                            :label="$yazarliMi ? 'Yazarlık rolünüz' : 'Bu faaliyetteki rolünüz'"
+                            :description="$yazarliMi
+                                ? 'Yönerge alt-koşullarında başlıca/tek yazarlık ayrıca değerlendirilir.'
+                                : 'Yönergeler proje ve tez danışmanlığı koşullarını role göre ayırıyor.'">
+                            <flux:select.option value="">Seçiniz</flux:select.option>
+                            @foreach ($roller as $deger => $etiket)
+                                <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
+                            @endforeach
+                        </flux:select>
+                    @endif
+
+                    {{-- Alt tür chip'leri --}}
                     @if (count($this->kaynakSecenekleri()))
                         <div>
-                            <flux:text class="mb-2 text-sm font-medium text-ink-muted">Dizin / Endeks</flux:text>
+                            <flux:text class="mb-2 text-sm font-medium text-ink-muted">
+                                {{ in_array($kat, \App\Enums\Kategori::yayinlar(), true) ? 'Dizin / Endeks' : 'Alt Tür' }}
+                            </flux:text>
                             <div class="flex flex-wrap gap-2">
                                 @foreach ($this->kaynakSecenekleri() as $secenek)
                                     <button type="button" wire:click="$set('kaynak', '{{ $secenek }}')" @class([
@@ -112,14 +135,14 @@
                                     'rounded-lg border px-3.5 py-1.5 text-xs font-medium transition',
                                     'border-brand bg-brand-light text-brand' => $kaynak === '',
                                     'border-line text-ink-muted hover:border-brand hover:text-brand' => $kaynak !== '',
-                                ])>Dizin Yok</button>
+                                ])>Belirtilmemiş</button>
                             </div>
-                            <flux:text class="mt-2 text-xs text-ink-subtle">Seçilen dizine göre puan otomatik güncellenir</flux:text>
+                            <flux:text class="mt-2 text-xs text-ink-subtle">Seçilen alt türe göre puan otomatik güncellenir</flux:text>
                         </div>
                     @endif
 
                     <div class="grid gap-4 sm:grid-cols-2">
-                        <flux:input wire:model="yil" label="Yayın Yılı" placeholder="2026" inputmode="numeric" maxlength="4" />
+                        <flux:input wire:model="yil" label="Yıl" placeholder="2026" inputmode="numeric" maxlength="4" />
                         <flux:select wire:model="donem" label="Dönem" placeholder="Belirtilmemiş">
                             <flux:select.option value="">Belirtilmemiş</flux:select.option>
                             <flux:select.option value="tez_disi">Tez Dışı Bağımsız</flux:select.option>
@@ -129,13 +152,13 @@
 
                     <flux:input wire:model="doi" label="DOI Numarası" placeholder="10.xxxx/xxxxx" />
 
-                        <flux:textarea wire:model="aciklama" label="Kısa Açıklama" placeholder="Yayın hakkında kısa bir not ekleyin..." rows="3" />
+                        <flux:textarea wire:model="aciklama" label="Kısa Açıklama" placeholder="Faaliyet hakkında kısa bir not ekleyin..." rows="3" />
                     </div>
                 </flux:card>
 
                 <div class="flex items-center justify-end gap-3">
-                    <flux:button :href="route('yayinlar')" wire:navigate variant="filled">İptal</flux:button>
-                    <flux:button type="submit" variant="primary" icon="check">{{ $faaliyet ? 'Güncelle' : 'Yayını Kaydet' }}</flux:button>
+                    <flux:button :href="route('faaliyetler')" wire:navigate variant="filled">İptal</flux:button>
+                    <flux:button type="submit" variant="primary" icon="check">{{ $faaliyet ? 'Güncelle' : 'Faaliyeti Kaydet' }}</flux:button>
                 </div>
             </form>
         @endif
@@ -149,7 +172,7 @@
                 <flux:heading size="lg">{{ $sekme === 'avesis' ? "AVESİS'ten İçe Aktar" : "Google Scholar'dan Ara" }}</flux:heading>
                 <flux:text class="max-w-md">
                     Otomatik içe aktarma entegrasyonu <strong>Faz 4</strong> kapsamında gelecek.
-                    Şimdilik yayınlarınızı <strong>Manuel Ekle</strong> sekmesinden ekleyebilirsiniz.
+                    Şimdilik faaliyetlerinizi <strong>Manuel Ekle</strong> sekmesinden ekleyebilirsiniz.
                 </flux:text>
                 <flux:badge color="amber" size="sm">Yakında</flux:badge>
             </flux:card>

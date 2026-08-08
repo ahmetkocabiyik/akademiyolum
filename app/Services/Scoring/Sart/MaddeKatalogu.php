@@ -1,0 +1,189 @@
+<?php
+
+namespace App\Services\Scoring\Sart;
+
+use App\Models\Faaliyet;
+
+/**
+ * Bir yönergenin KENDİ puan cetveli: madde kodu → (kategori, kaynaklar, puan, tavan).
+ *
+ * Şart ağacı `kaynak` etiketlerine değil madde koduna bağlanır, çünkü yönergeler
+ * alt-koşullarını kendi kod uzaylarıyla yazıyor ("1. Bölüm'den en az yarısı",
+ * "A1-A3 kategorilerinden 70P", "1.1.1-1.3.4.1 arası kodlu faaliyetlerden %30").
+ *
+ * @phpstan-type Madde array{
+ *     baslik: string,
+ *     kategori?: string,
+ *     kaynaklar?: list<string>,
+ *     roller?: list<string>,
+ *     puan?: int,
+ *     tavan?: int,
+ * }
+ */
+readonly class MaddeKatalogu
+{
+    /**
+     * @param  array<string, Madde>  $maddeler  Kod → madde tanımı (sıralı)
+     * @param  array<string, list<string>>  $gruplar  Takma ad → kod deseni listesi
+     * @param  array<string, int>  $grupTavanlari  Grup adı → o gruptan alınabilecek azami puan
+     */
+    public function __construct(
+        public string $anahtar,
+        public array $maddeler,
+        public array $gruplar = [],
+        public array $grupTavanlari = [],
+    ) {}
+
+    /**
+     * Desen listesini somut madde kodlarına çözer.
+     *
+     * Desteklenen desenler:
+     *   '*'            → tüm maddeler
+     *   'GRUP_ADI'     → $gruplar'daki takma ad (özyinelemeli çözülür)
+     *   '1.1*'         → önek eşleşmesi
+     *   '1.1.1..1.3.4' → cetveldeki sıraya göre aralık (iki uç dâhil)
+     *   '1.2'          → tam kod
+     *
+     * @param  list<string>  $desenler
+     * @return list<string>
+     */
+    public function coz(array $desenler): array
+    {
+        $kodlar = array_keys($this->maddeler);
+        $sonuc = [];
+
+        foreach ($desenler as $desen) {
+            if ($desen === '*') {
+                return $kodlar;
+            }
+
+            if (isset($this->gruplar[$desen])) {
+                $sonuc = array_merge($sonuc, $this->coz($this->gruplar[$desen]));
+
+                continue;
+            }
+
+            if (str_contains($desen, '..')) {
+                [$bas, $son] = explode('..', $desen, 2);
+                $i = array_search($bas, $kodlar, true);
+                $j = array_search($son, $kodlar, true);
+
+                if ($i !== false && $j !== false) {
+                    $sonuc = array_merge($sonuc, array_slice($kodlar, min($i, $j), abs($j - $i) + 1));
+                }
+
+                continue;
+            }
+
+            if (str_ends_with($desen, '*')) {
+                $onek = rtrim($desen, '*');
+                $sonuc = array_merge($sonuc, array_values(array_filter(
+                    $kodlar,
+                    fn (string $kod) => str_starts_with($kod, $onek),
+                )));
+
+                continue;
+            }
+
+            if (isset($this->maddeler[$desen])) {
+                $sonuc[] = $desen;
+            }
+        }
+
+        return array_values(array_unique($sonuc));
+    }
+
+    /**
+     * Faaliyet verilen kodlardan herhangi birine giriyor mu?
+     *
+     * @param  list<string>  $kodlar
+     */
+    public function eslesir(Faaliyet $faaliyet, array $kodlar): bool
+    {
+        foreach ($kodlar as $kod) {
+            if ($this->maddeyeUyar($faaliyet, $kod)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Faaliyetin verilen kodlar içindeki puanı.
+     *
+     * Yönergelerin ortak kuralı uygulanır: "Adayın herhangi bir yayını birden
+     * fazla puan grubuna giriyorsa hesaplamada sadece en yüksek olan puan
+     * dikkate alınır." Bu yüzden Faaliyet->puan alanına hiç bakılmaz; puan
+     * daima cetvelden türetilir.
+     *
+     * @param  list<string>  $kodlar
+     */
+    public function puan(Faaliyet $faaliyet, array $kodlar): int
+    {
+        $enYuksek = 0;
+
+        foreach ($kodlar as $kod) {
+            if ($this->maddeyeUyar($faaliyet, $kod)) {
+                $enYuksek = max($enYuksek, $this->maddeler[$kod]['puan'] ?? 0);
+            }
+        }
+
+        return $enYuksek;
+    }
+
+    /**
+     * Kodun kendi puanı (cetvel değeri).
+     */
+    public function maddePuani(string $kod): int
+    {
+        return $this->maddeler[$kod]['puan'] ?? 0;
+    }
+
+    /**
+     * Faaliyetlerin bu cetvele göre kategori bazlı puan ve adet dağılımı.
+     * Analiz ekranındaki dağılım grafiği bunu kullanır.
+     *
+     * @param  iterable<Faaliyet>  $faaliyetler
+     * @return array<string, array{puan: int, adet: int}>
+     */
+    public function kategoriDagilimi(iterable $faaliyetler): array
+    {
+        $kodlar = array_keys($this->maddeler);
+        $dagilim = [];
+
+        foreach ($faaliyetler as $faaliyet) {
+            $anahtar = $faaliyet->kategori->value;
+            $dagilim[$anahtar] ??= ['puan' => 0, 'adet' => 0];
+            $dagilim[$anahtar]['puan'] += $this->puan($faaliyet, $kodlar);
+            $dagilim[$anahtar]['adet']++;
+        }
+
+        return $dagilim;
+    }
+
+    private function maddeyeUyar(Faaliyet $faaliyet, string $kod): bool
+    {
+        $madde = $this->maddeler[$kod] ?? null;
+
+        if ($madde === null) {
+            return false;
+        }
+
+        if (isset($madde['kategori']) && $faaliyet->kategori->value !== $madde['kategori']) {
+            return false;
+        }
+
+        if (isset($madde['kaynaklar']) && ! in_array($faaliyet->kaynak, $madde['kaynaklar'], true)) {
+            return false;
+        }
+
+        // Yönergeler proje ve tez danışmanlığı puanını role göre ayırıyor
+        // (Akdeniz 6.1 yürütücü 200 ↔ 6.2 araştırıcı 50).
+        if (isset($madde['roller']) && ! in_array($faaliyet->rol, $madde['roller'], true)) {
+            return false;
+        }
+
+        return true;
+    }
+}

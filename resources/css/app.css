@@ -114,16 +114,10 @@
 .mesaj-icerik ul { list-style: disc; padding-inline-start: 1.25rem; margin: 0.4rem 0; }
 .mesaj-icerik li { margin: 0.15rem 0; }
 
-/* Kategori ikon tint'leri — 03_yayin_ekleme.html renkleriyle birebir.
-   (Tailwind @theme değişkenleri kullanılmadığında elenebildiği için sabit hex.) */
-.kat-makale { background: #e6f1fb; color: #1a56db; }
-.kat-tez_yayini { background: #eeedfe; color: #534ab7; }
-.kat-kitap { background: #eaf3de; color: #16a34a; }
-.kat-atif { background: #fef3c7; color: #b45309; }
-.kat-egitim_ogretim { background: #e1f5ee; color: #0f6e56; }
-.kat-editorluk { background: #fcebeb; color: #dc2626; }
-.kat-toplumsal_katki { background: #faeeda; color: #c9a84c; }
-.kat-diger { background: #f1efe8; color: #5f5e5a; }
+/* Kategori ikon tint'leri kaldırıldı: her kategoriye sabit bir .kat-* kuralı
+   yazmak, kategori eklendiğinde sessizce renksiz kutucuk bırakıyordu ve
+   dashboard'un kullandığı Kategori::renk() ile farklı renkler veriyordu.
+   Tek kaynak artık Kategori::renk(); tint'i color-mix ile şablon üretiyor. */
 
 /* Tablo aksiyon ikon butonları (düzenle / sil) */
 .act-btn {

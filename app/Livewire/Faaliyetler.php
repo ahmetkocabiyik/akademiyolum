@@ -12,8 +12,8 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.app')]
-#[Title('Yayınlar')]
-class Yayinlar extends Component
+#[Title('Faaliyetler')]
+class Faaliyetler extends Component
 {
     public string $arama = '';
 
@@ -42,7 +42,7 @@ class Yayinlar extends Component
 
     public function render()
     {
-        return view('livewire.yayinlar', [
+        return view('livewire.faaliyetler', [
             'faaliyetler' => $this->faaliyetler(),
             'kategoriler' => Kategori::secenekler(),
         ]);

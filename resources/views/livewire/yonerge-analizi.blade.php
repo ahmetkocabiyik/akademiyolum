@@ -33,10 +33,27 @@
                         </div>
                     </div>
                     <div class="my-3 h-px bg-white/10"></div>
+                    {{-- Tek bir "toplam puan" yok: her yönerge kendi cetveliyle
+                         puanlıyor. Onun yerine değerlendirmenin kesinliğini
+                         belirleyen iki girdi gösteriliyor. --}}
                     <div class="flex items-baseline justify-between">
-                        <span class="text-xs text-white/55">Toplam Puanım</span>
-                        <span class="font-serif text-2xl font-bold text-gold">{{ $this->profilToplam }} pt</span>
+                        <span class="text-xs text-white/55">Onaylı Faaliyet</span>
+                        <span class="font-serif text-2xl font-bold text-gold">{{ $this->faaliyetler->count() }}</span>
                     </div>
+                    <div class="mt-2 flex items-baseline justify-between">
+                        <span class="text-xs text-white/55">Akademik Profil</span>
+                        <span class="font-serif text-lg font-bold text-white">%{{ $this->profilDoluluk }}</span>
+                    </div>
+                    <div class="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
+                        <div class="h-full rounded-full bg-gold" style="width: {{ $this->profilDoluluk }}%"></div>
+                    </div>
+                    @if ($this->profilDoluluk < 100)
+                        <a href="{{ route('profile.edit') }}" wire:navigate
+                            class="mt-2 flex items-center gap-1 text-[11px] font-medium text-gold/80 transition hover:text-gold">
+                            <flux:icon name="pencil-square" class="size-3" />
+                            Eksik bilgileri tamamla
+                        </a>
+                    @endif
                 </div>
 
                 <flux:card class="flex flex-col gap-4">
@@ -66,7 +83,7 @@
                 {{-- Özet bar: durum sayaçları + sıralama + görünüm --}}
                 <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 py-2.5">
                     <div class="flex items-center gap-3">
-                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)'], ['Puan Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)'], ['Yakın Sınırda', $this->ozet['yakin'], 'var(--color-cat-amber)'], ['Başvuru Yapılabilir', $this->ozet['uygun'], 'var(--color-cat-green)']] as $stat)
+                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)'], ['Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)'], ['Yakın', $this->ozet['yakin'], 'var(--color-cat-amber)'], ['Eksik Bilgi', $this->ozet['eksik_bilgi'], 'var(--color-cat-amber)'], ['Yapılabilir', $this->ozet['uygun'], 'var(--color-cat-green)']] as $stat)
                             @if (! $loop->first)<div class="h-8 w-px bg-line"></div>@endif
                             <div class="text-center">
                                 <div class="font-serif text-lg font-bold leading-none" style="color: {{ $stat[2] }}">{{ $stat[1] }}</div>
@@ -105,6 +122,15 @@
                 </div>
 
                 {{-- Sonuç kartları --}}
+                @php
+                    // Motor üç değerli sonuç ürettiği için dört ekran durumu var.
+                    // "Eksik Bilgi" olumsuz bir sonuç DEĞİL: kesin olumsuz yaprak
+                    // yok, ama profil/tarih eksikliği yüzünden karara bağlanamıyor.
+                    $renkler = ['uygun' => 'var(--color-cat-green)', 'yakin' => 'var(--color-cat-amber)', 'eksik_bilgi' => 'var(--color-cat-amber)', 'yetersiz' => 'var(--color-cat-red)'];
+                    $badgeRenkler = ['uygun' => 'green', 'yakin' => 'amber', 'eksik_bilgi' => 'amber', 'yetersiz' => 'red'];
+                    $badgeMetinleri = ['uygun' => 'Uygun', 'yakin' => 'Yakın', 'eksik_bilgi' => 'Eksik Bilgi', 'yetersiz' => 'Yetersiz'];
+                @endphp
+
                 @if (empty($this->sonuclar))
                     <flux:card class="py-12 text-center">
                         <flux:text>Seçili filtrelere uygun yönerge bulunamadı.</flux:text>
@@ -127,29 +153,25 @@
                             <tbody>
                                 @foreach ($this->sonuclar as $s)
                                     @php
-                                        $renk = ['uygun' => 'var(--color-cat-green)', 'yakin' => 'var(--color-cat-amber)', 'yetersiz' => 'var(--color-cat-red)'][$s['durum']];
-                                        $badgeRenk = ['uygun' => 'green', 'yakin' => 'amber', 'yetersiz' => 'red'][$s['durum']];
-                                        $badgeMetin = ['uygun' => 'Uygun', 'yakin' => 'Yakın', 'yetersiz' => 'Yetersiz'][$s['durum']];
+                                        $renk = $renkler[$s['durum']];
                                     @endphp
                                     <tr class="cursor-pointer border-b border-line transition-colors last:border-0 hover:bg-canvas"
-                                        wire:key="krs-{{ $s['yonerge']->id }}"
-                                        wire:click="detayAc({{ $s['yonerge']->id }})"
+                                        wire:key="krs-{{ $s['universite']->id }}"
+                                        wire:click="detayAc({{ $s['universite']->id }})"
                                         x-on:click="$wire.detayAcik = true">
                                         <td class="px-4 py-2.5">
                                             <div class="flex items-center gap-1.5">
-                                                <span class="font-medium text-ink">{{ $s['yonerge']->universite->ad }}</span>
-                                                @if ($s['dogrulandi'])
-                                                    <flux:icon name="check-badge" variant="solid" class="size-3.5 text-brand" title="Doğrulandı" />
-                                                @endif
+                                                <span class="font-medium text-ink">{{ $s['universite']->ad }}</span>
+                                                <flux:icon name="check-badge" variant="solid" class="size-3.5 text-brand" title="Doğrulandı" />
                                             </div>
-                                            <div class="text-[11px] text-ink-subtle">{{ $s['yonerge']->universite->sehir }} · {{ $s['yonerge']->universite->tur === 'vakif' ? 'Vakıf' : 'Devlet' }}</div>
+                                            <div class="text-[11px] text-ink-subtle">{{ $s['universite']->sehir }} · {{ $s['universite']->tur === 'vakif' ? 'Vakıf' : 'Devlet' }}</div>
                                         </td>
                                         <td class="px-4 py-2.5 text-ink-muted">{{ $kadrolar[$hedefKadro] }}</td>
                                         <td class="px-4 py-2.5 font-serif font-bold text-ink">{{ $s['baraj'] }}</td>
                                         <td class="px-4 py-2.5 font-serif font-bold text-ink">{{ $s['toplam'] }}</td>
                                         <td class="px-4 py-2.5 font-serif font-bold" style="color: {{ $renk }}">%{{ $s['oran'] }}</td>
-                                        <td class="px-4 py-2.5 font-serif font-bold" style="color: {{ $renk }}">{{ $s['yapilabilir'] ? '+'.($s['toplam'] - $s['baraj']) : '-'.$s['kalan'] }}</td>
-                                        <td class="px-4 py-2.5"><flux:badge :color="$badgeRenk" size="sm">{{ $badgeMetin }}</flux:badge></td>
+                                        <td class="px-4 py-2.5 font-serif font-bold" style="color: {{ $renk }}">{{ $s['kalan'] === 0 ? '+'.($s['toplam'] - $s['baraj']) : '-'.$s['kalan'] }}</td>
+                                        <td class="px-4 py-2.5"><flux:badge :color="$badgeRenkler[$s['durum']]" size="sm">{{ $badgeMetinleri[$s['durum']] }}</flux:badge></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -159,21 +181,21 @@
                     <div @class(['grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4' => $gorunum === 'grid', 'flex flex-col gap-2' => $gorunum === 'list'])>
                         @foreach ($this->sonuclar as $s)
                             @php
-                                $uni = $s['yonerge']->universite;
-                                $renk = ['uygun' => 'var(--color-cat-green)', 'yakin' => 'var(--color-cat-amber)', 'yetersiz' => 'var(--color-cat-red)'][$s['durum']];
-                                $badgeRenk = ['uygun' => 'green', 'yakin' => 'amber', 'yetersiz' => 'red'][$s['durum']];
-                                $badgeMetin = ['uygun' => 'Uygun', 'yakin' => 'Yakın', 'yetersiz' => 'Yetersiz'][$s['durum']];
+                                $uni = $s['universite'];
+                                $renk = $renkler[$s['durum']];
+                                $badgeRenk = $badgeRenkler[$s['durum']];
+                                $badgeMetin = $badgeMetinleri[$s['durum']];
                                 $bashkler = \Illuminate\Support\Str::of($uni->ad)->explode(' ')
                                     ->map(fn ($w) => mb_strtoupper(mb_substr($w, 0, 1)))->take(3)->implode('');
                             @endphp
                             {{-- $wire.detayAcik = true: panel sunucu yanıtını beklemeden kaymaya başlar. --}}
                             <flux:card class="cursor-pointer overflow-hidden !p-0 transition duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lg active:translate-y-0"
-                                wire:key="yonerge-{{ $s['yonerge']->id }}"
-                                wire:click="detayAc({{ $s['yonerge']->id }})"
+                                wire:key="uni-{{ $uni->id }}"
+                                wire:click="detayAc({{ $uni->id }})"
                                 x-on:click="$wire.detayAcik = true"
                                 role="button" tabindex="0"
-                                x-on:keydown.enter.prevent="$wire.detayAcik = true; $wire.detayAc({{ $s['yonerge']->id }})"
-                                x-on:keydown.space.prevent="$wire.detayAcik = true; $wire.detayAc({{ $s['yonerge']->id }})"
+                                x-on:keydown.enter.prevent="$wire.detayAcik = true; $wire.detayAc({{ $uni->id }})"
+                                x-on:keydown.space.prevent="$wire.detayAcik = true; $wire.detayAc({{ $uni->id }})"
                                 aria-label="{{ $uni->ad }} detayları">
                                 <div class="h-1" style="background: {{ $renk }}"></div>
                                 <div class="p-4">
@@ -207,29 +229,38 @@
                                         </div>
                                     </div>
 
-                                    {{-- Asgari koşullar --}}
+                                    {{-- Asgari koşullar: kartta yalnızca kökün doğrudan
+                                         çocukları; tam ağaç detay panelinde. --}}
                                     <div class="mt-4 flex flex-col gap-1.5">
-                                        @foreach ($s['sonuc']->kosullar as $kosul)
+                                        @foreach ($s['sonuc']->cocuklar as $kosul)
                                             <div class="flex items-center justify-between gap-2 text-xs">
                                                 <span class="flex min-w-0 items-center gap-1.5 text-ink-muted">
-                                                    @if ($kosul->bilgi)
+                                                    @if ($kosul->beyan)
                                                         <flux:icon name="information-circle" class="size-3.5 shrink-0 text-ink-subtle" />
-                                                    @elseif ($kosul->saglandi())
-                                                        <flux:icon name="check-circle" variant="solid" class="size-3.5 shrink-0" style="color: var(--color-cat-green)" />
                                                     @else
-                                                        <flux:icon name="x-circle" variant="solid" class="size-3.5 shrink-0" style="color: var(--color-cat-red)" />
+                                                        <flux:icon :name="$kosul->durum->ikon()" variant="solid" class="size-3.5 shrink-0" style="color: {{ $kosul->durum->renk() }}" />
                                                     @endif
-                                                    <span class="truncate">{{ $kosul->ad }}</span>
+                                                    <span class="truncate">{{ $kosul->aciklama }}</span>
                                                 </span>
-                                                <span @class([
-                                                    'shrink-0 font-semibold',
-                                                    'text-ink-subtle' => $kosul->bilgi,
-                                                    'text-ink' => ! $kosul->bilgi && $kosul->saglandi(),
-                                                    'text-cat-red' => ! $kosul->bilgi && ! $kosul->saglandi(),
-                                                ])>{{ $kosul->bilgi && $kosul->gerekli <= 0 ? 'belge ile' : $kosul->mevcut.' / '.$kosul->gerekli }}</span>
+                                                <span class="shrink-0 font-semibold" style="color: {{ $kosul->beyan ? 'var(--color-ink-subtle)' : $kosul->durum->renk() }}">
+                                                    @if ($kosul->beyan)
+                                                        belge ile
+                                                    @elseif ($kosul->gerekli !== null)
+                                                        {{ $kosul->mevcut }} / {{ $kosul->gerekli }}
+                                                    @else
+                                                        {{ $kosul->durum->etiket() }}
+                                                    @endif
+                                                </span>
                                             </div>
                                         @endforeach
                                     </div>
+
+                                    @if ($s['belirsiz_sayisi'] > 0)
+                                        <div class="mt-2 flex items-start gap-1 text-[11px] text-cat-amber">
+                                            <flux:icon name="question-mark-circle" class="mt-px size-3 shrink-0" />
+                                            <span>{{ $s['belirsiz_sayisi'] }} koşul eksik bilgi yüzünden değerlendirilemedi.</span>
+                                        </div>
+                                    @endif
 
                                     @if ($uni->yonerge_url)
                                         <a href="{{ $uni->yonerge_url }}" target="_blank" rel="noopener" x-on:click.stop
@@ -281,14 +312,15 @@
         <div wire:loading.remove wire:target="detayAc">
         @if ($d = $this->detay)
             @php
-                $uni = $d['yonerge']->universite;
+                $uni = $d['universite'];
                 $esik = $d['esik'];
-                $renk = ['uygun' => 'var(--color-cat-green)', 'yakin' => 'var(--color-cat-amber)', 'yetersiz' => 'var(--color-cat-red)'][$d['durum']];
-                $badgeRenk = ['uygun' => 'green', 'yakin' => 'amber', 'yetersiz' => 'red'][$d['durum']];
-                $badgeMetin = ['uygun' => 'Başvuru Yapılabilir', 'yakin' => 'Yakın Sınırda', 'yetersiz' => 'Puan Yetersiz'][$d['durum']];
+                $renk = ['uygun' => 'var(--color-cat-green)', 'yakin' => 'var(--color-cat-amber)', 'eksik_bilgi' => 'var(--color-cat-amber)', 'yetersiz' => 'var(--color-cat-red)'][$d['durum']];
+                $badgeRenk = ['uygun' => 'green', 'yakin' => 'amber', 'eksik_bilgi' => 'amber', 'yetersiz' => 'red'][$d['durum']];
+                $badgeMetin = ['uygun' => 'Başvuru Yapılabilir', 'yakin' => 'Yakın Sınırda', 'eksik_bilgi' => 'Eksik Bilgi', 'yetersiz' => 'Puan Yetersiz'][$d['durum']];
                 $bashkler = \Illuminate\Support\Str::of($uni->ad)->explode(' ')
                     ->map(fn ($w) => mb_strtoupper(mb_substr($w, 0, 1)))->take(3)->implode('');
                 $eksikler = $d['sonuc']->eksikler();
+                $belirsizler = $d['sonuc']->belirsizler();
             @endphp
 
             <div class="flex flex-col gap-6">
@@ -317,7 +349,7 @@
                 <div class="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-4">
                     @foreach ([
                         ['Hedef Kadro', $kadrolar[$hedefKadro]],
-                        ['Temel Alan', $this->alanEtiketi($esik->alan)],
+                        ['Temel Alan', $this->alanEtiketi($esik['alan'])],
                         ['Puanım', $d['toplam'].' pt'],
                         ['Min. Baraj', $d['baraj'].' pt'],
                     ] as [$etiket, $deger])
@@ -338,59 +370,49 @@
                         <div class="h-full rounded-full transition-all" style="width: {{ $d['puan_orani'] }}%; background: {{ $renk }}"></div>
                     </div>
                     <div class="mt-2 text-xs text-ink-muted">
-                        @if ($d['yapilabilir'])
+                        @if ($d['durum'] === 'uygun')
                             Bu yönergenin tüm asgari koşullarını karşılıyorsunuz; barajı <strong class="text-ink">{{ $d['toplam'] - $d['baraj'] }} puan</strong> aşıyorsunuz.
+                        @elseif ($d['durum'] === 'eksik_bilgi')
+                            Kesin olarak karşılanmayan bir koşul yok, ancak
+                            <strong class="text-ink">{{ count($belirsizler) }} koşul</strong>
+                            eksik bilgi yüzünden değerlendirilemedi.
                         @else
-                            Barajı geçmek için <strong class="text-ink">{{ $d['kalan'] }} puan</strong> daha gerekiyor.
-                            @if (count($eksikler) > 1)
-                                Ayrıca {{ count($eksikler) - 1 }} alt koşul daha eksik.
+                            @if ($d['kalan'] > 0)
+                                Barajı geçmek için <strong class="text-ink">{{ $d['kalan'] }} puan</strong> daha gerekiyor.
+                            @endif
+                            @if (count($eksikler) > 0)
+                                {{ count($eksikler) }} koşul karşılanmıyor.
                             @endif
                         @endif
                     </div>
+
+                    {{-- Belirsizliğin gerekçesi: motor tahmin yürütmüyor. --}}
+                    @if (count($belirsizler) > 0)
+                        <div class="mt-3 rounded-xl border border-cat-amber/30 bg-cat-amber/5 p-3">
+                            <div class="mb-1.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-cat-amber">
+                                <flux:icon name="question-mark-circle" class="size-3.5" />Değerlendirilemeyen Koşullar
+                            </div>
+                            <flux:text class="!text-[11px] leading-relaxed">
+                                Aşağıdaki koşullar <strong>sağlanmadığı için değil</strong>, veri eksik olduğu için
+                                karara bağlanamadı. Faaliyet tarihlerini ve
+                                <a href="{{ route('profile.edit') }}" wire:navigate class="font-medium text-brand underline">akademik profilinizi</a>
+                                tamamladığınızda kesin sonuç görürsünüz.
+                            </flux:text>
+                        </div>
+                    @endif
                 </div>
 
                 <flux:separator variant="subtle" />
 
-                {{-- Asgari koşullar --}}
+                {{-- Asgari koşullar: yönergenin kendi şart ağacı, olduğu gibi --}}
                 <div>
-                    <flux:heading size="sm" class="mb-3">Asgari Koşullar</flux:heading>
-                    <div class="flex flex-col gap-3">
-                        @foreach ($d['sonuc']->kosullar as $kosul)
-                            @php
-                                $kosulRenk = $kosul->bilgi
-                                    ? 'var(--color-ink-subtle)'
-                                    : ($kosul->saglandi() ? 'var(--color-cat-green)' : 'var(--color-cat-red)');
-                            @endphp
-                            <div wire:key="kosul-{{ $loop->index }}">
-                                <div class="flex items-center justify-between gap-2 text-xs">
-                                    <span class="flex min-w-0 items-center gap-1.5 text-ink-muted">
-                                        @if ($kosul->bilgi)
-                                            <flux:icon name="information-circle" class="size-4 shrink-0 text-ink-subtle" />
-                                        @elseif ($kosul->saglandi())
-                                            <flux:icon name="check-circle" variant="solid" class="size-4 shrink-0" style="color: var(--color-cat-green)" />
-                                        @else
-                                            <flux:icon name="x-circle" variant="solid" class="size-4 shrink-0" style="color: var(--color-cat-red)" />
-                                        @endif
-                                        <span>{{ $kosul->ad }}</span>
-                                    </span>
-                                    <span class="shrink-0 font-semibold" style="color: {{ $kosulRenk }}">
-                                        @if ($kosul->bilgi && $kosul->gerekli <= 0)
-                                            belge ile
-                                        @else
-                                            {{ $kosul->mevcut }} / {{ $kosul->gerekli }}
-                                        @endif
-                                    </span>
-                                </div>
-                                @if ($kosul->bilgi)
-                                    <div class="mt-1 text-[11px] text-ink-subtle">Bu koşul belge ile doğrulanır, puanlamaya dahil edilmez.</div>
-                                @else
-                                    <div class="mt-1.5 h-1 overflow-hidden rounded-full bg-line">
-                                        <div class="h-full rounded-full" style="width: {{ $kosul->oran() }}%; background: {{ $kosulRenk }}"></div>
-                                    </div>
-                                    @if (! $kosul->saglandi())
-                                        <div class="mt-1 text-[11px] text-cat-red">{{ $kosul->eksik() }} puan eksik</div>
-                                    @endif
-                                @endif
+                    <flux:heading size="sm">Asgari Koşullar</flux:heading>
+                    <flux:text class="!mt-0.5 !text-[11px] text-ink-subtle">Yönergenin kendi koşul yapısı; iç içe geçmiş koşullar ve telafi seçenekleri dâhil.</flux:text>
+
+                    <div class="mt-3 flex flex-col gap-3">
+                        @foreach ($d['sonuc']->cocuklar as $i => $kosul)
+                            <div wire:key="kosul-{{ $i }}">
+                                <x-sart-dugum :dugum="$kosul" />
                             </div>
                         @endforeach
                     </div>
@@ -403,52 +425,49 @@
                     <flux:heading size="sm">Puanımın Dağılımı</flux:heading>
                     <flux:text class="!mt-0.5 !text-[11px] text-ink-subtle">Faaliyetleriniz bu üniversitenin kendi cetveline göre yeniden puanlandı.</flux:text>
 
+                    @php
+                        $enYuksek = max(1, collect($d['dagilim'])->max('puan') ?? 1);
+                    @endphp
                     <div class="mt-3 flex flex-col gap-2.5">
-                        @foreach ($d['rapor']->tumKategoriler() as $kategori)
-                            @continue ($kategori->adet === 0 && $kategori->tavan === 0)
-                            <div wire:key="kat-{{ $kategori->kategori->value }}">
+                        @foreach ($d['dagilim'] as $deger => $satir)
+                            @php $kategori = \App\Enums\Kategori::tryFrom($deger); @endphp
+                            @continue (! $kategori)
+                            <div wire:key="kat-{{ $deger }}">
                                 <div class="flex items-center justify-between gap-2 text-xs">
                                     <span class="flex min-w-0 items-center gap-1.5 text-ink-muted">
-                                        <flux:icon :name="$kategori->kategori->ikon()" class="size-3.5 shrink-0" style="color: var(--color-{{ $kategori->kategori->renk() }})" />
-                                        <span class="truncate">{{ $kategori->kategori->label() }}</span>
-                                        <span class="shrink-0 text-ink-subtle">({{ $kategori->adet }})</span>
+                                        <flux:icon :name="$kategori->ikon()" class="size-3.5 shrink-0" style="color: var(--color-{{ $kategori->renk() }})" />
+                                        <span class="truncate">{{ $kategori->label() }}</span>
+                                        <span class="shrink-0 text-ink-subtle">({{ $satir['adet'] }})</span>
                                     </span>
-                                    <span class="shrink-0 font-semibold text-ink">
-                                        {{ $kategori->puan }}<span class="font-normal text-ink-subtle"> / {{ $kategori->tavan }} pt</span>
-                                    </span>
+                                    <span class="shrink-0 font-semibold text-ink">{{ $satir['puan'] }} pt</span>
                                 </div>
                                 <div class="mt-1.5 h-1 overflow-hidden rounded-full bg-line">
-                                    <div class="h-full rounded-full" style="width: {{ $kategori->yuzde() }}%; background: var(--color-{{ $kategori->kategori->renk() }})"></div>
+                                    <div class="h-full rounded-full" style="width: {{ (int) round($satir['puan'] / $enYuksek * 100) }}%; background: var(--color-{{ $kategori->renk() }})"></div>
                                 </div>
-                                @if ($kategori->tavanAsildi())
-                                    <div class="mt-1 text-[11px] text-cat-amber">
-                                        Ham puan {{ $kategori->hamPuan }} pt; tavan nedeniyle {{ $kategori->hamPuan - $kategori->puan }} pt sayılmadı.
-                                    </div>
-                                @endif
                             </div>
                         @endforeach
                     </div>
 
                     <div class="mt-3 flex items-baseline justify-between rounded-lg bg-canvas px-3 py-2">
                         <span class="text-xs font-medium text-ink-muted">Toplam</span>
-                        <span class="font-serif text-lg font-bold text-ink">{{ $d['rapor']->toplamPuan }} pt</span>
+                        <span class="font-serif text-lg font-bold text-ink">{{ $d['toplam'] }} pt</span>
                     </div>
                 </div>
 
                 {{-- Yönerge notu --}}
-                @if ($esik->notlar)
+                @if ($esik['notlar'])
                     <div class="rounded-xl border border-line bg-canvas p-3">
                         <div class="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-ink-subtle">
                             <flux:icon name="document-text" class="size-3.5" />Yönerge Notu
                         </div>
-                        <flux:text class="!text-xs leading-relaxed">{{ $esik->notlar }}</flux:text>
+                        <flux:text class="!text-xs leading-relaxed">{{ $esik['notlar'] }}</flux:text>
                     </div>
                 @endif
 
                 {{-- Aksiyonlar --}}
                 <div class="flex flex-wrap items-center justify-between gap-2">
                     <flux:text class="!text-[11px] text-ink-subtle">
-                        {{ $d['yonerge']->ad }}@if ($d['yonerge']->yil) · {{ $d['yonerge']->yil }}@endif
+                        {{ $uni->ad }} · {{ $kadrolar[$hedefKadro] }} · cetvel: {{ $esik['cetvel'] }}
                     </flux:text>
                     <div class="flex items-center gap-2">
                         <flux:modal.close>

@@ -4,35 +4,43 @@ namespace App\Livewire;
 
 use App\Enums\TemelAlan;
 use App\Models\Faaliyet;
-use App\Models\Yonerge;
-use App\Models\YonergeEsik;
-use App\Services\Scoring\EsikDegerlendirici;
-use App\Services\Scoring\EsikSonuc;
-use App\Services\Scoring\KuralSetiCozucu;
-use App\Services\Scoring\PuanHesaplayici;
-use App\Services\Scoring\PuanRaporu;
-use App\Services\Scoring\RaporSonucu;
-use App\Services\Scoring\RuleSet;
+use App\Models\Universite;
+use App\Services\Scoring\Sart\Durum;
+use App\Services\Scoring\Sart\SartDegerlendirici;
+use App\Services\Scoring\Sart\SartDeposu;
+use App\Services\Scoring\Sart\SartSonucu;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
 /**
+ * Üniversite yönergelerini adayın dosyasına karşı karşılaştırır.
+ *
+ * Değerlendirme {@see SartDegerlendirici} ile şart
+ * ağacı üzerinden yapılır. Motor üç değerli sonuç ürettiği için ekran da dört
+ * durum gösterir: uygun · eksik bilgi · yakın · yetersiz. "Eksik bilgi",
+ * koşulun sağlanmadığı anlamına GELMEZ — adayın profilinde ya da faaliyet
+ * tarihlerinde eksik olduğu için karara bağlanamadığı anlamına gelir.
+ *
+ * @phpstan-import-type Esik from SartDeposu
+ *
  * @phpstan-type SonucSatiri array{
- *     yonerge: Yonerge,
- *     esik: YonergeEsik,
- *     sonuc: EsikSonuc,
- *     dogrulandi: bool,
+ *     universite: Universite,
+ *     esik: Esik,
+ *     sonuc: SartSonucu,
  *     toplam: int,
  *     baraj: int,
  *     oran: int,
  *     puan_orani: int,
- *     yapilabilir: bool,
  *     kalan: int,
+ *     yapilabilir: bool,
  *     durum: string,
+ *     eksik_sayisi: int,
+ *     belirsiz_sayisi: int,
  * }
  */
 #[Layout('layouts.app')]
@@ -52,10 +60,10 @@ class YonergeAnalizi extends Component
     public bool $karsilastirma = false;
 
     /**
-     * Detay panelinde gösterilen yönerge. Panel kapanınca sıfırlanmaz: aksi halde
-     * kapanış animasyonu sürerken içerik boşalıp göz kırpma etkisi yaratıyor.
+     * Detay panelinde gösterilen üniversite. Panel kapanınca sıfırlanmaz: aksi
+     * halde kapanış animasyonu sürerken içerik boşalıp göz kırpma etkisi yaratıyor.
      */
-    public ?int $secilenYonergeId = null;
+    public ?int $secilenUniversiteId = null;
 
     public bool $detayAcik = false;
 
@@ -82,6 +90,11 @@ class YonergeAnalizi extends Component
         };
     }
 
+    protected function depo(): SartDeposu
+    {
+        return app(SartDeposu::class);
+    }
+
     /**
      * Kullanıcının onaylı faaliyetleri.
      *
@@ -94,72 +107,72 @@ class YonergeAnalizi extends Component
     }
 
     /**
-     * Kullanıcının kendi yönergesine göre toplam puanı.
+     * Akademik profilin doluluk oranı — "eksik bilgi" sonuçlarının gerekçesi.
      */
     #[Computed]
-    public function profilToplam(): int
+    public function profilDoluluk(): int
     {
-        $ruleSet = (new KuralSetiCozucu)->kullaniciIcin(Auth::user());
-
-        return (new PuanRaporu($ruleSet))->olustur($this->faaliyetler)->toplamPuan;
+        return Auth::user()->profilDoluluk();
     }
 
     /**
      * Filtrelenmiş ve sıralanmış üniversite karşılaştırma sonuçları.
+     *
+     * Yalnızca doğrulanmış şart ağacı olan üniversiteler listelenir; eşiği
+     * olmayan üniversite için tahmini baraj üretilmez.
      *
      * @return list<SonucSatiri>
      */
     #[Computed]
     public function sonuclar(): array
     {
-        $yonergeler = Yonerge::query()
-            ->with(['universite', 'kurallar', 'esikler'])
-            ->whereNotNull('universite_id')
-            ->when($this->turFiltre !== '', fn ($q) => $q->whereHas(
-                'universite',
-                fn ($u) => $u->where('tur', $this->turFiltre)
-            ))
-            ->when($this->arama !== '', fn ($q) => $q->whereHas(
-                'universite',
-                fn ($u) => $u->where('ad', 'like', "%{$this->arama}%")
+        $depo = $this->depo();
+        $kullanici = Auth::user();
+        $temelAlan = ($kullanici->temel_alan ?? TemelAlan::Sosyal)->value;
+        $faaliyetler = $this->faaliyetler();
+        // Atıf/proje/tez sayaçları faaliyetlerden türediği için profil onlarla
+        // birlikte çözülür.
+        $profil = $kullanici->sartProfili($faaliyetler);
+
+        $universiteler = Universite::query()
+            ->whereIn('ad', $depo->universiteler())
+            ->when($this->turFiltre !== '', fn ($q) => $q->where('tur', $this->turFiltre))
+            ->when($this->arama !== '', fn ($q) => $q->where(
+                fn ($w) => $w->where('ad', 'like', "%{$this->arama}%")
                     ->orWhere('sehir', 'like', "%{$this->arama}%")
             ))
             ->get();
 
-        $temelAlan = Auth::user()->temel_alan ?? TemelAlan::Sosyal;
-
-        // Yalnızca seçili kadro + temel alan için doğrulanmış eşiği olan üniversiteler.
-        // Eşleşme tam (kadro + alan): yönerge bir eşiği birden çok alan için ortak
-        // tanımlıyorsa esikler.php o grubu zaten alan başına ayrı satıra açıyor.
-        $sonuclar = $yonergeler
-            ->map(function (Yonerge $yonerge) use ($temelAlan): ?array {
-                $esik = $this->esikBul($yonerge, $temelAlan);
+        $sonuclar = $universiteler
+            ->map(function (Universite $universite) use ($depo, $temelAlan, $faaliyetler, $profil): ?array {
+                $esik = $depo->bul($universite->ad, $this->hedefKadro, $temelAlan);
 
                 if ($esik === null) {
                     return null;
                 }
 
-                $ruleSet = RuleSet::fromYonerge($yonerge);
-                $sonuc = (new EsikDegerlendirici($ruleSet))->degerlendir(
-                    $this->yenidenPuanli($ruleSet),
-                    $esik,
-                );
+                $sonuc = $depo->degerlendir($esik, $faaliyetler, $profil);
+                $toplamDugum = $sonuc->rolile('toplam');
+
+                // Her ağaçta 'toplam' rolünde bir puan düğümü var; puansız
+                // yönergelerde (ör. Samsun) olmayabilir — o zaman baraj 0.
+                $toplam = $toplamDugum === null ? 0 : (int) $toplamDugum->mevcut;
+                $baraj = $toplamDugum === null ? 0 : (int) $toplamDugum->gerekli;
+                $oran = $this->genelOran($sonuc);
 
                 return [
-                    'yonerge' => $yonerge,
+                    'universite' => $universite,
                     'esik' => $esik,
                     'sonuc' => $sonuc,
-                    'dogrulandi' => true,
-                    // görünüm kolaylığı için:
-                    'toplam' => $sonuc->toplam,
-                    'baraj' => $esik->min_toplam,
-                    'oran' => $sonuc->oran,
-                    'puan_orani' => $esik->min_toplam > 0
-                        ? (int) min(100, round($sonuc->toplam / $esik->min_toplam * 100))
-                        : 100,
-                    'yapilabilir' => $sonuc->uygun,
-                    'kalan' => max(0, $esik->min_toplam - $sonuc->toplam),
-                    'durum' => $sonuc->durum,
+                    'toplam' => $toplam,
+                    'baraj' => $baraj,
+                    'oran' => $oran,
+                    'puan_orani' => $baraj > 0 ? (int) min(100, round($toplam / $baraj * 100)) : 100,
+                    'kalan' => max(0, $baraj - $toplam),
+                    'yapilabilir' => $sonuc->saglandi(),
+                    'durum' => $this->durum($sonuc, $oran),
+                    'eksik_sayisi' => count($sonuc->eksikler()),
+                    'belirsiz_sayisi' => count($sonuc->belirsizler()),
                 ];
             })
             ->filter();
@@ -167,7 +180,7 @@ class YonergeAnalizi extends Component
         $sonuclar = match ($this->siralama) {
             'baraj_azalan' => $sonuclar->sortByDesc('baraj'),
             'oran' => $sonuclar->sortByDesc('oran'),
-            'alfabetik' => $sonuclar->sortBy(fn ($s) => $s['yonerge']->universite->ad),
+            'alfabetik' => $sonuclar->sortBy(fn (array $s) => $s['universite']->ad),
             default => $sonuclar->sortBy('baraj'),
         };
 
@@ -175,39 +188,68 @@ class YonergeAnalizi extends Component
     }
 
     /**
+     * Ekranın dört durumu. `eksik_bilgi`, koşulun sağlanmadığı değil karara
+     * bağlanamadığı anlamına gelir — kesin olumsuz bir yaprak yoktur.
+     */
+    private function durum(SartSonucu $sonuc, int $oran): string
+    {
+        return match ($sonuc->durum) {
+            Durum::Saglandi => 'uygun',
+            Durum::Belirsiz => 'eksik_bilgi',
+            Durum::Saglanmadi => $oran >= 80 ? 'yakin' : 'yetersiz',
+        };
+    }
+
+    /**
+     * En zayıf ölçülebilir koşulun doluluk oranı (0-100). Beyan ve ölçülemeyen
+     * düğümler hesaba katılmaz.
+     */
+    private function genelOran(SartSonucu $sonuc): int
+    {
+        $olculebilir = $sonuc->topla(
+            fn (SartSonucu $d) => $d->cocuklar === [] && ! $d->beyan && $d->gerekli !== null,
+        );
+
+        if ($olculebilir === []) {
+            return $sonuc->saglandi() ? 100 : 0;
+        }
+
+        return (int) min(array_map(fn (SartSonucu $d) => $d->oran(), $olculebilir));
+    }
+
+    /**
      * Kart tıklamasıyla detay modalını açar.
      */
-    public function detayAc(int $yonergeId): void
+    public function detayAc(int $universiteId): void
     {
-        $this->secilenYonergeId = $yonergeId;
+        $this->secilenUniversiteId = $universiteId;
         $this->detayAcik = true;
     }
 
     /**
-     * Seçili yönergenin detayı: sonuç satırının (SonucSatiri) üzerine o yönergenin
-     * kural setine göre kategori bazlı puan dağılımı (`rapor`: RaporSonucu) eklenir.
-     * Modal kapalıysa veya yönerge filtre dışında kaldıysa null.
+     * Seçili üniversitenin detayı: sonuç satırının üzerine o yönergenin KENDİ
+     * cetveline göre kategori bazlı puan dağılımı eklenir.
      *
      * @return array<string, mixed>|null
      */
     #[Computed]
     public function detay(): ?array
     {
-        if ($this->secilenYonergeId === null) {
+        if ($this->secilenUniversiteId === null) {
             return null;
         }
 
-        $sonuc = collect($this->sonuclar)
-            ->first(fn (array $s) => $s['yonerge']->id === $this->secilenYonergeId);
+        $sonuc = collect($this->sonuclar())
+            ->first(fn (array $s) => $s['universite']->id === $this->secilenUniversiteId);
 
         if ($sonuc === null) {
             return null;
         }
 
-        $ruleSet = RuleSet::fromYonerge($sonuc['yonerge']);
+        $katalog = $this->depo()->katalog($sonuc['esik']['cetvel']);
 
         return $sonuc + [
-            'rapor' => (new PuanRaporu($ruleSet))->olustur($this->yenidenPuanli($ruleSet)),
+            'dagilim' => $katalog?->kategoriDagilimi($this->faaliyetler()) ?? [],
         ];
     }
 
@@ -220,52 +262,25 @@ class YonergeAnalizi extends Component
     }
 
     /**
-     * Yönergenin seçili kadro + temel alan için doğrulanmış eşiği. Yoksa null
-     * döner ve üniversite listeye girmez — tahmini eşik gösterilmez.
-     */
-    private function esikBul(Yonerge $yonerge, TemelAlan $alan): ?YonergeEsik
-    {
-        return $yonerge->esikler->first(
-            fn (YonergeEsik $esik) => $esik->kadro === $this->hedefKadro && $esik->alan === $alan->value
-        );
-    }
-
-    /**
-     * Kullanıcının faaliyetlerini verilen kural setine göre yeniden puanlanmış kopyalar.
-     *
-     * @return Collection<int, Faaliyet>
-     */
-    private function yenidenPuanli(RuleSet $ruleSet): Collection
-    {
-        $hesaplayici = new PuanHesaplayici($ruleSet);
-
-        return $this->faaliyetler->map(function (Faaliyet $faaliyet) use ($hesaplayici): Faaliyet {
-            $kopya = clone $faaliyet;
-            $kopya->puan = $hesaplayici->hesapla($faaliyet);
-
-            return $kopya;
-        });
-    }
-
-    /**
      * Sonuçların durum dağılımı (summary bar için).
      *
-     * @return array{toplam: int, uygun: int, yakin: int, yetersiz: int}
+     * @return array{toplam: int, uygun: int, eksik_bilgi: int, yakin: int, yetersiz: int}
      */
     #[Computed]
     public function ozet(): array
     {
-        $sonuclar = collect($this->sonuclar);
+        $sonuclar = collect($this->sonuclar());
 
         return [
             'toplam' => $sonuclar->count(),
             'uygun' => $sonuclar->where('durum', 'uygun')->count(),
+            'eksik_bilgi' => $sonuclar->where('durum', 'eksik_bilgi')->count(),
             'yakin' => $sonuclar->where('durum', 'yakin')->count(),
             'yetersiz' => $sonuclar->where('durum', 'yetersiz')->count(),
         ];
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.yonerge-analizi');
     }

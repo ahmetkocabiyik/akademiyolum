@@ -83,29 +83,69 @@ return [
             ],
             'varsayilan' => 50,
         ],
-        'toplumsal_katki' => [
+        // NOT: Bu düz cetvel (kaynak → puan) rolü ifade edemiyor; proje puanları
+        // yürütücülük değeriyle değil, ADAYIN LEHİNE OLMAYAN düşük değerle
+        // (araştırmacı) girildi ki Dashboard önizlemesi puanı şişirmesin.
+        // Rol ayrımını yapan cetvel: cetveller-agac.php.
+        'proje' => [
             'tavan' => 300,
             'puanlar' => [
-                'Uluslararası Patent' => 140,
-                'AB/TÜBİTAK Koordinatör' => 140,
-                'Ulusal Patent' => 115,
-                'AB/TÜBİTAK Araştırmacı' => 100,
-                'Kamu Ar-Ge / Danışman' => 60,
-                'BAP Yürütücü' => 40,
+                'AB Çerçeve / Ufuk' => 100,
+                'Diğer Uluslararası Fon' => 100,
+                'TÜBİTAK' => 100,
+                'TÜSEB' => 100,
+                'Diğer Kamu Kurumu' => 60,
+                'Özel Sektör / STK' => 60,
+                'BAP (Üniversite)' => 40,
+                'Öğrenci Projesi (2209 vb.)' => 20,
             ],
             'varsayilan' => 40,
         ],
-        'diger' => [
+        'patent' => [
+            'tavan' => 300,
+            'puanlar' => [
+                'Uluslararası Patent' => 140,
+                'Ulusal Patent' => 115,
+                'Faydalı Model' => 60,
+                'Endüstriyel Tasarım' => 60,
+                'Yazılım' => 60,
+                'Islahçı Hakkı / Çeşit Tescili' => 60,
+                'Ticarileştirme' => 100,
+            ],
+            'varsayilan' => 60,
+        ],
+        'tez_danismanligi' => [
             'tavan' => 100,
             'puanlar' => [
-                'Ödül (YÖK/TÜBİTAK/TÜBA)' => 25,
-                'Doktora Tez Danışmanlığı' => 25,
-                'h-indeksi ≥5 / Yurtdışı Araştırma' => 25,
-                'Uluslararası Bildiri (CPCI)' => 10,
-                'Yüksek Lisans Tez Danışmanlığı' => 10,
-                'Diğer Bildiri' => 8,
+                'Doktora Tezi' => 25,
+                'Tıpta/Diş/Sanatta Yeterlik Tezi' => 25,
+                'Yüksek Lisans Tezi' => 10,
+                'Tez İzleme / Jüri Üyeliği' => 5,
+            ],
+            'varsayilan' => 10,
+        ],
+        'bildiri' => [
+            'tavan' => 100,
+            'puanlar' => [
+                'Uluslararası Tam Metin (CPCI)' => 10,
+                'Uluslararası Tam Metin' => 10,
+                'Uluslararası Özet/Poster' => 5,
+                'Ulusal Tam Metin' => 8,
+                'Ulusal Özet/Poster' => 4,
+                'Davetli Konuşmacı' => 10,
             ],
             'varsayilan' => 8,
+        ],
+        'odul' => [
+            'tavan' => 100,
+            'puanlar' => [
+                'Uluslararası Bilim/Sanat Ödülü' => 25,
+                'TÜBİTAK / TÜBA Ödülü' => 25,
+                'Ulusal Bilim/Sanat Ödülü' => 15,
+                'Yarışma Derecesi / Mansiyon' => 10,
+                'Burs' => 10,
+            ],
+            'varsayilan' => 10,
         ],
     ],
 
@@ -175,29 +215,71 @@ return [
             ],
             'varsayilan' => 15,
         ],
-        'toplumsal_katki' => [
+        // Ek-1, 6. Bölüm. Düz cetvel rolü ifade edemediği için araştırıcı değeri
+        // girildi (yürütücülük daha yüksek); rol ayrımı cetveller-agac.php'de.
+        'proje' => [
+            'tavan' => 400,
+            'puanlar' => [
+                'AB Çerçeve / Ufuk' => 50,
+                'Diğer Uluslararası Fon' => 50,
+                'TÜBİTAK' => 15,
+                'TÜSEB' => 15,
+                'Diğer Kamu Kurumu' => 15,
+                'Özel Sektör / STK' => 15,
+                'BAP (Üniversite)' => 5,
+                'Öğrenci Projesi (2209 vb.)' => 5,
+            ],
+            'varsayilan' => 5,
+        ],
+        // Ek-1, 4. Bölüm: Patent ve Girişimcilik.
+        'patent' => [
             'tavan' => 400,
             'puanlar' => [
                 'Uluslararası Patent' => 250,
-                'AB/TÜBİTAK Koordinatör' => 150,
-                'AB/TÜBİTAK Araştırmacı' => 75,
+                'Islahçı Hakkı / Çeşit Tescili' => 200,
                 'Ulusal Patent' => 50,
-                'Kamu Ar-Ge / Danışman' => 50,
-                'BAP Yürütücü' => 30,
+                'Endüstriyel Tasarım' => 30,
+                'Yazılım' => 30,
+                'Ticarileştirme' => 30,
+                'Faydalı Model' => 25,
             ],
-            'varsayilan' => 30,
+            'varsayilan' => 25,
         ],
-        'diger' => [
+        // Ek-1, 5. Bölüm: Lisansüstü Tez Danışmanlığı.
+        'tez_danismanligi' => [
             'tavan' => 100,
             'puanlar' => [
-                'Ödül (YÖK/TÜBİTAK/TÜBA)' => 25,
-                'Doktora Tez Danışmanlığı' => 20,
-                'h-indeksi ≥5 / Yurtdışı Araştırma' => 20,
-                'Uluslararası Bildiri (CPCI)' => 10,
-                'Yüksek Lisans Tez Danışmanlığı' => 10,
-                'Diğer Bildiri' => 8,
+                'Doktora Tezi' => 15,
+                'Tıpta/Diş/Sanatta Yeterlik Tezi' => 10,
+                'Yüksek Lisans Tezi' => 7,
+                'Tez İzleme / Jüri Üyeliği' => 3,
             ],
-            'varsayilan' => 8,
+            'varsayilan' => 7,
+        ],
+        // Ek-1, 7. Bölüm: Bilimsel Toplantı Faaliyeti.
+        'bildiri' => [
+            'tavan' => 100,
+            'puanlar' => [
+                'Uluslararası Tam Metin (CPCI)' => 8,
+                'Uluslararası Tam Metin' => 4,
+                'Davetli Konuşmacı' => 4,
+                'Uluslararası Özet/Poster' => 2,
+                'Ulusal Tam Metin' => 2,
+                'Ulusal Özet/Poster' => 1,
+            ],
+            'varsayilan' => 2,
+        ],
+        // Ek-1, 9. Bölüm: Uluslararasılaşma Faaliyetleri ve Ödüller.
+        'odul' => [
+            'tavan' => 100,
+            'puanlar' => [
+                'Uluslararası Bilim/Sanat Ödülü' => 25,
+                'TÜBİTAK / TÜBA Ödülü' => 25,
+                'Ulusal Bilim/Sanat Ödülü' => 15,
+                'Yarışma Derecesi / Mansiyon' => 10,
+                'Burs' => 10,
+            ],
+            'varsayilan' => 10,
         ],
     ],
 

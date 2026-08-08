@@ -1,6 +1,6 @@
 <div>
-    <x-topbar title="Yayınlar" :pill="$faaliyetler->count() . ' kayıt'">
-        <flux:button :href="route('yayinlar.ekle')" wire:navigate variant="primary" size="sm" icon="plus">Yayın Ekle</flux:button>
+    <x-topbar title="Faaliyetler" :pill="$faaliyetler->count() . ' kayıt'">
+        <flux:button :href="route('faaliyetler.ekle')" wire:navigate variant="primary" size="sm" icon="plus">Faaliyet Ekle</flux:button>
     </x-topbar>
 
     <div class="flex flex-col gap-4">
@@ -22,7 +22,7 @@
                 <div class="flex flex-col items-center gap-2 py-12 text-center">
                     <flux:icon name="document-plus" class="size-8 text-ink-subtle" />
                     <flux:text>Kayıt bulunamadı.</flux:text>
-                    <flux:button :href="route('yayinlar.ekle')" wire:navigate size="sm" variant="primary" icon="plus">Yayın ekle</flux:button>
+                    <flux:button :href="route('faaliyetler.ekle')" wire:navigate size="sm" variant="primary" icon="plus">Faaliyet ekle</flux:button>
                 </div>
             @else
                 <div class="overflow-x-auto">
@@ -57,7 +57,7 @@
                                     </td>
                                     <td class="px-2 py-2.5">
                                         <div class="flex justify-end gap-1.5">
-                                            <a href="{{ route('yayinlar.duzenle', $f) }}" wire:navigate class="act-btn" title="Düzenle" aria-label="Düzenle">
+                                            <a href="{{ route('faaliyetler.duzenle', $f) }}" wire:navigate class="act-btn" title="Düzenle" aria-label="Düzenle">
                                                 <flux:icon name="pencil-square" />
                                             </a>
                                             <button type="button" wire:click="sil({{ $f->id }})" wire:confirm="Bu faaliyet silinsin mi?" class="act-btn act-del" title="Sil" aria-label="Sil">

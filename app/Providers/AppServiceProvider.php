@@ -6,6 +6,7 @@ use App\Services\AI\ClaudeSaglayici;
 use App\Services\AI\OpenAiSaglayici;
 use App\Services\AI\SohbetSaglayici;
 use App\Services\AI\StubSaglayici;
+use App\Services\Scoring\Sart\SartDeposu;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Şart ağaçları ve madde cetvelleri istek başına bir kez okunur.
+        // Testler kendi verisiyle bir örnek bağlayarak üretim verisinden
+        // bağımsız senaryo kurabilir.
+        $this->app->singleton(SartDeposu::class, fn (): SartDeposu => new SartDeposu);
+
         $this->app->bind(SohbetSaglayici::class, function (): SohbetSaglayici {
             if (config('ai.saglayici') === 'claude') {
                 $anahtar = config('ai.claude.anahtar');

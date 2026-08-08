@@ -1,9 +1,9 @@
 <?php
 
 use App\Livewire\Dashboard;
+use App\Livewire\FaaliyetEkle;
+use App\Livewire\Faaliyetler;
 use App\Livewire\Onboarding;
-use App\Livewire\YayinEkle;
-use App\Livewire\Yayinlar;
 use App\Livewire\YonergeAnalizi;
 use App\Livewire\YzDanisman;
 use Illuminate\Support\Facades\Route;
@@ -17,15 +17,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified', 'onboarded'])->group(function () {
     Route::livewire('dashboard', Dashboard::class)->name('dashboard');
 
-    Route::livewire('yayinlar', Yayinlar::class)->name('yayinlar');
-    Route::livewire('yayinlar/ekle', YayinEkle::class)->name('yayinlar.ekle');
-    Route::livewire('yayinlar/{faaliyet}/duzenle', YayinEkle::class)->name('yayinlar.duzenle');
+    Route::livewire('faaliyetler', Faaliyetler::class)->name('faaliyetler');
+    Route::livewire('faaliyetler/ekle', FaaliyetEkle::class)->name('faaliyetler.ekle');
+    Route::livewire('faaliyetler/{faaliyet}/duzenle', FaaliyetEkle::class)->name('faaliyetler.duzenle');
 
-    Route::view('toplumsal-katki', 'modules.placeholder', [
-        'heading' => 'Toplumsal Katkı',
-        'subheading' => 'Topluma yönelik faaliyet kayıtları',
-        'phase' => 'Faz 1',
-    ])->name('toplumsal-katki');
+    // Toplumsal Katkı ayrı bir bölüm değil: Faaliyetler içinde bir kategori
+    // (App\Enums\Kategori::ToplumsalKatki). Eski bağlantılar oraya yönlendirilir.
+    Route::redirect('toplumsal-katki', 'faaliyetler');
 
     Route::livewire('yonerge-analizi', YonergeAnalizi::class)->name('yonerge-analizi');
 

@@ -192,7 +192,7 @@ footer{background:#060f1e;padding:56px 5% 28px}
     <div>
       <div class="hero-badge"><span class="badge-dot"></span>Doçentlik Sürecini Yönet</div>
       <h1>Akademik<br>Kariyerinizin<br><em>Kontrol Merkezi</em></h1>
-      <p class="hero-desc">Yayınlarınızı takip edin, doçentlik puanlarınızı hesaplayın ve akademik hedefinize en hızlı yoldan ulaşın. Tüm Türk üniversite yönergeleriyle uyumlu.</p>
+      <p class="hero-desc">Faaliyetlerinizi takip edin, doçentlik puanlarınızı hesaplayın ve akademik hedefinize en hızlı yoldan ulaşın. Tüm Türk üniversite yönergeleriyle uyumlu.</p>
       <div class="hero-actions">
         <a class="btn-hero" href="{{ route('register') }}">Hemen Başla — Ücretsiz ›</a>
         <a class="btn-hero-ghost" href="#features">▶ Özellikleri Gör</a>
@@ -209,12 +209,12 @@ footer{background:#060f1e;padding:56px 5% 28px}
       <div class="floating-pill fp1"><span class="pill-dot pd-green"></span>Hedefe %65 ulaştınız</div>
       <div class="dashboard-mock">
         <div class="mock-header"><span class="mock-logo">Akademiyolum</span><span style="font-size:11px;color:rgba(255,255,255,.5)">Dr. Ahmet K.</span></div>
-        <div class="mock-tabs"><span class="mock-tab active">Dashboard</span><span class="mock-tab">Yayınlar</span><span class="mock-tab">Yönerge</span><span class="mock-tab">YZ</span></div>
+        <div class="mock-tabs"><span class="mock-tab active">Dashboard</span><span class="mock-tab">Faaliyetler</span><span class="mock-tab">Yönerge</span><span class="mock-tab">YZ</span></div>
         <div class="mock-body">
           <div class="mock-status"><span>● İLAHİYAT 2026 AKTİF</span><span>v1.1.0</span></div>
           <div class="mock-cards">
             <div class="mock-card"><div class="mock-card-label">Toplam Puan</div><div class="mock-card-val">124</div><div class="mock-card-sub sub-ok">↑ +18</div></div>
-            <div class="mock-card"><div class="mock-card-label">Yayın</div><div class="mock-card-val">16</div><div class="mock-card-sub sub-ok">4 onaylı</div></div>
+            <div class="mock-card"><div class="mock-card-label">Faaliyet</div><div class="mock-card-val">16</div><div class="mock-card-sub sub-ok">4 onaylı</div></div>
             <div class="mock-card"><div class="mock-card-label">Doçentlik</div><div class="mock-card-val" style="font-size:13px;padding-top:3px">Devam</div><div class="mock-card-sub sub-warn">2 eksik</div></div>
             <div class="mock-card"><div class="mock-card-label">ÜAK</div><div class="mock-card-val">82</div><div class="mock-card-sub sub-ok">/100</div></div>
           </div>
@@ -242,10 +242,10 @@ footer{background:#060f1e;padding:56px 5% 28px}
     <h2 class="section-title">Akademik kariyer yönetiminin tüm araçları</h2>
     <p class="section-sub">Doktora mezuniyetinden profesörlüğe, her adımda ihtiyacınız olan analiz, takip ve yapay zeka desteği.</p>
     <div class="features-grid">
-      <div class="feature-card"><div class="feature-icon fi-blue">📊</div><h3>Otomatik Puan Hesaplama</h3><p>Yayınlarınızı ekleyin; ÜAK ve üniversite yönergelerine göre puanlarınız anında hesaplansın. Tez dışı bağımsız / tezden üretilmiş ayrımı otomatik uygulanır.</p></div>
+      <div class="feature-card"><div class="feature-icon fi-blue">📊</div><h3>Otomatik Puan Hesaplama</h3><p>Makale, bildiri, kitap, proje, patent — tüm faaliyetlerinizi ekleyin; ÜAK ve üniversite yönergelerine göre puanlarınız anında hesaplansın. Tez dışı bağımsız / tezden üretilmiş ayrımı otomatik uygulanır.</p></div>
       <div class="feature-card"><div class="feature-icon fi-gold">🤖</div><h3>YZ Akademik Danışman</h3><p>Yapay zeka destekli danışmanınız, hangi faaliyetlere odaklanmanız gerektiğini ve eksiklerinizi açıklar.</p></div>
       <div class="feature-card"><div class="feature-icon fi-green">📋</div><h3>Yönerge Analizi</h3><p>Türkiye'deki tüm üniversite yönergelerini analiz edin. Doktora mezunundan profesörlüğe dört kariyer basamağı.</p></div>
-      <div class="feature-card"><div class="feature-icon fi-blue">📚</div><h3>AVESİS & Scholar Entegrasyonu</h3><p>Yayın listenizi manuel girmek zorunda değilsiniz. AVESİS ve Google Scholar'dan otomatik içe aktarın.</p></div>
+      <div class="feature-card"><div class="feature-icon fi-blue">📚</div><h3>AVESİS & Scholar Entegrasyonu</h3><p>Faaliyet listenizi manuel girmek zorunda değilsiniz. AVESİS ve Google Scholar'dan otomatik içe aktarın.</p></div>
       <div class="feature-card"><div class="feature-icon fi-gold">⚖️</div><h3>YZ Jüri Analizi</h3><p>YZ, dosyanızı gerçek bir jüri üyesi gibi 10 maddede değerlendirir. Net karar: Başvurabilir / Başvuramaz.</p></div>
       <div class="feature-card"><div class="feature-icon fi-green">📄</div><h3>CV & Çıktı Yönetimi</h3><p>Tüm akademik dosyanızı PDF veya Word formatında, başvuruya hazır şekilde bir tıklamayla oluşturun.</p></div>
     </div>
@@ -261,7 +261,7 @@ footer{background:#060f1e;padding:56px 5% 28px}
     </div>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><h4>Kayıt & Profil</h4><p>Üniversitenizi, temel alanınızı ve kariyer basamağınızı seçin.</p></div>
-      <div class="step"><div class="step-num">2</div><h4>Yayınları İçe Aktar</h4><p>AVESİS veya Scholar'dan mevcut yayınlarınızı otomatik alın.</p></div>
+      <div class="step"><div class="step-num">2</div><h4>Faaliyetleri İçe Aktar</h4><p>AVESİS veya Scholar'dan mevcut faaliyetlerinizi otomatik alın.</p></div>
       <div class="step"><div class="step-num">3</div><h4>Analizi Görün</h4><p>Puan dağılımınızı, eksik kriterlerinizi anlık takip edin.</p></div>
       <div class="step"><div class="step-num">4</div><h4>Hedefe Ulaş</h4><p>YZ rehberliğinde dosyanızı hazırlayın ve başvurunuzu yapın.</p></div>
     </div>
@@ -274,7 +274,7 @@ footer{background:#060f1e;padding:56px 5% 28px}
     <div class="testi-grid">
       <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Hangi kategoride kaç puanım eksik olduğunu anlayamıyordum. Akademiyolum sayesinde 3 ayda eksiğimi tamamladım."</p><div class="testi-author"><div class="testi-avatar ta1">MK</div><div><div class="testi-name">Dr. Mehmet Kaya</div><div class="testi-role">Doç. Dr. Aday, Ankara Üniversitesi</div></div></div></div>
       <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"YZ Jüri Analizi inanılmaz gerçekçi. Doktora sonrasında hangi üniversitelere başvurabileceğimi anında gördüm."</p><div class="testi-author"><div class="testi-avatar ta2">FT</div><div><div class="testi-name">Dr. Fatma Taşçı</div><div class="testi-role">Dr. Öğr. Üyesi, Hacettepe Üniversitesi</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"AVESİS entegrasyonu hayat kurtardı. 60 yayını tek tıkla aktardım, hepsi anında puanlandı."</p><div class="testi-author"><div class="testi-avatar ta3">AY</div><div><div class="testi-name">Prof. Dr. Ali Yıldırım</div><div class="testi-role">İTÜ, Mühendislik Fakültesi</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"AVESİS entegrasyonu hayat kurtardı. 60 faaliyeti tek tıkla aktardım, hepsi anında puanlandı."</p><div class="testi-author"><div class="testi-avatar ta3">AY</div><div><div class="testi-name">Prof. Dr. Ali Yıldırım</div><div class="testi-role">İTÜ, Mühendislik Fakültesi</div></div></div></div>
     </div>
   </div>
 </section>
@@ -283,8 +283,8 @@ footer{background:#060f1e;padding:56px 5% 28px}
   <div class="section-inner">
     <div style="text-align:center;margin-bottom:52px"><div class="section-tag">Fiyatlandırma</div><h2 class="section-title" style="margin:0 auto 14px">Şeffaf ve erişilebilir</h2></div>
     <div class="pricing-grid">
-      <div class="price-card"><div class="price-plan">Ücretsiz</div><div class="price-amount"><span class="price-num">₺0</span><span class="price-period">/ ay</span></div><p class="price-desc">Başlamak için mükemmel.</p><div class="price-divider"></div><ul class="price-features"><li><span class="check">✓</span>10 yayına kadar</li><li><span class="check">✓</span>Temel puan hesaplama</li><li><span class="check">✓</span>1 yönerge analizi</li></ul><a class="price-btn price-btn-outline" href="{{ route('register') }}">Ücretsiz Başla</a></div>
-      <div class="price-card featured"><div class="price-badge">En Popüler</div><div class="price-plan">Akademisyen</div><div class="price-amount"><span class="price-num">₺299</span><span class="price-period">/ ay</span></div><p class="price-desc">Aktif kariyer yönetimi için.</p><div class="price-divider"></div><ul class="price-features"><li><span class="check">✓</span>Sınırsız yayın</li><li><span class="check">✓</span>YZ Danışman</li><li><span class="check">✓</span>Tüm yönerge analizleri</li><li><span class="check">✓</span>AVESİS & Scholar</li><li><span class="check">✓</span>YZ Jüri Analizi</li><li><span class="check">✓</span>PDF/Word çıktı</li></ul><a class="price-btn price-btn-primary" href="{{ route('register') }}">Planı Seç</a></div>
+      <div class="price-card"><div class="price-plan">Ücretsiz</div><div class="price-amount"><span class="price-num">₺0</span><span class="price-period">/ ay</span></div><p class="price-desc">Başlamak için mükemmel.</p><div class="price-divider"></div><ul class="price-features"><li><span class="check">✓</span>10 faaliyete kadar</li><li><span class="check">✓</span>Temel puan hesaplama</li><li><span class="check">✓</span>1 yönerge analizi</li></ul><a class="price-btn price-btn-outline" href="{{ route('register') }}">Ücretsiz Başla</a></div>
+      <div class="price-card featured"><div class="price-badge">En Popüler</div><div class="price-plan">Akademisyen</div><div class="price-amount"><span class="price-num">₺299</span><span class="price-period">/ ay</span></div><p class="price-desc">Aktif kariyer yönetimi için.</p><div class="price-divider"></div><ul class="price-features"><li><span class="check">✓</span>Sınırsız faaliyet</li><li><span class="check">✓</span>YZ Danışman</li><li><span class="check">✓</span>Tüm yönerge analizleri</li><li><span class="check">✓</span>AVESİS & Scholar</li><li><span class="check">✓</span>YZ Jüri Analizi</li><li><span class="check">✓</span>PDF/Word çıktı</li></ul><a class="price-btn price-btn-primary" href="{{ route('register') }}">Planı Seç</a></div>
       <div class="price-card"><div class="price-plan">Kurumsal</div><div class="price-amount"><span class="price-num">₺999</span><span class="price-period">/ ay</span></div><p class="price-desc">Üniversiteler için kurumsal çözüm.</p><div class="price-divider"></div><ul class="price-features"><li><span class="check">✓</span>50 kullanıcıya kadar</li><li><span class="check">✓</span>Özel yönerge yükleme</li><li><span class="check">✓</span>Kurum panosu</li><li><span class="check">✓</span>API erişimi</li></ul><a class="price-btn price-btn-outline" href="{{ route('register') }}">İletişime Geç</a></div>
     </div>
   </div>

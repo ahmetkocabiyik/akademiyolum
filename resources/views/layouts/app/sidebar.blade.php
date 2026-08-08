@@ -16,13 +16,9 @@
                     <flux:icon name="squares-2x2" />
                     <span>{{ __('Dashboard') }}</span>
                 </a>
-                <a href="{{ route('yayinlar') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('yayinlar*')])>
-                    <flux:icon name="document-text" />
-                    <span>{{ __('Yayınlar') }}</span>
-                </a>
-                <a href="{{ route('toplumsal-katki') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('toplumsal-katki')])>
-                    <flux:icon name="heart" />
-                    <span>{{ __('Toplumsal Katkı') }}</span>
+                <a href="{{ route('faaliyetler') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('faaliyetler*')])>
+                    <flux:icon name="clipboard-document-list" />
+                    <span>{{ __('Faaliyetler') }}</span>
                 </a>
 
                 <div class="sb-sect">{{ __('Analiz') }}</div>

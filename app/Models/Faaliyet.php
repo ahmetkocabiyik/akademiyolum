@@ -18,7 +18,9 @@ use Illuminate\Support\Carbon;
  * @property string $tur
  * @property string $baslik
  * @property string|null $yazarlar
+ * @property string|null $rol
  * @property string|null $donem
+ * @property Carbon|null $tarih
  * @property string|null $kaynak
  * @property int $puan
  * @property string $durum
@@ -26,7 +28,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['kategori', 'tur', 'baslik', 'yazarlar', 'yazar_rolu', 'donem', 'kaynak', 'puan', 'durum', 'meta'])]
+#[Fillable(['kategori', 'tur', 'baslik', 'yazarlar', 'rol', 'donem', 'tarih', 'kaynak', 'puan', 'durum', 'meta'])]
 class Faaliyet extends Model
 {
     /** @use HasFactory<FaaliyetFactory> */
@@ -41,6 +43,7 @@ class Faaliyet extends Model
     {
         return [
             'kategori' => Kategori::class,
+            'tarih' => 'date',
             'puan' => 'integer',
             'meta' => 'array',
         ];

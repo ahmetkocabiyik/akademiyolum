@@ -6,7 +6,7 @@ use App\Services\Scoring\KosulDegerlendirici;
 
 function faal(Kategori $kategori, ?string $kaynak, string $rol): Faaliyet
 {
-    return new Faaliyet(['kategori' => $kategori, 'kaynak' => $kaynak, 'yazar_rolu' => $rol]);
+    return new Faaliyet(['kategori' => $kategori, 'kaynak' => $kaynak, 'rol' => $rol]);
 }
 
 test('adet ve yazarlık koşulları doğru sayılır', function () {

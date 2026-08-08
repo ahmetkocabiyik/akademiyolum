@@ -16,14 +16,14 @@
         <div class="flex flex-wrap items-center gap-2 rounded-xl border border-line bg-surface px-4 py-3">
             <span class="text-xs text-ink-subtle">Hızlı Ekle:</span>
             @foreach ([Kategori::Makale, Kategori::TezYayini, Kategori::ToplumsalKatki, Kategori::EgitimOgretim] as $k)
-                <flux:button :href="route('yayinlar.ekle', ['kategori' => $k->value])" wire:navigate size="sm" variant="subtle">
+                <flux:button :href="route('faaliyetler.ekle', ['kategori' => $k->value])" wire:navigate size="sm" variant="subtle">
                     <x-kategori-icon :kategori="$k" class="size-4" />
                     {{ $k->label() }}
                 </flux:button>
             @endforeach
             <div class="ms-auto">
-                <flux:button :href="route('yayinlar.ekle')" wire:navigate size="sm" variant="primary" icon="plus">
-                    Yayın Ekle
+                <flux:button :href="route('faaliyetler.ekle')" wire:navigate size="sm" variant="primary" icon="plus">
+                    Faaliyet Ekle
                 </flux:button>
             </div>
         </div>
@@ -168,16 +168,16 @@
             <div class="flex items-center justify-between">
                 <div>
                     <flux:heading size="lg">Faaliyet Listesi</flux:heading>
-                    <flux:text size="sm">Son eklenen yayın ve faaliyetler</flux:text>
+                    <flux:text size="sm">Son eklenen faaliyetler</flux:text>
                 </div>
-                <flux:button :href="route('yayinlar')" wire:navigate size="sm" variant="ghost">Tümünü Yönet →</flux:button>
+                <flux:button :href="route('faaliyetler')" wire:navigate size="sm" variant="ghost">Tümünü Yönet →</flux:button>
             </div>
 
             @if ($this->faaliyetler->isEmpty())
                 <div class="flex flex-col items-center gap-2 py-10 text-center">
                     <flux:icon name="document-plus" class="size-8 text-ink-subtle" />
                     <flux:text>Henüz faaliyet eklenmemiş.</flux:text>
-                    <flux:button :href="route('yayinlar.ekle')" wire:navigate size="sm" variant="primary" icon="plus">İlk faaliyeti ekle</flux:button>
+                    <flux:button :href="route('faaliyetler.ekle')" wire:navigate size="sm" variant="primary" icon="plus">İlk faaliyeti ekle</flux:button>
                 </div>
             @else
                 <div class="mt-3 overflow-x-auto">

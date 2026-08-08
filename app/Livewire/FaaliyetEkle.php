@@ -15,8 +15,8 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.focused')]
-#[Title('Yayın Ekle')]
-class YayinEkle extends Component
+#[Title('Faaliyet Ekle')]
+class FaaliyetEkle extends Component
 {
     public ?Faaliyet $faaliyet = null;
 
@@ -30,7 +30,8 @@ class YayinEkle extends Component
     /** @var list<string> */
     public array $yazarlar = [''];
 
-    public bool $baslicaYazar = false;
+    /** Adayın faaliyetteki rolü; geçerli değerler kategoriye göre değişir. */
+    public string $rol = '';
 
     public string $donem = '';
 
@@ -53,7 +54,7 @@ class YayinEkle extends Component
             $this->yazarlar = $faaliyet->yazarlar
                 ? array_map('trim', explode(',', $faaliyet->yazarlar))
                 : [''];
-            $this->baslicaYazar = $faaliyet->yazar_rolu === 'baslica';
+            $this->rol = $faaliyet->rol ?? '';
             $this->donem = $faaliyet->donem ?? '';
             $this->kaynak = $faaliyet->kaynak ?? '';
             $this->yil = (string) ($faaliyet->meta['yil'] ?? '');
@@ -72,8 +73,19 @@ class YayinEkle extends Component
 
     public function updatedKategori(): void
     {
-        // Kaynaklar kategoriye göre değiştiği için sıfırla.
+        // Kaynak ve rol sözlüğü kategoriye göre değişiyor.
         $this->kaynak = '';
+        $this->rol = '';
+    }
+
+    /**
+     * Seçili kategoride geçerli roller (yayında yazarlık, projede görev...).
+     *
+     * @return array<string, string>
+     */
+    public function rolSecenekleri(): array
+    {
+        return Kategori::from($this->kategori)->roller();
     }
 
     public function yazarEkle(): void
@@ -97,13 +109,17 @@ class YayinEkle extends Component
     }
 
     /**
-     * Seçili kategorinin bilinen dizin/kaynakları.
+     * Seçili kategorinin alt türleri.
+     *
+     * Kaynak, kullanıcının seçtiği yönergeden DEĞİL kategorinin kendi
+     * sözlüğünden gelir: form hangi cetvelin yüklü olduğuna bağlı olmamalı.
+     * Cetvelde karşılığı olmayan bir alt tür yalnızca 0 puan alır.
      *
      * @return list<string>
      */
     public function kaynakSecenekleri(): array
     {
-        return array_keys($this->ruleSet()->puanlar(Kategori::from($this->kategori)));
+        return Kategori::from($this->kategori)->kaynaklar();
     }
 
     /**
@@ -123,6 +139,7 @@ class YayinEkle extends Component
             'baslik' => ['required', 'string', 'max:255'],
             'yazarlar' => ['array'],
             'yazarlar.*' => ['nullable', 'string', 'max:255'],
+            'rol' => ['nullable', 'string', 'max:32'],
             'donem' => ['nullable', Rule::in(['tez_disi', 'tezden'])],
             'kaynak' => ['nullable', 'string', 'max:255'],
             'yil' => ['nullable', 'digits:4'],
@@ -137,8 +154,7 @@ class YayinEkle extends Component
             fn (string $yazar) => $yazar !== '',
         ));
 
-        // Yazarlık rolü: tek yazar otomatik; çok yazarda başlıca/ortak seçime bağlı.
-        $yazarRolu = count($yazarlar) <= 1 ? 'tek' : ($this->baslicaYazar ? 'baslica' : 'ortak');
+        $rol = $this->rolBelirle($kategori, $yazarlar);
 
         $faaliyet = $this->faaliyet ?? new Faaliyet(['durum' => 'onaylandi']);
 
@@ -147,7 +163,7 @@ class YayinEkle extends Component
             'tur' => $kategori->label(),
             'baslik' => $veri['baslik'],
             'yazarlar' => $yazarlar ? implode(', ', $yazarlar) : null,
-            'yazar_rolu' => $yazarRolu,
+            'rol' => $rol,
             'donem' => $veri['donem'] ?: null,
             'kaynak' => $veri['kaynak'] ?: null,
             'meta' => array_filter([
@@ -161,14 +177,40 @@ class YayinEkle extends Component
 
         Auth::user()->faaliyetler()->save($faaliyet);
 
-        Flux::toast(variant: 'success', text: $this->faaliyet !== null ? 'Yayın güncellendi.' : 'Yayın eklendi.');
+        Flux::toast(variant: 'success', text: $this->faaliyet !== null ? 'Faaliyet güncellendi.' : 'Faaliyet eklendi.');
 
-        $this->redirectRoute('yayinlar', navigate: true);
+        $this->redirectRoute('faaliyetler', navigate: true);
+    }
+
+    /**
+     * Rolü belirler. Yayın türlerinde tek yazarlık otomatik çıkarılır; diğer
+     * kategorilerde (proje, tez danışmanlığı) kullanıcının seçimi esastır.
+     *
+     * @param  list<string>  $yazarlar
+     */
+    private function rolBelirle(Kategori $kategori, array $yazarlar): ?string
+    {
+        $gecerli = $kategori->roller();
+
+        if ($gecerli === []) {
+            return null;
+        }
+
+        if (isset($gecerli['tek']) && count($yazarlar) <= 1) {
+            return 'tek';
+        }
+
+        if (isset($gecerli[$this->rol])) {
+            return $this->rol;
+        }
+
+        // Çok yazarlı ama rol seçilmemişse en kapsayıcı varsayılan.
+        return isset($gecerli['ortak']) ? 'ortak' : array_key_first($gecerli);
     }
 
     public function render()
     {
-        return view('livewire.yayin-ekle', [
+        return view('livewire.faaliyet-ekle', [
             'kategoriler' => Kategori::cases(),
         ]);
     }

@@ -25,7 +25,7 @@ class FaaliyetFactory extends Factory
             'tur' => 'Dergi Makalesi',
             'baslik' => fake()->sentence(6),
             'yazarlar' => '1 Yazar',
-            'yazar_rolu' => 'tek',
+            'rol' => 'tek',
             'donem' => 'tez_disi',
             'kaynak' => 'TR Dizin',
             'puan' => 10,
