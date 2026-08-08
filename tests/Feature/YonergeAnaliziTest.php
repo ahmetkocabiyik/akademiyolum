@@ -27,9 +27,10 @@ beforeEach(function () {
             'universite_id' => $uni->id,
             'ad' => $ad,
         ]);
-        // Doğrulanmış Dr. Öğr. Üyesi eşiği (kullanıcı ilahiyat → sosyal fallback).
+        // Doğrulanmış Dr. Öğr. Üyesi eşiği. Eşleşme tam alan eşleşmesi olduğu için
+        // satır kullanıcının temel alanıyla (ilahiyat) aynı alanda açılır.
         $yonerge->esikler()->create([
-            'kadro' => 'dr_ogr_uyesi', 'alan' => 'sosyal', 'min_toplam' => $baraj, 'kaynak' => 'pdf',
+            'kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat', 'min_toplam' => $baraj, 'kaynak' => 'pdf',
         ]);
     }
 
@@ -99,14 +100,14 @@ test('kullanıcının temel alanına göre doğru eşik seçilir', function () {
     $yonerge = Yonerge::factory()->ilahiyatKurallari()->create([
         'universite_id' => $uni->id, 'ad' => 'Alan Test Üni', 'universite_hedef' => 999,
     ]);
-    // Sosyal: min 50 (uygun), Fen: min 150 (yetersiz)
-    $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'sosyal', 'min_toplam' => 50, 'kaynak' => 'pdf']);
+    // İlahiyat: min 50 (uygun), Fen: min 150 (yetersiz)
+    $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat', 'min_toplam' => 50, 'kaynak' => 'pdf']);
     $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'fen', 'min_toplam' => 150, 'kaynak' => 'pdf']);
 
     $bul = fn () => collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
         ->first(fn ($s) => $s['yonerge']->universite->ad === 'Alan Test Üni');
 
-    // İlahiyat kullanıcı (70 puan): ilahiyat eşiği yok → sosyal'e düşer (min 50) → uygun
+    // İlahiyat kullanıcı (70 puan): kendi alanının eşiği (min 50) → uygun
     expect($bul()['baraj'])->toBe(50)
         ->and($bul()['durum'])->toBe('uygun');
 
@@ -116,14 +117,37 @@ test('kullanıcının temel alanına göre doğru eşik seçilir', function () {
         ->and($bul()['durum'])->toBe('yetersiz');
 });
 
+test('eşleşme tam alan eşleşmesidir, başka alana düşülmez', function () {
+    // Gruplama/fallback yok: yönergede o alanın satırı yoksa üniversite listeye girmez.
+    // Yönerge bir eşiği birden çok alan için ortak tanımlıyorsa esikler.php onu
+    // zaten alan başına ayrı satıra açar.
+    $uni = Universite::factory()->create(['ad' => 'Tam Eşleşme Üni', 'tur' => 'devlet']);
+    $yonerge = Yonerge::factory()->ilahiyatKurallari()->create([
+        'universite_id' => $uni->id, 'ad' => 'Tam Eşleşme Üni',
+    ]);
+    $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'sosyal', 'min_toplam' => 60, 'kaynak' => 'pdf']);
+
+    $bul = function (string $alan) {
+        $this->user->update(['temel_alan' => $alan]);
+
+        return collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
+            ->first(fn ($s) => $s['yonerge']->universite->ad === 'Tam Eşleşme Üni');
+    };
+
+    expect($bul('sosyal'))->not->toBeNull()
+        ->and($bul('sosyal')['baraj'])->toBe(60)
+        // İlahiyat eskiden sosyal'e düşüyordu; artık düşmüyor.
+        ->and($bul('ilahiyat'))->toBeNull()
+        ->and($bul('mimarlik'))->toBeNull();
+});
+
 test('hedef kadro değişince o kadronun eşiği kullanılır', function () {
     $uni = Universite::factory()->create(['ad' => 'Kadro Test Üni', 'tur' => 'devlet']);
     $yonerge = Yonerge::factory()->ilahiyatKurallari()->create([
         'universite_id' => $uni->id, 'ad' => 'Kadro Test Üni', 'universite_hedef' => 999,
     ]);
-    // onboarded kullanıcı 'ilahiyat' → sosyal fallback
-    $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'sosyal', 'min_toplam' => 50, 'kaynak' => 'pdf']);
-    $yonerge->esikler()->create(['kadro' => 'docentlik', 'alan' => 'sosyal', 'min_toplam' => 300, 'kaynak' => 'pdf']);
+    $yonerge->esikler()->create(['kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat', 'min_toplam' => 50, 'kaynak' => 'pdf']);
+    $yonerge->esikler()->create(['kadro' => 'docentlik', 'alan' => 'ilahiyat', 'min_toplam' => 300, 'kaynak' => 'pdf']);
 
     $baraj = fn (string $kadro) => collect(
         Livewire::test(YonergeAnalizi::class)->set('hedefKadro', $kadro)->instance()->sonuclar()
@@ -168,7 +192,7 @@ test('doğrulanmış eşik alt-koşulları değerlendirilir', function () {
         'universite_id' => $uni->id, 'ad' => 'Doğrulanmış Test Üni', 'universite_hedef' => 100,
     ]);
     $yonerge->esikler()->create([
-        'kadro' => 'dr_ogr_uyesi', 'alan' => 'sosyal',
+        'kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat',
         'min_toplam' => 100, 'yayin_min' => 40, 'yds_min' => 55, 'kaynak' => 'pdf',
     ]);
 

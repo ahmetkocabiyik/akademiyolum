@@ -33,7 +33,7 @@ class YonergeSeeder extends Seeder
         $universiteler = require database_path('data/universiteler.php');
 
         foreach ($universiteler as [$ad, $sehir, $tur]) {
-            Universite::query()->create(['ad' => $ad, 'sehir' => $sehir, 'tur' => $tur]);
+            Universite::query()->updateOrCreate(['ad' => $ad], ['sehir' => $sehir, 'tur' => $tur]);
         }
 
         // Üniversiteye özel Ek-1 puan cetvelleri (yoksa ÜAK cetveline düşülür).
@@ -77,23 +77,29 @@ class YonergeSeeder extends Seeder
         ?Universite $universite,
         int $yil = 2026,
     ): void {
-        $yonerge = Yonerge::query()->create([
-            'universite_id' => $universite?->id,
-            'anahtar' => $anahtar,
-            'ad' => $ad,
-            'kadro' => $kadro,
-            'yil' => $yil,
-            'uak_hedef' => $uakHedef,
-            'universite_hedef' => $universiteHedef,
-        ]);
+        // updateOrCreate: seeder mevcut veritabanı üzerinde de çalışabilsin
+        // (cetvel/baraj değişiklikleri için migrate:fresh gerekmesin).
+        $yonerge = Yonerge::query()->updateOrCreate(
+            ['anahtar' => $anahtar],
+            [
+                'universite_id' => $universite?->id,
+                'ad' => $ad,
+                'kadro' => $kadro,
+                'yil' => $yil,
+                'uak_hedef' => $uakHedef,
+                'universite_hedef' => $universiteHedef,
+            ],
+        );
 
         foreach ($kategoriKurallari as $kategori => $kural) {
-            $yonerge->kurallar()->create([
-                'kategori' => $kategori,
-                'tavan' => $kural['tavan'],
-                'varsayilan_puan' => $kural['varsayilan'],
-                'puanlar' => $kural['puanlar'],
-            ]);
+            $yonerge->kurallar()->updateOrCreate(
+                ['kategori' => $kategori],
+                [
+                    'tavan' => $kural['tavan'],
+                    'varsayilan_puan' => $kural['varsayilan'],
+                    'puanlar' => $kural['puanlar'],
+                ],
+            );
         }
     }
 }

@@ -126,12 +126,14 @@ class YonergeAnalizi extends Component
             ))
             ->get();
 
-        $oncelik = (Auth::user()->temel_alan ?? TemelAlan::Sosyal)->esikOncelik();
+        $temelAlan = Auth::user()->temel_alan ?? TemelAlan::Sosyal;
 
         // Yalnızca seçili kadro + temel alan için doğrulanmış eşiği olan üniversiteler.
+        // Eşleşme tam (kadro + alan): yönerge bir eşiği birden çok alan için ortak
+        // tanımlıyorsa esikler.php o grubu zaten alan başına ayrı satıra açıyor.
         $sonuclar = $yonergeler
-            ->map(function (Yonerge $yonerge) use ($oncelik): ?array {
-                $esik = $this->esikBul($yonerge, $oncelik);
+            ->map(function (Yonerge $yonerge) use ($temelAlan): ?array {
+                $esik = $this->esikBul($yonerge, $temelAlan);
 
                 if ($esik === null) {
                     return null;
@@ -218,24 +220,14 @@ class YonergeAnalizi extends Component
     }
 
     /**
-     * Yönergenin eşikleri içinden, temel alan öncelik sırasına göre ilk eşleşen
-     * doğrulanmış eşiği döndürür (ör. ilahiyat yoksa sosyal'e düşer).
-     *
-     * @param  list<string>  $oncelik
+     * Yönergenin seçili kadro + temel alan için doğrulanmış eşiği. Yoksa null
+     * döner ve üniversite listeye girmez — tahmini eşik gösterilmez.
      */
-    private function esikBul(Yonerge $yonerge, array $oncelik): ?YonergeEsik
+    private function esikBul(Yonerge $yonerge, TemelAlan $alan): ?YonergeEsik
     {
-        foreach ($oncelik as $alan) {
-            $esik = $yonerge->esikler->first(
-                fn ($e) => $e->kadro === $this->hedefKadro && $e->alan === $alan
-            );
-
-            if ($esik !== null) {
-                return $esik;
-            }
-        }
-
-        return null;
+        return $yonerge->esikler->first(
+            fn (YonergeEsik $esik) => $esik->kadro === $this->hedefKadro && $esik->alan === $alan->value
+        );
     }
 
     /**

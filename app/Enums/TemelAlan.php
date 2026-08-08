@@ -114,30 +114,6 @@ enum TemelAlan: string
     }
 
     /**
-     * Eşik eşleştirmede denenecek alan öncelik sırası (kendisi + gruplandığı
-     * geniş alanlar). Çoğu yönerge İlahiyat/Hukuk/Filoloji'yi "Sosyal/Beşeri",
-     * Ziraat'i "Fen", Spor'u "Eğitim" grubunda değerlendirdiği için kendi
-     * alanına özel eşik yoksa bu geniş grup eşiğine düşülür.
-     *
-     * @return list<string>
-     */
-    public function esikOncelik(): array
-    {
-        return match ($this) {
-            self::Ilahiyat => ['ilahiyat', 'sosyal'],
-            self::Hukuk => ['hukuk', 'sosyal'],
-            self::Filoloji => ['filoloji', 'sosyal'],
-            self::GuzelSanatlar => ['guzel_sanatlar', 'sosyal'],
-            self::Egitim => ['egitim', 'sosyal'],
-            self::Spor => ['spor', 'egitim', 'sosyal'],
-            self::Mimarlik => ['mimarlik', 'muhendislik', 'fen'],
-            self::Ziraat => ['ziraat', 'fen'],
-            self::Muhendislik => ['muhendislik', 'fen'],
-            default => [$this->value],
-        };
-    }
-
-    /**
      * @return array<string, string>
      */
     public static function secenekler(): array
