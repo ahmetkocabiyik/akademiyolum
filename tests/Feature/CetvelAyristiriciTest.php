@@ -130,3 +130,21 @@ test('tek hücrede birden çok değer taşıyan satır tahmin edilmez, bildirili
     expect(array_column($coklular, 'kod'))->toBe(['G2', 'G3'])
         ->and($coklular[1]['baslik'])->toContain('40/20/5');
 });
+
+test('bölüm başlığı alt bentlerin hangi bölüme ait olduğunu belirler (Ege)', function () {
+    // Ege'de "2. BİLİMSEL TOPLANTI" ve "4. ATIF" bölümlerinin ikisinde de b)
+    // bendi var. Bölüm başlığı tanınmazsa atıf bendi bildirinin koduna düşer
+    // ve biri diğerini sessizce ezer — denetim yanlış alarm verirdi.
+    $satirlar = $this->ayristirici->satirlar(
+        '2. BİLİMSEL TOPLANTI (BİLDİRİLER)'."\n".
+        'b) Uluslararası bilimsel toplantıda sözlü olarak sunulan bildiri                     8'."\n".
+        '4. ATIF'."\n".
+        'b) Diğer uluslararası alan indekslerince taranan dergilerde yapılan atıflar          1'
+    );
+
+    $kodlar = array_column($satirlar, 'kod');
+
+    expect($kodlar)->toBe(['2b', '4b'])
+        ->and($satirlar[0]['puan'])->toBe(8)
+        ->and($satirlar[1]['puan'])->toBe(1);
+});

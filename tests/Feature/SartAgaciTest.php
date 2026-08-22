@@ -1367,3 +1367,52 @@ test('Sabancı SSBF ve YBF araştırma ağırlıklı yolları Dr. Öğr. Üyesi 
     expect($gerekli($arastirma))->toBe(9)
         ->and($gerekli($egitim))->toBe(6);
 });
+
+test('Ege alan grubuna göre farklı yayın koşulu uyguluyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    // Dört ESCI/Scopus makalesi: Fen'de sayılmaz (yönerge 1(a) yani
+    // SCIE/SSCI/AHCI istiyor), Sosyal'de sayılır (1(a,b,c,d) kümesi geniş).
+    $esci = fn () => sartFaaliyet('ESCI / Scopus', tarih: '2020-01-01');
+    $faaliyetler = [$esci(), $esci(), $esci(), $esci()];
+
+    $sayac = function (string $alan) use ($depo, $faaliyetler, $profil): SartSonucu {
+        $esik = $depo->bul('Ege Üniversitesi', 'dr_ogr_uyesi', $alan);
+
+        return collect($depo->degerlendir($esik, $faaliyetler, $profil)->kosullar())
+            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'en az'));
+    };
+
+    expect($sayac('fen')->mevcut)->toBe(0)
+        ->and($sayac('sosyal')->mevcut)->toBe(4);
+
+    // Spor Bilimlerinde eşik bir eksik: üç yayın yeterli.
+    expect($sayac('spor')->gerekli)->toBe(3)
+        ->and($sayac('fen')->gerekli)->toBe(4);
+
+    // Eğitim, filoloji ve ziraat yönergede hiç anılmıyor — eşik üretilmedi.
+    foreach (['egitim', 'filoloji', 'ziraat'] as $alan) {
+        expect($depo->bul('Ege Üniversitesi', 'dr_ogr_uyesi', $alan))->toBeNull();
+    }
+});
+
+test('Ege yurt dışı koşulu puanla telafi edilebiliyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Ege Üniversitesi', 'dr_ogr_uyesi', 'fen');
+
+    // Yönerge: "Gereken en az puanın %50 fazlasının sağlanması durumunda
+    // (225 puan) yurt dışında bulunma koşulu aranmaz."
+    $yurtdisi = fn (array $faaliyetler, Profil $p) => collect($depo->degerlendir($esik, $faaliyetler, $p)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'yurt dışı'));
+
+    $bos = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yurtdisiAy: 0);
+    expect($yurtdisi([], $bos)->saglandi())->toBeFalse();
+
+    // Üç Q1 makale = 225 puan → telafi devreye girer.
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+    $sonuc = $yurtdisi([$q1(), $q1(), $q1()], $bos);
+
+    expect($sonuc->saglandi())->toBeTrue()
+        ->and($sonuc->telafiIleSaglandi())->toBeTrue();
+});

@@ -121,6 +121,12 @@ class CetvelAyristirici
         $anaKod = '';
 
         foreach ($tipler as $i => $t) {
+            if ($t['tip'] === 'bolum') {
+                $anaKod = $t['kod'];
+
+                continue;
+            }
+
             if ($t['tip'] !== 'kod') {
                 continue;
             }
@@ -199,6 +205,14 @@ class CetvelAyristirici
         // `6.1                    200`  — açıklama komşu satırlarda
         if (preg_match('/^\s*(?:\d{1,3}\s+)?('.self::KOD.')\s{2,}(\d{1,4})\s*$/u', $ln, $m) === 1) {
             return ['tip' => 'kod', 'kod' => rtrim($m[1], ').'), 'baslik' => '', 'puan' => (int) $m[2]];
+        }
+
+        // BÖLÜM BAŞLIĞI: `4. ATIF`, `5. BİLİMSEL ARAŞTIRMA PROJESİ`.
+        // Puanı yoktur ama altındaki `a)`, `b)` bentlerinin hangi bölüme ait
+        // olduğunu belirler. Tanınmazsa bir önceki bölümün numarasıyla
+        // birleşir ve atıf bendi bildiri bendinin üstüne yazılır.
+        if (preg_match('/^\s*(\d{1,2})\.\s*[A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜ0-9 ()\/]{2,}$/u', $ln, $m) === 1) {
+            return ['tip' => 'bolum', 'kod' => $m[1], 'baslik' => '', 'puan' => 0];
         }
 
         // Kodu olmayan yalnız sayı: bir üstteki kodun puanı (C düzeni).
