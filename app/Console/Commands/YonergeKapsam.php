@@ -63,11 +63,39 @@ class YonergeKapsam extends Command
 
             $taslak = $kayitlar->where('durum', SartDeposu::TASLAK)->count();
 
+            // Bir üniversitede o temel alanın HİÇBİR kadrosu yoksa fakülte de
+            // yoktur (Sabancı'nın tıp ya da ilahiyat fakültesi yok) — bu eksik
+            // veri değil, doğru yokluk. Eksik sayılan yalnızca bazı kadrosu
+            // girilip bazısı girilmemiş alanlar; "eksik" sütunu ancak böyle
+            // eyleme dönük oluyor.
+            $birimler = $depo->birimler($universite);
+            $bulunur = function (string $kadro, string $alan) use ($depo, $universite, $birimler): bool {
+                if ($depo->bul($universite, $kadro, $alan) !== null) {
+                    return true;
+                }
+
+                // Programa göre ayrışan yönergelerde eşik ancak program
+                // verilince dönüyor; rapor programsız çağırdığı için tek tek denenir.
+                foreach ($birimler as $birim) {
+                    if ($depo->bul($universite, $kadro, $alan, $birim) !== null) {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
+
             $eksik = [];
 
-            foreach ($kadrolar as $kadro) {
-                foreach (TemelAlan::cases() as $alan) {
-                    if ($depo->bul($universite, $kadro, $alan->value) === null) {
+            foreach (TemelAlan::cases() as $alan) {
+                $varlar = array_filter($kadrolar, fn (string $k) => $bulunur($k, $alan->value));
+
+                if ($varlar === []) {
+                    continue; // Üniversitede bu alan yok.
+                }
+
+                foreach ($kadrolar as $kadro) {
+                    if (! $bulunur($kadro, $alan->value)) {
                         $eksik[] = "{$kadro}/{$alan->value}";
                     }
                 }

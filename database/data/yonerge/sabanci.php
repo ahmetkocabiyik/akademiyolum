@@ -33,6 +33,8 @@ $birimKultur = 'SSBF — Kültürel Çalışmalar ve Tarih Programları';
 $birimGorsel = 'SSBF — Görsel Sanatlar ve Görsel İletişim Tasarımı Programı';
 $birimYbf = 'YBF — Yönetim Bilimleri Fakültesi';
 $birimEgitim = 'Eğitim Ağırlıklı Kariyer Gelişim Yolu (tüm fakülteler)';
+$birimSsbfArastirma = 'SSBF Tüm Programlar — Araştırma ve Uygulama Ağırlıklı';
+$birimYbfArastirma = 'YBF — Araştırma ve Uygulama Ağırlıklı';
 
 /**
  * EK-4 ikameleri. Diğer üç Sabancı bloğundan farkı: sanatsal sergi de makale
@@ -665,6 +667,132 @@ return [
             $ybfBasarilar(4),
         ]),
     ],
+    // ══════════ EK-2 SSBF · ARAŞTIRMA VE UYGULAMA AĞIRLIKLI ══════════
+    //
+    // SSBF'nin İKİNCİ kariyer yolu. "Eğitim ve Araştırma Ağırlıklı" yolda
+    // yönerge Dr. Öğr. Üyesi tanımlamıyor (doçentten başlıyor); bu yolda ise
+    // üç kadro da var. Yayın eşiği belirgin yüksek: doçent 10, profesör 20.
+    [
+        'anahtar' => 'sabanci-dr-ssbf-arastirma',
+        'aday_notu' => 'Bu, araştırma ve uygulama ağırlıklı AYRI bir kariyer yolu; yayın eşiği eğitim ağırlıklı yoldan yüksektir. Alan endeksinin ilk çeyreğindeki bir makale 2 makale sayılıyor.',
+        'universite' => 'Sabancı Üniversitesi',
+        'kadro' => 'dr_ogr_uyesi',
+        'alan' => ['sosyal', 'guzel_sanatlar'],
+        'birim' => $birimSsbfArastirma,
+        'cetvel' => 'sabanci-turler',
+        'notlar' => 'EK-2 SSBF / Araştırma ve Uygulama Ağırlıklı Öğretim Üyesi, DR. ÖĞRETİM ÜYESİ.',
+        'sart' => Kalip::ve('SSBF Araştırma ve Uygulama Ağırlıklı — Dr. Öğr. Üyesi', [
+            Kalip::adet('SCI/SSCI/AHCI/SCOPUS endeksli dergilerde en az 2 bilimsel makale', ['SU-S1'], 2)
+                + ['donusumler' => $ssbfIkameler],
+            Kalip::beyan('Proje başvuru/ilerleme ve sonuç raporları süreçlerinde yer almış olmak'),
+        ]),
+    ],
+    [
+        'anahtar' => 'sabanci-docent-ssbf-arastirma',
+        'aday_notu' => 'Bu, araştırma ve uygulama ağırlıklı AYRI bir kariyer yolu. Kitap eşdeğerlikleri CERES sıralamasına göre: A kategori kitap 3 makale, B kategori 2, C/D/E kategori 1 makale yerine sayılıyor.',
+        'universite' => 'Sabancı Üniversitesi',
+        'kadro' => 'docentlik',
+        'alan' => ['sosyal', 'guzel_sanatlar'],
+        'birim' => $birimSsbfArastirma,
+        'cetvel' => 'sabanci-turler',
+        'notlar' => 'EK-2 SSBF / Araştırma ve Uygulama Ağırlıklı, DOÇENT. "En az 4 tanesi doktora tezinden üretilmemiş olmak kaydıyla … en az 10 bilimsel makale."',
+        'sart' => Kalip::ve('SSBF Araştırma ve Uygulama Ağırlıklı — Doçent', [
+            Kalip::adet('SCI/SSCI/AHCI/SCOPUS endeksli dergilerde en az 10 bilimsel makale', ['SU-S1'], 10)
+                + ['donusumler' => $ssbfIkameler],
+            Kalip::adet('Bu makalelerin en az 4\'ü doktora tezinden üretilmemiş olmalı', ['SU-S1'], 4)
+                + ['haric' => ['doktora_tezinden']],
+            Kalip::metrik('Doktora sonrasında en az 4 lisans/lisansüstü ders vermiş olmak', 'ders_yariyil', 4, Kalip::DOKTORA_SONRASI),
+            Kalip::veya('Bitmiş 2 yüksek lisans tezi ya da 1 doktora tezi danışmanlığı', [
+                Kalip::metrik('Bitmiş en az 2 yüksek lisans tezinde danışmanlık', 'tez_danismanlik', 2),
+                Kalip::metrik('Bitmiş en az 1 doktora tezinde danışmanlık', 'doktora_tez_danismanlik', 1),
+            ]),
+            Kalip::beyan('En az biri uluslararası olmak kaydıyla 2 tamamlanmış projede yürütücülük ya da baş araştırmacılık'),
+            $ssbfBasarilar(3),
+        ]),
+    ],
+    [
+        'anahtar' => 'sabanci-profesor-ssbf-arastirma',
+        'aday_notu' => 'Bu, araştırma ve uygulama ağırlıklı AYRI bir kariyer yolu. Yirmi makalenin en az sekizi doçentlik sonrası olmalı.',
+        'universite' => 'Sabancı Üniversitesi',
+        'kadro' => 'profesorluk',
+        'alan' => ['sosyal', 'guzel_sanatlar'],
+        'birim' => $birimSsbfArastirma,
+        'cetvel' => 'sabanci-turler',
+        'notlar' => 'EK-2 SSBF / Araştırma ve Uygulama Ağırlıklı, PROFESÖR. "En az 8 tanesi doçentlik sonrası olmak kaydıyla … en az 20 bilimsel makale."',
+        'sart' => Kalip::ve('SSBF Araştırma ve Uygulama Ağırlıklı — Profesör', [
+            Kalip::adet('SCI/SSCI/AHCI/SCOPUS endeksli dergilerde en az 20 bilimsel makale', ['SU-S1'], 20)
+                + ['donusumler' => $ssbfIkameler],
+            Kalip::adet('Bunların en az 8\'i doçentlik sonrası olmalı', ['SU-S1'], 8, donem: Kalip::DOCENTLIK_SONRASI),
+            Kalip::metrik('Doktora sonrası en az dördü lisansüstü olmak üzere toplam 8 ders', 'ders_yariyil', 8, Kalip::DOKTORA_SONRASI),
+            Kalip::veya('Bitmiş 4 yüksek lisans tezi ya da 2 doktora tezi danışmanlığı', [
+                Kalip::metrik('Bitmiş en az 4 yüksek lisans tezinde danışmanlık', 'tez_danismanlik', 4),
+                Kalip::metrik('Bitmiş en az 2 doktora tezinde danışmanlık', 'doktora_tez_danismanlik', 2),
+            ]),
+            Kalip::beyan('En az üçü uluslararası olmak kaydıyla 5 tamamlanmış projede yürütücülük ya da baş araştırmacılık'),
+            $ssbfBasarilar(6),
+        ]),
+    ],
+
+    // ══════════ EK-3 YBF · ARAŞTIRMA VE UYGULAMA AĞIRLIKLI ══════════
+    //
+    // YBF'nin ikinci kariyer yolu; eğitim ağırlıklı yolda olmayan Dr. Öğr.
+    // Üyesi kadrosu burada tanımlı. Danışmanlık burada ağırlıklı puanla değil
+    // ADETLE isteniyor — eğitim ağırlıklı yoldan ayrıldığı nokta.
+    [
+        'anahtar' => 'sabanci-dr-ybf-arastirma',
+        'aday_notu' => 'Bu, araştırma ve uygulama ağırlıklı AYRI bir kariyer yolu. FT50 listesindeki ve AJG\'de en az 4 puan almış dergideki bir makale iki SSCI makalesi sayılıyor.',
+        'universite' => 'Sabancı Üniversitesi',
+        'kadro' => 'dr_ogr_uyesi',
+        'alan' => ['sosyal'],
+        'birim' => $birimYbfArastirma,
+        'cetvel' => 'sabanci-turler',
+        'notlar' => 'EK-3 YBF / Araştırma ve Uygulama Ağırlıklı, DR. ÖĞRETİM ÜYESİ.',
+        'sart' => Kalip::ve('YBF Araştırma ve Uygulama Ağırlıklı — Dr. Öğr. Üyesi', [
+            Kalip::adet('SCI/SCIE/SSCI endeksli dergilerde en az 2 bilimsel makale', ['SU-Y1'], 2)
+                + ['donusumler' => $ybfIkameler],
+            Kalip::beyan('Proje başvuru/ilerleme ve sonuç raporları süreçlerinde yer almış olmak'),
+        ]),
+    ],
+    [
+        'anahtar' => 'sabanci-docent-ybf-arastirma',
+        'aday_notu' => 'Bu, araştırma ve uygulama ağırlıklı AYRI bir kariyer yolu; yayın eşiği eğitim ağırlıklı yoldan yüksek (9 ↔ 6). Danışmanlık burada puanla değil adetle isteniyor.',
+        'universite' => 'Sabancı Üniversitesi',
+        'kadro' => 'docentlik',
+        'alan' => ['sosyal'],
+        'birim' => $birimYbfArastirma,
+        'cetvel' => 'sabanci-turler',
+        'notlar' => 'EK-3 YBF / Araştırma ve Uygulama Ağırlıklı, DOÇENT.',
+        'sart' => Kalip::ve('YBF Araştırma ve Uygulama Ağırlıklı — Doçent', [
+            Kalip::adet('SCI/SCIE/SSCI endeksli dergilerde en az 9 bilimsel makale', ['SU-Y1'], 9)
+                + ['donusumler' => $ybfIkameler],
+            Kalip::beyan('En az biri uluslararası olmak kaydıyla en az 2 projede proje yürütücülüğü'),
+            Kalip::beyan('Endüstriyel ve kurumsal ortaklıklar kurmak ya da bu çalışmalara destek vermiş olmak'),
+            Kalip::metrik('En az biri lisansüstü düzeyde olmak üzere toplam en az 2 farklı ders', 'ders_yariyil', 2),
+            Kalip::metrik('Bitmiş 2 yüksek lisans/doktora tezinde danışmanlık', 'tez_danismanlik', 2),
+            Kalip::beyan('Alanındaki yüksek lisans/doktora programlarına katkıda bulunmuş olmak'),
+            $ybfBasarilar(3),
+        ]),
+    ],
+    [
+        'anahtar' => 'sabanci-profesor-ybf-arastirma',
+        'aday_notu' => 'Bu, araştırma ve uygulama ağırlıklı AYRI bir kariyer yolu; yayın eşiği eğitim ağırlıklı yoldan yüksek (21 ↔ 14).',
+        'universite' => 'Sabancı Üniversitesi',
+        'kadro' => 'profesorluk',
+        'alan' => ['sosyal'],
+        'birim' => $birimYbfArastirma,
+        'cetvel' => 'sabanci-turler',
+        'notlar' => 'EK-3 YBF / Araştırma ve Uygulama Ağırlıklı, PROFESÖR.',
+        'sart' => Kalip::ve('YBF Araştırma ve Uygulama Ağırlıklı — Profesör', [
+            Kalip::adet('SCI/SCIE/SSCI endeksli dergilerde en az 21 bilimsel makale', ['SU-Y1'], 21)
+                + ['donusumler' => $ybfIkameler],
+            Kalip::beyan('En az ikisi uluslararası olmak kaydıyla en az 4 projede proje yürütücülüğü'),
+            Kalip::beyan('Endüstriyel ve kurumsal ortaklıklar kurmak ya da bu çalışmalara destek vermiş olmak'),
+            Kalip::metrik('En az ikisi lisansüstü düzeyde olmak üzere toplam en az 3 farklı ders', 'ders_yariyil', 3),
+            Kalip::metrik('Bitmiş 4 yüksek lisans/doktora tezinde danışmanlık', 'tez_danismanlik', 4),
+            $ybfBasarilar(6),
+        ]),
+    ],
+
     [
         'anahtar' => 'sabanci-docent-egitim',
         'aday_notu' => 'Bu, en az 10 yıl kıdem gerektiren AYRI bir kariyer yolu. Yayın eşiği düşük ama giriş ve eğitim performansı koşulları belge ile teyit ediliyor. Sanat alanında prestijli sergi makale şartının yerine geçebiliyor.',

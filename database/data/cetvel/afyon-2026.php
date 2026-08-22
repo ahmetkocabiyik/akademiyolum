@@ -139,6 +139,23 @@ return [
         '6.1' => ['baslik' => 'Alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 25],
         '6.2' => ['baslik' => 'Alanında makale, kitap bölümü veya karar tahlili çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
 
+        // ── 7. EDİTÖRLÜK VE HAKEMLİKLER ── ("her yıl için")
+        // 7.1 aynı işi çeyrekliğe göre farklı puanlıyor; kaynak sözlüğü bu
+        // yüzden WoS editörlüğünü Q1-Q4 diye ayırdı.
+        '7.1a' => ['baslik' => 'SCI/SCIE/SSCI/AHCI Q1 dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)'], 'puan' => 100],
+        '7.1b' => ['baslik' => 'SCI/SCIE/SSCI/AHCI Q2 dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q2)'], 'puan' => 80],
+        '7.1c' => ['baslik' => 'SCI/SCIE/SSCI/AHCI Q3 dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q3)'], 'puan' => 70],
+        '7.1d' => ['baslik' => 'SCI/SCIE/SSCI/AHCI Q4 dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q4)'], 'puan' => 60],
+        '7.2' => ['baslik' => 'ESCI veya SCOPUS dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 50],
+        '7.3' => ['baslik' => 'TR Dizin dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 50],
+        '7.4' => ['baslik' => 'Diğer hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 20],
+        '7.8' => ['baslik' => 'Uluslararası yayınevi kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 70],
+        '7.9' => ['baslik' => 'Ulusal kurum/yayınevi kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 40],
+
+        // 7.6 (yardımcı/konuk editörlük, %50) ve 7.7 (hakemlik, %20) oransal
+        // türev maddeler — motor bir faaliyeti yüzdeyle indirgeyemiyor, ayrı
+        // etiketleri de yok. Girilmedi.
+
         // ── 8. ATIFLAR ──
         // 8.1 (h faktörü × 10) bir metriktir, faaliyet satırı başına puan
         // değildir; cetvelde ifade edilemiyor ve girilmedi.

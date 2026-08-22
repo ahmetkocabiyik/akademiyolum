@@ -1283,3 +1283,87 @@ describe('taslak eşikler adaya gösterilmez', function () {
             ->and($depo()->dogrulanmisEsikler())->toHaveCount(1);
     });
 });
+
+test('kaynak sözlüğü yönergelerin ayırdığı kalemleri ayırt edebiliyor', function () {
+    $katalog = sartDepo()->katalog('ataturk-2026');
+
+    // Üç ödül de 30 puan ama yönerge genel "TÜBA/TÜBİTAK bilim ödülü"nü 40
+    // veriyor. Hepsi tek etikete düşseydi `puan()` en yükseği aldığı için
+    // her ödül 40 sayılırdı — sözlük bölünmeden bu kalemler girilemiyordu.
+    $puan = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::Odul, yazarRolu: null), array_keys($katalog->maddeler),
+    );
+
+    expect($puan('Ufuk Avrupa / ERC Ödülü'))->toBe(30)
+        ->and($puan('TÜBA GEBİP / TWAS Teşvik Ödülü'))->toBe(30)
+        ->and($puan('YÖK Ödülü'))->toBe(30)
+        ->and($puan('TÜBİTAK / TÜBA Ödülü'))->toBe(40);
+
+    // İdari görevler de tek tek puanlanıyor: rektör 50, rektör yardımcısı 40.
+    $idari = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::IdariGorev, yazarRolu: null), array_keys($katalog->maddeler),
+    );
+
+    expect($idari('Rektör'))->toBe(50)
+        ->and($idari('Rektör Yardımcısı'))->toBe(40)
+        ->and($idari('Bölüm Başkanı'))->toBe(10)
+        ->and($idari('Bölüm Başkan Yardımcısı'))->toBe(5);
+});
+
+test('editörlük çeyrekliğe göre farklı puanlanıyor (Afyon 7.1)', function () {
+    $katalog = sartDepo()->katalog('afyon-2026');
+    $kodlar = array_keys($katalog->maddeler);
+
+    $puan = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::Editorluk, yazarRolu: null), $kodlar,
+    );
+
+    expect($puan('WoS Dergi (Q1)'))->toBe(100)
+        ->and($puan('WoS Dergi (Q4)'))->toBe(60)
+        ->and($puan('TR Dizin Dergi'))->toBe(50)
+        ->and($puan('Diğer Hakemli Dergi'))->toBe(20);
+
+    // ÜAK çeyreklik gözetmiyor: dördü de aynı maddeye düşer.
+    $uak = sartDepo()->katalog('uak-2024-mart-fen');
+    $uakKodlar = array_keys($uak->maddeler);
+
+    foreach (['WoS Dergi (Q1)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'] as $kaynak) {
+        expect($uak->puan(sartFaaliyet($kaynak, Kategori::Editorluk, yazarRolu: null), $uakKodlar))->toBe(2);
+    }
+});
+
+test('Sabancı SSBF ve YBF araştırma ağırlıklı yolları Dr. Öğr. Üyesi kadrosunu kapsıyor', function () {
+    $depo = sartDepo();
+
+    // Bu iki kariyer yolu eksikti; SSBF/YBF'nin "Eğitim ve Araştırma Ağırlıklı"
+    // yolunda yönerge Dr. Öğr. Üyesi TANIMLAMIYOR, araştırma ağırlıklı yolda
+    // tanımlıyor. Eksikken sosyal ve güzel sanatlar alanlarında Dr. Öğr. Üyesi
+    // adayına gösterilecek hiçbir eşik yoktu.
+    $ssbf = $depo->bul('Sabancı Üniversitesi', 'dr_ogr_uyesi', 'sosyal',
+        'SSBF Tüm Programlar — Araştırma ve Uygulama Ağırlıklı');
+    $ybf = $depo->bul('Sabancı Üniversitesi', 'dr_ogr_uyesi', 'sosyal',
+        'YBF — Araştırma ve Uygulama Ağırlıklı');
+
+    expect($ssbf)->not->toBeNull()->and($ybf)->not->toBeNull();
+
+    // Kabul kümeleri fakülteye göre ayrı kalmalı: SCOPUS makale SSBF'de sayılır,
+    // YBF'de sayılmaz (EK-3 yalnızca SCI/SCIE/SSCI diyor).
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+    $scopus = fn () => sartFaaliyet('ESCI / Scopus', tarih: '2020-01-01');
+
+    $makale = fn (array $esik) => collect($depo->degerlendir($esik, [$scopus(), $scopus()], $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'en az 2 bilimsel makale'))->mevcut;
+
+    expect($makale($ssbf))->toBe(2)
+        ->and($makale($ybf))->toBe(0);
+
+    // Araştırma ağırlıklı yolun doçent eşiği, eğitim ağırlıklı yoldan yüksek.
+    $arastirma = $depo->bul('Sabancı Üniversitesi', 'docentlik', 'sosyal', 'YBF — Araştırma ve Uygulama Ağırlıklı');
+    $egitim = $depo->bul('Sabancı Üniversitesi', 'docentlik', 'sosyal', 'YBF — Yönetim Bilimleri Fakültesi');
+
+    $gerekli = fn (array $esik) => collect($depo->degerlendir($esik, [], $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'bilimsel makale'))->gerekli;
+
+    expect($gerekli($arastirma))->toBe(9)
+        ->and($gerekli($egitim))->toBe(6);
+});

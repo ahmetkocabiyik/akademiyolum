@@ -155,8 +155,14 @@ enum Kategori: string
                 'Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders',
                 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti',
             ],
+            // Editörlükte ÇEYREKLİK ayrımı var: Afyon 7.1 aynı işi Q1'de 100,
+            // Q4'te 60 puanlıyor. Tek "WoS / Scopus Dergi" etiketiyle bu
+            // kademe ifade edilemiyordu. Çeyreklik gözetmeyen yönergeler
+            // dördünü birden listeler (makale tarafındaki desenin aynısı).
             self::Editorluk => [
-                'WoS / Scopus Dergi', 'TR Dizin Dergi', 'BKCI Kitap',
+                'WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)',
+                'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi',
+                'BKCI Kitap', 'Kitap Editörlüğü',
                 'Yayın Kurulu Üyeliği', 'Hakemlik',
             ],
             self::SanatselEtkinlik => [
@@ -223,13 +229,26 @@ enum Kategori: string
                 'Sahneleme/Repetitörlük — Bölüm (Ulusal)', 'Müzikoloji Atölyesi',
                 'Eğitici Konser Programı (Uluslararası)', 'Eğitici Konser Programı (Ulusal)',
             ],
+            // Yönergeler belirli ödülleri ADIYLA ve ayrı puanla anıyor:
+            // Atatürk 07.02.02 YÖK Doktora Tezi Ödülü 30, 07.02.04 GEBİP/TWAS
+            // 30, 07.02.05 ERC 30; genel "TÜBİTAK/TÜBA ödülü" ise 40. Bunlar
+            // tek etikete toplanırsa `puan()` en yükseği aldığı için her ödül
+            // 40 sayılırdı.
             self::Odul => [
                 'Uluslararası Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü',
-                'Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs',
+                'TÜBA GEBİP / TWAS Teşvik Ödülü', 'Ufuk Avrupa / ERC Ödülü',
+                'YÖK Ödülü', 'Ulusal Bilim/Sanat Ödülü',
+                'Yarışma Derecesi / Mansiyon', 'Burs',
             ],
+            // Yönergeler idari görevleri tek tek puanlıyor (Atatürk 00.01.01-12):
+            // rektör ile rektör yardımcısı ayrı satır, ayrı puan. Birleşik
+            // etiketler bu ayrımı taşıyamıyordu.
             self::IdariGorev => [
-                'Rektör / Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü',
-                'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı',
+                'Rektör', 'Rektör Yardımcısı',
+                'Senato / Üniversite Yönetim Kurulu Üyesi',
+                'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.',
+                'Uygulama ve Araştırma Merkezi Müdürü',
+                'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı',
                 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği',
             ],
             self::ToplumsalKatki => [

@@ -60,7 +60,7 @@ $maddeler = [
 
     '11' => ['baslik' => 'YÖK/TÜBİTAK/TÜBA ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü'], 'puan' => 25],
 
-    '12a' => ['baslik' => 'WoS/Scopus dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS / Scopus Dergi'], 'puan' => 2],
+    '12a' => ['baslik' => 'WoS/Scopus dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 2],
     '12b' => ['baslik' => 'BKCI/Scopus kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 1],
     '12c' => ['baslik' => 'TR Dizin dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 1],
 

@@ -4,9 +4,11 @@
  * Atatürk Üniversitesi — Ek-2 Gösterge Tablosu (KISMİ)
  * Kaynak: pdf/17536930072.ataturkuniversitesi.pdf
  *
- * Yalnızca eşiklerin atıf yaptığı 02.01 / 02.02 / 02.04 blokları girildi;
- * proje (02.03), atıf ve idari görev blokları henüz yok — o koşullar
- * ağaçta `beyan` düğümü olarak duruyor ve toplam puanı düşük gösterir.
+ * Girilen bloklar: 01.03 (kitap), 02.01/02.02 (makale), 02.03/02.04 (proje),
+ * 07 (ödüller), 00.01 (idari görevler).
+ *
+ * ATIF bloğu henüz yok — o koşullar ağaçta `beyan` düğümü olarak duruyor ve
+ * toplam puanı düşük gösterir (fazla değil).
  *
  * Madde kodu → (kategori, kaynaklar, roller, puan). Bir faaliyet birden çok
  * maddeye giriyorsa puanı EN YÜKSEK maddeden alınır.
@@ -114,15 +116,31 @@ return [
         '07.02.03' => ['baslik' => 'TÜBA/TÜBİTAK bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü'], 'puan' => 40],
         // BURS KALEMİ YOK — 07.02.03 açıkça "(Burs, UBYT vb. kapsamındaki
         // ödüller hariç)" diyor. Burada bir süre '07.02.05' => "Burs, 5 puan"
-        // duruyordu; yönergede o kod ERC ödülüdür (30 puan), 5 puanlı olan
-        // 07.02.06'dır. Uydurma kalem kaldırıldı.
+        // duruyordu; yönergede o kod ERC ödülüdür. Uydurma kalem kaldırıldı.
         //
-        // 07.02.04 (TÜBA GEBİP/TWAS, 30), 07.02.05 (Ufuk Avrupa/ERC, 30) ve
-        // 07.02.06 (jürili ulusal derece ödülü, 5) BİLEREK girilmedi: kaynak
-        // sözlüğümüz bunları 07.02.03 ile 07.01.05'ten ayırt edemiyor, aynı
-        // etiketle eklenirlerse `puan()` en yükseği aldığı için hesabı
-        // değiştirmeden kapsanmış gibi görünürler. Eksik kalmak, olduğundan
-        // geniş görünmekten iyidir.
+        // 07.02.02/04/05 önce girilememişti: hepsi 'TÜBİTAK / TÜBA Ödülü'
+        // etiketine düşüyor, `puan()` en yükseği aldığı için üçü de 40 sayılırdı.
+        // Kaynak sözlüğüne ayrı etiketler eklendikten sonra girildiler.
+        '07.02.02' => ['baslik' => 'YÖK Doktora Tezi Ödülü', 'kategori' => 'odul', 'kaynaklar' => ['YÖK Ödülü'], 'puan' => 30],
+        '07.02.04' => ['baslik' => 'TÜBA GEBİP veya TÜBİTAK TWAS Teşvik Ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 30],
+        '07.02.05' => ['baslik' => 'TÜBİTAK Ufuk Avrupa / ERC programı eşik üstü ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ufuk Avrupa / ERC Ödülü'], 'puan' => 30],
+
+        // ── 00.01 İDARİ GÖREVLER ── (yıllık hesaplanır)
+        // Yönerge her görevi ayrı puanlıyor; birleşik etiketler bu ayrımı
+        // taşıyamadığı için sözlük görev başına bölündü.
+        '00.01.01' => ['baslik' => 'Rektör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 50],
+        '00.01.02' => ['baslik' => 'Rektör Yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı'], 'puan' => 40],
+        '00.01.03' => ['baslik' => 'Senato veya Üniversite Yönetim Kurulu üyesi', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
+        '00.01.05/07' => ['baslik' => 'Dekan, enstitü/konservatuvar/yüksekokul/MYO müdürü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 25],
+        '00.01.06/08' => ['baslik' => 'Dekan yardımcısı veya müdür yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 15],
+        '00.01.09' => ['baslik' => 'Uygulama ve Araştırma Merkezi müdürü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 10],
+        '00.01.11' => ['baslik' => 'Bölüm başkanı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 10],
+        '00.01.12' => ['baslik' => 'Bölüm başkan yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 5],
+        '00.01.13' => ['baslik' => 'Anabilim/bilim dalı başkanı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
+
+        // 00.01.05/07 (dekan 30 ↔ enstitü müdürü 25) ile 00.01.06/08 (dekan yrd.
+        // 20 ↔ müdür yrd. 15) sözlükte tek etiket. DÜŞÜK değer alındı: yüksek
+        // yazılsaydı her enstitü müdürü dekan gibi puanlanırdı.
         'T.1' => [
             'baslik' => 'Lisansüstü tezden üretilmiş yayın',
             'kategori' => 'tez_yayini',
