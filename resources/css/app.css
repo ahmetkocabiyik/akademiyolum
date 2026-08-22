@@ -26,7 +26,10 @@
     --color-cat-green-light: #eaf3de;
     --color-cat-red: #dc2626;
     --color-cat-red-light: #fcebeb;
-    --color-cat-amber: #b45309;
+    /* Yüzey tonu (şerit, çubuk, ikon): amber-600. Küçük metinde kontrastı
+       yetersiz kaldığı için metin ayrı token kullanır. */
+    --color-cat-amber: #d97706;
+    --color-cat-amber-text: #b45309;
     --color-cat-amber-light: #fef3c7;
     --color-cat-purple: #534ab7;
     --color-cat-purple-light: #eeedfe;
@@ -85,7 +88,10 @@
     --color-cat-purple-light: #eeedfe;
     --color-cat-green: #16a34a;
     --color-cat-green-light: #eaf3de;
-    --color-cat-amber: #b45309;
+    /* Yüzey tonu (şerit, çubuk, ikon): amber-600. Küçük metinde kontrastı
+       yetersiz kaldığı için metin ayrı token kullanır. */
+    --color-cat-amber: #d97706;
+    --color-cat-amber-text: #b45309;
     --color-cat-amber-light: #fef3c7;
     --color-cat-red: #dc2626;
     --color-cat-red-light: #fcebeb;

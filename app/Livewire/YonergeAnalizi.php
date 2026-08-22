@@ -32,8 +32,8 @@ use Livewire\Component;
  *     universite: Universite,
  *     esik: Esik,
  *     sonuc: SartSonucu,
- *     toplam: int,
- *     baraj: int,
+ *     toplam: ?int,
+ *     baraj: ?int,
  *     oran: int,
  *     puan_orani: int,
  *     kalan: int,
@@ -41,7 +41,17 @@ use Livewire\Component;
  *     durum: string,
  *     eksik_sayisi: int,
  *     belirsiz_sayisi: int,
+ *     beyan_sayisi: int,
  * }
+ *
+ * Livewire #[Computed] metotları özellik gibi okunur; @property-read satırları
+ * bunu statik analize bildirir.
+ *
+ * @property-read Collection<int, Faaliyet> $faaliyetler
+ * @property-read int $profilDoluluk
+ * @property-read list<SonucSatiri> $sonuclar
+ * @property-read array<string, mixed>|null $detay
+ * @property-read array{toplam: int, uygun: int, eksik_bilgi: int, yakin: int, yetersiz: int} $ozet
  */
 #[Layout('layouts.app')]
 #[Title('Yönerge Analizi')]
@@ -143,9 +153,11 @@ class YonergeAnalizi extends Component
             ))
             ->get();
 
+        $birim = Auth::user()->birim;
+
         $sonuclar = $universiteler
-            ->map(function (Universite $universite) use ($depo, $temelAlan, $faaliyetler, $profil): ?array {
-                $esik = $depo->bul($universite->ad, $this->hedefKadro, $temelAlan);
+            ->map(function (Universite $universite) use ($depo, $temelAlan, $faaliyetler, $profil, $birim): ?array {
+                $esik = $depo->bul($universite->ad, $this->hedefKadro, $temelAlan, $birim);
 
                 if ($esik === null) {
                     return null;
@@ -154,10 +166,12 @@ class YonergeAnalizi extends Component
                 $sonuc = $depo->degerlendir($esik, $faaliyetler, $profil);
                 $toplamDugum = $sonuc->rolile('toplam');
 
-                // Her ağaçta 'toplam' rolünde bir puan düğümü var; puansız
-                // yönergelerde (ör. Samsun) olmayabilir — o zaman baraj 0.
-                $toplam = $toplamDugum === null ? 0 : (int) $toplamDugum->mevcut;
-                $baraj = $toplamDugum === null ? 0 : (int) $toplamDugum->gerekli;
+                // Puansız yönergeler (Sabancı, Samsun) şartlarını adetle yazıyor;
+                // orada 'toplam' düğümü hiç yoktur. Bunu 0 ile temsil etmek
+                // "0/0 pt" gibi bozuk bir değer üretiyordu — null "baraj yok"
+                // demek, "baraj sıfır" demek değil.
+                $toplam = $toplamDugum === null ? null : (int) $toplamDugum->mevcut;
+                $baraj = $toplamDugum === null ? null : (int) $toplamDugum->gerekli;
                 $oran = $this->genelOran($sonuc);
 
                 return [
@@ -167,21 +181,25 @@ class YonergeAnalizi extends Component
                     'toplam' => $toplam,
                     'baraj' => $baraj,
                     'oran' => $oran,
-                    'puan_orani' => $baraj > 0 ? (int) min(100, round($toplam / $baraj * 100)) : 100,
-                    'kalan' => max(0, $baraj - $toplam),
+                    // Baraj yoksa ilerleme puandan değil koşul doluluğundan okunur.
+                    'puan_orani' => $baraj === null || $baraj <= 0
+                        ? $oran
+                        : (int) min(100, round($toplam / $baraj * 100)),
+                    'kalan' => $baraj === null ? 0 : max(0, $baraj - $toplam),
                     'yapilabilir' => $sonuc->saglandi(),
                     'durum' => $this->durum($sonuc, $oran),
                     'eksik_sayisi' => count($sonuc->eksikler()),
                     'belirsiz_sayisi' => count($sonuc->belirsizler()),
+                    'beyan_sayisi' => count($sonuc->beyanlar()),
                 ];
             })
             ->filter();
 
         $sonuclar = match ($this->siralama) {
-            'baraj_azalan' => $sonuclar->sortByDesc('baraj'),
+            'baraj_azalan' => $sonuclar->sortByDesc(fn (array $s) => $s['baraj'] ?? -1),
             'oran' => $sonuclar->sortByDesc('oran'),
             'alfabetik' => $sonuclar->sortBy(fn (array $s) => $s['universite']->ad),
-            default => $sonuclar->sortBy('baraj'),
+            default => $sonuclar->sortBy(fn (array $s) => $s['baraj'] ?? PHP_INT_MAX),
         };
 
         return array_values($sonuclar->all());
@@ -204,17 +222,22 @@ class YonergeAnalizi extends Component
      * En zayıf ölçülebilir koşulun doluluk oranı (0-100). Beyan ve ölçülemeyen
      * düğümler hesaba katılmaz.
      */
+    /**
+     * Eşiğin dayandığı cetvelin bilinen kapsam sınırı (varsa).
+     *
+     * @param  array<string, mixed>  $esik
+     */
+    public function kapsamNotu(array $esik): ?string
+    {
+        return app(SartDeposu::class)->katalog((string) $esik['cetvel'])?->kapsamNotu;
+    }
+
     private function genelOran(SartSonucu $sonuc): int
     {
-        $olculebilir = $sonuc->topla(
-            fn (SartSonucu $d) => $d->cocuklar === [] && ! $d->beyan && $d->gerekli !== null,
-        );
-
-        if ($olculebilir === []) {
-            return $sonuc->saglandi() ? 100 : 0;
-        }
-
-        return (int) min(array_map(fn (SartSonucu $d) => $d->oran(), $olculebilir));
+        // Ağacın kendi mantığıyla hesaplanır; eskiden tüm yaprakların minimumu
+        // alınıyordu ve "beş yoldan biri" tipi VEYA koşullarında sağlanmayan
+        // alternatifler oranı sıfıra çekiyordu.
+        return $sonuc->oran();
     }
 
     /**

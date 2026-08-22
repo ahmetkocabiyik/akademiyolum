@@ -3,10 +3,10 @@
 namespace App\Livewire;
 
 use App\Enums\Kategori;
+use App\Enums\TemelAlan;
 use App\Models\Faaliyet;
-use App\Services\Scoring\KuralSetiCozucu;
-use App\Services\Scoring\PuanHesaplayici;
-use App\Services\Scoring\RuleSet;
+use App\Services\Scoring\Sart\MaddeKatalogu;
+use App\Services\Scoring\Sart\SartDeposu;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -37,7 +37,14 @@ class FaaliyetEkle extends Component
 
     public string $kaynak = '';
 
-    public string $yil = '';
+    /**
+     * Faaliyetin gerçekleşme tarihi (Y-m-d).
+     *
+     * Yıl değil tam tarih alınıyor: dönem koşulları profildeki doktora/doçentlik/
+     * son atama tarihleriyle kıyaslanıyor ve yalnızca yıl bilinirse dönüm yılına
+     * denk gelen faaliyetler karara bağlanamıyor.
+     */
+    public string $tarih = '';
 
     public string $doi = '';
 
@@ -57,7 +64,7 @@ class FaaliyetEkle extends Component
             $this->rol = $faaliyet->rol ?? '';
             $this->donem = $faaliyet->donem ?? '';
             $this->kaynak = $faaliyet->kaynak ?? '';
-            $this->yil = (string) ($faaliyet->meta['yil'] ?? '');
+            $this->tarih = $faaliyet->tarih?->format('Y-m-d') ?? '';
             $this->doi = (string) ($faaliyet->meta['doi'] ?? '');
             $this->aciklama = (string) ($faaliyet->meta['aciklama'] ?? '');
 
@@ -76,6 +83,22 @@ class FaaliyetEkle extends Component
         // Kaynak ve rol sözlüğü kategoriye göre değişiyor.
         $this->kaynak = '';
         $this->rol = '';
+
+        // Tez ilişkisi yalnızca yayın türlerinde soruluyor; kategori değişince
+        // eski değer görünmez biçimde kaydedilmesin.
+        if (! $this->tezIliskisiSorulur()) {
+            $this->donem = '';
+        }
+    }
+
+    /**
+     * Formda "Tez İlişkisi" alanı gösterilsin mi?
+     */
+    public function tezIliskisiSorulur(): bool
+    {
+        $kategori = Kategori::tryFrom($this->kategori);
+
+        return $kategori?->tezdenUretilebilir() ?? false;
     }
 
     /**
@@ -103,9 +126,27 @@ class FaaliyetEkle extends Component
         }
     }
 
-    private function ruleSet(): RuleSet
+    /**
+     * Kullanıcının KENDİ üniversitesinin puan cetveli. Yönergesi girilmemişse
+     * null — o zaman puan önizlemesi gösterilmez, tahmini puan uydurulmaz.
+     */
+    private function katalog(): ?MaddeKatalogu
     {
-        return (new KuralSetiCozucu)->kullaniciIcin(Auth::user());
+        $user = Auth::user();
+
+        if ($user->universite === null) {
+            return null;
+        }
+
+        $depo = app(SartDeposu::class);
+        $esik = $depo->bul(
+            $user->universite,
+            'dr_ogr_uyesi',
+            ($user->temel_alan ?? TemelAlan::Sosyal)->value,
+            $user->birim,
+        );
+
+        return $esik !== null ? $depo->katalog($esik['cetvel']) : null;
     }
 
     /**
@@ -123,13 +164,25 @@ class FaaliyetEkle extends Component
     }
 
     /**
-     * Girilen bilgilere göre canlı tahmini puan.
+     * Girilen bilgilere göre canlı puan önizlemesi — kullanıcının kendi
+     * üniversitesinin cetveline göre. Cetvel yoksa null döner ve arayüz
+     * puan göstermez (uydurma puan üretmemek için).
      */
-    public function tahminiPuan(): int
+    public function tahminiPuan(): ?int
     {
-        $gecici = new Faaliyet(['kategori' => $this->kategori, 'kaynak' => $this->kaynak ?: null]);
+        $katalog = $this->katalog();
 
-        return (new PuanHesaplayici($this->ruleSet()))->hesapla($gecici);
+        if ($katalog === null) {
+            return null;
+        }
+
+        $gecici = new Faaliyet([
+            'kategori' => $this->kategori,
+            'kaynak' => $this->kaynak ?: null,
+            'rol' => $this->rol ?: null,
+        ]);
+
+        return $katalog->puan($gecici, $katalog->coz(['*']));
     }
 
     public function kaydet(): void
@@ -140,9 +193,11 @@ class FaaliyetEkle extends Component
             'yazarlar' => ['array'],
             'yazarlar.*' => ['nullable', 'string', 'max:255'],
             'rol' => ['nullable', 'string', 'max:32'],
-            'donem' => ['nullable', Rule::in(['tez_disi', 'tezden'])],
+            // 'tezden' düzeyi belirsiz eski değer; yeni kayıtta seçilemez ama
+            // mevcut kayıt düzenlenirken geri yazılabilmeli.
+            'donem' => ['nullable', Rule::in([...array_keys(Faaliyet::tezIliskileri()), 'tezden'])],
             'kaynak' => ['nullable', 'string', 'max:255'],
-            'yil' => ['nullable', 'digits:4'],
+            'tarih' => ['nullable', 'date', 'before_or_equal:today'],
             'doi' => ['nullable', 'string', 'max:255'],
             'aciklama' => ['nullable', 'string', 'max:1000'],
         ]);
@@ -164,17 +219,17 @@ class FaaliyetEkle extends Component
             'baslik' => $veri['baslik'],
             'yazarlar' => $yazarlar ? implode(', ', $yazarlar) : null,
             'rol' => $rol,
-            'donem' => $veri['donem'] ?: null,
+            'donem' => $this->tezIliskisiSorulur() ? ($veri['donem'] ?: null) : null,
+            'tarih' => $veri['tarih'] ?: null,
             'kaynak' => $veri['kaynak'] ?: null,
             'meta' => array_filter([
-                'yil' => $veri['yil'] ?: null,
                 'doi' => $veri['doi'] ?: null,
                 'aciklama' => $veri['aciklama'] ?: null,
             ]),
         ]);
 
-        $faaliyet->puan = (new PuanHesaplayici($this->ruleSet()))->hesapla($faaliyet);
-
+        // Puan SAKLANMAZ: her yönerge kendi cetveliyle puanlıyor, tek bir
+        // "doğru" puan yok. Motor daima cetvelden hesaplar.
         Auth::user()->faaliyetler()->save($faaliyet);
 
         Flux::toast(variant: 'success', text: $this->faaliyet !== null ? 'Faaliyet güncellendi.' : 'Faaliyet eklendi.');

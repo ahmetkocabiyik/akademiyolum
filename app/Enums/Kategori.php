@@ -131,8 +131,10 @@ enum Kategori: string
                 'Ansiklopedi Maddesi', 'Çeviri Kitap', 'Çeviri Kitap Bölümü',
             ],
             self::TezYayini => [
-                'SCIE/SSCI/AHCI', 'BKCI / Scopus Kitap', 'ESCI / Scopus',
-                'Kitap Bölümü', 'TR Dizin', 'CPCI Bildiri', 'Diğer',
+                'SCIE/SSCI/AHCI', 'ESCI / Scopus', 'TR Dizin',
+                'BKCI / Scopus Kitap', 'BKCI / Scopus Kitap Bölümü',
+                'Uluslararası/Ulusal Kitap', 'Kitap Bölümü',
+                'CPCI Bildiri', 'Diğer',
             ],
             self::Atif => ['WoS / Scopus', 'BKCI Kitap', 'TR Dizin', 'Patent', 'Diğer'],
             self::Proje => [
@@ -162,6 +164,64 @@ enum Kategori: string
                 'Karma/Jürili Etkinlik (Uluslararası)', 'Karma/Jürili Etkinlik (Ulusal)',
                 'Özgün Eser / Beste / Tasarım', 'Albüm / Konser Kaydı',
                 'Eserin Yayında Yer Alması / Satın Alınması',
+                // Mersin TABLO B'nin ayrı puanladığı kalemler. Her biri farklı
+                // puan aldığı için tek etikete toplanamıyor.
+                'Eserin Satın Alınması (Yurt İçi)',
+                'Uygulama Projesi — Müellif', 'Uygulama Projesi — Ekip',
+                'Uygulama Projesi — Ekip Yardımcısı', 'Uygulama Projesi — Danışman',
+                'Karma Etkinlik (Jürisiz, Ulusal)',
+                // Gümüşhane EK-1 P bölümü yer × jüri düzeyi × kişisel/karma
+                // ekseninde daha ince ayırıyor.
+                'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)',
+                'Karma Etkinlik (Yurt Dışı, Ulusal Jürili)',
+                'Kişisel Etkinlik (Yurt Dışı, Jürisiz)',
+                'Kişisel Etkinlik (Yurt İçi, Uluslararası Jürili)',
+                'Karma Etkinlik (Yurt İçi, Uluslararası Jürili)',
+                'Karma Etkinlik (Yurt Dışı, Jürisiz)',
+                'Kişisel Etkinlik (Yurt İçi, Jürisiz)',
+                'Sempozyum/Çalıştay/Bienal (Yurt Dışı)', 'Sempozyum/Çalıştay/Bienal (Yurt İçi)',
+                'Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)',
+                'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)',
+                'Belgesel/Kısa Film (Uluslararası)', 'Belgesel/Kısa Film (Ulusal)',
+                'Eserin Müzeye Kabulü (Yurt Dışı)', 'Eserin Müzeye Kabulü (Yurt İçi)',
+                'Eserin Haber Olması (Uluslararası)', 'Eserin Haber Olması (Ulusal)',
+                'Elektronik Kişisel Sergi (Uluslararası)', 'Elektronik Kişisel Sergi (Ulusal)',
+                'Elektronik Karma Sergi (Uluslararası)', 'Elektronik Karma Sergi (Ulusal)',
+                // Mersin TABLO C — konservatuvar (müzik, sahne sanatları, müzikoloji).
+                'Solistlik (Uluslararası)', 'Solistlik (Ulusal)', 'Resital (Uluslararası)',
+                'Resital (Ulusal)', 'Oda Müziği Grup Üyeliği (Uluslararası)',
+                'Oda Müziği Grup Üyeliği (Ulusal)', 'Başkemancılık (Uluslararası)',
+                'Başkemancılık (Ulusal)', 'Grup Şefliği (Uluslararası)', 'Grup Şefliği (Ulusal)',
+                'Bandrollü Kayıt (CD/DVD)', 'Masterclass (Uluslararası)', 'Masterclass (Ulusal)',
+                'Eğitim Amaçlı Sanat Etkinliği', 'Opera/Bale Kompozisyonu',
+                'Orkestralı Sahne Eseri', 'Senfoni Kompozisyonu', 'Konçerto/Senfonik Şiir',
+                'Küçük Ölçekli Orkestra Eseri', 'Oda/Koro Müziği Eseri (≥15 dk)',
+                'Oda/Koro Müziği Eseri (<15 dk)', 'Elektronik Müzik Eseri (≥15 dk)',
+                'Elektronik Müzik Eseri (<15 dk)', 'Sahne/Ekran Müziği', 'Eğitim Müziği Albümü',
+                'Orkestrasyon/Transkripsiyon', 'Eğitim Müziği Düzenlemesi',
+                'Opera Şefliği (Uluslararası)', 'Opera Şefliği (Ulusal)',
+                'Orkestra Şefliği (Uluslararası)', 'Orkestra Şefliği (Ulusal)',
+                'Bale Orkestra Şefliği (Uluslararası)', 'Bale Orkestra Şefliği (Ulusal)',
+                'Koro Şefliği (Uluslararası)', 'Koro Şefliği (Ulusal)',
+                'Opera Birinci Rol (Uluslararası)', 'Opera Birinci Rol (Ulusal)',
+                'Şan Resitali (Uluslararası)', 'Şan Resitali (Ulusal)',
+                'Opera İkinci Rol (Uluslararası)', 'Opera İkinci Rol (Ulusal)',
+                'Oratoryo/Kantat Solistliği (Uluslararası)',
+                'Oratoryo/Kantat Solistliği (Ulusal)', 'Rejisörlük (Uluslararası)',
+                'Rejisörlük (Ulusal)', 'Rejisörlük (Konservatuvar)',
+                'Rejisör Yardımcılığı (Uluslararası)', 'Rejisör Yardımcılığı (Ulusal)',
+                'Rejisör Yardımcılığı (Konservatuvar)', 'Bale Başrol (Uluslararası)',
+                'Bale Başrol (Ulusal)', 'Bale Solist Rol (Uluslararası)',
+                'Bale Solist Rol (Ulusal)', 'Corps de Ballet (Uluslararası)',
+                'Corps de Ballet (Ulusal)', 'Tüm Perde Koreograflığı (Uluslararası)',
+                'Tüm Perde Koreograflığı (Ulusal)', 'Bölüm Koreograflığı (Uluslararası)',
+                'Bölüm Koreograflığı (Ulusal)', 'Bale/Dans Koreograflığı (Uluslararası)',
+                'Bale/Dans Koreograflığı (Ulusal)',
+                'Sahneleme/Repetitörlük — Tüm Perde (Uluslararası)',
+                'Sahneleme/Repetitörlük — Tüm Perde (Ulusal)',
+                'Sahneleme/Repetitörlük — Bölüm (Uluslararası)',
+                'Sahneleme/Repetitörlük — Bölüm (Ulusal)', 'Müzikoloji Atölyesi',
+                'Eğitici Konser Programı (Uluslararası)', 'Eğitici Konser Programı (Ulusal)',
             ],
             self::Odul => [
                 'Uluslararası Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü',
@@ -219,6 +279,22 @@ enum Kategori: string
     public static function yayinlar(): array
     {
         return [self::Makale, self::Bildiri, self::Kitap, self::TezYayini];
+    }
+
+    /**
+     * Faaliyet bir tezden üretilmiş olabilir mi?
+     *
+     * Yalnızca yayın türlerinde anlamlı: bir makale doktora tezinden üretilmiş
+     * olabilir, bir tez danışmanlığı olamaz — orada tezin düzeyi zaten alt tür
+     * alanında (Doktora Tezi / Yüksek Lisans Tezi) sorulmuştur.
+     *
+     * TezYayini hariç tutuldu: o kategorinin tanımı zaten "lisansüstü tezden
+     * üretilmiş yayın", ayrıca sormak "tezden bağımsız" gibi çelişkili bir
+     * seçenek üretirdi.
+     */
+    public function tezdenUretilebilir(): bool
+    {
+        return in_array($this, [self::Makale, self::Bildiri, self::Kitap], true);
     }
 
     /**

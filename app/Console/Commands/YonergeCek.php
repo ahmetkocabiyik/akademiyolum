@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Universite;
-use App\Models\Yonerge;
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
@@ -62,7 +61,6 @@ class YonergeCek extends Command
                 'yonerge_url' => $link,
             ]);
 
-            $this->yonergeOlustur($universite);
             $mevcut->put($anahtar, $universite);
             $eklenen++;
         }
@@ -166,31 +164,4 @@ class YonergeCek extends Command
     /**
      * Yeni üniversite için placeholder yönerge oluşturur (deterministik baraj).
      */
-    private function yonergeOlustur(Universite $universite): void
-    {
-        /** @var array<string, array{tavan: int, puanlar: array<string, int>, varsayilan: int}> $kategoriler */
-        $kategoriler = config('yonerge.setler.ilahiyat_2026.kategoriler');
-
-        $tohum = crc32($universite->ad);
-        $kadro = $tohum % 3 === 0 ? 'dr_ogr_uyesi' : 'docentlik';
-
-        $yonerge = Yonerge::query()->create([
-            'universite_id' => $universite->id,
-            'anahtar' => str($universite->ad)->slug().'-'.$universite->id,
-            'ad' => $universite->ad.' — '.($kadro === 'docentlik' ? 'Doçentlik' : 'Dr. Öğr. Üyesi'),
-            'kadro' => $kadro,
-            'yil' => 2024 + ($tohum % 3),
-            'uak_hedef' => 100,
-            'universite_hedef' => 55 + ($tohum % 71),
-        ]);
-
-        foreach ($kategoriler as $kategori => $kural) {
-            $yonerge->kurallar()->create([
-                'kategori' => $kategori,
-                'tavan' => $kural['tavan'],
-                'varsayilan_puan' => $kural['varsayilan'],
-                'puanlar' => $kural['puanlar'],
-            ]);
-        }
-    }
 }

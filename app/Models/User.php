@@ -11,7 +11,6 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -28,6 +27,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string|null $universite
  * @property string|null $fakulte
  * @property string|null $bolum
+ * @property string|null $birim
  * @property TemelAlan|null $temel_alan
  * @property CarbonInterface|null $lisans_tarihi
  * @property CarbonInterface|null $doktora_tarihi
@@ -39,7 +39,6 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property int|null $yurtdisi_ay
  * @property string|null $orcid
  * @property string|null $avesis_id
- * @property string|null $yonerge
  * @property Carbon|null $onboarded_at
  * @property string $email
  * @property Carbon|null $email_verified_at
@@ -52,8 +51,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $updated_at
  */
 #[Fillable([
-    'name', 'unvan', 'universite', 'fakulte', 'bolum', 'temel_alan', 'orcid', 'avesis_id',
-    'yonerge', 'yonerge_id', 'onboarded_at', 'email', 'password',
+    'name', 'unvan', 'universite', 'fakulte', 'bolum', 'birim', 'temel_alan', 'orcid', 'avesis_id',
+    'onboarded_at', 'email', 'password',
     // Akademik profil — şart ağacının dönem ve metrik yaprakları için.
     'lisans_tarihi', 'doktora_tarihi', 'docentlik_tarihi', 'son_atama_tarihi',
     'program_dili', 'yds_puani', 'h_indeksi', 'yurtdisi_ay',
@@ -61,6 +60,13 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements PasskeyUser
 {
+    /**
+     * Akademik unvanlar — onboarding ve profil aynı listeyi kullanır.
+     *
+     * @var list<string>
+     */
+    public const UNVANLAR = ['Arş. Gör.', 'Öğr. Gör.', 'Dr. Öğr. Üyesi', 'Doç. Dr.', 'Prof. Dr.'];
+
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
 
@@ -106,8 +112,10 @@ class User extends Authenticatable implements PasskeyUser
      */
     public function profilDoluluk(): int
     {
+        // Profil formunda sorulan alanlarla birebir aynı olmalı; biri eksik
+        // kalırsa kullanıcı alanı doldurduğu hâlde oran %100'e ulaşmıyor.
         $alanlar = [
-            'doktora_tarihi', 'docentlik_tarihi', 'son_atama_tarihi',
+            'lisans_tarihi', 'doktora_tarihi', 'docentlik_tarihi', 'son_atama_tarihi',
             'program_dili', 'yds_puani', 'h_indeksi', 'yurtdisi_ay',
         ];
 
@@ -130,14 +138,6 @@ class User extends Authenticatable implements PasskeyUser
     public function faaliyetler(): HasMany
     {
         return $this->hasMany(Faaliyet::class);
-    }
-
-    /**
-     * @return BelongsTo<Yonerge, $this>
-     */
-    public function yonergeModel(): BelongsTo
-    {
-        return $this->belongsTo(Yonerge::class, 'yonerge_id');
     }
 
     /**

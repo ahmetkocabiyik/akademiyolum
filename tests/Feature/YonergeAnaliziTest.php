@@ -259,7 +259,10 @@ test('alt koşullar ağaç olarak değerlendirilir', function () {
 
     $kosullar = collect($s['sonuc']->cocuklar)->keyBy('aciklama');
 
-    expect($s['durum'])->toBe('yetersiz')                      // toplam 70 < 100
+    // Üç koşuldan ikisi tam, biri %70 → eşleşme %90 ("yakın"), ama puan barajı
+    // karşılanmadığı için başvuru hâlâ yapılamaz.
+    expect($s['durum'])->toBe('yakin')
+        ->and($s['oran'])->toBe(90)
         ->and($s['toplam'])->toBe(70)
         ->and($kosullar['Tüm faaliyetlerden toplam en az 100 puan']->saglandi())->toBeFalse()
         ->and($kosullar['Makalelerden en az 40 puan']->saglandi())->toBeTrue()   // 40 ≥ 40
@@ -277,11 +280,11 @@ test('baraja göre artan sıralar', function () {
 test('profil doluluğu girilen akademik alanlara göre artar', function () {
     expect(Livewire::test(YonergeAnalizi::class)->instance()->profilDoluluk())->toBe(0);
 
-    // Elle girilen 7 alandan 2'si dolu → %29. Atıf/proje/tez sayaçları bu orana
+    // Elle girilen 8 alandan 2'si dolu → %25. Atıf/proje/tez sayaçları bu orana
     // girmez; onların kaynağı Faaliyetler bölümüdür.
     $this->user->update(['doktora_tarihi' => '2020-01-01', 'yds_puani' => 75]);
 
-    expect(Livewire::test(YonergeAnalizi::class)->instance()->profilDoluluk())->toBe(29);
+    expect(Livewire::test(YonergeAnalizi::class)->instance()->profilDoluluk())->toBe(25);
 });
 
 test('karta tıklayınca detay modalı açılır ve dağılımı gösterir', function () {
@@ -411,4 +414,113 @@ test('dönem koşulu faaliyet tarihi girilince kesinleşir', function () {
     // Tarihler girilince kesinleşir.
     $this->user->faaliyetler()->where('kategori', Kategori::Makale)->update(['tarih' => '2022-06-01']);
     expect($bul()['durum'])->toBe('uygun');
+});
+
+test('puan barajı olmayan yönergede baraj sıfır değil YOK olarak taşınır', function () {
+    // Sabancı ve Samsun gibi yönergeler şartlarını adetle yazıyor; ağaçta
+    // 'toplam' rolünde düğüm yoktur. Bunu 0 ile temsil etmek kartta "0 / 0 pt"
+    // gibi bozuk bir değer ve %100'lük sahte bir ilerleme çubuğu üretiyordu.
+    depoBagla([[
+        'anahtar' => 'puansiz-dr-ilahiyat',
+        'universite' => 'Puansız Üniversitesi',
+        'kadro' => 'dr_ogr_uyesi',
+        'alan' => 'ilahiyat',
+        'birim' => null,
+        'cetvel' => 'test-cetvel',
+        'notlar' => 'Puan barajı olmayan yönerge.',
+        'sart' => [
+            'tip' => 'adet',
+            'aciklama' => 'En az 4 makale',
+            'maddeler' => ['MAKALE'],
+            'min_adet' => 4,
+        ],
+    ]]);
+
+    Universite::factory()->create(['ad' => 'Puansız Üniversitesi', 'tur' => 'vakif']);
+
+    $s = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())
+        ->firstWhere(fn (array $s) => $s['universite']->ad === 'Puansız Üniversitesi');
+
+    expect($s['baraj'])->toBeNull()
+        ->and($s['toplam'])->toBeNull()
+        ->and($s['kalan'])->toBe(0)
+        // İlerleme puandan değil koşul doluluğundan okunmalı.
+        ->and($s['puan_orani'])->toBe($s['oran'])
+        ->and($s['puan_orani'])->not->toBe(100);
+});
+
+test('detay panelinde resmi yönerge PDF bağlantısı gösterilir', function () {
+    $uni = Universite::where('ad', 'Ankara Üniversitesi')->firstOrFail();
+    $uni->update(['yonerge_url' => 'https://personel.yok.gov.tr/documentFiles/ornek.pdf']);
+
+    Livewire::test(YonergeAnalizi::class)
+        ->call('detayAc', $uni->id)
+        ->assertSee('Resmi yönerge (PDF)')
+        ->assertSeeHtml('href="https://personel.yok.gov.tr/documentFiles/ornek.pdf"')
+        // Yeni sekmede açılmalı: aday analizi kaybetmemeli.
+        ->assertSeeHtml('target="_blank"');
+});
+
+test('yönerge bağlantısı olmayan üniversitede PDF kutusu çıkmaz', function () {
+    $uni = Universite::where('ad', 'Ankara Üniversitesi')->firstOrFail();
+    $uni->update(['yonerge_url' => null]);
+
+    Livewire::test(YonergeAnalizi::class)
+        ->call('detayAc', $uni->id)
+        ->assertDontSee('Resmi yönerge (PDF)');
+});
+
+test('detay panelinde ham yönerge notu değil aday notu gösterilir', function () {
+    $uni = Universite::where('ad', 'Ankara Üniversitesi')->firstOrFail();
+
+    depoBagla([array_merge(testEsik('Ankara Üniversitesi', 120), [
+        // `notlar` denetim izidir: yönergeden birebir alıntı ve madde kodu içerir.
+        'notlar' => 'Madde 2.a-ç/h,ı kapsamında… Tablo-1 [C] sütunu boş.',
+        'aday_notu' => 'Makale sayısı yetmiyor, en az birinde başlıca yazar olmalısınız.',
+    ])]);
+
+    Livewire::test(YonergeAnalizi::class)
+        ->call('detayAc', $uni->id)
+        ->assertSee('Bu Yönerge Hakkında')
+        ->assertSee('en az birinde başlıca yazar olmalısınız')
+        // Madde kodu adaya sızmamalı.
+        ->assertDontSee('2.a-ç/h,ı')
+        ->assertDontSee('Tablo-1 [C]');
+});
+
+test('cetvelin kapsam sınırı adaya taşınır', function () {
+    $uni = Universite::where('ad', 'Ankara Üniversitesi')->firstOrFail();
+
+    $cetveller = testCetvelleri();
+    $cetveller['test-cetvel']['kapsam_notu'] = 'Ders kalemleri hesaba katılmadı.';
+
+    app()->instance(SartDeposu::class, new SartDeposu(
+        [testEsik('Ankara Üniversitesi', 120)],
+        $cetveller,
+    ));
+
+    Livewire::test(YonergeAnalizi::class)
+        ->call('detayAc', $uni->id)
+        ->assertSee('Ders kalemleri hesaba katılmadı.');
+});
+
+test('kartta en fazla 6 koşul gösterilir, kalanı sayıyla belirtilir', function () {
+    $uni = Universite::where('ad', 'Ankara Üniversitesi')->firstOrFail();
+
+    // Toplam barajı + 8 alt koşul = 9 koşul.
+    $ek = [];
+    foreach (range(1, 8) as $i) {
+        $ek[] = ['tip' => 'adet', 'aciklama' => "Koşul {$i} açıklaması", 'maddeler' => ['MAKALE'], 'min_adet' => $i];
+    }
+
+    depoBagla([testEsik('Ankara Üniversitesi', 100, ekKosullar: $ek)]);
+
+    $sayfa = Livewire::test(YonergeAnalizi::class)->set('gorunum', 'grid');
+
+    $sayfa->assertSee('Koşul 5 açıklaması')   // 6. sırada
+        ->assertDontSee('Koşul 6 açıklaması') // 7. sırada, kesilmeli
+        ->assertSee('+3 koşul daha');
+
+    // Detay panelinde tamamı görünmeli.
+    $sayfa->call('detayAc', $uni->id)->assertSee('Koşul 8 açıklaması');
 });

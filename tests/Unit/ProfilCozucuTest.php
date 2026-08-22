@@ -79,7 +79,11 @@ test('kategoride hiç kayıt yoksa null döner, sıfır değil', function () {
 
     expect($bos->atifSayisi)->toBeNull()
         ->and($bos->projeYurutuculuk)->toBeNull()
-        ->and($bos->tezDanismanlik)->toBeNull();
+        // Ders ve tez danışmanlığı bu kuralın istisnası: kayıt yoksa kesin 0.
+        ->and($bos->dersYariyil)->toBe(0)
+        ->and($bos->tezDanismanlik)->toBe(0)
+        ->and($bos->tezEsDanismanlik)->toBe(0)
+        ->and($bos->doktoraTezDanismanlik)->toBe(0);
 
     // Kategoride kayıt var ama filtreye uyan yok → 0 (kesin olumsuz).
     $sadeceArastirmaci = (new ProfilCozucu)->coz(pcKullanici(), [

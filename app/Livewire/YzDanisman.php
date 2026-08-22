@@ -126,7 +126,7 @@ class YzDanisman extends Component
             ->map(fn (DanismanMesaj $m) => ['rol' => $m->rol, 'icerik' => $m->icerik])
             ->all();
 
-        $sistemPrompt = (new DanismanContext)->sistemPrompt(Auth::user());
+        $sistemPrompt = app(DanismanContext::class)->sistemPrompt(Auth::user());
 
         try {
             $yanit = $saglayici->yanitla($sistemPrompt, $gecmis);

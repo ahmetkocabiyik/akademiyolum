@@ -26,12 +26,14 @@ readonly class MaddeKatalogu
      * @param  array<string, Madde>  $maddeler  Kod → madde tanımı (sıralı)
      * @param  array<string, list<string>>  $gruplar  Takma ad → kod deseni listesi
      * @param  array<string, int>  $grupTavanlari  Grup adı → o gruptan alınabilecek azami puan
+     * @param  string|null  $kapsamNotu  Cetvelin bilinen sınırı (adaya gösterilir)
      */
     public function __construct(
         public string $anahtar,
         public array $maddeler,
         public array $gruplar = [],
         public array $grupTavanlari = [],
+        public ?string $kapsamNotu = null,
     ) {}
 
     /**
@@ -49,6 +51,16 @@ readonly class MaddeKatalogu
      */
     public function coz(array $desenler): array
     {
+        return $this->cozInternal($desenler, []);
+    }
+
+    /**
+     * @param  list<string>  $desenler
+     * @param  list<string>  $acilanGruplar  Özyineleme yolu — döngü koruması
+     * @return list<string>
+     */
+    private function cozInternal(array $desenler, array $acilanGruplar): array
+    {
         $kodlar = array_keys($this->maddeler);
         $sonuc = [];
 
@@ -57,8 +69,15 @@ readonly class MaddeKatalogu
                 return $kodlar;
             }
 
-            if (isset($this->gruplar[$desen])) {
-                $sonuc = array_merge($sonuc, $this->coz($this->gruplar[$desen]));
+            // Bir ad hem grup hem madde olabilir (ör. 'A3' => ['A3']). Grubu
+            // yalnızca bu yolda daha önce açılmadıysa aç; aksi hâlde madde
+            // olarak ele al. Aksi takdirde veri dosyasındaki kendine referans
+            // motoru sonsuz özyinelemeye sokuyor.
+            if (isset($this->gruplar[$desen]) && ! in_array($desen, $acilanGruplar, true)) {
+                $sonuc = array_merge($sonuc, $this->cozInternal(
+                    $this->gruplar[$desen],
+                    [...$acilanGruplar, $desen],
+                ));
 
                 continue;
             }
@@ -130,6 +149,119 @@ readonly class MaddeKatalogu
         }
 
         return $enYuksek;
+    }
+
+    /**
+     * Verilen kodların kapsadığı kaynak etiketleri — "bu koşula hangi dergiler
+     * / hangi tür çalışmalar sayılıyor?" sorusunun cevabı.
+     *
+     * Arayüz bunu koşulun altında rozet olarak gösterir; böylece kullanıcı
+     * yönergenin madde kodunu bilmek zorunda kalmaz.
+     *
+     * @param  list<string>  $kodlar
+     * @return list<string>
+     */
+    public function kapsam(array $kodlar): array
+    {
+        $etiketler = [];
+
+        foreach ($kodlar as $kod) {
+            foreach ($this->maddeler[$kod]['kaynaklar'] ?? [] as $kaynak) {
+                $etiketler[$kaynak] = true;
+            }
+        }
+
+        return array_keys($etiketler);
+    }
+
+    /**
+     * Faaliyetlerin verilen kodlar içindeki TOPLAM puanı, grup tavanları
+     * uygulanarak.
+     *
+     * Yönergelerin neredeyse tamamı bölüm bazlı tavan koyuyor ("Bu maddeden en
+     * fazla 30 puan alınabilir"). Tavan uygulanmazsa tek bir kategoriden gelen
+     * yüzlerce puan barajı sahte biçimde aşar.
+     *
+     * Tavan dolarken yüksek puanlı faaliyetler önceliklidir: aday dosyasını
+     * böyle sunar ve yönergeler de azami puanı kastetmektedir.
+     *
+     * @param  iterable<Faaliyet>  $faaliyetler
+     * @param  list<string>  $kodlar
+     */
+    public function topla(iterable $faaliyetler, array $kodlar): int
+    {
+        $katkilar = [];
+
+        foreach ($faaliyetler as $faaliyet) {
+            $kod = $this->enIyiKod($faaliyet, $kodlar);
+
+            if ($kod !== null) {
+                $katkilar[] = [$kod, $this->maddeler[$kod]['puan'] ?? 0];
+            }
+        }
+
+        if ($this->grupTavanlari === []) {
+            return array_sum(array_column($katkilar, 1));
+        }
+
+        /** @var array<string, list<string>> $uyeler */
+        $uyeler = [];
+        $kalan = [];
+
+        foreach ($this->grupTavanlari as $grup => $tavan) {
+            $uyeler[$grup] = $this->coz([$grup]);
+            $kalan[$grup] = $tavan;
+        }
+
+        usort($katkilar, fn (array $a, array $b) => $b[1] <=> $a[1]);
+
+        $toplam = 0;
+
+        foreach ($katkilar as [$kod, $puan]) {
+            $izin = $puan;
+
+            foreach ($uyeler as $grup => $grupKodlari) {
+                if (in_array($kod, $grupKodlari, true)) {
+                    $izin = min($izin, $kalan[$grup]);
+                }
+            }
+
+            foreach ($uyeler as $grup => $grupKodlari) {
+                if (in_array($kod, $grupKodlari, true)) {
+                    $kalan[$grup] -= $izin;
+                }
+            }
+
+            $toplam += $izin;
+        }
+
+        return $toplam;
+    }
+
+    /**
+     * Faaliyetin verilen kodlar içinde en yüksek puanı veren kodu.
+     *
+     * @param  list<string>  $kodlar
+     */
+    private function enIyiKod(Faaliyet $faaliyet, array $kodlar): ?string
+    {
+        $enIyi = null;
+        $enYuksek = -1;
+
+        foreach ($kodlar as $kod) {
+            if (! $this->maddeyeUyar($faaliyet, $kod)) {
+                continue;
+            }
+
+            $puan = $this->maddeler[$kod]['puan'] ?? 0;
+
+            if ($puan > $enYuksek) {
+                $enYuksek = $puan;
+                $enIyi = $kod;
+            }
+        }
+
+        return $enIyi;
     }
 
     /**

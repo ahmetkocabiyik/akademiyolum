@@ -58,6 +58,58 @@ class Faaliyet extends Model
     }
 
     /**
+     * Şart ağacındaki `haric` etiketinin bu faaliyet için değeri.
+     *
+     * `null` "bilinmiyor" demektir — motor o faaliyeti dışlamaz ama koşulu da
+     * kesin sonuca bağlamaz (belirsiz kalır). "false" ile karıştırılmamalı.
+     *
+     * Tez ilişkisi `donem` kolonunda tutuluyor. Yönergeler iki ayrı şey soruyor:
+     * Sabancı "doktora tezinden üretilmemiş" derken ÜAK "lisansüstü tezlerden
+     * üretilmiş" diyor — yüksek lisans tezinden üretilen bir makale birincisine
+     * SAYILIR, ikincisine sayılmaz. Bu yüzden düzey ayrı tutulur.
+     *
+     * Eski kayıtlarda düzey belirtilmemiş olabilir (`tezden`); doktoraya özgü
+     * koşullarda bu "bilinmiyor"dur, doktora varsayılmaz.
+     */
+    public function haricDegeri(string $etiket): ?bool
+    {
+        if ($etiket === 'doktora_tezinden') {
+            return match ($this->donem) {
+                'doktora' => true,
+                'yuksek_lisans', 'tez_disi' => false,
+                default => null,   // 'tezden' (düzey bilinmiyor) ve boş
+            };
+        }
+
+        if (in_array($etiket, ['lisansustu_tezden', 'tezden_uretilmis'], true)) {
+            return match ($this->donem) {
+                'doktora', 'yuksek_lisans', 'tezden' => true,
+                'tez_disi' => false,
+                default => null,
+            };
+        }
+
+        $deger = $this->meta[$etiket] ?? null;
+
+        return $deger === null ? null : (bool) $deger;
+    }
+
+    /**
+     * Tez ilişkisi seçenekleri. `tezden` listelenmez: düzeyi belirsiz olduğu
+     * için yeni kayıtlarda kullanılmaz, yalnızca eski kayıtlarda görünür.
+     *
+     * @return array<string, string>
+     */
+    public static function tezIliskileri(): array
+    {
+        return [
+            'tez_disi' => 'Tezden bağımsız',
+            'yuksek_lisans' => 'Yüksek lisans tezinden üretilmiş',
+            'doktora' => 'Doktora tezinden üretilmiş',
+        ];
+    }
+
+    /**
      * @param  Builder<Faaliyet>  $query
      */
     public function scopeOnaylanmis(Builder $query): void

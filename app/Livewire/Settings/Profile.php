@@ -5,10 +5,12 @@ namespace App\Livewire\Settings;
 use App\Concerns\ProfileValidationRules;
 use App\Enums\TemelAlan;
 use App\Models\Universite;
+use App\Models\User;
 use App\Services\Scoring\Sart\ProfilCozucu;
+use App\Services\Scoring\Sart\SartDeposu;
+use Carbon\CarbonInterface;
 use Flux\Flux;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
@@ -24,11 +26,24 @@ class Profile extends Component
 
     public string $email = '';
 
+    /**
+     * Akademik unvan. Yalnızca gösterim değil: Yönerge Analizi varsayılan hedef
+     * kadroyu buradan türetiyor, o yüzden terfi edildiğinde güncellenebilmeli.
+     */
+    public string $unvan = '';
+
     public string $universite = '';
 
     public string $fakulte = '';
 
     public string $bolum = '';
+
+    /**
+     * Program/birim. Bazı yönergeler kriterleri temel alana değil PROGRAMA göre
+     * yazıyor; aynı alanda birden çok eşik varsa doğrusu ancak bununla seçilir.
+     * Seçenekler yönerge verisinden gelir, genel bölüm listesinden değil.
+     */
+    public string $birim = '';
 
     public string $temelAlan = 'sosyal';
 
@@ -63,6 +78,29 @@ class Profile extends Component
     }
 
     /**
+     * Kullanıcının üniversitesinde program bazlı eşik varsa program adları.
+     * Boşsa yönerge programdan bağımsızdır ve alan gösterilmez.
+     *
+     * @return list<string>
+     */
+    public function birimSecenekleri(): array
+    {
+        return $this->universite === ''
+            ? []
+            : app(SartDeposu::class)->birimler($this->universite);
+    }
+
+    /**
+     * Akademik unvanlar — onboarding ile aynı liste.
+     *
+     * @return list<string>
+     */
+    public static function unvanlar(): array
+    {
+        return User::UNVANLAR;
+    }
+
+    /**
      * Birimin öğretim dili — yabancı dil barajı buna göre kademelenir.
      *
      * @return array<string, string>
@@ -86,18 +124,24 @@ class Profile extends Component
 
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->unvan = $user->unvan ?? '';
         $this->universite = $user->universite ?? '';
         $this->fakulte = $user->fakulte ?? '';
         $this->bolum = $user->bolum ?? '';
+        $this->birim = $user->birim ?? '';
         $this->temelAlan = $user->temel_alan?->value ?? 'sosyal';
 
         $this->akademik = ['program_dili' => $user->program_dili ?? ''];
 
         foreach (array_keys(self::akademikAlanlar()) as $alan) {
             $deger = $user->{$alan};
+            // CarbonInterface: uygulama Date::use(CarbonImmutable) ile çalışıyor,
+            // dolayısıyla cast'ten dönen değer Illuminate\Support\Carbon DEĞİL.
+            // Somut sınıfa bakmak tarihi "2016-06-20 00:00:00" olarak stringe
+            // çeviriyor ve input[type=date] onu reddedip boş görünüyordu.
             $this->akademik[$alan] = match (true) {
                 $deger === null => '',
-                $deger instanceof Carbon => $deger->toDateString(),
+                $deger instanceof CarbonInterface => $deger->toDateString(),
                 default => (string) $deger,
             };
         }
@@ -158,11 +202,15 @@ class Profile extends Component
             'fakulte' => ['nullable', 'string', 'max:255'],
             'bolum' => ['nullable', 'string', 'max:255'],
             'temelAlan' => ['required', Rule::enum(TemelAlan::class)],
+            'unvan' => ['nullable', Rule::in(User::UNVANLAR)],
+            'birim' => ['nullable', Rule::in($this->birimSecenekleri())],
         ] + $akademikKurallar);
 
         $user->fill([
             'name' => $this->name,
             'email' => $this->email,
+            'unvan' => $this->unvan ?: null,
+            'birim' => $this->birim ?: null,
             'universite' => $this->universite ?: null,
             'fakulte' => $this->fakulte ?: null,
             'bolum' => $this->bolum ?: null,
@@ -227,6 +275,8 @@ class Profile extends Component
             'bolumler' => $this->bolumHaritasi(),
             'akademikAlanlar' => self::akademikAlanlar(),
             'programDilleri' => self::programDilleri(),
+            'unvanlar' => self::unvanlar(),
+            'birimler' => $this->birimSecenekleri(),
         ]);
     }
 }

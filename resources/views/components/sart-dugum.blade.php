@@ -10,6 +10,21 @@
     $renk = $dugum->durum->renk();
     $birlestirici = $dugum->cocuklar !== [];
     $olculur = $dugum->gerekli !== null && ! $dugum->beyan;
+
+    // Telafi devreye girdiyse düğümün sayacı ("0 / 1") karşılanmayan ANA yolu
+    // anlatır; onu sonucun yeşiliyle boyamak "0/1 ama yeşil" çelişkisi üretiyor.
+    $telafiIle = $dugum->telafiIleSaglandi();
+
+    // Değer hiç girilmemişse mevcut null'dır; sayaçta "/1" diye boşluk bırakmak
+    // yerine 0 gösterilir. Belirsizlik yine de renkten okunuyor.
+    $mevcut = $dugum->mevcut ?? 0;
+
+    // Sayaç zaten açığı gösteriyorsa gerekçe satırı tekrar olur. Yalnızca
+    // sayacın anlatamadığı belirsizlikler yazılır (dönem kapsamı, öğretim dili,
+    // eksik yazarlık rolü gibi).
+    $gerekceGoster = $dugum->belirsizlikNedeni
+        && ! $dugum->beyan
+        && ! ($olculur && $dugum->mevcut === null);
 @endphp
 
 <div @class(['flex flex-col gap-1.5', 'border-l border-line pl-3' => $derinlik > 0])>
@@ -23,11 +38,15 @@
             <span @class(['min-w-0', 'font-semibold text-ink' => $birlestirici])>{{ $dugum->aciklama }}</span>
         </span>
 
-        <span class="shrink-0 font-semibold" style="color: {{ $dugum->beyan ? 'var(--color-ink-subtle)' : $renk }}">
-            @if ($dugum->beyan)
+        <span class="shrink-0 font-semibold" style="color: {{ $dugum->beyan || $telafiIle ? 'var(--color-ink-subtle)' : $renk }}">
+            @if ($dugum->kaynakEksik)
+                hesaplanamıyor
+            @elseif ($dugum->beyan)
                 belge ile
+            @elseif ($telafiIle)
+                {{ $mevcut }} / {{ $dugum->gerekli }} <span class="font-normal">· telafi ile</span>
             @elseif ($olculur)
-                {{ $dugum->mevcut }} / {{ $dugum->gerekli }}
+                {{ $mevcut }} / {{ $dugum->gerekli }}
             @else
                 {{ $dugum->durum->etiket() }}
             @endif
@@ -40,12 +59,42 @@
         </div>
     @endif
 
-    {{-- Belirsizlik, koşulun sağlanmadığı anlamına gelmez: veri eksik. --}}
-    @if ($dugum->belirsizlikNedeni && ! $dugum->beyan)
-        <div class="text-[11px] text-cat-amber">{{ $dugum->belirsizlikNedeni }}</div>
+    {{--
+        Koşulun kapsamı: hangi dergi/çalışma türleri sayılıyor (cetvelden
+        türetilir) ve yönergenin kendi madde atfı. Aday madde kodunu bilmek
+        zorunda değil; kod yalnızca izlenebilirlik için soluk gösterilir.
+    --}}
+    @if ($dugum->kapsam !== [] || $dugum->madde)
+        <div class="flex flex-wrap items-center gap-1 pl-[22px] text-[10px] leading-tight">
+            @foreach ($dugum->kapsam as $etiket)
+                <span class="rounded bg-line px-1.5 py-0.5 text-ink-muted">{{ $etiket }}</span>
+            @endforeach
+
+            @if ($dugum->madde)
+                <span class="text-ink-subtle">{{ $dugum->madde }}</span>
+            @endif
+        </div>
     @endif
 
-    @if ($dugum->beyan)
+    {{-- Sayacı yükselten eşdeğerlikler; aksi hâlde rakam sebepsiz artmış görünür. --}}
+    @foreach ($dugum->donusumler as $donusum)
+        <div class="flex items-center gap-1 text-[11px] text-ink-subtle">
+            <flux:icon name="arrows-right-left" class="size-3 shrink-0" />
+            {{ $donusum }}
+        </div>
+    @endforeach
+
+    {{-- Belirsizlik, koşulun sağlanmadığı anlamına gelmez: veri eksik. --}}
+    @if ($gerekceGoster)
+        <div class="text-[11px] text-cat-amber-text">{{ $dugum->belirsizlikNedeni }}</div>
+    @endif
+
+    @if ($dugum->kaynakEksik)
+        <div class="text-[11px] text-ink-subtle">
+            Bu üniversite puanlamayı kendi cetveline değil harici bir ölçeğe dayandırıyor; o ölçek
+            henüz sisteme eklenmediği için koşulu sizin değerlendirmeniz gerekiyor.
+        </div>
+    @elseif ($dugum->beyan)
         <div class="text-[11px] text-ink-subtle">Bu koşul otomatik doğrulanamaz, belge ile teyit edilir.</div>
     @endif
 

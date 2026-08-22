@@ -2,7 +2,6 @@
 
 use App\Livewire\Onboarding;
 use App\Models\User;
-use App\Models\Yonerge;
 use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
@@ -41,7 +40,6 @@ test('bölüm seçenekleri fakülteye göre gelir ve fakülte değişince sıfı
 });
 
 test('fakülte ve bölüm opsiyonel — boş bırakılabilir', function () {
-    $yonerge = Yonerge::factory()->create();
     $user = User::factory()->create();
     actingAs($user);
 
@@ -58,7 +56,6 @@ test('fakülte ve bölüm opsiyonel — boş bırakılabilir', function () {
     $user->refresh();
     expect($user->fakulte)->toBeNull()
         ->and($user->bolum)->toBeNull()
-        ->and($user->yonerge_id)->toBe($yonerge->id)   // varsayılan ÜAK genel atanır
         ->and($user->hasCompletedOnboarding())->toBeTrue();
 });
 
@@ -88,7 +85,6 @@ test('onboarded user can load a module placeholder page', function () {
 });
 
 test('onboarding flow saves profile and completes', function () {
-    $yonerge = Yonerge::factory()->create(['ad' => 'ÜAK Doçentlik — İlahiyat 2026']);
     $user = User::factory()->create(['name' => 'Test Hoca']);
 
     actingAs($user);
@@ -111,9 +107,7 @@ test('onboarding flow saves profile and completes', function () {
         ->and($user->unvan)->toBe('Doç. Dr.')
         ->and($user->universite)->toBe('Mersin Üniversitesi')
         ->and($user->bolum)->toBe('Temel İslam Bilimleri')
-        ->and($user->temel_alan->value)->toBe('ilahiyat')
-        ->and($user->yonerge_id)->toBe($yonerge->id)
-        ->and($user->yonerge)->toBe('ÜAK Doçentlik — İlahiyat 2026');
+        ->and($user->temel_alan->value)->toBe('ilahiyat');
 });
 
 test('onboarding validates required fields before advancing', function () {

@@ -54,7 +54,11 @@ class SartDegerlendirici
                 aciklama: $dugum['aciklama'],
                 durum: Durum::Belirsiz,
                 beyan: true,
-                belirsizlikNedeni: 'Belge ile beyan edilmeli',
+                belirsizlikNedeni: ($dugum['kaynak_eksik'] ?? false)
+                    ? 'Bu koşulun dayandığı puan cetveli henüz sisteme eklenmedi'
+                    : 'Belge ile beyan edilmeli',
+                madde: $dugum['madde'] ?? null,
+                kaynakEksik: $dugum['kaynak_eksik'] ?? false,
                 rol: $dugum['rol'] ?? null,
             ),
             default => throw new InvalidArgumentException("Bilinmeyen düğüm tipi: {$dugum['tip']}"),
@@ -83,9 +87,10 @@ class SartDegerlendirici
 
         $telafi = $this->dugum($dugum['telafi'], $faaliyetler, $profil, $sonuc->eksik());
 
-        $durum = $telafi->saglandi()
-            ? Durum::Saglandi
-            : Durum::ve([$sonuc->durum, $telafi->durum]);
+        // Telafi ilişkisi "ana VEYA telafi"dir. Kleene `veya` şart: ana koşul
+        // kesin olumsuz ama telafi belirsizse sonuç BELİRSİZ olmalı — telafinin
+        // sağlanıp sağlanmadığını bilmiyoruz, kesin ret veremeyiz.
+        $durum = Durum::veya([$sonuc->durum, $telafi->durum]);
 
         return new SartSonucu(
             tip: $sonuc->tip,
@@ -96,7 +101,11 @@ class SartDegerlendirici
             cocuklar: $sonuc->cocuklar,
             telafi: $telafi,
             beyan: $sonuc->beyan,
+            kaynakEksik: $sonuc->kaynakEksik,
             belirsizlikNedeni: $sonuc->belirsizlikNedeni,
+            madde: $sonuc->madde,
+            kapsam: $sonuc->kapsam,
+            donusumler: $sonuc->donusumler,
             rol: $sonuc->rol,
         );
     }
@@ -130,6 +139,7 @@ class SartDegerlendirici
                 ? count(array_filter($durumlar, fn (Durum $d) => $d === Durum::Saglandi))
                 : null,
             cocuklar: $cocuklar,
+            madde: $dugum['madde'] ?? null,
             rol: $dugum['rol'] ?? null,
         );
     }
@@ -164,7 +174,9 @@ class SartDegerlendirici
             durum: $this->karar($mevcut, $iyimser, $gerekli),
             gerekli: $gerekli,
             mevcut: $mevcut,
-            belirsizlikNedeni: $muhtemel->isNotEmpty() ? $this->neden($dugum) : null,
+            belirsizlikNedeni: $muhtemel->isNotEmpty() ? $this->neden($dugum, $muhtemel, $profil) : null,
+            madde: $dugum['madde'] ?? null,
+            kapsam: $this->kapsam($dugum, $kodlar),
             rol: $dugum['rol'] ?? null,
         );
     }
@@ -183,12 +195,15 @@ class SartDegerlendirici
         $iyimser = $mevcut + $muhtemel->count();
 
         // Eşdeğerlik: açığı dönüşüm kurallarıyla kapatmayı dene.
+        $uygulananDonusumler = [];
+
         if ($mevcut < $gerekli && ! empty($dugum['donusumler'])) {
             $mevcut += $this->donusumUret(
                 $dugum['donusumler'],
                 $faaliyetler->reject(fn (Faaliyet $f) => $kesin->contains($f)),
                 $profil,
                 $gerekli - $mevcut,
+                $uygulananDonusumler,
             );
             $iyimser = max($iyimser, $mevcut);
         }
@@ -199,9 +214,33 @@ class SartDegerlendirici
             durum: $this->karar($mevcut, $iyimser, $gerekli),
             gerekli: $gerekli,
             mevcut: $mevcut,
-            belirsizlikNedeni: $muhtemel->isNotEmpty() ? $this->neden($dugum) : null,
+            belirsizlikNedeni: $muhtemel->isNotEmpty() ? $this->neden($dugum, $muhtemel, $profil) : null,
+            madde: $dugum['madde'] ?? null,
+            kapsam: $this->kapsam($dugum, $kodlar),
             rol: $dugum['rol'] ?? null,
         );
+    }
+
+    /**
+     * Koşula sayılan kaynak etiketleri — arayüzde "hangi dergiler / hangi tür
+     * çalışmalar sayılıyor?" sorusunun cevabı olarak rozetlenir.
+     *
+     * Toplam puan barajında liste bilgi taşımaz, boş döner: baraj ya cetvelin
+     * tamamını ya da koca bir listeyi kapsar (Mersin TABLO C tek başına 68
+     * kalem), rozete dökülünce okunmaz bir yığın olur. Kapsamı düğümün kendi
+     * açıklaması zaten söylüyor ("TABLO B + C kalemlerinden…").
+     *
+     * @param  Dugum  $dugum
+     * @param  list<string>  $kodlar
+     * @return list<string>
+     */
+    private function kapsam(array $dugum, array $kodlar): array
+    {
+        if (($dugum['rol'] ?? null) === 'toplam' || in_array('*', $dugum['maddeler'], true)) {
+            return [];
+        }
+
+        return $this->katalog->kapsam($kodlar);
     }
 
     /**
@@ -231,12 +270,16 @@ class SartDegerlendirici
             return new SartSonucu(
                 tip: 'metrik', aciklama: $dugum['aciklama'], durum: Durum::Belirsiz,
                 gerekli: $gerekli,
-                belirsizlikNedeni: "Profilde \"{$ad}\" değeri girilmemiş",
+                belirsizlikNedeni: $profil->eksikNedeni($ad),
             );
         }
 
+        $uygulananDonusumler = [];
+
         if ($mevcut < $gerekli && ! empty($dugum['donusumler'])) {
-            $mevcut += $this->donusumUret($dugum['donusumler'], $faaliyetler, $profil, $gerekli - $mevcut);
+            $mevcut += $this->donusumUret(
+                $dugum['donusumler'], $faaliyetler, $profil, $gerekli - $mevcut, $uygulananDonusumler,
+            );
         }
 
         return new SartSonucu(
@@ -245,6 +288,8 @@ class SartDegerlendirici
             durum: $this->karar($mevcut, $mevcut, $gerekli),
             gerekli: $gerekli,
             mevcut: $mevcut,
+            madde: $dugum['madde'] ?? null,
+            donusumler: $uygulananDonusumler,
             rol: $dugum['rol'] ?? null,
         );
     }
@@ -330,7 +375,7 @@ class SartDegerlendirici
      */
     private function puanTopla(Collection $faaliyetler, array $kodlar): int
     {
-        return (int) $faaliyetler->sum(fn (Faaliyet $f) => $this->katalog->puan($f, $kodlar));
+        return $this->katalog->topla($faaliyetler, $kodlar);
     }
 
     /**
@@ -378,7 +423,7 @@ class SartDegerlendirici
         }
 
         foreach ($dugum['haric'] ?? [] as $etiket) {
-            $deger = $faaliyet->meta[$etiket] ?? null;
+            $deger = $faaliyet->haricDegeri($etiket);
 
             if ($deger === null) {
                 $belirsiz = true;
@@ -454,8 +499,9 @@ class SartDegerlendirici
      *
      * @param  list<array<string, mixed>>  $donusumler
      * @param  Collection<int, Faaliyet>  $havuz
+     * @param  list<string>  $uygulanan  Fiilen devreye giren eşdeğerliklerin açıklaması
      */
-    private function donusumUret(array $donusumler, Collection $havuz, Profil $profil, int $eksik): int
+    private function donusumUret(array $donusumler, Collection $havuz, Profil $profil, int $eksik, array &$uygulanan = []): int
     {
         $kalanKota = [];
         $kullanilabilir = $havuz->all();
@@ -506,6 +552,10 @@ class SartDegerlendirici
             $kalanKota[$anahtar] -= $al;
             $eksik -= $al;
             $uretilen += $al;
+
+            if (isset($donusum['aciklama'])) {
+                $uygulanan[] = (string) $donusum['aciklama'];
+            }
         }
 
         return $uretilen;
@@ -525,12 +575,26 @@ class SartDegerlendirici
     }
 
     /**
+     * Belirsizliğin adaya söylenecek gerekçesi.
+     *
      * @param  Dugum  $dugum
+     * @param  Collection<int, Faaliyet>  $muhtemel  Karara bağlanamayan faaliyetler
      */
-    private function neden(array $dugum): string
+    private function neden(array $dugum, Collection $muhtemel, Profil $profil): string
     {
         if (isset($dugum['donem'])) {
-            return 'Bazı faaliyetlerin tarihi girilmemiş — dönem kapsamı doğrulanamıyor';
+            // Dönem koşulu iki veriye dayanır; hangisinin eksik olduğunu
+            // söylemezsek aday yanlış yeri doldurur.
+            $gerekceler = array_filter([
+                $profil->donemReferansEksik($dugum['donem']['baslangic'] ?? null),
+                $muhtemel->contains(fn (Faaliyet $f) => $f->tarih === null)
+                    ? 'bazı faaliyetlerin tarihi girilmemiş'
+                    : null,
+            ]);
+
+            if ($gerekceler !== []) {
+                return implode(', ', $gerekceler).' — dönem kapsamı doğrulanamıyor';
+            }
         }
 
         if (isset($dugum['haric'])) {

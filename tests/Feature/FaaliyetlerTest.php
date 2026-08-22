@@ -64,3 +64,14 @@ test('navigasyonda Toplumsal Katkı bağlantısı yok', function () {
         ->assertSee('Faaliyetler')
         ->assertDontSee('href="'.url('/toplumsal-katki').'"', false);
 });
+
+test('listedeki satır faaliyetin düzenleme sayfasına bağlanır', function () {
+    $faaliyet = Faaliyet::factory()->for($this->user)->create(['baslik' => 'Tıklanabilir Satır']);
+
+    Livewire::test(Faaliyetler::class)
+        ->assertOk()
+        // Başlık gerçek bir bağlantı: klavye ve ekran okuyucu erişimi korunur.
+        ->assertSeeHtml('href="'.route('faaliyetler.duzenle', $faaliyet).'"')
+        // Satır tıklaması o bağlantıyı tetikler, işlem düğmeleri hariç tutulur.
+        ->assertSeeHtml("closest('a, button') || \$refs.duzenle.click()");
+});

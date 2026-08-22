@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Enums\TemelAlan;
 use App\Models\Universite;
-use App\Models\Yonerge;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
@@ -36,9 +36,7 @@ class Onboarding extends Component
      *
      * @var list<string>
      */
-    public array $unvanlar = [
-        'Arş. Gör.', 'Öğr. Gör.', 'Dr. Öğr. Üyesi', 'Doç. Dr.', 'Prof. Dr.',
-    ];
+    public array $unvanlar = User::UNVANLAR;
 
     public function mount(): void
     {
@@ -120,11 +118,6 @@ class Onboarding extends Component
 
         $user = Auth::user();
 
-        // Varsayılan hedef yönerge: ÜAK genel (universite_id null) önce gelir.
-        $yonerge = Yonerge::query()
-            ->orderByRaw('universite_id is not null')
-            ->first();
-
         $user->fill([
             'name' => $this->name,
             'unvan' => $this->unvan,
@@ -132,8 +125,6 @@ class Onboarding extends Component
             'fakulte' => $this->fakulte ?: null,
             'bolum' => $this->bolum ?: null,
             'temel_alan' => $this->temelAlan,
-            'yonerge' => $yonerge?->ad,
-            'yonerge_id' => $yonerge?->id,
             'orcid' => $this->orcid ?: null,
             'onboarded_at' => now(),
         ])->save();

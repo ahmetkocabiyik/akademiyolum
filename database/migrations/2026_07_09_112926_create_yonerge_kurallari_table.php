@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Yonerge;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('yonerge_kurallari', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Yonerge::class)->constrained('yonergeler')->cascadeOnDelete();
+            $table->foreignId('yonerge_id')->constrained('yonergeler')->cascadeOnDelete();
             $table->string('kategori');
             $table->unsignedInteger('tavan')->default(0);
             $table->unsignedInteger('varsayilan_puan')->default(0);

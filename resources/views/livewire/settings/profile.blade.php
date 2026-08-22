@@ -72,6 +72,30 @@
                 </div>
             </div>
 
+            {{-- Program bazlı yönergelerde (ör. Sabancı) aynı temel alanda birden
+                 çok kriter bloğu var; doğru olanı ancak program seçilirse bulunur.
+                 Seçenekler yönerge verisinden gelir, o yüzden yalnızca gerçekten
+                 programa göre yazılmış yönergesi olan üniversitelerde çıkar. --}}
+            @if ($birimler)
+                <flux:select wire:model="birim" label="Program" placeholder="Program seçin..."
+                    description="{{ auth()->user()->universite }} yönergesi kriterleri programa göre belirliyor.">
+                    <flux:select.option value="">Belirtilmemiş</flux:select.option>
+                    @foreach ($birimler as $b)
+                        <flux:select.option :value="$b">{{ $b }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+            @endif
+
+            {{-- Yalnızca kimlik bilgisi değil: Yönerge Analizi varsayılan hedef
+                 kadroyu bundan türetiyor (Dr. Öğr. Üyesi → doçentlik gibi). --}}
+            <flux:select wire:model="unvan" label="Akademik Unvan" placeholder="Unvan seçin..."
+                description="Yönerge analizinde varsayılan hedef kadronuz buna göre belirlenir.">
+                <flux:select.option value="">Belirtilmemiş</flux:select.option>
+                @foreach ($unvanlar as $u)
+                    <flux:select.option :value="$u">{{ $u }}</flux:select.option>
+                @endforeach
+            </flux:select>
+
             <flux:select wire:model.live="temelAlan" label="Temel Alan (yönerge grubu)"
                 description="Yönerge analizi buna göre yapılır. Fakülte seçenekleri de buna göre gelir.">
                 @foreach ($temelAlanlar as $deger => $etiket)

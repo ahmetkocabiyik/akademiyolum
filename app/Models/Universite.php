@@ -6,7 +6,6 @@ use Database\Factories\UniversiteFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -22,12 +21,4 @@ class Universite extends Model
     use HasFactory;
 
     protected $table = 'universiteler';
-
-    /**
-     * @return HasMany<Yonerge, $this>
-     */
-    public function yonergeler(): HasMany
-    {
-        return $this->hasMany(Yonerge::class);
-    }
 }

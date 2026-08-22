@@ -1,14 +1,18 @@
 <div>
     @php
         use App\Enums\Kategori;
-        $rapor = $this->rapor;
-        $onayliAdet = $this->faaliyetler->where('durum', 'onaylandi')->count();
+        $esik = $this->esik;
+        $sonuc = $this->sonuc;
+        $onayliAdet = $this->onayli->count();
         // Yarım daire gauge yay uzunluğu (r=74 → π·74 ≈ 232.5)
         $gaugeUzunluk = 232.5;
-        $gaugeOffset = $gaugeUzunluk * (1 - $rapor->uakYuzde() / 100);
+        $gaugeOffset = $gaugeUzunluk * (1 - $this->yuzde / 100);
+        $durumRenk = ['uygun' => 'green', 'yakin' => 'amber', 'eksik_bilgi' => 'amber', 'yetersiz' => 'red'];
+        $durumMetin = ['uygun' => 'Karşılandı', 'yakin' => 'Yakın', 'eksik_bilgi' => 'Eksik Bilgi', 'yetersiz' => 'Yetersiz'];
     @endphp
 
-    <x-topbar title="Dashboard" :pill="(auth()->user()->yonerge ?? 'Yönerge yok') . ' aktif'" />
+    <x-topbar title="Dashboard"
+        :pill="$esik ? auth()->user()->universite . ' · ' . $this->kadroEtiketi() : 'Yönerge verisi yok'" />
 
     <div class="flex flex-col gap-4">
 
@@ -31,10 +35,16 @@
         {{-- İstatistik kartları --}}
         <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <x-dashboard.stat label="Toplam Puan" accent="brand">
-                <span class="font-serif text-3xl font-bold text-ink">{{ $rapor->toplamPuan }}</span>
+                <span class="font-serif text-3xl font-bold text-ink">{{ $esik ? $this->toplam : '—' }}</span>
                 <x-slot:meta>
-                    <flux:badge color="blue" size="sm">ÜAK: {{ $rapor->toplamPuan }}/{{ $rapor->uakHedef }}</flux:badge>
-                    <span class="text-xs text-ink-subtle">Üni: {{ $rapor->toplamPuan }}/{{ $rapor->universiteHedef }}</span>
+                    @if ($this->baraj !== null)
+                        <flux:badge color="blue" size="sm">{{ $this->toplam }} / {{ $this->baraj }}</flux:badge>
+                        <span class="text-xs text-ink-subtle">kendi üniversiteniz</span>
+                    @elseif ($esik)
+                        <span class="text-xs text-ink-subtle">Bu yönerge puan kullanmıyor</span>
+                    @else
+                        <span class="text-xs text-ink-subtle">Üniversitenizin yönergesi girilmedi</span>
+                    @endif
                 </x-slot:meta>
             </x-dashboard.stat>
 
@@ -45,23 +55,33 @@
                 </x-slot:meta>
             </x-dashboard.stat>
 
-            <x-dashboard.stat label="Doçentlik Durumu" accent="red">
-                <span class="pt-1 text-lg font-bold text-ink">
-                    {{ $rapor->uakYuzde() >= 100 ? 'Tamamlandı' : 'Devam Ediyor' }}
+            <x-dashboard.stat label="Karşılanmayan Koşul" accent="red">
+                <span class="font-serif text-3xl font-bold text-ink">
+                    {{ $sonuc ? count($sonuc->eksikler()) : '—' }}
                 </span>
                 <x-slot:meta>
-                    <flux:badge :color="$rapor->uakYuzde() >= 100 ? 'green' : 'red'" size="sm">
-                        %{{ $rapor->uakYuzde() }} ÜAK
-                    </flux:badge>
+                    @if ($sonuc)
+                        <flux:badge :color="count($sonuc->eksikler()) === 0 ? 'green' : 'red'" size="sm">
+                            {{ count($sonuc->belirsizler()) }} koşul belirsiz
+                        </flux:badge>
+                    @else
+                        <span class="text-xs text-ink-subtle">Değerlendirme yapılamıyor</span>
+                    @endif
                 </x-slot:meta>
             </x-dashboard.stat>
 
-            <x-dashboard.stat label="Atanma Kriteri" accent="green">
+            <x-dashboard.stat label="{{ $this->kadroEtiketi() }} Kriteri" accent="green">
                 <span class="pt-1 text-lg font-bold text-ink">
-                    {{ $rapor->universiteYuzde() >= 100 ? 'Karşılandı' : 'Eksik Puan' }}
+                    {{ $this->durum ? $durumMetin[$this->durum] : '—' }}
                 </span>
                 <x-slot:meta>
-                    <flux:badge color="amber" size="sm">%{{ $rapor->universiteYuzde() }} Baraj</flux:badge>
+                    @if ($this->durum)
+                        <flux:badge :color="$durumRenk[$this->durum]" size="sm">
+                            {{ $this->baraj !== null ? '%'.$this->yuzde.' baraj' : 'puansız yönerge' }}
+                        </flux:badge>
+                    @else
+                        <span class="text-xs text-ink-subtle">Yönerge verisi bekleniyor</span>
+                    @endif
                 </x-slot:meta>
             </x-dashboard.stat>
         </div>
@@ -73,7 +93,13 @@
                 <div class="flex items-start justify-between">
                     <div>
                         <flux:heading size="lg">Hedef Analizi</flux:heading>
-                        <flux:text size="sm">{{ $rapor->uakHedef }} puanlık ÜAK Doçentlik hedefi</flux:text>
+                        <flux:text size="sm">
+                            @if ($this->baraj !== null)
+                                {{ auth()->user()->universite }} · {{ $this->kadroEtiketi() }} · {{ $this->baraj }} puan barajı
+                            @else
+                                Üniversitenizin yönergesi girildiğinde burada barajınız görünecek
+                            @endif
+                        </flux:text>
                     </div>
                     <flux:badge color="green" size="sm">2026 Güncel</flux:badge>
                 </div>
@@ -89,14 +115,24 @@
                         <path d="M16 103 A74 74 0 0 1 164 103" fill="none" stroke="#e2e8f0" stroke-width="11" stroke-linecap="round" />
                         <path d="M16 103 A74 74 0 0 1 164 103" fill="none" stroke="url(#gauge)" stroke-width="11" stroke-linecap="round"
                             stroke-dasharray="{{ $gaugeUzunluk }}" stroke-dashoffset="{{ $gaugeOffset }}" />
-                        <text x="90" y="90" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#0a1628">{{ $rapor->toplamPuan }}</text>
-                        <text x="90" y="104" text-anchor="middle" font-size="10" fill="#94a3b8">/ {{ $rapor->uakHedef }} ÜAK Hedefi</text>
+                        <text x="90" y="90" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#0a1628">{{ $esik ? $this->toplam : '—' }}</text>
+                        <text x="90" y="104" text-anchor="middle" font-size="10" fill="#94a3b8">{{ $this->baraj !== null ? '/ '.$this->baraj.' baraj' : 'veri yok' }}</text>
                     </svg>
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <x-dashboard.bar label="ÜAK Doçentlik" :yuzde="$rapor->uakYuzde()" color="var(--color-brand)" />
-                    <x-dashboard.bar label="Üniversite Barajı" :yuzde="$rapor->universiteYuzde()" color="var(--color-gold)" />
+                    @if ($sonuc)
+                        {{-- Her asgari koşul ayrı çubuk: motorun ürettiği ağacın kök çocukları --}}
+                        @foreach ($sonuc->kosullar() as $kosul)
+                            @continue ($kosul->gerekli === null || $kosul->beyan)
+                            <x-dashboard.bar :label="$kosul->aciklama" :yuzde="$kosul->oran()"
+                                :color="$kosul->durum->renk()" />
+                        @endforeach
+                    @else
+                        <flux:text class="!text-xs text-ink-subtle">
+                            Yönerge Analizi ekranından verisi girilmiş üniversiteleri karşılaştırabilirsiniz.
+                        </flux:text>
+                    @endif
                 </div>
 
                 <flux:button :href="route('juri-analizi')" wire:navigate variant="subtle" size="sm" class="mt-4">
@@ -141,26 +177,38 @@
             <div class="mb-2.5 flex items-center justify-between">
                 <flux:heading size="lg">Kategori Puan Dağılımı</flux:heading>
             </div>
-            <div class="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach ($rapor->tumKategoriler() as $sonuc)
-                    @php $renk = $sonuc->kategori->renk(); @endphp
-                    <flux:card class="!p-3.5">
-                        <div class="flex size-7 items-center justify-center rounded-lg"
-                            style="background: color-mix(in srgb, var(--color-{{ $renk }}) 14%, white); color: var(--color-{{ $renk }})">
-                            <x-kategori-icon :kategori="$sonuc->kategori" class="size-3.5" />
-                        </div>
-                        <div class="mt-2 text-xs font-medium text-ink-muted">{{ $sonuc->kategori->label() }}</div>
-                        <div class="font-serif text-lg font-bold text-ink">{{ $sonuc->puan }} pt</div>
-                        <div class="mt-1 flex items-center justify-between text-[11px] text-ink-subtle">
-                            <span>{{ $sonuc->adet }} kayıt</span>
-                            <span>Tavan: {{ $sonuc->tavan }}</span>
-                        </div>
-                        <div class="mt-1.5 h-[3px] overflow-hidden rounded-full bg-line">
-                            <div class="h-full rounded-full" style="width: {{ $sonuc->yuzde() }}%; background: var(--color-{{ $renk }})"></div>
-                        </div>
-                    </flux:card>
-                @endforeach
-            </div>
+            @php $enYuksek = max(1, collect($this->dagilim)->max('puan') ?: 1); @endphp
+            @if (count($this->dagilim))
+                <div class="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+                    @foreach ($this->dagilim as $satir)
+                        @php $renk = $satir['kategori']->renk(); @endphp
+                        <flux:card class="!p-3.5" wire:key="kat-{{ $satir['kategori']->value }}">
+                            <div class="flex size-7 items-center justify-center rounded-lg"
+                                style="background: color-mix(in srgb, var(--color-{{ $renk }}) 14%, white); color: var(--color-{{ $renk }})">
+                                <x-kategori-icon :kategori="$satir['kategori']" class="size-3.5" />
+                            </div>
+                            <div class="mt-2 text-xs font-medium text-ink-muted">{{ $satir['kategori']->label() }}</div>
+                            <div class="font-serif text-lg font-bold text-ink">
+                                {{ $esik ? $satir['puan'].' pt' : $satir['adet'].' kayıt' }}
+                            </div>
+                            <div class="mt-1 flex items-center justify-between text-[11px] text-ink-subtle">
+                                <span>{{ $satir['adet'] }} kayıt</span>
+                                @if ($esik && $satir['puan'] === 0)
+                                    <span class="text-cat-amber-text">cetvelde karşılığı yok</span>
+                                @endif
+                            </div>
+                            <div class="mt-1.5 h-[3px] overflow-hidden rounded-full bg-line">
+                                <div class="h-full rounded-full"
+                                    style="width: {{ (int) round($satir['puan'] / $enYuksek * 100) }}%; background: var(--color-{{ $renk }})"></div>
+                            </div>
+                        </flux:card>
+                    @endforeach
+                </div>
+            @else
+                <flux:card class="py-8 text-center">
+                    <flux:text>Henüz onaylı faaliyet yok.</flux:text>
+                </flux:card>
+            @endif
         </div>
 
         {{-- Faaliyet listesi --}}

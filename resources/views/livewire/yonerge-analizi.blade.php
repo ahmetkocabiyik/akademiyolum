@@ -167,10 +167,10 @@
                                             <div class="text-[11px] text-ink-subtle">{{ $s['universite']->sehir }} · {{ $s['universite']->tur === 'vakif' ? 'Vakıf' : 'Devlet' }}</div>
                                         </td>
                                         <td class="px-4 py-2.5 text-ink-muted">{{ $kadrolar[$hedefKadro] }}</td>
-                                        <td class="px-4 py-2.5 font-serif font-bold text-ink">{{ $s['baraj'] }}</td>
-                                        <td class="px-4 py-2.5 font-serif font-bold text-ink">{{ $s['toplam'] }}</td>
+                                        <td class="px-4 py-2.5 font-serif font-bold text-ink">{{ $s['baraj'] ?? '—' }}</td>
+                                        <td class="px-4 py-2.5 font-serif font-bold text-ink">{{ $s['toplam'] ?? '—' }}</td>
                                         <td class="px-4 py-2.5 font-serif font-bold" style="color: {{ $renk }}">%{{ $s['oran'] }}</td>
-                                        <td class="px-4 py-2.5 font-serif font-bold" style="color: {{ $renk }}">{{ $s['kalan'] === 0 ? '+'.($s['toplam'] - $s['baraj']) : '-'.$s['kalan'] }}</td>
+                                        <td class="px-4 py-2.5 font-serif font-bold" style="color: {{ $renk }}">{{ $s['baraj'] === null ? '—' : ($s['kalan'] === 0 ? '+'.($s['toplam'] - $s['baraj']) : '-'.$s['kalan']) }}</td>
                                         <td class="px-4 py-2.5"><flux:badge :color="$badgeRenkler[$s['durum']]" size="sm">{{ $badgeMetinleri[$s['durum']] }}</flux:badge></td>
                                     </tr>
                                 @endforeach
@@ -189,7 +189,15 @@
                                     ->map(fn ($w) => mb_strtoupper(mb_substr($w, 0, 1)))->take(3)->implode('');
                             @endphp
                             {{-- $wire.detayAcik = true: panel sunucu yanıtını beklemeden kaymaya başlar. --}}
-                            <flux:card class="cursor-pointer overflow-hidden !p-0 transition duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lg active:translate-y-0"
+                            {{-- Sabit yükseklik: 6 koşullu bir kartın (Mersin) doğal
+                                 boyu. Sabit kısımlar 160px tutuyor, kalan ~128px tam 6
+                                 satırlık liste demek. Uyarı satırı ya da yönerge düğmesi
+                                 olan kartlarda liste payı azalır ve kendi içinde kayar —
+                                 kart boyu değişmez, içerik de kırpılmaz. --}}
+                            <flux:card @class([
+                                'flex cursor-pointer flex-col overflow-hidden !p-0 transition duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lg active:translate-y-0',
+                                'h-[18rem]' => $gorunum === 'grid',
+                            ])
                                 wire:key="uni-{{ $uni->id }}"
                                 wire:click="detayAc({{ $uni->id }})"
                                 x-on:click="$wire.detayAcik = true"
@@ -197,8 +205,8 @@
                                 x-on:keydown.enter.prevent="$wire.detayAcik = true; $wire.detayAc({{ $uni->id }})"
                                 x-on:keydown.space.prevent="$wire.detayAcik = true; $wire.detayAc({{ $uni->id }})"
                                 aria-label="{{ $uni->ad }} detayları">
-                                <div class="h-1" style="background: {{ $renk }}"></div>
-                                <div class="p-4">
+                                <div class="h-1 shrink-0" style="background: {{ $renk }}"></div>
+                                <div class="flex flex-1 flex-col p-4">
                                     <div class="flex items-start justify-between gap-3">
                                         <div class="flex min-w-0 items-center gap-3">
                                             <div class="flex size-10 shrink-0 items-center justify-center rounded-lg border border-line bg-canvas text-[11px] font-bold text-ink-muted">{{ $bashkler }}</div>
@@ -218,21 +226,36 @@
                                         </div>
                                     </div>
 
-                                    {{-- Puan karşılaması (eşleşme oranı) --}}
+                    {{-- Puansız yönergede "0 / 0 pt" bozuk görünüyordu: orada
+                         baraj yok, ilerleme koşul doluluğundan okunur. --}}
                                     <div class="mt-4">
                                         <div class="mb-1.5 flex items-center justify-between text-xs">
-                                            <span class="text-ink-subtle">Puan karşılaması</span>
-                                            <span class="font-semibold text-ink-muted">{{ $s['toplam'] }} / {{ $s['baraj'] }} pt · %{{ $s['puan_orani'] }}</span>
+                                            <span class="text-ink-subtle">{{ $s['baraj'] === null ? 'Koşul karşılaması' : 'Puan karşılaması' }}</span>
+                                            <span class="font-semibold text-ink-muted">
+                                                @if ($s['baraj'] === null)
+                                                    Puan barajı yok · %{{ $s['puan_orani'] }}
+                                                @else
+                                                    {{ $s['toplam'] }} / {{ $s['baraj'] }} pt · %{{ $s['puan_orani'] }}
+                                                @endif
+                                            </span>
                                         </div>
                                         <div class="h-1.5 overflow-hidden rounded-full bg-line">
                                             <div class="h-full rounded-full" style="width: {{ $s['puan_orani'] }}%; background: {{ $renk }}"></div>
                                         </div>
                                     </div>
 
-                                    {{-- Asgari koşullar: kartta yalnızca kökün doğrudan
-                                         çocukları; tam ağaç detay panelinde. --}}
-                                    <div class="mt-4 flex flex-col gap-1.5">
-                                        @foreach ($s['sonuc']->cocuklar as $kosul)
+                                    {{-- Asgari koşullar: kartta en fazla 6 tanesi; kalanı ve
+                                         tam ağaç detay panelinde. Kart sabit yükseklikte
+                                         olduğu için kaydırmak yerine kesip sayısını söylemek
+                                         daha okunur. --}}
+                                    @php
+                                        $tumKosullar = $s['sonuc']->kosullar();
+                                        $gosterilen = $gorunum === 'grid' ? array_slice($tumKosullar, 0, 6) : $tumKosullar;
+                                        $gizliSayi = count($tumKosullar) - count($gosterilen);
+                                    @endphp
+
+                                    <div @class(['mt-4 flex flex-col gap-1.5', 'flex-1' => $gorunum === 'grid'])>
+                                        @foreach ($gosterilen as $kosul)
                                             <div class="flex items-center justify-between gap-2 text-xs">
                                                 <span class="flex min-w-0 items-center gap-1.5 text-ink-muted">
                                                     @if ($kosul->beyan)
@@ -240,37 +263,51 @@
                                                     @else
                                                         <flux:icon :name="$kosul->durum->ikon()" variant="solid" class="size-3.5 shrink-0" style="color: {{ $kosul->durum->renk() }}" />
                                                     @endif
-                                                    <span class="truncate">{{ $kosul->aciklama }}</span>
+                                                    <span class="truncate" title="{{ $kosul->aciklama }}">{{ $kosul->aciklama }}</span>
                                                 </span>
-                                                <span class="shrink-0 font-semibold" style="color: {{ $kosul->beyan ? 'var(--color-ink-subtle)' : $kosul->durum->renk() }}">
-                                                    @if ($kosul->beyan)
+                                                {{-- Telafi ile geçilen koşulda sayaç ana yolu anlatır, sonucun rengiyle boyanmaz. --}}
+                                                <span class="shrink-0 font-semibold" style="color: {{ $kosul->beyan || $kosul->telafiIleSaglandi() ? 'var(--color-ink-subtle)' : $kosul->durum->renk() }}">
+                                                    @if ($kosul->kaynakEksik)
+                                                        hesaplanamıyor
+                                                    @elseif ($kosul->beyan)
                                                         belge ile
+                                                    @elseif ($kosul->telafiIleSaglandi())
+                                                        telafi ile
                                                     @elseif ($kosul->gerekli !== null)
-                                                        {{ $kosul->mevcut }} / {{ $kosul->gerekli }}
+                                                        {{ $kosul->mevcut ?? 0 }} / {{ $kosul->gerekli }}
                                                     @else
                                                         {{ $kosul->durum->etiket() }}
                                                     @endif
                                                 </span>
                                             </div>
                                         @endforeach
+
+                                        @if ($gizliSayi > 0)
+                                            <div class="pt-0.5 text-[11px] font-medium text-ink-subtle">
+                                                +{{ $gizliSayi }} koşul daha
+                                            </div>
+                                        @endif
                                     </div>
 
+                                    {{-- Eksik bilgi ile belge beyanı ayrı şeyler: birincisinde
+                                         aday veri girecek, ikincisinde girilecek bir şey yok. --}}
                                     @if ($s['belirsiz_sayisi'] > 0)
-                                        <div class="mt-2 flex items-start gap-1 text-[11px] text-cat-amber">
+                                        <div class="mt-2 flex items-start gap-1 text-[11px] text-cat-amber-text">
                                             <flux:icon name="question-mark-circle" class="mt-px size-3 shrink-0" />
                                             <span>{{ $s['belirsiz_sayisi'] }} koşul eksik bilgi yüzünden değerlendirilemedi.</span>
                                         </div>
                                     @endif
 
-                                    @if ($uni->yonerge_url)
-                                        <a href="{{ $uni->yonerge_url }}" target="_blank" rel="noopener" x-on:click.stop
-                                            class="mt-3 flex items-center justify-center gap-1.5 rounded-lg border border-line py-2 text-xs font-medium text-brand transition hover:border-brand hover:bg-brand-light">
-                                            <flux:icon name="document-arrow-down" class="size-3.5" />
-                                            Resmi Yönergeyi Aç
-                                        </a>
+                                    @if ($s['beyan_sayisi'] > 0)
+                                        <div class="mt-2 flex items-start gap-1 text-[11px] text-ink-subtle">
+                                            <flux:icon name="information-circle" class="mt-px size-3 shrink-0" />
+                                            <span>{{ $s['beyan_sayisi'] }} koşul belge ile teyit edilecek.</span>
+                                        </div>
                                     @endif
 
-                                    <div class="mt-2 flex items-center justify-center gap-1 text-[11px] font-medium text-ink-subtle">
+                                    {{-- mt-auto: kartların içeriği farklı uzunlukta olduğu için
+                                         ipucu satırı hepsinde kartın dibine hizalanır. --}}
+                                    <div class="mt-auto flex items-center justify-center gap-1 pt-2 text-[11px] font-medium text-ink-subtle">
                                         <flux:icon name="arrows-pointing-out" class="size-3" />
                                         Detay için karta tıklayın
                                     </div>
@@ -350,8 +387,8 @@
                     @foreach ([
                         ['Hedef Kadro', $kadrolar[$hedefKadro]],
                         ['Temel Alan', $this->alanEtiketi($esik['alan'])],
-                        ['Puanım', $d['toplam'].' pt'],
-                        ['Min. Baraj', $d['baraj'].' pt'],
+                        ['Puanım', $d['toplam'] === null ? '—' : $d['toplam'].' pt'],
+                        ['Min. Baraj', $d['baraj'] === null ? 'Baraj yok' : $d['baraj'].' pt'],
                     ] as [$etiket, $deger])
                         <div class="bg-surface px-3 py-2.5">
                             <div class="text-[10px] uppercase tracking-wide text-ink-subtle">{{ $etiket }}</div>
@@ -371,11 +408,17 @@
                     </div>
                     <div class="mt-2 text-xs text-ink-muted">
                         @if ($d['durum'] === 'uygun')
-                            Bu yönergenin tüm asgari koşullarını karşılıyorsunuz; barajı <strong class="text-ink">{{ $d['toplam'] - $d['baraj'] }} puan</strong> aşıyorsunuz.
+                            Bu yönergenin tüm asgari koşullarını karşılıyorsunuz@if ($d['baraj'] !== null); barajı <strong class="text-ink">{{ $d['toplam'] - $d['baraj'] }} puan</strong> aşıyorsunuz@endif.
                         @elseif ($d['durum'] === 'eksik_bilgi')
-                            Kesin olarak karşılanmayan bir koşul yok, ancak
-                            <strong class="text-ink">{{ count($belirsizler) }} koşul</strong>
-                            eksik bilgi yüzünden değerlendirilemedi.
+                            Kesin olarak karşılanmayan bir koşul yok.
+                            @if (count($belirsizler) > 0)
+                                <strong class="text-ink">{{ count($belirsizler) }} koşul</strong>
+                                eksik bilgi yüzünden değerlendirilemedi.
+                            @endif
+                            @if ($d['beyan_sayisi'] > 0)
+                                <strong class="text-ink">{{ $d['beyan_sayisi'] }} koşul</strong>
+                                belge ile teyit edilecek.
+                            @endif
                         @else
                             @if ($d['kalan'] > 0)
                                 Barajı geçmek için <strong class="text-ink">{{ $d['kalan'] }} puan</strong> daha gerekiyor.
@@ -389,7 +432,7 @@
                     {{-- Belirsizliğin gerekçesi: motor tahmin yürütmüyor. --}}
                     @if (count($belirsizler) > 0)
                         <div class="mt-3 rounded-xl border border-cat-amber/30 bg-cat-amber/5 p-3">
-                            <div class="mb-1.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-cat-amber">
+                            <div class="mb-1.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-cat-amber-text">
                                 <flux:icon name="question-mark-circle" class="size-3.5" />Değerlendirilemeyen Koşullar
                             </div>
                             <flux:text class="!text-[11px] leading-relaxed">
@@ -410,7 +453,7 @@
                     <flux:text class="!mt-0.5 !text-[11px] text-ink-subtle">Yönergenin kendi koşul yapısı; iç içe geçmiş koşullar ve telafi seçenekleri dâhil.</flux:text>
 
                     <div class="mt-3 flex flex-col gap-3">
-                        @foreach ($d['sonuc']->cocuklar as $i => $kosul)
+                        @foreach ($d['sonuc']->kosullar() as $i => $kosul)
                             <div wire:key="kosul-{{ $i }}">
                                 <x-sart-dugum :dugum="$kosul" />
                             </div>
@@ -450,17 +493,78 @@
 
                     <div class="mt-3 flex items-baseline justify-between rounded-lg bg-canvas px-3 py-2">
                         <span class="text-xs font-medium text-ink-muted">Toplam</span>
-                        <span class="font-serif text-lg font-bold text-ink">{{ $d['toplam'] }} pt</span>
+                        <span class="font-serif text-lg font-bold text-ink">{{ $d['toplam'] === null ? '—' : $d['toplam'].' pt' }}</span>
                     </div>
                 </div>
 
-                {{-- Yönerge notu --}}
-                @if ($esik['notlar'])
-                    <div class="rounded-xl border border-line bg-canvas p-3">
-                        <div class="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-ink-subtle">
-                            <flux:icon name="document-text" class="size-3.5" />Yönerge Notu
+                {{-- Kaynak belge: analiz bu yönergeden çıkarıldı, ayrıntı için
+                     adayın orijinaline bakabilmesi gerekir. Bağlantı YÖK'ün
+                     resmi kopyasına gider (personel.yok.gov.tr). --}}
+                @if ($uni->yonerge_url)
+                    <a href="{{ $uni->yonerge_url }}" target="_blank" rel="noopener"
+                        class="flex items-center gap-3 rounded-xl border border-line bg-canvas p-3 transition hover:border-brand hover:bg-brand-light">
+                        <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-cat-red-light text-cat-red">
+                            <flux:icon name="document-text" variant="solid" class="size-5" />
                         </div>
-                        <flux:text class="!text-xs leading-relaxed">{{ $esik['notlar'] }}</flux:text>
+                        <div class="min-w-0 flex-1">
+                            <div class="text-xs font-semibold text-ink">Resmi yönerge (PDF)</div>
+                            <div class="truncate text-[11px] text-ink-subtle">
+                                {{ $uni->ad }} · atama ve yükseltme kriterleri
+                            </div>
+                        </div>
+                        <flux:icon name="arrow-top-right-on-square" class="size-4 shrink-0 text-ink-subtle" />
+                    </a>
+                @endif
+
+                {{--
+                    Bu yönerge hakkında bilinmesi gerekenler.
+
+                    `$esik['notlar']` BİLİNÇLİ OLARAK gösterilmiyor: o alan bizim
+                    denetim izimiz — yönergeden birebir alıntılar ve madde kodları
+                    içeriyor (2.a-ç/h,ı, Tablo-1 [C] gibi). Adaya gösterilecek
+                    metin elle yazılan `aday_notu`, kapsam sınırları ise motordan
+                    türetiliyor; böylece uyarılar veriyle birlikte güncel kalıyor.
+                --}}
+                @php
+                    $hesaplanamayan = $d['sonuc']->hesaplanamayanlar();
+                    $beyanlar = array_filter($d['sonuc']->beyanlar(), fn ($b) => ! $b->kaynakEksik);
+                    $kapsamNotu = $this->kapsamNotu($esik);
+                @endphp
+
+                @if ($esik['aday_notu'] || $kapsamNotu || $hesaplanamayan || $beyanlar)
+                    <div class="rounded-xl border border-line bg-canvas p-3">
+                        <div class="mb-2 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-ink-subtle">
+                            <flux:icon name="light-bulb" class="size-3.5" />Bu Yönerge Hakkında
+                        </div>
+
+                        <div class="flex flex-col gap-2 text-xs leading-relaxed text-ink-muted">
+                            @if ($esik['aday_notu'])
+                                <p>{{ $esik['aday_notu'] }}</p>
+                            @endif
+
+                            @if ($beyanlar)
+                                <p class="flex items-start gap-1.5">
+                                    <flux:icon name="information-circle" class="mt-0.5 size-3.5 shrink-0 text-ink-subtle" />
+                                    <span><strong class="text-ink">{{ count($beyanlar) }} koşul</strong> otomatik doğrulanamıyor;
+                                    başvuru dosyanıza belge eklemeniz gerekecek.</span>
+                                </p>
+                            @endif
+
+                            @if ($hesaplanamayan)
+                                <p class="flex items-start gap-1.5">
+                                    <flux:icon name="exclamation-circle" class="mt-0.5 size-3.5 shrink-0 text-cat-amber-text" />
+                                    <span><strong class="text-ink">{{ count($hesaplanamayan) }} koşulun</strong> dayandığı puan cetveli
+                                    henüz sisteme eklenmedi; o koşulları kendiniz değerlendirmelisiniz.</span>
+                                </p>
+                            @endif
+
+                            @if ($kapsamNotu)
+                                <p class="flex items-start gap-1.5">
+                                    <flux:icon name="calculator" class="mt-0.5 size-3.5 shrink-0 text-ink-subtle" />
+                                    <span>{{ $kapsamNotu }}</span>
+                                </p>
+                            @endif
+                        </div>
                     </div>
                 @endif
 
@@ -469,16 +573,9 @@
                     <flux:text class="!text-[11px] text-ink-subtle">
                         {{ $uni->ad }} · {{ $kadrolar[$hedefKadro] }} · cetvel: {{ $esik['cetvel'] }}
                     </flux:text>
-                    <div class="flex items-center gap-2">
-                        <flux:modal.close>
-                            <flux:button variant="filled" size="sm">Kapat</flux:button>
-                        </flux:modal.close>
-                        @if ($uni->yonerge_url)
-                            <flux:button :href="$uni->yonerge_url" target="_blank" rel="noopener" variant="primary" size="sm" icon="document-arrow-down">
-                                Resmi Yönergeyi Aç
-                            </flux:button>
-                        @endif
-                    </div>
+                    <flux:modal.close>
+                        <flux:button variant="filled" size="sm">Kapat</flux:button>
+                    </flux:modal.close>
                 </div>
             </div>
         @endif

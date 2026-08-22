@@ -41,7 +41,7 @@ test('listede olmayan üniversite tür ve link ile eklenir', function () {
     expect($koc)->not->toBeNull()
         ->and($koc->tur)->toBe('vakif')
         ->and($koc->yonerge_url)->toBe('https://personel.yok.gov.tr/tr/document/99')
-        ->and($koc->yonergeler()->count())->toBe(1); // placeholder yönerge oluşturuldu
+        ->and($koc->sehir)->not->toBeNull();
 });
 
 test('sayfa çekilemezse hata döner', function () {

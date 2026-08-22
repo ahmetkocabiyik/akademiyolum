@@ -47,7 +47,6 @@ class UserFactory extends Factory
             'fakulte' => 'İlahiyat Fakültesi',
             'bolum' => 'Temel İslam Bilimleri',
             'temel_alan' => 'ilahiyat',
-            'yonerge' => 'ÜAK Doçentlik — İlahiyat 2026',
             'onboarded_at' => now(),
         ]);
     }

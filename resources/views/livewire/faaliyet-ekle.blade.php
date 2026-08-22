@@ -1,4 +1,12 @@
-<div>
+<div class="relative">
+
+    {{-- Kapatma sayfa düzeyinde: kartın içinde değil, içerik alanının sağ üst
+         köşesinde durur ve üç sekmenin hepsinde geçerlidir. --}}
+    <a href="{{ route('faaliyetler') }}" wire:navigate aria-label="Kapat" title="Kapat"
+        class="absolute right-0 top-0 z-10 flex size-9 items-center justify-center rounded-lg text-ink transition hover:text-cat-red">
+        <flux:icon name="x-mark" variant="solid" class="size-6" />
+    </a>
+
     <div class="mx-auto flex max-w-3xl flex-col gap-5">
 
         {{-- Sekme navigasyonu --}}
@@ -17,15 +25,9 @@
             <form wire:submit="kaydet" class="flex flex-col gap-5">
                 <flux:card class="overflow-hidden !p-0">
                     {{-- Başlık (03_yayin_ekleme.html modal-header stili) --}}
-                    <div class="flex items-start justify-between gap-4 border-b border-line px-6 py-5">
-                        <div>
-                            <flux:heading size="lg">{{ $faaliyet ? 'Faaliyeti Düzenle' : 'Faaliyet Ekle' }}</flux:heading>
-                            <flux:text class="mt-1">Bilgileri doldurun, puan otomatik hesaplanır</flux:text>
-                        </div>
-                        <a href="{{ route('faaliyetler') }}" wire:navigate aria-label="Kapat"
-                            class="flex size-9 shrink-0 items-center justify-center rounded-lg border border-line text-ink-subtle transition hover:border-cat-red hover:bg-cat-red-light hover:text-cat-red">
-                            <flux:icon name="x-mark" variant="solid" class="size-5" />
-                        </a>
+                    <div class="border-b border-line px-6 py-5">
+                        <flux:heading size="lg">{{ $faaliyet ? 'Faaliyeti Düzenle' : 'Faaliyet Ekle' }}</flux:heading>
+                        <flux:text class="mt-1">Bilgileri doldurun, puan otomatik hesaplanır</flux:text>
                     </div>
 
                     {{-- Gövde --}}
@@ -53,13 +55,21 @@
                         </div>
                     </div>
 
-                    {{-- Canlı puan önizleme --}}
+                    {{-- Canlı puan önizleme: kullanıcının KENDİ üniversitesinin
+                         cetveline göre. Cetvel yoksa puan gösterilmez. --}}
+                    @php $onizleme = $this->tahminiPuan(); @endphp
                     <div class="flex items-center justify-between rounded-xl bg-navy px-5 py-4">
                         <div>
-                            <div class="text-[10px] font-semibold uppercase tracking-wide text-white/40">Tahmini Puan</div>
+                            <div class="text-[10px] font-semibold uppercase tracking-wide text-white/40">
+                                {{ $onizleme === null ? 'Puan Önizlemesi' : auth()->user()->universite.' cetveline göre' }}
+                            </div>
                             <div class="flex items-baseline gap-2">
-                                <span class="font-serif text-3xl font-bold text-gold">{{ $this->tahminiPuan() }}</span>
-                                <span class="text-sm text-white/50">pt</span>
+                                @if ($onizleme === null)
+                                    <span class="text-sm text-white/60">Üniversitenizin yönergesi henüz girilmedi</span>
+                                @else
+                                    <span class="font-serif text-3xl font-bold text-gold">{{ $onizleme }}</span>
+                                    <span class="text-sm text-white/50">pt</span>
+                                @endif
                             </div>
                         </div>
                         <div class="text-right">
@@ -141,13 +151,32 @@
                         </div>
                     @endif
 
-                    <div class="grid gap-4 sm:grid-cols-2">
-                        <flux:input wire:model="yil" label="Yıl" placeholder="2026" inputmode="numeric" maxlength="4" />
-                        <flux:select wire:model="donem" label="Dönem" placeholder="Belirtilmemiş">
-                            <flux:select.option value="">Belirtilmemiş</flux:select.option>
-                            <flux:select.option value="tez_disi">Tez Dışı Bağımsız</flux:select.option>
-                            <flux:select.option value="tezden">Tezden Üretilmiş</flux:select.option>
-                        </flux:select>
+    @php($tezIliskisi = $this->tezIliskisiSorulur())
+
+                    <div @class(['grid gap-4', 'sm:grid-cols-2' => $tezIliskisi])>
+                        {{-- Tam tarih: dönem koşulları ("doçentlik sonrası", "son 5 yıl")
+                             profildeki dönüm tarihleriyle kıyaslanıyor. --}}
+                        <flux:input wire:model="tarih" type="date" label="Faaliyet Tarihi" max="{{ now()->format('Y-m-d') }}" />
+
+                        {{-- Yalnızca yayın türlerinde sorulur: bir makale tezden
+                             üretilmiş olabilir, bir tez danışmanlığı olamaz —
+                             orada tezin düzeyi zaten alt tür alanında seçiliyor.
+
+                             Düzey ayrı soruluyor çünkü yönergeler farklı şey
+                             istiyor: Sabancı "doktora tezinden üretilmemiş",
+                             ÜAK "lisansüstü tezlerden üretilmiş". Yüksek lisans
+                             tezinden üretilen yayın birincisine sayılır. --}}
+                        @if ($tezIliskisi)
+                            <flux:select wire:model="donem" label="Tez İlişkisi" placeholder="Belirtilmemiş">
+                                <flux:select.option value="">Belirtilmemiş</flux:select.option>
+                                @foreach (\App\Models\Faaliyet::tezIliskileri() as $deger => $etiket)
+                                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
+                                @endforeach
+                                @if ($donem === 'tezden')
+                                    <flux:select.option value="tezden">Tezden üretilmiş (düzey belirtilmemiş)</flux:select.option>
+                                @endif
+                            </flux:select>
+                        @endif
                     </div>
 
                     <flux:input wire:model="doi" label="DOI Numarası" placeholder="10.xxxx/xxxxx" />

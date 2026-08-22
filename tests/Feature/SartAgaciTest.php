@@ -5,9 +5,13 @@ use App\Enums\TemelAlan;
 use App\Models\Faaliyet;
 use App\Models\User;
 use App\Services\Scoring\Sart\Durum;
+use App\Services\Scoring\Sart\Kalip;
+use App\Services\Scoring\Sart\MaddeKatalogu;
 use App\Services\Scoring\Sart\Profil;
+use App\Services\Scoring\Sart\ProfilCozucu;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Scoring\Sart\SartSonucu;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 
 /**
@@ -36,11 +40,22 @@ function sartDepo(): SartDeposu
 }
 
 /**
- * Ağaçtaki belirli bir düğümü açıklamasının bir parçasıyla bulur.
+ * Sabancı kriterleri PROGRAMA göre yazılmış; aynı (kadro, alan) için birden çok
+ * eşik var. Program belirtilmeden `bul()` bilinçli olarak null döner.
+ */
+const SU_CS = 'MDBF — Bilgisayar Bilimleri ve Mühendisliği Programı';
+
+/**
+ * Ağaçtaki belirli bir düğümü bulur. Aranan parça açıklamada ya da yönergenin
+ * kendi madde atfında geçebilir; madde atfı sabit olduğu için açıklama metni
+ * sadeleştiğinde testi kırmayan tutamak odur.
  */
 function sartDugum(SartSonucu $sonuc, string $parca): SartSonucu
 {
-    $bulunan = $sonuc->topla(fn (SartSonucu $d) => str_contains($d->aciklama, $parca));
+    $bulunan = $sonuc->topla(
+        fn (SartSonucu $d) => str_contains($d->aciklama, $parca)
+            || str_contains($d->madde ?? '', $parca),
+    );
 
     expect($bulunan)->not->toBeEmpty("Düğüm bulunamadı: {$parca}");
 
@@ -129,15 +144,19 @@ test('Akdeniz Grup 1 Dr. Öğr. Üyesi: üç makale ve YDS ile sağlanır', func
     $depo = sartDepo();
     $esik = $depo->bul('Akdeniz Üniversitesi', 'dr_ogr_uyesi', 'fen');
 
+    // Üçü de son beş yılda, ikisinde başlıca yazar (tek yazarlı → başlıca sayılır).
     $sonuc = $depo->degerlendir($esik, [
-        sartFaaliyet('SCIE/SSCI (Q3)'),   // 1.4 → 90
-        sartFaaliyet('SCIE/SSCI (Q3)'),   // 90
-        sartFaaliyet('SCIE/SSCI (Q3)'),   // 90
+        sartFaaliyet('SCIE/SSCI (Q3)', tarih: '2024-01-10'),   // 1.4 → 90
+        sartFaaliyet('SCIE/SSCI (Q3)', tarih: '2024-06-20'),   // 90
+        sartFaaliyet('SCIE/SSCI (Q3)', tarih: '2025-02-05'),   // 90
     ], new Profil(yds: 75));
 
-    expect($sonuc->durum)->toBe(Durum::Saglandi)
+    // Tez yayını koşulu belge ile beyan edildiği için kök belirsiz kalır;
+    // ölçülebilir koşulların tamamı sağlanmış olmalı.
+    expect($sonuc->eksikler())->toBe([])
         ->and(sartDugum($sonuc, 'toplam en az 100 puan')->mevcut)->toBe(270)
-        ->and(sartDugum($sonuc, 'En az 3 yayın')->mevcut)->toBe(3);
+        ->and(sartDugum($sonuc, 'Son beş yılda en az 3 yayın')->mevcut)->toBe(3)
+        ->and(sartDugum($sonuc, 'En az 2 makalede başlıca yazar')->mevcut)->toBe(3);
 });
 
 test('YDS girilmemişse koşul sağlanmadı değil BELİRSİZ olur', function () {
@@ -150,9 +169,10 @@ test('YDS girilmemişse koşul sağlanmadı değil BELİRSİZ olur', function ()
         sartFaaliyet('SCIE/SSCI (Q3)'),
     ], new Profil);
 
+    // YDS ve "son beş yıl" koşulu (faaliyetlerin tarihi yok) belirsiz kalır.
     expect(sartDugum($sonuc, 'yabancı dil')->durum)->toBe(Durum::Belirsiz)
         ->and($sonuc->durum)->toBe(Durum::Belirsiz)
-        ->and($sonuc->belirsizler())->toHaveCount(1);
+        ->and($sonuc->belirsizler())->toHaveCount(2);
 });
 
 test('bir eser puanını en yüksek maddeden alır, Faaliyet->puan alanına bakılmaz', function () {
@@ -268,7 +288,7 @@ test('Atatürk Hukuk indeks alt sınırı 5, diğer B grubu alanlarında 12', fu
 
 test('tarihi girilmemiş faaliyet dönem koşulunu BELİRSİZ yapar, sağlanmadı değil', function () {
     $depo = sartDepo();
-    $esik = $depo->bul('Akdeniz Üniversitesi', 'docentlik', 'fen');
+    $esik = $depo->bul('Akdeniz Üniversitesi', 'profesorluk', 'fen');
 
     $sonuc = $depo->degerlendir($esik, [
         sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: 'baslica'),
@@ -283,7 +303,7 @@ test('tarihi girilmemiş faaliyet dönem koşulunu BELİRSİZ yapar, sağlanmad�
 
 test('dönem koşulu tarihler girilince kesin sonuç verir', function () {
     $depo = sartDepo();
-    $esik = $depo->bul('Akdeniz Üniversitesi', 'docentlik', 'fen');
+    $esik = $depo->bul('Akdeniz Üniversitesi', 'profesorluk', 'fen');
     $profil = new Profil(docentlikTarihi: Carbon::parse('2020-01-01'), yds: 70);
 
     $sonrasi = $depo->degerlendir($esik, [
@@ -425,4 +445,792 @@ test('atıf ve bildiri kayıtları toplam puana katkı verir', function () {
 
     expect(sartDugum($depo->degerlendir($esik, $yalnizMakale, $profil), 'toplam en az 100 puan')->mevcut)->toBe(15)
         ->and(sartDugum($depo->degerlendir($esik, $atifli, $profil), 'toplam en az 100 puan')->mevcut)->toBe(28);
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Yeni arketipler
+// ─────────────────────────────────────────────────────────────────────────────
+
+test('kendine referans veren grup tanımı motoru kilitlemez', function () {
+    // 'A3' => ['A3'] gibi bir veri hatası özyinelemeyi sonsuza sokuyordu.
+    $katalog = new MaddeKatalogu(
+        anahtar: 'test',
+        maddeler: ['A1' => ['baslik' => 'x'], 'A3' => ['baslik' => 'y']],
+        gruplar: ['A3' => ['A3'], 'DONGU' => ['DIGER'], 'DIGER' => ['DONGU', 'A1']],
+    );
+
+    expect($katalog->coz(['A3']))->toBe(['A3'])
+        ->and($katalog->coz(['DONGU']))->toBe(['A1']);
+});
+
+test('Gümüşhane: grup bazlı asgari puanlar cetvelden hesaplanır', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Gümüşhane Üniversitesi', 'dr_ogr_uyesi', 'sosyal');
+
+    expect($esik)->not->toBeNull();
+
+    // A1a Q1 = 35 · B4a uluslararası tam metin = 6 · B8a ulusal tam metin = 5
+    $sonuc = $depo->degerlendir($esik, [
+        sartFaaliyet('SCIE/SSCI (Q1)'),
+        sartFaaliyet('TR Dizin'),                                              // A3 = 10
+        sartFaaliyet('Uluslararası Tam Metin', Kategori::Bildiri),             // B4a = 6
+        sartFaaliyet('Ulusal Tam Metin', Kategori::Bildiri),                   // B8a = 5
+    ], new Profil);
+
+    expect(sartDugum($sonuc, 'TABLO-3 · A. Makale')->mevcut)->toBe(45)
+        ->and(sartDugum($sonuc, 'TABLO-3 · B. Bildiri')->mevcut)->toBe(11)
+        ->and(sartDugum($sonuc, 'toplam en az 55 puan')->mevcut)->toBe(56)
+        ->and($sonuc->durum)->toBe(Durum::Saglandi);
+});
+
+test('Gümüşhane dipnot (1): makale puanı A1-A2\'den karşılanırsa A3 şartı düşer', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Gümüşhane Üniversitesi', 'dr_ogr_uyesi', 'hukuk');
+
+    // Tek Q1 makale (35P) — A3'ten hiç yayın yok ama makale barajı A1'den doluyor.
+    $sonuc = $depo->degerlendir($esik, [
+        sartFaaliyet('SCIE/SSCI (Q1)'),
+        sartFaaliyet('Uluslararası Tam Metin', Kategori::Bildiri),
+        sartFaaliyet('Ulusal Tam Metin', Kategori::Bildiri),
+    ], new Profil);
+
+    $a3 = sartDugum($sonuc, 'TR Dizin dergisinde en az 1 makale');
+
+    expect($a3->mevcut)->toBe(0)
+        ->and($a3->telafiIleSaglandi())->toBeTrue()
+        // Sayaç 0/1 kalır ama koşul karşılandığı için ilerleme tamdır; aksi
+        // hâlde arayüz sağlanmış koşulu %0 dolulukla (yeşil ama boş) çizer.
+        ->and($a3->oran())->toBe(100);
+});
+
+test('Samsun: puansız yönergede toplam düğümü yoktur, şartlar adetle çözülür', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Samsun Üniversitesi', 'dr_ogr_uyesi', 'sosyal');
+
+    expect($esik)->not->toBeNull()
+        // Puan barajı yok → arayüz baraj 0 gösterir.
+        ->and($depo->degerlendir($esik, [], new Profil)->rolile('toplam'))->toBeNull();
+
+    $sonuc = $depo->degerlendir($esik, [
+        sartFaaliyet('SCIE/SSCI (Q1)'),   // A1
+        sartFaaliyet('TR Dizin'),         // A3
+        sartFaaliyet('Ulusal Tam Metin', Kategori::Bildiri), // C2
+    ], new Profil);
+
+    expect(sartDugum($sonuc, 'Tür A1/A2/A3')->mevcut)->toBe(2)
+        ->and(sartDugum($sonuc, 'Başlıca yazar olduğunuz toplam en az 3 çalışma')->mevcut)->toBe(3)
+        ->and($sonuc->durum)->toBe(Durum::Saglandi);
+});
+
+test('Samsun doçentlik: beş alternatiften biri yeterli', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Samsun Üniversitesi', 'docentlik', 'ilahiyat');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2018-01-01'));
+
+    // (e) şıkkı: D1/D3/D5 türü 2 proje, biri doçentlik sonrası — burada yok.
+    // (a) şıkkı: doktora sonrası 4 adet A1.
+    $dortA1 = array_map(
+        fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2021-01-01'),
+        range(1, 4),
+    );
+
+    expect($depo->degerlendir($esik, $dortA1, $profil)->durum)->toBe(Durum::Saglandi)
+        // Üç tane yetmez ve başka şık da dolmuyor.
+        ->and($depo->degerlendir($esik, array_slice($dortA1, 0, 3), $profil)->durum)->toBe(Durum::Saglanmadi);
+});
+
+test('Bursa Uludağ: adet koşullu alanlar hesaplanır, puana bağlı olanlar belirsiz kalır', function () {
+    $depo = sartDepo();
+    $profil = new Profil(yds: 75, programDili: 'turkce');
+    $makale = sartFaaliyet('SCIE/SSCI (Q1)');
+
+    // İlahiyat: [A] saf adet koşulu → kesin sonuç.
+    $ilahiyat = $depo->degerlendir(
+        $depo->bul('Bursa Uludağ Üniversitesi', 'dr_ogr_uyesi', 'ilahiyat'), [$makale], $profil,
+    );
+
+    // Fen: [A] tamamen puana bağlı → ÜAK cetvelinden hesaplanır.
+    // Tek Q1 makalesi 30 puan: ne 50'lik alt koşulu ne 90'lık toplamı karşılar.
+    $fen = $depo->degerlendir(
+        $depo->bul('Bursa Uludağ Üniversitesi', 'dr_ogr_uyesi', 'fen'), [$makale], $profil,
+    );
+
+    expect($ilahiyat->durum)->toBe(Durum::Saglandi)
+        ->and($fen->durum)->toBe(Durum::Saglanmadi)
+        // Artık beyan değil, ölçülen bir eksik.
+        ->and($fen->beyanlar())->toBe([])
+        ->and(sartDugum($fen, 'Tablo-1 · [A]')->mevcut)->toBe(30)
+        ->and(sartDugum($fen, 'Tablo-1 · [A]')->gerekli)->toBe(50);
+});
+
+test('Bursa Uludağ: ÜAK cetveline bağlı puan koşulu gerçekten hesaplanır', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Bursa Uludağ Üniversitesi', 'dr_ogr_uyesi', 'muhendislik');
+
+    // 2 × Q1 (30) = 60 → alt koşul (50) tamam. Toplam 90 için 30 puan daha:
+    // BKCI kitap 20 + TÜBİTAK yürütücülük 15 = 95.
+    $sonuc = $depo->degerlendir($esik, [
+        sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: 'baslica'),
+        sartFaaliyet('SCIE/SSCI (Q1)'),
+        sartFaaliyet('BKCI / Scopus Kitap', Kategori::Kitap),
+        sartFaaliyet('TÜBİTAK', Kategori::Proje, 'yurutucu'),
+    ], new Profil(yds: 75, programDili: 'turkce'));
+
+    expect(sartDugum($sonuc, 'Tablo-1 · [A]')->mevcut)->toBe(75)  // 60 makale + 15 proje
+        ->and(sartDugum($sonuc, 'toplam en az 90 puan')->mevcut)->toBe(95)
+        ->and($sonuc->durum)->toBe(Durum::Saglandi);
+});
+
+test('Bursa Uludağ: [A] sağlanmazsa [C] telafisi belirsizlik üretir, ret değil', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Bursa Uludağ Üniversitesi', 'dr_ogr_uyesi', 'hukuk');
+
+    // Q1-Q3 makalesi yok → [A] düşer, [C] puana bağlı olduğu için karara bağlanamaz.
+    $sonuc = $depo->degerlendir($esik, [
+        sartFaaliyet('TR Dizin'),
+    ], new Profil(yds: 75, programDili: 'turkce'));
+
+    $a = sartDugum($sonuc, 'Tablo-1 · [A]');
+
+    // TR Dizin makalesi 10 puan: [C] telafisi de (50/90) karşılanmıyor.
+    expect($a->mevcut)->toBe(0)
+        ->and($a->telafi)->not->toBeNull()
+        ->and($a->durum)->toBe(Durum::Saglanmadi)
+        ->and($sonuc->durum)->toBe(Durum::Saglanmadi);
+});
+
+test('referans düğümü {alan} yer tutucusunu çözer', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Bursa Uludağ Üniversitesi', 'profesorluk', 'ilahiyat');
+    $sonuc = $depo->degerlendir($esik, [sartFaaliyet('SCIE/SSCI (Q1)')], new Profil(yds: 75, programDili: 'turkce'));
+
+    // Hedef eşik çözülemeseydi "bulunamadı" gerekçesiyle çocuksuz belirsiz dönerdi.
+    expect($sonuc->cocuklar)->toHaveCount(1)
+        ->and($sonuc->belirsizler())->not->toContain(
+            fn ($d) => str_contains($d->belirsizlikNedeni ?? '', 'bulunamadı'),
+        );
+});
+
+test('telafi ilişkisi VE değil VEYA: ana koşul düşse de telafi belirsizse kesin ret verilmez', function () {
+    // Regresyon: `Durum::ve` kullanıldığında ana=Saglanmadi + telafi=Belirsiz
+    // kombinasyonu kesin RET üretiyordu. Doğrusu Belirsiz.
+    $depo = new SartDeposu(
+        esikVerisi: [[
+            'anahtar' => 't', 'universite' => 'T', 'kadro' => 'dr_ogr_uyesi', 'alan' => 'sosyal',
+            'birim' => null, 'cetvel' => 'test-cetvel', 'notlar' => '',
+            'sart' => Kalip::adet('Ana koşul', ['M1'], 1)
+                + ['telafi' => Kalip::beyan('Belge ile doğrulanacak alternatif')],
+        ]],
+        cetvelVerisi: ['test-cetvel' => ['maddeler' => [
+            'M1' => ['baslik' => 'Q1', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)']],
+        ]]],
+    );
+
+    $sonuc = $depo->degerlendir($depo->esik('t'), [], new Profil);
+
+    expect($sonuc->durum)->toBe(Durum::Belirsiz)
+        ->and($sonuc->eksikler())->toBe([]);
+});
+
+test('cetveli girilmemiş koşul, belge ile beyan edilecek koşuldan ayrılır', function () {
+    // Sentetik veri: üretimdeki "cetvel eksik" düğümleri kapatıldıkça bu test
+    // veriye bağlı kalırsa kendiliğinden anlamsızlaşır. Sınanan şey mekanizma.
+    $depo = new SartDeposu(
+        esikVerisi: [[
+            'anahtar' => 'x-dr-fen', 'universite' => 'X Üni', 'kadro' => 'dr_ogr_uyesi',
+            'alan' => 'fen', 'birim' => null, 'cetvel' => 'x', 'notlar' => '',
+            'sart' => Kalip::ve('Şartlar', [
+                Kalip::hesaplanamiyor('Dış ölçeğe göre en az 100 puan', 'md. 3'),
+                Kalip::beyan('Jüri kararıyla belirlenir'),
+            ]),
+        ]],
+        cetvelVerisi: ['x' => ['maddeler' => []]],
+    );
+
+    $sonuc = $depo->degerlendir($depo->esik('x-dr-fen'), [], new Profil);
+
+    // İkisi de beyandır ama biri BİZİM veri açığımız, diğeri kalıcı gerçeklik.
+    expect($sonuc->beyanlar())->toHaveCount(2)
+        ->and($sonuc->hesaplanamayanlar())->toHaveCount(1)
+        ->and($sonuc->hesaplanamayanlar()[0]->aciklama)->toBe('Dış ölçeğe göre en az 100 puan')
+        // Eksik bilgi sayılmamalı: adayın girmesi gereken bir veri yok.
+        ->and($sonuc->belirsizler())->toBe([])
+        // Adaya gösterilen metin bizim veri girişi durumumuzu anlatmamalı.
+        ->and($sonuc->hesaplanamayanlar()[0]->aciklama)->not->toContain('projeye');
+});
+
+test('grup tavanı uygulanır: tek kategoriden gelen puan barajı sahte biçimde aşamaz', function () {
+    $katalog = new MaddeKatalogu(
+        anahtar: 'test',
+        maddeler: [
+            'M1' => ['baslik' => 'Q1 makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 30],
+            'B1' => ['baslik' => 'Bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 5],
+        ],
+        gruplar: ['B' => ['B1']],
+        grupTavanlari: ['B' => 10],
+    );
+
+    $faaliyetler = collect([
+        sartFaaliyet('SCIE/SSCI (Q1)'),
+        ...array_fill(0, 6, sartFaaliyet('Ulusal Tam Metin', Kategori::Bildiri)),
+    ]);
+
+    // Tavansız toplam 30 + 6×5 = 60 olurdu; bildiri tavanı 10 → 40.
+    expect($katalog->topla($faaliyetler, ['M1', 'B1']))->toBe(40)
+        ->and($katalog->topla($faaliyetler, ['B1']))->toBe(10);
+});
+
+test('tavan dolarken yüksek puanlı faaliyet önceliklidir', function () {
+    $katalog = new MaddeKatalogu(
+        anahtar: 'test',
+        maddeler: [
+            'K1' => ['baslik' => 'BKCI kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
+            'K2' => ['baslik' => 'Kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 3],
+        ],
+        gruplar: ['K' => ['K1', 'K2']],
+        grupTavanlari: ['K' => 20],
+    );
+
+    // Sıralama olmasaydı önce 3'ler girip tavanı düşük değerle doldurabilirdi.
+    expect($katalog->topla(collect([
+        sartFaaliyet('Kitap Bölümü', Kategori::Kitap),
+        sartFaaliyet('BKCI / Scopus Kitap', Kategori::Kitap),
+    ]), ['K1', 'K2']))->toBe(20);
+});
+
+test('dışlama koşulu faaliyetin tez ilişkisi alanından okunur', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Sabancı Üniversitesi', 'docentlik', 'muhendislik', SU_CS);
+    $profil = new Profil(dersYariyil: 2, projeYurutuculuk: 2, tezDanismanlik: 3);
+
+    $ile = fn (?string $donem) => tap(sartFaaliyet('SCIE/SSCI (Q1)'), fn ($f) => $f->donem = $donem);
+    $ad = 'doktora tezinden üretilmemiş';
+    $degerlendir = fn (array $f) => sartDugum($depo->degerlendir($esik, $f, $profil), $ad);
+
+    // Girilmemişse karara bağlanamaz — "sağlanmadı" değil.
+    expect($degerlendir(array_map(fn () => $ile(null), range(1, 8)))->durum)->toBe(Durum::Belirsiz);
+
+    // Üçü tezden bağımsız → sağlanır.
+    $saglanan = $degerlendir([
+        $ile('tez_disi'), $ile('tez_disi'), $ile('tez_disi'),
+        $ile('doktora'), $ile('doktora'), $ile('doktora'), $ile('doktora'), $ile('doktora'),
+    ]);
+    expect($saglanan->durum)->toBe(Durum::Saglandi)
+        ->and($saglanan->mevcut)->toBe(3);
+
+    // Hepsi doktora tezinden → kesin olumsuz.
+    expect($degerlendir(array_map(fn () => $ile('doktora'), range(1, 8)))->mevcut)->toBe(0);
+
+    // Yönergenin dediği "DOKTORA tezinden üretilmemiş": yüksek lisans tezinden
+    // üretilmiş yayın bu koşula SAYILIR. Düzey ayrımı olmasaydı haksız yere
+    // dışlanır ve koşul sağlanmamış görünürdü.
+    $yl = $degerlendir([
+        $ile('yuksek_lisans'), $ile('yuksek_lisans'), $ile('yuksek_lisans'),
+        $ile('doktora'), $ile('doktora'), $ile('doktora'), $ile('doktora'), $ile('doktora'),
+    ]);
+    expect($yl->durum)->toBe(Durum::Saglandi)
+        ->and($yl->mevcut)->toBe(3);
+
+    // Eski kayıtlarda düzey yok: doktora varsayılmaz, belirsiz kalır.
+    expect($degerlendir(array_map(fn () => $ile('tezden'), range(1, 8)))->durum)->toBe(Durum::Belirsiz);
+});
+
+test('faaliyetten türetilen ölçüt eksikse profil değil Faaliyetler bölümü işaret edilir', function () {
+    $profil = new Profil;
+
+    expect($profil->eksikNedeni('ders_yariyil'))->toContain('Faaliyetler')
+        ->and($profil->eksikNedeni('tez_danismanlik'))->toContain('Faaliyetler')
+        ->and($profil->eksikNedeni('proje_yurutuculuk'))->toContain('Faaliyetler')
+        ->and($profil->eksikNedeni('atif_sayisi'))->toContain('Faaliyetler')
+        // Tek skaler olanlar gerçekten profilden okunur.
+        ->and($profil->eksikNedeni('yds'))->toContain('Profil')
+        ->and($profil->eksikNedeni('h_indeksi'))->toContain('Profil');
+
+    // Motor bu gerekçeyi düğüme taşıyor mu?
+    $depo = sartDepo();
+    $sonuc = $depo->degerlendir(
+        $depo->bul('Sabancı Üniversitesi', 'docentlik', 'muhendislik', SU_CS), [], $profil,
+    );
+
+    expect(sartDugum($sonuc, 'ders vermiş olmak')->belirsizlikNedeni)
+        ->toContain('Faaliyetler bölümüne henüz ders');
+});
+
+test('ders ve tez danışmanlığı kaydı yoksa 0 kabul edilir, koşul kesin sonuca bağlanır', function () {
+    $cozucu = new ProfilCozucu;
+    $user = User::factory()->onboarded()->create();
+
+    // Ders, boş kategoriyi kesin 0 sayan TEK ölçüt.
+    $profil = $cozucu->coz($user, []);
+
+    expect($profil->dersYariyil)->toBe(0)
+        ->and($profil->tezDanismanlik)->toBe(0)
+        // Atıf ve proje ölçütlerinde boşluk belirsizlik üretmeye devam etmeli.
+        ->and($profil->atifSayisi)->toBeNull()
+        ->and($profil->projeYurutuculuk)->toBeNull();
+
+    $depo = sartDepo();
+    $sonuc = $depo->degerlendir(
+        $depo->bul('Sabancı Üniversitesi', 'docentlik', 'muhendislik', SU_CS), [], $profil,
+    );
+
+    $ders = sartDugum($sonuc, 'ders vermiş olmak');
+
+    expect($ders->mevcut)->toBe(0)
+        ->and($ders->gerekli)->toBe(1)
+        ->and($ders->durum)->toBe(Durum::Saglanmadi);
+})->uses(RefreshDatabase::class);
+
+test('tez danışmanlığı sayımı: baş danışmanlık sayılır, eş danışmanlık 2:1 denklikle girer', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Sabancı Üniversitesi', 'docentlik', 'muhendislik', SU_CS);
+    $ad = 'Bitmiş en az 3 lisansüstü tezde baş danışmanlık';
+
+    $bas = fn () => sartFaaliyet('Doktora Tezi', Kategori::TezDanismanligi, 'danisman');
+    $es = fn () => sartFaaliyet('Yüksek Lisans Tezi', Kategori::TezDanismanligi, 'es_danisman');
+
+    $cozucu = new ProfilCozucu;
+    $user = User::factory()->onboarded()->create();
+    $degerlendir = fn (array $f) => $depo->degerlendir($esik, $f, $cozucu->coz($user, $f));
+
+    // Yalnızca eş danışmanlık: baş danışmanlık sayısına doğrudan eklenmez.
+    // 4 eş danışmanlık var ama denklik en fazla 1 tez için kullanılabilir.
+    expect(sartDugum($degerlendir([$es(), $es(), $es(), $es()]), $ad)->mevcut)->toBe(1);
+
+    // 2 baş + 2 eş = 2 + (2÷2, azami 1) = 3 → sağlanır.
+    $karma = $degerlendir([$bas(), $bas(), $es(), $es()]);
+    expect(sartDugum($karma, $ad)->mevcut)->toBe(3)
+        ->and(sartDugum($karma, $ad)->durum)->toBe(Durum::Saglandi)
+        // Sayaç sebepsiz artmış görünmesin: uygulanan denklik arayüze taşınır.
+        ->and(sartDugum($karma, $ad)->donusumler)->toBe([
+            '2 eş danışmanlık 1 baş danışmanlığa denk (en fazla 1 tez için)',
+        ]);
+
+    // Denklik gerekmiyorsa listelenmez.
+    expect(sartDugum($degerlendir([$bas(), $bas(), $bas()]), $ad)->donusumler)->toBe([]);
+
+    // 3 baş danışmanlık tek başına yeter.
+    expect(sartDugum($degerlendir([$bas(), $bas(), $bas()]), $ad)->durum)->toBe(Durum::Saglandi);
+
+    // Tez izleme jürisi baş danışmanlık değildir.
+    $juri = $degerlendir([sartFaaliyet('Tez İzleme / Jüri Üyeliği', Kategori::TezDanismanligi, 'danisman')]);
+    expect(sartDugum($juri, $ad)->mevcut)->toBe(0);
+})->uses(RefreshDatabase::class);
+
+test('belge beyanı eksik bilgi sayılmaz', function () {
+    $depo = sartDepo();
+    $profil = new Profil(dersYariyil: 2, projeYurutuculuk: 2, tezDanismanlik: 3);
+
+    $sonuc = $depo->degerlendir(
+        $depo->bul('Sabancı Üniversitesi', 'docentlik', 'muhendislik', SU_CS),
+        array_map(fn () => tap(sartFaaliyet('SCIE/SSCI (Q1)'), fn ($f) => $f->donem = 'tez_disi'), range(1, 8)),
+        $profil,
+    );
+
+    // "Projelerden en az biri tamamlanmış olmalı" bir beyandır: eksik veri yok,
+    // koşul doğası gereği otomatik doğrulanamıyor. Aday "bir şey girmeyi
+    // unuttum" sanmamalı.
+    expect($sonuc->beyanlar())->toHaveCount(1)
+        ->and($sonuc->belirsizler())->toBe([])
+        ->and($sonuc->hesaplanamayanlar())->toBe([]);
+});
+
+test('şart ağacındaki her dışlama etiketi motorda tanımlıdır', function () {
+    // Tanınmayan etiket sessizce null döner: koşul hiçbir veriyle kesinleşmez.
+    // Bu test o sınıf yazım hatasını yakalar.
+    $depo = sartDepo();
+    $ornek = new Faaliyet(['kategori' => Kategori::Makale, 'donem' => 'doktora']);
+    $bilinmeyen = [];
+
+    $gez = function (array $dugum, string $yol) use (&$gez, &$bilinmeyen, $ornek) {
+        foreach ($dugum['haric'] ?? [] as $etiket) {
+            if ($ornek->haricDegeri($etiket) === null) {
+                $bilinmeyen[] = "{$yol}: {$etiket}";
+            }
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $i => $cocuk) {
+            $gez($cocuk, "{$yol}/{$i}");
+        }
+
+        if (isset($dugum['telafi'])) {
+            $gez($dugum['telafi'], "{$yol}>telafi");
+        }
+    };
+
+    foreach ($depo->esikler() as $esik) {
+        $gez($esik['sart'], $esik['anahtar']);
+    }
+
+    expect($bilinmeyen)->toBe([]);
+});
+
+test('tek koşullu yönergede kökün kendisi koşul olarak listelenir', function () {
+    $depo = sartDepo();
+
+    // Sabancı Dr. Öğr. Üyesi'nin tek şartı var: ağacın kökü birleştirici değil
+    // yaprak. Arayüz koşulları `cocuklar` üzerinden listeleseydi kart boş
+    // görünür, "bu kadro için şart yok" sanılırdı.
+    $tek = $depo->degerlendir(
+        $depo->bul('Sabancı Üniversitesi', 'dr_ogr_uyesi', 'muhendislik', SU_CS), [], new Profil,
+    );
+
+    expect($tek->cocuklar)->toBe([])
+        ->and($tek->kosullar())->toHaveCount(1)
+        ->and($tek->kosullar()[0]->aciklama)->toContain('en az 3 bilimsel makale');
+
+    // Çok koşullu ağaçta davranış değişmez.
+    $cok = $depo->degerlendir(
+        $depo->bul('Sabancı Üniversitesi', 'docentlik', 'muhendislik', SU_CS), [], new Profil,
+    );
+
+    expect($cok->kosullar())->toBe($cok->cocuklar)
+        ->and($cok->kosullar())->toHaveCount(6);
+});
+
+test('eşleşme oranı ağacın mantığına uyar: VEYA dalında sağlanmayan alternatif eksiklik sayılmaz', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2020-01-01'));
+
+    $makale = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+
+    // Samsun Doçent beş alternatifli bir VEYA: 1. yol (A1 türü 4 çalışma) tam
+    // sağlanıyor, diğer dördü sağlanmıyor. Oran yaprakların minimumu alınırsa
+    // %0 çıkar ve "Başvuru Yapılabilir" rozetli üniversite sıralamada sona düşer.
+    $sonuc = $depo->degerlendir(
+        $depo->bul('Samsun Üniversitesi', 'docentlik', 'sosyal'),
+        [$makale(), $makale(), $makale(), $makale()],
+        $profil,
+    );
+
+    expect($sonuc->durum)->toBe(Durum::Saglandi)
+        ->and($sonuc->oran())->toBe(100);
+
+    // Hiçbir yol sağlanmıyorsa oran en iyi alternatiften okunur, sıfırdan değil.
+    $kismi = $depo->degerlendir(
+        $depo->bul('Samsun Üniversitesi', 'docentlik', 'sosyal'),
+        [$makale(), $makale()],
+        $profil,
+    );
+
+    // En iyi alternatif 2. yol: "en az 2'si A1" tam (%100), "toplamda 6" 2/6
+    // (%33) → ortalama %67. 1. yol yalnızca 2/4 = %50 verirdi.
+    expect($kismi->durum)->toBe(Durum::Saglanmadi)
+        ->and($kismi->oran())->toBe(67);
+});
+
+test('dönem belirsizliğinde hangi verinin eksik olduğu ayrı ayrı söylenir', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Sabancı Üniversitesi', 'profesorluk', 'muhendislik', SU_CS);
+    $ad = 'doçentlik sonrası';
+
+    $makale = fn (?string $tarih) => sartFaaliyet('SCIE/SSCI (Q1)', tarih: $tarih);
+    $bul = fn (array $f, Profil $p) => sartDugum($depo->degerlendir($esik, $f, $p), $ad)->belirsizlikNedeni;
+
+    // İkisi de eksik → ikisi de söylenmeli.
+    expect($bul([$makale(null)], new Profil))
+        ->toContain('doçentlik tarihi')
+        ->toContain('faaliyetlerin tarihi');
+
+    // Faaliyet tarihleri tamam, profil eksik → yalnızca profil suçlanmalı.
+    // Eskiden mesaj hep faaliyeti işaret ediyordu; aday tarihleri doldurup
+    // koşulun hâlâ belirsiz kalmasıyla karşılaşıyordu.
+    expect($bul([$makale('2024-06-01')], new Profil))
+        ->toContain('doçentlik tarihi')
+        ->not->toContain('faaliyetlerin tarihi');
+
+    // Profil tamam, bazı faaliyetlerin tarihi yok → yalnızca faaliyet.
+    $profil = new Profil(docentlikTarihi: Carbon::parse('2022-01-01'));
+
+    expect($bul([$makale('2024-06-01'), $makale(null)], $profil))
+        ->toContain('faaliyetlerin tarihi')
+        ->not->toContain('doçentlik tarihi');
+});
+
+test('ilk atanma koşulu geçmiş bir atamaya dayanamaz', function () {
+    // Dr. Öğr. Üyesi İLK atanmada "son atamadan bu yana" koşulu mantıksızdır;
+    // o referans yalnızca yeniden atanma kadrosunda anlamlıdır.
+    //
+    // DİKKAT: "docentlik kadrosu docentlik referansı kullanamaz" gibi bir kural
+    // YOKTUR. Türkiye'de doçentlik UNVANI (ÜAK verir) ile doçent KADROSU
+    // (üniversite verir) ayrı şeylerdir; kadroya başvuran aday unvanı çoktan
+    // almıştır. Samsun bunu birebir böyle yazıyor: "En az 1 tanesi doçentlik
+    // sonrası olmak şartıyla ... Doçent Kadrosu İçin Asgari Şartlar".
+    $hatalar = [];
+
+    $gez = function (array $dugum, string $yol) use (&$gez, &$hatalar) {
+        if (($dugum['donem']['baslangic'] ?? null) === 'son_atama') {
+            $hatalar[] = $yol;
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $i => $cocuk) {
+            $gez($cocuk, "{$yol}/{$i}");
+        }
+
+        if (isset($dugum['telafi'])) {
+            $gez($dugum['telafi'], "{$yol}>telafi");
+        }
+    };
+
+    foreach (sartDepo()->esikler() as $esik) {
+        if (! str_ends_with($esik['kadro'], '_yeniden')) {
+            $gez($esik['sart'], $esik['anahtar']);
+        }
+    }
+
+    expect($hatalar)->toBe([]);
+});
+
+test('Atatürk AR-GE koşulu: yürütücülük puanı yetmezse Q1/Q2 yayınlarla tamamlanır', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Atatürk Üniversitesi', 'docentlik', 'fen');
+    $ad = 'Yürütücü olduğunuz projelerden en az 30 puan';
+
+    $tubitak = fn () => sartFaaliyet('TÜBİTAK', Kategori::Proje, 'yurutucu');   // 02.04.04 → 20
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)');                              // 02.01.01 → 60
+
+    // Tek TÜBİTAK yürütücülüğü 20 puan: 30'u karşılamıyor.
+    $eksik = sartDugum($depo->degerlendir($esik, [$tubitak()], new Profil), $ad);
+    expect($eksik->mevcut)->toBe(20)
+        ->and($eksik->durum)->toBe(Durum::Saglanmadi);
+
+    // Yönerge md. 5: en az bir yürütücülük varsa kalan Q1/Q2 yayınlardan tamamlanır.
+    $telafili = sartDugum($depo->degerlendir($esik, [$tubitak(), $q1()], new Profil), $ad);
+    expect($telafili->durum)->toBe(Durum::Saglandi)
+        ->and($telafili->telafiIleSaglandi())->toBeTrue();
+
+    // İki yürütücülük tek başına yeter; telafiye gerek kalmaz.
+    $dogrudan = sartDugum($depo->degerlendir($esik, [$tubitak(), $tubitak()], new Profil), $ad);
+    expect($dogrudan->mevcut)->toBe(40)
+        ->and($dogrudan->telafiIleSaglandi())->toBeFalse();
+});
+
+test('Sabancı program bazlı: aynı alanda program seçimi eşiği değiştirir', function () {
+    $depo = sartDepo();
+    $emf = 'MDBF — Endüstri Mühendisliği / Matematik / Fizik Programları';
+
+    // Aynı kadro ve temel alan, farklı program → farklı tez danışmanlığı eşiği.
+    $cs = $depo->bul('Sabancı Üniversitesi', 'docentlik', 'muhendislik', SU_CS);
+    $endustri = $depo->bul('Sabancı Üniversitesi', 'docentlik', 'muhendislik', $emf);
+
+    expect($cs['anahtar'])->toBe('sabanci-docent-mdbf-cs-muhendislik')
+        ->and($endustri['anahtar'])->toBe('sabanci-docent-mdbf-emf-muhendislik');
+
+    $profil = new Profil(dersYariyil: 2, projeYurutuculuk: 2, tezDanismanlik: 2);
+    $ad = 'lisansüstü tezde baş danışmanlık';
+
+    // CS 3 tez ister, Endüstri/Matematik/Fizik 2 — aynı adayda farklı sonuç.
+    expect(sartDugum($depo->degerlendir($cs, [], $profil), $ad)->gerekli)->toBe(3)
+        ->and(sartDugum($depo->degerlendir($endustri, [], $profil), $ad)->gerekli)->toBe(2);
+
+    // Program seçilmemişse hangi kriterin geçerli olduğu bilinemez.
+    expect($depo->bul('Sabancı Üniversitesi', 'docentlik', 'muhendislik'))->toBeNull();
+});
+
+test('Sabancı araştırma ağırlıklı yol: dokuz başarıdan beşi k_ile ile sınanır', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Sabancı Üniversitesi', 'profesorluk', 'muhendislik',
+        'MDBF Tüm Programlar — Araştırma ve Uygulama Ağırlıklı');
+
+    $sonuc = $depo->degerlendir($esik, [], new Profil);
+    $besBasari = sartDugum($sonuc, 'dokuz başarıdan en az beşini');
+
+    // Dokuz seçenek, beşi gerekli; hepsi beyan olduğu için karar belirsiz kalır
+    // ve aday "sağlanmadı" damgası yemez.
+    expect($besBasari->cocuklar)->toHaveCount(9)
+        ->and($besBasari->gerekli)->toBe(5)
+        ->and($besBasari->durum)->toBe(Durum::Belirsiz);
+
+    // Aynı kadroda eğitim-araştırma yolu çok daha düşük yayın eşiği istiyor.
+    $egitimYolu = $depo->bul('Sabancı Üniversitesi', 'profesorluk', 'muhendislik', SU_CS);
+
+    expect(sartDugum($depo->degerlendir($egitimYolu, [], new Profil), 'en az 16 makale')->gerekli)->toBe(16)
+        ->and(sartDugum($sonuc, 'en az 27 bilimsel makale')->gerekli)->toBe(27);
+});
+
+test('SSBF kitap eşdeğerlikleri CERES kategorisine göre farklı ağırlık taşır', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Sabancı Üniversitesi', 'docentlik', 'sosyal',
+        'SSBF — Ekonomi / Siyaset Bilimi / Psikoloji Programları');
+    $ad = 'en az 5 bilimsel makale';
+
+    $makale = fn () => sartFaaliyet('SCIE/SSCI (Q2)');
+    $kitapA = fn () => sartFaaliyet('BKCI / Scopus Kitap', Kategori::Kitap);   // CERES A → 3 makale
+    $kitapB = fn () => sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap); // CERES B → 2 makale
+
+    // 2 makale + CERES A kitap = 2 + 3 = 5.
+    $a = sartDugum($depo->degerlendir($esik, [$makale(), $makale(), $kitapA()], new Profil), $ad);
+    expect($a->mevcut)->toBe(5)
+        ->and($a->durum)->toBe(Durum::Saglandi);
+
+    // Aynı sayıda kitap ama B kategori: 2 + 2 = 4, yetmiyor.
+    $b = sartDugum($depo->degerlendir($esik, [$makale(), $makale(), $kitapB()], new Profil), $ad);
+    expect($b->mevcut)->toBe(4)
+        ->and($b->durum)->toBe(Durum::Saglanmadi);
+
+    // SSBF çeyreklik aramıyor: Q3 makale de ana kümeye sayılır (MDBF'de sayılmazdı).
+    $q3 = sartDugum($depo->degerlendir($esik, array_map(
+        fn () => sartFaaliyet('SCIE/SSCI (Q3)'), range(1, 5),
+    ), new Profil), $ad);
+    expect($q3->mevcut)->toBe(5);
+});
+
+test('YBF danışmanlık koşulu ağırlıklı puanla ölçülür', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Sabancı Üniversitesi', 'docentlik', 'sosyal', 'YBF — Yönetim Bilimleri Fakültesi');
+    $ad = 'Danışmanlıklardan en az 4 puan';
+
+    $dr = fn () => sartFaaliyet('Doktora Tezi', Kategori::TezDanismanligi, 'danisman');        // 4
+    $yl = fn () => sartFaaliyet('Yüksek Lisans Tezi', Kategori::TezDanismanligi, 'danisman');  // 2
+
+    // Tek doktora tezi 4 puan → koşul karşılanır.
+    expect(sartDugum($depo->degerlendir($esik, [$dr()], new Profil), $ad)->mevcut)->toBe(4);
+
+    // Aynı sayıda ama yüksek lisans: 2 puan, yetmiyor.
+    expect(sartDugum($depo->degerlendir($esik, [$yl()], new Profil), $ad)->durum)->toBe(Durum::Saglanmadi);
+
+    // İki yüksek lisans = 4 puan, doktora tezine denk.
+    expect(sartDugum($depo->degerlendir($esik, [$yl(), $yl()], new Profil), $ad)->durum)->toBe(Durum::Saglandi);
+});
+
+test('EK-4 eğitim ağırlıklı yolda sanatsal sergi makale şartını karşılar', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Sabancı Üniversitesi', 'docentlik', 'guzel_sanatlar',
+        'Eğitim Ağırlıklı Kariyer Gelişim Yolu (tüm fakülteler)');
+    $ad = 'en az 3 bilimsel makale';
+    $profil = new Profil(docentlikTarihi: Carbon::parse('2015-01-01'));
+
+    $bienal = fn () => sartFaaliyet('Kişisel Etkinlik (Uluslararası)', Kategori::SanatselEtkinlik,
+        yazarRolu: null, tarih: '2022-05-01');
+    $solo = fn () => sartFaaliyet('Kişisel Etkinlik (Ulusal)', Kategori::SanatselEtkinlik,
+        yazarRolu: null, tarih: '2022-05-01');
+
+    // Yönerge: uluslararası solo sergi / bienal = 2 solo sergi.
+    // 1 bienal (2) + 1 solo (1) = 3 → makale şartı karşılanır.
+    $karma = sartDugum($depo->degerlendir($esik, [$bienal(), $solo()], $profil), $ad);
+    expect($karma->mevcut)->toBe(3)
+        ->and($karma->durum)->toBe(Durum::Saglandi);
+
+    // Tek solo sergi 1 sayılır, yetmez.
+    expect(sartDugum($depo->degerlendir($esik, [$solo()], $profil), $ad)->durum)->toBe(Durum::Saglanmadi);
+
+    // Giriş koşulları belge ile teyit edildiği için kök belirsiz kalır —
+    // aday 10 yıl kıdemi yok diye "sağlanmadı" damgası yemez.
+    $sonuc = $depo->degerlendir($esik, [$bienal(), $solo()], $profil);
+    expect($sonuc->beyanlar())->not->toBeEmpty()
+        ->and($sonuc->durum)->toBe(Durum::Belirsiz);
+});
+
+test('Mersin tek cetvelde üç listeyi ayrı tutar — puan listeler arası sızmaz', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    // Aynı adayda hem TABLO A (makale) hem TABLO B (sergi) kalemi var.
+    $faaliyetler = [
+        sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01'),                         // Liste A · 2.a = 50
+        sartFaaliyet('Kişisel Etkinlik (Uluslararası)', Kategori::SanatselEtkinlik,  // TABLO B · ç-1 = 30
+            yazarRolu: null, tarih: '2020-01-01'),
+        sartFaaliyet('Resital (Uluslararası)', Kategori::SanatselEtkinlik,           // TABLO C · 1b-1 = 40
+            yazarRolu: null, tarih: '2020-01-01'),
+    ];
+
+    $baraj = function (string $alan) use ($depo, $faaliyetler, $profil): SartSonucu {
+        $esik = $depo->bul('Mersin Üniversitesi', 'docentlik', $alan);
+
+        return $depo->degerlendir($esik, $faaliyetler, $profil)->rolile('toplam');
+    };
+
+    // Sağlık/fen adayı: yalnızca Liste A sayılır, sanat kalemleri barajına girmez.
+    expect($baraj('saglik')->mevcut)->toBe(50)
+        ->and($baraj('saglik')->aciklama)->toContain('Liste A');
+
+    // Güzel sanatlar: TABLO B + C sayılır, makale barajına GİRMEZ.
+    expect($baraj('guzel_sanatlar')->mevcut)->toBe(70)
+        ->and($baraj('guzel_sanatlar')->aciklama)->toContain('TABLO B + C');
+
+    // Mimarlık: yönerge barajı iki listeden BİRLİKTE istiyor (md. 2.2 e-7).
+    expect($baraj('mimarlik')->mevcut)->toBe(80)
+        ->and($baraj('mimarlik')->aciklama)->toContain('Liste A + TABLO B');
+
+    // Baraj düğümü kapsam rozeti taşımaz — 68 kalemlik liste okunmaz olurdu.
+    expect($baraj('guzel_sanatlar')->kapsam)->toBe([]);
+});
+
+test('Sabancı tek cetvelde dört fakültenin kabul kümesini ayrı tutar', function () {
+    $katalog = sartDepo()->katalog('sabanci-turler');
+
+    // Yönergenin dört eki farklı dergi kümesi kabul ediyor. Dört blok tek
+    // dosyada birleştiğinde ilk bozulacak şey budur: bir maddenin kaynak
+    // etiketi komşu fakülteye sızarsa aday yanlış fakültenin ölçütüyle ölçülür.
+    $kabul = fn (string $kaynak, string $grup) => $katalog->eslesir(
+        sartFaaliyet($kaynak), $katalog->coz([$grup]),
+    );
+
+    // SCOPUS: SSBF ve EK-4 sayıyor, MDBF ve YBF saymıyor.
+    expect($kabul('ESCI / Scopus', 'SSBF-MAKALE'))->toBeTrue()
+        ->and($kabul('ESCI / Scopus', 'EGITIM-MAKALE'))->toBeTrue()
+        ->and($kabul('ESCI / Scopus', 'MDBF-MAKALE'))->toBeFalse()
+        ->and($kabul('ESCI / Scopus', 'YBF-MAKALE'))->toBeFalse();
+
+    // Q3: çeyreklik şartı olmayan SSBF ve YBF sayıyor; MDBF yalnızca ikame
+    // maddesinde (SU-M2), EK-4 hiç saymıyor.
+    expect($kabul('SCIE/SSCI (Q3)', 'SSBF-MAKALE'))->toBeTrue()
+        ->and($kabul('SCIE/SSCI (Q3)', 'YBF-MAKALE'))->toBeTrue()
+        ->and($kabul('SCIE/SSCI (Q3)', 'EGITIM-MAKALE'))->toBeFalse();
+
+    // Q1 dördünde de sayılır — ayrım kabul kümesinin ucunda, ortasında değil.
+    foreach (['MDBF-MAKALE', 'SSBF-MAKALE', 'YBF-MAKALE', 'EGITIM-MAKALE'] as $grup) {
+        expect($kabul('SCIE/SSCI (Q1)', $grup))->toBeTrue();
+    }
+
+    // Kod uzayları ayrık: hiçbir madde iki fakültenin grubuna birden düşmez.
+    $gruplar = ['MDBF-MAKALE', 'SSBF-MAKALE', 'YBF-MAKALE', 'EGITIM-MAKALE',
+        'SSBF-CERES', 'YBF-DANISMANLIK', 'EGITIM-SERGI'];
+    $tum = array_merge(...array_map(fn (string $g) => $katalog->coz([$g]), $gruplar));
+    expect($tum)->toHaveCount(count(array_unique($tum)));
+});
+
+test('ÜAK 12 temel alan cetveli ortak gövdeden doğru türetiliyor', function () {
+    $depo = sartDepo();
+    $alanlar = ['fen', 'sosyal', 'muhendislik', 'saglik', 'egitim', 'filoloji',
+        'hukuk', 'ilahiyat', 'mimarlik', 'spor', 'ziraat', 'guzel_sanatlar'];
+
+    $katalog = fn (string $alan) => $depo->katalog("uak-2024-mart-{$alan}");
+
+    foreach ($alanlar as $alan) {
+        expect($katalog($alan))->not->toBeNull("uak-2024-mart-{$alan} üretilmedi");
+    }
+
+    // Ortak gövde: 43 kalem on iki tabloda da aynı. Tek dosyaya taşınmasının
+    // sebebi buydu — bir kalem bir alanda düzeltilip diğerlerinde unutulamaz.
+    foreach (['1a-Q1' => 30, '1c' => 10, '4a' => 20, '2a' => 10] as $kod => $puan) {
+        foreach ($alanlar as $alan) {
+            expect($katalog($alan)->maddePuani($kod))->toBe($puan, "{$alan}/{$kod}");
+        }
+    }
+
+    // Ayrışan sekiz kalem: ÜAK tabloları burada gerçekten farklı.
+    expect($katalog('ilahiyat')->maddePuani('3d'))->toBe(5)      // diğerlerinde 8
+        ->and($katalog('fen')->maddePuani('3d'))->toBe(8)
+        ->and($katalog('hukuk')->maddePuani('4c'))->toBe(20)     // diğerlerinde 5
+        ->and($katalog('fen')->maddePuani('4c'))->toBe(5)
+        ->and($katalog('muhendislik')->maddePuani('3ı'))->toBe(5) // diğerlerinde 3
+        ->and($katalog('sosyal')->maddePuani('3g'))->toBe(3);     // fen'de 5
+
+    // 4e (tahkik) yalnız İlahiyat tablosunda var ve yalnız oradaki gruba girer.
+    expect($katalog('ilahiyat')->maddePuani('4e'))->toBe(10)
+        ->and($katalog('fen')->maddeler)->not->toHaveKey('4e')
+        ->and($katalog('ilahiyat')->coz(['4cde']))->toContain('4e')
+        ->and($katalog('fen')->coz(['4cd']))->not->toContain('4e');
+
+    // Grup kırılımı da alana göre değişiyor: '3gh' fen/mühendislik/mimarlık/
+    // ziraat tablolarında yok.
+    expect($katalog('sosyal')->gruplar)->toHaveKey('3gh')
+        ->and($katalog('fen')->gruplar)->not->toHaveKey('3gh');
+
+    // Kapsam açığı alana göre farklı — notun doğru sayıyı söylemesi gerekiyor.
+    expect($katalog('fen')->kapsamNotu)->toContain('en fazla 16 puan')
+        ->and($katalog('sosyal')->kapsamNotu)->toContain('en fazla 26 puan')
+        ->and($katalog('ilahiyat')->kapsamNotu)->toContain('en fazla 26 puan')
+        ->and($katalog('spor')->kapsamNotu)->toContain('en fazla 21 puan');
 });

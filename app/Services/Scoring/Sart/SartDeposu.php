@@ -8,22 +8,27 @@ use App\Models\Faaliyet;
  * Şart ağaçlarını ve madde cetvellerini veri dosyalarından okur, bir eşik için
  * hazır değerlendirici üretir.
  *
- * Veri dosyaları: database/data/esikler-agac.php · database/data/cetveller-agac.php
+ * Veri dosyaları: database/data/yonerge/{slug}.php · database/data/cetvel/{anahtar}.php
  *
  * @phpstan-import-type Madde from MaddeKatalogu
  *
  * @phpstan-type Esik array{
  *     anahtar: string, universite: string, kadro: string, alan: string,
- *     birim: ?string, cetvel: string, notlar: string, sart: array<string, mixed>,
+ *     birim: ?string, cetvel: string, notlar: string, aday_notu: ?string,
+ *     sart: array<string, mixed>,
  * }
  * @phpstan-type Cetvel array{
  *     maddeler: array<string, Madde>,
  *     gruplar?: array<string, list<string>>,
  *     grup_tavanlari?: array<string, int>,
+ *     kapsam_notu?: string,
  * }
  */
 class SartDeposu
 {
+    /** Eşik kaydının opsiyonel alanları. @var array<string, mixed> */
+    private const VARSAYILANLAR = ['birim' => null, 'aday_notu' => null, 'durum' => 'dogrulandi'];
+
     /** @var list<Esik>|null */
     private ?array $esikler = null;
 
@@ -43,12 +48,57 @@ class SartDeposu
     ) {}
 
     /**
+     * Tüm eşikler. Üniversite başına bir dosya okunur
+     * (database/data/yonerge/{slug}.php); `_` ile başlayanlar atlanır.
+     *
+     * Bir kaydın `alan`ı dizi olabilir — grup satırı, alan başına ayrı kayda
+     * açılır. Böylece motor tarafında hiçbir gruplama/fallback mantığı kalmaz:
+     * eşleşme daima tam (kadro + alan) eşleşmesidir.
+     *
      * @return list<Esik>
      */
     public function esikler(): array
     {
-        /** @var list<Esik> */
-        return $this->esikler ??= $this->esikVerisi ?? require database_path('data/esikler-agac.php');
+        if ($this->esikler !== null) {
+            return $this->esikler;
+        }
+
+        if ($this->esikVerisi !== null) {
+            // Enjekte edilen veri de aynı şekle sahip olmalı; aksi hâlde
+            // opsiyonel alanlar yalnızca üretim yolunda tanımlı olur.
+            return $this->esikler = array_map(
+                fn (array $esik): array => array_merge(self::VARSAYILANLAR, $esik),
+                $this->esikVerisi,
+            );
+        }
+
+        $esikler = [];
+
+        foreach ($this->dosyalar(database_path('data/yonerge')) as $dosya) {
+            /** @var list<array<string, mixed>> $satirlar */
+            $satirlar = require $dosya;
+
+            foreach ($satirlar as $satir) {
+                foreach ((array) $satir['alan'] as $alan) {
+                    /** @var Esik $kayit */
+                    $kayit = array_merge(
+                        self::VARSAYILANLAR,
+                        $satir,
+                        [
+                            'alan' => $alan,
+                            'anahtar' => "{$satir['anahtar']}-{$alan}",
+                            // Puanlamayı ÜAK'a devreden yönergelerde cetvel alana
+                            // göre değişir (ÜAK her temel alan için ayrı tablo
+                            // yayımlıyor): 'cetvel' => 'uak-2025-{alan}'.
+                            'cetvel' => str_replace('{alan}', $alan, (string) $satir['cetvel']),
+                        ],
+                    );
+                    $esikler[] = $kayit;
+                }
+            }
+        }
+
+        return $this->esikler = $esikler;
     }
 
     /**
@@ -60,8 +110,28 @@ class SartDeposu
             return $this->cetveller;
         }
 
-        /** @var array<string, Cetvel> $ham */
-        $ham = $this->cetvelVerisi ?? require database_path('data/cetveller-agac.php');
+        if ($this->cetvelVerisi !== null) {
+            $ham = $this->cetvelVerisi;
+        } else {
+            $ham = [];
+
+            foreach ($this->dosyalar(database_path('data/cetvel')) as $dosya) {
+                /** @var Cetvel|array{cetveller: array<string, Cetvel>} $icerik */
+                $icerik = require $dosya;
+
+                // Bir dosya normalde tek cetveldir ve adını dosyadan alır. Aynı
+                // kaynağın alan başına ayrı tablo yayımladığı yerlerde (ÜAK'ın
+                // 12 temel alan tablosu) tablolar ortak bir gövdeden türetilir;
+                // o dosya `cetveller` anahtarıyla hepsini birden döndürür.
+                if (isset($icerik['cetveller'])) {
+                    $ham = array_merge($ham, $icerik['cetveller']);
+
+                    continue;
+                }
+
+                $ham[basename($dosya, '.php')] = $icerik;
+            }
+        }
 
         $this->cetveller = [];
 
@@ -71,6 +141,7 @@ class SartDeposu
                 maddeler: $cetvel['maddeler'],
                 gruplar: $cetvel['gruplar'] ?? [],
                 grupTavanlari: $cetvel['grup_tavanlari'] ?? [],
+                kapsamNotu: $cetvel['kapsam_notu'] ?? null,
             );
         }
 
@@ -80,6 +151,22 @@ class SartDeposu
     public function katalog(string $anahtar): ?MaddeKatalogu
     {
         return $this->cetveller()[$anahtar] ?? null;
+    }
+
+    /**
+     * Klasördeki veri dosyaları. `_` ile başlayanlar ortak kalıp/yardımcıdır,
+     * veri değildir.
+     *
+     * @return list<string>
+     */
+    private function dosyalar(string $klasor): array
+    {
+        $bulunan = glob($klasor.'/*.php') ?: [];
+
+        return array_values(array_filter(
+            $bulunan,
+            fn (string $yol) => ! str_starts_with(basename($yol), '_'),
+        ));
     }
 
     /**
@@ -107,19 +194,58 @@ class SartDeposu
     }
 
     /**
+     * Bir üniversitenin program bazlı eşiklerindeki birim adları.
+     *
+     * Boş dönerse yönerge programdan bağımsızdır ve kullanıcıya program
+     * sorulmasına gerek yoktur.
+     *
+     * @return list<string>
+     */
+    public function birimler(string $universite): array
+    {
+        $birimler = [];
+
+        foreach ($this->esikler() as $esik) {
+            if ($esik['universite'] === $universite && $esik['birim'] !== null) {
+                $birimler[$esik['birim']] = true;
+            }
+        }
+
+        return array_keys($birimler);
+    }
+
+    /**
      * Üniversite + kadro + temel alan için tam eşleşen eşik. Yoksa null döner
      * ve üniversite listede gösterilmez — tahmini eşik üretilmez.
+     *
+     * Programa özgü bir eşik (birim dolu) YALNIZCA o program seçiliyse eşleşir.
+     * Eskiden `$birim === null` her şeyi eşleştiriyordu; Sabancı gibi aynı temel
+     * alanda birden çok programı olan yönergelerde bu, dosyada önce gelen kaydı
+     * döndürüp Endüstri Mühendisliği adayına Bilgisayar Bilimleri kriterlerini
+     * gösterirdi.
      *
      * @return Esik|null
      */
     public function bul(string $universite, string $kadro, string $alan, ?string $birim = null): ?array
     {
-        foreach ($this->esikler() as $esik) {
-            if ($esik['universite'] === $universite
+        $adaylar = array_values(array_filter(
+            $this->esikler(),
+            fn (array $esik) => $esik['universite'] === $universite
                 && $esik['kadro'] === $kadro
-                && $esik['alan'] === $alan
-                && ($birim === null || $esik['birim'] === null || $esik['birim'] === $birim)
-            ) {
+                && $esik['alan'] === $alan,
+        ));
+
+        // Program yalnızca BELİRSİZLİK varsa gerekir: tek aday varsa program
+        // bilinmese de o kullanılır. Birden fazla aday varsa (Sabancı gibi
+        // program bazlı yönergeler) doğrusunu seçmek imkânsızdır — eskiden
+        // dosyada önce gelen kayıt dönüyor, Endüstri Mühendisliği adayına
+        // Bilgisayar Bilimleri kriterleri gösteriliyordu.
+        if (count($adaylar) <= 1) {
+            return $adaylar[0] ?? null;
+        }
+
+        foreach ($adaylar as $esik) {
+            if ($esik['birim'] === $birim) {
                 return $esik;
             }
         }
@@ -141,9 +267,13 @@ class SartDeposu
             throw new \RuntimeException("Cetvel bulunamadı: {$esik['cetvel']}");
         }
 
+        // `referans` düğümü hedefi `{alan}` yer tutucusuyla yazabilir
+        // (ör. profesörlük, aynı alanın doçentlik şartını yeniden çağırır).
         $degerlendirici = new SartDegerlendirici(
             $katalog,
-            fn (string $anahtar): ?array => $this->esik($anahtar),
+            fn (string $anahtar): ?array => $this->esik(
+                str_replace('{alan}', $esik['alan'], $anahtar),
+            ),
         );
 
         return $degerlendirici->degerlendir($esik['sart'], $faaliyetler, $profil);

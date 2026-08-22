@@ -155,13 +155,20 @@ test('hazır öneri gönderilir', function () {
         ->toBe('Hangi kategoride eksiğim var?');
 });
 
-test('sistem promptu profil ve puan verisini içerir', function () {
-    $prompt = (new DanismanContext)->sistemPrompt($this->user->refresh());
+test('sistem promptu profil ve değerlendirme verisini içerir', function () {
+    $prompt = app(DanismanContext::class)->sistemPrompt($this->user->refresh());
 
     expect($prompt)->toContain($this->user->name)
-        ->and($prompt)->toContain('İlahiyat 2026')
-        ->and($prompt)->toContain('Toplam Puan')
-        ->and($prompt)->toContain('ÜAK Hedefi');
+        ->and($prompt)->toContain('AKADEMİSYEN PROFİLİ')
+        ->and($prompt)->toContain('YÖNERGE DEĞERLENDİRMESİ')
+        ->and($prompt)->toContain('FAALİYET DAĞILIMI')
+        // Kullanıcı Mersin'de ve Mersin'in verisi girili → gerçek değerlendirme.
+        // Kullanıcı Mersin'de (onboarded fabrikası) ve Mersin'in verisi girili
+        // → prompt gerçek eşik değerlendirmesini taşır, uydurma puan taşımaz.
+        ->and($prompt)->toContain('Genel sonuç:')
+        ->and($prompt)->toContain('Liste A kalemlerinden toplam en az 220 puan')
+        // Modele "belirsiz ≠ sağlanmadı" talimatı veriliyor.
+        ->and($prompt)->toContain('SAĞLANMADIĞI anlamına GELMEZ');
 });
 
 test('başka kullanıcının sohbetleri listede görünmez', function () {

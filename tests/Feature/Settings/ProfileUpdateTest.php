@@ -2,6 +2,7 @@
 
 use App\Livewire\Settings\Profile;
 use App\Models\User;
+use App\Services\Scoring\Sart\SartDeposu;
 use Livewire\Livewire;
 
 test('profile page is displayed', function () {
@@ -164,4 +165,107 @@ test('geçersiz akademik değer doğrulamaya takılır', function () {
         ->set('akademik.program_dili', 'klingonca')
         ->call('updateProfileInformation')
         ->assertHasErrors(['akademik.doktora_tarihi', 'akademik.h_indeksi', 'akademik.program_dili']);
+});
+
+test('akademik unvan profilden görüntülenir ve güncellenir', function () {
+    $user = User::factory()->create(['unvan' => 'Dr. Öğr. Üyesi', 'temel_alan' => 'sosyal']);
+
+    $sayfa = Livewire::actingAs($user)->test(Profile::class);
+
+    // Mevcut unvan forma yüklenmeli.
+    expect($sayfa->get('unvan'))->toBe('Dr. Öğr. Üyesi');
+    $sayfa->assertSee('Akademik Unvan');
+
+    // Terfi edince güncellenebilmeli: Yönerge Analizi hedef kadroyu buradan
+    // türetiyor, daha önce yalnızca onboarding'de sorulup bir daha
+    // değiştirilemiyordu.
+    $sayfa->set('unvan', 'Doç. Dr.')->call('updateProfileInformation')->assertHasNoErrors();
+
+    expect($user->fresh()->unvan)->toBe('Doç. Dr.');
+});
+
+test('listede olmayan unvan reddedilir', function () {
+    $user = User::factory()->create(['temel_alan' => 'sosyal']);
+
+    Livewire::actingAs($user)->test(Profile::class)
+        ->set('unvan', 'Rektör')
+        ->call('updateProfileInformation')
+        ->assertHasErrors('unvan');
+});
+
+test('tarih alanları forma Y-m-d olarak yüklenir', function () {
+    $user = User::factory()->create([
+        'temel_alan' => 'sosyal',
+        'lisans_tarihi' => '2016-06-20',
+        'doktora_tarihi' => '2023-09-15',
+    ]);
+
+    // Uygulama CarbonImmutable kullanıyor; somut sınıfa bakan bir kontrol
+    // tarihi "2016-06-20 00:00:00" olarak stringe çeviriyor ve
+    // input[type=date] onu reddedip alan boş görünüyordu.
+    $sayfa = Livewire::actingAs($user)->test(Profile::class);
+
+    expect($sayfa->get('akademik')['lisans_tarihi'])->toBe('2016-06-20')
+        ->and($sayfa->get('akademik')['doktora_tarihi'])->toBe('2023-09-15');
+});
+
+test('profil doluluk oranı formdaki tüm alanları sayar', function () {
+    $user = User::factory()->create([
+        'temel_alan' => 'sosyal',
+        'lisans_tarihi' => '2016-06-20',
+        'doktora_tarihi' => '2023-09-15',
+        'docentlik_tarihi' => '2028-01-01',
+        'son_atama_tarihi' => '2024-09-01',
+        'program_dili' => 'turkce',
+        'yds_puani' => 80,
+        'h_indeksi' => 5,
+        'yurtdisi_ay' => 6,
+    ]);
+
+    expect($user->profilDoluluk())->toBe(100);
+});
+
+test('program seçimi yalnızca program bazlı yönergesi olan üniversitede çıkar', function () {
+    $depo = new SartDeposu(
+        esikVerisi: [
+            ['anahtar' => 'a', 'universite' => 'Program Üni', 'kadro' => 'docentlik', 'alan' => 'fen',
+                'birim' => 'A Programı', 'cetvel' => 'x', 'notlar' => '', 'sart' => ['tip' => 'beyan', 'aciklama' => 'x']],
+            ['anahtar' => 'b', 'universite' => 'Düz Üni', 'kadro' => 'docentlik', 'alan' => 'fen',
+                'birim' => null, 'cetvel' => 'x', 'notlar' => '', 'sart' => ['tip' => 'beyan', 'aciklama' => 'x']],
+        ],
+        cetvelVerisi: ['x' => ['maddeler' => []]],
+    );
+    app()->instance(SartDeposu::class, $depo);
+
+    $programli = User::factory()->create(['temel_alan' => 'fen', 'universite' => 'Program Üni']);
+    Livewire::actingAs($programli)->test(Profile::class)->assertSee('Program seçin...');
+
+    // Programdan bağımsız yönergede kullanıcıyı gereksiz soruyla meşgul etme.
+    $duz = User::factory()->create(['temel_alan' => 'fen', 'universite' => 'Düz Üni']);
+    Livewire::actingAs($duz)->test(Profile::class)->assertDontSee('Program seçin...');
+});
+
+test('aynı alanda birden çok program varsa eşik ancak program seçilince bulunur', function () {
+    $esik = fn (string $anahtar, ?string $birim) => [
+        'anahtar' => $anahtar, 'universite' => 'Çok Programlı Üni', 'kadro' => 'docentlik',
+        'alan' => 'muhendislik', 'birim' => $birim, 'cetvel' => 'x', 'notlar' => '',
+        'sart' => ['tip' => 'beyan', 'aciklama' => $anahtar],
+    ];
+
+    $depo = new SartDeposu(
+        esikVerisi: [$esik('bilgisayar', 'Bilgisayar'), $esik('endustri', 'Endüstri')],
+        cetvelVerisi: ['x' => ['maddeler' => []]],
+    );
+
+    // Program seçilmemişse hangisinin doğru olduğu bilinemez → null.
+    expect($depo->bul('Çok Programlı Üni', 'docentlik', 'muhendislik'))->toBeNull()
+        ->and($depo->bul('Çok Programlı Üni', 'docentlik', 'muhendislik', 'Endüstri')['anahtar'])->toBe('endustri');
+
+    // Tek eşik varsa program bilinmese de kullanılır.
+    $tek = new SartDeposu(
+        esikVerisi: [$esik('bilgisayar', 'Bilgisayar')],
+        cetvelVerisi: ['x' => ['maddeler' => []]],
+    );
+
+    expect($tek->bul('Çok Programlı Üni', 'docentlik', 'muhendislik')['anahtar'])->toBe('bilgisayar');
 });

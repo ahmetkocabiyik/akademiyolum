@@ -32,6 +32,7 @@
                                 <th class="px-2 py-2 font-semibold">Başlık</th>
                                 <th class="px-2 py-2 font-semibold">Kategori</th>
                                 <th class="px-2 py-2 font-semibold">Tür / Kaynak</th>
+                                <th class="px-2 py-2 font-semibold">Tarih</th>
                                 <th class="px-2 py-2 font-semibold">Puan</th>
                                 <th class="px-2 py-2 font-semibold">Durum</th>
                                 <th class="px-2 py-2 text-right font-semibold">İşlem</th>
@@ -39,15 +40,34 @@
                         </thead>
                         <tbody>
                             @foreach ($faaliyetler as $f)
-                                <tr wire:key="faaliyet-{{ $f->id }}" class="border-b border-line last:border-0 hover:bg-canvas">
+                                {{--
+                                    Satırın tamamı düzenlemeye götürür. Başlık gerçek bir <a>
+                                    olduğu için klavye ve ekran okuyucu erişimi korunur; satır
+                                    tıklaması yalnızca fare için o bağlantıyı tetikler. İşlem
+                                    sütunundaki düğmeler hariç tutulur, aksi hâlde silme
+                                    isteği aynı anda düzenlemeye de giderdi.
+                                --}}
+                                <tr wire:key="faaliyet-{{ $f->id }}"
+                                    x-data
+                                    x-on:click="$event.target.closest('a, button') || $refs.duzenle.click()"
+                                    class="cursor-pointer border-b border-line last:border-0 hover:bg-canvas">
                                     <td class="max-w-[260px] truncate px-2 py-2.5 font-medium text-ink">
-                                        {{ $f->baslik }}
+                                        <a href="{{ route('faaliyetler.duzenle', $f) }}" wire:navigate x-ref="duzenle"
+                                            class="hover:text-brand">{{ $f->baslik }}</a>
                                         <div class="text-[10px] text-ink-subtle">{{ $f->yazarlar }}</div>
                                     </td>
                                     <td class="px-2 py-2.5"><flux:badge size="sm">{{ $f->kategori->label() }}</flux:badge></td>
                                     <td class="px-2 py-2.5 text-ink-muted">
                                         {{ $f->tur }}
                                         @if ($f->kaynak)<div class="text-[10px] text-ink-subtle">{{ $f->kaynak }}</div>@endif
+                                    </td>
+                                    {{-- Dönem koşulları bu tarihe bakıyor; boşsa aday görüp tamamlayabilsin. --}}
+                                    <td class="px-2 py-2.5 text-ink-muted">
+                                        @if ($f->tarih)
+                                            {{ $f->tarih->format('d.m.Y') }}
+                                        @else
+                                            <span class="text-[11px] text-cat-amber-text">girilmemiş</span>
+                                        @endif
                                     </td>
                                     <td class="px-2 py-2.5 font-serif font-bold text-brand">{{ $f->puan }}</td>
                                     <td class="px-2 py-2.5">
