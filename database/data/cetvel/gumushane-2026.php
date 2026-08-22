@@ -99,6 +99,19 @@ return [
         'M4' => ['baslik' => 'Eğitim-öğretim danışmanlığı (yıllık)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Akreditasyon Faaliyeti'], 'puan' => 2],
 
         'T1' => ['baslik' => 'Lisansüstü tezden üretilmiş yayın', 'kategori' => 'tez_yayini', 'puan' => 10],
+
+        // ── G. PATENTLER, FAYDALI MODEL VE ENDÜSTRİYEL TASARIMLAR ──
+        // Yönerge slash ile birden çok kalemi tek satırda veriyor:
+        // "G2. Uluslararası tescillenmiş patent / faydalı model ve tasarım 60/30".
+        //
+        // Faydalı model ve tasarım için uluslararası (30) ile ulusal (20) ayrımı
+        // kaynak sözlüğümüzde YOK. Düşük değer alındı: `puan()` en yükseği
+        // aldığı için 30 yazılsaydı her ulusal faydalı model uluslararası gibi
+        // puanlanırdı.
+        'G1' => ['baslik' => 'Ticarileştirilmiş patent sahipliği (buluş sahibi olmak şartıyla)', 'kategori' => 'patent', 'kaynaklar' => ['Ticarileştirme'], 'puan' => 70],
+        'G2' => ['baslik' => 'Uluslararası tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 60],
+        'G3' => ['baslik' => 'Ulusal tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 40],
+        'G3b' => ['baslik' => 'Tescillenmiş faydalı model veya endüstriyel tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım'], 'puan' => 20],
     ],
 
     'gruplar' => [
@@ -117,6 +130,7 @@ return [
         'M' => ['M*'],
         'P' => ['P*'],
         'M3-M4' => ['M3', 'M4'],
+        'G' => ['G*'],
     ],
 
     'grup_tavanlari' => [
@@ -128,5 +142,7 @@ return [
         'M' => 60,
         // "Bu madde kapsamında en fazla 60P alınabilir."
         'P' => 60,
+        // "Bu bölümden en fazla 100P alınabilir."
+        'G' => 100,
     ],
 ];

@@ -106,6 +106,46 @@ return [
             'kategori' => 'tez_yayini',
             'puan' => 40,
         ],
+
+        // ── 4. PROJELER ──
+        // "Yürütücü olarak görev alanlar tam puan, araştırmacı/danışman/bursiyer
+        // olarak görev alanlar ise ilgili maddedeki puanın %50'sini alır."
+        // Bu yüzden her fon kaynağı iki maddeye açılıyor.
+        '4.1y' => ['baslik' => 'Dünya Bankası/AB vb. uluslararası kuruluş projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 140],
+        '4.1a' => ['baslik' => 'Dünya Bankası/AB vb. uluslararası kuruluş projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 70],
+        '4.2y' => ['baslik' => 'TÜBA veya TÜBİTAK destekli projede yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['yurutucu'], 'puan' => 100],
+        '4.2a' => ['baslik' => 'TÜBA veya TÜBİTAK destekli projede araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 50],
+
+        // 4.3 (bakanlık, 80) ile 4.4 (diğer kamu, 60) ayrı kalemler ama kaynak
+        // sözlüğümüz ikisini ayırt etmiyor. DÜŞÜK değer alındı: `puan()` en
+        // yükseği aldığı için 80 yazılsaydı her kamu projesi bakanlık projesi
+        // gibi puanlanırdı. Eksik kalmak, olduğundan fazla göstermekten iyidir.
+        '4.3y' => ['baslik' => 'Bakanlık veya diğer kamu kuruluşu projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'roller' => ['yurutucu'], 'puan' => 60],
+        '4.3a' => ['baslik' => 'Bakanlık veya diğer kamu kuruluşu projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 30],
+        '4.5y' => ['baslik' => 'Özel kuruluş destekli Ar-Ge projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['yurutucu'], 'puan' => 60],
+        '4.5a' => ['baslik' => 'Özel kuruluş destekli Ar-Ge projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 30],
+        '4.6y' => ['baslik' => 'Yükseköğretim kurumu destekli araştırma projesinde (BAP) yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 40],
+        '4.6a' => ['baslik' => 'Yükseköğretim kurumu destekli araştırma projesinde (BAP) araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
+
+        // ── 5. PATENT / TESCİL EDİLMİŞ BULUŞ / FAYDALI MODEL ──
+        // Sözlükle birebir örtüşüyor; beşi de ayrı etiket taşıyor.
+        '5.1' => ['baslik' => 'Alanında uluslararası tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 140],
+        '5.2' => ['baslik' => 'Alanında ulusal tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 115],
+        '5.3' => ['baslik' => 'Faydalı model', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model'], 'puan' => 70],
+        '5.4' => ['baslik' => 'Endüstriyel tasarım tescili', 'kategori' => 'patent', 'kaynaklar' => ['Endüstriyel Tasarım'], 'puan' => 45],
+        '5.5' => ['baslik' => 'Çeşit/ırk/tür tescili', 'kategori' => 'patent', 'kaynaklar' => ['Islahçı Hakkı / Çeşit Tescili'], 'puan' => 45],
+
+        // ── 6. ÇEVİRİLER ──
+        '6.1' => ['baslik' => 'Alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 25],
+        '6.2' => ['baslik' => 'Alanında makale, kitap bölümü veya karar tahlili çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
+
+        // ── 8. ATIFLAR ──
+        // 8.1 (h faktörü × 10) bir metriktir, faaliyet satırı başına puan
+        // değildir; cetvelde ifade edilemiyor ve girilmedi.
+        '8.2' => ['baslik' => 'SCI/SCIE/SSCI/AHCI dergilerde yayımlanan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 7],
+        '8.3' => ['baslik' => 'Diğer endeks ve özlerce taranan dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 4],
+        '8.4' => ['baslik' => 'Hakemli dergi, tez veya bilimsel kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
+        '8.5' => ['baslik' => 'Diğer yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 1],
     ],
     'gruplar' => [
         '1.1' => ['1.1a', '1.1b', '1.1c', '1.1d'],
@@ -116,5 +156,10 @@ return [
         'BILDIRI' => ['2.*'],
         'KITAP' => ['3.1', '3.2'],
         'KITAP_BOLUM' => ['3.3', '3.4'],
+        'PROJE' => ['4.*'],
+        'PROJE_YURUTUCU' => ['4.1y', '4.2y', '4.3y', '4.5y', '4.6y'],
+        'PATENT' => ['5.*'],
+        'CEVIRI' => ['6.*'],
+        'ATIF' => ['8.*'],
     ],
 ];

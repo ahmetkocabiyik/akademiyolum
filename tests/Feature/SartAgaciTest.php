@@ -1234,3 +1234,52 @@ test('ÜAK 12 temel alan cetveli ortak gövdeden doğru türetiliyor', function 
         ->and($katalog('ilahiyat')->kapsamNotu)->toContain('en fazla 26 puan')
         ->and($katalog('spor')->kapsamNotu)->toContain('en fazla 21 puan');
 });
+
+describe('taslak eşikler adaya gösterilmez', function () {
+    /** Biri doğrulanmış biri taslak, aynı üniversitenin iki ayrı alanı. */
+    $depo = fn () => new SartDeposu(
+        esikVerisi: [
+            [
+                'anahtar' => 'x-dogru', 'universite' => 'X Üniversitesi',
+                'kadro' => 'docentlik', 'alan' => 'fen', 'cetvel' => 'c', 'notlar' => '',
+                'sart' => Kalip::adet('Doğrulanmış koşul', ['m'], 1),
+            ],
+            [
+                'anahtar' => 'x-taslak', 'universite' => 'X Üniversitesi',
+                'kadro' => 'docentlik', 'alan' => 'sosyal', 'cetvel' => 'c', 'notlar' => '',
+                'durum' => SartDeposu::TASLAK, 'birim' => 'Taslak Programı',
+                'sart' => Kalip::adet('Taslak koşul', ['m'], 1),
+            ],
+            [
+                'anahtar' => 'y-taslak', 'universite' => 'Y Üniversitesi',
+                'kadro' => 'docentlik', 'alan' => 'fen', 'cetvel' => 'c', 'notlar' => '',
+                'durum' => SartDeposu::TASLAK,
+                'sart' => ['tip' => 'referans', 'aciklama' => 'Taslağa atıf', 'esik' => 'x-taslak'],
+            ],
+        ],
+        cetvelVerisi: ['c' => ['maddeler' => ['m' => ['baslik' => 'M', 'kategori' => 'makale', 'puan' => 1]]]],
+    );
+
+    test('bul() taslak eşiği döndürmez', function () use ($depo) {
+        expect($depo()->bul('X Üniversitesi', 'docentlik', 'fen'))->not->toBeNull()
+            ->and($depo()->bul('X Üniversitesi', 'docentlik', 'sosyal'))->toBeNull();
+    });
+
+    test('yalnızca taslağı olan üniversite listede görünmez', function () use ($depo) {
+        expect($depo()->universiteler())->toBe(['X Üniversitesi']);
+    });
+
+    test('taslak eşiğin birimi program seçeneği olarak sunulmaz', function () use ($depo) {
+        expect($depo()->birimler('X Üniversitesi'))->toBe([]);
+    });
+
+    test('referans taslağa çözülmez — veri sızmak yerine belirsiz kalır', function () use ($depo) {
+        expect($depo()->esik('x-taslak'))->toBeNull()
+            ->and($depo()->esik('x-dogru'))->not->toBeNull();
+    });
+
+    test('esikler() taslakları saklamaz — kapsam raporu kuyruğu ölçebilmeli', function () use ($depo) {
+        expect($depo()->esikler())->toHaveCount(3)
+            ->and($depo()->dogrulanmisEsikler())->toHaveCount(1);
+    });
+});

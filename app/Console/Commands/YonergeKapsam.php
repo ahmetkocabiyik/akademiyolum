@@ -61,6 +61,8 @@ class YonergeKapsam extends Command
                 $this->say($kayit['sart'], $dugum, $beyan, $kaynakEksik);
             }
 
+            $taslak = $kayitlar->where('durum', SartDeposu::TASLAK)->count();
+
             $eksik = [];
 
             foreach ($kadrolar as $kadro) {
@@ -74,6 +76,7 @@ class YonergeKapsam extends Command
             $satirlar[] = [
                 'universite' => $universite,
                 'esik' => $kayitlar->count().'/'.$hedef,
+                'taslak' => $taslak === 0 ? '—' : $taslak,
                 'dugum' => $dugum,
                 'beyan' => $beyan,
                 'kaynak_eksik' => $kaynakEksik,
@@ -83,13 +86,15 @@ class YonergeKapsam extends Command
         }
 
         $this->table(
-            ['Üniversite', 'Eşik', 'Düğüm', 'Beyan', 'Cetvel eksik', 'Beyan oranı', 'Eksik'],
+            ['Üniversite', 'Eşik', 'Taslak', 'Düğüm', 'Beyan', 'Cetvel eksik', 'Beyan oranı', 'Eksik'],
             $satirlar,
         );
 
         $toplamDugum = array_sum(array_column($satirlar, 'dugum'));
         $toplamBeyan = array_sum(array_column($satirlar, 'beyan'));
         $toplamKaynakEksik = array_sum(array_column($satirlar, 'kaynak_eksik'));
+
+        $taslakToplam = $esikler->where('durum', SartDeposu::TASLAK)->count();
 
         // "Beyan" kalıcı bir gerçeklik (jüri kararı, belge); "cetvel eksik" bizim
         // veri açığımız ve kapanabilir. İkisi ayrı raporlanmazsa açık ölçülemez.
@@ -102,6 +107,15 @@ class YonergeKapsam extends Command
             $toplamDugum > 0 ? round(100 * $toplamBeyan / $toplamDugum) : 0,
             $toplamKaynakEksik,
         ));
+
+        // Taslak eşik adaya GÖSTERİLMEZ; sayısı burada durur ki doğrulama
+        // kuyruğunun uzunluğu ölçülebilsin.
+        if ($taslakToplam > 0) {
+            $this->warn(sprintf(
+                '  %d eşik TASLAK — kaynağına karşı okunmadığı için adaya gösterilmiyor.',
+                $taslakToplam,
+            ));
+        }
     }
 
     private function talep(SartDeposu $depo): int

@@ -15,7 +15,7 @@ use App\Models\Faaliyet;
  * @phpstan-type Esik array{
  *     anahtar: string, universite: string, kadro: string, alan: string,
  *     birim: ?string, cetvel: string, notlar: string, aday_notu: ?string,
- *     sart: array<string, mixed>,
+ *     durum: string, sart: array<string, mixed>,
  * }
  * @phpstan-type Cetvel array{
  *     maddeler: array<string, Madde>,
@@ -26,8 +26,21 @@ use App\Models\Faaliyet;
  */
 class SartDeposu
 {
+    /**
+     * Kaynak PDF'i okunup elle doğrulanmış eşik. Yalnızca bu durumdaki kayıtlar
+     * adaya gösterilir.
+     */
+    public const DOGRULANDI = 'dogrulandi';
+
+    /**
+     * Makineyle çıkarılmış, henüz kaynağına karşı okunmamış eşik. Adayın
+     * göreceği hiçbir yolda dönmez — yanlış bir eşik, eksik eşikten kötüdür:
+     * aday buna bakıp kariyer kararı veriyor.
+     */
+    public const TASLAK = 'taslak';
+
     /** Eşik kaydının opsiyonel alanları. @var array<string, mixed> */
-    private const VARSAYILANLAR = ['birim' => null, 'aday_notu' => null, 'durum' => 'dogrulandi'];
+    private const VARSAYILANLAR = ['birim' => null, 'aday_notu' => null, 'durum' => self::DOGRULANDI];
 
     /** @var list<Esik>|null */
     private ?array $esikler = null;
@@ -170,21 +183,42 @@ class SartDeposu
     }
 
     /**
+     * Yalnızca doğrulanmış eşikler — adaya bir şey gösteren her yolun kaynağı.
+     *
+     * @return list<Esik>
+     */
+    public function dogrulanmisEsikler(): array
+    {
+        return array_values(array_filter(
+            $this->esikler(),
+            fn (array $esik) => $esik['durum'] === self::DOGRULANDI,
+        ));
+    }
+
+    /**
      * Doğrulanmış eşik verisi olan üniversite adları.
+     *
+     * Yalnızca taslak eşiği olan üniversite listede görünmez; görünseydi aday
+     * kartı açıp boş sonuç bulurdu.
      *
      * @return list<string>
      */
     public function universiteler(): array
     {
-        return array_values(array_unique(array_column($this->esikler(), 'universite')));
+        return array_values(array_unique(array_column($this->dogrulanmisEsikler(), 'universite')));
     }
 
     /**
+     * `referans` düğümlerinin hedefi. Taslak eşikler burada da dönmez: aksi
+     * hâlde doğrulanmış bir eşik, taslak bir eşiğe atıf yaparak doğrulanmamış
+     * veriyi sonuca taşırdı. Hedef bulunamazsa düğüm gerekçesiyle birlikte
+     * belirsiz kalır ({@see SartDegerlendirici::referans()}).
+     *
      * @return Esik|null
      */
     public function esik(string $anahtar): ?array
     {
-        foreach ($this->esikler() as $esik) {
+        foreach ($this->dogrulanmisEsikler() as $esik) {
             if ($esik['anahtar'] === $anahtar) {
                 return $esik;
             }
@@ -205,7 +239,7 @@ class SartDeposu
     {
         $birimler = [];
 
-        foreach ($this->esikler() as $esik) {
+        foreach ($this->dogrulanmisEsikler() as $esik) {
             if ($esik['universite'] === $universite && $esik['birim'] !== null) {
                 $birimler[$esik['birim']] = true;
             }
@@ -229,7 +263,7 @@ class SartDeposu
     public function bul(string $universite, string $kadro, string $alan, ?string $birim = null): ?array
     {
         $adaylar = array_values(array_filter(
-            $this->esikler(),
+            $this->dogrulanmisEsikler(),
             fn (array $esik) => $esik['universite'] === $universite
                 && $esik['kadro'] === $kadro
                 && $esik['alan'] === $alan,

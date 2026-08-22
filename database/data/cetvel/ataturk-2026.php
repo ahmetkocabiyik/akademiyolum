@@ -112,7 +112,17 @@ return [
         '07.01.05' => ['baslik' => 'Jürili uluslararası güzel sanatlar etkinliğinde derece ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 10],
         '07.02.01' => ['baslik' => 'Tanınmış ulusal organizasyonun ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü'], 'puan' => 20],
         '07.02.03' => ['baslik' => 'TÜBA/TÜBİTAK bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü'], 'puan' => 40],
-        '07.02.05' => ['baslik' => 'Burs (TÜBİTAK vb.)', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 5],
+        // BURS KALEMİ YOK — 07.02.03 açıkça "(Burs, UBYT vb. kapsamındaki
+        // ödüller hariç)" diyor. Burada bir süre '07.02.05' => "Burs, 5 puan"
+        // duruyordu; yönergede o kod ERC ödülüdür (30 puan), 5 puanlı olan
+        // 07.02.06'dır. Uydurma kalem kaldırıldı.
+        //
+        // 07.02.04 (TÜBA GEBİP/TWAS, 30), 07.02.05 (Ufuk Avrupa/ERC, 30) ve
+        // 07.02.06 (jürili ulusal derece ödülü, 5) BİLEREK girilmedi: kaynak
+        // sözlüğümüz bunları 07.02.03 ile 07.01.05'ten ayırt edemiyor, aynı
+        // etiketle eklenirlerse `puan()` en yükseği aldığı için hesabı
+        // değiştirmeden kapsanmış gibi görünürler. Eksik kalmak, olduğundan
+        // geniş görünmekten iyidir.
         'T.1' => [
             'baslik' => 'Lisansüstü tezden üretilmiş yayın',
             'kategori' => 'tez_yayini',
