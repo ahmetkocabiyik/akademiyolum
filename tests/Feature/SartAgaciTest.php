@@ -1627,3 +1627,30 @@ test('Kocaeli kümülatif dergi kademelerini iç içe sayıyor', function () {
 
     expect($sanat->telafiIleSaglandi())->toBeTrue();
 });
+
+test('Marmara yardımcı doçent koşulları Dr. Öğr. Üyesi kadrosuna bağlandı', function () {
+    $depo = sartDepo();
+
+    // Yönerge 2018 öncesi "yardımcı doçent" diyor; kadro yeniden adlandırıldı,
+    // koşullar aynı kadroya ait. MADDE 7 bu yüzden dr_ogr_uyesi altında.
+    $esik = $depo->bul('Marmara Üniversitesi', 'dr_ogr_uyesi', 'fen');
+    expect($esik)->not->toBeNull()
+        ->and($esik['notlar'])->toContain('MADDE 7');
+
+    // Yalnızca Tablo 2 girildi; diğer tabloların alanlarında eşik yok.
+    foreach (['sosyal', 'hukuk', 'ilahiyat', 'guzel_sanatlar', 'muhendislik', 'spor', 'filoloji'] as $alan) {
+        expect($depo->bul('Marmara Üniversitesi', 'dr_ogr_uyesi', $alan))->toBeNull();
+    }
+
+    // Koşullar madde numarası ARALIKLARINA atıf yapıyor; birincil indeksli bir
+    // makale hem "1-16" hem toplam barajına girer.
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
+    $q1 = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+    $sonuc = $depo->degerlendir($esik, [$q1], $profil);
+
+    $puan = fn (string $parca) => collect($sonuc->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca))->mevcut;
+
+    expect($puan('faaliyet aralıklarından'))->toBe(48)
+        ->and($puan('Tüm faaliyetlerden'))->toBe(48);
+});
