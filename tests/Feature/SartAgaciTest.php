@@ -1764,3 +1764,44 @@ test('Çukurova doçent asgari puanı alan grubuna göre değişiyor', function 
     expect($toplamKosulu('hukuk')->durum)->toBe(Durum::Saglandi)
         ->and($toplamKosulu('muhendislik')->durum)->toBe(Durum::Saglanmadi);
 });
+
+test('Selçuk on iki temel alanın cetvelini de yüklüyor', function () {
+    $depo = sartDepo();
+
+    // Dosya `cetveller` anahtarıyla on iki tabloyu birden döndürüyor; biri
+    // eksik yüklenirse o alanın eşiği sessizce puansız kalırdı.
+    foreach (array_map(fn (TemelAlan $a) => $a->value, TemelAlan::cases()) as $alan) {
+        expect($depo->katalog("selcuk-2024-{$alan}"))->not->toBeNull("selcuk-2024-{$alan}");
+    }
+
+    // Alanlar aynı kalemi farklı puanlıyor: Eğitim'de uluslararası indeksli
+    // makale 10, Spor'da 6 puan.
+    $puan = function (string $alan, string $kod) use ($depo): int {
+        return $depo->katalog("selcuk-2024-{$alan}")->maddeler[$kod]['puan'];
+    };
+
+    expect($puan('egitim', '1a'))->toBe(20)
+        ->and($puan('egitim', '1c'))->toBe(10)
+        ->and($puan('spor', '1c'))->toBe(6);
+});
+
+test('Selçuk Eğitim Bilimleri alt barajları toplam puandan bağımsız işliyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
+    $esik = $depo->bul('Selçuk Üniversitesi', 'dr_ogr_uyesi', 'egitim');
+
+    // Dört adet 20 puanlık WoS makalesi toplam barajı (70) aşıyor ama yönerge
+    // ayrıca bildiri ve proje alt barajı istiyor; bunlar sağlanmadan sonuç
+    // olumlu çıkmamalı.
+    $makaleler = array_map(
+        fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01'),
+        range(1, 4),
+    );
+
+    $kosullar = collect($depo->degerlendir($esik, $makaleler, $profil)->kosullar());
+    $bul = fn (string $parca) => $kosullar->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca));
+
+    expect($bul('toplam en az 70 puan')->durum)->toBe(Durum::Saglandi)
+        ->and($bul('Makaleler bölümünden toplam en az 30 puan')->durum)->toBe(Durum::Saglandi)
+        ->and($bul('Bilimsel Araştırma Projesi bölümünden en az 4 puan')->durum)->toBe(Durum::Saglanmadi);
+});
