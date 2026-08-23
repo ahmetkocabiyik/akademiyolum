@@ -2113,3 +2113,57 @@ test('Fırat alan grupları üç ayrı desene ayrılıyor', function () {
     expect($toplam('guzel_sanatlar'))->toBe(500)
         ->and($toplam('muhendislik'))->toBe(1000);
 });
+
+test('Gaziantep proje puanını göreve göre oranlıyor', function () {
+    $katalog = sartDepo()->katalog('gaziantep-2026');
+
+    // Yönerge: koordinatör/yürütücü %100, araştırmacı/uzman %60,
+    // danışman/bursiyer %20. Motorda ayrı çarpan yok; oran madde puanına
+    // gömülü ve `roller` filtresi hangi maddenin uygulanacağını belirliyor.
+    $puan = function (string $rol) use ($katalog): int {
+        $f = sartFaaliyet('Diğer Uluslararası Fon', tarih: '2020-01-01');
+        $f->kategori = Kategori::Proje;
+        $f->rol = $rol;
+
+        return $katalog->puan($f, array_keys($katalog->maddeler));
+    };
+
+    expect($puan('yurutucu'))->toBe(150)
+        ->and($puan('arastirmaci'))->toBe(90)
+        ->and($puan('bursiyer'))->toBe(30);
+
+    // "5 nolu maddeden (BAP hariç)" kümesi BAP kalemlerini dışarıda bırakmalı.
+    expect($katalog->coz(['5-BAP-haric']))->not->toContain('5-bap-y');
+});
+
+test('Gaziantep dört bilim alanının makale barajını farklı kuruyor', function () {
+    $depo = sartDepo();
+
+    $baraj = function (string $alan, string $madde) use ($depo): ?int {
+        $esik = $depo->bul('Gaziantep Üniversitesi', 'dr_ogr_uyesi', $alan);
+        $bul = function (array $d) use (&$bul, $madde): ?int {
+            if (($d['madde'] ?? null) === $madde) {
+                return $d['min_puan'] ?? null;
+            }
+            foreach ($d['cocuklar'] ?? [] as $c) {
+                if (($s = $bul($c)) !== null) {
+                    return $s;
+                }
+            }
+
+            return null;
+        };
+
+        return $bul($esik['sart']);
+    };
+
+    // Fen 1(a)'dan 120, sağlık aynı maddeden 60 istiyor.
+    expect($baraj('muhendislik', 'MADDE 12/1'))->toBe(120)
+        ->and($baraj('saglik', 'MADDE 13/1'))->toBe(60);
+
+    // Sosyal'de makale koşulu iki seçenekli (dar kümeden 75 ya da tümünden 90).
+    expect($baraj('sosyal', 'MADDE 14/1-a'))->toBe(75);
+
+    // Mimarlık/güzel sanatlar en geniş kümeden en düşük barajı koyuyor.
+    expect($baraj('guzel_sanatlar', 'MADDE 15/1-a'))->toBe(45);
+});
