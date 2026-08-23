@@ -1847,3 +1847,22 @@ test('Selçuk Eğitim Bilimleri alt barajları toplam puandan bağımsız işliy
         ->and($bul('Uluslararası Makale "a ve/veya b" bendi bölümünden en az 20 puan')->durum)->toBe(Durum::Saglandi)
         ->and($bul('Ulusal Makale "a" bendi bölümünden en az 20 puan')->durum)->toBe(Durum::Saglanmadi);
 });
+
+test('Sakarya cetveli çakışan ölçütlerde kodu koruyup en düşük puanı veriyor', function () {
+    $katalog = sartDepo()->katalog('sakarya-2026');
+
+    // Sakarya'nın eşik tabloları "1. BÖLÜM" gibi kümeleri kodları tek tek
+    // sayarak tanımlıyor. Aynı kaynak etiketine düşen ölçütler birleştirilseydi
+    // kümede anılan kod cetvelde bulunamaz, küme sessizce eksik puanlanırdı.
+    // Bu yüzden kod korunur; çakışmada puan güvenli olan (düşük) tarafa çekilir.
+    expect($katalog->maddePuani('1.1a'))->toBe(90);
+
+    // 2.1a (ERC yürütücülüğü, 340) ile 2.1d (MSCA yürütücülüğü, 270) kaynak
+    // sözlüğünde ayrılamıyor; ikisi de 270 taşımalı.
+    expect($katalog->maddePuani('2.1a'))->toBe(270)
+        ->and($katalog->maddePuani('2.1d'))->toBe(270);
+
+    // Uluslararası (50) ve ulusal (40) yayınevi kitabı da tek etiket.
+    expect($katalog->maddePuani('3.2'))->toBe(40)
+        ->and($katalog->maddePuani('3.5'))->toBe(40);
+});
