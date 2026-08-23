@@ -2200,3 +2200,35 @@ test('SUBÜ iki alan grubunun eşik kümesi bir kademe farklı', function () {
     expect($ilkSecenek('muhendislik')['min_adet'])->toBe(2)
         ->and($ilkSecenek('sosyal')['min_adet'])->toBe(1);
 });
+
+test('GİBTÜ fen ve sosyal alanların makale kümesi farklı genişlikte', function () {
+    $depo = sartDepo();
+
+    // Madde 11/12 "1.a veya 1.b" (yalnızca WoS ve ESCI) derken, Madde 13/14/15
+    // "1 numaralı madde" diyor ve TR Dizin ile ulusal hakemli dergileri de sayıyor.
+    $trDizin = fn () => sartFaaliyet('TR Dizin', tarih: '2020-01-01');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
+
+    $makalePuani = function (string $alan) use ($depo, $trDizin, $profil): int {
+        $esik = $depo->bul('Gaziantep İslam Bilim ve Teknoloji Üniversitesi', 'dr_ogr_uyesi', $alan);
+
+        return collect($depo->degerlendir($esik, [$trDizin()], $profil)->kosullar())
+            ->first(fn (SartSonucu $k) => str_ends_with((string) $k->madde, '/A.1'))->mevcut;
+    };
+
+    expect($makalePuani('fen'))->toBe(0)
+        ->and($makalePuani('sosyal'))->toBe(20);
+});
+
+test('GİBTÜ profesörlükte doçentlik öncesi ve sonrası iki ayrı toplam istiyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Gaziantep İslam Bilim ve Teknoloji Üniversitesi', 'profesorluk', 'fen');
+
+    $toplamlar = collect($esik['sart']['cocuklar'])
+        ->filter(fn (array $d) => ($d['rol'] ?? null) === 'toplam')
+        ->map(fn (array $d) => [$d['min_puan'], isset($d['donem'])])
+        ->values()->all();
+
+    // Genel toplam 200 (dönemsiz), doçentlik sonrası 100 (dönemli).
+    expect($toplamlar)->toBe([[200, false], [100, true]]);
+});
