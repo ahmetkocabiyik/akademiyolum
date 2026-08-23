@@ -47,16 +47,33 @@ $bolumOrtalamasi = fn (string $kadro): array => Kalip::beyan(
 );
 
 /**
+ * EK-2 madde gruplarının adaya gösterilecek karşılığı. Yönergenin kendi kodu
+ * (1(a,b,c) gibi) düğümün `madde` alanında duruyor; aday ekranında ise kümenin
+ * neyi kapsadığı yazıyor — kod adayın bilmediği bir iç referans.
+ *
+ * @var array<string, string>
+ */
+$grupAdi = [
+    '1(a)' => 'SCI-E, SSCI veya AHCI Q1-Q3 dergilerindeki makalelerinizden',
+    '1(a,b,c)' => 'SCI-E, SSCI, AHCI Q1-Q3 ile ESCI/Q4 ve senatoca belirlenen uluslararası dergilerdeki makalelerinizden',
+    '4(a,b,c)' => 'Yayınlarınıza yapılan atıflardan',
+    '5(a,b)' => 'Tamamladığınız doktora ve yüksek lisans tez danışmanlıklarından',
+    '6' => 'Tamamlanmış araştırma projelerindeki görevlerinizden',
+    '8(a,b,c,d)' => 'Verdiğiniz lisans ve lisansüstü derslerden',
+];
+
+/**
  * Bir kadro + alan grubu için EK-2 satırlarını düğüme çevirir.
  *
  * @param  array<string, int>  $asgari  Madde grubu → asgari puan
  * @return list<array<string, mixed>>
  */
-$asgariPuanlar = function (array $asgari): array {
+$asgariPuanlar = function (array $asgari) use ($grupAdi): array {
     $dugumler = [];
 
     foreach ($asgari as $grup => $puan) {
-        $dugumler[] = Kalip::puanDan("{$grup} kapsamında en az {$puan} puan", [$grup], $puan, madde: "EK-2 · {$grup}");
+        $ad = $grupAdi[$grup] ?? "{$grup} kapsamında";
+        $dugumler[] = Kalip::puanDan("{$ad} en az {$puan} puan", [$grup], $puan, madde: "EK-2 · {$grup}");
     }
 
     return $dugumler;

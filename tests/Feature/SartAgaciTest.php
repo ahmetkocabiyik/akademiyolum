@@ -1582,16 +1582,18 @@ test('YTÜ 1(a) kümesi Q4 makalesini kapsamıyor', function () {
 
     // Yönergede Q1-Q3 "a" bendinin alt kırılımları, Q4 ise ESCI ile birlikte
     // ayrı "b" bendi. EK-2'nin 1(a) ile 1(a,b,c) satırları arasındaki fark bu.
-    $puan = function (string $kaynak, string $parca) use ($depo, $esik, $profil): int {
+    // Koşul, açıklama metnine değil `madde` alanına göre aranıyor: açıklama
+    // adaya gösterilen serbest metin, madde ise yönergenin kendi kodu.
+    $puan = function (string $kaynak, string $madde) use ($depo, $esik, $profil): int {
         $f = sartFaaliyet($kaynak, tarih: '2020-01-01');
 
         return collect($depo->degerlendir($esik, [$f], $profil)->kosullar())
-            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca))->mevcut;
+            ->first(fn (SartSonucu $k) => $k->madde === $madde)->mevcut;
     };
 
-    expect($puan('SCIE/SSCI (Q3)', '1(a) kapsamında'))->toBe(15)
-        ->and($puan('SCIE/SSCI (Q4)', '1(a) kapsamında'))->toBe(0)
-        ->and($puan('SCIE/SSCI (Q4)', '1(a,b,c) kapsamında'))->toBe(12);
+    expect($puan('SCIE/SSCI (Q3)', 'EK-2 · 1(a)'))->toBe(15)
+        ->and($puan('SCIE/SSCI (Q4)', 'EK-2 · 1(a)'))->toBe(0)
+        ->and($puan('SCIE/SSCI (Q4)', 'EK-2 · 1(a,b,c)'))->toBe(12);
 
     // Bölüm ortalaması koşulu adayın dosyasından türetilemiyor — beyan.
     $sonuc = $depo->degerlendir($esik, [], $profil);
@@ -1667,7 +1669,7 @@ test('Erciyes yayın barajı alan grubuna göre farklı küme sayıyor', functio
         $esik = $depo->bul('Erciyes Üniversitesi', 'dr_ogr_uyesi', $alan);
 
         return collect($depo->degerlendir($esik, [$esci()], $profil)->kosullar())
-            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'kapsamında en az'))->mevcut;
+            ->first(fn (SartSonucu $k) => str_starts_with((string) $k->madde, 'Tablo · '))->mevcut;
     };
 
     expect($yayinPuani('fen'))->toBe(0)
@@ -1843,9 +1845,11 @@ test('Selçuk Eğitim Bilimleri alt barajları toplam puandan bağımsız işliy
     $kosullar = collect($depo->degerlendir($esik, $makaleler, $profil)->kosullar());
     $bul = fn (string $parca) => $kosullar->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca));
 
+    $madde = fn (string $m) => $kosullar->first(fn (SartSonucu $k) => $k->madde === $m);
+
     expect($bul('toplam en az 70 puan')->durum)->toBe(Durum::Saglandi)
-        ->and($bul('Uluslararası Makale "a ve/veya b" bendi bölümünden en az 20 puan')->durum)->toBe(Durum::Saglandi)
-        ->and($bul('Ulusal Makale "a" bendi bölümünden en az 20 puan')->durum)->toBe(Durum::Saglanmadi);
+        ->and($madde('Özel Kriterler I-a')->durum)->toBe(Durum::Saglandi)
+        ->and($madde('Özel Kriterler I-b')->durum)->toBe(Durum::Saglanmadi);
 });
 
 test('Sakarya cetveli çakışan ölçütlerde kodu koruyup en düşük puanı veriyor', function () {
@@ -1883,9 +1887,11 @@ test('Sakarya bölüm barajları toplam puandan bağımsız işliyor', function 
     $kosullar = collect($depo->degerlendir($esik, $makaleler, $profil)->kosullar());
     $bul = fn (string $parca) => $kosullar->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca));
 
+    $madde = fn (string $m) => $kosullar->first(fn (SartSonucu $k) => $k->madde === $m);
+
     expect($bul('EK-1 kalemlerinden toplam en az 1600 puan')->durum)->toBe(Durum::Saglandi)
-        ->and($bul('1. BÖLÜM ölçütlerinden en az 700 puan')->durum)->toBe(Durum::Saglandi)
-        ->and($bul('4. BÖLÜM ölçütlerinden en az 80 puan')->durum)->toBe(Durum::Saglanmadi);
+        ->and($madde('2.3 · 1. BÖLÜM')->durum)->toBe(Durum::Saglandi)
+        ->and($madde('2.3 · 4. BÖLÜM')->durum)->toBe(Durum::Saglanmadi);
 });
 
 test('Sakarya fakülte grupları temel alanlara çakışmadan dağılıyor', function () {

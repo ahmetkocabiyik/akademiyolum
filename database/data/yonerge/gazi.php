@@ -68,7 +68,7 @@ return [
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Fen ve Mühendislik', [
             Kalip::adet('WoS Q1-Q3 dergide ilk isim olduğunuz, doktora tezinden üretilmiş 1 yayın', ['1a-c'], 1, 'ilk')
                 + ['telafi' => Kalip::adet('Tez yayını yoksa: ilk isim olduğunuz, tez dışı 2 yayın', ['1a-c'], 2, 'ilk')],
-            Kalip::puanDan('MAKALELER 1-5 kapsamında en az 150 puan', ['1-5'], 150),
+            Kalip::puanDan('WoS Q1-Q4 dergilerindeki makale, derleme, kısa makale ve teknik notlarınızdan en az 150 puan', ['1-5'], 150),
             Kalip::toplam(200),
         ]),
     ],
@@ -82,7 +82,7 @@ return [
         'notlar' => 'A1 Doçent. Kriter 3) 1a-c kapsamında en az dört yayın şartıyla 1-5 kapsamında en az 200 puan. Kriter 4) en az 1 projede yürütücü. Toplam en az 350 puan.',
         'sart' => Kalip::ve('Doçent — Fen ve Mühendislik', [
             Kalip::adet('WoS Q1-Q3 dergilerde en az 4 yayın', ['1a-c'], 4) + ['haric' => ['lisansustu_tezden']],
-            Kalip::puanDan('MAKALELER 1-5 kapsamında en az 200 puan', ['1-5'], 200),
+            Kalip::puanDan('WoS Q1-Q4 dergilerindeki makale, derleme, kısa makale ve teknik notlarınızdan en az 200 puan', ['1-5'], 200),
             $projeKosulu(['1a-c']),
             $docentKidem(),
             Kalip::toplam(350),
@@ -98,7 +98,7 @@ return [
         'notlar' => 'A1 Profesör. Kriter 2) 1a-c kapsamında en az beş yayın şartıyla 1-5 kategorisinden en az 270 puan. Toplam en az 400 puan.',
         'sart' => Kalip::ve('Profesör — Fen ve Mühendislik', [
             Kalip::adet('Doçentlik sonrası WoS Q1-Q3 dergilerde en az 5 yayın', ['1a-c'], 5, donem: Kalip::DOCENTLIK_SONRASI),
-            Kalip::puanDan('MAKALELER 1-5 kapsamında en az 270 puan', ['1-5'], 270, Kalip::DOCENTLIK_SONRASI),
+            Kalip::puanDan('WoS Q1-Q4 dergilerindeki makale, derleme, kısa makale ve teknik notlarınızdan en az 270 puan', ['1-5'], 270, Kalip::DOCENTLIK_SONRASI),
             $projeKosulu(['1a-c']),
             $profesorKidem(),
             Kalip::toplam(400, Kalip::DOCENTLIK_SONRASI),
@@ -117,7 +117,7 @@ return [
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sağlık Bilimleri', [
             Kalip::adet('WoS dergide ilk isim olduğunuz, doktora/uzmanlık tezinden üretilmiş 1 yayın', ['1a-d'], 1, 'ilk')
                 + ['telafi' => Kalip::adet('Tez yayını yoksa: ilk isim olduğunuz, tez dışı 2 yayın', ['1a-c'], 2, 'ilk')],
-            Kalip::puanDan('MAKALELER 1-4 ve 6a kapsamında en az 150 puan', ['1-4 ve 6a'], 150),
+            Kalip::puanDan('WoS Q1-Q4 ile WoS All Databases/Scopus dergilerindeki makalelerinizden en az 150 puan', ['1-4 ve 6a'], 150),
             Kalip::toplam(200),
         ]),
     ],
@@ -131,7 +131,7 @@ return [
         'notlar' => 'A2 Doçent. Kriter 3) 1a-b kapsamında en az iki yayın şartıyla 1-4 ve 6a kapsamında en az 200 puan. Toplam en az 350 puan.',
         'sart' => Kalip::ve('Doçent — Sağlık Bilimleri', [
             Kalip::adet('WoS Q1-Q2 dergilerde en az 2 yayın', ['1a-b'], 2) + ['haric' => ['lisansustu_tezden']],
-            Kalip::puanDan('MAKALELER 1-4 ve 6a kapsamında en az 200 puan', ['1-4 ve 6a'], 200),
+            Kalip::puanDan('WoS Q1-Q4 ile WoS All Databases/Scopus dergilerindeki makalelerinizden en az 200 puan', ['1-4 ve 6a'], 200),
             $projeKosulu(['1a-c']),
             $docentKidem(),
             Kalip::toplam(350),
@@ -147,7 +147,7 @@ return [
         'notlar' => 'A2 Profesör. Kriter 2) 1a-c kapsamında en az dört yayın şartıyla 1-4 ve 6a kapsamında en az 270 puan. Toplam en az 400 puan.',
         'sart' => Kalip::ve('Profesör — Sağlık Bilimleri', [
             Kalip::adet('Doçentlik sonrası WoS Q1-Q3 dergilerde en az 4 yayın', ['1a-c'], 4, donem: Kalip::DOCENTLIK_SONRASI),
-            Kalip::puanDan('MAKALELER 1-4 ve 6a kapsamında en az 270 puan', ['1-4 ve 6a'], 270, Kalip::DOCENTLIK_SONRASI),
+            Kalip::puanDan('WoS Q1-Q4 ile WoS All Databases/Scopus dergilerindeki makalelerinizden en az 270 puan', ['1-4 ve 6a'], 270, Kalip::DOCENTLIK_SONRASI),
             $projeKosulu(['1a-c']),
             $profesorKidem(),
             Kalip::toplam(400, Kalip::DOCENTLIK_SONRASI),
@@ -168,7 +168,7 @@ return [
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sosyal Bilimler', [
             Kalip::adet('WoS dergide ilk isim olduğunuz, doktora tezinden üretilmiş 1 yayın', ['1a-d'], 1, 'ilk')
                 + ['telafi' => Kalip::adet('Tez yayını yoksa: ilk isim olduğunuz, tez dışı 2 yayın', ['1a-d'], 2, 'ilk')],
-            Kalip::puanDan('MAKALELER 1-5, 6a-b, 7a-b ve 8a-b kapsamında en az 120 puan', ['1-5, 6a-b, 7a-b, 8a-b'], 120),
+            Kalip::puanDan('WoS, Scopus, uluslararası alan indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 120 puan', ['1-5, 6a-b, 7a-b, 8a-b'], 120),
             Kalip::toplam(180),
         ]),
     ],
@@ -183,7 +183,7 @@ return [
         'sart' => Kalip::ve('Doçent — Sosyal Bilimler', [
             Kalip::adet('WoS, SCOPUS veya uluslararası alan indeksli dergilerde en az 2 yayın', ['1a-d, 6a-b, 7a-b'], 2)
                 + ['haric' => ['lisansustu_tezden']],
-            Kalip::puanDan('MAKALELER ve KİTAP kalemlerinden en az 180 puan', ['1-5, 6a-b, 7a-b, 8a-b', 'KITAP 1a-k'], 180),
+            Kalip::puanDan('Makale ve kitap kalemlerinizden en az 180 puan', ['1-5, 6a-b, 7a-b, 8a-b', 'KITAP 1a-k'], 180),
             $projeKosulu(['1a-d, 6a-b, 7a-b']),
             $docentKidem(),
             Kalip::toplam(300),
@@ -200,7 +200,7 @@ return [
         'sart' => Kalip::ve('Profesör — Sosyal Bilimler', [
             Kalip::adet('Doçentlik sonrası WoS, SCOPUS veya alan indeksli dergilerde en az 2 yayın',
                 ['1a-d, 6a-b, 7a-b'], 2, donem: Kalip::DOCENTLIK_SONRASI),
-            Kalip::puanDan('MAKALELER ve KİTAP kalemlerinden en az 250 puan',
+            Kalip::puanDan('Makale ve kitap kalemlerinizden en az 250 puan',
                 ['1-5, 6a-b, 7a-b, 8a-b', 'KITAP 1a-k'], 250, Kalip::DOCENTLIK_SONRASI),
             $projeKosulu(['1a-d, 6a-b, 7a-b']),
             $profesorKidem(),
@@ -221,7 +221,7 @@ return [
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Mimarlık', [
             Kalip::adet('WoS dergide ilk isim olduğunuz, doktora/sanatta yeterlik tezinden üretilmiş 1 yayın', ['1a-d'], 1, 'ilk')
                 + ['telafi' => Kalip::adet('Tez yayını yoksa: ilk isim olduğunuz, tez dışı 2 yayın', ['1a-d'], 2, 'ilk')],
-            Kalip::puanDan('MAKALELER 1-5, 6a-b ve 7a-b kapsamında en az 120 puan', ['1-5, 6a-b, 7a-b'], 120),
+            Kalip::puanDan('WoS, Scopus ve uluslararası alan indeksli dergilerindeki makalelerinizden en az 120 puan', ['1-5, 6a-b, 7a-b'], 120),
             Kalip::toplam(180),
         ]),
     ],
@@ -236,7 +236,7 @@ return [
         'sart' => Kalip::ve('Doçent — Mimarlık', [
             Kalip::adet('WoS, SCOPUS veya uluslararası alan indeksli dergilerde en az 2 yayın', ['1a-d, 6a-b, 7a-b'], 2)
                 + ['haric' => ['lisansustu_tezden']],
-            Kalip::puanDan('MAKALELER ve KİTAP kalemlerinden en az 180 puan', ['1-5, 6a-b, 7a-b', 'KITAP 1a-k'], 180),
+            Kalip::puanDan('Makale ve kitap kalemlerinizden en az 180 puan', ['1-5, 6a-b, 7a-b', 'KITAP 1a-k'], 180),
             $projeKosulu(['1a-d, 6a-b, 7a-b']),
             $docentKidem(),
             Kalip::toplam(300),
@@ -253,7 +253,7 @@ return [
         'sart' => Kalip::ve('Profesör — Mimarlık', [
             Kalip::adet('Doçentlik sonrası WoS, SCOPUS veya alan indeksli dergilerde en az 2 yayın',
                 ['1a-d, 6a-b, 7a-b'], 2, donem: Kalip::DOCENTLIK_SONRASI),
-            Kalip::puanDan('MAKALELER ve KİTAP kalemlerinden en az 250 puan',
+            Kalip::puanDan('Makale ve kitap kalemlerinizden en az 250 puan',
                 ['1-5, 6a-b, 7a-b', 'KITAP 1a-k'], 250, Kalip::DOCENTLIK_SONRASI),
             $projeKosulu(['1a-d, 6a-b, 7a-b']),
             $profesorKidem(),

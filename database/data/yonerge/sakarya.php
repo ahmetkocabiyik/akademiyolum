@@ -53,13 +53,13 @@ return [
         'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Dr. Öğr. Üyesi sütunu.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya', [
             Kalip::toplam(1000, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 350 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 350 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
                 '2.4b', '2.5a', '2.5c', '2.11a', '2.12a', '3.1', '4.1a', '4.1b',
                 '4.2a', '4.3a',
             ], 350, madde: '2.3 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 250 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.4a', '2.4b',
@@ -67,7 +67,7 @@ return [
                 '2.12a', '2.12b', '2.15', '3.1', '3.3', '4.1a', '4.1b', '4.2a',
                 '4.3a', '4.4', '9.1', '10.1a',
             ], 250, madde: '2.3 · 2. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 40 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 40 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d', '2.11e',
             ], 40, madde: '2.3 · 4. BÖLÜM'),
@@ -86,13 +86,13 @@ return [
         'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Doçent sütunu.',
         'sart' => Kalip::ve('Doçent — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya', [
             Kalip::toplam(1600, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 700 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 700 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
                 '2.4b', '2.5a', '2.5c', '2.11a', '2.12a', '3.1', '4.1a', '4.1b',
                 '4.2a', '4.3a',
             ], 700, madde: '2.3 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 450 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 450 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.4a', '2.4b',
@@ -100,11 +100,11 @@ return [
                 '2.12a', '2.12b', '2.15', '3.1', '3.3', '4.1a', '4.1b', '4.2a',
                 '4.3a', '4.4', '9.1', '10.1a',
             ], 450, madde: '2.3 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 80 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 80 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 80, madde: '2.3 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 80 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 80 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d', '2.11e',
             ], 80, madde: '2.3 · 4. BÖLÜM'),
@@ -123,13 +123,13 @@ return [
         'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Profesör sütunu.',
         'sart' => Kalip::ve('Profesör — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya', [
             Kalip::toplam(1800, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 750 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 750 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
                 '2.4b', '2.5a', '2.5c', '2.11a', '2.12a', '3.1', '4.1a', '4.1b',
                 '4.2a', '4.3a',
             ], 750, madde: '2.3 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 500 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 500 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.4a', '2.4b',
@@ -137,11 +137,11 @@ return [
                 '2.12a', '2.12b', '2.15', '3.1', '3.3', '4.1a', '4.1b', '4.2a',
                 '4.3a', '4.4', '9.1', '10.1a',
             ], 500, madde: '2.3 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 120 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 120 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 120, madde: '2.3 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 120 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 120 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d', '2.11e',
             ], 120, madde: '2.3 · 4. BÖLÜM'),
@@ -160,13 +160,13 @@ return [
         'notlar' => '2.4 Fen Fakültesi (Matematik Bölümü) — Dr. Öğr. Üyesi sütunu.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Fen Fakültesi (Matematik Bölümü)', [
             Kalip::toplam(800, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 250 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
                 '2.5a', '2.5c', '2.11a', '2.12a', '3.1', '4.1a', '4.1b', '4.2a',
                 '4.3a',
             ], 250, madde: '2.4 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 250 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.4a', '2.4b',
@@ -174,7 +174,7 @@ return [
                 '2.12b', '2.15', '3.1', '3.3', '4.1a', '4.1b', '4.2a', '4.3a',
                 '4.4', '9.1', '10.1a',
             ], 250, madde: '2.4 · 2. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 40 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 40 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 40, madde: '2.4 · 4. BÖLÜM'),
@@ -193,13 +193,13 @@ return [
         'notlar' => '2.4 Fen Fakültesi (Matematik Bölümü) — Doçent sütunu.',
         'sart' => Kalip::ve('Doçent — Fen Fakültesi (Matematik Bölümü)', [
             Kalip::toplam(1200, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 450 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 450 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
                 '2.5a', '2.5c', '2.11a', '2.12a', '3.1', '4.1a', '4.1b', '4.2a',
                 '4.3a',
             ], 450, madde: '2.4 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 350 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 350 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.4a', '2.4b',
@@ -207,11 +207,11 @@ return [
                 '2.12b', '2.15', '3.1', '3.3', '4.1a', '4.1b', '4.2a', '4.3a',
                 '4.4', '9.1', '10.1a',
             ], 350, madde: '2.4 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 80 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 80 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 80, madde: '2.4 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 80 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 80 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 80, madde: '2.4 · 4. BÖLÜM'),
@@ -230,13 +230,13 @@ return [
         'notlar' => '2.4 Fen Fakültesi (Matematik Bölümü) — Profesör sütunu.',
         'sart' => Kalip::ve('Profesör — Fen Fakültesi (Matematik Bölümü)', [
             Kalip::toplam(1500, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 500 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 500 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
                 '2.5a', '2.5c', '2.11a', '2.12a', '3.1', '4.1a', '4.1b', '4.2a',
                 '4.3a',
             ], 500, madde: '2.4 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 400 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 400 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.4a', '2.4b',
@@ -244,11 +244,11 @@ return [
                 '2.12b', '2.15', '3.1', '3.3', '4.1a', '4.1b', '4.2a', '4.3a',
                 '4.4', '9.1', '10.1a',
             ], 400, madde: '2.4 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 120 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 120 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 120, madde: '2.4 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 120 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 120 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 120, madde: '2.4 · 4. BÖLÜM'),
@@ -267,14 +267,14 @@ return [
         'notlar' => '2.5 Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Toplum Bilimleri — Dr. Öğr. Üyesi sütunu.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve To', [
             Kalip::toplam(600, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 200 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 200 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
                 '2.3c', '2.3d', '2.3e', '2.3f', '2.4a', '2.4b', '2.4c', '2.5a',
                 '2.5c', '2.10a', '2.11a', '2.12a', '3.1', '4.1a', '4.1b', '4.2a',
                 '4.3a',
             ], 200, madde: '2.5 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 250 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -283,7 +283,7 @@ return [
                 '3.3', '3.7', '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '5.14a',
                 '9.1', '10.1a', '10.1b',
             ], 250, madde: '2.5 · 2. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 100 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 100 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 100, madde: '2.5 · 4. BÖLÜM'),
@@ -302,14 +302,14 @@ return [
         'notlar' => '2.5 Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Toplum Bilimleri — Doçent sütunu.',
         'sart' => Kalip::ve('Doçent — Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve To', [
             Kalip::toplam(800, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 300 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 300 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
                 '2.3c', '2.3d', '2.3e', '2.3f', '2.4a', '2.4b', '2.4c', '2.5a',
                 '2.5c', '2.10a', '2.11a', '2.12a', '3.1', '4.1a', '4.1b', '4.2a',
                 '4.3a',
             ], 300, madde: '2.5 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 300 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 300 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -318,11 +318,11 @@ return [
                 '3.3', '3.7', '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '5.14a',
                 '9.1', '10.1a', '10.1b',
             ], 300, madde: '2.5 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 80 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 80 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 80, madde: '2.5 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 150 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 150 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 150, madde: '2.5 · 4. BÖLÜM'),
@@ -341,14 +341,14 @@ return [
         'notlar' => '2.5 Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Toplum Bilimleri — Profesör sütunu.',
         'sart' => Kalip::ve('Profesör — Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve To', [
             Kalip::toplam(1200, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 300 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 300 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
                 '2.3c', '2.3d', '2.3e', '2.3f', '2.4a', '2.4b', '2.4c', '2.5a',
                 '2.5c', '2.10a', '2.11a', '2.12a', '3.1', '4.1a', '4.1b', '4.2a',
                 '4.3a',
             ], 300, madde: '2.5 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 300 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 300 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -357,11 +357,11 @@ return [
                 '3.3', '3.7', '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '5.14a',
                 '9.1', '10.1a', '10.1b',
             ], 300, madde: '2.5 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 120 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 120 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 120, madde: '2.5 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 200 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 200 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 200, madde: '2.5 · 4. BÖLÜM'),
@@ -380,14 +380,14 @@ return [
         'notlar' => '2.6 İlahiyat ve Hukuk Fakültesi — Dr. Öğr. Üyesi sütunu.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — İlahiyat ve Hukuk Fakültesi', [
             Kalip::toplam(600, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 150 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 150 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a',
                 '2.3b', '2.3c', '2.3d', '2.3e', '2.3f', '2.4a', '2.4b', '2.4c',
                 '2.5a', '2.5c', '2.11a', '2.12a', '2.15', '3.1', '4.1a', '4.1b',
                 '4.2a', '4.3a',
             ], 150, madde: '2.6 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 200 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 200 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -396,7 +396,7 @@ return [
                 '3.7', '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '9.1', '10.1a',
                 '10.1b',
             ], 200, madde: '2.6 · 2. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 100 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 100 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 100, madde: '2.6 · 4. BÖLÜM'),
@@ -415,14 +415,14 @@ return [
         'notlar' => '2.6 İlahiyat ve Hukuk Fakültesi — Doçent sütunu.',
         'sart' => Kalip::ve('Doçent — İlahiyat ve Hukuk Fakültesi', [
             Kalip::toplam(800, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 200 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 200 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a',
                 '2.3b', '2.3c', '2.3d', '2.3e', '2.3f', '2.4a', '2.4b', '2.4c',
                 '2.5a', '2.5c', '2.11a', '2.12a', '2.15', '3.1', '4.1a', '4.1b',
                 '4.2a', '4.3a',
             ], 200, madde: '2.6 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 250 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -431,11 +431,11 @@ return [
                 '3.7', '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '9.1', '10.1a',
                 '10.1b',
             ], 250, madde: '2.6 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 60 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 60 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 60, madde: '2.6 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 150 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 150 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 150, madde: '2.6 · 4. BÖLÜM'),
@@ -454,14 +454,14 @@ return [
         'notlar' => '2.6 İlahiyat ve Hukuk Fakültesi — Profesör sütunu.',
         'sart' => Kalip::ve('Profesör — İlahiyat ve Hukuk Fakültesi', [
             Kalip::toplam(1200, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 250 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a',
                 '2.3b', '2.3c', '2.3d', '2.3e', '2.3f', '2.4a', '2.4b', '2.4c',
                 '2.5a', '2.5c', '2.11a', '2.12a', '2.15', '3.1', '4.1a', '4.1b',
                 '4.2a', '4.3a',
             ], 250, madde: '2.6 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 300 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 300 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -470,11 +470,11 @@ return [
                 '3.7', '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '9.1', '10.1a',
                 '10.1b',
             ], 300, madde: '2.6 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 100 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 100 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 100, madde: '2.6 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 200 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 200 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 200, madde: '2.6 · 4. BÖLÜM'),
@@ -493,14 +493,14 @@ return [
         'notlar' => '2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Dr. Öğr. Üyesi sütunu.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı)', [
             Kalip::toplam(600, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 250 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
                 '2.3c', '2.3d', '2.3e', '2.3f', '2.4a', '2.4b', '2.5a', '2.5c',
                 '2.11a', '2.12a', '3.1', '4.1a', '4.1b', '4.2a', '4.3a', '4.4',
                 '4.5', '5.5',
             ], 250, madde: '2.7 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 225 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 225 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -509,7 +509,7 @@ return [
                 '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '4.5', '5.5', '5.6',
                 '5.14a', '9.1', '10.1a', '10.1b',
             ], 225, madde: '2.7 · 2. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 40 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 40 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 40, madde: '2.7 · 4. BÖLÜM'),
@@ -528,14 +528,14 @@ return [
         'notlar' => '2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Doçent sütunu.',
         'sart' => Kalip::ve('Doçent — Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı)', [
             Kalip::toplam(1100, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 400 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 400 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
                 '2.3c', '2.3d', '2.3e', '2.3f', '2.4a', '2.4b', '2.5a', '2.5c',
                 '2.11a', '2.12a', '3.1', '4.1a', '4.1b', '4.2a', '4.3a', '4.4',
                 '4.5', '5.5',
             ], 400, madde: '2.7 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 275 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 275 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -544,11 +544,11 @@ return [
                 '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '4.5', '5.5', '5.6',
                 '5.14a', '9.1', '10.1a', '10.1b',
             ], 275, madde: '2.7 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 40 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 40 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 40, madde: '2.7 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 80 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 80 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 80, madde: '2.7 · 4. BÖLÜM'),
@@ -567,14 +567,14 @@ return [
         'notlar' => '2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Profesör sütunu.',
         'sart' => Kalip::ve('Profesör — Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı)', [
             Kalip::toplam(1400, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 450 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 450 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
                 '2.3c', '2.3d', '2.3e', '2.3f', '2.4a', '2.4b', '2.5a', '2.5c',
                 '2.11a', '2.12a', '3.1', '4.1a', '4.1b', '4.2a', '4.3a', '4.4',
                 '4.5', '5.5',
             ], 450, madde: '2.7 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 325 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 325 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -583,11 +583,11 @@ return [
                 '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '4.5', '5.5', '5.6',
                 '5.14a', '9.1', '10.1a', '10.1b',
             ], 325, madde: '2.7 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 60 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 60 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 60, madde: '2.7 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 120 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 120 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 120, madde: '2.7 · 4. BÖLÜM'),
@@ -606,7 +606,7 @@ return [
         'notlar' => '2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), Devlet Konservatuvarı — Dr. Öğr. Üyesi sütunu.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), ', [
             Kalip::toplam(500, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 100 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 100 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c', '2.2d',
                 '2.2e', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e', '2.3f', '2.4a',
@@ -614,7 +614,7 @@ return [
                 '2.12b', '2.15', '3.1', '4.1a', '4.1b', '4.2a', '4.3a', '4.4',
                 '4.5', '5.5',
             ], 100, madde: '2.8 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 120 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 120 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -623,7 +623,7 @@ return [
                 '3.3', '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '4.5', '5.5',
                 '5.14a', '9.1', '10.1a', '10.1b',
             ], 120, madde: '2.8 · 2. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 100 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 100 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 100, madde: '2.8 · 4. BÖLÜM'),
@@ -642,7 +642,7 @@ return [
         'notlar' => '2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), Devlet Konservatuvarı — Doçent sütunu.',
         'sart' => Kalip::ve('Doçent — Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), ', [
             Kalip::toplam(1100, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 160 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 160 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c', '2.2d',
                 '2.2e', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e', '2.3f', '2.4a',
@@ -650,7 +650,7 @@ return [
                 '2.12b', '2.15', '3.1', '4.1a', '4.1b', '4.2a', '4.3a', '4.4',
                 '4.5', '5.5',
             ], 160, madde: '2.8 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 220 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 220 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -659,11 +659,11 @@ return [
                 '3.3', '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '4.5', '5.5',
                 '5.14a', '9.1', '10.1a', '10.1b',
             ], 220, madde: '2.8 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 60 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 60 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 60, madde: '2.8 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 150 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 150 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 150, madde: '2.8 · 4. BÖLÜM'),
@@ -682,7 +682,7 @@ return [
         'notlar' => '2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), Devlet Konservatuvarı — Profesör sütunu.',
         'sart' => Kalip::ve('Profesör — Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), ', [
             Kalip::toplam(1400, liste: 'EK-1'),
-            Kalip::puanDan('1. BÖLÜM ölçütlerinden en az 250 puan', [
+            Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c', '2.2d',
                 '2.2e', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e', '2.3f', '2.4a',
@@ -690,7 +690,7 @@ return [
                 '2.12b', '2.15', '3.1', '4.1a', '4.1b', '4.2a', '4.3a', '4.4',
                 '4.5', '5.5',
             ], 250, madde: '2.8 · 1. BÖLÜM'),
-            Kalip::puanDan('2. BÖLÜM ölçütlerinden en az 280 puan', [
+            Kalip::puanDan('Yayın, proje, patent ve editörlük ölçütlerinden en az 280 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1c', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c',
                 '2.2d', '2.2e', '2.2f', '2.3a', '2.3b', '2.3c', '2.3d', '2.3e',
@@ -699,11 +699,11 @@ return [
                 '3.3', '4.1a', '4.1b', '4.2a', '4.3a', '4.4', '4.5', '5.5',
                 '5.14a', '9.1', '10.1a', '10.1b',
             ], 280, madde: '2.8 · 2. BÖLÜM'),
-            Kalip::puanDan('3. BÖLÜM ölçütlerinden en az 90 puan', [
+            Kalip::puanDan('Tez yönetimi ve eğitim-öğretim ölçütlerinden en az 90 puan', [
                 '13.1a', '13.1b', '13.2', '13.3', '2.11a', '2.11b', '2.11c', '2.11d',
                 '2.11e', '12.1', '12.2',
             ], 90, madde: '2.8 · 3. BÖLÜM'),
-            Kalip::puanDan('4. BÖLÜM ölçütlerinden en az 200 puan', [
+            Kalip::puanDan('Kurumsal ve toplumsal katkı ölçütlerinden en az 200 puan', [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 200, madde: '2.8 · 4. BÖLÜM'),

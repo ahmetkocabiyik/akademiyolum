@@ -60,7 +60,7 @@ return [
         'notlar' => 'MADDE 13/a. "Doktora sonrası döneme ait başvurduğu alan ile ilgili 27, 32-52 numaralı faaliyetlerden toplam en az 100 puana ulaşması gerekir."',
         'sart' => Kalip::ve('Doçent — Sağlık / Fen / Matematik', [
             Kalip::beyan('Üniversitelerarası Kurulca yapılan doçentlik sınavında başarılı olmak', 'Madde 13'),
-            Kalip::puanDan('Doktora sonrası 27 ve 32-52 numaralı faaliyetlerden en az 100 puan',
+            Kalip::puanDan('Doktora sonrası ders, proje, editörlük, tez danışmanlığı ve benzeri faaliyetlerden en az 100 puan',
                 ['27,32-52'], 100, Kalip::DOKTORA_SONRASI, madde: 'Madde 13/a'),
         ]),
     ],

@@ -48,9 +48,10 @@ $barajlar = function (
     int $toplam,
     ?array $donem = null,
     string $kume = '1(a-d)',
+    string $kumeAdi = 'WoS Q1-Q4 dergilerindeki makalelerinizden',
 ): array {
     $dugumler = [
-        Kalip::puanDan("{$kume} kapsamında en az {$yayinPuani} puan",
+        Kalip::puanDan("{$kumeAdi} en az {$yayinPuani} puan",
             array_values($yayinKumesi), $yayinPuani, $donem, madde: "Tablo · {$kume}"),
         Kalip::toplam($toplam),
     ];
@@ -118,7 +119,8 @@ return [
         'cetvel' => 'erciyes-2024',
         'notlar' => 'Tablo 3-6, Dr. Öğretim Üyesi (İlk Atama): 1(a-f), 4(a), 4(c) asgari 40, toplam asgari 75.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sosyal / İİBF / Mimarlık / Güzel Sanatlar', [
-            ...$barajlar(['1(a-d)', '1(e-g)', '4a', '4c'], 40, 75, kume: '1(a-f) ve kitap'),
+            ...$barajlar(['1(a-d)', '1(e-g)', '4a', '4c'], 40, 75, kume: '1(a-f) ve kitap',
+                kumeAdi: 'WoS, ESCI ve TR Dizin makaleleriniz ile özgün kitap ve kitap bölümlerinizden'),
             Kalip::yds(65),
         ]),
     ],
@@ -132,7 +134,8 @@ return [
         'notlar' => 'Tablo 3-6, Doçent: 1(a-f), 4(a), 4(c) asgari 75, toplam asgari 300.',
         'sart' => Kalip::ve('Doçent — Sosyal / İİBF / Mimarlık / Güzel Sanatlar', [
             Kalip::beyan('Üniversitelerarası Kuruldan doçentlik unvanı almış olmak', 'Madde 3'),
-            ...$barajlar(['1(a-d)', '1(e-g)', '4a', '4c'], 75, 300, Kalip::DOKTORA_SONRASI, '1(a-f) ve kitap'),
+            ...$barajlar(['1(a-d)', '1(e-g)', '4a', '4c'], 75, 300, Kalip::DOKTORA_SONRASI, '1(a-f) ve kitap',
+                kumeAdi: 'WoS, ESCI ve TR Dizin makaleleriniz ile özgün kitap ve kitap bölümlerinizden'),
             Kalip::yds(65),
         ]),
     ],
@@ -147,7 +150,8 @@ return [
         'sart' => Kalip::ve('Profesör — Sosyal / İİBF / Mimarlık / Güzel Sanatlar', [
             Kalip::beyan('Doçent unvanını aldıktan sonraki yayınlarından birini başlıca araştırma eseri olarak sunmak', 'Madde 3/iv'),
             Kalip::beyan('Doçentlik sonrası yasal sürenin en az yarısı kadar üniversitede veya araştırma kuruluşunda fiilen çalışmış olmak', 'Madde 3/v'),
-            ...$barajlar(['1(a-d)', '1(e-g)', '4a', '4c'], 150, 550, Kalip::DOCENTLIK_SONRASI, '1(a-f) ve kitap'),
+            ...$barajlar(['1(a-d)', '1(e-g)', '4a', '4c'], 150, 550, Kalip::DOCENTLIK_SONRASI, '1(a-f) ve kitap',
+                kumeAdi: 'WoS, ESCI ve TR Dizin makaleleriniz ile özgün kitap ve kitap bölümlerinizden'),
             Kalip::yds(65),
         ]),
     ],
