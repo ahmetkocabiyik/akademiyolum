@@ -33,6 +33,12 @@ class FaaliyetEkle extends Component
     /** Adayın faaliyetteki rolü; geçerli değerler kategoriye göre değişir. */
     public string $rol = '';
 
+    /**
+     * Makalenin yayın türü. Yönergeler aynı dergideki özgün makale ile
+     * derlemeyi farklı puanlıyor (Ege Q1: 75 ↔ 60).
+     */
+    public string $yayinTuru = 'ozgun_makale';
+
     public string $donem = '';
 
     public string $kaynak = '';
@@ -62,6 +68,7 @@ class FaaliyetEkle extends Component
                 ? array_map('trim', explode(',', $faaliyet->yazarlar))
                 : [''];
             $this->rol = $faaliyet->rol ?? '';
+            $this->yayinTuru = $faaliyet->yayin_turu ?? 'ozgun_makale';
             $this->donem = $faaliyet->donem ?? '';
             $this->kaynak = $faaliyet->kaynak ?? '';
             $this->tarih = $faaliyet->tarih?->format('Y-m-d') ?? '';
@@ -83,6 +90,7 @@ class FaaliyetEkle extends Component
         // Kaynak ve rol sözlüğü kategoriye göre değişiyor.
         $this->kaynak = '';
         $this->rol = '';
+        $this->yayinTuru = 'ozgun_makale';
 
         // Tez ilişkisi yalnızca yayın türlerinde soruluyor; kategori değişince
         // eski değer görünmez biçimde kaydedilmesin.
@@ -109,6 +117,17 @@ class FaaliyetEkle extends Component
     public function rolSecenekleri(): array
     {
         return Kategori::from($this->kategori)->roller();
+    }
+
+    /**
+     * Seçili kategoride geçerli yayın türleri. Boşsa alan gösterilmez —
+     * yalnızca makale ve tezden üretilmiş yayın türe göre puanlanıyor.
+     *
+     * @return array<string, string>
+     */
+    public function yayinTuruSecenekleri(): array
+    {
+        return Kategori::from($this->kategori)->yayinTurleri();
     }
 
     public function yazarEkle(): void
@@ -180,6 +199,7 @@ class FaaliyetEkle extends Component
             'kategori' => $this->kategori,
             'kaynak' => $this->kaynak ?: null,
             'rol' => $this->rol ?: null,
+            'yayin_turu' => $this->yayinTuru ?: null,
         ]);
 
         return $katalog->puan($gecici, $katalog->coz(['*']));
@@ -193,6 +213,7 @@ class FaaliyetEkle extends Component
             'yazarlar' => ['array'],
             'yazarlar.*' => ['nullable', 'string', 'max:255'],
             'rol' => ['nullable', 'string', 'max:32'],
+            'yayinTuru' => ['nullable', 'string', 'max:32'],
             // 'tezden' düzeyi belirsiz eski değer; yeni kayıtta seçilemez ama
             // mevcut kayıt düzenlenirken geri yazılabilmeli.
             'donem' => ['nullable', Rule::in([...array_keys(Faaliyet::tezIliskileri()), 'tezden'])],
@@ -219,6 +240,7 @@ class FaaliyetEkle extends Component
             'baslik' => $veri['baslik'],
             'yazarlar' => $yazarlar ? implode(', ', $yazarlar) : null,
             'rol' => $rol,
+            'yayin_turu' => $this->yayinTuruSecenekleri() === [] ? null : ($this->yayinTuru ?: null),
             'donem' => $this->tezIliskisiSorulur() ? ($veri['donem'] ?: null) : null,
             'tarih' => $veri['tarih'] ?: null,
             'kaynak' => $veri['kaynak'] ?: null,

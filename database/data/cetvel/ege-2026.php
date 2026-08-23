@@ -14,6 +14,10 @@
  * ÇEYREKLİK HER SATIRDA AYRI PUAN: yönerge yalnızca özgün makaleyi değil
  * derlemeyi, editöre mektubu ve dergi editörlüğünü de Q1-Q4 diye ayırıyor.
  *
+ * YAYIN TÜRÜ AYRIMI `turler` alanıyla kuruldu: aynı Q1 dergideki özgün makale
+ * 75, derleme 60, editöre mektup 25 puan. Faaliyetin türü girilmemişse özgün
+ * araştırma makalesi sayılır (formun varsayılanı da bu).
+ *
  * OKUNMAYAN BÖLÜMLER (bilinçli):
  *   · 8, 9 — ödüller ve patent; kaynak sözlüğünde karşılığı olan kalemler
  *     girildi, geri kalanı (kazı ruhsatı, hafızlık icazeti, sportif hakemlik
@@ -33,16 +37,23 @@ return [
 
     'maddeler' => [
         // ── 1. MAKALE ──
-        '1a-Q1' => ['baslik' => 'SCIE/SSCI/AHCI Q1 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 75],
-        '1a-Q2' => ['baslik' => 'SCIE/SSCI/AHCI Q2 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'puan' => 60],
-        '1a-Q3' => ['baslik' => 'SCIE/SSCI/AHCI Q3 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'puan' => 40],
-        '1a-Q4' => ['baslik' => 'SCIE/SSCI/AHCI Q4 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'puan' => 30],
+        '1a-Q1' => ['baslik' => 'SCIE/SSCI/AHCI Q1 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale'], 'puan' => 75],
+        '1a-Q2' => ['baslik' => 'SCIE/SSCI/AHCI Q2 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale'], 'puan' => 60],
+        '1a-Q3' => ['baslik' => 'SCIE/SSCI/AHCI Q3 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale'], 'puan' => 40],
+        '1a-Q4' => ['baslik' => 'SCIE/SSCI/AHCI Q4 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['ozgun_makale'], 'puan' => 30],
 
-        // 1b (derleme) ve 1c (editöre mektup) da çeyrekliğe göre ayrı puanlı
-        // ama GİRİLMEDİ: sözlükte "derleme" ile "özgün araştırma makalesi" ayrı
-        // etiket değil, ikisi de 'SCIE/SSCI (Q1)' etiketine düşer. Aynı etiketi
-        // ikinci kez vermek `puan()` en yükseği aldığı için hiçbir şeyi
-        // değiştirmez; girseydik kapsanmış gibi görünürdü.
+        // 1b (derleme) ve 1c (editöre mektup) aynı dergilerde ama daha düşük
+        // puanlı. `turler` boyutu eklenene kadar girilemiyorlardı: ikisi de
+        // 'SCIE/SSCI (Qn)' etiketine düşüyor ve `puan()` en yükseği aldığı için
+        // her derleme özgün makale gibi puanlanırdı.
+        '1b-Q1' => ['baslik' => 'SCIE/SSCI/AHCI Q1 dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['derleme'], 'puan' => 60],
+        '1b-Q2' => ['baslik' => 'SCIE/SSCI/AHCI Q2 dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['derleme'], 'puan' => 40],
+        '1b-Q3' => ['baslik' => 'SCIE/SSCI/AHCI Q3 dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['derleme'], 'puan' => 30],
+        '1b-Q4' => ['baslik' => 'SCIE/SSCI/AHCI Q4 dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['derleme'], 'puan' => 20],
+        '1c-Q1' => ['baslik' => 'SCIE/SSCI/AHCI Q1 dergide editöre mektup, olgu sunumu, teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 25],
+        '1c-Q2' => ['baslik' => 'SCIE/SSCI/AHCI Q2 dergide editöre mektup, olgu sunumu, teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 20],
+        '1c-Q3' => ['baslik' => 'SCIE/SSCI/AHCI Q3 dergide editöre mektup, olgu sunumu, teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 15],
+        '1c-Q4' => ['baslik' => 'SCIE/SSCI/AHCI Q4 dergide editöre mektup, olgu sunumu, teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
         '1d' => ['baslik' => 'Diğer uluslararası alan indeksli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 20],
         '1e' => ['baslik' => 'Diğer uluslararası alan indeksli dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 10],
         '1g1' => ['baslik' => 'ULAKBİM taranan ulusal dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
@@ -117,7 +128,7 @@ return [
         '1a-Q1Q2' => ['1a-Q1', '1a-Q2'],
         '1a-Q1Q3' => ['1a-Q1', '1a-Q2', '1a-Q3'],
         // "1 (a, b, c, d)" — sosyal/ilahiyat/hukuk koşullarının saydığı küme.
-        '1-abcd' => ['1a-Q1', '1a-Q2', '1a-Q3', '1a-Q4', '1d'],
+        '1-abcd' => ['1a-Q1', '1a-Q2', '1a-Q3', '1a-Q4', '1b-Q1', '1b-Q2', '1b-Q3', '1b-Q4', '1c-Q1', '1c-Q2', '1c-Q3', '1c-Q4', '1d'],
         // "3 (a1, a2, b1)" — sosyal bilimler kitap kümesi.
         '3-a1a2b1' => ['3a1', '3a2', '3b1'],
         // "3 (a1, a2, b1, b2, d)" — ilahiyat ve hukuk kitap kümesi.

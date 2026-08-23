@@ -16,6 +16,7 @@ use App\Models\Faaliyet;
  *     kategori?: string,
  *     kaynaklar?: list<string>,
  *     roller?: list<string>,
+ *     turler?: list<string>,
  *     puan?: int,
  *     tavan?: int,
  * }
@@ -314,6 +315,21 @@ readonly class MaddeKatalogu
         // (Akdeniz 6.1 yürütücü 200 ↔ 6.2 araştırıcı 50).
         if (isset($madde['roller']) && ! in_array($faaliyet->rol, $madde['roller'], true)) {
             return false;
+        }
+
+        // Aynı dergideki iki çalışma türüne göre farklı puanlanıyor: Ege 1(a)
+        // Q1 özgün makale 75, 1(b) Q1 derleme 60, 1(c) editöre mektup 25.
+        //
+        // Türü GİRİLMEMİŞ kayıt özgün araştırma makalesi sayılır. Bunun
+        // alternatifi hiçbir maddeye uymayıp sessizce 0 puan almaktı; form da
+        // aynı varsayılanı sunuyor, dolayısıyla türü farklı olan çalışmayı
+        // işaretlemek adayın elinde.
+        if (isset($madde['turler'])) {
+            $tur = $faaliyet->yayin_turu ?? 'ozgun_makale';
+
+            if (! in_array($tur, $madde['turler'], true)) {
+                return false;
+            }
         }
 
         return true;

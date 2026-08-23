@@ -18,11 +18,9 @@
  *   1F diğer uluslararası indeks              20 / 8 / 4 / (3-2) / 2
  *   1G TR-Dizin                               15 / 5 / 4 / (3-2)
  *
- * 1A, 1B ve 1C kaynak sözlüğünde AYRILAMIYOR — üçü de 'SCIE/SSCI (Qn)'
- * etiketine düşüyor. Yalnızca 1A girildi; 1B ve 1C girilseydi `puan()` en
- * yükseği aldığı için hesabı değiştirmez, sadece kapsanmış gibi görünürdü.
- * Bunun sonucu: `1A-1B` ve `1A-1C` grupları pratikte `1A` ile aynı kümeye
- * çözülüyor. Aday eksik puan görür, fazla değil.
+ * 1A, 1B ve 1C `turler` alanıyla ayrıldı. DİKKAT: Ankara 1A'da özgün makale
+ * ile derlemeyi BİRLİKTE puanlıyor (ikisi de 40/35/30/25), Ege ve Gazi ise
+ * ayırıyor. Bu yüzden 1A maddeleri iki türü de kabul ediyor.
  *
  * GİRİLMEYEN BÖLÜMLER: 3. Sanatsal Etkinlik (müzik, sahne, sergi — 40'tan
  * fazla kalem, kaynak sözlüğünde çoğunun karşılığı yok), 7. Bilimsel/Sanatsal
@@ -30,17 +28,28 @@
  */
 
 return [
-    'kapsam_notu' => 'Puanlar Ankara Üniversitesi 2023 kalıcı çizelgesinden. Short communication '
-        .'ve vaka/teknik not türleri kaynak sözlüğünde özgün araştırma makalesinden ayrılamadığı '
-        .'için ayrıca girilmedi; sanatsal etkinlik bölümü de henüz girilmedi. Gerçek toplamınız '
-        .'burada görünenden yüksek olabilir, düşük olamaz.',
+    'kapsam_notu' => 'Puanlar Ankara Üniversitesi 2023 kalıcı çizelgesinden. Sanatsal etkinlik '
+        .'bölümü henüz girilmedi. Gerçek toplamınız burada görünenden yüksek olabilir, '
+        .'düşük olamaz.',
 
     'maddeler' => [
         // ── 1A · Özgün araştırma makalesi / derleme ──
-        '1Aa' => ['baslik' => 'WoS Q1 dergide özgün araştırma makalesi/derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 40],
-        '1Ab' => ['baslik' => 'WoS Q2 dergide özgün araştırma makalesi/derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'puan' => 35],
-        '1Ac' => ['baslik' => 'WoS Q3 dergide özgün araştırma makalesi/derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'puan' => 30],
-        '1Aç' => ['baslik' => 'WoS Q4 dergide özgün araştırma makalesi/derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'puan' => 25],
+        '1Aa' => ['baslik' => 'WoS Q1 dergide özgün araştırma makalesi/derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
+        '1Ab' => ['baslik' => 'WoS Q2 dergide özgün araştırma makalesi/derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 35],
+        '1Ac' => ['baslik' => 'WoS Q3 dergide özgün araştırma makalesi/derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
+        '1Aç' => ['baslik' => 'WoS Q4 dergide özgün araştırma makalesi/derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
+
+        // ── 1B, 1C · aynı dergiler, farklı yayın türü ──
+        // Ankara 1A'da özgün makale ile derlemeyi BİRLİKTE puanlıyor;
+        // Ege ve Gazi ayırıyor. Bu yüzden 1A iki türü de kabul ediyor.
+        '1Ba' => ['baslik' => 'WoS Q1 dergide short/brief communication', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['kisa_makale'], 'puan' => 35],
+        '1Bb' => ['baslik' => 'WoS Q2 dergide short/brief communication', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['kisa_makale'], 'puan' => 30],
+        '1Bc' => ['baslik' => 'WoS Q3 dergide short/brief communication', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['kisa_makale'], 'puan' => 25],
+        '1Bç' => ['baslik' => 'WoS Q4 dergide short/brief communication', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['kisa_makale'], 'puan' => 20],
+        '1Ca' => ['baslik' => 'WoS Q1 dergide vaka, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['vaka_teknik_not'], 'puan' => 20],
+        '1Cb' => ['baslik' => 'WoS Q2 dergide vaka, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['vaka_teknik_not'], 'puan' => 15],
+        '1Cc' => ['baslik' => 'WoS Q3 dergide vaka, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['vaka_teknik_not'], 'puan' => 10],
+        '1Cç' => ['baslik' => 'WoS Q4 dergide vaka, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['vaka_teknik_not'], 'puan' => 8],
 
         // ── 1E-1G · çeyrekliksiz indeks kümeleri ──
         '1Ea' => ['baslik' => 'WoS All Databases / SCOPUS dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 22],
@@ -90,12 +99,11 @@ return [
     ],
 
     'gruplar' => [
-        // Koşulların birebir kullandığı atıflar. 1B ve 1C girilmediği için
-        // `1A-1B` ve `1A-1C` pratikte `1A` ile aynı kümeye çözülüyor.
-        '1A' => ['1Aa', '1Ab', '1Ac', '1Aç'],
-        '1A-1B' => ['1Aa', '1Ab', '1Ac', '1Aç'],
-        '1A-1C' => ['1Aa', '1Ab', '1Ac', '1Aç'],
-        '1A-1E' => ['1Aa', '1Ab', '1Ac', '1Aç', '1Ea', '1Eç'],
+        // Koşulların birebir kullandığı atıflar.
+        '1A' => ['1A*'],
+        '1A-1B' => ['1A*', '1B*'],
+        '1A-1C' => ['1A*', '1B*', '1C*'],
+        '1A-1E' => ['1A*', '1B*', '1C*', '1Ea', '1Eç'],
         '1A-1G' => ['1*'],
         'KITAP' => ['2*'],
         'PROJE' => ['5*'],

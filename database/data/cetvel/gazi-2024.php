@@ -15,10 +15,12 @@
  *   4. vaka incelemesi, teknik not, editöre mektup, kitap incelemesi  20/15/10/5
  *   5. kongre bildirisi (WoS dergide)  20/10, 15/7, 10/5, 5/3
  *
- * Kaynak sözlüğü bu türleri ayırt etmiyor — hepsi 'SCIE/SSCI (Q1)' etiketine
- * düşüyor. Yalnızca 1. blok girildi; 2-5 girilseydi `puan()` en yükseği aldığı
- * için hiçbir şeyi değiştirmez, sadece kapsanmış gibi görünürdü. Pratik etki
- * sınırlı: 1 ile 2 zaten aynı puanda, 3-5 daha düşük.
+ * 1-4 blokları `turler` alanıyla girildi: aynı dergideki çalışma türüne göre
+ * ayrı puanlanıyor. Faaliyetin türü girilmemişse özgün araştırma makalesi
+ * sayılır (formun varsayılanı da bu).
+ *
+ * 5. blok (WoS dergide kongre bildirisi) GİRİLMEDİ: değerleri "20/10" gibi
+ * tam metin/özet ikilisi ve bildiri kategorisiyle çakışıyor.
  *
  * GİRİLMEYEN BÖLÜMLER: EĞİTİM/ÖĞRETİM (tavan 20 puan), idari görevler ve
  * ödüller — kaynak sözlüğünde karşılığı olmayan ya da metrik olan kalemler.
@@ -26,17 +28,31 @@
  */
 
 return [
-    'kapsam_notu' => 'Puanlar Gazi Üniversitesi EK-1 tablosundan (01.01.2024 sürümü). Derleme, '
-        .'kısa makale ve vaka incelemesi türleri kaynak sözlüğünde özgün araştırma makalesinden '
-        .'ayrılamadığı için ayrıca girilmedi; eğitim-öğretim ve idari görev kalemleri de hesaba '
-        .'katılmadı. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
+    'kapsam_notu' => 'Puanlar Gazi Üniversitesi EK-1 tablosundan (01.01.2024 sürümü). '
+        .'Eğitim-öğretim ve idari görev kalemleri hesaba katılmadı. Gerçek toplamınız burada '
+        .'görünenden yüksek olabilir, düşük olamaz.',
 
     'maddeler' => [
         // ── MAKALELER 1 · WoS özgün araştırma makalesi ──
-        '1a' => ['baslik' => 'WoS Q1 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 40],
-        '1b' => ['baslik' => 'WoS Q2 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'puan' => 35],
-        '1c' => ['baslik' => 'WoS Q3 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'puan' => 30],
-        '1d' => ['baslik' => 'WoS Q4 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'puan' => 20],
+        '1a' => ['baslik' => 'WoS Q1 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale'], 'puan' => 40],
+        '1b' => ['baslik' => 'WoS Q2 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale'], 'puan' => 35],
+        '1c' => ['baslik' => 'WoS Q3 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale'], 'puan' => 30],
+        '1d' => ['baslik' => 'WoS Q4 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['ozgun_makale'], 'puan' => 20],
+
+        // ── MAKALELER 2-4 · aynı dergiler, farklı yayın türü ──
+        // `turler` boyutu eklenene kadar girilemiyorlardı.
+        '2a' => ['baslik' => 'WoS Q1 dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['derleme'], 'puan' => 40],
+        '2b' => ['baslik' => 'WoS Q2 dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['derleme'], 'puan' => 35],
+        '2c' => ['baslik' => 'WoS Q3 dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['derleme'], 'puan' => 30],
+        '2d' => ['baslik' => 'WoS Q4 dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['derleme'], 'puan' => 20],
+        '3a' => ['baslik' => 'WoS Q1 dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['kisa_makale'], 'puan' => 35],
+        '3b' => ['baslik' => 'WoS Q2 dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['kisa_makale'], 'puan' => 30],
+        '3c' => ['baslik' => 'WoS Q3 dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['kisa_makale'], 'puan' => 25],
+        '3d' => ['baslik' => 'WoS Q4 dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['kisa_makale'], 'puan' => 15],
+        '4a' => ['baslik' => 'WoS Q1 dergide vaka incelemesi, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['vaka_teknik_not'], 'puan' => 20],
+        '4b' => ['baslik' => 'WoS Q2 dergide vaka incelemesi, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['vaka_teknik_not'], 'puan' => 15],
+        '4c' => ['baslik' => 'WoS Q3 dergide vaka incelemesi, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['vaka_teknik_not'], 'puan' => 10],
+        '4d' => ['baslik' => 'WoS Q4 dergide vaka incelemesi, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['vaka_teknik_not'], 'puan' => 5],
 
         // ── MAKALELER 6-9 · çeyrekliksiz indeks kümeleri ──
         '6a' => ['baslik' => 'WoS All Databases / SCOPUS dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 20],
@@ -82,11 +98,10 @@ return [
         '1a-b' => ['1a', '1b'],
         '1a-c' => ['1a', '1b', '1c'],
         '1a-d' => ['1a', '1b', '1c', '1d'],
-        // "1-5 kapsamında": 2-5 blokları girilmediği için 1. blok ile aynı.
-        '1-5' => ['1a', '1b', '1c', '1d'],
-        '1-4 ve 6a' => ['1a', '1b', '1c', '1d', '6a'],
-        '1-5, 6a-b, 7a-b' => ['1a', '1b', '1c', '1d', '6a', '7a'],
-        '1-5, 6a-b, 7a-b, 8a-b' => ['1a', '1b', '1c', '1d', '6a', '7a', '8a'],
+        '1-5' => ['1*', '2*', '3*', '4*'],
+        '1-4 ve 6a' => ['1*', '2*', '3*', '4*', '6a'],
+        '1-5, 6a-b, 7a-b' => ['1*', '2*', '3*', '4*', '6a', '7a'],
+        '1-5, 6a-b, 7a-b, 8a-b' => ['1*', '2*', '3*', '4*', '6a', '7a', '8a'],
         '1a-d, 6a-b, 7a-b' => ['1a', '1b', '1c', '1d', '6a', '7a'],
         'KITAP 1a-k' => ['K1*'],
         // "PROJELER etkinliğinde (e maddesi hariç)" — BAP dışı projeler.

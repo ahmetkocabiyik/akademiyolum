@@ -83,10 +83,24 @@
                     @php
                         $kat = \App\Enums\Kategori::from($kategori);
                         $roller = $this->rolSecenekleri();
+                        $yayinTurleri = $this->yayinTuruSecenekleri();
                         // Yazar listesi yalnızca yayın türlerinde anlamlı; proje,
                         // tez danışmanlığı, atıf gibi kategorilerde gösterilmez.
                         $yazarliMi = isset($roller['tek']);
                     @endphp
+
+                    {{--
+                        Yayın türü: yönergeler aynı dergideki özgün makale ile
+                        derlemeyi farklı puanlıyor (Ege Q1: 75 ↔ 60). Yalnızca
+                        makale ve tezden üretilmiş yayında sorulur.
+                    --}}
+                    @if ($yayinTurleri !== [])
+                        <flux:select wire:model.live="yayinTuru" label="Yayın Türü">
+                            @foreach ($yayinTurleri as $deger => $etiket)
+                                <flux:select.option value="{{ $deger }}">{{ $etiket }}</flux:select.option>
+                            @endforeach
+                        </flux:select>
+                    @endif
 
                     {{-- Yazarlar (03_yayin_ekleme.html: çoklu yazar listesi) --}}
                     <div @class(['hidden' => ! $yazarliMi])>

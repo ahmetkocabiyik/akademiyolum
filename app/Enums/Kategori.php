@@ -267,6 +267,39 @@ enum Kategori: string
      *
      * @return array<string, string>
      */
+    /**
+     * Makalenin yayın türü.
+     *
+     * Yönergeler aynı dergideki iki çalışmayı türüne göre farklı puanlıyor:
+     * Ege 1(a) Q1 özgün makale 75 puan, 1(b) Q1 derleme 60, 1(c) Q1 editöre
+     * mektup 25. `kaynak` yalnızca dergiyi taşıdığı için bu ayrım oradan
+     * okunamıyor; cetvel maddeleri `turler` ile sınırlanabiliyor.
+     *
+     * VARSAYILAN 'ozgun_makale' — hem formun ön seçimi hem de türü
+     * girilmemiş kayıtların sayıldığı tür. Derleme veya editöre mektup
+     * kaydeden adayın bunu açıkça seçmesi gerekir.
+     *
+     * @return array<string, string>
+     */
+    public function yayinTurleri(): array
+    {
+        return match ($this) {
+            self::Makale, self::TezYayini => [
+                'ozgun_makale' => 'Özgün araştırma makalesi',
+                'derleme' => 'Derleme',
+                'kisa_makale' => 'Kısa makale (short/brief communication)',
+                'vaka_teknik_not' => 'Vaka sunumu, teknik not, editöre mektup',
+            ],
+            default => [],
+        };
+    }
+
+    /**
+     * Adayın bu kategorideki faaliyetteki rolü. Yayın türlerinde yazarlık,
+     * projede görev, tez danışmanlığında danışmanlık düzeyi.
+     *
+     * @return array<string, string>
+     */
     public function roller(): array
     {
         return match ($this) {

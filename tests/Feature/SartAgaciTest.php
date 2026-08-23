@@ -1495,3 +1495,35 @@ test('Ankara iki katmanlı baraj uyguluyor', function () {
         expect($depo->bul('Ankara Üniversitesi', 'docentlik', $alan))->toBeNull();
     }
 });
+
+test('yayın türü aynı dergideki çalışmaları farklı puanlıyor', function () {
+    $katalog = sartDepo()->katalog('ege-2026');
+    $kodlar = array_keys($katalog->maddeler);
+
+    // Ege 1(a) Q1 özgün makale 75, 1(b) Q1 derleme 60, 1(c) Q1 editöre mektup 25.
+    // Üçü de aynı dergide; ayrım yalnızca yayın türünden okunabiliyor.
+    $puan = function (?string $tur) use ($katalog, $kodlar): int {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+        $f->yayin_turu = $tur;
+
+        return $katalog->puan($f, $kodlar);
+    };
+
+    expect($puan('ozgun_makale'))->toBe(75)
+        ->and($puan('derleme'))->toBe(60)
+        ->and($puan('vaka_teknik_not'))->toBe(25)
+        ->and($puan('kisa_makale'))->toBe(25);
+
+    // Türü girilmemiş kayıt özgün araştırma makalesi sayılır — formun
+    // varsayılanı da bu. Alternatifi hiçbir maddeye uymayıp sessizce 0 almaktı.
+    expect($puan(null))->toBe(75);
+
+    // Türe duyarsız cetvellerde ayrım yok: madde `turler` bildirmiyorsa
+    // derleme de özgün makale de aynı puanı alır.
+    $gazi = sartDepo()->katalog('gazi-2024');
+    $gaziKodlar = array_keys($gazi->maddeler);
+    $derleme = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+    $derleme->yayin_turu = 'derleme';
+
+    expect($gazi->puan($derleme, $gaziKodlar))->toBe(40);
+});
