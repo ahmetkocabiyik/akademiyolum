@@ -71,6 +71,37 @@ return [
         '2Bd' => ['baslik' => 'Ulusal yayınevinden kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
         '2Bf' => ['baslik' => 'Tahkik / neşir / araştırma notu / detaylı kitap kritiği', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 5],
 
+        // ── 3 · SANATSAL ETKİNLİK ──
+        // Güzel Sanatlar barajı bu bölümü de sayıyor; girilmediği sürece o
+        // alandaki aday puanını eksik görüyordu.
+        //
+        // YAKLAŞIK EŞLEME: Ankara c) "orkestra eşliğinde solist, orkestra
+        // yönetmek, operada solist, bireysel dinleti, oda müziği" kalemlerini
+        // TEK satırda topluyor; sözlükteki etiketler (Mersin TABLO C'den gelen)
+        // bunları ayrı tutuyor. Satır, kapsadığı etiketlerin tümüyle bağlandı —
+        // aday hangisini kaydetmişse o satırdan puan alır.
+        '3c' => ['baslik' => 'Uluslararası etkinlikte solist konser, orkestra yönetimi, resital veya oda müziği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Solistlik (Uluslararası)', 'Resital (Uluslararası)', 'Orkestra Şefliği (Uluslararası)'], 'puan' => 40],
+        '3ç' => ['baslik' => 'Ulusal etkinlikte solist konser, orkestra yönetimi, resital veya oda müziği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Solistlik (Ulusal)', 'Resital (Ulusal)', 'Orkestra Şefliği (Ulusal)'], 'puan' => 20],
+        '3d' => ['baslik' => 'Uluslararası karma etkinlikte solist, oda müziği grup üyesi veya piyano eşlikçisi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Uluslararası)'], 'puan' => 20],
+        '3e' => ['baslik' => 'Ulusal karma etkinlikte solist, oda müziği grup üyesi veya piyano eşlikçisi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Ulusal)'], 'puan' => 10],
+        '3f' => ['baslik' => 'Uluslararası/ulusal etkinlikte orkestra veya koro üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Orkestra / Koro Üyeliği'], 'puan' => 10],
+        '3g' => ['baslik' => 'Uluslararası etkinlikte icra edilmiş veya yayımlanmış özgün beste', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Özgün Eser / Beste / Tasarım'], 'puan' => 40],
+        '3j' => ['baslik' => 'Performansı veya özgün besteleriyle yayınlanmış CD/DVD', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Albüm / Konser Kaydı'], 'puan' => 40],
+        '3k' => ['baslik' => 'Yayınlanmış karma CD/DVD\'de performans veya özgün beste', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Albüm / CD-DVD Katkısı'], 'puan' => 20],
+        '3l' => ['baslik' => 'Sahne, TV, radyo veya sinemada uluslararası mecrada yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)'], 'puan' => 40],
+        '3m' => ['baslik' => 'Sahne, TV, radyo veya sinemada ulusal mecrada yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)'], 'puan' => 20],
+        '3n' => ['baslik' => 'Dansçı veya performans icracısı olarak uluslararası etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Dansçı / Performans İcracısı (Uluslararası)'], 'puan' => 40],
+        '3o' => ['baslik' => 'Dansçı veya performans icracısı olarak ulusal etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Dansçı / Performans İcracısı (Ulusal)'], 'puan' => 20],
+        '3ö' => ['baslik' => 'Koreograf olarak sahnelenen yapıt', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koreografi'], 'puan' => 15],
+        '3p' => ['baslik' => 'Sahne, TV, radyo veya sinemada yönetmenlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Yönetmenlik (Sahne/Ekran)'], 'puan' => 30],
+        '3r' => ['baslik' => 'Sahne tasarımı (dekor, kostüm, ışık)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne Tasarımı (Dekor, Kostüm, Işık)'], 'puan' => 15],
+        '3s' => ['baslik' => 'Uluslararası koruma-onarım uygulaması veya kişisel sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koruma-Onarım Uygulaması (Uluslararası)', 'Kişisel Etkinlik (Uluslararası)'], 'puan' => 40],
+        '3ş' => ['baslik' => 'Ulusal koruma-onarım uygulaması veya kişisel sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koruma-Onarım Uygulaması (Ulusal)', 'Kişisel Etkinlik (Ulusal)'], 'puan' => 30],
+        '3t' => ['baslik' => 'Uluslararası ortak/karma/grup sergisine katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)'], 'puan' => 15],
+        '3u' => ['baslik' => 'Ulusal ortak/karma/grup sergisine katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 10],
+        '3ü' => ['baslik' => 'Kurum web adresinde yayımlanan özgün eser (elektronik kişisel sergi)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Elektronik Kişisel Sergi (Uluslararası)', 'Elektronik Kişisel Sergi (Ulusal)'], 'puan' => 10],
+        '3v' => ['baslik' => 'Kurum web adresinde yayımlanan karma sergi katılımı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Elektronik Karma Sergi (Uluslararası)', 'Elektronik Karma Sergi (Ulusal)'], 'puan' => 5],
+
         // ── 4 · Atıf ──
         '4a' => ['baslik' => 'WoS/Scopus dergilerde adayın yazar olmadığı yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
         '4b' => ['baslik' => 'Uluslararası yayınevi kitaplarında atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
@@ -106,6 +137,7 @@ return [
         '1A-1E' => ['1A*', '1B*', '1C*', '1Ea', '1Eç'],
         '1A-1G' => ['1*'],
         'KITAP' => ['2*'],
+        'SANATSAL' => ['3*'],
         'PROJE' => ['5*'],
         'PROJE_YURUTUCU' => ['5a', '5ç', '5f', '5h'],
     ],

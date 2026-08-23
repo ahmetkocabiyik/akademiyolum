@@ -1527,3 +1527,50 @@ test('yayın türü aynı dergideki çalışmaları farklı puanlıyor', functio
 
     expect($gazi->puan($derleme, $gaziKodlar))->toBe(40);
 });
+
+test('sanatsal etkinlik Güzel Sanatlar barajına giriyor (Ankara)', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Ankara Üniversitesi', 'docentlik', 'guzel_sanatlar');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    $baraj = fn (array $faaliyetler) => collect($depo->degerlendir($esik, $faaliyetler, $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'sanatsal etkinlik'))->mevcut;
+
+    expect($baraj([]))->toBe(0);
+
+    // Uluslararası kişisel sergi 3s maddesinden 40 puan.
+    $sergi = sartFaaliyet('Kişisel Etkinlik (Uluslararası)', Kategori::SanatselEtkinlik,
+        yazarRolu: null, tarih: '2020-01-01');
+
+    expect($baraj([$sergi]))->toBe(40);
+
+    // Mersin'in konservatuvar etiketleri de tanınıyor — Ankara c) maddesi
+    // solistlik, resital ve orkestra şefliğini tek satırda topluyor.
+    $resital = sartFaaliyet('Resital (Uluslararası)', Kategori::SanatselEtkinlik,
+        yazarRolu: null, tarih: '2020-01-01');
+
+    expect($baraj([$resital]))->toBe(40);
+});
+
+test('müzik/dans metot kitabı Ege güzel sanatlar yayın sayısına giriyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Ege Üniversitesi', 'dr_ogr_uyesi', 'guzel_sanatlar');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    // Yönerge md. 12.9 bu kalemi ADIYLA sayıyor: "… 10.4 (k, l) maddelerinden
+    // birinde başlıca yazar olmak koşulu ile dört yayını olmak."
+    $metot = fn () => sartFaaliyet('Ders / Metot Kitabı', Kategori::Kitap,
+        yazarRolu: 'tek', tarih: '2020-01-01');
+
+    $sayi = collect($depo->degerlendir($esik, [$metot(), $metot()], $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'en az 4'))->mevcut;
+
+    expect($sayi)->toBe(2);
+
+    // Fen alanında aynı kalem sayılmaz: yönerge orada yalnızca 1(a) diyor.
+    $fen = $depo->bul('Ege Üniversitesi', 'dr_ogr_uyesi', 'fen');
+    $fenSayi = collect($depo->degerlendir($fen, [$metot(), $metot()], $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'en az 4'))->mevcut;
+
+    expect($fenSayi)->toBe(0);
+});

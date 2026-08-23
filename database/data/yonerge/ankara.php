@@ -25,9 +25,8 @@
  * hukuk, ilahiyat, mimarlık, ziraat ve spor alanlarının hangi bölüme tabi
  * olduğu belgeden okunamıyor, bu yüzden eşik girilmedi.
  *
- * SANATSAL ETKİNLİK bölümü cetvele girilmediği için Güzel Sanatlar barajı
- * yalnızca makale ve kitap kalemlerinden hesaplanıyor; aday gerçekte olduğundan
- * düşük puan görür.
+ * SANATSAL ETKİNLİK bölümü girildi; Güzel Sanatlar barajı makale, kitap ve
+ * sanatsal etkinlik puanlarının toplamından hesaplanıyor.
  *
  * Ortak kalıplar: App\Services\Scoring\Sart\Kalip · cetvel: cetvel/ankara-2023.php
  */
@@ -152,44 +151,42 @@ return [
     ],
 
     // ══════════════════════ GÜZEL SANATLAR ══════════════════════
-    // Baraj makale + kitap + sanatsal etkinlik toplamından; sanatsal etkinlik
-    // bölümü cetvele girilmediği için hesaplanan puan eksik kalır.
+    // Baraj üç bölümün toplamından: makale + kitap + sanatsal etkinlik.
     [
         'anahtar' => 'ankara-dr-guzel-sanatlar',
-        'aday_notu' => 'Baraj makale, kitap ve sanatsal etkinlik puanlarının toplamından hesaplanıyor; sanatsal etkinlik kalemleri henüz sisteme girilmediği için puanınız eksik görünebilir.',
+        'aday_notu' => 'Baraj makale, kitap ve sanatsal etkinlik puanlarının toplamından hesaplanıyor.',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => ['guzel_sanatlar'],
         'cetvel' => 'ankara-2023',
         'notlar' => 'GÜZEL SANATLAR, Dr. Öğr. Üyesi. 1. Makaleler, 2. Kitap/Kitap Bölümü, 3. Sanatsal Etkinlik bölümlerinden toplam en az 90 puan.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Güzel Sanatlar', [
-            Kalip::puanDan('Makale ve kitap kalemlerinden en az 90 puan', ['1A-1G', 'KITAP'], 90),
+            Kalip::puanDan('Makale, kitap ve sanatsal etkinlik kalemlerinden en az 90 puan', ['1A-1G', 'KITAP', 'SANATSAL'], 90),
             $yurtDisi(),
         ]),
     ],
     [
         'anahtar' => 'ankara-docent-guzel-sanatlar',
-        'aday_notu' => 'Sanatsal etkinlik kalemleri henüz sisteme girilmediği için puanınız eksik görünebilir.',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => ['guzel_sanatlar'],
         'cetvel' => 'ankara-2023',
         'notlar' => 'GÜZEL SANATLAR, Doçent. Makaleler, Kitap/Kitap Bölümü ve Sanatsal Etkinlik bölümlerinden toplam en az 200 puan.',
         'sart' => Kalip::ve('Doçent — Güzel Sanatlar', [
-            Kalip::puanDan('Makale ve kitap kalemlerinden en az 200 puan', ['1A-1G', 'KITAP'], 200),
+            Kalip::puanDan('Makale, kitap ve sanatsal etkinlik kalemlerinden en az 200 puan', ['1A-1G', 'KITAP', 'SANATSAL'], 200),
         ]),
     ],
     [
         'anahtar' => 'ankara-profesor-guzel-sanatlar',
-        'aday_notu' => 'Zorunlu 350 puanın en az 150\'si doçentlik unvanından sonra kazanılmış olmalı. Sanatsal etkinlik kalemleri henüz sisteme girilmedi.',
+        'aday_notu' => 'Zorunlu 350 puanın en az 150\'si doçentlik unvanından sonra kazanılmış olmalı.',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => ['guzel_sanatlar'],
         'cetvel' => 'ankara-2023',
         'notlar' => 'GÜZEL SANATLAR, Profesör. Toplam en az 350 puan, en az 150 puanı doçentlik unvanı sonrası.',
         'sart' => Kalip::ve('Profesör — Güzel Sanatlar', [
-            Kalip::puanDan('Makale ve kitap kalemlerinden en az 350 puan', ['1A-1G', 'KITAP'], 350),
-            Kalip::puanDan('Bunun en az 150 puanı doçentlik sonrası olmalı', ['1A-1G', 'KITAP'], 150, Kalip::DOCENTLIK_SONRASI),
+            Kalip::puanDan('Makale, kitap ve sanatsal etkinlik kalemlerinden en az 350 puan', ['1A-1G', 'KITAP', 'SANATSAL'], 350),
+            Kalip::puanDan('Bunun en az 150 puanı doçentlik sonrası olmalı', ['1A-1G', 'KITAP', 'SANATSAL'], 150, Kalip::DOCENTLIK_SONRASI),
         ]),
     ],
 ];

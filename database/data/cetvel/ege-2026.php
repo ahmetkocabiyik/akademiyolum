@@ -117,6 +117,15 @@ return [
         '7a-Q3' => ['baslik' => 'SCIE/SSCI/AHCI Q3 dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q3)'], 'puan' => 8],
         '7a-Q4' => ['baslik' => 'SCIE/SSCI/AHCI Q4 dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q4)'], 'puan' => 5],
 
+        // ── 10.4 (k, l) · müzik/dans eğitim metodu ──
+        // Güzel Sanatlar ve Mimarlık koşulları bu iki kalemi ADIYLA anıyor
+        // ("… 10.4 (k, l) maddelerinden en az üçünde başlıca yazar olmak").
+        // Ders kitabı niteliğinde oldukları için kitap kategorisinde.
+        '10.4k' => ['baslik' => 'Uluslararası yayınevinden yabancı dilde müzik/dans eğitimi metodu veya etüt kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 50],
+        // 10.4(l) aynı kalemin ulusal karşılığı (40 puan) ve sözlükte ayrı
+        // etiketi yok; 10.4(k) ile aynı etikete düşerdi. Girilmedi — girilseydi
+        // `puan()` en yükseği aldığı için her metot kitabı 50 sayılırdı.
+
         // ── 8. ÖDÜLLER ──
         '8a' => ['baslik' => 'Cumhurbaşkanlığı Kültür ve Sanat Büyük Ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü'], 'puan' => 100],
         '8b' => ['baslik' => 'YÖK, TÜBA veya TÜBİTAK bilim/başarı ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'YÖK Ödülü'], 'puan' => 100],
@@ -133,6 +142,8 @@ return [
         '3-a1a2b1' => ['3a1', '3a2', '3b1'],
         // "3 (a1, a2, b1, b2, d)" — ilahiyat ve hukuk kitap kümesi.
         '3-ilahiyat' => ['3a1', '3a2', '3b1', '3b2'],
+        // "1 (a, b, d, e, g1, g2), 3 (a1, b1, d, e), 10.4 (k, l)" — Güzel Sanatlar/Mimarlık.
+        '10.4-kl' => ['10.4k'],
         'MAKALE' => ['1*'],
         'KITAP' => ['3*'],
         'PROJE' => ['5*'],

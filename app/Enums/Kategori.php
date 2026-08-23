@@ -129,6 +129,9 @@ enum Kategori: string
                 'BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)',
                 'BKCI / Scopus Kitap Bölümü', 'Kitap Bölümü',
                 'Ansiklopedi Maddesi', 'Çeviri Kitap', 'Çeviri Kitap Bölümü',
+                // Ege 3(ı)/3(i) ve 10.4(k,l), Gazi K1c: ders ve metot kitapları
+                // ayrı puanlı ve güzel sanatlar koşullarında ADIYLA anılıyor.
+                'Ders / Metot Kitabı',
             ],
             self::TezYayini => [
                 'SCIE/SSCI/AHCI', 'ESCI / Scopus', 'TR Dizin',
@@ -169,6 +172,20 @@ enum Kategori: string
                 'Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Ulusal)',
                 'Karma/Jürili Etkinlik (Uluslararası)', 'Karma/Jürili Etkinlik (Ulusal)',
                 'Özgün Eser / Beste / Tasarım', 'Albüm / Konser Kaydı',
+                // Ankara 3. bölümün sahne/ekran ve uygulama kalemleri. Mersin
+                // ile Gümüşhane bunları hiç puanlamıyor; ortak çekirdeğe değil
+                // bu üniversitenin gerektirdiği ayrıma karşılık geliyorlar.
+                'Orkestra / Koro Üyeliği',
+                'Karma Albüm / CD-DVD Katkısı',
+                'Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)',
+                'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)',
+                'Dansçı / Performans İcracısı (Uluslararası)',
+                'Dansçı / Performans İcracısı (Ulusal)',
+                'Koreografi',
+                'Yönetmenlik (Sahne/Ekran)',
+                'Sahne Tasarımı (Dekor, Kostüm, Işık)',
+                'Koruma-Onarım Uygulaması (Uluslararası)',
+                'Koruma-Onarım Uygulaması (Ulusal)',
                 'Eserin Yayında Yer Alması / Satın Alınması',
                 // Mersin TABLO B'nin ayrı puanladığı kalemler. Her biri farklı
                 // puan aldığı için tek etikete toplanamıyor.
