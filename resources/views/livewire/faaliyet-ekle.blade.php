@@ -86,7 +86,11 @@
                         $yayinTurleri = $this->yayinTuruSecenekleri();
                         // Yazar listesi yalnızca yayın türlerinde anlamlı; proje,
                         // tez danışmanlığı, atıf gibi kategorilerde gösterilmez.
-                        $yazarliMi = isset($roller['tek']);
+                        // Kategorinin TAM rol listesine bakılıyor: $roller girilen
+                        // yazar sayısına göre süzülüyor ve iki yazar girilince
+                        // 'tek' düşüyor — süzülmüş listeye bakmak yazar alanını
+                        // kullanıcının gözü önünde yok ederdi.
+                        $yazarliMi = isset($kat->roller()['tek']);
                     @endphp
 
                     {{--

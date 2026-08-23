@@ -7,6 +7,7 @@ use App\Models\Universite;
 use App\Models\User;
 use App\Services\Scoring\Sart\ProfilCozucu;
 use App\Services\Scoring\Sart\SartDeposu;
+use Livewire\Features\SupportTesting\Testable;
 use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
@@ -270,4 +271,53 @@ test('gelecek tarihli faaliyet reddedilir', function () {
         ->set('tarih', now()->addDay()->format('Y-m-d'))
         ->call('kaydet')
         ->assertHasErrors('tarih');
+});
+
+test('yazar sırası seçenekleri girilen yazar sayısıyla sınırlanır', function () {
+    actingAs(User::factory()->create());
+
+    $secenekler = fn (Testable $t) => array_keys($t->instance()->rolSecenekleri());
+
+    $bilesen = Livewire::test(FaaliyetEkle::class)->set('kategori', 'makale');
+
+    // Yazar girilmemişken kısıtlama yapılamaz.
+    expect($secenekler($bilesen))->toContain('yazar_5');
+
+    // Tek yazarlı eserde sıra ya da ortaklık rolü anlamsız.
+    $bilesen->set('yazarlar', ['Ada Lovelace']);
+    expect($secenekler($bilesen))->toBe(['tek']);
+
+    // Üç yazarlı eserde 4. ve sonraki sıralar seçilemez.
+    $bilesen->set('yazarlar', ['A', 'B', 'C']);
+    expect($secenekler($bilesen))->toBe(['ilk', 'baslica', 'yazar_2', 'yazar_3', 'ortak']);
+
+    // "6. yazar ve sonrası" ancak altı yazardan itibaren görünür.
+    $bilesen->set('yazarlar', ['A', 'B', 'C', 'D', 'E', 'F']);
+    expect($secenekler($bilesen))->toContain('yazar_6');
+});
+
+test('yazar silinince geçersiz kalan rol temizlenir', function () {
+    actingAs(User::factory()->create());
+
+    Livewire::test(FaaliyetEkle::class)
+        ->set('kategori', 'makale')
+        ->set('yazarlar', ['A', 'B', 'C', 'D'])
+        ->set('rol', 'yazar_4')
+        ->assertSet('rol', 'yazar_4')
+        // Dördüncü yazar silinince "4. yazar" seçimi tutarsız kalır.
+        ->call('yazarSil', 3)
+        ->assertSet('rol', '');
+});
+
+test('yazar alanı, sıra seçenekleri süzülse de görünür kalır', function () {
+    actingAs(User::factory()->create());
+
+    // Yazar bölümünün görünürlüğü kategorinin TAM rol listesinden türetilmeli;
+    // süzülmüş listeye bakılsaydı ikinci yazar girilince 'tek' düşer ve alan
+    // kullanıcının gözü önünde kaybolurdu.
+    Livewire::test(FaaliyetEkle::class)
+        ->set('kategori', 'makale')
+        ->set('yazarlar', ['A', 'B'])
+        ->assertSee('Yazarlar')
+        ->assertSee('2. yazar');
 });

@@ -112,11 +112,80 @@ class FaaliyetEkle extends Component
     /**
      * Seçili kategoride geçerli roller (yayında yazarlık, projede görev...).
      *
+     * Yazarlık rollerinde SIRA seçenekleri girilen yazar sayısıyla sınırlanır:
+     * iki yazarlı bir yayında "4. yazar" seçilebilmesi tutarsız veri üretir ve
+     * bazı yönergelerde (Kocaeli) doğrudan yanlış puana yol açar. Yazar listesi
+     * boşken kısıtlama yapılamaz, hepsi gösterilir.
+     *
      * @return array<string, string>
      */
     public function rolSecenekleri(): array
     {
-        return Kategori::from($this->kategori)->roller();
+        $roller = Kategori::from($this->kategori)->roller();
+
+        if (! isset($roller['tek'])) {
+            return $roller;
+        }
+
+        $sayi = $this->yazarSayisi();
+
+        if ($sayi === 0) {
+            return $roller;
+        }
+
+        return array_filter(
+            $roller,
+            fn (string $kod) => $this->rolYazarSayisinaUyar($kod, $sayi),
+            ARRAY_FILTER_USE_KEY,
+        );
+    }
+
+    /**
+     * Girilen boş olmayan yazar adedi.
+     */
+    private function yazarSayisi(): int
+    {
+        return count(array_filter(array_map('trim', $this->yazarlar), fn (string $a) => $a !== ''));
+    }
+
+    /**
+     * Rol kodu bu yazar sayısında seçilebilir mi?
+     */
+    private function rolYazarSayisinaUyar(string $kod, int $sayi): bool
+    {
+        if ($kod === 'tek') {
+            return $sayi === 1;
+        }
+
+        // Tek yazarlı eserde sıra ya da ortaklık rolü anlamsız.
+        if ($sayi === 1) {
+            return false;
+        }
+
+        if (preg_match('/^yazar_(\d+)$/', $kod, $eslesme) === 1) {
+            $sira = (int) $eslesme[1];
+
+            // '6. yazar ve sonrası' altı ve üzeri her yazar sayısında geçerli.
+            return $sira === 6 ? $sayi >= 6 : $sira <= $sayi;
+        }
+
+        return true;
+    }
+
+    /**
+     * Yazar listesi değişince seçili rol geçersiz kalabilir (üç yazar silinip
+     * "4. yazar" seçili kalması gibi); o durumda rol temizlenir.
+     */
+    public function updatedYazarlar(): void
+    {
+        $this->roluDogrula();
+    }
+
+    private function roluDogrula(): void
+    {
+        if ($this->rol !== '' && ! array_key_exists($this->rol, $this->rolSecenekleri())) {
+            $this->rol = '';
+        }
     }
 
     /**
@@ -143,6 +212,10 @@ class FaaliyetEkle extends Component
         if ($this->yazarlar === []) {
             $this->yazarlar = [''];
         }
+
+        // Livewire'ın `updated` kancası metotla yapılan değişikliği görmüyor;
+        // yazar silindiğinde rol geçersizleşebildiği için elle doğrulanıyor.
+        $this->roluDogrula();
     }
 
     /**
