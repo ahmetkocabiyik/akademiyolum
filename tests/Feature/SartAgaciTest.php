@@ -2232,3 +2232,47 @@ test('GİBTÜ profesörlükte doçentlik öncesi ve sonrası iki ayrı toplam is
     // Genel toplam 200 (dönemsiz), doçentlik sonrası 100 (dönemli).
     expect($toplamlar)->toBe([[200, false], [100, true]]);
 });
+
+test('OMÜ kategori aralığının üst sınırı alan grubuna göre değişiyor', function () {
+    $depo = sartDepo();
+
+    // Yönergenin en kolay yanlış okunan yeri: hepsi "1-10" ile başlıyor ama
+    // ikinci baraj A'da 1-14, B'de 1-15, C'de 1-16 kategorilerinden.
+    $ikinci = function (string $alan) use ($depo): array {
+        $esik = $depo->bul('Ondokuz Mayıs Üniversitesi', 'docentlik', $alan);
+        $d = collect($esik['sart']['cocuklar'])
+            ->first(fn (array $x) => str_contains((string) ($x['madde'] ?? ''), 'Madde 12 · 1-1')
+                && ! str_contains((string) $x['madde'], '1-10'));
+
+        return [$d['maddeler'][0], $d['min_puan']];
+    };
+
+    expect($ikinci('fen'))->toBe(['1-14', 750])
+        ->and($ikinci('hukuk'))->toBe(['1-15', 500])
+        ->and($ikinci('guzel_sanatlar'))->toBe(['1-16', 500]);
+
+    // Yalnızca C temel alanında ayrıca 16. kategori (sanatsal etkinlik) barajı var.
+    $sanat = function (string $alan) use ($depo): bool {
+        $esik = $depo->bul('Ondokuz Mayıs Üniversitesi', 'docentlik', $alan);
+
+        return collect($esik['sart']['cocuklar'])
+            ->contains(fn (array $x) => ($x['madde'] ?? null) === 'Madde 12 · 16');
+    };
+
+    expect($sanat('guzel_sanatlar'))->toBeTrue()
+        ->and($sanat('fen'))->toBeFalse();
+});
+
+test('OMÜ profesörlükte toplamın bir kısmını doçentlik sonrasına bağlıyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Ondokuz Mayıs Üniversitesi', 'profesorluk', 'fen');
+
+    $bul = fn (string $m) => collect($esik['sart']['cocuklar'])
+        ->first(fn (array $x) => ($x['madde'] ?? null) === $m);
+
+    // 1-10 kategorilerinden 720 puan, bunun en az 360'ı doçentlik sonrası.
+    expect($bul('Madde 13 · 1-10')['min_puan'])->toBe(720)
+        ->and(isset($bul('Madde 13 · 1-10')['donem']))->toBeFalse()
+        ->and($bul('Madde 13 · 1-10 (dönem)')['min_puan'])->toBe(360)
+        ->and(isset($bul('Madde 13 · 1-10 (dönem)')['donem']))->toBeTrue();
+});
