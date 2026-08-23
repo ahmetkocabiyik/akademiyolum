@@ -71,7 +71,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d', '2.11e',
             ], 40, madde: '2.3 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1a, 1.1b kapsamında bir adet yayın ya da 2.1b, 2.1d, 2.1e, 2.2a, 2.2e, 2.3a, 2.3b, 2.4a, 2.7 kapsamında bir adet araştırma projesi puanlanmalıdır. 6', '2.3 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.3 dipnot'),
         ]),
     ],
     // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya,  — Doçent ══
@@ -108,7 +108,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d', '2.11e',
             ], 80, madde: '2.3 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1a kapsamında iki adet yayın ya da 2.1a, 2.1d, 2.1e, 2.2d, 2.3a, 2.4a, 2.5c, 2.7 kapsamında bir adet araştırma projesi', '2.3 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde iki adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.3 dipnot'),
         ]),
     ],
     // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya,  — Profesör ══
@@ -145,7 +145,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d', '2.11e',
             ], 120, madde: '2.3 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1a kapsamında üç adet yayın (en az birinde başlıca yazar olmalı) ya da 2.1a, 2.1d, 2.1e, 2.2d, 2.3a kapsamında bir adet araştırma projesi', '2.3 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde üç adet yayın (en az birinde başlıca yazar olmalı) ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.3 dipnot'),
         ]),
     ],
     // ══ 2.4 Fen Fakültesi (Matematik Bölümü) — Dr. Öğr. Üyesi ══
@@ -178,7 +178,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 40, madde: '2.4 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1a, 1.1b, 1.1c kapsamında bir adet yayın ya da 2.1b, 2.1e, 2.2a, 2.2e, 2.3a, 2.3b, 2.4a, 2.7 kapsamında bir adet araştırma projesi puanlanmalıdır. 7', '2.4 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.4 dipnot'),
         ]),
     ],
     // ══ 2.4 Fen Fakültesi (Matematik Bölümü) — Doçent ══
@@ -215,7 +215,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 80, madde: '2.4 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1a, 1.1b, 1.1c kapsamında iki adet yayın ya da 2.1a, 2.1d, 2.1e, 2.2d, 2.3a, 2.4a, 2.5c, 2.7 kapsamında bir adet araştırma projesi', '2.4 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde iki adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.4 dipnot'),
         ]),
     ],
     // ══ 2.4 Fen Fakültesi (Matematik Bölümü) — Profesör ══
@@ -252,7 +252,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 120, madde: '2.4 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1.a, 1.1b kapsamında iki adet yayın ya da 2.1a, 2.1d, 2.1e, 2.2d, 2.3a kapsamında bir adet araştırma projesi', '2.4 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde iki adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.4 dipnot'),
         ]),
     ],
     // ══ 2.5 Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Topl — Dr. Öğr. Üyesi ══
@@ -287,7 +287,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 100, madde: '2.5 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1a, 1.1b, 1.1c, 1.1d, 1.1e kapsamında bir adet yayın ya da 2.1b, 2.1e, 2.2a, 2.2e, 2.3a, 2.3b, 2.3d, 2.3e, 2.4a, 2.7 kapsamında bir adet araştırma projesi puanlanmalıdır. 8', '2.5 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.5 dipnot'),
         ]),
     ],
     // ══ 2.5 Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Topl — Doçent ══
@@ -326,7 +326,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 150, madde: '2.5 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1a, 1.1b, 1.1c, 1.1e kapsamında bir adet yayın ya da 2.1a, 2.1d, 2.1e, 2.2a, 2.2d, 2.3a, 2.3d, 2.4a, 2.5c, 2.7 kapsamında bir adet araştırma projesi', '2.5 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.5 dipnot'),
         ]),
     ],
     // ══ 2.5 Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Topl — Profesör ══
@@ -365,7 +365,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 200, madde: '2.5 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1.a, 1.1b, 1.1e kapsamında bir adet yayın ya da 2.1a, 2.1d, 2.1e, 2.2a, 2.2d, 2.3a, 2.3d kapsamında bir adet araştırma projesi', '2.5 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.5 dipnot'),
         ]),
     ],
     // ══ 2.6 İlahiyat ve Hukuk Fakültesi — Dr. Öğr. Üyesi ══
@@ -400,7 +400,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 100, madde: '2.6 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1.a, 1.1b, 1.1c, 1.1d, 1.1e, 3.1, 3.3. kapsamında bir adet yayın veya 1.2a veya 1.2b kapsamında 2 adet yayın veya 2.15 kapsamında üç adet proje veya 2.1b, 2.1e, 2.2a, 2.2e, 2.3a, 2.3b, 2.4a, 2.4b, 2.5c kapsamında bir adet araştırma projesi puanlanmalıdır. ** 2. Bölümde bulunan ', '2.6 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın veya Scopus Q4 veya ESCI dergilerinde 2 adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi** 2. Bölümde bulunan', '2.6 dipnot'),
         ]),
     ],
     // ══ 2.6 İlahiyat ve Hukuk Fakültesi — Doçent ══
@@ -439,7 +439,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 150, madde: '2.6 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1.a, 1.1b, 1.1c, 1.1d, 1.1e, 3.1, 3.3. kapsamında bir adet yayın veya 1.2a, 1.2b kapsamında 2 adet yayın veya 2.15 kapsamında üç adet proje veya 2.1a, 2.1d, 2.1e, 2.2a, 2.2d, 2.3a, 2.4a, 2.5c kapsamında bir adet araştırma projesi', '2.6 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın veya Scopus Q4 veya ESCI dergilerinde 2 adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.6 dipnot'),
         ]),
     ],
     // ══ 2.6 İlahiyat ve Hukuk Fakültesi — Profesör ══
@@ -478,7 +478,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 200, madde: '2.6 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1.a, 1.1b, 1.1c, 1.1d, 1.1e, 3.1, 3.3. kapsamında bir adet yayın veya 1.2a, 1.2b kapsamında 3 adet yayın veya 2.15 kapsamında üç adet proje veya 2.1a, 2.1d, 2.1e, 2.2a, 2.2d, 2.3a, 2.4a, 2.5c kapsamında bir adet araştırma projesi', '2.6 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın veya Scopus Q4 veya ESCI dergilerinde 3 adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.6 dipnot'),
         ]),
     ],
     // ══ 2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Dr. Öğr. Üyesi ══
@@ -513,7 +513,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 40, madde: '2.7 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1a, 1.1b, 1.1c kapsamında bir adet yayın veya 2.15 kapsamında üç adet proje veya 2.1b, 2.1e, 2.2a, 2.2e, 2.3a, 2.3b, 2.4a, 2.7 kapsamında bir adet araştırma projesi puanlanmalıdır. ** Bölüm 1 ve Bölüm2’de bulunan 5.5 maddesinden en fazla 160 puan alınabilir. 10', '2.7 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi** Bölüm 1 ve Bölüm2’de bulunan 5.5 maddesinden en fazla 160 puan alınabilir. 10', '2.7 dipnot'),
         ]),
     ],
     // ══ 2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Doçent ══
@@ -552,7 +552,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 80, madde: '2.7 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1a, 1.1b kapsamında bir adet yayın veya 2.15 kapsamında üç adet proje veya 2.1a, 2.1d, 2.1e, 2.2d, 2.3a, 2.4a, 2.5c, 2.7 kapsamında bir adet araştırma projesi', '2.7 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.7 dipnot'),
         ]),
     ],
     // ══ 2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Profesör ══
@@ -591,7 +591,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 120, madde: '2.7 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1.a, 1.1b kapsamında iki adet yayın veya 2.15 kapsamında üç adet proje veya 2.1a, 2.1d, 2.1e, 2.2d, 2.3a kapsamında bir adet araştırma projesi', '2.7 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde iki adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.7 dipnot'),
         ]),
     ],
     // ══ 2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), De — Dr. Öğr. Üyesi ══
@@ -627,7 +627,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 100, madde: '2.8 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1.a, 1.1b, 1.1c, 1.1d, 1.1e, 3.1 veya 3.3. kapsamında bir adet yayın; 1.2a veya 1.2b kapsamında 2 adet yayın; 2.15 kapsamında 3 adet proje ya da 2.1b, 2.1e, 2.2a, 2.2b, 2.2e, 2.3a, 2.3b, 2.4a, 2.4b, 2.5c kapsamında bir adet araştırma projesi puanlanmalıdır. ** Bölüm 1 ve Bölüm ', '2.8 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın; Scopus Q4 veya ESCI dergilerinde 2 adet yayın; TÜBİTAK 2209 danışmanlığı kapsamında 3 adet proje ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi** Bölüm 1 ve Bölüm', '2.8 dipnot'),
         ]),
     ],
     // ══ 2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), De — Doçent ══
@@ -667,7 +667,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 150, madde: '2.8 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1.a, 1.1b, 1.1c, 1.1d, 1.1e, 3.1 veya 3.3. kapsamında bir adet yayın; 1.2a, veya 1.2b kapsamında 2 adet yayın; 2.15 kapsamında üç adet proje ya da 2.1a, 2.1d, 2.1e, 2.2a, 2.2b, 2.2d, 2.3a, 2.3b, 2.4a, 2.5c, 2.11a kapsamında bir adet araştırma projesi', '2.8 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın; Scopus Q4 veya ESCI dergilerinde 2 adet yayın; TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.8 dipnot'),
         ]),
     ],
     // ══ 2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), De — Profesör ══
@@ -707,7 +707,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 200, madde: '2.8 · 4. BÖLÜM'),
-            Kalip::beyan('1. Bölüm ek koşulu: 1.1.a, 1.1b, 1.1c, 1.1d, 1.1e, 3.1 veya 3.3. kapsamında bir adet yayın; 1.2a, 1.2b kapsamında 3 adet yayın; 2.15 kapsamında üç adet proje ya da 2.1a, 2.1d, 2.1e, 2.2a, 2.2b, 2.2d, 2.3a, 2.4a, 2.5c, 2.11a kapsamında bir adet araştırma projesi', '2.8 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın; Scopus Q4 veya ESCI dergilerinde 3 adet yayın; TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.8 dipnot'),
         ]),
     ],
 ];

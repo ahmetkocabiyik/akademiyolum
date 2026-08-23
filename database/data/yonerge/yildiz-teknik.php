@@ -41,7 +41,8 @@ $sosyal = ['sosyal', 'egitim', 'filoloji'];
  * @return array<string, mixed>
  */
 $bolumOrtalamasi = fn (string $kadro): array => Kalip::beyan(
-    "1(a,b,c) toplam puanınız, bölümünüzdeki {$kadro} kadrosundaki akademisyenlerin "
+    'SCI-E, SSCI, AHCI, ESCI ve senatoca belirlenen uluslararası dergilerdeki makale '
+    ."toplam puanınız, bölümünüzdeki {$kadro} kadrosundaki akademisyenlerin "
     .'atama yılı puan ortalamasının üzerinde olmalı',
     'MADDE 9',
 );

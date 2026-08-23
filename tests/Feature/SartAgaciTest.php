@@ -1142,15 +1142,15 @@ test('Mersin tek cetvelde üç listeyi ayrı tutar — puan listeler arası sız
 
     // Sağlık/fen adayı: yalnızca Liste A sayılır, sanat kalemleri barajına girmez.
     expect($baraj('saglik')->mevcut)->toBe(50)
-        ->and($baraj('saglik')->aciklama)->toContain('Liste A');
+        ->and($baraj('saglik')->aciklama)->toContain('Yayın ve proje');
 
     // Güzel sanatlar: TABLO B + C sayılır, makale barajına GİRMEZ.
     expect($baraj('guzel_sanatlar')->mevcut)->toBe(70)
-        ->and($baraj('guzel_sanatlar')->aciklama)->toContain('TABLO B + C');
+        ->and($baraj('guzel_sanatlar')->aciklama)->toContain('Sanatsal etkinlik');
 
     // Mimarlık: yönerge barajı iki listeden BİRLİKTE istiyor (md. 2.2 e-7).
     expect($baraj('mimarlik')->mevcut)->toBe(80)
-        ->and($baraj('mimarlik')->aciklama)->toContain('Liste A + TABLO B');
+        ->and($baraj('mimarlik')->aciklama)->toContain('Yayın, proje ve sanatsal etkinlik');
 
     // Baraj düğümü kapsam rozeti taşımaz — 68 kalemlik liste okunmaz olurdu.
     expect($baraj('guzel_sanatlar')->kapsam)->toBe([]);
@@ -1484,11 +1484,13 @@ test('Ankara iki katmanlı baraj uyguluyor', function () {
     $trDizin = fn () => sartFaaliyet('TR Dizin', tarih: '2020-01-01');
     $sonuc = $depo->degerlendir($esik, [$trDizin(), $trDizin()], $profil);
 
-    $puan = fn (string $parca) => collect($sonuc->kosullar())
-        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca))->mevcut;
+    // Açıklama adaya gösterilen serbest metin; koşul yönergenin kodunu taşıyan
+    // `madde` alanından aranıyor.
+    $puan = fn (string $madde) => collect($sonuc->kosullar())
+        ->first(fn (SartSonucu $k) => $k->madde === $madde)->mevcut;
 
-    expect($puan('(1A-1B)'))->toBe(0)
-        ->and($puan('(1A-1G)'))->toBe(30);
+    expect($puan('Bölüm 1 · 1A-1B'))->toBe(0)
+        ->and($puan('Bölüm 1 · 1A-1G'))->toBe(30);
 
     // Bölüm başlıklarında adı geçmeyen alanlarda eşik üretilmedi.
     foreach (['egitim', 'hukuk', 'ilahiyat', 'mimarlik', 'ziraat', 'spor', 'filoloji'] as $alan) {

@@ -166,7 +166,7 @@ test('sistem promptu profil ve değerlendirme verisini içerir', function () {
         // Kullanıcı Mersin'de (onboarded fabrikası) ve Mersin'in verisi girili
         // → prompt gerçek eşik değerlendirmesini taşır, uydurma puan taşımaz.
         ->and($prompt)->toContain('Genel sonuç:')
-        ->and($prompt)->toContain('Liste A kalemlerinden toplam en az 220 puan')
+        ->and($prompt)->toContain('Yayın ve proje kalemlerinden toplam en az 220 puan')
         // Modele "belirsiz ≠ sağlanmadı" talimatı veriliyor.
         ->and($prompt)->toContain('SAĞLANMADIĞI anlamına GELMEZ');
 });

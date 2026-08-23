@@ -74,10 +74,10 @@ return [
         'cetvel' => 'ankara-2023',
         'notlar' => 'FEN/MÜH/SAĞLIK, Dr. Öğr. Üyesi. Zorunlu puan (1A-1E) en az 50; bölümden toplam (1A-1G) en az 90. Ek koşul a) (1A-1B) makalelerinden en az 2, biri son iki yılda.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Fen / Mühendislik / Sağlık', [
-            Kalip::adet('WoS dergilerde en az 2 makale', ['1A-1B'], 2),
+            Kalip::adet('WoS dergilerde en az 2 makale', ['1A-1B'], 2, madde: 'Bölüm 1 · 1A-1B'),
             Kalip::beyan('Bu makalelerden en az biri son iki yılda yayımlanmış olmalı', 'Ek koşul a'),
-            Kalip::puanDan('Makale kalemlerinden (1A-1E) en az 50 puan', ['1A-1E'], 50),
-            Kalip::puanDan('Tüm makale kalemlerinden (1A-1G) en az 90 puan', ['1A-1G'], 90),
+            Kalip::puanDan('WoS ve Scopus dergilerindeki makalelerinizden en az 50 puan', ['1A-1E'], 50, madde: 'Bölüm 1 · 1A-1E'),
+            Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 90 puan', ['1A-1G'], 90, madde: 'Bölüm 1 · 1A-1G'),
             $yurtDisi(),
         ]),
     ],
@@ -91,8 +91,8 @@ return [
         'notlar' => 'FEN/MÜH/SAĞLIK, Doçent. Zorunlu puan (1A-1B) en az 190; bölümden toplam (1A-1G) en az 230. Ek koşul a) başlıca yazar olduğu en az 3 yayın.',
         'sart' => Kalip::ve('Doçent — Fen / Mühendislik / Sağlık', [
             $baslicaYazar(),
-            Kalip::puanDan('WoS makalelerinden (1A-1B) en az 190 puan', ['1A-1B'], 190),
-            Kalip::puanDan('Tüm makale kalemlerinden (1A-1G) en az 230 puan', ['1A-1G'], 230),
+            Kalip::puanDan('WoS Q1-Q4 dergilerindeki makalelerinizden en az 190 puan', ['1A-1B'], 190, madde: 'Bölüm 1 · 1A-1B'),
+            Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 230 puan', ['1A-1G'], 230, madde: 'Bölüm 1 · 1A-1G'),
         ]),
     ],
     [
@@ -105,9 +105,9 @@ return [
         'notlar' => 'FEN/MÜH/SAĞLIK, Profesör. Zorunlu puan (1A-1C) en az 300, en az 190 puanı doçentlik unvanı sonrası (1A-1B). Bölümden toplam (1A-1G) en az 450.',
         'sart' => Kalip::ve('Profesör — Fen / Mühendislik / Sağlık', [
             $baslicaYazar(Kalip::DOCENTLIK_SONRASI),
-            Kalip::puanDan('WoS makalelerinden (1A-1C) en az 300 puan', ['1A-1C'], 300),
+            Kalip::puanDan('WoS Q1-Q4 dergilerindeki makalelerinizden en az 300 puan', ['1A-1C'], 300, madde: 'Bölüm 1 · 1A-1C'),
             Kalip::puanDan('Bunun en az 190 puanı doçentlik sonrası olmalı', ['1A-1B'], 190, Kalip::DOCENTLIK_SONRASI),
-            Kalip::puanDan('Tüm makale kalemlerinden (1A-1G) en az 450 puan', ['1A-1G'], 450),
+            Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 450 puan', ['1A-1G'], 450, madde: 'Bölüm 1 · 1A-1G'),
         ]),
     ],
 
@@ -121,7 +121,7 @@ return [
         'cetvel' => 'ankara-2023',
         'notlar' => 'SOSYAL BİLİMLER, Dr. Öğr. Üyesi. (1A-1G) faaliyetlerinden en az 100 puan.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sosyal Bilimler', [
-            Kalip::puanDan('Makale kalemlerinden (1A-1G) en az 100 puan', ['1A-1G'], 100),
+            Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 100 puan', ['1A-1G'], 100, madde: 'Bölüm 1 · 1A-1G'),
             $yurtDisi(),
         ]),
     ],
@@ -133,7 +133,7 @@ return [
         'cetvel' => 'ankara-2023',
         'notlar' => 'SOSYAL BİLİMLER, Doçent. (1A-1G) faaliyetlerinden en az 250 puan.',
         'sart' => Kalip::ve('Doçent — Sosyal Bilimler', [
-            Kalip::puanDan('Makale kalemlerinden (1A-1G) en az 250 puan', ['1A-1G'], 250),
+            Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 250 puan', ['1A-1G'], 250, madde: 'Bölüm 1 · 1A-1G'),
         ]),
     ],
     [
@@ -145,7 +145,7 @@ return [
         'cetvel' => 'ankara-2023',
         'notlar' => 'SOSYAL BİLİMLER, Profesör. (1A-1G) faaliyetlerinden en az 370 puan, en az 210 puanı doçentlik unvanı sonrası.',
         'sart' => Kalip::ve('Profesör — Sosyal Bilimler', [
-            Kalip::puanDan('Makale kalemlerinden (1A-1G) en az 370 puan', ['1A-1G'], 370),
+            Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 370 puan', ['1A-1G'], 370, madde: 'Bölüm 1 · 1A-1G'),
             Kalip::puanDan('Bunun en az 210 puanı doçentlik sonrası olmalı', ['1A-1G'], 210, Kalip::DOCENTLIK_SONRASI),
         ]),
     ],
