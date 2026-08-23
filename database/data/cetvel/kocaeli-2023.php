@@ -18,20 +18,34 @@
  */
 
 return [
-    'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Puanlar Kocaeli Üniversitesi TABLO 3\'ten (Aralık 2023). Editörlük, ödül, '
+    'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yayındaki SIRASINA da bağlı olduğu için faaliyetinizde kaçıncı yazar olduğunuzu seçmeniz gerekir. Sırayı belirtmezseniz o yazar sayısındaki en düşük çarpan uygulanır; yazar listesi boşsa çarpan hiç uygulanmaz. Puanlar Kocaeli Üniversitesi TABLO 3\'ten (Aralık 2023). Editörlük, ödül, '
         .'idari görev ve sanatsal üretim blokları girilmedi; yönergede yalnızca azami sınır '
         .'taşıyorlar. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
 
     // Tablo 1: çarpan hem yazar sayısına hem adayın yayındaki SIRASINA bağlı.
-    // Faaliyet kaydı sırayı tam tutmuyor (tek/ilk/başlıca/ortak); ilk ve
-    // başlıca yazar tablonun 1. yazar satırına, sırası belirtilmemiş ortak
-    // yazar ise o yazar sayısındaki EN DÜŞÜK satıra eşlendi — sırayı bilmeden
-    // yüksek satırı vermek adayın puanını fazla gösterirdi.
+    // Yönergenin tablosu satır satır aktarıldı; "-" olan hücreler o yazar
+    // sayısında mümkün olmadığı için kademede yer almıyor.
+    //
+    //   sıra \ sayı    1     2     3     4     5    >5
+    //   1. yazar     1,00  0,90  0,80  0,70  0,60  0,50
+    //   2. yazar        -  0,80  0,70  0,60  0,50  0,40
+    //   3. yazar        -     -  0,60  0,50  0,40  0,35
+    //   4. yazar        -     -     -  0,40  0,35  0,30
+    //   5. yazar        -     -     -     -  0,30  0,25
+    //   6. ve sonrası   -     -     -     -     -  0,20
+    //
+    // Sırasını belirtmeyen aday ('ortak') o yazar sayısındaki EN DÜŞÜK satırı
+    // alır — sırayı bilmeden yüksek satırı vermek puanı fazla gösterirdi.
     'yazar_katsayisi' => [
         'roller' => [
             'tek' => ['kademeler' => [1 => 1.0]],
             'ilk' => ['kademeler' => [1 => 1.0, 2 => 0.90, 3 => 0.80, 4 => 0.70, 5 => 0.60], 'sonrasi' => 0.50],
             'baslica' => ['kademeler' => [1 => 1.0, 2 => 0.90, 3 => 0.80, 4 => 0.70, 5 => 0.60], 'sonrasi' => 0.50],
+            'yazar_2' => ['kademeler' => [2 => 0.80, 3 => 0.70, 4 => 0.60, 5 => 0.50], 'sonrasi' => 0.40],
+            'yazar_3' => ['kademeler' => [3 => 0.60, 4 => 0.50, 5 => 0.40], 'sonrasi' => 0.35],
+            'yazar_4' => ['kademeler' => [4 => 0.40, 5 => 0.35], 'sonrasi' => 0.30],
+            'yazar_5' => ['kademeler' => [5 => 0.30], 'sonrasi' => 0.25],
+            'yazar_6' => ['sonrasi' => 0.20],
             'ortak' => ['kademeler' => [1 => 1.0, 2 => 0.80, 3 => 0.60, 4 => 0.40, 5 => 0.30], 'sonrasi' => 0.20],
         ],
     ],

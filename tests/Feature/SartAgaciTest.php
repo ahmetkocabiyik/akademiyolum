@@ -2032,12 +2032,21 @@ test('yazar çarpanı role duyarlı yönergelerde sıraya göre değişiyor', fu
         return $depo->katalog($cetvel)->yazarCarpani($f);
     };
 
-    // Kocaeli Tablo 1: dört yazarlı yayında 1. yazar 0,70 alır (yönergenin
-    // kendi örneği: 30 × 0,70 = 21). Sırası belirtilmemiş ortak yazara o
-    // sütunun en düşük satırı verilir.
+    // Kocaeli Tablo 1, yönergenin kendi örneği: 30 puanlık dört yazarlı yayında
+    // 1. yazar 21 (0,70), 2. yazar 18 (0,60), 3. yazar 15 (0,50), 4. yazar 12 (0,40).
     expect($carpan('kocaeli-2023', 'ilk', 4))->toBe(0.70)
-        ->and($carpan('kocaeli-2023', 'ortak', 4))->toBe(0.40)
-        ->and($carpan('kocaeli-2023', 'ilk', 8))->toBe(0.50);
+        ->and($carpan('kocaeli-2023', 'yazar_2', 4))->toBe(0.60)
+        ->and($carpan('kocaeli-2023', 'yazar_3', 4))->toBe(0.50)
+        ->and($carpan('kocaeli-2023', 'yazar_4', 4))->toBe(0.40)
+        ->and($carpan('kocaeli-2023', 'ilk', 8))->toBe(0.50)
+        ->and($carpan('kocaeli-2023', 'yazar_6', 8))->toBe(0.20);
+
+    // Sırası belirtilmemiş ortak yazara o sütunun en düşük satırı verilir.
+    expect($carpan('kocaeli-2023', 'ortak', 4))->toBe(0.40);
+
+    // Sıra bazlı roller, kuralı sıraya göre yazmayan yönergelerde 'ortak'
+    // satırına düşer: Çukurova'da 2. yazar da diğer yazarlarla aynı çarpanı alır.
+    expect($carpan('cukurova-2024', 'yazar_2', 3))->toBe(0.4);
 
     // Çukurova: n>2'de başlıca yazar 0,5; diğerleri 0,8/(n-1). Hiçbir yazar
     // tek yazarlı puanın %10'undan azını almaz.

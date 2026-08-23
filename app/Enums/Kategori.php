@@ -320,11 +320,20 @@ enum Kategori: string
     public function roller(): array
     {
         return match ($this) {
+            // Bazı yönergeler (Kocaeli) çarpanı yalnızca yazar sayısına değil
+            // adayın yayındaki SIRASINA göre de değiştiriyor. Sıra seçenekleri
+            // bu yüzden ayrı ayrı duruyor; 'ortak' sırasını belirtmek
+            // istemeyen aday için kalıyor ve daima en düşük çarpanı alıyor.
             self::Makale, self::Bildiri, self::Kitap, self::TezYayini, self::SanatselEtkinlik => [
                 'tek' => 'Tek yazar',
-                'ilk' => 'İlk yazar',
+                'ilk' => 'İlk yazar (1. sıra)',
                 'baslica' => 'Başlıca / sorumlu yazar',
-                'ortak' => 'Ortak yazar',
+                'yazar_2' => '2. yazar',
+                'yazar_3' => '3. yazar',
+                'yazar_4' => '4. yazar',
+                'yazar_5' => '5. yazar',
+                'yazar_6' => '6. yazar veya sonrası',
+                'ortak' => 'Ortak yazar (sıra belirtmiyorum)',
             ],
             self::Proje => [
                 'yurutucu' => 'Yürütücü / koordinatör',
