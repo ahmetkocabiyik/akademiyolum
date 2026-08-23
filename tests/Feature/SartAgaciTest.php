@@ -1688,3 +1688,30 @@ test('Erciyes yayın barajı alan grubuna göre farklı küme sayıyor', functio
         ->and($puan('kisa_makale'))->toBe(45)
         ->and($puan('vaka_teknik_not'))->toBe(30);
 });
+
+test('Cerrahpaşa girişimci koşulu alan başına farklı telafi taşıyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+
+    // Yönerge: proje/patent koşulu sağlanamıyorsa sağlıkta makale sayısı
+    // 3'ten 5'e, sosyalde 1'den 2'ye çıkarak karşılanıyor.
+    $telafi = function (string $alan, int $makale) use ($depo, $q1, $profil): SartSonucu {
+        $esik = $depo->bul('İstanbul Üniversitesi-Cerrahpaşa', 'dr_ogr_uyesi', $alan);
+        $faaliyetler = array_map(fn () => $q1(), range(1, $makale));
+
+        return collect($depo->degerlendir($esik, $faaliyetler, $profil)->kosullar())
+            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'patent başvurusu'));
+    };
+
+    expect($telafi('fen', 3)->telafiIleSaglandi())->toBeFalse()
+        ->and($telafi('fen', 5)->telafiIleSaglandi())->toBeTrue();
+
+    expect($telafi('sosyal', 1)->telafiIleSaglandi())->toBeFalse()
+        ->and($telafi('sosyal', 2)->telafiIleSaglandi())->toBeTrue();
+
+    // Yönergede tanımlanmayan alanlarda eşik üretilmedi.
+    foreach (['hukuk', 'ilahiyat', 'ziraat', 'spor'] as $alan) {
+        expect($depo->bul('İstanbul Üniversitesi-Cerrahpaşa', 'dr_ogr_uyesi', $alan))->toBeNull();
+    }
+});
