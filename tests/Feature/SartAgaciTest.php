@@ -1913,3 +1913,51 @@ test('Sakarya fakülte grupları temel alanlara çakışmadan dağılıyor', fun
         expect($depo->bul('Sakarya Üniversitesi', 'docentlik', $alan))->toBeNull($alan);
     }
 });
+
+test('Anadolu toplam barajı iki gruba, alt barajı dört gruba ayırıyor', function () {
+    $depo = sartDepo();
+
+    // Toplam baraj: sosyal grubu 900, fen grubu 1500 (doçent).
+    $toplam = function (string $alan) use ($depo): int {
+        $esik = $depo->bul('Anadolu Üniversitesi', 'docentlik', $alan);
+
+        return collect($esik['sart']['cocuklar'])
+            ->first(fn (array $d) => ($d['rol'] ?? null) === 'toplam')['min_puan'];
+    };
+
+    expect($toplam('sosyal'))->toBe(900)
+        ->and($toplam('hukuk'))->toBe(900)
+        ->and($toplam('guzel_sanatlar'))->toBe(900)
+        ->and($toplam('fen'))->toBe(1500);
+
+    // Alt baraj aynı toplamda bile ayrışıyor: Hukuk 350, sosyal 150.
+    $yayin = function (string $alan) use ($depo): int {
+        $esik = $depo->bul('Anadolu Üniversitesi', 'docentlik', $alan);
+
+        return collect($esik['sart']['cocuklar'])
+            ->first(fn (array $d) => ($d['madde'] ?? null) === 'Ölçütler II · 1-2. madde')['min_puan'];
+    };
+
+    expect($yayin('sosyal'))->toBe(150)
+        ->and($yayin('hukuk'))->toBe(350)
+        ->and($yayin('fen'))->toBe(300);
+});
+
+test('Anadolu kadroya özgü koşullar doğru kadroda duruyor', function () {
+    $depo = sartDepo();
+    $madde = function (string $kadro, string $alan, string $m) use ($depo): bool {
+        $esik = $depo->bul('Anadolu Üniversitesi', $kadro, $alan);
+
+        return collect($esik['sart']['cocuklar'])->contains(fn (array $d) => ($d['madde'] ?? null) === $m);
+    };
+
+    // SCI şartı yönergede yalnız Dr. Öğr. Üyesi ilk atamada (Bölüm A/3-b).
+    expect($madde('dr_ogr_uyesi', 'fen', 'Bölüm A/3-b'))->toBeTrue()
+        ->and($madde('docentlik', 'fen', 'Bölüm A/3-b'))->toBeFalse()
+        ->and($madde('profesorluk', 'fen', 'Bölüm A/3-b'))->toBeFalse();
+
+    // Sanatsal etkinlik barajı yalnız Güzel Sanatlar'da ve Dr'da yok.
+    expect($madde('docentlik', 'guzel_sanatlar', 'Ölçütler II · 28-40. madde'))->toBeTrue()
+        ->and($madde('dr_ogr_uyesi', 'guzel_sanatlar', 'Ölçütler II · 28-40. madde'))->toBeFalse()
+        ->and($madde('docentlik', 'sosyal', 'Ölçütler II · 28-40. madde'))->toBeFalse();
+});
