@@ -1866,3 +1866,42 @@ test('Sakarya cetveli çakışan ölçütlerde kodu koruyup en düşük puanı v
     expect($katalog->maddePuani('3.2'))->toBe(40)
         ->and($katalog->maddePuani('3.5'))->toBe(40);
 });
+
+test('Sakarya bölüm barajları toplam puandan bağımsız işliyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
+    $esik = $depo->bul('Sakarya Üniversitesi', 'docentlik', 'muhendislik');
+
+    // Yirmi adet 90 puanlık Q1 makalesi = 1800 puan: TOPLAM (1600) ve 1./2.
+    // BÖLÜM barajlarını aşar. Ama 4. BÖLÜM kurumsal/toplumsal katkı ölçütlerini
+    // sayıyor; makaleyle sağlanamaz.
+    $makaleler = array_map(
+        fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01'),
+        range(1, 20),
+    );
+
+    $kosullar = collect($depo->degerlendir($esik, $makaleler, $profil)->kosullar());
+    $bul = fn (string $parca) => $kosullar->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca));
+
+    expect($bul('EK-1 kalemlerinden toplam en az 1600 puan')->durum)->toBe(Durum::Saglandi)
+        ->and($bul('1. BÖLÜM ölçütlerinden en az 700 puan')->durum)->toBe(Durum::Saglandi)
+        ->and($bul('4. BÖLÜM ölçütlerinden en az 80 puan')->durum)->toBe(Durum::Saglanmadi);
+});
+
+test('Sakarya fakülte grupları temel alanlara çakışmadan dağılıyor', function () {
+    $depo = sartDepo();
+
+    // 2.3 (Mühendislik + Fen'in Kimya/Fizik/Biyoloji bölümleri) ile 2.4 (Fen'in
+    // Matematik bölümü) ikisi de "fen" sayılsaydı aynı alanda iki eşik çakışırdı.
+    expect($depo->bul('Sakarya Üniversitesi', 'docentlik', 'muhendislik'))->not->toBeNull()
+        ->and($depo->bul('Sakarya Üniversitesi', 'docentlik', 'fen'))->not->toBeNull();
+
+    foreach (['egitim', 'sosyal', 'ilahiyat', 'hukuk', 'mimarlik', 'guzel_sanatlar'] as $alan) {
+        expect($depo->bul('Sakarya Üniversitesi', 'profesorluk', $alan))->not->toBeNull($alan);
+    }
+
+    // Yönergede karşılığı olmayan alanlar eşik üretmemeli.
+    foreach (['saglik', 'filoloji', 'spor', 'ziraat'] as $alan) {
+        expect($depo->bul('Sakarya Üniversitesi', 'docentlik', $alan))->toBeNull($alan);
+    }
+});
