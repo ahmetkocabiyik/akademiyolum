@@ -1574,3 +1574,28 @@ test('müzik/dans metot kitabı Ege güzel sanatlar yayın sayısına giriyor', 
 
     expect($fenSayi)->toBe(0);
 });
+
+test('YTÜ 1(a) kümesi Q4 makalesini kapsamıyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Yıldız Teknik Üniversitesi', 'dr_ogr_uyesi', 'muhendislik');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    // Yönergede Q1-Q3 "a" bendinin alt kırılımları, Q4 ise ESCI ile birlikte
+    // ayrı "b" bendi. EK-2'nin 1(a) ile 1(a,b,c) satırları arasındaki fark bu.
+    $puan = function (string $kaynak, string $parca) use ($depo, $esik, $profil): int {
+        $f = sartFaaliyet($kaynak, tarih: '2020-01-01');
+
+        return collect($depo->degerlendir($esik, [$f], $profil)->kosullar())
+            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca))->mevcut;
+    };
+
+    expect($puan('SCIE/SSCI (Q3)', '1(a) kapsamında'))->toBe(15)
+        ->and($puan('SCIE/SSCI (Q4)', '1(a) kapsamında'))->toBe(0)
+        ->and($puan('SCIE/SSCI (Q4)', '1(a,b,c) kapsamında'))->toBe(12);
+
+    // Bölüm ortalaması koşulu adayın dosyasından türetilemiyor — beyan.
+    $sonuc = $depo->degerlendir($esik, [], $profil);
+    expect(collect($sonuc->beyanlar())->contains(
+        fn (SartSonucu $k) => str_contains($k->aciklama, 'puan ortalamasının üzerinde')
+    ))->toBeTrue();
+});
