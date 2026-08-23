@@ -1466,3 +1466,32 @@ test('Gazi proje koşulu makaleyle telafi edilebiliyor', function () {
     expect($sonuc->saglandi())->toBeTrue()
         ->and($sonuc->telafiIleSaglandi())->toBeTrue();
 });
+
+test('Ankara iki katmanlı baraj uyguluyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    // Fen/Mühendislik/Sağlıkta iki ayrı baraj var: dar makale kümesinden
+    // (1A-1B) 190 VE geniş kümeden (1A-1G) 230. Sosyal'de tek baraj.
+    $esik = $depo->bul('Ankara Üniversitesi', 'docentlik', 'fen');
+    $kosullar = collect($depo->degerlendir($esik, [], $profil)->kosullar())
+        ->filter(fn (SartSonucu $k) => str_contains($k->aciklama, 'puan'))
+        ->map(fn (SartSonucu $k) => $k->gerekli)->values()->all();
+
+    expect($kosullar)->toBe([190, 230]);
+
+    // TR-Dizin makalesi geniş kümeye girer, dar kümeye girmez.
+    $trDizin = fn () => sartFaaliyet('TR Dizin', tarih: '2020-01-01');
+    $sonuc = $depo->degerlendir($esik, [$trDizin(), $trDizin()], $profil);
+
+    $puan = fn (string $parca) => collect($sonuc->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca))->mevcut;
+
+    expect($puan('(1A-1B)'))->toBe(0)
+        ->and($puan('(1A-1G)'))->toBe(30);
+
+    // Bölüm başlıklarında adı geçmeyen alanlarda eşik üretilmedi.
+    foreach (['egitim', 'hukuk', 'ilahiyat', 'mimarlik', 'ziraat', 'spor', 'filoloji'] as $alan) {
+        expect($depo->bul('Ankara Üniversitesi', 'docentlik', $alan))->toBeNull();
+    }
+});
