@@ -22,6 +22,7 @@ use App\Models\Faaliyet;
  *     gruplar?: array<string, list<string>>,
  *     grup_tavanlari?: array<string, int>,
  *     kapsam_notu?: string,
+ *     yazar_katsayisi?: array{kademeler: array<int, float>, sonrasi_pay?: float},
  * }
  */
 class SartDeposu
@@ -155,6 +156,7 @@ class SartDeposu
                 gruplar: $cetvel['gruplar'] ?? [],
                 grupTavanlari: $cetvel['grup_tavanlari'] ?? [],
                 kapsamNotu: $cetvel['kapsam_notu'] ?? null,
+                yazarKatsayisi: $cetvel['yazar_katsayisi'] ?? null,
             );
         }
 
@@ -166,12 +168,6 @@ class SartDeposu
         return $this->cetveller()[$anahtar] ?? null;
     }
 
-    /**
-     * Klasördeki veri dosyaları. `_` ile başlayanlar ortak kalıp/yardımcıdır,
-     * veri değildir.
-     *
-     * @return list<string>
-     */
     /**
      * Veri dosyasını KENDİ değişken kapsamında okur.
      *
@@ -189,6 +185,12 @@ class SartDeposu
         return require $dosya;
     }
 
+    /**
+     * Klasördeki veri dosyaları. `_` ile başlayanlar ortak kalıp/yardımcıdır,
+     * veri değildir.
+     *
+     * @return list<string>
+     */
     private function dosyalar(string $klasor): array
     {
         $bulunan = glob($klasor.'/*.php') ?: [];

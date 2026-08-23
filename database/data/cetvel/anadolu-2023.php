@@ -13,12 +13,12 @@
  * anıyor ("41‒45. maddelerden en az 30 puan", "28-40. maddelerden en az 150
  * puan"), o yüzden numaraların birebir korunması şart.
  *
- * YAZAR SAYISI KATSAYISI GİRİLMEDİ: yönerge tek yazarlı eserde tam puan, iki
- * yazarlıda 0,8; üç yazarlıda 0,6; dört ve üzeri için "2,0 × Puan / Yazar
- * Sayısı" diyor. Motor yazar sayısına göre puan bölmüyor, bu yüzden hesaplanan
- * toplam çok yazarlı eserlerde GERÇEKTEN YÜKSEK çıkar — bu, diğer
- * cetvellerdeki eksik-say kuralının tersi yönde bir sapma, kapsam notunda
- * açıkça belirtildi.
+ * YAZAR SAYISI KATSAYISI: yönerge tek yazarlı eserde tam puan, iki yazarlıda
+ * 0,8; üç yazarlıda 0,6; dört ve üzeri için "2,0 × Puan / Yazar Sayısı" diyor.
+ * `yazar_katsayisi` ile bildirildi; motor faaliyetin yazar listesini sayıp
+ * çarpanı uyguluyor. Yazar listesi boş bırakılmış faaliyetlerde çarpan
+ * uygulanmaz — kaç kişi olduğu bilinmiyorsa bir sayı varsaymak veri uydurmak
+ * olurdu; o faaliyetler tam puanla görünür.
  *
  * GİRİLMEYEN ÖLÇÜTLER: editörlük ve hakemlik satırları (18-23) puanı metin
  * içinde "120/60" gibi çift değerle veriyor ve baş/alan editörlüğü ayrımı
@@ -28,11 +28,18 @@
  */
 
 return [
-    'kapsam_notu' => 'Puanlar Anadolu Üniversitesi puanlama tablosundan (01/08/2023). DİKKAT: yönerge '
-        .'çok yazarlı eserlerde puanı yazar sayısına göre azaltıyor (iki yazarlıda 0,8; üç yazarlıda '
-        .'0,6; dört ve üzeri için 2,0×Puan/Yazar Sayısı); bu hesap uygulanmadığı için çok yazarlı '
-        .'eserlerde toplamınız burada OLDUĞUNDAN YÜKSEK görünür. Ayrıca editörlük/hakemlik, jüri ve '
-        .'düzenleme kurulu kalemleri kaynak sözlüğünde karşılıksız olduğu için girilmedi.',
+    'kapsam_notu' => 'Puanlar Anadolu Üniversitesi puanlama tablosundan (01/08/2023). Çok yazarlı '
+        .'eserlerde puan yazar sayısına göre azaltılır (iki yazarlıda 0,8; üç yazarlıda 0,6; dört ve '
+        .'üzeri için 2,0×Puan/Yazar Sayısı) — bu hesap uygulanıyor, ancak YAZAR LİSTESİNİ BOŞ '
+        .'BIRAKTIĞINIZ faaliyetlerde uygulanamaz ve o kalemler tam puanla görünür. Editörlük/hakemlik, '
+        .'jüri ve düzenleme kurulu kalemleri kaynak sözlüğünde karşılıksız olduğu için girilmedi.',
+
+    // Ölçütler I/2: tek yazarlı eserde tam puan, iki yazarlıda 0,8; üç
+    // yazarlıda 0,6; dört ve daha fazla yazarlıda 2,0 × Puan / Yazar Sayısı.
+    'yazar_katsayisi' => [
+        'kademeler' => [1 => 1.0, 2 => 0.8, 3 => 0.6],
+        'sonrasi_pay' => 2.0,
+    ],
 
     'maddeler' => [
         '1' => ['baslik' => 'SCI (Science Citation Index), SCI‐Expanded (Science Citation Index‐ Expanded), SSCI (Social Sciences Cit', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 150],

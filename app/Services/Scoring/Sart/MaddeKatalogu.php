@@ -20,6 +20,7 @@ use App\Models\Faaliyet;
  *     puan?: int,
  *     tavan?: int,
  * }
+ * @phpstan-type YazarKatsayisi array{kademeler: array<int, float>, sonrasi_pay?: float}
  */
 readonly class MaddeKatalogu
 {
@@ -28,6 +29,7 @@ readonly class MaddeKatalogu
      * @param  array<string, list<string>>  $gruplar  Takma ad → kod deseni listesi
      * @param  array<string, int>  $grupTavanlari  Grup adı → o gruptan alınabilecek azami puan
      * @param  string|null  $kapsamNotu  Cetvelin bilinen sınırı (adaya gösterilir)
+     * @param  YazarKatsayisi|null  $yazarKatsayisi  Yazar sayısına göre puan çarpanı
      */
     public function __construct(
         public string $anahtar,
@@ -35,7 +37,77 @@ readonly class MaddeKatalogu
         public array $gruplar = [],
         public array $grupTavanlari = [],
         public ?string $kapsamNotu = null,
+        public ?array $yazarKatsayisi = null,
     ) {}
+
+    /**
+     * Faaliyetin yazar sayısına göre puan çarpanı.
+     *
+     * Yönergelerin bir kısmı ortak yazarlı eserlerde puanı bölüyor (Anadolu:
+     * iki yazarlıda 0,8; üç yazarlıda 0,6; dört ve üzeri için 2,0/yazar sayısı).
+     * Cetvel böyle bir kural bildirmiyorsa çarpan yok.
+     *
+     * YAZAR LİSTESİ BOŞSA ÇARPAN UYGULANMAZ. Aday yazarları girmemişse kaç
+     * kişi olduğunu bilmiyoruz; varsayılan bir sayı uydurmak, girilmiş veriymiş
+     * gibi davranmak olurdu. Bu durumda puan tam gösterilir ve gerçek puandan
+     * YÜKSEK olabilir — cetvelin kapsam notu bunu söylemek zorunda.
+     */
+    public function yazarCarpani(Faaliyet $faaliyet): float
+    {
+        if ($this->yazarKatsayisi === null) {
+            return 1.0;
+        }
+
+        $sayi = $this->yazarSayisi($faaliyet);
+
+        if ($sayi === null) {
+            return 1.0;
+        }
+
+        $kademeler = $this->yazarKatsayisi['kademeler'];
+
+        if (isset($kademeler[$sayi])) {
+            return $kademeler[$sayi];
+        }
+
+        $pay = $this->yazarKatsayisi['sonrasi_pay'] ?? null;
+
+        if ($pay === null) {
+            // Kademe tablosu bitmişse son kademe geçerli sayılır.
+            return $kademeler === [] ? 1.0 : (float) end($kademeler);
+        }
+
+        return $pay / $sayi;
+    }
+
+    /**
+     * Faaliyetin yazar sayısı; liste boşsa null.
+     */
+    private function yazarSayisi(Faaliyet $faaliyet): ?int
+    {
+        $ham = trim((string) $faaliyet->yazarlar);
+
+        if ($ham === '') {
+            return null;
+        }
+
+        $adlar = array_filter(array_map('trim', explode(',', $ham)), fn (string $a) => $a !== '');
+
+        return $adlar === [] ? null : count($adlar);
+    }
+
+    /**
+     * Madde puanına yazar çarpanını uygular.
+     *
+     * Aşağı yuvarlanır: yönergeler küsuratı tanımlamıyor, aşağı yuvarlamak
+     * adayın puanını fazla göstermemeyi garanti eder.
+     */
+    private function carpanliPuan(Faaliyet $faaliyet, int $hamPuan): int
+    {
+        $carpan = $this->yazarCarpani($faaliyet);
+
+        return $carpan === 1.0 ? $hamPuan : (int) floor($hamPuan * $carpan);
+    }
 
     /**
      * Desen listesini somut madde kodlarına çözer.
@@ -149,7 +221,7 @@ readonly class MaddeKatalogu
             }
         }
 
-        return $enYuksek;
+        return $this->carpanliPuan($faaliyet, $enYuksek);
     }
 
     /**
@@ -197,7 +269,7 @@ readonly class MaddeKatalogu
             $kod = $this->enIyiKod($faaliyet, $kodlar);
 
             if ($kod !== null) {
-                $katkilar[] = [$kod, $this->maddeler[$kod]['puan'] ?? 0];
+                $katkilar[] = [$kod, $this->carpanliPuan($faaliyet, $this->maddeler[$kod]['puan'] ?? 0)];
             }
         }
 

@@ -1961,3 +1961,60 @@ test('Anadolu kadroya özgü koşullar doğru kadroda duruyor', function () {
         ->and($madde('dr_ogr_uyesi', 'guzel_sanatlar', 'Ölçütler II · 28-40. madde'))->toBeFalse()
         ->and($madde('docentlik', 'sosyal', 'Ölçütler II · 28-40. madde'))->toBeFalse();
 });
+
+test('yazar sayısı katsayısı yalnızca bildiren cetvelde uygulanır', function () {
+    $depo = sartDepo();
+    $anadolu = $depo->katalog('anadolu-2023');
+
+    $makale = function (?string $yazarlar): Faaliyet {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+        $f->yazarlar = $yazarlar;
+
+        return $f;
+    };
+
+    // Ölçütler I/2: tek yazar tam puan, iki yazarlı 0,8; üç yazarlı 0,6;
+    // dört ve üzeri 2,0/yazar sayısı. Madde 1'in ham puanı 150.
+    expect($anadolu->puan($makale('A'), ['1']))->toBe(150)
+        ->and($anadolu->puan($makale('A, B'), ['1']))->toBe(120)
+        ->and($anadolu->puan($makale('A, B, C'), ['1']))->toBe(90)
+        ->and($anadolu->puan($makale('A, B, C, D'), ['1']))->toBe(75)
+        ->and($anadolu->puan($makale('A, B, C, D, E'), ['1']))->toBe(60);
+
+    // Yazar listesi boşsa kaç kişi olduğunu bilmiyoruz; bir sayı varsaymak
+    // veri uydurmak olurdu, çarpan uygulanmaz.
+    expect($anadolu->puan($makale(null), ['1']))->toBe(150)
+        ->and($anadolu->puan($makale('   '), ['1']))->toBe(150);
+
+    // Kural bildirmeyen cetveller etkilenmemeli.
+    $mersin = $depo->katalog('mersin-2024');
+    $kodlar = array_keys($mersin->maddeler);
+
+    expect($mersin->puan($makale('A, B, C, D'), $kodlar))
+        ->toBe($mersin->puan($makale('A'), $kodlar));
+});
+
+test('yazar katsayısı toplam puana ve baraja da yansır', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
+    $esik = $depo->bul('Anadolu Üniversitesi', 'dr_ogr_uyesi', 'sosyal');
+
+    // Üç adet 150 puanlık Q1 makalesi tek yazarlıysa 450 puan (baraj 400 aşılır);
+    // aynı makaleler dört yazarlıysa 3 × 75 = 225 ve baraj sağlanmaz.
+    $uret = function (string $yazarlar) use ($profil, $depo, $esik): SartSonucu {
+        $f = array_map(function () use ($yazarlar) {
+            $x = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+            $x->yazarlar = $yazarlar;
+
+            return $x;
+        }, range(1, 3));
+
+        return collect($depo->degerlendir($esik, $f, $profil)->kosullar())
+            ->first(fn (SartSonucu $k) => ($k->rol ?? null) === 'toplam');
+    };
+
+    expect($uret('A')->mevcut)->toBe(450)
+        ->and($uret('A')->durum)->toBe(Durum::Saglandi)
+        ->and($uret('A, B, C, D')->mevcut)->toBe(225)
+        ->and($uret('A, B, C, D')->durum)->toBe(Durum::Saglanmadi);
+});
