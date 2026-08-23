@@ -1416,3 +1416,53 @@ test('Ege yurt dışı koşulu puanla telafi edilebiliyor', function () {
     expect($sonuc->saglandi())->toBeTrue()
         ->and($sonuc->telafiIleSaglandi())->toBeTrue();
 });
+
+test('Gazi alan grubunu fakülteye göre belirliyor', function () {
+    $depo = sartDepo();
+
+    // Yönergenin md. 6 tablosu sezgisel değil: Gazi Eğitim Fakültesi, Yabancı
+    // Diller YO ve Spor Bilimleri Fakültesi SOSYAL BİLİMLER kriterlerine tabi.
+    // Bu yüzden egitim/filoloji/spor alanları A3'e bağlandı.
+    $sosyal = $depo->bul('Gazi Üniversitesi', 'docentlik', 'sosyal');
+
+    // `anahtar` alan adıyla soneklendiği için kaynak kayıt `notlar` ile eşleşir.
+    foreach (['egitim', 'filoloji', 'spor'] as $alan) {
+        expect($depo->bul('Gazi Üniversitesi', 'docentlik', $alan)['notlar'])
+            ->toBe($sosyal['notlar'], "{$alan} A3'e bağlı olmalı");
+    }
+
+    // Madde 6 tablosunda olmayan alanlarda eşik üretilmedi.
+    foreach (['ilahiyat', 'hukuk', 'guzel_sanatlar', 'ziraat'] as $alan) {
+        expect($depo->bul('Gazi Üniversitesi', 'docentlik', $alan))->toBeNull();
+    }
+
+    // Sağlıkta yayın sayısı düşük (2) ama Q1-Q2 şartı var; Fen'de 4 yayın
+    // Q1-Q3'ten yeterli. İkisi farklı kümeler.
+    $gerekli = function (string $alan) use ($depo): int {
+        $esik = $depo->bul('Gazi Üniversitesi', 'docentlik', $alan);
+
+        return collect($depo->degerlendir($esik, [], new Profil)->kosullar())
+            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'en az') && str_contains($k->aciklama, 'yayın'))->gerekli;
+    };
+
+    expect($gerekli('saglik'))->toBe(2)
+        ->and($gerekli('fen'))->toBe(4);
+});
+
+test('Gazi proje koşulu makaleyle telafi edilebiliyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Gazi Üniversitesi', 'docentlik', 'fen');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    $proje = fn (array $faaliyetler) => collect($depo->degerlendir($esik, $faaliyetler, $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'projede yürütücü'));
+
+    expect($proje([])->saglandi())->toBeFalse();
+
+    // Yönerge: "Bu kriter sağlanamıyorsa … 1a-c kapsamında 30 puan almak."
+    // Bir Q1 makale 40 puan → telafi devreye girer.
+    $sonuc = $proje([sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01')]);
+
+    expect($sonuc->saglandi())->toBeTrue()
+        ->and($sonuc->telafiIleSaglandi())->toBeTrue();
+});
