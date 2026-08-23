@@ -1654,3 +1654,37 @@ test('Marmara yardımcı doçent koşulları Dr. Öğr. Üyesi kadrosuna bağlan
     expect($puan('faaliyet aralıklarından'))->toBe(48)
         ->and($puan('Tüm faaliyetlerden'))->toBe(48);
 });
+
+test('Erciyes yayın barajı alan grubuna göre farklı küme sayıyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
+
+    // Fen/Sağlıkta yayın barajı yalnızca WoS çeyrekli dergilerden (1a-d);
+    // sosyal gruplarda ESCI ve TR Dizin de sayılıyor (1a-f + kitap).
+    $esci = fn () => sartFaaliyet('ESCI / Scopus', tarih: '2020-01-01');
+
+    $yayinPuani = function (string $alan) use ($depo, $esci, $profil): int {
+        $esik = $depo->bul('Erciyes Üniversitesi', 'dr_ogr_uyesi', $alan);
+
+        return collect($depo->degerlendir($esik, [$esci()], $profil)->kosullar())
+            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'kapsamında en az'))->mevcut;
+    };
+
+    expect($yayinPuani('fen'))->toBe(0)
+        ->and($yayinPuani('sosyal'))->toBe(15);
+
+    // Yayın türü ayrımı Erciyes'te tam karşılığını buluyor: aynı Q1 dergide
+    // özgün makale 60, kısa makale 45, vaka raporu 30 puan.
+    $katalog = $depo->katalog('erciyes-2024');
+    $kodlar = array_keys($katalog->maddeler);
+    $puan = function (string $tur) use ($katalog, $kodlar): int {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+        $f->yayin_turu = $tur;
+
+        return $katalog->puan($f, $kodlar);
+    };
+
+    expect($puan('ozgun_makale'))->toBe(60)
+        ->and($puan('kisa_makale'))->toBe(45)
+        ->and($puan('vaka_teknik_not'))->toBe(30);
+});
