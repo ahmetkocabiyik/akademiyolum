@@ -20,9 +20,11 @@ class CetvelAyristirici
      *   `1.6` `11.1.3` `1.1a.`  noktalı, sonda harf olabilir  (Akdeniz, Afyon)
      *   `00.01.02`              sıfır dolgulu                 (Atatürk)
      *   `B5.` `A1a`             harf önekli                   (Gümüşhane)
-     *   `2.` `a)`               yalın                         (çeşitli)
+     *   `A.1` `A.10`            harf, nokta, rakam            (İTÜ)
+     *   `g3)` `b1)` `c2)`       alt bendin kendi kırılımı     (Ege)
+     *   `2.` `a)` `a.`          yalın; alt bent nokta ya da parantezli (Gazi)
      */
-    private const KOD = '(?:\d{1,2}(?:\.\d{1,2})+[a-zçğıöşü]?\.?|[A-ZÇĞİÖŞÜ]\d{1,2}[a-zçğıöşü]?\.?|\d{1,2}\.|[a-zçğıöşü]\))';
+    private const KOD = '(?:\d{1,2}(?:\.\d{1,2})+[a-zçğıöşü]?\.?|[A-ZÇĞİÖŞÜ]\.\d{1,2}(?:\.\d{1,2})?|[A-ZÇĞİÖŞÜ]\d{1,2}[a-zçğıöşü]?\.?|\d{1,2}\.|[a-zçğıöşü]\d{1,2}[.)]|[a-zçğıöşü][.)])';
 
     /**
      * Başlık metninden kaynak etiketine eşleme kuralları.
@@ -119,19 +121,32 @@ class CetvelAyristirici
         // Üst kod hatırlanmazsa iki farklı bölümün `a)` bendi aynı koda düşer
         // ve biri diğerini sessizce ezer.
         $anaKod = '';
+        $kodsuzSayac = 0;
 
         foreach ($tipler as $i => $t) {
             if ($t['tip'] === 'bolum') {
                 $anaKod = $t['kod'];
+                $kodsuzSayac = 0;
 
                 continue;
             }
 
-            if ($t['tip'] !== 'kod') {
+            if ($t['tip'] !== 'kod' && $t['tip'] !== 'kodsuz') {
                 continue;
             }
 
-            if (preg_match('/^[a-zçğıöşü]$/u', $t['kod']) === 1) {
+            if ($t['tip'] === 'kodsuz') {
+                // Üretilmiş kod: `~` öneki yönergede karşılığı olmadığını
+                // söyler, denetimde elle girilen kodlarla eşleşmemeli. Üst kod
+                // olarak KULLANILMAZ — yoksa her kodsuz satır bir öncekinin
+                // altına iç içe geçer.
+                $kodsuzSayac++;
+                $t['kod'] = '~'.($anaKod === '' ? '' : $anaKod.'.').$kodsuzSayac;
+            } elseif (preg_match('/^[a-zçğıöşü]\d{0,2}$/u', $t['kod']) === 1) {
+                // Harfle başlayan alt bent (`a)`, `a1)`, `g3)`) üst kalemin
+                // kırılımıdır ve tek başına kod taşımaz; bölüm numarasıyla
+                // birleşir. Kendisi üst kod OLMAZ, yoksa `a1` sonraki `b1`in
+                // üstüne yazılırdı.
                 $t['kod'] = $anaKod.$t['kod'];
             } else {
                 $anaKod = $t['kod'];
@@ -188,6 +203,22 @@ class CetvelAyristirici
             return $bos;
         }
 
+        // ÇOK SÜTUNLU TABLO: `A.1 Scopus Q1 dergide makale    10    10    10`
+        // İTÜ puanı birim grubuna göre veriyor (Tüm Birimler / MF / H,S,TMDK);
+        // "-" o grubun kalemi saymadığını gösterir. Sütunlar AYNIYSA değer
+        // tektir ve okunabilir; farklıysa hangi sütunun hangi birime ait
+        // olduğunu ancak başlık satırı söyler — tahmin edilmez, bildirilir.
+        if (preg_match('/^\s*(?:\d{1,3}\s+)?('.self::KOD.')\s+(\S.*?)\s{2,}((?:-|\d{1,4})(?:\s{2,}(?:-|\d{1,4}))+)\s*$/u', $ln, $m) === 1) {
+            $sutunlar = preg_split('/\s+/u', trim($m[3])) ?: [];
+            $kod = rtrim($m[1], ').');
+
+            if (count(array_unique($sutunlar)) === 1 && $sutunlar[0] !== '-') {
+                return ['tip' => 'kod', 'kod' => $kod, 'baslik' => $m[2], 'puan' => (int) $sutunlar[0]];
+            }
+
+            return ['tip' => 'coklu', 'kod' => $kod, 'baslik' => trim($m[2]).'  →  '.implode(' | ', $sutunlar), 'puan' => 0];
+        }
+
         // ÇOK DEĞERLİ HÜCRE: `G3. Ulusal patent/faydalı model/telif  40/20/5`
         // ya da `E1. AB projesi  60/40` (yürütücü/araştırmacı). Tek satırda
         // birden çok kalem var; hangisinin hangi değere ait olduğu ancak metin
@@ -223,6 +254,19 @@ class CetvelAyristirici
         // Kod + metin, puan ayrı satırda (C düzeninin ilk satırı).
         if (preg_match('/^\s*(?:\d{1,3}\s+)?('.self::KOD.')\s+(\S.{15,})$/u', $ln, $m) === 1) {
             return ['tip' => 'kod', 'kod' => rtrim($m[1], ').'), 'baslik' => trim($m[2]), 'puan' => 0];
+        }
+
+        // KODSUZ SATIR: `   Ulusal hakemli dergilerde yayımlanmış        20`
+        // Bazı yönergeler bent numarası kullanmıyor; kalemin kimliği yalnızca
+        // açıklaması (Kayseri, Erciyes ve 17 PDF daha). Kod üretilir ama `~`
+        // önekiyle: o kod BİZİM, yönergenin değil.
+        //
+        // Yanlış pozitife karşı üç koruma: açıklama en az 20 karakter, puan
+        // sağa dayalı (3+ boşluk), ve satır cümle sonu noktasıyla bitmiyor
+        // (düzyazı paragrafları böyle eleniyor).
+        if (preg_match('/^\s*(\S[^.]{19,}?)\s{3,}(\d{1,4})\s*$/u', $ln, $m) === 1
+            && preg_match('/^(madde|tablo)\b/iu', trim($m[1])) !== 1) {
+            return ['tip' => 'kodsuz', 'kod' => '', 'baslik' => trim($m[1]), 'puan' => (int) $m[2]];
         }
 
         // Girintili düz metin: sarmalanmış açıklama parçası olabilir.

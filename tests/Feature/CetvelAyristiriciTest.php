@@ -148,3 +148,70 @@ test('bölüm başlığı alt bentlerin hangi bölüme ait olduğunu belirler (E
         ->and($satirlar[0]['puan'])->toBe(8)
         ->and($satirlar[1]['puan'])->toBe(1);
 });
+
+test('alt bent noktayla da yazılabiliyor (Gazi)', function () {
+    // Gazi alt bentleri "a)" değil "a." yazıyor. Tanınmadığında tablonun
+    // tamamı okunamıyordu — 59 satırın hiçbiri çıkmıyordu.
+    $satirlar = $this->ayristirici->satirlar(
+        ' 1. Web of Science tarafından taranan dergilerde yayımlanmış özgün araştırma makalesi'."\n".
+        '     a. Q1 grubu dergilerde yayımlanmış özgün araştırma makalesi                       40'."\n".
+        '     b. Q2 grubu dergilerde yayımlanmış özgün araştırma makalesi                       35'
+    );
+
+    expect(array_column($satirlar, 'kod'))->toBe(['1a', '1b'])
+        ->and($satirlar[0]['puan'])->toBe(40)
+        ->and($satirlar[1]['puan'])->toBe(35);
+});
+
+test('çok sütunlu tabloda sütunlar aynıysa okunur, farklıysa bildirilir (İTÜ)', function () {
+    // İTÜ puanı birim grubuna göre veriyor (Tüm Birimler / MF / H,S,TMDK);
+    // "-" o grubun kalemi saymadığı anlamına geliyor. Sütunlar farklıyken
+    // birini seçmek, adayı başka bir fakültenin ölçütüyle puanlamak olurdu.
+    $metin =
+        'A.1 Scopus Q1 olarak taranan dergilerde yayınlanan makale            10        10        10'."\n".
+        'A.5 AHCI tarafından taranan dergilerde yayınlanan makale              -         4        10';
+
+    $satirlar = $this->ayristirici->satirlar($metin);
+    $coklular = $this->ayristirici->coklular($metin);
+
+    expect(array_column($satirlar, 'kod'))->toBe(['A.1'])
+        ->and($satirlar[0]['puan'])->toBe(10);
+
+    expect(array_column($coklular, 'kod'))->toBe(['A.5'])
+        ->and($coklular[0]['baslik'])->toContain('- | 4 | 10');
+});
+
+test('harfle başlayan alt bent bölüm numarasıyla birleşir (Ege)', function () {
+    // Ege'de 3. bölümün alt bentleri "a1)", "b1)" gibi. Bunlar tek başına kod
+    // taşımaz; bölümle birleşmezse iki farklı bölümün a1 bendi çakışır.
+    $satirlar = $this->ayristirici->satirlar(
+        '3. KİTAP'."\n".
+        'a1) Uluslararası yayınevinden yabancı dilde kitap yazarlığı              75'."\n".
+        'b1) Uluslararası yayınevinden yabancı dilde kitap bölümü                20'
+    );
+
+    expect(array_column($satirlar, 'kod'))->toBe(['3a1', '3b1'])
+        ->and($satirlar[0]['puan'])->toBe(75);
+});
+
+test('kodsuz satır okunur ama ürettiği kod ~ ile işaretlenir (Kayseri)', function () {
+    // Bazı yönergeler bent numarası kullanmıyor; kalemin kimliği açıklaması.
+    // Üretilen kod bizimdir, yönergenin değil — denetimde elle girilen
+    // kodlarla eşleşmemesi için `~` ile işaretlenir.
+    $satirlar = $this->ayristirici->satirlar(
+        '5. PROJE'."\n".
+        '    Ulusal veya uluslararası hakemli dergilerde yayımlanmış            20'."\n".
+        '    Hakemsiz dergilerde yayımlanmış (en çok 2 adet/yıl)                 5'
+    );
+
+    expect(array_column($satirlar, 'kod'))->toBe(['~5.1', '~5.2'])
+        ->and($satirlar[0]['puan'])->toBe(20)
+        ->and($satirlar[1]['puan'])->toBe(5);
+
+    // Düzyazı paragrafı kalem sanılmamalı: cümle sonu noktası eleme ölçütü.
+    $duzyazi = $this->ayristirici->satirlar(
+        'Madde 10. Profesörlüğe yükseltilme için gerekli koşullar bölümünde yer alır.        5'
+    );
+
+    expect($duzyazi)->toBe([]);
+});

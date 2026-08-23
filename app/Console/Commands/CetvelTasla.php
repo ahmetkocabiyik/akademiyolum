@@ -44,8 +44,18 @@ class CetvelTasla extends Command
 
         $metin = $this->metin($pdf);
 
-        if (trim($metin) === '') {
-            $this->error('PDF\'te metin katmanı yok — taranmış belge, önce OCR gerekiyor.');
+        // Taranmış belgeler tamamen boş dönmüyor: KTÜ'nün 48 sayfası 48
+        // karakter üretiyor (sayfa numaraları). Boşluk kontrolü bunu
+        // yakalamadığı için komut "tablo düzeni farklı" diyor ve insanı
+        // ayrıştırıcıyı düzeltmeye yönlendiriyordu — oysa yapılacak iş OCR.
+        $sayfa = max(1, $this->sayfaSayisi($pdf));
+        $karakterYogunlugu = mb_strlen(trim($metin)) / $sayfa;
+
+        if ($karakterYogunlugu < 200) {
+            $this->error(sprintf(
+                'PDF taranmış görünüyor (sayfa başına %d karakter) — ayrıştırılamaz, önce OCR gerekiyor.',
+                (int) $karakterYogunlugu,
+            ));
 
             return self::FAILURE;
         }
@@ -108,6 +118,14 @@ class CetvelTasla extends Command
         $surec->run();
 
         return $surec->getOutput();
+    }
+
+    private function sayfaSayisi(string $pdf): int
+    {
+        $surec = new Process(['pdfinfo', $pdf]);
+        $surec->run();
+
+        return preg_match('/^Pages:\s+(\d+)/m', $surec->getOutput(), $m) === 1 ? (int) $m[1] : 0;
     }
 
     /**
