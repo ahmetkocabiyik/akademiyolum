@@ -2072,3 +2072,44 @@ test('rol belirtilmemişse ortak yazar varsayılır', function () {
 
     expect($depo->katalog('kocaeli-2023')->yazarCarpani($f))->toBe(0.40);
 });
+
+test('Fırat çeyreklikleri alt maddelere bölüyor ve aralık grupları hepsini kapsıyor', function () {
+    $katalog = sartDepo()->katalog('firat-2026');
+
+    // EK-1 A2.1 puanı tek satırda "Q1 200 / Q2 160 / Q3 120 / Q4 80" veriyor;
+    // kaynak sözlüğü çeyrekliği ayırdığı için satır alt maddelere bölündü.
+    expect($katalog->maddePuani('A2.1-Q1'))->toBe(200)
+        ->and($katalog->maddePuani('A2.1-Q4'))->toBe(80)
+        ->and($katalog->maddePuani('A2.2-Q1'))->toBe(60);
+
+    // Koşullar "A2.1-A2.2" gibi aralığa atıf yapıyor; grup bölünmüş kodların
+    // tamamını yakalamalı, yoksa baraj sessizce eksik puanlanır.
+    expect($katalog->coz(['A2.1-A2.2']))->toHaveCount(8)
+        ->and($katalog->coz(['A2.1']))->toHaveCount(4);
+});
+
+test('Fırat alan grupları üç ayrı desene ayrılıyor', function () {
+    $depo = sartDepo();
+
+    $madde = function (string $alan, string $m): bool {
+        $esik = sartDepo()->bul('Fırat Üniversitesi', 'dr_ogr_uyesi', $alan);
+
+        return collect($esik['sart']['cocuklar'])->contains(fn (array $d) => ($d['madde'] ?? null) === $m);
+    };
+
+    // Sağlık/mühendislik/fen WoS makale sayısı istiyor; sosyal grubu istemiyor.
+    expect($madde('muhendislik', 'Madde 10 · a.1'))->toBeTrue()
+        ->and($madde('sosyal', 'Madde 10 · a.1'))->toBeFalse()
+        ->and($madde('sosyal', 'Madde 10 · ç.1'))->toBeTrue();
+
+    // Toplam baraj güzel sanatlarda düşük: 500 ↔ diğer alanlarda 1000.
+    $toplam = function (string $alan) use ($depo): int {
+        $esik = $depo->bul('Fırat Üniversitesi', 'dr_ogr_uyesi', $alan);
+
+        return collect($esik['sart']['cocuklar'])
+            ->first(fn (array $d) => ($d['rol'] ?? null) === 'toplam')['min_puan'];
+    };
+
+    expect($toplam('guzel_sanatlar'))->toBe(500)
+        ->and($toplam('muhendislik'))->toBe(1000);
+});
