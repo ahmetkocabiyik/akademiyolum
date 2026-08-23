@@ -89,7 +89,7 @@ class SartDeposu
 
         foreach ($this->dosyalar(database_path('data/yonerge')) as $dosya) {
             /** @var list<array<string, mixed>> $satirlar */
-            $satirlar = require $dosya;
+            $satirlar = self::dosyayiOku($dosya);
 
             foreach ($satirlar as $satir) {
                 foreach ((array) $satir['alan'] as $alan) {
@@ -130,7 +130,7 @@ class SartDeposu
 
             foreach ($this->dosyalar(database_path('data/cetvel')) as $dosya) {
                 /** @var Cetvel|array{cetveller: array<string, Cetvel>} $icerik */
-                $icerik = require $dosya;
+                $icerik = self::dosyayiOku($dosya);
 
                 // Bir dosya normalde tek cetveldir ve adını dosyadan alır. Aynı
                 // kaynağın alan başına ayrı tablo yayımladığı yerlerde (ÜAK'ın
@@ -172,6 +172,23 @@ class SartDeposu
      *
      * @return list<string>
      */
+    /**
+     * Veri dosyasını KENDİ değişken kapsamında okur.
+     *
+     * `require` çağrıldığı metodun kapsamında çalışır. Yönerge dosyaları eşik
+     * listesini bir döngüyle üretebildiği için (Çukurova on iki temel alan için
+     * otuz altı eşik türetiyor) dosyanın yerel değişkeni okuyucunun yerel
+     * değişkeniyle aynı adı taşıyabilir; o zaman dosya, kendinden önce okunmuş
+     * dosyaların birikmiş sonucunu sessizce ezer. Statik metot bu kapsamı
+     * yalıtır — dosyanın hangi adları kullandığı okuyucuyu ilgilendirmez.
+     *
+     * @return array<mixed>
+     */
+    private static function dosyayiOku(string $dosya): array
+    {
+        return require $dosya;
+    }
+
     private function dosyalar(string $klasor): array
     {
         $bulunan = glob($klasor.'/*.php') ?: [];

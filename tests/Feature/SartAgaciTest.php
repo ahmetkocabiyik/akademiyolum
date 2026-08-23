@@ -1715,3 +1715,52 @@ test('Cerrahpaşa girişimci koşulu alan başına farklı telafi taşıyor', fu
         expect($depo->bul('İstanbul Üniversitesi-Cerrahpaşa', 'dr_ogr_uyesi', $alan))->toBeNull();
     }
 });
+
+test('yönerge dosyaları birbirinin değişkenlerini ezmiyor', function () {
+    // `require` çağrıldığı metodun kapsamında çalışır. Eşiklerini bir döngüyle
+    // üreten bir yönerge dosyası yerel `$esikler` değişkeni kullandığında,
+    // okuyucunun aynı adlı biriktiricisini eziyor ve kendinden ÖNCE okunmuş
+    // dosyalar sessizce kayboluyordu. Alfabetik olarak Çukurova'dan önce gelen
+    // üniversitelerin hepsi listeden düşmüştü.
+    $depo = sartDepo();
+    $universiteler = $depo->universiteler();
+
+    expect($universiteler)->toContain('Afyon Kocatepe Üniversitesi')
+        ->and($universiteler)->toContain('Atatürk Üniversitesi')
+        ->and($universiteler)->toContain('Çukurova Üniversitesi')
+        ->and($universiteler)->toContain('Yıldız Teknik Üniversitesi');
+});
+
+test('Çukurova on iki temel alanın üçünde de kadro eşiği üretiyor', function () {
+    $depo = sartDepo();
+    $alanlar = array_map(fn (TemelAlan $a) => $a->value, TemelAlan::cases());
+
+    foreach ($alanlar as $alan) {
+        foreach (['dr_ogr_uyesi', 'docentlik', 'profesorluk'] as $kadro) {
+            expect($depo->bul('Çukurova Üniversitesi', $kadro, $alan))
+                ->not->toBeNull("Çukurova / {$kadro} / {$alan}");
+        }
+    }
+});
+
+test('Çukurova doçent asgari puanı alan grubuna göre değişiyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
+
+    // EK 1: Mühendislik doçentliği 240 puan isterken Hukuk 120 istiyor. Aynı
+    // faaliyet listesi birinde yetip diğerinde yetmemeli.
+    $toplamKosulu = function (string $alan) use ($depo, $profil): SartSonucu {
+        $esik = $depo->bul('Çukurova Üniversitesi', 'docentlik', $alan);
+        // 90 puanlık iki Q1 makale = 180 puan.
+        $faaliyetler = array_map(
+            fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01'),
+            range(1, 2),
+        );
+
+        return collect($depo->degerlendir($esik, $faaliyetler, $profil)->kosullar())
+            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'EK 2 kalemlerinden'));
+    };
+
+    expect($toplamKosulu('hukuk')->durum)->toBe(Durum::Saglandi)
+        ->and($toplamKosulu('muhendislik')->durum)->toBe(Durum::Saglanmadi);
+});
