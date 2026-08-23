@@ -215,3 +215,35 @@ test('kodsuz satır okunur ama ürettiği kod ~ ile işaretlenir (Kayseri)', fun
 
     expect($duzyazi)->toBe([]);
 });
+
+test('harfli bölüm başlığı sayısal alt bentlerin önekini belirler (Kocaeli)', function () {
+    // Kocaeli bölümleri harfle, kalemleri sayıyla numaralandırıyor: "A. Makaleler"
+    // altında "1)", "2)". Bölüm harfi taşınmazsa A bölümünün 1) bendi ile
+    // D bölümünün 1) bendi aynı koda düşer.
+    $satirlar = $this->ayristirici->satirlar(
+        'A. Makaleler (Başvurulan bilim alanı ile ilgili tam araştırma makaleleri)'."\n".
+        '1) SCI-E, SSCI veya AHCI kapsamındaki dergilerde yayımlanmış makale (Q1)          60'."\n".
+        'D. ATIFLAR (Atıf yapan eserlerin belgelenmesi kaydıyla, Azami 1500 puan)'."\n".
+        '1) SCI-E, SSCI ve AHCI tarafından taranan dergilerde yapılan atıf                  4'
+    );
+
+    expect(array_column($satirlar, 'kod'))->toBe(['A1', 'D1'])
+        ->and($satirlar[0]['puan'])->toBe(60)
+        ->and($satirlar[1]['puan'])->toBe(4);
+});
+
+test('belge kodlarını açıkça yazıyorsa sayısal birleştirme kapanır (Gümüşhane)', function () {
+    // Gümüşhane kalemlerini "P5" diye açıkça kodluyor. İlgisiz bir tablodaki
+    // "5." satırı bölüm harfiyle birleşseydi gerçek P5'i ezerdi.
+    $satirlar = $this->ayristirici->satirlar(
+        'P. SANATSAL ETKİNLİKLER'."\n".
+        'P5. Yurt dışında uluslararası jürili karma etkinlik                                20'."\n".
+        'Ortak Çalışmalar İçin Puan Dağılımı'."\n".
+        '5. ve sonraki isimler                                                              50'
+    );
+
+    $kodlar = array_column($satirlar, 'kod');
+
+    expect($kodlar)->toContain('P5')
+        ->and($satirlar[array_search('P5', $kodlar, true)]['puan'])->toBe(20);
+});

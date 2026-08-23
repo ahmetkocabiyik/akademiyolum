@@ -1599,3 +1599,31 @@ test('YTÜ 1(a) kümesi Q4 makalesini kapsamıyor', function () {
         fn (SartSonucu $k) => str_contains($k->aciklama, 'puan ortalamasının üzerinde')
     ))->toBeTrue();
 });
+
+test('Kocaeli kümülatif dergi kademelerini iç içe sayıyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Kocaeli Üniversitesi', 'dr_ogr_uyesi', 'fen');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    // Koşullar iç içe kümeler istiyor: "A.1-A.2'den ≥1, A.1-A.4'ten ≥2".
+    // Q1-Q2'deki makale her iki sayıya da girer.
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+    $q3 = fn () => sartFaaliyet('SCIE/SSCI (Q3)', tarih: '2020-01-01');
+
+    $sayac = function (array $faaliyetler, string $parca) use ($depo, $esik, $profil): int {
+        return collect($depo->degerlendir($esik, $faaliyetler, $profil)->kosullar())
+            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca))->mevcut;
+    };
+
+    $dosya = [$q1(), $q3()];
+
+    expect($sayac($dosya, 'Q1-Q2 dergide'))->toBe(1)
+        ->and($sayac($dosya, 'Q1-Q4 dergide'))->toBe(2);
+
+    // Güzel Sanatlarda sanatsal etkinlik koşulu ek makaleyle telafi ediliyor.
+    $gs = $depo->bul('Kocaeli Üniversitesi', 'dr_ogr_uyesi', 'guzel_sanatlar');
+    $sanat = collect($depo->degerlendir($gs, [$q1()], $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'Sanatsal etkinlik koşulu'));
+
+    expect($sanat->telafiIleSaglandi())->toBeTrue();
+});

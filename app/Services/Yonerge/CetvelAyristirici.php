@@ -22,9 +22,9 @@ class CetvelAyristirici
      *   `B5.` `A1a`             harf önekli                   (Gümüşhane)
      *   `A.1` `A.10`            harf, nokta, rakam            (İTÜ)
      *   `g3)` `b1)` `c2)`       alt bendin kendi kırılımı     (Ege)
-     *   `2.` `a)` `a.`          yalın; alt bent nokta ya da parantezli (Gazi)
+     *   `2.` `a)` `a.` `1)`     yalın; nokta ya da parantezli (Gazi, Kocaeli)
      */
-    private const KOD = '(?:\d{1,2}(?:\.\d{1,2})+[a-zçğıöşü]?\.?|[A-ZÇĞİÖŞÜ]\.\d{1,2}(?:\.\d{1,2})?|[A-ZÇĞİÖŞÜ]\d{1,2}[a-zçğıöşü]?\.?|\d{1,2}\.|[a-zçğıöşü]\d{1,2}[.)]|[a-zçğıöşü][.)])';
+    private const KOD = '(?:\d{1,2}(?:\.\d{1,2})+[a-zçğıöşü]?\.?|[A-ZÇĞİÖŞÜ]\.\d{1,2}(?:\.\d{1,2})?|[A-ZÇĞİÖŞÜ]\d{1,2}[a-zçğıöşü]?\.?|\d{1,2}[.)]|[a-zçğıöşü]\d{1,2}[.)]|[a-zçğıöşü][.)])';
 
     /**
      * Başlık metninden kaynak etiketine eşleme kuralları.
@@ -122,6 +122,7 @@ class CetvelAyristirici
         // ve biri diğerini sessizce ezer.
         $anaKod = '';
         $kodsuzSayac = 0;
+        $acikKodlu = false;
 
         foreach ($tipler as $i => $t) {
             if ($t['tip'] === 'bolum') {
@@ -142,6 +143,10 @@ class CetvelAyristirici
                 // altına iç içe geçer.
                 $kodsuzSayac++;
                 $t['kod'] = '~'.($anaKod === '' ? '' : $anaKod.'.').$kodsuzSayac;
+            } elseif (! $acikKodlu && preg_match('/^\d{1,2}$/u', $t['kod']) === 1 && preg_match('/^[A-ZÇĞİÖŞÜ]$/u', $anaKod) === 1) {
+                // Harfli bölüm altındaki sayısal bent: `A. Makaleler` → `1)` = A1
+                // (Kocaeli). Bölüm harfi olmadan iki bölümün 1) bendi çakışırdı.
+                $t['kod'] = $anaKod.$t['kod'];
             } elseif (preg_match('/^[a-zçğıöşü]\d{0,2}$/u', $t['kod']) === 1) {
                 // Harfle başlayan alt bent (`a)`, `a1)`, `g3)`) üst kalemin
                 // kırılımıdır ve tek başına kod taşımaz; bölüm numarasıyla
@@ -149,6 +154,11 @@ class CetvelAyristirici
                 // üstüne yazılırdı.
                 $t['kod'] = $anaKod.$t['kod'];
             } else {
+                // Belge kodlarını AÇIKÇA yazıyorsa (Gümüşhane `P5`) sayısal
+                // birleştirme kapatılır; yoksa ilgisiz bir tablodaki `5.` satırı
+                // bölüm harfiyle birleşip gerçek P5'i ezerdi. Harfli alt bent
+                // birleştirmesi (`B4` + `a)` → `B4a`) etkilenmez.
+                $acikKodlu = $acikKodlu || preg_match('/^[A-ZÇĞİÖŞÜ]\d/u', $t['kod']) === 1;
                 $anaKod = $t['kod'];
             }
 
@@ -243,6 +253,15 @@ class CetvelAyristirici
         // olduğunu belirler. Tanınmazsa bir önceki bölümün numarasıyla
         // birleşir ve atıf bendi bildiri bendinin üstüne yazılır.
         if (preg_match('/^\s*(\d{1,2})\.\s*[A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜ0-9 ()\/]{2,}$/u', $ln, $m) === 1) {
+            return ['tip' => 'bolum', 'kod' => $m[1], 'baslik' => '', 'puan' => 0];
+        }
+
+        // Harfli bölüm başlığı: `A. Makaleler`, `H. ARAŞTIRMA PROJELERİ`
+        // (Kocaeli). Bölüm harfi alt bentlerin önekini belirler: A + 1) → A1.
+        // Başlıkta rakam olabilir ("… Azami 50 puan …"); satır sonunda puan
+        // taşıyan satırlar bu noktaya zaten gelmez, veri satırı olarak
+        // yakalanmış olur.
+        if (preg_match('/^\s*([A-KMNPRSTUVYZÇĞİÖŞÜ])\.\s+[A-ZÇĞİÖŞÜ].{4,}$/u', $ln, $m) === 1) {
             return ['tip' => 'bolum', 'kod' => $m[1], 'baslik' => '', 'puan' => 0];
         }
 
