@@ -29,11 +29,25 @@
  */
 
 return [
-    'kapsam_notu' => 'Puanlar Çukurova Üniversitesi EK 2 tablosundan (24/12/2024 senato değişikliği). '
+    'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Puanlar Çukurova Üniversitesi EK 2 tablosundan (24/12/2024 senato değişikliği). '
         .'Scopus çeyreklik kademeleri ile "ilk %10\'luk dilim" kademesi kaynak sözlüğünde WoS '
         .'çeyrekliklerinden ayrılamadığı için girilmedi; kitap ve patent kalemlerinde ayrılamayan '
         .'kademe çiftlerinin düşük olanı kullanıldı. EK 2\'de kitap bölümü, çeviri ve ansiklopedi '
         .'maddesi için satır yok. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
+
+    // Yönerge: iki yazarlı eserde ikinci yazar puanın 0,5'ini alır. Yazar
+    // sayısı ikiden fazlaysa puanın yarısı başlıca yazara verilir; kalan yarı
+    // diğer yazar sayısına bölünüp 1,6 ile çarpılır (0,5/(n-1)×1,6 = 0,8/(n-1)).
+    // Hiçbir yazar tek yazarlı puanın %10'undan azını almaz.
+    'yazar_katsayisi' => [
+        'taban' => 0.10,
+        'roller' => [
+            'tek' => ['kademeler' => [1 => 1.0]],
+            'ilk' => ['kademeler' => [1 => 1.0, 2 => 1.0], 'sonrasi' => 0.5],
+            'baslica' => ['kademeler' => [1 => 1.0, 2 => 1.0], 'sonrasi' => 0.5],
+            'ortak' => ['kademeler' => [1 => 1.0, 2 => 0.5], 'bol' => ['pay' => 0.8, 'eksi' => 1]],
+        ],
+    ],
 
     'maddeler' => [
         // ── MAKALE ──

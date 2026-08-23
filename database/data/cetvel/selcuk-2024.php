@@ -37,11 +37,30 @@
 return [
     'cetveller' => [
         'selcuk-2024-egitim' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Eğitim Bilimleri Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Eğitim Bilimleri Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -111,11 +130,30 @@ return [
             ],
         ],
         'selcuk-2024-fen' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Fen Bilimleri ve Matematik Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Fen Bilimleri ve Matematik Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -184,11 +222,30 @@ return [
             ],
         ],
         'selcuk-2024-filoloji' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Filoloji Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Filoloji Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -258,11 +315,30 @@ return [
             ],
         ],
         'selcuk-2024-guzel_sanatlar' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Güzel Sanatlar Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Güzel Sanatlar Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -334,11 +410,30 @@ return [
             ],
         ],
         'selcuk-2024-hukuk' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Hukuk Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Hukuk Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -407,11 +502,30 @@ return [
             ],
         ],
         'selcuk-2024-ilahiyat' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi İlahiyat Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi İlahiyat Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -480,11 +594,30 @@ return [
             ],
         ],
         'selcuk-2024-mimarlik' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Mimarlık ve Tasarım Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Mimarlık ve Tasarım Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -543,11 +676,30 @@ return [
             ],
         ],
         'selcuk-2024-muhendislik' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Mühendislik Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Mühendislik Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -616,11 +768,30 @@ return [
             ],
         ],
         'selcuk-2024-saglik' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Sağlık Bilimleri Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Sağlık Bilimleri Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -689,11 +860,30 @@ return [
             ],
         ],
         'selcuk-2024-sosyal' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Sosyal, Beşerî ve İdari Bilimler Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Sosyal, Beşerî ve İdari Bilimler Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -761,11 +951,30 @@ return [
             ],
         ],
         'selcuk-2024-spor' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Spor Bilimleri Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Spor Bilimleri Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
@@ -838,11 +1047,30 @@ return [
             ],
         ],
         'selcuk-2024-ziraat' => [
-            'kapsam_notu' => 'Puanlar Selçuk Üniversitesi Ziraat Temel Alanı Başvuru Şartları '
+            'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yazar SIRASINA da bağlı olduğu için faaliyetinizde rolü ("tek / ilk / başlıca / ortak") işaretlemeniz gerekir. Rol veya yazar listesi boşsa en düşük çarpan uygulanır ya da hiç uygulanmaz. Atıflarda çarpan uygulanmaz. Puanlar Selçuk Üniversitesi Ziraat Temel Alanı Başvuru Şartları '
                 .'Tablosundan. Kongre düzenleme kurulu görevleri, h-indeksi ve yurt dışı deneyim '
                 .'koşulları, patent başvurusu ve sportif başarı kalemleri kaynak sözlüğünde '
                 .'karşılıksız olduğu için girilmedi. Gerçek toplamınız burada görünenden yüksek '
                 .'olabilir, düşük olamaz.',
+            // Yönerge: başlıca yazar puanın yarısını alır, diğer yazarlar kalan yarıyı
+            // eşit paylaşır (0,5/(n-1)). Başlıca yazar belirtilmemişse ve bildiri/kitap
+            // gibi diğer yayınlarda puan yazarlar arasında eşit bölünür. ATIFLARDA
+            // yazar sayısına bakılmaksızın tüm yazarlar tam puan alır.
+            //
+            // "Lisansüstü tez ve projelerden yapılan makalelerde azaltma katsayısı
+            // uygulanmaz" istisnası girilemedi: faaliyet kaydı bir makalenin tezden
+            // üretilip üretilmediğini tutmuyor. O makalelerde puan olduğundan DÜŞÜK
+            // görünür.
+            'yazar_katsayisi' => [
+                'haric' => ['atif'],
+                'roller' => [
+                    'tek' => ['kademeler' => [1 => 1.0]],
+                    'ilk' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 0.5],
+                    'ortak' => ['kademeler' => [1 => 1.0], 'bol' => ['pay' => 0.5, 'eksi' => 1]],
+                ],
+            ],
+
             'maddeler' => [
                 '1a' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 20],
                 '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],

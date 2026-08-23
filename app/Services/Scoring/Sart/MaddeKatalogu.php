@@ -20,7 +20,21 @@ use App\Models\Faaliyet;
  *     puan?: int,
  *     tavan?: int,
  * }
- * @phpstan-type YazarKatsayisi array{kademeler: array<int, float>, sonrasi_pay?: float}
+ * @phpstan-type YazarKademe array{
+ *     kademeler?: array<int, float>,
+ *     sonrasi?: float,
+ *     sonrasi_pay?: float,
+ *     bol?: array{pay: float, eksi?: int},
+ * }
+ * @phpstan-type YazarKatsayisi array{
+ *     kademeler?: array<int, float>,
+ *     sonrasi?: float,
+ *     sonrasi_pay?: float,
+ *     bol?: array{pay: float, eksi?: int},
+ *     roller?: array<string, YazarKademe>,
+ *     haric?: list<string>,
+ *     taban?: float,
+ * }
  */
 readonly class MaddeKatalogu
 {
@@ -58,26 +72,74 @@ readonly class MaddeKatalogu
             return 1.0;
         }
 
+        if (in_array($faaliyet->kategori->value, $this->yazarKatsayisi['haric'] ?? [], true)) {
+            return 1.0;
+        }
+
         $sayi = $this->yazarSayisi($faaliyet);
 
         if ($sayi === null) {
             return 1.0;
         }
 
-        $kademeler = $this->yazarKatsayisi['kademeler'];
+        return max(
+            $this->yazarKatsayisi['taban'] ?? 0.0,
+            $this->kademeCarpani($this->rolTablosu($faaliyet), $sayi),
+        );
+    }
+
+    /**
+     * Faaliyetin rolüne karşılık gelen kademe tablosu.
+     *
+     * Rol bilinmiyorsa ORTAK YAZAR varsayılır: sıra belirtilmemiş bir yazarın
+     * kaçıncı olduğunu bilmiyoruz ve ortak yazar çarpanı daima en düşüğüdür,
+     * yani aday puanını fazla görmez.
+     *
+     * @return YazarKademe
+     */
+    private function rolTablosu(Faaliyet $faaliyet): array
+    {
+        $roller = $this->yazarKatsayisi['roller'] ?? [];
+
+        if ($roller === []) {
+            return $this->yazarKatsayisi;
+        }
+
+        $rol = $faaliyet->rol ?? 'ortak';
+
+        return $roller[$rol] ?? $roller['ortak'] ?? [];
+    }
+
+    /**
+     * Kademe tablosundan yazar sayısına düşen çarpan.
+     *
+     * @param  YazarKademe  $tablo
+     */
+    private function kademeCarpani(array $tablo, int $sayi): float
+    {
+        $kademeler = $tablo['kademeler'] ?? [];
 
         if (isset($kademeler[$sayi])) {
             return $kademeler[$sayi];
         }
 
-        $pay = $this->yazarKatsayisi['sonrasi_pay'] ?? null;
-
-        if ($pay === null) {
-            // Kademe tablosu bitmişse son kademe geçerli sayılır.
-            return $kademeler === [] ? 1.0 : (float) end($kademeler);
+        // Kademelerin bittiği yerden sonrası: sabit çarpan, "pay / yazar
+        // sayısı" ya da "pay / (yazar sayısı - eksi)" biçiminde olabiliyor.
+        if (isset($tablo['sonrasi'])) {
+            return $tablo['sonrasi'];
         }
 
-        return $pay / $sayi;
+        if (isset($tablo['bol'])) {
+            $bolen = $sayi - ($tablo['bol']['eksi'] ?? 0);
+
+            return $bolen > 0 ? $tablo['bol']['pay'] / $bolen : 1.0;
+        }
+
+        if (isset($tablo['sonrasi_pay'])) {
+            return $tablo['sonrasi_pay'] / $sayi;
+        }
+
+        return $kademeler === [] ? 1.0 : (float) end($kademeler);
     }
 
     /**

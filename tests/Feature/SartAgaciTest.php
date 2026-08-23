@@ -2018,3 +2018,48 @@ test('yazar katsayısı toplam puana ve baraja da yansır', function () {
         ->and($uret('A, B, C, D')->mevcut)->toBe(225)
         ->and($uret('A, B, C, D')->durum)->toBe(Durum::Saglanmadi);
 });
+
+test('yazar çarpanı role duyarlı yönergelerde sıraya göre değişiyor', function () {
+    $depo = sartDepo();
+    $yazarlar = fn (int $n) => implode(', ', array_map(fn (int $i) => "Y{$i}", range(1, $n)));
+
+    $carpan = function (string $cetvel, string $rol, int $n, string $kategori = 'makale') use ($depo, $yazarlar): float {
+        $f = sartFaaliyet($kategori === 'atif' ? 'WoS / Scopus' : 'SCIE/SSCI (Q1)', tarih: '2020-01-01');
+        $f->kategori = Kategori::from($kategori);
+        $f->rol = $rol;
+        $f->yazarlar = $yazarlar($n);
+
+        return $depo->katalog($cetvel)->yazarCarpani($f);
+    };
+
+    // Kocaeli Tablo 1: dört yazarlı yayında 1. yazar 0,70 alır (yönergenin
+    // kendi örneği: 30 × 0,70 = 21). Sırası belirtilmemiş ortak yazara o
+    // sütunun en düşük satırı verilir.
+    expect($carpan('kocaeli-2023', 'ilk', 4))->toBe(0.70)
+        ->and($carpan('kocaeli-2023', 'ortak', 4))->toBe(0.40)
+        ->and($carpan('kocaeli-2023', 'ilk', 8))->toBe(0.50);
+
+    // Çukurova: n>2'de başlıca yazar 0,5; diğerleri 0,8/(n-1). Hiçbir yazar
+    // tek yazarlı puanın %10'undan azını almaz.
+    expect($carpan('cukurova-2024', 'baslica', 3))->toBe(0.5)
+        ->and($carpan('cukurova-2024', 'ortak', 3))->toBe(0.4)
+        ->and($carpan('cukurova-2024', 'ortak', 2))->toBe(0.5)
+        ->and($carpan('cukurova-2024', 'ortak', 20))->toBe(0.10);
+
+    // Selçuk: başlıca yazar yarısını alır, diğerleri kalan yarıyı paylaşır;
+    // atıflarda yazar sayısına bakılmaz.
+    expect($carpan('selcuk-2024-egitim', 'baslica', 4))->toBe(0.5)
+        ->and(round($carpan('selcuk-2024-egitim', 'ortak', 4), 3))->toBe(0.167)
+        ->and($carpan('selcuk-2024-egitim', 'ortak', 4, 'atif'))->toBe(1.0);
+});
+
+test('rol belirtilmemişse ortak yazar varsayılır', function () {
+    $depo = sartDepo();
+
+    // Sırayı bilmeden yüksek satırı vermek adayın puanını fazla gösterirdi.
+    $f = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+    $f->yazarlar = 'A, B, C, D';
+    $f->rol = null;
+
+    expect($depo->katalog('kocaeli-2023')->yazarCarpani($f))->toBe(0.40);
+});
