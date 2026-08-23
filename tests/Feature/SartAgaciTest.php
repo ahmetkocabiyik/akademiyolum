@@ -2167,3 +2167,36 @@ test('Gaziantep dört bilim alanının makale barajını farklı kuruyor', funct
     // Mimarlık/güzel sanatlar en geniş kümeden en düşük barajı koyuyor.
     expect($baraj('guzel_sanatlar', 'MADDE 15/1-a'))->toBe(45);
 });
+
+test('SUBÜ alternatifli koşulda tek dalın sağlanması yeterli', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
+    $esik = $depo->bul('Sakarya Uygulamalı Bilimler Üniversitesi', 'dr_ogr_uyesi', 'muhendislik');
+
+    // Yönerge "aşağıdaki faaliyetlerden BİRİNİ gerçekleştirmek" diyor; iki WoS
+    // makalesi ilk seçeneği tek başına karşılar.
+    $iki = array_map(fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01'), range(1, 2));
+    $secenek = fn (array $f) => collect($depo->degerlendir($esik, $f, $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'seçeneklerden birini'));
+
+    expect($secenek($iki)->durum)->toBe(Durum::Saglandi);
+
+    // Tek WoS makalesi hiçbir seçeneği tamamlamıyor.
+    expect($secenek([$iki[0]])->durum)->toBe(Durum::Saglanmadi);
+});
+
+test('SUBÜ iki alan grubunun eşik kümesi bir kademe farklı', function () {
+    $depo = sartDepo();
+
+    $ilkSecenek = function (string $alan) use ($depo): array {
+        $esik = $depo->bul('Sakarya Uygulamalı Bilimler Üniversitesi', 'dr_ogr_uyesi', $alan);
+        $veya = collect($esik['sart']['cocuklar'])
+            ->first(fn (array $d) => ($d['tip'] ?? null) === 'veya');
+
+        return $veya['cocuklar'][0];
+    };
+
+    // Mühendislik grubunda ilk seçenek iki WoS yayını, sosyal grupta bir tane.
+    expect($ilkSecenek('muhendislik')['min_adet'])->toBe(2)
+        ->and($ilkSecenek('sosyal')['min_adet'])->toBe(1);
+});
