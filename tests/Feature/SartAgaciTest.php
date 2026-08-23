@@ -1785,14 +1785,56 @@ test('Selçuk on iki temel alanın cetvelini de yüklüyor', function () {
         ->and($puan('spor', '1c'))->toBe(6);
 });
 
+test('Selçuk on iki temel alanın üç kadrosunda da eşik üretiyor', function () {
+    $depo = sartDepo();
+
+    foreach (array_map(fn (TemelAlan $a) => $a->value, TemelAlan::cases()) as $alan) {
+        foreach (['dr_ogr_uyesi', 'docentlik', 'profesorluk'] as $kadro) {
+            expect($depo->bul('Selçuk Üniversitesi', $kadro, $alan))->not->toBeNull("Selçuk / {$kadro} / {$alan}");
+        }
+    }
+});
+
+test('Selçuk şart ağacındaki her madde referansı kendi cetvelinde karşılık buluyor', function () {
+    // Bölüm numaraları alanlar arasında kayıyor: atıf Eğitim'de 4, Fen'de 3,
+    // Güzel Sanatlar'da 5. Yanlış numara yazılırsa koşul hata vermez, sessizce
+    // hiçbir faaliyeti saymaz ve aday koşulu sağlayamaz hâle gelir.
+    $depo = sartDepo();
+    $karsiliksiz = [];
+
+    $gez = function (array $dugum, MaddeKatalogu $katalog, string $anahtar) use (&$gez, &$karsiliksiz): void {
+        foreach ($dugum['maddeler'] ?? [] as $desen) {
+            if ($katalog->coz([$desen]) === []) {
+                $karsiliksiz[] = "{$anahtar} :: {$desen}";
+            }
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+            $gez($cocuk, $katalog, $anahtar);
+        }
+
+        if (isset($dugum['telafi'])) {
+            $gez($dugum['telafi'], $katalog, $anahtar);
+        }
+    };
+
+    foreach ($depo->dogrulanmisEsikler() as $esik) {
+        $katalog = $depo->katalog($esik['cetvel']);
+        expect($katalog)->not->toBeNull($esik['cetvel']);
+        $gez($esik['sart'], $katalog, $esik['anahtar']);
+    }
+
+    expect($karsiliksiz)->toBe([]);
+});
+
 test('Selçuk Eğitim Bilimleri alt barajları toplam puandan bağımsız işliyor', function () {
     $depo = sartDepo();
     $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
     $esik = $depo->bul('Selçuk Üniversitesi', 'dr_ogr_uyesi', 'egitim');
 
-    // Dört adet 20 puanlık WoS makalesi toplam barajı (70) aşıyor ama yönerge
-    // ayrıca bildiri ve proje alt barajı istiyor; bunlar sağlanmadan sonuç
-    // olumlu çıkmamalı.
+    // Dört adet 20 puanlık WoS makalesi toplam barajı (70) ve uluslararası
+    // makale barajını aşıyor; ama Eğitim Bilimleri ayrıca ULUSAL makaleden
+    // 20 puan istiyor. Toplam puan yeterli diye sonuç olumlu çıkmamalı.
     $makaleler = array_map(
         fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01'),
         range(1, 4),
@@ -1802,6 +1844,6 @@ test('Selçuk Eğitim Bilimleri alt barajları toplam puandan bağımsız işliy
     $bul = fn (string $parca) => $kosullar->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca));
 
     expect($bul('toplam en az 70 puan')->durum)->toBe(Durum::Saglandi)
-        ->and($bul('Makaleler bölümünden toplam en az 30 puan')->durum)->toBe(Durum::Saglandi)
-        ->and($bul('Bilimsel Araştırma Projesi bölümünden en az 4 puan')->durum)->toBe(Durum::Saglanmadi);
+        ->and($bul('Uluslararası Makale "a ve/veya b" bendi bölümünden en az 20 puan')->durum)->toBe(Durum::Saglandi)
+        ->and($bul('Ulusal Makale "a" bendi bölümünden en az 20 puan')->durum)->toBe(Durum::Saglanmadi);
 });

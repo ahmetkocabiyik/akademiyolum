@@ -12,6 +12,13 @@
  * KALEMLER YÖNERGENİN KENDİ KODLARIYLA: bölüm numarası + bent harfi (1a, 7c…).
  * Bölüm numaraları alanlar arasında kayıyor — Mühendislik'te 12. bölüm,
  * Güzel Sanatlar'da 3. bölüm yok — kodlar yalnızca kendi alanı içinde anlamlı.
+ * Özel kriterler bölüm ADIYLA atıf yaptığı için (yonerge/selcuk.php) bu kayma
+ * orada alan başına açıkça eşleniyor.
+ *
+ * ÇİFT DEĞERLİ HÜCRELER: Güzel Sanatlar'ın sanatsal etkinlik satırları puanı
+ * "20/5" biçiminde veriyor — kişisel etkinlik 20, grup/karma 5. Kaynak sözlüğü
+ * bu ikisini ayırabildiği için satır iki ayrı maddeye bölündü (2a-kisisel,
+ * 2a-karma gibi).
  *
  * AYNI ETİKETE DÜŞEN KALEMLERDE DÜŞÜK PUAN: motor bir faaliyete uyan maddeler
  * arasından en yükseğini seçtiği için, kaynak sözlüğünün ayıramadığı kalemler
@@ -262,6 +269,14 @@ return [
                 '1c' => ['baslik' => 'TR Dizin kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
                 '1d' => ['baslik' => 'Diğer uluslararası indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 5],
                 '1e' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide derleme, editöre mektup, teknik not veya kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['derleme', 'kisa_makale', 'vaka_teknik_not'], 'puan' => 5],
+                '2a-karma' => ['baslik' => 'Uluslararası grup/karma sanat etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)'], 'puan' => 5],
+                '2a-kisisel' => ['baslik' => 'Uluslararası kişisel sanat etkinliği (sergi, konser, gösteri, dinleti, festival)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)'], 'puan' => 20],
+                '2b-karma' => ['baslik' => 'Ulusal grup/karma sanat etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 3],
+                '2b-kisisel' => ['baslik' => 'Ulusal kişisel sanat etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Ulusal)'], 'puan' => 15],
+                '2e-karma' => ['baslik' => 'Bandrollü CD, plak, kaset, VCD veya DVD yayınında grup/karma yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Albüm / CD-DVD Katkısı'], 'puan' => 3],
+                '2e-kisisel' => ['baslik' => 'Bandrollü CD, plak, kaset, VCD veya DVD yayınında kişisel yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Albüm / Konser Kaydı'], 'puan' => 15],
+                '2g' => ['baslik' => 'Uluslararası yayınlanmış görsel-işitsel program, belgesel, film veya oyun', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)', 'Yönetmenlik (Sahne/Ekran)'], 'puan' => 10],
+                '2h' => ['baslik' => 'Ulusal yayınlanmış görsel-işitsel program, belgesel, film veya oyun', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)'], 'puan' => 5],
                 '4a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulmuş bildiri (poster hariç)', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 5],
                 '4b' => ['baslik' => 'Ulusal bilimsel toplantıda sunulmuş bildiri (poster hariç)', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 3],
                 '5a' => ['baslik' => 'SCI, SCIE, SSCI, AHCI, ESCI veya Scopus kapsamında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
@@ -297,6 +312,7 @@ return [
             ],
             'gruplar' => [
                 '1' => ['1*'],
+                '2' => ['2*'],
                 '4' => ['4*'],
                 '5' => ['5*'],
                 '6' => ['6*'],
