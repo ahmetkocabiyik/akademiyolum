@@ -2432,3 +2432,47 @@ test('Ağrı sağlıkta alt baraj aramıyor, sosyalde kitap barajı ekliyor', fu
     expect($barajlar('profesorluk', 'sosyal'))->toContain(30)
         ->and($barajlar('profesorluk', 'fen'))->not->toContain(30);
 });
+
+test('Artvin yayın türüne göre farklı puan veriyor ve grup tavanı uyguluyor', function () {
+    $katalog = sartDepo()->katalog('artvin-2024');
+
+    // Yönerge A1-A3 dergilerinde derleme için puanın YARISI, vaka/teknik not
+    // için ÜÇTE BİRİ diyor; motorda tür çarpanı yok, puanlar önceden bölündü.
+    $puan = function (string $tur) use ($katalog): int {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+        $f->yayin_turu = $tur;
+
+        return $katalog->puan($f, array_keys($katalog->maddeler));
+    };
+
+    expect($puan('ozgun_makale'))->toBe(60)
+        ->and($puan('derleme'))->toBe(15)
+        ->and($puan('vaka_teknik_not'))->toBe(10);
+
+    // Yönergenin kendi üst sınırları: bildiri 50, kitap 80, atıf 100.
+    $cokBildiri = array_map(
+        fn () => sartFaaliyet('Uluslararası Tam Metin (CPCI)', kategori: Kategori::Bildiri, tarih: '2020-01-01'),
+        range(1, 10),
+    );
+
+    // 10 × 13 = 130 ham puan, tavan 50.
+    expect($katalog->topla($cokBildiri, array_keys($katalog->maddeler)))->toBe(50);
+});
+
+test('Artvin profesörlükte dört alan grubunu farklı kuruyor', function () {
+    $depo = sartDepo();
+
+    $maddeler = function (string $alan) use ($depo): array {
+        $esik = $depo->bul('Artvin Çoruh Üniversitesi', 'profesorluk', $alan);
+
+        return collect($esik['sart']['cocuklar'])->pluck('madde')->filter()->values()->all();
+    };
+
+    // Mimarlık grubunda proje koşulu yok, diğer üçünde var.
+    expect($maddeler('muhendislik'))->toContain('Madde 9/a-5')
+        ->and($maddeler('sosyal'))->toContain('Madde 9/c-5')
+        ->and($maddeler('mimarlik'))->not->toContain('Madde 9/b-5');
+
+    // Eğitim'de makale SAYISI ayrıca şart (9/ç-3), diğerlerinde yok.
+    expect($maddeler('egitim'))->toContain('Madde 9/ç-3');
+});
