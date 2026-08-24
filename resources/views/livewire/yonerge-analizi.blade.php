@@ -131,7 +131,21 @@
                     $badgeMetinleri = ['uygun' => 'Uygun', 'yakin' => 'Yakın', 'eksik_bilgi' => 'Eksik Bilgi', 'yetersiz' => 'Yetersiz'];
                 @endphp
 
-                @if (empty($this->sonuclar))
+                @if ($this->kapsamDisi !== [])
+                {{-- Kart sayısı tek başına yanıltıcı: aday, listede olmayan bir
+                     üniversitenin yönergesinin hiç girilmediğini mi yoksa kendi
+                     alanının kapsanmadığını mı bilemiyor. --}}
+                <flux:callout icon="information-circle" variant="secondary" class="mb-4">
+                    <flux:callout.heading>{{ count($this->kapsamDisi) }} üniversite bu listede yok</flux:callout.heading>
+                    <flux:callout.text>
+                        {{ implode(', ', $this->kapsamDisi) }} — yönergeleri girili ama seçtiğiniz
+                        kadro ve temel alan için ölçüt tanımlamıyor. Birime göre ölçüt koyan
+                        üniversitelerde profilinizdeki birimi seçmeniz gerekebilir.
+                    </flux:callout.text>
+                </flux:callout>
+            @endif
+
+            @if (empty($this->sonuclar))
                     <flux:card class="py-12 text-center">
                         <flux:text>Seçili filtrelere uygun yönerge bulunamadı.</flux:text>
                     </flux:card>

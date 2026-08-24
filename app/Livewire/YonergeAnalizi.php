@@ -126,6 +126,29 @@ class YonergeAnalizi extends Component
     }
 
     /**
+     * Yönergesi girili olduğu hâlde adayın kadro + temel alan (ve varsa birim)
+     * bileşimi için eşik ÜRETMEYEN üniversiteler.
+     *
+     * Bunlar listeden sessizce düşüyordu: aday Marmara'yı arayıp bulamayınca
+     * "yönergesi hiç yok mu, yoksa benim alanım mı kapsanmıyor?" sorusuna
+     * cevap bulamıyordu. Kart sayısı doğru ama tek başına yanıltıcı.
+     *
+     * @return list<string>
+     */
+    #[Computed]
+    public function kapsamDisi(): array
+    {
+        $depo = $this->depo();
+        $kullanici = Auth::user();
+        $temelAlan = ($kullanici->temel_alan ?? TemelAlan::Sosyal)->value;
+
+        return array_values(array_filter(
+            $depo->universiteler(),
+            fn (string $ad) => $depo->bul($ad, $this->hedefKadro, $temelAlan, $kullanici->birim) === null,
+        ));
+    }
+
+    /**
      * Filtrelenmiş ve sıralanmış üniversite karşılaştırma sonuçları.
      *
      * Yalnızca doğrulanmış şart ağacı olan üniversiteler listelenir; eşiği

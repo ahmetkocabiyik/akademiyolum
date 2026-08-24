@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Kategori;
+use App\Enums\TemelAlan;
 use App\Livewire\YonergeAnalizi;
 use App\Models\Faaliyet;
 use App\Models\Universite;
@@ -523,4 +524,34 @@ test('kartta en fazla 6 koşul gösterilir, kalanı sayıyla belirtilir', functi
 
     // Detay panelinde tamamı görünmeli.
     $sayfa->call('detayAc', $uni->id)->assertSee('Koşul 8 açıklaması');
+});
+
+test('kadro veya alanı kapsamayan üniversiteler gerekçesiyle bildirilir', function () {
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal,
+        'unvan' => 'Dr. Öğr. Üyesi',
+        'birim' => null,
+    ]);
+
+    // Marmara yalnızca sağlık, fen ve eğitim alanlarını kapsıyor; Sabancı'nın
+    // bütün eşikleri birime bağlı. Sosyal alandaki, birimi seçilmemiş aday
+    // ikisini de listede göremiyor — kart sayısı doğru ama sebebi söylenmezse
+    // aday "yönergesi hiç yok mu?" diye düşünüyor.
+    Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)
+        ->assertOk()
+        ->assertSee('bu listede yok')
+        ->assertSee('Marmara Üniversitesi');
+});
+
+test('bütün üniversiteler kapsandığında uyarı çıkmaz', function () {
+    $kullanici = User::factory()->onboarded()->create(['temel_alan' => TemelAlan::Sosyal]);
+
+    $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class);
+    $kapsamDisi = $bilesen->instance()->kapsamDisi();
+
+    // Kapsam dışı listesi ile gösterilen kart sayısı birlikte tüm korpusu
+    // vermeli; aradaki fark sessizce kaybolan üniversite demek olurdu.
+    $depo = app(SartDeposu::class);
+    expect(count($kapsamDisi) + count($bilesen->instance()->sonuclar()))
+        ->toBe(count($depo->universiteler()));
 });
