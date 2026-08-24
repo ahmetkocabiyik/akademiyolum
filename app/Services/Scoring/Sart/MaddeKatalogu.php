@@ -24,13 +24,13 @@ use App\Models\Faaliyet;
  *     kademeler?: array<int, float>,
  *     sonrasi?: float,
  *     sonrasi_pay?: float,
- *     bol?: array{pay: float, eksi?: int},
+ *     bol?: array{pay: float, eksi?: int, ek?: float},
  * }
  * @phpstan-type YazarKatsayisi array{
  *     kademeler?: array<int, float>,
  *     sonrasi?: float,
  *     sonrasi_pay?: float,
- *     bol?: array{pay: float, eksi?: int},
+ *     bol?: array{pay: float, eksi?: int, ek?: float},
  *     roller?: array<string, YazarKademe>,
  *     haric?: list<string>,
  *     taban?: float,
@@ -82,10 +82,15 @@ readonly class MaddeKatalogu
             return 1.0;
         }
 
-        return max(
+        // Üst sınır 1.0: çarpan puanı ASLA artırmamalı. Formül tabanlı
+        // kurallarda tutarsız veri bunu delebiliyor (Ağrı'nın "1/n + 0,30"
+        // formülü, tek yazarlı bir esere "2. isim" denirse 1,20 üretir).
+        // Formun sıra seçenekleri artık böyle bir seçime izin vermiyor ama
+        // eski kayıtlar taşıyabilir; sınır motorda duruyor.
+        return min(1.0, max(
             $this->yazarKatsayisi['taban'] ?? 0.0,
             $this->kademeCarpani($this->rolTablosu($faaliyet), $sayi),
-        );
+        ));
     }
 
     /**
@@ -132,7 +137,14 @@ readonly class MaddeKatalogu
         if (isset($tablo['bol'])) {
             $bolen = $sayi - ($tablo['bol']['eksi'] ?? 0);
 
-            return $bolen > 0 ? $tablo['bol']['pay'] / $bolen : 1.0;
+            if ($bolen <= 0) {
+                return 1.0;
+            }
+
+            // Bazı yönergeler payı bölmekle kalmayıp sabit bir pay ekliyor
+            // (Ağrı: "Puan / Yazar Sayısı + Puan × 0,30" — birinci isme
+            // bölünmüş payın üstüne %30 ilave veriliyor).
+            return $tablo['bol']['pay'] / $bolen + ($tablo['bol']['ek'] ?? 0.0);
         }
 
         if (isset($tablo['sonrasi_pay'])) {

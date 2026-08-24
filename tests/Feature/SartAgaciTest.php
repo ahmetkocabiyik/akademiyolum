@@ -2387,3 +2387,48 @@ test('Amasya profesörlükte beş alan grubunu farklı barajlıyor', function ()
     expect($yazar('muhendislik', 'Madde 9/a-1'))->toBe('baslica')
         ->and($yazar('egitim', 'Madde 9/ç-1'))->toBe('tek');
 });
+
+test('Ağrı formül tabanlı yazar kuralını uyguluyor ve çarpan 1 ü aşmıyor', function () {
+    $katalog = sartDepo()->katalog('agri-2024');
+
+    $carpan = function (string $rol, int $n) use ($katalog): float {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+        $f->rol = $rol;
+        $f->yazarlar = implode(', ', array_map(fn (int $i) => "Y{$i}", range(1, $n)));
+
+        return round($katalog->yazarCarpani($f), 3);
+    };
+
+    // Madde 4.2: 1. isim Puan/n + Puan×0,30 → üç yazarlıda 1/3 + 0,30 = 0,633.
+    expect($carpan('ilk', 3))->toBe(0.633)
+        ->and($carpan('yazar_2', 3))->toBe(0.533)
+        ->and($carpan('yazar_5', 5))->toBe(0.200);
+
+    // Madde 4.1: tek isim tam puan. Formül uygulansa 1,30 çıkardı.
+    expect($carpan('tek', 1))->toBe(1.0)
+        ->and($carpan('ilk', 1))->toBe(1.0);
+
+    // Tutarsız veri (tek yazarlı eserde "2. isim") çarpanı 1'in ÜSTÜNE
+    // çıkarıyordu, yani puanı artırıyordu. Üst sınır motorda.
+    expect($carpan('yazar_2', 1))->toBe(1.0);
+});
+
+test('Ağrı sağlıkta alt baraj aramıyor, sosyalde kitap barajı ekliyor', function () {
+    $depo = sartDepo();
+
+    $barajlar = function (string $kadro, string $alan) use ($depo): array {
+        $esik = $depo->bul('Ağrı İbrahim Çeçen Üniversitesi', $kadro, $alan);
+
+        return collect($esik['sart']['cocuklar'])
+            ->filter(fn (array $d) => ($d['tip'] ?? null) === 'puan' && ($d['rol'] ?? null) !== 'toplam')
+            ->pluck('min_puan')->values()->all();
+    };
+
+    // Madde 5.1.3: sağlıkta yalnızca genel toplam var, alt baraj yok.
+    expect($barajlar('dr_ogr_uyesi', 'saglik'))->toBe([])
+        ->and($barajlar('dr_ogr_uyesi', 'fen'))->toBe([20]);
+
+    // Madde 7.1.2: sosyal profesörlükte kitaptan ayrı 30 puan barajı var.
+    expect($barajlar('profesorluk', 'sosyal'))->toContain(30)
+        ->and($barajlar('profesorluk', 'fen'))->not->toContain(30);
+});
