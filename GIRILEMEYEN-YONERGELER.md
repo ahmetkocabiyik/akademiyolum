@@ -117,3 +117,18 @@ için ayrı paragraf. Üstüne üç ayrı "Puan Çizelgesi" matrisi var (6 alan 
 zorunlu madde listesi) ve ayrı bir Puanlandırma Formu.
 
 **Devam edilirse:** Selçuk ölçeğinde bir iş; birkaç tura yayılması gerekiyor.
+
+---
+
+## Balıkesir Üniversitesi
+
+**Dosya:** `pdf/17536971662.balikesiruniversitesi.pdf` (131 satır)
+
+**Puan tablosu PDF'te yok.** Ölçüt metni eksiksiz — profesör 300 puan (200'ü
+EK-2'nin 1-9 maddelerinden, 100'ü …), doçent 225 (150 + 75), güzel sanatlar /
+sahne sanatları 150 (100 + …) — ama koşulların tamamı **EK-2'ye** atıf yapıyor
+ve EK-2 bu dosyada yer almıyor. Cetvel olmadan eşik yazmak, adaya hiçbir zaman
+hesaplanamayacak bir baraj göstermek olurdu.
+
+**Devam edilirse:** Balıkesir Üniversitesi'nin EK-2 puanlama tablosunu ayrıca
+indirmek gerekiyor; ölçüt tarafı hazır, yalnızca cetvel eksik.
