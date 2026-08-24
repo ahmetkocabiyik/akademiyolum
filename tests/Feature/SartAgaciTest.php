@@ -2276,3 +2276,41 @@ test('OMÜ profesörlükte toplamın bir kısmını doçentlik sonrasına bağl�
         ->and($bul('Madde 13 · 1-10 (dönem)')['min_puan'])->toBe(360)
         ->and(isset($bul('Madde 13 · 1-10 (dönem)')['donem']))->toBeTrue();
 });
+
+test('Adıyaman yazar sırasına göre puanı azaltıyor', function () {
+    $katalog = sartDepo()->katalog('adiyaman-2024');
+
+    // Tablo 1: 1. isim tek yazarlıda %100, üç yazarlıda %80; 2. isim üç
+    // yazarlıda %70, 3. isim %60. Sorumlu yazar birinci isim gibi sayılıyor.
+    $puan = function (string $rol, int $n) use ($katalog): int {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01');
+        $f->rol = $rol;
+        $f->yazarlar = implode(', ', array_map(fn (int $i) => "Y{$i}", range(1, $n)));
+
+        return $katalog->puan($f, ['A.1']);
+    };
+
+    // A.1 ham puanı 150.
+    expect($puan('tek', 1))->toBe(150)
+        ->and($puan('ilk', 3))->toBe(120)
+        ->and($puan('baslica', 3))->toBe(120)
+        ->and($puan('yazar_2', 3))->toBe(105)
+        ->and($puan('yazar_3', 3))->toBe(90);
+});
+
+test('Adıyaman doçentlikte puan barajı aramıyor', function () {
+    $depo = sartDepo();
+
+    // Yönerge doçentlik için kendi puan tablosunu uygulamıyor (Madde 21);
+    // eksik veri değil, kasıtlı. Dr ve profesörde baraj var.
+    $barajVar = function (string $kadro) use ($depo): bool {
+        $esik = $depo->bul('Adıyaman Üniversitesi', $kadro, 'fen');
+
+        return collect($esik['sart']['cocuklar'])
+            ->contains(fn (array $d) => ($d['tip'] ?? null) === 'puan');
+    };
+
+    expect($barajVar('dr_ogr_uyesi'))->toBeTrue()
+        ->and($barajVar('profesorluk'))->toBeTrue()
+        ->and($barajVar('docentlik'))->toBeFalse();
+});
