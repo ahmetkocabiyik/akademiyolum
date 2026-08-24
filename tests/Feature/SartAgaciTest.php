@@ -2314,3 +2314,28 @@ test('Adıyaman doçentlikte puan barajı aramıyor', function () {
         ->and($barajVar('profesorluk'))->toBeTrue()
         ->and($barajVar('docentlik'))->toBeFalse();
 });
+
+test('Batman kendi cetveli olmadan ÜAK tablolarını kullanıyor', function () {
+    $depo = sartDepo();
+
+    // Yönergenin puan cetveli yok; koşullar "ÜAK Doçentlik Şartlarında
+    // belirtilen faaliyetlerden en az 30 puan" diyor. Cetvel alan başına
+    // ÜAK tablosuna çözülmeli.
+    foreach (['fen', 'sosyal', 'guzel_sanatlar'] as $alan) {
+        $esik = $depo->bul('Batman Üniversitesi', 'dr_ogr_uyesi', $alan);
+        expect($esik['cetvel'])->toBe("uak-2024-mart-{$alan}")
+            ->and($depo->katalog($esik['cetvel']))->not->toBeNull();
+    }
+
+    // Dr'da alan grubuna göre makale koşulu değişiyor, doçentte hiç baraj yok.
+    $puanDugumu = function (string $kadro, string $alan) use ($depo): int {
+        $esik = $depo->bul('Batman Üniversitesi', $kadro, $alan);
+
+        return collect($esik['sart']['cocuklar'])
+            ->filter(fn (array $d) => in_array($d['tip'] ?? null, ['puan', 'adet', 'veya'], true))
+            ->count();
+    };
+
+    expect($puanDugumu('dr_ogr_uyesi', 'fen'))->toBeGreaterThan(0)
+        ->and($puanDugumu('docentlik', 'fen'))->toBe(0);
+});
