@@ -2339,3 +2339,51 @@ test('Batman kendi cetveli olmadan ÜAK tablolarını kullanıyor', function () 
     expect($puanDugumu('dr_ogr_uyesi', 'fen'))->toBeGreaterThan(0)
         ->and($puanDugumu('docentlik', 'fen'))->toBe(0);
 });
+
+test('Amasya yazar çarpanını yalnızca makale, kongre ve atıfta uyguluyor', function () {
+    $katalog = sartDepo()->katalog('amasya-2024');
+
+    // Çizelge 2 yalnızca "Makale, Kongre ve Atıf Alanındaki Eserler" için;
+    // kitap ve projede yönerge kendi paylaşım kuralını yazıyor, o yüzden
+    // çarpan oralarda uygulanmamalı.
+    $carpan = function (string $kategori, string $kaynak) use ($katalog): float {
+        $f = sartFaaliyet($kaynak, tarih: '2020-01-01');
+        $f->kategori = Kategori::from($kategori);
+        $f->rol = 'yazar_3';
+        $f->yazarlar = 'A, B, C, D';
+
+        return $katalog->yazarCarpani($f);
+    };
+
+    expect($carpan('makale', 'SCIE/SSCI (Q1)'))->toBe(0.65)
+        ->and($carpan('atif', 'WoS / Scopus'))->toBe(0.65)
+        ->and($carpan('kitap', 'BKCI / Scopus Kitap'))->toBe(1.0)
+        ->and($carpan('proje', 'TÜBİTAK'))->toBe(1.0);
+});
+
+test('Amasya profesörlükte beş alan grubunu farklı barajlıyor', function () {
+    $depo = sartDepo();
+
+    $alt = function (string $alan) use ($depo): int {
+        $esik = $depo->bul('Amasya Üniversitesi', 'profesorluk', $alan);
+
+        return collect($esik['sart']['cocuklar'])
+            ->first(fn (array $d) => ($d['madde'] ?? null) === 'Madde 9')['min_puan'];
+    };
+
+    expect($alt('muhendislik'))->toBe(150)
+        ->and($alt('saglik'))->toBe(100)
+        ->and($alt('hukuk'))->toBe(125)
+        ->and($alt('egitim'))->toBe(125);
+
+    // Eğitim "tek yazarlı", mühendislik "başlıca yazar" istiyor — farklı filtre.
+    $yazar = function (string $alan, string $madde) use ($depo): ?string {
+        $esik = $depo->bul('Amasya Üniversitesi', 'profesorluk', $alan);
+
+        return collect($esik['sart']['cocuklar'])
+            ->first(fn (array $d) => ($d['madde'] ?? null) === $madde)['yazar'] ?? null;
+    };
+
+    expect($yazar('muhendislik', 'Madde 9/a-1'))->toBe('baslica')
+        ->and($yazar('egitim', 'Madde 9/ç-1'))->toBe('tek');
+});
