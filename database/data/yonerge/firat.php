@@ -75,7 +75,7 @@ $alan = function (string $anahtar, string $ad, array $alanlar, array $kosullar, 
                     'docentlik' => Kalip::DOKTORA_SONRASI,
                     'profesorluk' => Kalip::DOCENTLIK_SONRASI,
                     default => null,
-                }, liste: 'EK-1'),
+                }),
                 ...array_values($kosullar[$kisa]),
             ]),
         ];
@@ -167,9 +167,12 @@ return [
                 ['A2.1-A2.4'], 50, madde: 'Madde 10 · e.1'),
             Kalip::puanDan('Yayın, bildiri, proje ve patent etkinliklerinizden toplam en az 150 puan',
                 ['A1-A4', 'B1-B3', 'C2-C6'], 150, madde: 'Madde 10 · e.1'),
-            Kalip::beyan('Ulusal veya uluslararası kişisel sergiden olmak üzere F1.1, F1.2, F4.3 ve '
-                .'F4.4 faaliyetlerinden toplamda en az 40 puan almış olmak', 'Madde 10 · e.3'),
-            Kalip::beyan('Devlet Konservatuvarı için E1 kapsamında en az 100 puan almış olmak', 'Madde 10 · e.4'),
+            Kalip::beyan('Tanınmış müze, kültür merkezi veya sanat galerisinde açtığınız kişisel '
+                .'sergilerden ve ulusal veya uluslararası sempozyumlardaki kişisel '
+                .'sergilerinizden toplam en az 40 puan almış olmak', 'Madde 10 · e.3'),
+            Kalip::beyan('Devlet Konservatuvarı adayları için müzik etkinliklerinden (solo konser, '
+                .'resital, yayımlanmış albüm, koro şefliği, atölye çalışması) en az 100 puan '
+                .'almış olmak', 'Madde 10 · e.4'),
             Kalip::puanDan('Proje, patent ve Ar-Ge etkinliklerinizden en az 20 puan',
                 ['C2-C6'], 20, madde: 'Madde 10 · e.5'),
         ],
@@ -178,9 +181,12 @@ return [
                 ['A2.1-A2.4'], 150, $D, madde: 'Madde 11 · e.1'),
             Kalip::puanDan('Yayın, bildiri, proje ve patent etkinliklerinizden toplam en az 300 puan',
                 ['A1-A4', 'B1-B3', 'C2-C6'], 300, $D, madde: 'Madde 11 · e.1'),
-            Kalip::beyan('Ulusal veya uluslararası kişisel sergiden olmak üzere F1.1, F1.2, F4.3 ve '
-                .'F4.4 faaliyetlerinden toplamda en az 80 puan almış olmak', 'Madde 11 · e.2'),
-            Kalip::beyan('Devlet Konservatuvarı için E1 kapsamında en az 100 puan almış olmak', 'Madde 11 · e.3'),
+            Kalip::beyan('Tanınmış müze, kültür merkezi veya sanat galerisinde açtığınız kişisel '
+                .'sergilerden ve ulusal veya uluslararası sempozyumlardaki kişisel '
+                .'sergilerinizden toplam en az 80 puan almış olmak', 'Madde 11 · e.2'),
+            Kalip::beyan('Devlet Konservatuvarı adayları için müzik etkinliklerinden (solo konser, '
+                .'resital, yayımlanmış albüm, koro şefliği, atölye çalışması) en az 100 puan '
+                .'almış olmak', 'Madde 11 · e.3'),
             Kalip::puanDan('Proje, patent ve Ar-Ge etkinliklerinizden en az 50 puan',
                 ['C2-C6'], 50, $D, madde: 'Madde 11 · e.4'),
         ],
@@ -189,10 +195,13 @@ return [
                 ['A2.1-A2.4'], 150, $P, madde: 'Madde 12 · e.1'),
             Kalip::puanDan('Yayın, bildiri, proje ve patent etkinliklerinizden toplam en az 300 puan',
                 ['A1-A4', 'B1-B3', 'C2-C6'], 300, $P, madde: 'Madde 12 · e.1'),
-            Kalip::beyan('Ulusal veya uluslararası kişisel sergiden olmak üzere F1.1, F1.2, F4.3 ve '
-                .'F4.4 faaliyetlerinden toplamda en az 800 puan almış olmak (yönerge aynı cümlenin '
+            Kalip::beyan('Tanınmış müze, kültür merkezi veya sanat galerisinde açtığınız kişisel '
+                .'sergilerden ve ulusal veya uluslararası sempozyumlardaki kişisel '
+                .'sergilerinizden toplam en az 800 puan almış olmak (yönerge aynı cümlenin '
                 .'parantezinde 80 puan diyor; ana hüküm 800 kabul edildi)', 'Madde 12 · e.2'),
-            Kalip::beyan('Devlet Konservatuvarı için E1 kapsamında en az 100 puan almış olmak', 'Madde 12 · e.3'),
+            Kalip::beyan('Devlet Konservatuvarı adayları için müzik etkinliklerinden (solo konser, '
+                .'resital, yayımlanmış albüm, koro şefliği, atölye çalışması) en az 100 puan '
+                .'almış olmak', 'Madde 12 · e.3'),
             Kalip::puanDan('Proje, patent ve Ar-Ge etkinliklerinizden en az 50 puan',
                 ['C2-C6'], 50, $P, madde: 'Madde 12 · e.4'),
             Kalip::beyan('Doçentlik unvanını aldıktan sonra yayımlanmış başlıca araştırma eserine '

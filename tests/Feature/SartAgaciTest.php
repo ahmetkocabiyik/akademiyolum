@@ -1762,7 +1762,7 @@ test('Çukurova doçent asgari puanı alan grubuna göre değişiyor', function 
         );
 
         return collect($depo->degerlendir($esik, $faaliyetler, $profil)->kosullar())
-            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'EK 2 kalemlerinden'));
+            ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'Tüm faaliyetlerden toplam en az'));
     };
 
     expect($toplamKosulu('hukuk')->durum)->toBe(Durum::Saglandi)
@@ -1891,7 +1891,7 @@ test('Sakarya bölüm barajları toplam puandan bağımsız işliyor', function 
 
     $madde = fn (string $m) => $kosullar->first(fn (SartSonucu $k) => $k->madde === $m);
 
-    expect($bul('EK-1 kalemlerinden toplam en az 1600 puan')->durum)->toBe(Durum::Saglandi)
+    expect($bul('Tüm faaliyetlerden toplam en az 1600 puan')->durum)->toBe(Durum::Saglandi)
         ->and($madde('2.3 · 1. BÖLÜM')->durum)->toBe(Durum::Saglandi)
         ->and($madde('2.3 · 4. BÖLÜM')->durum)->toBe(Durum::Saglanmadi);
 });

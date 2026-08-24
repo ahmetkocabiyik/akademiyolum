@@ -156,7 +156,7 @@ foreach ($tablolar as $t) {
         'notlar' => "EK 1 {$t['tablo']}, Doçent sütunu: asgari puan {$t['docPuan']}. Madde 5.4: doktora/uzmanlık/sanatta yeterlik sonrası çalışmalar, Ek 4'ten en az beş etkinlik.",
         'sart' => Kalip::ve("Doçent — {$t['tablo']}", [
             Kalip::beyan('Üniversitelerarası Kuruldan doçentlik unvanı almış olmak', 'Madde 5.4'),
-            Kalip::toplam($t['docPuan'], Kalip::DOKTORA_SONRASI, liste: 'EK 2'),
+            Kalip::toplam($t['docPuan'], Kalip::DOKTORA_SONRASI),
             ...$yayinBlogu($t['kume'], $t['kumeAdi'], $t['doc'], $t['docBaslica'], 3, Kalip::DOKTORA_SONRASI, $t['tablo']),
             Kalip::beyan('Ek 4\'te verilen genel akademik etkinliklerden en az beş tanesini sağlamak', 'Madde 5.4'),
         ]),
@@ -172,7 +172,7 @@ foreach ($tablolar as $t) {
         'cetvel' => 'cukurova-2024',
         'notlar' => "EK 1 {$t['tablo']}, Profesör sütunu: asgari puan {$t['profPuan']}. Madde 5.5: doçentlik başvuru dönemi sonrası çalışmalar, Ek 4'ten en az yedi etkinlik.",
         'sart' => Kalip::ve("Profesör — {$t['tablo']}", [
-            Kalip::toplam($t['profPuan'], Kalip::DOCENTLIK_SONRASI, liste: 'EK 2'),
+            Kalip::toplam($t['profPuan'], Kalip::DOCENTLIK_SONRASI),
             ...$yayinBlogu($t['kume'], $t['kumeAdi'], $t['prof'], $t['docBaslica'], 3, Kalip::DOCENTLIK_SONRASI, $t['tablo']),
             Kalip::beyan('Yayınlarınızdan birini başlıca araştırma eseri olarak göstermek', 'Madde 5.5'),
             Kalip::beyan('Ek 4\'te verilen genel akademik etkinliklerden en az yedi tanesini sağlamak', 'Madde 5.5'),

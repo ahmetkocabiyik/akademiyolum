@@ -53,10 +53,16 @@ final class Kalip
     /**
      * Toplam puan barajı. `rol` arayüzün bu düğümü metne bakmadan bulması için.
      *
-     * Varsayılan olarak cetvelin tamamından toplanır. Bir yönerge puanı birden
-     * çok listede tanımlıyor ve barajı yalnızca bazılarından istiyorsa (Mersin:
-     * güzel sanatlar TABLO B+C'den, mimarlık A+B'den) `$maddeler` ile kapsam
-     * daraltılır; `$liste` o kapsamın adayın göreceği adıdır.
+     * Varsayılan olarak cetvelin tamamından toplanır ve aday "Tüm
+     * faaliyetlerden toplam en az N puan" görür. Bir yönerge puanı birden çok
+     * listede tanımlıyor ve barajı yalnızca bazılarından istiyorsa `$maddeler`
+     * ile kapsam daraltılır; `$liste` o kapsamın adayın göreceği adıdır.
+     *
+     * `$liste` YALNIZCA KAPSAM DARALDIĞINDA VE DÜZ TÜRKÇE VERİLİR. Kapsam
+     * cetvelin tamamıysa `$liste` geçmeyin: "EK-1 kalemlerinden", "Çizelge-1
+     * kalemlerinden" gibi belge adları adaya hiçbir bilgi vermez, yalnızca
+     * yönergenin kod diline geri döner. Doğru kullanım "Sanatsal etkinlik
+     * kalemlerinden" gibi adayın ne sayıldığını anladığı bir addır.
      *
      * @param  array<string, mixed>|null  $donem
      * @param  list<string>  $maddeler

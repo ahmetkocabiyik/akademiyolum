@@ -62,7 +62,7 @@ $dr = function (string $anahtar, string $ad, array $alanlar, array $makale, stri
         'sart' => Kalip::ve("Dr. Öğr. Üyesi — {$ad}", [
             Kalip::yds(60),
             ...array_values($makale),
-            Kalip::toplam(30, liste: 'ÜAK Doçentlik Şartları'),
+            Kalip::toplam(30),
         ]),
     ];
 };

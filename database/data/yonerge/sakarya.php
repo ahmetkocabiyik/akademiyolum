@@ -41,7 +41,7 @@
 use App\Services\Scoring\Sart\Kalip;
 
 return [
-    // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya,  — Dr. Öğr. Üyesi ══
+    // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Dr. Öğr. Üyesi ══
     [
         'anahtar' => 'sakarya-dr-2_3',
         'aday_notu' => 'Sakarya eşiği fakülte grubuna göre belirlenir; bu eşik Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, '
@@ -51,8 +51,8 @@ return [
         'alan' => ['muhendislik'],
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Dr. Öğr. Üyesi sütunu.',
-        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya', [
-            Kalip::toplam(1000, liste: 'EK-1'),
+        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji)', [
+            Kalip::toplam(1000),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 350 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
@@ -74,7 +74,7 @@ return [
             Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.3 dipnot'),
         ]),
     ],
-    // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya,  — Doçent ══
+    // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Doçent ══
     [
         'anahtar' => 'sakarya-docent-2_3',
         'aday_notu' => 'Sakarya eşiği fakülte grubuna göre belirlenir; bu eşik Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, '
@@ -84,8 +84,8 @@ return [
         'alan' => ['muhendislik'],
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Doçent sütunu.',
-        'sart' => Kalip::ve('Doçent — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya', [
-            Kalip::toplam(1600, liste: 'EK-1'),
+        'sart' => Kalip::ve('Doçent — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji)', [
+            Kalip::toplam(1600),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 700 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
@@ -111,7 +111,7 @@ return [
             Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde iki adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.3 dipnot'),
         ]),
     ],
-    // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya,  — Profesör ══
+    // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Profesör ══
     [
         'anahtar' => 'sakarya-profesor-2_3',
         'aday_notu' => 'Sakarya eşiği fakülte grubuna göre belirlenir; bu eşik Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, '
@@ -121,8 +121,8 @@ return [
         'alan' => ['muhendislik'],
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Profesör sütunu.',
-        'sart' => Kalip::ve('Profesör — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya', [
-            Kalip::toplam(1800, liste: 'EK-1'),
+        'sart' => Kalip::ve('Profesör — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji)', [
+            Kalip::toplam(1800),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 750 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
@@ -159,7 +159,7 @@ return [
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.4 Fen Fakültesi (Matematik Bölümü) — Dr. Öğr. Üyesi sütunu.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Fen Fakültesi (Matematik Bölümü)', [
-            Kalip::toplam(800, liste: 'EK-1'),
+            Kalip::toplam(800),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
@@ -192,7 +192,7 @@ return [
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.4 Fen Fakültesi (Matematik Bölümü) — Doçent sütunu.',
         'sart' => Kalip::ve('Doçent — Fen Fakültesi (Matematik Bölümü)', [
-            Kalip::toplam(1200, liste: 'EK-1'),
+            Kalip::toplam(1200),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 450 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
@@ -229,7 +229,7 @@ return [
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.4 Fen Fakültesi (Matematik Bölümü) — Profesör sütunu.',
         'sart' => Kalip::ve('Profesör — Fen Fakültesi (Matematik Bölümü)', [
-            Kalip::toplam(1500, liste: 'EK-1'),
+            Kalip::toplam(1500),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 500 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
                 '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b', '2.3c', '2.4a',
@@ -265,8 +265,8 @@ return [
         'alan' => ['egitim', 'sosyal'],
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.5 Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Toplum Bilimleri — Dr. Öğr. Üyesi sütunu.',
-        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve To', [
-            Kalip::toplam(600, liste: 'EK-1'),
+        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Toplum Bilimleri', [
+            Kalip::toplam(600),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 200 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
@@ -300,8 +300,8 @@ return [
         'alan' => ['egitim', 'sosyal'],
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.5 Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Toplum Bilimleri — Doçent sütunu.',
-        'sart' => Kalip::ve('Doçent — Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve To', [
-            Kalip::toplam(800, liste: 'EK-1'),
+        'sart' => Kalip::ve('Doçent — Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Toplum Bilimleri', [
+            Kalip::toplam(800),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 300 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
@@ -339,8 +339,8 @@ return [
         'alan' => ['egitim', 'sosyal'],
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.5 Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Toplum Bilimleri — Profesör sütunu.',
-        'sart' => Kalip::ve('Profesör — Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve To', [
-            Kalip::toplam(1200, liste: 'EK-1'),
+        'sart' => Kalip::ve('Profesör — Eğitim, Siyasal Bilgiler, İşletme, İletişim, İnsan ve Toplum Bilimleri', [
+            Kalip::toplam(1200),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 300 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
@@ -379,7 +379,7 @@ return [
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.6 İlahiyat ve Hukuk Fakültesi — Dr. Öğr. Üyesi sütunu.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — İlahiyat ve Hukuk Fakültesi', [
-            Kalip::toplam(600, liste: 'EK-1'),
+            Kalip::toplam(600),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 150 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a',
@@ -400,7 +400,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 100, madde: '2.6 · 4. BÖLÜM'),
-            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın veya Scopus Q4 veya ESCI dergilerinde 2 adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi** 2. Bölümde bulunan', '2.6 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde ya da WoS/Scopus indeksli kitap veya kitap bölümü kapsamında bir adet yayın veya Scopus Q4 veya ESCI dergilerinde 2 adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.6 dipnot'),
         ]),
     ],
     // ══ 2.6 İlahiyat ve Hukuk Fakültesi — Doçent ══
@@ -414,7 +414,7 @@ return [
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.6 İlahiyat ve Hukuk Fakültesi — Doçent sütunu.',
         'sart' => Kalip::ve('Doçent — İlahiyat ve Hukuk Fakültesi', [
-            Kalip::toplam(800, liste: 'EK-1'),
+            Kalip::toplam(800),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 200 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a',
@@ -439,7 +439,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 150, madde: '2.6 · 4. BÖLÜM'),
-            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın veya Scopus Q4 veya ESCI dergilerinde 2 adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.6 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde ya da WoS/Scopus indeksli kitap veya kitap bölümü kapsamında bir adet yayın veya Scopus Q4 veya ESCI dergilerinde 2 adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.6 dipnot'),
         ]),
     ],
     // ══ 2.6 İlahiyat ve Hukuk Fakültesi — Profesör ══
@@ -453,7 +453,7 @@ return [
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.6 İlahiyat ve Hukuk Fakültesi — Profesör sütunu.',
         'sart' => Kalip::ve('Profesör — İlahiyat ve Hukuk Fakültesi', [
-            Kalip::toplam(1200, liste: 'EK-1'),
+            Kalip::toplam(1200),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a',
@@ -478,7 +478,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 200, madde: '2.6 · 4. BÖLÜM'),
-            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın veya Scopus Q4 veya ESCI dergilerinde 3 adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.6 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde ya da WoS/Scopus indeksli kitap veya kitap bölümü kapsamında bir adet yayın veya Scopus Q4 veya ESCI dergilerinde 3 adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.6 dipnot'),
         ]),
     ],
     // ══ 2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Dr. Öğr. Üyesi ══
@@ -492,7 +492,7 @@ return [
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Dr. Öğr. Üyesi sütunu.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı)', [
-            Kalip::toplam(600, liste: 'EK-1'),
+            Kalip::toplam(600),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
@@ -513,7 +513,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 40, madde: '2.7 · 4. BÖLÜM'),
-            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi** Bölüm 1 ve Bölüm2’de bulunan 5.5 maddesinden en fazla 160 puan alınabilir. 10', '2.7 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın veya TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje veya desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.7 dipnot'),
         ]),
     ],
     // ══ 2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Doçent ══
@@ -527,7 +527,7 @@ return [
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Doçent sütunu.',
         'sart' => Kalip::ve('Doçent — Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı)', [
-            Kalip::toplam(1100, liste: 'EK-1'),
+            Kalip::toplam(1100),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 400 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
@@ -566,7 +566,7 @@ return [
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.7 Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı) — Profesör sütunu.',
         'sart' => Kalip::ve('Profesör — Sanat Tasarım ve Mimarlık Fakültesi (Mimarlık Alanı)', [
-            Kalip::toplam(1400, liste: 'EK-1'),
+            Kalip::toplam(1400),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 450 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '2.1a',
                 '2.1b', '2.1d', '2.1e', '2.2a', '2.2d', '2.2e', '2.3a', '2.3b',
@@ -604,8 +604,8 @@ return [
         'alan' => ['guzel_sanatlar'],
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), Devlet Konservatuvarı — Dr. Öğr. Üyesi sütunu.',
-        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), ', [
-            Kalip::toplam(500, liste: 'EK-1'),
+        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), Devlet Konservatuvarı', [
+            Kalip::toplam(500),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 100 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c', '2.2d',
@@ -627,7 +627,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 100, madde: '2.8 · 4. BÖLÜM'),
-            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın; Scopus Q4 veya ESCI dergilerinde 2 adet yayın; TÜBİTAK 2209 danışmanlığı kapsamında 3 adet proje ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi** Bölüm 1 ve Bölüm', '2.8 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde ya da WoS/Scopus indeksli kitap veya kitap bölümü kapsamında bir adet yayın; Scopus Q4 veya ESCI dergilerinde 2 adet yayın; TÜBİTAK 2209 danışmanlığı kapsamında 3 adet proje ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.8 dipnot'),
         ]),
     ],
     // ══ 2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), De — Doçent ══
@@ -640,8 +640,8 @@ return [
         'alan' => ['guzel_sanatlar'],
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), Devlet Konservatuvarı — Doçent sütunu.',
-        'sart' => Kalip::ve('Doçent — Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), ', [
-            Kalip::toplam(1100, liste: 'EK-1'),
+        'sart' => Kalip::ve('Doçent — Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), Devlet Konservatuvarı', [
+            Kalip::toplam(1100),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 160 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c', '2.2d',
@@ -667,7 +667,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 150, madde: '2.8 · 4. BÖLÜM'),
-            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın; Scopus Q4 veya ESCI dergilerinde 2 adet yayın; TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.8 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde ya da WoS/Scopus indeksli kitap veya kitap bölümü kapsamında bir adet yayın; Scopus Q4 veya ESCI dergilerinde 2 adet yayın; TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.8 dipnot'),
         ]),
     ],
     // ══ 2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), De — Profesör ══
@@ -680,8 +680,8 @@ return [
         'alan' => ['guzel_sanatlar'],
         'cetvel' => 'sakarya-2026',
         'notlar' => '2.8 Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), Devlet Konservatuvarı — Profesör sütunu.',
-        'sart' => Kalip::ve('Profesör — Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), ', [
-            Kalip::toplam(1400, liste: 'EK-1'),
+        'sart' => Kalip::ve('Profesör — Sanat Tasarım ve Mimarlık Fakültesi (Sanat ve Tasarım), Devlet Konservatuvarı', [
+            Kalip::toplam(1400),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 250 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '1.2a', '1.2b', '1.3',
                 '2.1a', '2.1b', '2.1d', '2.1e', '2.2a', '2.2b', '2.2c', '2.2d',
@@ -707,7 +707,7 @@ return [
                 '14.23', '14.25', '14.34', '14.38', '14.39', '14.40', '14.42', '14.43',
                 '14.44', '2.11a', '2.11b', '2.11c', '2.11d',
             ], 200, madde: '2.8 · 4. BÖLÜM'),
-            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde, WoS/Scopus indeksli kitap veya kitap bölümü kapsamında kapsamında bir adet yayın; Scopus Q4 veya ESCI dergilerinde 3 adet yayın; TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.8 dipnot'),
+            Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde ya da WoS/Scopus indeksli kitap veya kitap bölümü kapsamında bir adet yayın; Scopus Q4 veya ESCI dergilerinde 3 adet yayın; TÜBİTAK 2209 danışmanlığı kapsamında üç adet proje ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.8 dipnot'),
         ]),
     ],
 ];

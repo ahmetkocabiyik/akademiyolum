@@ -48,9 +48,9 @@ $sosyalGrubu = ['sosyal', 'spor', 'egitim', 'filoloji', 'hukuk', 'ilahiyat', 'mi
  */
 $projeVePatent = function (?array $donem, string $projeRolu, string $madde): array {
     return [
-        Kalip::adet('Kitap veya kitap bölümü faaliyetlerinden (3.1-3.4) en az biri',
+        Kalip::adet('Kitap veya kitap bölümü çalışmalarınızdan en az biri',
             ['3.1-3.4'], 1, donem: $donem, madde: $madde),
-        Kalip::adet("Kabul edilmiş bir araştırma projesinde {$projeRolu} olarak görev almak (4.1-4.4)",
+        Kalip::adet("Kabul edilmiş bir araştırma projesinde {$projeRolu} olarak görev almak",
             ['4.1-4.4'], 1, donem: $donem, madde: $madde),
         Kalip::adet('En az bir patent sahibi olmak', ['PATENT'], 1, donem: $donem, madde: $madde),
     ];
@@ -171,7 +171,7 @@ return [
                     ]),
                     $projeVePatent($D, 'araştırmacı', 'MADDE 6/1-ç'),
                 ),
-                Kalip::adet('Kabul edilmiş araştırma projelerinden en az biri (4.1-4.4)',
+                Kalip::adet('Kabul edilmiş araştırma projelerinden en az birinde görev almak',
                     ['4.1-4.4'], 1, donem: $D, madde: 'MADDE 6/1-ç.vi'),
             ]),
         ]),

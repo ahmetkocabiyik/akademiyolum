@@ -58,7 +58,7 @@ $profesor = function (string $anahtar, string $ad, array $alanlar, int $alt, int
         'cetvel' => 'amasya-2024',
         'notlar' => "Madde 9 ({$ad}): A1-A16 kategorilerinden en az {$alt}, Çizelge-1'den toplam en az {$toplam} puan.",
         'sart' => Kalip::ve("Profesör — {$ad}", [
-            Kalip::toplam($toplam, $P, liste: 'Çizelge-1'),
+            Kalip::toplam($toplam, $P),
             Kalip::puanDan("Makale kalemlerinizden en az {$alt} puan", ['A1-A16'], $alt, $P, madde: 'Madde 9'),
             ...array_values($ek),
         ]),
@@ -77,7 +77,7 @@ return [
         'cetvel' => 'amasya-2024',
         'notlar' => 'Madde 6/1: A1-A16 kategorilerinden en az 20, Çizelge-1\'den toplam en az 40 puan.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Amasya Üniversitesi', [
-            Kalip::toplam(40, liste: 'Çizelge-1'),
+            Kalip::toplam(40),
             Kalip::puanDan('Makale kalemlerinizden en az 20 puan', ['A1-A16'], 20, madde: 'Madde 6/1'),
         ]),
     ],
