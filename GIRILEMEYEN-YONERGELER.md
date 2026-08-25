@@ -132,3 +132,46 @@ hesaplanamayacak bir baraj göstermek olurdu.
 
 **Devam edilirse:** Balıkesir Üniversitesi'nin EK-2 puanlama tablosunu ayrıca
 indirmek gerekiyor; ölçüt tarafı hazır, yalnızca cetvel eksik.
+
+---
+
+# Kısmen girilen yönergeler
+
+Aşağıdaki üniversiteler korpusa girdi, ama yönergenin bir parçası kaynak
+PDF'ten çıkarılamadığı için o parçaya bağlı eşikler eksik kaldı. Her biri ilgili
+dosyanın başlığında da anlatılıyor.
+
+| Üniversite | Eksik kalan | Sonuç |
+|---|---|---|
+| **Bayburt** | 11(2) Sanat ve Tasarım Etkinlikleri bölümünün puan sütunu | Güzel Sanatlar alanı hiç girilmedi; diğer alanlar tam |
+| **Kilis 7 Aralık** | Çizelgenin 9-34 numaralı bölümleri (sergi, koleksiyon, müzik, film, tiyatro, mimarlık) | Sanat ve Tasarım Dalları hiç girilmedi |
+| **Bitlis Eren** | "I" (sanat çalışmaları) bölümü kaynak sözlüğünde karşılıksız | Güzel Sanatlar hiç girilmedi |
+| **Bingöl** | 52 numaralı ihtisaslaşma kalemi (Tarım ve Havza Bazlı Kalkınma) | Fen ve sosyal alanların zorunlu barajı olduğundan zor görünür |
+| **Hatay MKÜ** | G bölümü (sanat tarihi, arkeoloji, antropoloji kazı çalışmaları) | Sosyal ve Güzel Sanatlar barajı olduğundan zor görünür |
+| **Giresun** | M, O, P, R bölümleri (ödüller, görsel ve sanatsal etkinlikler) | Alt barajlara girmiyor; Güzel Sanatlar adayının genel toplamı düşük çıkar |
+| **Manisa CBÜ** | I (32-51), J (52-53) ve K (54-68) bölümleri | Güzel Sanatlar ve Konservatuvar toplamı düşük çıkar |
+| **Karabük** | Spor kalemleri 4.6.14-4.6.21 | Spor Bilimleri adayında 4.1-4.6 barajı zor görünür |
+
+## Motorun karşılayamadığı kurallar
+
+Bunlar PDF sorunu değil; motorun bugünkü yapısıyla ifade edilemeyen kurallar.
+Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
+
+- **Yüzdeye bağlı tavan** — Düzce (eğitim-öğretim %20, burs %10, idari görev
+  %10), Manisa CBÜ (atıf %20), Karabük (E bölümü %10). Motor yalnızca sabit
+  grup tavanı tanıyor; bu kalemlerde puan **yüksek** görünür.
+- **Çeyrekliğe bağlı çarpan** — Bandırma (Q1:2, Q2:1,5, Q3:1,25, Q4:1). En düşük
+  çarpan alındı; Q1 makalesi olan adayın puanı **düşük** görünür.
+- **Kategoriye göre farklı yazar formülü** — Bayburt (makalede kademeli, kitap ve
+  bildiride 1/n). Cetvel başına tek matris tanımlanabildiği için makale kuralı
+  uygulandı; çok yazarlı kitapta puan **yüksek** görünür.
+- **Kişi sayısına bölme** — Kilis (yardımcı araştırıcı puanı araştırıcı sayısına
+  bölünüyor), Bitlis ve Bolu (çevirmen, editör, patent sahibi sayısına
+  bölünüyor). Kilis'te araştırmacı satırları hiç girilmedi; diğerlerinde çarpan
+  o kalemlerde uygulanmıyor.
+- **Yıl ortalaması / görev süresi** — Hatay MKÜ, Bandırma, Bingöl, Bolu, Düzce,
+  Karabük ve Manisa CBÜ'nün yeniden atanma koşulları. Atama dönemi uzunluğu
+  profilde tutulmadığı için bu eşikler girilmedi.
+- **"Çağrılı makale", "tezden üretilmiş yayın", "atıf alan eser sayısı"** —
+  Düzce, Bandırma ve Karabük'te puanı değiştiren ama faaliyet kaydında karşılığı
+  olmayan nitelikler. Her birinde kural gereği düşük olan satır seçildi.
