@@ -221,6 +221,67 @@ Doğrusu bölüm bölüm girmek, o da ayrı bir oturumluk iş.
 
 ---
 
+## Çankaya Üniversitesi — bozuk font kodlaması
+
+**Dosya:** `pdf/17537097862.cankayauniversitesi.pdf`
+
+PDF taranmış değil, metin katmanı var — ama gömülü fontun karakter haritası
+(cmap) bozuk. `pdftotext` çıktısı okunmuyor:
+
+```
+0$''(  %X<|QHUJHQLQDPDFÕdDQND\DhQLYHUVLWHVL
+```
+
+**Kısmen çözüldü.** ASCII harfler **+29 kaydırmalı**: `0$''(` → `MADDE`,
+`dDQND\D` → `Çankaya`. Kaydırmayı uygulayan bir satır:
+
+```python
+''.join(chr(ord(c)+29) if 32 <= ord(c) <= 97 else c for c in metin)
+```
+
+Kaydırma sonrası ASCII sınırını aşan karakterler Türkçe harflere karşılık
+geliyor ve bunların haritası elle çıkarılmalı. Şimdiye kadar doğrulananlar:
+
+| Ham | Gerçek | Ham | Gerçek |
+|---|---|---|---|
+| `d` | Ç | `o` | ç |
+| `g` | Ö | `\|` | ö |
+| `h` | Ü | `ø` | İ / i |
+| `Õ` | ı | `÷` | ğ |
+| `ú` | ş | | |
+
+**Neden bekletildi:** Harita eksik ve rakamların nasıl kodlandığı henüz
+bilinmiyor. Bir kriter belgesinde rakamı yanlış okumak puanı sessizce bozar;
+haritayı tamamlayıp bilinen bir cümleyle doğrulamadan girmek doğru olmaz.
+
+**Devam edilirse:** Haritayı tamamla, çıktıyı yönergenin PDF'teki görünümüyle
+karşılaştırarak doğrula, sonra normal akışa gir. Bu tek dosya için geçerli;
+korpustaki 179 PDF tarandı, aynı bozukluk başka dosyada yok.
+
+---
+
+## Munzur Üniversitesi — kötü OCR
+
+**Dosya:** `pdf/17634002431.Munzur Üniversitesi Kriter.pdf` (1243 satır)
+
+Dosya OCR'dan geçirilmiş ama çıktı kullanılamaz durumda. 4030 kelimenin
+yalnızca 35'i (%0) tanınabiliyor:
+
+```
+MtIı.{ZuR rn ıivpnsff nsi
+oĞnnrişı r_ryşıİĞİNE yuı<sprrilME vE ATANMa nrgıgnİ
+"eııdirıneleriıi", "yapıiabilııesi", "diizenleyen", "öğretiın", "iiyelerine"
+```
+
+Türkçe karakterler ve `n/ıı/ıv`, `m/ııı`, `ü/ii` ayrımları tutarsız biçimde
+bozulmuş; düzeltilebilir bir kural yok.
+
+**Devam edilirse:** Yönergenin metin sürümünü Munzur Üniversitesi'nin kendi
+sitesinden indirmek ya da PDF'i yeniden OCR'lamak gerekiyor (`ocrmypdf --force-ocr
+-l tur`). Mevcut çıktı üzerinden giriş yapılamaz.
+
+---
+
 # Kısmen girilen yönergeler
 
 Aşağıdaki üniversiteler korpusa girdi, ama yönergenin bir parçası kaynak
