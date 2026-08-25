@@ -26,3 +26,4 @@ yarn-error.log
 /pdf
 /pdf-ocr
 /uak
+.DS_Store
