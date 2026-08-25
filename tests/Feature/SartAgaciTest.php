@@ -3175,3 +3175,51 @@ test('Alanya alan ayrımı yapmadan on iki temel alana da tanımlı', function (
         ->and($baraj('docentlik'))->toBe(50)
         ->and($baraj('profesorluk'))->toBe(60);
 });
+
+test('İbn Haldun sanatsal kalemleri yalnızca iki fakültede sayıyor', function () {
+    $depo = sartDepo();
+
+    $puan = function (string $cetvel, string $kaynak, Kategori $kategori) use ($depo): int {
+        $katalog = $depo->katalog($cetvel);
+
+        return $katalog->puan(sartFaaliyet($kaynak, $kategori, null), array_keys($katalog->maddeler));
+    };
+
+    // Yayın puanları iki sütunda birebir aynı.
+    expect($puan('ibn-haldun-2024', 'SCIE/SSCI (Q1)', Kategori::Makale))->toBe(35)
+        ->and($puan('ibn-haldun-2024-sanat', 'SCIE/SSCI (Q1)', Kategori::Makale))->toBe(35);
+
+    // Sanatsal kalemler yalnızca MTGF/İF sütununda puanlı; ötekinde tabloda
+    // "GD (Geçerli Değil)" yazıyor.
+    $sergi = 'Kişisel Etkinlik (Uluslararası)';
+    expect($puan('ibn-haldun-2024', $sergi, Kategori::SanatselEtkinlik))->toBe(0)
+        ->and($puan('ibn-haldun-2024-sanat', $sergi, Kategori::SanatselEtkinlik))->toBe(10);
+
+    // İletişim Fakültesi sosyal alanı İTBF ile paylaşıyor; birim seçilmezse
+    // sanatsal kalemlerin sayılmadığı grup 1 eşiği gelir (güvenli taraf).
+    expect($depo->bul('İbn Haldun Üniversitesi', 'docentlik', 'sosyal')['cetvel'])
+        ->toBe('ibn-haldun-2024')
+        ->and($depo->bul('İbn Haldun Üniversitesi', 'docentlik', 'sosyal', 'İletişim Fakültesi')['cetvel'])
+        ->toBe('ibn-haldun-2024-sanat');
+});
+
+test('İbn Haldun hukuk grubunda baraj yüksek ama küme geniş', function () {
+    $depo = sartDepo();
+    $profil = new Profil(dersYariyil: 4);
+
+    $genel = $depo->bul('İbn Haldun Üniversitesi', 'dr_ogr_uyesi', 'sosyal');
+    $hukuk = $depo->bul('İbn Haldun Üniversitesi', 'dr_ogr_uyesi', 'hukuk');
+
+    // TR Dizin makalesi (10 puan) ulusal kalem: hukuk kümesine giriyor,
+    // genel kümeye girmiyor.
+    $ulusal = fn () => sartFaaliyet('TR Dizin', tarih: '2024-01-01');
+
+    $genelPuan = sartDugum($depo->degerlendir($genel, array_map($ulusal, range(1, 5)), $profil), 'B bölümü');
+    $hukukPuan = sartDugum($depo->degerlendir($hukuk, array_map($ulusal, range(1, 5)), $profil), 'B bölümü');
+
+    expect($genelPuan->mevcut)->toBe(0)
+        ->and($genelPuan->gerekli)->toBe(30)
+        ->and($hukukPuan->mevcut)->toBe(50)
+        ->and($hukukPuan->gerekli)->toBe(40)
+        ->and($hukukPuan->durum)->toBe(Durum::Saglandi);
+});

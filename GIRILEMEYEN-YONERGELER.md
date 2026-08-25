@@ -106,6 +106,31 @@ indirmek gerekiyor; ölçüt tarafı hazır, yalnızca cetvel eksik.
 
 ---
 
+## Türk Hava Kurumu Üniversitesi
+
+**Dosya:** `pdf/17634009071.Türk Hava Kurumu Üniversitesi Kriter.pdf` (193 satır)
+
+**Koşullar eksiksiz, iki tablo birden eksik.** Akademik puan barajları net
+(Dr. 100, doçent 750, profesör 1500 — 1000'i doçentlik sonrası) ve alan
+başına yayın sayıları dört fakülte grubu için tablo hâlinde veriliyor.
+
+Ama iki dayanak PDF'te YOK:
+
+1. **EK-1** — Madde 6 "A, B, C, D, E, F ve G faaliyet türleri puanları"
+   diyor; o tablo dosyada değil. Puan barajları hesaplanamaz.
+2. **A1-A4 dergi grupları** — bütün yayın sayısı koşulları bu gruplara atıf
+   yapıyor ("A1 grubundan en az 2 yayın") ama grupların hangi indekslere
+   karşılık geldiği tanımlı değil.
+
+Madde 13 üstelik puanı üçüncü bir belgeye bağlıyor: "performans için
+hazırlanan tablo esas alınır."
+
+**Devam edilirse:** THK Üniversitesi'nin EK-1 puanlama tablosunu ve A1-A4
+grup tanımlarını ayrıca indirmek gerekiyor; koşul tarafı hazır. Balıkesir'le
+aynı durum.
+
+---
+
 ## Taranmış (metin katmanı olmayan) PDF'ler
 
 Aşağıdaki dosyalar görüntü olarak taranmış: `pdftotext` sıfır bayt metin
