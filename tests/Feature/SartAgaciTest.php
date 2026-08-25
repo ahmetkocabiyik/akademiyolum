@@ -2826,3 +2826,70 @@ test('İTÜ Türkçe yayın koşulu sağlanmazsa eser puanı sınırı yükseliy
     $puanla = sartDugum($depo->degerlendir($esik, array_map($q1, range(1, 8)), $profil), $ad);
     expect($puanla->durum)->toBe(Durum::Saglandi);
 });
+
+test('İstanbul Üniversitesi üst çeyreklik makalesi varsa sayı bir azalıyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('İstanbul Üniversitesi', 'docentlik', 'saglik');
+    $ad = 'Madde 9 — Makale';
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+    $q4 = fn () => sartFaaliyet('SCIE/SSCI (Q4)', tarih: '2024-01-01');
+
+    // Altı Q4 makale doğrudan yeter (yüksek sayı dalı).
+    expect(sartDugum($depo->degerlendir($esik, array_map($q4, range(1, 6)), $profil), $ad)->durum)
+        ->toBe(Durum::Saglandi);
+
+    // Beş Q4 makale yetmez: ne altı adet var ne de üst çeyreklik makalesi.
+    expect(sartDugum($depo->degerlendir($esik, array_map($q4, range(1, 5)), $profil), $ad)->durum)
+        ->toBe(Durum::Saglanmadi);
+
+    // Beş makalenin biri Q1 olunca düşük sayı dalı açılıyor.
+    expect(sartDugum($depo->degerlendir($esik, [...array_map($q4, range(1, 4)), $q1()], $profil), $ad)->durum)
+        ->toBe(Durum::Saglandi);
+});
+
+test('İstanbul Üniversitesi Matematik bölümü ayrı sayı kümesi kullanıyor', function () {
+    $depo = sartDepo();
+
+    $sayi = function (string $kadro, ?string $birim) use ($depo): int {
+        $esik = $depo->bul('İstanbul Üniversitesi', $kadro, 'fen', $birim);
+        $dugum = collect($esik['sart']['cocuklar'])->firstWhere('madde', 'Madde 10 — Makale');
+
+        return $dugum['cocuklar'][0]['min_adet'];
+    };
+
+    // Genel fen alanında doçentlik 6 makale, Matematik'te 5.
+    expect($sayi('docentlik', null))->toBe(6)
+        ->and($sayi('docentlik', 'Matematik Bölümü'))->toBe(5)
+        ->and($sayi('profesorluk', null))->toBe(8)
+        ->and($sayi('profesorluk', 'Matematik Bölümü'))->toBe(7);
+});
+
+test('İstanbul Üniversitesi yazar katsayısı sorumlu yazarı ayırıyor', function () {
+    $katalog = sartDepo()->katalog('istanbul-2026');
+    $kodlar = array_keys($katalog->maddeler);
+
+    $puan = function (?string $rol, int $yazarSayisi) use ($katalog, $kodlar): int {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: $rol);          // 2.a.1 → 60 puan
+        $f->yazarlar = implode(', ', array_map(fn ($i) => "Yazar {$i}", range(1, $yazarSayisi)));
+
+        return $katalog->puan($f, $kodlar);
+    };
+
+    // Sorumlu yazar üç yazarlıda 0,60; diğer yazarlar 0,25.
+    expect($puan('baslica', 3))->toBe(36)
+        ->and($puan('ortak', 3))->toBe(15);
+
+    // Yönerge sıraya bakmıyor: birinci isim de "diğer yazarlar" satırında.
+    expect($puan('ilk', 3))->toBe(15);
+
+    // Yirmiden fazla yazarlı yayında sorumlu yazar dışındakiler 0,04 alır.
+    expect($puan('ortak', 25))->toBe(2)
+        ->and($puan('baslica', 25))->toBe(24);
+
+    // Atıf ve bildiri puanı yazarlar arasında bölüşülmez (Tablo 1, 3 ve 4).
+    $atif = sartFaaliyet('WoS / Scopus', Kategori::Atif, null);
+    $atif->yazarlar = 'A, B, C, D, E';
+    expect($katalog->puan($atif, $kodlar))->toBe(3);
+});

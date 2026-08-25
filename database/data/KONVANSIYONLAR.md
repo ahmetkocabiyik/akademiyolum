@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-59 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+60 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -274,6 +274,12 @@ diye böl.
   çoğu zaman kodun ya da açıklamanın bir ÜSTÜNDEKİ satırda duruyor,
   kaybolmuyor. Şıkların puanları hemen her zaman azalan sırada (a > b > c);
   hizayı çözerken bu iyi bir çapraz kontrol.
+- **`-layout` sütunları karıştırıyorsa `-layout`'SUZ dene.** Sütunlar arasında
+  tam boş şerit olmayan tablolarda (İstanbul Üniversitesi'nin dört kadro
+  sütunu) `pdftotext -layout` hücreleri yan yana eziyor. `-layout` OLMADAN
+  çalıştırıldığında pdftotext hücreleri okuma sırasına göre tek tek döküyor ve
+  sütunlar kendiliğinden ayrılıyor. İki modu da dene: biri tablo, diğeri düz
+  metin için daha iyi.
 - **Kolon çapasını en dolu satırdan al.** Alan sütunlu koşul tablolarında
   (İnönü'nün on bir sütunu) seyrek satırlar yanlış sütuna düşer. Bütün
   hücreleri dolu bir satır bul ("Toplam puan" genelde öyledir), konumlarını
@@ -303,11 +309,11 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 59 üniversite · 1927 eşik · 76 cetvel |
+| Girildi | 60 üniversite · 1971 eşik · 78 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
-| Kaynak sorunuyla bekleyen | 3 (İstanbul, Dokuz Eylül, Balıkesir) |
+| Kaynak sorunuyla bekleyen | 2 (Dokuz Eylül, Balıkesir) |
 | Girilmemiş, engeli bilinmeyen | 105 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,

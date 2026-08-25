@@ -8,9 +8,10 @@ başlanacağını söylüyor.
 Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 `database/data/cetvel/` altına cetveli girildiğinde çıkar.
 
-**Önce teşhisi doğrula.** Trabzon, Iğdır, İnönü ve İTÜ bu listede "tablo
-okunmuyor" diye duruyordu; DÖRDÜNDE DE düz `pdftotext -q -layout` çıktısı
-tabloyu eksiksiz veriyordu. Kayıp PDF'ten değil, üstüne yazılan sütun dilimleme
+**Önce teşhisi doğrula.** Trabzon, Iğdır, İnönü, İTÜ ve İstanbul Üniversitesi
+bu listede "tablo okunmuyor" diye duruyordu; beşinde de tablo aslında
+okunuyordu. Dördünde düz `pdftotext -q -layout` yetti; İstanbul'da ise tam
+tersi gerekti — `-layout` OLMADAN. Kayıp PDF'ten değil, üstüne yazılan sütun dilimleme
 adımından geliyordu. Bir kaydı ele almadan önce ham `-layout` çıktısına bak —
 dosya adının da hâlâ doğru olduğunu kontrol et (Iğdır'ınki yanlış yazılmıştı).
 
@@ -32,13 +33,28 @@ metin çıkarıyor, yani metin katmanı yok.
 
 ---
 
-## İstanbul Üniversitesi
+## İstanbul Üniversitesi — Devlet Konservatuvarı alanları
 
-**Engel:** Koşul matrisinin sütunları satır satır kayıyor; ayrıca yapı hem adet
-hem puan barajını iç içe kullanıyor. Sabit sütun konumu varsayımı burada
-tutmuyor.
+**Dosya:** `pdf/1784016632886.istanbul-universitesi-kriter.pdf` (24 sayfa, 01/06/2026)
 
-**Devam edilirse:** Sayfa görüntüsünden okumak gerekiyor.
+**Girildi:** Madde 9-12'nin dört alanı (Sağlık, Fen ve Mühendislik, Sosyal,
+Mimarlık) dört kadroyla birlikte; Tablo 1 ve Tablo 4 cetvele çevrildi.
+
+**Kalan:** Madde 13-15 — Devlet Konservatuvarı'nın Müzik ve Sahne Sanatları,
+Müzikoloji ve Türk Müziği bölümleri. Bu üç alanın koşulları neredeyse tamamen
+TABLO 2'ye bağlı ("Tablo 1'den en az 20, Tablo 2'den en az 80, ikisinden
+toplam 300 puan") ve Tablo 2 konservatuvara özgü seksen satırlık bir müzik,
+sahne ve icra tablosu. Cetvele çevrilmeden koşul yazılamaz.
+
+**Devam edilirse:** Tablo 2'yi (raw metnin 730-813. satırları) cetvele çevir,
+`istanbul-2026-konservatuvar` adında üçüncü bir varyant üret (Tablo 1 + Tablo 2
+maddeleri, `TABLO-1` ve `TABLO-2` grupları), sonra Madde 13-15'i o cetvele
+bağla. Koşullar zaten okunmuş durumda ve düz puan barajları.
+
+**NOT — bu PDF `-layout` ile okunmuyor:** alan tabloları dört sütunlu ve
+sütunlar arasında tam boş şerit yok, `pdftotext -layout` sütunları birbirine
+karıştırıyor. `-layout` OLMADAN çalıştırıldığında pdftotext hücreleri okuma
+sırasına göre tek tek döküyor ve sütunlar temiz ayrılıyor.
 
 ---
 
