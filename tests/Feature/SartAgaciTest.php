@@ -2752,3 +2752,77 @@ test('İnönü makale puanını çeyrekliğe ve yayın türüne göre ayırıyor
     $proje->yazarlar = 'A, B, C, D';
     expect($katalog->puan($proje, $kodlar))->toBe(112);               // çarpansız
 });
+
+test('İTÜ puan cetveli birime göre değişiyor', function () {
+    $depo = sartDepo();
+
+    $puan = function (string $cetvel, string $kaynak, Kategori $kategori = Kategori::Makale) use ($depo): int {
+        $katalog = $depo->katalog($cetvel);
+
+        return $katalog->puan(sartFaaliyet($kaynak, $kategori), array_keys($katalog->maddeler));
+    };
+
+    // A bölümü üç sütunlu: AHCI genel birimlerde sayılmıyor, H/S/MF'de 4,
+    // konservatuvarda 10 puan.
+    expect($puan('itu-2022', 'AHCI'))->toBe(0)
+        ->and($puan('itu-2022-hs', 'AHCI'))->toBe(4)
+        ->and($puan('itu-2022-tmdk', 'AHCI'))->toBe(10);
+
+    // TR Dizin konservatuvarda diğer birimlerin iki katından fazla.
+    expect($puan('itu-2022', 'TR Dizin'))->toBe(3)
+        ->and($puan('itu-2022-tmdk', 'TR Dizin'))->toBe(8);
+
+    // Scopus çeyreklikleri bütün birimlerde aynı.
+    foreach (['itu-2022', 'itu-2022-hs', 'itu-2022-mf', 'itu-2022-tmdk', 'itu-2022-moda'] as $cetvel) {
+        expect($puan($cetvel, 'SCIE/SSCI (Q1)'))->toBe(10);
+    }
+
+    // Aynı sanatsal kayıt konservatuvarda müzik satırından, Moda Tasarımı'nda
+    // moda satırından puanlanıyor; genel cetvelde hiç karşılığı yok.
+    $sergi = 'Kişisel Etkinlik (Uluslararası)';
+    expect($puan('itu-2022-tmdk', $sergi, Kategori::SanatselEtkinlik))->toBe(10)
+        ->and($puan('itu-2022-moda', $sergi, Kategori::SanatselEtkinlik))->toBe(30)
+        ->and($puan('itu-2022', $sergi, Kategori::SanatselEtkinlik))->toBe(0);
+});
+
+test('İTÜ eser puanı kapsamı birime göre daralıyor', function () {
+    $depo = sartDepo();
+
+    $kapsam = fn (string $cetvel): array => $depo->katalog($cetvel)->coz(['ESER-PUANI']);
+
+    // Tüm Birimler'de eser puanına yalnızca Scopus Q1-Q3 makaleleri giriyor.
+    expect($kapsam('itu-2022'))->toBe(['A.1', 'A.2', 'A.3']);
+
+    // Hukuk ve Sosyoloji'de A, B ve C bölümlerinin tamamı sayılıyor.
+    expect($kapsam('itu-2022-hs'))->toContain('B.1')
+        ->and($kapsam('itu-2022-hs'))->toContain('C.7')
+        ->and($kapsam('itu-2022'))->not->toContain('B.1');
+
+    // Konservatuvarda müzik ve sahne çalışmaları da eser puanına giriyor.
+    expect($kapsam('itu-2022-tmdk'))->toContain('L.5')
+        ->and($kapsam('itu-2022-moda'))->toContain('M.1');
+});
+
+test('İTÜ Türkçe yayın koşulu sağlanmazsa eser puanı sınırı yükseliyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('İstanbul Teknik Üniversitesi', 'docentlik', 'muhendislik');
+    $ad = 'Tablo 2 — Türkçe Yayın';
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+    $tr = fn () => sartFaaliyet('TR Dizin', tarih: '2024-01-01');
+
+    // Yedi Q1 makale = 70 puan: normal sınırı (70) geçiyor ama Türkçe yayın yok,
+    // o yüzden yükseltilmiş sınır (73) aranıyor ve karşılanmıyor.
+    $dugum = sartDugum($depo->degerlendir($esik, array_map($q1, range(1, 7)), $profil), $ad);
+    expect($dugum->durum)->toBe(Durum::Saglanmadi)
+        ->and($dugum->cocuklar[1]->gerekli)->toBe(73);
+
+    // Tek bir TR Dizin makalesi koşulu doğrudan sağlıyor.
+    $trIle = sartDugum($depo->degerlendir($esik, [...array_map($q1, range(1, 7)), $tr()], $profil), $ad);
+    expect($trIle->durum)->toBe(Durum::Saglandi);
+
+    // TR Dizin yoksa da sekiz Q1 makale (80 puan) yükseltilmiş sınırı geçiyor.
+    $puanla = sartDugum($depo->degerlendir($esik, array_map($q1, range(1, 8)), $profil), $ad);
+    expect($puanla->durum)->toBe(Durum::Saglandi);
+});

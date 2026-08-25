@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-58 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+59 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -266,8 +266,8 @@ diye böl.
 - **Python `İ`.lower()** birleşik nokta üretir; `İ`→`i` elle değiştir. Ama
   `I`→`ı` yapma, ASCII kısaltmaları bozar (SCI→scı).
 - **Sütun dilimlemesi tabloyu düşürebilir, PDF suçsuz olabilir.** Trabzon'un
-  Tablo 2'si, Iğdır'ın EK-1'i ve İnönü'nün EK-1'i birer tur "tablonun yarısı
-  çıkmıyor" diye bekletildi; ÜÇÜNDE DE düz `pdftotext -q -layout` çıktısı
+  Tablo 2'si, Iğdır'ın EK-1'i, İnönü'nün EK-1'i ve İTÜ'nün beş tablosu birer
+  tur "tablo okunmuyor" diye bekletildi; DÖRDÜNDE DE düz `pdftotext -q -layout` çıktısı
   tabloyu eksiksiz veriyordu. Kayıp PDF'ten değil, üstüne yazılan sütun
   dilimleme adımından geliyordu. Bir tabloyu okunamaz ilan etmeden önce HAM
   `-layout` çıktısına bak: satır etiketi kayıyor gibi görünen tablolarda puan
@@ -303,11 +303,11 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 58 üniversite · 1891 eşik · 71 cetvel |
+| Girildi | 59 üniversite · 1927 eşik · 76 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
-| Kaynak sorunuyla bekleyen | 4 (İstanbul, İTÜ, Dokuz Eylül, Balıkesir) |
+| Kaynak sorunuyla bekleyen | 3 (İstanbul, Dokuz Eylül, Balıkesir) |
 | Girilmemiş, engeli bilinmeyen | 105 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,

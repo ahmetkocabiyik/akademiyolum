@@ -8,9 +8,9 @@ başlanacağını söylüyor.
 Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 `database/data/cetvel/` altına cetveli girildiğinde çıkar.
 
-**Önce teşhisi doğrula.** Trabzon, Iğdır ve İnönü bu listede "tablonun yarısı
-çıkmıyor" diye duruyordu; ÜÇÜNDE DE düz `pdftotext -q -layout` çıktısı tabloyu
-eksiksiz veriyordu. Kayıp PDF'ten değil, üstüne yazılan sütun dilimleme
+**Önce teşhisi doğrula.** Trabzon, Iğdır, İnönü ve İTÜ bu listede "tablo
+okunmuyor" diye duruyordu; DÖRDÜNDE DE düz `pdftotext -q -layout` çıktısı
+tabloyu eksiksiz veriyordu. Kayıp PDF'ten değil, üstüne yazılan sütun dilimleme
 adımından geliyordu. Bir kaydı ele almadan önce ham `-layout` çıktısına bak —
 dosya adının da hâlâ doğru olduğunu kontrol et (Iğdır'ınki yanlış yazılmıştı).
 
@@ -39,35 +39,6 @@ hem puan barajını iç içe kullanıyor. Sabit sütun konumu varsayımı burada
 tutmuyor.
 
 **Devam edilirse:** Sayfa görüntüsünden okumak gerekiyor.
-
----
-
-## İstanbul Teknik Üniversitesi
-
-**Dosya:** `pdf/17536997252.istanbulteknikuniverstesi.pdf` (17 sayfa)
-
-**Çözülen:** TABLO 1'in 82 kalemi ve kodları çıkarıldı. Kısaltmalar belgede
-tanımlı: H = Hukuk Temel Alanı, S = Sosyoloji Bölümü, MF = Mimarlık Fakültesi,
-TMDK = Türk Musikisi Devlet Konservatuvarı.
-
-**Engel:** Sütun düzeni **bölümden bölüme değişiyor** — tek bir kolon haritası
-yok:
-
-| bölüm | sütunlar |
-|---|---|
-| A (Makaleler) | 3 sütun: Tüm Birimler (H, S, MF, TMDK hariç) / H, S, MF / TMDK |
-| B (Bildiriler) | 1 sütun: bütün birimler için tek değer |
-| C (Kitap) | 2 sütun: Tüm Birimler (H, S, TMDK hariç) / H, S, TMDK |
-| Eğitim-öğretim | 2 sütun: Tüm Birimler (H, S hariç) / H, S |
-
-Ayrıca bazı satırlar değer yerine formül taşıyor:
-`(h-indeksi − Sınır Değer) × 25`, `(FWCI − 1) × Yayın Sayısı`. Bunlar motorun
-`puan` alanına sığmıyor; `metrik` düğümü ya da beyan olarak modellenmeleri
-gerekir.
-
-**Devam edilirse:** Her bölümün kendi başlığını ayrıştıran bir okuma yaz; tek
-kolon haritasıyla okumak yanlış birimin puanını atar (B ve C bölümlerinde bu
-oldu).
 
 ---
 
@@ -242,6 +213,7 @@ dosyanın başlığında da anlatılıyor.
 | **Manisa CBÜ** | I (32-51), J (52-53) ve K (54-68) bölümleri | Güzel Sanatlar ve Konservatuvar toplamı düşük çıkar |
 | **Karabük** | Spor kalemleri 4.6.14-4.6.21 | Spor Bilimleri adayında 4.1-4.6 barajı zor görünür |
 | **İnönü** | L bölümü (girişimcilik, TGB, TTO), P bölümü (sportif faaliyetler), H (kongre düzenleme), S (iletişim bilimleri) | "L1-L18 Puanı" koşulu hiç yazılmadı; Spor Bilimleri adayının toplamı düşük çıkar |
+| **İTÜ** | Hukuk Temel Alanı (Tablo 4'te sınır değeri yok), atıf puanı, ders kredisi, program koordinatörlüğü, toplumsal katkı | Toplam puan barajı hiç yazılmadı; hukuk alanı kapsam dışı |
 
 ## Motorun karşılayamadığı kurallar
 
@@ -275,6 +247,16 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   500 ×1,6, uluslararası ortaklı ×1,4, ulusal ortaklı ×1,2) ve Madde 7(2)
   (Incites/SciVal %1'lik dilim ×3, %10'luk ×1,5). Faaliyet kaydı ortağın
   kurumunu ve derginin dilim bilgisini tutmuyor; puan DÜŞÜK görünür.
+- **Puan üreten formüller** — İTÜ Tablo 1'in D.1 ((h-indeksi − sınır) × 25),
+  D.2 ((FWCI − 1) × yayın sayısı) ve K.1 (ders kredileri toplamı) kalemleri.
+  Motorun `puan` alanı sabit sayı tutuyor. İTÜ'nün TOPLAM PUAN barajı bu
+  yüzden hiç yazılmadı; eser puanı barajı etkilenmiyor çünkü ona yalnızca
+  yayın türleri giriyor.
+- **"En fazla N'i şu türden"** — üst sınırlı adet koşulları. Motorda "en
+  fazla" düğümü yok. Çoğu satırda üst sınır alt sınırdan türüyor (2 eserin en
+  az 1'i A ise en fazla 1'i C olabilir); türemediği yerlerde (İTÜ Mimarlık
+  Fakültesi doçent ve profesör satırları) uygulanmıyor ve koşul olduğundan
+  KOLAY görünüyor.
 - **İlk yazarın payına bağlı formül** — Iğdır'ın altı ve daha fazla yazarlı
   yayınlarda diğer yazarlara verdiği pay: (Puan − ilk ismin puanı) / diğer
   yazar sayısı. Motorun `bol` alanı yalnızca `pay / (n − eksi) + ek` biçimini
