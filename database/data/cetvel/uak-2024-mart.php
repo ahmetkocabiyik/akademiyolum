@@ -229,6 +229,36 @@ $tavanlar = [
     'guzel_sanatlar' => ['3' => 20, '4' => 20, '5' => 10, '6' => 10, '7' => 20, '8' => 10, '11' => 25, '12' => 4, '3gh' => 5, '4cd' => 5],
 ];
 
+// ÜAK Tablo 1'in genel kuralı, bölüm başlıklarından hemen önce:
+// "Tek yazarlı yayınlarda yazar tam puan alır. Çok yazarlı yayınlarda puan
+// yazarlar arasında eşit olarak bölünür." Patent bölümünde ayrıca:
+// "Patentlerde puan kişi sayısına bölünür."
+//
+// ÜAK BAŞLICA YAZARA AYRICALIK TANIMIYOR — kural yalnızca yazar sayısına
+// bakıyor, sıraya ya da sorumlu yazarlığa değil. Bütün roller aynı 1/n
+// bölmesini paylaşır.
+//
+// Atıf, proje, tez danışmanlığı, editörlük ve ödül kalemleri dışarıda: ÜAK
+// bunlarda bölme kuralı yazmıyor, projede rol ayrımını zaten ayrı kodlarla
+// (7a-y yürütücü ↔ 7a-a araştırmacı) yapıyor.
+$bol = ['bol' => ['pay' => 1.0]];
+
+$yazarKatsayisi = [
+    'haric' => ['atif', 'proje', 'tez_danismanligi', 'editorluk', 'odul',
+        'egitim_ogretim', 'idari_gorev', 'toplumsal_katki'],
+    'roller' => [
+        'tek' => ['kademeler' => [1 => 1.0]],
+        'ilk' => $bol,
+        'baslica' => $bol,
+        'yazar_2' => $bol,
+        'yazar_3' => $bol,
+        'yazar_4' => $bol,
+        'yazar_5' => $bol,
+        'yazar_6' => $bol,
+        'ortak' => $bol,
+    ],
+];
+
 $cetveller = [];
 
 foreach ($alanlar as $alan => [$tablo, $pdf, $acik]) {
@@ -249,9 +279,15 @@ foreach ($alanlar as $alan => [$tablo, $pdf, $acik]) {
 
     $cetveller["uak-2024-mart-{$alan}"] = [
         'kapsam_notu' => 'Bu yönerge puanlamayı ÜAK Doçentlik Başvuru Şartları\'na ('.$tablo.') '
-            .'devrediyor. Ders verme ve h-indeksi kalemleri faaliyet kaydından doğrulanamadığı '
-            .'için hesaba katılmadı; gerçek ÜAK toplamınız burada görünenden en fazla '
-            .$acik.' puan yüksek olabilir, düşük olamaz.',
+            .'devrediyor. Çok yazarlı yayınlarda ÜAK puanı yazarlar arasında EŞİT BÖLÜYOR '
+            .'("tek yazarlı yayınlarda yazar tam puan alır"); bu bölme yalnızca faaliyetinizde '
+            .'yazar listesini doldurduğunuzda uygulanabiliyor. Yazar listesi boş bırakılan çok '
+            .'yazarlı bir yayın burada TAM puan alır, gerçek ÜAK hesabında ise bölünür — o '
+            .'kayıtlarda puanınız olduğundan yüksek görünür. Patent puanı da kişi sayısına '
+            .'bölünür. Ders verme ve h-indeksi kalemleri faaliyet kaydından doğrulanamadığı '
+            .'için hiç hesaba katılmadı; o kalemlerden gelecek en fazla '.$acik.' puan burada '
+            .'görünmez.',
+        'yazar_katsayisi' => $yazarKatsayisi,
         'maddeler' => $alanMaddeleri,
         'gruplar' => $alanGruplari,
         'grup_tavanlari' => $tavanlar[$alan],

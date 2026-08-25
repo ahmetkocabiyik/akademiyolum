@@ -27,6 +27,30 @@ Başka bir yönerge açıkça 2025'e atıf yaparsa `uak/` kökünden üretilir.
 > 30 ↔ 40 farkı dönem farkı değil, **alan** farkıdır: Eğitim Bilimleri 30, diğer
 > temel alanlar 40 — her iki sürümde de böyle.
 
+## Yazar bölmesi
+
+Tablo 1'in bölüm başlıklarından hemen önceki genel kuralı:
+
+> Tek yazarlı yayınlarda yazar tam puan alır. Çok yazarlı yayınlarda puan
+> yazarlar arasında eşit olarak bölünür.
+
+Patent bölümünde ayrıca: "Patentlerde puan kişi sayısına bölünür."
+
+Cetvelde `yazar_katsayisi` olarak 1/n bölmesiyle karşılandı. **ÜAK başlıca
+yazara ayrıcalık tanımıyor** — kural yalnızca yazar sayısına bakıyor, sıraya ya
+da sorumlu yazarlığa değil; bütün roller aynı bölmeyi paylaşır. Atıf, proje,
+tez danışmanlığı, editörlük ve ödül bölme dışında: ÜAK bunlarda bölme kuralı
+yazmıyor, projede rol ayrımını zaten ayrı kodlarla (7a-y ↔ 7a-a) yapıyor.
+
+Bölme **yalnızca aday yazar listesini doldurduğunda** uygulanabiliyor. Liste boş
+bırakılan çok yazarlı bir yayın burada tam puan alır; o kayıtlarda puan
+olduğundan YÜKSEK görünür ve `kapsam_notu` bunu söylüyor.
+
+> Bu kural bir süre cetvelde yoktu; kapsam notu da "gerçek ÜAK toplamınız burada
+> görünenden yüksek olabilir, düşük olamaz" diyordu. İkisi birden yanlıştı:
+> bölme uygulanmayınca çok yazarlı adayın puanı ÜAK'ın hesaplayacağından yüksek
+> çıkıyordu, yani garanti ters yöndeydi.
+
 ## Girilmeyen bölümler
 
 Bunlar cetvelde **yoktur**, dolayısıyla hesaplanan toplam gerçek ÜAK puanından

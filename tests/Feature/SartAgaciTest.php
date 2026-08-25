@@ -2996,3 +2996,37 @@ test('Dokuz Eylül bir makaleyi girişimcilik puanıyla değiştirmeye izin veri
     expect(sartDugum($depo->degerlendir($esik, [...array_map($makale, range(1, 3)), $patent()], $profil), $ad)->durum)
         ->toBe(Durum::Saglanmadi);
 });
+
+test('ÜAK cetveli çok yazarlı yayında puanı yazarlara eşit bölüyor', function () {
+    // ÜAK Tablo 1'in genel kuralı: "Tek yazarlı yayınlarda yazar tam puan alır.
+    // Çok yazarlı yayınlarda puan yazarlar arasında eşit olarak bölünür."
+    // Bölme uygulanmazsa ÜAK'a devreden bütün üniversitelerde çok yazarlı
+    // adayın puanı olduğundan YÜKSEK görünür.
+    $katalog = sartDepo()->katalog('uak-2024-mart-fen');
+    $kodlar = array_keys($katalog->maddeler);
+
+    $puan = function (string $rol, int $yazarSayisi, string $kaynak = 'SCIE/SSCI (Q1)', Kategori $kategori = Kategori::Makale) use ($katalog, $kodlar): int {
+        $f = sartFaaliyet($kaynak, $kategori, $rol);
+        $f->yazarlar = implode(', ', array_map(fn ($i) => "Yazar {$i}", range(1, $yazarSayisi)));
+
+        return $katalog->puan($f, $kodlar);
+    };
+
+    // Q1 makale 30 puan; iki yazarlıda 15, üçte 10, dörtte 7 (aşağı yuvarlanır).
+    expect($puan('tek', 1))->toBe(30)
+        ->and($puan('ortak', 2))->toBe(15)
+        ->and($puan('ortak', 3))->toBe(10)
+        ->and($puan('ortak', 4))->toBe(7);
+
+    // ÜAK başlıca yazara ayrıcalık TANIMIYOR: kural yalnızca yazar sayısına
+    // bakıyor, bütün roller aynı bölmeyi alır.
+    expect($puan('baslica', 3))->toBe(10)
+        ->and($puan('ilk', 3))->toBe(10);
+
+    // "Patentlerde puan kişi sayısına bölünür" — patent de bölünür.
+    expect($puan('ortak', 2, 'Ulusal Patent', Kategori::Patent))->toBe(5);
+
+    // Atıf bölünmez: ÜAK atıfta bölme kuralı yazmıyor.
+    expect($puan('ortak', 4, 'WoS / Scopus', Kategori::Atif))
+        ->toBe($puan('tek', 1, 'WoS / Scopus', Kategori::Atif));
+});
