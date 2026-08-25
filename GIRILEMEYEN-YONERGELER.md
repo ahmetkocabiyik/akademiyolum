@@ -8,6 +8,13 @@ başlanacağını söylüyor.
 Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 `database/data/cetvel/` altına cetveli girildiğinde çıkar.
 
+**Önce teşhisi doğrula.** Trabzon ve Iğdır bu listede "tablonun yarısı
+çıkmıyor" diye duruyordu; ikisinde de düz `pdftotext -q -layout` çıktısı
+tabloyu eksiksiz veriyordu. Kayıp PDF'ten değil, üstüne yazılan sütun
+dilimleme adımından geliyordu. Bir kaydı ele almadan önce ham `-layout`
+çıktısına bak — dosya adının da hâlâ doğru olduğunu kontrol et (Iğdır'ınki
+yanlış yazılmıştı).
+
 ---
 
 ## İnönü Üniversitesi
@@ -132,27 +139,6 @@ hesaplanamayacak bir baraj göstermek olurdu.
 
 **Devam edilirse:** Balıkesir Üniversitesi'nin EK-2 puanlama tablosunu ayrıca
 indirmek gerekiyor; ölçüt tarafı hazır, yalnızca cetvel eksik.
-
----
-
-## Iğdır Üniversitesi
-
-**Dosya:** `pdf/17536999612.igdiruniverstesi.pdf`
-
-**Engel yok, ama tablo satır satır dağılmış.** Koşullar net ve zengin: profesör
-3000 puan (20-23. maddelerden 500), doçent 2000 (22-23'ten 200), Dr. ilk atama
-fen/sağlıkta 500, diğerlerinde 300; Güzel Sanatlar ve Spor için ayrı kümeler
-(6-7. maddeler). Sorun EK-1'de: madde numarası, açıklama metni ve puan ÜÇ AYRI
-SATIRA dağılmış ve numara sütunu 10. maddeden sonra kayıyor. 1-9 arası
-maddeler temiz çıktı, 10-23 arası çıkmadı.
-
-**Neden bekletildi:** koşullar tam olarak 10-23 arası maddeleri (editörlük,
-projeler, ödüller, burslar) sayıyor. Eksik puanlarla eşik yazmak, adaya
-sağlayamayacağı bir baraj göstermek olurdu.
-
-**Devam edilirse:** numarayı, metni ve puanı ayrı ayrı toplayıp madde
-sınırlarını "yeni numara göründüğünde kapat" kuralıyla birleştiren bir okuma
-gerekiyor; tek satırlık kolon dilimlemesi bu tabloda yetmiyor.
 
 ---
 
@@ -317,8 +303,16 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   bölünüyor). Kilis'te araştırmacı satırları hiç girilmedi; diğerlerinde çarpan
   o kalemlerde uygulanmıyor.
 - **Yıl ortalaması / görev süresi** — Hatay MKÜ, Bandırma, Bingöl, Bolu, Düzce,
-  Karabük ve Manisa CBÜ'nün yeniden atanma koşulları. Atama dönemi uzunluğu
-  profilde tutulmadığı için bu eşikler girilmedi.
+  Karabük, Manisa CBÜ ve Iğdır'ın yeniden atanma koşulları. Atama dönemi
+  uzunluğu profilde tutulmadığı için bu eşikler girilmedi.
+- **Yarıyıl başına adet sınırı** — Iğdır 20. madde ("son beş yılda, her
+  yarıyılda verilen en fazla dört ders"). Hem kayan pencere hem yarıyıl başına
+  sayı gerekiyor; motor ikisini birlikte tutamıyor, ders puanı YÜKSEK görünür.
+- **İlk yazarın payına bağlı formül** — Iğdır'ın altı ve daha fazla yazarlı
+  yayınlarda diğer yazarlara verdiği pay: (Puan − ilk ismin puanı) / diğer
+  yazar sayısı. Motorun `bol` alanı yalnızca `pay / (n − eksi) + ek` biçimini
+  tanıyor; 0,8/(n−1) yazıldı, altı yazarlıda birebir aynı, daha kalabalık
+  yayınlarda puan bir tık DÜŞÜK çıkıyor.
 - **"Çağrılı makale", "tezden üretilmiş yayın", "atıf alan eser sayısı"** —
   Düzce, Bandırma ve Karabük'te puanı değiştiren ama faaliyet kaydında karşılığı
   olmayan nitelikler. Her birinde kural gereği düşük olan satır seçildi.

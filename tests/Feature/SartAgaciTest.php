@@ -2578,3 +2578,87 @@ test('Trabzon yazar çarpanı sıra ve sayı matrisini birlikte uyguluyor', func
     // Yazar listesi boşsa çarpan hiç uygulanmaz.
     expect($puan('ortak', 1))->toBe(8);
 });
+
+test('Iğdır altı ve daha fazla yazarlı yayında formül tabanlı çarpana geçiyor', function () {
+    $katalog = sartDepo()->katalog('igdir-2023');
+    $kodlar = array_keys($katalog->maddeler);
+
+    $puan = function (?string $rol, int $yazarSayisi) use ($katalog, $kodlar): int {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: $rol);          // 1.a.1 → 100 puan
+        $f->yazarlar = implode(', ', array_map(fn ($i) => "Yazar {$i}", range(1, $yazarSayisi)));
+
+        return $katalog->puan($f, $kodlar);
+    };
+
+    // Beş yazara kadar yönergenin matrisi.
+    expect($puan('ilk', 3))->toBe(80)
+        ->and($puan('yazar_3', 3))->toBe(60)
+        ->and($puan('yazar_5', 5))->toBe(30);
+
+    // Altı yazardan itibaren formül: ilk isim = Puan × 1,2 / yazar sayısı.
+    expect($puan('ilk', 6))->toBe(20)
+        ->and($puan('ilk', 8))->toBe(15);
+
+    // Diğer yazarlar = (Puan − ilk ismin puanı) / diğer yazar sayısı. Altı
+    // yazarlıda formülün kendisi de 0,8/(n−1) de 16 veriyor; daha kalabalık
+    // yayınlarda bizimki bir tık DÜŞÜK kalıyor (8 yazarlıda 11'e karşı 12).
+    expect($puan('yazar_3', 6))->toBe(16)
+        ->and($puan('yazar_3', 8))->toBe(11);
+
+    // Sorumlu yazar yönergede birinci isimle aynı; sıra belirtmeyen aday o
+    // yazar sayısındaki en düşük satırı alır.
+    expect($puan('baslica', 3))->toBe(80)
+        ->and($puan('ortak', 3))->toBe(60);
+});
+
+test('Iğdır yalnızca yönergenin adıyla andığı dört alan grubunu kapsıyor', function () {
+    $depo = sartDepo();
+
+    $var = fn (string $alan): bool => $depo->bul('Iğdır Üniversitesi', 'docentlik', $alan) !== null;
+
+    // Yönergenin saydığı gruplar: Fen ve Sağlık, Sosyal, Güzel Sanatlar, Spor.
+    expect($var('fen'))->toBeTrue()
+        ->and($var('saglik'))->toBeTrue()
+        ->and($var('sosyal'))->toBeTrue()
+        ->and($var('guzel_sanatlar'))->toBeTrue()
+        ->and($var('spor'))->toBeTrue();
+
+    // Yönerge bunlardan hiç söz etmiyor; "Fen ve Sağlık" grubuna katmak adaya
+    // yazmayan bir baraj göstermek olurdu.
+    expect($var('muhendislik'))->toBeFalse()
+        ->and($var('ziraat'))->toBeFalse()
+        ->and($var('egitim'))->toBeFalse()
+        ->and($var('hukuk'))->toBeFalse();
+});
+
+test('Iğdır alana göre farklı kapı kuruyor: sayı, kitap ya da alt baraj', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2018-01-01'));
+
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2022-01-01');
+    $sergi = fn () => sartFaaliyet('Kişisel Etkinlik (Uluslararası)', Kategori::SanatselEtkinlik, null, '2022-01-01');
+
+    // Fen: altı SCI makale isteniyor, beşi yetmiyor.
+    $fen = $depo->bul('Iğdır Üniversitesi', 'docentlik', 'fen');
+    $bes = sartDugum($depo->degerlendir($fen, array_map($q1, range(1, 5)), $profil), 'B-3/a');
+    $alti = sartDugum($depo->degerlendir($fen, array_map($q1, range(1, 6)), $profil), 'B-3/a');
+
+    expect($bes->durum)->toBe(Durum::Saglanmadi)
+        ->and($alti->durum)->toBe(Durum::Saglandi);
+
+    // Sosyal aynı kadroda tek Q1 makaleyle alana özgü koşulu geçiyor.
+    $sosyal = $depo->bul('Iğdır Üniversitesi', 'docentlik', 'sosyal');
+    expect(sartDugum($depo->degerlendir($sosyal, [$q1()], $profil), 'B-3/b')->durum)
+        ->toBe(Durum::Saglandi);
+
+    // Güzel Sanatlar'da koşul makale değil, sanat etkinliklerinden 600 puanlık
+    // alt baraj: altı uluslararası kişisel etkinlik (6 × 100) tam karşılıyor.
+    $gs = $depo->bul('Iğdır Üniversitesi', 'docentlik', 'guzel_sanatlar');
+    $az = sartDugum($depo->degerlendir($gs, array_map($sergi, range(1, 5)), $profil), 'B-3/c');
+    $tam = sartDugum($depo->degerlendir($gs, array_map($sergi, range(1, 6)), $profil), 'B-3/c');
+
+    expect($az->mevcut)->toBe(500)
+        ->and($az->durum)->toBe(Durum::Saglanmadi)
+        ->and($tam->mevcut)->toBe(600)
+        ->and($tam->durum)->toBe(Durum::Saglandi);
+});

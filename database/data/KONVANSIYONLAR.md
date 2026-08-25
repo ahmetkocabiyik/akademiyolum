@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-56 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+57 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -265,12 +265,13 @@ diye böl.
 - **Python `İ`.lower()** birleşik nokta üretir; `İ`→`i` elle değiştir. Ama
   `I`→`ı` yapma, ASCII kısaltmaları bozar (SCI→scı).
 - **Sütun dilimlemesi tabloyu düşürebilir, PDF suçsuz olabilir.** Trabzon'un
-  Tablo 2'si bir tur "2.x ve 3.x çıkmıyor" diye bekletildi; oysa düz
-  `pdftotext -q -layout` çıktısında 95 satırın hepsi puanıyla duruyordu. Kayıp
-  sütun dilimlemesinden geliyordu. Bir tabloyu okunamaz ilan etmeden önce HAM
-  `-layout` çıktısına bak: satır etiketi kayıyor gibi görünen tablolarda puan
-  çoğu zaman kodun bulunduğu satırda, açıklama ise onun altında ve üstünde
-  duruyor.
+  Tablo 2'si ve Iğdır'ın EK-1'i birer tur "tablonun yarısı çıkmıyor" diye
+  bekletildi; ikisinde de düz `pdftotext -q -layout` çıktısı tabloyu eksiksiz
+  veriyordu. Kayıp sütun dilimlemesinden geliyordu. Bir tabloyu okunamaz ilan
+  etmeden önce HAM `-layout` çıktısına bak: satır etiketi kayıyor gibi görünen
+  tablolarda puan çoğu zaman kodun ya da açıklamanın bir ÜSTÜNDEKİ satırda
+  duruyor, kaybolmuyor. Şıkların puanları hemen her zaman azalan sırada
+  (a > b > c); hizayı çözerken bu iyi bir çapraz kontrol.
 
 ---
 
@@ -294,11 +295,11 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 56 üniversite · 1828 eşik · 69 cetvel |
+| Girildi | 57 üniversite · 1843 eşik · 70 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
-| Kaynak sorunuyla bekleyen | 6 (İnönü, İstanbul, İTÜ, Dokuz Eylül, Balıkesir, Iğdır) |
+| Kaynak sorunuyla bekleyen | 5 (İnönü, İstanbul, İTÜ, Dokuz Eylül, Balıkesir) |
 | Girilmemiş, engeli bilinmeyen | ~100 |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
