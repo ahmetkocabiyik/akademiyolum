@@ -1,0 +1,295 @@
+# Yönerge girişi konvansiyonları
+
+Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyaları
+yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
+oturumun) aynı kararları vererek sürdürebilmesi.
+
+44 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+"neden" kısımları o yüzden önemli.
+
+---
+
+## 0. Temel kural: EKSİK SAY, FAZLA SAYMA
+
+Bir belirsizlikle karşılaştığında **adayın puanını düşük gösteren** tarafı seç.
+
+Gerekçe: Bu araç adaya "başvurabilirsin" diyor. Fazla sayarsak aday hazır
+olmadığı bir başvuruya girer ve reddedilir. Eksik sayarsak aday gereğinden fazla
+çalışır — can sıkıcı ama zararsız.
+
+Pratikte:
+
+- İki cetvel satırı aynı kaynağa düşüyorsa **düşük puanlı** olanı gir.
+- Kesirli puanı **aşağı** yuvarla (`intdiv`, `floor`).
+- Bir kalemin puanını belirleyen nitelik faaliyet kaydında yoksa (çağrılı makale,
+  tezden üretilmiş yayın, bireysel/grup patent) **düşük satırı** gir.
+- Cetvele girmeyen bir bölüm koşulun kümesindeyse, koşulu yine de gir ama
+  dosya başlığında ve `kapsam_notu`'nda "baraj olduğundan zor görünür" diye
+  uyar.
+- **İstisna:** koşulun tamamı girilemeyen bir bölüme dayanıyorsa o eşiği HİÇ
+  yazma. Yarısı eksik bir baraj, adaya asla sağlayamayacağı bir hedef gösterir.
+  (Bitlis ve Bayburt'ta Güzel Sanatlar böyle bırakıldı.)
+
+---
+
+## 1. Cetvel dosyası (`database/data/cetvel/`)
+
+### Dosya adı
+
+`{universite-kisa}-{yil}.php` — yıl, yönergenin yürürlük ya da kabul yılı.
+Örnek: `tarsus-2023.php`, `bandirma-2024.php`.
+
+### Madde kodları
+
+**Yönergenin kendi kodlarını birebir koru.** Koşullar tabloya kodla atıf yapıyor
+("A.1-A.8 kategorilerinden", "1, 2, 6, 10 numaralı maddelerden"); kod
+değiştirilirse koşulla cetvel arasındaki bağ kopar ve `SartAgaciTest` bunu
+yakalayamaz.
+
+Bir madde alt şıklara bölünüyorsa nokta veya harf ekle: `A.1.1`, `1.a`, `4.1.b`.
+Kendi uydurduğun alt kod varsa (ör. çeyrekliğe göre böldüğün satırlar) yorum
+satırında belirt: `// Kodlar (a-d) bize ait.`
+
+### Grup deseninde NOKTA ZORUNLU
+
+```php
+// YANLIŞ — 'A.1*' deseni 'A.10.1' atıf kalemini de yakalar
+'A.1-A.8' => ['A.1*', 'A.2*', ...],
+
+// DOĞRU
+'A.1-A.8' => ['A.1.*', 'A.2.*', ...],
+```
+
+Aynı tuzak tek haneli numaralarda daha da sinsi: `'1*'` deseni 10-19 arasını da
+yakalar. Karabük, Manisa CBÜ, Bingöl, Bayburt ve Kilis'te bu yüzden bütün
+gruplarda `'1.*'` biçimi kullanıldı. Numaralar tek haneli ve alt kodu yoksa
+kümeyi **tek tek say** (Manisa CBÜ'de 46 kod elle yazıldı).
+
+### Kaynak sözlüğü
+
+`kaynaklar` alanındaki değerler `App\Enums\Kategori::kaynaklar()` içinde tanımlı
+sabit listeden gelir; yeni kaynak uydurma. Mevcut listeyi görmek için:
+
+```bash
+php artisan tinker --execute 'print_r(App\Enums\Kategori::Makale->kaynaklar());'
+```
+
+Bir yönerge kalemi sözlükte karşılıksızsa **girme** ve dosya başlığındaki
+"GİRİLMEYEN KALEMLER" bölümüne yaz.
+
+### Yazar katsayısı
+
+`yazar_katsayisi.roller` altında her rol için `kademeler` (yazar sayısı → çarpan),
+`sonrasi` (kademelerin dışı), `bol` (`pay / (n − eksi) + ek`) ya da `sonrasi_pay`
+kullanılabilir. Çarpan hiçbir zaman 1.0'ı aşamaz (motor `min(1.0, …)` uyguluyor).
+
+- Çarpan **yalnızca sıraya** bağlıysa (Karabük, Bingöl, Hakkari) bütün roller
+  `sonrasi` kullanır, `kademeler` boş kalır.
+- Çarpan **yalnızca kişi sayısına** bağlıysa (Tarsus) bütün roller aynı
+  `kademeler`i paylaşır.
+- `ortak` rolü (aday sırasını belirtmemiş) o yazar sayısındaki **en düşük**
+  satırı almalı.
+- `baslica`, yönerge "sorumlu yazar 1. isim gibi sayılır" diyorsa `ilk` ile aynı
+  satırı alır.
+- `haric` alanına, yönergenin kendi paylaşım kuralını yazdığı kategorileri koy
+  (proje, patent, editörlük, ödül genelde böyledir) ve nedenini başlıkta yaz.
+
+### Grup tavanları
+
+`grup_tavanlari` yalnızca **sabit** tavan alır (`'ATIF' => 75`). Yüzdeye bağlı
+tavan ("toplam puanın %20'sini aşamaz") ya da başka bir grubun toplamına bağlı
+tavan motorda yok — uygulanmaz, `kapsam_notu`'nda uyarılır.
+
+### `kapsam_notu`
+
+Adayın gördüğü metin. Şunları söylemeli:
+
+1. Puanların kaynağı.
+2. Yazar çarpanı nasıl işliyor ve ne zaman uygulanamıyor ("yazar listesini boş
+   bırakırsanız").
+3. **Hangi yönde saptığı**: "puanınız olduğundan yüksek/düşük görünebilir".
+4. Girilemeyen bölümler ve bunun kimi etkilediği.
+
+---
+
+## 2. Yönerge dosyası (`database/data/yonerge/`)
+
+### Dosya başlığı
+
+Docblock, dosyanın en değerli parçası. Şunları içermeli:
+
+- Kaynak PDF ve yönergenin tarihi/karar numarası.
+- Alan gruplarının nasıl ayrıldığı.
+- **Bu yönergeyi diğerlerinden ayıran şey** (üç katmanlı baraj, ders barajı,
+  ÜAK'a devretme, kayan pencere…).
+- Girilmeyen her şey ve **nedeni**.
+- Yorum gerektiren her karar ("yüzde sabit puana çevrildi", "kesirli değer aşağı
+  yuvarlandı", "yüksek olan yazıldı çünkü…").
+
+### Aday metinleri: KOD YASAK
+
+`aciklama` alanları adaya gösteriliyor. Yönergenin kodlarını oraya yazma.
+
+```php
+// YANLIŞ
+'1(a,b,c) kapsamında en az 40 puan'
+'A.1-A.4 kapsamında en az 20 puan'
+'EK-1 kalemlerinden toplam en az 1000 puan'
+
+// DOĞRU
+'SCI, SSCI veya AHCI dergilerindeki makalelerinizden en az 40 puan'
+'Makale ve kitap kalemlerinizden en az 20 puan'
+'Tüm faaliyetlerden toplam en az 1000 puan'
+```
+
+Kod, düğümün `madde` alanına yazılır (`madde: 'Madde 8.1/e'`); testler de oraya
+bakar, böylece metin değişince test kırılmaz.
+
+`Kalip::toplam`'ın `liste` argümanı yalnızca **kapsam daraldığında** ve düz
+Türkçe verilir. Kapsam cetvelin tamamıysa hiç verme.
+
+### Kalıplar
+
+| Kalıp | Ne zaman |
+|---|---|
+| `Kalip::toplam($puan, $donem, $maddeler, $liste)` | genel puan barajı |
+| `Kalip::puanDan($aciklama, $maddeler, $puan, $donem, madde:)` | alt baraj |
+| `Kalip::adet($aciklama, $maddeler, $sayi, $yazar, $donem, telafi:, madde:)` | sayı koşulu |
+| `Kalip::beyan($aciklama, $madde)` | kayıttan hesaplanamayan koşul |
+| `Kalip::yds($puan)` | yabancı dil |
+| `Kalip::ve` / `Kalip::veya` | birleştirici |
+| `Kalip::sonYil($yil, $baslangic)` | kayan pencere (Düzce, Akdeniz) |
+
+Dönem sabitleri: `DOKTORA_SONRASI`, `DOCENTLIK_SONRASI`, `SON_ATAMA_SONRASI`.
+
+### `beyan` ne zaman
+
+Koşul faaliyet kaydından **hesaplanamıyorsa**. Örnekler: "başlıca araştırma
+eseri olarak sunmak", "5 yıl çalışmış olmak", "deneme dersinden 75 almak",
+"2 eserine 30 atıf yapılmış olmak" (kayıt atıf sayısını tutar, atıf alan eser
+sayısını değil).
+
+Hesaplanabilir bir koşulu beyana çevirme; beyan, adayın kendi onayına bırakılan
+şeydir.
+
+### `birim` ne zaman
+
+Aynı (üniversite, kadro, temel alan) üçlüsü için **birden fazla eşik** varsa.
+Motor `bul()` içinde birden fazla aday bulursa `birim` ile ayırır; birim boşsa
+`null` döner ve üniversite o alanda kapsam dışı görünür.
+
+Kullanıldığı yerler: Sabancı (program bazlı), Karabük (tıp/diş/eczacılık
+fakülteleri), Bingöl (Güzel Sanatlar ve Müzik alt alanları), Tarsus (Matematik ve
+İstatistik).
+
+### Yönergenin anmadığı alanlar
+
+Bir yönerge yalnızca "Fen, Mühendislik, Sağlık / Sosyal, Eğitim, Güzel Sanatlar"
+diyorsa hukuk, ilahiyat, filoloji, spor, ziraat için eşik **yazma**. O alanları
+bir gruba katmak, adaya yönergede yazmayan bir baraj göstermek olur. Kapsam dışı
+kalması doğrusudur; Yönerge Analizi sayfası zaten bunu listeliyor.
+
+### Girilmeyen tipik koşullar
+
+- **Yeniden atanma**: koşullar genelde "her yıl için N puan" ya da "son atama
+  tarihinden sonra" biçiminde; atama tarihi ve dönem uzunluğu profilde yok.
+  Aday notunda anlat, eşik yazma.
+- **Yüzdeye bağlı hesap**: sabit puana çevrilebiliyorsa çevir (toplam biliniyorsa
+  "%50'si" → sayı). Çevrilemiyorsa girme.
+- **Kurum/süre bilgisi gerektiren koşullar**: "üniversite dışından geliyorsa",
+  "3 aydan uzun yurt dışı araştırma".
+
+---
+
+## 3. Doğrulama sırası
+
+Her üniversiteden sonra, bu sırayla:
+
+```bash
+php -l database/data/cetvel/YENI.php && php -l database/data/yonerge/YENI.php
+vendor/bin/pint --dirty --format agent          # --dirty ŞART, yoksa ilgisiz dosyaları biçimler
+php artisan test --compact                       # 275 test; madde referans testi asıl ağ
+vendor/bin/phpstan analyse --no-progress         # 14 hata baseline; artmamalı
+```
+
+Sonra grupların gerçekten çözüldüğünü gör:
+
+```bash
+php artisan tinker --execute '
+$d = app(App\Services\Scoring\Sart\SartDeposu::class);
+$k = $d->katalog("YENI-CETVEL");
+foreach (["GRUP_ADI"] as $g) printf("%-20s %d\n", $g, count($k->coz([$g])));'
+```
+
+**`SartAgaciTest` içindeki madde referans testi** korpusun ana güvenlik ağı:
+koşulun andığı her madde deseninin cetvelde karşılığı olduğunu doğrular. Yanlış
+kod yazılırsa koşul hata vermez, sessizce hiçbir faaliyeti saymaz — bu test dört
+sessiz hatayı yakaladı.
+
+---
+
+## 4. PDF'ten tablo çıkarma
+
+`pdftotext -q -layout` ile başla. Sonra sütun konumunu bul:
+
+```bash
+python3 -c "
+import re, io, collections
+L = io.open('cikti.txt', encoding='utf-8').read().split('\n')
+c = collections.Counter()
+for t in L:
+    for m in re.finditer(r'(?<=\s)\d{1,4}(?=\s*\$)', t): c[m.start()] += 1
+print(c.most_common(6))"
+```
+
+En sık görülen konum puan sütunudur; gövdeyi `t[:konum]`, puanı `t[konum:]`
+diye böl.
+
+### Tekrar eden tuzaklar
+
+- **Sayfa numarası puan sütununa karışıyor.** Sütun konumuyla ayır; sayfa
+  numarası genelde farklı kolonda.
+- **Madde numarası, metin ve puan üç ayrı satırda.** Numara göründüğünde önceki
+  maddeyi kapatan bir birikim mantığı gerekir (Iğdır'da bu yüzden çıkarılamadı).
+- **Çok değerli hücre** (`20/5`, `Q1 200 / Q2 160`): ayrı maddelere böl.
+- **Olumsuzlama devam satırında** ("… hariç olmak üzere"): puan ilk satırdaysa
+  madde erken kapanır ve olumsuzlama kaybolur. Çukurova'da bir kalem bu yüzden
+  tamamen düşmüştü.
+- **Python `İ`.lower()** birleşik nokta üretir; `İ`→`i` elle değiştir. Ama
+  `I`→`ı` yapma, ASCII kısaltmaları bozar (SCI→scı).
+
+---
+
+## 5. Commit
+
+Üniversite başına bir commit. Mesaj gövdesi şunları saymalı:
+
+- Ne girildi, korpusun yeni sayısı.
+- Bu yönergeyi ayıran yapısal özellik.
+- Verilen her yorum kararı ve **hangi yönde saptığı**.
+- Girilmeyenler ve nedeni.
+
+Girilemeyen yönergeler `GIRILEMEYEN-YONERGELER.md`'ye yazılır: tam engeller,
+kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
+
+---
+
+## 6. Kuyruğun bugünkü hâli
+
+179 PDF içinde:
+
+| Durum | Sayı |
+|---|---|
+| Girildi | 44 |
+| Taranmış (metin yok) | 10 |
+| Yönerge değil (üst yazı) | 1 |
+| **Kendi puan tablosu olmayan** | ~15 |
+| Kendi puan tablosu olan | ~110 |
+
+**Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
+yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
+kullanır). Bunlardan bazıları: İskenderun Teknik, Boğaziçi, Galatasaray,
+Yeditepe, Bezmiâlem, İstanbul Ticaret, Çankaya, Munzur, TED, Atılım.
+
+Sıradaki iş bu grupla başlarsa hem hızlı ilerler hem de `uak-2024-mart` cetvelinin
+kapsamı gerçek kullanımla sınanmış olur.
