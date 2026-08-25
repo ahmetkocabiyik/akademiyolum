@@ -156,6 +156,43 @@ gerekiyor; tek satırlık kolon dilimlemesi bu tabloda yetmiyor.
 
 ---
 
+## Taranmış (metin katmanı olmayan) PDF'ler
+
+Aşağıdaki dosyalar görüntü olarak taranmış: `pdftotext` sıfır bayt metin
+döndürüyor. Hiçbiri okunamıyor, dolayısıyla hiçbiri girilemiyor. Karadeniz
+Teknik zaten yukarıda ayrı başlıkta anılıyordu; taramayla gelen sorun tek
+değilmiş.
+
+| Üniversite | Dosya | Sayfa |
+|---|---|---|
+| Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.pdf` | — |
+| Karamanoğlu Mehmetbey | `17536999512.karamanoglumehmetbeyuniverstesi.pdf` | 15 |
+| Tekirdağ Namık Kemal | `17537009192.tekirdagnamikkemaluniverstesi.pdf` | 19 |
+| Kırklareli | `1770040975746.kirklareli-kriter-02022026.pdf` | 18 |
+| Bilecik Şeyh Edebali | `1785927020751.bilecik-seyh-edebali-kriter-16102025.pdf` | 18 |
+| Sağlık Bilimleri | `1765867210191.saglik-bilimleri-kriter-16122025.pdf` | 11 |
+| Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.pdf` | 25 |
+| İstanbul Okan | `17537100352.istanbulokanuniversitesi.pdf` | 14 |
+| Biruni | `17537097592.biruniuniversitesi.pdf` | 6 |
+
+Ayrıca `17537003802.mersinuniverstesi.pdf` de taranmış; Mersin korpusta zaten
+var, demek ki başka bir kaynaktan girilmiş.
+
+**Devam edilirse:** Bu dosyalar için ya OCR (ör. `ocrmypdf`) gerekiyor ya da
+yönergelerin metin sürümünü üniversitelerin kendi sitelerinden indirmek. OCR
+çıktısı puan tablolarında güvenilmez olabilir; sayı okuma hatası puanı sessizce
+bozar, o yüzden OCR sonrası her tablo kaynakla karşılaştırılmalı.
+
+---
+
+## Yönerge değil, üst yazı
+
+- **Burdur Mehmet Akif Ersoy** (`17536991522.burdurmehmetakifersoyuniverstesi.pdf`,
+  87 satır): dosya yönergenin kendisi değil, YÖK'e gönderilen 17/02/2016 tarihli
+  yönerge değişikliği üst yazısı. Ölçüt metni ve puan tablosu yok.
+
+---
+
 # Kısmen girilen yönergeler
 
 Aşağıdaki üniversiteler korpusa girdi, ama yönergenin bir parçası kaynak
