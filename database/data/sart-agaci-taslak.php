@@ -34,8 +34,9 @@
 |    'oran_payda' => list<kod>|['*'],
 |    'donem'      => dönem|null,
 |    'telafi'     => düğüm|null,
-|    'telafi_carpani' => int|null]    // telafi düğümünde: gereken puan = eksik × çarpan
-|                                     // (Trabzon "her eksik puanın iki katı")
+|    'telafi_carpani' => int|null]    // telafi düğümünde: gereken = min_puan + eksik × çarpan
+|                                     // (Trabzon "her eksik puanın iki katı FAZLA
+|                                     //  puan": min_puan taban, çarpanlı miktar üstüne)
 |
 | YAPRAK 'adet'   — bir madde kümesinden asgari eser sayısı
 |   ['tip' => 'adet', 'aciklama' => string,
@@ -962,8 +963,8 @@ return [
                         'tip' => 'puan',
                         'aciklama' => 'Eksik kalan her puanın iki katı 1.1.1-1.3.4.1 kodlarından',
                         'maddeler' => ['1.1.1..1.3.4.1'],
-                        'min_puan' => 0,          // taban yok; gereken miktar eksikten türetilir
-                        'telafi_carpani' => 2,    // gereken = eksik_puan * 2
+                        'min_puan' => 12,         // taban: yayınlardan istenen ilk %30 durmaya devam eder
+                        'telafi_carpani' => 2,    // gereken = 12 + eksik_puan * 2
                         'donem' => $doktoraSonrasi,
                     ],
                 ],

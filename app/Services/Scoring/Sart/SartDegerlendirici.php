@@ -157,9 +157,12 @@ class SartDegerlendirici
         $iyimser = $mevcut + $this->puanTopla($muhtemel, $kodlar);
 
         // Telafi düğümünde gereken miktar ana koşulun açığından türeyebilir
-        // (Trabzon: "her eksik puanın iki katı").
+        // (Trabzon: "her eksik puanın iki katı FAZLA puan"). `min_puan` bu
+        // durumda taban olarak kalır ve türetilen miktar ONUN ÜSTÜNE biner:
+        // Trabzon'da telafiye giren aday, yayınlardan istenen ilk barajdan
+        // muaf olmuyor, açığın iki katını ona ek olarak sağlıyor.
         if (isset($dugum['telafi_carpani']) && $devirEksik !== null) {
-            $gerekli = $devirEksik * (int) $dugum['telafi_carpani'];
+            $gerekli = (int) ($dugum['min_puan'] ?? 0) + $devirEksik * (int) $dugum['telafi_carpani'];
         } elseif (isset($dugum['min_oran'])) {
             $paydaKodlar = $this->katalog->coz($dugum['oran_payda'] ?? ['*']);
             [$paydaKesin] = $this->ayikla($this->uyanlar($faaliyetler, $paydaKodlar), $dugum, $profil);

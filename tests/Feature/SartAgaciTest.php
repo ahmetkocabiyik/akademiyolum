@@ -2476,3 +2476,105 @@ test('Artvin profesörlükte dört alan grubunu farklı kuruyor', function () {
     // Eğitim'de makale SAYISI ayrıca şart (9/ç-3), diğerlerinde yok.
     expect($maddeler('egitim'))->toContain('Madde 9/ç-3');
 });
+
+test('Trabzon: ikinci %30 eksikse açığın iki katı yayınlardan isteniyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Trabzon Üniversitesi', 'docentlik', 'sosyal');
+    $ad = 'Ödül, proje ve patent kalemlerinizden en az 12 puan';
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2018-01-01'));
+
+    // Uluslararası indeksli makale 8 puan; ödül-proje-patent hanesi boş.
+    $makale = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+    $odul = fn () => sartFaaliyet('Ulusal Bilim/Sanat Ödülü', Kategori::Odul, null, '2024-01-01');
+
+    // Dört makale = 32 puan. Açık 12; telafi 12 taban + 12 × 2 = 36 istiyor.
+    $az = sartDugum($depo->degerlendir($esik, [$makale(), $makale(), $makale(), $makale()], $profil), $ad);
+
+    expect($az->mevcut)->toBe(0)
+        ->and($az->telafi->gerekli)->toBe(36)
+        ->and($az->telafi->mevcut)->toBe(32)
+        ->and($az->durum)->toBe(Durum::Saglanmadi);
+
+    // Altı makale = 48 puan: aynı açık, aynı 36 puanlık telafi, bu kez karşılanıyor.
+    $yeter = sartDugum(
+        $depo->degerlendir($esik, array_map($makale, range(1, 6)), $profil), $ad,
+    );
+
+    expect($yeter->durum)->toBe(Durum::Saglandi)
+        ->and($yeter->telafiIleSaglandi())->toBeTrue();
+
+    // Ödül açığı küçülünce telafi de küçülüyor: 10 puanlık ödülle açık 2'ye
+    // düşer, telafi 12 + 2 × 2 = 16 ister ve dört makale yeter.
+    $kismi = sartDugum($depo->degerlendir($esik, [$odul(), $makale(), $makale(), $makale(), $makale()], $profil), $ad);
+
+    expect($kismi->mevcut)->toBe(10)
+        ->and($kismi->telafi->gerekli)->toBe(16)
+        ->and($kismi->durum)->toBe(Durum::Saglandi);
+
+    // Ödül tek başına barajı geçerse telafi hiç devreye girmez.
+    $tam = sartDugum($depo->degerlendir($esik, [$odul(), $odul()], $profil), $ad);
+
+    expect($tam->mevcut)->toBe(20)
+        ->and($tam->telafiIleSaglandi())->toBeFalse();
+});
+
+test('Trabzon barajı temel alana değil birime bağlı', function () {
+    $depo = sartDepo();
+
+    $gerekli = function (string $kadro, string $alan, ?string $birim = null) use ($depo): int {
+        $esik = $depo->bul('Trabzon Üniversitesi', $kadro, $alan, $birim);
+
+        return collect($esik['sart']['cocuklar'])->firstWhere('rol', 'toplam')['min_puan'];
+    };
+
+    // Dr. Öğr. Üyeliğinde bütün birimler aynı: 10 puan.
+    expect($gerekli('dr_ogr_uyesi', 'sosyal'))->toBe(10)
+        ->and($gerekli('dr_ogr_uyesi', 'hukuk'))->toBe(10)
+        ->and($gerekli('dr_ogr_uyesi', 'guzel_sanatlar'))->toBe(10);
+
+    // Doçent ve profesörlükte Hukuk düşük barajlı.
+    expect($gerekli('docentlik', 'sosyal'))->toBe(40)
+        ->and($gerekli('docentlik', 'hukuk'))->toBe(28)
+        ->and($gerekli('profesorluk', 'sosyal'))->toBe(60)
+        ->and($gerekli('profesorluk', 'hukuk'))->toBe(42);
+
+    // Aynı temel alanın iki birimi farklı baraja tabi; birim seçilmeden eşik
+    // bulunamaz, çünkü hangisinin doğru olduğu bilinemez.
+    expect($gerekli('docentlik', 'guzel_sanatlar', 'Güzel Sanatlar Fakültesi'))->toBe(28)
+        ->and($gerekli('docentlik', 'guzel_sanatlar', 'Devlet Konservatuvarı'))->toBe(40)
+        ->and($depo->bul('Trabzon Üniversitesi', 'docentlik', 'guzel_sanatlar'))->toBeNull();
+});
+
+test('Trabzon yazar çarpanı sıra ve sayı matrisini birlikte uyguluyor', function () {
+    $katalog = sartDepo()->katalog('trabzon-2025');
+    $kodlar = array_keys($katalog->maddeler);
+
+    $puan = function (?string $rol, int $yazarSayisi) use ($katalog, $kodlar): int {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: $rol);           // 1.1.1.1 → 8 puan
+        $f->yazarlar = implode(', ', array_map(fn ($i) => "Yazar {$i}", range(1, $yazarSayisi)));
+
+        return $katalog->puan($f, $kodlar);
+    };
+
+    // 1. isim: üç yazarlıda 0,90 → 7; altı yazarlıda 0,75 → 6.
+    expect($puan('ilk', 3))->toBe(7)
+        ->and($puan('ilk', 6))->toBe(6);
+
+    // 3. isim üç yazarlıda 0,75 → 6; dört yazarlıda 0,70 → 5.
+    expect($puan('yazar_3', 3))->toBe(6)
+        ->and($puan('yazar_3', 4))->toBe(5);
+
+    // "6. yazar veya sonrası" 6-8 yazarlı eserde zorunlu olarak 0,35 satırında
+    // (→ 2); dokuz ve üzeri yazarda 0,25 olabileceği için düşük satır alınır.
+    expect($puan('yazar_6', 7))->toBe(2)
+        ->and($puan('yazar_6', 9))->toBe(2);
+
+    // Sırasını belirtmeyen ve "başlıca yazar" diyen aday, o yazar sayısındaki
+    // en düşük satırı alır: yönergenin Tablo 3'ü sorumlu yazara ayrıcalık
+    // tanımıyor, sıra bilinmeden yüksek satır verilemez.
+    expect($puan('ortak', 3))->toBe(6)
+        ->and($puan('baslica', 3))->toBe(6);
+
+    // Yazar listesi boşsa çarpan hiç uygulanmaz.
+    expect($puan('ortak', 1))->toBe(8);
+});

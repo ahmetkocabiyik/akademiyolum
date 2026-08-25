@@ -282,39 +282,6 @@ sitesinden indirmek ya da PDF'i yeniden OCR'lamak gerekiyor (`ocrmypdf --force-o
 
 ---
 
-## Trabzon Üniversitesi
-
-**Dosya:** `pdf/17537009582.trabzonuniverstesi.pdf` (324 satır)
-
-**Koşullar ve Tablo 1 temiz çıktı, Tablo 2'nin yarısı çıkmadı.**
-
-Okunabilen kısım:
-
-- **Tablo 1** (fakülte × kadro asgari puanları) eksiksiz: bütün fakültelerde
-  Dr. 10, doçent 40, profesör 60; yalnızca Güzel Sanatlar ve Hukuk'ta 28 / 42.
-- **Koşul metni** eksiksiz. Dikkat çeken iki kural:
-  - Dr. Öğr. Üyeliğinde "öngörülen puanın en az **2/3'ü makalelerden**".
-  - Doçent ve profesörlükte puan üç parçaya bölünüyor: **%30'u 1.1.1-1.3.4.1**
-    (yayınlar), **%30'u 2.1.1-2.4.4** (ödül, proje, patent), kalan %40 serbest.
-    İkinci %30'u toplayamayan aday, **eksik puanın İKİ KATINI** yayın
-    kalemlerinden sağlamak zorunda — korpusta telafiyi çarpanla kuran ilk kural.
-- **Tablo 2'nin 1.x bölümü** (makale, bildiri, kitap) temiz çıktı.
-
-Çıkmayan kısım: **Tablo 2'nin 2.x ve 3.x bölümleri.** Satır etiketleri bir
-sonraki satıra kayıyor ve puan sütunu birçok satırda boş okunuyor (`2.1.2`,
-`2.2.1`, `2.4.1`-`2.4.4`, `3.1.1` hep 0 çıkıyor). Bunlar tam olarak doçent ve
-profesörlük koşulunun **ikinci %30'unu** oluşturan kalemler.
-
-**Neden bekletildi:** 2.x bölümü olmadan doçent ve profesör eşikleri
-yazılamaz — koşulun üçte biri o kalemlere bağlı. 1.x'i girip 2.x'i boş
-bırakmak, adaya hiçbir zaman sağlayamayacağı bir alt baraj gösterirdi.
-
-**Devam edilirse:** Tablo 2 için satır-birleştirmeli bir okuma gerekiyor
-(numara göründüğünde önceki maddeyi kapatan mantık; Iğdır'da da aynı sorun
-var). Tablo 1 ve koşul metni hazır, iş yalnızca Tablo 2'nin ikinci yarısında.
-
----
-
 # Kısmen girilen yönergeler
 
 Aşağıdaki üniversiteler korpusa girdi, ama yönergenin bir parçası kaynak

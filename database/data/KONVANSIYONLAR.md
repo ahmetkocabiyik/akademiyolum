@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-44 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+56 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -20,7 +20,10 @@ olmadığı bir başvuruya girer ve reddedilir. Eksik sayarsak aday gereğinden 
 Pratikte:
 
 - İki cetvel satırı aynı kaynağa düşüyorsa **düşük puanlı** olanı gir.
-- Kesirli puanı **aşağı** yuvarla (`intdiv`, `floor`).
+- Kesirli **puanı** aşağı yuvarla (`intdiv`, `floor`).
+- Kesirli **barajı** YUKARI yuvarla (`ceil`). Yön aynı, işlem ters: puanı aşağı,
+  eşiği yukarı yuvarlamak ikisi de adayı olduğundan hazır göstermez. (Trabzon'da
+  28 × %30 = 8,4 → 9 alındı.)
 - Bir kalemin puanını belirleyen nitelik faaliyet kaydında yoksa (çağrılı makale,
   tezden üretilmiş yayın, bireysel/grup patent) **düşük satırı** gir.
 - Cetvele girmeyen bir bölüm koşulun kümesindeyse, koşulu yine de gir ama
@@ -180,7 +183,11 @@ Motor `bul()` içinde birden fazla aday bulursa `birim` ile ayırır; birim boş
 
 Kullanıldığı yerler: Sabancı (program bazlı), Karabük (tıp/diş/eczacılık
 fakülteleri), Bingöl (Güzel Sanatlar ve Müzik alt alanları), Tarsus (Matematik ve
-İstatistik).
+İstatistik), Trabzon (Güzel Sanatlar Fakültesi ↔ Devlet Konservatuvarı).
+
+Eşiği temel alana değil FAKÜLTEYE bağlayan yönergelerde (Trabzon Tablo 1) fakülte
+→ temel alan eşlemesi yapılır; iki fakülte aynı temel alana düşüp farklı baraj
+veriyorsa ayrım yalnızca `birim` ile kurulabilir.
 
 ### Yönergenin anmadığı alanlar
 
@@ -257,6 +264,13 @@ diye böl.
   tamamen düşmüştü.
 - **Python `İ`.lower()** birleşik nokta üretir; `İ`→`i` elle değiştir. Ama
   `I`→`ı` yapma, ASCII kısaltmaları bozar (SCI→scı).
+- **Sütun dilimlemesi tabloyu düşürebilir, PDF suçsuz olabilir.** Trabzon'un
+  Tablo 2'si bir tur "2.x ve 3.x çıkmıyor" diye bekletildi; oysa düz
+  `pdftotext -q -layout` çıktısında 95 satırın hepsi puanıyla duruyordu. Kayıp
+  sütun dilimlemesinden geliyordu. Bir tabloyu okunamaz ilan etmeden önce HAM
+  `-layout` çıktısına bak: satır etiketi kayıyor gibi görünen tablolarda puan
+  çoğu zaman kodun bulunduğu satırda, açıklama ise onun altında ve üstünde
+  duruyor.
 
 ---
 
@@ -280,16 +294,18 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 44 |
+| Girildi | 56 üniversite · 1828 eşik · 69 cetvel |
 | Taranmış (metin yok) | 10 |
+| Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
-| **Kendi puan tablosu olmayan** | ~15 |
-| Kendi puan tablosu olan | ~110 |
+| Kaynak sorunuyla bekleyen | 6 (İnönü, İstanbul, İTÜ, Dokuz Eylül, Balıkesir, Iğdır) |
+| Girilmemiş, engeli bilinmeyen | ~100 |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
-kullanır). Bunlardan bazıları: İskenderun Teknik, Boğaziçi, Galatasaray,
-Yeditepe, Bezmiâlem, İstanbul Ticaret, Çankaya, Munzur, TED, Atılım.
+kullanır). Bu şeridin girilenleri: İskenderun Teknik, Boğaziçi, Galatasaray,
+İstanbul Medipol, İstanbul Galata, İstanbul Topkapı, Bezmiâlem, İstanbul
+Ticaret, TED, Atılım. Bekleyenler `GIRILEMEYEN-YONERGELER.md`'de.
 
-Sıradaki iş bu grupla başlarsa hem hızlı ilerler hem de `uak-2024-mart` cetvelinin
-kapsamı gerçek kullanımla sınanmış olur.
+Kalanların çoğu kendi puan tablosunu taşıyor; her biri cetvel çıkarma +
+koşul girme adımını birlikte istiyor.
