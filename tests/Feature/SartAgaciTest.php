@@ -2662,3 +2662,93 @@ test('Iğdır alana göre farklı kapı kuruyor: sayı, kitap ya da alt baraj', 
         ->and($tam->mevcut)->toBe(600)
         ->and($tam->durum)->toBe(Durum::Saglandi);
 });
+
+test('İnönü aynı temel alanı iki birime ayırıyor', function () {
+    $depo = sartDepo();
+    $tip = 'Tıp ve Diş Hekimliği Fakülteleri';
+    $saglik = 'Sağlık Bilimleri, Hemşirelik ve Eczacılık Fakülteleri';
+
+    $toplam = function (string $kadro, ?string $birim) use ($depo): ?int {
+        $esik = $depo->bul('İnönü Üniversitesi', $kadro, 'saglik', $birim);
+
+        return $esik === null
+            ? null
+            : collect($esik['sart']['cocuklar'])->firstWhere('rol', 'toplam')['min_puan'];
+    };
+
+    // Yönerge Tıp/Diş ile Sağlık Bilimlerini ayrı sütunlarda tutuyor.
+    expect($toplam('dr_ogr_uyesi', $tip))->toBe(500)
+        ->and($toplam('dr_ogr_uyesi', $saglik))->toBe(700)
+        ->and($toplam('profesorluk', $tip))->toBe(2500)
+        ->and($toplam('profesorluk', $saglik))->toBe(3000);
+
+    // Birim seçilmeden hangisinin geçerli olduğu bilinemez.
+    expect($toplam('docentlik', null))->toBeNull();
+
+    // İlahiyat kendi sütununda değil; yönerge onu sosyal alanın içinde sayıyor.
+    expect($depo->bul('İnönü Üniversitesi', 'docentlik', 'ilahiyat')['anahtar'])
+        ->toBe('inonu-sosyal-docent-ilahiyat');
+
+    // Ziraat Madde 4'ün saydığı on bir alanda yok.
+    expect($depo->bul('İnönü Üniversitesi', 'docentlik', 'ziraat'))->toBeNull();
+});
+
+test('İnönü ek koşul bloğu alternatiflerden biriyle sağlanıyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('İnönü Üniversitesi', 'docentlik', 'fen');
+    $ad = 'Ek koşullardan en az biri sağlanmalı';
+
+    // Hiçbir alternatif sağlanmıyor ama FWCI ve iş birliği dalları BEYAN:
+    // motor kesin ret vermemeli, belirsiz kalmalı.
+    $bos = sartDugum($depo->degerlendir($esik, [], new Profil), $ad);
+    expect($bos->durum)->toBe(Durum::Belirsiz);
+
+    // h-indeksi 7'ye ulaşınca blok sağlanır.
+    $hIndeks = sartDugum($depo->degerlendir($esik, [], new Profil(hIndeksi: 7)), $ad);
+    expect($hIndeks->durum)->toBe(Durum::Saglandi);
+
+    // h-indeksi düşükken tek bir patent de bloğu açar.
+    $patent = sartDugum(
+        $depo->degerlendir($esik, [sartFaaliyet('Ulusal Patent', Kategori::Patent, null)], new Profil(hIndeksi: 2)),
+        $ad,
+    );
+    expect($patent->durum)->toBe(Durum::Saglandi);
+
+    // Yurt dışı araştırma deneyimi doçentlikte 3 ay, profesörlükte 6 ay.
+    $profesor = $depo->bul('İnönü Üniversitesi', 'profesorluk', 'fen');
+    expect(sartDugum($depo->degerlendir($esik, [], new Profil(yurtdisiAy: 3)), $ad)->durum)
+        ->toBe(Durum::Saglandi)
+        ->and(sartDugum($depo->degerlendir($profesor, [], new Profil(yurtdisiAy: 3)), $ad)->durum)
+        ->toBe(Durum::Belirsiz);
+});
+
+test('İnönü makale puanını çeyrekliğe ve yayın türüne göre ayırıyor', function () {
+    $katalog = sartDepo()->katalog('inonu-2026');
+    $kodlar = array_keys($katalog->maddeler);
+
+    $puan = function (string $kaynak, string $tur) use ($katalog, $kodlar): int {
+        $f = sartFaaliyet($kaynak);
+        $f->yayin_turu = $tur;
+
+        return $katalog->puan($f, $kodlar);
+    };
+
+    // A.1 çeyreklik kademeleri.
+    expect($puan('SCIE/SSCI (Q1)', 'ozgun_makale'))->toBe(200)
+        ->and($puan('SCIE/SSCI (Q3)', 'ozgun_makale'))->toBe(90)
+        ->and($puan('TR Dizin', 'ozgun_makale'))->toBe(40);
+
+    // A.6: aynı dergilerde derleme, teknik not ve özet satır puanının 1/3'ü.
+    expect($puan('SCIE/SSCI (Q1)', 'derleme'))->toBe(66)
+        ->and($puan('SCIE/SSCI (Q1)', 'vaka_teknik_not'))->toBe(66)
+        ->and($puan('TR Dizin', 'derleme'))->toBe(13);
+
+    // Yazar çarpanı A-D bölümlerinde işler, projede işlemez (Madde 12).
+    $cokYazarli = sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: 'yazar_3');
+    $cokYazarli->yazarlar = 'A, B, C, D';
+    expect($katalog->puan($cokYazarli, $kodlar))->toBe(130);          // 200 × 0,65
+
+    $proje = sartFaaliyet('TÜBİTAK', Kategori::Proje, 'yurutucu');
+    $proje->yazarlar = 'A, B, C, D';
+    expect($katalog->puan($proje, $kodlar))->toBe(112);               // çarpansız
+});

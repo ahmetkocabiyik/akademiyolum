@@ -8,59 +8,16 @@ başlanacağını söylüyor.
 Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 `database/data/cetvel/` altına cetveli girildiğinde çıkar.
 
-**Önce teşhisi doğrula.** Trabzon ve Iğdır bu listede "tablonun yarısı
-çıkmıyor" diye duruyordu; ikisinde de düz `pdftotext -q -layout` çıktısı
-tabloyu eksiksiz veriyordu. Kayıp PDF'ten değil, üstüne yazılan sütun
-dilimleme adımından geliyordu. Bir kaydı ele almadan önce ham `-layout`
-çıktısına bak — dosya adının da hâlâ doğru olduğunu kontrol et (Iğdır'ınki
-yanlış yazılmıştı).
+**Önce teşhisi doğrula.** Trabzon, Iğdır ve İnönü bu listede "tablonun yarısı
+çıkmıyor" diye duruyordu; ÜÇÜNDE DE düz `pdftotext -q -layout` çıktısı tabloyu
+eksiksiz veriyordu. Kayıp PDF'ten değil, üstüne yazılan sütun dilimleme
+adımından geliyordu. Bir kaydı ele almadan önce ham `-layout` çıktısına bak —
+dosya adının da hâlâ doğru olduğunu kontrol et (Iğdır'ınki yanlış yazılmıştı).
 
----
-
-## İnönü Üniversitesi
-
-**Dosya:** `pdf/178160788251.inonu-kriter-15042026.pdf` (60 sayfa, 15/04/2026)
-
-**Çözülen:** Koşul tabloları (Tablo 2-5) matris biçiminde ve sütun haritası
-tamamen çıkarıldı. On bir alan sütunu, metin içinde sabit karakter
-konumlarında duruyor:
-
-| kolon | alan | kolon | alan |
-|---|---|---|---|
-| 45 | Tıp ve Diş Hekimliği | 150 | Eğitim Bilimleri |
-| 68 | Sağlık Bilimleri | 171 | Mimarlık, Planlama ve Tasarım |
-| 89 | Fen Bilimleri ve Matematik | 199 | Sosyal, Beşerî ve İdari Bilimler |
-| 109 | Mühendislik | 231 | Hukuk |
-| 127 | Spor Bilimleri | 242 | Filoloji |
-| | | 256 | Güzel Sanatlar |
-
-**Tablo 2 ve 3** (Dr. Öğr. Üyesi ilk ve yeniden atama) bu haritayla eksiksiz
-okunuyor. Örnek — ilk atama toplam puan barajı: Tıp 500 · Sağlık 700 ·
-Fen 1000 · Mühendislik 800 · Spor 700 · Eğitim/Mimarlık/Sosyal 600 · Hukuk 400.
-
-**Çözülemeyen iki şey:**
-
-1. **EK-1 puanlama tablosunun hizası.** Koşullar `A puanı`, `Proje Puanı
-   (K1-K14)`, `L1-L18 Puanı`, `Patent (M1-M5)` gibi kategori kodlarına atıf
-   yapıyor. EK-1'de bu kodlardan yalnızca altı satır bulunabildi; tablo
-   muhtemelen farklı bir hizada ya da sayfalara bölünmüş. Kategori kodları
-   çözülmeden `A puanı ≥ 250` türü barajlar hiçbir maddeye bağlanamıyor.
-
-2. **Tablo 4 ve 5'in (doçent, profesör) satır etiketleri.** Etiketler birden
-   çok satıra sarmalanıyor ("Başlıca araştırma eseri: SCI-E, SSCI / …indeksli
-   özgün makale (%50'sinde…)") ve bazı değerler etiket sütununa taşıyor, bu
-   yüzden satır → sütun eşlemesi güvenilir değil. Yönergenin en zengin
-   ölçütleri (h-indeksi, FWCI/CNCI, patent sayısı, yurt dışı araştırma
-   deneyimi) tam bu iki tabloda.
-
-**Neden yarısı girilmedi:** Yalnızca Dr. tabloları girilebilirdi ama EK-1
-olmadan onların da puan barajları (`A puanı`, `Toplam puan`) modellenemiyor;
-geriye yalnızca makale sayıları kalırdı ki bu yönergenin ayırt edici tarafı
-değil.
-
-**Devam edilirse:** EK-1'in hizasını çöz (muhtemelen sayfa görüntüsünden
-okumak gerekiyor), sonra Tablo 4-5'in sarmalanmış etiketlerini ayır. Sütun
-haritası yukarıda hazır.
+Kolon haritası çıkarırken çapayı **en dolu satırdan** al (genelde "Toplam
+puan"), tolerans dar tutma: aynı tablonun dört haneli ve tek haneli hücreleri
+birkaç karakter kayık hizalanıyor. Aynı belgedeki her tablonun kendi çapası
+olabilir.
 
 ---
 
@@ -284,6 +241,7 @@ dosyanın başlığında da anlatılıyor.
 | **Giresun** | M, O, P, R bölümleri (ödüller, görsel ve sanatsal etkinlikler) | Alt barajlara girmiyor; Güzel Sanatlar adayının genel toplamı düşük çıkar |
 | **Manisa CBÜ** | I (32-51), J (52-53) ve K (54-68) bölümleri | Güzel Sanatlar ve Konservatuvar toplamı düşük çıkar |
 | **Karabük** | Spor kalemleri 4.6.14-4.6.21 | Spor Bilimleri adayında 4.1-4.6 barajı zor görünür |
+| **İnönü** | L bölümü (girişimcilik, TGB, TTO), P bölümü (sportif faaliyetler), H (kongre düzenleme), S (iletişim bilimleri) | "L1-L18 Puanı" koşulu hiç yazılmadı; Spor Bilimleri adayının toplamı düşük çıkar |
 
 ## Motorun karşılayamadığı kurallar
 
@@ -308,6 +266,15 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
 - **Yarıyıl başına adet sınırı** — Iğdır 20. madde ("son beş yılda, her
   yarıyılda verilen en fazla dört ders"). Hem kayan pencere hem yarıyıl başına
   sayı gerekiyor; motor ikisini birlikte tutamıyor, ders puanı YÜKSEK görünür.
+- **FWCI / CNCI ve iş birliği nitelikleri** — İnönü'nün doçent ve profesörlük
+  "ek koşullardan biri" bloğu. Profil FWCI değerini tutmuyor, faaliyet kaydı da
+  yayının uluslararası ya da üniversite-üniversite iş birliğiyle üretilip
+  üretilmediğini tutmuyor. Üçü de beyan olarak girildi; blok `veya` olduğu için
+  koşul kesin ret vermiyor, belirsiz kalıyor.
+- **Ortak çalışma çarpanları** — İnönü Madde 5(4) (QS ilk 100 ortağı ×2, ilk
+  500 ×1,6, uluslararası ortaklı ×1,4, ulusal ortaklı ×1,2) ve Madde 7(2)
+  (Incites/SciVal %1'lik dilim ×3, %10'luk ×1,5). Faaliyet kaydı ortağın
+  kurumunu ve derginin dilim bilgisini tutmuyor; puan DÜŞÜK görünür.
 - **İlk yazarın payına bağlı formül** — Iğdır'ın altı ve daha fazla yazarlı
   yayınlarda diğer yazarlara verdiği pay: (Puan − ilk ismin puanı) / diğer
   yazar sayısı. Motorun `bol` alanı yalnızca `pay / (n − eksi) + ek` biçimini

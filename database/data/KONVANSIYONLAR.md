@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-57 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+58 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -257,7 +257,8 @@ diye böl.
 - **Sayfa numarası puan sütununa karışıyor.** Sütun konumuyla ayır; sayfa
   numarası genelde farklı kolonda.
 - **Madde numarası, metin ve puan üç ayrı satırda.** Numara göründüğünde önceki
-  maddeyi kapatan bir birikim mantığı gerekir (Iğdır'da bu yüzden çıkarılamadı).
+  maddeyi kapatan bir birikim mantığı gerekir. Ama önce ham `-layout` çıktısına
+  bak: Iğdır bu teşhisle bir tur bekletilmişti, oysa tablo zaten okunuyordu.
 - **Çok değerli hücre** (`20/5`, `Q1 200 / Q2 160`): ayrı maddelere böl.
 - **Olumsuzlama devam satırında** ("… hariç olmak üzere"): puan ilk satırdaysa
   madde erken kapanır ve olumsuzlama kaybolur. Çukurova'da bir kalem bu yüzden
@@ -265,13 +266,20 @@ diye böl.
 - **Python `İ`.lower()** birleşik nokta üretir; `İ`→`i` elle değiştir. Ama
   `I`→`ı` yapma, ASCII kısaltmaları bozar (SCI→scı).
 - **Sütun dilimlemesi tabloyu düşürebilir, PDF suçsuz olabilir.** Trabzon'un
-  Tablo 2'si ve Iğdır'ın EK-1'i birer tur "tablonun yarısı çıkmıyor" diye
-  bekletildi; ikisinde de düz `pdftotext -q -layout` çıktısı tabloyu eksiksiz
-  veriyordu. Kayıp sütun dilimlemesinden geliyordu. Bir tabloyu okunamaz ilan
-  etmeden önce HAM `-layout` çıktısına bak: satır etiketi kayıyor gibi görünen
-  tablolarda puan çoğu zaman kodun ya da açıklamanın bir ÜSTÜNDEKİ satırda
-  duruyor, kaybolmuyor. Şıkların puanları hemen her zaman azalan sırada
-  (a > b > c); hizayı çözerken bu iyi bir çapraz kontrol.
+  Tablo 2'si, Iğdır'ın EK-1'i ve İnönü'nün EK-1'i birer tur "tablonun yarısı
+  çıkmıyor" diye bekletildi; ÜÇÜNDE DE düz `pdftotext -q -layout` çıktısı
+  tabloyu eksiksiz veriyordu. Kayıp PDF'ten değil, üstüne yazılan sütun
+  dilimleme adımından geliyordu. Bir tabloyu okunamaz ilan etmeden önce HAM
+  `-layout` çıktısına bak: satır etiketi kayıyor gibi görünen tablolarda puan
+  çoğu zaman kodun ya da açıklamanın bir ÜSTÜNDEKİ satırda duruyor,
+  kaybolmuyor. Şıkların puanları hemen her zaman azalan sırada (a > b > c);
+  hizayı çözerken bu iyi bir çapraz kontrol.
+- **Kolon çapasını en dolu satırdan al.** Alan sütunlu koşul tablolarında
+  (İnönü'nün on bir sütunu) seyrek satırlar yanlış sütuna düşer. Bütün
+  hücreleri dolu bir satır bul ("Toplam puan" genelde öyledir), konumlarını
+  çapa yap, kalan satırların sayılarını en yakın çapaya ata. Toleransı 10-12
+  karakter tut: dört haneli ve tek haneli hücreler aynı sütunda birkaç
+  karakter kayık hizalanıyor. Aynı belgedeki her tablonun KENDİ çapası olur.
 
 ---
 
@@ -295,12 +303,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 57 üniversite · 1843 eşik · 70 cetvel |
+| Girildi | 58 üniversite · 1891 eşik · 71 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
-| Kaynak sorunuyla bekleyen | 5 (İnönü, İstanbul, İTÜ, Dokuz Eylül, Balıkesir) |
-| Girilmemiş, engeli bilinmeyen | ~100 |
+| Kaynak sorunuyla bekleyen | 4 (İstanbul, İTÜ, Dokuz Eylül, Balıkesir) |
+| Girilmemiş, engeli bilinmeyen | 105 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
