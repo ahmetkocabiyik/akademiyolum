@@ -3030,3 +3030,47 @@ test('ÜAK cetveli çok yazarlı yayında puanı yazarlara eşit bölüyor', fun
     expect($puan('ortak', 4, 'WoS / Scopus', Kategori::Atif))
         ->toBe($puan('tek', 1, 'WoS / Scopus', Kategori::Atif));
 });
+
+test('dönemli toplam barajı adaya dönemi de söylüyor', function () {
+    // Bir yönerge aynı kadroda iki toplam barajı isteyebiliyor: biri kariyerin
+    // tamamından, biri yalnızca doçentlik sonrasından. Dönem metne yazılmazsa
+    // aday iki satırda da aynı cümleyi görür ve farkı anlayamaz.
+    $donemsiz = Kalip::toplam(250);
+    $docentlik = Kalip::toplam(100, Kalip::DOCENTLIK_SONRASI);
+    $pencere = Kalip::toplam(80, Kalip::sonYil(3));
+    $ikisi = Kalip::toplam(60, Kalip::sonYil(5, 'doktora'));
+
+    expect($donemsiz['aciklama'])->toBe('Tüm faaliyetlerden toplam en az 250 puan')
+        ->and($docentlik['aciklama'])->toBe('Tüm faaliyetlerden toplam en az 100 puan (doçentlik unvanınızdan sonra)')
+        ->and($pencere['aciklama'])->toBe('Tüm faaliyetlerden toplam en az 80 puan (son 3 yılda)')
+        ->and($ikisi['aciklama'])->toBe('Tüm faaliyetlerden toplam en az 60 puan (doktora unvanınızdan sonra, son 5 yılda)');
+
+    // Korpusta gerçekten iki toplamı olan bir eşikte ayrım görünüyor mu?
+    $esik = sartDepo()->bul('İstinye Üniversitesi', 'profesorluk', 'fen');
+    $toplamlar = collect($esik['sart']['cocuklar'])
+        ->where('rol', 'toplam')->pluck('aciklama')->all();
+
+    expect($toplamlar)->toHaveCount(2)
+        ->and($toplamlar[0])->not->toBe($toplamlar[1]);
+});
+
+test('İstinye puanlamayı ÜAK cetveline devrediyor', function () {
+    $depo = sartDepo();
+
+    // On iki temel alanın hepsinde tanımlı ve hepsi ÜAK cetvelini kullanıyor.
+    foreach (TemelAlan::cases() as $alan) {
+        $esik = $depo->bul('İstinye Üniversitesi', 'docentlik', $alan->value);
+
+        expect($esik)->not->toBeNull($alan->value)
+            ->and($esik['cetvel'])->toBe("uak-2024-mart-{$alan->value}");
+    }
+
+    // Dr. Öğr. Üyeliğinde baraj doktora sonrasına bağlı: doktoradan önceki
+    // çalışmalar sayılmaz.
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2020-01-01'));
+    $dr = $depo->bul('İstinye Üniversitesi', 'dr_ogr_uyesi', 'fen');
+    $makale = fn (string $tarih) => sartFaaliyet('SCIE/SSCI (Q1)', tarih: $tarih);
+
+    expect($depo->degerlendir($dr, [$makale('2018-01-01')], $profil)->kosullar()[0]->mevcut)->toBe(0)
+        ->and($depo->degerlendir($dr, [$makale('2023-01-01')], $profil)->kosullar()[0]->mevcut)->toBe(30);
+});

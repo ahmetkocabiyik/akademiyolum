@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-61 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+62 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -147,6 +147,11 @@ Docblock, dosyanın en değerli parçası. Şunları içermeli:
 
 Kod, düğümün `madde` alanına yazılır (`madde: 'Madde 8.1/e'`); testler de oraya
 bakar, böylece metin değişince test kırılmaz.
+
+`Kalip::toplam` dönem verildiğinde dönemi metne kendisi ekliyor ("… en az 100
+puan (doçentlik unvanınızdan sonra)"). Aynı kadroda iki toplam barajı olan
+yönergelerde (GİBTÜ, OMÜ, İstinye) bu şart: yoksa aday iki satırda da aynı
+cümleyi görüp farkı anlayamıyor.
 
 `Kalip::toplam`'ın `liste` argümanı yalnızca **kapsam daraldığında** ve düz
 Türkçe verilir. Kapsam cetvelin tamamıysa hiç verme.
@@ -318,7 +323,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 61 üniversite · 2007 eşik · 79 cetvel |
+| Girildi | 62 üniversite · 2043 eşik · 79 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |

@@ -75,7 +75,7 @@ final class Kalip
         return self::temizle([
             'tip' => 'puan',
             'rol' => 'toplam',
-            'aciklama' => "{$nereden} toplam en az {$puan} puan",
+            'aciklama' => "{$nereden} toplam en az {$puan} puan".self::donemEki($donem),
             'maddeler' => $maddeler,
             'min_puan' => $puan,
             'donem' => $donem,
@@ -247,6 +247,43 @@ final class Kalip
     public static function kIle(string $aciklama, int $k, array $cocuklar): array
     {
         return ['tip' => 'k_ile', 'k' => $k, 'aciklama' => $aciklama, 'cocuklar' => $cocuklar];
+    }
+
+    /**
+     * Dönem kısıtının adaya gösterilecek eki.
+     *
+     * Bir yönerge aynı kadroda iki toplam barajı isteyebiliyor: biri kariyerin
+     * tamamından, biri yalnızca doçentlik sonrasından (GİBTÜ, OMÜ, İstinye).
+     * Dönem metne yazılmazsa aday iki satırda da "Tüm faaliyetlerden toplam en
+     * az N puan" görüyor ve ikisinin farkını anlayamıyordu.
+     *
+     * @param  array<string, mixed>|null  $donem
+     */
+    private static function donemEki(?array $donem): string
+    {
+        if ($donem === null) {
+            return '';
+        }
+
+        $parcalar = [];
+
+        $baslangic = match ($donem['baslangic'] ?? null) {
+            'doktora' => 'doktora unvanınızdan sonra',
+            'docentlik' => 'doçentlik unvanınızdan sonra',
+            'son_atama' => 'son atamanızdan sonra',
+            'lisans' => 'lisans mezuniyetinizden sonra',
+            default => null,
+        };
+
+        if ($baslangic !== null) {
+            $parcalar[] = $baslangic;
+        }
+
+        if (($donem['son_yil'] ?? null) !== null) {
+            $parcalar[] = "son {$donem['son_yil']} yılda";
+        }
+
+        return $parcalar === [] ? '' : ' ('.implode(', ', $parcalar).')';
     }
 
     /**
