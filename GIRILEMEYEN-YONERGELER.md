@@ -193,6 +193,34 @@ bozar, o yüzden OCR sonrası her tablo kaynakla karşılaştırılmalı.
 
 ---
 
+## Yeditepe Üniversitesi
+
+**Dosya:** `pdf/17537104532.yeditepeuniversitesi.pdf` (432 satır)
+
+**Engel yok, ama BÖLÜM düzeyinde ayrıntılı.** Kendi puan tablosu yok, koşullar
+sayı şartı — buraya kadar hızlı şeride uygun. Sorun granülerlik: Madde 7'de
+yalnızca Dr. Öğr. Üyeliği için **45 ayrı fakülte/bölüm başlığı** var ve her biri
+kendi yayın kuralını taşıyor. Örnekler:
+
+- Fen-Edebiyat / Çeviribilimi: Q1-Q4, MLA, ERIC, ESJI, ESCI, Scopus, CEEOL'de
+  1 yayın **ya da** ULAKBİM TR Dizin'de 2 yayın
+- Fen-Edebiyat / Rus Dili ve Edebiyatı: hakemli dergide 1 araştırma makalesi
+  **ve** doktora çalışması kapsamında Rusça 1 makale
+- Fen-Edebiyat / Matematik: Q1-Q3'te 1 yayın **ya da** editör kurulunda alandan
+  bir uzman bulunan dergilerde 1 yayın
+
+Doçentlik ve profesörlük için de benzer ayrım sürüyor. Bu, `birim` alanıyla
+girilebilir ama tek başına 30-40 eşik demek.
+
+**Neden bekletildi:** Fakülte düzeyinde toplamak bölümler arasındaki gerçek
+farkı siler; adaya kendi bölümünün koşulu yerine komşu bölümünkini gösterir.
+Doğrusu bölüm bölüm girmek, o da ayrı bir oturumluk iş.
+
+**Devam edilirse:** Madde 7-(2), 8-(2) ve 9-(2)'deki bölüm listeleri sırayla
+`birim` olarak açılmalı. `KONVANSIYONLAR.md`'deki `birim` kuralı aynen geçerli.
+
+---
+
 # Kısmen girilen yönergeler
 
 Aşağıdaki üniversiteler korpusa girdi, ama yönergenin bir parçası kaynak
