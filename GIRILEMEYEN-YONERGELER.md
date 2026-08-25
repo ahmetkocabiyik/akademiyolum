@@ -58,16 +58,36 @@ sırasına göre tek tek döküyor ve sütunlar temiz ayrılıyor.
 
 ---
 
-## Dokuz Eylül Üniversitesi
+## Dokuz Eylül Üniversitesi — Güzel Sanatlar ve Konservatuvar
 
 **Dosya:** `pdf/17536992732.dokuzeyluluniverstesi.pdf` (46 sayfa)
 
-**Engel yok, sadece büyük.** Ölçütler tablo değil düzyazı: 25 alan bloğu (Güzel
-Sanatlar 7, Konservatuvar 5 alt alana bölünmüş), her biri Dr/Doçent/Profesör
-için ayrı paragraf. Üstüne üç ayrı "Puan Çizelgesi" matrisi var (6 alan grubu ×
-zorunlu madde listesi) ve ayrı bir Puanlandırma Formu.
+**Girildi:** Madde 2.1-2.10'un on bir alanı (tıp-sağlık, hemşirelik,
+mühendislik, fen, matematik, sosyal, eğitim, spor, filoloji, ilahiyat, hukuk,
+mimarlık) üç kadroyla; Puanlandırma Formunun A, B ve C bölümleri cetvele
+çevrildi.
 
-**Devam edilirse:** Selçuk ölçeğinde bir iş; birkaç tura yayılması gerekiyor.
+**Kalan:** Madde 2.11 (Güzel Sanatlar, yedi alt alan) ve 2.12 (Konservatuvar,
+beş alt alan). İki sebeple bekliyor:
+
+1. Koşulları Puanlandırma Formunun **D bölümüne** (24-41 arası maddeler)
+   dayanıyor: müzik teknolojisi, uzun metrajlı film, TV dizisi, kısa film,
+   animasyon, reklam filmi, tiyatro, sahne tasarımı blokları. Bu blokların
+   kalemleri kaynak sözlüğünde (`App\Enums\Kategori::kaynaklar()`) karşılıksız;
+   yalnızca sergiler (24) ve tiyatro yazarlığının (33) bir kısmı girilebildi.
+2. Bu alanların **zorunlu puan kümesi** de aynı maddeleri içeriyor
+   (Madde 1.10.1/c: "ilaveten 24-25-26-27-28-29-30-31-32-33-34 no'lu
+   maddeler"). Eksik kümeyle zorunlu puan barajı yazmak, adaya asla
+   sağlayamayacağı bir hedef gösterirdi.
+
+**Devam edilirse:** Önce sözlüğe film, animasyon ve müzik teknolojisi
+etiketleri eklenmeli (Kategori::SanatselEtkinlik altına); sonra D bölümünün
+24-41 arası maddeleri cetvele girilip `ZORUNLU-GS-UYGULAMALI` ve
+`ZORUNLU-KONSERVATUVAR` kümeleri açılmalı. Alan koşulları zaten okunmuş
+durumda ve düz sayı/puan şartları.
+
+**Ziraat, orman ve su ürünleri** alanları yönergede hiç anılmıyor; kapsam dışı
+kalması doğrudur.
 
 ---
 
@@ -230,6 +250,7 @@ dosyanın başlığında da anlatılıyor.
 | **Karabük** | Spor kalemleri 4.6.14-4.6.21 | Spor Bilimleri adayında 4.1-4.6 barajı zor görünür |
 | **İnönü** | L bölümü (girişimcilik, TGB, TTO), P bölümü (sportif faaliyetler), H (kongre düzenleme), S (iletişim bilimleri) | "L1-L18 Puanı" koşulu hiç yazılmadı; Spor Bilimleri adayının toplamı düşük çıkar |
 | **İTÜ** | Hukuk Temel Alanı (Tablo 4'te sınır değeri yok), atıf puanı, ders kredisi, program koordinatörlüğü, toplumsal katkı | Toplam puan barajı hiç yazılmadı; hukuk alanı kapsam dışı |
+| **Dokuz Eylül** | Puanlandırma Formunun D bölümü (film, animasyon, müzik teknolojisi, TV, reklam blokları); teknopark, meslek odası ve girişimcilik dersi kalemleri | Güzel Sanatlar ve Konservatuvar alanları hiç girilmedi |
 
 ## Motorun karşılayamadığı kurallar
 
@@ -268,6 +289,16 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   Motorun `puan` alanı sabit sayı tutuyor. İTÜ'nün TOPLAM PUAN barajı bu
   yüzden hiç yazılmadı; eser puanı barajı etkilenmiyor çünkü ona yalnızca
   yayın türleri giriyor.
+- **Çok kademeli eşdeğerlik** — Dokuz Eylül mühendislik doçentliği "en az iki
+  yayın … her bir yayına eşdeğer 15 puanlık etkinlik" diyor, yani iki yayının
+  ikisi birden 30 puanla değiştirilebilir. Motorun `telafi` dalı tek kademe
+  tanıyor; yalnızca "1 yayın + 15 puan" okuması girildi, koşul o alanda
+  olduğundan ZOR görünür.
+- **`referans` düğümü hedefin TAMAMINI çeker** — Dokuz Eylül profesörlüğü
+  "doçent kadrosunun asgari YAYIN koşullarını tekrarlamak" istiyor ama
+  `referans` doçentliğin puan barajlarını da taşırdı; profesörlüğün kendi
+  barajları ayrı olduğu için aday yönergede yazmayan bir baraj görürdü. Aynı
+  koşul kapanışını ikinci dönemle çağırmak doğru çözüm oldu.
 - **"En fazla N'i şu türden"** — üst sınırlı adet koşulları. Motorda "en
   fazla" düğümü yok. Çoğu satırda üst sınır alt sınırdan türüyor (2 eserin en
   az 1'i A ise en fazla 1'i C olabilir); türemediği yerlerde (İTÜ Mimarlık

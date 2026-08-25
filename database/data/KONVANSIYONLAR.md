@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-60 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+61 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -163,6 +163,15 @@ Türkçe verilir. Kapsam cetvelin tamamıysa hiç verme.
 | `Kalip::ve` / `Kalip::veya` | birleştirici |
 | `Kalip::sonYil($yil, $baslangic)` | kayan pencere (Düzce, Akdeniz) |
 
+### `referans` düğümüne dikkat
+
+`referans` hedef eşiğin ŞARTININ TAMAMINI çeker — puan barajları dâhil. Bir
+yönerge "doçentliğin YAYIN koşullarını tekrarla" diyor ve profesörlüğün kendi
+puan barajları ayrıysa (Dokuz Eylül Madde 1.14.3), `referans` adaya yönergede
+yazmayan bir baraj gösterir. Böyle durumlarda koşulları bir kapanışa (closure)
+alıp iki kadroda iki farklı dönemle çağır; kapanışa dönem ADINI da geçir, yoksa
+aday metni "Doktora sonrası" derken motor doçentlik sonrasını filtreler.
+
 Dönem sabitleri: `DOKTORA_SONRASI`, `DOCENTLIK_SONRASI`, `SON_ATAMA_SONRASI`.
 
 ### `beyan` ne zaman
@@ -309,11 +318,11 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 60 üniversite · 1971 eşik · 78 cetvel |
+| Girildi | 61 üniversite · 2007 eşik · 79 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
-| Kaynak sorunuyla bekleyen | 2 (Dokuz Eylül, Balıkesir) |
+| Kaynak sorunuyla bekleyen | 1 (Balıkesir — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 105 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,

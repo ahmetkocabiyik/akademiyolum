@@ -2893,3 +2893,106 @@ test('İstanbul Üniversitesi yazar katsayısı sorumlu yazarı ayırıyor', fun
     $atif->yazarlar = 'A, B, C, D, E';
     expect($katalog->puan($atif, $kodlar))->toBe(3);
 });
+
+test('Dokuz Eylül iki ayrı puan barajı istiyor: zorunlu küme ve genel toplam', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Dokuz Eylül Üniversitesi', 'dr_ogr_uyesi', 'muhendislik');
+    $profil = new Profil(yds: 70);
+
+    // Zorunlu küme (ZORUNLU-FEN) girişimcilik kalemlerini sayar, atıf saymaz.
+    $atif = fn () => sartFaaliyet('WoS / Scopus', Kategori::Atif, null, '2024-01-01');
+    $makale = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+
+    // On altı atıf = 80 puan: genel toplamı karşılar, zorunlu kümeyi karşılamaz.
+    $sonuc = $depo->degerlendir($esik, array_map($atif, range(1, 16)), $profil);
+
+    expect(sartDugum($sonuc, 'Alanınızın zorunlu puan kalemlerinden en az 50 puan')->mevcut)->toBe(0)
+        ->and(sartDugum($sonuc, 'Tüm faaliyetlerden toplam en az 80 puan')->mevcut)->toBe(80);
+
+    // Dört makale = 100 puan: ikisini birden karşılar.
+    $makaleli = $depo->degerlendir($esik, array_map($makale, range(1, 4)), $profil);
+
+    expect(sartDugum($makaleli, 'Alanınızın zorunlu puan kalemlerinden en az 50 puan')->durum)
+        ->toBe(Durum::Saglandi)
+        ->and(sartDugum($makaleli, 'Tüm faaliyetlerden toplam en az 80 puan')->durum)
+        ->toBe(Durum::Saglandi);
+});
+
+test('Dokuz Eylül zorunlu puan kümesi alana göre değişiyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('dokuz-eylul-2024');
+
+    $fen = $katalog->coz(['ZORUNLU-FEN']);
+    $sosyal = $katalog->coz(['ZORUNLU-SOSYAL']);
+    $mimarlik = $katalog->coz(['ZORUNLU-MIMARLIK']);
+
+    // Fen kümesi derleme makalelerden yalnızca 2.a'yı sayar; sosyal hepsini.
+    expect($fen)->toContain('2.a')
+        ->and($fen)->not->toContain('2.c')
+        ->and($sosyal)->toContain('2.c');
+
+    // Kitaplar sosyal ve mimarlıkta zorunlu, fende değil.
+    expect($sosyal)->toContain('5.a')
+        ->and($fen)->not->toContain('5.a');
+
+    // Mimarlık ayrıca üniversite-sanayi projelerini de sayıyor.
+    expect($mimarlik)->toContain('8.c')
+        ->and($sosyal)->not->toContain('8.c');
+});
+
+test('Dokuz Eylül profesörlük doçentlik koşullarını doçentlik sonrası tekrarlatıyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(
+        doktoraTarihi: Carbon::parse('2010-01-01'),
+        docentlikTarihi: Carbon::parse('2020-01-01'),
+        yds: 70,
+    );
+
+    $esik = $depo->bul('Dokuz Eylül Üniversitesi', 'profesorluk', 'muhendislik');
+    $ad = 'Doçentlik sonrası, SCI, SCI-Expanded veya SSCI dergilerinde en az 5 araştırma makalesi';
+
+    // Doçentlik ÖNCESİ beş makale koşulu karşılamıyor.
+    $onceki = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2015-01-01');
+    expect(sartDugum($depo->degerlendir($esik, array_map($onceki, range(1, 5)), $profil), $ad)->mevcut)
+        ->toBe(0);
+
+    // Doçentlik sonrası beş makale karşılıyor.
+    $sonraki = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2023-01-01');
+    expect(sartDugum($depo->degerlendir($esik, array_map($sonraki, range(1, 5)), $profil), $ad)->durum)
+        ->toBe(Durum::Saglandi);
+
+    // Profesörlük ağacı doçentliğin PUAN barajlarını taşımamalı: yönerge
+    // yalnızca yayın koşullarını tekrarlatıyor, profesörlüğün kendi barajı ayrı.
+    $barajlar = collect($esik['sart']['cocuklar'])
+        ->pluck('min_puan')->filter()->values()->all();
+
+    expect($barajlar)->toBe([200, 70, 400]);
+});
+
+test('Dokuz Eylül bir makaleyi girişimcilik puanıyla değiştirmeye izin veriyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Dokuz Eylül Üniversitesi', 'docentlik', 'sosyal');
+    $ad = 'Doktora sonrası, hakemli dergilerde en az 5 araştırma makalesi';
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'));
+
+    $makale = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+    $patent = fn () => sartFaaliyet('Ulusal Patent', Kategori::Patent, null, '2024-01-01');
+
+    // Dört makale tek başına yetmiyor.
+    expect(sartDugum($depo->degerlendir($esik, array_map($makale, range(1, 4)), $profil), $ad)->durum)
+        ->toBe(Durum::Saglanmadi);
+
+    // Dört makale + ulusal patent (30 puan) telafiyi açıyor.
+    $telafili = sartDugum(
+        $depo->degerlendir($esik, [...array_map($makale, range(1, 4)), $patent()], $profil), $ad,
+    );
+
+    expect($telafili->durum)->toBe(Durum::Saglandi)
+        ->and($telafili->telafiIleSaglandi())->toBeTrue();
+
+    // Telafi BİLEŞİK: yalnızca girişimcilik puanı yetmez, dört makale de şart.
+    // Üç makale + patent hâlâ düşüyor — yönerge yalnızca BİR makalenin yerine
+    // geçmesine izin veriyor.
+    expect(sartDugum($depo->degerlendir($esik, [...array_map($makale, range(1, 3)), $patent()], $profil), $ad)->durum)
+        ->toBe(Durum::Saglanmadi);
+});
