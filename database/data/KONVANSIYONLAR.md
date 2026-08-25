@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-63 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+64 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -92,6 +92,13 @@ kullanılabilir. Çarpan hiçbir zaman 1.0'ı aşamaz (motor `min(1.0, …)` uyg
   `kademeler`i paylaşır.
 - `ortak` rolü (aday sırasını belirtmemiş) o yazar sayısındaki **en düşük**
   satırı almalı.
+- Yönerge "birinci yazar" diyorsa `baslica` da en düşük satırı alır: sorumlu
+  yazarlığa ayrıcalık tanımayan bir kuralda sırayı bilmeden yüksek satırı
+  vermek puanı fazla gösterir (Alanya, ÜAK).
+- Bölmenin **neyi** böldüğüne dikkat: yönergelerin çoğu tek bir tam puanı
+  yazarlara pay ediyor, ama Alanya "birinci yazar tam puan alır VE tam puan
+  diğer yazarlar arasında pay edilir" diyor — birinci yazarınki hiç bölünmüyor,
+  ikinci bir tam puan kalanlara dağılıyor (`bol` + `eksi: 1`).
 - `baslica`, yönerge "sorumlu yazar 1. isim gibi sayılır" diyorsa `ilk` ile aynı
   satırı alır.
 - `haric` alanına, yönergenin kendi paylaşım kuralını yazdığı kategorileri koy
@@ -331,7 +338,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 63 üniversite · 2058 eşik · 80 cetvel |
+| Girildi | 64 üniversite · 2094 eşik · 81 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |

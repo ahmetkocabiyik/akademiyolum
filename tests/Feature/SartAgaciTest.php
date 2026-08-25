@@ -3122,3 +3122,56 @@ test('Toros güzel sanatlarda makale yerine yarışma derecesi kabul ediyor', fu
     expect(sartDugum($depo->degerlendir($esik, [$makale], new Profil), $ad)->durum)
         ->toBe(Durum::Saglandi);
 });
+
+test('Alanya birinci yazara yazar sayısından bağımsız tam puan veriyor', function () {
+    // Yönergenin notu: "Birinci yazar tam puan alır; birden çok yazarlı
+    // çalışmalarda birinci yazar tam puan alır ve tam puan diğer yazarlar
+    // arasında eşit olarak pay edilir." Korpustaki öteki yönergelerin hepsi
+    // TEK bir tam puanı bölüyor; burada birinci yazarınki hiç bölünmüyor.
+    $katalog = sartDepo()->katalog('alanya-2024');
+    $kodlar = array_keys($katalog->maddeler);
+
+    $puan = function (string $rol, int $yazarSayisi) use ($katalog, $kodlar): int {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: $rol);          // A.1 → 20 puan
+        $f->yazarlar = implode(', ', array_map(fn ($i) => "Yazar {$i}", range(1, $yazarSayisi)));
+
+        return $katalog->puan($f, $kodlar);
+    };
+
+    // Birinci yazar her zaman tam puan.
+    expect($puan('ilk', 1))->toBe(20)
+        ->and($puan('ilk', 3))->toBe(20)
+        ->and($puan('ilk', 8))->toBe(20);
+
+    // Diğer yazarlar ikinci bir tam puanı bölüşür: 1/(n−1).
+    expect($puan('yazar_2', 2))->toBe(20)
+        ->and($puan('yazar_2', 3))->toBe(10)
+        ->and($puan('yazar_3', 5))->toBe(5);
+
+    // Yönerge sorumlu yazara ayrıcalık tanımıyor; sırasını belirtmeyen de
+    // birinci yazar payını alamaz.
+    expect($puan('baslica', 3))->toBe(10)
+        ->and($puan('ortak', 3))->toBe(10);
+});
+
+test('Alanya alan ayrımı yapmadan on iki temel alana da tanımlı', function () {
+    $depo = sartDepo();
+
+    foreach (TemelAlan::cases() as $alan) {
+        foreach (['dr_ogr_uyesi', 'docentlik', 'profesorluk'] as $kadro) {
+            expect($depo->bul('Alanya Üniversitesi', $kadro, $alan->value))
+                ->not->toBeNull("{$kadro} · {$alan->value}");
+        }
+    }
+
+    // Korpusun en dar doçent-profesör aralığı: 50 → 60.
+    $baraj = function (string $kadro) use ($depo): int {
+        $sart = $depo->bul('Alanya Üniversitesi', $kadro, 'fen')['sart'];
+
+        return collect($sart['cocuklar'] ?? [$sart])->firstWhere('rol', 'toplam')['min_puan'];
+    };
+
+    expect($baraj('dr_ogr_uyesi'))->toBe(20)
+        ->and($baraj('docentlik'))->toBe(50)
+        ->and($baraj('profesorluk'))->toBe(60);
+});
