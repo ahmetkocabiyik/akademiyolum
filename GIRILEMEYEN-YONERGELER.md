@@ -135,6 +135,27 @@ indirmek gerekiyor; ölçüt tarafı hazır, yalnızca cetvel eksik.
 
 ---
 
+## Iğdır Üniversitesi
+
+**Dosya:** `pdf/17536999612.igdiruniverstesi.pdf`
+
+**Engel yok, ama tablo satır satır dağılmış.** Koşullar net ve zengin: profesör
+3000 puan (20-23. maddelerden 500), doçent 2000 (22-23'ten 200), Dr. ilk atama
+fen/sağlıkta 500, diğerlerinde 300; Güzel Sanatlar ve Spor için ayrı kümeler
+(6-7. maddeler). Sorun EK-1'de: madde numarası, açıklama metni ve puan ÜÇ AYRI
+SATIRA dağılmış ve numara sütunu 10. maddeden sonra kayıyor. 1-9 arası
+maddeler temiz çıktı, 10-23 arası çıkmadı.
+
+**Neden bekletildi:** koşullar tam olarak 10-23 arası maddeleri (editörlük,
+projeler, ödüller, burslar) sayıyor. Eksik puanlarla eşik yazmak, adaya
+sağlayamayacağı bir baraj göstermek olurdu.
+
+**Devam edilirse:** numarayı, metni ve puanı ayrı ayrı toplayıp madde
+sınırlarını "yeni numara göründüğünde kapat" kuralıyla birleştiren bir okuma
+gerekiyor; tek satırlık kolon dilimlemesi bu tabloda yetmiyor.
+
+---
+
 # Kısmen girilen yönergeler
 
 Aşağıdaki üniversiteler korpusa girdi, ama yönergenin bir parçası kaynak
