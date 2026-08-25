@@ -3074,3 +3074,51 @@ test('İstinye puanlamayı ÜAK cetveline devrediyor', function () {
     expect($depo->degerlendir($dr, [$makale('2018-01-01')], $profil)->kosullar()[0]->mevcut)->toBe(0)
         ->and($depo->degerlendir($dr, [$makale('2023-01-01')], $profil)->kosullar()[0]->mevcut)->toBe(30);
 });
+
+test('Toros alan gruplarını kadroya göre farklı topluyor', function () {
+    $depo = sartDepo();
+
+    $baraj = function (string $kadro, string $alan) use ($depo): int {
+        $esik = $depo->bul('Toros Üniversitesi', $kadro, $alan);
+        $sart = $esik['sart'];
+
+        return collect($sart['cocuklar'] ?? [$sart])->firstWhere('rol', 'toplam')['min_puan'];
+    };
+
+    // Dr. ve profesörlükte sosyal ayrı satırda, doçentlikte mühendislik ve
+    // sağlıkla aynı grupta — yönergenin kendi gruplaması kadroya göre değişiyor.
+    expect($baraj('dr_ogr_uyesi', 'muhendislik'))->toBe(30)
+        ->and($baraj('dr_ogr_uyesi', 'sosyal'))->toBe(25)
+        ->and($baraj('docentlik', 'muhendislik'))->toBe(120)
+        ->and($baraj('docentlik', 'sosyal'))->toBe(120)
+        ->and($baraj('profesorluk', 'muhendislik'))->toBe(180)
+        ->and($baraj('profesorluk', 'sosyal'))->toBe(150);
+
+    // Güzel Sanatlar ve Mimarlık doçentlikte ayrı ve daha düşük.
+    expect($baraj('docentlik', 'mimarlik'))->toBe(100)
+        ->and($baraj('profesorluk', 'guzel_sanatlar'))->toBe(150);
+
+    // Yönergenin anmadığı alanlar kapsam dışı.
+    expect($depo->bul('Toros Üniversitesi', 'docentlik', 'fen'))->toBeNull()
+        ->and($depo->bul('Toros Üniversitesi', 'docentlik', 'hukuk'))->toBeNull();
+});
+
+test('Toros güzel sanatlarda makale yerine yarışma derecesi kabul ediyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Toros Üniversitesi', 'dr_ogr_uyesi', 'mimarlik');
+    $ad = 'Madde 4/a-3';
+
+    // Hiçbir yayın yok: dal beyan içerdiği için kesin ret değil, belirsiz.
+    expect(sartDugum($depo->degerlendir($esik, [], new Profil), $ad)->durum)
+        ->toBe(Durum::Belirsiz);
+
+    // Yarışma derecesi makale olmadan da koşulu açıyor.
+    $yarisma = sartFaaliyet('Yarışma Derecesi / Mansiyon', Kategori::Odul, null, '2024-01-01');
+    expect(sartDugum($depo->degerlendir($esik, [$yarisma], new Profil), $ad)->durum)
+        ->toBe(Durum::Saglandi);
+
+    // Makale de tek başına yeterli.
+    $makale = sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+    expect(sartDugum($depo->degerlendir($esik, [$makale], new Profil), $ad)->durum)
+        ->toBe(Durum::Saglandi);
+});

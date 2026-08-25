@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-62 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+63 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -203,6 +203,14 @@ Eşiği temel alana değil FAKÜLTEYE bağlayan yönergelerde (Trabzon Tablo 1) 
 → temel alan eşlemesi yapılır; iki fakülte aynı temel alana düşüp farklı baraj
 veriyorsa ayrım yalnızca `birim` ile kurulabilir.
 
+### Alan grupları KADRO BAŞINA değişebilir
+
+Bir yönerge aynı alanları her kadroda aynı gruplamayabilir. Toros'ta sosyal
+bilimler Dr. ve profesörlükte ayrı satırda (25 / 150) ama doçentlikte
+mühendislik ve sağlıkla aynı satırda (120). Alan gruplarını dosyanın başında
+bir kez tanımlayıp üç kadroda da kullanmak burada yanlış baraj üretirdi;
+gruplar kadro başına ayrı yazıldı.
+
 ### Yönergenin anmadığı alanlar
 
 Bir yönerge yalnızca "Fen, Mühendislik, Sağlık / Sosyal, Eğitim, Güzel Sanatlar"
@@ -323,7 +331,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 62 üniversite · 2043 eşik · 79 cetvel |
+| Girildi | 63 üniversite · 2058 eşik · 80 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
