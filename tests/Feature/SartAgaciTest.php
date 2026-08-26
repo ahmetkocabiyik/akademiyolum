@@ -94,6 +94,25 @@ test('her eşiğin cetveli tanımlıdır', function () {
     expect($eksik)->toBe([]);
 });
 
+test('her eşiğin üniversitesi universiteler.php\'de tanımlıdır', function () {
+    // Yönerge Analizi ekranı `Universite` tablosunu gezip her satırın adıyla
+    // `bul()` çağırıyor. Adı listede geçmeyen bir üniversitenin eşikleri
+    // hesaplanır, bu dosyadaki öteki testleri geçer ve adaya HİÇ GÖRÜNMEZ.
+    // Altı üniversite bu yüzden bir süre sessizce görünmez kaldı.
+    /** @var list<array{0: string, 1: string, 2: string}> $satirlar */
+    $satirlar = require database_path('data/universiteler.php');
+    $liste = array_column($satirlar, 0);
+
+    $eksik = collect(sartDepo()->esikler())
+        ->pluck('universite')
+        ->unique()
+        ->reject(fn (string $ad) => in_array($ad, $liste, true))
+        ->values()
+        ->all();
+
+    expect($eksik)->toBe([]);
+});
+
 test('ağaçtaki her madde deseni en az bir maddeye çözülür', function () {
     // Yazım hatası olan bir desen sessizce boş kümeye çözülür ve koşul asla
     // sağlanamaz hâle gelir; bu test o sınıf hatayı yakalar.

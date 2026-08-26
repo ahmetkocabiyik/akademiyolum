@@ -319,14 +319,13 @@ içinde geçmeyen bir üniversitenin eşikleri hesaplanır, testleri geçer ve
 adaya HİÇ GÖRÜNMEZ. Yeni üniversite girerken listede olup olmadığını kontrol
 et, yoksa ekle; adı birebir aynı yazılmalı.
 
-Kontrol:
-
-```bash
-php artisan tinker --execute '
-$d = app(App\Services\Scoring\Sart\SartDeposu::class);
-$liste = array_column(require database_path("data/universiteler.php"), 0);
-foreach (array_diff(array_unique(array_column($d->esikler(), "universite")), $liste) as $u) echo " - $u\n";'
-```
+`SartAgaciTest` bunu artık test ediyor ("her eşiğin üniversitesi
+universiteler.php'de tanımlıdır"), ama adı listeye eklerken **veritabanındaki
+satırı da düşün**: `UniversiteSeeder` `ad` alanına göre `updateOrCreate`
+yapıyor, yani veri dosyasındaki bir adı DEĞİŞTİRMEK yeni satır açıp eskisini
+öksüz bırakır — aynı üniversite listede iki kez, biri eşiksiz görünür.
+Yeni ad ekleme sorunsuz; ad değiştirmek migration ister (örnek:
+`2026_08_26_112754_bezmialem_universite_adini_duzelt.php`).
 
 ---
 
@@ -337,7 +336,7 @@ Her üniversiteden sonra, bu sırayla:
 ```bash
 php -l database/data/cetvel/YENI.php && php -l database/data/yonerge/YENI.php
 vendor/bin/pint --dirty --format agent          # --dirty ŞART, yoksa ilgisiz dosyaları biçimler
-php artisan test --compact                       # 317 test; madde referans testi asıl ağ
+php artisan test --compact                       # 318 test; madde referans testi asıl ağ
 vendor/bin/phpstan analyse --no-progress         # 14 hata baseline; artmamalı
 ```
 
