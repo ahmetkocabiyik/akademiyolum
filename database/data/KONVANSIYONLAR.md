@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-76 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+77 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -158,6 +158,18 @@ puanlar yönergede yazılı olduğu için tavan kadro başına sabit sayıya ini
 (20/120/250 → 10/60/125). Cetvelin kadro başına bir varyantı üretilir ve her
 eşik kendi varyantına bağlanır (Işık'taki çarpanlı/çarpansız üretimin aynısı;
 bir dosya `return ['cetveller' => $cetveller]` ile birden çok cetvel döndürebilir).
+
+### Tavan FAKÜLTE × KADRO ise cetveli çarpanla üret
+
+MEF'in tablosunda her bölümün altında fakülte fakülte tavan notu var ve tavan
+kadroya göre de değişiyor ("Mühendislik: doçentlikte en fazla 30, profesörlükte
+50"). Beş fakülte × üç kadro = 15 varyant; hepsi tek gövdeden döngüyle üretilip
+`return ['cetveller' => $cetveller]` ile döndürüldü. Tavan matrisini dosyanın
+başında TEK BİR DİZİDE topla — tabloya dağılmış onlarca notu tek yerde görmek,
+kadro atlamayı engelleyen tek pratik.
+
+Fakülteye kapalı bölümler ("Diğer Fakülteler: Bu bölümden puan alamaz") için
+satırları silmek yerine o varyantta tavanı **0** yaz; gövde tek kalır.
 
 ### `kapsam_notu`
 
@@ -474,12 +486,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 76 üniversite · 2490 eşik · 106 cetvel |
+| Girildi | 77 üniversite · 2505 eşik · 121 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 97 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 96 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
