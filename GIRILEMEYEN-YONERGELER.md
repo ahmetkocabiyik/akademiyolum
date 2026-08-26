@@ -298,6 +298,7 @@ dosyanın başlığında da anlatılıyor.
 | **Dokuz Eylül** | Puanlandırma Formunun D bölümü (film, animasyon, müzik teknolojisi, TV, reklam blokları); teknopark, meslek odası ve girişimcilik dersi kalemleri | Güzel Sanatlar ve Konservatuvar alanları hiç girilmedi |
 | **Yalova** | Mimarlık ve Güzel Sanatlar'ın 14. bölümü (Mesleki ve Diğer Araştırma Geliştirme Etkinlikleri: düzenleme kurulu, küratörlük, oturum başkanlığı, danışmanlık); Güzel Sanatlar'ın 13.3 (kamusal alanda sergilenen ürün) alt tablosu; bütün alanların "12. Diğer" (h-indeksi, yurt dışı araştırma) ve "İdari Görev" bölümleri | Sanat alanlarında toplam düşük çıkar; 13. bölüm barajı (Güzel Sanatlar Dr 35, Doçent 80) yalnızca girilebilen alt tablolardan hesaplanıyor |
 | **Nişantaşı** | Ek1-D Sportif Performans bölümünün on altı satırının tamamı (antrenörlük, hakemlik, milli takım, federasyon kurulu) | Spor Bilimleri adayının toplamı düşük çıkar; yönergenin "spor alanında çalışanlar asgari puanı Ek1-D'den tamamlayabilir" alternatifi fiilen kapalı |
+| **İstanbul Rumeli** | 6. bölümün tamamı (mimarlık ve mühendislik proje etkinlikleri: üniversitenin kendi Ar-Ge birimindeki mimari projeler, öğrenci yarışması danışmanlıkları, ulusal ve uluslararası yarışma dereceleri — 19 satır) | Mimarlık ve Mühendislik adayının toplamı düşük çıkar |
 
 ## Motorun karşılayamadığı kurallar
 

@@ -162,6 +162,7 @@ return [
     ['İstanbul Kültür Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Medipol Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Okan Üniversitesi', 'İstanbul', 'vakif'],
+    ['İstanbul Rumeli Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Sabahattin Zaim Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Şehir Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Ticaret Üniversitesi', 'İstanbul', 'vakif'],

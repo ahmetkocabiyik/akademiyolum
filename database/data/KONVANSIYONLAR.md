@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-70 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+71 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -258,6 +258,20 @@ diyorsa hukuk, ilahiyat, filoloji, spor, ziraat için eşik **yazma**. O alanlar
 bir gruba katmak, adaya yönergede yazmayan bir baraj göstermek olur. Kapsam dışı
 kalması doğrusudur; Yönerge Analizi sayfası zaten bunu listeliyor.
 
+### Barajın saydığı küme tablonun tamamı olmayabilir
+
+Bir yönerge "tablodan toplam N puan" dese bile tablonun kendi ara toplam
+satırları kapsamı daraltıyor olabilir. İstanbul Rumeli'nin ara değerlendirme
+satırı "TOPLAM 1 PUANI (1.1;1.2;1.3;1.4;1.6)" diyor — editörlük-hakemlik (1.5)
+ve atıflar (1.7) bölüm toplamının dışında; genel değerlendirme tablosu da bu
+ikisini "TOPLAM" satırının ALTINDA ayrı raporluyor. Baraj cetvelin tamamına
+bağlansaydı aday hakemlik ve atıf puanıyla barajı sahte biçimde aşardı.
+
+Tabloyu çıkarırken ARA TOPLAM ve GENEL DEĞERLENDİRME satırlarını da oku:
+hangi bölümlerin toplandığını, hangilerinin ayrı raporlandığını söylerler.
+Daralma varsa `Kalip::toplam`'a `maddeler` grubu ve düz Türkçe bir `liste` adı
+geç; satırlar cetvelde kalsın (aday puanını görsün) ama gruba girmesin.
+
 ### Tablo dipnotları da eşiğin parçası
 
 Sayısal ölçütler yalnızca "BAŞVURU ESASLARI" paragrafında olmayabilir. Yalova
@@ -296,6 +310,26 @@ olduğu gibi girildi. Gerekçe: aday jüriye bu metinle gidiyor, bizim
 
 ---
 
+### Üniversite adı `universiteler.php`'de OLMALI
+
+`yonerge/*.php`'deki `universite` alanı serbest metin, hiçbir şeye bağlı değil.
+Yönerge Analizi ekranı ise `Universite` tablosunu gezip her satırın adıyla
+`SartDeposu::bul()` çağırıyor — yani adı `database/data/universiteler.php`
+içinde geçmeyen bir üniversitenin eşikleri hesaplanır, testleri geçer ve
+adaya HİÇ GÖRÜNMEZ. Yeni üniversite girerken listede olup olmadığını kontrol
+et, yoksa ekle; adı birebir aynı yazılmalı.
+
+Kontrol:
+
+```bash
+php artisan tinker --execute '
+$d = app(App\Services\Scoring\Sart\SartDeposu::class);
+$liste = array_column(require database_path("data/universiteler.php"), 0);
+foreach (array_diff(array_unique(array_column($d->esikler(), "universite")), $liste) as $u) echo " - $u\n";'
+```
+
+---
+
 ## 3. Doğrulama sırası
 
 Her üniversiteden sonra, bu sırayla:
@@ -303,7 +337,7 @@ Her üniversiteden sonra, bu sırayla:
 ```bash
 php -l database/data/cetvel/YENI.php && php -l database/data/yonerge/YENI.php
 vendor/bin/pint --dirty --format agent          # --dirty ŞART, yoksa ilgisiz dosyaları biçimler
-php artisan test --compact                       # 275 test; madde referans testi asıl ağ
+php artisan test --compact                       # 317 test; madde referans testi asıl ağ
 vendor/bin/phpstan analyse --no-progress         # 14 hata baseline; artmamalı
 ```
 
@@ -397,12 +431,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 70 üniversite · 2285 eşik · 97 cetvel |
+| Girildi | 71 üniversite · 2321 eşik · 98 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 103 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 102 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
