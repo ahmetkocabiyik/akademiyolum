@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-72 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+73 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -300,6 +300,16 @@ tabloyu çıkarırken satır aralarındaki notları da oku ve koşula çevir. Di
 hangi kadroları bağladığını söylemiyorsa hepsine uygula, söylüyorsa (Yalova'nın
 1. bölüm dipnotu yalnızca doçent ve profesöre) yalnızca onlara.
 
+### Tek harflik fark koşulu değiştirir
+
+Aynı kategori aralıklarını sayan iki paragraf farklı çekim eki taşıyabiliyor.
+İstanbul Yeni Yüzyıl'da Sosyal-Hukuk paragrafı "1.A1-21, 1.A25-27 ve 1.A31
+kategorilerinin **birinde** en az iki yayın" derken Sanat paragrafı aynı üç
+aralık için "kategorilerin**de** en az iki yayın" diyor. Birincisi üç kümeden
+BİRİNDE iki yayın (`Kalip::veya` ile üç ayrı `adet`), ikincisi üçünün
+birleşiminde iki yayın (tek `adet`, üç desen). Aradaki fark bir harf ama biri
+ötekinden zor. Aralıkları kopyalarken eki de oku.
+
 ### Kaynaktaki hatayı DÜZELTME, kaydet
 
 Yönergelerde kopyala-yapıştır hataları çıkıyor: Yalova EK-D'nin "PROFESÖR
@@ -448,12 +458,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 72 üniversite · 2364 eşik · 99 cetvel |
+| Girildi | 73 üniversite · 2408 eşik · 100 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 101 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 100 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`

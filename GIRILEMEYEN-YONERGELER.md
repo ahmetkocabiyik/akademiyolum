@@ -300,6 +300,7 @@ dosyanın başlığında da anlatılıyor.
 | **Nişantaşı** | Ek1-D Sportif Performans bölümünün on altı satırının tamamı (antrenörlük, hakemlik, milli takım, federasyon kurulu) | Spor Bilimleri adayının toplamı düşük çıkar; yönergenin "spor alanında çalışanlar asgari puanı Ek1-D'den tamamlayabilir" alternatifi fiilen kapalı |
 | **İstanbul Rumeli** | 6. bölümün tamamı (mimarlık ve mühendislik proje etkinlikleri: üniversitenin kendi Ar-Ge birimindeki mimari projeler, öğrenci yarışması danışmanlıkları, ulusal ve uluslararası yarışma dereceleri — 19 satır) | Mimarlık ve Mühendislik adayının toplamı düşük çıkar |
 | **İstanbul Sabahattin Zaim** | Uluslararası kitaplar bölümünün tamamı (C.1-C.4: yurt dışı kitap, bölüm, editörlük, rapor — hepsi "tanınmış yabancı yayınevi" koşuluna bağlı); indekslenmemiş uluslararası hakemli dergiler (A.3, A.6, A.7); bilimsel toplantı düzenleme ve oturum başkanlığı (U.1-U.8) | Uluslararası kitaplar ulusal kitap satırına düşüyor, genel toplama girip "A-C" alt kapısına girmiyor; kitap ağırlıklı alanlarda doçentlik ve profesörlük alt kapısı olduğundan zor görünür |
+| **İstanbul Yeni Yüzyıl** | 4.D Sportif Kariyer bölümünün tamamı (milli sporcu ve antrenör belgeleri); 5.E'nin kongre organizasyonu, kurum dergisi ve sahne sanatları performans blokları; 6.F'nin tez danışmanlığı dışındaki tamamı (klinik ve saha eğitimi, sertifikalı kurs, öğrenci kulübü danışmanlığı); 2.B'nin grafik tasarım kalemleri | Spor Bilimleri adayının puanı düşük çıkar; ders vermek için puan satırı zaten yönergede yok |
 
 ## Motorun karşılayamadığı kurallar
 

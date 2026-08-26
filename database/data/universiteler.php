@@ -169,6 +169,7 @@ return [
     ['İstanbul Şehir Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Ticaret Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Topkapı Üniversitesi', 'İstanbul', 'vakif'],
+    ['İstanbul Yeni Yüzyıl Üniversitesi', 'İstanbul', 'vakif'],
     ['İstinye Üniversitesi', 'İstanbul', 'vakif'],
     ['İzmir Ekonomi Üniversitesi', 'İzmir', 'vakif'],
     ['Kadir Has Üniversitesi', 'İstanbul', 'vakif'],
