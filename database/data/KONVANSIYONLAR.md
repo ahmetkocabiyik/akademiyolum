@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-73 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+74 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -458,16 +458,20 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 73 üniversite · 2408 eşik · 100 cetvel |
+| Girildi | 74 üniversite · 2426 eşik · 101 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 100 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 99 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
-kullanır). Bu şeridin girilenleri: İskenderun Teknik, Boğaziçi, Galatasaray,
+kullanır). Bu şeridin İKİ TÜRÜ var: puanlamayı ÜAK'a devredenler ve kendi
+kategori taksonomisi olup PUANI OLMAYANLAR. İkincisi yine bir cetvel ister ama
+puansızını — `{slug}-turler.php` (Samsun, İzmir Demokrasi, Bursa Uludağ,
+Kadir Has). `puan` anahtarı hiç yazılmaz; koşullar `Kalip::adet` ile kurulur,
+`Kalip::toplam` hiç kullanılmaz. Bu şeridin girilenleri: İskenderun Teknik, Boğaziçi, Galatasaray,
 İstanbul Medipol, İstanbul Galata, İstanbul Topkapı, Bezmiâlem, İstanbul
 Ticaret, TED, Atılım. Bekleyenler `GIRILEMEYEN-YONERGELER.md`'de.
 
