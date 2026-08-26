@@ -3223,3 +3223,56 @@ test('İbn Haldun hukuk grubunda baraj yüksek ama küme geniş', function () {
         ->and($hukukPuan->gerekli)->toBe(40)
         ->and($hukukPuan->durum)->toBe(Durum::Saglandi);
 });
+
+test('İzmir Demokrasi tez ve proje koşullarını TR Dizin yayınıyla telafi ediyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('İzmir Demokrasi Üniversitesi', 'profesorluk', 'fen');
+    $profil = new Profil(yds: 70, programDili: 'turkce');
+
+    $trDizin = fn () => sartFaaliyet('TR Dizin', yazarRolu: 'ilk', tarih: '2024-01-01');
+    $proje = fn () => sartFaaliyet('TÜBİTAK', Kategori::Proje, 'yurutucu', '2024-01-01');
+
+    $tezAd = 'Madde 1/1-c';
+    $projeAd = 'Madde 1/1-ç';
+
+    // Hiçbiri yoksa iki koşul da düşer.
+    $bos = $depo->degerlendir($esik, [], $profil);
+    expect(sartDugum($bos, $tezAd)->durum)->toBe(Durum::Saglanmadi)
+        ->and(sartDugum($bos, $projeAd)->durum)->toBe(Durum::Saglanmadi);
+
+    // Profesörlükte telafi 2 yayın istiyor; tek yayın yetmez.
+    $tek = $depo->degerlendir($esik, [$trDizin()], $profil);
+    expect(sartDugum($tek, $tezAd)->durum)->toBe(Durum::Saglanmadi);
+
+    // İki yayın telafiyi açıyor.
+    $iki = $depo->degerlendir($esik, [$trDizin(), $trDizin()], $profil);
+    expect(sartDugum($iki, $tezAd)->durum)->toBe(Durum::Saglandi)
+        ->and(sartDugum($iki, $tezAd)->telafiIleSaglandi())->toBeTrue();
+
+    // İki gerçek proje telafiye gerek bırakmıyor.
+    $projeli = $depo->degerlendir($esik, [$proje(), $proje()], $profil);
+    expect(sartDugum($projeli, $projeAd)->durum)->toBe(Durum::Saglandi)
+        ->and(sartDugum($projeli, $projeAd)->telafiIleSaglandi())->toBeFalse();
+
+    // Doçentlikte aynı telafi tek yayınla açılıyor (sayı 1).
+    $docent = $depo->bul('İzmir Demokrasi Üniversitesi', 'docentlik', 'fen');
+    expect(sartDugum($depo->degerlendir($docent, [$trDizin()], $profil), 'Madde 2/1-c')->durum)
+        ->toBe(Durum::Saglandi);
+});
+
+test('İzmir Demokrasi ikinci yazarlı yayınları saymıyor', function () {
+    // Yönerge "birinci veya ikinci yazar" diyor ama motorun yazar süzgecinde
+    // öyle bir kademe yok; `ilk` ile girildi ve koşul olduğundan zor görünür.
+    $depo = sartDepo();
+    $esik = $depo->bul('İzmir Demokrasi Üniversitesi', 'dr_ogr_uyesi', 'fen');
+    $profil = new Profil(yds: 70, programDili: 'turkce');
+    $ad = 'Madde 3/1-b';
+
+    $ikinci = fn () => sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: 'yazar_2', tarih: '2024-01-01');
+    $birinci = fn () => sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: 'ilk', tarih: '2024-01-01');
+
+    expect(sartDugum($depo->degerlendir($esik, [$ikinci()], $profil), $ad)->durum)
+        ->toBe(Durum::Saglanmadi)
+        ->and(sartDugum($depo->degerlendir($esik, [$birinci()], $profil), $ad)->durum)
+        ->toBe(Durum::Saglandi);
+});

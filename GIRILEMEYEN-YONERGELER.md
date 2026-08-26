@@ -131,6 +131,26 @@ aynı durum.
 
 ---
 
+## Maltepe Üniversitesi
+
+**Dosya:** `pdf/17537102832.maltepeuniversitesi.pdf` (3 sayfa, 147 satır)
+
+**Yönerge metni eksiksiz ama iki eki de PDF'te yok.** Madde 5 ve 6 koşulları
+iki ayrı belgeye devrediyor:
+
+- **Ek-2** "Yükseltilme ve Atanma Asgari Koşulları" — ön değerlendirme bu
+  belgeye göre yapılıyor.
+- **Ek-3** "Akademik Personel Yükseltilme ve Atanma Puanlama Tablosu" —
+  adayın formu bu tabloya göre dolduruluyor.
+
+Dosyada yalnızca süreç maddeleri var (ön değerlendirme komisyonu, başvuru,
+jüri). Sayısal tek bir koşul geçmiyor.
+
+**Devam edilirse:** Maltepe Üniversitesi'nin Ek-2 ve Ek-3 belgelerini ayrıca
+indirmek gerekiyor. Balıkesir ve Türk Hava Kurumu ile aynı durum.
+
+---
+
 ## Taranmış (metin katmanı olmayan) PDF'ler
 
 Aşağıdaki dosyalar görüntü olarak taranmış: `pdftotext` sıfır bayt metin
@@ -324,6 +344,13 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   `referans` doçentliğin puan barajlarını da taşırdı; profesörlüğün kendi
   barajları ayrı olduğu için aday yönergede yazmayan bir baraj görürdü. Aynı
   koşul kapanışını ikinci dönemle çağırmak doğru çözüm oldu.
+- **Bir eseri iki koşulda birden saymak** — motor koşulları bağımsız
+  değerlendiriyor, bir kaynak eserin başka bir koşulda kullanılıp
+  kullanılmadığını izlemiyor (`donusumler`in kota takibi bunun tek istisnası).
+  İzmir Demokrasi'nin tez ve proje telafileri ikisi de "N adet DAHA yayın"
+  istiyor; tek yayını olan aday burada ikisini birden karşılamış görünür.
+  Koşulu olduğundan KOLAY gösteren ender sapmalardan; ilgili eşiğin aday
+  notunda söyleniyor.
 - **"En fazla N'i şu türden"** — üst sınırlı adet koşulları. Motorda "en
   fazla" düğümü yok. Çoğu satırda üst sınır alt sınırdan türüyor (2 eserin en
   az 1'i A ise en fazla 1'i C olabilir); türemediği yerlerde (İTÜ Mimarlık
