@@ -302,12 +302,17 @@ dosyanın başlığında da anlatılıyor.
 | **İstanbul Sabahattin Zaim** | Uluslararası kitaplar bölümünün tamamı (C.1-C.4: yurt dışı kitap, bölüm, editörlük, rapor — hepsi "tanınmış yabancı yayınevi" koşuluna bağlı); indekslenmemiş uluslararası hakemli dergiler (A.3, A.6, A.7); bilimsel toplantı düzenleme ve oturum başkanlığı (U.1-U.8) | Uluslararası kitaplar ulusal kitap satırına düşüyor, genel toplama girip "A-C" alt kapısına girmiyor; kitap ağırlıklı alanlarda doçentlik ve profesörlük alt kapısı olduğundan zor görünür |
 | **İstanbul Yeni Yüzyıl** | 4.D Sportif Kariyer bölümünün tamamı (milli sporcu ve antrenör belgeleri); 5.E'nin kongre organizasyonu, kurum dergisi ve sahne sanatları performans blokları; 6.F'nin tez danışmanlığı dışındaki tamamı (klinik ve saha eğitimi, sertifikalı kurs, öğrenci kulübü danışmanlığı); 2.B'nin grafik tasarım kalemleri | Spor Bilimleri adayının puanı düşük çıkar; ders vermek için puan satırı zaten yönergede yok |
 | **Kadir Has** | A-3 (indekslenmemiş uluslararası hakemli dergiler), C-1 ve C-2 (adayın adıyla anılan formül ve şekiller), O-1 ve O-2 (bilimsel toplantı düzenleme kurulu); L bölümü yalnızca yürütücülüğü sayıyor, araştırmacı ve danışmanlık hiç girmiyor | Kategoriler puansız olduğu için toplam etkilenmiyor; yalnızca A-3 kaynaksız kaldığından "A kategorisi" kümesi indeksli dergilerle sınırlı |
+| **Kocaeli Sağlık ve Teknoloji** | Satır 50 (idari görevde bulunmak — kaynakta puan sütununda soru işareti var); sanatsal etkinlik satırının tamamı (çizelgede hiç yok); ESCI kapsamındaki dergilerde görev (hakemlik satırı yok); yardımcı tez danışmanlığı, el-cep kitabı, kongre başkanlığı, üniversite ödülleri | İdari görev puanı hiç hesaplanmıyor; Güzel Sanatlar adayının toplamı düşük çıkar |
 
 ## Motorun karşılayamadığı kurallar
 
 Bunlar PDF sorunu değil; motorun bugünkü yapısıyla ifade edilemeyen kurallar.
 Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
 
+- **Puan sütunu boş bırakılmış satır** — KOSTÜ'nün 50. satırı ("son beş yılda
+  üniversite eğitim biriminde idari görevde bulunmak") puan yerine soru işareti
+  taşıyor. Kaynakta sayı olmadığı için idari görev puanı hiç girilemedi; puan
+  DÜŞÜK görünür.
 - **Yüzdeye bağlı tavan** — Düzce (eğitim-öğretim %20, burs %10, idari görev
   %10), Manisa CBÜ (atıf %20), Karabük (E bölümü %10), Yalova (Sosyal ve
   Mimarlık'ta kitap %30, atıf %20, tez danışmanlığı %10 — hepsi "başvuru

@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-74 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+75 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -142,6 +142,14 @@ float tutup çarpımdan **sonra bir kez** aşağı yuvarla; önce yuvarlayıp so
 `grup_tavanlari` yalnızca **sabit** tavan alır (`'ATIF' => 75`). Yüzdeye bağlı
 tavan ("toplam puanın %20'sini aşamaz") ya da başka bir grubun toplamına bağlı
 tavan motorda yok — uygulanmaz, `kapsam_notu`'nda uyarılır.
+
+**İstisna: yüzde KADRONUN ASGARİ PUANINA bağlıysa çevrilebilir.** KOSTÜ'nün
+Madde 14'ü "lisansüstü tez yönetiminden … elde edilecek puanın ilgili kadronun
+gerektirdiği asgari puanın %50'sini aşan kısmı dikkate alınmaz" diyor; asgari
+puanlar yönergede yazılı olduğu için tavan kadro başına sabit sayıya iniyor
+(20/120/250 → 10/60/125). Cetvelin kadro başına bir varyantı üretilir ve her
+eşik kendi varyantına bağlanır (Işık'taki çarpanlı/çarpansız üretimin aynısı;
+bir dosya `return ['cetveller' => $cetveller]` ile birden çok cetvel döndürebilir).
 
 ### `kapsam_notu`
 
@@ -458,12 +466,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 74 üniversite · 2426 eşik · 101 cetvel |
+| Girildi | 75 üniversite · 2462 eşik · 104 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 99 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 98 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
