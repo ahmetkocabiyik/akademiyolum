@@ -3354,3 +3354,87 @@ test('Işık mühendislikte makale sayısı yerine puan barajı kullanıyor', fu
         ->and(sartDugum($uc, 'Madde 7(2)-c')->durum)->toBe(Durum::Saglandi)
         ->and(sartDugum($dort, 'Madde 7(2)-c')->mevcut)->toBe(60);
 });
+
+test('İstanbul Kültür alt kapısı alana göre biçim değiştiriyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), dersYariyil: 4);
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+
+    // Sosyal ve Güzel Sanatlarda alt kapı yalnızca PUAN: tek Q1 makale (30 p)
+    // 10 puanlık kapıyı geçiyor, makale sayısı hiç aranmıyor.
+    $sosyal = $depo->degerlendir($depo->bul('İstanbul Kültür Üniversitesi', 'docentlik', 'sosyal'), [$q1()], $profil);
+    expect(sartDugum($sosyal, 'TABLO 8')->durum)->toBe(Durum::Saglandi);
+
+    // Mühendislikte hem sayı hem puan var. Tek Q1 makale (30 puan) ikisini de
+    // düşürüyor: sayı 1/3, puan 30/40.
+    $esikMuh = $depo->bul('İstanbul Kültür Üniversitesi', 'docentlik', 'muhendislik');
+    $muhKosullar = collect($depo->degerlendir($esikMuh, [$q1()], $profil)->kosullar())
+        ->filter(fn (SartSonucu $k) => str_contains($k->madde ?? '', 'TABLO 6'))->values();
+
+    expect($muhKosullar)->toHaveCount(2)
+        ->and($muhKosullar[0]->mevcut)->toBe(1)
+        ->and($muhKosullar[0]->gerekli)->toBe(3)
+        ->and($muhKosullar[1]->mevcut)->toBe(30)
+        ->and($muhKosullar[1]->gerekli)->toBe(40);
+
+    // İki Q1 makale (60 puan) puan kapısını açıyor ama sayı hâlâ eksik —
+    // yönerge ikisini birden istiyor.
+    $ikiMakale = collect($depo->degerlendir($esikMuh, [$q1(), $q1()], $profil)->kosullar())
+        ->filter(fn (SartSonucu $k) => str_contains($k->madde ?? '', 'TABLO 6'))->values();
+
+    expect($ikiMakale[0]->durum)->toBe(Durum::Saglanmadi)
+        ->and($ikiMakale[1]->durum)->toBe(Durum::Saglandi);
+
+    // Fen'de Matematik ayrı birim ve daha düşük eşik.
+    $sayi = function (?string $birim) use ($depo): int {
+        $esik = $depo->bul('İstanbul Kültür Üniversitesi', 'docentlik', 'fen', $birim);
+
+        return collect($esik['sart']['cocuklar'])->firstWhere('min_puan')['min_puan'];
+    };
+
+    expect($sayi(null))->toBe(40)
+        ->and($sayi('Matematik ve İstatistik'))->toBe(20);
+});
+
+test('İstanbul Kültür hukuk ve dil kapısını uluslararası yayınla telafi ediyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('İstanbul Kültür Üniversitesi', 'dr_ogr_uyesi', 'hukuk');
+    $ad = 'TABLO 4';
+
+    $tr = fn () => sartFaaliyet('TR Dizin', tarih: '2024-01-01');
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+
+    // Üç TR Dizin yayını koşulu doğrudan sağlıyor.
+    expect(sartDugum($depo->degerlendir($esik, [$tr(), $tr(), $tr()], new Profil), $ad)->durum)
+        ->toBe(Durum::Saglandi);
+
+    // İki TR Dizin yetmiyor; ama tek bir uluslararası yayın telafiyi açıyor.
+    expect(sartDugum($depo->degerlendir($esik, [$tr(), $tr()], new Profil), $ad)->durum)
+        ->toBe(Durum::Saglanmadi);
+
+    $telafili = sartDugum($depo->degerlendir($esik, [$q1()], new Profil), $ad);
+    expect($telafili->durum)->toBe(Durum::Saglandi)
+        ->and($telafili->telafiIleSaglandi())->toBeTrue();
+});
+
+test('İstanbul Kültür kitap puanı hukuk ve dilde dört kat', function () {
+    $depo = sartDepo();
+
+    $puan = function (string $cetvel, string $kaynak) use ($depo): int {
+        $katalog = $depo->katalog($cetvel);
+
+        return $katalog->puan(sartFaaliyet($kaynak, Kategori::Kitap, null), array_keys($katalog->maddeler));
+    };
+
+    expect($puan('istanbul-kultur-2024', 'Uluslararası/Ulusal Kitap'))->toBe(5)
+        ->and($puan('istanbul-kultur-2024-hukuk', 'Uluslararası/Ulusal Kitap'))->toBe(20)
+        ->and($puan('istanbul-kultur-2024-dil', 'Uluslararası/Ulusal Kitap'))->toBe(20);
+
+    // Kitap bölümü Hukuk'ta 10, Dil'de 5, diğerlerinde 3.
+    expect($puan('istanbul-kultur-2024', 'Kitap Bölümü'))->toBe(3)
+        ->and($puan('istanbul-kultur-2024-hukuk', 'Kitap Bölümü'))->toBe(10)
+        ->and($puan('istanbul-kultur-2024-dil', 'Kitap Bölümü'))->toBe(5);
+
+    // Sanatsal kalemler yalnızca Güzel Sanatlar varyantında.
+    expect($puan('istanbul-kultur-2024', 'Kişisel Etkinlik (Uluslararası)'))->toBe(0);
+});

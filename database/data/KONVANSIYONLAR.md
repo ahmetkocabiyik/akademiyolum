@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-67 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+68 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -205,6 +205,18 @@ sayısını değil).
 Hesaplanabilir bir koşulu beyana çevirme; beyan, adayın kendi onayına bırakılan
 şeydir.
 
+### Alan başına ayrı tablo ≠ alan başına ayrı cetvel
+
+Bir yönerge her temel alan için ayrı tablo verse bile tabloların çoğu birebir
+aynı olabilir. Önce **tabloları birbirine karşı diff'le**: İstanbul Kültür'ün
+dokuz tablosundan yalnızca üçü puan olarak farklıydı (Hukuk ve Dil'de kitap
+puanı, Güzel Sanatlar'da ek bölüm), kalan altısı ortak gövdeyi paylaştı. Dokuz
+cetvel yazmak yerine bir gövde + üç varyant yeterli oldu; ÜAK dosyasındaki
+`farklar` deseninin aynısı.
+
+Ayrım genellikle cetvelde değil KOŞULDA: aynı puan tablosu üstüne her alan
+kendi alt kapısını koyuyor.
+
 ### `birim` ne zaman
 
 Aynı (üniversite, kadro, temel alan) üçlüsü için **birden fazla eşik** varsa.
@@ -347,7 +359,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 67 üniversite · 2181 eşik · 86 cetvel |
+| Girildi | 68 üniversite · 2211 eşik · 90 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
