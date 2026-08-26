@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-75 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+76 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -136,6 +136,14 @@ birimde bütün kadrolarda geçerliyse cetvelin İKİ VARYANTINI üret (çarpanl
 çarpansız) ve eşikleri birime göre doğru varyanta bağla (Işık). Ham değerleri
 float tutup çarpımdan **sonra bir kez** aşağı yuvarla; önce yuvarlayıp sonra
 çarpmak farklı sonuç verir.
+
+### Adet tavanı puana ÇEVRİLEBİLİR
+
+Motorda "en fazla N faaliyet" düğümü yok, ama satırın puanı sabitse tavan
+puana çevrilir: KTO Karatay "her bir jüri üyeliği için (en fazla 6)" diyor ve
+satır 5 puan, yani `grup_tavanlari` içinde 30. Çevrilemeyen tek durum tavanın
+YIL BAŞINA olması ("her yıl için en fazla 10 ders"); orada puan yüksek çıkar
+ve `kapsam_notu`'nda uyarılır.
 
 ### Grup tavanları
 
@@ -466,12 +474,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 75 üniversite · 2462 eşik · 104 cetvel |
+| Girildi | 76 üniversite · 2490 eşik · 106 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 98 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 97 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
