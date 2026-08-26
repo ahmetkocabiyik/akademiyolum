@@ -3276,3 +3276,81 @@ test('İzmir Demokrasi ikinci yazarlı yayınları saymıyor', function () {
         ->and(sartDugum($depo->degerlendir($esik, [$birinci()], $profil), $ad)->durum)
         ->toBe(Durum::Saglandi);
 });
+
+test('Işık 1,3 katsayısını yalnızca bazı birimlere uyguluyor', function () {
+    $depo = sartDepo();
+
+    $puan = function (string $cetvel, string $kaynak, Kategori $kategori = Kategori::Makale, ?string $rol = 'tek') use ($depo): int {
+        $katalog = $depo->katalog($cetvel);
+
+        return $katalog->puan(sartFaaliyet($kaynak, $kategori, $rol), array_keys($katalog->maddeler));
+    };
+
+    // A.1 (uluslararası yayın) ve B (proje) çarpanlı; çarpımdan sonra aşağı
+    // yuvarlanıyor: 15 × 1,3 = 19,5 → 19.
+    expect($puan('isik-2019', 'SCIE/SSCI (Q1)'))->toBe(15)
+        ->and($puan('isik-2019-carpanli', 'SCIE/SSCI (Q1)'))->toBe(19);
+
+    // Proje de A.1 ile aynı kuralda: 12 × 1,3 = 15,6 → 15.
+    expect($puan('isik-2019', 'TÜBİTAK', Kategori::Proje, 'yurutucu'))->toBe(12)
+        ->and($puan('isik-2019-carpanli', 'TÜBİTAK', Kategori::Proje, 'yurutucu'))->toBe(15);
+
+    // A.2 (ulusal yayın) çarpanın DIŞINDA: iki cetvelde de aynı.
+    expect($puan('isik-2019', 'TR Dizin'))->toBe(6)
+        ->and($puan('isik-2019-carpanli', 'TR Dizin'))->toBe(6);
+
+    // Mühendislik ve Fizik çarpansız cetveli, Matematik çarpanlıyı kullanıyor;
+    // ikisi de `fen`/`muhendislik` alanında, ayrım birimle yapılıyor.
+    expect($depo->bul('Işık Üniversitesi', 'docentlik', 'muhendislik')['cetvel'])->toBe('isik-2019')
+        ->and($depo->bul('Işık Üniversitesi', 'docentlik', 'fen')['cetvel'])->toBe('isik-2019')
+        ->and($depo->bul('Işık Üniversitesi', 'docentlik', 'fen', 'Matematik Bölümü')['cetvel'])
+        ->toBe('isik-2019-carpanli');
+});
+
+test('Işık yazar payını sıraya bağlıyor, sayıya değil', function () {
+    // Açıklama 2: birinci isim ve sorumlu yazar %100, ikinci %90, üçüncü %80,
+    // dördüncü %70, beşinci ve sonrası %50. Yazar SAYISI hiç rol oynamıyor.
+    $katalog = sartDepo()->katalog('isik-2019');
+    $kodlar = array_keys($katalog->maddeler);
+
+    $puan = function (string $rol, int $yazarSayisi) use ($katalog, $kodlar): int {
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: $rol);          // A.1.1.a → 15 puan
+        $f->yazarlar = implode(', ', array_map(fn ($i) => "Yazar {$i}", range(1, $yazarSayisi)));
+
+        return $katalog->puan($f, $kodlar);
+    };
+
+    // Aynı rol, farklı yazar sayısı → aynı puan.
+    expect($puan('yazar_3', 3))->toBe($puan('yazar_3', 9))
+        ->and($puan('ilk', 2))->toBe($puan('ilk', 12));
+
+    // Sıra kademeleri: %100 / %90 / %80 / %70 / %50.
+    expect($puan('ilk', 6))->toBe(15)
+        ->and($puan('baslica', 6))->toBe(15)
+        ->and($puan('yazar_2', 6))->toBe(13)
+        ->and($puan('yazar_3', 6))->toBe(12)
+        ->and($puan('yazar_4', 6))->toBe(10)
+        ->and($puan('yazar_5', 6))->toBe(7)
+        ->and($puan('ortak', 6))->toBe(7);
+});
+
+test('Işık mühendislikte makale sayısı yerine puan barajı kullanıyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(docentlikTarihi: Carbon::parse('2020-01-01'));
+    $q1 = fn (string $tarih = '2023-01-01') => sartFaaliyet('SCIE/SSCI (Q1)', tarih: $tarih);
+
+    // Sosyal doçentlikte SAYI koşulu var (en az 1 A.1.1 makale).
+    $sosyal = $depo->bul('Işık Üniversitesi', 'docentlik', 'sosyal');
+    expect(sartDugum($depo->degerlendir($sosyal, [$q1()], $profil), 'Madde 7(2)-a')->gerekli)
+        ->toBe(1);
+
+    // Mühendislik doçentliğinde sayı yok, 45 puanlık alt baraj var.
+    $muh = $depo->bul('Işık Üniversitesi', 'docentlik', 'muhendislik');
+    $uc = $depo->degerlendir($muh, [$q1(), $q1(), $q1()], $profil);
+    $dort = $depo->degerlendir($muh, [$q1(), $q1(), $q1(), $q1()], $profil);
+
+    // Üç makale 45 puan (3 × 15), tam barajda; dördü rahat geçiyor.
+    expect(sartDugum($uc, 'Madde 7(2)-c')->mevcut)->toBe(45)
+        ->and(sartDugum($uc, 'Madde 7(2)-c')->durum)->toBe(Durum::Saglandi)
+        ->and(sartDugum($dort, 'Madde 7(2)-c')->mevcut)->toBe(60);
+});

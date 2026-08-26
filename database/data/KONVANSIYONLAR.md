@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-66 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+67 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -103,6 +103,15 @@ kullanılabilir. Çarpan hiçbir zaman 1.0'ı aşamaz (motor `min(1.0, …)` uyg
   satırı alır.
 - `haric` alanına, yönergenin kendi paylaşım kuralını yazdığı kategorileri koy
   (proje, patent, editörlük, ödül genelde böyledir) ve nedenini başlıkta yaz.
+
+### Koşula bağlı çarpanı cetvele göm
+
+Bir yönerge "şu birimde A grubu faaliyetler 1,3 katsayısı ile çarpılır" diyorsa
+çarpanı koşula yazmaya çalışma — motorda `carpanlar` alanı yok. Çarpan aynı
+birimde bütün kadrolarda geçerliyse cetvelin İKİ VARYANTINI üret (çarpanlı ve
+çarpansız) ve eşikleri birime göre doğru varyanta bağla (Işık). Ham değerleri
+float tutup çarpımdan **sonra bir kez** aşağı yuvarla; önce yuvarlayıp sonra
+çarpmak farklı sonuç verir.
 
 ### Grup tavanları
 
@@ -338,7 +347,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 66 üniversite · 2163 eşik · 84 cetvel |
+| Girildi | 67 üniversite · 2181 eşik · 86 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
