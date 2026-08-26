@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-71 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+72 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -67,6 +67,24 @@ Aynı tuzak tek haneli numaralarda daha da sinsi: `'1*'` deseni 10-19 arasını 
 yakalar. Karabük, Manisa CBÜ, Bingöl, Bayburt ve Kilis'te bu yüzden bütün
 gruplarda `'1.*'` biçimi kullanıldı. Numaralar tek haneli ve alt kodu yoksa
 kümeyi **tek tek say** (Manisa CBÜ'de 46 kod elle yazıldı).
+
+### Harf aralığı KODA DEĞİL, SIRAYA bakar
+
+Bir yönerge kümeyi harf aralığıyla veriyorsa ("A-C kategorilerinden", "A-U
+kategorileri arasından") aralığı `'A..U'` diye yazma: motorun `..` deseni
+cetveldeki DİZİ SIRASINA bakıyor, harf sırasına değil. Bölümleri `gruplar`
+altında tek tek say.
+
+Türkçe alfabe ayrıca iki tuzak taşıyor: `A-J` aralığı I ile J arasındaki **İ**
+bölümünü de kapsar, `A-U` ise **Ü**'den sonra gelen V ve Y'yi dışarıda bırakır
+(İstanbul Sabahattin Zaim'in üç katmanlı barajı bu ayrımın üstüne kurulu).
+Kümeler iç içeyse tanımladıktan sonra kapsamayı doğrula:
+
+```bash
+php artisan tinker --execute '
+$k = app(App\Services\Scoring\Sart\SartDeposu::class)->katalog("YENI-CETVEL");
+echo implode(", ", array_diff($k->coz(["*"]), $k->coz(["DIS_GRUP"])));'
+```
 
 ### Kaynak sözlüğü
 
@@ -430,12 +448,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 71 üniversite · 2321 eşik · 98 cetvel |
+| Girildi | 72 üniversite · 2364 eşik · 99 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 102 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 101 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
