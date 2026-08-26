@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-69 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+70 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -177,6 +177,12 @@ cümleyi görüp farkı anlayamıyor.
 
 `Kalip::toplam`'ın `liste` argümanı yalnızca **kapsam daraldığında** ve düz
 Türkçe verilir. Kapsam cetvelin tamamıysa hiç verme.
+
+`Kalip::puanDan` dönemi metne EKLEMİYOR — bunu yalnızca `toplam` yapıyor. Alt
+baraj bir döneme bağlıysa dönemi `aciklama`ya elle yaz ("… doçentlik
+unvanınızdan sonra en az 40 puan"). Yazılmazsa aday, yeniden atanma satırında
+ilk atamanınkiyle birebir aynı cümleyi görüp neden puanının sayılmadığını
+anlayamıyor (Nişantaşı'nda bu yüzden eklendi).
 
 ### Kalıplar
 
@@ -391,12 +397,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 69 üniversite · 2235 eşik · 96 cetvel |
+| Girildi | 70 üniversite · 2285 eşik · 97 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 104 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 103 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`

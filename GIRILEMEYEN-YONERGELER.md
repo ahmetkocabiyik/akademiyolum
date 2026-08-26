@@ -297,6 +297,7 @@ dosyanın başlığında da anlatılıyor.
 | **İTÜ** | Hukuk Temel Alanı (Tablo 4'te sınır değeri yok), atıf puanı, ders kredisi, program koordinatörlüğü, toplumsal katkı | Toplam puan barajı hiç yazılmadı; hukuk alanı kapsam dışı |
 | **Dokuz Eylül** | Puanlandırma Formunun D bölümü (film, animasyon, müzik teknolojisi, TV, reklam blokları); teknopark, meslek odası ve girişimcilik dersi kalemleri | Güzel Sanatlar ve Konservatuvar alanları hiç girilmedi |
 | **Yalova** | Mimarlık ve Güzel Sanatlar'ın 14. bölümü (Mesleki ve Diğer Araştırma Geliştirme Etkinlikleri: düzenleme kurulu, küratörlük, oturum başkanlığı, danışmanlık); Güzel Sanatlar'ın 13.3 (kamusal alanda sergilenen ürün) alt tablosu; bütün alanların "12. Diğer" (h-indeksi, yurt dışı araştırma) ve "İdari Görev" bölümleri | Sanat alanlarında toplam düşük çıkar; 13. bölüm barajı (Güzel Sanatlar Dr 35, Doçent 80) yalnızca girilebilen alt tablolardan hesaplanıyor |
+| **Nişantaşı** | Ek1-D Sportif Performans bölümünün on altı satırının tamamı (antrenörlük, hakemlik, milli takım, federasyon kurulu) | Spor Bilimleri adayının toplamı düşük çıkar; yönergenin "spor alanında çalışanlar asgari puanı Ek1-D'den tamamlayabilir" alternatifi fiilen kapalı |
 
 ## Motorun karşılayamadığı kurallar
 
@@ -343,11 +344,15 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   500 ×1,6, uluslararası ortaklı ×1,4, ulusal ortaklı ×1,2) ve Madde 7(2)
   (Incites/SciVal %1'lik dilim ×3, %10'luk ×1,5). Faaliyet kaydı ortağın
   kurumunu ve derginin dilim bilgisini tutmuyor; puan DÜŞÜK görünür.
+- **Tam sayıya inince kaybolan satır** — motorun `puan` alanı tam sayı tutuyor.
+  Nişantaşı'nın "orkestra konserinde üyelik (yurt içi) 0,5 puan" satırı aşağı
+  yuvarlanınca 0 ettiği için hiç girilmedi; o kalemde puan DÜŞÜK görünür.
 - **Puan üreten formüller** — İTÜ Tablo 1'in D.1 ((h-indeksi − sınır) × 25),
   D.2 ((FWCI − 1) × yayın sayısı) ve K.1 (ders kredileri toplamı) kalemleri.
   Motorun `puan` alanı sabit sayı tutuyor. İTÜ'nün TOPLAM PUAN barajı bu
   yüzden hiç yazılmadı; eser puanı barajı etkilenmiyor çünkü ona yalnızca
-  yayın türleri giriyor.
+  yayın türleri giriyor. Nişantaşı'nın G.4 "H-index × 5" satırı da aynı
+  sebeple girilmedi.
 - **Çok kademeli eşdeğerlik** — Dokuz Eylül mühendislik doçentliği "en az iki
   yayın … her bir yayına eşdeğer 15 puanlık etkinlik" diyor, yani iki yayının
   ikisi birden 30 puanla değiştirilebilir. Motorun `telafi` dalı tek kademe
