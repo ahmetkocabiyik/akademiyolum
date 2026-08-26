@@ -3438,3 +3438,173 @@ test('İstanbul Kültür kitap puanı hukuk ve dilde dört kat', function () {
     // Sanatsal kalemler yalnızca Güzel Sanatlar varyantında.
     expect($puan('istanbul-kultur-2024', 'Kişisel Etkinlik (Uluslararası)'))->toBe(0);
 });
+
+test('Yalova altı alanı ayrı tabloyla ve ayrı bölüm tavanıyla puanlıyor', function () {
+    $depo = sartDepo();
+
+    $puan = function (string $cetvel, string $kaynak, Kategori $kategori = Kategori::Makale) use ($depo): int {
+        $katalog = $depo->katalog($cetvel);
+
+        return $katalog->puan(sartFaaliyet($kaynak, $kategori, null), array_keys($katalog->maddeler));
+    };
+
+    // Diğer ulusal hakemli makale: Sosyal 5, Mühendislik ve Sağlık 4,
+    // Mimarlık ve Güzel Sanatlar 6.
+    expect($puan('yalova-2024-sosyal', 'Diğer Ulusal Hakemli'))->toBe(5)
+        ->and($puan('yalova-2024-muhendislik', 'Diğer Ulusal Hakemli'))->toBe(4)
+        ->and($puan('yalova-2024-saglik', 'Diğer Ulusal Hakemli'))->toBe(4)
+        ->and($puan('yalova-2024-mimarlik', 'Diğer Ulusal Hakemli'))->toBe(6)
+        ->and($puan('yalova-2024-guzel-sanatlar', 'Diğer Ulusal Hakemli'))->toBe(6)
+        ->and($puan('yalova-2024-spor', 'Diğer Ulusal Hakemli'))->toBe(5);
+
+    // Sağlık tablosu derlemeyi özgün makaleden ayırıp düşük puanlıyor;
+    // diğer tablolarda derleme tam makale puanı alıyor.
+    $derleme = function (string $cetvel) use ($depo): int {
+        $katalog = $depo->katalog($cetvel);
+        $f = sartFaaliyet('SCIE/SSCI (Q1)', yazarRolu: null);
+        $f->yayin_turu = 'derleme';
+
+        return $katalog->puan($f, array_keys($katalog->maddeler));
+    };
+
+    expect($derleme('yalova-2024-sosyal'))->toBe(20)
+        ->and($derleme('yalova-2024-saglik'))->toBe(5);
+
+    // Sanatsal kalemler yalnızca Güzel Sanatlar varyantında puanlanıyor.
+    expect($puan('yalova-2024-guzel-sanatlar', 'Kişisel Etkinlik (Uluslararası)', Kategori::SanatselEtkinlik))->toBe(25)
+        ->and($puan('yalova-2024-sosyal', 'Kişisel Etkinlik (Uluslararası)', Kategori::SanatselEtkinlik))->toBe(0);
+
+    // Bölüm tavanları: Sosyal'de 7. madde 20 puanla sınırlı, üç AB projesi
+    // (3 × 15 = 45) tavanda kesiliyor.
+    $katalog = $depo->katalog('yalova-2024-sosyal');
+    $proje = function () {
+        $f = sartFaaliyet('AB Çerçeve / Ufuk', Kategori::Proje, null);
+        $f->rol = 'yurutucu';
+
+        return $f;
+    };
+
+    expect($katalog->topla([$proje(), $proje(), $proje()], $katalog->coz(['7'])))->toBe(20);
+});
+
+test('Yalova yazar payında iki kuralın düşüğünü uyguluyor', function () {
+    $depo = sartDepo();
+    $yazarlar = fn (int $n) => implode(', ', array_map(fn (int $i) => "Y{$i}", range(1, $n)));
+
+    $carpan = function (string $rol, int $n, Kategori $kategori = Kategori::Makale) use ($depo, $yazarlar): float {
+        $f = sartFaaliyet($kategori === Kategori::Atif ? 'WoS / Scopus' : 'SCIE/SSCI (Q1)', $kategori, null);
+        $f->rol = $rol;
+        $f->yazarlar = $yazarlar($n);
+
+        return $depo->katalog('yalova-2024-sosyal')->yazarCarpani($f);
+    };
+
+    // MADDE 10/4 makalede başlıca yazara 2 kişide 0,8 veriyor ama kitap ve
+    // bildiride eşit bölüşme istiyor. Motor kategoriye göre ayrı tablo
+    // tanımadığı için her rolde DÜŞÜK olan (eşit bölüşme) yazıldı.
+    expect($carpan('tek', 1))->toBe(1.0)
+        ->and($carpan('baslica', 2))->toBe(0.5)
+        ->and($carpan('baslica', 4))->toBe(0.25)
+        ->and($carpan('ilk', 5))->toBe(0.2);
+
+    // İkinci ve sonraki yazarlar: 0,5 / (n - 1). İki yazarda yönergenin
+    // verdiği 0,5'e eşit, üç ve sonrasında eşit bölüşmeden düşük.
+    expect($carpan('yazar_2', 2))->toBe(0.5)
+        ->and($carpan('yazar_2', 3))->toBe(0.25)
+        ->and($carpan('ortak', 5))->toBe(0.125);
+
+    // Yayın dışı kalemlerde yönerge sessiz; pay uygulanmıyor.
+    expect($carpan('ortak', 5, Kategori::Atif))->toBe(1.0);
+});
+
+test('Yalova Sağlık tablosunun dipnot zorunluluklarını koşula çeviriyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Yalova Üniversitesi', 'dr_ogr_uyesi', 'saglik');
+
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2024-01-01');
+    $tr = fn () => sartFaaliyet('TR Dizin', tarih: '2024-01-01');
+
+    // Üç Q1 makale kadro paragrafını (2 yayın + 50 puan) karşılıyor, ama
+    // tablo dipnotları TR Dizin'den 10, tezden 1 yayın ve atıftan 4 puan
+    // istiyor; üçü de eksik.
+    $sonuc = $depo->degerlendir($esik, [$q1(), $q1(), $q1()], new Profil);
+
+    expect(sartDugum($sonuc, 'EK-C · 2. bölüm dipnotu')->durum)->toBe(Durum::Saglanmadi)
+        ->and(sartDugum($sonuc, 'EK-C · 3. bölüm dipnotu')->durum)->toBe(Durum::Saglanmadi)
+        ->and(sartDugum($sonuc, 'EK-C · 5. bölüm dipnotu')->durum)->toBe(Durum::Saglanmadi);
+
+    // TR Dizin makalesi 10 puan; tek yayın dipnotu açıyor.
+    $sonuc = $depo->degerlendir($esik, [$q1(), $q1(), $tr()], new Profil);
+    expect(sartDugum($sonuc, 'EK-C · 2. bölüm dipnotu')->durum)->toBe(Durum::Saglandi);
+});
+
+test('Yalova Mimarlık doçentliğinde tek yazarlı makale şart', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Yalova Üniversitesi', 'docentlik', 'mimarlik');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2018-01-01'));
+
+    $makale = function (string $rol, string $kaynak = 'SCIE/SSCI (Q1)') {
+        $f = sartFaaliyet($kaynak, tarih: '2022-01-01');
+        $f->rol = $rol;
+        $f->yazarlar = $rol === 'tek' ? 'Y1' : 'Y1, Y2';
+
+        return $f;
+    };
+
+    // Ortak yazarlı makale koşulu açmıyor.
+    expect(sartDugum($depo->degerlendir($esik, [$makale('baslica')], $profil), 'EK-Ç · 2')->durum)
+        ->toBe(Durum::Saglanmadi);
+
+    // Tek yazarlı makale açıyor.
+    expect(sartDugum($depo->degerlendir($esik, [$makale('tek')], $profil), 'EK-Ç · 2')->durum)
+        ->toBe(Durum::Saglandi);
+
+    // 1ç bendi (diğer uluslararası indeks) koşulun dışında bırakılmış.
+    expect(sartDugum($depo->degerlendir($esik, [$makale('tek', 'Diğer Hakemli Dergi')], $profil), 'EK-Ç · 2')->durum)
+        ->toBe(Durum::Saglanmadi);
+});
+
+test('Yalova Mimarlık yarışma puanını yayınla telafi ediyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Yalova Üniversitesi', 'docentlik', 'mimarlik');
+    $ad = 'EK-Ç · 13. bölüm notu';
+
+    $yarisma = fn () => sartFaaliyet('Sempozyum/Çalıştay/Bienal (Yurt Dışı)', Kategori::SanatselEtkinlik, null, '2022-01-01');
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2022-01-01');
+
+    // Tek yarışma 15 puan; koşulu doğrudan sağlıyor.
+    expect(sartDugum($depo->degerlendir($esik, [$yarisma()], new Profil), $ad)->durum)
+        ->toBe(Durum::Saglandi);
+
+    // Yarışması olmayan aday 1a-1c'den bir yayınla telafi ediyor.
+    $telafili = sartDugum($depo->degerlendir($esik, [$q1()], new Profil), $ad);
+    expect($telafili->durum)->toBe(Durum::Saglandi)
+        ->and($telafili->telafiIleSaglandi())->toBeTrue();
+});
+
+test('Yalova profesörlüğü puanın beş ayrı maddeye dağılmasını istiyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Yalova Üniversitesi', 'profesorluk', 'sosyal');
+    $profil = new Profil(docentlikTarihi: Carbon::parse('2019-01-01'));
+    $ad = 'en az BEŞ ayrı maddesinden';
+
+    // Sekiz Q1 makale 160 puan eder ama hepsi tek maddeden; beş madde koşulu
+    // açılmıyor.
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2022-01-01');
+    $sadeceMakale = array_map($q1, range(1, 8));
+
+    expect(sartDugum($depo->degerlendir($esik, $sadeceMakale, $profil), $ad)->durum)
+        ->toBe(Durum::Saglanmadi);
+
+    // Beş ayrı bölümden birer faaliyet koşulu açıyor.
+    $dagilmis = [
+        $q1(),
+        sartFaaliyet('TR Dizin', tarih: '2022-01-01'),
+        sartFaaliyet('Kitap Bölümü', Kategori::Kitap, null, '2022-01-01'),
+        sartFaaliyet('WoS / Scopus', Kategori::Atif, null, '2022-01-01'),
+        sartFaaliyet('Lisansüstü Ders', Kategori::EgitimOgretim, null, '2022-01-01'),
+    ];
+
+    expect(sartDugum($depo->degerlendir($esik, $dagilmis, $profil), $ad)->durum)
+        ->toBe(Durum::Saglandi);
+});

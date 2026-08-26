@@ -296,6 +296,7 @@ dosyanın başlığında da anlatılıyor.
 | **İnönü** | L bölümü (girişimcilik, TGB, TTO), P bölümü (sportif faaliyetler), H (kongre düzenleme), S (iletişim bilimleri) | "L1-L18 Puanı" koşulu hiç yazılmadı; Spor Bilimleri adayının toplamı düşük çıkar |
 | **İTÜ** | Hukuk Temel Alanı (Tablo 4'te sınır değeri yok), atıf puanı, ders kredisi, program koordinatörlüğü, toplumsal katkı | Toplam puan barajı hiç yazılmadı; hukuk alanı kapsam dışı |
 | **Dokuz Eylül** | Puanlandırma Formunun D bölümü (film, animasyon, müzik teknolojisi, TV, reklam blokları); teknopark, meslek odası ve girişimcilik dersi kalemleri | Güzel Sanatlar ve Konservatuvar alanları hiç girilmedi |
+| **Yalova** | Mimarlık ve Güzel Sanatlar'ın 14. bölümü (Mesleki ve Diğer Araştırma Geliştirme Etkinlikleri: düzenleme kurulu, küratörlük, oturum başkanlığı, danışmanlık); Güzel Sanatlar'ın 13.3 (kamusal alanda sergilenen ürün) alt tablosu; bütün alanların "12. Diğer" (h-indeksi, yurt dışı araştırma) ve "İdari Görev" bölümleri | Sanat alanlarında toplam düşük çıkar; 13. bölüm barajı (Güzel Sanatlar Dr 35, Doçent 80) yalnızca girilebilen alt tablolardan hesaplanıyor |
 
 ## Motorun karşılayamadığı kurallar
 
@@ -303,13 +304,26 @@ Bunlar PDF sorunu değil; motorun bugünkü yapısıyla ifade edilemeyen kuralla
 Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
 
 - **Yüzdeye bağlı tavan** — Düzce (eğitim-öğretim %20, burs %10, idari görev
-  %10), Manisa CBÜ (atıf %20), Karabük (E bölümü %10). Motor yalnızca sabit
+  %10), Manisa CBÜ (atıf %20), Karabük (E bölümü %10), Yalova (Sosyal ve
+  Mimarlık'ta kitap %30, atıf %20, tez danışmanlığı %10 — hepsi "başvuru
+  şartında istenen asgari puanın" yüzdesi, yani kadroya göre değişiyor). Motor yalnızca sabit
   grup tavanı tanıyor; bu kalemlerde puan **yüksek** görünür.
 - **Çeyrekliğe bağlı çarpan** — Bandırma (Q1:2, Q2:1,5, Q3:1,25, Q4:1). En düşük
   çarpan alındı; Q1 makalesi olan adayın puanı **düşük** görünür.
 - **Kategoriye göre farklı yazar formülü** — Bayburt (makalede kademeli, kitap ve
-  bildiride 1/n). Cetvel başına tek matris tanımlanabildiği için makale kuralı
-  uygulandı; çok yazarlı kitapta puan **yüksek** görünür.
+  bildiride 1/n) ve Yalova (MADDE 10/4: makalede başlıca yazara 0,8 / 0,5
+  ayrıcalığı, "diğer yayınlarda (bildiri, kitap)" eşit bölüşme). Cetvel başına
+  tek matris tanımlanabiliyor. Yalova'da her rolde İKİ KURALIN DÜŞÜĞÜ yazıldı;
+  başlıca yazar olunan iki yazarlı makalede puan **düşük** görünür.
+  **Bayburt'ta tersi yapılmış** — makale kuralı uygulanmış, çok yazarlı kitapta
+  puan **yüksek** görünüyor. Bu, "eksik say, fazla sayma" kuralına aykırı;
+  Bayburt cetveli Yalova'daki gibi düşük kurala çevrilmeli.
+- **Tavanlı bonus çarpanı** — Yalova MADDE 10/3: "Makale yayımlandığı tarihte
+  yayınlanan derginin Q1 veya Q2 indeksinde olması halinde puan hesaplanmasında
+  %50 daha fazla puan verilir. Bu ek puan kapsamında en fazla 2 yayın
+  değerlendirmeye alınır." Motor "en çok N faaliyete uygulanan çarpan"
+  tanımıyor; ek puan hiç verilmedi, Q1/Q2 makalesi olan adayın puanı **düşük**
+  görünür.
 - **Kişi sayısına bölme** — Kilis (yardımcı araştırıcı puanı araştırıcı sayısına
   bölünüyor), Bitlis ve Bolu (çevirmen, editör, patent sahibi sayısına
   bölünüyor). Kilis'te araştırmacı satırları hiç girilmedi; diğerlerinde çarpan

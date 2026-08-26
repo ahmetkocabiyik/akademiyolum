@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-68 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+69 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -103,6 +103,12 @@ kullanılabilir. Çarpan hiçbir zaman 1.0'ı aşamaz (motor `min(1.0, …)` uyg
   satırı alır.
 - `haric` alanına, yönergenin kendi paylaşım kuralını yazdığı kategorileri koy
   (proje, patent, editörlük, ödül genelde böyledir) ve nedenini başlıkta yaz.
+- Yönerge **kategoriye göre iki ayrı pay kuralı** veriyorsa (Yalova MADDE 10/4:
+  makalede başlıca yazara ayrıcalık, "diğer yayınlarda (bildiri, kitap)" eşit
+  bölüşme), cetvel başına tek matris tanımlanabildiği için her rolde **iki
+  kuralın DÜŞÜK olanını** yaz. Yalova'da bu, `baslica` rolünün her yazar
+  sayısında `sonrasi_pay: 1.0` (yani 1/n) almasına indi. Yüksek olanı seçmek
+  çok yazarlı kitabın puanını fazla gösterir.
 
 ### Koşula bağlı çarpanı cetvele göm
 
@@ -246,6 +252,32 @@ diyorsa hukuk, ilahiyat, filoloji, spor, ziraat için eşik **yazma**. O alanlar
 bir gruba katmak, adaya yönergede yazmayan bir baraj göstermek olur. Kapsam dışı
 kalması doğrusudur; Yönerge Analizi sayfası zaten bunu listeliyor.
 
+### Tablo dipnotları da eşiğin parçası
+
+Sayısal ölçütler yalnızca "BAŞVURU ESASLARI" paragrafında olmayabilir. Yalova
+EK-C'de puan tablosunun bölüm altlarına dört zorunluluk daha serpiştirilmiş
+("Bu maddenin a bendi kapsamında en az 10 puan alınmalıdır", "Bu madde
+kapsamında en az 1 yayın zorunludur"). Bunlar kadro paragrafı kadar bağlayıcı;
+tabloyu çıkarırken satır aralarındaki notları da oku ve koşula çevir. Dipnot
+hangi kadroları bağladığını söylemiyorsa hepsine uygula, söylüyorsa (Yalova'nın
+1. bölüm dipnotu yalnızca doçent ve profesöre) yalnızca onlara.
+
+### Kaynaktaki hatayı DÜZELTME, kaydet
+
+Yönergelerde kopyala-yapıştır hataları çıkıyor: Yalova EK-D'nin "PROFESÖR
+KADROSUNA BAŞVURU" paragrafı doçentlik paragrafının kelimesi kelimesine
+aynısı ve "Doçentlik kadrosuna atama için…" diye başlıyor; Toros'un proje
+satırlarında araştırıcı (8) yürütücüden (6) fazla puan alıyor; Yalova EK-A'nın
+11c bendi ödül bölümünde "Tescil edilmiş faydalı model" yazıyor. Üçü de
+olduğu gibi girildi. Gerekçe: aday jüriye bu metinle gidiyor, bizim
+"düzeltilmiş" okumamızla değil. İki istisna:
+
+- Hata puanı **fazla** gösterecekse satırı hiç yazma (Yalova 11c: faydalı model
+  zaten 10c'de 5 puan alıyor, ödül bölümünde 25 puan daha vermek çifte sayım
+  olurdu).
+- Her hâlde dosya başlığına ve `aday_notu`'na yaz; Yalova profesörlüğünde aday
+  notu "başvurmadan önce üniversiteye teyit ettirin" diyor.
+
 ### Girilmeyen tipik koşullar
 
 - **Yeniden atanma**: koşullar genelde "her yıl için N puan" ya da "son atama
@@ -359,12 +391,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 68 üniversite · 2211 eşik · 90 cetvel |
+| Girildi | 69 üniversite · 2235 eşik · 96 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 105 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 104 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Kendi puan tablosu olmayanlar hızlı şerit**: cetvel çıkarma adımı düşer,
 yalnızca koşullar girilir (ÜAK cetveline bağlananlar `uak-2024-mart-{alan}`
