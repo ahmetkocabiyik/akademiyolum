@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-93 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+94 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -150,6 +150,26 @@ birimde bütün kadrolarda geçerliyse cetvelin İKİ VARYANTINI üret (çarpanl
 çarpansız) ve eşikleri birime göre doğru varyanta bağla (Işık). Ham değerleri
 float tutup çarpımdan **sonra bir kez** aşağı yuvarla; önce yuvarlayıp sonra
 çarpmak farklı sonuç verir.
+
+### Puanı PORTFÖYE bağlı satır girilmez
+
+Güzel sanatlar tablolarında bir satırın puanı çoğu zaman tek bir esere
+değil, bir DOSYAYA veriliyor: ISUBÜ Tablo 3'ün "en az 6 eser sunmak … 120
+dakikalık kayıt bulunmak" satırı 60 puan, "en az üç saatlik canlı iki
+resital ve orkestra eşliğinde bir konser" satırı 75 puan. Kayıt eser
+başına tutulduğu için bu puan bölünemez; satırı yazmak tek bir konser
+kaydını 75 puanla ödüllendirirdi. Böyle satırları HİÇ YAZMA, "her bir
+etkinlik için" diyen satırları yaz ve farkı `kapsam_notu`'nda söyle.
+
+### Aynı faaliyet İKİ TABLODA birden karşılık bulabilir
+
+Bir yönerge alan gruplarına ayrı tablolar veriyorsa (ISUBÜ: Fen/Sosyal
+Tablo 1 + Tablo 2, Güzel Sanatlar Tablo 2 + Tablo 3) aynı makale iki
+tabloda iki farklı puan taşıyabilir. Satırların ikisini de yaz: motor her
+grubun İÇİNDEKİ en iyi kodu seçtiği için Fen adayının makalesi Tablo 1
+satırından, Güzel Sanatlar adayının makalesi Tablo 3 satırından
+puanlanır. Barajlara `maddeler` grubunu geçmeyi unutma; unutulursa aday
+kendi tablosunda olmayan satırlardan puan toplar.
 
 ### Adet tavanı puana ÇEVRİLEBİLİR
 
@@ -557,12 +577,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 93 üniversite · 3181 eşik · 145 cetvel |
+| Girildi | 94 üniversite · 3197 eşik · 146 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 80 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 79 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
