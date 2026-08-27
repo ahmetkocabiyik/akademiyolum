@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-92 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+93 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -404,6 +404,12 @@ olduğu gibi girildi. Gerekçe: aday jüriye bu metinle gidiyor, bizim
 - **Yeniden atanma**: koşullar genelde "her yıl için N puan" ya da "son atama
   tarihinden sonra" biçiminde; atama tarihi ve dönem uzunluğu profilde yok.
   Aday notunda anlat, eşik yazma.
+  Karar **fakülte fakülte** verilir, üniversite geneline değil: Gebze Teknik'te
+  Mühendislik/Fen yeniden atanması (MADDE 4) barajı atama süresine bağladığı
+  için (1 yıl 24 · 2 yıl 48 · 3 yıl 72 · 4 yıl 96 puan) girilmedi, ama İşletme
+  (MADDE 8) ve Mimarlık (MADDE 12) yeniden atanmaları süreye bağlı olmayıp
+  "son atama tarihinden sonra şu ölçütlerden en az ikisi/üçü" dediği için
+  `SON_ATAMA_SONRASI` dönemiyle girildi.
 - **Yüzdeye bağlı hesap**: sabit puana çevrilebiliyorsa çevir (toplam biliniyorsa
   "%50'si" → sayı). Çevrilemiyorsa girme.
 - **Kurum/süre bilgisi gerektiren koşullar**: "üniversite dışından geliyorsa",
@@ -551,12 +557,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 92 üniversite · 3166 eşik · 136 cetvel |
+| Girildi | 93 üniversite · 3181 eşik · 145 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 81 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 80 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim

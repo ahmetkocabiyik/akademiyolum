@@ -62,6 +62,7 @@ return [
     ['Gazi Üniversitesi', 'Ankara', 'devlet'],
     ['Gaziantep Üniversitesi', 'Gaziantep', 'devlet'],
     ['Gaziantep İslam Bilim ve Teknoloji Üniversitesi', 'Gaziantep', 'devlet'],
+    ['Gebze Teknik Üniversitesi', 'Kocaeli', 'devlet'],
     ['Giresun Üniversitesi', 'Giresun', 'devlet'],
     ['Gümüşhane Üniversitesi', 'Gümüşhane', 'devlet'],
     ['Hacettepe Üniversitesi', 'Ankara', 'devlet'],
