@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-78 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+79 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -127,6 +127,20 @@ kullanılabilir. Çarpan hiçbir zaman 1.0'ı aşamaz (motor `min(1.0, …)` uyg
   kuralın DÜŞÜK olanını** yaz. Yalova'da bu, `baslica` rolünün her yazar
   sayısında `sonrasi_pay: 1.0` (yani 1/n) almasına indi. Yüksek olanı seçmek
   çok yazarlı kitabın puanını fazla gösterir.
+
+### Koşulun istediği nitelik cetvelde yoksa AYNA SATIR aç
+
+Bir yönerge "doktora tezinden üretilmiş en az bir yayın" gibi bir koşul koyup
+puanlama tablosunda o nitelik için ayrı satır AÇMAYABİLİR (Üsküdar MADDE 13/d):
+böyle bir çalışma kendi yayın türünün satırından puan alıyor. Koşul yine de
+değerlendirilebilmeli.
+
+Çözüm, `tez_yayini` kategorisinde ayna satırlar açmak: puanları karşılık
+geldikleri satırlarla BİREBİR AYNI, tek işlevleri niteliği taşımak. Puanı
+değiştirmedikleri için çifte sayım doğurmuyorlar — bir faaliyetin tek
+kategorisi var, aday çalışmayı ya makale ya tez yayını olarak kaydeder.
+Kodlar bize ait olduğundan yorum satırında belirtilir ve `kapsam_notu` adaya
+"bu çalışmayı tez yayını olarak kaydedin" der.
 
 ### Koşula bağlı çarpanı cetvele göm
 
@@ -486,12 +500,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 78 üniversite · 2541 eşik · 122 cetvel |
+| Girildi | 79 üniversite · 2589 eşik · 123 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 95 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 94 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
