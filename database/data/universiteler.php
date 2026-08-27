@@ -143,6 +143,7 @@ return [
     ['Acıbadem Mehmet Ali Aydınlar Üniversitesi', 'İstanbul', 'vakif'],
     ['Alanya Üniversitesi', 'Antalya', 'vakif'],
     ['Altınbaş Üniversitesi', 'İstanbul', 'vakif'],
+    ['Ankara Bilim Üniversitesi', 'Ankara', 'vakif'],
     ['Atılım Üniversitesi', 'Ankara', 'vakif'],
     ['Bahçeşehir Üniversitesi', 'İstanbul', 'vakif'],
     ['Başkent Üniversitesi', 'Ankara', 'vakif'],

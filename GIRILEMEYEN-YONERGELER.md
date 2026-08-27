@@ -350,6 +350,7 @@ dosyanın başlığında da anlatılıyor.
 | **MEF** | 14. bölümün tamamı (Eğitim Fakültesinin okullarla iş birliği kalemleri: öğretmenlik, psikolojik danışmanlık, aday öğretmen denetimi); 15. bölüm (h-indeksi, yurt dışı araştırma); bitirme projesi danışmanlığı, patent başvurusu, dergi hakemliği | Eğitim Fakültesi adayının toplamı düşük çıkar; doçentlik ve profesörlüğün okul iş birliği koşulu `hesaplanamiyor` olarak duruyor, koşul belgeyle sağlanmalı |
 | **SANKO** | Puanlama Çizelgesi ve Asgari Koşullar Çizelgesi (ikisi de PDF'te yok) | Toplam puan barajı hiç gösterilemiyor; doçentlik eşiği yalnızca beyanlardan, profesörlüğün başlıca eser koşulu `hesaplanamiyor` düğümünden ibaret. Dr. Öğr. Üyesi eşiği tam |
 | **Üsküdar** | Bilimsel toplantı düzenleme bölümünün tamamı (başkanlık, düzenleme ve bilim kurulu üyelikleri); sanat etkinliklerine davetli katılım satırları; tezsiz yüksek lisans proje danışmanlığı; yönetim görevlerinde rektör yardımcılığı ve bölüm başkan yardımcılığı (tabloda satırı yok) | Toplantı düzenleyen adayın toplamı düşük çıkar; yönetim görevlerinde asgari süre koşulu (3-4 yıl) uygulanamadığı için o kalemde puan tersine yüksek görünür |
+| **Ankara Bilim** | İndeks kapsamı dışındaki uluslararası hakemli dergiler (1.2.3); ansiklopedi konu ve madde yazarlığının üst satırları (1.5.1-1.5.3); tasarım alanında üretime girmiş çalışma/koleksiyon (2.4); film yaratıcı kadrosunun üst satırları (2.5.5-2.5.6, 2.5.8-2.5.9); restorasyon ekibi ve düzenleme kurulu satırları (2.8.2-2.8.3, 2.8.5-2.8.6); arkeolojik kazı kalemleri (6.1.9-6.1.14); laboratuvar çalışması (6.2.3-6.2.4); bilimsel ve sanatsal toplantı düzenleme bölümünün tamamı (6.4.1-6.4.18: seçici kurul, düzenleme kurulu, küratörlük, sergi organizasyonu, oturum başkanlığı); yurtdışı idari görev (6.5.4); 0,5 puanlık satırlar (atıf 1.7.3, oturum başkanlığı 6.4.18) | Sanat ve tasarım alanında çalışan adayın toplamı düşük çıkar; toplantı düzenleyen adayın toplamı düşük çıkar. Toplam barajlar (20/30/50) korpusun en düşükleri arasında olduğu için eksik bölümler eşiği fiilen kapatmıyor |
 
 ## Motorun karşılayamadığı kurallar
 
@@ -383,11 +384,23 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   görünür.
 - **Kişi sayısına bölme** — Kilis (yardımcı araştırıcı puanı araştırıcı sayısına
   bölünüyor), Bitlis ve Bolu (çevirmen, editör, patent sahibi sayısına
-  bölünüyor). Kilis'te araştırmacı satırları hiç girilmedi; diğerlerinde çarpan
-  o kalemlerde uygulanmıyor.
+  bölünüyor), Ankara Bilim (6.1.6, 6.1.8, 6.2.1 ve 6.2.2: "kişi sayısına
+  bölünecektir"). Kilis'te araştırmacı satırları hiç girilmedi; diğerlerinde
+  çarpan o kalemlerde uygulanmıyor ve puan YÜKSEK görünür.
 - **Yıl ortalaması / görev süresi** — Hatay MKÜ, Bandırma, Bingöl, Bolu, Düzce,
   Karabük, Manisa CBÜ ve Iğdır'ın yeniden atanma koşulları. Atama dönemi
   uzunluğu profilde tutulmadığı için bu eşikler girilmedi.
+- **Puanın görev yılıyla ÇARPILMASI** — Ankara Bilim EK1'in 6.5 ve 6.7.1
+  satırları ("Yıl ile çarpılacaktır"): yöneticilik 3, yardımcılık 2, kurul
+  üyeliği 1 puan × görev yılı. Motorun `puan` alanı sabit; her görev bir yıl
+  sayılıyor ve yönetim puanı DÜŞÜK görünür. Bölmenin tersi bir sorun: aynı
+  cetvelde 6.1 ve 6.2 kalemleri bölünemediği için puan yüksek, 6.5 kalemleri
+  çarpılamadığı için düşük çıkıyor.
+- **Cetvel satırının kendi kayan penceresi** — Ankara Bilim EK1'de editörlük
+  "her yıl için (son 3 yıl)", tez ve jüri kalemleri "son 5 yılda", ders
+  kalemleri "son iki yılda" diyor ama bu kadroların toplam puan barajında
+  dönem kısıtı yok. Dönem yalnızca KOŞUL düğümünde tutulabiliyor, cetvel
+  satırında değil; bu kalemlerde puan YÜKSEK görünür.
 - **Yarıyıl başına adet sınırı** — Iğdır 20. madde ("son beş yılda, her
   yarıyılda verilen en fazla dört ders"). Hem kayan pencere hem yarıyıl başına
   sayı gerekiyor; motor ikisini birlikte tutamıyor, ders puanı YÜKSEK görünür.
