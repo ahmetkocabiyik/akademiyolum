@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-85 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+86 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -255,6 +255,37 @@ anlayamıyor (Nişantaşı'nda bu yüzden eklendi).
 | `Kalip::yds($puan)` | yabancı dil |
 | `Kalip::ve` / `Kalip::veya` | birleştirici |
 | `Kalip::sonYil($yil, $baslangic)` | kayan pencere (Düzce, Akdeniz) |
+
+### Puan barajı olmayan, ÖLÇÜT SAYAN yönergeler
+
+Bir yönerge puan tablosu yayımladığı hâlde hiçbir maddesinde puan barajı
+koymayabilir. Bartın'ın atama ölçütleri PUAN değil ÖLÇÜT SAYIYOR: yirmi (Dr.
+Öğr. Üyesi) ve yirmi iki (doçent, profesör) satırlık listeler veriyor, her
+satırın "temel ölçüt" ile "yardımcı ölçüt" olmak üzere iki dalı var ve
+yönerge "aynı satırda belirtilenlerden sadece biri değerlendirilir" diyor.
+
+Karşılığı: her satır bir `Kalip::veya`, sayım `Kalip::kIle($aciklama, $k,
+$cocuklar)`. `Kalip::toplam` HİÇ KULLANILMAZ — kullanmak, yönergede olmayan
+bir baraj uydurmak olur. Cetvel yine de puanlarıyla girilir (aday başvuru
+formunda o puanı beyan ediyor) ama `kapsam_notu` adaya toplam puanın atamada
+bir eşiği olmadığını AÇIKÇA söylemelidir.
+
+Bu desende asıl karar, değerlendirilemeyen ölçütlerde verilir:
+
+- Satırın **iki dalı da** faaliyet kaydından okunamıyorsa satırı hiç yazma.
+- **Tek dalı** okunamıyorsa yalnızca okunabilen dalı yaz.
+
+İkisi de sayımı zorlaştırır (aday bir ölçüt daha az sayar), yani §0'ın
+istediği yöndedir. Ama sayının ne kadar daraldığını `notlar` ve `aday_notu`
+söylemeli: aday, listelenmeyen bir ölçütü sağlıyorsa gerçek durumunun
+ekrandakinden iyi olduğunu bilmeli. Bartın'da Tablo-1'in 20 satırından 3'ü
+(yurt dışı süresi, ders anketi, idari görev süresi), Tablo-2'nin 22
+satırından 1'i (spor) hiç yazılamadı.
+
+**Ölçüt aralığı ile tablo boyu çelişebilir.** Bartın'ın metni "1 ila 13"
+diyor ama tablo 20 satır taşıyor (tablo büyümüş, metin güncellenmemiş).
+Kaynağı düzeltme: "en az 4" koşulu metnin dediği aralığa, "toplam 6" koşulu
+tablonun tamamına bağlandı.
 
 ### `referans` düğümüne dikkat
 
@@ -507,12 +538,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 85 üniversite · 2781 eşik · 129 cetvel |
+| Girildi | 86 üniversite · 2825 eşik · 130 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 88 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 87 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
