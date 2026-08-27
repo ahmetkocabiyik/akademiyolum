@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-86 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+87 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -509,6 +509,19 @@ diye böl.
   çalıştırıldığında pdftotext hücreleri okuma sırasına göre tek tek döküyor ve
   sütunlar kendiliğinden ayrılıyor. İki modu da dene: biri tablo, diğeri düz
   metin için daha iyi.
+- **Tablo başlığındaki eşik, bölüm eşiği olmayabilir.** Bursa Teknik'in
+  "Aktivite-2 (… en az 20 Puan)" başlığı bölümlerin EN YÜKSEĞİNİ yazıyor;
+  gerçek bölüm eşiği proje tablosunun İÇİNDE, dikey ortalanmış bir hücrede
+  duruyor (Denizcilik'te 15/20, Orman'da 20/20/15). Başlığa güvenmek bir
+  bölümün adayına 15 yerine 20 puanlık baraj gösterirdi. Sütunlu tablolarda
+  başlıktaki sayıyı gördükten sonra gövdede aynı birimde başka sayı var mı
+  diye bak.
+- **İçindekilerdeki harf sırasına güvenme.** Bursa Teknik'in İnsan ve Toplum
+  Bilimleri bölümünde tabloların "(devamı)" sayfaları da harf almış: 1.2.e
+  doçentliğin devamı, 1.2.g tecrübeli doçentliğin devamı, profesörlük ise
+  1.2.h. Diğer fakültelerde a-g gitmesine bakıp 1.2.f'yi profesörlük sanmak,
+  doçentliğin hafif varyantını profesörlük eşiği olarak girmek olurdu. Her
+  bölüm başlığının KADRO ADINI oku, harfini değil.
 - **Kolon çapasını en dolu satırdan al.** Alan sütunlu koşul tablolarında
   (İnönü'nün on bir sütunu) seyrek satırlar yanlış sütuna düşer. Bütün
   hücreleri dolu bir satır bul ("Toplam puan" genelde öyledir), konumlarını
@@ -538,12 +551,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 86 üniversite · 2825 eşik · 130 cetvel |
+| Girildi | 87 üniversite · 2949 eşik · 131 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 87 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 86 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
