@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-82 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+83 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -456,6 +456,13 @@ diye böl.
   tamamen düşmüştü.
 - **Python `İ`.lower()** birleşik nokta üretir; `İ`→`i` elle değiştir. Ama
   `I`→`ı` yapma, ASCII kısaltmaları bozar (SCI→scı).
+- **Kısmi font kayması Çankaya'daki gibi tam bozulma değildir — önce kapsamını
+  ölç.** Afyonkarahisar Sağlık'ta yalnızca BAŞLIK/kalın metnin fontu bozuktu
+  (büyük İ → `Ġ` U+0120, büyük Ş → `Ģ` U+0122); gövde metni ve puan tablosu
+  ayrı bir font alt kümesinde, bozulmamış çıktı. `grep -c` ile İ/Ġ ve Ş/Ģ
+  sayısını karşılaştırmak bunu bir dakikada ayırt ediyor: ikisi de belgede
+  varsa (yalnızca biri değil) kısmi bir kayma var demektir, tabloyu okumaya
+  engel değildir — Çankaya'daki gibi haritalamaya girmeden devam et.
 - **Sütun dilimlemesi tabloyu düşürebilir, PDF suçsuz olabilir.** Trabzon'un
   Tablo 2'si, Iğdır'ın EK-1'i, İnönü'nün EK-1'i ve İTÜ'nün beş tablosu birer
   tur "tablo okunmuyor" diye bekletildi; DÖRDÜNDE DE düz `pdftotext -q -layout` çıktısı
@@ -500,12 +507,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 82 üniversite · 2637 eşik · 126 cetvel |
+| Girildi | 83 üniversite · 2653 eşik · 127 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 91 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 90 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
