@@ -151,6 +151,49 @@ indirmek gerekiyor. Balıkesir ve Türk Hava Kurumu ile aynı durum.
 
 ---
 
+## SANKO Üniversitesi — iki çizelge de eksik (kısmen girildi)
+
+**Dosya:** `pdf/17537103582.sankouniersitesi.pdf` (6 sayfa)
+
+**Puanlama Çizelgesi ve Asgari Koşullar Çizelgesi PDF'te yok.** Yönerge ikisini
+de MADDE 4'te tanımlıyor (4/c ve 4/m) ve maddeler boyunca onlara atıf yapıyor,
+ama dosyada yalnızca gövde (MADDE 1-18) var.
+
+**Girildi.** Balıkesir, Türk Hava Kurumu ve Maltepe'den farkı şu: SANKO'nun
+gövdesi çizelgeye ihtiyaç duymayan somut koşullar taşıyor.
+
+- Dr. Öğr. Üyesi: MADDE 10/2 makale sayısını (en az 2) ve dergi kümesini
+  (MADDE 4/p ve 4/r'de tanımlı indeksler) gövdede veriyor; MADDE 10/3 yabancı
+  dil için 55 puan diyor. Eşik TAM değerlendirilebiliyor.
+- Doçent: MADDE 11 yalnızca ÜAK doçentlik unvanı ve YÖK'ün doçentlik asgari
+  koşullarını istiyor; ikisi de beyan.
+- Profesör: MADDE 12/1-2 kıdem koşullarını veriyor (5 yıl doçentlik, 2 yıl
+  doçent kadrosu). MADDE 12/4'ün "Puanlama Çizelgesi B1 kapsamındaki
+  yayınlarından biri" koşulu ise B1'in kapsamı bilinmediği için
+  `Kalip::hesaplanamiyor` olarak duruyor.
+
+**Devam edilirse — YAZAR FORMÜLÜ ZATEN ELİMİZDE.** MADDE 15 formülü gövdede
+yazıyor ve motorun `bol` alanıyla birebir ifade edilebiliyor. Çizelge
+bulunduğunda cetvele eklenecek:
+
+```php
+'tek'                 => ['kademeler' => [1 => 1.0]],
+'ilk', 'baslica'      => ['bol' => ['pay' => 1.6, 'ek' => 0.20]],
+'yazar_2'             => ['bol' => ['pay' => 1.6, 'ek' => 0.15]],
+'yazar_3'             => ['bol' => ['pay' => 1.6, 'ek' => 0.10]],
+'yazar_4'…'ortak'     => ['bol' => ['pay' => 1.6, 'ek' => 0.05]],
+```
+
+Yönerge "yazar sayısı 4 veya daha fazla ise … eşit olarak dağıtılır" diyor,
+yani dördüncü ve sonraki isimler aynı satırı paylaşıyor. MADDE 4/d'nin
+"başlıca yazar" tanımı motorun süzgecinden geniş: tek yazarı, çok yazarlı
+makalede İLK İKİ SIRADAKİ yazarı, sorumlu yazarı ve danışmanlığını yaptığı
+tezden üretilmiş yayındaki yazarı kapsıyor.
+
+Eksik olan yalnızca iki çizelge; SANKO Üniversitesinden ayrıca istenmeli.
+
+---
+
 ## Taranmış (metin katmanı olmayan) PDF'ler
 
 Aşağıdaki dosyalar görüntü olarak taranmış: `pdftotext` sıfır bayt metin
@@ -305,6 +348,7 @@ dosyanın başlığında da anlatılıyor.
 | **Kocaeli Sağlık ve Teknoloji** | Satır 50 (idari görevde bulunmak — kaynakta puan sütununda soru işareti var); sanatsal etkinlik satırının tamamı (çizelgede hiç yok); ESCI kapsamındaki dergilerde görev (hakemlik satırı yok); yardımcı tez danışmanlığı, el-cep kitabı, kongre başkanlığı, üniversite ödülleri | İdari görev puanı hiç hesaplanmıyor; Güzel Sanatlar adayının toplamı düşük çıkar |
 | **KTO Karatay** | C bölümünün sanat ve tasarım satırlarının çoğu (uzun ve kısa metraj film, multimedya CD, web tasarımı, afiş ve fotoğraf baskısı, reklam kampanyası, fotoğraf ve grafik sergisi, kurumsal kimlik); çalıştay ve kongre başkanlığı ile oturum başkanlığı (C.35-C.38); adayın adıyla anılan formül ve tasarımlar (B.1, B.3, B.5); üniversite destekli BAP projeleri (yönerge ulusal proje satırında bunları açıkça dışarıda bırakıyor) | Güzel Sanatlar adayının toplamı düşük çıkar; hukuk, ilahiyat, filoloji, mimarlık ve ziraat alanları yönergede hiç anılmadığı için kapsam dışı |
 | **MEF** | 14. bölümün tamamı (Eğitim Fakültesinin okullarla iş birliği kalemleri: öğretmenlik, psikolojik danışmanlık, aday öğretmen denetimi); 15. bölüm (h-indeksi, yurt dışı araştırma); bitirme projesi danışmanlığı, patent başvurusu, dergi hakemliği | Eğitim Fakültesi adayının toplamı düşük çıkar; doçentlik ve profesörlüğün okul iş birliği koşulu `hesaplanamiyor` olarak duruyor, koşul belgeyle sağlanmalı |
+| **SANKO** | Puanlama Çizelgesi ve Asgari Koşullar Çizelgesi (ikisi de PDF'te yok) | Toplam puan barajı hiç gösterilemiyor; doçentlik eşiği yalnızca beyanlardan, profesörlüğün başlıca eser koşulu `hesaplanamiyor` düğümünden ibaret. Dr. Öğr. Üyesi eşiği tam |
 
 ## Motorun karşılayamadığı kurallar
 

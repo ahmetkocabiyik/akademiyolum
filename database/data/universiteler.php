@@ -182,6 +182,7 @@ return [
     ['Ostim Teknik Üniversitesi', 'Ankara', 'vakif'],
     ['Özyeğin Üniversitesi', 'İstanbul', 'vakif'],
     ['Sabancı Üniversitesi', 'İstanbul', 'vakif'],
+    ['SANKO Üniversitesi', 'Gaziantep', 'vakif'],
     ['Süleyman Şah Üniversitesi', 'İstanbul', 'vakif'],
     ['TED Üniversitesi', 'Ankara', 'vakif'],
     ['TOBB Ekonomi ve Teknoloji Üniversitesi', 'Ankara', 'vakif'],
