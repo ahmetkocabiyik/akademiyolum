@@ -352,6 +352,7 @@ dosyanın başlığında da anlatılıyor.
 | **Üsküdar** | Bilimsel toplantı düzenleme bölümünün tamamı (başkanlık, düzenleme ve bilim kurulu üyelikleri); sanat etkinliklerine davetli katılım satırları; tezsiz yüksek lisans proje danışmanlığı; yönetim görevlerinde rektör yardımcılığı ve bölüm başkan yardımcılığı (tabloda satırı yok) | Toplantı düzenleyen adayın toplamı düşük çıkar; yönetim görevlerinde asgari süre koşulu (3-4 yıl) uygulanamadığı için o kalemde puan tersine yüksek görünür |
 | **Ankara Bilim** | İndeks kapsamı dışındaki uluslararası hakemli dergiler (1.2.3); ansiklopedi konu ve madde yazarlığının üst satırları (1.5.1-1.5.3); tasarım alanında üretime girmiş çalışma/koleksiyon (2.4); film yaratıcı kadrosunun üst satırları (2.5.5-2.5.6, 2.5.8-2.5.9); restorasyon ekibi ve düzenleme kurulu satırları (2.8.2-2.8.3, 2.8.5-2.8.6); arkeolojik kazı kalemleri (6.1.9-6.1.14); laboratuvar çalışması (6.2.3-6.2.4); bilimsel ve sanatsal toplantı düzenleme bölümünün tamamı (6.4.1-6.4.18: seçici kurul, düzenleme kurulu, küratörlük, sergi organizasyonu, oturum başkanlığı); yurtdışı idari görev (6.5.4); 0,5 puanlık satırlar (atıf 1.7.3, oturum başkanlığı 6.4.18) | Sanat ve tasarım alanında çalışan adayın toplamı düşük çıkar; toplantı düzenleyen adayın toplamı düşük çıkar. Toplam barajlar (20/30/50) korpusun en düşükleri arasında olduğu için eksik bölümler eşiği fiilen kapatmıyor |
 | **Abdullah Gül** | Dergi editörlüğü/yardımcı editörlük/editör kurulu üyeliği/özel sayı editörlüğünün tamamı (kaynak sözlüğü çeyrekliğe göre TEK grup etiketi taşıyor, ana editörlüğü kurul üyeliğinden ayıramıyor); toplumsal katkının çoğu (STK görevleri, bilirkişi raportörlüğü, teknik rapor, şirket kurma, teknopark projeleri, AGÜ Akademi); bilimsel alana/mesleğe katkının çoğu (kongre düzenleme kurulu, akademik yükseltme jüri üyeliği, yarışma jüri üyeliği, yayımlanmış proje/fikir projesi, uluslararası kuruluş komisyon üyeliği, sergi küratörlüğü, seçici kurul üyeliği); B grubu proje ve çok ortaklı/sanayi ortaklı proje kademeleri; kitap hakemliği; post-doc danışmanlığı, eğitim ödülleri, ders yükü/öğrenci değerlendirmesi/yaz-kış okulu satırları; Mimarlık biriminin "Yayımlanmış Proje/Uygulama/Fikir Projesi" alt tabanı (dayandığı madde girilemediği için); uluslararası ortaklı yayın bonusu (+%20); atıfın 0,5 ve 0,3 puanlık alt satırları | Editörlük yapan, toplumsal katkısı geniş ve disiplinler arası/sanayi ortaklı çalışan adayın toplamı düşük çıkar; Mimarlık biriminde KATKI'nın kendi alt tabanı hiç uygulanmıyor ama TOPLAM barajı geçerliliğini koruyor |
+| **Adana Alparslan Türkeş** | Dergi editörlüğünün üst kademeleri (baş editör, yardımcı editör — kaynak sözlüğü çeyrekliğe göre TEK grup etiketi taşıyor); toplumsal katkı bölümünün tamamı (basılmış bilimsel/sanatsal rapor, sanat/sergi katalog yazarlığı, etkinlik düzenleme, TÜBİTAK öğrenci proje danışmanlığı/jüri üyeliği); üniversite-sanayi protokollü tez danışmanlığı (normal danışmanlıkla aynı kaynağa düşüyor, yüksek satır fazla sayardı); uluslararası/ulusal iş birlikli yayın bonusları (+%50/eşitleme); yurt dışı araştırma tecrübesi (30 puan, metrik puana çevrilemediği için); kitap ve kitap bölümü çevirisi dışındaki E3 (çeviri makale); ek baskı (D7) | Editörlük yapan, sanayi iş birlikli çalışan ve yurt dışı ortaklı yayını olan adayın toplamı düşük çıkar |
 
 ## Motorun karşılayamadığı kurallar
 
@@ -469,3 +470,15 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   Motorun `puan` alanı tek bir sabit sayı tutuyor, seri toplamı hesaplayamıyor;
   yalnızca ilk yıl değeri girildi, çok yıllık idari görevlerde puan DÜŞÜK
   görünür.
+- **Eser bazlı tavan ("bir eserde en fazla N")** — Adana Alparslan Türkeş'in
+  D2/E2 satırları ("bir eserde en fazla 2 bölüm puanlanabilir"): motorun
+  `grup_tavanlari` yalnızca KATEGORİ/GRUP bazlı toplam tavanı tanıyor, TEK BİR
+  ESERİN kendi içindeki tekrarları sınırlayan bir mekanizma yok. Aynı
+  kitaptan üç veya daha fazla bölümü olan bir adayın puanı YÜKSEK görünür.
+- **Grup tavanı KADRO/FAKÜLTEYE göre değişiyor ama cetvel tek tavan tutuyor**
+  — Adana Alparslan Türkeş'in bildiri (B/C) grubu tavanı İİSBF'de sabit 100,
+  Mimarlık'ta kadroya göre değişiyor (doçentlik 150, profesörlük 250).
+  MEF/Işık'taki "cetvel varyantı" çözümü burada uygulanmadı (üç farklı tavan
+  için üç varyant yerine); en düşük ortak değer (100) evrensel uygulandı —
+  Mimarlık adayının B/C katkısı TOPLAM'a olduğundan az yansır, "eksik say"
+  yönünde güvenli ama kaba bir sadeleştirme.
