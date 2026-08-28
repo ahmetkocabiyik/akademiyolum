@@ -231,34 +231,6 @@ bozar, o yüzden OCR sonrası her tablo kaynakla karşılaştırılmalı.
 
 ---
 
-## Yeditepe Üniversitesi
-
-**Dosya:** `pdf/17537104532.yeditepeuniversitesi.pdf` (432 satır)
-
-**Engel yok, ama BÖLÜM düzeyinde ayrıntılı.** Kendi puan tablosu yok, koşullar
-sayı şartı — buraya kadar hızlı şeride uygun. Sorun granülerlik: Madde 7'de
-yalnızca Dr. Öğr. Üyeliği için **45 ayrı fakülte/bölüm başlığı** var ve her biri
-kendi yayın kuralını taşıyor. Örnekler:
-
-- Fen-Edebiyat / Çeviribilimi: Q1-Q4, MLA, ERIC, ESJI, ESCI, Scopus, CEEOL'de
-  1 yayın **ya da** ULAKBİM TR Dizin'de 2 yayın
-- Fen-Edebiyat / Rus Dili ve Edebiyatı: hakemli dergide 1 araştırma makalesi
-  **ve** doktora çalışması kapsamında Rusça 1 makale
-- Fen-Edebiyat / Matematik: Q1-Q3'te 1 yayın **ya da** editör kurulunda alandan
-  bir uzman bulunan dergilerde 1 yayın
-
-Doçentlik ve profesörlük için de benzer ayrım sürüyor. Bu, `birim` alanıyla
-girilebilir ama tek başına 30-40 eşik demek.
-
-**Neden bekletildi:** Fakülte düzeyinde toplamak bölümler arasındaki gerçek
-farkı siler; adaya kendi bölümünün koşulu yerine komşu bölümünkini gösterir.
-Doğrusu bölüm bölüm girmek, o da ayrı bir oturumluk iş.
-
-**Devam edilirse:** Madde 7-(2), 8-(2) ve 9-(2)'deki bölüm listeleri sırayla
-`birim` olarak açılmalı. `KONVANSIYONLAR.md`'deki `birim` kuralı aynen geçerli.
-
----
-
 ## Çankaya Üniversitesi — bozuk font kodlaması
 
 **Dosya:** `pdf/17537097862.cankayauniversitesi.pdf`
@@ -320,6 +292,47 @@ sitesinden indirmek ya da PDF'i yeniden OCR'lamak gerekiyor (`ocrmypdf --force-o
 
 ---
 
+## Trakya Üniversitesi — yedi ek, yedi ayrı puanlama sistemi
+
+**Dosya:** `pdf/17537009772.trakyauniverstesi.pdf` (78 sayfa)
+
+**Engel yok, tek başına bir parti büyüklüğünde.** Metin temiz, tablolar
+`pdftotext -q -layout` ile okunuyor. Sorun hacim ve çeşitlilik: yönergenin
+YEDİ eki var ve her biri KENDİ puanlama sistemini taşıyor.
+
+| Ek | Temel alan | Şekli |
+|---|---|---|
+| EK-1 | Sağlık Bilimleri | 17 kategori, makale/meta analiz/derleme üçlüsü |
+| EK-2 | Mühendislik, Fen Bilimleri ve Matematik | makaleyi çeyreklik × tür matrisine açıyor; ayrı hakemlik bölümü |
+| EK-3 | Mimarlık, Planlama ve Tasarım | EK-1 ile aynı şekil, kitap ve atıf puanları farklı |
+| EK-4 | Sosyal, Eğitim, Filoloji, İlahiyat, Öğretmen Yetiştirme | 21 kategori; müzik performansında kesirli puan (0,5) |
+| EK-5 | Devlet Konservatuvarı | bilimsel tablo + ayrı "Müzik Bilim/Sanat Alanı" performans tablosu |
+| EK-6 | Güzel Sanatlar | performans tablosu |
+| EK-7 | Spor Bilimleri | ayrı "Sportif Performans" bölümü (16), iki h-indeksi seçeneği |
+
+Normalleştirilip hash'lendi, yedisi de farklı: `dbc98ef`, `156aa32`, `95a1f60`,
+`8721ca9`, `fb38d3a`, `6ea7472`, `adef9ad`. Toplam yaklaşık **1300 puanlı
+satır**.
+
+**Neden bekletildi:** EK-5'in "Müzik Bilim/Sanat Alanı" ve EK-6'nın performans
+satırlarının çoğu PORTFÖYE bağlı ve yıl başına tavanlı ("En çok 15 puan ile
+sınırlandırılmıştır", "orkestra konserinde üyelik 0,5"); §0 uyarınca büyük
+bölümü zaten girilemeyecek. Kalan beş tablo tek tek çıkarılmayı istiyor.
+Aceleye getirilirse Ahi Evran ve Pamukkale'de yaşanan türden sessiz hatalar
+(salt rakam madde kodu, önekle aralık eşleşmesi) burada yedi kat maliyetli.
+
+**Devam edilirse:** EK-1, EK-3 ve EK-7 tek gövdeden üretilebilir; EK-2, EK-4,
+EK-5 ve EK-6 ayrı gövde ister. Ek koşullar da eklere göre ayrışıyor ve
+fakülte / yüksekokul / meslek yüksekokulu için ayrı ayrı yazılmış, yani `birim`
+ayrımı gerekecek. Genel ilkelerden (MADDE 4) çıkanlar: yabancı dil doktor
+öğretim üyeliğinde 55, doçentlik ve profesörlükte 65 (tamamen yabancı dilde
+eğitim yapan birimlerde 85); MADDE 4(2) doktor öğretim üyeliği puanlarının DÖRT
+YILLIK atama için olduğunu, MADDE 5(3) daha kısa süreler için x/4 oranı
+kurulduğunu söylüyor. Ek yapısı ve hash'ler `KONVANSIYONLAR.md` §6'da da
+duruyor.
+
+---
+
 # Kısmen girilen yönergeler
 
 Aşağıdaki üniversiteler korpusa girdi, ama yönergenin bir parçası kaynak
@@ -354,6 +367,15 @@ dosyanın başlığında da anlatılıyor.
 | **Abdullah Gül** | Dergi editörlüğü/yardımcı editörlük/editör kurulu üyeliği/özel sayı editörlüğünün tamamı (kaynak sözlüğü çeyrekliğe göre TEK grup etiketi taşıyor, ana editörlüğü kurul üyeliğinden ayıramıyor); toplumsal katkının çoğu (STK görevleri, bilirkişi raportörlüğü, teknik rapor, şirket kurma, teknopark projeleri, AGÜ Akademi); bilimsel alana/mesleğe katkının çoğu (kongre düzenleme kurulu, akademik yükseltme jüri üyeliği, yarışma jüri üyeliği, yayımlanmış proje/fikir projesi, uluslararası kuruluş komisyon üyeliği, sergi küratörlüğü, seçici kurul üyeliği); B grubu proje ve çok ortaklı/sanayi ortaklı proje kademeleri; kitap hakemliği; post-doc danışmanlığı, eğitim ödülleri, ders yükü/öğrenci değerlendirmesi/yaz-kış okulu satırları; Mimarlık biriminin "Yayımlanmış Proje/Uygulama/Fikir Projesi" alt tabanı (dayandığı madde girilemediği için); uluslararası ortaklı yayın bonusu (+%20); atıfın 0,5 ve 0,3 puanlık alt satırları | Editörlük yapan, toplumsal katkısı geniş ve disiplinler arası/sanayi ortaklı çalışan adayın toplamı düşük çıkar; Mimarlık biriminde KATKI'nın kendi alt tabanı hiç uygulanmıyor ama TOPLAM barajı geçerliliğini koruyor |
 | **Adana Alparslan Türkeş** | Dergi editörlüğünün üst kademeleri (baş editör, yardımcı editör — kaynak sözlüğü çeyrekliğe göre TEK grup etiketi taşıyor); toplumsal katkı bölümünün tamamı (basılmış bilimsel/sanatsal rapor, sanat/sergi katalog yazarlığı, etkinlik düzenleme, TÜBİTAK öğrenci proje danışmanlığı/jüri üyeliği); üniversite-sanayi protokollü tez danışmanlığı (normal danışmanlıkla aynı kaynağa düşüyor, yüksek satır fazla sayardı); uluslararası/ulusal iş birlikli yayın bonusları (+%50/eşitleme); yurt dışı araştırma tecrübesi (30 puan, metrik puana çevrilemediği için); kitap ve kitap bölümü çevirisi dışındaki E3 (çeviri makale); ek baskı (D7) | Editörlük yapan, sanayi iş birlikli çalışan ve yurt dışı ortaklı yayını olan adayın toplamı düşük çıkar |
 | **Afyonkarahisar Sağlık Bilimleri** | Web of Science h-faktörü × 20 (formül tabanlı puan); dört patent aşamasının (rüçhanlı/rüçhansız, incelemeli/incelemesiz) ayrı puanları tek satırda birleşti; SCI ile SCI-Expanded dergi/editörlük ayrımı tek etikette birleşti; kongre başkanlığı/görev alma, adayın çalışmaları hakkında yayın yapılmış olması, bilimsel toplantıya yalnızca katılmak, hizmet içi eğitime katılmak, Erasmus/Farabi/Mevlana koordinatörlüğü, soruşturma-inceleme görevi, uluslararası/ulusal meslek kuruluşu yönetim kurulu üyeliği/üyelik (L.5-L.6, L.9, L.11-L.14) | Editörlük yapan, yönetim kurulu üyeliği olan ve idari görevi çok yıllık olan adayın toplamı düşük çıkar |
+| **Recep Tayyip Erdoğan** | 11. madde (sportif başarı ve temsil); 13.a (en az 15 özgün eser barındıran kişisel sergi — puan tek esere değil dosyaya veriliyor); 13.e h-indeksi ve 13.f-g yurt dışı araştırma süresi; 13.n eğiticilerin eğitimi; 5.f (AKDTYK projesi); ansiklopedi maddelerinin "üç madde bir kitap bölümü sayılır" kuralı | Sportif ve sanatsal kalemleri olan adayın toplamı düşük çıkar. Projelerde rol puanı bölündüğü için (yürütücü 1/1, araştırmacı 1/3, danışman 1/4) ROLÜ GİRİLMEMİŞ proje 0 puan alır |
+| **Sinop** | Güzel Sanatlar temel alanının TAMAMI: Tablo GS2'nin satırları tek esere değil dosyaya puan veriyor ("a veya b bentlerinden en az 50 puan") ve bu alanın her kadrosunda GS2 barajı zorunlu — §0 istisnası uygulandı. Ayrıca Sinop'ta yapılan toplantı (4) ve Sinop dergilerinde editörlük (5) satırları; İlahiyat'ın 11. (sanatsal uygulama) ve Spor'un 12. (sportif faaliyet) maddeleri; patent başvurusu, h-indeksi, yurt dışı araştırma, öğrenci kulübü danışmanlığı, SEM dersi | Güzel Sanatlar alanında hiç eşik yok; diğer on bir alanda toplam düşük çıkar |
+| **Sivas Bilim ve Teknoloji** | B1.9-B1.11 ders satırları (puan ders SAATİ başına, kayıt ders başına tutuluyor; bölümün tavanı 40 puandı); B1.12 laboratuvar altyapısı; A1.18 hakemsiz dergi, A2.7 ders notu, A4.12 reddedilen proje başvurusu, C1.3 ve C1.18 kongre kitabı editörlüğü, C1.14 ve C1.24 proje hakemliği, C1.26 TÜBA/TÜBİTAK üyeliği, B3.4 ve B3.10 sergi küratörlüğü | Ders veren adayın 40 puana kadar eksiği olur. Buna karşılık §0'dan İKİ YERDE sapıldı: `TÜBİTAK` etiketi A4.3 değerleriyle (yürütücü 100) girildi, Hızlı Destek (50) ve bilim-toplum projeleri (30) YÜKSEK puanlanıyor; `ESCI / Scopus` etiketi A1.2 ile (60) girildi, yalnız Scopus'ta taranan dergi aslında A1.6 (25) satırına girer |
+| **Sivas Cumhuriyet** | K bölümünün tamamı (kazı ruhsatı, yüzey araştırması, kazı projesinde görev); A8 (Üniversiteye bağlı hakemli dergilerde makale) — MADDE 12(b)'nin "A8 kapsamında en az 2 makale" seçeneği de bu yüzden girilemedi; E5-E9 proje ve sanat etkinliği hakemliği; F4-F5 firma sahipliği; G7 teknopark danışmanlığı | Kazı çalışması olan adayın toplamı düşük çıkar; profesörlükte 12(b)'nin yalnız A1/A3/A4 seçeneği uygulanıyor |
+| **Şırnak** | 4.3 (H indeksi × 5 — faaliyet değil ölçüt); 10. bölüm (koleksiyon) ve 11. bölüm (müzik teknolojisi); 7. bölümün başkanlık ve sekreterlik satırları; II.4 (sağlık eğitimi hizmetleri); 1.2.4 makale çevirisi, 5.6 yurt dışı proje ay puanı, 5.8 proje başvurusu, 8.2 ve 8.5 toplantı kitabı editörlüğü; Güzel Sanatların UYGULAMALI ve müzik alanlarına tanınan düşük eşikler (30 puan + toplam 50) | Dersler haftalık ders saati başına 1 puan olduğu hâlde ders başına sayılıyor (tavan 30); uygulamalı sanat ve müzik alanından başvuran aday koşulları olduğundan AĞIR görür |
+| **Türk-Alman** | E türünün özet bildirileri — yönerge "poster hariç" diyor, kaynak sözlüğü ise sözlü özet bildiriyi posterden ayırmıyor, §0 uyarınca hiçbiri sayılmadı; G türüne girmeyen üniversite BAP projeleri; atıf, tez danışmanlığı, ders, editörlük ve idari görev (EK-1'de karşılığı yok) | Özet bildirisi olan adayın yeniden atanma puanı düşük çıkar |
+| **Uşak** | 11. bölüm (yurt dışı araştırma çalışmaları, en fazla 20 puan — faaliyet değil süre ölçütü); 1b (SCOPUS makalesi, 13 puan) ve 1d (kitap kritiği yapılmış makale); 15c-15d koordinatörlükler ve kalite üyelikleri | SCOPUS makaleleri ESCI puanıyla (10) sayılıyor; yurt dışı araştırması olan adayın toplamı 20 puana kadar düşük çıkar. MADDE 6(1)(f)'nin bazı birimlerde puanın %60'ının aranması ve idari görev puanının doçentlik kriterinde kullanılamaması kuralları uygulanmıyor |
+| **Van Yüzüncü Yıl** | MADDE 11'in %20 kotası için EK-4 ek kriterleri; EK-1, EK-2 ve EK-3 seçmeli kriter listelerinin yaklaşık üçte biri (sportif kariyer, bilimsel kazı, tonmaysterlik, web sayfası tasarımı, ders materyali geliştirme, mesleki rapor, sertifika programı eğiticiliği, sunum ödülü, etki faktörü, standart hazırlama, laboratuvar kılavuzu çevirisi) | Bu kriterler `beyan` düğümü olarak soruluyor ve motorda "belirsiz" dönüyor; adayın hangi kriteri sağladığını başvuru dosyasında belgelemesi gerekiyor. "1.1., 2.1. ve 3.1. dışındaki her kriterden en fazla üç etkinlik sayılır" ve "bir eser aynı kategoride bir kez kullanılır" kuralları uygulanmıyor, sağlanan kriter sayısı YÜKSEK görünebilir |
+| **Yeditepe** | Bölüm ve program düzeyindeki ayrımların tamamı: Fen-Edebiyat'ın yedi bölümü (Çeviribilimi, Fizik, İngiliz Dili ve Edebiyatı, Matematik, Psikoloji, Rus Dili ve Edebiyatı, Türk Dili ve Edebiyatı), Güzel Sanatlar'ın özel yetenek sınavıyla ve merkezi yerleştirme puanıyla öğrenci alan programları, İletişim'in Görsel İletişim Tasarımı bölümü | `birim` ayrımı FAKÜLTE düzeyinde tutuldu; bu bölümlerden başvuran aday kendi bölümünün değil fakültenin genel koşulunu görür. Farklar aday notunda anlatılıyor ama DOĞRUSU bölüm bölüm girmek: Madde 7-(2), 8-(2) ve 9-(2)'deki bölüm listeleri sırayla `birim` olarak açılmalı. Çeyreklik isteyen koşullarda AHCI makaleleri de sayılmıyor (sözlük AHCI'ye çeyreklik vermiyor) |
 
 ## Motorun karşılayamadığı kurallar
 
