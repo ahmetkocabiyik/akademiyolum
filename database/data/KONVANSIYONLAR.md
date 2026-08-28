@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-107 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+108 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -630,12 +630,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 107 üniversite · 3638 eşik · 184 cetvel |
+| Girildi | 108 üniversite · 3646 eşik · 185 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 66 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 65 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
