@@ -163,6 +163,7 @@ return [
     ['İhsan Doğramacı Bilkent Üniversitesi', 'Ankara', 'vakif'],
     ['İstanbul 29 Mayıs Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Aydın Üniversitesi', 'İstanbul', 'vakif'],
+    ['İstanbul Beykent Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Bilgi Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Galata Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Kültür Üniversitesi', 'İstanbul', 'vakif'],
