@@ -157,7 +157,7 @@ return [
     ['Doğuş Üniversitesi', 'İstanbul', 'vakif'],
     ['Fatih Sultan Mehmet Vakıf Üniversitesi', 'İstanbul', 'vakif'],
     ['Fenerbahçe Üniversitesi', 'İstanbul', 'vakif'],
-    ['Halic Üniversitesi', 'İstanbul', 'vakif'],
+    ['Haliç Üniversitesi', 'İstanbul', 'vakif'],
     ['Işık Üniversitesi', 'İstanbul', 'vakif'],
     ['İbn Haldun Üniversitesi', 'İstanbul', 'vakif'],
     ['İhsan Doğramacı Bilkent Üniversitesi', 'Ankara', 'vakif'],
