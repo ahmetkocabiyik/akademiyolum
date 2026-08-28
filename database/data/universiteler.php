@@ -145,6 +145,7 @@ return [
     ['Alanya Üniversitesi', 'Antalya', 'vakif'],
     ['Altınbaş Üniversitesi', 'İstanbul', 'vakif'],
     ['Ankara Bilim Üniversitesi', 'Ankara', 'vakif'],
+    ['Antalya Bilim Üniversitesi', 'Antalya', 'vakif'],
     ['Atılım Üniversitesi', 'Ankara', 'vakif'],
     ['Bahçeşehir Üniversitesi', 'İstanbul', 'vakif'],
     ['Başkent Üniversitesi', 'Ankara', 'vakif'],
