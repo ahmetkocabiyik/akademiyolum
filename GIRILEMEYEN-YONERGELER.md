@@ -428,6 +428,15 @@ anlatılıyor — ayrıntı orada, bu tablo yalnızca dizin.
 | **Bahçeşehir** | A-4.2 (Scopus h-indeksi × 10 puan); A-4.3-A-4.5 mahkeme kararlarında atıf; C-7 kanun şerhlerinde yazarlık; E-2 patent başvurusu; Q4 Scopus dergilerinde ve diğer hakemli dergilerde editörlük; hakemlik, ders verme ve burs (esaslarda hiç yok) | h-indeksi puanı esasların en yüksek tek kalemlerinden; girilemediği için toplam belirgin biçimde düşük çıkar |
 | **Başkent** | SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki vaka takdimi, editöre mektup, özet ve kitap kritikleri (1 ve 2. maddeler açıkça dışlıyor); 39. madde yurt dışında üç ay görev; ESCI, Scopus, TR Dizin ve diğer hakemli dergilerde editörlük; hakemlik; tez danışmanlığı, ders verme ve idari görev (çizelgede hiç yok); 55. madde sanat eserlerine atıf | Yurt dışı ortak yazar (%50), proje türü (%30-50) ve WoS-Scopus kitap (%50) primleri kayıtta karşılığı olmadığı için uygulanamıyor |
 | **İstanbul Beykent** | P-1 EĞİTİME KATKI (ders KREDİSİ başına 0,5 puan, kayıt krediyi taşımıyor); A-4 ve D-3 kitap eleştirisi; D-4 yargısal karar tahlili; K bölümünün televizyon, radyo, gazete ve öğrenci uygulama satırları; 'Ticarileştirme' | Yeniden atanmadaki "A grubu faaliyetlerden yıllık ortalama 40 puan" AYRI BİR YÖNERGENİN (Akademik Personel Performans Ölçme-Değerlendirme Yönergesi) puanlaması; o belge elimizde olmadığı için koşul HESAPLANAMIYOR |
+| **Ankara Hacı Bayram Veli** | Madde 13/a h-indeksi ve 13/b yurt dışı araştırma; 13/h iki yıl kesintisiz idari görev (kayıt görev süresini taşımıyor, idari görev kayıtları puan getirmiyor); 13/ı-i yabancı dil sınav puanları; 10/d patent başvurusu; SANATSAL ve SPORTİF FAALİYETLER tablolarının TAMAMI (ikisi de bilim/sanat dalına kilitli); madde 14 İlahiyat dînî mûsikî | Güzel Sanatlar ile Spor Bilimlerinin bu tablolara bağlı koşulları `hesaplanamiyor` olarak duruyor; yazar payı temel alana göre değiştiği için cetvel iki varyantla üretildi |
+| **Ankara Sosyal Bilimler** | D.11 proje BAŞVURUSU; G.1 doktora sonrası ilk 500 üniversitede iki dönem; C.8-C.9 konferans kitabı editörlüğü ve H.1 makale çevirisi; PATENT, SANATSAL ETKİNLİK ve TOPLUMSAL KATKI kalemlerinin tamamı (tabloda hiç yok) | Ders kitapları ve özgün olmayan derleme kitaplar yönergenin dipnotuyla AÇIKÇA dışlandığı için 'Ders / Metot Kitabı' etiketi puansız; ödül satırları üçüncülük değeriyle girildi |
+| **Ankara Yıldırım Beyazıt** | "Diğer Etkinlikler" başlığının h-indeksi bendi; Alanlara Özgü Etkinliğin spor bentleri (olimpiyat ve üniversite oyunlarında madalya), hizmet içi eğitim sertifikaları, yurt dışı ziyaret ve üniversite-sanayi danışmanlığı; standart hazırlama, firma sahipliği, TEKNOFEST danışmanlığı, millî takım görevi, bilirkişilik ve arabuluculuk bentleri | "Eşik üzeri puanla ret alan projelerde puanların %50'si" kuralı uygulanamıyor; alanlara özgü etkinlik tavanı değiştiği için cetvel iki varyantla üretildi |
+| **Çankırı Karatekin** | 7.14-7.15 ihtisaslaşma alanı projeleri; 13 bilimsel kazı etkinlikleri; 14 ÇAKÜ Açık Erişim kayıtları; 11.16-11.22 (mobil arayüz, web, afiş, kurumsal kimlik tasarımı) ile 11.25-11.40'ın stüdyo kaydı ve tonmaysterlik kademelerinin çoğu; 10.5 tescil edilmiş marka | Devam eden proje ve tezlere yönergenin verdiği üçte bir puan §0 gereği satıra gömüldü |
+| **Doğuş** | U maddesi EĞİTİME KATKI (ders KREDİSİ başına 0,5 puan, kayıt krediyi taşımıyor — ders kayıtları toplam puana katkı vermiyor); A-3 indekssiz uluslararası hakemli dergiler; A-4 ve D'nin kitap eleştirisi ile yargısal karar tahlili satırları; V bölümünün gazete, televizyon ve radyo programı satırları | Hakemlik, yayın kurulu üyeliği, yarışma derecesi ve toplantı düzenlemenin yüksek kademeleri düşük kademelerinden ayrılamadığı için en düşük değerden sayılıyor |
+| **Erzincan Binali Yıldırım** | Ondalıklı satırlar (A.1.1 önlisans/lisans danışmanlığı 0,05; A.2 sınav gözetmenliği 0,1; atıf tablosunun TR-Dizin 0,8 ve diğer ulusal dergi 0,5 satırları); lisans tez danışmanlığı, tezsiz yüksek lisans ve öğrenci kulübü danışmanlığı; derleme kitap yazarlığı; çeviri makale; C.3 SPOR ETKİNLİKLERİ bölümünün TAMAMI; sanat bölümünde küratörlük, festival, el sanatları belge çözümlemesi ve arkeolojik kazı | "Her bir yıl için ortalama en az 15 puan" koşulu `hesaplanamiyor` olarak duruyor; yarım puanlı kalemler (yardımcılıklar, tekrar baskı, devam eden proje) uygulanamadığı için o satırlarda puan YÜKSEK görünür |
+| **Fatih Sultan Mehmet Vakıf** | A1.4 (uluslararası indekslere girmeyen hakemli dergiler) ve A2.3 (hakemsiz ulusal dergiler); çok ciltli kitap ve çeviri satırları (A1.6.b, A1.7.b, A1.7.f, A2.5.b); A1.7.h makale çevirisi; A9.2.c tezsiz yüksek lisans projesi; A8.4 proje BAŞVURULARI; A10'un sergileme satırları (A5'te zaten puanlanıyor) | A8.1-A8.2'nin "her bir eğitim-öğretim yılı için" kuralı uygulanamıyor, çok yıllı projeler bir kez sayılıyor; eşikler temel alana değil FAKÜLTEYE bağlı olduğu için her kayıt `birim` taşıyor |
+| **Haliç** | EK-4 Beden Eğitimi ve Spor Bilimleri formunun TAMAMI; EK-3/A-1 ("en az iki kişisel etkinlikte yer almak", 24 puan — dosyaya veriliyor); ondalıklı satırlar (TR Dizin atfı 0,5; kurul üyeliği 0,5/yıl); EK-2/3 yüksek lisans proje danışmanlığı; EK-3'ün C/1, D/4, E/3, E/4, F/3 ve G/2 satırları | BAP projeleri yönergede açıkça kapsam dışı; Scopus çeyrekleri kayıttaki WoS çeyrek etiketleriyle eşleştirildi, çeyreği belli olmayan ESCI-Scopus ve AHCI dergileri en düşük kademeden sayılıyor |
+| **Harran** | A11 SPORTİF BAŞARI VE TEMSİL bölümünün TAMAMI; lisansüstü tezden üretilmiş makale satırları (A1/ı-k); Harran dergilerine özgü ve hakemsiz dergi satırları; A3 (çağrılı derleme, teknik not); patent ve faydalı model BAŞVURULARI, marka tescili, TTO buluş bildirimi; A5'in arkeolojik kazı satırları; A8/d h-indeksi; A14, A15'in ödül satırları, A22-A25, A31, A32, A36, A38-A40; A17'nin "en az 15 özgün eser barındıran kişisel sergi" satırları; B4 dil puanı | Bölüm katsayıları (A ×0,7; B ×0,3; C ×0,3) satır puanlarına gömüldüğü için HAM PUANI 1 OLAN SATIRLAR SIFIRA DÜŞTÜ: ders, jüri ve kurul faaliyetleri toplama hiç katkı vermiyor, eğitim-öğretim bölümünden yalnız doktora tez danışmanlığı sayılıyor. Patent, ödül ve ekip çalışmalarında yönergenin istediği EŞİT paylaşım yerine yazar sırası tablosu uygulanıyor |
 
 ## Motorun karşılayamadığı kurallar
 
@@ -438,23 +447,27 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   Bartın, Dicle, Erzurum Teknik, Eskişehir Osmangazi, Kafkas, Kahramanmaraş
   Sütçü İmam, Kastamonu, Kayseri, Kırıkkale, Kırşehir Ahi Evran, Kütahya
   Dumlupınar, Malatya Turgut Özal, Nevşehir, Trabzon, Yozgat Bozok,
-  Acıbadem, Ardahan, Antalya Bilim, Bahçeşehir ve Başkent'te tescil edilmiş
+  Acıbadem, Ardahan, Antalya Bilim, Bahçeşehir, Başkent, Ankara Hacı Bayram
+  Veli, Ankara Sosyal Bilimler ve Harran'da tescil edilmiş
   patentin yanında BAŞVURU için de ayrı ve düşük puanlı satır var. Kayıt
   başvuruyu tescilden ayırmadığı için başvuru satırları hiç girilmedi:
   girilseydi motor en yükseği seçer ve BAŞVURU sahibini TESCİL sahibi gibi
   sayardı. Yalnız başvurusu olan adayın puanı bu kalemde sıfır görünür.
 - **Ders puanını SAAT, AKTS ya da KREDİ başına veren satırlar** — Altınbaş
   (4.0.2.1.1, AKTS başına 0,5), Aydın Adnan Menderes (C2, ders saati başına
-  0,25 ve 0,5) ve İstanbul Beykent (P-1, kredi başına 0,5) ders puanını
+  0,25 ve 0,5), İstanbul Beykent (P-1, kredi başına 0,5) ve Doğuş (U maddesi,
+  kredi başına 0,5) ders puanını
   faaliyet başına değil süre birimi başına veriyor. Faaliyet kaydı yalnız
   yarıyıl sayısını taşıdığı için bu satırlar hiç girilemedi; ders kayıtları
-  bu üç üniversitede toplam puana katkı vermiyor ve yönergelerin "derslerden
+  bu dört üniversitede toplam puana katkı vermiyor ve yönergelerin "derslerden
   şu kadar puan" koşulları eşiklerde `hesaplanamiyor` olarak duruyor.
 - **h-indeksi ve atıf ortalaması satırları** — Aksaray (E.8), Bartın (H
   bölümü), Bursa Teknik (E bölümü), Konya Gıda ve Tarım (Ç.1-4),
   Kahramanmaraş Sütçü İmam (Tablo 3/5), Nevşehir (D.5), Afyonkarahisar
   Sağlık Bilimleri (h × 20), Şırnak (4.3, h × 5), Yozgat Bozok (B5.4.7),
-  Ardahan (3.11.1, h × 2) ve Bahçeşehir (A-4.2, h × 10) puanı h faktörüne ya da
+  Ardahan (3.11.1, h × 2), Bahçeşehir (A-4.2, h × 10), Ankara Hacı Bayram Veli
+  (13/a), Ankara Yıldırım Beyazıt (Diğer Etkinlikler) ve Harran (A8/d) puanı h
+  faktörüne ya da
   "toplam atıf / atıf alan yayın sayısı" ortalamasına bağlıyor. İkisi de
   faaliyet başına puan değil, PROFİL ölçütü; motor puanı yalnız
   faaliyetlerden topladığı için bu satırlar hiç girilemedi. h-indeksi yüksek
@@ -587,3 +600,19 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   için üç varyant yerine); en düşük ortak değer (100) evrensel uygulandı —
   Mimarlık adayının B/C katkısı TOPLAM'a olduğundan az yansır, "eksik say"
   yönünde güvenli ama kaba bir sadeleştirme.
+- **Bölüm katsayısı satır puanlarına gömülünce KÜÇÜK SATIRLAR SIFIRLANIYOR** —
+  Harran'ın "TOPLAM PUAN HESAPLAMA" tablosu bölüm toplamlarını çarpıyor
+  (Akademik ×0,7; Eğitim-Öğretim ×0,3; İdari ×0,3). Motorda bölüm katsayısı
+  alanı olmadığı için çarpan her satıra gömüldü ve çarpımdan sonra bir kez
+  aşağı yuvarlandı (KONVANSIYONLAR'ın "Koşula bağlı çarpanı cetvele göm"
+  kuralı). Ham puanı 1 olan satırlar (ders kredisi, jüri üyelikleri, kurul
+  üyelikleri, seminer, hakemlik) çarpımdan sonra sıfıra düştüğü için hiç
+  yazılamadı: eğitim-öğretim bölümünden yalnızca doktora tez danışmanlığı puan
+  üretiyor. Yön §0'ın istediği yön ama kayıp büyük; bir gün motora bölüm
+  katsayısı eklenirse ilk düzeltilecek cetvel bu.
+- **Yıl ortalamasına bağlı YENİDEN ATAMA barajı** — Erzincan Binali Yıldırım'ın
+  Madde 6'sı ve Güzel Sanatlar alanının sanat etkinliği koşulu "her bir yıl
+  için ortalama en az 15 puan" istiyor; Beykent'in yeniden atanma koşulu da
+  "yıllık ortalama 40 puan". İki atama arasındaki yıl sayısı profilde
+  tutulmadığı için bu koşullar `hesaplanamiyor` düğümü olarak duruyor ve
+  yeniden atama sonucu "belirsiz" dönüyor.
