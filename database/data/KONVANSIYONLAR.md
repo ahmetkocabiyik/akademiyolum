@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-102 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+103 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -495,6 +495,20 @@ Yeni ad ekleme sorunsuz; ad değiştirmek migration ister (örnek:
 
 ---
 
+### Madde kodu SALT RAKAM olmasın
+
+`'11' => [...]` yazdığında PHP anahtarı `int(11)`'e çevirir. Tek cetvelde sorun
+çıkmaz (`isset($maddeler['11'])` tam sayı anahtarı da bulur) ama iki tabloyu
+`array_merge` ile birleştiren dosyalarda (Ahi Evran'ın Ek-1 + Ek-2 varyantı)
+`array_merge` SAYISAL ANAHTARLARI YENİDEN NUMARALANDIRIR: `'11'` sessizce `0`
+olur, o maddeye bağlı grup boşalır, tavanı da boşa düşer. Test yakalamaz —
+grup boş olduğu için hiçbir şart patlamaz, yalnızca puan eksik hesaplanır.
+
+Kural: madde kodunda en az bir harf bulunsun (`'11a-f'`, `'M11'`). Doğrulama
+turunda `array_filter(array_keys($katalog->maddeler), 'is_int')` boş dönmeli.
+
+---
+
 ## 3. Doğrulama sırası
 
 Her üniversiteden sonra, bu sırayla:
@@ -616,12 +630,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 102 üniversite · 3486 eşik · 174 cetvel |
+| Girildi | 103 üniversite · 3534 eşik · 176 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 71 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 70 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
