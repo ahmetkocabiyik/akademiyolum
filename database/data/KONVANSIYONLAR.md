@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-157 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+158 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -658,7 +658,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 157 üniversite · 5839 eşik · 282 cetvel |
+| Girildi | 158 üniversite · 5947 eşik · 289 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
@@ -686,27 +686,24 @@ Ticaret, TED, Atılım. Bekleyenler `GIRILEMEYEN-YONERGELER.md`'de.
 Kalanların çoğu kendi puan tablosunu taşıyor; her biri cetvel çıkarma +
 koşul girme adımını birlikte istiyor.
 
-**Sıradaki iş: Trakya Üniversitesi** (`pdf/17537009772.trakyauniverstesi.pdf`,
-78 sayfa). Girilmedi; tek başına bir batch büyüklüğünde. Yapılan ön çalışma:
+**Trakya Üniversitesi girildi** (`cetvel/trakya-2025.php`, yedi cetvel;
+`yonerge/trakya.php`, 56 kayıt / 108 eşik). Tek dosyada yedi varyant tutmanın
+işe yarayan biçimi: ORTAK BLOK ÜRETİCİLERİ. Atıf, tez danışmanlığı, bildiri,
+eğitim-öğretim, patent, idari görev, toplumsal katkı ve jüri satırları yedi
+ekte de aynı; her biri madde numarasını parametre alan bir closure
+(`$atifBlok('4')`, `$atifBlok('5')`) ve `array_merge` ile üretiliyor. Yalnız
+makale, kitap, ödül ve editörlük blokları ek başına elle yazıldı. EK-1 ile
+EK-3'ün tabloları satır satır aynı çıktığı için tek `$ek1` dizisi iki cetvele
+birden veriliyor — yazar çarpanları farklı olduğu için ayrı cetvel olarak
+kaldılar.
 
-- Yönergenin YEDİ eki var ve her biri KENDİ puanlama sistemini taşıyor:
-  EK-1 Sağlık, EK-2 Mühendislik-Fen-Matematik, EK-3 Mimarlık-Planlama-Tasarım,
-  EK-4 Sosyal-Eğitim-Filoloji-İlahiyat-Öğretmen Yetiştirme, EK-5 Devlet
-  Konservatuvarı, EK-6 Güzel Sanatlar, EK-7 Spor Bilimleri.
-- Normalleştirilip hash'lendi: yedisi de FARKLI (dbc98ef, 156aa32, 95a1f60,
-  8721ca9, fb38d3a, 6ea7472, adef9ad). EK-1 ve EK-3 aynı şekli paylaşıyor;
-  EK-2 makaleyi çeyreklik × tür matrisine açıyor; EK-4 yirmi bir kategoriye
-  çıkıyor ve müzik performansında kesirli puan (0,5) kullanıyor; EK-5 ile
-  EK-6 performans tabloları.
-- Toplam yaklaşık 1300 puanlı satır. EK-5'in "MÜZİK BİLİM/SANAT ALANI" ve
-  EK-6'nın performans satırlarının çoğu PORTFÖYE bağlı ve yıl başına
-  tavanlı; §0 uyarınca büyük bölümü girilemeyecek.
-- Ek koşullar da eklere göre ayrışıyor ve fakülte / yüksekokul / meslek
-  yüksekokulu için ayrı ayrı yazılmış; `birim` ayrımı gerekecek.
-- MADDE 4(2): doktor öğretim üyeliği puanları DÖRT YILLIK atama için;
-  MADDE 5(3) daha kısa süreler için x/4 oranı kuruyor.
-- Genel ilkeler (MADDE 4): dil doktor öğretim üyeliğinde 55, doçentlik ve
-  profesörlükte 65 (tamamen yabancı dilde eğitim yapan birimlerde 85).
+Grup listeleri de elle değil iki yardımcıyla kuruldu: `$bolum($maddeler, '1',
+'2')` kodun başındaki madde numarasına bakıyor (`preg_match('/^(\d+)/')`, yani
+`11a-f` → 11, `1a-Q1` → 1) ve `$onek($maddeler, '1a-', '1b')` önek eşliyor.
+Salt önekle çalışmak Kırşehir Ahi Evran ile FSMVÜ'de sessiz hatalar üretmişti;
+madde numarası üzerinden eşleşen `$bolum` o sınıf hatayı baştan kapatıyor.
 
-Girerken EK-1/EK-3/EK-7 tek gövdeden, EK-2, EK-4, EK-5 ve EK-6 ayrı ayrı
-üretilmeli.
+Bu üniversitede §0 uyarınca verilen kararların tamamı `GIRILEMEYEN-YONERGELER.md`
+tablosunda; en pahalıları: %25 tavanlarının atama eşiğine bağlı olduğu için
+uygulanamaması, Matematik alanının EK-2'den ayrılamaması ve EK-7'nin sportif
+performans bölümünün tamamen dışarıda kalması.

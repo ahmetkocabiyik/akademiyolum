@@ -292,47 +292,6 @@ sitesinden indirmek ya da PDF'i yeniden OCR'lamak gerekiyor (`ocrmypdf --force-o
 
 ---
 
-## Trakya Üniversitesi — yedi ek, yedi ayrı puanlama sistemi
-
-**Dosya:** `pdf/17537009772.trakyauniverstesi.pdf` (78 sayfa)
-
-**Engel yok, tek başına bir parti büyüklüğünde.** Metin temiz, tablolar
-`pdftotext -q -layout` ile okunuyor. Sorun hacim ve çeşitlilik: yönergenin
-YEDİ eki var ve her biri KENDİ puanlama sistemini taşıyor.
-
-| Ek | Temel alan | Şekli |
-|---|---|---|
-| EK-1 | Sağlık Bilimleri | 17 kategori, makale/meta analiz/derleme üçlüsü |
-| EK-2 | Mühendislik, Fen Bilimleri ve Matematik | makaleyi çeyreklik × tür matrisine açıyor; ayrı hakemlik bölümü |
-| EK-3 | Mimarlık, Planlama ve Tasarım | EK-1 ile aynı şekil, kitap ve atıf puanları farklı |
-| EK-4 | Sosyal, Eğitim, Filoloji, İlahiyat, Öğretmen Yetiştirme | 21 kategori; müzik performansında kesirli puan (0,5) |
-| EK-5 | Devlet Konservatuvarı | bilimsel tablo + ayrı "Müzik Bilim/Sanat Alanı" performans tablosu |
-| EK-6 | Güzel Sanatlar | performans tablosu |
-| EK-7 | Spor Bilimleri | ayrı "Sportif Performans" bölümü (16), iki h-indeksi seçeneği |
-
-Normalleştirilip hash'lendi, yedisi de farklı: `dbc98ef`, `156aa32`, `95a1f60`,
-`8721ca9`, `fb38d3a`, `6ea7472`, `adef9ad`. Toplam yaklaşık **1300 puanlı
-satır**.
-
-**Neden bekletildi:** EK-5'in "Müzik Bilim/Sanat Alanı" ve EK-6'nın performans
-satırlarının çoğu PORTFÖYE bağlı ve yıl başına tavanlı ("En çok 15 puan ile
-sınırlandırılmıştır", "orkestra konserinde üyelik 0,5"); §0 uyarınca büyük
-bölümü zaten girilemeyecek. Kalan beş tablo tek tek çıkarılmayı istiyor.
-Aceleye getirilirse Ahi Evran ve Pamukkale'de yaşanan türden sessiz hatalar
-(salt rakam madde kodu, önekle aralık eşleşmesi) burada yedi kat maliyetli.
-
-**Devam edilirse:** EK-1, EK-3 ve EK-7 tek gövdeden üretilebilir; EK-2, EK-4,
-EK-5 ve EK-6 ayrı gövde ister. Ek koşullar da eklere göre ayrışıyor ve
-fakülte / yüksekokul / meslek yüksekokulu için ayrı ayrı yazılmış, yani `birim`
-ayrımı gerekecek. Genel ilkelerden (MADDE 4) çıkanlar: yabancı dil doktor
-öğretim üyeliğinde 55, doçentlik ve profesörlükte 65 (tamamen yabancı dilde
-eğitim yapan birimlerde 85); MADDE 4(2) doktor öğretim üyeliği puanlarının DÖRT
-YILLIK atama için olduğunu, MADDE 5(3) daha kısa süreler için x/4 oranı
-kurulduğunu söylüyor. Ek yapısı ve hash'ler `KONVANSIYONLAR.md` §6'da da
-duruyor.
-
----
-
 # Kısmen girilen yönergeler
 
 Aşağıdaki üniversiteler korpusa girdi, ama bir bölümü cetvele giremedi. Üç
@@ -446,6 +405,7 @@ anlatılıyor — ayrıntı orada, bu tablo yalnızca dizin.
 | **Siirt** | Ek-I'in 2. MADDESİNİN TAMAMI (lisansüstü tezden üretilmiş yayınlar); 13.d (kurum içi/dışı bilimsel ödül); EK-2'NİN TAMAMI (sinema, plastik sanatlar, tasarım, geleneksel Türk sanatları, müzik-kompozisyon, yorumculuk, Türk müziği, dans-koreografi, halk dansları) — her bölüm ayrı sanat dalına kilitli, "tüm şartlar zorunludur" kurgusu ve puanlar dosyaya veriliyor | Güzel Sanatlar adayının sanatsal etkinlikleri hiç sayılmıyor; MADDE 6'nın yıl başına ortalama puan koşulu `hesaplanamiyor`. Patentte "puan kişi sayısına bölünür" kuralı yerine MADDE 11'in yazar oranları işliyor |
 | **Süleyman Demirel** | Ek-1'in 3. MADDESİNİN TAMAMI (lisansüstü tezden üretilmiş yayınlar); 9. madde (eğitim-öğretim; puan "dört farklı yarıyılda ders vermiş olmak" bloğuna veriliyor); 10/d patent başvurusu; 14. MADDE SPORTİF BAŞARI VE TEMSİL bölümünün TAMAMI; 15.1/a (en az 15 özgün eser barındıran kişisel sergi); 15.2'nin orkestra şefliği, dans ve halk oyunları alt bölümleri | SCOPUS makaleleri ESCI ile aynı etikette olduğu için çeyreğine bakılmaksızın 20 puandan sayılıyor; yurt dışı ortak yazarlık için verilen 1,25 kat ek puan uygulanamıyor. Spor Bilimlerinin "Sportif Başarı ve Temsil'den 10 puan" koşulu ile yeniden atamanın yıllık ortalama barajı `hesaplanamiyor`. Ziraat, Orman ve Su Ürünleri temel alanı tablolarda hiç geçmiyor |
 | **Tokat Gaziosmanpaşa** | 1.1.k hakemsiz dergi; 1.6.a h-indeksi; 3.1-3.2 patent BAŞVURUSU; 2.3.d-e (üniversitenin Enerji Depolama ihtisas alanı projeleri); 6. bölüm bilimsel nitelikli kazı etkinlikleri; 4.4 Teknoloji Transfer Ofisinde görev almak | Yönergenin "en fazla 10 hakemlik", "en fazla 10 atıf" ve "en fazla 10 ders" gibi ADET sınırları motorda karşılığı olmadığı için uygulanmıyor; bu kalemlerde puan YÜKSEK çıkabilir. Görev süresi uzatımının puanı istenen süreye bağlı olduğundan (1 yıl 40 … 4 yıl 150) eşiğe en düşük basamak yazıldı |
+| **Trakya** | EK-7'NİN 16. MADDESİNİN TAMAMI (sportif performans: sporcu yetiştirme 40'a kadar, millî takım görevi, antrenörlük ve hakemlik belgeleri, federasyon kurul üyeliği — 26 satır); h-indeksi (×5) ve "ilk 500 üniversitede altı ay yurt dışı araştırma" (25) satırları yedi ekte de; meslek örgütü YETERLİK BELGESİ (EK-1 madde 17, EK-4 madde 21); patent BAŞVURUSU; EK-1 madde 12'nin yarışma (20) ve uygulanmış proje (15) satırları; EK-5'in müzik alt tablosunda sınıf konseri yönetimi, öğrenciye piyano eşliği ve konser anlatıcılığı; EK-6'nın 17. maddesinde etkinlik yöneticiliği ve panel-söyleşi; EK-4 madde 14 (bilimsel kazı ve yüzey araştırması); EK-5 ile EK-6'nın sergi değerlendirme (15/10) ve hakemli araştırma-derleme makalesi (20/15) satırları | Yönergenin "atama için gerekli toplam puanın %25'ini geçemez" tavanları ATAMA EŞİĞİNE bağlı; aynı cetvel dört ayrı eşikte kullanıldığı için sabit tavana çevrilemedi ve atıf, ödül, editörlük, jüri, idari görev kalemlerinde puan YÜKSEK çıkıyor. MATEMATİK alanı EK-2'den ayrılamadı (eşik 60/160 yerine 50/120 olmalıydı); ziraat EK-2'ye, hukuk EK-4'e bağlandı — yönerge ikisini de saymıyor. EK-2'nin ilk atamadaki üç kollu ek yayın merdiveni tez yayınının ÇEYREĞİNE bağlı olduğu için en sıkı kol yazıldı. EK-4 doçentliğinde aranan "ÜAK doçentlik puanının %20 fazlası" `hesaplanamiyor`. "Diğer uluslararası/ulusal kitap" çift değerlerinin (15/10, 10/5) düşüğü alındı |
 | **Ufuk** | 7. MADDENİN TAMAMI (atıflar; puan atıf sayısının 0,5 ve 0,3 katı) ve 11/a-f (ders puanı dönemlik ders SAATİ ile çarpılan 0,025-0,15 katsayıları) — ikisi de ondalıklı; 4. MADDENİN TAMAMI (lisansüstü tezden üretilen yayınlar); h-indeksi eklentisi (h × 0,1); 14/a yabancı dil sınav başarısı, 14/c etki faktörü, 14/e-f yeterlilik sertifikaları, 14/g yeni birim kurma, 14/m yurt dışı üç ay, 14/o atama jürisi üyeliği | ATIFLAR VE DERSLER TOPLAM PUANA HİÇ KATKI VERMİYOR. Kitaplarda Sense Ranking A-E kategorileri kayıtta olmadığı için en düşük kategoriden sayılıyor. Yayın ve kitap için iki ayrı ortak yazar kuralı var; motor kategori bazlı çarpan tanımlayamadığından düşük olan yayın kuralı ikisine de uygulandı |
 
 ## Motorun karşılayamadığı kurallar
@@ -458,8 +418,8 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   Sütçü İmam, Kastamonu, Kayseri, Kırıkkale, Kırşehir Ahi Evran, Kütahya
   Dumlupınar, Malatya Turgut Özal, Nevşehir, Trabzon, Yozgat Bozok,
   Acıbadem, Ardahan, Antalya Bilim, Bahçeşehir, Başkent, Ankara Hacı Bayram
-  Veli, Ankara Sosyal Bilimler, Harran, İzmir Bakırçay, Süleyman Demirel ve
-  Tokat Gaziosmanpaşa'da tescil edilmiş
+  Veli, Ankara Sosyal Bilimler, Harran, İzmir Bakırçay, Süleyman Demirel,
+  Tokat Gaziosmanpaşa ve Trakya'da tescil edilmiş
   patentin yanında BAŞVURU için de ayrı ve düşük puanlı satır var. Kayıt
   başvuruyu tescilden ayırmadığı için başvuru satırları hiç girilmedi:
   girilseydi motor en yükseği seçer ve BAŞVURU sahibini TESCİL sahibi gibi
@@ -480,8 +440,8 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   Sağlık Bilimleri (h × 20), Şırnak (4.3, h × 5), Yozgat Bozok (B5.4.7),
   Ardahan (3.11.1, h × 2), Bahçeşehir (A-4.2, h × 10), Ankara Hacı Bayram Veli
   (13/a), Ankara Yıldırım Beyazıt (Diğer Etkinlikler), Harran (A8/d), İzmir
-  Bakırçay (13.a), Necmettin Erbakan (K16, h × 10), Tokat Gaziosmanpaşa (1.6.a)
-  ve Ufuk (h × 0,1) puanı h faktörüne ya da
+  Bakırçay (13.a), Necmettin Erbakan (K16, h × 10), Tokat Gaziosmanpaşa (1.6.a),
+  Ufuk (h × 0,1) ve Trakya (yedi ekte de h × 5) puanı h faktörüne ya da
   "toplam atıf / atıf alan yayın sayısı" ortalamasına bağlıyor. İkisi de
   faaliyet başına puan değil, PROFİL ölçütü; motor puanı yalnız
   faaliyetlerden topladığı için bu satırlar hiç girilemedi. h-indeksi yüksek
@@ -498,8 +458,22 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
 - **Yüzdeye bağlı tavan** — Düzce (eğitim-öğretim %20, burs %10, idari görev
   %10), Manisa CBÜ (atıf %20), Karabük (E bölümü %10), Yalova (Sosyal ve
   Mimarlık'ta kitap %30, atıf %20, tez danışmanlığı %10 — hepsi "başvuru
-  şartında istenen asgari puanın" yüzdesi, yani kadroya göre değişiyor). Motor yalnızca sabit
+  şartında istenen asgari puanın" yüzdesi, yani kadroya göre değişiyor) ve
+  Trakya (yedi ekin hepsinde atıf, patent, ödül, editörlük, jüri, idari görev ve
+  "diğer" başlıklarına "atama için gerekli toplam puanın %25'i" sınırı; aynı
+  cetvel doktor öğretim üyeliğinden profesörlüğe dört ayrı eşikte
+  kullanıldığı için sabit bir sayıya çevrilemedi). Motor yalnızca sabit
   grup tavanı tanıyor; bu kalemlerde puan **yüksek** görünür.
+
+- **Sportif performans bölümleri** — İnönü (P), Nişantaşı (Ek1-D, on altı satır),
+  İstanbul Yeni Yüzyıl (4.D), Recep Tayyip Erdoğan (11. madde), Kırşehir Ahi
+  Evran (13.C), Süleyman Demirel (14. madde) ve Trakya (EK-7 madde 16, yirmi
+  altı satır) sporcu yetiştirmeyi, millî takım görevini, antrenörlük ve
+  hakemlik belgelerini, federasyon kurul üyeliğini puanlıyor — Trakya'da tek
+  sporcu için 40 puana kadar. `Kategori` sözlüğünde bu faaliyetlerin karşılığı
+  yok; hiçbirinde satır girilemedi. Spor Bilimleri adayının puanı bu yüzden
+  sistematik olarak DÜŞÜK çıkıyor ve Trakya'da eşiklerin adıyla andığı
+  "16. kategori" payı hiç dolmuyor.
 - **Çeyrekliğe bağlı çarpan** — Bandırma (Q1:2, Q2:1,5, Q3:1,25, Q4:1). En düşük
   çarpan alındı; Q1 makalesi olan adayın puanı **düşük** görünür.
 - **Kategoriye göre farklı yazar formülü** — Bayburt (makalede kademeli, kitap ve
