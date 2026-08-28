@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-116 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+117 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -495,6 +495,23 @@ Yeni ad ekleme sorunsuz; ad değiştirmek migration ister (örnek:
 
 ---
 
+### Kod ÖNEKİYLE aralık eşleştirme A.1'i A.10'a bağlar
+
+"A.1-A.13 maddeler kapsamında" gibi aralıklara `str_starts_with($kod, 'A.1')`
+ile grup kurma refleksi, `A.10`, `A.11`, `A.14`, `A.16` ve `A.17` kodlarını da
+yakalar. Pamukkale'de bu, `A.1-A.4` grubunu 7 yerine 23 satıra çıkarmış,
+`A.1-A.12`, `A.1-A.13`, `A.1-A.15` ve `A.1-A.16` gruplarını da birbirinin aynısı
+yapmıştı — dört ayrı baraj tek barajla ölçülür hâle gelmişti. Test yakalamaz;
+gruplar boş değil, sadece yanlış.
+
+Kural: NOKTALI ya da ÇOK BASAMAKLI kod uzayında aralık gruplarını AÇIKÇA yaz
+(`$A1 = ['A.1a','A.1b','A.1c']` gibi) ve aralıkları bu parçaları birleştirerek
+kur. Önek eşleştirmesi yalnız kodun tek karakterlik harf bloğu olduğu
+cetvellerde (`A-`, `B-`, `K-1`) güvenlidir. Doğrulama turunda ardışık aralık
+gruplarının BOYUTLARI kesin artmalı; ikisi aynı çıkıyorsa önek sızması vardır.
+
+---
+
 ### Madde kodu SALT RAKAM olmasın
 
 `'11' => [...]` yazdığında PHP anahtarı `int(11)`'e çevirir. Tek cetvelde sorun
@@ -630,12 +647,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 116 üniversite · 4029 eşik · 197 cetvel |
+| Girildi | 117 üniversite · 4079 eşik · 198 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 57 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 56 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
