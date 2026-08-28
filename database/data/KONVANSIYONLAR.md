@@ -674,3 +674,28 @@ Ticaret, TED, Atılım. Bekleyenler `GIRILEMEYEN-YONERGELER.md`'de.
 
 Kalanların çoğu kendi puan tablosunu taşıyor; her biri cetvel çıkarma +
 koşul girme adımını birlikte istiyor.
+
+**Sıradaki iş: Trakya Üniversitesi** (`pdf/17537009772.trakyauniverstesi.pdf`,
+78 sayfa). Girilmedi; tek başına bir batch büyüklüğünde. Yapılan ön çalışma:
+
+- Yönergenin YEDİ eki var ve her biri KENDİ puanlama sistemini taşıyor:
+  EK-1 Sağlık, EK-2 Mühendislik-Fen-Matematik, EK-3 Mimarlık-Planlama-Tasarım,
+  EK-4 Sosyal-Eğitim-Filoloji-İlahiyat-Öğretmen Yetiştirme, EK-5 Devlet
+  Konservatuvarı, EK-6 Güzel Sanatlar, EK-7 Spor Bilimleri.
+- Normalleştirilip hash'lendi: yedisi de FARKLI (dbc98ef, 156aa32, 95a1f60,
+  8721ca9, fb38d3a, 6ea7472, adef9ad). EK-1 ve EK-3 aynı şekli paylaşıyor;
+  EK-2 makaleyi çeyreklik × tür matrisine açıyor; EK-4 yirmi bir kategoriye
+  çıkıyor ve müzik performansında kesirli puan (0,5) kullanıyor; EK-5 ile
+  EK-6 performans tabloları.
+- Toplam yaklaşık 1300 puanlı satır. EK-5'in "MÜZİK BİLİM/SANAT ALANI" ve
+  EK-6'nın performans satırlarının çoğu PORTFÖYE bağlı ve yıl başına
+  tavanlı; §0 uyarınca büyük bölümü girilemeyecek.
+- Ek koşullar da eklere göre ayrışıyor ve fakülte / yüksekokul / meslek
+  yüksekokulu için ayrı ayrı yazılmış; `birim` ayrımı gerekecek.
+- MADDE 4(2): doktor öğretim üyeliği puanları DÖRT YILLIK atama için;
+  MADDE 5(3) daha kısa süreler için x/4 oranı kuruyor.
+- Genel ilkeler (MADDE 4): dil doktor öğretim üyeliğinde 55, doçentlik ve
+  profesörlükte 65 (tamamen yabancı dilde eğitim yapan birimlerde 85).
+
+Girerken EK-1/EK-3/EK-7 tek gövdeden, EK-2, EK-4, EK-5 ve EK-6 ayrı ayrı
+üretilmeli.
