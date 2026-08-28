@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-95 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+96 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -318,6 +318,19 @@ aday metni "Doktora sonrası" derken motor doçentlik sonrasını filtreler.
 
 Dönem sabitleri: `DOKTORA_SONRASI`, `DOCENTLIK_SONRASI`, `SON_ATAMA_SONRASI`.
 
+### Sağlanamaz eşik yazma: TAVANIN ÜSTÜNDEKİ BARAJ
+
+Bir yönergenin gövdesi tablonun kendi tavanından yüksek bir baraj isteyebilir:
+İzmir Kâtip Çelebi EK-C doçentlik metni eğitim öğretim faaliyetlerinden "en az
+25 puan" derken aynı tablonun dipnotu "bu madde kapsamında en fazla 15 puan
+alınabilir" diyor. 25'i yazmak eşiği hiçbir adayın sağlayamayacağı hâle
+getirir — kaynağa sadakat burada aracı kullanılamaz kılar.
+
+Çözüm: barajın ULAŞILABİLİR EN SIKI hâlini (tavanın kendisini) yaz, çelişkiyi
+`notlar` ve `aday_notu`'nda birebir aktar ve adaya "başvurmadan önce
+üniversiteye teyit ettirin" de. Bu, §"Kaynaktaki hatayı DÜZELTME, kaydet"
+kuralının sağlanamazlık istisnasıdır.
+
 ### `beyan` ne zaman
 
 Koşul faaliyet kaydından **hesaplanamıyorsa**. Örnekler: "başlıca araştırma
@@ -577,12 +590,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 95 üniversite · 3245 eşik · 147 cetvel |
+| Girildi | 96 üniversite · 3260 eşik · 153 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 78 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 77 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
