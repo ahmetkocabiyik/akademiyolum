@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-99 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+100 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -354,6 +354,19 @@ sayısını değil).
 Hesaplanabilir bir koşulu beyana çevirme; beyan, adayın kendi onayına bırakılan
 şeydir.
 
+### On altı ek, beş kural: ÖNCE NORMALLEŞTİRİP DİFF'LE
+
+Kastamonu'nun yönergesi on altı akademik birim için ayrı "özel şartlar" eki
+taşıyor; her biri dört kadro × dört koşul. Ekleri boşluk, satır kayması ve
+"Doçentlik sonrası süreçte sonraki süreçte" gibi kopyala-yapıştır artıkları
+normalleştirip karşılaştırınca geriye YALNIZCA BEŞ farklı kural seti kaldı
+(yedi ek birebir aynı, dört ek birebir aynı, iki ek yalnızca "1-8" ile
+"1-9" farkı taşıyor).
+
+On altı eki tek tek yazmak on altı kez hata yapma fırsatıdır. Ekleri önce
+metin olarak hashleyip grupla, sonra grupları diff'le; kalan farkları elle
+oku. Aynı yöntem Kafkas'ın on temel alan tablosunda da yürüdü.
+
 ### Alan başına ayrı tablo ≠ alan başına ayrı cetvel
 
 Bir yönerge her temel alan için ayrı tablo verse bile tabloların çoğu birebir
@@ -603,12 +616,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 99 üniversite · 3360 eşik · 171 cetvel |
+| Girildi | 100 üniversite · 3408 eşik · 172 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 74 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 73 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
