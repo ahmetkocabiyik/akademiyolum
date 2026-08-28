@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-97 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+98 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -150,6 +150,19 @@ birimde bütün kadrolarda geçerliyse cetvelin İKİ VARYANTINI üret (çarpanl
 çarpansız) ve eşikleri birime göre doğru varyanta bağla (Işık). Ham değerleri
 float tutup çarpımdan **sonra bir kez** aşağı yuvarla; önce yuvarlayıp sonra
 çarpmak farklı sonuç verir.
+
+### Puan BLOĞA veriliyorsa satırı hiç yazma, KOŞULU metriğe çevir
+
+Bir bölümün birimi eser değil BLOK olabilir: Kafkas'ın eğitim-öğretim bölümü
+"Dönemlik programlarda DÖRT FARKLI YARIYILDA ders vermiş olmak — 3 puan"
+diyor. 3 puan dört yarıyıla bölünemez (0,75 → 0); satırı 3 puanla yazmak tek
+yarıyıllık dersi dört katına çıkarır.
+
+Çözüm iki adımlı: (1) cetvele o bölümün satırlarını HİÇ yazma — toplam puan
+bölümün tavanı kadar düşük görünür, §0'ın istediği yön; (2) o bölüme bağlı
+KOŞULLARI puandan sayıya çevir, `Kalip::metrik` ile. Kafkas'ta "Eğitim-Öğretim
+Faaliyeti kapsamında en az 2 puan" → `metrik('ders_yariyil', 4)`, "en az 4
+puan" → `metrik('ders_yariyil', 8)` oldu. Çevirinin aritmetiğini `notlar`a yaz.
 
 ### Puanı PORTFÖYE bağlı satır girilmez
 
@@ -590,12 +603,12 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 97 üniversite · 3276 eşik · 160 cetvel |
+| Girildi | 98 üniversite · 3316 eşik · 170 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 76 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 75 (metni okunur; liste için PDF taraması yapıldı) |
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
