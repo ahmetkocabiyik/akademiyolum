@@ -177,6 +177,7 @@ return [
     ['Kadir Has Üniversitesi', 'İstanbul', 'vakif'],
     ['Kocaeli Sağlık ve Teknoloji Üniversitesi', 'Kocaeli', 'vakif'],
     ['Koç Üniversitesi', 'İstanbul', 'vakif'],
+    ['Konya Gıda ve Tarım Üniversitesi', 'Konya', 'vakif'],
     ['KTO Karatay Üniversitesi', 'Konya', 'vakif'],
     ['Maltepe Üniversitesi', 'İstanbul', 'vakif'],
     ['MEF Üniversitesi', 'İstanbul', 'vakif'],
