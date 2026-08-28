@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-130 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+131 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -127,6 +127,17 @@ kullanılabilir. Çarpan hiçbir zaman 1.0'ı aşamaz (motor `min(1.0, …)` uyg
   kuralın DÜŞÜK olanını** yaz. Yalova'da bu, `baslica` rolünün her yazar
   sayısında `sonrasi_pay: 1.0` (yani 1/n) almasına indi. Yüksek olanı seçmek
   çok yazarlı kitabın puanını fazla gösterir.
+- **İstisna — hangi kuralın hangi kategoriyi yönettiğine bak.** Düşük olanı
+  seçmek, o kural yönergenin BÜTÜN EŞİKLERİNİN yazıldığı kategoriyi
+  yönetmiyorsa doğru. Yönetiyorsa sonuç aracı kullanılmaz hâle getirir:
+  Acıbadem'de makale dışındaki kural seçilseydi ("yazar sayısına eşit
+  bölünür") her eşiğin dayandığı MAKALE puanı iki yazarlı bir yayında %90
+  yerine %50'ye düşerdi — adaya gereken makale sayısının neredeyse iki katını
+  gösterirdik. Böyle bir durumda **eşiklerin yazıldığı kategoriyi yöneten
+  kuralı** yaz, ters yöndeki hatayı `kapsam_notu`'na "şu kalemde puanınız
+  olduğundan yüksek görünür" diye açıkça yaz ve hatanın büyüklüğünü söyle.
+  Acıbadem ile Ardahan'da bu yol seçildi; ikisinde de sapma yalnız 2-15
+  puanlık bildiri ve kitap satırlarında kalıyor.
 
 ### Koşulun istediği nitelik cetvelde yoksa AYNA SATIR aç
 
@@ -647,7 +658,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 130 üniversite · 4578 eşik · 248 cetvel |
+| Girildi | 131 üniversite · 4618 eşik · 249 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
