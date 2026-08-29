@@ -14,17 +14,27 @@ Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 |---|---|---|
 | **Gerçekten engelli** | 3 | Balıkesir, Türk Hava Kurumu, Maltepe — puanlama tablosu PDF'te YOK, belge dışarıdan gelmeli |
 | **Okuma engeli çözüldü, giriş bekliyor** | 0 | — |
-| **Kısmen girildi, kalanı korpus içinde hazır** | 1 | İstanbul Üniversitesi (Tablo 2) |
+| **Kısmen girildi, kalanı korpus içinde hazır** | 0 | — |
 | **Kısmen girildi, çizelge dışarıdan gelmeli** | 2 | SANKO, İstanbul Okan |
 
-Yani **dışarıdan belge beklemeden yapılabilecek iş 1 dosya** (İstanbul
-Üniversitesi'nin Tablo 2'si); kalan beş üniversite için ilgili üniversiteden
-puanlama ya da ölçüt tablosunu istemek gerekiyor.
+Yani **dışarıdan belge beklemeden yapılabilecek iş KALMADI**; listedeki beş
+üniversite için ilgili üniversiteden puanlama ya da ölçüt tablosunu istemek
+gerekiyor.
 
-**Bu tablo 29.08.2026'da yeniden sayıldı.** Karamanoğlu, Sağlık Bilimleri ve
-Biruni girilmiş olmalarına rağmen üç hafta "giriş bekliyor" satırında
-durmuşlardı — `pdf-ocr/` kaydıyla aynı hata. Sayıyı değiştirmeden önce
-`database/data/yonerge/` altına bak.
+**Bu tablo 29.08.2026'da iki kez yeniden sayıldı.** İlkinde Karamanoğlu, Sağlık
+Bilimleri ve Biruni girilmiş olmalarına rağmen üç hafta "giriş bekliyor"
+satırında duruyordu; ikincisinde İstanbul Üniversitesi'nin Tablo 2'si AYNI GÜN
+girilmiş olmasına rağmen hâlâ "kalanı korpus içinde hazır" sayılıyordu. Aynı
+hata üç kez tekrarlandı: iş yapıldı, kayıt güncellenmedi. **Sayıyı
+değiştirmeden önce motora sor**, dosya adına ya da bu tabloya değil:
+
+```bash
+php artisan tinker --execute '
+$d = app(App\Services\Scoring\Sart\SartDeposu::class);
+$e = array_filter($d->esikler(), fn($x) => $x["universite"] === "ÜNİVERSİTE ADI");
+$c = []; foreach ($e as $x) { $c[$x["cetvel"] ?? "(yok)"] = true; }
+printf("%d esik, cetvel: %s\n", count($e), implode(",", array_keys($c)));'
+```
 
 **Önce teşhisi doğrula.** Trabzon, Iğdır, İnönü, İTÜ ve İstanbul Üniversitesi
 bu listede "tablo okunmuyor" diye duruyordu; beşinde de tablo aslında
@@ -53,16 +63,15 @@ tarif ve tuzakları aşağıda "Okuma engeli çözüldü" başlığında. Bir do
 **Girildi:** Madde 9-12'nin dört alanı (Sağlık, Fen ve Mühendislik, Sosyal,
 Mimarlık) dört kadroyla birlikte; Tablo 1 ve Tablo 4 cetvele çevrildi.
 
-**Kalan:** Madde 13-15 — Devlet Konservatuvarı'nın Müzik ve Sahne Sanatları,
-Müzikoloji ve Türk Müziği bölümleri. Bu üç alanın koşulları neredeyse tamamen
-TABLO 2'ye bağlı ("Tablo 1'den en az 20, Tablo 2'den en az 80, ikisinden
-toplam 300 puan") ve Tablo 2 konservatuvara özgü seksen satırlık bir müzik,
-sahne ve icra tablosu. Cetvele çevrilmeden koşul yazılamaz.
+**GİRİLDİ** (29.08.2026, commit 2585197): Madde 13-15 (Müzik ve Sahne
+Sanatları, Müzikoloji, Türk Müziği) girildi. Tablo 2'nin 39 satırı cetvele
+çevrildi ve üçüncü bir varyant açıldı: `istanbul-2026-konservatuvar` = Tablo 1 +
+Tablo 2. Üç bölüm `guzel_sanatlar` temel alanını paylaştığı için `birim` ile
+ayrıldı; 12 yeni eşik. Konservatuvarın kadro sütunları ötekilerden farklı:
+Dr. Öğr. Üyesi (İlk Atama) yalnız bir yayın koşulu istiyor, puan barajı yok.
 
-**Devam edilirse:** Tablo 2'yi (raw metnin 730-813. satırları) cetvele çevir,
-`istanbul-2026-konservatuvar` adında üçüncü bir varyant üret (Tablo 1 + Tablo 2
-maddeleri, `TABLO-1` ve `TABLO-2` grupları), sonra Madde 13-15'i o cetvele
-bağla. Koşullar zaten okunmuş durumda ve düz puan barajları.
+Bu kayıt bir gün boyunca bayat kaldı — bkz. yukarıdaki "iki kez yeniden sayıldı"
+notu.
 
 **NOT — bu PDF `-layout` ile okunmuyor:** alan tabloları dört sütunlu ve
 sütunlar arasında tam boş şerit yok, `pdftotext -layout` sütunları birbirine

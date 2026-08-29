@@ -680,10 +680,11 @@ foreach ($e as $x) { $u[$x["universite"]] = true; }
 printf("esik=%d universite=%d cetvel=%d\n", count($e), count($u), count($d->cetveller()));'
 ```
 
-**SIRADAKİ İŞ — KUYRUKTA GİRİLMEMİŞ DOSYA KALMADI.** Geriye dışarıdan belge
-bekleyen beş üniversite (Balıkesir, Türk Hava Kurumu ve Maltepe'nin puan
-tabloları, SANKO ile İstanbul Okan'ın çizelgeleri) ile korpus içinde hazır duran
-TEK bir tamamlama işi kaldı: İstanbul Üniversitesi'nin Tablo 2'si.
+**SIRADAKİ İŞ — KUYRUK BOŞ.** Ne okunamayan ne girilmemiş ne de yarım kalmış
+dosya var. Geriye yalnızca DIŞARIDAN BELGE bekleyen beş üniversite kaldı:
+Balıkesir, Türk Hava Kurumu ve Maltepe'nin puan tabloları (PDF'lerinde hiç yok),
+SANKO ile İstanbul Okan'ın çizelgeleri (ikisi de vekil cetvelle girildi).
+Bunların dışındaki iş, yeni bir yönerge PDF'i gelmesini gerektiriyor.
 
 **KAYNAK SÖZLÜĞÜ GENİŞLETİLEBİLİR — "SÖZLÜKTE YOK" KALICI ENGEL DEĞİL.** Dokuz
 Eylül'ün güzel sanatlar ve konservatuvar alanları üç hafta "Puanlandırma
@@ -798,7 +799,7 @@ ters basılmış sayfalar için `sips -r 180`. `ocrmypdf` bu makinede kırık
 `GIRILEMEYEN-YONERGELER.md`'nin "Okuma engeli çözüldü" başlığında.
 
 **KUYRUKTA OKUNAMAYAN DA GİRİLMEMİŞ DE DOSYA KALMADI.** Dışarıdan belge
-beklemeden yapılacak iş 1 dosya: İstanbul Üniversitesi'nin Tablo 2'si. Sayım dosya
+beklemeden yapılacak iş bitti. Sayım dosya
 adlarını veri dosyalarındaki kaynak atıflarıyla eşleyerek yapıldı; "47
 girilmemiş" satırı uzun süre bayat kalmıştı, son beş üniversite (Çağ,
 İstanbul Arel, İstanbul Gedik, İzmir Kavram MYO, İstanbul Atlas) o yüzden
