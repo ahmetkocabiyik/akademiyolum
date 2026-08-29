@@ -274,6 +274,28 @@ Docblock, dosyanın en değerli parçası. Şunları içermeli:
 Kod, düğümün `madde` alanına yazılır (`madde: 'Madde 8.1/e'`); testler de oraya
 bakar, böylece metin değişince test kırılmaz.
 
+**BU KURAL ARTIK TESTLE KORUNUYOR** — `tests/Feature/AdayMetniTest.php`. Test
+her eşiğin bütün düğüm `aciklama`'larını ve `aday_notu`'sunu tarıyor; MADDE,
+Tablo-N, EK-N, Çizelge-N, A.1, A1.1 desenlerinden biri geçerse kırılıyor ve
+hangi üniversitenin hangi eşiğinde ne bulduğunu yazıyor.
+
+Kural korpusa SONRADAN eklendi ve o an 111 üniversite kirliydi. Test bu yüzden
+bir **borç listesi** (`$BORCLU`) taşıyor: henüz süpürülmemiş üniversiteler
+listede bekliyor, temizlenenler korumaya giriyor. **Liste yalnızca KISALIR.**
+Bir üniversiteyi temizleyince adını sil; ikinci test zaten "listede olup da
+temiz olan" isimleri yakalayıp seni uyarıyor. Yeni bir yönerge girildiğinde
+listede olmadığı için doğrudan korunuyor.
+
+Sızıntının dört yeri var, dördüne de bak:
+
+1. `Kalip::toplam`'ın `liste` argümanı (aşağıdaki paragraf).
+2. Düğüm açıklamaları — `adet`, `beyan`, `puanDan`, `hesaplanamiyor`.
+3. **Düğüm BAŞLIKLARI** — `Kalip::ve`/`veya`'nın ilk argümanı. Bu koşul
+   listesinin en üstünde bir satır olarak görünüyor; Çukurova'da "Dr. Öğr.
+   Üyesi — Tablo 1. Eğitim Bilimleri" diye duruyordu.
+4. **Ortak not değişkenleri** — bütün eşiklere eklenen bir `$NOT_CETVEL` ya da
+   `$BARAJ_NOTU` içindeki tek bir kod onlarca eşiğe yayılıyor.
+
 `Kalip::toplam` dönem verildiğinde dönemi metne kendisi ekliyor ("… en az 100
 puan (doçentlik unvanınızdan sonra)"). Aynı kadroda iki toplam barajı olan
 yönergelerde (GİBTÜ, OMÜ, İstinye) bu şart: yoksa aday iki satırda da aynı
