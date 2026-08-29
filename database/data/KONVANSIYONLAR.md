@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-174 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+175 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -629,6 +629,12 @@ diye böl.
   1.2.h. Diğer fakültelerde a-g gitmesine bakıp 1.2.f'yi profesörlük sanmak,
   doçentliğin hafif varyantını profesörlük eşiği olarak girmek olurdu. Her
   bölüm başlığının KADRO ADINI oku, harfini değil.
+- **Metin katmanı SAYFA SAYFA değişir.** Burdur'un dosyası üç hafta "yönerge
+  değil, YÖK'e gönderilen üst yazı" diye kayıtlıydı: ilk iki sayfa gerçekten
+  üst yazı ve metin katmanı VAR, yönergenin kendisi ise 3-13. sayfalarda ve o
+  sayfalar taranmış. Baştan okunan bir kaç yüz bayt dosyanın tamamı sanılmış.
+  Bir dosyayı "ölçüt metni yok" diye kapatmadan önce sayfa sayfa ölç:
+  `for i in $(seq 1 13); do printf "%s " $i; pdftotext -q -f $i -l $i X.pdf - | wc -c; done`
 - **Kolon çapasını en dolu satırdan al.** Alan sütunlu koşul tablolarında
   (İnönü'nün on bir sütunu) seyrek satırlar yanlış sütuna düşer. Bütün
   hücreleri dolu bir satır bul ("Toplam puan" genelde öyledir), konumlarını
@@ -658,8 +664,8 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 174 üniversite · 6565 eşik · 328 cetvel |
-| Okuma engeli çözüldü, giriş bekliyor | 1 (Burdur) |
+| Girildi | 175 üniversite · 6601 eşik · 329 cetvel |
+| Okuma engeli çözüldü, giriş bekliyor | 0 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |
 
@@ -674,14 +680,16 @@ foreach ($e as $x) { $u[$x["universite"]] = true; }
 printf("esik=%d universite=%d cetvel=%d\n", count($e), count($u), count($d->cetveller()));'
 ```
 
-**SIRADAKİ İŞ — KALAN İKİ DOSYA.** Aşağıdakiler okunabiliyor ve veri girişi
+**SIRADAKİ İŞ — KALAN TEK DOSYA.** Aşağıdaki okunabiliyor ve veri girişi
 bekliyor. OCR çıktıları `pdf-ocr/` altında hazır duruyor (klasör `.gitignore`'da,
 depoya girmiyor); yeniden OCR'lamaya GEREK YOK.
 
 | Sıra | Üniversite | OCR dosyası (`pdf-ocr/`) |
 |---|---|---|
-| 1 | Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.txt` (3-13. sayfalar) |
-| 2 | Dokuz Eylül (Güzel Sanatlar + Konservatuvar) | OCR gerekmiyor; `pdftotext -q -layout` yetiyor |
+| 1 | Dokuz Eylül (Güzel Sanatlar + Konservatuvar) | OCR gerekmiyor; `pdftotext -q -layout` yetiyor |
+
+Bunun yanında İstanbul Üniversitesi'nin Tablo 2'si ile Dokuz Eylül'ün D bölümü
+korpus içinde hazır duruyor; ikisi de kısmen girilmiş dosyaların tamamlanması.
 
 **BEŞ SÜTUNLU KOŞUL TABLOSUNDA SATIR ETİKETİ ALTTA OLUR.** KTÜ'nün on üç
 fakülte eki "Zorunlu/En Fazla | 200 P /--- | …" satırını, ait olduğu bölümün
@@ -780,7 +788,7 @@ ters basılmış sayfalar için `sips -r 180`. `ocrmypdf` bu makinede kırık
 **KUYRUKTA OKUNAMAYAN DOSYA KALMADI** ama girilecek dosya kaldı: yukarıdaki
 dosya artık okunabiliyor ve veri girişi bekliyor; İstanbul Üniversitesi'nin
 Tablo 2'si ile Dokuz Eylül'ün D bölümü de korpus içinde hazır duruyor.
-Dışarıdan belge beklemeden yapılacak iş 3 dosya. Sayım dosya
+Dışarıdan belge beklemeden yapılacak iş 2 dosya. Sayım dosya
 adlarını veri dosyalarındaki kaynak atıflarıyla eşleyerek yapıldı; "47
 girilmemiş" satırı uzun süre bayat kalmıştı, son beş üniversite (Çağ,
 İstanbul Arel, İstanbul Gedik, İzmir Kavram MYO, İstanbul Atlas) o yüzden

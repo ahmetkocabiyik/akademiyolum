@@ -13,13 +13,13 @@ Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 | Durum | Sayı | Kimler |
 |---|---|---|
 | **Gerçekten engelli** | 3 | Balıkesir, Türk Hava Kurumu, Maltepe — puanlama tablosu PDF'te YOK, belge dışarıdan gelmeli |
-| **Okuma engeli çözüldü, giriş bekliyor** | 1 | Burdur MAKÜ |
+| **Okuma engeli çözüldü, giriş bekliyor** | 0 | — |
 | **Kısmen girildi, kalanı korpus içinde hazır** | 2 | İstanbul Üniversitesi (Tablo 2), Dokuz Eylül (Puanlandırma Formu D bölümü) |
 | **Kısmen girildi, çizelge dışarıdan gelmeli** | 2 | SANKO, İstanbul Okan |
 
-Yani **dışarıdan belge beklemeden yapılabilecek iş 3 dosya**; kalan beş
-üniversite için ilgili üniversiteden puanlama ya da ölçüt tablosunu istemek
-gerekiyor.
+Yani **dışarıdan belge beklemeden yapılabilecek iş 2 dosya** (İstanbul
+Üniversitesi'nin Tablo 2'si ve Dokuz Eylül'ün D bölümü); kalan beş üniversite
+için ilgili üniversiteden puanlama ya da ölçüt tablosunu istemek gerekiyor.
 
 **Bu tablo 29.08.2026'da yeniden sayıldı.** Karamanoğlu, Sağlık Bilimleri ve
 Biruni girilmiş olmalarına rağmen üç hafta "giriş bekliyor" satırında
@@ -345,7 +345,7 @@ olduğu için gözden kaçardı. Puan sütununu HER ZAMAN görüntüden doğrula
 | Biruni | `17537097592.biruniuniversitesi.pdf` | 6 | taranmış | OCR temiz (PSM tuzağı burada bulundu) — **GİRİLDİ** |
 | Munzur | `17634002431.Munzur Üniversitesi Kriter.pdf` | 19 | kötü OCR | **gömülü metin katmanı çöp, görüntüden yeniden OCR tertemiz**; puan sütununda sekiz sessiz hata gözle düzeltildi — **GİRİLDİ** |
 | Çankaya | `17537097862.cankayauniversitesi.pdf` | 25 | bozuk font (cmap) | OCR font sorununu tamamen atlıyor — **GİRİLDİ** (puan tablosu yok, kriter sayan yönerge) |
-| Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.pdf` | 13 | "yönerge değil, üst yazı" | **TEŞHİS YANLIŞMIŞ** — bkz. aşağısı |
+| Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.pdf` | 13 | "yönerge değil, üst yazı" | **TEŞHİS YANLIŞMIŞ**, 3-13. sayfalar görüntüden okundu — **GİRİLDİ** |
 
 ### Burdur: teşhis yanlıştı
 
@@ -365,6 +365,17 @@ Bildiriler
 Ders: bir PDF'in ilk iki sayfasında metin katmanı bulunması, kalanında da
 bulunduğu anlamına gelmiyor. Sayfa sayfa `pdftotext -f N -l N ... | wc -c`
 çalıştır.
+
+**GİRİLDİ** (29.08.2026): tarama temiz olduğu için sayfalar 150 dpi'da görüntü
+olarak okundu ve puan sütununun tamamı böyle doğrulandı. Çizelge 65 madde,
+`cetvel/burdur-2016.php`; eşikler `yonerge/burdur.php`, üç kadro × on iki temel
+alan = 36 eşik. Yönergenin kendine özgü yanı, barajın İKİ KATMANLI olması
+(toplam puanın yanında "1-24. maddelerden" ayrı bir eşik) ve taban puan
+tablosunun ALAN AYRIMI YAPMAMASI — tek satır bütün alanları kapsıyor.
+Girilemeyenler: 65. maddenin sportif faaliyetlerinin tamamı, uluslararası
+başvuru kitaplarındaki atıflar, yeniden atanma eşiği ve çizelgenin yıl/eser
+bazlı adet sınırları (motorda böyle bir sınır yok, bu kalemlerde puan yüksek
+çıkabilir).
 
 ### Çankaya: şifre de çözülmüştü, ama OCR daha kısa yol
 
