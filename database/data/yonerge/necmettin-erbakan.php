@@ -52,7 +52,21 @@ $MIMARLIK = ['mimarlik'];
 
 $DIL_NOTU = 'Bütün kadrolarda merkezi bir yabancı dil sınavından en az 70 puan aranıyor.';
 
-$ORTAK_NOTU = 'Tablo-3 iki tür baraj koyuyor: zorunlu kategori barajları (makale, atıf ve '
+/**
+ * Baraj kümelerinin ADAYA gösterilen adları. Yönergenin kendi kodları
+ * (Tablo-3, MADDE 5/ç, A1, K, N) yalnızca düğümlerin `madde` alanında ve
+ * `notlar`da kalır — KONVANSIYONLAR §2, "Aday metinleri: KOD YASAK".
+ */
+$KUME_ADI = [
+    'A1-A2' => 'SCI-Expanded, SSCI, AHCI, ESCI ve Scopus dergilerindeki makale',
+    'A1-A5' => 'Makale',
+    'K' => 'Atıf',
+    'N' => 'Proje',
+    'D' => 'Kitap ve kitap bölümü',
+    'F-G' => 'Sanat ve sahne etkinliği',
+];
+
+$ORTAK_NOTU = 'Yönerge iki tür baraj koyuyor: zorunlu kategori barajları (makale, atıf ve '
     .'alana göre proje, kitap ya da sanat etkinliği) ile tüm kategorilerin toplamı. İkisini '
     .'birden sağlamanız gerekiyor. Proje barajını sağlayamayan adaylar için yönergede iki '
     .'muafiyet yolu var (en az 90 gün yurt dışı araştırma deneyimi ya da eksik proje puanını '
@@ -101,24 +115,25 @@ $EK_AD = ['D' => 'kitap ve kitap bölümü', 'F-G' => 'sanat ve sahne etkinliği
  * @param  array<string, int>  $e
  * @return list<array<string, mixed>>
  */
-$kategoriler = function (array $g, array $e, ?array $donem, string $altGrupKodu, string $madde) use ($EK_AD): array {
+$kategoriler = function (array $g, array $e, ?array $donem, string $altGrupKodu, string $madde) use ($KUME_ADI): array {
     $cocuklar = [];
 
     if ($e['alt'] > 0) {
-        $cocuklar[] = Kalip::toplam($e['alt'], donem: $donem, maddeler: [$altGrupKodu], liste: $madde);
+        $cocuklar[] = Kalip::toplam($e['alt'], donem: $donem, maddeler: [$altGrupKodu], liste: $KUME_ADI[$altGrupKodu]);
     } else {
-        $cocuklar[] = Kalip::adet('A1 ya da A2 kategorisinde en az 1 makale', ['A1-A2'], 1, donem: $donem, madde: $madde);
+        $cocuklar[] = Kalip::adet('SCI-Expanded, SSCI, AHCI, ESCI ya da Scopus dergilerinde en az 1 makale', ['A1-A2'], 1, donem: $donem, madde: $madde);
     }
 
-    $cocuklar[] = Kalip::toplam($e['makale'], donem: $donem, maddeler: ['A1-A5'], liste: $madde);
-    $cocuklar[] = Kalip::toplam($e['atif'], donem: $donem, maddeler: ['K'], liste: $madde);
+    $cocuklar[] = Kalip::toplam($e['makale'], donem: $donem, maddeler: ['A1-A5'], liste: $KUME_ADI['A1-A5']);
+    $cocuklar[] = Kalip::toplam($e['atif'], donem: $donem, maddeler: ['K'], liste: $KUME_ADI['K']);
 
     if ($g['ek'] !== null) {
-        $cocuklar[] = Kalip::toplam($e['ekPuan'], donem: $donem, maddeler: [$g['ek']], liste: $madde.' ('.$EK_AD[$g['ek']].')');
+        $cocuklar[] = Kalip::toplam($e['ekPuan'], donem: $donem, maddeler: [$g['ek']], liste: $KUME_ADI[$g['ek']]);
     }
 
-    $cocuklar[] = Kalip::toplam($e['proje'], donem: $donem, maddeler: ['N'], liste: $madde);
-    $cocuklar[] = Kalip::toplam($e['toplam'], donem: $donem, liste: $madde.' (tüm kategoriler)');
+    $cocuklar[] = Kalip::toplam($e['proje'], donem: $donem, maddeler: ['N'], liste: $KUME_ADI['N']);
+    // Kapsam cetvelin tamamı: `liste` verilmiyor, "Tüm faaliyetlerden" yazıyor.
+    $cocuklar[] = Kalip::toplam($e['toplam'], donem: $donem);
 
     return $cocuklar;
 };
@@ -138,7 +153,7 @@ foreach ($gruplar as $g) {
     $drCocuklar = [
         Kalip::yds(70),
         ...$kategoriler($g, $g['dr'], null, $altGrup, 'Tablo-3'),
-        Kalip::toplam((int) floor($g['dr']['makale'] / 4), donem: Kalip::DOKTORA_SONRASI, maddeler: ['A1-A5'], liste: 'MADDE 7/e'),
+        Kalip::toplam((int) floor($g['dr']['makale'] / 4), donem: Kalip::DOKTORA_SONRASI, maddeler: ['A1-A5'], liste: $KUME_ADI['A1-A5']),
     ];
 
     $esikler[] = array_merge($ortak, [
@@ -149,8 +164,8 @@ foreach ($gruplar as $g) {
             .($ekAd !== null ? $ekAd.' kategorisinden '.$g['dr']['ekPuan'].' puan; ' : '')
             .'projeden '.$g['dr']['proje'].' puan; tüm kategorilerden '.$g['dr']['toplam'].' puan. '
             .'MADDE 7/e: makale barajının %25\'i doktora sonrası.',
-        'aday_notu' => $g['ad'].' alanında doktor öğretim üyeliği için Tablo-3\'ün bütün zorunlu '
-            .'kategori barajlarını ve '.$g['dr']['toplam'].' puanlık genel toplamı birlikte '
+        'aday_notu' => $g['ad'].' alanında doktor öğretim üyeliği için bütün zorunlu kategori '
+            .'barajlarını ve '.$g['dr']['toplam'].' puanlık genel toplamı birlikte '
             .'sağlamanız gerekiyor. Makale barajı '.$g['dr']['makale'].' puan ve bunun en az '
             .'dörtte biri ('.(int) floor($g['dr']['makale'] / 4).' puan) DOKTORA unvanınızı '
             .'aldıktan sonraki çalışmalardan gelmeli. '.$ORTAK_NOTU.' '.$DIL_NOTU,
@@ -163,8 +178,8 @@ foreach ($gruplar as $g) {
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'notlar' => 'MADDE 7/f: ilk atama dört yıllıktır; yeniden atamada en son atanma '
             .'tarihinden itibaren Tablo-3\'ün aynı kategorilerdeki puan şartları aranır.',
-        'aday_notu' => 'İlk atama dört yıllık yapılıyor. Yeniden atamada Tablo-3\'ün doktor '
-            .'öğretim üyeliği için öngördüğü barajların aynısı aranıyor; fark, puanların EN SON '
+        'aday_notu' => 'İlk atama dört yıllık yapılıyor. Yeniden atamada doktor öğretim '
+            .'üyeliği için öngörülen barajların aynısı aranıyor; fark, puanların EN SON '
             .'ATANMA TARİHİNDEN İTİBAREN gerçekleştirilen çalışmalardan hesaplanması. Doçent '
             .'unvanını almış ya da doçent kadrosu koşullarını sağlamış doktor öğretim üyeleri '
             .'atama işlemleri tamamlanıncaya kadar görevlerine devam ediyor. '.$ORTAK_NOTU,
@@ -179,8 +194,8 @@ foreach ($gruplar as $g) {
         'notlar' => 'MADDE 6/ç: Tablo-3\'ün zorunlu kategori puanları doktora ya da uzmanlık '
             .'eğitimini tamamladıktan sonra sağlanmalı. Makale '.$g['doc']['makale'].', atıf '
             .$g['doc']['atif'].', proje '.$g['doc']['proje'].', toplam '.$g['doc']['toplam'].' puan.',
-        'aday_notu' => $g['ad'].' alanında doçent kadrosu için Tablo-3\'ün doçentlik sütunundaki '
-            .'bütün barajlar aranıyor ve hepsi DOKTORA (ya da tıpta, diş hekimliğinde, '
+        'aday_notu' => $g['ad'].' alanında doçent kadrosu için doçentliğe özgü barajların '
+            .'tamamı aranıyor ve hepsi DOKTORA (ya da tıpta, diş hekimliğinde, '
             .'eczacılıkta, veteriner hekimlikte uzmanlık veya sanatta yeterlik) eğitimini '
             .'tamamladıktan sonraki çalışmalardan hesaplanıyor. Genel toplam '
             .$g['doc']['toplam'].' puan. '.$ORTAK_NOTU.' '.$DIL_NOTU,
@@ -197,7 +212,7 @@ foreach ($gruplar as $g) {
     ];
 
     if ($g['altGrup'] !== null) {
-        $profCocuklar[] = Kalip::adet('A1 kategorisindeki yayınlardan en az birinde başlıca yazar olmak', ['A1'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: 'Tablo-3 dipnot 14');
+        $profCocuklar[] = Kalip::adet('SCI-Expanded, SSCI veya AHCI dergilerindeki yayınlarınızdan en az birinde başlıca yazar olmak', ['A1'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: 'Tablo-3 dipnot 14');
     }
 
     $esikler[] = array_merge($ortak, [
@@ -207,13 +222,13 @@ foreach ($gruplar as $g) {
             .'sonra sağlanmalı. Makale '.$g['prof']['makale'].', atıf '.$g['prof']['atif']
             .', proje '.$g['prof']['proje'].', toplam '.$g['prof']['toplam'].' puan.'
             .($g['altGrup'] !== null ? ' Dipnot 14: A1 yayınlarından en az birinde başlıca yazar olmak.' : ''),
-        'aday_notu' => $g['ad'].' alanında profesörlük için Tablo-3\'ün profesörlük sütunundaki '
-            .'barajların tamamı DOÇENT unvanını aldıktan sonraki çalışmalardan sağlanmalı; genel '
+        'aday_notu' => $g['ad'].' alanında profesörlük için profesörlüğe özgü barajların '
+            .'tamamı DOÇENT unvanını aldıktan sonraki çalışmalardan sağlanmalı; genel '
             .'toplam '.$g['prof']['toplam'].' puan. '
             .($g['altGrup'] !== null
-                ? 'Ayrıca A1 kategorisindeki yayınlarınızdan en az birinde başlıca yazar '
-                    .'olmalısınız; kaydınızda bu rolü işaretlemezseniz koşul sağlanmamış '
-                    .'görünür. '
+                ? 'Ayrıca SCI-Expanded, SSCI veya AHCI dergilerindeki yayınlarınızdan en az '
+                    .'birinde başlıca yazar olmalısınız; kaydınızda bu rolü işaretlemezseniz '
+                    .'koşul sağlanmamış görünür. '
                 : '')
             .$ORTAK_NOTU.' '.$DIL_NOTU,
         'sart' => Kalip::ve('Profesörlük koşulları', $profCocuklar),

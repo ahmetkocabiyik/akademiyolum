@@ -78,10 +78,15 @@ $fakulteler = [
 
 $INDEKS_KOSULU = 'Çalışmalarınızdan en az birinin SSCI, SCIE, AHCI, ESCI ya da SCOPUS tarafından taranan dergilerde yayımlanmış olması';
 
-$BARAJ_NOTU = 'Tablo 1 her kadro için iki ayrı baraj koyuyor: "A1, A2 ve A5" sütunu yalnızca '
-    .'uluslararası yayınlar (A1), ulusal yayınlar (A2) ve sanatsal faaliyetler (A5) '
-    .'kalemlerinden hesaplanıyor; "Toplam" sütunu ise atıf, rapor, editörlük, patent, proje, '
-    .'tez danışmanlığı ve ödül puanlarınızı da içeriyor. İkisini birden sağlamanız gerekiyor.';
+/** Adaya gösterilen küme adı; yönergenin "A1, A2 ve A5" sütunu (§2 kod yasağı). */
+$YAYIN_ADI = 'Yayın ve sanatsal faaliyet';
+
+$BARAJ_NOTU = 'Yönerge her kadro için iki ayrı baraj koyuyor. Birincisi yalnızca '
+    .'YAYINLARINIZDAN ve SANATSAL FAALİYETLERİNİZDEN hesaplanıyor: uluslararası ve ulusal '
+    .'makaleler, bildiriler, kitaplar, kitap bölümleri, çeviriler ile sergi, konser ve benzeri '
+    .'etkinlikler. İkincisi ise tüm faaliyetlerinizin toplamı; atıf, rapor, editörlük, patent, '
+    .'proje, tez danışmanlığı ve ödül puanlarınız buraya giriyor. İkisini birden sağlamanız '
+    .'gerekiyor.';
 
 $esikler = [];
 
@@ -96,8 +101,8 @@ foreach ($fakulteler as $f) {
         'notlar' => 'MADDE 6/2: ULAKBİM (TR Dizin) ya da hakemli uluslararası bir dergide en az '
             .'1 makale veya özgün bilimsel kitap bölümü; Tablo 1\'e göre A1-A2-A5 sütunundan '
             .$f['dr'][0].', toplamdan '.$f['dr'][1].' puan.',
-        'aday_notu' => $f['birim'].' için doktor öğretim üyeliğinde A1, A2 ve A5 kalemlerinden '
-            .$f['dr'][0].' puan, tablonun tamamından '.$f['dr'][1].' puan gerekiyor. Ayrıca '
+        'aday_notu' => $f['birim'].' için doktor öğretim üyeliğinde yayın ve sanatsal faaliyet kalemlerinizden '
+            .$f['dr'][0].' puan, tüm faaliyetlerinizden '.$f['dr'][1].' puan gerekiyor. Ayrıca '
             .'doktora eğitiminize başladıktan sonra TR Dizin kapsamındaki ya da hakemli '
             .'uluslararası bir dergide en az bir makale (ya da özgün bilimsel kitap bölümü) '
             .'yayımlamış olmanız şart. Araç bu makalenin doktoranıza başlamadan önce yayımlanıp '
@@ -105,8 +110,8 @@ foreach ($fakulteler as $f) {
         'sart' => Kalip::ve('Doktor öğretim üyeliği koşulları', [
             Kalip::beyan('Doktor unvanını almış ya da sanat dallarının birinde yeterlik kazanmış olmak', 'MADDE 6/1'),
             Kalip::adet('ULAKBİM tarafından taranan hakemli ulusal bir dergide ya da hakemli uluslararası bir dergide en az 1 makale veya özgün bilimsel kitap bölümü', ['DR-MAKALE'], 1, madde: 'MADDE 6/2-a'),
-            Kalip::toplam($f['dr'][0], maddeler: ['A1-A2-A5'], liste: 'Tablo 1'),
-            Kalip::toplam($f['dr'][1], maddeler: ['TOPLAM'], liste: 'Tablo 1'),
+            Kalip::toplam($f['dr'][0], maddeler: ['A1-A2-A5'], liste: $YAYIN_ADI),
+            Kalip::toplam($f['dr'][1], maddeler: ['TOPLAM']),
         ]),
     ]);
 
@@ -118,7 +123,7 @@ foreach ($fakulteler as $f) {
             .'yöneticisinin gerekçeli önerisi ile ilgili yönetim kurulunun olumlu kararı '
             .'aranıyor.',
         'aday_notu' => 'Fatih Sultan Mehmet Vakıf Üniversitesi yeniden atamada puan barajı '
-            .'koymuyor. MADDE 11 yalnızca bölüm başkanı ile birim yöneticisinin gerekçeli '
+            .'koymuyor. Yönerge yalnızca bölüm başkanı ile birim yöneticisinin gerekçeli '
             .'önerisini ve ilgili yönetim kurulunun olumlu kararını arıyor; atamalar en az bir, '
             .'en çok dört yıllık yapılıyor ve süre sonunda görev kendiliğinden sona eriyor.',
         'sart' => Kalip::beyan('Bölüm başkanı ve birim yöneticisinin gerekçeli önerisi ile ilgili yönetim kurulunun olumlu kararını almak', 'MADDE 11/1-a'),
@@ -127,8 +132,8 @@ foreach ($fakulteler as $f) {
     // ══ DOÇENTLİK (MADDE 12) ══
     $docCocuklar = [
         Kalip::beyan('Üniversitelerarası Kuruldan doçentlik unvanını ya da doçentlik denklik belgesini almış olmak', 'MADDE 12/1'),
-        Kalip::toplam($f['doc'][0], donem: Kalip::DOKTORA_SONRASI, maddeler: ['A1-A2-A5'], liste: 'Tablo 1'),
-        Kalip::toplam($f['doc'][1], donem: Kalip::DOKTORA_SONRASI, maddeler: ['TOPLAM'], liste: 'Tablo 1'),
+        Kalip::toplam($f['doc'][0], donem: Kalip::DOKTORA_SONRASI, maddeler: ['A1-A2-A5'], liste: $YAYIN_ADI),
+        Kalip::toplam($f['doc'][1], donem: Kalip::DOKTORA_SONRASI, maddeler: ['TOPLAM']),
     ];
 
     if ($f['indeks']) {
@@ -141,8 +146,8 @@ foreach ($fakulteler as $f) {
         'notlar' => 'MADDE 12: ÜAK doçentlik unvanı ve doktora unvanını aldıktan sonra Tablo '
             .'1\'e göre A1-A2-A5 sütunundan '.$f['doc'][0].', toplamdan '.$f['doc'][1].' puan.'
             .($f['indeks'] ? ' Tablo 1 dipnotu: çalışmalardan en az biri SSCI/SCIE/AHCI/ESCI/SCOPUS taranan dergide yayımlanmış olmalı.' : ''),
-        'aday_notu' => $f['birim'].' için doçent kadrosunda A1, A2 ve A5 kalemlerinden '
-            .$f['doc'][0].' puan, tablonun tamamından '.$f['doc'][1].' puan gerekiyor ve bu '
+        'aday_notu' => $f['birim'].' için doçent kadrosunda yayın ve sanatsal faaliyet kalemlerinizden '
+            .$f['doc'][0].' puan, tüm faaliyetlerinizden '.$f['doc'][1].' puan gerekiyor ve bu '
             .'puanlar DOKTORA unvanını aldıktan sonraki çalışmalardan sayılıyor. '
             .($f['indeks']
                 ? 'Bu fakültede ayrıca çalışmalarınızdan en az birinin SSCI, SCIE, AHCI, ESCI ya '
@@ -161,8 +166,8 @@ foreach ($fakulteler as $f) {
             Kalip::adet('En az 3 yüksek lisans tezi yönetmiş olmak', ['TEZ-YL'], 3, madde: 'MADDE 17/8'),
             Kalip::adet('En az 1 doktora tezi yönetmiş olmak', ['TEZ-DOKTORA'], 1, madde: 'MADDE 17/8'),
         ]),
-        Kalip::toplam($f['prof'][0], donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['A1-A2-A5'], liste: 'Tablo 1'),
-        Kalip::toplam($f['prof'][1], donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TOPLAM'], liste: 'Tablo 1'),
+        Kalip::toplam($f['prof'][0], donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['A1-A2-A5'], liste: $YAYIN_ADI),
+        Kalip::toplam($f['prof'][1], donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TOPLAM']),
     ];
 
     if ($f['indeks']) {
@@ -176,8 +181,8 @@ foreach ($fakulteler as $f) {
             .'eser, en az 3 yüksek lisans veya 1 doktora tezi yönetimi; Tablo 1\'e göre '
             .'A1-A2-A5 sütunundan '.$f['prof'][0].', toplamdan '.$f['prof'][1].' puan.'
             .($f['indeks'] ? ' Tablo 1 dipnotu ayrıca indeksli dergi koşulu getiriyor.' : ''),
-        'aday_notu' => $f['birim'].' için profesörlükte A1, A2 ve A5 kalemlerinden '
-            .$f['prof'][0].' puan, tablonun tamamından '.$f['prof'][1].' puan gerekiyor ve bu '
+        'aday_notu' => $f['birim'].' için profesörlükte yayın ve sanatsal faaliyet kalemlerinizden '
+            .$f['prof'][0].' puan, tüm faaliyetlerinizden '.$f['prof'][1].' puan gerekiyor ve bu '
             .'puanlar DOÇENT unvanını aldıktan sonraki çalışmalardan sayılıyor. '
             .($f['indeks']
                 ? 'Bu fakültede ayrıca çalışmalarınızdan en az birinin SSCI, SCIE, AHCI, ESCI ya '

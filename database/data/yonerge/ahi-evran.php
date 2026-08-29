@@ -98,7 +98,7 @@ $baslicaEser = Kalip::beyan(
 
 /** Tablo 1: Kurumsal Katkı ve Diğer Akademik Faaliyetler. */
 $kurumsalKatki = fn (int $sayi, string $md): array => Kalip::beyan(
-    'Kurumsal Katkı ve Diğer Akademik Faaliyetler tablosundan (Tablo 1) son beş yıl içinde en az '
+    'Kurumsal katkı ve diğer akademik faaliyetler listesinden son beş yıl içinde en az '
     ."{$sayi} maddeyi belgelendirerek karşılamak — karşılayamadığınız her madde için asgari puana "
     .'3 puan ekleniyor',
     $md,
@@ -123,8 +123,8 @@ foreach ([
             $doktora,
             $kurumsalKatki(3, '10(6)'),
             Kalip::puanDan(
-                'Ek-1 puanlama tablosunun 1.a, 1.b, 1.c ve 2.a maddelerinden (uluslararası '
-                .'indeksli ve TR Dizin makaleleriniz) en az 15 puan',
+                'SCIE, SSCI, AHCI, ESCI, Scopus ve TR Dizin dergilerinde yayımlanmış '
+                .'makalelerinizden en az 15 puan',
                 ['M1ABC2A'], 15, $donem, madde: $madde,
             ),
             Kalip::toplam($toplam, $donem),
@@ -136,9 +136,10 @@ foreach ([
         'aday_notu' => ($donem === null
             ? 'Doktoranızı tamamladıktan sonraki bütün çalışmalarınız sayılıyor. '
             : 'Bir önceki atama döneminizden sonraki çalışmalarınız sayılıyor. ')
-            ."Ek-1 tablosundan toplam {$toplam} puan isteniyor; bunun en az 15 puanı 1.a, 1.b, "
-            .'1.c veya 2.a maddelerinden (uluslararası indeksli veya TR Dizin makalesi) gelmek '
-            .'zorunda. Ayrıca Kurumsal Katkı ve Diğer Akademik Faaliyetler tablosundan 3 madde '
+            ."Tüm faaliyetlerinizden toplam {$toplam} puan isteniyor; bunun en az 15 puanı "
+            .'SCIE, SSCI, AHCI, ESCI, Scopus ya da TR Dizin dergilerindeki makalelerinizden '
+            .'gelmek zorunda. Ayrıca kurumsal katkı ve diğer akademik faaliyetler listesinden '
+            .'3 madde '
             .'belgelemeniz gerekiyor; belgeleyemediğiniz her madde için asgari puan 3 puan artar, '
             .'motor bu artışı uygulamıyor.',
         'universite' => $UNIVERSITE,
@@ -155,9 +156,11 @@ foreach ([
         'aday_notu' => ($donem === null
             ? 'Doktora ya da sanatta yeterliğinizi tamamladıktan sonraki çalışmalarınız sayılıyor. '
             : 'Bir önceki atama döneminizden sonraki çalışmalarınız sayılıyor. ')
-            ."Güzel Sanatlar temel alanında Ek-1 ve Ek-2 tablolarından toplam {$toplam} puan "
-            .'isteniyor; bunun en az 15 puanı Ek-1\'in 1.a, 1.b, 1.c veya 2.a maddelerinden '
-            .'gelmek zorunda. Ayrıca Tablo 1\'den 3 madde belgelemeniz gerekiyor.',
+            .'Güzel Sanatlar temel alanında, sanatsal etkinlikleriniz de dahil olmak üzere tüm '
+            ."faaliyetlerinizden toplam {$toplam} puan isteniyor; bunun en az 15 puanı SCIE, "
+            .'SSCI, AHCI, ESCI, Scopus ya da TR Dizin dergilerindeki makalelerinizden gelmek '
+            .'zorunda. Ayrıca kurumsal katkı ve diğer akademik faaliyetler listesinden 3 madde '
+            .'belgelemeniz gerekiyor.',
         'universite' => $UNIVERSITE,
         'kadro' => $kadro,
         'alan' => ['guzel_sanatlar'],
@@ -173,9 +176,9 @@ foreach ([
 
 $esikler[] = [
     'anahtar' => 'ahi-evran-docentlik',
-    'aday_notu' => 'Doçentlik kadrosuna başvurabilmek için Ek-1 puanlama tablosundan en az 120 '
+    'aday_notu' => 'Doçentlik kadrosuna başvurabilmek için tüm faaliyetlerinizden en az 120 '
         .'puan isteniyor. Yönerge bu puan için bir dönem sınırı koymuyor, bütün akademik '
-        .'geçmişiniz sayılıyor. Ayrıca Kurumsal Katkı ve Diğer Akademik Faaliyetler tablosundan '
+        .'geçmişiniz sayılıyor. Ayrıca kurumsal katkı ve diğer akademik faaliyetler listesinden '
         .'son beş yılda 5 madde belgelemeniz gerekiyor; belgeleyemediğiniz her madde için asgari '
         .'puan 3 puan artar, motor bu artışı uygulamıyor.',
     'universite' => $UNIVERSITE,
@@ -193,9 +196,11 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'ahi-evran-gsf-docentlik',
-    'aday_notu' => 'Güzel Sanatlar temel alanında Ek-1 ve Ek-2 tablolarından toplam en az 120 '
-        .'puan isteniyor; bunun en az 40 puanı Ek-1 tablosundan gelmek zorunda. Ayrıca Tablo '
-        .'1\'den son beş yılda 5 madde belgelemeniz gerekiyor.',
+    'aday_notu' => 'Güzel Sanatlar temel alanında, sanatsal etkinlikleriniz de dahil olmak '
+        .'üzere tüm faaliyetlerinizden toplam en az 120 puan isteniyor; bunun en az 40 puanı '
+        .'sanatsal etkinlik dışındaki akademik faaliyetlerinizden gelmek zorunda. Ayrıca '
+        .'kurumsal katkı ve diğer akademik faaliyetler listesinden son beş yılda 5 madde '
+        .'belgelemeniz gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
     'alan' => ['guzel_sanatlar'],
@@ -205,7 +210,7 @@ $esikler[] = [
         $genelSartlar,
         $docentUnvani,
         $kurumsalKatki(5, '11(4)'),
-        Kalip::puanDan('Ek-1 puanlama tablosundan en az 40 puan', ['EK1'], 40, madde: '11(3)'),
+        Kalip::puanDan('Sanatsal etkinlik dışındaki akademik faaliyetlerinizden en az 40 puan', ['EK1'], 40, madde: '11(3)'),
         Kalip::toplam(120),
     ]),
 ];
@@ -220,16 +225,16 @@ $projeSecenegi = Kalip::ve(
     [
         Kalip::veya('Yürütücülük koşulu', [
             Kalip::adet(
-                'Ek-1\'in 7.a veya 7.b başlığındaki en az bir projede yürütücü olmak',
+                'Başarıyla tamamlanmış bir AB Çerçeve Programı ya da uluslararası destekli araştırma projesinde yürütücü olmak',
                 ['P7AB-Y'], 1, donem: $DOCENTLIK, madde: '12(5)-iii',
             ),
             Kalip::adet(
-                'Ya da 7.c başlığındaki en az iki projede yürütücü olmak',
+                'Ya da kamu kurumu veya özel kuruluşla yapılmış, başarıyla tamamlanmış en az iki Ar-Ge projesinde yürütücü olmak',
                 ['P7C-Y'], 2, donem: $DOCENTLIK, madde: '12(5)-iii',
             ),
         ]),
         Kalip::puanDan(
-            'Bilimsel araştırma projesi başlığından (Ek-1 madde 7) en az 40 puan',
+            'Bilimsel araştırma projesi kalemlerinizden en az 40 puan',
             ['B7'], 40, $DOCENTLIK, madde: '12(5)-iii',
         ),
         Kalip::toplam(120, $DOCENTLIK),
@@ -244,12 +249,12 @@ $uakSecenegi = Kalip::hesaplanamiyor(
 );
 
 foreach ([
-    ['p50', ['fen', 'muhendislik', 'saglik'], 'M1A', 50, 'Ek-1\'in 1.a maddesindeki (SCIE veya SSCI) dergilerde yayımlanmış makalelerden'],
-    ['p40-ziraat', ['ziraat'], 'M1A', 40, 'Ek-1\'in 1.a maddesindeki (SCIE veya SSCI) dergilerde yayımlanmış makalelerden'],
-    ['p40', ['egitim', 'spor'], 'M1ABC', 40, 'Ek-1\'in 1.a, 1.b ve 1.c maddelerindeki dergilerde yayımlanmış makalelerden'],
-    ['p30', ['sosyal'], 'M1ABC', 30, 'Ek-1\'in 1.a, 1.b ve 1.c maddelerindeki dergilerde yayımlanmış makalelerden'],
-    ['p25', ['mimarlik'], 'M1ABC', 25, 'Ek-1\'in 1.a, 1.b ve 1.c maddelerindeki dergilerde yayımlanmış makalelerden'],
-    ['p20', ['filoloji', 'hukuk', 'ilahiyat'], 'M1ABC', 20, 'Ek-1\'in 1.a, 1.b ve 1.c maddelerindeki dergilerde yayımlanmış makalelerden'],
+    ['p50', ['fen', 'muhendislik', 'saglik'], 'M1A', 50, 'SCIE veya SSCI dergilerinde yayımlanmış makalelerinizden'],
+    ['p40-ziraat', ['ziraat'], 'M1A', 40, 'SCIE veya SSCI dergilerinde yayımlanmış makalelerinizden'],
+    ['p40', ['egitim', 'spor'], 'M1ABC', 40, 'SCIE, SSCI, AHCI, ESCI ve Scopus dergilerinde yayımlanmış makalelerinizden'],
+    ['p30', ['sosyal'], 'M1ABC', 30, 'SCIE, SSCI, AHCI, ESCI ve Scopus dergilerinde yayımlanmış makalelerinizden'],
+    ['p25', ['mimarlik'], 'M1ABC', 25, 'SCIE, SSCI, AHCI, ESCI ve Scopus dergilerinde yayımlanmış makalelerinizden'],
+    ['p20', ['filoloji', 'hukuk', 'ilahiyat'], 'M1ABC', 20, 'SCIE, SSCI, AHCI, ESCI ve Scopus dergilerinde yayımlanmış makalelerinizden'],
 ] as [$anahtar, $alanlar, $grup, $baraj, $aciklama]) {
     $esikler[] = [
         'anahtar' => "ahi-evran-{$anahtar}-profesorluk",
@@ -257,10 +262,11 @@ foreach ([
             .'sayılıyor. Yönerge üç seçenek sunuyor, birini sağlamanız yeterli: (i) ÜAK doçentlik '
             .'tablosundan 120 puan alıp doçentlik asgari şartlarını bir kez daha sağlamak — motor '
             .'bunu hesaplayamıyor; (ii) '.mb_strtolower(mb_substr($aciklama, 0, 1)).mb_substr($aciklama, 1)
-            ." en az {$baraj} puan alıp toplam 120 puanı tamamlamak; (iii) 7.a veya 7.b'den bir, "
-            .'ya da 7.c\'den iki projede yürütücü olup bilimsel araştırma projesi başlığından 40 '
-            .'puan alarak toplam 120 puanı tamamlamak. Ayrıca Tablo 1\'den son beş yılda 7 madde '
-            .'belgelemeniz gerekiyor.'
+            ." en az {$baraj} puan alıp toplam 120 puanı tamamlamak; (iii) bir AB Çerçeve ya da "
+            .'uluslararası destekli projede, veya iki Ar-Ge projesinde yürütücü olup bilimsel '
+            .'araştırma projesi kalemlerinizden 40 puan alarak toplam 120 puanı tamamlamak. '
+            .'Ayrıca kurumsal katkı ve diğer akademik faaliyetler listesinden son beş yılda 7 '
+            .'madde belgelemeniz gerekiyor.'
             .($anahtar === 'p50'
                 ? ' Fen Bilimleri ve Matematik temel alanında Matematik ve İstatistik bilim '
                 .'alanları için bu baraj 25 puandır; motor bilim alanını ayırt edemediği için '
@@ -277,7 +283,7 @@ foreach ([
             $besYil,
             $baslicaEser,
             $kurumsalKatki(7, '12(4)'),
-            Kalip::veya('Madde 12(5)\'teki üç seçenekli koşuldan biri', [
+            Kalip::veya('Aşağıdaki üç seçenekten biri', [
                 Kalip::ve('Makale barajı ile 120 puanı tamamlamak', [
                     Kalip::puanDan("{$aciklama} en az {$baraj} puan", [$grup], $baraj, $DOCENTLIK, madde: '12(5)-ii'),
                     Kalip::toplam(120, $DOCENTLIK),
@@ -292,11 +298,12 @@ foreach ([
 $esikler[] = [
     'anahtar' => 'ahi-evran-gsf-profesorluk',
     'aday_notu' => 'Doçentlik unvanınızı aldığınız başvuru tarihinden sonraki faaliyetleriniz '
-        .'sayılıyor. Güzel Sanatlar temel alanında Ek-1\'in 1.a, 1.b ve 1.c maddelerindeki '
-        .'dergilerde yayımlanmış makalelerden en az 20 puan almak kaydıyla Ek-1 ve/veya Ek-2 '
-        .'tablolarından toplam 120 puanı tamamlamanız isteniyor. Alternatif olarak ÜAK tablosu '
-        .'(motor hesaplayamıyor) ya da proje yürütücülüğü seçeneği kullanılabilir. Ayrıca Tablo '
-        .'1\'den son beş yılda 7 madde belgelemeniz gerekiyor.',
+        .'sayılıyor. Güzel Sanatlar temel alanında, SCIE, SSCI, AHCI, ESCI ve Scopus '
+        .'dergilerinde yayımlanmış makalelerinizden en az 20 puan almak kaydıyla, sanatsal '
+        .'etkinlikleriniz de dahil tüm faaliyetlerinizden toplam 120 puanı tamamlamanız '
+        .'isteniyor. Alternatif olarak ÜAK tablosu (motor hesaplayamıyor) ya da proje '
+        .'yürütücülüğü seçeneği kullanılabilir. Ayrıca kurumsal katkı ve diğer akademik '
+        .'faaliyetler listesinden son beş yılda 7 madde belgelemeniz gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
     'alan' => ['guzel_sanatlar'],
@@ -308,11 +315,11 @@ $esikler[] = [
         $besYil,
         $baslicaEser,
         $kurumsalKatki(7, '12(4)'),
-        Kalip::veya('Madde 12(5)\'teki üç seçenekli koşuldan biri', [
+        Kalip::veya('Aşağıdaki üç seçenekten biri', [
             Kalip::ve('Makale barajı ile 120 puanı tamamlamak', [
                 Kalip::puanDan(
-                    'Ek-1\'in 1.a, 1.b ve 1.c maddelerindeki dergilerde yayımlanmış '
-                    .'makalelerden en az 20 puan',
+                    'SCIE, SSCI, AHCI, ESCI ve Scopus dergilerinde yayımlanmış '
+                    .'makalelerinizden en az 20 puan',
                     ['M1ABC'], 20, $DOCENTLIK, madde: '12(5)-ii',
                 ),
                 Kalip::toplam(120, $DOCENTLIK),

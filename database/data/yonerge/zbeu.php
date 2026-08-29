@@ -48,14 +48,15 @@ $FEN = ['fen', 'muhendislik', 'saglik', 'ziraat'];
 $SOSYAL = ['egitim', 'mimarlik', 'sosyal', 'spor'];
 $FILOLOJI = ['filoloji', 'guzel_sanatlar', 'ilahiyat', 'hukuk'];
 
-$TAVAN_NOTU = 'Ek-2\'nin tavanlarının çoğu "doçentlik öncesi ve sonrası ayrı ayrı" '
+$TAVAN_NOTU = 'Puan tablosundaki tavanların çoğu "doçentlik öncesi ve sonrası ayrı ayrı" '
     .'uygulanıyor (25+25, 40+40, 50+50 gibi); araç tek tavan tanıdığı için bu kalemlerde '
     .'puanınız olduğundan düşük çıkar.';
 
-$TEZ_NOTU = 'Ek-2\'nin 3. maddesi (lisansüstü tezlerden üretilmiş makaleler) 1. madde ile aynı '
-    .'puanları verdiği ve kayıt yayının tez kökenli olup olmadığını taşımadığı için cetvele '
-    .'yazılmadı. Yönergenin "1(a)\'dan bir, 3(a)\'dan bir adet" kolu bu yüzden '
-    .'değerlendirilemiyor; araç yalnızca diğer kolu (bütün yayınlar 1. maddeden) uyguluyor. '
+$TEZ_NOTU = 'Yönerge lisansüstü tezlerden üretilmiş makaleleri ayrı bir satırda ama aynı '
+    .'puanlarla sayıyor; kayıt bir yayının tez kökenli olup olmadığını tutmadığı için bu satır '
+    .'cetvele yazılmadı. Yönergenin "biri tezden, biri tez dışından" kolu bu yüzden '
+    .'değerlendirilemiyor; araç yalnızca diğer kolu (yayınların tamamı tez dışı sayılarak) '
+    .'uyguluyor. '
     .'Bir tez yayınınız ve bir tez dışı yayınınız varsa koşulu sağlıyor olsanız da burada '
     .'sağlanmamış görünür.';
 
@@ -64,8 +65,8 @@ $projeKosulu = fn (bool $profesor, int $telafiDonem, int $telafiToplam, ?array $
     Kalip::adet('TÜBİTAK, TÜBA, AB, kalkınma ajansı ya da bakanlık destekli en az 1 projede yürütücü olmak', ['PROJE-YURUTUCU'], 1, donem: $donem, madde: $madde),
     $profesor ? null : Kalip::adet('Aynı kurumların desteklediği en az 2 projede araştırmacı olmak', ['PROJE-ARASTIRMACI'], 2, donem: $donem, madde: $madde),
     Kalip::ve('Proje koşulu sağlanmıyorsa toplam puan koşulunun artırılmış hâli', [
-        Kalip::toplam($telafiDonem, donem: $donem, liste: $madde),
-        Kalip::toplam($telafiToplam, liste: $madde),
+        Kalip::toplam($telafiDonem, donem: $donem),
+        Kalip::toplam($telafiToplam),
     ]),
 ])));
 
@@ -115,8 +116,8 @@ foreach ([
             .$g['drAd'].' en az '.$g['drAdet'].' yayın (birinde birinci isim) ve Ek-2\'den en az '
             .$g['drPuan'].' puan.',
         'aday_notu' => $g['ad'].' temel alanlarında doktor öğretim üyeliği için '.$g['drAd'].' en '
-            .'az '.$g['drAdet'].' yayın (en az birinde birinci isim olmak üzere) ve Ek-2 '
-            .'tablosundan '.$g['drPuan'].' puan gerekiyor. Atamalar dört yıllık yapılıyor. '
+            .'az '.$g['drAdet'].' yayın (en az birinde birinci isim olmak üzere) ve tüm '
+            .'faaliyetlerinizden '.$g['drPuan'].' puan gerekiyor. Atamalar dört yıllık yapılıyor. '
             .'Yabancı dil eşiği YDS ya da YÖKDİL\'den 60 puan; bilim alanı bir yabancı dille '
             .'ilgili olanlarda 85 puana çıkıyor, araç 60 üzerinden değerlendiriyor. '
             .$TEZ_NOTU.' '.$TAVAN_NOTU,
@@ -129,7 +130,7 @@ foreach ([
                 Kalip::adet('Birinci isim olduğunuz en az 1 yayın', [$g['drGrup']], 1, yazar: 'ilk', madde: 'Madde 9/1'),
                 Kalip::adet('Sorumlu yazar olduğunuz en az 1 yayın', [$g['drGrup']], 1, yazar: 'baslica', madde: 'Madde 9/1'),
             ]),
-            Kalip::toplam($g['drPuan'], liste: 'Madde 9/1'),
+            Kalip::toplam($g['drPuan']),
         ]),
     ]);
 
@@ -140,7 +141,8 @@ foreach ([
         'notlar' => 'Madde 10: bir önceki atama tarihinden sonra en az '.$g['yenidenAdet']
             .' yayın (birinde en az ikinci isim) ve Ek-2\'den en az 100 puan.',
         'aday_notu' => 'Yeniden atamada yalnızca BİR ÖNCEKİ ATAMA TARİHİNDEN SONRAKİ '
-            .'faaliyetler sayılıyor: en az '.$g['yenidenAdet'].' yayın ve Ek-2\'den 100 puan. '
+            .'faaliyetler sayılıyor: en az '.$g['yenidenAdet'].' yayın ve tüm '
+            .'faaliyetlerinizden 100 puan. '
             .'Yönerge yayınların en az birinde "en az ikinci isim" olmanızı istiyor; araç bu '
             .'koşulu yalnız tek yazar, birinci yazar ve sorumlu yazar rolleriyle '
             .'sorgulayabildiği için ikinci yazar olduğunuz bir yayınla koşulu sağlıyorsanız '
@@ -153,7 +155,7 @@ foreach ([
                 Kalip::adet('Birinci isim olduğunuz en az 1 yayın', [$g['yenidenGrup']], 1, yazar: 'ilk', donem: Kalip::SON_ATAMA_SONRASI, madde: 'Madde 10/1'),
                 Kalip::adet('Sorumlu yazar olduğunuz en az 1 yayın', [$g['yenidenGrup']], 1, yazar: 'baslica', donem: Kalip::SON_ATAMA_SONRASI, madde: 'Madde 10/1'),
             ]),
-            Kalip::toplam(100, donem: Kalip::SON_ATAMA_SONRASI, liste: 'Madde 10/1'),
+            Kalip::toplam(100, donem: Kalip::SON_ATAMA_SONRASI),
         ]),
     ]);
 
@@ -185,8 +187,8 @@ foreach ([
             .' '.$TAVAN_NOTU,
         'sart' => Kalip::ve('Doçentlik koşulları', [
             $docMakale,
-            Kalip::toplam($g['docDonem'], donem: Kalip::DOKTORA_SONRASI, liste: 'Madde 11/1'),
-            Kalip::toplam($g['docToplam'], liste: 'Madde 11/1'),
+            Kalip::toplam($g['docDonem'], donem: Kalip::DOKTORA_SONRASI),
+            Kalip::toplam($g['docToplam']),
             $projeKosulu(false, (int) round($g['docDonem'] * 1.1), (int) round($g['docToplam'] * 1.1), Kalip::DOKTORA_SONRASI, 'Madde 11/2'),
         ]),
     ]);
@@ -221,8 +223,8 @@ foreach ([
             Kalip::beyan('Doçent unvanının alındığı tarihten sonra en az beş yıl süreyle açık bulunan profesörlük kadrosuyla ilgili bilim ya da sanat alanında çalışmış olmak', 'Madde 12/1-a'),
             Kalip::hesaplanamiyor('Doçent unvanı alındıktan sonra YÖK tarafından belirlenen kendi alanınızla ilgili güncel doçentlik asgari ölçütlerini yeniden sağlamış olmak', 'Madde 12/1-b'),
             $profMakale,
-            Kalip::toplam($g['profDonem'], donem: Kalip::DOCENTLIK_SONRASI, liste: 'Madde 12/2'),
-            Kalip::toplam($g['profToplam'], liste: 'Madde 12/2'),
+            Kalip::toplam($g['profDonem'], donem: Kalip::DOCENTLIK_SONRASI),
+            Kalip::toplam($g['profToplam']),
             $projeKosulu(true, (int) round($g['profDonem'] * 1.15), (int) round($g['profToplam'] * 1.15), Kalip::DOCENTLIK_SONRASI, 'Madde 12/3'),
         ]),
     ]);
