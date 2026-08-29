@@ -704,7 +704,7 @@ foreach ($FAKULTELER as $fakulte) {
                 'aday_notu' => 'Bursa Teknik\'in ölçütleri BÖLÜM BÖLÜM değişiyor; burada '
                     ."{$bolumAdi} bölümünün tablosu uygulanıyor. Yayın ölçütlerinden en az "
                     .'birini sağlamanız, ardından proje ölçütünü ya da onun yayın alternatifini '
-                    .'tamamlamanız ve Tablo 2 faaliyetlerinden toplam '.$toplam.' puan almanız '
+                    .'tamamlamanız ve tüm faaliyetlerinizden toplam '.$toplam.' puan almanız '
                     .'gerekiyor. Sayı istenen her ölçütte, o sayının yarısında başlıca yazar '
                     .'olmanız da aranıyor.'
                     .($kad['k'] !== null ? ' Ayrıca on altı "diğer aktivite" ölçütünden en az '.$kad['k'].'\'ini sağlamalısınız.' : '')

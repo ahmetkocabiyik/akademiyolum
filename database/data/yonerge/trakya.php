@@ -99,11 +99,11 @@ $myo = function (string $ek, int $ilkPuan) use ($YDS_DR): array {
         'dr_ogr_uyesi' => Kalip::ve('Meslek yüksekokulu doktor öğretim üyesi ilk atama koşulları', [
             $YDS_DR,
             Kalip::adet('Uluslararası indekslerde taranan hakemli dergilerde yayımlanmış en az iki uluslararası yayın', ['M1'], 2, madde: $ek.' MYO ilk atama 1)'),
-            Kalip::toplam($ilkPuan, maddeler: ['TUM'], liste: $ek),
+            Kalip::toplam($ilkPuan, maddeler: ['TUM']),
         ]),
         'dr_ogr_uyesi_yeniden' => Kalip::ve('Meslek yüksekokulu doktor öğretim üyesi yeniden atama koşulları', [
             $YDS_DR,
-            Kalip::toplam(40, maddeler: ['TUM'], liste: $ek),
+            Kalip::toplam(40, maddeler: ['TUM']),
             Kalip::oran('Puanınızın en az yarısı uluslararası faaliyetlerden gelmeli', ['ULUS'], 0.5, ['TUM'], madde: $ek.' MYO yeniden atama 1)'),
         ]),
     ];
@@ -115,13 +115,13 @@ $myo = function (string $ek, int $ilkPuan) use ($YDS_DR): array {
 $ek1 = [
     'dr_ogr_uyesi' => Kalip::ve('Doktor öğretim üyesi ilk atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(30, maddeler: ['TUM'], liste: 'EK-1'),
-        Kalip::oran('Toplam puanınızın en az üçte biri EK-1\'in 1, 3.a-3.d, 4.a-4.c, 6.a-6.b ve 7.a-7.b1 kalemlerinden gelmeli', ['OZEL'], 1 / 3, ['TUM'], madde: 'EK-1 Fakülte Dr. Öğr. Üyesi ilk atama'),
+        Kalip::toplam(30, maddeler: ['TUM']),
+        Kalip::oran('Toplam puanınızın en az üçte biri makale, kitap, atıf, proje ve uluslararası bildiri kalemlerinizden gelmeli', ['OZEL'], 1 / 3, ['TUM'], madde: 'EK-1 Fakülte Dr. Öğr. Üyesi ilk atama'),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(40, maddeler: ['TUM'], liste: 'EK-1'),
-        Kalip::oran('Toplam puanınızın en az dörtte biri EK-1\'in 1, 3.a-3.d, 4.a-4.c, 6.a-6.b ve 7.a-7.b1 kalemlerinden gelmeli', ['OZEL'], 0.25, ['TUM'], madde: 'EK-1 Fakülte Dr. Öğr. Üyesi yeniden atama'),
+        Kalip::toplam(40, maddeler: ['TUM']),
+        Kalip::oran('Toplam puanınızın en az dörtte biri makale, kitap, atıf, proje ve uluslararası bildiri kalemlerinizden gelmeli', ['OZEL'], 0.25, ['TUM'], madde: 'EK-1 Fakülte Dr. Öğr. Üyesi yeniden atama'),
     ]),
     'docentlik' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
         ...$GENEL_DOCENT,
@@ -130,8 +130,8 @@ $ek1 = [
     'profesorluk' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
         ...$GENEL_PROF,
         Kalip::adet('Birinci danışman olarak en az iki lisansüstü ya da uzmanlık tezi yönetmiş olmak', ['5a', '5b'], 2, madde: 'EK-1 Fakülte Profesör 1)'),
-        Kalip::toplam(300, maddeler: ['TUM'], liste: 'EK-1'),
-        Kalip::oran('Toplam puanınızın en az yarısı EK-1\'in 1, 3.a-3.d, 4.a-4.c, 6.a-6.b ve 7.a-7.b1 kalemlerinden gelmeli', ['OZEL'], 0.5, ['TUM'], madde: 'EK-1 Fakülte Profesör 2)'),
+        Kalip::toplam(300, maddeler: ['TUM']),
+        Kalip::oran('Toplam puanınızın en az yarısı makale, kitap, atıf, proje ve uluslararası bildiri kalemlerinizden gelmeli', ['OZEL'], 0.5, ['TUM'], madde: 'EK-1 Fakülte Profesör 2)'),
         Kalip::adet('Doçentlik sonrası SCIE ya da SSCI kapsamında en az iki makale', ['M1A'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-1 Fakülte Profesör 3)'),
         Kalip::adet('Bu makalelerden birinde birinci isim olmak', ['M1A'], 1, yazar: 'ilk', donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-1 Fakülte Profesör 3)'),
         Kalip::adet('Bu makalelerden birinde başlıca yazar olmak', ['M1A'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-1 Fakülte Profesör 3)'),
@@ -148,7 +148,7 @@ $ek2 = [
         $YDS_DR,
         Kalip::adet('Doktora tezinizden üretilmiş en az bir araştırma makalesi ya da tam metin araştırma bildirisi', ['TEZY'], 1, madde: 'EK-2 Fakülte Dr. Öğr. Üyesi ilk atama 1)'),
         Kalip::adet('Alanınızda SCIE ya da SSCI kapsamında en az iki makale daha', ['M1A'], 2, madde: 'EK-2 Fakülte Dr. Öğr. Üyesi ilk atama 2.a)'),
-        Kalip::toplam(60, maddeler: ['TUM'], liste: 'EK-2'),
+        Kalip::toplam(60, maddeler: ['TUM']),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
@@ -159,7 +159,7 @@ $ek2 = [
             telafi: Kalip::adet('Tescil edilmiş uluslararası ya da ulusal patentiniz varsa iki makale koşulu aranmaz', ['9a', '9b'], 1, madde: 'EK-2 Fakülte Dr. Öğr. Üyesi yeniden atama 1.b)'),
             madde: 'EK-2 Fakülte Dr. Öğr. Üyesi yeniden atama 1)',
         ),
-        Kalip::toplam(60, maddeler: ['TUM'], liste: 'EK-2'),
+        Kalip::toplam(60, maddeler: ['TUM']),
     ]),
     'docentlik' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
         ...$GENEL_DOCENT,
@@ -169,7 +169,7 @@ $ek2 = [
         ]),
         Kalip::adet('SCIE ya da SSCI kapsamında en az beş araştırma makalesi', ['M1A'], 5, madde: 'EK-2 Fakülte Doçent 2)'),
         Kalip::adet('Bu makalelerden en az birinde başlıca yazar olmak', ['M1A'], 1, yazar: 'baslica', madde: 'EK-2 Fakülte Doçent 2)'),
-        Kalip::toplam(160, maddeler: ['TUM'], liste: 'EK-2'),
+        Kalip::toplam(160, maddeler: ['TUM']),
     ]),
     'profesorluk' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
         ...$GENEL_PROF,
@@ -177,7 +177,7 @@ $ek2 = [
         Kalip::adet('Doçentlik sonrası başlayan, 6.a-6.f kategorilerinde en az bir projede koordinatör ya da yürütücü olmak', $PROJE_YURUTUCU_2, 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-2 Fakülte Profesör 2)'),
         Kalip::adet('Doçentlik sonrası SCIE ya da SSCI kapsamında en az üç araştırma makalesi', ['M1A'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-2 Fakülte Profesör 3)'),
         Kalip::adet('Bu makalelerden en az birinde başlıca yazar olmak', ['M1A'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-2 Fakülte Profesör 3)'),
-        Kalip::toplam(160, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'EK-2'),
+        Kalip::toplam(160, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
     ]),
 ];
 
@@ -190,23 +190,23 @@ $ek3 = [
         Kalip::adet('1 ve 2. maddelerden (lisansüstü tezlerden üretilenler dâhil) en az iki yayın', ['M12'], 2, madde: 'EK-3 Fakülte Dr. Öğr. Üyesi ilk atama 1)'),
         Kalip::adet('Bu yayınlardan en az biri 1.a, 1.b ya da 1.c kategorisinde olmalı', ['M1ABC'], 1, madde: 'EK-3 Fakülte Dr. Öğr. Üyesi ilk atama 1)'),
         Kalip::adet('1 ve 2. maddelerden en az bir çalışmada başlıca yazar olmak', ['M12'], 1, yazar: 'baslica', madde: 'EK-3 Fakülte Dr. Öğr. Üyesi ilk atama 2)'),
-        Kalip::toplam(50, maddeler: ['TUM'], liste: 'EK-3'),
+        Kalip::toplam(50, maddeler: ['TUM']),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
         Kalip::adet('1.a-1.d ve 2.a kategorilerinde en az iki yayın', ['M1ABCD2A'], 2, madde: 'EK-3 Fakülte Dr. Öğr. Üyesi yeniden atama 1)'),
-        Kalip::toplam(50, maddeler: ['TUM'], liste: 'EK-3'),
+        Kalip::toplam(50, maddeler: ['TUM']),
     ]),
     'docentlik' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
         ...$GENEL_DOCENT,
         Kalip::adet('Alanınızda tamamlanmış en az bir lisansüstü tezde birinci danışman olmak', ['5a', '5b'], 1, madde: 'EK-3 Fakülte Doçent 1)'),
         Kalip::adet('1.a-1.d ve 2.a kapsamındaki dergilerde en az beş araştırma makalesi', ['M1ABCD2A'], 5, madde: 'EK-3 Fakülte Doçent 2)'),
-        Kalip::toplam(200, maddeler: ['TUM'], liste: 'EK-3'),
+        Kalip::toplam(200, maddeler: ['TUM']),
     ]),
     'profesorluk' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
         ...$GENEL_PROF,
         Kalip::adet('Doçentlik sonrası 1.a, 1.b, 1.c ya da 2.a kategorilerinde başlıca yazar olduğunuz en az iki yayın', ['M1ABC', '2a'], 2, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-3 Fakülte Profesör 1)'),
-        Kalip::toplam(200, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'EK-3'),
+        Kalip::toplam(200, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
         Kalip::adet('Doçentlik sonrası alanınızda en az iki lisansüstü tez danışmanlığı', ['5a', '5b'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-3 Fakülte Profesör 3)'),
         Kalip::adet('6. maddede tamamlanmış ya da devam eden en az bir araştırma projesinde yürütücü olmak', ['6a-y', '6b-y', '6c-y', '6d-y'], 1, madde: 'EK-3 Fakülte Profesör 4)'),
     ]),
@@ -228,9 +228,9 @@ $DOCENT_4_ORTAK = [
 ];
 
 $PROF_4_ORTAK = [
-    Kalip::toplam(150, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'EK-4'),
-    Kalip::toplam(100, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['K1248'], liste: 'EK-4\'ün 1, 2, 4, 8, 15 ve 16. kategorileri'),
-    Kalip::toplam(60, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['ULUS'], liste: 'EK-4 uluslararası yayın ve performans'),
+    Kalip::toplam(150, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
+    Kalip::toplam(100, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['K1248'], liste: 'Makale, kitap, bildiri ve sanatsal etkinlik'),
+    Kalip::toplam(60, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['ULUS'], liste: 'Uluslararası makale, kitap ve bildiri'),
     Kalip::puanDan('5. kategori kapsamında en az 15 puan atıf almış olmak', ['ATIF'], 15, madde: 'EK-4 Fakülte Profesör 3)'),
     Kalip::adet('7.a-7.d kategorilerinde tamamlanmış ya da devam eden bir bilimsel araştırma projesinde yürütücü veya araştırmacı olarak yer almış olmak', ['PROJE7'], 1, madde: 'EK-4 Fakülte Profesör 4)'),
     Kalip::metrik('Doçentlik sonrası en az dört yarıyıl lisans düzeyinde en az iki farklı ders ya da en az iki yarıyıl lisansüstü düzeyde en az bir ders vermiş olmak', 'ders_yariyil', 4, Kalip::DOCENTLIK_SONRASI),
@@ -239,14 +239,14 @@ $PROF_4_ORTAK = [
 $ek4 = [
     'dr_ogr_uyesi' => Kalip::ve('Doktor öğretim üyesi ilk atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(50, maddeler: ['TUM'], liste: 'EK-4'),
-        Kalip::toplam(30, maddeler: ['OZEL'], liste: 'EK-4\'ün 1.a-1.d, 2.a, 2.b, 4 ve 8. kategorileri'),
+        Kalip::toplam(50, maddeler: ['TUM']),
+        Kalip::toplam(30, maddeler: ['OZEL'], liste: 'Makale, kitap ve bildiri'),
         Kalip::adet('Lisansüstü tezinizden üretilmiş en az bir yayın (3. kategori)', ['TEZY'], 1, madde: 'EK-4 Fakülte Dr. Öğr. Üyesi ilk atama 1.b)'),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(50, maddeler: ['TUM'], liste: 'EK-4'),
-        Kalip::oran('Toplam puanınızın en az yarısı EK-4\'ün 1.a-1.d, 2.a, 2.b, 4 ve 8. kategorilerinden gelmeli', ['OZEL'], 0.5, ['TUM'], madde: 'EK-4 Fakülte Dr. Öğr. Üyesi yeniden atama 1)'),
+        Kalip::toplam(50, maddeler: ['TUM']),
+        Kalip::oran('Toplam puanınızın en az yarısı makale, kitap ve bildiri kalemlerinizden gelmeli', ['OZEL'], 0.5, ['TUM'], madde: 'EK-4 Fakülte Dr. Öğr. Üyesi yeniden atama 1)'),
     ]),
     'docentlik' => Kalip::ve('Doçent kadrosuna atanma koşulları', [...$GENEL_DOCENT, ...$DOCENT_4_ORTAK]),
     'profesorluk' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
@@ -266,15 +266,15 @@ $ek4 = [
 $ek4Enstitu = [
     'dr_ogr_uyesi' => Kalip::ve('Araştırma enstitüsü doktor öğretim üyesi ilk atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(60, maddeler: ['TUM'], liste: 'EK-4'),
-        Kalip::toplam(30, maddeler: ['OZELENS'], liste: 'EK-4\'ün 1.a-1.d, 4.a-4.c, 4.e, 8.a ve 8.b kategorileri'),
+        Kalip::toplam(60, maddeler: ['TUM']),
+        Kalip::toplam(30, maddeler: ['OZELENS'], liste: 'Makale, kitap ve bildiri'),
         Kalip::adet('Bu yayınların en az ikisi 1.a, 1.b, 1.c, 4.a ya da 4.b\'de tanımlı, tek ya da ilk isimli olmalı', ['M1ABC', '4a', '4b'], 2, yazar: 'ilk', madde: 'EK-4 Araştırma Enstitüleri ilk atama 1.a)'),
         Kalip::adet('Lisansüstü tezinizden üretilmiş en az bir yayın (3. kategori)', ['TEZY'], 1, madde: 'EK-4 Araştırma Enstitüleri ilk atama 1.b)'),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Araştırma enstitüsü doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(75, maddeler: ['TUM'], liste: 'EK-4'),
-        Kalip::oran('Toplam puanınızın en az yarısı EK-4\'ün 1.a-1.d, 4.a-4.c, 4.e, 8.a ve 8.b kategorilerinden gelmeli', ['OZELENS'], 0.5, ['TUM'], madde: 'EK-4 Araştırma Enstitüleri yeniden atama 1)'),
+        Kalip::toplam(75, maddeler: ['TUM']),
+        Kalip::oran('Toplam puanınızın en az yarısı makale, kitap ve bildiri kalemlerinizden gelmeli', ['OZELENS'], 0.5, ['TUM'], madde: 'EK-4 Araştırma Enstitüleri yeniden atama 1)'),
         Kalip::adet('Bu yayınların en az biri 1.a, 1.b, 1.c, 4.a ya da 4.b\'de tanımlı, tek ya da ilk isimli olmalı', ['M1ABC', '4a', '4b'], 1, yazar: 'ilk', madde: 'EK-4 Araştırma Enstitüleri yeniden atama 1)'),
     ]),
     'docentlik' => Kalip::ve('Araştırma enstitüsü doçent kadrosuna atanma koşulları', [
@@ -295,23 +295,23 @@ $ek4Enstitu = [
 $ek5 = [
     'dr_ogr_uyesi' => Kalip::ve('Doktor öğretim üyesi ilk atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(15, maddeler: ['K1234'], liste: 'EK-5\'in 1, 2, 3 ve 4. kategorileri'),
-        Kalip::toplam(100, maddeler: ['TUM'], liste: 'EK-5'),
+        Kalip::toplam(15, maddeler: ['K1234'], liste: 'Makale ve kitap'),
+        Kalip::toplam(100, maddeler: ['TUM']),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(15, maddeler: ['K1234'], liste: 'EK-5\'in 1, 2, 3 ve 4. kategorileri'),
-        Kalip::toplam(60, maddeler: ['TUM'], liste: 'EK-5'),
+        Kalip::toplam(15, maddeler: ['K1234'], liste: 'Makale ve kitap'),
+        Kalip::toplam(60, maddeler: ['TUM']),
     ]),
     'docentlik' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
         ...$GENEL_DOCENT,
-        Kalip::toplam(30, donem: Kalip::DOKTORA_SONRASI, maddeler: ['K12'], liste: 'EK-5\'in 1 ve 2. kategorileri'),
-        Kalip::toplam(200, donem: Kalip::DOKTORA_SONRASI, maddeler: ['TUM'], liste: 'EK-5'),
+        Kalip::toplam(30, donem: Kalip::DOKTORA_SONRASI, maddeler: ['K12'], liste: 'Makale'),
+        Kalip::toplam(200, donem: Kalip::DOKTORA_SONRASI, maddeler: ['TUM']),
     ]),
     'profesorluk' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
         ...$GENEL_PROF,
-        Kalip::toplam(30, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['K12'], liste: 'EK-5\'in 1 ve 2. kategorileri'),
-        Kalip::toplam(300, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'EK-5'),
+        Kalip::toplam(30, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['K12'], liste: 'Makale'),
+        Kalip::toplam(300, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
     ]),
 ];
 
@@ -321,22 +321,22 @@ $ek5 = [
 $ek6 = [
     'dr_ogr_uyesi' => Kalip::ve('Doktor öğretim üyesi ilk atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(150, maddeler: ['TUM'], liste: 'EK-6\'nın 1-17. kategorileri'),
+        Kalip::toplam(150, maddeler: ['TUM']),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(10, maddeler: ['K1-5'], liste: 'EK-6\'nın 1-5. kategorileri'),
-        Kalip::toplam(150, maddeler: ['TUM'], liste: 'EK-6'),
+        Kalip::toplam(10, maddeler: ['K1-5'], liste: 'Makale, kitap ve atıf'),
+        Kalip::toplam(150, maddeler: ['TUM']),
     ]),
     'docentlik' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
         ...$GENEL_DOCENT,
-        Kalip::toplam(200, donem: Kalip::DOKTORA_SONRASI, maddeler: ['TUM'], liste: 'EK-6\'nın 1-17. kategorileri'),
+        Kalip::toplam(200, donem: Kalip::DOKTORA_SONRASI, maddeler: ['TUM']),
     ]),
     'profesorluk' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
         ...$GENEL_PROF,
         Kalip::adet('Doçentlik sonrası 1 ve/veya 2. kategorilerden en az iki yayın', ['K12'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-6 Fakülte Profesör 1)'),
-        Kalip::toplam(150, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['K1-16'], liste: 'EK-6\'nın 1-16. kategorileri'),
-        Kalip::toplam(300, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'EK-6'),
+        Kalip::toplam(150, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['K1-16']),
+        Kalip::toplam(300, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
     ]),
 ];
 
@@ -347,17 +347,17 @@ $ek7 = [
     'dr_ogr_uyesi' => Kalip::ve('Doktor öğretim üyesi ilk atama koşulları', [
         $YDS_DR,
         Kalip::adet('Doktora tezinizden üretilmiş en az bir yayın (3. kategori)', ['TEZY'], 1, madde: 'EK-7 Dr. Öğr. Üyesi ilk atama 1)'),
-        Kalip::toplam(15, maddeler: ['K1234816'], liste: 'EK-7\'nin 1, 2, 3, 4, 8 ve 16. kategorileri'),
-        Kalip::toplam(30, maddeler: ['TUM'], liste: 'EK-7'),
+        Kalip::toplam(15, maddeler: ['K1234816'], liste: 'Makale, kitap ve bildiri'),
+        Kalip::toplam(30, maddeler: ['TUM']),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
-        Kalip::toplam(20, maddeler: ['K1234678'], liste: 'EK-7\'nin 1, 2, 3, 4, 6, 7, 8 ve 16. kategorileri'),
-        Kalip::toplam(40, maddeler: ['TUM'], liste: 'EK-7'),
+        Kalip::toplam(20, maddeler: ['K1234678'], liste: 'Makale, kitap, bildiri, proje ve tez danışmanlığı'),
+        Kalip::toplam(40, maddeler: ['TUM']),
     ]),
     'docentlik' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
         ...$GENEL_DOCENT,
-        Kalip::toplam(120, maddeler: ['TUM'], liste: 'EK-7\'nin 1-18. kategorileri'),
+        Kalip::toplam(120, maddeler: ['TUM']),
     ]),
     'profesorluk' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
         ...$GENEL_PROF,
@@ -366,8 +366,8 @@ $ek7 = [
         Kalip::adet('Doçentlik sonrası 2. kategoriden en az bir yayın', ['K2'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-7 Profesör 2)'),
         Kalip::adet('Doçentlik sonrası 4. kategoriden en az bir yayın', ['K4'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-7 Profesör 2)'),
         Kalip::adet('Doçentlik sonrası 8. kategoriden en az iki bildiri', ['K8'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-7 Profesör 2)'),
-        Kalip::toplam(50, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['K1234816'], liste: 'EK-7\'nin 1, 2, 4 ve 8. kategorileri'),
-        Kalip::toplam(150, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'EK-7'),
+        Kalip::toplam(50, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['K1234816'], liste: 'Makale, kitap ve bildiri'),
+        Kalip::toplam(150, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
     ]),
 ];
 
@@ -391,17 +391,17 @@ $ORTAK_ADAY = 'Yeniden atamalarda yönergenin aradığı "bir önceki atamada ku
     .'sınırları eşiğe bağlı olduğu için uygulanmıyor; atıf, ödül, editörlük, jüri ve idari görev '
     .'kalemlerinde puanınız olduğundan yüksek görünür.';
 
-$MYO_ADAY = 'Meslek yüksekokulu doktor öğretim üyeliğinde fakülte kriterleri değil bu ekin '
-    .'meslek yüksekokulu koşulları aranıyor. Doçentlik ve profesörlükte ise fakülte kriterleri '
+$MYO_ADAY = 'Meslek yüksekokulu doktor öğretim üyeliğinde fakülte kriterleri değil, temel '
+    .'alanınızın meslek yüksekokulu koşulları aranıyor. Doçentlik ve profesörlükte ise fakülte kriterleri '
     .'geçerli; o kadrolar için "'.$BIRIM_FAKULTE.'" seçeneğiyle aynı eşik kullanılıyor. '
     .'Disiplinlerarası ve hibrit anabilim dallarına ilişkin Özel Durumlar 5.2 maddesi girilmedi.';
 
 /** @var array<string, array<string, array{0: string, 1: string}>> */
 $METIN = [
     'ek1' => [
-        'dr_ogr_uyesi' => ['EK-1 Fakülte Dr. Öğr. Üyesi ilk atama: toplam en az 30 puan; puanın en az 1/3\'ü 1, 3.a-3.d, 4.a-4.c, 6.a-6.b ve 7.a-7.b1 kalemlerinden.', 'Sağlık Bilimleri temel alanında ilk atama için EK-1\'den 30 puan yetiyor ama puanın en az üçte biri makale, kitap, atıf, AB-TÜBİTAK-uluslararası proje ve bildiri kalemlerinden gelmeli; idari görev, editörlük ve ödülle bu payı dolduramazsınız.'],
+        'dr_ogr_uyesi' => ['EK-1 Fakülte Dr. Öğr. Üyesi ilk atama: toplam en az 30 puan; puanın en az 1/3\'ü 1, 3.a-3.d, 4.a-4.c, 6.a-6.b ve 7.a-7.b1 kalemlerinden.', 'Sağlık Bilimleri temel alanında ilk atama için 30 puan yetiyor ama puanın en az üçte biri makale, kitap, atıf, AB-TÜBİTAK-uluslararası proje ve bildiri kalemlerinden gelmeli; idari görev, editörlük ve ödülle bu payı dolduramazsınız.'],
         'dr_ogr_uyesi_yeniden' => ['EK-1 Fakülte Dr. Öğr. Üyesi yeniden atama: toplam en az 40 puan; puanın en az 1/4\'ü aynı kalemlerden.', 'Yeniden atamada baraj 40 puana çıkıyor, aynı kalemlerden gelmesi gereken pay ise dörtte bire iniyor.'],
-        'docentlik' => ['EK-1 Fakülte Doçent: birinci danışman olarak en az bir lisansüstü ya da uzmanlık tezi. Puan barajı yok.', 'EK-1 doçentlikte puan barajı koymuyor; tek alan koşulu birinci danışman olarak yönettiğiniz bir lisansüstü ya da uzmanlık tezi. Devam eden tezler kayıtta tutulmadığı için araç tamamlanmış tez arıyor.'],
+        'docentlik' => ['EK-1 Fakülte Doçent: birinci danışman olarak en az bir lisansüstü ya da uzmanlık tezi. Puan barajı yok.', 'Yönerge bu alanda doçentlikte puan barajı koymuyor; tek alan koşulu birinci danışman olarak yönettiğiniz bir lisansüstü ya da uzmanlık tezi. Devam eden tezler kayıtta tutulmadığı için araç tamamlanmış tez arıyor.'],
         'profesorluk' => ['EK-1 Fakülte Profesör: iki lisansüstü/uzmanlık tezi (en az biri tamamlanmış); toplam 300 puan, en az yarısı 1, 3.a-3.d, 4.a-4.c, 6.a-6.b ve 7.a-7.b1 kalemlerinden; doçentlik sonrası SCIE/SSCI\'de iki makale (birinde birinci isim, diğerinde başlıca yazar).', 'Profesörlükte üç ayrı katman var: 300 puanlık toplam, bunun yarısının belirli kalemlerden gelmesi ve doçentlik sonrası iki SCIE/SSCI makalesi. Yönerge "en az biri tamamlanmış" iki tez istiyor; araç devam eden tezi göremediği için iki tamamlanmış tez arıyor, koşulu gerçeğinden sıkı uyguluyor.'],
     ],
     'ek2' => [
@@ -435,7 +435,7 @@ $METIN = [
         'profesorluk' => ['EK-6 Fakülte Profesör: doçentlik sonrası 1 ve/veya 2. kategorilerden en az iki yayın; 1-16. kategorilerden en az 150 puan; toplam 300 puan.', 'Profesörlükte sanatsal etkinlik puanı tek başına yetmiyor: 150 puanın 17. madde dışındaki kategorilerden, iki yayının da makale kategorilerinden gelmesi gerekiyor.'],
     ],
     'ek7' => [
-        'dr_ogr_uyesi' => ['EK-7 Dr. Öğr. Üyesi ilk atama: doktora tezinden üretilmiş en az bir yayın; 1, 2, 3, 4, 8 ve 16. kategorilerden en az 15 puan; toplam 30 puan.', 'EK-7\'nin 16. maddesi (sportif performans) kayıtta karşılığı olmadığı için hiç girilmedi: sporcu yetiştirme, millî takım görevi, antrenörlük ve hakemlik belgeleri sayılmıyor. Bu maddeye dayanan puanınız varsa gerçek puanınız buradakinden yüksektir.'],
+        'dr_ogr_uyesi' => ['EK-7 Dr. Öğr. Üyesi ilk atama: doktora tezinden üretilmiş en az bir yayın; 1, 2, 3, 4, 8 ve 16. kategorilerden en az 15 puan; toplam 30 puan.', 'Sportif performans kalemleri kayıtta karşılığı olmadığı için hiç girilmedi: sporcu yetiştirme, millî takım görevi, antrenörlük ve hakemlik belgeleri sayılmıyor. Bu maddeye dayanan puanınız varsa gerçek puanınız buradakinden yüksektir.'],
         'dr_ogr_uyesi_yeniden' => ['EK-7 Dr. Öğr. Üyesi yeniden atama: 1, 2, 3, 4, 6, 7, 8 ve 16. kategorilerden en az 20 puan; toplam 40 puan.', '16. madde (sportif performans) girilmediği için kategori payı yalnız yayın, tez danışmanlığı, proje ve bildiri kalemlerinden doluyor.'],
         'docentlik' => ['EK-7 Doçent: 1-18. kategorilerden toplam en az 120 puan.', 'Doçentlikte tek koşul 120 puan; yönerge burada dönem kısıtı koymuyor. 16. madde girilmediği için sportif performansınız bu toplama girmiyor.'],
         'profesorluk' => ['EK-7 Profesör: doçentlik sonrası birinci danışman olarak tamamlanmış bir lisansüstü tez; doçentlik sonrası 1, 2 ve 4. kategorilerden birer, 8. kategoriden iki yayın ve bu kalemlerden en az 50 puan; toplam 150 puan.', 'Profesörlükte kategori dağılımı zorunlu: uluslararası makale, ulusal makale, kitap ve bildiri kalemlerinin her birinden ayrı ayrı yayın isteniyor.'],

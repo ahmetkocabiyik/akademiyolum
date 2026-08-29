@@ -92,7 +92,7 @@ $esikleriUret = function (
         'cetvel' => $CETVEL,
     ];
 
-    $notu = fn (string $kadro): string => "EK 3 ({$ad}) — {$kadro}. Yönergenin bütün "
+    $notu = fn (string $kadro): string => "{$ad} — {$kadro}. Yönergenin bütün "
         .'birimlerinde toplam puan aynı: doktor öğretim üyeliğine ilk atanmada 100, yeniden '
         .'atanmada son bir yıl için 50, doçentlikte 200, profesörlükte 300 puan. Değişen tek '
         .'şey ek koşulların hangi bölümden ne kadar puan istediği.';
