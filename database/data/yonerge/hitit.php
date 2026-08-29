@@ -74,27 +74,55 @@ $gruplar = [
         'dr' => 'A1-5', 'dp' => 'A1-5', 'proje' => 'G1-12', 'sanat' => true],
 ];
 
-$KATEGORI_ADI = [
+/**
+ * Zorunlu makale koşulunun dergi kümesi. İKİ AYRI METİN: adaya gösterilen
+ * `$DERGI` kod taşımaz (KONVANSIYONLAR §2, "Aday metinleri: KOD YASAK"),
+ * `$DERGI_KOD` yalnızca `notlar` alanında kullanılır ve yönergenin kendi
+ * kategori numaralarını korur.
+ */
+$DERGI = [
+    'A1-3' => 'SCIE-SSCI, AHCI ve Scopus dergilerinde',
+    'A1-4' => 'SCIE-SSCI, AHCI, Scopus ve ESCI dergilerinde',
+    'A1-5' => 'SCIE-SSCI, AHCI, Scopus, ESCI ve TR Dizin dergilerinde',
+];
+
+$DERGI_KOD = [
     'A1-3' => 'SCIE-SSCI, AHCI ve SCOPUS (A.1-3)',
     'A1-4' => 'SCIE-SSCI, AHCI, SCOPUS ve ESCI (A.1-4)',
     'A1-5' => 'SCIE-SSCI, AHCI, SCOPUS, ESCI ve TR Dizin (A.1-5)',
 ];
 
-$CEKIRDEK_NOTU = 'Yönergenin "çekirdek" kategorileri A.1-7 (makaleler), B.1-4 ve B.7-8 '
-    .'(kitaplar ve kitap bölümleri) ile N (üniversitenin kapasitesine katkı). Bildiri, atıf, '
-    .'editörlük, hakemlik, proje, sanatsal etkinlik, tez danışmanlığı ve ödül puanlarınız '
-    .'genel toplama giriyor ama bu alt baraja SAYILMIYOR.';
+/** Proje koşulunun kapsadığı fon türleri; kategori numarası yerine fon adları. */
+$PROJE = [
+    'G1-10' => 'Ufuk Avrupa, TÜBİTAK, TÜSEB, uluslararası Ar-Ge ya da üniversite-sanayi '
+        .'iş birliği projesi',
+    'G1-12' => 'Ufuk Avrupa, TÜBİTAK, TÜSEB, uluslararası Ar-Ge, üniversite-sanayi iş birliği '
+        .'ya da TÜBİTAK 2209/2242 öğrenci projesi',
+];
 
-$SANAT_NOTU = 'Güzel Sanatlar alanından başvuruyorsanız ek olarak Tablo-7\'nin H bölümünde '
-    .'(sanatsal, mimari, tasarım ve uygulamaya yönelik etkinlikler) en az üç etkinliğiniz '
-    .'olmalı.';
+/** Alt barajların saydığı çekirdek küme; `liste` argümanına giren kısa ad. */
+$CEKIRDEK_ADI = 'Makale, bilimsel kitap ve idari görev';
+
+$CEKIRDEK_NOTU = 'Bu alt barajın saydığı kalemler şunlar: SCIE-SSCI, AHCI, Scopus, ESCI ve '
+    .'TR Dizin dergilerindeki makaleleriniz; bilimsel kitaplarınız ve kitap bölümleriniz (ders '
+    .'kitabı ile ansiklopedi maddesi hariç); bir de üniversitedeki idari görevleriniz (dekanlık, '
+    .'bölüm başkanlığı, kurul üyeliği). Bildiri, atıf, editörlük, hakemlik, proje, sanatsal '
+    .'etkinlik, tez danışmanlığı, patent ve ödül puanlarınız genel toplama giriyor ama bu alt '
+    .'baraja SAYILMIYOR.';
+
+$SANAT_NOTU = 'Güzel Sanatlar alanından başvuruyorsanız ek olarak en az üç sanatsal '
+    .'etkinliğiniz olmalı: sergi, bienal, gösteri, dinleti, konser, festival ya da yarışma '
+    .'katılımı, yayımlanmış ses veya görüntü kaydı, kamuya ya da özel sektöre uygulanmış '
+    .'tasarım projesi.';
 
 /** Madde 9/ç ve 12/ç: proje koşulu ve ona bağlı muafiyet yolları. */
-$projeKosulu = fn (string $projeGrubu, int $yil, string $madde): array => Kalip::veya('Proje koşulu', [
-    Kalip::adet('İlgili proje kategorilerinden en az 1 kabul edilmiş ya da sonuçlanmış proje', [$projeGrubu], 1, donem: Kalip::sonYil($yil), madde: $madde),
-    Kalip::adet('Son üç yılda K.6-9 kategorilerinde (patent, çeşit tescili, endüstriyel tasarım, faydalı model) en az 1 faaliyet', ['K6-9'], 1, donem: Kalip::sonYil(3), madde: $madde),
-    Kalip::adet('Son üç yılda SCIE-SSCI Q1 diliminde ya da AHCI kapsamında en az 1 makale', ['Q1-AHCI'], 1, donem: Kalip::sonYil(3), madde: $madde),
-    Kalip::adet('Son üç yılda SCIE-SSCI Q2 diliminde en az 2 makale', ['Q2'], 2, donem: Kalip::sonYil(3), madde: $madde),
+$YIL_ADI = [4 => 'dört', 5 => 'beş'];
+
+$projeKosulu = fn (string $projeGrubu, int $yil, string $madde): array => Kalip::veya('Proje koşulu ya da onun yerine geçen üç yoldan biri', [
+    Kalip::adet("Son {$YIL_ADI[$yil]} yılda kabul edilmiş ya da sonuçlanmış en az 1 proje ({$PROJE[$projeGrubu]})", [$projeGrubu], 1, donem: Kalip::sonYil($yil), madde: $madde),
+    Kalip::adet('Ya da son üç yılda en az 1 patent, ürün tescili, endüstriyel tasarım belgesi veya faydalı model', ['K6-9'], 1, donem: Kalip::sonYil(3), madde: $madde),
+    Kalip::adet('Ya da son üç yılda SCIE-SSCI Q1 diliminde veya AHCI kapsamında en az 1 makale', ['Q1-AHCI'], 1, donem: Kalip::sonYil(3), madde: $madde),
+    Kalip::adet('Ya da son üç yılda SCIE-SSCI Q2 diliminde en az 2 makale', ['Q2'], 2, donem: Kalip::sonYil(3), madde: $madde),
 ]);
 
 $esikler = [];
@@ -105,42 +133,42 @@ foreach ($gruplar as $g) {
     // ══ DOKTOR ÖĞRETİM ÜYELİĞİNE İLK ATANMA (MADDE 5/1) ══
     $drCocuklar = [
         Kalip::beyan('Doktora ya da tıpta, diş hekimliğinde, eczacılıkta veya veteriner hekimlikte uzmanlık veya sanatta yeterlik eğitimini tamamlamış olmak', 'MADDE 5/1-a'),
-        Kalip::adet('Bilim alanınızla ilgili, Tablo-2\'de belirtilen kategorilerde yayımlanmış en az 3 makale', [$g['dr']], 3, madde: 'MADDE 5/1-b'),
-        Kalip::toplam(24, maddeler: [$g['dr']], liste: 'MADDE 5/1-b'),
-        Kalip::toplam(40, maddeler: ['TOPLAM-DR'], liste: 'MADDE 5/1-c'),
-        Kalip::toplam(35, maddeler: ['CEKIRDEK'], liste: 'MADDE 5/1-c'),
+        Kalip::adet("Bilim alanınızla ilgili, {$DERGI[$g['dr']]} yayımlanmış en az 3 makale", [$g['dr']], 3, madde: 'MADDE 5/1-b'),
+        Kalip::toplam(24, maddeler: [$g['dr']], liste: "{$DERGI[$g['dr']]} yayımlanmış makale"),
+        Kalip::toplam(40, maddeler: ['TOPLAM-DR']),
+        Kalip::toplam(35, maddeler: ['CEKIRDEK'], liste: $CEKIRDEK_ADI),
     ];
 
     if ($g['sanat']) {
-        $drCocuklar[] = Kalip::adet('Tablo-7\'nin H kategorisinde (sanatsal, mimari, tasarım ve uygulamaya yönelik etkinlikler) en az 3 etkinlik', ['H'], 3, madde: 'MADDE 5/1-ç');
+        $drCocuklar[] = Kalip::adet('Sergi, konser, festival, yayımlanmış kayıt ya da uygulanmış tasarım projesi türünden en az 3 sanatsal etkinlik', ['H'], 3, madde: 'MADDE 5/1-ç');
     }
 
     $esikler[] = array_merge($ortak, [
         'anahtar' => 'hitit-'.$g['anahtar'].'-dr',
         'kadro' => 'dr_ogr_uyesi',
-        'notlar' => 'MADDE 5/1: '.$KATEGORI_ADI[$g['dr']].' kategorilerinde en az 3 makale ve bu '
+        'notlar' => 'MADDE 5/1: '.$DERGI_KOD[$g['dr']].' kategorilerinde en az 3 makale ve bu '
             .'kategorilerden 24 puan; Tablo-7\'den toplam 40 puan ve bunun en az 35 puanı '
             .'A.1-7, B.1-4, B.7-8 ve N kategorilerinden.'
             .($g['sanat'] ? ' MADDE 5/1-ç: H kategorisinde en az 3 etkinlik.' : ''),
         'aday_notu' => $g['ad'].' alanında doktor öğretim üyeliği için zorunlu makale koşulu '
-            .$KATEGORI_ADI[$g['dr']].' kategorilerinde en az üç makale ve bu kategorilerden 24 '
-            .'puan. Ayrıca Tablo-7\'nin tamamından 40 puan gerekiyor ve bunun 35\'i çekirdek '
-            .'kategorilerden gelmeli; yani bildiri, atıf ve hakemlik puanlarınızla '
-            .'kapatabileceğiniz pay yalnızca 5 puan. '.$CEKIRDEK_NOTU
+            .$DERGI[$g['dr']].' en az üç makale ve yine bu dergilerdeki makalelerinizden 24 '
+            .'puan. Ayrıca tüm faaliyetlerinizden 40 puan gerekiyor ve bunun 35\'i makale, '
+            .'bilimsel kitap ve idari görev kalemlerinden gelmeli; yani bildiri, atıf ve '
+            .'hakemlik puanlarınızla kapatabileceğiniz pay yalnızca 5 puan. '.$CEKIRDEK_NOTU
             .($g['sanat'] ? ' '.$SANAT_NOTU : '')
-            .' Eğitime katkı (J) bölümü yalnızca doktor öğretim üyeliği başvurularında '
-            .'sayılıyor ve en fazla 5 puan getiriyor.',
+            .' Verdiğiniz dersler yalnızca doktor öğretim üyeliği başvurularında sayılıyor ve '
+            .'en fazla 5 puan getiriyor.',
         'sart' => Kalip::ve('Doktor öğretim üyeliğine ilk atanma koşulları', $drCocuklar),
     ]);
 
     // ══ DOKTOR ÖĞRETİM ÜYELİĞİNE YENİDEN ATANMA (MADDE 5/2) ══
     $yenidenCocuklar = [
-        Kalip::hesaplanamiyor('Önceki atanma tarihinden yeniden atanma başvurusuna kadar Tablo-7\'de en az iki farklı ana kategoriden elde edilen puanın yıl bazında en az 10 olması', 'MADDE 5/2-a'),
-        Kalip::hesaplanamiyor('Bu toplam puanın en az yarısının A.1-5, B.1-4 veya B.7-8 kategorilerinden elde edilmiş olması', 'MADDE 5/2-a'),
+        Kalip::hesaplanamiyor('Önceki atanma tarihinizden bu yana, en az iki farklı faaliyet türünden topladığınız puanın yıl başına en az 10 olması', 'MADDE 5/2-a'),
+        Kalip::hesaplanamiyor('Bu toplamın en az yarısının dizinli dergilerdeki makalelerinizden ya da bilimsel kitap ve kitap bölümlerinizden gelmiş olması', 'MADDE 5/2-a'),
     ];
 
     if ($g['sanat']) {
-        $yenidenCocuklar[] = Kalip::hesaplanamiyor('Tablo-7\'nin H kategorisinde her yıl için en az bir etkinliğin bulunması', 'MADDE 5/2-c');
+        $yenidenCocuklar[] = Kalip::hesaplanamiyor('Her yıl için en az bir sanatsal etkinliğinizin bulunması', 'MADDE 5/2-c');
     }
 
     $esikler[] = array_merge($ortak, [
@@ -152,43 +180,44 @@ foreach ($gruplar as $g) {
         'aday_notu' => 'Hitit\'te yeniden atanma koşulları araç tarafından HESAPLANAMIYOR. '
             .'Yönerge, önceki atanma tarihinizden bu yana topladığınız puanın YIL BAŞINA en az '
             .'10 olmasını, bu puanın en az iki farklı ana kategoriden gelmesini ve toplamın en '
-            .'az yarısının A.1-5 (makaleler), B.1-4 ya da B.7-8 (kitaplar) kategorilerinden '
-            .'sağlanmasını istiyor. Araç iki atama arasındaki yıl sayısını bilmiyor, kategori '
-            .'çeşitliliğini ve oransal payı da hesaplayamıyor. Kendi hesabınızı Tablo-7\'yi '
-            .'doldurarak yapmanız gerekiyor.'
-            .($g['sanat'] ? ' Güzel Sanatlar alanında ayrıca her yıl için en az bir H kategorisi etkinliği aranıyor.' : ''),
+            .'az yarısının dizinli dergilerdeki makalelerinizden ya da bilimsel kitap ve kitap '
+            .'bölümlerinizden sağlanmasını istiyor. Araç iki atama arasındaki yıl sayısını '
+            .'bilmiyor, faaliyet çeşitliliğini ve oransal payı da hesaplayamıyor. Kendi '
+            .'hesabınızı üniversitenin puan çizelgesini doldurarak yapmanız gerekiyor.'
+            .($g['sanat'] ? ' Güzel Sanatlar alanında ayrıca her yıl için en az bir sanatsal etkinlik aranıyor.' : ''),
         'sart' => Kalip::ve('Yeniden atanma koşulları', $yenidenCocuklar),
     ]);
 
     // ══ DOÇENTLİK (MADDE 9) ══
     $docCocuklar = [
         Kalip::beyan('Üniversitelerarası Kurul Başkanlığı tarafından verilen doçentlik belgesini almış olmak', 'MADDE 9/1-a'),
-        Kalip::beyan('Doktora sonrası yayınlarınızdan birini, Tablo-8\'deki bilim alanı tanımına uygun nitelikte "Başlıca Araştırma Eseri" olarak göstermek', 'MADDE 9/1-b'),
-        Kalip::adet('Son dört yılda, lisansüstü tezlerinizden üretilmemiş, Tablo-3\'te belirtilen kategorilerde en az 3 makale', [$g['dp']], 3, donem: Kalip::sonYil(4), madde: 'MADDE 9/1-c'),
-        Kalip::toplam(24, donem: Kalip::sonYil(4), maddeler: [$g['dp']], liste: 'MADDE 9/1-c'),
+        Kalip::beyan('Doktora sonrası yayınlarınızdan birini, kendi bilim alanınızın tanımına uygun nitelikte "Başlıca Araştırma Eseri" olarak göstermek', 'MADDE 9/1-b'),
+        Kalip::adet("Son dört yılda, lisansüstü tezlerinizden üretilmemiş, {$DERGI[$g['dp']]} yayımlanmış en az 3 makale", [$g['dp']], 3, donem: Kalip::sonYil(4), madde: 'MADDE 9/1-c'),
+        Kalip::toplam(24, donem: Kalip::sonYil(4), maddeler: [$g['dp']], liste: "{$DERGI[$g['dp']]} yayımlanmış makale"),
         $projeKosulu($g['proje'], 4, 'MADDE 9/1-ç'),
-        Kalip::toplam(120, maddeler: ['TOPLAM'], liste: 'MADDE 9/1-d'),
-        Kalip::toplam(70, donem: Kalip::DOKTORA_SONRASI, maddeler: ['CEKIRDEK'], liste: 'MADDE 9/1-d'),
+        Kalip::toplam(120, maddeler: ['TOPLAM'], liste: 'Verdiğiniz dersler dışındaki tüm faaliyet'),
+        Kalip::toplam(70, donem: Kalip::DOKTORA_SONRASI, maddeler: ['CEKIRDEK'], liste: $CEKIRDEK_ADI),
     ];
 
     if ($g['sanat']) {
-        $docCocuklar[] = Kalip::adet('Tablo-7\'nin H kategorisinde en az 3 etkinlik', ['H'], 3, madde: 'MADDE 9/1-e');
+        $docCocuklar[] = Kalip::adet('Sergi, konser, festival, yayımlanmış kayıt ya da uygulanmış tasarım projesi türünden en az 3 sanatsal etkinlik', ['H'], 3, madde: 'MADDE 9/1-e');
     }
 
     $esikler[] = array_merge($ortak, [
         'anahtar' => 'hitit-'.$g['anahtar'].'-docentlik',
         'kadro' => 'docentlik',
         'notlar' => 'MADDE 9: ÜAK doçentlik belgesi, başlıca araştırma eseri, son dört yılda '
-            .$KATEGORI_ADI[$g['dp']].' kategorilerinde 3 makale ve 24 puan, son dört yılda bir '
+            .$DERGI_KOD[$g['dp']].' kategorilerinde 3 makale ve 24 puan, son dört yılda bir '
             .'proje faaliyeti (muafiyet yollarıyla), toplam 120 puan ve doktora sonrası '
             .'çekirdek kategorilerden 70 puan.'
             .($g['sanat'] ? ' MADDE 9/1-e: H kategorisinde en az 3 etkinlik.' : ''),
         'aday_notu' => 'Doçentlikte makale koşulunun penceresi dar: SON DÖRT YILDA '
-            .$KATEGORI_ADI[$g['dp']].' kategorilerinde en az üç makale ve bu kategorilerden 24 '
+            .$DERGI[$g['dp']].' en az üç makale ve yine bu dergilerdeki makalelerinizden 24 '
             .'puan. Proje koşulunu ya son dört yılda bir kabul edilmiş projeyle ya da üç '
-            .'muafiyet yolundan biriyle sağlayabilirsiniz: son üç yılda bir patent (K.6-9), bir '
-            .'Q1 ya da AHCI makalesi, veya iki Q2 makalesi. Toplam 120 puanın en az 70\'i '
-            .'DOKTORA SONRASI çekirdek kategorilerden gelmeli. '.$CEKIRDEK_NOTU
+            .'muafiyet yolundan biriyle sağlayabilirsiniz: son üç yılda bir patent ya da tescil, '
+            .'bir Q1 ya da AHCI makalesi, veya iki Q2 makalesi. Toplam 120 puanın en az 70\'i '
+            .'DOKTORA SONRASI makale, bilimsel kitap ve idari görev kalemlerinden gelmeli. '
+            .$CEKIRDEK_NOTU
             .($g['sanat'] ? ' '.$SANAT_NOTU : ''),
         'sart' => Kalip::ve('Doçentlik koşulları', $docCocuklar),
     ]);
@@ -196,31 +225,31 @@ foreach ($gruplar as $g) {
     // ══ PROFESÖRLÜK (MADDE 12) ══
     $profCocuklar = [
         Kalip::beyan('Doçent unvanını aldıktan sonra en az beş yıl süreyle kendi bilim alanında ulusal ya da uluslararası düzeyde yayın ve faaliyette bulunmuş olmak', 'MADDE 12/1-a'),
-        Kalip::beyan('Doçentlik sonrası yayınlarınızdan birini, Tablo-8\'deki bilim alanı tanımına uygun nitelikte "Başlıca Araştırma Eseri" olarak göstermek', 'MADDE 12/1-b'),
-        Kalip::adet('Son beş yılda, lisansüstü tezlerinizden üretilmemiş, Tablo-5\'te belirtilen kategorilerde en az 4 makale', [$g['dp']], 4, donem: Kalip::sonYil(5), madde: 'MADDE 12/1-c'),
-        Kalip::toplam(30, donem: Kalip::sonYil(5), maddeler: [$g['dp']], liste: 'MADDE 12/1-c'),
+        Kalip::beyan('Doçentlik sonrası yayınlarınızdan birini, kendi bilim alanınızın tanımına uygun nitelikte "Başlıca Araştırma Eseri" olarak göstermek', 'MADDE 12/1-b'),
+        Kalip::adet("Son beş yılda, lisansüstü tezlerinizden üretilmemiş, {$DERGI[$g['dp']]} yayımlanmış en az 4 makale", [$g['dp']], 4, donem: Kalip::sonYil(5), madde: 'MADDE 12/1-c'),
+        Kalip::toplam(30, donem: Kalip::sonYil(5), maddeler: [$g['dp']], liste: "{$DERGI[$g['dp']]} yayımlanmış makale"),
         $projeKosulu($g['proje'], 5, 'MADDE 12/1-ç'),
-        Kalip::toplam(200, maddeler: ['TOPLAM'], liste: 'MADDE 12/1-d'),
-        Kalip::toplam(80, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TOPLAM'], liste: 'MADDE 12/1-d'),
-        Kalip::toplam(50, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['CEKIRDEK'], liste: 'MADDE 12/1-d'),
+        Kalip::toplam(200, maddeler: ['TOPLAM'], liste: 'Verdiğiniz dersler dışındaki tüm faaliyet'),
+        Kalip::toplam(80, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TOPLAM'], liste: 'Verdiğiniz dersler dışındaki tüm faaliyet'),
+        Kalip::toplam(50, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['CEKIRDEK'], liste: $CEKIRDEK_ADI),
     ];
 
     if ($g['sanat']) {
-        $profCocuklar[] = Kalip::adet('Doçent unvanını aldıktan sonra Tablo-7\'nin H kategorisinde en az 3 etkinlik', ['H'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: 'MADDE 12/1-e');
+        $profCocuklar[] = Kalip::adet('Doçent unvanını aldıktan sonra sergi, konser, festival, yayımlanmış kayıt ya da uygulanmış tasarım projesi türünden en az 3 sanatsal etkinlik', ['H'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: 'MADDE 12/1-e');
     }
 
     $esikler[] = array_merge($ortak, [
         'anahtar' => 'hitit-'.$g['anahtar'].'-profesorluk',
         'kadro' => 'profesorluk',
         'notlar' => 'MADDE 12: doçentlik sonrası beş yıl, başlıca araştırma eseri, son beş yılda '
-            .$KATEGORI_ADI[$g['dp']].' kategorilerinde 4 makale ve 30 puan, son beş yılda bir '
+            .$DERGI_KOD[$g['dp']].' kategorilerinde 4 makale ve 30 puan, son beş yılda bir '
             .'proje faaliyeti (muafiyet yollarıyla), toplam 200 puan; bunun 80\'i doçentlik '
             .'sonrası ve 50\'si doçentlik sonrası çekirdek kategorilerden.'
             .($g['sanat'] ? ' MADDE 12/1-e: doçentlik sonrası H kategorisinde en az 3 etkinlik.' : ''),
-        'aday_notu' => 'Profesörlükte üç katmanlı bir puan yapısı var: Tablo-7\'den toplam 200 '
-            .'puan, bunun en az 80\'i doçent unvanını aldıktan sonra ve o 80\'in en az 50\'si '
-            .'çekirdek kategorilerden. Makale koşulu SON BEŞ YILA bakıyor: '
-            .$KATEGORI_ADI[$g['dp']].' kategorilerinde en az dört makale ve 30 puan. Proje '
+        'aday_notu' => 'Profesörlükte üç katmanlı bir puan yapısı var: tüm faaliyetlerinizden '
+            .'toplam 200 puan, bunun en az 80\'i doçent unvanını aldıktan sonra ve o 80\'in en '
+            .'az 50\'si makale, bilimsel kitap ve idari görev kalemlerinden. Makale koşulu SON '
+            .'BEŞ YILA bakıyor: '.$DERGI[$g['dp']].' en az dört makale ve 30 puan. Proje '
             .'koşulunda doçentlikteki muafiyet yolları burada da geçerli. '.$CEKIRDEK_NOTU
             .($g['sanat'] ? ' '.$SANAT_NOTU.' Profesörlükte bu etkinliklerin doçentlik sonrasında yapılmış olması gerekiyor.' : ''),
         'sart' => Kalip::ve('Profesörlük koşulları', $profCocuklar),
