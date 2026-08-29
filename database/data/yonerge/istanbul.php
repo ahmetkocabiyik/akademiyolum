@@ -240,7 +240,8 @@ foreach ($alanlar as $a) {
         'anahtar' => "{$a['anahtar']}-dr-yeniden",
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'aday_notu' => 'Görev süresi uzatmada yalnızca son üç yılda ürettiğiniz çalışmalar '
-            ."sayılıyor: {$yeniAdet} makale ve Tablo 1'den 80 puan. Puan hesabında eğitim-öğretim, "
+            ."sayılıyor: {$yeniAdet} makale ve akademik faaliyet kalemlerinizden 80 puan. "
+            .'Puan hesabında eğitim-öğretim, '.''
             .'idari görev ve h-indeksi kalemleri sayılmıyor.',
         'notlar' => "{$madde} + Tablo 1. Dr. Öğr. Üyesi (Yeniden Atama) sütunu: son 3 yılda "
             ."{$yeniAdet} makale, Tablo 1'den 80 puan (Tablo 1 Madde 8, 10 ve 11 hariç).",
@@ -318,11 +319,11 @@ foreach ($alanlar as $a) {
 // ══════════════════════════════════════════════════════════════════════
 $SON_DORT_YIL = Kalip::sonYil(4);
 
-$KONSERVATUVAR_NOTU = 'Tablo 2\'nin uluslararası ve ulusal satırları kayıtta ayrı etiketi '
+$KONSERVATUVAR_NOTU = 'Sanatsal etkinliklerin uluslararası ve ulusal satırları kayıtta ayrı etiketi '
     .'olmayan kalemlerde (orkestra ve koro üyeliği, audio yayın, radyo-televizyon katılımı, '
     .'yarışma derecesi) tek satıra düştü ve ulusal değerden sayılıyor; 2. maddenin çeviri '
     .'bentleri ile 4 ve 6. maddelerin karma dinleti ve oda müziği organizasyonu bentleri '
-    .'kayıtta karşılıksız olduğu için girilmedi. Tablo 1\'in formüllü kalemleri (makalede '
+    .'kayıtta karşılıksız olduğu için girilmedi. Akademik faaliyet çizelgesinin formüllü kalemleri (makalede '
     .'etki faktörü, h-indeksi) burada da eksik, yani toplam puanınız gerçeğinden düşük '
     .'olabilir, yüksek olamaz.';
 
@@ -398,9 +399,9 @@ foreach ($konservatuvar as $k) {
             .'ve kariyeriniz boyunca toplam 200 puana ulaşmış olmanız isteniyor. '.$KONSERVATUVAR_NOTU,
         'sart' => Kalip::ve("Dr. Öğr. Üyeliğine yeniden atanma — {$k['ad']}", [
             $dil(75),
-            Kalip::toplam(60, donem: $SON_UC_YIL, liste: "{$madde} — son üç yıl"),
-            Kalip::toplam($yT1, maddeler: ['TABLO-1'], liste: 'Tablo 1'),
-            Kalip::toplam($yT2, maddeler: ['TABLO-2'], liste: 'Tablo 2'),
+            Kalip::toplam(60, donem: $SON_UC_YIL),
+            Kalip::toplam($yT1, maddeler: ['TABLO-1'], liste: 'Akademik faaliyet'),
+            Kalip::toplam($yT2, maddeler: ['TABLO-2'], liste: 'Sanatsal etkinlik'),
             Kalip::toplam(200),
         ]),
     ];
@@ -411,14 +412,15 @@ foreach ($konservatuvar as $k) {
         'notlar' => "{$madde}. Doçent: Tablo 1'den {$dT1}, Tablo 2'den {$dT2}, ikisinden aldığı "
             ."puanların en az {$dSonDort}'ı son dört yılda, toplamda 300 puan. Yabancı dil 80.",
         'aday_notu' => "Doçentlikte 300 puanın en az {$dSonDort}'ı başvuru tarihinden geriye "
-            .'dönük son dört yılda üretilmiş olmalı; ayrıca Tablo 1 ve Tablo 2 için ayrı ayrı '
+            .'dönük son dört yılda üretilmiş olmalı; ayrıca akademik faaliyet ve sanatsal '
+            .'etkinlik kalemleri için ayrı ayrı '
             .'alt paylar var. '.$KONSERVATUVAR_NOTU,
         'sart' => Kalip::ve("Doçent kadrosuna atanma — {$k['ad']}", [
             $dil(80),
             Kalip::beyan('Doçent unvanını kazanmış olmak', 'Madde 8-ç'),
-            Kalip::toplam($dT1, maddeler: ['TABLO-1'], liste: 'Tablo 1'),
-            Kalip::toplam($dT2, maddeler: ['TABLO-2'], liste: 'Tablo 2'),
-            Kalip::toplam($dSonDort, donem: $SON_DORT_YIL, liste: "{$madde} — son dört yıl"),
+            Kalip::toplam($dT1, maddeler: ['TABLO-1'], liste: 'Akademik faaliyet'),
+            Kalip::toplam($dT2, maddeler: ['TABLO-2'], liste: 'Sanatsal etkinlik'),
+            Kalip::toplam($dSonDort, donem: $SON_DORT_YIL),
             Kalip::toplam(300),
         ]),
     ];
@@ -431,16 +433,16 @@ foreach ($konservatuvar as $k) {
             ."ikisinden aldığı puanların en az {$pDocentSonrasi}'ı doçentlik sonrası, toplamda "
             .'500 puan. Yabancı dil 85.',
         'aday_notu' => "Profesörlükte 500 puanın en az {$pDocentSonrasi}'ı doçent unvanını "
-            .'aldıktan sonraki döneme ait olmalı. Tez koşulu Madde 8-f\'ye bağlı; "son beş yılda '
+            .'aldıktan sonraki döneme ait olmalı. Tez koşulunda yönergenin "son beş yılda '
             .'ilgili birimde tez yapılmadığı belgelenirse aranmaz" istisnası girilmedi. '
             .$KONSERVATUVAR_NOTU,
         'sart' => Kalip::ve("Profesör kadrosuna atanma — {$k['ad']}", [
             $dil(85),
             Kalip::beyan($k['baslicaEser'], "{$madde} — Başlıca araştırma eseri"),
             Kalip::adet('En az 1 lisansüstü ya da sanatta yeterlik tezi yönetmiş olmak', ['TEZ'], 1, madde: "{$madde} — Tez"),
-            Kalip::toplam($pT1, maddeler: ['TABLO-1'], liste: 'Tablo 1'),
-            Kalip::toplam($pT2, maddeler: ['TABLO-2'], liste: 'Tablo 2'),
-            Kalip::toplam($pDocentSonrasi, donem: $DOCENTLIK, liste: "{$madde} — doçentlik sonrası"),
+            Kalip::toplam($pT1, maddeler: ['TABLO-1'], liste: 'Akademik faaliyet'),
+            Kalip::toplam($pT2, maddeler: ['TABLO-2'], liste: 'Sanatsal etkinlik'),
+            Kalip::toplam($pDocentSonrasi, donem: $DOCENTLIK),
             Kalip::toplam(500),
         ]),
     ];

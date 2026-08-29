@@ -36,7 +36,6 @@ $KOD_DESENI = '/('
  */
 $BORCLU = [
     'Adıyaman Üniversitesi',
-    'Afyon Kocatepe Üniversitesi',
     'Afyonkarahisar Sağlık Bilimleri Üniversitesi',
     'Aksaray Üniversitesi',
     'Alanya Alaaddin Keykubat Üniversitesi',
@@ -60,7 +59,6 @@ $BORCLU = [
     'Dicle Üniversitesi',
     'Dokuz Eylül Üniversitesi',
     'Doğuş Üniversitesi',
-    'Erzincan Binali Yıldırım Üniversitesi',
     'Eskişehir Osmangazi Üniversitesi',
     'Galatasaray Üniversitesi',
     'Gebze Teknik Üniversitesi',
@@ -78,7 +76,6 @@ $BORCLU = [
     'Kocaeli Üniversitesi',
     'Konya Gıda ve Tarım Üniversitesi',
     'Konya Teknik Üniversitesi',
-    'Kütahya Dumlupınar Üniversitesi',
     'Kütahya Sağlık Bilimleri Üniversitesi',
     'Kırklareli Üniversitesi',
     'Lokman Hekim Üniversitesi',
@@ -120,7 +117,6 @@ $BORCLU = [
     'İstanbul Medipol Üniversitesi',
     'İstanbul Rumeli Üniversitesi',
     'İstanbul Teknik Üniversitesi',
-    'İstanbul Üniversitesi',
     'İzmir Bakırçay Üniversitesi',
     'İzmir Demokrasi Üniversitesi',
     'İzmir Kavram Meslek Yüksekokulu',

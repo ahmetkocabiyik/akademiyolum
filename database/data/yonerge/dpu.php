@@ -110,27 +110,27 @@ $esikler = [];
 foreach ([
     ['muh', ['fen', 'muhendislik', 'mimarlik'], 'dpu-2024-muh',
         'Fen Bilimleri ve Matematik, Mühendislik ile Mimarlık, Planlama ve Tasarım temel alanları',
-        ['A11'], 'A11 başlığından (uluslararası makaleler)', 20, ['A'], 'A başlığından', 40, 50,
-        ['A-C'], 'A-C başlıkları arasından', 20,
-        ['A'], 'A başlığından', 30, ['A-B'], 'A-B başlıkları arasından', 40],
+        ['A11'], 'uluslararası makalelerinizden', 20, ['A'], 'makale kalemlerinizden', 40, 50,
+        ['A-C'], 'makale, kitap ve bildiri kalemlerinizden', 20,
+        ['A'], 'makale kalemlerinizden', 30, ['A-B'], 'makale ve kitap kalemlerinizden', 40],
     ['sosyal', ['egitim', 'filoloji', 'sosyal', 'spor'], 'dpu-2024',
         'Eğitim Bilimleri, Filoloji, Sosyal-Beşeri-İdari Bilimler ve Spor Bilimleri temel alanları',
-        ['A11-A21'], 'A11 ve/veya A21 başlığından (uluslararası ve ulusal makaleler)', 16,
-        ['A-C'], 'A-C başlıkları arasından', 30, 40,
-        ['A-C'], 'A-C başlıkları arasından', 16,
-        ['A'], 'A başlığından', 20, ['A-B'], 'A-B başlıkları arasından', 30],
+        ['A11-A21'], 'uluslararası ve ulusal makalelerinizden', 16,
+        ['A-C'], 'makale, kitap ve bildiri kalemlerinizden', 30, 40,
+        ['A-C'], 'makale, kitap ve bildiri kalemlerinizden', 16,
+        ['A'], 'makale kalemlerinizden', 20, ['A-B'], 'makale ve kitap kalemlerinizden', 30],
     ['ilahiyat', ['ilahiyat'], 'dpu-2024-ilahiyat', 'İlahiyat temel alanı',
-        ['A11-A21'], 'A11 ve/veya A21 başlığından (uluslararası ve ulusal makaleler)', 16,
-        ['A-C'], 'A-C başlıkları arasından', 30, 40,
-        ['A-C'], 'A-C başlıkları arasından', 16,
-        ['A'], 'A başlığından', 20, ['A-B'], 'A-B başlıkları arasından', 30],
+        ['A11-A21'], 'uluslararası ve ulusal makalelerinizden', 16,
+        ['A-C'], 'makale, kitap ve bildiri kalemlerinizden', 30, 40,
+        ['A-C'], 'makale, kitap ve bildiri kalemlerinizden', 16,
+        ['A'], 'makale kalemlerinizden', 20, ['A-B'], 'makale ve kitap kalemlerinizden', 30],
 ] as [$anahtar, $alanlar, $cetvel, $alanAdi,
     $drAltGrup, $drAltAd, $drAltPuan, $drUstGrup, $drUstAd, $drUstPuan, $drToplam,
     $yenidenGrup, $yenidenAd, $yenidenPuan,
     $prAltGrup, $prAltAd, $prAltPuan, $prUstGrup, $prUstAd, $prUstPuan]) {
     $esikler[] = [
         'anahtar' => "dpu-{$anahtar}-dr-ilk",
-        'aday_notu' => "{$alanAdi} için Doktor Öğretim Üyesi kadrosuna ilk atanmada EK-1'in "
+        'aday_notu' => "{$alanAdi} için Doktor Öğretim Üyesi kadrosuna ilk atanmada "
             ."{$drAltAd} en az {$drAltPuan} puan, {$drUstAd} en az {$drUstPuan} puan ve "
             ."toplamda en az {$drToplam} puan isteniyor. Ayrıca yabancı dilden, öğretim "
             .'elemanı kadroları için belirlenen taban puanı almış olmanız gerekiyor.',
@@ -143,8 +143,8 @@ foreach ([
         'sart' => Kalip::ve("Doktor Öğretim Üyesi kadrosuna ilk atanma — {$alanAdi}", [
             $dil,
             $doktora,
-            Kalip::puanDan("EK-1'in {$drAltAd} en az {$drAltPuan} puan", $drAltGrup, $drAltPuan, madde: '5.1.1'),
-            Kalip::puanDan("EK-1'in {$drUstAd} en az {$drUstPuan} puan", $drUstGrup, $drUstPuan, madde: '5.1.1'),
+            Kalip::puanDan("{$drAltAd} en az {$drAltPuan} puan", $drAltGrup, $drAltPuan, madde: '5.1.1'),
+            Kalip::puanDan("{$drUstAd} en az {$drUstPuan} puan", $drUstGrup, $drUstPuan, madde: '5.1.1'),
             Kalip::toplam($drToplam),
         ]),
     ];
@@ -152,7 +152,7 @@ foreach ([
     $esikler[] = [
         'anahtar' => "dpu-{$anahtar}-dr-yeniden",
         'aday_notu' => 'Son atama döneminizdeki faaliyetleriniz sayılıyor. '
-            ."{$alanAdi} için her yeniden atanma döneminde EK-1'in {$yenidenAd} en az "
+            ."{$alanAdi} için her yeniden atanma döneminde {$yenidenAd} en az "
             ."{$yenidenPuan} puan ve toplamda en az {$drToplam} puan isteniyor. Puanı "
             .'sağlayamazsanız bir defaya mahsus bir yıl izleme süresi veriliyor; Üniversite '
             .'Yönetim Kurulu kararıyla bu süre bir yıl daha uzatılabiliyor.',
@@ -163,7 +163,7 @@ foreach ([
         'notlar' => "5.1.2 ({$alanAdi}): {$yenidenAd} {$yenidenPuan}; toplam {$drToplam}.",
         'sart' => Kalip::ve("Doktor Öğretim Üyesi kadrosuna yeniden atanma — {$alanAdi}", [
             Kalip::puanDan(
-                "Son atama döneminizde EK-1'in {$yenidenAd} en az {$yenidenPuan} puan",
+                "Son atama döneminizde {$yenidenAd} en az {$yenidenPuan} puan",
                 $yenidenGrup, $yenidenPuan, $SON_ATAMA, madde: '5.1.2',
             ),
             Kalip::toplam($drToplam, $SON_ATAMA),
@@ -174,7 +174,7 @@ foreach ([
         'anahtar' => "dpu-{$anahtar}-docentlik",
         'aday_notu' => 'Yönerge doçentlik kadrosuna atanmada ilave bir kriter aramıyor: '
             .'Üniversitelerarası Kurul tarafından düzenlenen doçentlik sınavından başarılı '
-            .'olmanız yeterli. EK-1 puan tablosundan bir baraj istenmiyor.',
+            .'olmanız yeterli. Puan çizelgesinden bir baraj istenmiyor.',
         'universite' => $UNIVERSITE,
         'kadro' => 'docentlik',
         'alan' => $alanlar,
@@ -186,10 +186,10 @@ foreach ([
     $esikler[] = [
         'anahtar' => "dpu-{$anahtar}-profesorluk",
         'aday_notu' => 'Doçentlik unvanınızı aldıktan sonraki çalışmalarınız sayılıyor. '
-            ."{$alanAdi} için EK-1'in {$prAltAd} en az {$prAltPuan} puan, {$prUstAd} en az "
+            ."{$alanAdi} için {$prAltAd} en az {$prAltPuan} puan, {$prUstAd} en az "
             ."{$prUstPuan} puan ve toplamda en az 130 puan isteniyor. Başvurunuzda "
             .'yayınlarınızdan birini başlıca eser olarak göstermeniz gerekiyor. Doçentliğini '
-            .'sözlü sınava girerek almış adaylara EK-1\'in S satırından 25 ilave puan '
+            .'sözlü sınava girerek almış adaylara 25 ilave puan '
             .'veriliyor; bu puan faaliyet kaydına çevrilemediği için hesaba katılmıyor.'
             .($anahtar === 'sosyal'
                 ? ' Güzel Sanatlar Fakültesi kadrosunda görev yapıyorsanız koşul değişiyor: '
@@ -205,11 +205,11 @@ foreach ([
             $besYil,
             $baslicaEser,
             Kalip::puanDan(
-                "Doçentlik sonrası EK-1'in {$prAltAd} en az {$prAltPuan} puan",
+                "Doçentlik sonrası {$prAltAd} en az {$prAltPuan} puan",
                 $prAltGrup, $prAltPuan, $DOCENTLIK, madde: '5.3',
             ),
             Kalip::puanDan(
-                "Doçentlik sonrası EK-1'in {$prUstAd} en az {$prUstPuan} puan",
+                "Doçentlik sonrası {$prUstAd} en az {$prUstPuan} puan",
                 $prUstGrup, $prUstPuan, $DOCENTLIK, madde: '5.3',
             ),
             Kalip::toplam(130, $DOCENTLIK),
@@ -222,21 +222,22 @@ foreach ([
 // ══════════════════════════════════════════════════════════════════════════
 
 $gsGovde = fn (int $ac, int $jBlok, int $jm, int $toplam, ?array $donem, string $md): array => [
-    Kalip::puanDan("EK-1'in A-C başlıkları arasından en az {$ac} puan", ['A-C'], $ac, $donem, madde: $md),
+    Kalip::puanDan("Makale, kitap ve bildiri kalemlerinizden en az {$ac} puan", ['A-C'], $ac, $donem, madde: $md),
     Kalip::puanDan(
-        "EK-1'in J111, J1121, J1161 ve J1171 maddelerinden (eserin satın alınması veya yayında "
-        ."yer alması, jürili kişisel sanat etkinliği, restorasyon yürütücülüğü) en az {$jBlok} puan",
+        'Eserinizin satın alınması ya da yayında yer alması, jürili kişisel sanat etkinliği ve '
+        ."restorasyon yürütücülüğü kalemlerinizden en az {$jBlok} puan",
         ['J-BLOK'], $jBlok, $donem, madde: $md,
     ),
-    Kalip::puanDan("EK-1'in J-M başlıkları arasından en az {$jm} puan", ['J-M'], $jm, $donem, madde: $md),
+    Kalip::puanDan("Proje ve diğer akademik faaliyet kalemlerinizden en az {$jm} puan", ['J-M'], $jm, $donem, madde: $md),
     Kalip::toplam($toplam, $donem),
 ];
 
 $esikler[] = [
     'anahtar' => 'dpu-gsf-dr-ilk',
     'aday_notu' => 'Güzel Sanatlar temel alanında Doktor Öğretim Üyesi kadrosuna ilk atanmada '
-        .'EK-1\'in A-C başlıklarından en az 16 puan, J111/J1121/J1161/J1171 maddelerinden en az '
-        .'24 puan, J-M başlıkları arasından en az 10 puan ve toplamda en az 50 puan isteniyor. '
+        .'makale, kitap ve bildiri kalemlerinizden en az 16 puan, eserinizin satın alınması, jürili kişisel sanat etkinliği ve '
+        .'restorasyon yürütücülüğü kalemlerinizden en az '
+        .'24 puan, proje ve diğer akademik faaliyet kalemlerinizden en az 10 puan ve toplamda en az 50 puan isteniyor. '
         .'Ayrıca yabancı dilden, öğretim elemanı kadroları için belirlenen taban puanı almış '
         .'olmanız gerekiyor.',
     'universite' => $UNIVERSITE,
@@ -251,8 +252,9 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'dpu-gsf-dr-yeniden',
     'aday_notu' => 'Son atama döneminizdeki faaliyetleriniz sayılıyor. Güzel Sanatlar temel '
-        .'alanında her yeniden atanma döneminde EK-1\'in A-C başlıklarından en az 16 puan, '
-        .'J111/J1121/J1161/J1171 maddelerinden en az 24 puan, J-M başlıkları arasından en az 10 '
+        .'alanında her yeniden atanma döneminde makale, kitap ve bildiri kalemlerinizden en '
+        .'az 16 puan, '
+        .'J111/J1121/J1161/J1171 maddelerinden en az 24 puan, proje ve diğer akademik faaliyet kalemlerinizden en az 10 '
         .'puan ve toplamda en az 50 puan isteniyor. Puanı sağlayamazsanız bir defaya mahsus bir '
         .'yıl izleme süresi veriliyor.',
     'universite' => $UNIVERSITE,
@@ -280,8 +282,8 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'dpu-gsf-profesorluk',
     'aday_notu' => 'Doçentlik unvanınızı aldıktan sonraki çalışmalarınız sayılıyor. Güzel '
-        .'Sanatlar temel alanında EK-1\'in A-C başlıklarından en az 20 puan, '
-        .'J111/J1121/J1161/J1171 maddelerinden en az 48 puan, J-M başlıkları arasından en az 70 '
+        .'Sanatlar temel alanında makale, kitap ve bildiri kalemlerinizden en az 20 puan, '
+        .'J111/J1121/J1161/J1171 maddelerinden en az 48 puan, proje ve diğer akademik faaliyet kalemlerinizden en az 70 '
         .'puan ve toplamda en az 130 puan isteniyor. Başvurunuzda yayınlarınızdan birini başlıca '
         .'eser olarak göstermeniz gerekiyor.',
     'universite' => $UNIVERSITE,

@@ -53,11 +53,22 @@ $HUKUK = ['hukuk'];
 $GUZEL_SANATLAR = ['guzel_sanatlar'];
 $SPOR = ['spor'];
 
+/**
+ * Puan barajı kümelerinin ADAYA gösterilen adları (KONVANSIYONLAR §2).
+ * PUAN: makale, kitap, bildiri, atıf ve proje. PUAN-MESLEKI aynı küme,
+ * mesleki uygulama kalemleri de dahil.
+ */
+$PUAN_ADI = 'Makale, kitap, bildiri, atıf ve proje';
+$PUAN_GRUP_ADI = [
+    'PUAN' => $PUAN_ADI,
+    'PUAN-MESLEKI' => 'Makale, kitap, bildiri, atıf, proje, sanatsal etkinlik ve ödül',
+];
+
 /** Doktor öğretim üyeliğine ilk atama: Madde 5. */
 $drIlk = fn (string $grup, string $puanGrup, string $madde): array => Kalip::ve('Doktor öğretim üyeliğine ilk atama koşulları', [
     Kalip::yds(55),
     Kalip::adet('Makaleler başlığındaki ilgili maddelerde tanımlanan dergilerde en az 1 özgün makale', [$grup], 1, madde: $madde.'/1'),
-    Kalip::toplam(40, maddeler: [$puanGrup], liste: $madde.'/2'),
+    Kalip::toplam(40, maddeler: [$puanGrup], liste: $PUAN_GRUP_ADI[$puanGrup]),
 ]);
 
 /** Doktor öğretim üyeliğine yeniden atama: Madde 6 (Madde 4/l ile). */
@@ -73,8 +84,8 @@ $drYeniden = fn (string $grup, int $sayi, string $madde): array => Kalip::ve('Do
 $profFen = fn (string $madde): array => Kalip::ve('Profesörlük koşulları', [
     Kalip::adet('Makaleler başlığının 1. maddesinde tanımlanan dergilerde en az 2 yayın', ['MAKALE-1-TUM'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
     Kalip::adet('Bu yayınlardan en az birinde sorumlu yazar olmak', ['MAKALE-1-TUM'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
-    Kalip::toplam(200, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['PUAN'], liste: $madde.'/2'),
-    Kalip::toplam(250, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM-DERS-HARIC'], liste: $madde.'/2'),
+    Kalip::toplam(200, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['PUAN'], liste: $PUAN_ADI),
+    Kalip::toplam(250, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM-DERS-HARIC'], liste: 'Verdiğiniz dersler dışındaki tüm faaliyet'),
 ]);
 
 /**
@@ -89,8 +100,8 @@ $profSosyal = fn (int $puan, int $toplam, string $puanGrup, string $madde): arra
         Kalip::adet('2. maddede tanımlanan dergilerde en az 2 yayın', ['MAKALE-2-TUM'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
     ]),
     Kalip::adet('Yayınlarınızdan en az birinde sorumlu yazar olmak', ['MAKALE-1-4-TUM'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
-    Kalip::toplam($puan, donem: Kalip::DOCENTLIK_SONRASI, maddeler: [$puanGrup], liste: $madde.'/2'),
-    Kalip::toplam($toplam, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM-DERS-HARIC'], liste: $madde.'/2'),
+    Kalip::toplam($puan, donem: Kalip::DOCENTLIK_SONRASI, maddeler: [$puanGrup], liste: $PUAN_GRUP_ADI[$puanGrup]),
+    Kalip::toplam($toplam, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM-DERS-HARIC'], liste: 'Verdiğiniz dersler dışındaki tüm faaliyet'),
 ]);
 
 $DR_NOTU = 'Doktor öğretim üyeliğine ilk atamada yabancı dil sınavından en az 55 puan '
@@ -345,8 +356,8 @@ return [
         'sart' => Kalip::ve('Doktor öğretim üyeliğine ilk atama koşulları', [
             Kalip::yds(55),
             Kalip::adet('1, 2, 3 veya 4. maddelerde tanımlanan dergilerde en az 1 özgün makale', ['MAKALE-1-4'], 1, madde: 'Madde 5/e-1'),
-            Kalip::toplam(40, maddeler: ['PUAN'], liste: 'Madde 5/e-2'),
-            Kalip::toplam(50, maddeler: ['SANAT'], liste: 'Madde 5/e-3'),
+            Kalip::toplam(40, maddeler: ['PUAN'], liste: $PUAN_ADI),
+            Kalip::toplam(50, maddeler: ['SANAT'], liste: 'Sanatsal etkinlik ve ödül'),
         ]),
     ],
     [
@@ -382,8 +393,8 @@ return [
             .'kapatıyor. '.$PROF_NOTU,
         'sart' => Kalip::ve('Profesörlük koşulları', [
             Kalip::adet('1, 2, 3 veya 4. maddelerde tanımlanan dergilerde en az 3 yayın', ['MAKALE-1-4-TUM'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 8/e-1'),
-            Kalip::toplam(80, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['PUAN'], liste: 'Madde 8/e-2'),
-            Kalip::toplam(250, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM-DERS-HARIC'], liste: 'Madde 8/e-2'),
+            Kalip::toplam(80, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['PUAN'], liste: $PUAN_ADI),
+            Kalip::toplam(250, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM-DERS-HARIC'], liste: 'Verdiğiniz dersler dışındaki tüm faaliyet'),
         ]),
     ],
 
@@ -397,7 +408,7 @@ return [
         'notlar' => 'Madde 5/f: 1-4. maddelerde en az 1 özgün makale; Makaleler, Kitaplar, '
             .'Bildiriler, Atıflar, Projeler ile Mesleki Faaliyetlerden en az 40 puan.',
         'aday_notu' => 'Spor Bilimleri temel alanında 40 puanlık barajın kaynağına Mesleki '
-            .'Faaliyetler başlığı da giriyor. Ancak bu başlığın altındaki C.3 Spor Etkinlikleri '
+            .'Faaliyetler başlığı da giriyor. Ancak spor etkinlikleri bölümü '
             .'bölümü (millî takım görevi, spor hakemliği, organizasyon, federasyon kurulu, '
             .'sportif ödüller) faaliyet kaydında karşılığı olmadığı için girilemedi; sportif '
             .'kariyeri olan adayın puanı burada olduğundan belirgin biçimde düşük çıkar. '.$DR_NOTU,
@@ -423,7 +434,7 @@ return [
         'notlar' => 'Madde 8/f: yayın koşulu sosyal alanlarla aynı; 150 puan (Mesleki '
             .'Faaliyetler dahil) ve 200 puan barajları.',
         'aday_notu' => 'Spor Bilimlerinde profesörlük puan barajları 150 ve 200. İlk baraja '
-            .'Mesleki Faaliyetler başlığı da giriyor; ancak C.3 Spor Etkinlikleri bölümü '
+            .'Mesleki Faaliyetler başlığı da giriyor; ancak spor etkinlikleri bölümü '
             .'girilemediği için sportif kalemleriniz sayılmıyor. '.$PROF_NOTU,
         'sart' => $profSosyal(150, 200, 'PUAN-MESLEKI', 'Madde 8/f'),
     ],
