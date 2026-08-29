@@ -128,6 +128,10 @@ $yayinBlogu = function (array $kume, string $kumeAdi, int $makale, int $baslica,
 $esikler = [];
 
 foreach ($tablolar as $t) {
+    // Düğüm başlığı adaya gösteriliyor: tablo numarası değil alan adı yazılır
+    // (KONVANSIYONLAR §2). `notlar` tablo numarasını olduğu gibi koruyor.
+    $alanAdi = preg_replace('/^Tablo \d+\. /u', '', $t['tablo']);
+
     $esikler[] = [
         'anahtar' => "cukurova-dr-{$t['alan']}",
         'aday_notu' => 'Dr. Öğretim Üyeliğinde asgari puan barajı yok; yalnızca makale ve bildiri sayısı aranıyor. '
@@ -137,7 +141,7 @@ foreach ($tablolar as $t) {
         'alan' => [$t['alan']],
         'cetvel' => 'cukurova-2024',
         'notlar' => "EK 1 {$t['tablo']}, Doktor Öğretim Üyesi sütunu. Madde 5.2: Ek 1 asgari ölçütleri Ek 2 akademik etkinlikleri ile karşılanmalı.",
-        'sart' => Kalip::ve("Dr. Öğr. Üyesi — {$t['tablo']}", [
+        'sart' => Kalip::ve("Dr. Öğr. Üyesi — {$alanAdi}", [
             Kalip::adet("{$t['kumeAdi']} en az birinde başlıca yazar olduğunuz en az {$t['dr']} makale",
                 $t['kume'], $t['dr'], 'baslica', madde: $t['tablo']),
             Kalip::adet('Bilimsel toplantılarda sunulmuş en az bir bildiri', ['BILDIRI'], 1, madde: $t['tablo']),
@@ -148,34 +152,34 @@ foreach ($tablolar as $t) {
     $esikler[] = [
         'anahtar' => "cukurova-docent-{$t['alan']}",
         'aday_notu' => 'Yalnızca doktora, uzmanlık veya sanatta yeterlik eğitiminizi tamamladıktan sonraki çalışmalarınız sayılır. '
-            .'Ayrıca Ek 4 listesindeki genel akademik etkinliklerden en az beşini sağlamanız gerekiyor.',
+            .'Ayrıca yönergenin genel akademik etkinlik listesinden en az beşini sağlamanız gerekiyor.',
         'universite' => 'Çukurova Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => [$t['alan']],
         'cetvel' => 'cukurova-2024',
         'notlar' => "EK 1 {$t['tablo']}, Doçent sütunu: asgari puan {$t['docPuan']}. Madde 5.4: doktora/uzmanlık/sanatta yeterlik sonrası çalışmalar, Ek 4'ten en az beş etkinlik.",
-        'sart' => Kalip::ve("Doçent — {$t['tablo']}", [
+        'sart' => Kalip::ve("Doçent — {$alanAdi}", [
             Kalip::beyan('Üniversitelerarası Kuruldan doçentlik unvanı almış olmak', 'Madde 5.4'),
             Kalip::toplam($t['docPuan'], Kalip::DOKTORA_SONRASI),
             ...$yayinBlogu($t['kume'], $t['kumeAdi'], $t['doc'], $t['docBaslica'], 3, Kalip::DOKTORA_SONRASI, $t['tablo']),
-            Kalip::beyan('Ek 4\'te verilen genel akademik etkinliklerden en az beş tanesini sağlamak', 'Madde 5.4'),
+            Kalip::beyan('Yönergenin genel akademik etkinlik listesinden en az beş tanesini sağlamak', 'Madde 5.4'),
         ]),
     ];
 
     $esikler[] = [
         'anahtar' => "cukurova-profesor-{$t['alan']}",
         'aday_notu' => 'Yalnızca doçent unvanını almaya hak kazandığınız başvuru döneminin son başvuru tarihinden sonraki '
-            .'çalışmalarınız sayılır. Ek 4 listesinden en az yedi etkinlik gerekiyor.',
+            .'çalışmalarınız sayılır. Genel akademik etkinlik listesinden en az yedi etkinlik gerekiyor.',
         'universite' => 'Çukurova Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => [$t['alan']],
         'cetvel' => 'cukurova-2024',
         'notlar' => "EK 1 {$t['tablo']}, Profesör sütunu: asgari puan {$t['profPuan']}. Madde 5.5: doçentlik başvuru dönemi sonrası çalışmalar, Ek 4'ten en az yedi etkinlik.",
-        'sart' => Kalip::ve("Profesör — {$t['tablo']}", [
+        'sart' => Kalip::ve("Profesör — {$alanAdi}", [
             Kalip::toplam($t['profPuan'], Kalip::DOCENTLIK_SONRASI),
             ...$yayinBlogu($t['kume'], $t['kumeAdi'], $t['prof'], $t['docBaslica'], 3, Kalip::DOCENTLIK_SONRASI, $t['tablo']),
             Kalip::beyan('Yayınlarınızdan birini başlıca araştırma eseri olarak göstermek', 'Madde 5.5'),
-            Kalip::beyan('Ek 4\'te verilen genel akademik etkinliklerden en az yedi tanesini sağlamak', 'Madde 5.5'),
+            Kalip::beyan('Yönergenin genel akademik etkinlik listesinden en az yedi tanesini sağlamak', 'Madde 5.5'),
         ]),
     ];
 }

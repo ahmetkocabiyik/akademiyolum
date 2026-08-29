@@ -74,7 +74,7 @@ $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 
 $DENEME_DERSI = Kalip::beyan(
-    'Üç profesörden oluşan komisyon huzurunda verilen deneme dersinde EK-4 değerlendirme formundan 100 üzerinden en az 60 puan almak',
+    'Üç profesörden oluşan komisyon huzurunda verilen deneme dersinde, yönergenin değerlendirme formundan 100 üzerinden en az 60 puan almak',
     'Madde 5(14)'
 );
 $UNVAN = Kalip::beyan(
@@ -90,16 +90,17 @@ $BASLICA_ESER = Kalip::beyan(
     'Madde 5(12)'
 );
 
-$NOT_C2 = ' Ek 3\'ün "C2\'den şu kadar puan" koşulları HESAPLANAMIYOR olarak işaretli: yönerge '
-    .'ders puanlarını ders SAATİ başına veriyor (0,25 puan/saat), faaliyet kaydı ise ders '
+$NOT_C2 = ' Yönergenin "eğitim-öğretim kaleminden şu kadar puan" koşulları HESAPLANAMIYOR '
+    .'olarak işaretli: ders puanları ders SAATİ başına veriliyor (0,25 puan/saat), faaliyet '
+    .'kaydı ise ders '
     .'saatini taşımıyor. Bu koşulu kendiniz kontrol etmelisiniz; ders kayıtlarınız toplam '
     .'puanınıza da katkı vermiyor.';
 
-$NOT_CETVEL = ' Puanlar Ek.2\'ye göre bölünüyor: birinci isim tam puan, ikinci %80, üçüncü '
-    .'%60, dördüncü ve sonrası %50; atıflarda yazar sayısı dikkate alınmıyor. Projelerde ve '
-    .'tez yöneticiliğinde "devam eden" değerleri girildi, çünkü kayıt tamamlanma durumunu '
-    .'taşımıyor. A1\'in "etki faktörü 1\'den büyükse puan etki faktörüyle çarpılır" kuralı da '
-    .'uygulanamıyor.';
+$NOT_CETVEL = ' Puanlar yazar sırasına göre bölünüyor: birinci isim tam puan, ikinci %80, '
+    .'üçüncü %60, dördüncü ve sonrası %50; atıflarda yazar sayısı dikkate alınmıyor. '
+    .'Projelerde ve tez yöneticiliğinde "devam eden" değerleri girildi, çünkü kayıt tamamlanma '
+    .'durumunu taşımıyor. Makale puanlarındaki "etki faktörü 1\'den büyükse puan etki '
+    .'faktörüyle çarpılır" kuralı da uygulanamıyor.';
 
 /** Profesörlükte ÜAK seçeneği ile A tablosu puan seçeneğinin "veya"sı. */
 $profYayin = function (string $aciklama, string $grup, int $puan) use ($DOCENTLIK): array {
@@ -132,7 +133,8 @@ $tablo = function (string $kod, array $alanlar, ?string $birim, string $ad,
         'notlar' => $ad.' doktor öğretim üyesi ilk atama: toplam '.$drToplam.' puan.',
         'aday_notu' => $ad.' için doktor öğretim üyesi kadrosuna İLK ATANMA. Yönerge ilk '
             .'atamada dönem sınırı koymuyor, bütün akademik geçmişiniz sayılıyor. Ayrıca üç '
-            .'profesörden oluşan komisyon huzurunda deneme dersi vermeniz ve EK-4 formundan '
+            .'profesörden oluşan komisyon huzurunda deneme dersi vermeniz ve değerlendirme '
+            .'formundan '
             .'en az 60 puan almanız gerekiyor.'.$NOT_C2.$NOT_CETVEL,
         'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna ilk atanma — '.$ad, array_values([
             $DENEME_DERSI,
@@ -150,9 +152,8 @@ $tablo = function (string $kod, array $alanlar, ?string $birim, string $ad,
         'cetvel' => $CETVEL,
         'notlar' => $ad.' doktor öğretim üyesi yeniden atama: toplam '.$yenidenToplam.' puan, '
             .'son atamadan sonraki çalışmalardan.',
-        'aday_notu' => $ad.' için doktor öğretim üyesi kadrosuna YENİDEN ATANMA. Madde 5(6) '
-            .'uyarınca yalnız SON ATAMADAN SONRAKİ çalışmalarınız sayılıyor; Madde 5(5) '
-            .'yeniden atanma süresini en çok dört yıl olarak belirliyor.'.$NOT_C2.$NOT_CETVEL,
+        'aday_notu' => $ad.' için doktor öğretim üyesi kadrosuna YENİDEN ATANMA. Yalnız SON ATAMADAN '
+            .'SONRAKİ çalışmalarınız sayılıyor; yeniden atanma süresi en çok dört yıl.'.$NOT_C2.$NOT_CETVEL,
         'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna yeniden atanma — '.$ad, array_values([
             ...$yenidenKosul,
             Kalip::toplam($yenidenToplam, $SON_ATAMA),
@@ -168,7 +169,7 @@ $tablo = function (string $kod, array $alanlar, ?string $birim, string $ad,
         'cetvel' => $CETVEL,
         'notlar' => $ad.' profesörlük: toplam '.$profToplam.' puan, doçentlik başvurusu '
             .'sonrası çalışmalardan.',
-        'aday_notu' => $ad.' için profesör kadrosuna atanma. Madde 5(10) uyarınca puanlar '
+        'aday_notu' => $ad.' için profesör kadrosuna atanma. Puanlar '
             .'DOÇENTLİK BAŞVURUSU SONRASI çalışmaları kapsıyor; motor doçentlik unvanının '
             .'alındığı tarihi tuttuğu için pencere biraz daralıyor ve koşul olduğundan sıkı '
             .'görünüyor. Yayın koşulunu ya yürürlükteki doçentlik temel alan koşullarını bir '
@@ -203,92 +204,92 @@ $A = function (string $ad, string $grup, int $puan, ?array $donem = null): array
 // ── Ek 3a1: Tıp, Sağlık Bilimleri ve Hemşirelik Fakülteleri ──
 $tablo('saglik-tip', ['saglik'], 'Tıp, Sağlık Bilimleri ve Hemşirelik Fakülteleri',
     'Tıp, Sağlık Bilimleri ve Hemşirelik Fakülteleri',
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 75)], 125,
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 50, $SON_ATAMA), $C2(20)], 100,
-    [$profYayin('Makalelerden (A1.1-A1.4)', 'A1.1-A1.4', 200), $B(10), $C2(60)], 400);
+    [$A('Makale ve bildirilerden', 'A1-A2', 75)], 125,
+    [$A('Makale ve bildirilerden', 'A1-A2', 50, $SON_ATAMA), $C2(20)], 100,
+    [$profYayin('Makalelerden', 'A1.1-A1.4', 200), $B(10), $C2(60)], 400);
 
 // ── Ek 3a2: Veteriner Fakültesi ──
 $tablo('saglik-veteriner', ['saglik'], 'Veteriner Fakültesi', 'Veteriner Fakültesi',
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 75)], 125,
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 50, $SON_ATAMA), $C2(20)], 125,
-    [$profYayin('Makalelerden (A1.1-A1.4)', 'A1.1-A1.4', 200),
-        Kalip::puanDan('Bu 200 puanın en az 75\'ini SCI-Expanded, SSCI ya da A&HCI dergilerindeki makalelerden (A1.1) almak', ['A1.1'], 75, $DOCENTLIK, madde: 'Ek 3a2'),
+    [$A('Makale ve bildirilerden', 'A1-A2', 75)], 125,
+    [$A('Makale ve bildirilerden', 'A1-A2', 50, $SON_ATAMA), $C2(20)], 125,
+    [$profYayin('Makalelerden', 'A1.1-A1.4', 200),
+        Kalip::puanDan('Bu 200 puanın en az 75\'ini SCI-Expanded, SSCI ya da A&HCI dergilerindeki makalelerden almak', ['A1.1'], 75, $DOCENTLIK, madde: 'Ek 3a2'),
         $B(20), $C2(40)], 400);
 
 // ── Ek 3k: Diş Hekimliği Fakültesi ──
 $tablo('saglik-dis', ['saglik'], 'Diş Hekimliği Fakültesi', 'Diş Hekimliği Fakültesi',
-    [$A('SCI-Expanded, SSCI, A&HCI ve diğer indekslerdeki makalelerden (A1.1-A1.2)', 'A1.1-A1.2', 120)], 200,
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 50, $SON_ATAMA), $C2(20)], 100,
-    [$profYayin('Makalelerden (A1.1-A1.4)', 'A1.1-A1.4', 200), $B(10), $C2(60)], 400);
+    [$A('SCI-Expanded, SSCI, A&HCI ve diğer indekslerdeki makalelerden', 'A1.1-A1.2', 120)], 200,
+    [$A('Makale ve bildirilerden', 'A1-A2', 50, $SON_ATAMA), $C2(20)], 100,
+    [$profYayin('Makalelerden', 'A1.1-A1.4', 200), $B(10), $C2(60)], 400);
 
 // ── Ek 3b: Ziraat Fakültesi ──
 $tablo('ziraat', ['ziraat'], null, 'Ziraat Fakültesi',
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 75)], 125,
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 50, $SON_ATAMA), $C2(50)], 125,
-    [$profYayin('Makalelerden (A1.1-A1.4)', 'A1.1-A1.4', 200),
-        Kalip::adet('SCI-Expanded, SSCI ya da A&HCI dergilerinde ilk isim yazarı olduğunuz en az bir makale (A1.1)', ['A1.1'], 1, yazar: 'ilk', donem: $DOCENTLIK, madde: 'Ek 3b'),
+    [$A('Makale ve bildirilerden', 'A1-A2', 75)], 125,
+    [$A('Makale ve bildirilerden', 'A1-A2', 50, $SON_ATAMA), $C2(50)], 125,
+    [$profYayin('Makalelerden', 'A1.1-A1.4', 200),
+        Kalip::adet('SCI-Expanded, SSCI ya da A&HCI dergilerinde ilk isim yazarı olduğunuz en az bir makale', ['A1.1'], 1, yazar: 'ilk', donem: $DOCENTLIK, madde: 'Ek 3b'),
         $B(20), $C1(20), $C2(60)], 400);
 
 // ── Ek 3c: Fen Bilimleri (Fizik, Kimya, Biyoloji) ──
 $tablo('fen', ['fen'], 'Fen-Edebiyat Fakültesi Fizik, Kimya ve Biyoloji Bölümleri',
     'Fen-Edebiyat Fakültesi Fizik, Kimya ve Biyoloji Bölümleri',
-    [$A('SCI-Expanded, SSCI, A&HCI ve diğer indekslerdeki makalelerden (A1.1-A1.2)', 'A1.1-A1.2', 75)], 200,
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 75, $SON_ATAMA), $C2(30)], 200,
-    [$profYayin('Makalelerden (A1.1-A1.4)', 'A1.1-A1.4', 200),
-        Kalip::puanDan('Bu 200 puanın en az 75\'ini SCI-Expanded, SSCI ya da A&HCI dergilerindeki makalelerden (A1.1) almak', ['A1.1'], 75, $DOCENTLIK, madde: 'Ek 3c'),
+    [$A('SCI-Expanded, SSCI, A&HCI ve diğer indekslerdeki makalelerden', 'A1.1-A1.2', 75)], 200,
+    [$A('Makale ve bildirilerden', 'A1-A2', 75, $SON_ATAMA), $C2(30)], 200,
+    [$profYayin('Makalelerden', 'A1.1-A1.4', 200),
+        Kalip::puanDan('Bu 200 puanın en az 75\'ini SCI-Expanded, SSCI ya da A&HCI dergilerindeki makalelerden almak', ['A1.1'], 75, $DOCENTLIK, madde: 'Ek 3c'),
         $B(20), $C1(20), $C2(60)], 600);
 
 // ── Ek 3d: Matematik ve İstatistik ──
 $tablo('matematik', ['fen'], 'Fen-Edebiyat Fakültesi Matematik Bölümü',
     'Fen-Edebiyat Fakültesi Matematik Bölümü',
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 50)], 75,
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 30, $SON_ATAMA), $C2(30)], 100,
-    [$profYayin('Makalelerden (A1.1-A1.4)', 'A1.1-A1.4', 150), $C1(20), $C2(60)], 350);
+    [$A('Makale ve bildirilerden', 'A1-A2', 50)], 75,
+    [$A('Makale ve bildirilerden', 'A1-A2', 30, $SON_ATAMA), $C2(30)], 100,
+    [$profYayin('Makalelerden', 'A1.1-A1.4', 150), $C1(20), $C2(60)], 350);
 
 // ── Ek 3e: Mühendislik, Söke Mimarlık ve Tasarım, Kuşadası Denizcilik ──
 $tablo('muhendislik', ['muhendislik', 'mimarlik'], null,
     'Mühendislik, Söke Mimarlık ve Tasarım ve Kuşadası Denizcilik Fakülteleri',
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 75)], 125,
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 50, $SON_ATAMA), $C2(50)], 125,
-    [$profYayin('Makalelerden (A1.1-A1.4)', 'A1.1-A1.4', 200),
-        Kalip::puanDan('Bu 200 puanın en az 75\'ini SCI-Expanded, SSCI ya da A&HCI dergilerindeki makalelerden (A1.1) almak', ['A1.1'], 75, $DOCENTLIK, madde: 'Ek 3e'),
+    [$A('Makale ve bildirilerden', 'A1-A2', 75)], 125,
+    [$A('Makale ve bildirilerden', 'A1-A2', 50, $SON_ATAMA), $C2(50)], 125,
+    [$profYayin('Makalelerden', 'A1.1-A1.4', 200),
+        Kalip::puanDan('Bu 200 puanın en az 75\'ini SCI-Expanded, SSCI ya da A&HCI dergilerindeki makalelerden almak', ['A1.1'], 75, $DOCENTLIK, madde: 'Ek 3e'),
         $B(20), $C1(20), $C2(60)], 400);
 
 // ── Ek 3f: Eğitim Fakültesi ──
 $tablo('egitim', ['egitim'], null, 'Eğitim Bilimleri ve Öğretmen Yetiştirme',
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 75)], 125,
-    [$A('Makale ve bildirilerden (A1-A2)', 'A1-A2', 50, $SON_ATAMA)], 125,
-    [$profYayin('Makalelerden (A1.1-A1.4)', 'A1.1-A1.4', 200), $B(20), $C1(20), $C2(60)], 400);
+    [$A('Makale ve bildirilerden', 'A1-A2', 75)], 125,
+    [$A('Makale ve bildirilerden', 'A1-A2', 50, $SON_ATAMA)], 125,
+    [$profYayin('Makalelerden', 'A1.1-A1.4', 200), $B(20), $C1(20), $C2(60)], 400);
 
 // ── Ek 3g: Güzel Sanatlar ──
 $tablo('guzel-sanatlar', ['guzel_sanatlar'], null,
     'Güzel Sanatlar ve Güzel Sanatlar Eğitimi',
-    [$A('Makalelerden (A1)', 'A1', 50),
-        $A('Sergi ve müzik etkinliklerinden (F1-F2)', 'F1-F2', 45)], 125,
-    [$A('Makalelerden (A1)', 'A1', 30, $SON_ATAMA), $C2(20),
-        $A('Sergi ve müzik etkinliklerinden (F1-F2)', 'F1-F2', 45, $SON_ATAMA)], 125,
-    [$profYayin('Makalelerden (A1)', 'A1', 120), $C1(60),
-        $A('Sergi ve müzik etkinliklerinden (F1-F2)', 'F1-F2', 120, $DOCENTLIK)], 400);
+    [$A('Makalelerden', 'A1', 50),
+        $A('Sergi ve müzik etkinliklerinden', 'F1-F2', 45)], 125,
+    [$A('Makalelerden', 'A1', 30, $SON_ATAMA), $C2(20),
+        $A('Sergi ve müzik etkinliklerinden', 'F1-F2', 45, $SON_ATAMA)], 125,
+    [$profYayin('Makalelerden', 'A1', 120), $C1(60),
+        $A('Sergi ve müzik etkinliklerinden', 'F1-F2', 120, $DOCENTLIK)], 400);
 
 // ── Ek 3h: Sosyal, Beşeri, İktisadi ve İdari Bilimler ──
 $tablo('sosyal', ['sosyal', 'ilahiyat'], null,
     'Sosyal, Beşeri, İktisadi ve İdari Bilimler',
-    [$A('Makale, bildiri ve kitaplardan (A1-A3)', 'A1-A3', 50)], 75,
-    [$A('Makale, bildiri ve kitaplardan (A1-A3)', 'A1-A3', 30, $SON_ATAMA), $C1(30)], 75,
-    [$profYayin('Makale, bildiri, kitap ve çevirilerden (A1-A4)', 'A1-A4', 300),
+    [$A('Makale, bildiri ve kitaplardan', 'A1-A3', 50)], 75,
+    [$A('Makale, bildiri ve kitaplardan', 'A1-A3', 30, $SON_ATAMA), $C1(30)], 75,
+    [$profYayin('Makale, bildiri, kitap ve çevirilerden', 'A1-A4', 300),
         $C1(20), $C2(60)], 450);
 
 // ── Ek 3i: Filoloji ──
 $tablo('filoloji', ['filoloji'], null, 'Filoloji',
-    [$A('Makale, bildiri, kitap ve çevirilerden (A1-A4)', 'A1-A4', 50)], 75,
-    [$A('Makale, bildiri, kitap ve çevirilerden (A1-A4)', 'A1-A4', 40, $SON_ATAMA)], 75,
-    [$profYayin('Makale, bildiri, kitap ve çevirilerden (A1-A4)', 'A1-A4', 250), $C1(60)], 250);
+    [$A('Makale, bildiri, kitap ve çevirilerden', 'A1-A4', 50)], 75,
+    [$A('Makale, bildiri, kitap ve çevirilerden', 'A1-A4', 40, $SON_ATAMA)], 75,
+    [$profYayin('Makale, bildiri, kitap ve çevirilerden', 'A1-A4', 250), $C1(60)], 250);
 
 // ── Ek 3j: Spor Bilimleri ──
 $tablo('spor', ['spor'], null, 'Spor Bilimleri',
-    [$A('Makalelerden (A1)', 'A1', 50), $F3(30)], 100,
-    [$A('Makalelerden (A1)', 'A1', 30, $SON_ATAMA), $C2(30), $F3(30)], 100,
-    [$profYayin('Makalelerden (A1)', 'A1', 200), $C1(60), $F3(120)], 400);
+    [$A('Makalelerden', 'A1', 50), $F3(30)], 100,
+    [$A('Makalelerden', 'A1', 30, $SON_ATAMA), $C2(30), $F3(30)], 100,
+    [$profYayin('Makalelerden', 'A1', 200), $C1(60), $F3(120)], 400);
 
 // ═══════════════ DOÇENT (bütün alanlarda aynı) ═══════════════
 $esikler[] = [
