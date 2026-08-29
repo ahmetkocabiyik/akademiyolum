@@ -138,23 +138,24 @@ $drEsikleri = function (
 };
 
 $a1Yayin = Kalip::adet(
-    'A.1 maddesi kapsamında (SCI, SCI-Expanded, SSCI, AHCI, ESCI dergileri ile uluslararası '
-    .'kitap ve kitap bölümü) en az bir araştırma yayınınız olmak (isim sırasına bakılmaz)',
+    'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI dergilerinde, ya da uluslararası kitap veya '
+    .'kitap bölümü olarak en az bir araştırma yayınınız olmak (isim sırasına bakılmaz)',
     ['A.1'], 1, madde: '7',
 );
 
 $ilkUcIsim = Kalip::adet(
-    'Görev uzatma süresi içinde A.1-A.4 maddeleri kapsamında, adınızın ilk üç isim arasında '
-    .'olduğu bir yayınınız olmak',
+    'Görev uzatma süresi içinde makale, kitap ya da bildiri türünden, adınızın ilk üç isim '
+    .'arasında olduğu bir yayınınız olmak',
     ['A.1-A.4'], 1, yazar: 'baslica', donem: $SON_ATAMA, madde: '7',
 );
 
 foreach ($drEsikleri('saglik', ['saglik'], null, 'Sağlık Bilimleri alanları',
     [$a1Yayin],
-    'A.1 maddesi kapsamında en az bir araştırma yayını isteniyor (isim sırasına bakılmaz).',
+    'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI dergilerinde veya uluslararası kitap olarak en az bir araştırma yayını isteniyor (isim sırasına bakılmaz).',
     [$ilkUcIsim],
-    'A.1-A.4 kapsamında adınızın ilk üç isim arasında olduğu bir yayın isteniyor. Tıp '
-    .'Fakültesi kadrolarında ayrıca her uzatma döneminde D.4 maddesinden (ders verme) en az 40 '
+    'Makale, kitap ya da bildiri türünden, adınızın ilk üç isim arasında olduğu bir yayın '
+    .'isteniyor. Tıp Fakültesi kadrolarında ayrıca her uzatma döneminde ders verme kaleminden '
+    .'en az 40 '
     .'puan gerekiyor; koşul fakülteye bağlı olduğu için motor onu uygulamıyor.',
     80) as $e) {
     $esikler[] = $e;
@@ -162,22 +163,22 @@ foreach ($drEsikleri('saglik', ['saglik'], null, 'Sağlık Bilimleri alanları',
 
 foreach ($drEsikleri('muh-fen', ['muhendislik', 'fen'], $MUH_FEN, $MUH_FEN,
     [$a1Yayin],
-    'A.1 maddesi kapsamında en az bir araştırma yayını isteniyor (isim sırasına bakılmaz).',
+    'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI dergilerinde veya uluslararası kitap olarak en az bir araştırma yayını isteniyor (isim sırasına bakılmaz).',
     [
         $ilkUcIsim,
-        Kalip::puanDan('A.1-A.10 kapsamındaki yayınlardan en az 40 puan', ['A.1-A.10'], 40, $SON_ATAMA, madde: '7'),
+        Kalip::puanDan('Makale, kitap, bildiri ve atıf kalemlerinizden en az 40 puan', ['A.1-A.10'], 40, $SON_ATAMA, madde: '7'),
     ],
-    'A.1-A.10 kapsamındaki yayınlardan en az 40 puan ve A.1-A.4 kapsamında adınızın ilk üç isim '
-    .'arasında olduğu bir yayın isteniyor.',
+    'Makale, kitap, bildiri ve atıf kalemlerinizden en az 40 puan ve makale, kitap ya '
+    .'da bildiri türünden adınızın ilk üç isim arasında olduğu bir yayın isteniyor.',
     80) as $e) {
     $esikler[] = $e;
 }
 
 foreach ($drEsikleri('mat-ist', ['fen'], $MAT_IST, $MAT_IST,
     [$a1Yayin],
-    'A.1 maddesi kapsamında en az bir araştırma yayını isteniyor (isim sırasına bakılmaz).',
-    [Kalip::puanDan('A.1-A.10 kapsamındaki yayınlardan en az 30 puan', ['A.1-A.10'], 30, $SON_ATAMA, madde: '7')],
-    'A.1-A.10 kapsamındaki yayınlardan en az 30 puan isteniyor.',
+    'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI dergilerinde veya uluslararası kitap olarak en az bir araştırma yayını isteniyor (isim sırasına bakılmaz).',
+    [Kalip::puanDan('Makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan', ['A.1-A.10'], 30, $SON_ATAMA, madde: '7')],
+    'Makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan isteniyor.',
     80) as $e) {
     $esikler[] = $e;
 }
@@ -186,11 +187,11 @@ foreach ($drEsikleri('sosyal', ['sosyal', 'egitim'], null,
     'Eğitim, İletişim, Fen-Edebiyat ve İktisadi ve İdari Bilimler Fakültelerinin sosyal ve beşerî bilimler alanları ile Eğitim Bilimleri temel alanı',
     [
         $tezdenUretilmemis,
-        Kalip::puanDan('A.1-A.13 maddeleri kapsamında en az 50 puan', ['A.1-A.13'], 50, madde: '7'),
+        Kalip::puanDan('Makale, kitap, bildiri ve atıf kalemlerinizden en az 50 puan', ['A.1-A.13'], 50, madde: '7'),
     ],
-    'tezinizden üretilmemiş en az bir yayın ve A.1-A.13 maddeleri kapsamında en az 50 puan isteniyor.',
-    [Kalip::puanDan('A.1-A.13 maddeleri kapsamında en az 30 puan', ['A.1-A.13'], 30, $SON_ATAMA, madde: '7')],
-    'A.1-A.13 maddeleri kapsamında en az 30 puan isteniyor.',
+    'tezinizden üretilmemiş en az bir yayın ve Makale, kitap, bildiri ve atıf kalemlerinizden en az 50 puan isteniyor.',
+    [Kalip::puanDan('Makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan', ['A.1-A.13'], 30, $SON_ATAMA, madde: '7')],
+    'Makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan isteniyor.',
     80) as $e) {
     $esikler[] = $e;
 }
@@ -198,11 +199,12 @@ foreach ($drEsikleri('sosyal', ['sosyal', 'egitim'], null,
 foreach ($drEsikleri('gs-egitim', ['guzel_sanatlar'], $GS_EGITIM, $GS_EGITIM,
     [
         $tezdenUretilmemis,
-        Kalip::puanDan('A.1-A.15 maddeleri kapsamında en az 50 puan', ['A.1-A.15'], 50, madde: '7'),
+        Kalip::puanDan('Makale, kitap, bildiri, atıf ve sanatsal etkinlik kalemlerinizden en az 50 puan', ['A.1-A.15'], 50, madde: '7'),
     ],
-    'tezinizden üretilmemiş en az bir yayın ve A.1-A.15 maddeleri kapsamında en az 50 puan isteniyor.',
-    [Kalip::puanDan('A.1-A.12 maddeleri kapsamında en az 30 puan', ['A.1-A.12'], 30, $SON_ATAMA, madde: '7')],
-    'A.1-A.12 maddeleri kapsamında en az 30 puan isteniyor.',
+    'tezinizden üretilmemiş en az bir yayın ve makale, kitap, bildiri, atıf ile sanatsal '
+    .'etkinlik kalemlerinizden en az 50 puan isteniyor.',
+    [Kalip::puanDan('Makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan', ['A.1-A.12'], 30, $SON_ATAMA, madde: '7')],
+    'Makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan isteniyor.',
     80) as $e) {
     $esikler[] = $e;
 }
@@ -211,11 +213,12 @@ foreach ($drEsikleri('filoloji-spor', ['filoloji', 'spor'], null,
     'Filoloji temel alanı, yabancı dil eğitimi, Uygulamalı Bilimler ve Yabancı Diller Yüksekokulları ile Spor Bilimleri ve Turizm Fakülteleri',
     [
         $tezdenUretilmemis,
-        Kalip::puanDan('A.1-A.16 maddeleri kapsamında en az 50 puan', ['A.1-A.16'], 50, madde: '7'),
+        Kalip::puanDan('Makale, kitap, bildiri, atıf ve sanatsal etkinlik kalemlerinizden en az 50 puan', ['A.1-A.16'], 50, madde: '7'),
     ],
-    'tezinizden üretilmemiş en az bir yayın ve A.1-A.16 maddeleri kapsamında en az 50 puan isteniyor.',
-    [Kalip::puanDan('A.1-A.16 maddeleri kapsamında en az 30 puan', ['A.1-A.16'], 30, $SON_ATAMA, madde: '7')],
-    'A.1-A.16 maddeleri kapsamında en az 30 puan isteniyor.',
+    'tezinizden üretilmemiş en az bir yayın ve makale, kitap, bildiri, atıf ile sanatsal '
+    .'etkinlik kalemlerinizden en az 50 puan isteniyor.',
+    [Kalip::puanDan('Makale, kitap, bildiri, atıf ve sanatsal etkinlik kalemlerinizden en az 30 puan', ['A.1-A.16'], 30, $SON_ATAMA, madde: '7')],
+    'Makale, kitap, bildiri, atıf ve sanatsal etkinlik kalemlerinizden en az 30 puan isteniyor.',
     80) as $e) {
     $esikler[] = $e;
 }
@@ -224,9 +227,10 @@ foreach ($drEsikleri('hukuk', ['hukuk', 'ilahiyat', 'mimarlik'], null,
     'Hukuk, İlahiyat ve Mimarlık temel alanları',
     [
         $tezdenUretilmemis,
-        Kalip::puanDan('A.1-A.15 maddeleri kapsamında en az 50 puan', ['A.1-A.15'], 50, madde: '7'),
+        Kalip::puanDan('Makale, kitap, bildiri, atıf ve sanatsal etkinlik kalemlerinizden en az 50 puan', ['A.1-A.15'], 50, madde: '7'),
     ],
-    'tezinizden üretilmemiş en az bir yayın ve A.1-A.15 maddeleri kapsamında en az 50 puan isteniyor.',
+    'tezinizden üretilmemiş en az bir yayın ve makale, kitap, bildiri, atıf ile sanatsal '
+    .'etkinlik kalemlerinizden en az 50 puan isteniyor.',
     [Kalip::adet('Son atamanızdan sonra en az bir yayın yapmış olmak', ['YAYIN'], 1, donem: $SON_ATAMA, madde: '7')],
     'en az bir yayın isteniyor.',
     80) as $e) {
@@ -235,16 +239,17 @@ foreach ($drEsikleri('hukuk', ['hukuk', 'ilahiyat', 'mimarlik'], null,
 
 foreach ($drEsikleri('muzik', ['guzel_sanatlar'], $MUZIK, $MUZIK,
     [Kalip::veya('Yayın ya da sanatsal etkinlik koşulu', [
-        Kalip::puanDan('A.1-A.13 maddeleri kapsamında en az 60 puan', ['A.1-A.13'], 60, madde: '7'),
-        Kalip::puanDan('Ya da A.17 (Müzik ve Sahne Sanatları) veya A.18 (Türk Müziği) maddelerinden en az 60 puan', ['A.17-A.18'], 60, madde: '7'),
+        Kalip::puanDan('Makale, kitap, bildiri ve atıf kalemlerinizden en az 60 puan', ['A.1-A.13'], 60, madde: '7'),
+        Kalip::puanDan('Ya da müzik, sahne sanatları ve Türk müziği etkinlik kalemlerinizden en az 60 puan', ['A.17-A.18'], 60, madde: '7'),
     ])],
-    'A.1-A.13 maddeleri kapsamında ya da A.17 (Müzik ve Sahne Sanatları) veya A.18 (Türk '
+    'Makale, kitap, bildiri ve atıf kalemlerinden ya da müzik, sahne sanatları ve Türk '
     .'Müziği) maddelerinden en az 60 puan isteniyor.',
     [
-        Kalip::puanDan('A.1-A.13 maddeleri kapsamında en az 30 puan', ['A.1-A.13'], 30, $SON_ATAMA, madde: '7'),
-        Kalip::puanDan('A.17 ya da A.18 maddelerinden en az 60 puan', ['A.17-A.18'], 60, $SON_ATAMA, madde: '7'),
+        Kalip::puanDan('Makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan', ['A.1-A.13'], 30, $SON_ATAMA, madde: '7'),
+        Kalip::puanDan('Müzik, sahne sanatları ve Türk müziği etkinlik kalemlerinizden en az 60 puan', ['A.17-A.18'], 60, $SON_ATAMA, madde: '7'),
     ],
-    'A.1-A.13 maddeleri kapsamında en az 30 puan ve A.17 ya da A.18 maddelerinden en az 60 puan '
+    'Makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan ve müzik, sahne sanatları '
+    .'ve Türk müziği etkinlik kalemlerinizden en az 60 puan '
     .'isteniyor.',
     100) as $e) {
     $esikler[] = $e;
@@ -302,8 +307,9 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'pau-muzik-docentlik',
     'aday_notu' => 'Müzik ve Sahne Sanatları temel alanlarında doçentlik kadrosuna atanmada '
-        .'A.1-A.13 maddeleri kapsamında en az 30 puan, A.17 (Müzik ve Sahne Sanatları) ya da '
-        .'A.18 (Türk Müziği) maddesinden en az 75 puan ve toplam en az 150 puan isteniyor.',
+        .'makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan, müzik, sahne '
+        .'sanatları ve Türk müziği etkinlik kalemlerinizden en az 75 puan ve toplam en az 150 '
+        .'puan isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
     'alan' => ['guzel_sanatlar'],
@@ -312,8 +318,8 @@ $esikler[] = [
     'notlar' => 'Madde 7 (Müzik ve Sahne Sanatları): A.1-13\'ten 30, A.17/A.18\'den 75; toplam 150.',
     'sart' => Kalip::ve('Doçent kadrosuna atanma — Müzik ve Sahne Sanatları', [
         $uakDocentlik,
-        Kalip::puanDan('A.1-A.13 maddeleri kapsamında en az 30 puan', ['A.1-A.13'], 30, madde: '7'),
-        Kalip::puanDan('A.17 ya da A.18 maddesinden en az 75 puan', ['A.17-A.18'], 75, madde: '7'),
+        Kalip::puanDan('Makale, kitap, bildiri ve atıf kalemlerinizden en az 30 puan', ['A.1-A.13'], 30, madde: '7'),
+        Kalip::puanDan('Müzik, sahne sanatları ve Türk müziği etkinlik kalemlerinizden en az 75 puan', ['A.17-A.18'], 75, madde: '7'),
         Kalip::toplam(150),
     ]),
 ];
