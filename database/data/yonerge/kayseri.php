@@ -66,16 +66,18 @@ $CETVEL = 'kayseri-2024';
 $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 
 $T1A2 = ['T1A-T2'];
-$LISTE = 'Tablo 1a ve Tablo 2';
+// Adaya gösterilen küme adı: T1A (makale, kitap, bildiri, proje, patent,
+// editörlük) + T2 (atıf, ödül, idari görev, ders, tez danışmanlığı, toplumsal
+// katkı). Güzel sanatlar kalemleri (T1B) bu kümenin dışında (§2 kod yasağı).
+$LISTE = 'Bilimsel yayın ve akademik faaliyet';
 
 $MUAFIYET_NOTU = ' DİKKAT: yönergenin V/1 açıklaması, WOS etki faktörü 5 ve üzeri dergilerde '
     .'başlıca yazar olarak yayın yapanlardan ya da WOS h-indeksi Dr. Öğretim Üyeliğinde 5, '
     .'doçentlikte 10, profesörlükte 15 ve üzerinde olanlardan "herhangi bir ölçüt aranmaz" diyor; '
     .'bu muafiyet burada uygulanmıyor.';
 
-$HATA_NOTU = ' Yönergenin doçentlik bloklarında bir numaralandırma hatası var: "Madde 3\'teki '
-    .'puan şartı" deniyor ama puan şartı Madde 1\'de. Kaynak düzeltilmeden, Madde 1\'in puanı '
-    .'esas alındı.';
+$HATA_NOTU = ' Yönergenin doçentlik bloklarında bir numaralandırma hatası var: puan şartı için '
+    .'yanlış maddeye atıf yapılıyor. Kaynak düzeltilmeden, doğru maddedeki puan esas alındı.';
 
 $dil = Kalip::yds(65);
 
@@ -189,7 +191,8 @@ $esikler[] = $esik('teknik', 'dr_ogr_uyesi', $TEKNIK, null,
     'Bir tanesi SCI veya SCI-Expanded kapsamında olmak üzere en az 2 araştırma makalesi ve üç '
     .'seçenekten biri isteniyor.',
     'I/A ve I/B1 (=C1a=C4): doktora, YDS 65; SCI/SCI-E\'de 1 olmak üzere 2 araştırma makalesi; '
-    .'yurt dışı deneyimi, proje araştırmacılığı ya da Tablo 1a+2\'den 75 puan.');
+    .'yurt dışı deneyimi, proje araştırmacılığı ya da bilimsel yayın ve akademik '
+    .'faaliyet kalemlerinden 75 puan.');
 
 $esikler[] = $esik('teknik', 'docentlik', $TEKNIK, null,
     'Mühendislik, fen ve ziraat gibi teknik bilimler alanı',
@@ -197,16 +200,17 @@ $esikler[] = $esik('teknik', 'docentlik', $TEKNIK, null,
     [
         Kalip::veya('Tez danışmanlığı ya da ek puan koşulu', [
             $tezKosulu(2, 1, null, 'II/B1-2a'),
-            Kalip::toplam(300, null, $T1A2, $LISTE.' (250 puanın %20 fazlası)'),
+            Kalip::toplam(300, null, $T1A2, $LISTE),
         ]),
         Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız', [
             $yurtdisi,
             $projeKosulu('II/B1-3b'),
-            Kalip::toplam(500, null, $T1A2, $LISTE.' (250 puana ilaveten 250 puan daha)'),
+            Kalip::toplam(500, null, $T1A2, $LISTE),
         ]),
         Kalip::toplam(250, null, $T1A2, $LISTE),
     ],
-    'Tablo 1a ve Tablo 2\'den toplam en az 250 puan, tez danışmanlığı ya da %20 fazla puan, '
+    'Bilimsel yayın ve akademik faaliyet kalemlerinizden toplam en az 250 puan, tez '
+    .'danışmanlığı ya da %20 fazla puan, '
     .'ayrıca yurt dışı deneyimi, proje ya da ek 250 puan isteniyor.'.$HATA_NOTU,
     'II/A ve II/B1 (=C1a=C4): doçent unvanı, YDS 65, ÜAK sözlü sınavı; Tablo 1a+2\'den 250 puan; '
     .'2 yüksek lisans veya 1 doktora tezi ya da %20 fazla puan; yurt dışı deneyimi, proje ya da '
@@ -219,11 +223,11 @@ $esikler[] = $esik('teknik', 'profesorluk', $TEKNIK, null,
         $projeKosulu('III/B1-1'),
         Kalip::veya('Tez danışmanlığı ya da ek puan koşulu', [
             $tezKosulu(3, 1, $DOCENTLIK, 'III/B1-3'),
-            Kalip::toplam(420, $DOCENTLIK, $T1A2, $LISTE.' (350 puanın %20 fazlası)'),
+            Kalip::toplam(420, $DOCENTLIK, $T1A2, $LISTE),
         ]),
         Kalip::toplam(350, $DOCENTLIK, $T1A2, $LISTE),
     ],
-    'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Tablo 1a ve Tablo '
+    'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Bilimsel yayın ve '
     .'2\'den toplam en az 350 puan, en az bir projede yürütücülük (ya da iki projede '
     .'araştırmacılık) ve tez danışmanlığı ya da %20 fazla puan isteniyor.',
     'III/A ve III/B1 (=C1a=C4): 2 projede araştırmacılık ya da 1 projede yürütücülük; doçentlik '
@@ -267,11 +271,12 @@ $esikler[] = $esik('sosyal', 'docentlik', $SOSYAL, null,
         Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız', [
             $projeKosulu('II/B2-3a'),
             $tekYazarliKitap(null, 'II/B2-3b'),
-            Kalip::toplam(225, null, $T1A2, $LISTE.' (150 puana ilaveten 75 puan daha)'),
+            Kalip::toplam(225, null, $T1A2, $LISTE),
         ]),
         Kalip::toplam(150, null, $T1A2, $LISTE),
     ],
-    'Tablo 1a ve Tablo 2\'den toplam en az 150 puan, yurt dışı deneyimi ya da 50 puan, ayrıca '
+    'Bilimsel yayın ve akademik faaliyet kalemlerinizden toplam en az 150 puan, yurt dışı '
+    .'deneyimi ya da 50 puan, ayrıca '
     .'proje, tek yazarlı kitap ya da ilave 75 puan isteniyor.',
     'II/A ve II/B2 (=C2): doçent unvanı, YDS 65, ÜAK sözlü sınavı; Tablo 1a+2\'den 150 puan; yurt '
     .'dışı deneyimi ya da 50 puan; proje, tek yazarlı kitap ya da ilave 75 puan.');
@@ -287,17 +292,17 @@ $esikler[] = $esik('sosyal', 'profesorluk', $SOSYAL, null,
         ),
         Kalip::veya('Tez danışmanlığı ya da ek puan koşulu', [
             $tezKosulu(3, 1, $DOCENTLIK, 'III/B2-3a'),
-            Kalip::toplam(240, $DOCENTLIK, $T1A2, $LISTE.' (200 puanın %20 fazlası)'),
+            Kalip::toplam(240, $DOCENTLIK, $T1A2, $LISTE),
         ]),
         Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız', [
             $yurtdisi,
             $projeKosulu('III/B2-4b'),
             $tekYazarliKitap($DOCENTLIK, 'III/B2-4c'),
-            Kalip::toplam(250, $DOCENTLIK, $T1A2, $LISTE.' (200 puana ilaveten 50 puan daha)'),
+            Kalip::toplam(250, $DOCENTLIK, $T1A2, $LISTE),
         ]),
         Kalip::toplam(200, $DOCENTLIK, $T1A2, $LISTE),
     ],
-    'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Tablo 1a ve Tablo '
+    'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Bilimsel yayın ve '
     .'2\'den toplam en az 200 puan, tez danışmanlığı ya da %20 fazla puan ve dört seçenekten biri '
     .'isteniyor.',
     'III/A ve III/B2 (=C2): başlıca eser sunumu; doçentlik sonrası Tablo 1a+2\'den 200 puan; '
@@ -323,7 +328,8 @@ $esikler[] = $esik('saglik', 'dr_ogr_uyesi', $SAGLIK, null, 'Sağlık bilimleri 
     'Bir tanesi SSCI, SCI veya SCI-Expanded kapsamında olmak üzere en az 3 araştırma makalesi ve '
     .'dört seçenekten biri isteniyor.',
     'I/A ve I/B3 (=C3): doktora, YDS 65; SCI\'de 1 olmak üzere 3 araştırma makalesi; yurt dışı, '
-    .'proje, ilave SCI makalesi ya da Tablo 1a+2\'den 75 puan.');
+    .'proje, ilave SCI makalesi ya da bilimsel yayın ve akademik faaliyet kalemlerinden '
+    .'75 puan.');
 
 $esikler[] = $esik('saglik', 'docentlik', $SAGLIK, null, 'Sağlık bilimleri alanı',
     [$docentUnvani, $dil, $docentSozlu],
@@ -332,11 +338,12 @@ $esikler[] = $esik('saglik', 'docentlik', $SAGLIK, null, 'Sağlık bilimleri ala
             $yurtdisi,
             $projeKosulu('II/B3-2b'),
             $tekYazarliKitap(null, 'II/B3-2c'),
-            Kalip::toplam(500, null, $T1A2, $LISTE.' (250 puana ilaveten 250 puan daha)'),
+            Kalip::toplam(500, null, $T1A2, $LISTE),
         ]),
         Kalip::toplam(250, null, $T1A2, $LISTE),
     ],
-    'Tablo 1a ve Tablo 2\'den toplam en az 250 puan ve dört seçenekten biri isteniyor.'.$HATA_NOTU,
+    'Bilimsel yayın ve akademik faaliyet kalemlerinizden toplam en az 250 puan ve dört '
+    .'seçenekten biri isteniyor.'.$HATA_NOTU,
     'II/A ve II/B3 (=C3): doçent unvanı, YDS 65, ÜAK sözlü sınavı; Tablo 1a+2\'den 250 puan; yurt '
     .'dışı, proje, tek yazarlı kitap ya da ilave 250 puan.');
 
@@ -351,11 +358,11 @@ $esikler[] = $esik('saglik', 'profesorluk', $SAGLIK, null, 'Sağlık bilimleri a
                 Kalip::adet('Bunlardan en az 1 tanesinde başlıca yazar olmalısınız', ['SCI-MAKALE'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'III/B3-2c'),
             ]),
             $projeKosulu('III/B3-2d'),
-            Kalip::toplam(600, $DOCENTLIK, $T1A2, $LISTE.' (300 puana ilaveten 300 puan daha)'),
+            Kalip::toplam(600, $DOCENTLIK, $T1A2, $LISTE),
         ]),
         Kalip::toplam(300, $DOCENTLIK, $T1A2, $LISTE),
     ],
-    'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Tablo 1a ve Tablo '
+    'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Bilimsel yayın ve '
     .'2\'den toplam en az 300 puan ve beş şarttan en az üçü isteniyor.',
     'III/A ve III/B3 (=C3): doçentlik sonrası Tablo 1a+2\'den 300 puan ve a-e şıklarından en az üçü.');
 
@@ -394,26 +401,27 @@ foreach ([
     $esikler[] = $esik($anahtar, 'docentlik', $SANAT, $birim, $setAdi,
         [$docentUnvani, $dil, $docentSozlu],
         [
-            Kalip::puanDan('Tablo 1a ve Tablo 1b kalemlerinizden en az 100 puan', ['T1A-T1B'], 100, madde: "II/{$kod}-1"),
-            Kalip::puanDan('Tablo 2 kalemlerinizden en az 50 puan', ['T2'], 50, madde: "II/{$kod}-1"),
+            Kalip::puanDan('Bilimsel yayın ve sanatsal etkinlik kalemlerinizden en az 100 puan', ['T1A-T1B'], 100, madde: "II/{$kod}-1"),
+            Kalip::puanDan('Akademik faaliyet kalemlerinizden en az 50 puan', ['T2'], 50, madde: "II/{$kod}-1"),
             Kalip::veya('Tez danışmanlığı ya da ek puan koşulu', [
                 $tezKosulu(2, 1, null, "II/{$kod}-2a"),
-                Kalip::toplam(180, null, ['T1A', 'T1B', 'T2'], 'Tablo 1a, 1b ve 2 (150 puanın %20 fazlası)'),
+                Kalip::toplam(180, null, ['T1A', 'T1B', 'T2'], 'Bilimsel yayın, sanatsal etkinlik ve akademik faaliyet'),
             ]),
             $sanatDocentEk,
-            Kalip::toplam(150, null, ['T1A', 'T1B', 'T2'], 'Tablo 1a, Tablo 1b ve Tablo 2'),
+            Kalip::toplam(150, null, ['T1A', 'T1B', 'T2'], 'Bilimsel yayın, sanatsal etkinlik ve akademik faaliyet'),
         ],
-        'Tablo 1a ve 1b\'den en az 100, Tablo 2\'den en az 50 olmak üzere toplam 150 puan; tez '
+        'Bilimsel yayın ve sanatsal etkinlik kalemlerinizden en az 100, akademik faaliyet '
+        .'kalemlerinizden en az 50 olmak üzere toplam 150 puan; tez '
         .'danışmanlığı ya da %20 fazla puan; ayrıca altı seçenekten biri isteniyor.',
         "II/A ve II/{$kod}: doçent unvanı, YDS 65, ÜAK sözlü sınavı; Tablo 1a+1b'den 100, Tablo "
         ."2'den 50, toplam 150 puan; tez danışmanlığı ya da %20 fazla; a-f şıklarından biri.");
 
     $profesorKosullari = [
-        Kalip::puanDan('Doçentlik sonrası Tablo 1a ve Tablo 1b kalemlerinizden en az 200 puan', ['T1A-T1B'], 200, $DOCENTLIK, madde: "III/{$kod}-1"),
-        Kalip::puanDan('Doçentlik sonrası Tablo 2 kalemlerinizden en az 50 puan', ['T2'], 50, $DOCENTLIK, madde: "III/{$kod}-1"),
+        Kalip::puanDan('Doçentlik sonrası bilimsel yayın ve sanatsal etkinlik kalemlerinizden en az 200 puan', ['T1A-T1B'], 200, $DOCENTLIK, madde: "III/{$kod}-1"),
+        Kalip::puanDan('Doçentlik sonrası akademik faaliyet kalemlerinizden en az 50 puan', ['T2'], 50, $DOCENTLIK, madde: "III/{$kod}-1"),
         Kalip::veya('Tez danışmanlığı ya da ek puan koşulu', [
             $tezKosulu(3, 1, $DOCENTLIK, "III/{$kod}-2a"),
-            Kalip::toplam(300, $DOCENTLIK, ['T1A', 'T1B', 'T2'], 'Tablo 1a, 1b ve 2 (250 puanın %20 fazlası)'),
+            Kalip::toplam(300, $DOCENTLIK, ['T1A', 'T1B', 'T2'], 'Bilimsel yayın, sanatsal etkinlik ve akademik faaliyet'),
         ]),
     ];
 
@@ -421,12 +429,13 @@ foreach ([
         $profesorKosullari[] = $sanatDocentEk;
     }
 
-    $profesorKosullari[] = Kalip::toplam(250, $DOCENTLIK, ['T1A', 'T1B', 'T2'], 'Tablo 1a, Tablo 1b ve Tablo 2');
+    $profesorKosullari[] = Kalip::toplam(250, $DOCENTLIK, ['T1A', 'T1B', 'T2'], 'Bilimsel yayın, sanatsal etkinlik ve akademik faaliyet');
 
     $esikler[] = $esik($anahtar, 'profesorluk', $SANAT, $birim, $setAdi, $profesorOn,
         $profesorKosullari,
-        'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Tablo 1a ve '
-        .'1b\'den en az 200, Tablo 2\'den en az 50 olmak üzere toplam 250 puan ve tez danışmanlığı '
+        'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Bilimsel '
+        .'yayın ve sanatsal etkinlik kalemlerinizden en az 200, akademik faaliyet '
+        .'kalemlerinizden en az 50 olmak üzere toplam 250 puan ve tez danışmanlığı '
         .'ya da %20 fazla puan isteniyor.'
         .($kod === 'C1b' ? ' Fakülte adaylarında ayrıca altı seçenekten biri aranıyor.' : ''),
         "III/A ve III/{$kod}: doçentlik sonrası Tablo 1a+1b'den 200, Tablo 2'den 50, toplam 250 "

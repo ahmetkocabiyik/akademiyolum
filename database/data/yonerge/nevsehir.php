@@ -242,8 +242,8 @@ foreach ($ALANLAR as $alan => [$alanAdi, $cetvel]) {
     $esikler[] = array_merge($ortak, [
         'anahtar' => "nevsehir-{$alan}-dr",
         'kadro' => 'dr_ogr_uyesi',
-        'aday_notu' => "{$alanAdi} alanında doktor öğretim üyeliğine ilk atanma için EK 1 "
-            .'puanlama tablosundan toplam en az 30 puan, TR Dizin dergilerinden en az '
+        'aday_notu' => "{$alanAdi} alanında doktor öğretim üyeliğine ilk atanma için tüm "
+            .'faaliyetlerinizden toplam en az 30 puan, TR Dizin dergilerinden en az '
             ."{$drTr} puan"
             .($drGrup !== null ? " ve uluslararası indeksli dergilerden en az {$drPuan} puan" : '')
             .' isteniyor. İlk atama üç yıl süreyle yapılıyor.'.$DIL_NOTU,
@@ -258,7 +258,7 @@ foreach ($ALANLAR as $alan => [$alanAdi, $cetvel]) {
     $esikler[] = array_merge($ortak, [
         'anahtar' => "nevsehir-{$alan}-dr-yeniden",
         'kadro' => 'dr_ogr_uyesi_yeniden',
-        'aday_notu' => 'Son atama tarihinizden sonraki faaliyetleriniz sayılıyor. Madde 11 '
+        'aday_notu' => 'Son atama tarihinizden sonraki faaliyetleriniz sayılıyor. Yönerge '
             .'yeniden atanmayı SÜREYE bağlıyor; aşağıda EN HAFİF basamak (iki yıllık atama) '
             .'gösteriliyor: '
             .($sciTabanli
@@ -295,7 +295,7 @@ foreach ($ALANLAR as $alan => [$alanAdi, $cetvel]) {
                 .'çalışmalarınız sayılıyor: desteklenen ve sonuç raporu onaylanan en az bir '
                 .'araştırma projesinde görev almış olmanız, alanınıza özgü makale ve kitap '
                 .'koşullarını sağlamanız, bilimsel toplantı çalışmalarından en az 5 puan '
-                .'almanız ve EK 1 puanlama tablosundan toplam en az 100 puan almanız gerekiyor.'
+                .'almanız ve tüm faaliyetlerinizden toplam en az 100 puan almanız gerekiyor.'
                 .($alan === 'fen'
                     ? ' Matematik ve İstatistik bilim alanlarında Q1-Q3 barajı 20 puandır; '
                         .'motor bilim alanını ayırt edemediği için yüksek olan (40) uygulanıyor.'

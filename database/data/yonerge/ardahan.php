@@ -83,13 +83,13 @@ $TEZDEN = Kalip::beyan(
 
 $NOT_DIL = ' Yabancı dil koşulu 55 puandan uygulanıyor; tamamen yabancı dilde eğitim veren bir '
     .'programa ya da yabancı dil eğitimi veren bir bölüme başvuruyorsanız en az 85 puan '
-    .'gerekiyor (MADDE 10).';
+    .'gerekiyor.';
 
 $NOT_CETVEL = ' Puan hesabında atıflar en fazla 60, bilimsel toplantılar 40, hakemlikler 50, '
     .'tez danışmanlıkları 30, kurumsal katkı ve eğitime katkı ise 20\'şer puanla sınırlı. '
-    .'Yazar payı MADDE 67\'nin yazar sayısı × sıra matrisine göre hesaplanıyor.';
+    .'Yazar payı, yönergenin yazar sayısı × sıra matrisine göre hesaplanıyor.';
 
-$NOT_SURE = ' Bu puanlar DÖRT YILLIK atama için; MADDE 19 uyarınca bir yıllık atamalarda '
+$NOT_SURE = ' Bu puanlar DÖRT YILLIK atama için; bir yıllık atamalarda '
     .'toplam asgari puanın %25\'i, iki yıllıkta %50\'si, üç yıllıkta %75\'i yetiyor. Atama '
     .'süreniz kayıtta taşınmadığı için tam değerler uygulandı, kısa süreli atamalarda koşul '
     .'burada olduğundan ağır görünür.';
@@ -99,48 +99,48 @@ $esikler = [];
 // ═══════════════ DOKTOR ÖĞRETİM ÜYESİ — İLK ATAMA (MADDE 15) ═══════════════
 $drTablosu = [
     ['egitim', ['egitim'], 'Eğitim Bilimleri', [
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 25 puan almak', ['3.1-3.2'], 25, madde: 'MADDE 15/a'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 25 puan almak', ['3.1-3.2'], 25, madde: 'MADDE 15/a'),
         Kalip::toplam(40),
     ]],
     ['fen', ['fen'], 'Fen Bilimleri ve Matematik', [
         Kalip::adet('SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde en az iki makale yayımlamış olmak', ['3.1.1-3.1.4'], 2, madde: 'MADDE 15/b'),
-        Kalip::puanDan('3.1, 3.2 ve 3.3 başlıklarındaki makale ve kitaplardan en az 40 puan almak', ['3.1-3.2-3.3'], 40, madde: 'MADDE 15/b'),
+        Kalip::puanDan('Makale ve kitap kalemlerinizden en az 40 puan almak', ['3.1-3.2-3.3'], 40, madde: 'MADDE 15/b'),
         Kalip::toplam(80),
     ]],
     ['filoloji', ['filoloji'], 'Filoloji', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, madde: 'MADDE 15/c'),
-        Kalip::adet('3.1, 3.2 ya da 3.3 başlıklarından en az bir yayın yapmış olmak', ['3.1-3.2-3.3'], 1, madde: 'MADDE 15/c'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, madde: 'MADDE 15/c'),
+        Kalip::adet('Makale ya da kitap türünden en az bir yayın yapmış olmak', ['3.1-3.2-3.3'], 1, madde: 'MADDE 15/c'),
         $TEZDEN,
         Kalip::toplam(40),
     ]],
     ['guzel-sanatlar', ['guzel_sanatlar'], 'Güzel Sanatlar', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az bir makale yayımlamış olmak', ['3.1-3.2'], 1, madde: 'MADDE 15/d'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az bir makale yayımlamış olmak', ['3.1-3.2'], 1, madde: 'MADDE 15/d'),
         Kalip::puanDan('Kurumsal katkı ve sanatsal faaliyet kalemlerinden en az 100 puan almak', ['KURUMSAL-VE-SANATSAL'], 100, madde: 'MADDE 15/d'),
     ]],
     ['ilahiyat', ['ilahiyat'], 'İlahiyat', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, madde: 'MADDE 15/e'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, madde: 'MADDE 15/e'),
         Kalip::toplam(40),
     ]],
     ['muhendislik', ['muhendislik'], 'Mühendislik', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, madde: 'MADDE 15/f'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, madde: 'MADDE 15/f'),
         Kalip::toplam(80),
     ]],
     ['sosyal', ['sosyal'], 'Sosyal, Beşeri ve İdari Bilimler', [
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 25 puan almak', ['3.1-3.2'], 25, madde: 'MADDE 15/g'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 25 puan almak', ['3.1-3.2'], 25, madde: 'MADDE 15/g'),
         Kalip::toplam(40),
     ]],
     ['saglik', ['saglik'], 'Sağlık Bilimleri', [
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 25 puan almak', ['3.1-3.2'], 25, madde: 'MADDE 15/h'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 25 puan almak', ['3.1-3.2'], 25, madde: 'MADDE 15/h'),
         Kalip::toplam(80),
     ]],
     ['spor', ['spor'], 'Spor Bilimleri', [
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 20 puan almak', ['3.1-3.2'], 20, madde: 'MADDE 15/ı'),
-        Kalip::adet('3.1, 3.2 ya da 3.3 başlıklarından en az bir yayın yapmış olmak', ['3.1-3.2-3.3'], 1, madde: 'MADDE 15/ı'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 20 puan almak', ['3.1-3.2'], 20, madde: 'MADDE 15/ı'),
+        Kalip::adet('Makale ya da kitap türünden en az bir yayın yapmış olmak', ['3.1-3.2-3.3'], 1, madde: 'MADDE 15/ı'),
         $TEZDEN,
         Kalip::toplam(40),
     ]],
     ['ziraat', ['ziraat'], 'Ziraat, Orman ve Su Ürünleri', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, madde: 'MADDE 15/i'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, madde: 'MADDE 15/i'),
         Kalip::toplam(40),
     ]],
 ];
@@ -168,37 +168,37 @@ foreach ($drTablosu as [$kod, $alanlar, $alanAdi, $kosullar]) {
 // ═══════════ DOKTOR ÖĞRETİM ÜYESİ — YENİDEN ATAMA (MADDE 16-19) ═══════════
 $yenidenTablosu = [
     ['egitim', ['egitim'], 'Eğitim Bilimleri', [
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 40 puan almak', ['3.1-3.2'], 40, $SON_ATAMA, madde: 'MADDE 16/a'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 40 puan almak', ['3.1-3.2'], 40, $SON_ATAMA, madde: 'MADDE 16/a'),
         Kalip::toplam(60, $SON_ATAMA),
     ]],
     ['fen', ['fen'], 'Fen Bilimleri ve Matematik', [
         Kalip::veya('Makale koşulunu sağlamak', [
             Kalip::adet('SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde en az iki makale yayımlamış olmak', ['3.1.1-3.1.4'], 2, donem: $SON_ATAMA, madde: 'MADDE 16/b'),
-            Kalip::puanDan('3.1, 3.2 ve 3.3 başlıklarındaki makale ve kitaplardan en az 40 puan almak', ['3.1-3.2-3.3'], 40, $SON_ATAMA, madde: 'MADDE 16/b'),
+            Kalip::puanDan('Makale ve kitap kalemlerinizden en az 40 puan almak', ['3.1-3.2-3.3'], 40, $SON_ATAMA, madde: 'MADDE 16/b'),
         ]),
         Kalip::adet('Ulusal Ar-Ge projelerinden en az birinde görev almak', ['3.7'], 1, donem: $SON_ATAMA, madde: 'MADDE 16/b'),
         Kalip::toplam(100, $SON_ATAMA),
     ]],
     ['filoloji', ['filoloji'], 'Filoloji', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, donem: $SON_ATAMA, madde: 'MADDE 16/c'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, donem: $SON_ATAMA, madde: 'MADDE 16/c'),
         Kalip::toplam(60, $SON_ATAMA),
     ]],
     ['guzel-sanatlar', ['guzel_sanatlar'], 'Güzel Sanatlar', [
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 55 puan almak', ['3.1-3.2'], 55, $SON_ATAMA, madde: 'MADDE 16/d'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 55 puan almak', ['3.1-3.2'], 55, $SON_ATAMA, madde: 'MADDE 16/d'),
         Kalip::adet('Bu makalelerden en az birinin TR Dizin kapsamındaki bir dergide yayımlanmış olması', ['3.2.1'], 1, donem: $SON_ATAMA, madde: 'MADDE 16/d'),
         Kalip::puanDan('Kurumsal katkı ve sanatsal faaliyet kalemlerinden en az 140 puan almak', ['KURUMSAL-VE-SANATSAL'], 140, $SON_ATAMA, madde: 'MADDE 16/d'),
         Kalip::toplam(180, $SON_ATAMA),
     ]],
     ['ilahiyat', ['ilahiyat'], 'İlahiyat', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, donem: $SON_ATAMA, madde: 'MADDE 16/e'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, donem: $SON_ATAMA, madde: 'MADDE 16/e'),
         Kalip::toplam(60, $SON_ATAMA),
     ]],
     ['muhendislik', ['muhendislik'], 'Mühendislik', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, donem: $SON_ATAMA, madde: 'MADDE 16/f'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, donem: $SON_ATAMA, madde: 'MADDE 16/f'),
         Kalip::toplam(100, $SON_ATAMA),
     ]],
     ['sosyal', ['sosyal'], 'Sosyal, Beşeri ve İdari Bilimler', [
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 40 puan almak', ['3.1-3.2'], 40, $SON_ATAMA, madde: 'MADDE 16/g'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 40 puan almak', ['3.1-3.2'], 40, $SON_ATAMA, madde: 'MADDE 16/g'),
         Kalip::toplam(60, $SON_ATAMA),
     ]],
     ['saglik', ['saglik'], 'Sağlık Bilimleri', [
@@ -212,7 +212,7 @@ $yenidenTablosu = [
         Kalip::toplam(60, $SON_ATAMA),
     ]],
     ['ziraat', ['ziraat'], 'Ziraat, Orman ve Su Ürünleri', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, donem: $SON_ATAMA, madde: 'MADDE 16/i'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az iki makale yayımlamış olmak', ['3.1-3.2'], 2, donem: $SON_ATAMA, madde: 'MADDE 16/i'),
         Kalip::toplam(60, $SON_ATAMA),
     ]],
 ];
@@ -227,7 +227,7 @@ foreach ($yenidenTablosu as [$kod, $alanlar, $alanAdi, $kosullar]) {
         'notlar' => $alanAdi.' doktor öğretim üyesi yeniden atama (MADDE 16). MADDE 17: yalnız '
             .'son atama tarihinden sonraki faaliyetler sayılır.',
         'aday_notu' => $alanAdi.' alanında doktor öğretim üyesi kadrosuna YENİDEN ATANMA. '
-            .'MADDE 17 uyarınca yalnız SON ATAMA TARİHİNDEN SONRAKİ faaliyetleriniz sayılıyor.'
+            .'Yalnız SON ATAMA TARİHİNDEN SONRAKİ faaliyetleriniz sayılıyor.'
             .$NOT_SURE.$NOT_DIL.$NOT_CETVEL,
         'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna yeniden atanma — '.$alanAdi, [
             $DOKTORA,
@@ -251,7 +251,7 @@ $esikler[] = [
     'notlar' => 'MADDE 20: doçent kadrosu için yalnız ÜAK doçentlik unvanı aranıyor; '
         .'üniversitenin ek puan barajı ya da asgari faaliyet tablosu yok.',
     'aday_notu' => 'Ardahan Üniversitesi doçent kadrosuna atanmada KENDİ EK KOŞULUNU KOYMUYOR. '
-        .'MADDE 20 yalnız ÜAK tarafından verilen doçentlik unvanına sahip olmayı (ya da yurt '
+        .'Yalnız ÜAK tarafından verilen doçentlik unvanına sahip olmak (ya da yurt '
         .'dışından alınan unvanın 2547 sayılı Kanunun 27. maddesi uyarınca ÜAK tarafından '
         .'geçerli sayılmasını) arıyor. Yönergenin asgari faaliyet tabloları yalnız doktor '
         .'öğretim üyesi ve profesör kadroları için var.'.$NOT_DIL,
@@ -279,7 +279,7 @@ $KITAP = Kalip::adet(
 $profTablosu = [
     ['egitim', ['egitim'], 'Eğitim Bilimleri', [
         Kalip::adet('SCI, SCI-Expanded, SSCI, AHCI, ESCI ya da SCOPUS kapsamındaki dergilerde en az iki makale yayımlamış olmak', ['3.1.1-3.1.11'], 2, donem: $DOCENTLIK, madde: 'MADDE 24/a'),
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 100 puan almak', ['3.1-3.2'], 100, $DOCENTLIK, madde: 'MADDE 24/a'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 100 puan almak', ['3.1-3.2'], 100, $DOCENTLIK, madde: 'MADDE 24/a'),
         $KITAP,
         $PROJE_YURUTUCU,
         Kalip::puanDan('Atıflardan en az 20 puan almak', ['3.10'], 20, $DOCENTLIK, madde: 'MADDE 24/a'),
@@ -293,19 +293,19 @@ $profTablosu = [
         Kalip::toplam(200, $DOCENTLIK),
     ]],
     ['filoloji', ['filoloji'], 'Filoloji', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az üç makale yayımlamış olmak', ['3.1-3.2'], 3, donem: $DOCENTLIK, madde: 'MADDE 24/c'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az üç makale yayımlamış olmak', ['3.1-3.2'], 3, donem: $DOCENTLIK, madde: 'MADDE 24/c'),
         $KITAP,
         $PROJE_YURUTUCU,
         Kalip::toplam(200, $DOCENTLIK),
     ]],
     ['ilahiyat', ['ilahiyat'], 'İlahiyat', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az üç makale yayımlamış olmak', ['3.1-3.2'], 3, donem: $DOCENTLIK, madde: 'MADDE 24/e'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az üç makale yayımlamış olmak', ['3.1-3.2'], 3, donem: $DOCENTLIK, madde: 'MADDE 24/e'),
         $PROJE_YURUTUCU,
         $KITAP,
         Kalip::toplam(200, $DOCENTLIK),
     ]],
     ['muhendislik', ['muhendislik'], 'Mühendislik', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az üç makale yayımlamış olmak', ['3.1-3.2'], 3, donem: $DOCENTLIK, madde: 'MADDE 24/f'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az üç makale yayımlamış olmak', ['3.1-3.2'], 3, donem: $DOCENTLIK, madde: 'MADDE 24/f'),
         Kalip::adet('Bu makalelerin en az ikisinde başlıca yazar olmak', ['3.1-3.2'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: 'MADDE 24/f'),
         Kalip::adet('Tez danışmanlığı ve jüri üyelikleri başlığından en az iki faaliyet', ['3.4'], 2, donem: $DOCENTLIK, madde: 'MADDE 24/f'),
         $PROJE_YURUTUCU,
@@ -313,14 +313,14 @@ $profTablosu = [
     ]],
     ['sosyal', ['sosyal'], 'Sosyal, Beşeri ve İdari Bilimler', [
         Kalip::adet('SCI, SCI-Expanded, SSCI, AHCI, ESCI ya da SCOPUS kapsamındaki dergilerde en az iki makale yayımlamış olmak', ['3.1.1-3.1.11'], 2, donem: $DOCENTLIK, madde: 'MADDE 24/g'),
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 100 puan almak', ['3.1-3.2'], 100, $DOCENTLIK, madde: 'MADDE 24/g'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 100 puan almak', ['3.1-3.2'], 100, $DOCENTLIK, madde: 'MADDE 24/g'),
         $KITAP,
         Kalip::puanDan('Atıflardan en az 20 puan almak', ['3.10'], 20, $DOCENTLIK, madde: 'MADDE 24/g'),
         $PROJE_YURUTUCU,
         Kalip::toplam(200, $DOCENTLIK),
     ]],
     ['saglik', ['saglik'], 'Sağlık Bilimleri', [
-        Kalip::puanDan('3.1 ve 3.2 başlıklarındaki makalelerden en az 60 puan almak', ['3.1-3.2'], 60, $DOCENTLIK, madde: 'MADDE 24/h'),
+        Kalip::puanDan('Uluslararası ve ulusal hakemli dergilerdeki makalelerinizden en az 60 puan almak', ['3.1-3.2'], 60, $DOCENTLIK, madde: 'MADDE 24/h'),
         Kalip::adet('Bu makalelerin en az birinde başlıca yazar olmak', ['3.1-3.2'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'MADDE 24/h'),
         $PROJE_YURUTUCU,
         Kalip::puanDan('Kitap, tez danışmanlığı, proje, bildiri, bilimsel tanınırlık, hakemlik ve ödül kalemlerinden en az 80 puan almak', ['SAGLIK-PROF'], 80, $DOCENTLIK, madde: 'MADDE 24/h'),
@@ -337,7 +337,7 @@ $profTablosu = [
         Kalip::toplam(200, $DOCENTLIK),
     ]],
     ['ziraat', ['ziraat'], 'Ziraat, Orman ve Su Ürünleri', [
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az üç makale yayımlamış olmak', ['3.1-3.2'], 3, donem: $DOCENTLIK, madde: 'MADDE 24/i'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az üç makale yayımlamış olmak', ['3.1-3.2'], 3, donem: $DOCENTLIK, madde: 'MADDE 24/i'),
         Kalip::adet('Bu makalelerin en az ikisinde başlıca yazar olmak', ['3.1-3.2'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: 'MADDE 24/i'),
         Kalip::adet('Tez danışmanlığı ve jüri üyelikleri başlığından en az iki faaliyet', ['3.4'], 2, donem: $DOCENTLIK, madde: 'MADDE 24/i'),
         $PROJE_YURUTUCU,
@@ -354,10 +354,10 @@ foreach ($profTablosu as [$kod, $alanlar, $alanAdi, $kosullar]) {
         'cetvel' => $CETVEL,
         'notlar' => $alanAdi.' profesörlük (MADDE 24). Bütün koşullar doçentlik unvanı '
             .'alındıktan sonraki faaliyetlerden sağlanmalı.',
-        'aday_notu' => $alanAdi.' alanında profesör kadrosuna atanma. MADDE 24 bütün asgari '
+        'aday_notu' => $alanAdi.' alanında profesör kadrosuna atanma. Yönerge bütün asgari '
             .'faaliyetlerin ve puanların DOÇENT UNVANINI ALDIKTAN SONRAKİ çalışmalardan '
-            .'sağlanmasını istiyor. MADDE 23: profesörlük temel eseri olarak 3.1, 3.2 ve 3.3 '
-            .'başlıklarındaki yayınlar sunulabilir.'.$NOT_DIL.$NOT_CETVEL,
+            .'sağlanmasını istiyor. Profesörlük temel eseri olarak makale ve kitap '
+            .'yayınlarınızdan biri sunulabilir.'.$NOT_DIL.$NOT_CETVEL,
         'sart' => Kalip::ve('Profesör kadrosuna atanma — '.$alanAdi, [
             $UNVAN,
             $DIL,
@@ -388,7 +388,7 @@ $esikler[] = [
         $DIL,
         $DIL_NOT,
         $MADDE22,
-        Kalip::adet('3.1 ve 3.2 başlıklarındaki dergilerde en az bir makale yayımlamış olmak', ['3.1-3.2'], 1, donem: $DOCENTLIK, madde: 'MADDE 24/d'),
+        Kalip::adet('Uluslararası ya da ulusal hakemli dergilerde en az bir makale yayımlamış olmak', ['3.1-3.2'], 1, donem: $DOCENTLIK, madde: 'MADDE 24/d'),
         Kalip::adet('TR Dizin kapsamındaki bir dergide en az bir makale yayımlamış olmak', ['3.2.1'], 1, donem: $DOCENTLIK, madde: 'MADDE 24/d'),
         Kalip::adet('En az bir özgün bilimsel kitap, kitap bölümü ya da kitap editörlüğü', ['3.3'], 1, donem: $DOCENTLIK, madde: 'MADDE 24/d'),
         $PROJE_YURUTUCU,

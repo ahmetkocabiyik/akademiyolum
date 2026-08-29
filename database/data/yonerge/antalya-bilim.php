@@ -85,7 +85,7 @@ $NOT_DIL = ' Yabancı dil koşulu yalnız YABANCI DİLDE EĞİTİM yapan birimle
     .'85 puan); Türkçe eğitim yapan birimlere yönerge dil koşulu koymuyor. Başvuracağınız '
     .'birimin eğitim dili kayıtta taşınmadığı için bu koşul beyan olarak duruyor.';
 
-$NOT_CETVEL = ' EK-1 çizelgesi yalnız araştırma çıktısını puanlıyor: tez danışmanlığı, ders '
+$NOT_CETVEL = ' Puan çizelgesi yalnız araştırma çıktısını puanlıyor: tez danışmanlığı, ders '
     .'verme ve idari görevlerin puan satırı yok, bu kayıtlarınız toplam puanınıza katkı '
     .'vermiyor. Yönerge ortak çalışmalarda puanın yazarlar arasında bölünmesi için de bir kural '
     .'koymuyor; çok yazarlı çalışmalarınız tam puan alıyor.';
@@ -94,11 +94,11 @@ $NOT_CETVEL = ' EK-1 çizelgesi yalnız araştırma çıktısını puanlıyor: t
 $sanatYaDaMakale = function (int $makale, int $etkinlik, ?array $donem, string $madde): array {
     return Kalip::veya('Makale ya da sanatsal etkinlik koşulunu sağlamak', [
         Kalip::adet(
-            "EK-1 çizelgesinin 01-06 numaralı maddeleri kapsamındaki dergilerde en az {$makale} makale yayımlamış olmak",
+            "Hakemli dergilerde en az {$makale} makale yayımlamış olmak",
             ['01-06'], $makale, donem: $donem, madde: $madde
         ),
         Kalip::adet(
-            "EK-1 çizelgesinin 45-51 numaralı maddeleri kapsamında en az {$etkinlik} sanatsal etkinlik yapmış olmak",
+            "Sergi, konser, temsil ya da tasarım türünden en az {$etkinlik} sanatsal etkinlik yapmış olmak",
             ['45-51'], $etkinlik, donem: $donem, madde: $madde
         ),
     ]);
@@ -109,8 +109,8 @@ $esikler = [];
 // ═══════════════ DOKTOR ÖĞRETİM ÜYESİ — İLK ATANMA ═══════════════
 $drKosullari = [
     'sosyal' => [['sosyal'], 'Sosyal, Beşerî ve İdari Bilimler', Kalip::ve('Yayın koşulunu sağlamak', [
-        Kalip::adet('EK-1 çizelgesinin 1 ve 2 numaralı maddeleri kapsamındaki dergilerde en az bir makale yayımlamış olmak', ['1-2'], 1, madde: 'Tablo 2'),
-        Kalip::adet('EK-1 çizelgesinin 3-6 numaralı maddeleri kapsamındaki dergilerde en az bir makale yayımlamış olmak', ['3-6'], 1, madde: 'Tablo 2'),
+        Kalip::adet('SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde en az bir makale yayımlamış olmak', ['1-2'], 1, madde: 'Tablo 2'),
+        Kalip::adet('Web of Science, Scopus, alan indeksli ya da TR Dizin dergilerinde en az bir makale yayımlamış olmak', ['3-6'], 1, madde: 'Tablo 2'),
     ])],
     'saglik' => [['saglik'], 'Sağlık Bilimleri', null],
     'muhendislik' => [['muhendislik'], 'Mühendislik', null],
@@ -118,7 +118,7 @@ $drKosullari = [
 ];
 
 $ikiUluslararasi = Kalip::ve('Yayın koşulunu sağlamak', [
-    Kalip::adet('EK-1 çizelgesinin 1 ya da 2 numaralı maddeleri kapsamındaki dergilerde en az bir makale yayımlamış olmak', ['1-2'], 1, madde: 'Tablo 2'),
+    Kalip::adet('SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde en az bir makale yayımlamış olmak', ['1-2'], 1, madde: 'Tablo 2'),
     Kalip::adet('Uluslararası dergilerde toplam en az iki yayın yapmış olmak', ['ULUSLARARASI-MAKALE'], 2, madde: 'Tablo 2'),
 ]);
 
@@ -132,8 +132,8 @@ foreach ($drKosullari as $kod => [$alanlar, $alanAdi, $yayin]) {
         'notlar' => $alanAdi.' doktor öğretim üyesi: Tablo 1\'den 40 puan ve Tablo 2\'nin '
             .'yayın koşulu.',
         'aday_notu' => $alanAdi.' alanında doktor öğretim üyesi kadrosuna İLK ATANMA. Yönerge '
-            .'Tablo 1\'in puan barajıyla Tablo 2\'nin yayın koşulunun BİRLİKTE sağlanmasını '
-            .'istiyor (MADDE 7/1). Puan barajı bütün temel alanlarda aynı: 40 puan.'
+            .'puan barajıyla yayın koşulunun BİRLİKTE sağlanmasını istiyor. Puan barajı '
+            .'bütün temel alanlarda aynı: 40 puan.'
             .$NOT_DIL.$NOT_CETVEL,
         'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna atanma — '.$alanAdi, [
             $DOKTORA,
@@ -192,19 +192,19 @@ $esikler[] = [
         .'ya da doktora tezi tanınmış bir yayınevinde yayımlanmış olmak kaydıyla 01-06\'da en '
         .'az iki yayın.',
     'aday_notu' => 'Hukuk alanında doktor öğretim üyesi kadrosuna İLK ATANMA. Yayın koşulunu '
-        .'iki yoldan biriyle karşılayabilirsiniz: 01-06 numaralı maddeler kapsamındaki '
-        .'dergilerde dört yayın ya da doktora tezinizin tanınmış bir yayınevinde kitap olarak '
+        .'iki yoldan biriyle karşılayabilirsiniz: hakemli dergilerde dört yayın ya da '
+        .'doktora tezinizin tanınmış bir yayınevinde kitap olarak '
         .'yayımlanmış olması kaydıyla iki yayın. İkinci yolda kitabın doktora tezinizden '
         .'üretildiği kayıtta taşınmadığı için o kısım beyan olarak duruyor.'.$NOT_DIL.$NOT_CETVEL,
     'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna atanma — Hukuk', [
         $DOKTORA,
         $DIL,
         Kalip::veya('Yayın koşulunu sağlamak', [
-            Kalip::adet('EK-1 çizelgesinin 01-06 numaralı maddeleri kapsamındaki dergilerde en az dört yayın yapmış olmak', ['01-06'], 4, madde: 'Tablo 2'),
+            Kalip::adet('Hakemli dergilerde en az dört yayın yapmış olmak', ['01-06'], 4, madde: 'Tablo 2'),
             Kalip::ve('Doktora tezi kitap olarak yayımlanmış adaylar için', [
                 Kalip::beyan('Doktora tezinizin tanınmış bir uluslararası ya da ulusal yayınevinde kitap olarak yayımlanmış olması', 'Tablo 2'),
                 Kalip::adet('Tanınmış bir yayınevinde yayımlanmış en az bir kitabınızın olması', ['KITAP'], 1, madde: 'Tablo 2'),
-                Kalip::adet('EK-1 çizelgesinin 01-06 numaralı maddeleri kapsamındaki dergilerde en az iki yayın yapmış olmak', ['01-06'], 2, madde: 'Tablo 2'),
+                Kalip::adet('Hakemli dergilerde en az iki yayın yapmış olmak', ['01-06'], 2, madde: 'Tablo 2'),
             ]),
         ]),
         Kalip::toplam(40),
@@ -223,8 +223,8 @@ $esikler[] = [
     'notlar' => 'Yeniden atama: Tablo 1\'den 20 puan, son atamadan sonra alınmış olmak üzere. '
         .'Tablo 2\'nin yeniden atama için ayrı bir yayın koşulu yok.',
     'aday_notu' => 'Doktor öğretim üyesi kadrosuna YENİDEN ATANMA. Yönerge yeniden atamaya '
-        .'yalnız puan barajı koyuyor: son atamanızdan sonra alınmış en az 20 puan. Tablo 2\'nin '
-        .'yayın koşulları yeniden atamada aranmıyor. Bu 20 puan BİR YILLIK sözleşme için '
+        .'yalnız puan barajı koyuyor: son atamanızdan sonra alınmış en az 20 puan. İlk '
+        .'atamadaki yayın koşulları yeniden atamada aranmıyor. Bu 20 puan BİR YILLIK sözleşme için '
         .'geçerli; sözleşmeniz daha uzunsa puanın da orantılı olarak artması gerekiyor, '
         .'sözleşme süresi kayıtta taşınmadığı için bir yıllık değer uygulandı.'
         .$NOT_DIL.$NOT_CETVEL,
@@ -236,6 +236,15 @@ $esikler[] = [
 ];
 
 // ═══════════════ DOÇENT ═══════════════
+/**
+ * Yayın koşulunun dergi kümesi alana göre değişiyor. `$KUME_ADI` adaya
+ * gösterilen adı taşır (KONVANSIYONLAR §2); kod yalnızca `notlar`da kalır.
+ */
+$KUME_ADI = [
+    '01-03' => 'SCI, SCI-Expanded, SSCI, AHCI, Web of Science ve Scopus',
+    '01-06' => 'hakemli',
+];
+
 $docKosullari = [
     ['sosyal', ['sosyal'], 'Sosyal, Beşerî ve İdari Bilimler', '01-06'],
     ['saglik', ['saglik'], 'Sağlık Bilimleri', '01-03'],
@@ -245,6 +254,7 @@ $docKosullari = [
 ];
 
 foreach ($docKosullari as [$kod, $alanlar, $alanAdi, $kume]) {
+    $kumeAdi = $KUME_ADI[$kume];
     $esikler[] = [
         'anahtar' => "antalya-bilim-{$kod}-docentlik",
         'universite' => $UNIVERSITE,
@@ -255,14 +265,14 @@ foreach ($docKosullari as [$kod, $alanlar, $alanAdi, $kume]) {
             .$kume.' numaralı maddeleri kapsamındaki dergilerde toplam iki makale; Tablo 1\'den '
             .'100 puan.',
         'aday_notu' => $alanAdi.' alanında doçent kadrosuna atanma. YÖK doçentlik kriterlerini '
-            .'sağlayıp unvanı almış olmanıza EK OLARAK, EK-1 çizelgesinin '.$kume.' numaralı '
-            .'maddeleri kapsamındaki dergilerde toplam iki makaleniz olması ve Tablo 1\'in 100 '
+            .'sağlayıp unvanı almış olmanıza EK OLARAK, '.$kumeAdi.' dergilerde toplam iki '
+            .'makaleniz olması ve 100 '
             .'puanlık barajını geçmeniz gerekiyor. Yönerge bu yayınlar için dönem sınırı '
             .'koymuyor, bütün akademik geçmişiniz sayılıyor.'.$NOT_DIL.$NOT_CETVEL,
         'sart' => Kalip::ve('Doçent kadrosuna atanma — '.$alanAdi, [
             $UNVAN,
             $DIL,
-            Kalip::adet('EK-1 çizelgesinin '.$kume.' numaralı maddeleri kapsamındaki dergilerde toplam en az iki makale yayımlamış olmak', [$kume], 2, madde: 'Tablo 2'),
+            Kalip::adet($kumeAdi.' dergilerde toplam en az iki makale yayımlamış olmak', [$kume], 2, madde: 'Tablo 2'),
             Kalip::toplam(100),
         ]),
     ];
@@ -279,9 +289,9 @@ foreach ([['mimarlik', ['mimarlik'], 'Mimarlık, Planlama ve Tasarım'],
         'notlar' => $alanAdi.' doçentlik: YÖK doçentlik kriterlerine ek olarak 01-06\'da iki '
             .'makale ve/veya 45-51\'de en az beş sanatsal etkinlik; Tablo 1\'den 100 puan.',
         'aday_notu' => $alanAdi.' alanında doçent kadrosuna atanma. YÖK doçentlik kriterlerine '
-            .'ek olarak ya 01-06 numaralı maddeler kapsamındaki dergilerde iki makaleniz ya da '
-            .'45-51 numaralı maddeler kapsamında en az beş sanatsal etkinliğiniz olmalı; '
-            .'yönergenin "ve/veya" ifadesi VEYA olarak okundu. Tablo 1\'in 100 puanlık barajı '
+            .'ek olarak ya hakemli dergilerde iki makaleniz ya da sergi, konser, temsil '
+            .'türünden en az beş sanatsal etkinliğiniz olmalı; yönergenin "ve/veya" ifadesi '
+            .'VEYA olarak okundu. 100 puanlık baraj '
             .'ayrıca geçilmeli.'.$NOT_DIL.$NOT_CETVEL,
         'sart' => Kalip::ve('Doçent kadrosuna atanma — '.$alanAdi, [
             $UNVAN,
@@ -301,6 +311,7 @@ $profKosullari = [
 ];
 
 foreach ($profKosullari as [$kod, $alanlar, $alanAdi, $kume]) {
+    $kumeAdi = $KUME_ADI[$kume];
     $esikler[] = [
         'anahtar' => "antalya-bilim-{$kod}-profesorluk",
         'universite' => $UNIVERSITE,
@@ -311,13 +322,13 @@ foreach ($profKosullari as [$kod, $alanlar, $alanAdi, $kume]) {
             .$kume.' numaralı maddeleri kapsamındaki dergilerde toplam iki makale; Tablo 1\'den '
             .'150 puan.',
         'aday_notu' => $alanAdi.' alanında profesör kadrosuna atanma. İki makale koşulu '
-            .'DOÇENTLİK ATAMASINDAN SONRAKİ çalışmalarınızdan hesaplanıyor; Tablo 1\'in 150 '
+            .'DOÇENTLİK ATAMASINDAN SONRAKİ çalışmalarınızdan hesaplanıyor; 150 '
             .'puanlık barajı için yönerge dönem sınırı koymuyor, bütün akademik geçmişiniz '
             .'sayılıyor.'.$NOT_DIL.$NOT_CETVEL,
         'sart' => Kalip::ve('Profesör kadrosuna atanma — '.$alanAdi, [
             $UNVAN,
             $DIL,
-            Kalip::adet('Doçentlik atamanızdan sonra EK-1 çizelgesinin '.$kume.' numaralı maddeleri kapsamındaki dergilerde toplam en az iki makale yayımlamış olmak', [$kume], 2, donem: $DOCENTLIK, madde: 'Tablo 2'),
+            Kalip::adet('Doçentlik atamanızdan sonra '.$kumeAdi.' dergilerde toplam en az iki makale yayımlamış olmak', [$kume], 2, donem: $DOCENTLIK, madde: 'Tablo 2'),
             Kalip::toplam(150),
         ]),
     ];
@@ -335,8 +346,8 @@ foreach ([['mimarlik', ['mimarlik'], 'Mimarlık, Planlama ve Tasarım'],
             .'makale ve/veya 45-51\'de en az üç sanatsal etkinlik; Tablo 1\'den 150 puan.',
         'aday_notu' => $alanAdi.' alanında profesör kadrosuna atanma. Üç makale ya da üç '
             .'sanatsal etkinlik koşulu DOÇENTLİK ATAMASINDAN SONRAKİ çalışmalarınızdan '
-            .'hesaplanıyor; yönergenin "ve/veya" ifadesi VEYA olarak okundu. Tablo 1\'in 150 '
-            .'puanlık barajında dönem sınırı yok.'.$NOT_DIL.$NOT_CETVEL,
+            .'hesaplanıyor; yönergenin "ve/veya" ifadesi VEYA olarak okundu. 150 puanlık '
+            .'barajda dönem sınırı yok.'.$NOT_DIL.$NOT_CETVEL,
         'sart' => Kalip::ve('Profesör kadrosuna atanma — '.$alanAdi, [
             $UNVAN,
             $DIL,
@@ -365,7 +376,7 @@ $esikler[] = [
         $UNVAN,
         $DIL,
         Kalip::adet('Doçentlik atamanızdan sonra tek yazarlı ve ders kitabı dışında bir kitabınızın olması', ['KITAP'], 1, yazar: 'tek', donem: $DOCENTLIK, madde: 'Tablo 2'),
-        Kalip::adet('Doçentlik atamanızdan sonra EK-1 çizelgesinin 01-06 numaralı maddeleri kapsamındaki dergilerde toplam en az iki yayın yapmış olmak', ['01-06'], 2, donem: $DOCENTLIK, madde: 'Tablo 2'),
+        Kalip::adet('Doçentlik atamanızdan sonra hakemli dergilerde toplam en az iki yayın yapmış olmak', ['01-06'], 2, donem: $DOCENTLIK, madde: 'Tablo 2'),
         Kalip::toplam(150),
     ]),
 ];
