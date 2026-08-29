@@ -85,8 +85,10 @@ $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 
 $T12 = ['T1', 'T2'];
 $T23 = ['T2', 'T3'];
-$LISTE12 = 'Tablo 1 ve Tablo 2';
-$LISTE23 = 'Tablo 2 ve Tablo 3';
+// Adaya gösterilen küme adları (KONVANSIYONLAR §2): T1 yayınlar, T2 atıf,
+// editörlük, idari görev, ders ve tez danışmanlığı, T3 sanatsal etkinlikler.
+$LISTE12 = 'Yayın ve diğer akademik faaliyet';
+$LISTE23 = 'Sanatsal etkinlik ve diğer akademik faaliyet';
 
 $UYARI = ' DİKKAT: yönergenin ölçüt listelerinden faaliyet kaydından okunamayan dallar '
     .'çıkarıldı (kamu kurumu projesine yapılmış BAŞVURU, tez projesi dışındaki BAP '
@@ -161,7 +163,8 @@ $drOrtak = [
 $esikler[] = [
     'anahtar' => 'isparta-ubu-fen-muh-dr',
     'aday_notu' => 'Fen ve Mühendislik Bilimleriyle ilgili birimlerde Dr. Öğretim Üyeliği için '
-        .'Tablo 1\'den en az 40 puan olmak üzere Tablo 1 ve Tablo 2\'den toplam 60 puan, bir '
+        .'yayın kalemlerinizden en az 40 puan olmak üzere, yayın ve diğer akademik faaliyet '
+        .'kalemlerinizden toplam 60 puan, bir '
         .'yayın koşulu ve altı ölçütten en az ikisi isteniyor.'.$UYARI,
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
@@ -176,13 +179,13 @@ $esikler[] = [
             Kalip::adet('SSCI, SCI ya da SCI-Expanded kapsamındaki dergilerde en az 1 araştırma makaleniz olmalı', ['SCI-MAKALE'], 1, madde: 'MADDE 6/2-a'),
             Kalip::adet('Ya da diğer indekslere giren hakemli dergilerde en az 3 araştırma makaleniz olmalı', ['DIGER-INDEKS-MAKALE'], 3, madde: 'MADDE 6/2-a'),
         ]),
-        Kalip::puanDan('Tablo 1 kalemlerinizden en az 40 puan', ['T1'], 40, madde: 'MADDE 6/2-b'),
+        Kalip::puanDan('Yayın kalemlerinizden en az 40 puan', ['T1'], 40, madde: 'MADDE 6/2-b'),
         Kalip::kIle('Aşağıdaki ölçütlerden en az 2 tanesini sağlamalısınız', 2, [
             $yurtdisi,
             Kalip::adet('Üniversite dışındaki kamu kurumları projelerinden en az 1\'inde araştırmacı olmak', ['PROJE-KAMU-A'], 1, madde: 'MADDE 6/2-c-2'),
-            Kalip::adet('Madde 6/2-a\'daki yayına ilaveten SSCI, SCI ya da SCI-Expanded kapsamında bir makale daha (toplam 2)', ['SCI-MAKALE'], 2, madde: 'MADDE 6/2-c-4'),
+            Kalip::adet('Yukarıdaki yayına ilaveten SSCI, SCI ya da SCI-Expanded kapsamında bir makale daha (toplam 2)', ['SCI-MAKALE'], 2, madde: 'MADDE 6/2-c-4'),
             $kitapVeyaEditor('MADDE 6/2-c-5', 'ilk'),
-            Kalip::puanDan('Madde 6/2-b\'deki puana ilaveten Tablo 1\'den 20 puan daha (toplam 60)', ['T1'], 60, madde: 'MADDE 6/2-c-6'),
+            Kalip::puanDan('Yayın kalemlerinizden 20 puan daha (toplam 60)', ['T1'], 60, madde: 'MADDE 6/2-c-6'),
         ]),
         Kalip::toplam(60, null, $T12, $LISTE12),
     ]),
@@ -191,7 +194,8 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'isparta-ubu-sosyal-dr',
     'aday_notu' => 'Sosyal, Beşeri ve İdari Bilimlerle ilgili birimlerde Dr. Öğretim Üyeliği için '
-        .'Tablo 1\'den en az 40 puan olmak üzere Tablo 1 ve Tablo 2\'den toplam 60 puan ve beş '
+        .'yayın kalemlerinizden en az 40 puan olmak üzere, yayın ve diğer akademik faaliyet '
+        .'kalemlerinizden toplam 60 puan ve beş '
         .'ölçütten en az biri isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
@@ -201,7 +205,7 @@ $esikler[] = [
         .'ve Tablo 2\'den toplam en az 60 puan; 6/4-b bendindeki şartlardan en az biri.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna atanma — Sosyal, Beşeri ve İdari Bilimler', [
         ...$drOrtak,
-        Kalip::puanDan('Tablo 1 kalemlerinizden en az 40 puan', ['T1'], 40, madde: 'MADDE 6/4-a'),
+        Kalip::puanDan('Yayın kalemlerinizden en az 40 puan', ['T1'], 40, madde: 'MADDE 6/4-a'),
         Kalip::kIle('Aşağıdaki ölçütlerden en az 1 tanesini sağlamalısınız', 1, [
             Kalip::adet('SSCI, AHCI, SCI ya da SCI-Expanded kapsamındaki dergilerde 1 makaleniz olmalı', ['SCI-MAKALE'], 1, madde: 'MADDE 6/4-b-1'),
             Kalip::ve('En az 1\'i ISI indeksli ya da SCOPUS hakemli dergide olmak üzere toplam 2 makale', [
@@ -210,7 +214,7 @@ $esikler[] = [
             ]),
             Kalip::adet('ULAKBİM tarafından taranan dergilerde en az 3 makaleniz olmalı', ['ULAKBIM-MAKALE'], 3, madde: 'MADDE 6/4-b-3'),
             $yurtdisi,
-            Kalip::puanDan('Madde 6/4-a\'daki puana ilaveten Tablo 1\'den 20 puan daha (toplam 60)', ['T1'], 60, madde: 'MADDE 6/4-b-5'),
+            Kalip::puanDan('Yayın kalemlerinizden 20 puan daha (toplam 60)', ['T1'], 60, madde: 'MADDE 6/4-b-5'),
         ]),
         Kalip::toplam(60, null, $T12, $LISTE12),
     ]),
@@ -218,11 +222,12 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'isparta-ubu-gsf-dr',
-    'aday_notu' => 'Güzel Sanatlar Temel Alanında Dr. Öğretim Üyeliği için Tablo 3\'ten en az 40 '
-        .'puan olmak üzere Tablo 2 ve Tablo 3\'ten toplam 60 puan; ayrıca Tablo 3/A\'nın 4. '
-        .'maddesindeki asgari puanı (12,5 → 13) sağladıktan sonra 1, 2, 3 ve 5 numaralı '
-        .'maddelerden en az üçünde eser vermiş olmak isteniyor. DİKKAT: Tablo 3\'ün puanı bir '
-        .'PORTFÖYE bağlı satırları (altı eserlik beste dosyası, üç saatlik resital dizisi, dört '
+    'aday_notu' => 'Güzel Sanatlar Temel Alanında Dr. Öğretim Üyeliği için sanatsal '
+        .'etkinliklerinizden en az 40 puan olmak üzere, sanatsal etkinlik ve diğer akademik '
+        .'faaliyet kalemlerinizden toplam 60 puan; ayrıca kitap, makale ve çeviri kaleminden '
+        .'asgari puanı (12,5 → 13) sağladıktan sonra kişisel etkinlik, karma etkinlik, '
+        .'festival katılımı ve bildiri kalemlerinin en az üçünde eser vermiş olmak isteniyor. '
+        .'DİKKAT: sanatsal etkinlik puanının bir PORTFÖYE bağlı satırları (altı eserlik beste dosyası, üç saatlik resital dizisi, dört '
         .'saatlik şeflik kaydı gibi) eser başına bölünemediği için hiç girilemedi; bu satırlardan '
         .'puan alacaksanız gerçek durumunuz ekrandakinden iyidir.',
     'universite' => $UNIVERSITE,
@@ -234,9 +239,9 @@ $esikler[] = [
         .'puanından sonra A-1, A-2, A-3 ve A-5\'ten en az üçünde eser.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna atanma — Güzel Sanatlar', [
         ...$drOrtak,
-        Kalip::puanDan('Tablo 3 kalemlerinizden en az 40 puan', ['T3'], 40, madde: 'MADDE 6/6-a'),
-        Kalip::puanDan('Tablo 3/A-4 kalemlerinizden (kitap, makale, çeviri) en az 13 puan', ['A4'], 13, madde: 'MADDE 6/6-b'),
-        Kalip::kIle('Tablo 3/A\'nın 1, 2, 3 ve 5 numaralı maddelerinden en az 3\'ünde eseriniz olmalı', 3, [
+        Kalip::puanDan('Sanatsal etkinlik kalemlerinizden en az 40 puan', ['T3'], 40, madde: 'MADDE 6/6-a'),
+        Kalip::puanDan('Kitap, makale ve çeviri kalemlerinizden en az 13 puan', ['A4'], 13, madde: 'MADDE 6/6-b'),
+        Kalip::kIle('Aşağıdaki dört kalemden en az 3\'ünde eseriniz olmalı', 3, [
             Kalip::adet('Kişisel etkinlik (sergi, bienal, gösteri, dinleti, festival, gösterim)', ['A1'], 1, madde: 'MADDE 6/6-b'),
             Kalip::adet('Karma ya da ortak etkinlik veya kamusal alanda sergilenen/satın alınan eser', ['A2'], 1, madde: 'MADDE 6/6-b'),
             Kalip::adet('Sempozyum, festival, workshop ya da bienale eserle katılım', ['A3'], 1, madde: 'MADDE 6/6-b'),
@@ -251,7 +256,7 @@ $esikler[] = [
 $yenidenNotu = 'Bir önceki atama tarihinizden itibaren yaptığınız çalışmalar sayılıyor. Asgari '
     .'puanı sağlayamayan adaylara, durumunun izlenmesi amacıyla her defasında bir yıllık olmak '
     .'üzere en fazla 2 yıllığına yeniden atama yapılabiliyor; o dönemin sonunda aynı puanlar '
-    .'aranıyor (MADDE 6/3-b, 6/5-b, 6/7-b).';
+    .'aranıyor.';
 
 foreach ([
     ['fen-muh', ['fen', 'muhendislik'], 'T1', $T12, $LISTE12, 'Fen ve Mühendislik Bilimleri', 'MADDE 6/3-a'],
@@ -288,8 +293,8 @@ $docentOrtak = [
 
 $esikler[] = [
     'anahtar' => 'isparta-ubu-fen-muh-docentlik',
-    'aday_notu' => 'Fen ve Mühendislik Bilimleriyle ilgili birimlerde doçent kadrosu için Tablo 1 '
-        .'ve Tablo 2\'den toplam en az 100 puan ve dokuz ölçütten en az biri isteniyor.',
+    'aday_notu' => 'Fen ve Mühendislik Bilimleriyle ilgili birimlerde doçent kadrosu için yayın ve '
+        .'diğer akademik faaliyet kalemlerinizden toplam en az 100 puan ve dokuz ölçütten en az biri isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
     'alan' => ['fen', 'muhendislik'],
@@ -313,9 +318,9 @@ $esikler[] = [
             $kitapVeyaEditor('MADDE 7/2-b-6', 'ilk'),
             Kalip::adet('SSCI, AHCI, SCI ya da SCI-Expanded kapsamındaki Q1 veya Q2 dergilerde en az 1 araştırma makalesi', ['SCI-Q1Q2'], 1, madde: 'MADDE 7/2-b-7'),
             $tezTamamlama('MADDE 7/2-b-8', null),
-            Kalip::ve('Madde 7/2-a\'daki puana ilaveten Tablo 1\'den 10, Tablo 2\'den 10, toplamda 20 puan daha', [
-                Kalip::puanDan('Tablo 1 kalemlerinizden en az 10 puan', ['T1'], 10, madde: 'MADDE 7/2-b-9'),
-                Kalip::puanDan('Tablo 2 kalemlerinizden en az 10 puan', ['T2'], 10, madde: 'MADDE 7/2-b-9'),
+            Kalip::ve('Yayın kalemlerinizden 10, diğer akademik faaliyet kalemlerinizden 10, toplamda 20 puan daha', [
+                Kalip::puanDan('Yayın kalemlerinizden en az 10 puan', ['T1'], 10, madde: 'MADDE 7/2-b-9'),
+                Kalip::puanDan('Diğer akademik faaliyet kalemlerinizden en az 10 puan', ['T2'], 10, madde: 'MADDE 7/2-b-9'),
                 Kalip::toplam(120, null, $T12, $LISTE12),
             ]),
         ]),
@@ -325,8 +330,8 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'isparta-ubu-sosyal-docentlik',
-    'aday_notu' => 'Sosyal, Beşeri ve İdari Bilimlerle ilgili birimlerde doçent kadrosu için Tablo 1 '
-        .'ve Tablo 2\'den toplam en az 100 puan ve yedi ölçütten en az biri isteniyor.',
+    'aday_notu' => 'Sosyal, Beşeri ve İdari Bilimlerle ilgili birimlerde doçent kadrosu için yayın ve '
+        .'diğer akademik faaliyet kalemlerinizden toplam en az 100 puan ve yedi ölçütten en az biri isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
     'alan' => ['sosyal'],
@@ -345,7 +350,7 @@ $esikler[] = [
             Kalip::adet('SSCI, AHCI, SCI ya da SCI-Expanded kapsamındaki dergilerde 1 makalenizin yayımlanmış olması', ['SCI-MAKALE'], 1, madde: 'MADDE 7/3-b-4'),
             $kitapVeyaEditor('MADDE 7/3-b-5', 'tek'),
             $tezTamamlama('MADDE 7/3-b-6', null),
-            Kalip::toplam(120, null, $T12, 'Tablo 1 ve Tablo 2 (Madde 7/3-a\'daki puana ilaveten 20 puan)'),
+            Kalip::toplam(120, null, $T12, $LISTE12),
         ]),
         Kalip::toplam(100, null, $T12, $LISTE12),
     ]),
@@ -353,9 +358,10 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'isparta-ubu-gsf-docentlik',
-    'aday_notu' => 'Güzel Sanatlar Temel Alanında doçent kadrosu için Tablo 2 ve Tablo 3\'ten toplam '
-        .'en az 150 puan isteniyor; yönerge bu kadroda ayrıca ölçüt listesi vermiyor. DİKKAT: '
-        .'Tablo 3\'ün portföye bağlı satırları girilemediği için puanınız olduğundan düşük '
+    'aday_notu' => 'Güzel Sanatlar Temel Alanında doçent kadrosu için sanatsal etkinlik ve '
+        .'diğer akademik faaliyet kalemlerinizden toplam en az 150 puan isteniyor; yönerge bu '
+        .'kadroda ayrıca ölçüt listesi vermiyor. DİKKAT: sanatsal etkinlik puanının portföye '
+        .'bağlı satırları girilemediği için puanınız olduğundan düşük '
         .'görünebilir.',
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
@@ -382,8 +388,9 @@ $profesorOrtak = [
 $esikler[] = [
     'anahtar' => 'isparta-ubu-fen-muh-profesorluk',
     'aday_notu' => 'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Fen ve '
-        .'Mühendislik Bilimleriyle ilgili birimlerde profesör kadrosu için Tablo 1\'den en az 60 '
-        .'puan olmak üzere Tablo 1 ve Tablo 2\'den toplam 120 puan ve sekiz ölçütten en az biri '
+        .'Mühendislik Bilimleriyle ilgili birimlerde profesör kadrosu için yayın kalemlerinizden en az 60 '
+        .'puan olmak üzere, yayın ve diğer akademik faaliyet kalemlerinizden toplam 120 puan '
+        .'ve sekiz ölçütten en az biri '
         .'isteniyor.'.$UYARI,
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
@@ -395,7 +402,7 @@ $esikler[] = [
         .'şartlardan en az biri.',
     'sart' => Kalip::ve('Profesör kadrosuna atanma — Fen ve Mühendislik Bilimleri', [
         ...$profesorOrtak,
-        Kalip::puanDan('Doçentlik sonrası Tablo 1 kalemlerinizden en az 60 puan', ['T1'], 60, $DOCENTLIK, madde: 'MADDE 8/2-a'),
+        Kalip::puanDan('Doçentlik sonrası yayın kalemlerinizden en az 60 puan', ['T1'], 60, $DOCENTLIK, madde: 'MADDE 8/2-a'),
         Kalip::kIle('Aşağıdaki ölçütlerden en az 1 tanesini sağlamalısınız', 1, [
             $yurtdisi,
             Kalip::adet('AB ya da uluslararası fonlarca desteklenen en az 1 projede yürütücü veya yardımcı araştırmacı olmak', ['PROJE-AB'], 1, madde: 'MADDE 8/2-b-2'),
@@ -406,9 +413,9 @@ $esikler[] = [
             $kitapVeyaEditor('MADDE 8/2-b-4', 'ilk'),
             Kalip::adet('Doçent unvanınızı aldıktan sonra SSCI, AHCI, SCI ya da SCI-Expanded kapsamındaki Q1 veya Q2 dergilerde 1 araştırma makalesi', ['SCI-Q1Q2'], 1, donem: $DOCENTLIK, madde: 'MADDE 8/2-b-5'),
             $tezTamamlama('MADDE 8/2-b-6', $DOCENTLIK),
-            Kalip::ve('Madde 8/2-a\'daki puana ilaveten Tablo 1\'den 10, Tablo 2\'den 10, toplamda 20 puan daha', [
-                Kalip::puanDan('Doçentlik sonrası Tablo 1 kalemlerinizden en az 10 puan daha (toplam 70)', ['T1'], 70, $DOCENTLIK, madde: 'MADDE 8/2-b-8'),
-                Kalip::puanDan('Doçentlik sonrası Tablo 2 kalemlerinizden en az 10 puan', ['T2'], 10, $DOCENTLIK, madde: 'MADDE 8/2-b-8'),
+            Kalip::ve('Yayın kalemlerinizden 10, diğer akademik faaliyet kalemlerinizden 10, toplamda 20 puan daha', [
+                Kalip::puanDan('Doçentlik sonrası yayın kalemlerinizden en az 10 puan daha (toplam 70)', ['T1'], 70, $DOCENTLIK, madde: 'MADDE 8/2-b-8'),
+                Kalip::puanDan('Doçentlik sonrası diğer akademik faaliyet kalemlerinizden en az 10 puan', ['T2'], 10, $DOCENTLIK, madde: 'MADDE 8/2-b-8'),
                 Kalip::toplam(140, $DOCENTLIK, $T12, $LISTE12),
             ]),
         ]),
@@ -419,8 +426,9 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'isparta-ubu-sosyal-profesorluk',
     'aday_notu' => 'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Sosyal, '
-        .'Beşeri ve İdari Bilimlerle ilgili birimlerde profesör kadrosu için Tablo 1\'den en az 60 '
-        .'puan olmak üzere Tablo 1 ve Tablo 2\'den toplam 120 puan ve sekiz ölçütten en az biri '
+        .'Beşeri ve İdari Bilimlerle ilgili birimlerde profesör kadrosu için yayın kalemlerinizden en az 60 '
+        .'puan olmak üzere, yayın ve diğer akademik faaliyet kalemlerinizden toplam 120 puan '
+        .'ve sekiz ölçütten en az biri '
         .'isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
@@ -432,7 +440,7 @@ $esikler[] = [
         .'8/3-b bendindeki şartlardan en az biri.',
     'sart' => Kalip::ve('Profesör kadrosuna atanma — Sosyal, Beşeri ve İdari Bilimler', [
         ...$profesorOrtak,
-        Kalip::puanDan('Doçentlik sonrası Tablo 1 kalemlerinizden en az 60 puan', ['T1'], 60, $DOCENTLIK, madde: 'MADDE 8/3-a'),
+        Kalip::puanDan('Doçentlik sonrası yayın kalemlerinizden en az 60 puan', ['T1'], 60, $DOCENTLIK, madde: 'MADDE 8/3-a'),
         Kalip::kIle('Doçentlik sonrası aşağıdaki ölçütlerden en az 1 tanesini sağlamalısınız', 1, [
             $yurtdisi,
             Kalip::adet('AB ya da uluslararası fonlarca desteklenen en az 1 projede yürütücü veya yardımcı araştırmacı olmak', ['PROJE-AB'], 1, donem: $DOCENTLIK, madde: 'MADDE 8/3-b-2'),
@@ -444,7 +452,7 @@ $esikler[] = [
             $kitapVeyaEditor('MADDE 8/3-b-5', 'tek'),
             Kalip::adet('Başlıca yazar olarak SSCI, AHCI, SCI ya da SCI-Expanded kapsamındaki dergilerde 1 makale', ['SCI-MAKALE'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'MADDE 8/3-b-6'),
             $tezTamamlama('MADDE 8/3-b-7', $DOCENTLIK),
-            Kalip::toplam(140, $DOCENTLIK, $T12, 'Tablo 1 ve Tablo 2 (Madde 8/3-a\'daki puana ilaveten 20 puan)'),
+            Kalip::toplam(140, $DOCENTLIK, $T12, $LISTE12),
         ]),
         Kalip::toplam(120, $DOCENTLIK, $T12, $LISTE12),
     ]),
@@ -453,9 +461,11 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'isparta-ubu-gsf-profesorluk',
     'aday_notu' => 'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. Güzel '
-        .'Sanatlar Temel Alanında profesör kadrosu için Tablo 3\'ten en az 70 puan olmak üzere '
-        .'Tablo 2 ve Tablo 3\'ten toplam 200 puan isteniyor; yönerge bu kadroda ayrıca ölçüt '
-        .'listesi vermiyor. DİKKAT: Tablo 3\'ün portföye bağlı satırları girilemediği için '
+        .'Sanatlar Temel Alanında profesör kadrosu için sanatsal etkinlik kalemlerinizden en '
+        .'az 70 puan olmak üzere, sanatsal etkinlik ve diğer akademik faaliyet '
+        .'kalemlerinizden toplam 200 puan isteniyor; yönerge bu kadroda ayrıca ölçüt listesi '
+        .'vermiyor. DİKKAT: sanatsal etkinlik puanının portföye bağlı satırları girilemediği '
+        .'için '
         .'puanınız olduğundan düşük görünebilir.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
@@ -466,7 +476,7 @@ $esikler[] = [
         .'en az 70 puan olmak üzere Tablo 2 ve Tablo 3\'ten toplam en az 200 puan.',
     'sart' => Kalip::ve('Profesör kadrosuna atanma — Güzel Sanatlar', [
         ...$profesorOrtak,
-        Kalip::puanDan('Doçentlik sonrası Tablo 3 kalemlerinizden en az 70 puan', ['T3'], 70, $DOCENTLIK, madde: 'MADDE 8/4-a'),
+        Kalip::puanDan('Doçentlik sonrası sanatsal etkinlik kalemlerinizden en az 70 puan', ['T3'], 70, $DOCENTLIK, madde: 'MADDE 8/4-a'),
         Kalip::toplam(200, $DOCENTLIK, $T23, $LISTE23),
     ]),
 ];

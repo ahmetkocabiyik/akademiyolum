@@ -141,35 +141,36 @@ $alanEsikleri = function (string $alan, string $alanAdi, array $kosullar) use (
             'ad' => 'Doktor Öğretim Üyesi kadrosuna atanma',
             'on' => [$dil],
             'son' => [Kalip::toplam(60)],
-            'not' => 'Tablo 2 uyarınca toplam en az 60 puan gerekiyor.',
+            'not' => 'Tüm faaliyetlerinizden toplam en az 60 puan gerekiyor.',
         ],
         'dr_ogr_uyesi_yeniden' => [
             'ad' => 'Doktor Öğretim Üyeliğine yeniden atanma',
             'on' => [],
             'son' => [Kalip::toplam(50, $SON_ATAMA)],
             'not' => 'Bir önceki atama tarihinizden itibaren yaptığınız çalışmalar sayılıyor; '
-                .'Tablo 2 uyarınca toplam en az 50 puan gerekiyor. Asgari puanı tamamlayanlar '
+                .'tüm faaliyetlerinizden toplam en az 50 puan gerekiyor. Asgari puanı '
+                .'tamamlayanlar '
                 .'dört yıl süreyle yeniden atanır.',
         ],
         'docentlik' => [
             'ad' => 'Doçent kadrosuna atanma',
             'on' => [$dil, $docentUnvani, $docentKidem],
             'son' => [
-                Kalip::toplam(120, $DOKTORA, ['*'], 'Başvuru Şartları Tablosunun tamamı (doktora sonrası)'),
+                Kalip::toplam(120, $DOKTORA),
                 Kalip::toplam(200),
             ],
-            'not' => 'Tablo 2 uyarınca toplam en az 200 puan ve bunun en az 120 puanının doktora '
+            'not' => 'Tüm faaliyetlerinizden toplam en az 200 puan ve bunun en az 120 puanının doktora '
                 .'unvanınızı aldıktan sonraki çalışmalardan gelmesi gerekiyor.',
         ],
         'profesorluk' => [
             'ad' => 'Profesör kadrosuna atanma',
             'on' => [$dil, $profesorKidem],
             'son' => [
-                Kalip::toplam(140, $DOCENTLIK, ['*'], 'Başvuru Şartları Tablosunun tamamı (doçentlik sonrası)'),
+                Kalip::toplam(140, $DOCENTLIK),
                 Kalip::toplam(280),
             ],
-            'not' => 'Doçentlik unvanınızı aldıktan sonraki çalışmalarınız sayılıyor. Tablo 2 '
-                .'uyarınca toplam en az 280 puan ve bunun en az 140 puanının doçentlik sonrası '
+            'not' => 'Doçentlik unvanınızı aldıktan sonraki çalışmalarınız sayılıyor. Tüm '
+                .'faaliyetlerinizden toplam en az 280 puan ve bunun en az 140 puanının doçentlik sonrası '
                 .'çalışmalardan gelmesi gerekiyor.',
         ],
     ];
