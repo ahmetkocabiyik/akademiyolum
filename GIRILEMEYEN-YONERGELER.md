@@ -13,11 +13,11 @@ Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 | Durum | Sayı | Kimler |
 |---|---|---|
 | **Gerçekten engelli** | 3 | Balıkesir, Türk Hava Kurumu, Maltepe — puanlama tablosu PDF'te YOK, belge dışarıdan gelmeli |
-| **Okuma engeli çözüldü, giriş bekliyor** | 2 | Karadeniz Teknik, Burdur MAKÜ |
+| **Okuma engeli çözüldü, giriş bekliyor** | 1 | Burdur MAKÜ |
 | **Kısmen girildi, kalanı korpus içinde hazır** | 2 | İstanbul Üniversitesi (Tablo 2), Dokuz Eylül (Puanlandırma Formu D bölümü) |
 | **Kısmen girildi, çizelge dışarıdan gelmeli** | 2 | SANKO, İstanbul Okan |
 
-Yani **dışarıdan belge beklemeden yapılabilecek iş 4 dosya**; kalan beş
+Yani **dışarıdan belge beklemeden yapılabilecek iş 3 dosya**; kalan beş
 üniversite için ilgili üniversiteden puanlama ya da ölçüt tablosunu istemek
 gerekiyor.
 
@@ -262,14 +262,14 @@ koşullarla değiştirmek.
 
 ---
 
-## Okuma engeli çözüldü — on iki dosya, ikisi hâlâ giriş bekliyor
+## Okuma engeli çözüldü — on iki dosya, biri hâlâ giriş bekliyor
 
 Bu on iki dosya uzun süre "taranmış", "bozuk font" ya da "kötü OCR" diye
 bekliyordu. Engel PDF'lerde değil elimizdeki araçlardaymış: makinede
 `tesseract 5.5.3` ve `tur` dil paketi var. **Hepsi okunuyor**, hiçbiri artık
-kaynak sorunu değil. Onu (Karamanoğlu, Sağlık Bilimleri, Biruni, İstanbul
-Okan, Kırklareli, Bilecik, Tekirdağ NKÜ, Munzur, Çankaya, Piri Reis) girildi;
-kalan ikisi veri girişi bekliyor.
+kaynak sorunu değil. On biri (Karamanoğlu, Sağlık Bilimleri, Biruni, İstanbul
+Okan, Kırklareli, Bilecik, Tekirdağ NKÜ, Munzur, Çankaya, Piri Reis, Karadeniz
+Teknik) girildi; kalan biri veri girişi bekliyor.
 
 **ÇIKTILAR ZATEN DEPODAYMIŞ.** Bu başlık yazılırken fark edildi: `pdf-ocr/`
 klasörü 8 Ağustos 2026'da bu dosyaların OCR çıktılarıyla doldurulmuş ve
@@ -334,7 +334,7 @@ olduğu için gözden kaçardı. Puan sütununu HER ZAMAN görüntüden doğrula
 
 | Üniversite | Dosya | Sayfa | Eski teşhis | Doğrulanan durum |
 |---|---|---|---|---|
-| Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.pdf` | 48 | taranmış | OCR temiz |
+| Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.pdf` | 48 | taranmış | OCR temiz ama beş sütunlu koşul tabloları kolonlara bölünüyor; sayılar görüntüden okundu — **GİRİLDİ** |
 | Karamanoğlu Mehmetbey | `17536999512.karamanoglumehmetbeyuniverstesi.pdf` | 15 | taranmış | OCR temiz — **GİRİLDİ** |
 | Tekirdağ Namık Kemal | `17537009192.tekirdagnamikkemaluniverstesi.pdf` | 19 | taranmış | OCR temiz görünüyordu ama **puan sütununda üç sessiz hata** vardı; gözle doğrulandı — **GİRİLDİ** |
 | Kırklareli | `1770040975746.kirklareli-kriter-02022026.pdf` | 18 | taranmış | OCR temiz ama **A, B ve Ç bölümlerinin puan sütunu çıkmadı** — sağ şerit kırpılıp gözle okundu; **GİRİLDİ** |
@@ -416,6 +416,7 @@ anlatılıyor — ayrıntı orada, bu tablo yalnızca dizin.
 | **KTO Karatay** | C bölümünün sanat ve tasarım satırlarının çoğu (uzun ve kısa metraj film, multimedya CD, web tasarımı, afiş ve fotoğraf baskısı, reklam kampanyası, fotoğraf ve grafik sergisi, kurumsal kimlik); çalıştay ve kongre başkanlığı ile oturum başkanlığı (C.35-C.38); adayın adıyla anılan formül ve tasarımlar (B.1, B.3, B.5); üniversite destekli BAP projeleri (yönerge ulusal proje satırında bunları açıkça dışarıda bırakıyor) | Güzel Sanatlar adayının toplamı düşük çıkar; hukuk, ilahiyat, filoloji, mimarlık ve ziraat alanları yönergede hiç anılmadığı için kapsam dışı |
 | **MEF** | 14. bölümün tamamı (Eğitim Fakültesinin okullarla iş birliği kalemleri: öğretmenlik, psikolojik danışmanlık, aday öğretmen denetimi); 15. bölüm (h-indeksi, yurt dışı araştırma); bitirme projesi danışmanlığı, patent başvurusu, dergi hakemliği | Eğitim Fakültesi adayının toplamı düşük çıkar; doçentlik ve profesörlüğün okul iş birliği koşulu `hesaplanamiyor` olarak duruyor, koşul belgeyle sağlanmalı |
 | **SANKO** | Puanlama Çizelgesi ve Asgari Koşullar Çizelgesi (ikisi de PDF'te yok) | Toplam puan barajı hiç gösterilemiyor; doçentlik eşiği yalnızca beyanlardan, profesörlüğün başlıca eser koşulu `hesaplanamiyor` düğümünden ibaret. Dr. Öğr. Üyesi eşiği tam |
+| **Karadeniz Teknik** | 1g-1i kongre bildirisinin dergide yayımlanması (20 puana kadar); TR Dizin dışındaki ulusal hakemli dergilerdeki makaleler (tabloda satırı yok); 2b, 2ç, 2d, 2e çeviri editörlüğü kademeleri; 3d-3f ondalıklı kitap ve patent atıfları; 4a TÜBİTAK 2244 ve YÖK 100/2000 tez danışmanlığı; COST öneren ve kamu-üniversite-sanayi proje satırları; 10/A-d laboratuvar kurma, 10/A-e teknokent şirketi, 10/A-h radyo-TV söyleşisi, 10/B kazı başkanlığı ve resmi görevlendirmeler, 10/C-n üniversite eğitim projeleri | REKTÖRLÜK, DEKANLIK VE MÜDÜRLÜĞÜN TABLODA SATIRI YOK; bu görevlerden puan alınmıyor. PROJE BÖLÜMÜNÜN TAMAMI "devam eden" değerlerinden sayılıyor (tamamlanmış projeye iki katı veriliyor ama kayıt bunu ayırmıyor); kamu ve özel sektör projelerinde bütçe basamakları bilinmediği için en düşükten. Başlıca yazar, tez danışmanlığı ve proje koşullarının "eksik başına ilave makale" telafileri eksik miktara bağlı olduğu için `hesaplanamiyor`. Dr. Öğr. Üyeliğinin 89 günlük yurt dışı indirimi ile "KTÜ 50/d doktora mezunu" sütunu girilmedi; yeniden atanma da (uzatma yılı × 10 puan) girilmedi. Eğitim, hukuk, ilahiyat, spor ve güzel sanatlar yönergenin ek listesinde hiç yok, kapsam dışı |
 | **Piri Reis** | N. EĞİTİME KATKI bölümünün tamamı (puan derse değil BLOĞA veriliyor: "dört farklı yarıyılda ders vermiş olmak, 2 puan"); H h-indeksi; B.2 Piri Reis Üniversitesi dergileri (6); L.1.d patent BAŞVURUSU; R.1.a yurt dışı araştırma (5); R.1.b-R.1.e toplantı düzenleme ve bilim kurulu üyelikleri (5/4/3/2) | Ödül bölümü YALNIZCA YÖK, TÜBİTAK ve TÜBA ödüllerini sayıyor; başka bilim ya da sanat ödülünün tabloda satırı yok. "Lisansüstü tezlerden üretilmiş yayın" koşulları `hesaplanamiyor` (tabloda tez yayını satırı yok). Hukuk ve Sosyal doçentliğinin "yayınların üçü FARKLI DERGİDE" koşulu dergi adı tutulmadığı için değerlendirilemiyor. MADDE 4/2 ile MADDE 9'un yazar kuralları çatışıyor; daha özel olan MADDE 9 uygulandı. Sağlık, eğitim, ilahiyat, filoloji, spor, ziraat, mimarlık ve güzel sanatlar yönergede hiç anılmıyor, kapsam dışı |
 | **Çankaya** | Özel kriterlerin kayıttan okunamayan yarısı: h-indeksi, "bir eserine N atıf" kırılımları, davetli konuşmacılık ve panelistlik, hakemlik sayısı, özel sayı konuk editörlüğü, kitap çevirisi, kişisel/karma sanat etkinliği, proje yarışması ödülü, tasarım atölyesi ürünleri ve atölye düzenleme; doçentlik sözlü sınav belgesi olmayanın 2 makalelik ek şartı; "tezlerden üretilmemiş olmak" filtresi | PUAN TABLOSU YOK, kriter sayan yönerge; ÜAK doçentlik cetveline bağlandı ve `Kalip::toplam` hiç kullanılmadı. Sayılamayan özel kriterler `beyan` olduğu için `Kalip::kIle` sayımı belirsiz kalıyor; aday kaç kriteri belgeyle sağladığını kendisi görüyor. Sağlık, Eğitim, İlahiyat, Spor, Ziraat ve Güzel Sanatlar yönergede hiç anılmıyor, kapsam dışı. Dr. Öğr. Üyesi yeniden atanması (30 aylık dönem) girilmedi |
 | **Munzur** | G. SPORTİF ETKİNLİKLER bölümünün tamamı (11 satır, 100 puana kadar); A7 h-indeksi; C5 sertifika programları; C9 dolaşım programları; C2.11-C2.12 yurt dışı araştırma (ay başına puan); C2.19 TÜBİTAK ARDEB başvurusu; C4.1-C4.2 patent BAŞVURULARI; C1.2 ve C1.4 devam eden tez danışmanlıkları; B1.6, B2.2, A3.9-A3.10, B3.4-B3.5, D1.2, E1.6-E1.8, F2.6-F2.7, F5.7-F5.12 | A2.1'in TÜBİTAK-sanayi ve uluslararası iş birliği için verdiği 1,25 katı çarpanlar kayıtta karşılığı olmadığı için uygulanmıyor. Bildiriler toplantıyı düzenleyen kuruluşa göre üç bölümde puanlanıyor; ayrım kayıtta olmadığı için daima EN DÜŞÜK bölümden sayılıyor. C8 idari görev bölümünün "diğer bölümlerin toplamının %20'sini aşamaz" tavanı motorda ifade edilemiyor, idari görevi çok olan adayın puanı yüksek çıkar. Doçentlik ve profesörlüğün "lisansüstü tezleri kapsamı dışında" filtresi uygulanamıyor. Hukuk ve İlahiyat yönergede hiç anılmıyor, kapsam dışı |
