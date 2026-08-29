@@ -8,6 +8,18 @@ başlanacağını söylüyor.
 Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 `database/data/cetvel/` altına cetveli girildiğinde çıkar.
 
+## Bugünkü tablo
+
+| Durum | Sayı | Kimler |
+|---|---|---|
+| **Gerçekten engelli** | 3 | Balıkesir, Türk Hava Kurumu, Maltepe — puanlama tablosu PDF'te YOK, belge dışarıdan gelmeli |
+| **Okuma engeli çözüldü, giriş bekliyor** | 12 | Karadeniz Teknik, Karamanoğlu, Tekirdağ NKÜ, Kırklareli, Bilecik, Sağlık Bilimleri, Piri Reis, İstanbul Okan, Biruni, Munzur, Çankaya, Burdur MAKÜ |
+| **Kısmen girildi, kalanı korpus içinde hazır** | 2 | İstanbul Üniversitesi (Tablo 2), Dokuz Eylül (Puanlandırma Formu D bölümü) |
+| **Kısmen girildi, çizelge dışarıdan gelmeli** | 1 | SANKO |
+
+Yani **dışarıdan belge beklemeden yapılabilecek iş 14 dosya**; kalan dört
+üniversite için ilgili üniversiteden puanlama tablosunu istemek gerekiyor.
+
 **Önce teşhisi doğrula.** Trabzon, Iğdır, İnönü, İTÜ ve İstanbul Üniversitesi
 bu listede "tablo okunmuyor" diye duruyordu; beşinde de tablo aslında
 okunuyordu. Dördünde düz `pdftotext -q -layout` yetti; İstanbul'da ise tam
@@ -20,16 +32,11 @@ puan"), tolerans dar tutma: aynı tablonun dört haneli ve tek haneli hücreleri
 birkaç karakter kayık hizalanıyor. Aynı belgedeki her tablonun kendi çapası
 olabilir.
 
----
-
-## Karadeniz Teknik Üniversitesi
-
-**Dosya:** `pdf/17536999312.karadenizteknikuniverstesi.pdf` (48 sayfa)
-
-**Engel:** PDF taranmış görüntü. `pdftotext` 48 sayfadan toplam **48 karakter**
-metin çıkarıyor, yani metin katmanı yok.
-
-**Devam edilirse:** Sayfa görüntülerini okumak ya da OCR gerekiyor.
+**"Metin katmanı yok" artık son söz değil.** Bu dosyanın uzun süre en kalabalık
+engeli taranmış PDF'lerdi; makinede `tesseract 5.5` ve Türkçe dil paketi
+bulunduğu anlaşılınca on iki dosyanın hepsinin okunabildiği görüldü. Çalışan
+tarif ve tuzakları aşağıda "Okuma engeli çözüldü" başlığında. Bir dosyayı
+"okunmuyor" diye kaydetmeden önce o tarifi dene.
 
 ---
 
@@ -194,101 +201,94 @@ Eksik olan yalnızca iki çizelge; SANKO Üniversitesinden ayrıca istenmeli.
 
 ---
 
-## Taranmış (metin katmanı olmayan) PDF'ler
+## Okuma engeli çözüldü — giriş bekleyen on iki dosya
 
-Aşağıdaki dosyalar görüntü olarak taranmış: `pdftotext` sıfır bayt metin
-döndürüyor. Hiçbiri okunamıyor, dolayısıyla hiçbiri girilemiyor. Karadeniz
-Teknik zaten yukarıda ayrı başlıkta anılıyordu; taramayla gelen sorun tek
-değilmiş.
+Bu on iki dosya uzun süre "taranmış", "bozuk font" ya da "kötü OCR" diye
+bekliyordu. Engel PDF'lerde değil elimizdeki araçlardaymış: makinede
+`tesseract 5.5.3` ve `tur` dil paketi var. **Hepsi okunuyor**, hiçbiri artık
+kaynak sorunu değil; yalnızca veri girişi bekliyorlar.
 
-| Üniversite | Dosya | Sayfa |
-|---|---|---|
-| Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.pdf` | — |
-| Karamanoğlu Mehmetbey | `17536999512.karamanoglumehmetbeyuniverstesi.pdf` | 15 |
-| Tekirdağ Namık Kemal | `17537009192.tekirdagnamikkemaluniverstesi.pdf` | 19 |
-| Kırklareli | `1770040975746.kirklareli-kriter-02022026.pdf` | 18 |
-| Bilecik Şeyh Edebali | `1785927020751.bilecik-seyh-edebali-kriter-16102025.pdf` | 18 |
-| Sağlık Bilimleri | `1765867210191.saglik-bilimleri-kriter-16122025.pdf` | 11 |
-| Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.pdf` | 25 |
-| İstanbul Okan | `17537100352.istanbulokanuniversitesi.pdf` | 14 |
-| Biruni | `17537097592.biruniuniversitesi.pdf` | 6 |
+### Çalışan tarif
 
-Ayrıca `17537003802.mersinuniverstesi.pdf` de taranmış; Mersin korpusta zaten
-var, demek ki başka bir kaynaktan girilmiş.
-
-**Devam edilirse:** Bu dosyalar için ya OCR (ör. `ocrmypdf`) gerekiyor ya da
-yönergelerin metin sürümünü üniversitelerin kendi sitelerinden indirmek. OCR
-çıktısı puan tablolarında güvenilmez olabilir; sayı okuma hatası puanı sessizce
-bozar, o yüzden OCR sonrası her tablo kaynakla karşılaştırılmalı.
-
----
-
-## Yönerge değil, üst yazı
-
-- **Burdur Mehmet Akif Ersoy** (`17536991522.burdurmehmetakifersoyuniverstesi.pdf`,
-  87 satır): dosya yönergenin kendisi değil, YÖK'e gönderilen 17/02/2016 tarihli
-  yönerge değişikliği üst yazısı. Ölçüt metni ve puan tablosu yok.
-
----
-
-## Çankaya Üniversitesi — bozuk font kodlaması
-
-**Dosya:** `pdf/17537097862.cankayauniversitesi.pdf`
-
-PDF taranmış değil, metin katmanı var — ama gömülü fontun karakter haritası
-(cmap) bozuk. `pdftotext` çıktısı okunmuyor:
-
-```
-0$''(  %X<|QHUJHQLQDPDFÕdDQND\DhQLYHUVLWHVL
+```bash
+pdftoppm -r 300 -png "pdf/DOSYA.pdf" "$SC/ocr/ad"          # sayfaları 300 dpi PNG
+for f in "$SC"/ocr/ad-*.png; do
+    tesseract "$f" "${f%.png}" -l tur                      # PSM VERME — varsayılan (3) doğru
+done
+cat "$SC"/ocr/ad-*.txt > "$SC/ocr/ad.txt"
 ```
 
-**Kısmen çözüldü.** ASCII harfler **+29 kaydırmalı**: `0$''(` → `MADDE`,
-`dDQND\D` → `Çankaya`. Kaydırmayı uygulayan bir satır:
+**Üç tuzak, üçü de denendi ve doğrulandı:**
 
-```python
-''.join(chr(ord(c)+29) if 32 <= ord(c) <= 97 else c for c in metin)
+1. **`--psm 6` PUAN SÜTUNUNU YOK EDİYOR.** Biruni'nin Ek-1 tablosunda `--psm 6`
+   ile puanlar `|O1ı| 80 |`, `92|) 15 |` gibi çöp çıkıyor; PSM vermeden
+   (varsayılan 3) aynı tablo `80 / 60 / 20 / 15 / 10` diye temiz okunuyor.
+   Tablolu belgede asla PSM zorlama.
+2. **Bazı sayfalar 180° dönük.** Piri Reis'in 13. sayfası ters basılmış;
+   ham OCR `IğnLıy dey KA 1970 "njou guLınsere` gibi okunuyor.
+   `sips -r 180 sayfa.png --out donuk.png` ile çevirince aynı sayfa
+   `EK-1 ÖĞRETİM ÜYELİĞİNE YÜKSELTİLME VE ATANMALARDA KULLANILACAK PUANLAR`
+   oluyor. `osd.traineddata` kurulu, `--psm 0` ile yön tespiti de yapılabilir.
+3. **`ocrmypdf` bu makinede ÇALIŞMIYOR** (`ImportError: No module named expat`).
+   Doğrudan `pdftoppm` + `tesseract` kullan, ocrmypdf'i deneyip zaman kaybetme.
+
+`17537003802.mersinuniverstesi.pdf` de taranmış ama Mersin korpusta zaten var;
+başka bir kaynaktan girilmiş, bu listeye dâhil değil.
+
+**OCR sonrası her puan tablosu kaynakla karşılaştırılmalı.** Sayı okuma hatası
+puanı sessizce bozar; prova cümlesi olarak tablonun en kalabalık satırını ve
+yazar oranları tablosunu seç.
+
+### Dosyalar
+
+| Üniversite | Dosya | Sayfa | Eski teşhis | Doğrulanan durum |
+|---|---|---|---|---|
+| Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.pdf` | 48 | taranmış | OCR temiz |
+| Karamanoğlu Mehmetbey | `17536999512.karamanoglumehmetbeyuniverstesi.pdf` | 15 | taranmış | OCR temiz |
+| Tekirdağ Namık Kemal | `17537009192.tekirdagnamikkemaluniverstesi.pdf` | 19 | taranmış | OCR temiz |
+| Kırklareli | `1770040975746.kirklareli-kriter-02022026.pdf` | 18 | taranmış | OCR temiz |
+| Bilecik Şeyh Edebali | `1785927020751.bilecik-seyh-edebali-kriter-16102025.pdf` | 18 | taranmış | OCR temiz |
+| Sağlık Bilimleri | `1765867210191.saglik-bilimleri-kriter-16122025.pdf` | 11 | taranmış | OCR temiz |
+| Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.pdf` | 25 | taranmış | OCR temiz, **sayfalar dönük** |
+| İstanbul Okan | `17537100352.istanbulokanuniversitesi.pdf` | 14 | taranmış | OCR temiz |
+| Biruni | `17537097592.biruniuniversitesi.pdf` | 6 | taranmış | OCR temiz (PSM tuzağı burada bulundu) |
+| Munzur | `17634002431.Munzur Üniversitesi Kriter.pdf` | 19 | kötü OCR | **gömülü metin katmanı çöp, görüntüden yeniden OCR tertemiz** |
+| Çankaya | `17537097862.cankayauniversitesi.pdf` | 25 | bozuk font (cmap) | OCR font sorununu tamamen atlıyor |
+| Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.pdf` | 13 | "yönerge değil, üst yazı" | **TEŞHİS YANLIŞMIŞ** — bkz. aşağısı |
+
+### Burdur: teşhis yanlıştı
+
+Dosya "YÖK'e gönderilen üst yazı, ölçüt metni ve puan tablosu yok" diye
+kayıtlıydı. Doğrusu: **1-2. sayfalar** üst yazı (17/02/2016 tarihli yönerge
+değişikliği yazısı, metin katmanı var), **3-13. sayfalar** ise yönergenin
+kendisi ve TARANMIŞ. Gömülü metin katmanının o sayfalarda 1 bayt olması
+"ölçüt yok" diye okunmuş. 7. sayfanın OCR'ı ölçüt metnini net veriyor:
+
+```
+l inci, 2 nci, 3 üncü ve 4 üncü maddelerde belirtilen dergilerde yayımlanan teknik
+not, editöre mektup, tartışma, vaka ve özet türünden yayınlar: Adı geçen
+maddelerde belirtilen puanların yarısı uygulanır.
+Bildiriler
 ```
 
-Kaydırma sonrası ASCII sınırını aşan karakterler Türkçe harflere karşılık
-geliyor ve bunların haritası elle çıkarılmalı. Şimdiye kadar doğrulananlar:
+Ders: bir PDF'in ilk iki sayfasında metin katmanı bulunması, kalanında da
+bulunduğu anlamına gelmiyor. Sayfa sayfa `pdftotext -f N -l N ... | wc -c`
+çalıştır.
 
-| Ham | Gerçek | Ham | Gerçek |
-|---|---|---|---|
-| `d` | Ç | `o` | ç |
-| `g` | Ö | `\|` | ö |
-| `h` | Ü | `ø` | İ / i |
-| `Õ` | ı | `÷` | ğ |
-| `ú` | ş | | |
+### Çankaya: şifre de çözülmüştü, ama OCR daha kısa yol
 
-**Neden bekletildi:** Harita eksik ve rakamların nasıl kodlandığı henüz
-bilinmiyor. Bir kriter belgesinde rakamı yanlış okumak puanı sessizce bozar;
-haritayı tamamlayıp bilinen bir cümleyle doğrulamadan girmek doğru olmaz.
+Kayıtta "ASCII harfler +29 kaydırmalı, rakamların nasıl kodlandığı bilinmiyor"
+yazıyordu. **Rakamlar da aynı kaydırmada:** kural `32 <= ord(c) <= 97` değil,
+**3'ten itibaren bütün baytlar +29**. Ham `\x14\x10` → `1-`, `\x03` → boşluk,
+`\x15\x18\x17\x1a` → `2547`, `\x19\x12\x14\x14\x12\x14\x1c\x1b\x14` →
+`6/11/1981`. Eski betiğin alt sınırı 32 olduğu için rakamlar ve boşluklar
+düşüyordu, "bilinmiyor" tanısı oradan gelmiş.
 
-**Devam edilirse:** Haritayı tamamla, çıktıyı yönergenin PDF'teki görünümüyle
-karşılaştırarak doğrula, sonra normal akışa gir. Bu tek dosya için geçerli;
-korpustaki 179 PDF tarandı, aynı bozukluk başka dosyada yok.
-
----
-
-## Munzur Üniversitesi — kötü OCR
-
-**Dosya:** `pdf/17634002431.Munzur Üniversitesi Kriter.pdf` (1243 satır)
-
-Dosya OCR'dan geçirilmiş ama çıktı kullanılamaz durumda. 4030 kelimenin
-yalnızca 35'i (%0) tanınabiliyor:
-
-```
-MtIı.{ZuR rn ıivpnsff nsi
-oĞnnrişı r_ryşıİĞİNE yuı<sprrilME vE ATANMa nrgıgnİ
-"eııdirıneleriıi", "yapıiabilııesi", "diizenleyen", "öğretiın", "iiyelerine"
-```
-
-Türkçe karakterler ve `n/ıı/ıv`, `m/ııı`, `ü/ii` ayrımları tutarsız biçimde
-bozulmuş; düzeltilebilir bir kural yok.
-
-**Devam edilirse:** Yönergenin metin sürümünü Munzur Üniversitesi'nin kendi
-sitesinden indirmek ya da PDF'i yeniden OCR'lamak gerekiyor (`ocrmypdf --force-ocr
--l tur`). Mevcut çıktı üzerinden giriş yapılamaz.
+Yine de **OCR yolu tercih edilmeli**: dosyada İKİ ayrı bozuk font var. Gövde
+Latin-1 kümesini (`Õ ú | ÷ ø` …) kullanıyor, tablolar ise U+0100-U+03F5
+aralığında ikinci bir küme (`Ğ Ă ŝ ů Ŷ ƌ`; rakamlar U+03EC-U+03F5 aralığında
+sıralı duruyor). İkinci fontun harf haritası glif sırasına bağlı ve elle
+çıkarılması gerekir — 25 sayfayı OCR'lamak daha ucuz ve daha az riskli.
 
 ---
 

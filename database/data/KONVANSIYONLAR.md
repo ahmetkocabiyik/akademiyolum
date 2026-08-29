@@ -659,14 +659,21 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 | Durum | Sayı |
 |---|---|
 | Girildi | 163 üniversite · 6151 eşik · 296 cetvel |
-| Taranmış (metin yok) | 10 |
-| Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
-| Yönerge değil (üst yazı) | 1 |
+| Okuma engeli çözüldü, giriş bekliyor | 12 (dokuz taranmış + Munzur + Çankaya + Burdur) |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |
 
-**KUYRUK BOŞALDI.** `pdf/` altındaki 179 dosyanın tamamı ya girildi ya da
-`GIRILEMEYEN-YONERGELER.md`'de belgelenmiş bir engelle duruyor. Sayım dosya
+**TARAMA ENGELİ ARTIK ENGEL DEĞİL.** Makinede `tesseract 5.5.3` ve `tur` dil
+paketi var; on iki dosyanın hepsi okunuyor. Çalışan tarif `pdftoppm -r 300
+-png` + `tesseract -l tur` (PSM VERME — `--psm 6` puan sütununu yok ediyor);
+ters basılmış sayfalar için `sips -r 180`. `ocrmypdf` bu makinede kırık
+(`No module named expat`). Ayrıntı ve doğrulanmış örnekler
+`GIRILEMEYEN-YONERGELER.md`'nin "Okuma engeli çözüldü" başlığında.
+
+**KUYRUKTA OKUNAMAYAN DOSYA KALMADI** ama girilecek dosya kaldı: yukarıdaki on
+iki dosya artık okunabiliyor ve veri girişi bekliyor; İstanbul Üniversitesi'nin
+Tablo 2'si ile Dokuz Eylül'ün D bölümü de korpus içinde hazır duruyor.
+Dışarıdan belge beklemeden yapılacak iş 14 dosya. Sayım dosya
 adlarını veri dosyalarındaki kaynak atıflarıyla eşleyerek yapıldı; "47
 girilmemiş" satırı uzun süre bayat kalmıştı, son beş üniversite (Çağ,
 İstanbul Arel, İstanbul Gedik, İzmir Kavram MYO, İstanbul Atlas) o yüzden
