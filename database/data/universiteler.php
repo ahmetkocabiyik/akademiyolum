@@ -166,6 +166,7 @@ return [
     ['İstanbul Beykent Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Bilgi Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Galata Üniversitesi', 'İstanbul', 'vakif'],
+    ['İstanbul Gedik Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Kültür Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Medipol Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Okan Üniversitesi', 'İstanbul', 'vakif'],
