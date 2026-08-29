@@ -42,11 +42,44 @@
  *   kredi başına 1 puan) · 23 animasyon eğitim materyali. Hepsinin ortak
  *   sebebi: kaynak sözlüğünde ayırt edici etiket yok ya da kalem formüllü.
  *
- * ── D BÖLÜMÜ (GÜZEL SANATLAR-KONSERVATUVAR, 24-41) KISMEN GİRİLDİ ──
- * Sergiler (24) ve tiyatro (33) kaleminin sözlükte karşılığı olan satırları
- * yazıldı; müzik teknolojisi, film, animasyon, TV ve reklam blokları (25-32,
- * 34-41) girilemedi. Güzel Sanatlar ve Konservatuvar alanlarının KOŞULLARI da
- * bu yüzden girilmedi — bkz. yonerge/dokuz-eylul.php.
+ * ── D BÖLÜMÜ (GÜZEL SANATLAR-KONSERVATUVAR, 24-41) TAMAMLANDI ──
+ * Bölüm uzun süre "sözlükte karşılığı yok" diye yarım durdu; yalnızca sergiler
+ * (24) ve tiyatro yazarlığının (33.b) bir kısmı girilmişti. Sözlüğe 19 yeni
+ * etiket eklendi (`Kategori::SanatselEtkinlik`) ve bölümün tamamı yazıldı.
+ * 38-41 arası (çalgı, opera, bale, kompozisyon) neredeyse bütünüyle MEVCUT
+ * konservatuvar etiketleriyle karşılandı — Mersin TABLO C için açılmış küme
+ * DEÜ'nün satırlarına birebir oturuyor.
+ *
+ * ── D BÖLÜMÜNDE AYNI ETİKETE DÜŞÜP DÜŞÜĞÜ GİRİLEN SATIRLAR (§0) ──
+ *   25 uygulanmış tasarımın sekiz satırı (25→7) → 7 · 26 müzik teknolojisinin
+ *       altı satırı (20→5) → 5 · 34 sahne tasarımının altı satırı (20→5) → 5.
+ *   27.b-f, 29.c ve 30.a-e'nin tamamı tek "animasyon" etiketinde (30→7) → 7.
+ *   31 ve 32'de yönetmenlik (15/10) ile görüntü yönetmenliği (10/5) tek
+ *       etikette → 10/5.
+ *   33.a tam uzunlukta oyun (20) ile kısa oyun (10) → 10; 33.b'nin üç yazarlık
+ *       satırı (20/15/10) → 10. Eskiden 33.b.1 20 puandı, düşürüldü.
+ *   38.g tutti üyeliği (3/2) ve 39.g konservatuvar rejisörlüğü (20/10): kaynak
+ *       etiketleri yurt dışı/yurt içi ayrımı taşımıyor → 2 ve 10.
+ *   41.a opera kompozisyonu (30) ile 41.b oratoryo/bale (20) tek etikette → 20;
+ *       41.c-e'nin yurt dışı/yurt içi çiftlerinde yurt içi değeri alındı.
+ *
+ * ── D BÖLÜMÜNDE GİRİLMEYENLER ──
+ *   35.c.2 festivale eserle katılım (15/5) ve 35.d atölye yöneticiliği (3/2):
+ *       etiketleri (Sempozyum/Bienal ve Masterclass) 24.a.2 ile 38.h'nin;
+ *       girilseydi motor kaydı yüksek satırdan sayardı.
+ *   36 retrospektif kitap ve bireysel katalog (5) — etiket yok.
+ *   37 ödüllerin tamamı: bütün satırları 18.a/18.b.1'e düşüyor, 18 zaten her
+ *       zorunlu kümede var. Ayrı satır ölü kod olurdu.
+ *   38.d etkinlikte eşlikçilik (15/10) — etiket yok.
+ *   38.i, 39.k, 40.j, 41.i "eğiticiliğini yaptığı öğrencinin ödül alması" —
+ *       kayıt öğrencinin ödülünü tutmuyor.
+ *   Sözlükteki şeflik etiketlerinin (opera, orkestra, bale, koro şefliği)
+ *       yönergede karşılık satırı YOK; şeflik kaydeden aday 0 puan görür.
+ *
+ * ── ZORUNLU-MIMARLIK DÜZELTİLDİ ──
+ * Küme 8.c ve 8.c.a (üniversite-sanayi projeleri) sayıyordu; Madde 1.10.1/c ve
+ * kadro puan çizelgelerinin ikisi de mimarlık için "8.a, 8.b, 8.f" diyor. 8.c
+ * çıkarıldı, 8.f eklendi (satırı bu düzeltmeyle açıldı).
  *
  * Yönerge: yonerge/dokuz-eylul.php
  */
@@ -62,8 +95,12 @@ return [
         .'görevi, girişimcilik dersi ve sertifikası, değişim programları, proje değerlendirme ve '
         .'izleyiciliği, öğrenci geri bildirimi ve ders yükü dışı dersler kaynakta ayrılamadığı '
         .'için girilmedi; patentte bireysel/grup ayrımı yapılamadığı için düşük olan grup satırı '
-        .'kullanıldı. Güzel sanatlar ve konservatuvar bölümünün yalnızca sergi ve tiyatro '
-        .'kalemleri girilebildi.',
+        .'kullanıldı. Güzel sanatlar ve konservatuvar bölümü (24-41) tamamen girildi, ama '
+        .'bir kaynak etiketine birden çok yönerge satırı düştüğünde daima DÜŞÜK olan puan '
+        .'kullanıldı: uygulanmış tasarım, müzik teknolojisi, sahne tasarımı ve animasyon '
+        .'kalemlerinde puanınız olduğundan düşük görünebilir. Festivale eserle katılım, sanat '
+        .'atölyesi yöneticiliği, retrospektif katalog, etkinlikte eşlikçilik ve öğrencinizin '
+        .'aldığı ödüller girilmedi; şeflik kalemlerinin yönergede satırı yok.',
 
     // Madde 1.10.1/e — çok isimli yayınlarda puan dağılımı.
     //
@@ -155,6 +192,9 @@ return [
         '8.c.a' => ['baslik' => 'SAN-TEZ, bakanlık destekli veya üniversite-sanayi projesinde araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK', 'Diğer Kamu Kurumu'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 8],
         '8.d' => ['baslik' => 'Üniversite destekli projede yöneticilik', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 10],
         '8.d.a' => ['baslik' => 'Üniversite destekli projede araştırmacılık veya danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 8],
+        // 8.f mimarlık ve sanat alanlarının yarışma/uygulama projesi. Mimarlık
+        // ile Konservatuvar zorunlu kümelerinin ikisi de bu maddeyi anıyor.
+        '8.f' => ['baslik' => 'Mimarlık, sanat veya tasarım yarışma projesi ya da yayımlanmış uygulama projesi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif', 'Uygulama Projesi — Ekip', 'Uygulama Projesi — Ekip Yardımcısı', 'Uygulama Projesi — Danışman'], 'puan' => 10],
 
         // ══ A.9 EDİTÖRLÜK VE YAYIN KURULU ÜYELİĞİ ══
         '9.a' => ['baslik' => 'Uluslararası yayınevi bilimsel kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 25],
@@ -183,14 +223,126 @@ return [
         '19.d' => ['baslik' => 'Danışmanlığında tamamlanmış yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman', 'es_danisman'], 'puan' => 5],
         '22.a' => ['baslik' => 'Uluslararası yayınevinde ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],
 
-        // ══ D. GÜZEL SANATLAR - KONSERVATUVAR (kısmen) ══
+        // ══ D. GÜZEL SANATLAR - KONSERVATUVAR (24-41) ══
+        // 24 SERGİLER — yurt dışı / yurt içi ayrımı yönergenin kendi ayrımı.
         '24.a.1' => ['baslik' => 'Yurt dışı bireysel (kişisel) sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)'], 'puan' => 30],
         '24.a.2' => ['baslik' => 'Yurt dışı hakemli sergi, bienal veya trienal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Sempozyum/Çalıştay/Bienal (Yurt Dışı)'], 'puan' => 20],
+        '24.a.3' => ['baslik' => 'Yurt dışı grup sergisi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Grup Etkinliği (Uluslararası)'], 'puan' => 10],
+        '24.a.4' => ['baslik' => 'Yurt dışı karma sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Yurt Dışı, Jürisiz)'], 'puan' => 5],
+        '24.a.5' => ['baslik' => 'Yurt dışında kamusal alanda uygulanmış yapıt', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kamusal Alanda Uygulanmış Yapıt (Yurt Dışı)'], 'puan' => 15],
         '24.a.6' => ['baslik' => 'Yurt dışında koleksiyon veya müzede sürekli sergilenen yapıt', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt Dışı)', 'Eserin Yayında Yer Alması / Satın Alınması'], 'puan' => 20],
         '24.b.1' => ['baslik' => 'Yurt içi bireysel (kişisel) sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Ulusal)'], 'puan' => 20],
         '24.b.2' => ['baslik' => 'Yurt içi hakemli sergi, bienal veya trienal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)', 'Sempozyum/Çalıştay/Bienal (Yurt İçi)'], 'puan' => 15],
+        '24.b.3' => ['baslik' => 'Yurt içi grup sergisi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Grup Etkinliği (Ulusal)'], 'puan' => 8],
+        '24.b.4' => ['baslik' => 'Yurt içi karma sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Jürisiz, Ulusal)'], 'puan' => 3],
+        '24.b.5' => ['baslik' => 'Yurt içinde kamusal alanda uygulanmış yapıt', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kamusal Alanda Uygulanmış Yapıt (Yurt İçi)'], 'puan' => 10],
         '24.b.6' => ['baslik' => 'Yurt içinde koleksiyon veya müzede sürekli sergilenen yapıt', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt İçi)', 'Eserin Satın Alınması (Yurt İçi)'], 'puan' => 15],
-        '33.b.1' => ['baslik' => 'Sahne oyunu yazmak veya özgün eser üretmek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Özgün Eser / Beste / Tasarım'], 'puan' => 20],
+
+        // 25 UYGULANMIŞ TASARIM — sekiz satır (25→7) tek etikete düşüyor, en
+        // düşüğü (25.f-h, 7 puan) alındı.
+        '25.h' => ['baslik' => 'Uygulanmış tasarım çalışması veya koleksiyon hazırlığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulanmış Tasarım / Koleksiyon'], 'puan' => 7],
+
+        // 26 MÜZİK TEKNOLOJİSİ — altı satır (20→5) tek etikette, en düşüğü
+        // (26.f kayıt/mix/mastering katılımcılığı, 5 puan) alındı.
+        '26.f' => ['baslik' => 'Müzik teknolojisi uygulaması (kayıt, mix, akustik proje, MIDI)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Müzik Teknolojisi Uygulaması'], 'puan' => 5],
+
+        // 27-32 EKRAN YAPIMLARI. 27.a ile 28 uluslararası/ulusal ayrımını
+        // taşıyor; animasyon satırlarının tamamı (27.b-f, 29.c, 30.a-e, 30→7)
+        // tek etikete düştüğü için en düşüğü (30.e, 7 puan) alındı.
+        '27.a.1' => ['baslik' => 'Uluslararası uzun metrajlı film veya belgeselde yönetmen, görüntü yönetmeni veya senaryo yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uzun Metrajlı Film / Belgesel (Uluslararası)'], 'puan' => 30],
+        '27.a.2' => ['baslik' => 'Ulusal uzun metrajlı film veya belgeselde yönetmen, görüntü yönetmeni veya senaryo yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uzun Metrajlı Film / Belgesel (Ulusal)'], 'puan' => 20],
+        '30.e' => ['baslik' => 'Animasyon, canlandırma veya video efekt yapımı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Animasyon / Canlandırma Yapımı'], 'puan' => 7],
+        '28.1' => ['baslik' => 'Uluslararası TV filmi, dizisi veya belgeselinde yönetmen, görüntü yönetmeni veya senaryo yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['TV Filmi / Dizisi (Uluslararası)'], 'puan' => 30],
+        '28.2' => ['baslik' => 'Ulusal TV filmi, dizisi veya belgeselinde yönetmen, görüntü yönetmeni veya senaryo yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['TV Filmi / Dizisi (Ulusal)'], 'puan' => 20],
+        '29.a' => ['baslik' => 'Uluslararası kısa filmde yönetmen, görüntü yönetmeni veya senaryo yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Belgesel/Kısa Film (Uluslararası)'], 'puan' => 20],
+        '29.b' => ['baslik' => 'Ulusal kısa filmde yönetmen, görüntü yönetmeni veya senaryo yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Belgesel/Kısa Film (Ulusal)'], 'puan' => 10],
+        // 31.a yönetmenlik (15/10) ile 31.b görüntü yönetmenliği (10/5) aynı
+        // etikete düşüyor; 32'de de aynı ikilik var. İkisinde de düşüğü alındı.
+        '31.b.1' => ['baslik' => 'Uluslararası TV programında yönetmen, görüntü yönetmeni veya senaryo yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['TV Programı (Uluslararası)'], 'puan' => 10],
+        '31.b.2' => ['baslik' => 'Ulusal TV programında yönetmen, görüntü yönetmeni veya senaryo yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['TV Programı (Ulusal)'], 'puan' => 5],
+        '32.b.1' => ['baslik' => 'Uluslararası reklam veya tanıtım filminde yönetmen, kameraman veya metin yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Reklam / Tanıtım Filmi (Uluslararası)'], 'puan' => 10],
+        '32.b.2' => ['baslik' => 'Ulusal reklam veya tanıtım filminde yönetmen, kameraman veya metin yazarı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Reklam / Tanıtım Filmi (Ulusal)'], 'puan' => 5],
+
+        // 33 TİYATRO. 33.a tam uzunlukta (20) ile kısa oyun (10) sahnelemesi
+        // tek "Yönetmenlik" etiketinde → 10. 33.b yazarlığında da üç satır
+        // (20/15/10) tek "Özgün Eser" etiketinde → 10.
+        '33.a.2' => ['baslik' => 'Oyun sahneleme', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Yönetmenlik (Sahne/Ekran)'], 'puan' => 10],
+        '33.b.2' => ['baslik' => 'Sahne oyunu yazarlığı, uyarlama veya özgün eser', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Özgün Eser / Beste / Tasarım'], 'puan' => 10],
+        // 33.c uygulama: hareket düzeni, dramatizasyon, performans, happening.
+        // Üç satır (5/3/2) tek etikette → en düşüğü değil, gösterim satırının
+        // kendisi alındı: atölye satırları (c.2, c.3) 35.d ile aynı kalem.
+        '33.c.1' => ['baslik' => 'İzleyici karşısına çıkmış uygulama gösterimi (hareket düzeni, dramatizasyon, performans)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Dansçı / Performans İcracısı (Uluslararası)', 'Dansçı / Performans İcracısı (Ulusal)'], 'puan' => 5],
+
+        // 34 SAHNE TASARIMI — altı satır (20→5) tek etikette, en düşüğü alındı.
+        '34.e' => ['baslik' => 'Sahne tasarımı: dekor, kostüm, ışık, makyaj veya kukla', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne Tasarımı (Dekor, Kostüm, Işık)'], 'puan' => 5],
+
+        // 35 SANAT ETKİNLİKLERİ
+        '35.a.1' => ['baslik' => 'Uluslararası sergi yapımcılığı (küratörlük)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sergi Küratörlüğü (Uluslararası)'], 'puan' => 10],
+        '35.a.2' => ['baslik' => 'Ulusal sergi yapımcılığı (küratörlük)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sergi Küratörlüğü (Ulusal)'], 'puan' => 5],
+        '35.b' => ['baslik' => 'Sanat ve tasarım danışmanlığı veya sanat kurulu üyeliği', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 5],
+        '35.c.1.1' => ['baslik' => 'Uluslararası sanat festivali koordinatörlüğü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Festival Koordinatörlüğü (Uluslararası)'], 'puan' => 20],
+        '35.c.1.2' => ['baslik' => 'Ulusal sanat festivali koordinatörlüğü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Festival Koordinatörlüğü (Ulusal)'], 'puan' => 10],
+
+        // 38 ÇALGI VE SES PERFORMANSI
+        '38.a.1' => ['baslik' => 'Yurt dışında orkestra eşliğinde solistlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Solistlik (Uluslararası)'], 'puan' => 25],
+        '38.a.2' => ['baslik' => 'Yurt içinde orkestra eşliğinde solistlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Solistlik (Ulusal)'], 'puan' => 15],
+        '38.b.1' => ['baslik' => 'Yurt dışı resital veya dinleti', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Resital (Uluslararası)'], 'puan' => 30],
+        '38.b.2' => ['baslik' => 'Yurt içi resital veya dinleti', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Resital (Ulusal)'], 'puan' => 20],
+        '38.c.1' => ['baslik' => 'Yurt dışı karma dinleti veya oda müziği konseri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Uluslararası)'], 'puan' => 30],
+        '38.c.2' => ['baslik' => 'Yurt içi karma dinleti veya oda müziği konseri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Ulusal)'], 'puan' => 20],
+        '38.e.1' => ['baslik' => 'Yurt dışı orkestra konserinde başkemancılık', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Başkemancılık (Uluslararası)'], 'puan' => 5],
+        '38.e.2' => ['baslik' => 'Yurt içi orkestra konserinde başkemancılık', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Başkemancılık (Ulusal)'], 'puan' => 3],
+        '38.f.1' => ['baslik' => 'Yurt dışı orkestra konserinde grup şefliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Grup Şefliği (Uluslararası)'], 'puan' => 5],
+        '38.f.2' => ['baslik' => 'Yurt içi orkestra konserinde grup şefliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Grup Şefliği (Ulusal)'], 'puan' => 3],
+        // 38.g tutti üyeliği (3/2): etiket yurt ayrımı taşımıyor → düşüğü.
+        '38.g' => ['baslik' => 'Orkestra veya koro konserinde tutti üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Orkestra / Koro Üyeliği'], 'puan' => 2],
+        // 38.h, 39.j, 40.i ve 41.h aynı workshop satırı (20/10).
+        '38.h.1' => ['baslik' => 'Konservatuvar veya müzik kurumunda yurt dışında workshop yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Masterclass (Uluslararası)'], 'puan' => 20],
+        '38.h.2' => ['baslik' => 'Konservatuvar veya müzik kurumunda yurt içinde workshop yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Masterclass (Ulusal)'], 'puan' => 10],
+        // 38.j, 39.i ve 40.h aynı bandrollü kayıt satırı (20).
+        '38.j' => ['baslik' => 'Performansın bandrollü CD, DVD veya benzeri kayıt ortamında yayımlanması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bandrollü Kayıt (CD/DVD)'], 'puan' => 20],
+
+        // 39 OPERA PERFORMANSI
+        '39.a.1' => ['baslik' => 'Yurt dışında opera veya operet temsilinde birinci derece rol', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera Birinci Rol (Uluslararası)'], 'puan' => 30],
+        '39.a.2' => ['baslik' => 'Yurt içinde opera veya operet temsilinde birinci derece rol', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera Birinci Rol (Ulusal)'], 'puan' => 20],
+        '39.b.1' => ['baslik' => 'Yurt dışında oratoryo, kantat veya ensemble solistliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oratoryo/Kantat Solistliği (Uluslararası)'], 'puan' => 20],
+        '39.b.2' => ['baslik' => 'Yurt içinde oratoryo, kantat veya ensemble solistliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oratoryo/Kantat Solistliği (Ulusal)'], 'puan' => 10],
+        '39.c.1' => ['baslik' => 'Yurt dışı şan resitali', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Şan Resitali (Uluslararası)'], 'puan' => 30],
+        '39.c.2' => ['baslik' => 'Yurt içi şan resitali', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Şan Resitali (Ulusal)'], 'puan' => 20],
+        '39.d.1' => ['baslik' => 'Yurt dışında opera veya operet temsilinde ikinci derece rol', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera İkinci Rol (Uluslararası)'], 'puan' => 20],
+        '39.d.2' => ['baslik' => 'Yurt içinde opera veya operet temsilinde ikinci derece rol', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera İkinci Rol (Ulusal)'], 'puan' => 10],
+        '39.f.1' => ['baslik' => 'Yurt dışı profesyonel sanat kurumunda rejisörlük', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Rejisörlük (Uluslararası)'], 'puan' => 30],
+        '39.f.2' => ['baslik' => 'Yurt içi profesyonel sanat kurumunda rejisörlük', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Rejisörlük (Ulusal)'], 'puan' => 20],
+        // 39.g konservatuvar rejisörlüğü (20/10): etiket yurt ayrımı taşımıyor.
+        '39.g' => ['baslik' => 'Devlet konservatuvarında en az 60 dakikalık bir eserin rejisörlüğü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Rejisörlük (Konservatuvar)'], 'puan' => 10],
+        '39.h.1' => ['baslik' => 'Yurt dışı profesyonel sanat kurumunda rejisör yardımcılığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Rejisör Yardımcılığı (Uluslararası)', 'Rejisör Yardımcılığı (Konservatuvar)'], 'puan' => 20],
+        '39.h.2' => ['baslik' => 'Yurt içi profesyonel sanat kurumunda rejisör yardımcılığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Rejisör Yardımcılığı (Ulusal)'], 'puan' => 10],
+
+        // 40 BALE PERFORMANSI
+        '40.a.1' => ['baslik' => 'Yurt dışı bale temsilinde başrol', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bale Başrol (Uluslararası)'], 'puan' => 30],
+        '40.a.2' => ['baslik' => 'Yurt içi bale temsilinde başrol', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bale Başrol (Ulusal)'], 'puan' => 20],
+        '40.b.1' => ['baslik' => 'Yurt dışı bale temsilinde solist rol', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bale Solist Rol (Uluslararası)'], 'puan' => 20],
+        '40.b.2' => ['baslik' => 'Yurt içi bale temsilinde solist rol', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bale Solist Rol (Ulusal)'], 'puan' => 10],
+        '40.c.1' => ['baslik' => 'Yurt dışı bale temsilinde corps de ballet rolü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Corps de Ballet (Uluslararası)'], 'puan' => 10],
+        '40.c.2' => ['baslik' => 'Yurt içi bale temsilinde corps de ballet rolü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Corps de Ballet (Ulusal)'], 'puan' => 5],
+        '40.d.1' => ['baslik' => 'Yurt dışı profesyonel sanat kurumunda tüm perde koreograflığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Tüm Perde Koreograflığı (Uluslararası)'], 'puan' => 20],
+        '40.d.2' => ['baslik' => 'Yurt içi profesyonel sanat kurumunda tüm perde koreograflığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Tüm Perde Koreograflığı (Ulusal)'], 'puan' => 10],
+        '40.e.1' => ['baslik' => 'Yurt dışı profesyonel sanat kurumunda bölüm koreograflığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bölüm Koreograflığı (Uluslararası)'], 'puan' => 10],
+        '40.e.2' => ['baslik' => 'Yurt içi profesyonel sanat kurumunda bölüm koreograflığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bölüm Koreograflığı (Ulusal)'], 'puan' => 5],
+        '40.f.1' => ['baslik' => 'Yurt dışı konservatuvarda bale veya dans koreograflığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bale/Dans Koreograflığı (Uluslararası)', 'Koreografi'], 'puan' => 10],
+        '40.f.2' => ['baslik' => 'Yurt içi konservatuvarda bale veya dans koreograflığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bale/Dans Koreograflığı (Ulusal)'], 'puan' => 5],
+        '40.g.1' => ['baslik' => 'Yurt dışı konservatuvarda klasik bir bale eserini sahnelemek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahneleme/Repetitörlük — Tüm Perde (Uluslararası)', 'Sahneleme/Repetitörlük — Bölüm (Uluslararası)'], 'puan' => 20],
+        '40.g.2' => ['baslik' => 'Yurt içi konservatuvarda klasik bir bale eserini sahnelemek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahneleme/Repetitörlük — Tüm Perde (Ulusal)', 'Sahneleme/Repetitörlük — Bölüm (Ulusal)'], 'puan' => 10],
+
+        // 41 KOMPOZİSYON. Yurt dışı/yurt içi ayrımı taşıyan satırlarda yurt içi
+        // değeri alındı: kaynak sözlüğündeki beste etiketleri yer ayrımı
+        // taşımıyor. 41.a opera (30) ile 41.b oratoryo/bale (20) tek etikette.
+        '41.b' => ['baslik' => 'Opera, oratoryo, bale ya da eşdeğeri sahne kompozisyonu', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera/Bale Kompozisyonu', 'Orkestralı Sahne Eseri'], 'puan' => 20],
+        '41.c' => ['baslik' => 'Orkestra için senfonik eser kompozisyonu', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Senfoni Kompozisyonu', 'Konçerto/Senfonik Şiir', 'Küçük Ölçekli Orkestra Eseri'], 'puan' => 20],
+        '41.d' => ['baslik' => 'En az 5 dakika süreli solo çalgı, ses, koro, oda müziği veya elektronik müzik eseri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda/Koro Müziği Eseri (≥15 dk)', 'Elektronik Müzik Eseri (≥15 dk)'], 'puan' => 15],
+        '41.e' => ['baslik' => '5 dakikadan kısa solo çalgı, ses, koro, oda müziği veya elektronik müzik eseri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda/Koro Müziği Eseri (<15 dk)', 'Elektronik Müzik Eseri (<15 dk)'], 'puan' => 10],
+        '41.f' => ['baslik' => 'Film müziği, tiyatro müziği ya da eşdeğeri eser kompozisyonu', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne/Ekran Müziği'], 'puan' => 15],
+        '41.g' => ['baslik' => 'Eğitim müziği albümü kompozisyonu', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eğitim Müziği Albümü'], 'puan' => 8],
     ],
 
     'gruplar' => [
@@ -207,12 +359,43 @@ return [
         // Mimarlık doçentliğinin ek koşulu (yarışma, uygulama, yazılım/patent).
         'MIMARLIK-EK' => ['11.b.1', '11.b.2', '11.c', '11.d', '18.a', '18.b.1'],
 
-        // Madde 1.10.1/c — alanlara göre zorunlu puan madde kümeleri.
+        // Madde 1.10.1/c — alanlara göre zorunlu puan madde kümeleri. Altı küme
+        // hem Madde 1.10.1/c'de hem de kadro puan çizelgelerinin ilk satırında
+        // yazılı; ikisi de aynı listeyi veriyor.
+        //
+        // MADDE 37 KÜMELERE AYRICA YAZILMADI. Mimarlık ve Konservatuvar
+        // kümeleri "Madde 37" (Mimarlık, Sanat ve Tasarım Ödülleri) diyor ama
+        // o maddenin bütün satırları 18.a/18.b.1'in kaynak etiketlerine
+        // düşüyor ve 18 zaten B bölümünün parçası olarak her kümede var. Ayrı
+        // satır açmak ölü kod olurdu: motor kayıt başına en yüksek maddeyi
+        // seçtiği için ödül daima 18'den sayılıyor.
         'ZORUNLU-FEN' => ['1.*', '2.a', '8.a', '8.a.a', '8.b', '8.b.a', 'B-GIRISIMCILIK'],
         'ZORUNLU-SOSYAL' => ['1.*', '2.*', '5.*', '22.*', '8.a', '8.a.a', '8.b', '8.b.a', 'B-GIRISIMCILIK'],
-        'ZORUNLU-MIMARLIK' => ['1.*', '2.*', '5.*', '22.*', '8.a', '8.a.a', '8.b', '8.b.a', '8.c', '8.c.a', 'B-GIRISIMCILIK'],
+        'ZORUNLU-MIMARLIK' => ['1.*', '2.*', '5.*', '22.*', '8.a', '8.a.a', '8.b', '8.b.a', '8.f', 'B-GIRISIMCILIK'],
+        // Güzel sanatların kuramsal alanları tiyatro çalışmalarını (33) da
+        // sayıyor; uygulamalı alanlar D bölümünün 24-34 arasının tamamını.
+        'ZORUNLU-GS-KURAMSAL' => ['1.*', '2.*', '5.*', '22.*', '33.*', '8.a', '8.a.a', '8.b', '8.b.a', 'B-GIRISIMCILIK'],
+        'ZORUNLU-GS-UYGULAMALI' => ['1.*', '2.*', '5.*', '22.*', '8.a', '8.a.a', '8.b', '8.b.a', 'B-GIRISIMCILIK',
+            '24.*', '25.*', '26.*', '27.*', '28.*', '29.*', '30.*', '31.*', '32.*', '33.*', '34.*'],
+        'ZORUNLU-KONSERVATUVAR' => ['1.*', '2.*', '5.*', '22.*', '8.a', '8.a.a', '8.b', '8.b.a', 'B-GIRISIMCILIK',
+            '38.*', '39.*', '40.*', '41.*'],
 
         'CEVIRI' => ['6.b.1', '6.b.2'],
+
+        // Madde 2.11-2.12'nin koşul metinlerinin andığı sanatsal kümeler.
+        'BILDIRI' => ['7.*'],
+        'KISISEL-ETKINLIK' => ['24.a.1', '24.b.1'],
+        'KARMA-ETKINLIK' => ['24.a.2', '24.a.3', '24.a.4', '24.b.2', '24.b.3', '24.b.4'],
+        'SANAT-ETKINLIGI' => ['24.a.2', '24.b.2'],
+        'MUZIK-TEKNOLOJISI' => ['26.*'],
+        'TIYATRO-UYGULAMA' => ['33.*', '34.*'],
+        'SAHNE-TASARIMI' => ['34.*'],
+        'DRAMATIK-METIN' => ['33.b.2'],
+        'KOMPOZISYON' => ['41.*'],
+        'OPERA-REJI' => ['39.f.1', '39.f.2', '39.g'],
+        'DANS-SOLIST' => ['40.a.1', '40.a.2', '40.b.1', '40.b.2'],
+        'DANS-KOREOGRAFI' => ['40.d.1', '40.d.2', '40.e.1', '40.e.2', '40.f.1', '40.f.2'],
+        'DANS-SAHNELEME' => ['40.c.1', '40.c.2', '40.g.1', '40.g.2'],
     ],
 
     'grup_tavanlari' => [

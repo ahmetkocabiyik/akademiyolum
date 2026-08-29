@@ -14,12 +14,12 @@ Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 |---|---|---|
 | **Gerçekten engelli** | 3 | Balıkesir, Türk Hava Kurumu, Maltepe — puanlama tablosu PDF'te YOK, belge dışarıdan gelmeli |
 | **Okuma engeli çözüldü, giriş bekliyor** | 0 | — |
-| **Kısmen girildi, kalanı korpus içinde hazır** | 2 | İstanbul Üniversitesi (Tablo 2), Dokuz Eylül (Puanlandırma Formu D bölümü) |
+| **Kısmen girildi, kalanı korpus içinde hazır** | 1 | İstanbul Üniversitesi (Tablo 2) |
 | **Kısmen girildi, çizelge dışarıdan gelmeli** | 2 | SANKO, İstanbul Okan |
 
-Yani **dışarıdan belge beklemeden yapılabilecek iş 2 dosya** (İstanbul
-Üniversitesi'nin Tablo 2'si ve Dokuz Eylül'ün D bölümü); kalan beş üniversite
-için ilgili üniversiteden puanlama ya da ölçüt tablosunu istemek gerekiyor.
+Yani **dışarıdan belge beklemeden yapılabilecek iş 1 dosya** (İstanbul
+Üniversitesi'nin Tablo 2'si); kalan beş üniversite için ilgili üniversiteden
+puanlama ya da ölçüt tablosunu istemek gerekiyor.
 
 **Bu tablo 29.08.2026'da yeniden sayıldı.** Karamanoğlu, Sağlık Bilimleri ve
 Biruni girilmiş olmalarına rağmen üç hafta "giriş bekliyor" satırında
@@ -80,24 +80,32 @@ mühendislik, fen, matematik, sosyal, eğitim, spor, filoloji, ilahiyat, hukuk,
 mimarlık) üç kadroyla; Puanlandırma Formunun A, B ve C bölümleri cetvele
 çevrildi.
 
-**Kalan:** Madde 2.11 (Güzel Sanatlar, yedi alt alan) ve 2.12 (Konservatuvar,
-beş alt alan). İki sebeple bekliyor:
+**GİRİLDİ** (29.08.2026): Madde 2.11 (yedi alt alan) ve 2.12 (beş alt alan) üç
+kadroyla girildi, 36 yeni eşik. Engel, Puanlandırma Formunun D bölümünün kaynak
+sözlüğünde karşılıksız olmasıydı; `Kategori::SanatselEtkinlik`'e 19 etiket
+eklenip (film, animasyon, TV, reklam, müzik teknolojisi, uygulanmış tasarım,
+grup sergisi, kamusal alan yapıtı, küratörlük, festival koordinatörlüğü) bölümün
+24-41 arası tamamlandı. 38-41 (çalgı, opera, bale, kompozisyon) neredeyse
+bütünüyle MEVCUT etiketlerle karşılandı: Mersin TABLO C için açılmış konservatuvar
+kümesi DEÜ'nün satırlarına birebir oturdu.
 
-1. Koşulları Puanlandırma Formunun **D bölümüne** (24-41 arası maddeler)
-   dayanıyor: müzik teknolojisi, uzun metrajlı film, TV dizisi, kısa film,
-   animasyon, reklam filmi, tiyatro, sahne tasarımı blokları. Bu blokların
-   kalemleri kaynak sözlüğünde (`App\Enums\Kategori::kaynaklar()`) karşılıksız;
-   yalnızca sergiler (24) ve tiyatro yazarlığının (33) bir kısmı girilebildi.
-2. Bu alanların **zorunlu puan kümesi** de aynı maddeleri içeriyor
-   (Madde 1.10.1/c: "ilaveten 24-25-26-27-28-29-30-31-32-33-34 no'lu
-   maddeler"). Eksik kümeyle zorunlu puan barajı yazmak, adaya asla
-   sağlayamayacağı bir hedef gösterirdi.
+Üç yeni zorunlu puan kümesi açıldı: `ZORUNLU-GS-KURAMSAL` (33 dahil),
+`ZORUNLU-GS-UYGULAMALI` (24-34 dahil), `ZORUNLU-KONSERVATUVAR` (38-41 dahil).
+Barajlar altı sütunda da aynı (50/80, 120/200, 200/400); değişen tek şey küme.
 
-**Devam edilirse:** Önce sözlüğe film, animasyon ve müzik teknolojisi
-etiketleri eklenmeli (Kategori::SanatselEtkinlik altına); sonra D bölümünün
-24-41 arası maddeleri cetvele girilip `ZORUNLU-GS-UYGULAMALI` ve
-`ZORUNLU-KONSERVATUVAR` kümeleri açılmalı. Alan koşulları zaten okunmuş
-durumda ve düz sayı/puan şartları.
+On iki alt alanın hepsi `guzel_sanatlar` temel alanına düşüyor; ayrım yalnızca
+`birim` ile kuruluyor ve program seçilmeden `bul()` null döner.
+
+Yan bulgu: `ZORUNLU-MIMARLIK` yanlıştı. Küme 8.c ve 8.c.a'yı (üniversite-sanayi
+projeleri) sayıyordu; Madde 1.10.1/c ile kadro puan çizelgelerinin ikisi de
+mimarlık için "8.a, 8.b, 8.f" diyor. 8.c çıkarıldı, 8.f eklendi.
+
+Girilemeyen kalanlar: 35.c.2 festivale eserle katılım ile 35.d atölye
+yöneticiliği (etiketleri 24.a.2 ve 38.h'nin, girilseydi yüksek satırdan
+sayılırdı), 36 retrospektif katalog, 37 ödüller (bütün satırları 18.a/18.b.1'e
+düşüyor; 18 zaten her zorunlu kümede var), 38.d eşlikçilik ve dört alandaki
+"öğrencinin ödül alması" satırları. Sözlükteki şeflik etiketlerinin yönergede
+karşılık satırı yok.
 
 **Ziraat, orman ve su ürünleri** alanları yönergede hiç anılmıyor; kapsam dışı
 kalması doğrudur.

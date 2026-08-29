@@ -14,16 +14,43 @@
  * Doçentlikte zorunlu puanın 50'si doktora sonrası, profesörlükte 70'i
  * doçentlik sonrası üretilmiş olmalı — bunlar da ayrı düğüm.
  *
- * ZORUNLU PUAN KÜMESİ ALANA GÖRE DEĞİŞİYOR (Madde 1.10.1/c). Üç küme cetvelde
+ * ZORUNLU PUAN KÜMESİ ALANA GÖRE DEĞİŞİYOR (Madde 1.10.1/c). Altı küme cetvelde
  * tanımlı: ZORUNLU-FEN (fen, mühendislik, tıp, sağlık), ZORUNLU-SOSYAL
- * (sosyal, eğitim, filoloji, ilahiyat, hukuk, spor), ZORUNLU-MIMARLIK.
+ * (sosyal, eğitim, filoloji, ilahiyat, hukuk, spor), ZORUNLU-MIMARLIK,
+ * ZORUNLU-GS-KURAMSAL, ZORUNLU-GS-UYGULAMALI, ZORUNLU-KONSERVATUVAR.
+ * Küme değişiyor ama BARAJLAR DEĞİŞMİYOR: kadro puan çizelgelerinin altı
+ * sütununda da aynı sayılar var (50/80, 120/200, 200/400).
  *
- * ── GÜZEL SANATLAR VE KONSERVATUVAR GİRİLMEDİ ──
- * Madde 2.11 (yedi alt alan) ve 2.12 (beş alt alan) koşulları Puanlandırma
- * Formunun D bölümüne (24-41 arası, film, animasyon, müzik teknolojisi, TV,
- * reklam blokları) dayanıyor ve o bölümün kalemleri kaynak sözlüğünde
- * karşılıksız. Zorunlu puan kümesi de o maddeleri içeriyor; eksik kümeyle
- * baraj yazmak adaya sağlayamayacağı bir hedef gösterirdi.
+ * ── GÜZEL SANATLAR VE KONSERVATUVAR GİRİLDİ ──
+ * Madde 2.11 (yedi alt alan) ve 2.12 (beş alt alan) uzun süre bekledi: koşullar
+ * Puanlandırma Formunun D bölümüne dayanıyordu ve o bölümün kalemleri kaynak
+ * sözlüğünde karşılıksızdı. Sözlüğe 19 etiket eklenip D bölümü tamamlanınca
+ * on iki alanın üçü de girildi (36 yeni eşik).
+ *
+ * ON İKİ ALT ALANIN HEPSİ AYNI TEMEL ALANA (guzel_sanatlar) DÜŞÜYOR, ayrım
+ * yalnızca `birim` ile kuruluyor. Program seçilmeden `bul()` null döner ve
+ * üniversite o alanda kapsam dışı görünür — Bingöl ve Trabzon'daki davranışın
+ * aynısı. Programı seçmeyen adaya on iki koşul kümesinden birini rastgele
+ * göstermek, yanlış bir barajı "Doğrulandı" rozetiyle sunmak olurdu.
+ *
+ * "BİR KİTAP VEYA … BİR MAKALE VEYA … EN AZ İKİ MAKALE" ZİNCİRİ İKİ TÜRLÜ
+ * OKUNUYOR. 2.11.1 ve 2.11.3'ün cümlesi hem "tek uluslararası makale yeter"
+ * hem "en az iki makale gerekir" diye okunabiliyor; §0 uyarınca SIKI okuma
+ * girildi (2.11.1'de iki makale + biri alan endeksli). 2.11.4-2.11.7'nin
+ * cümlesi ise şıkları açıkça "veya" ile ayırdığı için `Kalip::veya` oldu.
+ *
+ * SAYIYA ÇEVRİLEMEYEN SANAT KOŞULLARI BEYAN OLARAK GİRİLDİ: konservatuvarın
+ * "2 saatlik görüntülü kayıt", "45 dakikası konser kaydı", oyunculuğun "değişik
+ * türlerde önemli roller" ve dans alanının "esas meslek derslerini üç yıl
+ * vermiş olmak" koşulları. Kayıt ne süre ne de rol önemi tutuyor; DEÜ'nün puan
+ * tablosunda da oyunculuk rolünün satırı yok.
+ *
+ * GİRİLMEYEN ALAN KOŞULLARI: 2.12.1 profesörlüğünün "2 numaralı koşullara uygun
+ * iki saatlik kayıt" ek maddesi (doçentlik beyanı zaten tekrarlanıyor) ve
+ * 2.12.5'in yalnız profesörlükte geçerli olan "1 numaralı koşulun DIŞINDA
+ * doçentlik kriterlerini tekrarlamak" istisnası — motor tekrar kapanışından bir
+ * düğüm çıkaramıyor, bütün koşullar tekrarlatıldı, koşul olduğundan ZOR görünür.
+ *
  * Ziraat, orman ve su ürünleri alanları yönergede hiç anılmıyor.
  *
  * ── HEMŞİRELİK AYRI BİRİM ──
@@ -354,6 +381,300 @@ $alanlar = [
             ]) + ['madde' => $m],
         ],
         'telafiHedefi' => 0,
+    ],
+
+    // ══════════ 2.11.1 GÖRÜNTÜ, CANLANDIRMA, PLASTİK VE GELENEKSEL TÜRK SANATLARI ══════════
+    [
+        'anahtar' => 'deu-gs-goruntu', 'ad' => 'Görüntü, Canlandırma, Plastik ve Geleneksel Türk Sanatları',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Güzel Sanatlar — Görüntü, Canlandırma ve Plastik Sanatlar',
+        'zorunlu' => 'ZORUNLU-GS-UYGULAMALI', 'madde' => 'Madde 2.11.1',
+        'dr' => fn (string $m): array => [
+            Kalip::adet('Hakemli dergilerde en az 2 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 2, madde: $m),
+            Kalip::adet('Bunların en az 1\'i SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide olmalı', ['SCI-ALAN'], 1, madde: $m),
+            Kalip::adet('En az 1\'inde tek yazar veya birinci isim olmalısınız', ['HAKEMLI-MAKALE'], 1, 'ilk', madde: $m),
+            Kalip::adet('Özgün eserlerinizle en az 1 kişisel etkinlikte bulunmalısınız', ['KISISEL-ETKINLIK'], 1, madde: $m),
+            Kalip::kIle('Ayrıca aşağıdakilerden en az 1\'i', 1, [
+                Kalip::adet('En az 1 karma veya ortak etkinliğe katılmak', ['KARMA-ETKINLIK'], 1, madde: $m),
+                Kalip::adet('Sempozyum, festival, workshop veya bienale eserinizle katılmak', ['SANAT-ETKINLIGI'], 1, madde: $m),
+                Kalip::adet('Bilimsel veya sanatsal bir toplantıya bildiri ile katılmak', ['BILDIRI'], 1, madde: $m),
+            ]),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::adet("{$dad}, hakemli dergilerde en az 3 araştırma veya derleme makale", ['HAKEMLI-MAKALE'], 3, donem: $d, madde: $m),
+            Kalip::adet('Bunların en az 2\'si SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide olmalı', ['SCI-ALAN'], 2, donem: $d, madde: $m),
+            Kalip::adet('Özgün eserlerinizle en az 3 kişisel etkinlikte bulunmalısınız', ['KISISEL-ETKINLIK'], 3, donem: $d, madde: $m),
+            Kalip::kIle('Ayrıca aşağıdakilerden en az 2\'si', 2, [
+                Kalip::adet('En az 3 karma veya ortak etkinliğe katılmak', ['KARMA-ETKINLIK'], 3, donem: $d, madde: $m),
+                Kalip::adet('Sempozyum, festival, workshop veya bienale eserinizle katılmak', ['SANAT-ETKINLIGI'], 1, donem: $d, madde: $m),
+                Kalip::adet('Bilimsel veya sanatsal bir toplantıya bildiri ile katılmak', ['BILDIRI'], 1, donem: $d, madde: $m),
+            ]),
+        ],
+        'telafiHedefi' => 0,
+    ],
+
+    // ══════════ 2.11.2 MÜZİKOLOJİ ══════════
+    [
+        'anahtar' => 'deu-gs-muzikoloji', 'ad' => 'Müzikoloji',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Güzel Sanatlar — Müzikoloji',
+        'zorunlu' => 'ZORUNLU-GS-KURAMSAL', 'madde' => 'Madde 2.11.2',
+        'dr' => fn (string $m): array => [
+            Kalip::veya('Alanınızla ilgili bir kitap ya da kitap bölümü, ya da en az 2 makale', [
+                Kalip::adet('Alanınızla ilgili bir kitap veya kitap içi bölüm', ['KITAP-VEYA-BOLUM'], 1, madde: $m),
+                Kalip::ve('Ya da en az 2 araştırma veya derleme makale', [
+                    Kalip::adet('Hakemli dergilerde en az 2 makale', ['HAKEMLI-MAKALE'], 2, madde: $m),
+                    Kalip::adet('En az 1\'i SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide olmalı', ['SCI-ALAN'], 1, madde: $m),
+                ]),
+            ]) + ['madde' => $m],
+            Kalip::adet('Makalelerinizin en az 1\'inde tek yazar veya birinci isim olmalısınız', ['HAKEMLI-MAKALE'], 1, 'ilk', madde: $m),
+            Kalip::adet('Bilimsel veya sanatsal en az 1 toplantıya bildiri ile katılmalısınız', ['BILDIRI'], 1, madde: $m),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::adet("{$dad}, hakemli dergilerde en az 3 araştırma veya derleme makale", ['HAKEMLI-MAKALE'], 3, donem: $d, madde: $m),
+            Kalip::adet('Bunların en az 1\'i SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide olmalı', ['SCI-ALAN'], 1, donem: $d, madde: $m),
+            Kalip::adet('En az 1\'inde tek yazar veya birinci isim olmalısınız', ['HAKEMLI-MAKALE'], 1, 'ilk', $d, madde: $m),
+            Kalip::adet('Bilimsel veya sanatsal en az 2 toplantıya bildiri ile katılmalısınız', ['BILDIRI'], 2, donem: $d, madde: $m),
+        ],
+        'telafiHedefi' => 0,
+    ],
+
+    // ══════════ 2.11.3 MÜZİK TEKNOLOJİLERİ ══════════
+    [
+        'anahtar' => 'deu-gs-muzik-teknoloji', 'ad' => 'Müzik Teknolojileri',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Güzel Sanatlar — Müzik Teknolojileri',
+        'zorunlu' => 'ZORUNLU-GS-UYGULAMALI', 'madde' => 'Madde 2.11.3',
+        'dr' => fn (string $m): array => [
+            Kalip::adet('Alanınızda en az 1 uygulamalı yapım gerçekleştirmelisiniz', ['MUZIK-TEKNOLOJISI'], 1, madde: $m),
+            Kalip::beyan('Yapımın tarihsel gelişimi, geleneksel özellikleri ya da yenilikçi katkıları hakkında rapor sunmak', $m),
+            Kalip::veya('Alanınızla ilgili bir kitap ya da kitap bölümü, ya da en az 1 makale', [
+                Kalip::adet('Alanınızla ilgili bir kitap veya kitap içi bölüm', ['KITAP-VEYA-BOLUM'], 1, madde: $m),
+                Kalip::adet('Ya da SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide en az 1 makale', ['SCI-ALAN'], 1, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::adet('Bilimsel veya sanatsal en az 1 toplantıya bildiri ile katılmalısınız', ['BILDIRI'], 1, madde: $m),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::adet("{$dad}, alanınızda en az 2 uygulamalı yapım", ['MUZIK-TEKNOLOJISI'], 2, donem: $d, madde: $m),
+            Kalip::adet('Hakemli dergilerde en az 3 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 3, donem: $d, madde: $m),
+            Kalip::adet('Bunların en az 2\'si SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide olmalı', ['SCI-ALAN'], 2, donem: $d, madde: $m),
+            Kalip::adet('Bilimsel veya sanatsal en az 2 toplantıya bildiri ile katılmalısınız', ['BILDIRI'], 2, donem: $d, madde: $m),
+        ],
+        'telafiHedefi' => 1,
+    ],
+
+    // ══════════ 2.11.4 TİYATRO KURAMI ══════════
+    [
+        'anahtar' => 'deu-gs-tiyatro-kuram', 'ad' => 'Tiyatro Kuramı',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Güzel Sanatlar — Tiyatro Kuramı',
+        'zorunlu' => 'ZORUNLU-GS-KURAMSAL', 'madde' => 'Madde 2.11.4',
+        'dr' => fn (string $m): array => [
+            Kalip::veya('Lisansüstü tezinizden üretilmemiş özgün bilimsel bir eser', [
+                Kalip::adet('Bir kitap', ['KITAP'], 1, madde: $m),
+                Kalip::adet('Ya da SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide en az 1 makale', ['SCI-ALAN'], 1, madde: $m),
+                Kalip::adet('Ya da ULAKBİM listesindeki dergilerde en az 3 araştırma veya derleme makale', ['1.c'], 3, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::adet('Makalelerinizin en az 1\'inde tek yazar veya birinci isim olmalısınız', ['HAKEMLI-MAKALE'], 1, 'ilk', madde: $m),
+            Kalip::kIle('Ayrıca aşağıdakilerden en az 1\'i', 1, [
+                Kalip::adet('Bir oyun veya gösteri çalışmasında yorum, tasarım, araştırma ya da yazım görevi almak', ['TIYATRO-UYGULAMA'], 1, madde: $m),
+                Kalip::adet('Bilimsel veya sanatsal bir toplantıya bildiri ile katılmak', ['BILDIRI'], 1, madde: $m),
+            ]),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::veya("{$dad}, lisansüstü tezinizden üretilmemiş özgün bilimsel bir eser", [
+                Kalip::adet('Bir kitap', ['KITAP'], 1, donem: $d, madde: $m),
+                Kalip::adet('Ya da SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide en az 1 makale', ['SCI-ALAN'], 1, donem: $d, madde: $m),
+                Kalip::adet('Ya da ULAKBİM listesindeki dergilerde en az 3 araştırma veya derleme makale', ['1.c'], 3, donem: $d, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::adet('Bir oyun veya gösteri çalışmasında yorum, tasarım, araştırma ya da yazım görevi almalısınız', ['TIYATRO-UYGULAMA'], 1, donem: $d, madde: $m),
+            Kalip::adet('Bilimsel veya sanatsal bir toplantıya bildiri ile katılmalısınız', ['BILDIRI'], 1, donem: $d, madde: $m),
+        ],
+    ],
+
+    // ══════════ 2.11.5 OYUNCULUK – REJİ – UYGULAMA ══════════
+    [
+        'anahtar' => 'deu-gs-oyunculuk', 'ad' => 'Oyunculuk, Reji ve Uygulama',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Güzel Sanatlar — Oyunculuk, Reji ve Uygulama',
+        'zorunlu' => 'ZORUNLU-GS-UYGULAMALI', 'madde' => 'Madde 2.11.5',
+        'dr' => fn (string $m): array => [
+            Kalip::veya('Lisansüstü tezinizden üretilmemiş özgün bir eser', [
+                Kalip::adet('Bir kitap', ['KITAP'], 1, madde: $m),
+                Kalip::adet('Ya da SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide en az 1 makale', ['SCI-ALAN'], 1, madde: $m),
+                Kalip::adet('Ya da ULAKBİM listesindeki dergilerde en az 3 araştırma veya derleme makale', ['1.c'], 3, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::adet('Makalelerinizin en az 1\'inde tek yazar veya birinci isim olmalısınız', ['HAKEMLI-MAKALE'], 1, 'ilk', madde: $m),
+            Kalip::kIle('Ayrıca oyunculuk, reji ya da uygulama dallarından biri', 1, [
+                Kalip::beyan('Oyunculuk dalı: değişik türlerde en az 2 önemli rolü oynamak ve görüntü kayıtlarıyla belgelemek', $m),
+                Kalip::adet('Reji dalı: saygın tiyatrolarda en az 2 oyun sahnelemek', ['33.a.2'], 2, madde: $m),
+                Kalip::adet('Uygulama dalı: izleyici karşısına çıkmış en az 4 uygulama çalışması', ['33.c.1'], 4, madde: $m),
+            ]),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::veya("{$dad}, lisansüstü tezinizden üretilmemiş özgün bir eser", [
+                Kalip::adet('Bir kitap', ['KITAP'], 1, donem: $d, madde: $m),
+                Kalip::adet('Ya da SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide en az 1 makale', ['SCI-ALAN'], 1, donem: $d, madde: $m),
+                Kalip::adet('Ya da ULAKBİM listesindeki dergilerde en az 3 araştırma veya derleme makale', ['1.c'], 3, donem: $d, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::veya('Oyunculuk, reji ya da uygulama dallarından en az 5 çalışma', [
+                Kalip::beyan('Oyunculuk dalı: değişik türlerde en az 5 önemli rolü oynamak', $m),
+                Kalip::adet('Ya da reji ve uygulama çalışmalarınızdan en az 5 çalışma', ['TIYATRO-UYGULAMA'], 5, donem: $d, madde: $m),
+            ]) + ['madde' => $m],
+        ],
+    ],
+
+    // ══════════ 2.11.6 YORUM – DRAMATİK YAZARLIK ══════════
+    [
+        'anahtar' => 'deu-gs-dramatik-yazarlik', 'ad' => 'Yorum ve Dramatik Yazarlık',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Güzel Sanatlar — Yorum ve Dramatik Yazarlık',
+        'zorunlu' => 'ZORUNLU-GS-UYGULAMALI', 'madde' => 'Madde 2.11.6',
+        'dr' => fn (string $m): array => [
+            Kalip::veya('Lisansüstü tezinizden üretilmemiş özgün bir eser', [
+                Kalip::adet('Bir kitap', ['KITAP'], 1, madde: $m),
+                Kalip::adet('Ya da SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide en az 1 makale', ['SCI-ALAN'], 1, madde: $m),
+                Kalip::adet('Ya da ULAKBİM listesindeki dergilerde en az 3 araştırma makalesi', ['1.c'], 3, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::adet('Makalelerinizin en az 1\'inde tek yazar veya birinci isim olmalısınız', ['HAKEMLI-MAKALE'], 1, 'ilk', madde: $m),
+            Kalip::kIle('Ayrıca aşağıdakilerden en az 2\'si', 2, [
+                Kalip::adet('Sahne, TV, radyo veya sinema için en az 2 dramatik metin yazmak', ['DRAMATIK-METIN'], 2, madde: $m),
+                Kalip::adet('Bir oyun, film ya da gösteride yazarlık, metin yazarlığı veya dramaturg görevi', ['TIYATRO-UYGULAMA'], 1, madde: $m),
+                Kalip::beyan('Oyun metni ve senaryo incelemeleri, eleştiri ve tanıtım yazıları yazmak', $m),
+            ]),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::veya("{$dad}, lisansüstü tezinizden üretilmemiş özgün bir eser", [
+                Kalip::adet('Bir kitap', ['KITAP'], 1, donem: $d, madde: $m),
+                Kalip::adet('Ya da SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide en az 1 makale', ['SCI-ALAN'], 1, donem: $d, madde: $m),
+                Kalip::adet('Ya da ULAKBİM listesindeki dergilerde en az 3 araştırma makalesi', ['1.c'], 3, donem: $d, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::adet('Sahne, TV, radyo veya sinema için en az 2 dramatik metin yazmalısınız', ['DRAMATIK-METIN'], 2, donem: $d, madde: $m),
+            Kalip::adet('Bir oyun, film ya da gösteride yazarlık, metin yazarlığı veya dramaturg görevi almalısınız', ['TIYATRO-UYGULAMA'], 1, donem: $d, madde: $m),
+            Kalip::beyan('Oyun metni ve senaryo incelemeleri, eleştiri ve tanıtım yazıları yazmış olmak', $m),
+        ],
+    ],
+
+    // ══════════ 2.11.7 SAHNE TASARIMI ══════════
+    [
+        'anahtar' => 'deu-gs-sahne-tasarimi', 'ad' => 'Sahne Tasarımı',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Güzel Sanatlar — Sahne Tasarımı',
+        'zorunlu' => 'ZORUNLU-GS-UYGULAMALI', 'madde' => 'Madde 2.11.7',
+        'dr' => fn (string $m): array => [
+            Kalip::veya('Lisansüstü tezinizden üretilmemiş özgün bir eser', [
+                Kalip::adet('Bir kitap', ['KITAP'], 1, madde: $m),
+                Kalip::adet('Ya da SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide en az 1 makale', ['SCI-ALAN'], 1, madde: $m),
+                Kalip::adet('Ya da ULAKBİM listesindeki dergilerde en az 3 araştırma veya derleme makale', ['1.c'], 3, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::kIle('Ayrıca aşağıdakilerden en az 1\'i', 1, [
+                Kalip::adet('Sahne, TV, sinema, kukla, makyaj ya da ışık alanında sahnelenmiş bir tasarım', ['SAHNE-TASARIMI'], 1, madde: $m),
+                Kalip::adet('Özgün eserlerinizle en az 1 kişisel etkinlik', ['KISISEL-ETKINLIK'], 1, madde: $m),
+                Kalip::adet('Özgün eserlerinizle en az 2 karma veya ortak etkinlik', ['KARMA-ETKINLIK'], 2, madde: $m),
+            ]),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::veya("{$dad}, lisansüstü tezinizden üretilmemiş özgün bir eser", [
+                Kalip::adet('Bir kitap', ['KITAP'], 1, donem: $d, madde: $m),
+                Kalip::adet('Ya da SCI, SCI-Expanded, SSCI, AHCI veya alan endeksli dergide en az 1 makale', ['SCI-ALAN'], 1, donem: $d, madde: $m),
+                Kalip::adet('Ya da ULAKBİM listesindeki dergilerde en az 3 araştırma veya derleme makale', ['1.c'], 3, donem: $d, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::adet('Sahne, TV, sinema, kukla, makyaj ya da ışık alanında en az 2 sahnelenmiş tasarım', ['SAHNE-TASARIMI'], 2, donem: $d, madde: $m),
+            Kalip::kIle('Ayrıca aşağıdakilerden en az 1\'i', 1, [
+                Kalip::adet('Özgün eserlerinizle en az 1 kişisel etkinlik', ['KISISEL-ETKINLIK'], 1, donem: $d, madde: $m),
+                Kalip::adet('Özgün eserlerinizle en az 2 karma veya ortak etkinlik', ['KARMA-ETKINLIK'], 2, donem: $d, madde: $m),
+                Kalip::adet('Bilimsel veya sanatsal bir toplantıya bildiri ile katılmak', ['BILDIRI'], 1, donem: $d, madde: $m),
+            ]),
+        ],
+    ],
+
+    // ══════════ 2.12.1 KONSERVATUVAR — KOMPOZİSYON ══════════
+    [
+        'anahtar' => 'deu-kons-kompozisyon', 'ad' => 'Konservatuvar — Kompozisyon',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Konservatuvar — Kompozisyon',
+        'zorunlu' => 'ZORUNLU-KONSERVATUVAR', 'madde' => 'Madde 2.12.1',
+        'dr' => fn (string $m): array => [
+            Kalip::adet('En az 3 farklı yaratı formunda, toplam en az 4 özgün eser', ['KOMPOZISYON'], 4, madde: $m),
+            Kalip::beyan('45 dakikalık bölümü konser kaydı olmak üzere 1 saatlik ses kaydı sunmak', $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, madde: $m),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::adet("{$dad}, en az 3 farklı yaratı formunda, toplam en az 10 özgün eser", ['KOMPOZISYON'], 10, donem: $d, madde: $m),
+            Kalip::beyan('3 saatlik canlı, stüdyo veya MIDI kaydı ile eserlere ait yazılı materyali sunmak', $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, donem: $d, madde: $m),
+        ],
+    ],
+
+    // ══════════ 2.12.2 KONSERVATUVAR — YORUMCULUK ══════════
+    [
+        'anahtar' => 'deu-kons-yorumculuk', 'ad' => 'Konservatuvar — Yorumculuk',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Konservatuvar — Yorumculuk',
+        'zorunlu' => 'ZORUNLU-KONSERVATUVAR', 'madde' => 'Madde 2.12.2',
+        'dr' => fn (string $m): array => [
+            Kalip::beyan('Solo ve/veya orkestra eşlikli en az 2 saatlik görüntülü müzik kaydı sunmak '
+                .'(en az 1 saati konser kaydı; şeflik dalında en az 3 saatlik senfonik müzik kaydı)', $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, madde: $m),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::beyan("{$dad}, solo ve/veya orkestra eşlikli en az 2 saatlik görüntülü müzik kaydı sunmak", $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, donem: $d, madde: $m),
+        ],
+    ],
+
+    // ══════════ 2.12.3 KONSERVATUVAR — OPERA ŞARKICILIĞI ══════════
+    [
+        'anahtar' => 'deu-kons-opera-sarki', 'ad' => 'Konservatuvar — Opera Şarkıcılığı',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Konservatuvar — Opera Şarkıcılığı',
+        'zorunlu' => 'ZORUNLU-KONSERVATUVAR', 'madde' => 'Madde 2.12.3',
+        'dr' => fn (string $m): array => [
+            Kalip::beyan('En az 2 saatlik konser kaydı sunmak (en az 1 saati görsel kayıt)', $m),
+            Kalip::adet('Radyo, TV ya da seçkin kurumlarda en az 4 sahne etkinliği', ['39.*'], 4, madde: $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, madde: $m),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::beyan("{$dad}, en az 2 saatlik konser kaydı sunmak (en az 1 saati görsel kayıt)", $m),
+            Kalip::adet('Radyo, TV ya da seçkin kurumlarda en az 4 sahne etkinliği', ['39.*'], 4, donem: $d, madde: $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, donem: $d, madde: $m),
+        ],
+    ],
+
+    // ══════════ 2.12.4 KONSERVATUVAR — OPERA REJİSÖRLÜĞÜ ══════════
+    [
+        'anahtar' => 'deu-kons-opera-reji', 'ad' => 'Konservatuvar — Opera Rejisörlüğü',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Konservatuvar — Opera Rejisörlüğü',
+        'zorunlu' => 'ZORUNLU-KONSERVATUVAR', 'madde' => 'Madde 2.12.4',
+        'dr' => fn (string $m): array => [
+            Kalip::beyan('En az 2 saatlik görsel ve/veya işitsel canlı ya da stüdyo kaydı sunmak', $m),
+            Kalip::adet('En az 2 sahne eseri hazırlamış olmalısınız', ['OPERA-REJI'], 2, madde: $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, madde: $m),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::beyan("{$dad}, en az 2 saatlik görsel ve/veya işitsel canlı ya da stüdyo kaydı sunmak", $m),
+            Kalip::adet('Radyo, TV ya da seçkin kurumlarda en az 4 sahne etkinliği', ['OPERA-REJI'], 4, donem: $d, madde: $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, donem: $d, madde: $m),
+        ],
+    ],
+
+    // ══════════ 2.12.5 KONSERVATUVAR — DANS VE KOREOGRAFİ ══════════
+    [
+        'anahtar' => 'deu-kons-dans', 'ad' => 'Konservatuvar — Dans ve Koreografi',
+        'alanlar' => ['guzel_sanatlar'], 'birim' => 'Konservatuvar — Dans ve Koreografi',
+        'zorunlu' => 'ZORUNLU-KONSERVATUVAR', 'madde' => 'Madde 2.12.5',
+        'dr' => fn (string $m): array => [
+            Kalip::adet('Solist olarak en az 1 eserde rol almış olmalısınız', ['DANS-SOLIST'], 1, madde: $m),
+            Kalip::veya('Alanınızda ödül ya da sonuçlandırılmış tez danışmanlığı', [
+                Kalip::adet('Yarışma, festival veya bienalden ödül almış olmak', ['18.b.1'], 1, madde: $m),
+                Kalip::adet('Ya da yürütücüsü olduğunuz sonuçlandırılmış bir lisansüstü tez danışmanlığı', ['19.a', '19.d'], 1, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::adet('Koreografisini yaptığınız en az 1 eseri sahnelemiş olmalısınız', ['DANS-KOREOGRAFI'], 1, madde: $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, madde: $m),
+        ],
+        'docent' => fn (string $m, array $d, string $dad): array => [
+            Kalip::adet("{$dad}, solist olarak en az 2 eserde rol almak ya da 2 eserden bölüm sahnelemek", ['DANS-SOLIST'], 2, donem: $d, madde: $m),
+            Kalip::veya('Alanınızda ödül ya da sonuçlandırılmış tez danışmanlığı', [
+                Kalip::adet('Yarışma, festival veya bienalden ödül almış olmak', ['18.b.1'], 1, donem: $d, madde: $m),
+                Kalip::adet('Ya da yürütücüsü olduğunuz sonuçlandırılmış bir lisansüstü tez danışmanlığı', ['19.a', '19.d'], 1, donem: $d, madde: $m),
+            ]) + ['madde' => $m],
+            Kalip::adet('Koreografisini yaptığınız en az 1 eseri sahnelemiş olmalısınız', ['DANS-KOREOGRAFI'], 1, donem: $d, madde: $m),
+            Kalip::adet('Bale repertuarından en az 2 eser sahnelemiş olmalısınız', ['DANS-SAHNELEME'], 2, donem: $d, madde: $m),
+            Kalip::adet('Hakemli dergilerde en az 1 araştırma veya derleme makale', ['HAKEMLI-MAKALE'], 1, donem: $d, madde: $m),
+            Kalip::beyan('Konservatuvar lisans ya da hazırlık birimlerinde esas meslek derslerinden en az '
+                .'ikisini üç yıl vermiş olmak', $m),
+            Kalip::adet('Alanınızdaki yarışma, sempozyum, festival veya workshop etkinliklerine katılmış olmalısınız', ['SANAT-ETKINLIGI'], 1, donem: $d, madde: $m),
+        ],
     ],
 ];
 

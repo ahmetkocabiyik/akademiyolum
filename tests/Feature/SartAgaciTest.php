@@ -2954,9 +2954,51 @@ test('Dokuz Eylül zorunlu puan kümesi alana göre değişiyor', function () {
     expect($sosyal)->toContain('5.a')
         ->and($fen)->not->toContain('5.a');
 
-    // Mimarlık ayrıca üniversite-sanayi projelerini de sayıyor.
-    expect($mimarlik)->toContain('8.c')
-        ->and($sosyal)->not->toContain('8.c');
+    // Mimarlık ayrıca yarışma ve uygulama projelerini (8.f) sayıyor; Madde
+    // 1.10.1/c ile kadro puan çizelgeleri mimarlık için 8.a, 8.b ve 8.f diyor,
+    // 8.c'yi (üniversite-sanayi projesi) hiçbir kümeye koymuyor.
+    expect($mimarlik)->toContain('8.f')
+        ->and($mimarlik)->not->toContain('8.c')
+        ->and($sosyal)->not->toContain('8.f');
+
+    // Güzel sanatların kuramsal alanı tiyatroyu (33), uygulamalı alanı D
+    // bölümünün 24-34 arasının tamamını, konservatuvar ise 38-41'i sayıyor.
+    $gsKuramsal = $katalog->coz(['ZORUNLU-GS-KURAMSAL']);
+    $gsUygulamali = $katalog->coz(['ZORUNLU-GS-UYGULAMALI']);
+    $konservatuvar = $katalog->coz(['ZORUNLU-KONSERVATUVAR']);
+
+    expect($gsKuramsal)->toContain('33.b.2')
+        ->and($gsKuramsal)->not->toContain('24.a.1')
+        ->and($gsUygulamali)->toContain('24.a.1')
+        ->and($gsUygulamali)->toContain('26.f')
+        ->and($gsUygulamali)->not->toContain('38.b.1')
+        ->and($konservatuvar)->toContain('41.c')
+        ->and($konservatuvar)->not->toContain('24.a.1');
+});
+
+test('Dokuz Eylül güzel sanatlar ve konservatuvar eşikleri programa bağlı', function () {
+    $depo = sartDepo();
+
+    // Aynı temel alanda on iki program var; program seçilmeden ayrım kurulamaz.
+    expect($depo->bul('Dokuz Eylül Üniversitesi', 'dr_ogr_uyesi', 'guzel_sanatlar'))->toBeNull();
+
+    $muzikoloji = $depo->bul(
+        'Dokuz Eylül Üniversitesi', 'dr_ogr_uyesi', 'guzel_sanatlar',
+        'Güzel Sanatlar — Müzikoloji',
+    );
+    $dans = $depo->bul(
+        'Dokuz Eylül Üniversitesi', 'docentlik', 'guzel_sanatlar',
+        'Konservatuvar — Dans ve Koreografi',
+    );
+
+    expect($muzikoloji['anahtar'])->toBe('deu-gs-muzikoloji-dr-guzel_sanatlar')
+        ->and($dans['anahtar'])->toBe('deu-kons-dans-docent-guzel_sanatlar');
+
+    // Kuramsal ve uygulamalı alanlar farklı zorunlu puan kümesine bağlı.
+    $kume = fn (array $esik): string => json_encode($esik['sart'], JSON_UNESCAPED_UNICODE);
+
+    expect($kume($muzikoloji))->toContain('ZORUNLU-GS-KURAMSAL')
+        ->and($kume($dans))->toContain('ZORUNLU-KONSERVATUVAR');
 });
 
 test('Dokuz Eylül profesörlük doçentlik koşullarını doçentlik sonrası tekrarlatıyor', function () {

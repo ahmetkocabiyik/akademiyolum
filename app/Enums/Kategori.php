@@ -245,6 +245,24 @@ enum Kategori: string
                 'Sahneleme/Repetitörlük — Bölüm (Uluslararası)',
                 'Sahneleme/Repetitörlük — Bölüm (Ulusal)', 'Müzikoloji Atölyesi',
                 'Eğitici Konser Programı (Uluslararası)', 'Eğitici Konser Programı (Ulusal)',
+                // Dokuz Eylül Puanlandırma Formunun D bölümü (24-35). Korpusta
+                // ilk kez bir yönerge film, animasyon, TV ve müzik teknolojisi
+                // yapımlarını ayrı ayrı puanlıyor; mevcut sahne/ekran etiketleri
+                // bunları taşımıyordu. Grup sergisi karma sergiden ayrı satır
+                // (10/8 ↔ 5/3), kamusal alan yapıtı da öyle (15/10).
+                'Grup Etkinliği (Uluslararası)', 'Grup Etkinliği (Ulusal)',
+                'Kamusal Alanda Uygulanmış Yapıt (Yurt Dışı)',
+                'Kamusal Alanda Uygulanmış Yapıt (Yurt İçi)',
+                'Uygulanmış Tasarım / Koleksiyon',
+                'Müzik Teknolojisi Uygulaması',
+                'Uzun Metrajlı Film / Belgesel (Uluslararası)',
+                'Uzun Metrajlı Film / Belgesel (Ulusal)',
+                'Animasyon / Canlandırma Yapımı',
+                'TV Filmi / Dizisi (Uluslararası)', 'TV Filmi / Dizisi (Ulusal)',
+                'TV Programı (Uluslararası)', 'TV Programı (Ulusal)',
+                'Reklam / Tanıtım Filmi (Uluslararası)', 'Reklam / Tanıtım Filmi (Ulusal)',
+                'Sergi Küratörlüğü (Uluslararası)', 'Sergi Küratörlüğü (Ulusal)',
+                'Festival Koordinatörlüğü (Uluslararası)', 'Festival Koordinatörlüğü (Ulusal)',
             ],
             // Yönergeler belirli ödülleri ADIYLA ve ayrı puanla anıyor:
             // Atatürk 07.02.02 YÖK Doktora Tezi Ödülü 30, 07.02.04 GEBİP/TWAS

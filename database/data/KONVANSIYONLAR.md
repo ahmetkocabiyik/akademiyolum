@@ -664,7 +664,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 175 üniversite · 6601 eşik · 329 cetvel |
+| Girildi | 175 üniversite · 6637 eşik · 329 cetvel |
 | Okuma engeli çözüldü, giriş bekliyor | 0 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |
@@ -680,16 +680,28 @@ foreach ($e as $x) { $u[$x["universite"]] = true; }
 printf("esik=%d universite=%d cetvel=%d\n", count($e), count($u), count($d->cetveller()));'
 ```
 
-**SIRADAKİ İŞ — KALAN TEK DOSYA.** Aşağıdaki okunabiliyor ve veri girişi
-bekliyor. OCR çıktıları `pdf-ocr/` altında hazır duruyor (klasör `.gitignore`'da,
-depoya girmiyor); yeniden OCR'lamaya GEREK YOK.
+**SIRADAKİ İŞ — KUYRUKTA GİRİLMEMİŞ DOSYA KALMADI.** Geriye dışarıdan belge
+bekleyen beş üniversite (Balıkesir, Türk Hava Kurumu ve Maltepe'nin puan
+tabloları, SANKO ile İstanbul Okan'ın çizelgeleri) ile korpus içinde hazır duran
+TEK bir tamamlama işi kaldı: İstanbul Üniversitesi'nin Tablo 2'si.
 
-| Sıra | Üniversite | OCR dosyası (`pdf-ocr/`) |
-|---|---|---|
-| 1 | Dokuz Eylül (Güzel Sanatlar + Konservatuvar) | OCR gerekmiyor; `pdftotext -q -layout` yetiyor |
+**KAYNAK SÖZLÜĞÜ GENİŞLETİLEBİLİR — "SÖZLÜKTE YOK" KALICI ENGEL DEĞİL.** Dokuz
+Eylül'ün güzel sanatlar ve konservatuvar alanları üç hafta "Puanlandırma
+Formunun D bölümü sözlükte karşılıksız" diye bekledi. `Kategori`'ye 19 etiket
+eklenince bölüm bir oturumda bitti — üstelik 38-41 arası (çalgı, opera, bale,
+kompozisyon) hiç yeni etiket istemedi: Mersin için açılmış konservatuvar kümesi
+zaten oturuyordu. Yeni etiket açmadan önce MEVCUT listeyi baştan sona oku;
+açtıktan sonra da bir etikete birden çok satır düşüyorsa daima DÜŞÜĞÜNÜ gir ve
+çakışmayı betikle doğrula:
 
-Bunun yanında İstanbul Üniversitesi'nin Tablo 2'si ile Dokuz Eylül'ün D bölümü
-korpus içinde hazır duruyor; ikisi de kısmen girilmiş dosyaların tamamlanması.
+```bash
+php -r '$c = require "database/data/cetvel/X.php";
+foreach ($c["maddeler"] as $kod => $m) {
+    $a = ($m["kategori"] ?? "?")."|".implode(",", $m["turler"] ?? [])."|".implode(",", $m["roller"] ?? []);
+    foreach ($m["kaynaklar"] ?? [] as $k) { $map["$a :: $k"][] = "$kod=".$m["puan"]; } }
+foreach ($map as $k => $v) { if (count(array_unique(array_map(fn($x) => explode("=", $x)[1], $v))) > 1) {
+    echo "CAKISMA $k -> ".implode(", ", $v)."\n"; } }'
+```
 
 **BEŞ SÜTUNLU KOŞUL TABLOSUNDA SATIR ETİKETİ ALTTA OLUR.** KTÜ'nün on üç
 fakülte eki "Zorunlu/En Fazla | 200 P /--- | …" satırını, ait olduğu bölümün
@@ -785,10 +797,8 @@ ters basılmış sayfalar için `sips -r 180`. `ocrmypdf` bu makinede kırık
 (`No module named expat`). Ayrıntı ve doğrulanmış örnekler
 `GIRILEMEYEN-YONERGELER.md`'nin "Okuma engeli çözüldü" başlığında.
 
-**KUYRUKTA OKUNAMAYAN DOSYA KALMADI** ama girilecek dosya kaldı: yukarıdaki
-dosya artık okunabiliyor ve veri girişi bekliyor; İstanbul Üniversitesi'nin
-Tablo 2'si ile Dokuz Eylül'ün D bölümü de korpus içinde hazır duruyor.
-Dışarıdan belge beklemeden yapılacak iş 2 dosya. Sayım dosya
+**KUYRUKTA OKUNAMAYAN DA GİRİLMEMİŞ DE DOSYA KALMADI.** Dışarıdan belge
+beklemeden yapılacak iş 1 dosya: İstanbul Üniversitesi'nin Tablo 2'si. Sayım dosya
 adlarını veri dosyalarındaki kaynak atıflarıyla eşleyerek yapıldı; "47
 girilmemiş" satırı uzun süre bayat kalmıştı, son beş üniversite (Çağ,
 İstanbul Arel, İstanbul Gedik, İzmir Kavram MYO, İstanbul Atlas) o yüzden
