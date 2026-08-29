@@ -10,10 +10,25 @@
  *   Madde 10  Fen ve Mühendislik Bilimleri
  *   Madde 11  Sosyal Bilimler
  *   Madde 12  Mimarlık, Planlama ve Tasarım
- * Madde 13-15 (Devlet Konservatuvarı'nın Müzik ve Sahne Sanatları, Müzikoloji
- * ve Türk Müziği bölümleri) GİRİLMEDİ: koşulları TABLO 2'ye (konservatuvara
- * özgü seksen satırlık müzik ve sahne tablosu) bağlı ve o tablo henüz
- * cetvele çevrilmedi. Bkz. GIRILEMEYEN-YONERGELER.md.
+ *   Madde 13  Devlet Konservatuvarı — Müzik ve Sahne Sanatları Bölümleri
+ *   Madde 14  Devlet Konservatuvarı — Müzikoloji Bölümü
+ *   Madde 15  Devlet Konservatuvarı — Türk Müziği Bölümü
+ * Son üçü `guzel_sanatlar` temel alanını paylaştığı için `birim` ile ayrıldı
+ * ve `istanbul-2026-konservatuvar` cetvelini (Tablo 1 + Tablo 2) kullanıyor.
+ *
+ * ── KONSERVATUVARIN DÖRT SÜTUNU ──
+ * Bu üç maddede kadro sütunları ötekilerden farklı çalışıyor:
+ *   Dr. Öğr. Üyesi (İlk Atama)  YALNIZ bir yayın koşulu; puan barajı YOK.
+ *   Dr. Öğr. Üyesi (Yeniden)    son üç yılda 60 puan (görev süresi uzatımı)
+ *                               ve ayrıca Tablo 1'den 10-30, Tablo 2'den
+ *                               10-30, toplam 200 puan.
+ *   Doçent                      Tablo 1 ve Tablo 2'den ayrı paylar + son dört
+ *                               yıl payı + toplam 300.
+ *   Profesör                    başlıca eser + tez + ayrı paylar + doçentlik
+ *                               sonrası pay + toplam 500.
+ * Ham metin sütunları sayfa kırığında karıştırıyor; okuma üç maddede de
+ * 200/300/500 merdivenini verecek biçimde çözüldü (Madde 15'in sütun
+ * başlıkları ayrı satırlarda göründüğü için orayla doğrulandı).
  *
  * MATEMATİK ALANI AYRI BİRİM: Fen ve Mühendislik bloğu makale sayılarını
  * "(Matematik alanı için en az N)" diye ayrıca veriyor. Matematik `fen` temel
@@ -295,6 +310,139 @@ foreach ($alanlar as $a) {
         'notlar' => "{$madde} + Tablo 1. Profesör sütunu: başlıca eser + {$cok}/{$az} makale "
             ."(doçentlik sonrası), {$tezAd}, toplam 800 puan, yabancı dil 85.",
         'sart' => Kalip::ve("Profesör kadrosuna atanma — {$a['ad']}", $kosullar),
+    ];
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// MADDE 13-15 — DEVLET KONSERVATUVARI
+// ══════════════════════════════════════════════════════════════════════
+$SON_DORT_YIL = Kalip::sonYil(4);
+
+$KONSERVATUVAR_NOTU = 'Tablo 2\'nin uluslararası ve ulusal satırları kayıtta ayrı etiketi '
+    .'olmayan kalemlerde (orkestra ve koro üyeliği, audio yayın, radyo-televizyon katılımı, '
+    .'yarışma derecesi) tek satıra düştü ve ulusal değerden sayılıyor; 2. maddenin çeviri '
+    .'bentleri ile 4 ve 6. maddelerin karma dinleti ve oda müziği organizasyonu bentleri '
+    .'kayıtta karşılıksız olduğu için girilmedi. Tablo 1\'in formüllü kalemleri (makalede '
+    .'etki faktörü, h-indeksi) burada da eksik, yani toplam puanınız gerçeğinden düşük '
+    .'olabilir, yüksek olamaz.';
+
+/** @var list<array<string, mixed>> $konservatuvar */
+$konservatuvar = [
+    [
+        'anahtar' => 'istanbul-konservatuvar-muzik-sahne',
+        'ad' => 'Devlet Konservatuvarı Müzik ve Sahne Sanatları',
+        'birim' => 'Devlet Konservatuvarı — Müzik ve Sahne Sanatları Bölümleri',
+        'madde' => 'Madde 13',
+        'prof' => [30, 100, 70],
+        'docent' => [20, 80, 40],
+        'yeniden' => [10, 30],
+        'drYayin' => 'Doktora ya da sanatta yeterlik tezinizin kitap olarak veya Yükseköğretim Kurulu ya da İstanbul Üniversitesi\'nin sağlayacağı elektronik ortamda yayımlanmış olması',
+        'baslicaEser' => 'Doçent unvanını aldıktan sonra yaptığınız yapıt ya da etkinliklerden (yayımlanmış kitap, CD, etüt, özgün libretto; sahnelenmiş tiyatro eseri, özgün koreografi, opera veya müzikal tiyatro librettosu) en az birini başlıca araştırma eseri olarak sunmak',
+    ],
+    [
+        'anahtar' => 'istanbul-konservatuvar-muzikoloji',
+        'ad' => 'Devlet Konservatuvarı Müzikoloji',
+        'birim' => 'Devlet Konservatuvarı — Müzikoloji Bölümü',
+        'madde' => 'Madde 14',
+        'prof' => [100, 30, 150],
+        'docent' => [60, 20, 150],
+        'yeniden' => [30, 10],
+        'drYayin' => 'Doktora tezinizin ulusal ya da uluslararası bir yayınevinde ISBN numarasıyla kitap olarak yayımlanması veya tezinizden üretilmiş bir makalenin ulusal ya da uluslararası hakemli bir dergide yayımlanmış olması',
+        'baslicaEser' => 'Doçent unvanını aldıktan sonra yaptığınız çalışmalardan (tek ya da çift yazarlı kitap, kitap bölümü veya alan indekslerinde taranan dergide makale) en az birini başlıca araştırma eseri olarak sunmak',
+    ],
+    [
+        'anahtar' => 'istanbul-konservatuvar-turk-muzigi',
+        'ad' => 'Devlet Konservatuvarı Türk Müziği',
+        'birim' => 'Devlet Konservatuvarı — Türk Müziği Bölümü',
+        'madde' => 'Madde 15',
+        'prof' => [30, 100, 70],
+        'docent' => [20, 80, 40],
+        'yeniden' => [10, 30],
+        'drYayin' => 'Doktora ya da sanatta yeterlik tezinizin kitap olarak veya elektronik ortamda yayımlanması, ya da tezinizden üretilmiş 2 ulusal/uluslararası makalenizin yayımlanmış olması',
+        'baslicaEser' => 'Doçent unvanını aldıktan sonra yaptığınız yapıt ya da etkinliklerden (yayımlanmış kitap, yayımlanmış albüm, gerçekleştirilmiş solo konser) en az birini başlıca araştırma eseri olarak sunmak; albümün en az 30 dakikalık ses, solo konserin en az 30 dakikalık video kaydı olmalı',
+    ],
+];
+
+foreach ($konservatuvar as $k) {
+    $madde = $k['madde'];
+    $ortak = [
+        'universite' => 'İstanbul Üniversitesi',
+        'alan' => ['guzel_sanatlar'],
+        'birim' => $k['birim'],
+        'cetvel' => 'istanbul-2026-konservatuvar',
+    ];
+    [$pT1, $pT2, $pDocentSonrasi] = $k['prof'];
+    [$dT1, $dT2, $dSonDort] = $k['docent'];
+    [$yT1, $yT2] = $k['yeniden'];
+
+    $esikler[] = $ortak + [
+        'anahtar' => "{$k['anahtar']}-dr",
+        'kadro' => 'dr_ogr_uyesi',
+        'notlar' => "{$madde}. Dr. Öğr. Üyesi (İlk Atama) sütunu yalnız bir yayın koşulu "
+            .'taşıyor; puan barajı yok. Yabancı dil 75.',
+        'aday_notu' => 'Konservatuvarda ilk atamada puan barajı YOK: tek sayısal olmayan koşul '
+            .'tezinizin yayımlanmış olması. '.$KONSERVATUVAR_NOTU,
+        'sart' => Kalip::ve("Dr. Öğr. Üyeliğine ilk atanma — {$k['ad']}", [
+            $dil(75),
+            Kalip::beyan($k['drYayin'], "{$madde} — Yayın"),
+        ]),
+    ];
+
+    $esikler[] = $ortak + [
+        'anahtar' => "{$k['anahtar']}-dr-yeniden",
+        'kadro' => 'dr_ogr_uyesi_yeniden',
+        'notlar' => "{$madde}. Yeniden atama: son üç yılda Tablo 1 ve 2'den toplam 60 puan "
+            ."(görev süresi 3 yıl uzatılır); ayrıca Tablo 1'den {$yT1}, Tablo 2'den {$yT2}, "
+            .'toplamda 200 puan.',
+        'aday_notu' => 'Görev süresi uzatımı iki katmanlı: son üç yılda 60 puan üretmiş olmanız '
+            .'ve kariyeriniz boyunca toplam 200 puana ulaşmış olmanız isteniyor. '.$KONSERVATUVAR_NOTU,
+        'sart' => Kalip::ve("Dr. Öğr. Üyeliğine yeniden atanma — {$k['ad']}", [
+            $dil(75),
+            Kalip::toplam(60, donem: $SON_UC_YIL, liste: "{$madde} — son üç yıl"),
+            Kalip::toplam($yT1, maddeler: ['TABLO-1'], liste: 'Tablo 1'),
+            Kalip::toplam($yT2, maddeler: ['TABLO-2'], liste: 'Tablo 2'),
+            Kalip::toplam(200),
+        ]),
+    ];
+
+    $esikler[] = $ortak + [
+        'anahtar' => "{$k['anahtar']}-docent",
+        'kadro' => 'docentlik',
+        'notlar' => "{$madde}. Doçent: Tablo 1'den {$dT1}, Tablo 2'den {$dT2}, ikisinden aldığı "
+            ."puanların en az {$dSonDort}'ı son dört yılda, toplamda 300 puan. Yabancı dil 80.",
+        'aday_notu' => "Doçentlikte 300 puanın en az {$dSonDort}'ı başvuru tarihinden geriye "
+            .'dönük son dört yılda üretilmiş olmalı; ayrıca Tablo 1 ve Tablo 2 için ayrı ayrı '
+            .'alt paylar var. '.$KONSERVATUVAR_NOTU,
+        'sart' => Kalip::ve("Doçent kadrosuna atanma — {$k['ad']}", [
+            $dil(80),
+            Kalip::beyan('Doçent unvanını kazanmış olmak', 'Madde 8-ç'),
+            Kalip::toplam($dT1, maddeler: ['TABLO-1'], liste: 'Tablo 1'),
+            Kalip::toplam($dT2, maddeler: ['TABLO-2'], liste: 'Tablo 2'),
+            Kalip::toplam($dSonDort, donem: $SON_DORT_YIL, liste: "{$madde} — son dört yıl"),
+            Kalip::toplam(300),
+        ]),
+    ];
+
+    $esikler[] = $ortak + [
+        'anahtar' => "{$k['anahtar']}-profesor",
+        'kadro' => 'profesorluk',
+        'notlar' => "{$madde}. Profesör: başlıca araştırma eseri, en az 1 lisansüstü ya da "
+            ."sanatta yeterlik tezi yönetmiş olmak, Tablo 1'den {$pT1}, Tablo 2'den {$pT2}, "
+            ."ikisinden aldığı puanların en az {$pDocentSonrasi}'ı doçentlik sonrası, toplamda "
+            .'500 puan. Yabancı dil 85.',
+        'aday_notu' => "Profesörlükte 500 puanın en az {$pDocentSonrasi}'ı doçent unvanını "
+            .'aldıktan sonraki döneme ait olmalı. Tez koşulu Madde 8-f\'ye bağlı; "son beş yılda '
+            .'ilgili birimde tez yapılmadığı belgelenirse aranmaz" istisnası girilmedi. '
+            .$KONSERVATUVAR_NOTU,
+        'sart' => Kalip::ve("Profesör kadrosuna atanma — {$k['ad']}", [
+            $dil(85),
+            Kalip::beyan($k['baslicaEser'], "{$madde} — Başlıca araştırma eseri"),
+            Kalip::adet('En az 1 lisansüstü ya da sanatta yeterlik tezi yönetmiş olmak', ['TEZ'], 1, madde: "{$madde} — Tez"),
+            Kalip::toplam($pT1, maddeler: ['TABLO-1'], liste: 'Tablo 1'),
+            Kalip::toplam($pT2, maddeler: ['TABLO-2'], liste: 'Tablo 2'),
+            Kalip::toplam($pDocentSonrasi, donem: $DOCENTLIK, liste: "{$madde} — doçentlik sonrası"),
+            Kalip::toplam(500),
+        ]),
     ];
 }
 

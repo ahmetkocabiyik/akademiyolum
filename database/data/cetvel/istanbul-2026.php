@@ -239,6 +239,68 @@ $tablo4 = [
     'T4.3.f' => ['baslik' => 'Eğitime yönelik atölye veya yaz okulu düzenlemek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Akreditasyon Faaliyeti'], 'puan' => 5],
 ];
 
+// ══════════════════════════════════════════════════════════════════════
+// TABLO 2 — Devlet Konservatuvarı
+// Madde 13-15'in bütün eşikleri Tablo 1 ile Tablo 2'yi birlikte sayıyor;
+// bu tablo yalnız `istanbul-2026-konservatuvar` varyantında var.
+//
+// Uluslararası ve ulusal satırlar kayıtta ayrı etiket taşımayan kalemlerde
+// (orkestra/koro üyeliği, audio yayın, yarışma derecesi) tek satıra düştü ve
+// §0 uyarınca ULUSAL değer alındı.
+// 2. maddenin çeviri bentleri (tam uzunlukta 10, kısa oyun 5) ile 4/6.
+// maddelerin karma ve oda müziği organizasyonu bentleri kayıtta karşılıksız;
+// girilmedi.
+// ══════════════════════════════════════════════════════════════════════
+$tablo2 = [
+    // ══ 1. MÜZİK KOMPOZİSYONLARI ══
+    'T2.1.a' => ['baslik' => 'Sahne yapıtı bestelemek (opera, bale, müzikal tiyatro, oratoryo vb.)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera/Bale Kompozisyonu', 'Orkestralı Sahne Eseri'], 'puan' => 50],
+    'T2.1.b' => ['baslik' => 'Senfonik yapıt bestelemek (senfoni, konçerto vb.)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Senfoni Kompozisyonu', 'Konçerto/Senfonik Şiir'], 'puan' => 50],
+    'T2.1.c' => ['baslik' => 'Oda müziği yapıtı, koro yapıtı ya da solo yapıt bestelemek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda/Koro Müziği Eseri (≥15 dk)', 'Oda/Koro Müziği Eseri (<15 dk)', 'Küçük Ölçekli Orkestra Eseri', 'Özgün Eser / Beste / Tasarım'], 'puan' => 35],
+    'T2.1.d' => ['baslik' => 'Düzenleme', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Orkestrasyon/Transkripsiyon', 'Eğitim Müziği Düzenlemesi'], 'puan' => 15],
+    'T2.1.e' => ['baslik' => 'Elektronik müzik yapıtı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Elektronik Müzik Eseri (≥15 dk)', 'Elektronik Müzik Eseri (<15 dk)'], 'puan' => 25],
+
+    // ══ 3 ve 5. ULUSLARARASI / ULUSAL SANATSAL ETKİNLİKLER ══
+    'T2.3.a' => ['baslik' => 'Ödenekli ya da özel sanat kurumunda tam uzunlukta tiyatro oyunu, müzikal ya da bale eseri yönetmek (uluslararası)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Rejisörlük (Uluslararası)'], 'puan' => 20],
+    'T2.5.a' => ['baslik' => 'Ödenekli ya da özel sanat kurumunda tiyatro oyunu, müzikal ya da bale eseri yönetmek (ulusal)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Rejisörlük (Ulusal)', 'Rejisörlük (Konservatuvar)'], 'puan' => 15],
+    'T2.3.c' => ['baslik' => 'Bireysel dinleti (solo resital) — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Resital (Uluslararası)', 'Şan Resitali (Uluslararası)'], 'puan' => 40],
+    'T2.5.c' => ['baslik' => 'Bireysel dinleti (solo resital) — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Resital (Ulusal)', 'Şan Resitali (Ulusal)'], 'puan' => 30],
+    'T2.3.d' => ['baslik' => 'Karma dinleti — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)'], 'puan' => 25],
+    'T2.5.d' => ['baslik' => 'Karma dinleti — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 15],
+    'T2.3.e' => ['baslik' => 'Eşlikçi (korrepetitör) olarak katılım — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahneleme/Repetitörlük — Tüm Perde (Uluslararası)', 'Sahneleme/Repetitörlük — Bölüm (Uluslararası)'], 'puan' => 30],
+    'T2.5.e' => ['baslik' => 'Eşlikçi (korrepetitör) olarak katılım — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahneleme/Repetitörlük — Tüm Perde (Ulusal)', 'Sahneleme/Repetitörlük — Bölüm (Ulusal)'], 'puan' => 20],
+    'T2.3.f' => ['baslik' => 'Tiyatro, opera ya da balede başrol oynamak — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera Birinci Rol (Uluslararası)', 'Bale Başrol (Uluslararası)', 'Oratoryo/Kantat Solistliği (Uluslararası)'], 'puan' => 30],
+    'T2.5.f' => ['baslik' => 'Tiyatro, opera ya da balede başrol oynamak — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera Birinci Rol (Ulusal)', 'Bale Başrol (Ulusal)', 'Oratoryo/Kantat Solistliği (Ulusal)'], 'puan' => 20],
+    'T2.3.g' => ['baslik' => 'Tiyatro, opera ya da balede yardımcı rol oynamak — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera İkinci Rol (Uluslararası)', 'Bale Solist Rol (Uluslararası)'], 'puan' => 15],
+    'T2.5.g' => ['baslik' => 'Tiyatro, opera ya da balede yardımcı rol oynamak — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Opera İkinci Rol (Ulusal)', 'Bale Solist Rol (Ulusal)'], 'puan' => 10],
+    'T2.3.h' => ['baslik' => 'Orkestrada solist olarak yer almak — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Solistlik (Uluslararası)'], 'puan' => 35],
+    'T2.5.h' => ['baslik' => 'Senfoni orkestrasında solist olarak yer almak — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Solistlik (Ulusal)'], 'puan' => 25],
+    'T2.3.i' => ['baslik' => 'Oda müziği dinletisi — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Uluslararası)'], 'puan' => 35],
+    'T2.5.i' => ['baslik' => 'Oda müziği dinletisi — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Ulusal)'], 'puan' => 25],
+    'T2.3.j' => ['baslik' => 'Corps de ballet olarak yer almak — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Corps de Ballet (Uluslararası)'], 'puan' => 20],
+    'T2.5.j' => ['baslik' => 'Orkestrada (tutti), operada (koro) ya da balede (corps de ballet) yer almak — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Corps de Ballet (Ulusal)', 'Orkestra / Koro Üyeliği'], 'puan' => 10],
+    'T2.3.k' => ['baslik' => 'Orkestra dinletisinde şeflik — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Orkestra Şefliği (Uluslararası)', 'Opera Şefliği (Uluslararası)', 'Bale Orkestra Şefliği (Uluslararası)'], 'puan' => 40],
+    'T2.5.k' => ['baslik' => 'Orkestra dinletisinde şeflik — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Orkestra Şefliği (Ulusal)', 'Opera Şefliği (Ulusal)', 'Bale Orkestra Şefliği (Ulusal)'], 'puan' => 30],
+    'T2.3.l' => ['baslik' => 'Koro dinletisinde şeflik — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koro Şefliği (Uluslararası)'], 'puan' => 35],
+    'T2.5.l' => ['baslik' => 'Koro dinletisinde şeflik — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koro Şefliği (Ulusal)'], 'puan' => 25],
+    'T2.3.m' => ['baslik' => 'Yönetmen yardımcılığı, reji asistanlığı ya da sahne amirliği — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Rejisör Yardımcılığı (Uluslararası)'], 'puan' => 10],
+    'T2.5.m' => ['baslik' => 'Yönetmen yardımcılığı, reji asistanlığı ya da sahne amirliği — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Rejisör Yardımcılığı (Ulusal)', 'Rejisör Yardımcılığı (Konservatuvar)'], 'puan' => 5],
+    'T2.5.n' => ['baslik' => 'Radyo ya da televizyon etkinliğine katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)', 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)'], 'puan' => 5],
+    'T2.5.o' => ['baslik' => 'Bireysel audio yayın (CD ya da dijital platformlarda)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Bandrollü Kayıt (CD/DVD)', 'Albüm / Konser Kaydı'], 'puan' => 20],
+    'T2.5.p' => ['baslik' => 'Karma audio yayın (CD ya da dijital platformlarda)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Albüm / CD-DVD Katkısı'], 'puan' => 10],
+
+    // ══ 2. ESER YAZIMI ══
+    'T2.2.b' => ['baslik' => 'Ödenekli ya da özel sanat kurumunda sahnelenmek kaydıyla tiyatro oyunu, libretto ya da müzikal tiyatro oyunu yazımı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Yönetmenlik (Sahne/Ekran)'], 'puan' => 15],
+
+    // ══ 4 ve 6. ORGANİZASYON ETKİNLİKLERİ ══
+    'T2.4.a' => ['baslik' => 'Bireysel dinleti organize etmek — uluslararası', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eğitici Konser Programı (Uluslararası)', 'Müzikoloji Atölyesi'], 'puan' => 20],
+    'T2.6.a' => ['baslik' => 'Bireysel dinleti organize etmek — ulusal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eğitici Konser Programı (Ulusal)', 'Eğitim Amaçlı Sanat Etkinliği'], 'puan' => 10],
+
+    // ══ 7. SANATSAL ÖDÜLLER ══
+    'T2.7.a' => ['baslik' => 'Uluslararası sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü'], 'puan' => 50],
+    'T2.7.e' => ['baslik' => 'Ulusal sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü'], 'puan' => 40],
+    'T2.7.d' => ['baslik' => 'Yarışma ödülü (derece)', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 20],
+];
+
 $gruplar = [
     // Koşulların adıyla andığı dergi kümeleri.
     'SCIE' => ['2.a.1', '2.a.2', '2.a.3', '2.a.4'],
@@ -292,6 +354,30 @@ return ['cetveller' => [
         'maddeler' => $maddeler,
         'gruplar' => $gruplar,
         'grup_tavanlari' => $tavanlar,
+    ],
+    'istanbul-2026-konservatuvar' => [
+        'kapsam_notu' => $kapsamNotu.' Devlet Konservatuvarı bölümlerinde TABLO 2 (müzik '
+            .'kompozisyonları, sanatsal etkinlikler, organizasyon etkinlikleri ve sanatsal '
+            .'ödüller) de sayılıyor. Tablo 2\'nin uluslararası ve ulusal satırları kayıtta ayrı '
+            .'etiketi olmayan kalemlerde (orkestra ve koro üyeliği, audio yayın, radyo-televizyon '
+            .'katılımı, yarışma derecesi) tek satıra düştü ve ULUSAL değerden sayılıyor; '
+            .'2. maddenin çeviri bentleri (10 ve 5) ile 4 ve 6. maddelerin karma dinleti ve oda '
+            .'müziği organizasyonu bentleri (25, 25, 15, 15) kayıtta karşılıksız olduğu için '
+            .'girilmedi. Tablo 2\'nin kendi madde tavanları (2. madde 50/30/20/10; 3.m ve 3.n 20; '
+            .'5.m ve 5.n 10) uygulanıyor.',
+        'yazar_katsayisi' => $yazarKatsayisi,
+        'maddeler' => $maddeler + $tablo2,
+        'gruplar' => $gruplar + [
+            'TABLO-1' => array_keys($maddeler),
+            'TABLO-2' => array_keys($tablo2),
+            'T2-YAZIM' => ['T2.2.b'],
+            'T2-3M' => ['T2.3.m'],
+            'T2-3N' => ['T2.5.n'],
+            'T2-5M' => ['T2.5.m'],
+        ],
+        'grup_tavanlari' => $tavanlar + [
+            'T2-YAZIM' => 30, 'T2-3M' => 20, 'T2-3N' => 20, 'T2-5M' => 10,
+        ],
     ],
     'istanbul-2026-mimarlik' => [
         'kapsam_notu' => $kapsamNotu.' Mimarlık Fakültesi için TABLO 4 (meslek ödülleri, '
