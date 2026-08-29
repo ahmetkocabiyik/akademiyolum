@@ -13,11 +13,11 @@ Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 | Durum | Sayı | Kimler |
 |---|---|---|
 | **Gerçekten engelli** | 3 | Balıkesir, Türk Hava Kurumu, Maltepe — puanlama tablosu PDF'te YOK, belge dışarıdan gelmeli |
-| **Okuma engeli çözüldü, giriş bekliyor** | 7 | Karadeniz Teknik, Tekirdağ NKÜ, Bilecik, Piri Reis, Munzur, Çankaya, Burdur MAKÜ |
+| **Okuma engeli çözüldü, giriş bekliyor** | 6 | Karadeniz Teknik, Tekirdağ NKÜ, Piri Reis, Munzur, Çankaya, Burdur MAKÜ |
 | **Kısmen girildi, kalanı korpus içinde hazır** | 2 | İstanbul Üniversitesi (Tablo 2), Dokuz Eylül (Puanlandırma Formu D bölümü) |
 | **Kısmen girildi, çizelge dışarıdan gelmeli** | 2 | SANKO, İstanbul Okan |
 
-Yani **dışarıdan belge beklemeden yapılabilecek iş 9 dosya**; kalan beş
+Yani **dışarıdan belge beklemeden yapılabilecek iş 8 dosya**; kalan beş
 üniversite için ilgili üniversiteden puanlama ya da ölçüt tablosunu istemek
 gerekiyor.
 
@@ -262,13 +262,13 @@ koşullarla değiştirmek.
 
 ---
 
-## Okuma engeli çözüldü — on iki dosya, yedisi hâlâ giriş bekliyor
+## Okuma engeli çözüldü — on iki dosya, altısı hâlâ giriş bekliyor
 
 Bu on iki dosya uzun süre "taranmış", "bozuk font" ya da "kötü OCR" diye
 bekliyordu. Engel PDF'lerde değil elimizdeki araçlardaymış: makinede
 `tesseract 5.5.3` ve `tur` dil paketi var. **Hepsi okunuyor**, hiçbiri artık
-kaynak sorunu değil. Beşi (Karamanoğlu, Sağlık Bilimleri, Biruni, İstanbul
-Okan, Kırklareli) girildi; kalan yedisi veri girişi bekliyor.
+kaynak sorunu değil. Altısı (Karamanoğlu, Sağlık Bilimleri, Biruni, İstanbul
+Okan, Kırklareli, Bilecik) girildi; kalan altısı veri girişi bekliyor.
 
 **ÇIKTILAR ZATEN DEPODAYMIŞ.** Bu başlık yazılırken fark edildi: `pdf-ocr/`
 klasörü 8 Ağustos 2026'da bu dosyaların OCR çıktılarıyla doldurulmuş ve
@@ -331,7 +331,7 @@ yazar oranları tablosunu seç.
 | Karamanoğlu Mehmetbey | `17536999512.karamanoglumehmetbeyuniverstesi.pdf` | 15 | taranmış | OCR temiz — **GİRİLDİ** |
 | Tekirdağ Namık Kemal | `17537009192.tekirdagnamikkemaluniverstesi.pdf` | 19 | taranmış | OCR temiz |
 | Kırklareli | `1770040975746.kirklareli-kriter-02022026.pdf` | 18 | taranmış | OCR temiz ama **A, B ve Ç bölümlerinin puan sütunu çıkmadı** — sağ şerit kırpılıp gözle okundu; **GİRİLDİ** |
-| Bilecik Şeyh Edebali | `1785927020751.bilecik-seyh-edebali-kriter-16102025.pdf` | 18 | taranmış | OCR temiz |
+| Bilecik Şeyh Edebali | `1785927020751.bilecik-seyh-edebali-kriter-16102025.pdf` | 18 | taranmış | OCR temiz — **GİRİLDİ** |
 | Sağlık Bilimleri | `1765867210191.saglik-bilimleri-kriter-16122025.pdf` | 11 | taranmış | OCR temiz — **GİRİLDİ** |
 | Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.pdf` | 25 | taranmış | OCR temiz, **sayfalar dönük** |
 | İstanbul Okan | `17537100352.istanbulokanuniversitesi.pdf` | 14 | taranmış | OCR temiz — **GİRİLDİ** (puan tablosu yok, kendi başlığına bakın) |
@@ -409,6 +409,7 @@ anlatılıyor — ayrıntı orada, bu tablo yalnızca dizin.
 | **KTO Karatay** | C bölümünün sanat ve tasarım satırlarının çoğu (uzun ve kısa metraj film, multimedya CD, web tasarımı, afiş ve fotoğraf baskısı, reklam kampanyası, fotoğraf ve grafik sergisi, kurumsal kimlik); çalıştay ve kongre başkanlığı ile oturum başkanlığı (C.35-C.38); adayın adıyla anılan formül ve tasarımlar (B.1, B.3, B.5); üniversite destekli BAP projeleri (yönerge ulusal proje satırında bunları açıkça dışarıda bırakıyor) | Güzel Sanatlar adayının toplamı düşük çıkar; hukuk, ilahiyat, filoloji, mimarlık ve ziraat alanları yönergede hiç anılmadığı için kapsam dışı |
 | **MEF** | 14. bölümün tamamı (Eğitim Fakültesinin okullarla iş birliği kalemleri: öğretmenlik, psikolojik danışmanlık, aday öğretmen denetimi); 15. bölüm (h-indeksi, yurt dışı araştırma); bitirme projesi danışmanlığı, patent başvurusu, dergi hakemliği | Eğitim Fakültesi adayının toplamı düşük çıkar; doçentlik ve profesörlüğün okul iş birliği koşulu `hesaplanamiyor` olarak duruyor, koşul belgeyle sağlanmalı |
 | **SANKO** | Puanlama Çizelgesi ve Asgari Koşullar Çizelgesi (ikisi de PDF'te yok) | Toplam puan barajı hiç gösterilemiyor; doçentlik eşiği yalnızca beyanlardan, profesörlüğün başlıca eser koşulu `hesaplanamiyor` düğümünden ibaret. Dr. Öğr. Üyesi eşiği tam |
+| **Bilecik Şeyh Edebali** | EĞİTİM-ÖĞRETİM bölümünün ders satırı (H.1; puan haftalık ders SAATİ başına 0,1, on saat bir puan); J bölümünün tamamı (kurum dışı araştırma, üç ay ve üzeri yurt dışı bulunma, 20/15/10/5); L.1 h-indeksi, L.2 düzenleme kurulu başkanlığı, L.4 etkinlikte görev alma, L.8 probleme dayalı öğrenim, L.9 hastane poliklinik faaliyeti; K.4-K.5 kongre bilim/sanat kurulu ödülleri; F.5 lisanslanan faydalı model; M.12 ve M.13 | Doçentlik ve profesörlüğün "H maddesinden en az 4/6 puan" koşulu ile Sağlık Bilimlerinin L.9 kolu `hesaplanamiyor` düğümü olarak duruyor. Yazar matrisi kitap ve bildiride EŞİT bölünmesi gerekirken makale kuralıyla hesaplandığı için çok yazarlı kitapta başlıca yazarın puanı yüksek çıkar. Dr. Öğr. Üyesi yeniden atanması (Tablo 2) hiç girilmedi |
 | **İstanbul Okan** | Üniversitenin "Akademik Yükseltme ve Atama Ölçütleri" belgesi (yönergenin MADDE 7/1/e, 8/1/c ve 9/1/d'de devrettiği ayrı belge; PDF'te yok). Elimizdeki dosya puan cetveli DEĞİL, personel yönergesi | Puan barajı hiç gösterilemiyor — yönergede de yok. Her eşikte ölçüt belgesi `hesaplanamiyor` düğümü olarak duruyor, bu yüzden hiçbir kadro "sağlandı"ya düşmüyor; hesaplanan tek şey kadro başına bir yayın şartı. Doçentlikte yayın şartı yönergede hiç yok |
 | **Üsküdar** | Bilimsel toplantı düzenleme bölümünün tamamı (başkanlık, düzenleme ve bilim kurulu üyelikleri); sanat etkinliklerine davetli katılım satırları; tezsiz yüksek lisans proje danışmanlığı; yönetim görevlerinde rektör yardımcılığı ve bölüm başkan yardımcılığı (tabloda satırı yok) | Toplantı düzenleyen adayın toplamı düşük çıkar; yönetim görevlerinde asgari süre koşulu (3-4 yıl) uygulanamadığı için o kalemde puan tersine yüksek görünür |
 | **Ankara Bilim** | İndeks kapsamı dışındaki uluslararası hakemli dergiler (1.2.3); ansiklopedi konu ve madde yazarlığının üst satırları (1.5.1-1.5.3); tasarım alanında üretime girmiş çalışma/koleksiyon (2.4); film yaratıcı kadrosunun üst satırları (2.5.5-2.5.6, 2.5.8-2.5.9); restorasyon ekibi ve düzenleme kurulu satırları (2.8.2-2.8.3, 2.8.5-2.8.6); arkeolojik kazı kalemleri (6.1.9-6.1.14); laboratuvar çalışması (6.2.3-6.2.4); bilimsel ve sanatsal toplantı düzenleme bölümünün tamamı (6.4.1-6.4.18: seçici kurul, düzenleme kurulu, küratörlük, sergi organizasyonu, oturum başkanlığı); yurtdışı idari görev (6.5.4); 0,5 puanlık satırlar (atıf 1.7.3, oturum başkanlığı 6.4.18) | Sanat ve tasarım alanında çalışan adayın toplamı düşük çıkar; toplantı düzenleyen adayın toplamı düşük çıkar. Toplam barajlar (20/30/50) korpusun en düşükleri arasında olduğu için eksik bölümler eşiği fiilen kapatmıyor |
