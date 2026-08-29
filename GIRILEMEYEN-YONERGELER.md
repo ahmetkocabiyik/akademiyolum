@@ -407,6 +407,11 @@ anlatılıyor — ayrıntı orada, bu tablo yalnızca dizin.
 | **Tokat Gaziosmanpaşa** | 1.1.k hakemsiz dergi; 1.6.a h-indeksi; 3.1-3.2 patent BAŞVURUSU; 2.3.d-e (üniversitenin Enerji Depolama ihtisas alanı projeleri); 6. bölüm bilimsel nitelikli kazı etkinlikleri; 4.4 Teknoloji Transfer Ofisinde görev almak | Yönergenin "en fazla 10 hakemlik", "en fazla 10 atıf" ve "en fazla 10 ders" gibi ADET sınırları motorda karşılığı olmadığı için uygulanmıyor; bu kalemlerde puan YÜKSEK çıkabilir. Görev süresi uzatımının puanı istenen süreye bağlı olduğundan (1 yıl 40 … 4 yıl 150) eşiğe en düşük basamak yazıldı |
 | **Trakya** | EK-7'NİN 16. MADDESİNİN TAMAMI (sportif performans: sporcu yetiştirme 40'a kadar, millî takım görevi, antrenörlük ve hakemlik belgeleri, federasyon kurul üyeliği — 26 satır); h-indeksi (×5) ve "ilk 500 üniversitede altı ay yurt dışı araştırma" (25) satırları yedi ekte de; meslek örgütü YETERLİK BELGESİ (EK-1 madde 17, EK-4 madde 21); patent BAŞVURUSU; EK-1 madde 12'nin yarışma (20) ve uygulanmış proje (15) satırları; EK-5'in müzik alt tablosunda sınıf konseri yönetimi, öğrenciye piyano eşliği ve konser anlatıcılığı; EK-6'nın 17. maddesinde etkinlik yöneticiliği ve panel-söyleşi; EK-4 madde 14 (bilimsel kazı ve yüzey araştırması); EK-5 ile EK-6'nın sergi değerlendirme (15/10) ve hakemli araştırma-derleme makalesi (20/15) satırları | Yönergenin "atama için gerekli toplam puanın %25'ini geçemez" tavanları ATAMA EŞİĞİNE bağlı; aynı cetvel dört ayrı eşikte kullanıldığı için sabit tavana çevrilemedi ve atıf, ödül, editörlük, jüri, idari görev kalemlerinde puan YÜKSEK çıkıyor. MATEMATİK alanı EK-2'den ayrılamadı (eşik 60/160 yerine 50/120 olmalıydı); ziraat EK-2'ye, hukuk EK-4'e bağlandı — yönerge ikisini de saymıyor. EK-2'nin ilk atamadaki üç kollu ek yayın merdiveni tez yayınının ÇEYREĞİNE bağlı olduğu için en sıkı kol yazıldı. EK-4 doçentliğinde aranan "ÜAK doçentlik puanının %20 fazlası" `hesaplanamiyor`. "Diğer uluslararası/ulusal kitap" çift değerlerinin (15/10, 10/5) düşüğü alındı |
 | **Ufuk** | 7. MADDENİN TAMAMI (atıflar; puan atıf sayısının 0,5 ve 0,3 katı) ve 11/a-f (ders puanı dönemlik ders SAATİ ile çarpılan 0,025-0,15 katsayıları) — ikisi de ondalıklı; 4. MADDENİN TAMAMI (lisansüstü tezden üretilen yayınlar); h-indeksi eklentisi (h × 0,1); 14/a yabancı dil sınav başarısı, 14/c etki faktörü, 14/e-f yeterlilik sertifikaları, 14/g yeni birim kurma, 14/m yurt dışı üç ay, 14/o atama jürisi üyeliği | ATIFLAR VE DERSLER TOPLAM PUANA HİÇ KATKI VERMİYOR. Kitaplarda Sense Ranking A-E kategorileri kayıtta olmadığı için en düşük kategoriden sayılıyor. Yayın ve kitap için iki ayrı ortak yazar kuralı var; motor kategori bazlı çarpan tanımlayamadığından düşük olan yayın kuralı ikisine de uygulandı |
+| **Çağ** | Kısa bildiri, teknik not, tartışma ve editöre mektup için tanımlanan %60 KURALI (SCIE'de 9 puan) — kayıt bunları A-5'in kitap eleştirisinden ayırmadığı için 2 puanlık satır kullanılıyor; U bölümünün "eğitime katkı" satırı (kredi başına 0,5, hem ondalık hem kredi bazlı); T bölümünün TAMAMI (bilimsel toplantı düzenleme 20/5/10/2, seçici ve bilim kurulu üyeliği 5/2); lisansüstü tezden üretilmiş yayın | İdari görev puanları YIL SAYISIYLA ÇARPILMIYOR (10/5/3 × yıl); beş yıllık dekanlık 50 değil 10 puan. Uluslararası dergi hakemliği (3), uluslararası yayın kurulu üyeliği (15) ve yarışma dereceleri (10'a kadar) ulusal karşılıklarından ayrılamadığı için en düşükten. MADDE 3/1-c'nin dil koşulu yalnız %100 yabancı dille eğitim veren bölümler için geçerli olduğundan sayısal YDS düğümü yerine `beyan` yazıldı. PDF'in başlık fontundaki sistematik harf ikamesi (İ→Ġ, Ş→Ģ) çıkarma sırasında düzeltildi |
+| **İstanbul Gedik** | Üniversitenin kendi BAP projeleri (G bölümü yalnız uluslararası ve üniversite DIŞI kaynaklı projeleri puanlıyor); lisansüstü tezden üretilmiş yayın; idari görev; toplumsal katkı; yarışma dışındaki ödüller; eş danışmanlık ve tezsiz yüksek lisans danışmanlığı (1) | J bölümünün "son iki yılda alınan dersler" kaydı satır bazlı zaman penceresi olmadığı için uygulanmıyor, eski dersler de sayılıyor. "Tanınmış uluslararası" ile "tanınmış ulusal yayınevi" ayrımı kayıtta olmadığından BKCI/Scopus kitapları uluslararası (20/10), öteki kitaplar ulusal (10/5) satırından. MADDE 6.3'ün "uygulama projesi yayımlamış olmak" seçeneği ve MADDE 10'un yabancı dille öğretim yapan bölümlere özgü dil koşulu girilmedi |
+| **İzmir Kavram MYO** | 13. madde (bilimsel ve sanatsal etkinlik düzenlemelerinde yer almak, 5/3); 18. madde (Web of Science h-indeksi, 5); 19. madde (yabancı dil sınavından 85 ve üzeri, 5); dergi editörlüğü (cetvelde satır yok, editörlük kayıtları yayın kurulu üyeliğinden sayılıyor); 16.b (uygulama projesi yayımlamış olmak, 15); lisansüstü tezden üretilmiş yayın; idari görev; toplumsal katkı | KAYNAK PDF TARANMIŞ VE OCR'LANMIŞ; "ı", "ş", "ğ", "İ" harflerinin bir bölümü düşmüş. Puanlar ve madde başlıkları okunduğu için girilebildi, iki satır daraltıcı okundu (2.c-2.d BKCI dışındaki uluslararası kitap 15 ve bölümü 10; 17. madde ders başına 2 puan, tavan 6). E-SCI (20), uluslararası faydalı model (20), uluslararası hakemlik (3) ve davetli konuşmacılık (10) ulusal karşılıklarından ayrılamadığı için düşükten. Ek-1'in 15 ve 16. maddeleri tek temel alana kilitli olduğu için üç ayrı cetvel yazıldı |
+| **İstanbul Arel** | A.3.c satırı (puanı kaynak PDF'te okunamıyor); patent BAŞVURULARI (yurt dışı 50, yurt içi 25), faydalı model ve endüstriyel tasarım; O bölümünün organizasyon başkanlığı (150/100), düzenleme ve bilim kurulu üyeliği (20) ile O.6 TÜBİTAK görevlendirmeleri (50); P.3 rektör danışmanlığı (30); P.8 öğrenci danışmanlığı (10); lisansüstü tezden üretilmiş yayın | IMPACT FAKTÖRÜ ÇARPANI UYGULANMIYOR: tablo makale puanlarının derginin etki faktörüyle çarpılmasını istiyor, kayıt etki faktörünü tutmuyor. "Senior isim" (alanında en az on uluslararası yayını olan son yazar) tam puan alıyor ama kayıtta böyle bir rol yok. Ders puanı haftalık ders SAATİ başına verildiği hâlde ders başına tek puan. TABLODA ULUSAL KİTAP YAZARLIĞI SATIRI YOK; Türkçe kitap da uluslararası kitap satırından (60) sayılıyor ve puan YÜKSEK çıkıyor — satırı hiç girmemek uluslararası kitapların tamamını sıfırlardı |
+| **İstanbul Atlas** | 1.4.a Scopus ATIFLARI (atıf başına 0,5; ondalık olduğu için atıf bölümü neredeyse boş kaldı, yalnız patent atfı girildi); 1.5 bilimsel toplantı düzenleme (10/5/2/1); dergi hakemliği ve yayın kurulu üyeliği (tabloda satır yok); 1.2.n üniversitenin kendi dergilerindeki yayın (15); 2.4.a Scopus h-indeksi (değer başına 2); patent BAŞVURULARI (30/20); lisansüstü tezden üretilmiş yayın; idari görev; toplumsal katkı | TÜBİTAK PROJELERİ 10 PUANDAN: tablo ARDEB, TEYDEB ve Kamu Ar-Ge yürütücülüğüne 60, TÜBİTAK 1002 ve Bilim-Toplum'a 10 veriyor, kayıt ikisini ayırmıyor. AHCI'nin tabloda satırı yok (tablo Scopus merkezli), "diğer uluslararası hakemli dergi"den (7) sayılıyor. Ders puanı haftalık ders saati başına verildiği hâlde ders başına tek puan; "son bir yıl" kısıtı satır bazlı olduğu için uygulanmıyor. Tablo kitap, bildiri ve sanatsal etkinlikte puanı eşit bölüyor, makalede kademeli; motor makale kuralını hepsine uyguluyor |
 
 ## Motorun karşılayamadığı kurallar
 
@@ -419,7 +424,7 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   Dumlupınar, Malatya Turgut Özal, Nevşehir, Trabzon, Yozgat Bozok,
   Acıbadem, Ardahan, Antalya Bilim, Bahçeşehir, Başkent, Ankara Hacı Bayram
   Veli, Ankara Sosyal Bilimler, Harran, İzmir Bakırçay, Süleyman Demirel,
-  Tokat Gaziosmanpaşa ve Trakya'da tescil edilmiş
+  Tokat Gaziosmanpaşa, Trakya, İstanbul Arel ve İstanbul Atlas'ta tescil edilmiş
   patentin yanında BAŞVURU için de ayrı ve düşük puanlı satır var. Kayıt
   başvuruyu tescilden ayırmadığı için başvuru satırları hiç girilmedi:
   girilseydi motor en yükseği seçer ve BAŞVURU sahibini TESCİL sahibi gibi
@@ -428,11 +433,13 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   (4.0.2.1.1, AKTS başına 0,5), Aydın Adnan Menderes (C2, ders saati başına
   0,25 ve 0,5), İstanbul Beykent (P-1, kredi başına 0,5), Doğuş (U maddesi,
   kredi başına 0,5), Ostim Teknik (5.b/1, AKTS başına 2), İstanbul Aydın (EK-2/6,
-  kredi saat başına 1) ve Ufuk (11/a-f, dönemlik ders saatiyle çarpılan
-  0,025-0,15 katsayıları) ders puanını
+  kredi saat başına 1), Ufuk (11/a-f, dönemlik ders saatiyle çarpılan
+  0,025-0,15 katsayıları), Çağ (U bölümü, kredi başına 0,5), İstanbul Arel
+  (N.1-N.2, haftalık ders saati) ve İstanbul Atlas (4.1, güz ve bahar toplam
+  haftalık ders saati) ders puanını
   faaliyet başına değil süre birimi başına veriyor. Faaliyet kaydı yalnız
   yarıyıl sayısını taşıdığı için bu satırlar hiç girilemedi; ders kayıtları
-  bu yedi üniversitede toplam puana katkı vermiyor ve yönergelerin "derslerden
+  bu on üniversitede toplam puana katkı vermiyor ve yönergelerin "derslerden
   şu kadar puan" koşulları eşiklerde `hesaplanamiyor` olarak duruyor.
 - **h-indeksi ve atıf ortalaması satırları** — Aksaray (E.8), Bartın (H
   bölümü), Bursa Teknik (E bölümü), Konya Gıda ve Tarım (Ç.1-4),
@@ -441,7 +448,8 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   Ardahan (3.11.1, h × 2), Bahçeşehir (A-4.2, h × 10), Ankara Hacı Bayram Veli
   (13/a), Ankara Yıldırım Beyazıt (Diğer Etkinlikler), Harran (A8/d), İzmir
   Bakırçay (13.a), Necmettin Erbakan (K16, h × 10), Tokat Gaziosmanpaşa (1.6.a),
-  Ufuk (h × 0,1) ve Trakya (yedi ekte de h × 5) puanı h faktörüne ya da
+  Ufuk (h × 0,1), Trakya (yedi ekte de h × 5), İzmir Kavram MYO (18. madde, 5)
+  ve İstanbul Atlas (2.4.a, değer başına 2) puanı h faktörüne ya da
   "toplam atıf / atıf alan yayın sayısı" ortalamasına bağlıyor. İkisi de
   faaliyet başına puan değil, PROFİL ölçütü; motor puanı yalnız
   faaliyetlerden topladığı için bu satırlar hiç girilemedi. h-indeksi yüksek
@@ -484,6 +492,14 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   **Bayburt'ta tersi yapılmış** — makale kuralı uygulanmış, çok yazarlı kitapta
   puan **yüksek** görünüyor. Bu, "eksik say, fazla sayma" kuralına aykırı;
   Bayburt cetveli Yalova'daki gibi düşük kurala çevrilmeli.
+- **Derginin ETKİ FAKTÖRÜYLE çarpılan puan** — İstanbul Arel'in puanlama
+  tablosu "birden fazla ismin yer aldığı yayınlar için yazılan puanı hak ediş
+  oranları, derginin IMPACT FAKTÖRÜ İLE ÇARPILDIKTAN SONRA aşağıdaki oranlara
+  göre hesaplanır" diyor. Motorun `puan` alanı sabit bir sayı; kayıt da
+  derginin etki faktörünü tutmuyor. Bütün makale puanları çarpansız, yani
+  tablo değerinden sayılıyor. Yüksek etki faktörlü dergilerde yayın yapan
+  adayın puanı **düşük**, düşük etki faktörlü dergilerde yayın yapanın puanı
+  **yüksek** görünür — sapmanın yönü adaydan adaya değişiyor.
 - **Tavanlı bonus çarpanı** — Yalova MADDE 10/3: "Makale yayımlandığı tarihte
   yayınlanan derginin Q1 veya Q2 indeksinde olması halinde puan hesaplanmasında
   %50 daha fazla puan verilir. Bu ek puan kapsamında en fazla 2 yayın
@@ -507,8 +523,11 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
 - **Cetvel satırının kendi kayan penceresi** — Ankara Bilim EK1'de editörlük
   "her yıl için (son 3 yıl)", tez ve jüri kalemleri "son 5 yılda", ders
   kalemleri "son iki yılda" diyor ama bu kadroların toplam puan barajında
-  dönem kısıtı yok. Dönem yalnızca KOŞUL düğümünde tutulabiliyor, cetvel
-  satırında değil; bu kalemlerde puan YÜKSEK görünür.
+  dönem kısıtı yok. Aynı sorun İstanbul Gedik'in J bölümünde ("son iki yılda
+  alınan dersler"), İstanbul Arel'in N bölümünde ("son iki yılda haftalık ders
+  yükü") ve İstanbul Atlas'ın 4. bölümünde ("son 1 yıl içerisinde
+  gerçekleştirdiği faaliyetler") var. Dönem yalnızca KOŞUL düğümünde
+  tutulabiliyor, cetvel satırında değil; bu kalemlerde puan YÜKSEK görünür.
 - **Yarıyıl başına adet sınırı** — Iğdır 20. madde ("son beş yılda, her
   yarıyılda verilen en fazla dört ders"). Hem kayan pencere hem yarıyıl başına
   sayı gerekiyor; motor ikisini birlikte tutamıyor, ders puanı YÜKSEK görünür.

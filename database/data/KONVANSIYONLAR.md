@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-158 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+163 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -658,12 +658,27 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 158 üniversite · 5947 eşik · 289 cetvel |
+| Girildi | 163 üniversite · 6151 eşik · 296 cetvel |
 | Taranmış (metin yok) | 10 |
 | Bozuk font / kötü OCR | 2 (Çankaya, Munzur) |
 | Yönerge değil (üst yazı) | 1 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
-| Girilmemiş, engeli bilinmeyen | 47 (metni okunur; liste için PDF taraması yapıldı) |
+| Girilmemiş, engeli bilinmeyen | 0 |
+
+**KUYRUK BOŞALDI.** `pdf/` altındaki 179 dosyanın tamamı ya girildi ya da
+`GIRILEMEYEN-YONERGELER.md`'de belgelenmiş bir engelle duruyor. Sayım dosya
+adlarını veri dosyalarındaki kaynak atıflarıyla eşleyerek yapıldı; "47
+girilmemiş" satırı uzun süre bayat kalmıştı, son beş üniversite (Çağ,
+İstanbul Arel, İstanbul Gedik, İzmir Kavram MYO, İstanbul Atlas) o yüzden
+gözden kaçmıştı. **Sayımı bir daha yaparken dosya adı eşlemesine güvenme:**
+girilmiş on üç üniversitenin docblock'u kaynak PDF'i adıyla anmıyor, salt
+`grep` bunları "açık" gösteriyor. Doğru yordam, adayı `yonerge/` dosya adıyla
+da çapraz kontrol etmek.
+
+**Yeni bir PDF eklenirse** listeye alınmadan önce `universiteler.php`'ye de
+yazılmalı: son beşinin hiçbiri listede yoktu ve eşikleri hesaplansa bile
+adaya görünmezdi. Vakıf meslek yüksekokulları da listeye giriyor (Ataşehir
+Adıgüzel ve İzmir Kavram örnekleri).
 
 **Puan tablosu eksikse önce GÖVDEYİ oku.** Çizelgesi PDF'te bulunmayan bir
 yönerge otomatik olarak "girilemez" değil: SANKO'nun gövdesi doktor öğretim
