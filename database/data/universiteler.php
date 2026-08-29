@@ -153,6 +153,7 @@ return [
     ['Beykoz Üniversitesi', 'İstanbul', 'vakif'],
     ['Bezmiâlem Vakıf Üniversitesi', 'İstanbul', 'vakif'],
     ['Biruni Üniversitesi', 'İstanbul', 'vakif'],
+    ['Çağ Üniversitesi', 'Mersin', 'vakif'],
     ['Çankaya Üniversitesi', 'Ankara', 'vakif'],
     ['Doğuş Üniversitesi', 'İstanbul', 'vakif'],
     ['Fatih Sultan Mehmet Vakıf Üniversitesi', 'İstanbul', 'vakif'],
