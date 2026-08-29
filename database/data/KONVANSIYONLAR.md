@@ -663,6 +663,35 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |
 
+**SIRADAKİ İŞ — KALAN ON DOSYA.** Aşağıdakiler okunabiliyor ve veri girişi
+bekliyor. OCR çıktıları `pdf-ocr/` altında hazır duruyor (klasör `.gitignore`'da,
+depoya girmiyor); yeniden OCR'lamaya GEREK YOK.
+
+| Sıra | Üniversite | OCR dosyası (`pdf-ocr/`) |
+|---|---|---|
+| 1 | İstanbul Okan | `17537100352.istanbulokanuniversitesi.txt` |
+| 2 | Kırklareli | `1770040975746.kirklareli-kriter-02022026.txt` |
+| 3 | Bilecik Şeyh Edebali | `1785927020751.bilecik-seyh-edebali-kriter-16102025.txt` |
+| 4 | Tekirdağ Namık Kemal | `17537009192.tekirdagnamikkemaluniverstesi.txt` |
+| 5 | Munzur | `17634002431.Munzur Üniversitesi Kriter.txt` |
+| 6 | Çankaya | `17537097862.cankayauniversitesi.txt` |
+| 7 | Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.txt` |
+| 8 | Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.txt` |
+| 9 | Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.txt` (3-13. sayfalar) |
+| 10 | Dokuz Eylül (Güzel Sanatlar + Konservatuvar) | OCR gerekmiyor; `pdftotext -q -layout` yetiyor |
+
+Dokuz Eylül ötekilerden farklı: üniversite korpusta zaten var, eksik olan
+Madde 2.11 (yedi alt alan) ile 2.12 (beş alt alan) ve Puanlandırma Formunun
+D bölümü (24-41. maddeler). Girilebilmesi için ÖNCE
+`App\Enums\Kategori::kaynaklar()`'ın `SanatselEtkinlik` listesine film,
+animasyon, oyun, TV, reklam ve müzik teknolojisi etiketleri eklenmeli.
+
+**OCR ÇIKTILARI ZATEN ORADAYMIŞ.** `pdf-ocr/` klasörü 8 Ağustos 2026'da
+doldurulmuş; `GIRILEMEYEN-YONERGELER.md` ise üç hafta boyunca "hiçbiri
+okunamıyor" demeye devam etmiş. Bu, "47 girilmemiş" sayacıyla aynı hata:
+iş yapılmış, kayıt güncellenmemiş. Bir kaydı "engelli" diye okumadan önce
+`pdf-ocr/` altına bak.
+
 **TARAMA ENGELİ ARTIK ENGEL DEĞİL.** Makinede `tesseract 5.5.3` ve `tur` dil
 paketi var; on iki dosyanın hepsi okunuyor. Çalışan tarif `pdftoppm -r 300
 -png` + `tesseract -l tur` (PSM VERME — `--psm 6` puan sütununu yok ediyor);

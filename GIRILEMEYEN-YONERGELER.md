@@ -208,6 +208,13 @@ bekliyordu. Engel PDF'lerde değil elimizdeki araçlardaymış: makinede
 `tesseract 5.5.3` ve `tur` dil paketi var. **Hepsi okunuyor**, hiçbiri artık
 kaynak sorunu değil; yalnızca veri girişi bekliyorlar.
 
+**ÇIKTILAR ZATEN DEPODAYMIŞ.** Bu başlık yazılırken fark edildi: `pdf-ocr/`
+klasörü 8 Ağustos 2026'da bu dosyaların OCR çıktılarıyla doldurulmuş ve
+`.gitignore`'a alınmış; bu belge ise üç hafta boyunca "hiçbiri okunamıyor"
+demeye devam etmiş. Yeniden üretilen çıktılar eskileriyle BAYT BAYT AYNI
+çıktı. Bir kaydı ele almadan önce `pdf-ocr/` altına bak; tarif yalnız orada
+karşılığı olmayan dosyalar için gerekiyor.
+
 ### Çalışan tarif
 
 ```bash
