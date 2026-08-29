@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-170 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+171 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -658,8 +658,8 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 170 üniversite · 6459 eşik · 306 cetvel |
-| Okuma engeli çözüldü, giriş bekliyor | 5 (iki taranmış + Munzur + Çankaya + Burdur) |
+| Girildi | 171 üniversite · 6491 eşik · 313 cetvel |
+| Okuma engeli çözüldü, giriş bekliyor | 4 (iki taranmış + Çankaya + Burdur) |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |
 
@@ -674,18 +674,26 @@ foreach ($e as $x) { $u[$x["universite"]] = true; }
 printf("esik=%d universite=%d cetvel=%d\n", count($e), count($u), count($d->cetveller()));'
 ```
 
-**SIRADAKİ İŞ — KALAN ALTI DOSYA.** Aşağıdakiler okunabiliyor ve veri girişi
+**SIRADAKİ İŞ — KALAN BEŞ DOSYA.** Aşağıdakiler okunabiliyor ve veri girişi
 bekliyor. OCR çıktıları `pdf-ocr/` altında hazır duruyor (klasör `.gitignore`'da,
 depoya girmiyor); yeniden OCR'lamaya GEREK YOK.
 
 | Sıra | Üniversite | OCR dosyası (`pdf-ocr/`) |
 |---|---|---|
-| 1 | Munzur | `17634002431.Munzur Üniversitesi Kriter.txt` |
-| 2 | Çankaya | `17537097862.cankayauniversitesi.txt` |
-| 3 | Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.txt` — **`universiteler.php`'de YOK, önce eklenmeli** |
-| 4 | Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.txt` |
-| 5 | Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.txt` (3-13. sayfalar) |
-| 6 | Dokuz Eylül (Güzel Sanatlar + Konservatuvar) | OCR gerekmiyor; `pdftotext -q -layout` yetiyor |
+| 1 | Çankaya | `17537097862.cankayauniversitesi.txt` |
+| 2 | Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.txt` — **`universiteler.php`'de YOK, önce eklenmeli** |
+| 3 | Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.txt` |
+| 4 | Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.txt` (3-13. sayfalar) |
+| 5 | Dokuz Eylül (Güzel Sanatlar + Konservatuvar) | OCR gerekmiyor; `pdftotext -q -layout` yetiyor |
+
+**ÜNİVERSİTE ADI TUTMUYORSA MIGRATION YAZ.** Munzur'un yönergesi kurumu
+"Munzur Üniversitesi" diye anıyordu, `universiteler.php` ise eski adıyla
+"Tunceli Munzur Üniversitesi". `SartAgaciTest`'in "her eşiğin üniversitesi
+universiteler.php'de tanımlıdır" testi bunu yakaladı. Ad değiştirmenin doğru
+yolu veri dosyası + migration ikilisi (`2026_08_29_140000_munzur_universite_
+adini_duzelt.php`, Bezmiâlem örneğinin aynısı); yalnız veri dosyasını
+değiştirmek `UniversiteSeeder`'ın `updateOrCreate`'i yüzünden yeni satır açıp
+eskisini öksüz bırakır.
 
 **TARANMIŞ PDF'İN PUAN SÜTUNU HER ZAMAN GÖZLE DOĞRULANMALI.** Tekirdağ'ın
 EK-2 tablosunda OCR üç satırı yanlış okumuştu ve üçü de veriyi bozardı:
@@ -735,9 +743,9 @@ ters basılmış sayfalar için `sips -r 180`. `ocrmypdf` bu makinede kırık
 `GIRILEMEYEN-YONERGELER.md`'nin "Okuma engeli çözüldü" başlığında.
 
 **KUYRUKTA OKUNAMAYAN DOSYA KALMADI** ama girilecek dosya kaldı: yukarıdaki
-beş dosya artık okunabiliyor ve veri girişi bekliyor; İstanbul Üniversitesi'nin
+dört dosya artık okunabiliyor ve veri girişi bekliyor; İstanbul Üniversitesi'nin
 Tablo 2'si ile Dokuz Eylül'ün D bölümü de korpus içinde hazır duruyor.
-Dışarıdan belge beklemeden yapılacak iş 7 dosya. Sayım dosya
+Dışarıdan belge beklemeden yapılacak iş 6 dosya. Sayım dosya
 adlarını veri dosyalarındaki kaynak atıflarıyla eşleyerek yapıldı; "47
 girilmemiş" satırı uzun süre bayat kalmıştı, son beş üniversite (Çağ,
 İstanbul Arel, İstanbul Gedik, İzmir Kavram MYO, İstanbul Atlas) o yüzden

@@ -133,7 +133,7 @@ return [
     ['Tokat Gaziosmanpaşa Üniversitesi', 'Tokat', 'devlet'],
     ['Trabzon Üniversitesi', 'Trabzon', 'devlet'],
     ['Trakya Üniversitesi', 'Edirne', 'devlet'],
-    ['Tunceli Munzur Üniversitesi', 'Tunceli', 'devlet'],
+    ['Munzur Üniversitesi', 'Tunceli', 'devlet'],
     ['Uşak Üniversitesi', 'Uşak', 'devlet'],
     ['Van Yüzüncü Yıl Üniversitesi', 'Van', 'devlet'],
     ['Yalova Üniversitesi', 'Yalova', 'devlet'],
