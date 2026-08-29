@@ -58,8 +58,9 @@ $YDS_NOTU = 'Bütün kadrolarda ÖSYM ya da YÖK tarafından kabul edilen bir ya
     .'en az 65 puan gerekiyor; temel alanı yabancı dille ilgili olan kadrolarda o dilden 85 '
     .'puan aranıyor, araç 65 üzerinden değerlendiriyor.';
 
-$TEZ_NOTU = 'Yönerge, lisansüstü tezinizden üretilmiş en az bir makale istiyor; Ek-1\'in 3. '
-    .'maddesi araca girilemediği için bu koşul yönergenin kendi alternatif kolu üzerinden '
+$TEZ_NOTU = 'Yönerge, lisansüstü tezinizden üretilmiş en az bir makale istiyor; tez '
+    .'yayınları kalemi araca girilemediği için bu koşul yönergenin kendi alternatif kolu '
+    .'üzerinden '
     .'(uluslararası makale kategorisinden bir makale) değerlendiriliyor. Yönergenin "ilk '
     .'500\'deki bir kurumda kesintisiz altı ay yurt dışı araştırma" muafiyeti belgeye bağlı '
     .'olduğu için araçta uygulanmıyor.';
@@ -130,6 +131,18 @@ $GRUP_ADI = [
     '1ABC-2A-4AB' => 'uluslararası makale (1/a, 1/b, 1/c), TR Dizin (2/a) ya da kitap (4/a, 4/b) kategorilerinden',
 ];
 
+/**
+ * Baraj kümelerinin ADAYA gösterilen adları; yönergenin tablo numaraları
+ * yalnızca `notlar` ve `madde` alanlarında kalır (KONVANSIYONLAR §2).
+ */
+$GRUP_ADI = [
+    '1A' => 'SCIE, SSCI ve AHCI dergilerindeki makale',
+    '1A-Q123' => 'SCIE, SSCI ve AHCI dergilerinin Q1-Q3 dilimindeki makale',
+    '1ABC' => 'Uluslararası dergilerdeki makale',
+    '1ABC-2A' => 'Uluslararası ve TR Dizin dergilerindeki makale',
+    '1ABC-2A-4AB' => 'Makale ve bilimsel kitap',
+];
+
 $esikler = [];
 
 foreach ($alanlar as $a) {
@@ -140,8 +153,8 @@ foreach ($alanlar as $a) {
     $drCocuklar = [
         Kalip::beyan('Doktora, sanatta yeterlik ya da uzmanlık unvanını almış olmak', 'MADDE 10/1'),
         Kalip::yds(65),
-        Kalip::toplam(80, liste: 'MADDE 10/2'),
-        Kalip::toplam($a['dr']['puan'], maddeler: [$a['dr']['grup']], liste: 'Tablo 2'),
+        Kalip::toplam(80),
+        Kalip::toplam($a['dr']['puan'], maddeler: [$a['dr']['grup']], liste: $GRUP_ADI[$a['dr']['grup']]),
     ];
 
     if (($a['dr']['baslica'] ?? false) === true) {
@@ -153,11 +166,11 @@ foreach ($alanlar as $a) {
     }
 
     if (isset($a['dr']['sanatPuan'])) {
-        $drCocuklar[] = Kalip::toplam($a['dr']['sanatPuan'], maddeler: ['SANAT'], liste: 'Tablo 2 (Sanat ve Tasarım Faaliyetleri)');
+        $drCocuklar[] = Kalip::toplam($a['dr']['sanatPuan'], maddeler: ['SANAT'], liste: 'Sanat ve tasarım faaliyeti');
     }
 
     if (isset($a['dr']['yarismaPuan'])) {
-        $drCocuklar[] = Kalip::toplam($a['dr']['yarismaPuan'], maddeler: ['YARISMA'], liste: 'Tablo 2 (Yarışma, Proje ve Yazılım)');
+        $drCocuklar[] = Kalip::toplam($a['dr']['yarismaPuan'], maddeler: ['YARISMA'], liste: 'Yarışma, proje ve yazılım');
     }
 
     $drCocuklar[] = Kalip::adet('Lisansüstü tezinizden üretilmiş bir makale yerine, uluslararası makale kategorisinde en az 1 makale', ['1ABC'], 1, madde: 'Tablo 2');
@@ -172,13 +185,13 @@ foreach ($alanlar as $a) {
             .(isset($a['dr']['yarismaPuan']) ? '; yarışma, proje ve yazılımdan '.$a['dr']['yarismaPuan'].' puan' : '')
             .'; lisansüstü tezden üretilmiş yayın koşulu.',
         'aday_notu' => $a['ad'].' temel alanında doktor öğretim üyeliği için atanmaya esas '
-            .'puanınızın en az 80 olması ve Tablo 2\'nin alan şartlarını taşımanız gerekiyor: '
+            .'puanınızın en az 80 olması ve alanınızın şartlarını taşımanız gerekiyor: '
             .$GRUP_ADI[$a['dr']['grup']].' en az '.$a['dr']['puan'].' puan'
             .(isset($a['dr']['ulusal']) ? ', TR Dizin kapsamındaki dergilerde en az '.$a['dr']['ulusal'].' makale' : '')
             .(isset($a['dr']['sanatPuan']) ? ', Sanat ve Tasarım Faaliyetlerinden '.$a['dr']['sanatPuan'].' puan' : '')
             .(isset($a['dr']['yarismaPuan']) ? ', Yarışma-Proje-Yazılım kategorisinden '.$a['dr']['yarismaPuan'].' puan' : '')
-            .'. Doktora öncesi ve sonrası bütün çalışmalar puanlamaya dâhil ve Ek-1\'deki "en '
-            .'az" ifadeleri bu kadroda dikkate alınmıyor. '.$TEZ_NOTU.' '.$YDS_NOTU,
+            .'. Doktora öncesi ve sonrası bütün çalışmalar puanlamaya dâhil; puan '
+            .'çizelgesindeki "en az" ifadeleri bu kadroda dikkate alınmıyor. '.$TEZ_NOTU.' '.$YDS_NOTU,
         'sart' => Kalip::ve('Doktor öğretim üyeliği koşulları', $drCocuklar),
     ]);
 
@@ -205,8 +218,8 @@ foreach ($alanlar as $a) {
             $cocuklar[] = Kalip::beyan('Üniversitelerarası Kurul tarafından verilen doçentlik belgesine sahip olmak', 'MADDE 12/2-ii');
         }
 
-        $cocuklar[] = Kalip::toplam(160, donem: $donem, liste: $madde);
-        $cocuklar[] = Kalip::toplam($a['doc']['puan'], donem: $donem, maddeler: [$a['doc']['grup']], liste: $tablo);
+        $cocuklar[] = Kalip::toplam(160, donem: $donem);
+        $cocuklar[] = Kalip::toplam($a['doc']['puan'], donem: $donem, maddeler: [$a['doc']['grup']], liste: $GRUP_ADI[$a['doc']['grup']]);
 
         if (isset($a['doc']['adet'])) {
             $cocuklar[] = Kalip::adet('Belirtilen dergilerde en az '.$a['doc']['adet'].' makale', [$a['doc']['grup']], $a['doc']['adet'], donem: $donem, madde: $tablo);
@@ -226,11 +239,11 @@ foreach ($alanlar as $a) {
         }
 
         if (isset($a['doc']['sanatPuan'])) {
-            $cocuklar[] = Kalip::toplam($a['doc']['sanatPuan'], donem: $donem, maddeler: ['SANAT'], liste: $tablo.' (Sanat ve Tasarım Faaliyetleri)');
+            $cocuklar[] = Kalip::toplam($a['doc']['sanatPuan'], donem: $donem, maddeler: ['SANAT'], liste: 'Sanat ve tasarım faaliyeti');
         }
 
         if (isset($a['doc']['yarismaPuan'])) {
-            $cocuklar[] = Kalip::toplam($a['doc']['yarismaPuan'], donem: $donem, maddeler: ['YARISMA'], liste: $tablo.' (Yarışma, Proje ve Yazılım)');
+            $cocuklar[] = Kalip::toplam($a['doc']['yarismaPuan'], donem: $donem, maddeler: ['YARISMA'], liste: 'Yarışma, proje ve yazılım');
         }
 
         if ($a['sportif']) {
@@ -241,8 +254,8 @@ foreach ($alanlar as $a) {
 
         if ($kadro === 'profesorluk') {
             $cocuklar[] = Kalip::veya('Bilimsel araştırma projesi koşulu', [
-                Kalip::toplam(10, donem: $donem, maddeler: ['PROJE'], liste: 'Tablo 4'),
-                Kalip::toplam(10, donem: $donem, maddeler: ['1ABC'], liste: 'Tablo 4 (proje koşulunun telafisi)'),
+                Kalip::toplam(10, donem: $donem, maddeler: ['PROJE'], liste: 'Proje'),
+                Kalip::toplam(10, donem: $donem, maddeler: ['1ABC'], liste: 'Uluslararası dergilerdeki makale'),
             ]);
         }
 
@@ -264,7 +277,7 @@ foreach ($alanlar as $a) {
                 .' için atanmaya esas puanınızın en az 160 olması gerekiyor'
                 .($kadro === 'profesorluk'
                     ? '; bu puan yalnızca ÜAK doçentlik başvuru beyannamenizde YER ALMAYAN yayın, faaliyet ve etkinliklerden hesaplanıyor. '
-                    : ' ve bu kadroda Ek-1\'deki "en az" ifadeleri de dikkate alınıyor. ')
+                    : ' ve bu kadroda puan çizelgesindeki "en az" ifadeleri de dikkate alınıyor. ')
                 .'Alan şartı: '.$GRUP_ADI[$a['doc']['grup']].' en az '.$a['doc']['puan'].' puan'
                 .(isset($a['doc']['adet']) ? ' ve en az '.$a['doc']['adet'].' makale' : '')
                 .(isset($a['doc']['baslicaAdet']) ? ' (en az '.$a['doc']['baslicaAdet'].' tanesinde başlıca yazar)' : '')

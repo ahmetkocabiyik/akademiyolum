@@ -89,12 +89,12 @@ $TEZ_YAYINI = Kalip::adet(
     ['M3'], 1, madde: 'Tablo 2 / 3'
 );
 
-$NOT_CETVEL = ' Tablo 1\'in maddelerinin çoğunda azami puan var (kitap 40, ödül 25, patent ve '
-    .'diğer 20, proje 15, atıf, tez danışmanlığı ve bilimsel toplantı 10\'ar, editörlük 4). '
-    .'Eğitim-öğretim puanı dört farklı yarıyılda ders vermiş olma bloğuna verildiği için satır '
-    .'olarak girilemedi; o maddeye bağlı koşul ders yarıyılı sayısından kontrol ediliyor. '
-    .'Madde 13\'ün h-indeksi, yurt dışı araştırma, idari görev ve yabancı dil puanı bentleri de '
-    .'faaliyet olarak kaydedilemediği için girilmedi.';
+$NOT_CETVEL = ' Puan çizelgesindeki kalemlerin çoğunda azami puan var (kitap 40, ödül 25, '
+    .'patent ve diğer 20, proje 15, atıf, tez danışmanlığı ve bilimsel toplantı 10\'ar, '
+    .'editörlük 4). Eğitim-öğretim puanı dört farklı yarıyılda ders vermiş olma bloğuna '
+    .'verildiği için satır olarak girilemedi; o koşul ders yarıyılı sayısından kontrol ediliyor. '
+    .'H-indeksi, yurt dışı araştırma, idari görev ve yabancı dil puanı kalemleri de faaliyet '
+    .'olarak kaydedilemediği için girilmedi.';
 
 $esikler = [];
 
@@ -121,8 +121,8 @@ $alan = function (string $kod, array $alanlar, string $ad, string $cetvel, calla
         'cetvel' => $cetvel,
         'notlar' => $ad.' doktor öğretim üyeliği: doktora sonrası, lisansüstü tez yayınları '
             .'hariç toplam 40 puan ve Tablo 2\'nin zorunlu tez yayını koşulu.',
-        'aday_notu' => $ad.' alanında doktor öğretim üyesi kadrosuna İLK ATANMA. MADDE 6/n '
-            .'uyarınca yalnız DOKTOR UNVANINI ALDIKTAN SONRAKİ çalışmalarınız sayılıyor '
+        'aday_notu' => $ad.' alanında doktor öğretim üyesi kadrosuna İLK ATANMA. Yalnız '
+            .'DOKTOR UNVANINI ALDIKTAN SONRAKİ çalışmalarınız sayılıyor '
             .'(lisansüstü tez yayınları hariç). Toplam puan barajına lisansüstü tezlerinizden '
             .'üretilmiş yayınların puanı DAHİL EDİLMİYOR; o kalem yalnız kendi zorunlu '
             .'koşulunu karşılıyor. Doktor öğretim üyeliğine ilk atamalar iki yıllığına '
@@ -161,8 +161,8 @@ $alan = function (string $kod, array $alanlar, string $ad, string $cetvel, calla
         'notlar' => $ad.' doçentlik: doçentlik unvanı, dört yarıyıl kadrolu ders, doktora '
             .'sonrası lisansüstü tez yayınları hariç toplam 100 puan ve Tablo 2\'nin '.$ad
             .' zorunlu kriterleri.',
-        'aday_notu' => $ad.' alanında doçent kadrosuna yükseltilme ve atanma. MADDE 6/n uyarınca '
-            .'yalnız DOKTOR UNVANINI ALDIKTAN SONRAKİ çalışmalarınız sayılıyor. Toplam puan '
+        'aday_notu' => $ad.' alanında doçent kadrosuna yükseltilme ve atanma. Yalnız DOKTOR '
+            .'UNVANINI ALDIKTAN SONRAKİ çalışmalarınız sayılıyor. Toplam puan '
             .'barajına lisansüstü tez yayınlarının puanı dâhil edilmiyor. Ayrıca yükseköğretim '
             .'kurumlarında en az iki yıl (dört yarıyıl) kadrolu ve tam zamanlı ders vermiş '
             .'olmanız gerekiyor.'.$NOT_CETVEL,
@@ -180,8 +180,8 @@ $alan = function (string $kod, array $alanlar, string $ad, string $cetvel, calla
         'notlar' => $ad.' profesörlük: doçentlik sonrası beş yıl çalışma, dört yarıyıl kadrolu '
             .'ders, doçentlik sonrası toplam 100 puan ve Tablo 2\'nin '.$ad.' zorunlu '
             .'kriterleri.',
-        'aday_notu' => $ad.' alanında profesör kadrosuna yükseltilme ve atanma. MADDE 6/n '
-            .'uyarınca yalnız DOÇENT UNVANINI ALDIKTAN SONRAKİ çalışmalarınız sayılıyor. '
+        'aday_notu' => $ad.' alanında profesör kadrosuna yükseltilme ve atanma. Yalnız DOÇENT '
+            .'UNVANINI ALDIKTAN SONRAKİ çalışmalarınız sayılıyor. '
             .'Doçentlik sonrası en az beş yıl alanınızda çalışmış ve bu süre içinde en az iki '
             .'yıl (dört yarıyıl) kadrolu ders vermiş olmanız, ayrıca hangi çalışmanızı '
             .'"başlıca eser" olarak sunduğunuzu belirtmeniz gerekiyor. Profesörlük barajında '
