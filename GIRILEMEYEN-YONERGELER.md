@@ -13,11 +13,11 @@ Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 | Durum | Sayı | Kimler |
 |---|---|---|
 | **Gerçekten engelli** | 3 | Balıkesir, Türk Hava Kurumu, Maltepe — puanlama tablosu PDF'te YOK, belge dışarıdan gelmeli |
-| **Okuma engeli çözüldü, giriş bekliyor** | 8 | Karadeniz Teknik, Tekirdağ NKÜ, Kırklareli, Bilecik, Piri Reis, Munzur, Çankaya, Burdur MAKÜ |
+| **Okuma engeli çözüldü, giriş bekliyor** | 7 | Karadeniz Teknik, Tekirdağ NKÜ, Bilecik, Piri Reis, Munzur, Çankaya, Burdur MAKÜ |
 | **Kısmen girildi, kalanı korpus içinde hazır** | 2 | İstanbul Üniversitesi (Tablo 2), Dokuz Eylül (Puanlandırma Formu D bölümü) |
 | **Kısmen girildi, çizelge dışarıdan gelmeli** | 2 | SANKO, İstanbul Okan |
 
-Yani **dışarıdan belge beklemeden yapılabilecek iş 10 dosya**; kalan beş
+Yani **dışarıdan belge beklemeden yapılabilecek iş 9 dosya**; kalan beş
 üniversite için ilgili üniversiteden puanlama ya da ölçüt tablosunu istemek
 gerekiyor.
 
@@ -262,13 +262,13 @@ koşullarla değiştirmek.
 
 ---
 
-## Okuma engeli çözüldü — on iki dosya, sekizi hâlâ giriş bekliyor
+## Okuma engeli çözüldü — on iki dosya, yedisi hâlâ giriş bekliyor
 
 Bu on iki dosya uzun süre "taranmış", "bozuk font" ya da "kötü OCR" diye
 bekliyordu. Engel PDF'lerde değil elimizdeki araçlardaymış: makinede
 `tesseract 5.5.3` ve `tur` dil paketi var. **Hepsi okunuyor**, hiçbiri artık
-kaynak sorunu değil. Dördü (Karamanoğlu, Sağlık Bilimleri, Biruni, İstanbul
-Okan) girildi; kalan sekizi veri girişi bekliyor.
+kaynak sorunu değil. Beşi (Karamanoğlu, Sağlık Bilimleri, Biruni, İstanbul
+Okan, Kırklareli) girildi; kalan yedisi veri girişi bekliyor.
 
 **ÇIKTILAR ZATEN DEPODAYMIŞ.** Bu başlık yazılırken fark edildi: `pdf-ocr/`
 klasörü 8 Ağustos 2026'da bu dosyaların OCR çıktılarıyla doldurulmuş ve
@@ -286,6 +286,21 @@ for f in "$SC"/ocr/ad-*.png; do
 done
 cat "$SC"/ocr/ad-*.txt > "$SC/ocr/ad.txt"
 ```
+
+**DÖRDÜNCÜ TUZAK — DİKEY BAŞLIKLI DAR SÜTUN OCR'DA HİÇ ÇIKMAZ.** Kırklareli'nin
+EK-I tablosunda A (Makaleler), B (Bildiriler) ve Ç (Çeviriler) bölümlerinin puan
+sütunu tesseract çıktısında YOKTU; aynı çalıştırmada C, D ve E bölümlerinin
+puanları temiz okundu. Sebep sütunun dar olması ve başlığının DİKEY yazılması
+("PUAN"). Bu, "OCR bozuk" değil "bir sütun düştü" durumudur; kırpıp gözle
+okumak yetiyor:
+
+```bash
+magick pg-07.png -crop 40%x100%+1987+0 +repage -resize 900x pg07-right.png
+```
+
+Sağ şeridin satır sırası soldaki gövdeyle birebir eşleşiyor, satır satır
+karşılaştırılabiliyor. `sips` kırpma için yetmiyor (offset alamıyor), `magick`
+kurulu.
 
 **Üç tuzak, üçü de denendi ve doğrulandı:**
 
@@ -315,7 +330,7 @@ yazar oranları tablosunu seç.
 | Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.pdf` | 48 | taranmış | OCR temiz |
 | Karamanoğlu Mehmetbey | `17536999512.karamanoglumehmetbeyuniverstesi.pdf` | 15 | taranmış | OCR temiz — **GİRİLDİ** |
 | Tekirdağ Namık Kemal | `17537009192.tekirdagnamikkemaluniverstesi.pdf` | 19 | taranmış | OCR temiz |
-| Kırklareli | `1770040975746.kirklareli-kriter-02022026.pdf` | 18 | taranmış | OCR temiz |
+| Kırklareli | `1770040975746.kirklareli-kriter-02022026.pdf` | 18 | taranmış | OCR temiz ama **A, B ve Ç bölümlerinin puan sütunu çıkmadı** — sağ şerit kırpılıp gözle okundu; **GİRİLDİ** |
 | Bilecik Şeyh Edebali | `1785927020751.bilecik-seyh-edebali-kriter-16102025.pdf` | 18 | taranmış | OCR temiz |
 | Sağlık Bilimleri | `1765867210191.saglik-bilimleri-kriter-16122025.pdf` | 11 | taranmış | OCR temiz — **GİRİLDİ** |
 | Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.pdf` | 25 | taranmış | OCR temiz, **sayfalar dönük** |

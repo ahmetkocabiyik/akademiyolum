@@ -4,7 +4,7 @@ Bu belge, `database/data/cetvel/` ve `database/data/yonerge/` altındaki dosyala
 yazarken uygulanan kuralları anlatır. Amacı, işi başka birinin (ya da başka bir
 oturumun) aynı kararları vererek sürdürebilmesi.
 
-167 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
+168 üniversite bu kurallarla girildi. Kuralların çoğu bir hatadan sonra yazıldı;
 "neden" kısımları o yüzden önemli.
 
 ---
@@ -658,8 +658,8 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 167 üniversite · 6343 eşik · 300 cetvel |
-| Okuma engeli çözüldü, giriş bekliyor | 8 (beş taranmış + Munzur + Çankaya + Burdur) |
+| Girildi | 168 üniversite · 6375 eşik · 301 cetvel |
+| Okuma engeli çözüldü, giriş bekliyor | 7 (dört taranmış + Munzur + Çankaya + Burdur) |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |
 
@@ -674,21 +674,34 @@ foreach ($e as $x) { $u[$x["universite"]] = true; }
 printf("esik=%d universite=%d cetvel=%d\n", count($e), count($u), count($d->cetveller()));'
 ```
 
-**SIRADAKİ İŞ — KALAN DOKUZ DOSYA.** Aşağıdakiler okunabiliyor ve veri girişi
+**SIRADAKİ İŞ — KALAN SEKİZ DOSYA.** Aşağıdakiler okunabiliyor ve veri girişi
 bekliyor. OCR çıktıları `pdf-ocr/` altında hazır duruyor (klasör `.gitignore`'da,
 depoya girmiyor); yeniden OCR'lamaya GEREK YOK.
 
 | Sıra | Üniversite | OCR dosyası (`pdf-ocr/`) |
 |---|---|---|
-| 1 | Kırklareli | `1770040975746.kirklareli-kriter-02022026.txt` |
-| 2 | Bilecik Şeyh Edebali | `1785927020751.bilecik-seyh-edebali-kriter-16102025.txt` |
-| 3 | Tekirdağ Namık Kemal | `17537009192.tekirdagnamikkemaluniverstesi.txt` |
-| 4 | Munzur | `17634002431.Munzur Üniversitesi Kriter.txt` |
-| 5 | Çankaya | `17537097862.cankayauniversitesi.txt` |
-| 6 | Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.txt` — **`universiteler.php`'de YOK, önce eklenmeli** |
-| 7 | Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.txt` |
-| 8 | Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.txt` (3-13. sayfalar) |
-| 9 | Dokuz Eylül (Güzel Sanatlar + Konservatuvar) | OCR gerekmiyor; `pdftotext -q -layout` yetiyor |
+| 1 | Bilecik Şeyh Edebali | `1785927020751.bilecik-seyh-edebali-kriter-16102025.txt` |
+| 2 | Tekirdağ Namık Kemal | `17537009192.tekirdagnamikkemaluniverstesi.txt` |
+| 3 | Munzur | `17634002431.Munzur Üniversitesi Kriter.txt` |
+| 4 | Çankaya | `17537097862.cankayauniversitesi.txt` |
+| 5 | Piri Reis | `17634009071.Piri Reis Üniversitesi Kriter.txt` — **`universiteler.php`'de YOK, önce eklenmeli** |
+| 6 | Karadeniz Teknik | `17536999312.karadenizteknikuniverstesi.txt` |
+| 7 | Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.txt` (3-13. sayfalar) |
+| 8 | Dokuz Eylül (Güzel Sanatlar + Konservatuvar) | OCR gerekmiyor; `pdftotext -q -layout` yetiyor |
+
+**TARANMIŞ TABLONUN PUAN SÜTUNU OCR'DA HİÇ ÇIKMAYABİLİR.** Kırklareli'nin
+EK-I tablosunda A, B ve Ç bölümlerinin puanları `tesseract` çıktısında yoktu:
+sütun dar ve başlığı DİKEY yazılmış ("PUAN"), tesseract onu satır metnine hiç
+katmıyor. Bölümün öteki sayfaları (C, D, E…) aynı çalıştırmada temiz okundu,
+yani "OCR bozuk" teşhisi yanlış olurdu. Çözüm bir satır:
+
+```bash
+magick pg-07.png -crop 40%x100%+1987+0 +repage -resize 900x pg07-right.png
+```
+
+Sayfanın sağ şeridini kırpıp GÖRÜNTÜ OLARAK okumak yetiyor; satır sırası
+soldaki gövdeyle birebir eşleşiyor. Bir bölümün puanları eksikse tabloyu
+okunamaz ilan etmeden önce bunu dene.
 
 **İstanbul Okan girildi** (29.08.2026): elimizdeki dosya puan yönergesi değil
 PERSONEL yönergesiymiş — cetvel yok, baraj yok, üç kadronun başvuru maddesi de
@@ -717,9 +730,9 @@ ters basılmış sayfalar için `sips -r 180`. `ocrmypdf` bu makinede kırık
 `GIRILEMEYEN-YONERGELER.md`'nin "Okuma engeli çözüldü" başlığında.
 
 **KUYRUKTA OKUNAMAYAN DOSYA KALMADI** ama girilecek dosya kaldı: yukarıdaki
-sekiz dosya artık okunabiliyor ve veri girişi bekliyor; İstanbul Üniversitesi'nin
+yedi dosya artık okunabiliyor ve veri girişi bekliyor; İstanbul Üniversitesi'nin
 Tablo 2'si ile Dokuz Eylül'ün D bölümü de korpus içinde hazır duruyor.
-Dışarıdan belge beklemeden yapılacak iş 10 dosya. Sayım dosya
+Dışarıdan belge beklemeden yapılacak iş 9 dosya. Sayım dosya
 adlarını veri dosyalarındaki kaynak atıflarıyla eşleyerek yapıldı; "47
 girilmemiş" satırı uzun süre bayat kalmıştı, son beş üniversite (Çağ,
 İstanbul Arel, İstanbul Gedik, İzmir Kavram MYO, İstanbul Atlas) o yüzden
