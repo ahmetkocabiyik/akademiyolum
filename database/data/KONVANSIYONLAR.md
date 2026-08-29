@@ -684,6 +684,23 @@ depoya girmiyor); yeniden OCR'lamaya GEREK YOK.
 | 2 | Burdur Mehmet Akif Ersoy | `17536991522.burdurmehmetakifersoyuniverstesi.txt` (3-13. sayfalar) |
 | 3 | Dokuz Eylül (Güzel Sanatlar + Konservatuvar) | OCR gerekmiyor; `pdftotext -q -layout` yetiyor |
 
+**KARADENİZ TEKNİK ÖN TARAMASI YAPILDI, GİRİLMEDİ.** 4398 satırlık OCR
+çıktısı şu yapıda: EK-1 bütün kadrolar için ZORUNLU başvuru koşulları
+(sözlü sınav, yabancı dil 65 — yabancı dille eğitim yapan bölümlerde 85 —,
+lisans sonrası en az 89 gün yurt dışı gözlem/eğitim/araştırma ve bunun proje
+alternatifi), EK-15 tek bir puan tablosu, ARADAKİ ON ÜÇ EK ise FAKÜLTE
+FAKÜLTE özel koşullar. On üç ek NORMALLEŞTİRİLİP HASH'LENDİ: hiçbiri
+birbirinin aynı değil, her biri 4100-5400 karakter. Yani Kastamonu'daki
+"on altı ek, beş kural" kısayolu burada İŞLEMİYOR; on üç ek tek tek
+okunacak. Fakülteler: Diş Hekimliği, Eczacılık, Edebiyat, Fen, İİBF,
+Mimarlık, Mühendislik, Of Teknoloji, Orman, Sağlık Bilimleri, Sürmene Deniz
+Bilimleri, Tıp, ve öğretim üyesi tahsisli enstitü/YO/MYO (EK-14 yalnız 8
+satır). Eşikler temel alana değil FAKÜLTEYE bağlı olduğu için her kayıt
+`birim` taşıyacak — Trabzon ve FSMVÜ'deki gibi. Yurt dışı koşulunun
+alternatifi "istenen asgari puanın %30 fazlası" (profesörlükte) ve "%30"
+(doçentlikte); OCR bu iki yüzdeyi "430" ve "930" diye okumuş, girmeden önce
+görüntüden doğrulanmalı.
+
 **YAN YATIK VE TERS BASILMIŞ SAYFALAR.** Piri Reis'in EK-1 tablosu yan yatık
 basılı, 19. sayfası ayrıca 180° ters. `magick ... -rotate 90` ile döndürüp
 gözle okumak tek pratik yol; `sips -r 180` ters sayfayı düzeltiyor. OCR bu
