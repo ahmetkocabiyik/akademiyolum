@@ -178,6 +178,7 @@ return [
     ['İstanbul Yeni Yüzyıl Üniversitesi', 'İstanbul', 'vakif'],
     ['İstinye Üniversitesi', 'İstanbul', 'vakif'],
     ['İzmir Ekonomi Üniversitesi', 'İzmir', 'vakif'],
+    ['İzmir Kavram Meslek Yüksekokulu', 'İzmir', 'vakif'],
     ['Kadir Has Üniversitesi', 'İstanbul', 'vakif'],
     ['Kocaeli Sağlık ve Teknoloji Üniversitesi', 'Kocaeli', 'vakif'],
     ['Koç Üniversitesi', 'İstanbul', 'vakif'],
