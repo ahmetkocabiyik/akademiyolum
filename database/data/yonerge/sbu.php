@@ -58,14 +58,22 @@ $FEN = ['saglik', 'muhendislik', 'fen', 'ziraat', 'mimarlik', 'guzel_sanatlar'];
 $SOSYAL = ['sosyal', 'egitim', 'ilahiyat', 'hukuk', 'filoloji', 'spor'];
 
 $PUAN_NOTU = 'h-indeksi satırı, proje ve patent BAŞVURULARI, üniversitenin kendi '
-    .'dergilerindeki yayınlar ve alanı kilitli satırlar cetvele girmedi. A.13\'ün atıf tavanı '
-    .'("gerekli asgari puanın %20\'si") kadroya bağlı olduğu için uygulanmıyor; B (50), C (100) '
-    .'ve D (50) bölümlerinin sabit tavanları uygulanıyor.';
+    .'dergilerindeki yayınlar ve alanı kilitli satırlar cetvele girmedi. Atıf puanlarına '
+    .'yönergenin koyduğu tavan ("gerekli asgari puanın %20\'si") kadroya bağlı olduğu için '
+    .'uygulanmıyor; ulusal yayınların (en fazla 50), girişimcilik faaliyetlerinin (100) ve '
+    .'eğitim-öğretim faaliyetlerinin (50) sabit tavanları uygulanıyor.';
 
 $DIL = fn (): array => Kalip::yds(60);
 
 $DIL_NOTU = 'Yabancı dil koşulu 60 puan; yabancı dilde eğitim veren bölümlere başvuruyorsanız '
     .'85 puan aranıyor ve araç bu istisnayı sormuyor.';
+
+/**
+ * Adaya gösterilen küme adları. Yönergenin Ek-1 bölüm harfleri yalnızca
+ * `notlar`da ve düğümlerin `madde` alanında kalır (KONVANSIYONLAR §2).
+ */
+$YAYIN_ADI = 'Uluslararası ve ulusal yayın ve etkinlik';
+$GIRISIM_ADI = 'Girişimci ve yenilikçi üniversite faaliyeti';
 
 $projeVeyaPatent = fn (string $madde): array => Kalip::adet(
     'En az bir ulusal ya da uluslararası projede görev almış olmak veya patent/faydalı model belgesine sahip olmak',
@@ -99,8 +107,8 @@ return [
                     Kalip::adet('Alan indekslerinde taranan dergilerde en az 2 yayın', ['ALAN-INDEKSI'], 2, madde: 'MADDE 6/2'),
                 ]),
             ]),
-            Kalip::toplam(30, maddeler: ['AB'], liste: 'Ek-1\'in A ve B bölümleri'),
-            Kalip::toplam(80, maddeler: ['TUM'], liste: 'Ek-1'),
+            Kalip::toplam(30, maddeler: ['AB'], liste: $YAYIN_ADI),
+            Kalip::toplam(80, maddeler: ['TUM']),
         ]),
     ],
     [
@@ -120,10 +128,10 @@ return [
             .'hiçbiri aranmıyor. '.$PUAN_NOTU,
         'sart' => Kalip::veya('Yeniden atama koşulları', [
             Kalip::beyan('Üniversitelerarası Kuruldan doçentlik belgesi almış olmak (bu durumda başka koşul aranmaz)', 'MADDE 8/3'),
-            Kalip::ve('MADDE 8/1 koşulları', [
+            Kalip::ve('Yeniden atama koşulları', [
                 $DIL(),
                 Kalip::adet('Üniversite adresli, WoS kapsamında birinci isim ya da sorumlu yazar olduğunuz en az 1 özgün araştırma makalesi', ['WOS-MAKALE'], 1, yazar: 'ilk', madde: 'MADDE 8/1'),
-                Kalip::toplam(120, maddeler: ['TUM'], liste: 'Ek-1'),
+                Kalip::toplam(120, maddeler: ['TUM']),
             ]),
         ]),
     ],
@@ -152,9 +160,9 @@ return [
             ]),
             Kalip::adet('Bu makalelerden en az 2\'si doktora sonrasında yayımlanmış olmalı', ['WOS-MAKALE'], 2, donem: Kalip::DOKTORA_SONRASI, madde: 'MADDE 10/2'),
             Kalip::adet('Bu makalelerden en az 1\'inde birinci isim olmak', ['WOS-MAKALE'], 1, yazar: 'ilk', madde: 'MADDE 10/2'),
-            Kalip::toplam(60, maddeler: ['AB'], liste: 'Ek-1\'in A ve B bölümleri'),
-            Kalip::toplam(10, maddeler: ['C'], liste: 'Ek-1\'in C bölümü'),
-            Kalip::toplam(150, maddeler: ['TUM'], liste: 'Ek-1'),
+            Kalip::toplam(60, maddeler: ['AB'], liste: $YAYIN_ADI),
+            Kalip::toplam(10, maddeler: ['C'], liste: $GIRISIM_ADI),
+            Kalip::toplam(150, maddeler: ['TUM']),
         ]),
     ],
     [
@@ -190,9 +198,9 @@ return [
                 Kalip::adet('Proje/patent koşulu yerine doçentlik sonrası en az 4 özgün araştırma makalesi', ['WOS-MAKALE'], 4, donem: Kalip::DOCENTLIK_SONRASI, madde: 'MADDE 13/5'),
             ]),
             Kalip::adet('En az bir yüksek lisans, doktora ya da uzmanlık tezi yönetmiş olmak', ['TEZ'], 1, madde: 'MADDE 13/6'),
-            Kalip::toplam(80, maddeler: ['AB'], liste: 'Ek-1\'in A ve B bölümleri'),
-            Kalip::toplam(20, maddeler: ['C'], liste: 'Ek-1\'in C bölümü'),
-            Kalip::toplam(200, maddeler: ['TUM'], liste: 'Ek-1'),
+            Kalip::toplam(80, maddeler: ['AB'], liste: $YAYIN_ADI),
+            Kalip::toplam(20, maddeler: ['C'], liste: $GIRISIM_ADI),
+            Kalip::toplam(200, maddeler: ['TUM']),
         ]),
     ],
 
@@ -226,8 +234,8 @@ return [
                     Kalip::adet('Doktora tezinizin kitap olarak ya da tezinizden üretilmiş bir yayın', ['A.3.a', 'A.3.b', 'A.3.c'], 1, madde: 'MADDE 6/2'),
                 ]),
             ]),
-            Kalip::toplam(20, maddeler: ['AB'], liste: 'Ek-1\'in A ve B bölümleri'),
-            Kalip::toplam(60, maddeler: ['TUM'], liste: 'Ek-1'),
+            Kalip::toplam(20, maddeler: ['AB'], liste: $YAYIN_ADI),
+            Kalip::toplam(60, maddeler: ['TUM']),
         ]),
     ],
     [
@@ -246,10 +254,10 @@ return [
             .'Doçentlik belgeniz varsa bu koşulların hiçbiri aranmıyor. '.$PUAN_NOTU,
         'sart' => Kalip::veya('Yeniden atama koşulları', [
             Kalip::beyan('Üniversitelerarası Kuruldan doçentlik belgesi almış olmak (bu durumda başka koşul aranmaz)', 'MADDE 8/3'),
-            Kalip::ve('MADDE 8/1 koşulları', [
+            Kalip::ve('Yeniden atama koşulları', [
                 $DIL(),
                 Kalip::adet('Üniversite adresli, birinci isim ya da sorumlu yazar olduğunuz en az 1 makale', ['WOS-MAKALE', 'ALAN-INDEKSI'], 1, yazar: 'ilk', madde: 'MADDE 8/1'),
-                Kalip::toplam(90, maddeler: ['TUM'], liste: 'Ek-1'),
+                Kalip::toplam(90, maddeler: ['TUM']),
             ]),
         ]),
     ],
@@ -283,8 +291,8 @@ return [
                 $projeVeyaPatent('MADDE 10/4'),
                 Kalip::adet('Doktora sonrası uluslararası hakemli dergilerde en az 2 ilave makale', ['ALAN-INDEKSI'], 2, donem: Kalip::DOKTORA_SONRASI, madde: 'MADDE 10/4'),
             ]),
-            Kalip::toplam(40, maddeler: ['AB'], liste: 'Ek-1\'in A ve B bölümleri'),
-            Kalip::toplam(120, maddeler: ['TUM'], liste: 'Ek-1'),
+            Kalip::toplam(40, maddeler: ['AB'], liste: $YAYIN_ADI),
+            Kalip::toplam(120, maddeler: ['TUM']),
         ]),
     ],
     [
@@ -319,9 +327,9 @@ return [
                 Kalip::adet('Proje/patent koşulu yerine doçentlik sonrası en az 4 makale', ['WOS-MAKALE', 'ALAN-INDEKSI'], 4, donem: Kalip::DOCENTLIK_SONRASI, madde: 'MADDE 13/5'),
             ]),
             Kalip::adet('En az bir yüksek lisans, doktora ya da uzmanlık tezi yönetmiş olmak', ['TEZ'], 1, madde: 'MADDE 13/6'),
-            Kalip::toplam(60, maddeler: ['AB'], liste: 'Ek-1\'in A ve B bölümleri'),
-            Kalip::toplam(10, maddeler: ['C'], liste: 'Ek-1\'in C bölümü'),
-            Kalip::toplam(150, maddeler: ['TUM'], liste: 'Ek-1'),
+            Kalip::toplam(60, maddeler: ['AB'], liste: $YAYIN_ADI),
+            Kalip::toplam(10, maddeler: ['C'], liste: $GIRISIM_ADI),
+            Kalip::toplam(150, maddeler: ['TUM']),
         ]),
     ],
 ];

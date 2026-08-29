@@ -64,16 +64,23 @@ $gruplar = [
         'prof' => 130, 'toplam' => 'TOPLAM-SANAT', 'sanat' => true],
 ];
 
-$SANAT_NOTU = 'Bu alanda EK-3 (Sanat ve Mimarlık Dalları) puanları da toplama giriyor. '
-    .'EK-3\'ün "en az iki kişisel etkinlikte yer almak" satırı (24 puan) tek bir etkinliğe '
+/**
+ * Adaya gösterilen küme adları. Yönergenin EK numaraları yalnızca `notlar`da
+ * ve düğümlerin `madde` alanında kalır — KONVANSIYONLAR §2, kod yasağı.
+ */
+$EK1_ADI = 'Yayın, atıf, proje, editörlük, patent ve ödül';
+$TOPLAM_ADI = ['TOPLAM' => 'Akademik ve yönetsel faaliyet', 'TOPLAM-SANAT' => null];
+
+$SANAT_NOTU = 'Bu alanda sanat ve mimarlık etkinlikleriniz de toplama giriyor. '
+    .'Yönergenin "en az iki kişisel etkinlikte yer almak" satırı (24 puan) tek bir etkinliğe '
     .'değil dosyanın tamamına puan verdiği için araca girilemedi; kişisel sergi ve '
     .'gösterileriniz varsa sanat puanınız olduğundan düşük çıkar.';
 
-$SPOR_NOTU = 'Spor Bilimlerinde EK-4 (Beden Eğitimi ve Spor Bilimleri Puanlama Formu) da '
-    .'toplama giriyor; ancak formun satırlarının (akademik organizasyon, spor teşkilatı kurul '
-    .'üyeliği, antrenörlük, hakemlik, sporcu derecesi, eğiticilik) faaliyet kaydında karşılığı '
-    .'olmadığı için hiçbiri girilemedi. Sportif kariyeriniz varsa toplamınız burada belirgin '
-    .'biçimde düşük çıkar; EK-4\'ten en çok 60 puan sayılabildiğini de göz önünde bulundurun.';
+$SPOR_NOTU = 'Spor Bilimlerinde sportif faaliyet puanlarınız da toplama giriyor; ancak '
+    .'yönergenin bu formundaki satırların (akademik organizasyon, spor teşkilatı kurul üyeliği, '
+    .'antrenörlük, hakemlik, sporcu derecesi, eğiticilik) faaliyet kaydında karşılığı olmadığı '
+    .'için hiçbiri girilemedi. Sportif kariyeriniz varsa toplamınız burada belirgin biçimde '
+    .'düşük çıkar; bu formdan en çok 60 puan sayılabildiğini de göz önünde bulundurun.';
 
 $esikler = [];
 
@@ -88,14 +95,14 @@ foreach ($gruplar as $g) {
         'notlar' => 'Madde 11/2: EK-1, EK-2 (ilgili alanlarda EK-3 veya EK-4) toplamından en az '
             .'40 puan ve bu toplamın en az 20 puanının EK-1 kapsamında olması.',
         'aday_notu' => 'Doktor öğretim üyeliği için toplam 40 puan yetiyor ama bunun en az 20 '
-            .'puanı EK-1\'den, yani yayın, atıf, proje, editörlük, patent ve ödül '
-            .'kalemlerinden gelmeli; tez danışmanlığı ve yönetsel görev puanları (EK-2) tek '
+            .'puanı yayın, atıf, proje, editörlük, patent ve ödül '
+            .'kalemlerinden gelmeli; tez danışmanlığı ve yönetsel görev puanlarınız tek '
             .'başına barajı kapatmıyor. Atamalar en fazla dört yıllık yapılıyor ve ilgili '
             .'birimce belirlenen jüri karşısında deneme dersi vermeniz gerekiyor.'.$alanNotu,
         'sart' => Kalip::ve('Doktor öğretim üyeliği koşulları', [
             Kalip::beyan('Doktora ya da sanatta yeterlik unvanına sahip olmak', 'Madde 11/1'),
-            Kalip::toplam(40, maddeler: [$g['toplam']], liste: 'Madde 11/2'),
-            Kalip::toplam(20, maddeler: ['EK1'], liste: 'Madde 11/2'),
+            Kalip::toplam(40, maddeler: [$g['toplam']], liste: $TOPLAM_ADI[$g['toplam']]),
+            Kalip::toplam(20, maddeler: ['EK1'], liste: $EK1_ADI),
             Kalip::beyan('İlgili birimce belirlenen jüri karşısında deneme dersi yapmak', 'Madde 11/3'),
         ]),
     ]);
@@ -108,11 +115,12 @@ foreach ($gruplar as $g) {
             .'ikinci fıkradaki EK-1 asgari payı (20 puan) yeniden atamada da uygulanır.',
         'aday_notu' => 'Yeniden atamada barajın penceresi dar: başvuru tarihinden geriye doğru '
             .'SON DÖRT YIL içindeki faaliyetlerden 40 puan toplamanız ve bunun en az 20 '
-            .'puanının EK-1\'den gelmesi gerekiyor. Daha eski çalışmalarınız bu hesaba '
+            .'puanının yayın, atıf, proje, editörlük, patent ve ödül kalemlerinizden gelmesi '
+            .'gerekiyor. Daha eski çalışmalarınız bu hesaba '
             .'girmiyor.'.$alanNotu,
         'sart' => Kalip::ve('Yeniden atama koşulları', [
-            Kalip::toplam(40, donem: Kalip::sonYil(4), maddeler: [$g['toplam']], liste: 'Madde 11/4'),
-            Kalip::toplam(20, donem: Kalip::sonYil(4), maddeler: ['EK1'], liste: 'Madde 11/4'),
+            Kalip::toplam(40, donem: Kalip::sonYil(4), maddeler: [$g['toplam']], liste: $TOPLAM_ADI[$g['toplam']]),
+            Kalip::toplam(20, donem: Kalip::sonYil(4), maddeler: ['EK1'], liste: $EK1_ADI),
         ]),
     ]);
 
@@ -124,28 +132,29 @@ foreach ($gruplar as $g) {
             .'alanlarda EK-3 veya EK-4) toplamından en az 100 puan; jüri karşısında akademik '
             .'sunum.',
         'aday_notu' => 'Doçent kadrosu için 100 puanlık baraj DOKTORA unvanını aldıktan sonraki '
-            .'çalışmalardan hesaplanıyor. Doktor öğretim üyeliğinden farklı olarak EK-1 için '
-            .'ayrı bir asgari pay aranmıyor; tez danışmanlığı ve yönetsel görev puanları da '
+            .'çalışmalardan hesaplanıyor. Doktor öğretim üyeliğinden farklı olarak yayın '
+            .'kalemleri için ayrı bir asgari pay aranmıyor; tez danışmanlığı ve yönetsel görev '
+            .'puanlarınız da '
             .'(en fazla 30 puan) toplama giriyor. Ayrıca ilgili birimce belirlenen jüri '
             .'karşısında alanınıza ilişkin akademik sunum yapmanız gerekiyor.'.$alanNotu,
         'sart' => Kalip::ve('Doçentlik koşulları', [
             Kalip::beyan('Doçentlik belgesine sahip olmak', 'Madde 10/1'),
-            Kalip::toplam(100, donem: Kalip::DOKTORA_SONRASI, maddeler: [$g['toplam']], liste: 'Madde 10/2'),
+            Kalip::toplam(100, donem: Kalip::DOKTORA_SONRASI, maddeler: [$g['toplam']], liste: $TOPLAM_ADI[$g['toplam']]),
             Kalip::beyan('İlgili birimce belirlenen jüri karşısında alanınıza ilişkin akademik sunum yapmak', 'Madde 10/3'),
         ]),
     ]);
 
     // ══ PROFESÖRLÜK (MADDE 9) ══
     $baslicaEser = $g['sanat']
-        ? Kalip::veya('Başlıca eser (Madde 9/2-b)', [
-            Kalip::adet('EK-1/A–EK-1/D kapsamında en az 1 eser', ['EK1-A-D'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-b'),
-            Kalip::adet('EK-3 kapsamında kişisel ya da özgün nitelikte en az 1 faaliyet', ['EK3-KISISEL'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-b'),
+        ? Kalip::veya('Başlıca eser koşulu', [
+            Kalip::adet('Hakemli dergide makale, tam metin bildiri ya da kitap türünden en az 1 eser', ['EK1-A-D'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-b'),
+            Kalip::adet('Ya da kişisel veya özgün nitelikte en az 1 sanat ya da tasarım etkinliği', ['EK3-KISISEL'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-b'),
         ])
-        : Kalip::veya('Başlıca eser (Madde 9/2-a)', [
-            Kalip::adet('EK-1/A kapsamında tek yazarlı en az 1 makale', ['EK1-A'], 1, yazar: 'tek', donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-a'),
-            Kalip::adet('EK-1/A kapsamında ilk yazar olduğunuz en az 1 makale', ['EK1-A'], 1, yazar: 'ilk', donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-a'),
-            Kalip::adet('EK-1/A kapsamında sorumlu yazar olduğunuz en az 1 makale', ['EK1-A'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-a'),
-            Kalip::adet('EK-1/D kapsamında yazarı ya da bölüm yazarı olduğunuz en az 1 kitap (editörlük sayılmaz)', ['EK1-D-YAZAR'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-a'),
+        : Kalip::veya('Başlıca eser koşulu', [
+            Kalip::adet('Hakemli dergide tek yazarlı en az 1 makale', ['EK1-A'], 1, yazar: 'tek', donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-a'),
+            Kalip::adet('Ya da hakemli dergide ilk yazar olduğunuz en az 1 makale', ['EK1-A'], 1, yazar: 'ilk', donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-a'),
+            Kalip::adet('Ya da hakemli dergide sorumlu yazar olduğunuz en az 1 makale', ['EK1-A'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-a'),
+            Kalip::adet('Ya da yazarı veya bölüm yazarı olduğunuz en az 1 kitap (editörlük sayılmaz)', ['EK1-D-YAZAR'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/2-a'),
         ]);
 
     $esikler[] = array_merge($ortak, [
@@ -166,8 +175,8 @@ foreach ($gruplar as $g) {
         'sart' => Kalip::ve('Profesörlük koşulları', [
             Kalip::beyan('Doçentlik unvanını aldıktan sonra ilgili mevzuatta öngörülen süre ve şartları tamamlamış olmak', 'Madde 9/1'),
             $baslicaEser,
-            Kalip::toplam($g['prof'], donem: Kalip::DOCENTLIK_SONRASI, maddeler: [$g['toplam']], liste: 'Madde 9/3'),
-            Kalip::veya('Tez danışmanlığı koşulu (Madde 9/4)', [
+            Kalip::toplam($g['prof'], donem: Kalip::DOCENTLIK_SONRASI, maddeler: [$g['toplam']], liste: $TOPLAM_ADI[$g['toplam']]),
+            Kalip::veya('Tez danışmanlığı koşulu', [
                 Kalip::adet('Doçentlik sonrası tamamlanmış en az 1 doktora tezi danışmanlığı', ['TEZ-DOKTORA'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/4'),
                 Kalip::adet('Doçentlik sonrası tamamlanmış en az 1 tezli yüksek lisans danışmanlığı', ['TEZ-YL'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 9/4'),
             ]),
