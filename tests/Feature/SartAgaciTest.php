@@ -1660,8 +1660,13 @@ test('Marmara yardımcı doçent koşulları Dr. Öğr. Üyesi kadrosuna bağlan
     expect($esik)->not->toBeNull()
         ->and($esik['notlar'])->toContain('MADDE 7');
 
-    // Yalnızca Tablo 2 girildi; diğer tabloların alanlarında eşik yok.
-    foreach (['sosyal', 'hukuk', 'ilahiyat', 'guzel_sanatlar', 'muhendislik', 'spor', 'filoloji'] as $alan) {
+    // Yönergenin yedi tablosu da girildi; on temel alanda eşik var. Mimarlık
+    // ve Ziraat yönergenin KENDİSİNDE yok (Marmara'da o fakülteler bulunmuyor).
+    foreach (['sosyal', 'hukuk', 'ilahiyat', 'guzel_sanatlar', 'muhendislik', 'spor', 'filoloji', 'egitim', 'saglik'] as $alan) {
+        expect($depo->bul('Marmara Üniversitesi', 'dr_ogr_uyesi', $alan))->not->toBeNull();
+    }
+
+    foreach (['mimarlik', 'ziraat'] as $alan) {
         expect($depo->bul('Marmara Üniversitesi', 'dr_ogr_uyesi', $alan))->toBeNull();
     }
 
@@ -1674,8 +1679,41 @@ test('Marmara yardımcı doçent koşulları Dr. Öğr. Üyesi kadrosuna bağlan
     $puan = fn (string $parca) => collect($sonuc->kosullar())
         ->first(fn (SartSonucu $k) => str_contains($k->aciklama, $parca))->mevcut;
 
-    expect($puan('faaliyet aralıklarından'))->toBe(48)
+    expect($puan('kalemlerinizden en az 42 puan'))->toBe(48)
         ->and($puan('Tüm faaliyetlerden'))->toBe(48);
+});
+
+test('Marmara dr. öğr. üyeliği koşulu temel alana göre gerçekten değişiyor', function () {
+    $depo = sartDepo();
+
+    // Md. 7/d on bir ayrı bent veriyor ve bunlar birbirinin kopyası değil.
+    // Önceki sürüm Sağlık ve Eğitim'i de Fen kuralına bağlamıştı.
+    $aciklamalar = function (string $alan) use ($depo): array {
+        $esik = $depo->bul('Marmara Üniversitesi', 'dr_ogr_uyesi', $alan);
+
+        return array_map(fn (array $d): string => $d['aciklama'], $esik['sart']['cocuklar']);
+    };
+
+    // Mühendislikte PUAN BARAJI YOK; tek koşul iki SCI-Expanded makale.
+    expect($aciklamalar('muhendislik'))->toContain('SCI-Expanded kapsamındaki dergilerde en az 2 makale')
+        ->and(implode(' ', $aciklamalar('muhendislik')))->not->toContain('toplam en az');
+
+    // Sağlık iki hakemli makale + 90 puan istiyor, Fen ise tek SCI-E makale
+    // + 42 puanlık ara katman + 90 puan.
+    expect($aciklamalar('saglik'))->toContain('Hakemli dergilerde en az 2 makale')
+        ->and($aciklamalar('fen'))->toContain('SCI-Expanded kapsamındaki bir dergide en az 1 makale')
+        ->and($aciklamalar('saglik'))->not->toBe($aciklamalar('fen'));
+
+    // Eğitimde toplam puan barajı YOK; iki dar katman var.
+    expect(implode(' ', $aciklamalar('egitim')))->not->toContain('Tüm faaliyetlerden');
+
+    // Doçentlik ve profesörlük ise alandan bağımsız: aynı cümle her alanda.
+    $docent = fn (string $alan): array => array_map(
+        fn (array $d): string => $d['aciklama'],
+        $depo->bul('Marmara Üniversitesi', 'docentlik', $alan)['sart']['cocuklar'],
+    );
+
+    expect($docent('sosyal'))->toBe($docent('muhendislik'));
 });
 
 test('Erciyes yayın barajı alan grubuna göre farklı küme sayıyor', function () {

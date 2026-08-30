@@ -9,10 +9,18 @@
  * metin makale ya da şu alternatif" biçiminde sayı şartı. Cetvel olarak ÜAK
  * doçentlik tablosu (`uak-2024-mart-{alan}`) kullanıldı.
  *
- * DR. ÖĞR. ÜYELİĞİ İÇİN AKADEMİK KOŞUL YOK: Madde 5 yalnızca ilan, jüri ve
- * atama usulünü düzenliyor, yayın ya da puan şartı koymuyor. Bu yüzden o kadro
- * için eşik yazılmadı — olmayan bir koşul uydurmak yerine kadro kapsam dışı
- * bırakıldı.
+ * DR. ÖĞR. ÜYELİĞİNDE YAYIN KOŞULU YOK, AMA KADRO KAPSAM DIŞI DEĞİL:
+ * Madde 5 yayın ya da puan şartı koymuyor; tek somut koşulu "doktora unvanını;
+ * tıpta, diş hekimliğinde, eczacılıkta ve veteriner hekimlikte uzmanlık
+ * unvanını veya ... sanatta yeterliği kazanmış olmak". Eşik ÖNCE yazılmamıştı
+ * ve üniversite bu kadroda listeden düşüyordu; oysa "ek yayın koşulu yok"
+ * bilgisi adayın en çok işine yarayan bilgilerden biri. Korpusta yalnız beyan
+ * düğümü taşıyan 372 eşik daha var; bu da onlardan biri.
+ *
+ * YABANCI DİL KOŞULU PROFİLE BAĞLANAMIYOR: Madde 4 yabancı dille eğitim yapan
+ * bölümlerdeki üç kadro için de YÖK'ün ilgili yönetmelik koşullarını istiyor.
+ * Bölümün eğitim dili burada tutulmadığı için koşul olarak değil, aday notunda
+ * uyarı olarak duruyor.
  *
  * DOÇENTLİK VE PROFESÖRLÜK AYNI YAPIDA, YALNIZCA SAYI DEĞİŞİYOR: doçentlikte
  * 2, profesörlükte 1 makale. Korpusta profesörlük şartının doçentlikten DAHA
@@ -39,8 +47,17 @@ $fenGrubu = ['fen', 'muhendislik', 'saglik', 'ziraat'];
 $sosyalGrubu = ['egitim', 'ilahiyat', 'filoloji', 'hukuk', 'spor', 'sosyal', 'mimarlik'];
 $sanatGrubu = ['guzel_sanatlar'];
 
-$drNotu = 'İstanbul Galata yönergesi Dr. Öğr. Üyeliği için akademik koşul koymuyor; yalnızca '
-    .'yalnızca ilan, jüri ve atama usulünü düzenliyor. Bu kadro için eşik yazılmadı.';
+/** Madde 5 alan ayrımı yapmıyor: derece koşulu on iki temel alanın hepsinde aynı. */
+$tumAlanlar = [...$fenGrubu, ...$sosyalGrubu, ...$sanatGrubu];
+
+$DIL_NOTU = ' Yabancı dille eğitim yapan bölümlere başvuruyorsanız yönerge ayrıca YÖK\'ün '
+    .'yabancı dille öğretim yönetmeliğindeki dil koşullarını arıyor; bölümün eğitim '
+    .'dili burada tutulmadığı için bu koşul hesaba katılmadı.';
+
+$drNotu = 'İstanbul Galata Dr. Öğr. Üyeliği için YAYIN YA DA PUAN KOŞULU KOYMUYOR: yönergenin '
+    .'tek somut şartı doktora, uzmanlık ya da sanatta yeterlik derecesine sahip olmak. Kalan '
+    .'hükümler ilan, jüri raporu ve atama usulüyle ilgili; atama en çok dört yıllık ve süre '
+    .'sonunda yeniden atanabiliyorsunuz.'.$DIL_NOTU;
 
 /**
  * Doçentlik ve profesörlükte ortak yapı: alan grubuna göre makale sayısı ve
@@ -72,12 +89,31 @@ $esik = function (string $kadro, string $kadroAd, string $anahtar, string $ad, a
 };
 
 $docNotu = 'Koşulun tamamı DOKTORA unvanınızı aldıktan sonraki çalışmalarınızla sağlanmalı. '
-    .$drNotu;
+    .'Yönerge puan barajı koymuyor; tek koşul yayın sayısı.'.$DIL_NOTU;
 $profNotu = 'Koşulun tamamı DOÇENTLİK unvanınızı aldıktan sonraki çalışmalarınızla sağlanmalı. '
     .'Sayı doçentlikten düşük görünüyor (2 yerine 1) çünkü pencere daha dar: doçentlikte '
-    .'doktora sonrası, profesörlükte doçentlik sonrası sayılıyor.';
+    .'doktora sonrası, profesörlükte doçentlik sonrası sayılıyor. Ayrıca doçent unvanınızı '
+    .'aldıktan sonra en az beş yıl ilgili bilim alanında çalışmış olmanız gerekiyor.'.$DIL_NOTU;
 
 return [
+    // ══════════ DR. ÖĞR. ÜYESİ (Madde 5) — yalnızca derece koşulu ══════════
+    [
+        'anahtar' => 'istanbul-galata-dr',
+        'aday_notu' => $drNotu,
+        'universite' => 'İstanbul Galata Üniversitesi',
+        'kadro' => 'dr_ogr_uyesi',
+        'alan' => $tumAlanlar,
+        'cetvel' => 'uak-2024-mart-{alan}',
+        'notlar' => 'Madde 5: doktora unvanı; tıpta, diş hekimliğinde, eczacılıkta ve veteriner '
+            .'hekimlikte uzmanlık unvanı veya sanatta yeterlik. Yayın ya da puan şartı yok. '
+            .'Madde 4 yabancı dille eğitim yapan bölümler için dil koşulu getiriyor. Atama en '
+            .'çok dört yıl (Madde 5), yeniden atanma mümkün ve ek koşula bağlanmamış.',
+        'sart' => Kalip::ve('Dr. Öğr. Üyesi kadrosuna atanma', [
+            Kalip::beyan('Doktora unvanına; tıpta, diş hekimliğinde, eczacılıkta ya da veteriner '
+                .'hekimlikte uzmanlık unvanına veya sanatta yeterliğe sahip olmak', 'Madde 5'),
+        ]),
+    ],
+
     // ══════════ DOÇENT (Madde 6) — doktora sonrası ══════════
     $esik('docentlik', 'Doçent', 'fen', 'Fen Bilimleri, Matematik, Mühendislik ve Sağlık Bilimleri',
         $fenGrubu, 2, ['1a-*', '1b', '1c'], 'Web of Science veya Scopus dergilerinde', [
