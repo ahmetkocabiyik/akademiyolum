@@ -45,7 +45,7 @@ return [
     // ══════════ DR. ÖĞRETİM ÜYESİ (ilk atama, Madde 8.3) ══════════
     [
         'anahtar' => 'bitlis-dr-fen',
-        'aday_notu' => 'Yeniden atanmada (Madde 8.4) ayrı bir puan tablosu yok; yönerge yalnızca '
+        'aday_notu' => 'Yeniden atanmada ayrı bir puan tablosu yok; yönerge yalnızca '
             .'"yeniden atanma puanının en az yüzde 50\'sini A.1-A.8 kategorilerinden almak", '
             .'A.1\'den 1 yayın veya A.2 ile A.5\'ten toplam 2 yayın, ve 2 eserinize en az 10 atıf '
             .'şartlarını arıyor. Burada gördükleriniz ilk atama koşullarıdır.',
@@ -66,7 +66,7 @@ return [
     ],
     [
         'anahtar' => 'bitlis-dr-sosyal',
-        'aday_notu' => 'Yeniden atanmada (Madde 8.4) ayrı bir puan tablosu yok; yönerge yalnızca '
+        'aday_notu' => 'Yeniden atanmada ayrı bir puan tablosu yok; yönerge yalnızca '
             .'"yeniden atanma puanının en az yüzde 50\'sini A.1-A.8 kategorilerinden almak", '
             .'A.1\'den 1 yayın veya A.2, A.5 ve A.7.1\'den toplam 2 yayın, ve 2 eserinize en az 10 '
             .'atıf şartlarını arıyor. Burada gördükleriniz ilk atama koşullarıdır.',

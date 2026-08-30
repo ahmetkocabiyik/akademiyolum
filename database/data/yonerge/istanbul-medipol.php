@@ -62,7 +62,7 @@ return [
     // ══════════ DOÇENT (Madde 7 — tümüyle ÜAK'a devrediliyor) ══════════
     [
         'anahtar' => 'medipol-docent',
-        'aday_notu' => 'İstanbul Medipol doçentlikte kendi koşulunu koymuyor; Madde 7 doğrudan '
+        'aday_notu' => 'İstanbul Medipol doçentlikte kendi koşulunu koymuyor; yönerge doğrudan '
             .'YÖK doçentlik başvuru koşullarına gönderiyor. Aşağıdaki puan ÜAK doçentlik '
             .'cetveline göre hesaplanıyor.',
         'universite' => 'İstanbul Medipol Üniversitesi',

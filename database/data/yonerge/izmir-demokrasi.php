@@ -150,7 +150,7 @@ return [
     [
         'anahtar' => 'izmir-demokrasi-dr-yeniden',
         'aday_notu' => 'Yeniden atanmada yalnızca bu kadroda kesintisiz geçirdiğiniz son üç '
-            .'yılın çalışmaları sayılıyor. Atanma süresi üç yıl (Madde 5/1).',
+            .'yılın çalışmaları sayılıyor. Atanma süresi üç yıl.',
         'universite' => 'İzmir Demokrasi Üniversitesi',
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'alan' => $tumAlanlar,

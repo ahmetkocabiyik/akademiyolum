@@ -139,7 +139,7 @@ return [
     [
         'anahtar' => 'kirklareli-dr-sanat',
         'aday_notu' => 'Sanat Alanlarında (Güzel Sanatlar, Konservatuvar) yabancı dil koşulu '
-            .'ARANMIYOR (MADDE 8/1-d); bu eşikte dil barajı yok. '
+            .'ARANMIYOR; bu eşikte dil barajı yok. '
             .$baglayiciDegil.' '.$kadroEksigi.' '.$yenidenAtanma,
         'universite' => $UNI,
         'kadro' => 'dr_ogr_uyesi',

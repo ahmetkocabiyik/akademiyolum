@@ -85,7 +85,7 @@ return [
     // ══════════ DOÇENT (puan barajı yok) ══════════
     [
         'anahtar' => 'amasya-docent',
-        'aday_notu' => 'Amasya yönergesi doçentlik için puan barajı koymuyor; Madde 8 yalnızca '
+        'aday_notu' => 'Amasya yönergesi doçentlik için puan barajı koymuyor; yalnızca '
             .'ÜAK doçentlik unvanını şart koşuyor. Burada baraj görmüyorsunuz — eksik veri '
             .'değil, yönergede öyle.',
         'universite' => 'Amasya Üniversitesi',

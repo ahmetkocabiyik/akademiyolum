@@ -211,7 +211,7 @@ foreach ($birimler as $b) {
     $esikler[] = $ortak + [
         'anahtar' => "{$b['anahtar']}-dr-yeniden",
         'kadro' => 'dr_ogr_uyesi_yeniden',
-        'aday_notu' => 'Görev süresi uzatma üç yıllık aralıklarla yapılıyor (Madde 9.1). '
+        'aday_notu' => 'Görev süresi uzatma üç yıllık aralıklarla yapılıyor. '
             ."Uzatma için eser puanı sınırı {$u1}; yönergenin ayrıca istediği toplam puan sınırı "
             .'burada gösterilmiyor.',
         'notlar' => "Madde 9 + Tablo 4 ({$b['ad']}). U1 (eser puanı sınırı) {$u1}, U2 (toplam "

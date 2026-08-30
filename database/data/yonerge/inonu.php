@@ -258,7 +258,7 @@ foreach ($sutunlar as $s) {
         'anahtar' => "{$s['anahtar']}-dr-yeniden",
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'aday_notu' => 'Yeniden atanmada yalnızca son atandığınız dönemde ürettiğiniz çalışmalar '
-            .'sayılıyor (Madde 14/2); atama dört yıllık. '.$lNotu,
+            .'sayılıyor; atama dört yıllık. '.$lNotu,
         'notlar' => "Madde 14 + Tablo 3, {$s['ad']} sütunu. Toplam {$toplam} puan (son atama sonrası), "
             ."K1-K14 proje puanı {$projeK14}. L1-L18 satırı girilemedi.",
         'sart' => Kalip::ve("Dr. Öğr. Üyeliğine yeniden atanma — {$s['ad']}", $kosullar),

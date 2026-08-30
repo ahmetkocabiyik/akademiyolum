@@ -94,7 +94,7 @@ return [
             .'atamanın koşulları uygulandı.',
         'aday_notu' => 'Yönerge yeniden atamaya ayrı bir baraj koymuyor, karar yönetim kurulunun '
             .'uygun görüşüne bırakılmış; araç ilk atamanın 8 puanlık eşiğini arıyor. Atama süreniz '
-            .'MADDE 7/1 uyarınca en az bir en çok dört yıl. '.$PUAN_NOTU,
+            .'yönerge uyarınca en az bir en çok dört yıl. '.$PUAN_NOTU,
         'sart' => $drSart,
     ],
     [
@@ -127,7 +127,7 @@ return [
             .'40 puanı doçentlik sonrası çalışmalardan. MADDE 14: yayınlardan biri başlıca '
             .'araştırma eseri olarak gösterilir.',
         'aday_notu' => 'Profesörlükte 100 puanın 40\'ı doçentlik sonrasına ait olmalı. Doçentlik '
-            .'unvanı yurt dışında alınmışsa MADDE 12/3 uyarınca hizmet süresi o tarihten '
+            .'unvanı yurt dışında alınmışsa yönerge uyarınca hizmet süresi o tarihten '
             .'başlıyor. '.$PUAN_NOTU,
         'sart' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
             $DIL_BEYANI,

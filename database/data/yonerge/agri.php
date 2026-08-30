@@ -65,7 +65,7 @@ return [
     [
         'anahtar' => 'agri-dr-saglik',
         'aday_notu' => 'Sağlık Bilimlerinde makale alt barajı yok; yönerge yalnızca genel toplam '
-            .'istiyor (Madde 5.1.3). Bu eksik veri değil, yönergenin kendi tercihi.',
+            .'istiyor. Bu eksik veri değil, yönergenin kendi tercihi.',
         'universite' => 'Ağrı İbrahim Çeçen Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $saglikGrubu,
@@ -79,7 +79,7 @@ return [
     // ══════════ DOÇENT (puan barajı yok) ══════════
     [
         'anahtar' => 'agri-docent',
-        'aday_notu' => 'Ağrı yönergesi doçentlik için puan barajı koymuyor; Madde 6 yalnızca ÜAK '
+        'aday_notu' => 'Ağrı yönergesi doçentlik için puan barajı koymuyor; yalnızca ÜAK '
             .'doçentlik unvanını şart koşuyor. Burada baraj görmüyorsunuz — eksik veri değil, '
             .'yönergede öyle.',
         'universite' => 'Ağrı İbrahim Çeçen Üniversitesi',

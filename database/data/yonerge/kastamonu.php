@@ -159,7 +159,7 @@ $setEsikleri = function (string $anahtar, array $alanlar, ?string $birim, string
         'dr_ogr_uyesi_yeniden' => ['ad' => 'Doktor öğretim üyeliği kadrosuna yeniden atanma', 'on' => [],
             'not' => 'Son atanma tarihinizden itibaren yaptığınız çalışmalar sayılıyor; yeniden '
                 .'atama üç yıl için yapılıyor. Doçent unvanı almış olup doktor öğretim üyesi '
-                .'kadrosunda görev yapanlarda yönerge bu şartları aramıyor (MADDE 9(1)(c)).'],
+                .'kadrosunda görev yapanlarda yönerge bu şartları aramıyor.'],
     ];
 
     $uretilen = [];

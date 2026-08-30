@@ -110,7 +110,7 @@ $docent = function (string $anahtar, string $ad, array $alanlar, array $ek = [])
         'aday_notu' => $ek === []
             ? 'Bu alanda doçentlik için yalnızca puan barajı ve yabancı dil şartı var; ek yayın '
                 .'koşulu aranmıyor.'
-            : 'Puan barajına ek olarak bir yayın koşulu da var (Madde 7/d).',
+            : 'Puan barajına ek olarak bir yayın koşulu da var.',
         'universite' => 'Osmaniye Korkut Ata Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => array_values($alanlar),

@@ -111,12 +111,12 @@ $ingilizceNotu = 'Eğitim dili İngilizce olan bir programa başvuruyorsanız bi
 return [
     [
         'anahtar' => 'rumeli-dr',
-        'aday_notu' => 'Rumeli, Dr. Öğr. Üyeliği için PUAN BARAJI KOYMUYOR. MADDE 6 tek '
+        'aday_notu' => 'Rumeli, Dr. Öğr. Üyeliği için PUAN BARAJI KOYMUYOR. Yönerge tek '
             .'fıkra ve yalnızca doktora, uzmanlık ya da sanatta yeterlik unvanı istiyor; '
             .'değerlendirme ölçütleri tablosu yalnızca doçentlik ve profesörlük maddelerinde '
             .'anılıyor. Atama bir ilâ dört yıl süreyle yapılıyor ve süre sonunda görev '
             .'kendiliğinden sona eriyor; yeniden atanma yönetim kurulunun uygun görüşüne '
-            .'bağlı, sayısal bir koşula değil (MADDE 9). '.$ingilizceNotu,
+            .'bağlı, sayısal bir koşula değil. '.$ingilizceNotu,
         'universite' => 'İstanbul Rumeli Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $tumAlanlar,

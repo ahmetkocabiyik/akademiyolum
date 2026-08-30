@@ -762,7 +762,7 @@ foreach ($alanlar as $a) {
         'kadro' => 'profesorluk',
         'aday_notu' => 'Profesörlüğün kendi yayın sayıları yok: doçent kadrosunun bütün yayın '
             .'koşullarını doçentlik unvanınızdan SONRAKİ çalışmalarınızla bir kez daha '
-            .'sağlamanız isteniyor (Madde 1.14.3). Puan barajları ayrı: 200 zorunlu '
+            .'sağlamanız isteniyor. Puan barajları ayrı: 200 zorunlu '
             .'(70\'i doçentlik sonrası) ve 400 genel toplam.',
         'notlar' => "{$madde} + Madde 1.14 + Madde 1.10.1/d. Madde 1.14.3 doçentliğin yayın "
             .'koşullarını doçentlik sonrası dönemde tekrarlatıyor. Zorunlu puan 200 '

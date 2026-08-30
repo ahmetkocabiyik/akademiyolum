@@ -85,7 +85,7 @@ return [
         'notlar' => 'MADDE 6 ve Ek-1: doçent kadrosunda ek puan koşulu yok; ÜAK tarafından ilgili '
             .'alanda doçent unvanını almış olmak yeterli.',
         'aday_notu' => 'Ufuk Üniversitesinde doçent kadrosuna atanmak için yönergenin koyduğu ek '
-            .'bir puan koşulu yok. MADDE 6 doğrudan 2547 sayılı Kanun ile Öğretim Üyeliğine '
+            .'bir puan koşulu yok. Yönerge doğrudan 2547 sayılı Kanun ile Öğretim Üyeliğine '
             .'Yükseltilme ve Atanma Yönetmeliğine atıf yapıyor; Ek-1 tablosu da yalnızca '
             .'Üniversitelerarası Kurul tarafından ilgili alanda doçent unvanının alınmış olmasını '
             .'arıyor. '.$DIL_NOTU,

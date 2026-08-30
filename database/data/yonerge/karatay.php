@@ -214,7 +214,7 @@ foreach ($gruplar as $ad => $g) {
             .'sonra" diye tanımlıyor; profilde ilk atama tarihi tutulmadığı için son atama '
             .'tarihiniz kullanıldı, yani gerçek kapsam burada gösterilenden GENİŞ olabilir. '
             .'Asgari puanı sağlayamazsanız rektör bir defaya mahsus iki yıl ek süre '
-            .'verebiliyor (Madde 10/d). '.$atifNotu,
+            .'verebiliyor. '.$atifNotu,
         'universite' => 'KTO Karatay Üniversitesi',
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'alan' => $g['alanlar'],

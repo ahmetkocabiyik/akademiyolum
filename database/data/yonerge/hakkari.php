@@ -64,7 +64,7 @@ return [
     // ══════════ DOÇENT (Madde 8 — puan koşulu yok) ══════════
     [
         'anahtar' => 'hakkari-docent',
-        'aday_notu' => 'Hakkari yönergesi doçentlik için puan koşulu koymuyor; Madde 8 yalnızca '
+        'aday_notu' => 'Hakkari yönergesi doçentlik için puan koşulu koymuyor; yalnızca '
             .'2547 sayılı Kanun ve ilgili yönetmelik hükümlerindeki şartları arıyor. Burada '
             .'baraj görmüyorsunuz — eksik veri değil, yönergede öyle.',
         'universite' => 'Hakkari Üniversitesi',
