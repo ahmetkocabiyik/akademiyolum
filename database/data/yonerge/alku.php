@@ -87,7 +87,7 @@ $UNVAN = Kalip::beyan(
     '2547 s.K. m.24'
 );
 
-$NOT_CETVEL = ' Ortak çalışmalarda puan Tablo 3\'ün yazar sayısı × sıra matrisine göre '
+$NOT_CETVEL = ' Ortak çalışmalarda puan yönergenin yazar sayısı × sıra matrisine göre '
     .'bölünüyor; sorumlu yazar sıraya bakılmaksızın en yüksek yüzdeyle değerlendiriliyor. '
     .'"Araştırma makalesi" koşullarında derleme, vaka takdimi ve editöre mektup sayılmıyor '
     .'(Açıklama 8); kaydınızda yayın türünü doğru işaretlemeniz gerekiyor. ESCI dergileri ile '
@@ -195,8 +195,8 @@ $esikler[] = [
     'notlar' => 'Doçentlik B: doktora ya da uzmanlık unvanı alındıktan sonra en az 240 puanı '
         .'Tablo 1a\'dan olmak kaydıyla Tablo 1a, 1b ve/veya 2\'den toplam en az 400 puan.',
     'aday_notu' => 'Doçent kadrosuna atanma. Koşul bütün birimlerde aynı: doktora ya da '
-        .'tıpta/diş hekimliğinde uzmanlık unvanını ALDIKTAN SONRA, en az 240 puanı Tablo 1a '
-        .'(bilimsel yayınlar) kaleminden gelmek üzere toplam en az 400 puan. Yabancı dil '
+        .'tıpta/diş hekimliğinde uzmanlık unvanını ALDIKTAN SONRA, en az 240 puanı bilimsel '
+        .'yayın kalemlerinizden gelmek üzere toplam en az 400 puan. Yabancı dil '
         .'koşulu Üniversitelerarası Kurulun güncel doçentlik başvurularında istediği puan; '
         .'motorda 55 olarak uygulanıyor, ÜAK bu değeri değiştirirse yönerge de değişiyor.'
         .$NOT_CETVEL.$NOT_MUAFIYET,
@@ -204,7 +204,7 @@ $esikler[] = [
         $UNVAN,
         Kalip::yds(55),
         $DIL_85,
-        Kalip::puanDan('Doktora ya da uzmanlık unvanını aldıktan sonra Tablo 1a bilimsel yayın kalemlerinden en az 240 puan almak', ['TABLO-1A'], 240, $DOKTORA, madde: 'Doçentlik B'),
+        Kalip::puanDan('Doktora ya da uzmanlık unvanını aldıktan sonra bilimsel yayın kalemlerinizden en az 240 puan almak', ['TABLO-1A'], 240, $DOKTORA, madde: 'Doçentlik B'),
         Kalip::toplam(400, $DOKTORA),
     ]),
 ];
@@ -222,7 +222,8 @@ $esikler[] = [
     'aday_notu' => 'Profesör kadrosuna atanma. Bütün koşullar DOÇENT UNVANINI ALDIKTAN SONRAKİ '
         .'çalışmalardan sağlanmalı: SSCI, SCI, SCI-Expanded, AHCI ya da ESCI kapsamındaki bir '
         .'dergide başlıca yazar olduğunuz bir makale, tek yazarlı ya da sorumlu/birinci yazar '
-        .'olduğunuz toplam iki araştırma makalesi ve en az 360 puanı Tablo 1a\'dan gelmek üzere '
+        .'olduğunuz toplam iki araştırma makalesi ve en az 360 puanı bilimsel yayın '
+        .'kalemlerinizden gelmek üzere '
         .'toplam 600 puan. Ayrıca doçentlik sonrası yasal süreyi doldurmuş ve bir üniversitede '
         .'ya da araştırma kuruluşunda en az iki yıl fiilen çalışmış olmanız gerekiyor. Yabancı '
         .'dil koşulu 60 puan; çalışma alanı bir dil olan bölümlerde başka bir dilden en az 70 '
@@ -235,7 +236,7 @@ $esikler[] = [
         Kalip::beyan('Doçent unvanını aldıktan sonra profesörlüğe atanabilmek için gerekli yasal süreyi doldurmuş ve bir üniversitede ya da alanıyla ilgili bir araştırma kuruluşunda en az iki yıl fiilen çalışmış olmak', 'Profesörlük A/1'),
         Kalip::adet('Doçent unvanını aldıktan sonra SSCI, SCI, SCI-Expanded, AHCI ya da ESCI kapsamındaki bir dergide başlıca yazar olarak bir makale yayımlamış olmak', ['SCI-ESCI'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'Profesörlük A/2'),
         Kalip::adet('Doçent unvanını aldıktan sonra tek yazarlı, sorumlu yazarlı ya da birinci yazarlı toplam en az iki araştırma makalesi yayımlamış olmak', ['ARASTIRMA-MAKALE'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: 'Profesörlük A/5'),
-        Kalip::puanDan('Doçent unvanını aldıktan sonra Tablo 1a bilimsel yayın kalemlerinden en az 360 puan almak', ['TABLO-1A'], 360, $DOCENTLIK, madde: 'Profesörlük B'),
+        Kalip::puanDan('Doçent unvanını aldıktan sonra bilimsel yayın kalemlerinizden en az 360 puan almak', ['TABLO-1A'], 360, $DOCENTLIK, madde: 'Profesörlük B'),
         Kalip::toplam(600, $DOCENTLIK),
     ]),
 ];

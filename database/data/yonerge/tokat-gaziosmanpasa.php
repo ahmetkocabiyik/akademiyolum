@@ -56,8 +56,8 @@ $dortuncuMadde = fn (string $makaleGrubu, int $toplam, int $yayinPuani, ?array $
     Kalip::adet('Uluslararası ya da ulusal patent veya faydalı model almış olmak', ['PATENT'], 1, donem: $donem, madde: $madde.'/c'),
     Kalip::adet('Alanınıza göre belirtilen indeks kademelerinde en az 1 makale', [$makaleGrubu], 1, donem: $donem, madde: $madde.'/d'),
     Kalip::ve('Bu şartların hiçbiri sağlanmıyorsa toplam puanların bir buçuk katı', [
-        Kalip::toplam($toplam, donem: $donem, liste: $madde),
-        Kalip::toplam($yayinPuani, donem: $donem, maddeler: ['YAYIN-PROJE'], liste: $madde),
+        Kalip::toplam($toplam, donem: $donem),
+        Kalip::toplam($yayinPuani, donem: $donem, maddeler: ['YAYIN-PROJE'], liste: 'Makale, bildiri, kitap, editörlük ve proje'),
     ]),
 ]);
 
@@ -88,7 +88,7 @@ foreach ([
             .$g['drAd'].' olmalı. Puan barajı temel alandan bağımsız; alan farkı yalnızca zorunlu '
             .'makalenin indeks kademesinde. '.$DIL_NOTU,
         'sart' => Kalip::ve('Doktor öğretim üyeliğine ilk atanma koşulları', [
-            Kalip::toplam(150, liste: 'Doktor öğretim üyeliği Madde 1'),
+            Kalip::toplam(150),
             Kalip::adet('En az 3 makale', ['MAKALE'], 3, madde: 'Doktor öğretim üyeliği Madde 2'),
             Kalip::adet('Bu makalelerden en az '.$g['drAdet'].' tanesi belirtilen indeks kademelerinde olmak', [$g['drGrup']], $g['drAdet'], madde: 'Doktor öğretim üyeliği Madde 2'),
         ]),
@@ -111,7 +111,7 @@ foreach ([
             .'hastalık gibi zorunlu nedenlerle üç ay ve üzeri ayrı kaldığınız süreler görev '
             .'sürenize ekleniyor.',
         'sart' => Kalip::ve('Görev süresi uzatımı koşulları', [
-            Kalip::toplam(40, donem: Kalip::SON_ATAMA_SONRASI, liste: 'Doktor öğretim üyeliği Madde 3'),
+            Kalip::toplam(40, donem: Kalip::SON_ATAMA_SONRASI),
             Kalip::adet('Belirtilen indeks kademelerinde en az '.$g['drAdet'].' yayın', [$g['drGrup']], $g['drAdet'], donem: Kalip::SON_ATAMA_SONRASI, madde: 'Doktor öğretim üyeliği Madde 2'),
         ]),
     ]);
@@ -134,8 +134,8 @@ foreach ([
         'sart' => Kalip::ve('Doçentlik koşulları', [
             Kalip::beyan('Doçentlik unvanını almış olmak', 'Doçentlik Madde 1'),
             Kalip::yds(60),
-            Kalip::toplam(300, liste: 'Doçentlik Madde 2'),
-            Kalip::toplam(150, maddeler: ['YAYIN-PROJE'], liste: 'Doçentlik Madde 3'),
+            Kalip::toplam(300),
+            Kalip::toplam(150, maddeler: ['YAYIN-PROJE'], liste: 'Makale, bildiri, kitap, editörlük ve proje'),
             $dortuncuMadde($g['dortGrup'], 450, 225, Kalip::DOKTORA_SONRASI, 'Doçentlik Madde 4'),
         ]),
     ]);
@@ -159,8 +159,8 @@ foreach ([
         'sart' => Kalip::ve('Profesörlük koşulları', [
             Kalip::yds(60),
             Kalip::hesaplanamiyor('Doçentlik unvanının alındığı başvuru döneminden sonra, bu unvanı alırken sağladığınız ÜAK doçentlik temel alan başvuru şartlarını yeniden sağlamış olmak (lisansüstü tezlerden üretilmiş yayınlar zorunlu değil)', 'Profesörlük Madde 1'),
-            Kalip::toplam(500, donem: Kalip::DOCENTLIK_SONRASI, liste: 'Profesörlük Madde 2'),
-            Kalip::toplam(250, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['YAYIN-PROJE'], liste: 'Profesörlük Madde 3'),
+            Kalip::toplam(500, donem: Kalip::DOCENTLIK_SONRASI),
+            Kalip::toplam(250, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['YAYIN-PROJE'], liste: 'Makale, bildiri, kitap, editörlük ve proje'),
             $dortuncuMadde($g['dortGrup'], 750, 375, Kalip::DOCENTLIK_SONRASI, 'Profesörlük Madde 4'),
             Kalip::beyan('Doçentlikten sonra yayımlanmış, tek yazarlı ya da ilk yazar veya sorumlu yazar olduğunuz bir makaleyi, tez danışmanlığı yaptığınız öğrenciyle birlikte tezden üretilmiş bir makaleyi, yürütücüsü olduğunuz bir projeden üretilmiş makaleyi ya da birinci ismi veya editörü olduğunuz bir kitabı başlıca araştırma eseri olarak göstermek', 'Profesörlük Madde 6'),
         ]),

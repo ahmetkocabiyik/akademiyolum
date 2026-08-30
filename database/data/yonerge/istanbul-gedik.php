@@ -56,7 +56,7 @@ $MUH_SAGLIK = ['muhendislik', 'saglik', 'fen', 'ziraat'];
 $SOSYAL = ['sosyal', 'egitim', 'ilahiyat', 'hukuk', 'filoloji', 'spor', 'guzel_sanatlar'];
 $TUM_ALANLAR = [...$MUH_SAGLIK, ...$SOSYAL, 'mimarlik'];
 
-$PUAN_NOTU = 'Üniversitenin kendi BAP projeleri EK-2 tablosunda hiç geçmiyor; lisansüstü tezden '
+$PUAN_NOTU = 'Üniversitenin kendi BAP projeleri puan çizelgesinde hiç geçmiyor; lisansüstü tezden '
     .'üretilmiş yayın, idari görev, toplumsal katkı ve yarışma dışındaki ödüller için de satır '
     .'yok, bu kayıtlar toplama girmiyor. Eş danışmanlık ile tezsiz yüksek lisans danışmanlığı '
     .'girilmedi. J bölümünün "son iki yılda alınan dersler" kaydı uygulanamadığı için daha eski '
@@ -64,14 +64,14 @@ $PUAN_NOTU = 'Üniversitenin kendi BAP projeleri EK-2 tablosunda hiç geçmiyor;
 
 $docentlik = Kalip::ve('Doçent kadrosuna atanma koşulları', [
     Kalip::beyan('Doçentlik Yönetmeliği ve Doçentlik Başvuru Şartlarına uygun olarak doçent unvanını almış olmak', 'MADDE 7'),
-    Kalip::toplam(120, maddeler: ['TUM'], liste: 'EK-2'),
-    Kalip::toplam(20, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'EK-2'),
+    Kalip::toplam(120, maddeler: ['TUM']),
+    Kalip::toplam(20, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
 ]);
 
 $profesorluk = Kalip::ve('Profesör kadrosuna atanma koşulları', [
     Kalip::beyan('Yayınlarınızdan birini başlıca araştırma eseri olarak göstermiş olmak', 'MADDE 8'),
-    Kalip::toplam(150, maddeler: ['TUM'], liste: 'EK-2'),
-    Kalip::toplam(50, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'EK-2'),
+    Kalip::toplam(150, maddeler: ['TUM']),
+    Kalip::toplam(50, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
 ]);
 
 return [
@@ -83,14 +83,14 @@ return [
         'birim' => null,
         'cetvel' => 'istanbul-gedik-2025',
         'notlar' => 'MADDE 6.1: en az bir uluslararası alan indeksinde taranan dergide yayımlanmış '
-            .'araştırma makalesi ve EK-2 tablosundan en az 20 puan.',
+            .'araştırma makalesi ve tüm faaliyetlerinizden en az 20 puan.',
         'aday_notu' => 'Yönerge yalnız üç alan grubu sayıyor: Mühendislik-Sağlık, Sosyal Bilimler ve '
             .'Mimarlık-Tasarım. Fen Bilimleri ile Ziraat adıyla geçmediği için bu gruba bağlandı; '
             .'ikisi de daha yüksek olan 20 puanlık eşiği ve uluslararası makale ön koşulunu '
             .'karşılamak durumunda görünüyor. '.$PUAN_NOTU,
         'sart' => Kalip::ve('Doktor öğretim üyesi koşulları', [
             Kalip::adet('Uluslararası alan indekslerinde taranan bir dergide yayımlanmış araştırma makalesi', ['MAKALE-ULUS'], 1, madde: 'MADDE 6.1'),
-            Kalip::toplam(20, maddeler: ['TUM'], liste: 'EK-2'),
+            Kalip::toplam(20, maddeler: ['TUM']),
         ]),
     ],
     [
@@ -101,7 +101,7 @@ return [
         'birim' => null,
         'cetvel' => 'istanbul-gedik-2025',
         'notlar' => 'MADDE 6.2: ön koşul olarak en az bir araştırma makalesi ya da kitap ya da kitap '
-            .'içinde bölüm; EK-2 tablosundan en az 15 puan.',
+            .'içinde bölüm; tüm faaliyetlerinizden en az 15 puan.',
         'aday_notu' => 'Sosyal Bilimler kolunda ön koşul esnek: bir makale, bir kitap ya da bir kitap '
             .'bölümü yeterli. Güzel Sanatlar yönergede adıyla geçmiyor; Mimarlık-Tasarım kolunun '
             .'yarışma seçeneği daha gevşek olduğu için bu koldan değerlendiriliyor, yani yarışma '
@@ -111,7 +111,7 @@ return [
                 Kalip::adet('Hakemli bir dergide yayımlanmış araştırma makalesi', ['MAKALE'], 1, madde: 'MADDE 6.2'),
                 Kalip::adet('Bilimsel kitap ya da kitap bölümü', ['KITAP'], 1, madde: 'MADDE 6.2'),
             ]),
-            Kalip::toplam(15, maddeler: ['TUM'], liste: 'EK-2'),
+            Kalip::toplam(15, maddeler: ['TUM']),
         ]),
     ],
     [
@@ -122,7 +122,7 @@ return [
         'birim' => null,
         'cetvel' => 'istanbul-gedik-2025',
         'notlar' => 'MADDE 6.3: ön koşul olarak en az bir araştırma makalesi ya da bir yarışmada jüri '
-            .'üyeliği/derece/mansiyon ya da yayımlanmış bir uygulama projesi; EK-2 tablosundan en az '
+            .'üyeliği/derece/mansiyon ya da yayımlanmış bir uygulama projesi; tüm faaliyetlerinizden en az '
             .'15 puan.',
         'aday_notu' => 'Ön koşulun üçüncü seçeneği ("Döner Sermaye ya da üniversiteye bağlı kuruluşlar '
             .'aracılığıyla yapılan uygulama projesini yayımlamış olmak") kayıtta karşılığı olmadığı '
@@ -132,7 +132,7 @@ return [
                 Kalip::adet('Hakemli bir dergide yayımlanmış araştırma makalesi', ['MAKALE'], 1, madde: 'MADDE 6.3'),
                 Kalip::adet('Yarışmada jüri üyeliği ya da derece/mansiyon', ['YARISMA'], 1, madde: 'MADDE 6.3'),
             ]),
-            Kalip::toplam(15, maddeler: ['TUM'], liste: 'EK-2'),
+            Kalip::toplam(15, maddeler: ['TUM']),
         ]),
     ],
     [
@@ -142,7 +142,7 @@ return [
         'alan' => $TUM_ALANLAR,
         'birim' => null,
         'cetvel' => 'istanbul-gedik-2025',
-        'notlar' => 'MADDE 7: EK-2 tablosundan en az 120 puan; 120 puanın en az 20\'si doçentlik '
+        'notlar' => 'MADDE 7: tüm faaliyetlerinizden en az 120 puan; 120 puanın en az 20\'si doçentlik '
             .'başvurusundan sonraki çalışmalardan.',
         'aday_notu' => 'Yönerge "doçentlik BAŞVURUSU yaptıktan sonrası" diyor; motor doçentlik '
             .'UNVANININ alındığı tarihi tuttuğu için başvuru ile unvan arasındaki çalışmalarınız 20 '
@@ -156,7 +156,7 @@ return [
         'alan' => $TUM_ALANLAR,
         'birim' => null,
         'cetvel' => 'istanbul-gedik-2025',
-        'notlar' => 'MADDE 8: EK-2 tablosundan en az 150 puan; 150 puanın en az 50\'si doçentlik '
+        'notlar' => 'MADDE 8: tüm faaliyetlerinizden en az 150 puan; 150 puanın en az 50\'si doçentlik '
             .'başvurusundan sonraki çalışmalardan. Yayınlardan biri başlıca araştırma eseri olarak '
             .'gösterilir.',
         'aday_notu' => 'Doçentlikteki gibi, "doçentlik başvurusu sonrası" penceresi unvan tarihinden '

@@ -53,14 +53,14 @@ $DIL_BEYANI = Kalip::beyan(
 $PUAN_NOTU = 'WoS dışındaki uluslararası dergi atıfları (atıf başına 0,6) ondalık olduğu için '
     .'girilemedi; ulusal proje yürütücülüğünde puan proje bütçesine bağlı olduğundan en düşük '
     .'basamaktan (100) sayılıyor; yabancı dil satırı (75) ve proje BAŞVURULARI girilmedi. '
-    .'Ek-1\'in makale bölümü yalnız Q1-Q3 satırı taşıyor; Q4 makaleleriniz "diğer uluslararası '
+    .'Puan çizelgesinin makale bölümü yalnız Q1-Q3 satırı taşıyor; Q4 makaleleriniz "diğer uluslararası '
     .'dergi" satırından (20) sayılıyor.';
 
 $drSart = Kalip::ve('Doktor öğretim üyesi koşulları', [
     $DIL_BEYANI,
-    Kalip::veya('Son üç yılda bir yayın ya da Ek-1\'den 250 puan', [
+    Kalip::veya('Son üç yılda bir yayın ya da tüm faaliyetlerinizden 250 puan', [
         Kalip::adet('Son üç yılda bilim alanınızla ilgili en az bir araştırma makalesi, derleme, tam metin bildiri ya da olgu sunumu', ['MAKALE-BILDIRI'], 1, donem: Kalip::sonYil(3), madde: 'MADDE 5/1'),
-        Kalip::toplam(250, maddeler: ['TUM'], liste: 'Ek-1'),
+        Kalip::toplam(250, maddeler: ['TUM']),
     ]),
 ]);
 
@@ -74,7 +74,7 @@ return [
         'cetvel' => 'biruni-2024',
         'notlar' => 'MADDE 5/1: son üç yılda ulusal ya da uluslararası hakemli dergide yayımlanmış '
             .'en az bir araştırma makalesi, derleme, tam metin bildiri veya olgu sunumu; ya da '
-            .'Ek-1 tablosundan en az 250 puan.',
+            .'tüm faaliyetlerinizden en az 250 puan.',
         'aday_notu' => 'İki alternatiften biri yeterli: son üç yılda tek bir yayın ya da tabloda '
             .'250 puan. Yönerge "yayıma gönderilmiş" makaleyi de sayıyor ama kayıt yalnız '
             .'yayımlanmış eseri tuttuğu için araç bu esnekliği gösteremiyor. '.$PUAN_NOTU,
@@ -118,20 +118,20 @@ return [
         'notlar' => 'MADDE 7/1: doçentlik unvanından sonraki son beş yılda SSCI, SCI-Expanded ya '
             .'da AHCI kapsamındaki dergilerde en az iki özgün makale, birinde ilk isim. '
             .'MADDE 7/2 (başka kurumda profesör olmuşsa): profesörlük sonrası WoS, ESCI ya da '
-            .'ulusal taranan dergilerde en az iki makale, ya da Ek-1\'den en az 600 puan.',
+            .'ulusal taranan dergilerde en az iki makale, ya da tüm faaliyetlerinizden en az 600 puan.',
         'aday_notu' => 'Yönergenin iki fıkrası profesörlüğün iki ayrı yolu: ilk kez '
             .'yükseltilenler için doçentlik sonrası son beş yılda iki WoS makalesi (birinde ilk '
             .'isim), başka kurumda profesör olmuşlar için iki makale ya da 600 puan. Üçü `veya` '
             .'ile birleştirildi. '.$PUAN_NOTU,
         'sart' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
             $DIL_BEYANI,
-            Kalip::veya('MADDE 7/1 ya da MADDE 7/2 yollarından biri', [
-                Kalip::ve('MADDE 7/1 — doçentlik sonrası son beş yılda iki WoS makalesi', [
+            Kalip::veya('Aşağıdaki üç yoldan biri', [
+                Kalip::ve('Doçentlik sonrası son beş yılda iki WoS makalesi', [
                     Kalip::adet('SSCI, SCI-Expanded ya da AHCI kapsamında en az iki özgün makale', ['WOS-MAKALE'], 2, donem: Kalip::sonYil(5), madde: 'MADDE 7/1'),
                     Kalip::adet('Bu makalelerin birinde ilk isim olmak', ['WOS-MAKALE'], 1, yazar: 'ilk', donem: Kalip::sonYil(5), madde: 'MADDE 7/1'),
                 ]),
-                Kalip::adet('MADDE 7/2 — WoS, ESCI ya da ulusal taranan dergilerde en az iki makale', ['WOS-ESCI-TRDIZIN'], 2, madde: 'MADDE 7/2'),
-                Kalip::toplam(600, maddeler: ['TUM'], liste: 'Ek-1'),
+                Kalip::adet('Ya da WoS, ESCI ya da ulusal taranan dergilerde en az iki makale', ['WOS-ESCI-TRDIZIN'], 2, madde: 'MADDE 7/2'),
+                Kalip::toplam(600, maddeler: ['TUM']),
             ]),
         ]),
     ],
