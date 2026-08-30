@@ -60,13 +60,13 @@ $ulusalUluslararasiYayin = ['1a-*', '1b', '1c', '2a', '4a', '4b', '4c', '4d'];
 $dilBeyani = Kalip::beyan('Bilimsel araştırma yapabilecek ve ders yürütebilecek düzeyde '
     .'Fransızca yeterliliği öncelikli olmak üzere bir yabancı dil bilmek', 'Madde 5-8/a');
 
-$indirimNotu = 'Puan barajının bir indirimi var: başvuru öncesinde Ek 1\'deki idari veya '
+$indirimNotu = 'Puan barajının bir indirimi var: başvuru öncesinde yönergede sayılan idari veya '
     .'topluma katkı faaliyetlerinden en az birini yapmışsanız 110 yerine 100 puan yeterli. '
     .'Bu faaliyetler burada hesaplanamadığı için YÜKSEK olan 110 gösteriliyor.';
 
 $yurtDisiNotu = 'Doktoranızı 31.12.2023 tarihinden sonra yurt içinde tamamladıysanız, lisansüstü '
     .'eğitiminiz sırasında ya da doktora sonrasında yurt dışı yükseköğretim kurumlarında toplam '
-    .'en az 9 ay bilimsel araştırma yapmış olmanız gerekiyor (Madde 5/c).';
+    .'en az 9 ay bilimsel araştırma yapmış olmanız gerekiyor.';
 
 $yenidenAtamaNotu = 'Yeniden atanmada bir önceki atama tarihinizden itibaren üç yıl içinde en az '
     .'50 puan isteniyor; atama tarihi burada tutulmadığı için yeniden atanma eşiği girilmedi.';
@@ -78,7 +78,7 @@ return [
         'aday_notu' => 'Galatasaray puanı kendi cetveline göre değil ÜAK doçentlik birim '
             .'puanlarına göre hesaplatıyor; ölçek ÜAK\'ın, eşik Galatasaray\'ın. Çok yazarlı '
             .'yayınlarda yazar sayısı ve sırası dikkate ALINMIYOR, tam puan sayılıyor '
-            .'(Madde 5/ç-3). '.$yurtDisiNotu.' '.$yenidenAtamaNotu,
+            .'tam puan sayılıyor. '.$yurtDisiNotu.' '.$yenidenAtamaNotu,
         'universite' => 'Galatasaray Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => ['muhendislik'],
@@ -98,7 +98,7 @@ return [
     [
         'anahtar' => 'galatasaray-dr-fen',
         'aday_notu' => 'Çok yazarlı yayınlarda yazar sayısı ve sırası dikkate ALINMIYOR, tam '
-            .'puan sayılıyor (Madde 5/ç-3). '.$yurtDisiNotu.' '.$yenidenAtamaNotu,
+            .'puan sayılıyor. '.$yurtDisiNotu.' '.$yenidenAtamaNotu,
         'universite' => 'Galatasaray Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => ['fen'],
@@ -118,7 +118,7 @@ return [
     [
         'anahtar' => 'galatasaray-dr-sosyal',
         'aday_notu' => 'Çok yazarlı yayınlarda yazar sayısı ve sırası dikkate ALINMIYOR, tam '
-            .'puan sayılıyor (Madde 5/ç-3). '.$yurtDisiNotu.' '.$yenidenAtamaNotu,
+            .'puan sayılıyor. '.$yurtDisiNotu.' '.$yenidenAtamaNotu,
         'universite' => 'Galatasaray Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => ['sosyal'],

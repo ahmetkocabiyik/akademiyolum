@@ -66,13 +66,13 @@ $GRUP1_AD = 'Fen Bilimleri ve Matematik, Mühendislik, Ziraat-Orman-Su Ürünler
 $GRUP2_AD = 'Eğitim, Spor, Filoloji, Güzel Sanatlar, Hukuk, İlahiyat, Mimarlık-Planlama-Tasarım '
     .'ile Sosyal, Beşerî ve İdari Bilimler';
 
-$NOT_TAVAN = ' EK-1\'in bölüm tavanları kadronun asgari puanının yüzdesi olarak hesaplanıyor '
+$NOT_TAVAN = ' Bölüm tavanları kadronun asgari puanının yüzdesi olarak hesaplanıyor '
     .'(bildiri, kitap, atıf, editörlük ve sanatsal etkinliklerde %25, patentte %40, projede %30, '
     .'tez danışmanlığı ve derste %15, ödülde %20, idari görevde %15).';
 $NOT_ESKI = ' Yönergenin 20. maddesi uyarınca doktor öğretim üyeliğine ilk atamalarda ve '
     .'profesörlük atamalarında bir yıl, doktor öğretim üyeliğine yeniden atanmada iki yıl '
     .'süreyle 29.11.2018 tarihli eski yönerge uygulanıyor.';
-$NOT_KAZI = ' Kazı ve yüzey araştırması faaliyetleri (EK-1 K bölümü) ile Üniversiteye bağlı '
+$NOT_KAZI = ' Kazı ve yüzey araştırması faaliyetleri ile Üniversiteye bağlı '
     .'dergilerdeki makaleler puana katılmıyor; bu kalemleri olan adayın gerçek puanı daha '
     .'yüksektir.';
 
@@ -146,7 +146,7 @@ $esikler[] = [
     'alan' => $GRUP1,
     'cetvel' => 'scu-2021-50',
     'notlar' => 'MADDE 15 ve 16(1)(a): tez konusuyla ilgili 1 makale; en az 1\'i A1 kapsamında '
-        .'olmak üzere 2 makale; EK-1\'den toplam 50 puan.',
+        .'olmak üzere 2 makale; tüm faaliyetlerinizden toplam 50 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine ilk atanma — Fen, Mühendislik, Ziraat, Sağlık', [
         ...$drOrtak,
         Kalip::adet('En az 2 makale yayımlamış olmak', ['MAKALE'], 2, madde: '16-1-a-2'),
@@ -168,7 +168,7 @@ $esikler[] = [
     'alan' => $GRUP2,
     'cetvel' => 'scu-2021-50',
     'notlar' => 'MADDE 15 ve 16(1)(b): tez konusuyla ilgili 1 makale; A1 veya A3\'te 1 makale '
-        .'ya da A4-A5\'te 2 makale; EK-1\'den toplam 50 puan.',
+        .'ya da A4-A5\'te 2 makale; tüm faaliyetlerinizden toplam 50 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine ilk atanma — Sosyal, Eğitim, Hukuk ve diğerleri', [
         ...$drOrtak,
         Kalip::veya('Yayın koşullarından biri', [
@@ -201,7 +201,7 @@ $esikler[] = [
     'alan' => $GRUP1,
     'cetvel' => 'scu-2021-60',
     'notlar' => 'MADDE 17(1)(a): en az 1\'i A1 veya A3 kapsamında olmak üzere toplam 3 araştırma '
-        .'makalesi; EK-1\'den toplam 60 puan.',
+        .'makalesi; tüm faaliyetlerinizden toplam 60 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine yeniden atanma — Fen, Mühendislik, Ziraat, Sağlık', [
         Kalip::adet('En az 3 araştırma makalesi yayımlamış olmak', ['MAKALE'], 3, madde: '17-1-a'),
         Kalip::adet(
@@ -224,7 +224,7 @@ $esikler[] = [
     'alan' => $GRUP2,
     'cetvel' => 'scu-2021-50',
     'notlar' => 'MADDE 17(1)(b): A1 veya A3\'te en az 1 ya da A4-A5\'te en az 3 makale; '
-        .'EK-1\'den toplam 50 puan.',
+        .'tüm faaliyetlerinizden toplam 50 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine yeniden atanma — Sosyal, Eğitim, Hukuk ve diğerleri', [
         Kalip::veya('Yayın koşullarından biri', [
             Kalip::adet(
@@ -254,7 +254,7 @@ $docentlik = function (string $anahtar, array $alanlar, string $alanAdi, string 
         'anahtar' => "scu-{$anahtar}-docentlik",
         'aday_notu' => "{$alanAdi} temel alanlarında doçent kadrosuna atanma koşulları. Doçent "
             .'unvanını almış olmak ve başvuru döneminde ÜAK\'ın doçentlik için belirlediği '
-            .'yabancı dil puanını (55) sağlamak gerekiyor. EK-1\'den toplam 300 puan almanın yanı '
+            .'yabancı dil puanını (55) sağlamak gerekiyor. tüm faaliyetlerinizden toplam 300 puan almanın yanı '
             .'sıra beş koşuldan en az birini sağlamalısınız; sonuncusu 50 puan daha istediği için '
             .'toplam 350 puan olarak yazıldı.'.$NOT_TAVAN.$NOT_KAZI,
         'universite' => $UNIVERSITE,

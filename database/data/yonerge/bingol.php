@@ -57,8 +57,8 @@ $gsUygulamali = 'Güzel Sanatlar — Uygulamalı Alanlar';
 $muzikSanatcilik = 'Müzik — Sanatçılık Alanı';
 $muzikKompozisyon = 'Müzik — Kompozisyon Alanı';
 
-$yenidenAtamaNotu = 'Yeniden atanmada yönerge yıl başına puan istiyor (Madde 10: en az biri '
-    .'makale ya da kitap maddelerinden olmak üzere her yıl için 30 puan). Atanma dönemi '
+$yenidenAtamaNotu = 'Yeniden atanmada yönerge yıl başına puan istiyor: en az biri '
+    .'makale ya da kitap kalemlerinden olmak üzere her yıl için 30 puan. Atanma dönemi '
     .'uzunluğu burada tutulmadığı için yeniden atanma eşiği girilmedi.';
 
 $ihtisasNotu = 'Üniversitenin ihtisaslaşma kalemi (52 — Tarım ve Havza Bazlı Kalkınma '
@@ -137,7 +137,7 @@ return [
     $dr('gs-kuramsal', $gsKuramsal, ['guzel_sanatlar'], $gsKuramsal, 'ZORUNLU',
         'Makale, tebliğ ve kitap kalemlerinizden', 'b-1',
         'Güzel Sanatların KURAMSAL alanlarında bilimsel alanlarla aynı zorunlu maddeler '
-        .'geçerli (Madde 9/b-1). '.$yenidenAtamaNotu),
+        .'geçerli. '.$yenidenAtamaNotu),
 
     $dr('gs-uygulamali', $gsUygulamali, ['guzel_sanatlar'], $gsUygulamali, 'GS_UYGULAMALI',
         'Sergi, kompozisyon, film ve sanatsal etkinlik kalemlerinizden', 'b-2',
@@ -158,7 +158,7 @@ return [
     // ══════════ DOÇENT (Madde 11 — puan barajı yok) ══════════
     [
         'anahtar' => 'bingol-docent',
-        'aday_notu' => 'Bingöl yönergesi doçentlik için puan barajı koymuyor; Madde 11 yalnızca '
+        'aday_notu' => 'Bingöl yönergesi doçentlik için puan barajı koymuyor; yalnızca '
             .'ÜAK doçentlik unvanını, doçentlik sözlü sınavında başarıyı ve yabancı dil puanını '
             .'şart koşuyor. Burada baraj görmüyorsunuz — eksik veri değil, yönergede öyle.',
         'universite' => 'Bingöl Üniversitesi',
@@ -179,7 +179,7 @@ return [
     $profesor('fen', 'Fen, Mühendislik-Mimarlık ve Sağlık Bilimleri', $fenGrubu, null,
         'ZORUNLU', 'Makale, tebliğ ve kitap kalemlerinizden', 'a',
         'SSCI, SCI-Expanded veya AHCI dergilerdeki makalelerinizden puan almanız ZORUNLU '
-        .'(Madde 13/a); diğer kalemler tek başına yetmiyor. '.$ihtisasNotu, [
+        .'; diğer kalemler tek başına yetmiyor. '.$ihtisasNotu, [
             Kalip::adet('SSCI, SCI-Expanded veya AHCI dergide en az 1 makale',
                 ['1.a'], 1, madde: 'Madde 13/a'),
         ]),
@@ -198,8 +198,7 @@ return [
 
     $profesor('gs-kuramsal', $gsKuramsal, ['guzel_sanatlar'], $gsKuramsal,
         'ZORUNLU', 'Makale, tebliğ ve kitap kalemlerinizden', 'c-1',
-        'Güzel Sanatların KURAMSAL alanlarında Sosyal Bilimlerle aynı esaslar geçerli '
-        .'(Madde 13/c-1).'),
+        'Güzel Sanatların KURAMSAL alanlarında Sosyal Bilimlerle aynı esaslar geçerli.'),
 
     $profesor('gs-uygulamali', $gsUygulamali, ['guzel_sanatlar'], $gsUygulamali,
         'GS_UYGULAMALI', 'Sergi, kompozisyon, film ve sanatsal etkinlik kalemlerinizden', 'c-2',

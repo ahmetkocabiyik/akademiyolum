@@ -108,7 +108,8 @@ $muhMim = 'Mühendislik Mimarlık Fakültesi';
 
 $sporNotu = 'Sportif performans kalemleri (antrenörlük, hakemlik, milli takım ve federasyon '
     .'görevleri) faaliyet kaydında karşılık bulmadığı için puanlanamıyor; yönergenin '
-    .'"spor alanında çalışanlar asgari puanı Ek1-D\'den tamamlayabilir" alternatifi bu yüzden '
+    .'"spor alanında çalışanlar asgari puanı sportif faaliyet kalemlerinden tamamlayabilir" '
+    .'alternatifi bu yüzden '
     .'yalnızca sanat ve müzik kalemleriyle çalışıyor. Spor Bilimleri adayıysanız koşul '
     .'olduğundan zor görünür.';
 
@@ -273,7 +274,7 @@ $profesor = function (string $anahtar, array $alanlar, bool $sanat, ?string $bir
             .'sonra birinci isim olduğunuz bir başlıca araştırma eseri, bilimsel yayın '
             ."kalemlerinizden {$asgari} puan (bunun {$docentlikSonrasi} puanı doçentlik "
             ."sonrasında) ve tablonun tamamından toplam {$toplam} puan. Alanınızda lisansüstü "
-            .'program yoksa tez yürütücülüğünden muafiyet talep edebilirsiniz (Madde 6/a); '
+            .'program yoksa tez yürütücülüğünden muafiyet talep edebilirsiniz; '
             .'muafiyet burada hesaplanamadığı için koşul sağlanmamış görünür. '.$ekNot,
         'universite' => 'Nişantaşı Üniversitesi',
         'kadro' => 'profesorluk',
@@ -281,8 +282,8 @@ $profesor = function (string $anahtar, array $alanlar, bool $sanat, ?string $bir
         'birim' => $birim,
         'cetvel' => 'nisantasi-2025',
         'notlar' => "{$madde}: Ek 1-A'dan asgari {$asgari} puan ({$docentlikSonrasi} puanı "
-            ."doçentlik sonrası), tüm maddelerden toplam {$toplam} puan. Madde 6/a lisansüstü "
-            .'tez yürütücülüğü, Madde 6/b doçentlik sonrası birinci isim olunan bir başlıca '
+            ."doçentlik sonrası), tüm faaliyetlerden toplam {$toplam} puan. Yönerge ayrıca "
+            .'lisansüstü tez yürütücülüğü ve doçentlik sonrası birinci isim olunan bir başlıca '
             .'araştırma eseri istiyor (kaynaktaki küme "1a-2a-3a-5a").',
         'sart' => Kalip::ve('Profesör kadrosuna yükseltilip atanma', [
             Kalip::adet('Tamamlanmış en az bir lisansüstü tez yürütücülüğü', ['TEZ'], 1, madde: 'Madde 6/a'),

@@ -300,9 +300,10 @@ $esikler = [];
 $esikler[] = [
     'anahtar' => 'vanyyu-dr',
     'aday_notu' => 'Doktor öğretim üyesi kadrosuna İLK ATANMA koşulları. Atamalar üç yıl süreyle '
-        .'yapılıyor. Zorunlu koşullara ek olarak EK-1 seçmeli kriter listesinden en az 6 kriteri '
+        .'yapılıyor. Zorunlu koşullara ek olarak yönergenin seçmeli kriter listesinden en az 6 kriteri '
         .'sağlamanız gerekiyor. 2547 sayılı Kanunun 50/d maddesi kapsamında araştırma görevlisi '
-        .'olarak çalışıp %20 kotasıyla başvuruyorsanız EK-4\'ten ayrıca iki kriter daha '
+        .'olarak çalışıp %20 kotasıyla başvuruyorsanız yönergenin ek listesinden ayrıca iki '
+        .'kriter daha '
         .'isteniyor (indeksli dergide bir makale; hakemli dergide bir makale ve iki bildiri; '
         .'üniversite dışı bir projede görev; iki BAP projesi; patent; WOS h-indeksi 2; dergi '
         .'editörlüğü; sanat alanında sergi veya bildiri).'.$NOT_SECMELI,
@@ -350,7 +351,7 @@ $esikler[] = [
                 ['BILDIRI-POSTER'], 5, madde: '7-2-b',
             ),
         ]),
-        Kalip::kIle('EK-1 seçmeli kriterlerinden en az 6 tanesini sağlamak', 6,
+        Kalip::kIle('Yönergenin seçmeli kriterlerinden en az 6 tanesini sağlamak', 6,
             $dugumler($EK1_TAM, null)),
     ]),
 ];
@@ -391,7 +392,7 @@ $esikler[] = [
             .'az 2 sözlü veya poster sunum yapmış olmak',
             ['BILDIRI'], 2, donem: $SON_ATAMA, madde: '7-3-b',
         ),
-        Kalip::kIle('EK-1 seçmeli kriterlerinden son üç yıl içinde en az 4 tanesini sağlamak', 4,
+        Kalip::kIle('Yönergenin seçmeli kriterlerinden son üç yıl içinde en az 4 tanesini sağlamak', 4,
             $dugumler($EK1_TAM, $SON_UC_YIL)),
     ]),
 ];
@@ -400,7 +401,7 @@ $esikler[] = [
     'anahtar' => 'vanyyu-docentlik',
     'aday_notu' => 'Doçent kadrosuna atanma koşulları: ÜAK doçentlik belgesi, merkezi yabancı '
         .'dil sınavından en az 65 puan, devlet yükseköğretim kurumlarında en az iki yıl tam '
-        .'zamanlı öğretim üyeliği ve EK-2 seçmeli kriter listesinden en az 15 kriter. Bilim '
+        .'zamanlı öğretim üyeliği ve yönergenin seçmeli kriter listesinden en az 15 kriter. Bilim '
         .'alanınız bir yabancı dille ilgiliyse dil puanınızı ikinci bir yabancı dilden almanız '
         .'gerekiyor.'.$NOT_SECMELI,
     'universite' => $UNIVERSITE,
@@ -421,7 +422,7 @@ $esikler[] = [
             .'olarak çalışmış olmak',
             '7-4-c',
         ),
-        Kalip::kIle('EK-2 seçmeli kriterlerinden en az 15 tanesini sağlamak', 15,
+        Kalip::kIle('Yönergenin seçmeli kriterlerinden en az 15 tanesini sağlamak', 15,
             $dugumler($EK2_TAM, null)),
     ]),
 ];
@@ -433,7 +434,7 @@ $esikler[] = [
         .'yeniden sağlamak (bu koşul ÜAK\'ın kendi ölçütlerine bağlı olduğu için motor '
         .'hesaplayamıyor), devlet üniversitelerinde en az beş yıl tam zamanlı öğretim üyeliği, '
         .'merkezi yabancı dil sınavından en az 65 puan, doçentlikten sonra en az iki farklı '
-        .'toplantıda toplam 5 sunum ve EK-3 seçmeli kriter listesinden en az 20 kriter. Bu 20 '
+        .'toplantıda toplam 5 sunum ve yönergenin seçmeli kriter listesinden en az 20 kriter. Bu 20 '
         .'kriterin en az beşini doçent unvanını aldıktan sonra gerçekleştirmiş olmanız '
         .'gerekiyor; motor bu ek koşulu ayrı bir beyan olarak soruyor.'.$NOT_SECMELI,
     'universite' => $UNIVERSITE,
@@ -461,10 +462,10 @@ $esikler[] = [
             .'ya da sözlü sunum yapmış olmak',
             ['BILDIRI'], 5, donem: $DOCENTLIK, madde: '7-5-d',
         ),
-        Kalip::kIle('EK-3 seçmeli kriterlerinden en az 20 tanesini sağlamak', 20,
+        Kalip::kIle('Yönergenin seçmeli kriterlerinden en az 20 tanesini sağlamak', 20,
             $dugumler($EK3_TAM, null)),
         Kalip::beyan(
-            'Sağladığınız EK-3 kriterlerinden en az beşini doçent unvanını aldıktan sonra '
+            'Sağladığınız seçmeli kriterlerden en az beşini doçent unvanını aldıktan sonra '
             .'gerçekleştirmiş olmak',
             '7-5-e',
         ),

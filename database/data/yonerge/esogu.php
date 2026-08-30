@@ -92,7 +92,7 @@ $CAKISMA_UYARISI = ' DİKKAT: yönerge "aynı bilimsel çıktı bir başka koşu
  *
  * @return array<string, mixed>
  */
-$madde22 = fn (): array => Kalip::ve('Yayın şartı (Madde 2.2)', [
+$madde22 = fn (): array => Kalip::ve('Yayın şartı', [
     Kalip::adet('Web of Science Q1-Q4 dergilerinde ya da tezinizden üretilmiş Q1-Q4 yayınlarınız arasında en az 1 makaleniz olmalı', ['2.2-UST'], 1, madde: 'Madde 2.2'),
     Kalip::adet('Web of Science, uluslararası alan indeksli ve diğer uluslararası hakemli dergilerdeki yayınlarınız toplam en az 2 olmalı', ['2.2-KUME'], 2, madde: 'Madde 2.2'),
 ]);
@@ -150,7 +150,7 @@ $esikler = [];
 $drIlk = function (string $anahtar, array $alanlar, ?string $birim, bool $sayisal, int $altBaraj, string $notlar) use ($UNIVERSITE, $CETVEL, $madde22, $projeKosulu, $kitapPatent, $sanatKosulu): array {
     $yayinSarti = $sayisal
         ? $madde22()
-        : Kalip::veya('Yayın şartı (Madde 2.3)', [
+        : Kalip::veya('Yayın şartı', [
             $madde22(),
             Kalip::adet('Uluslararası alan indeksli ya da diğer uluslararası hakemli dergilerde en az 3 yayınınız olmalı', ['2.3-KUME'], 3, madde: 'Madde 2.3'),
         ]);
@@ -180,7 +180,7 @@ $drIlk = function (string $anahtar, array $alanlar, ?string $birim, bool $sayisa
             $yayinSarti,
             Kalip::puanDan("Makale, bildiri ve sanat etkinliği kalemlerinizden en az {$altBaraj} puan", ['1-2-3-9-16'], $altBaraj, madde: 'Madde 2.4'),
             Kalip::toplam(60),
-            Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız (Madde 2.5)', [
+            Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız', [
                 $projeKosulu(null, 'Madde 2.5b'),
                 $kitapPatent(null, 'Madde 2.5c'),
                 Kalip::toplam(120, null),
@@ -223,7 +223,7 @@ $esikler[] = [
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine yeniden atanma', [
         Kalip::puanDan('Son 4 yılda makale, bildiri ve sanat etkinliği kalemlerinizden en az 40 puan', ['1-2-9-16'], 40, $SON_DORT_YIL, madde: 'Madde 3.1'),
         Kalip::toplam(60, $SON_DORT_YIL),
-        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız (Madde 3.2)', [
+        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız', [
             Kalip::adet('Son 4 yılda danışmanlığınızda en az 1 lisansüstü tez tamamlanmış olmalı', ['TEZ-DOKTORA', 'TEZ-YL'], 1, donem: $SON_DORT_YIL, madde: 'Madde 3.2b'),
             $kitapPatent($SON_DORT_YIL, 'Madde 3.2c'),
             $projeKosulu($SON_DORT_YIL, 'Madde 3.2ç'),
@@ -259,13 +259,13 @@ $esikler[] = [
         Kalip::beyan('Dönemlik program uygulayan birimlerde en az dört yarıyıl, yıllık program uygulayan birimlerde en az iki yıl ders vermiş olmak', 'Madde 4.2'),
         Kalip::beyan('ÜAK tarafından oluşturulan jürilerce yapılan sözlü sınavda başarılı olmak', 'Madde 4.4'),
         Kalip::toplam(200, $DOKTORA),
-        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız (Madde 4.6)', [
+        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız', [
             Kalip::adet('Danışmanlığınızda en az 2 yüksek lisans tezi tamamlanmış olmalı', ['TEZ-YL'], 2, donem: $DOKTORA, madde: 'Madde 4.6a'),
             Kalip::adet('Danışmanlığınızda en az 1 doktora, uzmanlık ya da sanatta yeterlik tezi tamamlanmış olmalı', ['TEZ-DOKTORA'], 1, donem: $DOKTORA, madde: 'Madde 4.6a'),
             $projeKosulu($DOKTORA, 'Madde 4.6b', yurutucuZorunlu: true),
             Kalip::toplam(300, $DOKTORA),
         ]),
-        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız (Madde 4.7)', [
+        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız', [
             $kitapPatent($DOKTORA, 'Madde 4.7b'),
             Kalip::adet('Teknoloji geliştirme bölgesinde faaliyet gösteren bir şirketin sahibi ya da ortağı olmalısınız', ['TEKNOPARK'], 1, donem: $DOKTORA, madde: 'Madde 4.7c'),
             Kalip::toplam(300, $DOKTORA),
@@ -302,7 +302,7 @@ $esikler[] = [
         Kalip::beyan('ÜAK tarafından oluşturulan jürilerce yapılan doçentlik sözlü sınavını başarmış olmak', 'Madde 5.3'),
         Kalip::beyan('Doçentlik unvanını aldıktan sonra en az beş yıl süreyle üniversitelerde çalışmış olmak', 'Madde 5.4'),
         Kalip::toplam(300, $DOCENTLIK),
-        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız (Madde 5.6)', [
+        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız', [
             Kalip::adet('Doçentlik unvanınızdan sonra danışmanlığınızda en az 3 yüksek lisans tezi tamamlanmış olmalı', ['TEZ-YL'], 3, donem: $DOCENTLIK, madde: 'Madde 5.6a'),
             Kalip::adet('Doçentlik unvanınızdan sonra danışmanlığınızda en az 2 doktora ya da sanatta yeterlik tezi tamamlanmış olmalı', ['TEZ-DOKTORA'], 2, donem: $DOCENTLIK, madde: 'Madde 5.6a'),
             Kalip::ve('Bir yüksek lisans ve bir doktora tezi', [
@@ -312,7 +312,7 @@ $esikler[] = [
             $projeKosulu($DOCENTLIK, 'Madde 5.6b', yurutucuZorunlu: true),
             Kalip::toplam(450, $DOCENTLIK),
         ]),
-        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız (Madde 5.7)', [
+        Kalip::veya('Aşağıdaki şartlardan en az birini sağlamalısınız', [
             $kitapPatent($DOCENTLIK, 'Madde 5.7b'),
             Kalip::adet('Doçentlik unvanınızdan sonra teknoloji geliştirme bölgesinde faaliyet gösteren bir şirketin sahibi ya da ortağı olmalısınız', ['TEKNOPARK'], 1, donem: $DOCENTLIK, madde: 'Madde 5.7c'),
             Kalip::toplam(450, $DOCENTLIK),
