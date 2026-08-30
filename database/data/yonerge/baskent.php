@@ -181,81 +181,81 @@ $adet = function (string $ad, string $g, int $n, ?string $yazar = null, ?array $
 // ── Tıp, Diş Hekimliği ve Eczacılık ──
 $grup('tip', ['saglik'], 'Tıp, Diş Hekimliği ve Eczacılık Fakülteleri',
     'Tıp, Diş Hekimliği ve Eczacılık', [600, 500, 1500, 2500],
-    [$adet('01 ya da 02 numaralı maddeler kapsamındaki dergilerde en az dört makale yayımlamış olmak', '01-02', 4),
+    [$adet('SCI, SCI-Expanded, SSCI ve AHCI dergilerinde en az dört makale yayımlamış olmak', '01-02', 4),
         $adet('Bu makalelerin en az ikisinde başlıca yazar olmak', '01-02', 2, 'baslica'),
         $adet('Toplamda en az altı makalesi olmak', '01-07', 6)],
-    [$adet('Son atamadan sonra 01 ya da 02 numaralı maddeler kapsamındaki dergilerde en az iki makale yayımlamış olmak', '01-02', 2, donem: $SON_ATAMA)],
-    [$adet('01 ya da 02 numaralı maddeler kapsamındaki dergilerde toplam en az yedi makale yayımlamış olmak', '01-02', 7),
+    [$adet('Son atamadan sonra SCI, SCI-Expanded, SSCI ve AHCI dergilerinde en az iki makale yayımlamış olmak', '01-02', 2, donem: $SON_ATAMA)],
+    [$adet('SCI, SCI-Expanded, SSCI ve AHCI dergilerinde toplam en az yedi makale yayımlamış olmak', '01-02', 7),
         $adet('Bu makalelerin en az üçünü doktora ya da uzmanlık derecesinden sonra yayımlamış olmak', '01-02', 3, donem: $DOKTORA),
         $adet('Bu yedi makalenin en az üçünde başlıca yazar olmak', '01-02', 3, 'baslica')],
-    [$adet('01 ya da 02 numaralı maddeler kapsamındaki dergilerde toplam en az on iki makale yayımlamış olmak', '01-02', 12),
+    [$adet('SCI, SCI-Expanded, SSCI ve AHCI dergilerinde toplam en az on iki makale yayımlamış olmak', '01-02', 12),
         $adet('Bu makalelerin en az beşini doçentlik unvanından sonra yayımlamış olmak', '01-02', 5, donem: $DOCENTLIK),
         $adet('Bu on iki makalenin en az dördünde başlıca yazar olmak', '01-02', 4, 'baslica')]);
 
 // ── Mühendislik, Sağlık ve Fen Bilimleri ──
 $grup('muhfen', ['muhendislik', 'fen', 'saglik'], 'Mühendislik, Sağlık ve Fen Bilimleri',
     'Mühendislik, Sağlık ve Fen Bilimleri', [500, 400, 1500, 2500],
-    [$adet('01 ya da 02 numaralı maddeler kapsamındaki dergilerde en az iki makale yayımlamış olmak', '01-02', 2),
+    [$adet('SCI, SCI-Expanded, SSCI ve AHCI dergilerinde en az iki makale yayımlamış olmak', '01-02', 2),
         $adet('Toplamda en az dört makalesi olmak', '01-07', 4)],
-    [$adet('Son atamadan sonra 01 ya da 02 numaralı maddeler kapsamındaki dergilerde en az bir makale yayımlamış olmak', '01-02', 1, donem: $SON_ATAMA)],
-    [$adet('01 ya da 02 numaralı maddeler kapsamındaki dergilerde toplam en az dört makale yayımlamış olmak', '01-02', 4),
+    [$adet('Son atamadan sonra SCI, SCI-Expanded, SSCI ve AHCI dergilerinde en az bir makale yayımlamış olmak', '01-02', 1, donem: $SON_ATAMA)],
+    [$adet('SCI, SCI-Expanded, SSCI ve AHCI dergilerinde toplam en az dört makale yayımlamış olmak', '01-02', 4),
         $adet('Bu makalelerin en az ikisini doktora derecesinden sonra yayımlamış olmak', '01-02', 2, donem: $DOKTORA),
-        $adet('01-03 numaralı maddeler kapsamındaki dergilerde toplam en az sekiz makalesi olmak', '01-03', 8)],
-    [$adet('Doçentlik unvanından sonra 01 ya da 02 numaralı maddeler kapsamındaki dergilerde en az üç makale yayımlamış olmak', '01-02', 3, donem: $DOCENTLIK),
-        $adet('01-03 numaralı maddeler kapsamındaki dergilerde toplam en az on bir makalesi olmak', '01-03', 11)]);
+        $adet('SCI, SCI-Expanded, SSCI, AHCI ve ESCI dergilerinde toplam en az sekiz makalesi olmak', '01-03', 8)],
+    [$adet('Doçentlik unvanından sonra SCI, SCI-Expanded, SSCI ve AHCI dergilerinde en az üç makale yayımlamış olmak', '01-02', 3, donem: $DOCENTLIK),
+        $adet('SCI, SCI-Expanded, SSCI, AHCI ve ESCI dergilerinde toplam en az on bir makalesi olmak', '01-03', 11)]);
 
 // ── Eğitim, Sosyal, Beşerî Bilimler ve Filoloji ──
 $grup('sosyal', ['egitim', 'sosyal', 'filoloji', 'spor'], null,
     'Eğitim, Sosyal, Beşerî Bilimler ve Filoloji', [400, 300, 1500, 2500],
-    [$adet('01-03 numaralı maddeler kapsamındaki dergilerde en az bir makale yayımlamış olmak', '01-03', 1),
+    [$adet('SCI, SCI-Expanded, SSCI, AHCI ve ESCI dergilerinde en az bir makale yayımlamış olmak', '01-03', 1),
         $adet('Toplamda en az dört makalesi olmak', '01-07', 4)],
-    [$adet('Son atamadan sonra 01-03 numaralı maddeler kapsamındaki dergilerde en az bir makale yayımlamış olmak', '01-03', 1, donem: $SON_ATAMA)],
-    [$adet('01-03 numaralı maddeler kapsamındaki dergilerde toplam en az iki makale yayımlamış olmak', '01-03', 2),
+    [$adet('Son atamadan sonra SCI, SCI-Expanded, SSCI, AHCI ve ESCI dergilerinde en az bir makale yayımlamış olmak', '01-03', 1, donem: $SON_ATAMA)],
+    [$adet('SCI, SCI-Expanded, SSCI, AHCI ve ESCI dergilerinde toplam en az iki makale yayımlamış olmak', '01-03', 2),
         $adet('Toplamda en az yedi makalesi olmak', '01-07', 7)],
-    [$adet('Doçentlik unvanından sonra 01 ya da 02 numaralı maddeler kapsamındaki dergilerde en az iki makale yayımlamış olmak', '01-02', 2, donem: $DOCENTLIK),
-        $adet('01-03 numaralı maddeler kapsamındaki dergilerde toplam en az beş makalesi olmak', '01-03', 5)]);
+    [$adet('Doçentlik unvanından sonra SCI, SCI-Expanded, SSCI ve AHCI dergilerinde en az iki makale yayımlamış olmak', '01-02', 2, donem: $DOCENTLIK),
+        $adet('SCI, SCI-Expanded, SSCI, AHCI ve ESCI dergilerinde toplam en az beş makalesi olmak', '01-03', 5)]);
 
 // ── Sanat, Tasarım ve Mimarlık ──
 $grup('sanat', ['guzel_sanatlar', 'mimarlik'], null, 'Sanat, Tasarım ve Mimarlık',
     [300, 300, 900, 1500],
     [Kalip::veya('Makale ya da sanatsal etkinlik koşulunu sağlamak', [
-        $adet('01-06 numaralı maddeler kapsamındaki dergilerde en az dört makale yayımlamış olmak', '01-06', 4),
-        $adet('40-48 numaralı maddeler kapsamında en az dört sanatsal etkinlik yapmış olmak', '40-48', 4),
+        $adet('hakemli dergilerde en az dört makale yayımlamış olmak', '01-06', 4),
+        $adet('sanatsal etkinlik kalemlerinizde en az dört sanatsal etkinlik yapmış olmak', '40-48', 4),
     ])],
     [Kalip::veya('Makale ya da sanatsal etkinlik koşulunu sağlamak', [
-        $adet('Son atamadan sonra 01-06 numaralı maddeler kapsamındaki dergilerde en az üç makale yayımlamış olmak', '01-06', 3, donem: $SON_ATAMA),
-        $adet('Son atamadan sonra 40-48 numaralı maddeler kapsamında en az üç sanatsal etkinlik yapmış olmak', '40-48', 3, donem: $SON_ATAMA),
+        $adet('Son atamadan sonra hakemli dergilerde en az üç makale yayımlamış olmak', '01-06', 3, donem: $SON_ATAMA),
+        $adet('Son atamadan sonra sanatsal etkinlik kalemlerinizde en az üç sanatsal etkinlik yapmış olmak', '40-48', 3, donem: $SON_ATAMA),
     ])],
     [Kalip::veya('Makale ya da sanatsal etkinlik koşulunu sağlamak', [
-        $adet('01-06 numaralı maddeler kapsamındaki dergilerde en az yedi makale yayımlamış olmak', '01-06', 7),
-        $adet('40-48 numaralı maddeler kapsamında en az yedi sanatsal etkinlik yapmış olmak', '40-48', 7),
+        $adet('hakemli dergilerde en az yedi makale yayımlamış olmak', '01-06', 7),
+        $adet('sanatsal etkinlik kalemlerinizde en az yedi sanatsal etkinlik yapmış olmak', '40-48', 7),
     ])],
     [Kalip::veya('Makale ya da sanatsal etkinlik koşulunu sağlamak', [
-        Kalip::ve('01-06 numaralı maddelerde sekiz makale (en az üçü doçentlik sonrası)', [
-            $adet('01-06 numaralı maddeler kapsamındaki dergilerde toplam en az sekiz makale yayımlamış olmak', '01-06', 8),
+        Kalip::ve('hakemli dergilerde sekiz makale (en az üçü doçentlik sonrası)', [
+            $adet('hakemli dergilerde toplam en az sekiz makale yayımlamış olmak', '01-06', 8),
             $adet('Bu makalelerin en az üçünü doçentlik unvanından sonra yayımlamış olmak', '01-06', 3, donem: $DOCENTLIK),
         ]),
-        Kalip::ve('40-48 numaralı maddelerde sekiz sanatsal etkinlik (en az üçü doçentlik sonrası)', [
-            $adet('40-48 numaralı maddeler kapsamında toplam en az sekiz sanatsal etkinlik yapmış olmak', '40-48', 8),
+        Kalip::ve('sanatsal etkinlik kalemlerinizde sekiz sanatsal etkinlik (en az üçü doçentlik sonrası)', [
+            $adet('sanatsal etkinlik kalemlerinizde toplam en az sekiz sanatsal etkinlik yapmış olmak', '40-48', 8),
             $adet('Bu etkinliklerin en az üçünü doçentlik unvanından sonra yapmış olmak', '40-48', 3, donem: $DOCENTLIK),
         ]),
     ])]);
 
 // ── Hukuk ──
 $grup('hukuk', ['hukuk'], null, 'Hukuk', [300, 300, 900, 1500],
-    [$adet('01-06 numaralı maddeler kapsamındaki dergilerde en az dört makale yayımlamış olmak', '01-06', 4)],
-    [$adet('Son atamadan sonra 01-06 numaralı maddeler kapsamındaki dergilerde en az üç makale yayımlamış olmak', '01-06', 3, donem: $SON_ATAMA)],
-    [$adet('01-06 numaralı maddeler kapsamındaki dergilerde en az yedi makale yayımlamış olmak', '01-06', 7),
+    [$adet('hakemli dergilerde en az dört makale yayımlamış olmak', '01-06', 4)],
+    [$adet('Son atamadan sonra hakemli dergilerde en az üç makale yayımlamış olmak', '01-06', 3, donem: $SON_ATAMA)],
+    [$adet('hakemli dergilerde en az yedi makale yayımlamış olmak', '01-06', 7),
         $adet('Bu makalelerin en az üçünü doktora derecesinden sonra yayımlamış olmak', '01-06', 3, donem: $DOKTORA),
         $adet('Tek yazarlı ve ders kitabı dışında bir kitabınızın olması', 'KITAP', 1, 'tek')],
     [$adet('Doçentlik unvanından sonra tek yazarlı ve ders kitabı dışında bir kitabınızın olması', 'KITAP', 1, 'tek', $DOCENTLIK),
         Kalip::veya('Makale koşulunu sağlamak', [
-            Kalip::ve('01-06 numaralı maddelerde on bir makale (en az dördü doçentlik sonrası)', [
-                $adet('01-06 numaralı maddeler kapsamındaki dergilerde toplam en az on bir makale yayımlamış olmak', '01-06', 11),
+            Kalip::ve('hakemli dergilerde on bir makale (en az dördü doçentlik sonrası)', [
+                $adet('hakemli dergilerde toplam en az on bir makale yayımlamış olmak', '01-06', 11),
                 $adet('Bu makalelerin en az dördünü doçentlik unvanından sonra yayımlamış olmak', '01-06', 4, donem: $DOCENTLIK),
             ]),
-            Kalip::ve('01-03 numaralı maddelerde dokuz makale (en az ikisi doçentlik sonrası)', [
-                $adet('01-03 numaralı maddeler kapsamındaki dergilerde toplam en az dokuz makale yayımlamış olmak', '01-03', 9),
+            Kalip::ve('SCI, SCI-Expanded, SSCI, AHCI ve ESCI dergilerinde dokuz makale (en az ikisi doçentlik sonrası)', [
+                $adet('SCI, SCI-Expanded, SSCI, AHCI ve ESCI dergilerinde toplam en az dokuz makale yayımlamış olmak', '01-03', 9),
                 $adet('Bu makalelerin en az ikisini doçentlik unvanından sonra yayımlamış olmak', '01-03', 2, donem: $DOCENTLIK),
             ]),
         ])]);

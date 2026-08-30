@@ -284,9 +284,15 @@ dokuz partide tamamlandı (bkz. "Aday metni süpürmesi N/N" commit'leri) ve
 geçici borç listesi kaldırıldı. **Test artık bütün korpusu koşulsuz tarıyor.**
 Yeni bir yönerge girildiğinde aday metnine kod sızarsa doğrudan kırılıyor.
 
-Desen NOKTALI kodların (A.1, A1.1) yanında noktasız ARALIKLARI da yakalıyor
-(A1-A4, C1-C7, D1-D4). Dergi çeyrekleri (Q1-Q3) bilinçli olarak dışlandı: onlar
-yönergenin kodu değil, adayın tanıdığı bir ad.
+Desen dört kod biçimini birden yakalıyor: NOKTALI kodlar (A.1, A1.1), noktasız
+ARALIKLAR (A1-A4, C1-C7), TİRELİ harf-rakam (A-1, A-1.1, D-5, F-3) ve
+yönergenin madde numarasını SÖZLE anan biçimler ("01-06 numaralı maddeler",
+"1/a bendi", "TABLO B"). Dergi çeyrekleri (Q1-Q3) bilinçli olarak dışlandı:
+onlar yönergenin kodu değil, adayın tanıdığı bir ad.
+
+Desen üç turda bu hâle geldi; her seferinde temiz sanılan dosyalarda yeni
+sızıntı çıktı. Yeni bir kod biçimi görürsen deseni genişlet, sonra bütün
+korpusu yeniden tara — eski dosyalarda da bulunması olağan.
 
 Sızıntının dört yeri var, dördüne de bak:
 

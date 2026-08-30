@@ -173,7 +173,7 @@ $tablo = function (string $kod, array $alanlar, ?string $birim, string $ad,
             .'DOÇENTLİK BAŞVURUSU SONRASI çalışmaları kapsıyor; motor doçentlik unvanının '
             .'alındığı tarihi tuttuğu için pencere biraz daralıyor ve koşul olduğundan sıkı '
             .'görünüyor. Yayın koşulunu ya yürürlükteki doçentlik temel alan koşullarını bir '
-            .'kez daha sağlayarak ya da A tablosundan öngörülen puanı alarak '
+            .'kez daha sağlayarak ya da makale kalemlerinizden öngörülen puanı alarak '
             .'karşılayabilirsiniz; birinci yol ÜAK\'ın kendi tablosuna dayandığı için '
             .'hesaplanamıyor olarak işaretli.'.$NOT_C2.$NOT_CETVEL,
         'sart' => Kalip::ve('Profesör kadrosuna atanma — '.$ad, array_values([

@@ -367,8 +367,8 @@ $esikler[] = [
         .'dışında kitap; 01-06\'da toplam iki yayın (ikisi de doçentlik sonrası); Tablo 1\'den '
         .'150 puan.',
     'aday_notu' => 'Hukuk alanında profesör kadrosuna atanma. Doçentlik atamanızdan sonra TEK '
-        .'YAZARLI ve ders kitabı dışında bir kitabınızın olması zorunlu. Buna ek olarak 01-06 '
-        .'numaralı maddeler kapsamındaki dergilerde iki yayın gerekiyor; yönerge bu iki yayının '
+        .'YAZARLI ve ders kitabı dışında bir kitabınızın olması zorunlu. Buna ek olarak '
+        .'hakemli dergilerde iki yayın gerekiyor; yönerge bu iki yayının '
         .'da doçentlik sonrası olmasını istiyor. Kitabın ders kitabı olmadığı kayıtta '
         .'ayrılamadığı için ders kitapları da bu koşula sayılıyor, koşul burada olduğundan '
         .'hafif görünür.'.$NOT_DIL.$NOT_CETVEL,

@@ -194,11 +194,11 @@ $esikler = array_merge($esikler, $setEsikleri(
         'profesorluk' => [
             Kalip::veya('Makale koşulu', [
                 Kalip::ve('En az ikisi Q1-Q3 olmak üzere 3 makale', [
-                    Kalip::adet('1/a bendindeki dergilerde en az 3 makale', ['1a'], 3, donem: $DOCENTLIK, madde: 'Ek özel şartlar · Profesör'),
+                    Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 3 makale', ['1a'], 3, donem: $DOCENTLIK, madde: 'Ek özel şartlar · Profesör'),
                     Kalip::adet('Bunlardan en az 2 tanesi Q1, Q2 veya Q3 kapsamında olmalı', ['1a-Q123'], 2, donem: $DOCENTLIK, madde: 'Ek özel şartlar · Profesör'),
                 ]),
                 Kalip::ve('Ya da en az biri Q1-Q3 olmak üzere 5 makale', [
-                    Kalip::adet('1/a bendindeki dergilerde en az 5 makale', ['1a'], 5, donem: $DOCENTLIK, madde: 'Ek özel şartlar · Profesör'),
+                    Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 5 makale', ['1a'], 5, donem: $DOCENTLIK, madde: 'Ek özel şartlar · Profesör'),
                     Kalip::adet('Bunlardan en az 1 tanesi Q1, Q2 veya Q3 kapsamında olmalı', ['1a-Q123'], 1, donem: $DOCENTLIK, madde: 'Ek özel şartlar · Profesör'),
                 ]),
             ]),
@@ -214,7 +214,7 @@ $esikler = array_merge($esikler, $setEsikleri(
             Kalip::toplam(300, $DOKTORA, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
         ],
         'dr_ogr_uyesi' => [
-            Kalip::adet('1/a veya 3/a bendindeki dergilerde en az 2 makale', ['1a-3a'], 2, madde: 'Ek özel şartlar · Dr. ilk atama'),
+            Kalip::adet('SCI-Expanded ve SSCI dergilerinde (tez yayınları dahil) en az 2 makale', ['1a-3a'], 2, madde: 'Ek özel şartlar · Dr. ilk atama'),
             Kalip::adet('1/b-c, 2/a veya 3/b-c-g bendindeki dergilerde en az 2 makale', ['1bc-2a-3bcg'], 2, madde: 'Ek özel şartlar · Dr. ilk atama'),
             Kalip::puanDan('Puanlama Cetvelinin 1-8. maddelerinden en az 125 puan', ['1-8'], 125, madde: 'Ek özel şartlar · Dr. ilk atama'),
             Kalip::adet('Araştırma projelerinden en az 1 tanesinde koordinatör, yürütücü ya da araştırmacı olmak', ['7-PH-YA'], 1, madde: 'Ek özel şartlar · Dr. ilk atama'),
@@ -230,17 +230,17 @@ $esikler = array_merge($esikler, $setEsikleri(
 // ══════════════════════════════════════════════════════════════════════════
 
 $egitimProfesorMakale = Kalip::veya('Makale koşulu', [
-    Kalip::adet('1/a bendindeki dergilerde en az 1 makale', ['1a'], 1, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
+    Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 1 makale', ['1a'], 1, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
     Kalip::adet('Ya da 1/b-c bentlerindeki dergilerde en az 3 makale', ['1bc'], 3, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
-    Kalip::adet('Ya da 2/a bendindeki dergilerde en az 5 makale', ['2a'], 5, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
+    Kalip::adet('Ya da TR Dizin dergilerinde en az 5 makale', ['2a'], 5, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
     Kalip::ve('Ya da 1/b-c\'den 2 ve 2/a\'dan 3 olmak üzere toplam 5 makale', [
         Kalip::adet('1/b-c bentlerinde en az 2 makale', ['1bc'], 2, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
-        Kalip::adet('2/a bendinde en az 3 makale', ['2a'], 3, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
+        Kalip::adet('TR Dizin dergilerinde en az 3 makale', ['2a'], 3, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
     ]),
 ]);
 
 $drIlkMakaleSosyal = fn (string $md): array => Kalip::veya('Makale koşulu', [
-    Kalip::adet('1/a veya 3/a bendindeki dergilerde en az 1 makale', ['1a-3a'], 1, madde: $md),
+    Kalip::adet('SCI-Expanded ve SSCI dergilerinde (tez yayınları dahil) en az 1 makale', ['1a-3a'], 1, madde: $md),
     Kalip::adet('Ya da 1/b-c bentlerindeki dergilerde en az 3 makale', ['1bc'], 3, madde: $md),
     Kalip::adet('Ya da 1/b-c, 2/a veya 3/b-c-g bentlerindeki dergilerde toplam en az 4 makale', ['1bc-2a-3bcg'], 4, madde: $md),
 ]);
@@ -277,7 +277,7 @@ $esikler = array_merge($esikler, $setEsikleri('sanat', ['guzel_sanatlar'], null,
     'Güzel Sanatlar ve Tasarım Fakültesi', [
         'profesorluk' => [
             Kalip::veya('Makale koşulu', [
-                Kalip::adet('1/a bendindeki dergilerde en az 2 makale', ['1a'], 2, donem: $DOCENTLIK, madde: 'Ek-4 · Profesör'),
+                Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 2 makale', ['1a'], 2, donem: $DOCENTLIK, madde: 'Ek-4 · Profesör'),
                 Kalip::adet('Ya da 1/b-c-ç-d ve 2/a-b bentlerindeki dergilerde en az 5 makale', ['1bcçd-2ab'], 5, donem: $DOCENTLIK, madde: 'Ek-4 · Profesör'),
             ]),
             Kalip::adet('9. maddeden en az 2 sanat faaliyeti', ['9'], 2, donem: $DOCENTLIK, madde: 'Ek-4 · Profesör'),
@@ -294,7 +294,7 @@ $esikler = array_merge($esikler, $setEsikleri('sanat', ['guzel_sanatlar'], null,
         ],
         'dr_ogr_uyesi' => [
             Kalip::veya('Makale koşulu', [
-                Kalip::adet('1/a veya 3/a bendindeki dergilerde en az 1 makale', ['1a-3a'], 1, madde: 'Ek-4 · Dr. ilk atama'),
+                Kalip::adet('SCI-Expanded ve SSCI dergilerinde (tez yayınları dahil) en az 1 makale', ['1a-3a'], 1, madde: 'Ek-4 · Dr. ilk atama'),
                 Kalip::ve('Ya da en az birinde tek yazar olduğunuz 3 makale', [
                     Kalip::adet('1/b-c-ç-d, 2/a-b veya 3/b-c-ç-g-ğ bentlerinde en az 3 makale', ['1bcçd-2ab-3bcçgğ'], 3, madde: 'Ek-4 · Dr. ilk atama'),
                     Kalip::adet('Bu makalelerden en az 1 tanesinde tek yazar olmalısınız', ['1bcçd-2ab-3bcçgğ'], 1, yazar: 'tek', madde: 'Ek-4 · Dr. ilk atama'),
@@ -327,21 +327,21 @@ $esikler = array_merge($esikler, $setEsikleri('sanat', ['guzel_sanatlar'], null,
 // ══════════════════════════════════════════════════════════════════════════
 
 $sosyalProfesorMakale = fn (string $md): array => Kalip::veya('Makale koşulu', [
-    Kalip::adet('1/a bendindeki dergilerde en az 2 makale', ['1a'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
+    Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 2 makale', ['1a'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
     Kalip::adet('Ya da 1/b-c bentlerindeki dergilerde en az 3 makale', ['1bc'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
-    Kalip::adet('Ya da 2/a bendindeki dergilerde en az 5 makale', ['2a'], 5, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
+    Kalip::adet('Ya da TR Dizin dergilerinde en az 5 makale', ['2a'], 5, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
     Kalip::ve('Ya da 1/a\'dan 1 ve 1/b-c\'den 2 olmak üzere toplam 3 makale', [
-        Kalip::adet('1/a bendinde en az 1 makale', ['1a'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
+        Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 1 makale', ['1a'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
         Kalip::adet('1/b-c bentlerinde en az 2 makale', ['1bc'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
     ]),
     Kalip::ve('Ya da 1/a\'dan 1, 1/b-c\'den 1 ve 2/a\'dan 3 olmak üzere toplam 5 makale', [
-        Kalip::adet('1/a bendinde en az 1 makale', ['1a'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
+        Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 1 makale', ['1a'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
         Kalip::adet('1/b-c bentlerinde en az 1 makale', ['1bc'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
-        Kalip::adet('2/a bendinde en az 3 makale', ['2a'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
+        Kalip::adet('TR Dizin dergilerinde en az 3 makale', ['2a'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
     ]),
     Kalip::ve('Ya da 1/b-c\'den 2 ve 2/a\'dan 3 olmak üzere toplam 5 makale', [
         Kalip::adet('1/b-c bentlerinde en az 2 makale', ['1bc'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
-        Kalip::adet('2/a bendinde en az 3 makale', ['2a'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
+        Kalip::adet('TR Dizin dergilerinde en az 3 makale', ['2a'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
     ]),
 ]);
 

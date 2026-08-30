@@ -241,13 +241,13 @@ return [
 
     [
         'anahtar' => 'mersin-dr-sanat',
-        'aday_notu' => 'Puanınız sanat ve tasarım etkinliklerinden (TABLO B) ve konservatuvar etkinliklerinden (TABLO C) birlikte hesaplanıyor. Makale, kitap ve proje kalemleri bu toplama girmez; onlar TABLO A\'ya tabidir.',
+        'aday_notu' => 'Puanınız sanat ve tasarım etkinliklerinden ve konservatuvar etkinliklerinden birlikte hesaplanıyor. Makale, kitap ve proje kalemleri bu toplama girmez; onlar bilimsel faaliyet barajına tabidir.',
         'universite' => 'Mersin Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => ['guzel_sanatlar', 'mimarlik'],
         'cetvel' => 'mersin-2024',
         'notlar' => '2.1.1 c-6) GÜZEL SANATLAR ve c-7) MİMARLIK, PLANLAMA ve TASARIM. Puan barajı '
-            .'TABLO A\'dan değil TABLO B (sanat/tasarım) veya TABLO C (konservatuvar) '
+            .'bilimsel faaliyetlerden değil sanat, tasarım ya da konservatuvar etkinliklerinden '
             .'listesinden 120 puan.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi ilk atanma — Güzel Sanatlar / Mimarlık', [
             Kalip::toplam(120, null, ['B', 'C'], 'Sanatsal etkinlik'),
@@ -443,7 +443,7 @@ return [
     ],
     [
         'anahtar' => 'mersin-docent-mimarlik',
-        'aday_notu' => 'Puan barajı yönerge gereği iki listeden BİRLİKTE hesaplanıyor: Liste A (makale, kitap, proje, atıf) ve TABLO B (sanat ve tasarım etkinlikleri). Projede yalnızca yürütücülük sayılıyor.',
+        'aday_notu' => 'Puan barajı yönerge gereği iki listeden BİRLİKTE hesaplanıyor: bilimsel faaliyetler (makale, kitap, proje, atıf) ve sanat ve tasarım etkinlikleri. Projede yalnızca yürütücülük sayılıyor.',
         'universite' => 'Mersin Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => ['mimarlik'],
@@ -465,7 +465,7 @@ return [
     ],
     [
         'anahtar' => 'mersin-docent-sanat',
-        'aday_notu' => 'Puanınız sanat ve tasarım etkinliklerinden (TABLO B) ve konservatuvar etkinliklerinden (TABLO C) birlikte hesaplanıyor. Makale, kitap ve proje kalemleri bu toplama girmez; onlar TABLO A\'ya tabidir.',
+        'aday_notu' => 'Puanınız sanat ve tasarım etkinliklerinden ve konservatuvar etkinliklerinden birlikte hesaplanıyor. Makale, kitap ve proje kalemleri bu toplama girmez; onlar bilimsel faaliyet barajına tabidir.',
         'universite' => 'Mersin Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => ['guzel_sanatlar'],
@@ -663,7 +663,7 @@ return [
     ],
     [
         'anahtar' => 'mersin-profesor-mimarlik',
-        'aday_notu' => 'Puan barajı yönerge gereği iki listeden BİRLİKTE hesaplanıyor: Liste A (makale, kitap, proje, atıf) ve TABLO B (sanat ve tasarım etkinlikleri). Projede yalnızca yürütücülük sayılıyor.',
+        'aday_notu' => 'Puan barajı yönerge gereği iki listeden BİRLİKTE hesaplanıyor: bilimsel faaliyetler (makale, kitap, proje, atıf) ve sanat ve tasarım etkinlikleri. Projede yalnızca yürütücülük sayılıyor.',
         'universite' => 'Mersin Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => ['mimarlik'],
@@ -686,7 +686,7 @@ return [
     ],
     [
         'anahtar' => 'mersin-profesor-sanat',
-        'aday_notu' => 'Puanınız sanat ve tasarım etkinliklerinden (TABLO B) ve konservatuvar etkinliklerinden (TABLO C) birlikte hesaplanıyor. Makale, kitap ve proje kalemleri bu toplama girmez; onlar TABLO A\'ya tabidir.',
+        'aday_notu' => 'Puanınız sanat ve tasarım etkinliklerinden ve konservatuvar etkinliklerinden birlikte hesaplanıyor. Makale, kitap ve proje kalemleri bu toplama girmez; onlar bilimsel faaliyet barajına tabidir.',
         'universite' => 'Mersin Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => ['guzel_sanatlar'],

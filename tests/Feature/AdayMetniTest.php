@@ -30,6 +30,12 @@ $KOD_DESENI = '/('
     // Noktasız kod aralıkları: A1-A4, C1-C7, D1-D4. Dergi çeyrekleri (Q1-Q3)
     // KOD DEĞİL, adayın tanıdığı bir ad — desenden dışlanıyor.
     .'|\b(?!Q)[A-Z]\d{1,2}-(?!Q)[A-Z]?\d{1,2}\b'
+    // Tireli harf-rakam kodları (A-1, A-1.1, D-5, F-3) ve yönergenin madde
+    // numarasını sözle anan biçimler ("01-06 numaralı maddeler", "1/a bendi").
+    .'|\b[A-Z]-\d(\.\d)?\b'
+    .'|\b\d{1,2}(-\d{1,2})? numaralı madde'
+    .'|\b\d[.\/][a-zçğıöşü] bend'
+    .'|\bTABLO [A-Z]\b'
     .')/u';
 
 /**

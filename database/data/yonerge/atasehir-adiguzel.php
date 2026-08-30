@@ -95,12 +95,12 @@ return [
         'notlar' => 'MADDE 4: doktora sonrası 1-12 numaralı maddelerden en az 250 puan ve '
             .'toplam en az 500 puan.',
         'aday_notu' => 'Doçent kadrosuna atanma. İki baraj var: doktora derecenizi aldıktan '
-            .'SONRA tablonun 1-12 numaralı maddelerinden (makale, sanat etkinlikleri, kongre '
-            .'sunumları, kitap yazarlığı ve çeviri) en az 250 puan ve bütün etkinliklerden '
+            .'SONRA makale, sanat etkinliği, kongre sunumu, kitap yazarlığı ve çeviri '
+            .'kalemlerinizden en az 250 puan ve bütün etkinliklerden '
             .'toplam en az 500 puan. Toplam puan barajında dönem sınırı yok.'.$NOT_ORTAK,
         'sart' => Kalip::ve('Doçent kadrosuna atanma', [
             Kalip::beyan('Üniversitelerarası Kurul tarafından verilen doçentlik unvanına sahip olmak', '2547 s.K. m.24'),
-            Kalip::puanDan('Doktora derecenizi aldıktan sonra tablonun 1-12 numaralı maddelerinden en az 250 puan almak', ['1-12'], 250, $DOKTORA, madde: 'MADDE 4/a'),
+            Kalip::puanDan('Doktora derecenizi aldıktan sonra makale, sanat etkinliği, bildiri ve proje kalemlerinizden en az 250 puan almak', ['1-12'], 250, $DOKTORA, madde: 'MADDE 4/a'),
             Kalip::toplam(500),
         ]),
     ],
@@ -112,18 +112,19 @@ return [
         'cetvel' => $CETVEL,
         'notlar' => 'MADDE 5: profesörlük başlıca eseri, doçentlik sonrası 1-12 numaralı '
             .'maddelerden en az 350 puan ve toplam en az 700 puan.',
-        'aday_notu' => 'Profesör kadrosuna atanma. Doçent unvanını aldıktan SONRA tablonun 1-12 '
-            .'numaralı maddelerinden en az 350 puan ve bütün etkinliklerden toplam en az 700 '
+        'aday_notu' => 'Profesör kadrosuna atanma. Doçent unvanını aldıktan SONRA makale, '
+            .'sanat etkinliği, kongre sunumu, kitap yazarlığı ve çeviri kalemlerinizden en az '
+            .'350 puan ve bütün etkinliklerden toplam en az 700 '
             .'puan gerekiyor. Ayrıca profesörlük başlıca eseri göstermelisiniz; yönerge bunu '
             .'beş yoldan biriyle karşılamaya izin veriyor: uluslararası indeksli bir dergide tek '
             .'yazarlı ya da ilk isim olduğunuz makale, danışmanlığını yaptığınız lisansüstü '
             .'öğrencilerle birlikte yayımlanmış makale, yürütücüsü olduğunuz projeden üretilmiş '
-            .'makale, kendi isminizle basılmış özgün bir kitap ya da tablonun 6. maddesindeki '
-            .'sanat etkinliklerinden birine katılmak.'.$NOT_ORTAK,
+            .'makale, kendi isminizle basılmış özgün bir kitap ya da sanat etkinliklerinden '
+            .'birine katılmak.'.$NOT_ORTAK,
         'sart' => Kalip::ve('Profesör kadrosuna atanma', [
             Kalip::beyan('Üniversitelerarası Kurul tarafından verilen doçentlik unvanına sahip olmak', '2547 s.K. m.26'),
             Kalip::beyan('Doçent unvanını aldıktan sonra ilgili bilim alanında uygulamaya yönelik bir çalışma ya da uluslararası düzeyde araştırmaya dayalı özgün bir eseri profesörlük başlıca eseri olarak göstermek', 'MADDE 5/a'),
-            Kalip::puanDan('Doçent unvanını aldıktan sonra tablonun 1-12 numaralı maddelerinden en az 350 puan almak', ['1-12'], 350, $DOCENTLIK, madde: 'MADDE 5/b'),
+            Kalip::puanDan('Doçent unvanını aldıktan sonra makale, sanat etkinliği, bildiri ve proje kalemlerinizden en az 350 puan almak', ['1-12'], 350, $DOCENTLIK, madde: 'MADDE 5/b'),
             Kalip::toplam(700),
         ]),
     ],

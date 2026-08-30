@@ -132,7 +132,7 @@ $docKosullari = [
     ['sanat', ['guzel_sanatlar'], 'Sanat',
         Kalip::adet('L maddesinde tanımlı en az bir sanat ya da tasarım etkinliğinde yer almak', ['L'], 1, madde: 'MADDE 5/d')],
     ['saglik', ['saglik'], 'Sağlık',
-        Kalip::adet('A-1 maddesinde tanımlı en az üç uluslararası yayın yapmış olmak', ['A-1'], 3, madde: 'MADDE 5/e')],
+        Kalip::adet('SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde en az üç uluslararası yayın yapmış olmak', ['A-1'], 3, madde: 'MADDE 5/e')],
 ];
 
 foreach ($docKosullari as [$kod, $alanlar, $ad, $kosul]) {
@@ -169,7 +169,7 @@ $BASLICA_ESER = Kalip::beyan(
 
 $profKosullari = [
     ['muhfen', ['muhendislik', 'fen', 'mimarlik'], 'Mühendislik ve Fen Bilimleri', [
-        Kalip::adet('Doçentlik sonrası A-1 maddesinde tanımlı en az bir uluslararası yayın yapmış olmak', ['A-1'], 1, donem: $DOCENTLIK, madde: 'MADDE 6/2-a'),
+        Kalip::adet('Doçentlik sonrası SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde en az bir uluslararası yayın yapmış olmak', ['A-1'], 1, donem: $DOCENTLIK, madde: 'MADDE 6/2-a'),
         Kalip::adet('Doçentlik sonrası A ya da C maddelerinde tanımlı toplam en az üç uluslararası yayın yapmış olmak', ['A-C'], 3, donem: $DOCENTLIK, madde: 'MADDE 6/2-a'),
     ]],
     ['sosyal', ['sosyal', 'egitim', 'filoloji', 'spor'], 'Sosyal Bilimler', [

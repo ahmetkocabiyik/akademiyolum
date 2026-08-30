@@ -100,9 +100,9 @@ $esikler = [];
 foreach ([
     ['genel', ['fen', 'muhendislik', 'saglik', 'ziraat', 'egitim', 'hukuk', 'filoloji',
         'ilahiyat', 'spor', 'guzel_sanatlar'], 'ktun-2024', false,
-        'A-1a, A-1b, A-2a ve A-2b türü yayınlarınızdan', ['8', '10', '12']],
+        'uluslararası makale kalemlerinizden', ['8', '10', '12']],
     ['mps', ['mimarlik', 'sosyal'], 'ktun-2024-mps', true,
-        'A-1a, A-1b, A-1g, A-2a, A-2b, A-3a, A-4a, B, C-1 ve C-2 türü yayınlarınızdan',
+        'uluslararası makale, bildiri ve kitap kalemlerinizden',
         ['9', '11', '13']],
 ] as [$anahtar, $alanlar, $cetvel, $mps, $drYayinAdi, $maddeler]) {
     [$mdDr, $mdDoc, $mdProf] = $maddeler;
@@ -123,18 +123,18 @@ foreach ([
 
     if ($mps) {
         $drKosullar[] = Kalip::adet(
-            'B-1, B-2, D veya E-1 türü en az 4 faaliyet (ulusal makale ya da bildiri)',
+            'Ulusal makale ya da bildiri türünden en az 4 faaliyet',
             ['DR-9c'], 4, madde: '9-c',
         );
     } else {
         $drKosullar[] = Kalip::adet(
-            'TR Dizin kapsamında (D-1) en az 1 araştırma makalesi', ['D1'], 1, madde: '8-c',
+            'TR Dizin kapsamında en az 1 araştırma makalesi', ['D1'], 1, madde: '8-c',
         );
         $drKosullar[] = Kalip::adet(
-            'D-1 ya da D-2 türü toplam en az 2 ulusal araştırma makalesi', ['D12'], 2, madde: '8-c',
+            'Ulusal dergilerde toplam en az 2 araştırma makalesi', ['D12'], 2, madde: '8-c',
         );
         $drKosullar[] = Kalip::adet(
-            'B-1 ya da E-1 türü en az 2 tam metin bildiri', ['B1E1'], 2, madde: '8-c',
+            'Uluslararası ya da ulusal toplantıda en az 2 tam metin bildiri', ['B1E1'], 2, madde: '8-c',
         );
     }
 
@@ -238,7 +238,7 @@ foreach ([
         'anahtar' => "ktun-{$anahtar}-profesorluk",
         'aday_notu' => "{$alanAdi}: başlıca eser niteliğinde 3 faaliyet "
             .'(en az 1\'i doçentlik unvanınızdan sonra), doçentlik sonrası seçili yayın '
-            .'türlerinden 2 faaliyet, doçentlik sonrası K-1/K-2/K-3, L ve M faaliyetlerinden '
+            .'türlerinden 2 faaliyet, doçentlik sonrası proje, patent ve ödül kalemlerinden '
             .'50 puan, doçentlik sonrası A-G ile K-L-M faaliyetlerinden 200 puan, aynı '
             .'kümeden toplam 550 puan ve tüm faaliyetlerden 650 puan isteniyor. Doçentlik '
             .'unvanınızı aldıktan sonra en az beş yıl ilgili bilim alanında çalışmış '
@@ -268,8 +268,8 @@ foreach ([
                 ['PROF-12b'], 2, donem: $DOCENTLIK, madde: "{$mdProf}-b",
             ),
             Kalip::puanDan(
-                'Doçentlik unvanınızı aldıktan sonra K-1, K-2, K-3 (Ar-Ge projeleri), L '
-                .'(patentler) ve M (yarışmalar, sergileme) faaliyetlerinizden en az 50 puan',
+                'Doçentlik unvanınızı aldıktan sonra Ar-Ge projesi, patent ve ödül '
+                .'(yarışma, sergileme) kalemlerinizden en az 50 puan',
                 ['K123LM'], 50, $DOCENTLIK, madde: "{$mdProf}-c",
             ),
             Kalip::puanDan(

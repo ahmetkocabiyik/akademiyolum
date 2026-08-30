@@ -55,7 +55,7 @@ $DIL_BEYANI = Kalip::beyan(
 );
 
 $PUAN_NOTU = 'Yönergenin kısa bildiri, teknik not ve editöre mektup için tanımladığı %60 kuralı '
-    .'uygulanmıyor: kayıt bunları kitap eleştirisinden ayırmadığı için A-5\'in 2 puanlık satırı '
+    .'uygulanmıyor: kayıt bunları kitap eleştirisinden ayırmadığı için en düşük (2 puanlık) satır '
     .'kullanılıyor ve bu yayınlarda puanınız düşük görünür. İdari görev puanları yıl sayısıyla '
     .'çarpılmıyor; "eğitime katkı" (kredi başına 0,5), bilimsel toplantı düzenleme ve lisansüstü '
     .'tezden üretilmiş yayın kalemlerinin cetvelde karşılığı yok.';

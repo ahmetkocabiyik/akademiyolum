@@ -142,7 +142,8 @@ foreach ([
         'anahtar' => "musku-{$anahtar}-profesorluk",
         'aday_notu' => "{$ad} için doçent unvanınızı aldıktan sonra bir yükseköğretim kurumunda "
             .'ya da araştırma merkezinde en az üç yıl çalışmış olmanız, tüm faaliyetlerinizden toplam 1000 '
-            .'puan almanız (en az yarısı doçentlik sonrası) ve doçentlik sonrası A-1 '
+            .'puan almanız (en az yarısı doçentlik sonrası) ve doçentlik sonrası SCI, '
+            .'SCI-Expanded, SSCI ve AHCI '
             ."kapsamındaki dergilerde en az {$makale} makale yayımlamış olmanız gerekiyor.",
         'universite' => $UNIVERSITE,
         'kadro' => 'profesorluk',
@@ -154,7 +155,7 @@ foreach ([
         'sart' => Kalip::ve("Profesör kadrosuna atanma — {$ad}", [
             $ucYil,
             Kalip::adet(
-                "Doçentlik unvanınızı aldıktan sonra A-1 kapsamındaki dergilerde en az {$makale} makale",
+                "Doçentlik unvanınızı aldıktan sonra SCI, SCI-Expanded, SSCI ve AHCI dergilerinde en az {$makale} makale",
                 ['MAKALE-SCI'], $makale, donem: $DOCENTLIK, madde: '6-3-c',
             ),
             Kalip::toplam(500, $DOCENTLIK),

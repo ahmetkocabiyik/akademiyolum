@@ -45,7 +45,7 @@ $fenGrubu = ['fen', 'muhendislik', 'mimarlik', 'saglik', 'ziraat'];
 $sosyalGrubu = ['sosyal', 'egitim', 'hukuk', 'ilahiyat', 'filoloji', 'spor'];
 $tumAlanlar = [...$fenGrubu, ...$sosyalGrubu];
 
-$sanatNotu = 'Sanat ve Tasarım Dalları girilemedi: o alanın koşulu çizelgenin 9-34 numaralı '
+$sanatNotu = 'Sanat ve Tasarım Dalları girilemedi: o alanın koşulu çizelgenin sanatsal etkinlik '
     .'maddelerini (sergi, koleksiyon, müzik, film, tiyatro, mimarlık) sayıyor, bu bölümlerin '
     .'puan sütunu kaynak yönergeden çıkarılamadı.';
 

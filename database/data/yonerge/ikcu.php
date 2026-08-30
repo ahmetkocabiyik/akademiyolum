@@ -463,7 +463,7 @@ foreach ([
 
     $ozelProfesor = $tip === 'plastik'
         ? [
-            Kalip::adet('Plastik sanatlarda 1.a bendi kapsamında en az 2 etkinlik', ['D-O1.a'], 2, madde: 'EK-D/1-c'),
+            Kalip::adet('Plastik sanatlarda kişisel sergi türünden en az 2 etkinlik', ['D-O1.a'], 2, madde: 'EK-D/1-c'),
             Kalip::puanDan('Plastik sanatlarda 1. madde toplamında en az 100 puan', ['D-O1'], 100, madde: 'EK-D/1-c'),
         ]
         : [
