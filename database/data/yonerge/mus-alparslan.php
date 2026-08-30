@@ -93,10 +93,10 @@ $esikler = [];
 $esikler[] = [
     'anahtar' => 'mus-fen-dr',
     'aday_notu' => 'Mühendislik, fen bilimleri ve matematik, sağlık ile ziraat-orman-su ürünleri '
-        .'alanlarında EK-1\'den zorunlu puanlar dâhil toplam en az 250 puan ve A2.1 ile A2.2 '
+        .'alanlarında zorunlu puanlar dâhil tüm faaliyetlerinizden toplam en az 250 puan ve SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki '
         .'numaralı yayımlanmış çalışmalardan (SCI, SCI-Expanded, SSCI, AHCI makaleleri) en az 60 '
         .'puan isteniyor. Merkezi bir yabancı dil sınavından en az 65 puan gerekiyor. DİKKAT: '
-        .'A2.1 ve A2.2 satırları derginin ETKİ FAKTÖRÜNE bağlı (30+20×IF ve 20+10×IF); kayıt '
+        .'bu makalelerin puanı derginin ETKİ FAKTÖRÜNE bağlı (30+20×IF ve 20+10×IF); kayıt '
         .'etki faktörünü taşımadığı için sıfır kabul edildi, bu baraj olduğundan zor görünüyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
@@ -106,7 +106,7 @@ $esikler[] = [
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna ilk atanma — mühendislik, fen, sağlık ve ziraat', [
         $doktora,
         $dil,
-        Kalip::puanDan('A2.1 ve A2.2 numaralı yayımlanmış çalışmalardan en az 60 puan', ['A2.1-2'], 60, madde: '9-ç'),
+        Kalip::puanDan('SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 60 puan', ['A2.1-2'], 60, madde: '9-ç'),
         Kalip::toplam(250),
     ]),
 ];
@@ -114,9 +114,10 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'mus-sosyal-dr',
     'aday_notu' => 'Eğitim bilimleri, filoloji, ilahiyat, mimarlık, spor ile sosyal-beşerî-idari '
-        .'bilimler alanlarında EK-1\'den zorunlu puanlar dâhil toplam en az 250 puan isteniyor. '
-        .'Ayrıca A2.1 ve A2.2\'den en az 60 puan gerekiyor; bu şartı sağlamayanlar eksik '
-        .'puanlarını A1 (uluslararası kitap), B1 (ulusal kitap) ve B2 (ulusal makale) '
+        .'bilimler alanlarında zorunlu puanlar dâhil tüm faaliyetlerinizden toplam en az 250 puan isteniyor. '
+        .'Ayrıca SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 60 '
+        .'puan gerekiyor; bu şartı sağlamayanlar eksik puanlarını uluslararası kitap, ulusal '
+        .'kitap ve ulusal makale '
         .'kalemlerinden tamamlayabiliyor. Doktora tezinizin kitap olarak ya da tezinizden bir '
         .'bölümün TR Dizin veya yurt dışı hakemli dergide yayımlanmış olması da şart. Merkezi '
         .'bir yabancı dil sınavından en az 65 puan gerekiyor.'.$ILETISIM_NOTU,
@@ -135,10 +136,10 @@ $esikler[] = [
             .'olması',
             '9-d.1',
         ),
-        Kalip::veya('A2.1-A2.2 barajı ya da telafisi', [
-            Kalip::puanDan('A2.1 ve A2.2 numaralı yayımlanmış çalışmalardan en az 60 puan', ['A2.1-2'], 60, madde: '9-d.2'),
+        Kalip::veya('Makale barajı ya da telafisi', [
+            Kalip::puanDan('SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 60 puan', ['A2.1-2'], 60, madde: '9-d.2'),
             Kalip::puanDan(
-                'Ya da A2.1, A2.2, A1, B1 ve B2 kalemlerinden toplam en az 60 puan',
+                'Ya da makale ve kitap kalemlerinizden toplam en az 60 puan',
                 ['A2-A1-B1-B2'], 60, madde: '9-d.2',
             ),
         ]),
@@ -148,7 +149,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'mus-dr-yeniden',
-    'aday_notu' => 'Son atanma döneminizden sonraki çalışmalarınız sayılıyor. Madde 9 yeniden '
+    'aday_notu' => 'Son atanma döneminizden sonraki çalışmalarınız sayılıyor. Yönerge yeniden '
         .'atanmada "öngörülen toplam asgari puanların 1/3\'ünün yeniden sağlanmasını" istiyor; '
         .'doktor öğretim üyeliğinin toplamı 250 puan olduğu için 84 puan gerekiyor. Doktor '
         .'öğretim üyesi en fazla üç yıl süreyle atanıyor.',
@@ -168,11 +169,13 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'mus-fen-docentlik',
-    'aday_notu' => 'Doçent unvanına ek olarak EK-1\'den zorunlu puanlar dâhil toplam en az 750 '
-        .'puan isteniyor. Ayrıca doktora sonrasında ve tez kapsamı dışında A2.1 ile A2.2 '
-        .'makalelerinden en az 150 puan, doktora sonrasında C2-C4 kapsamından (projeler, patent '
-        .'ve fikri mülkiyet) en az 50 puan gerekiyor; C2-C4 şartını sağlamayanlar eksik '
-        .'puanlarını A2.1 ve A2.2\'den tamamlayabiliyor. Merkezi bir yabancı dil sınavından en '
+    'aday_notu' => 'Doçent unvanına ek olarak zorunlu puanlar dâhil tüm faaliyetlerinizden toplam en az 750 '
+        .'puan isteniyor. Ayrıca doktora sonrasında ve tez kapsamı dışında SCI, '
+        .'SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 150 puan, doktora '
+        .'sonrasında proje, patent ve fikri mülkiyet kalemlerinizden en az 50 puan gerekiyor; '
+        .'bu şartı sağlamayanlar eksik '
+        .'puanlarını dizinli dergilerdeki makalelerinden tamamlayabiliyor. Merkezi bir '
+        .'yabancı dil sınavından en '
         .'az 65 puan gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
@@ -183,10 +186,10 @@ $esikler[] = [
     'sart' => Kalip::ve('Doçent kadrosuna atanma — mühendislik, fen, sağlık ve ziraat', [
         $docentUnvani,
         $dil,
-        Kalip::puanDan('Doktora unvanınızı aldıktan sonra A2.1 ve A2.2 makalelerinden en az 150 puan', ['A2.1-2'], 150, $DOKTORA, madde: '10-2-a.1'),
-        Kalip::veya('C2-C4 barajı ya da telafisi', [
-            Kalip::puanDan('Doktora sonrasında C2-C4 kapsamından (projeler ve fikri mülkiyet) en az 50 puan', ['C2-C4'], 50, $DOKTORA, madde: '10-2-a.2'),
-            Kalip::puanDan('Ya da A2.1 ve A2.2 makalelerinden en az 200 puan (150 puanlık barajın üstüne 50 puan daha)', ['A2.1-2'], 200, madde: '10-2-a.2'),
+        Kalip::puanDan('Doktora unvanınızı aldıktan sonra SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 150 puan', ['A2.1-2'], 150, $DOKTORA, madde: '10-2-a.1'),
+        Kalip::veya('Proje ve fikri mülkiyet barajı ya da telafisi', [
+            Kalip::puanDan('Doktora sonrasında proje ve fikri mülkiyet kalemlerinizden en az 50 puan', ['C2-C4'], 50, $DOKTORA, madde: '10-2-a.2'),
+            Kalip::puanDan('Ya da SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 200 puan (150 puanlık barajın üstüne 50 puan daha)', ['A2.1-2'], 200, madde: '10-2-a.2'),
         ]),
         Kalip::toplam(750),
     ]),
@@ -194,9 +197,10 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'mus-sosyal-docentlik',
-    'aday_notu' => 'Doçent unvanına ek olarak EK-1\'den zorunlu puanlar dâhil toplam en az 750 '
-        .'puan isteniyor. Ayrıca A2.1 ile A2.2 makalelerinden en az 150 puan (sağlamayanlar '
-        .'eksiği A1, B1 ve B2\'den tamamlayabilir) ve doktora sonrasında C1-C7 kapsamından '
+    'aday_notu' => 'Doçent unvanına ek olarak zorunlu puanlar dâhil tüm faaliyetlerinizden toplam en az 750 '
+        .'puan isteniyor. Ayrıca SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 150 puan (sağlamayanlar '
+        .'eksiği kitap ve ulusal makale kalemlerinden tamamlayabilir) ve doktora sonrasında '
+        .'proje, patent ve diğer faaliyet kalemlerinizden '
         .'(tez danışmanlığı, projeler, patent, ödüller, eğitime katkı) en az 50 puan gerekiyor. '
         .'Merkezi bir yabancı dil sınavından en az 65 puan gerekiyor.'.$ILETISIM_NOTU,
     'universite' => $UNIVERSITE,
@@ -208,13 +212,13 @@ $esikler[] = [
     'sart' => Kalip::ve('Doçent kadrosuna atanma — sosyal, eğitim, filoloji, ilahiyat, mimarlık ve spor', [
         $docentUnvani,
         $dil,
-        Kalip::veya('A2.1-A2.2 barajı ya da telafisi', [
-            Kalip::puanDan('A2.1 ve A2.2 makalelerinden en az 150 puan', ['A2.1-2'], 150, madde: '10-2-b.1'),
-            Kalip::puanDan('Ya da A2.1, A2.2, A1, B1 ve B2 kalemlerinden toplam en az 150 puan', ['A2-A1-B1-B2'], 150, madde: '10-2-b.1'),
+        Kalip::veya('Makale barajı ya da telafisi', [
+            Kalip::puanDan('SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 150 puan', ['A2.1-2'], 150, madde: '10-2-b.1'),
+            Kalip::puanDan('Ya da makale ve kitap kalemlerinizden toplam en az 150 puan', ['A2-A1-B1-B2'], 150, madde: '10-2-b.1'),
         ]),
-        Kalip::veya('C1-C7 barajı ya da telafisi', [
-            Kalip::puanDan('Doktora sonrasında C1-C7 kapsamından en az 50 puan', ['C1-C7'], 50, $DOKTORA, madde: '10-2-b.2'),
-            Kalip::puanDan('Ya da A2.1, A2.2, A1, B1 ve B2 kalemlerinden toplam en az 200 puan', ['A2-A1-B1-B2'], 200, madde: '10-2-b.2'),
+        Kalip::veya('Proje, patent ve diğer faaliyet barajı ya da telafisi', [
+            Kalip::puanDan('Doktora sonrasında proje, patent ve diğer faaliyet kalemlerinizden en az 50 puan', ['C1-C7'], 50, $DOKTORA, madde: '10-2-b.2'),
+            Kalip::puanDan('Ya da makale ve kitap kalemlerinizden toplam en az 200 puan', ['A2-A1-B1-B2'], 200, madde: '10-2-b.2'),
         ]),
         Kalip::toplam(750),
     ]),
@@ -226,9 +230,10 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'mus-fen-profesorluk',
-    'aday_notu' => 'EK-1\'in tüm maddelerinden toplam en az 1200 puan isteniyor. Ayrıca doçent '
-        .'unvanınızı aldıktan sonra A2.1 ile A2.2 makalelerinden en az 200 puan, C2-C4 '
-        .'kapsamından en az 50 puan (sağlamayanlar eksiği A2.1 ve A2.2\'den tamamlar) ve bir '
+    'aday_notu' => 'Tüm faaliyetlerinizden toplam en az 1200 puan isteniyor. Ayrıca doçent '
+        .'unvanınızı aldıktan sonra SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 200 puan, proje ve fikri mülkiyet '
+        .'kalemlerinden en az 50 puan (sağlamayanlar eksiği dizinli dergilerdeki '
+        .'makalelerinden tamamlar) ve bir '
         .'başlıca araştırma eseri gerekiyor. Doçent unvanını aldığınız dönemin ÜAK doçentlik '
         .'başvuru şartlarını akademik faaliyetlerinizle yeniden sağlamanız da şart; motor bunu '
         .'hesaplayamıyor. Merkezi bir yabancı dil sınavından en az 65 puan gerekiyor.',
@@ -242,10 +247,10 @@ $esikler[] = [
         $dil,
         $uakKosullari,
         $baslicaEser,
-        Kalip::puanDan('Doçent unvanınızı aldıktan sonra A2.1 ve A2.2 makalelerinden en az 200 puan', ['A2.1-2'], 200, $DOCENTLIK, madde: '11-3-a.1'),
-        Kalip::veya('C2-C4 barajı ya da telafisi', [
-            Kalip::puanDan('Doçentlik sonrasında C2-C4 kapsamından en az 50 puan', ['C2-C4'], 50, $DOCENTLIK, madde: '11-3-a.2'),
-            Kalip::puanDan('Ya da doçentlik sonrasında A2.1 ve A2.2 makalelerinden en az 250 puan', ['A2.1-2'], 250, $DOCENTLIK, madde: '11-3-a.2'),
+        Kalip::puanDan('Doçent unvanınızı aldıktan sonra SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 200 puan', ['A2.1-2'], 200, $DOCENTLIK, madde: '11-3-a.1'),
+        Kalip::veya('Proje ve fikri mülkiyet barajı ya da telafisi', [
+            Kalip::puanDan('Doçentlik sonrasında proje ve fikri mülkiyet kalemlerinizden en az 50 puan', ['C2-C4'], 50, $DOCENTLIK, madde: '11-3-a.2'),
+            Kalip::puanDan('Ya da doçentlik sonrasında SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 250 puan', ['A2.1-2'], 250, $DOCENTLIK, madde: '11-3-a.2'),
         ]),
         Kalip::toplam(1200),
     ]),
@@ -253,10 +258,11 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'mus-sosyal-profesorluk',
-    'aday_notu' => 'EK-1\'in tüm maddelerinden toplam en az 1200 puan isteniyor. Ayrıca A2.1 ile '
-        .'A2.2 makalelerinden en az 200 puan (sağlamayanlar eksiği A1, B1 ve B2\'den tamamlar), '
-        .'doçent unvanınızı aldıktan sonra C1-C7 kapsamından en az 50 puan ve bir başlıca '
-        .'araştırma eseri gerekiyor. Lisansüstü programı bulunmayan bölümlerde C1-C7 barajı '
+    'aday_notu' => 'Tüm faaliyetlerinizden toplam en az 1200 puan isteniyor. Ayrıca SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki '
+        .'makalelerinizden en az 200 puan (sağlamayanlar eksiği kitap ve ulusal makale '
+        .'kalemlerinden tamamlar), doçent unvanınızı aldıktan sonra proje, patent ve fikri '
+        .'mülkiyet kalemlerinizden en az 50 puan ve bir başlıca araştırma eseri gerekiyor. '
+        .'Lisansüstü programı bulunmayan bölümlerde bu baraj '
         .'aranmıyor; motor bölüm bilgisini tutmadığı için barajı yine de uyguluyor. Doçentlik '
         .'başvuru şartlarını yeniden sağlama koşulunu motor hesaplayamıyor. Merkezi bir yabancı '
         .'dil sınavından en az 65 puan gerekiyor.'.$ILETISIM_NOTU,
@@ -270,13 +276,13 @@ $esikler[] = [
         $dil,
         $uakKosullari,
         $baslicaEser,
-        Kalip::veya('A2.1-A2.2 barajı ya da telafisi', [
-            Kalip::puanDan('A2.1 ve A2.2 makalelerinden en az 200 puan', ['A2.1-2'], 200, madde: '11-3-b.1'),
-            Kalip::puanDan('Ya da A2.1, A2.2, A1, B1 ve B2 kalemlerinden toplam en az 200 puan', ['A2-A1-B1-B2'], 200, madde: '11-3-b.1'),
+        Kalip::veya('Makale barajı ya da telafisi', [
+            Kalip::puanDan('SCI, SCI-Expanded, SSCI ve AHCI dergilerindeki makalelerinizden en az 200 puan', ['A2.1-2'], 200, madde: '11-3-b.1'),
+            Kalip::puanDan('Ya da makale ve kitap kalemlerinizden toplam en az 200 puan', ['A2-A1-B1-B2'], 200, madde: '11-3-b.1'),
         ]),
-        Kalip::veya('C1-C7 barajı ya da telafisi', [
-            Kalip::puanDan('Doçent unvanınızı aldıktan sonra C1-C7 kapsamından en az 50 puan', ['C1-C7'], 50, $DOCENTLIK, madde: '11-3-b.2'),
-            Kalip::puanDan('Ya da A2.1, A2.2, A1, B1 ve B2 kalemlerinden toplam en az 250 puan', ['A2-A1-B1-B2'], 250, madde: '11-3-b.2'),
+        Kalip::veya('Proje, patent ve diğer faaliyet barajı ya da telafisi', [
+            Kalip::puanDan('Doçent unvanınızı aldıktan sonra proje, patent ve diğer faaliyet kalemlerinizden en az 50 puan', ['C1-C7'], 50, $DOCENTLIK, madde: '11-3-b.2'),
+            Kalip::puanDan('Ya da makale ve kitap kalemlerinizden toplam en az 250 puan', ['A2-A1-B1-B2'], 250, madde: '11-3-b.2'),
         ]),
         Kalip::toplam(1200),
     ]),

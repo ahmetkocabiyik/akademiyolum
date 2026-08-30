@@ -65,8 +65,10 @@ $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 
 $T13 = ['T1-T3'];
 $T123 = ['T1-T2-T3'];
-$LISTE13 = 'Tablo 1 ve Tablo 3';
-$LISTE123 = 'Tablo 1, Tablo 2 ve Tablo 3';
+// Adaya gösterilen küme adları (KONVANSIYONLAR §2). T1 akademik yayın ve
+// faaliyet, T2 mimari ve sanatsal etkinlik, T3 eğitim ve kurumsal katkı.
+$LISTE13 = 'Akademik faaliyet ve kurumsal katkı';
+$LISTE123 = 'Akademik faaliyet, sanatsal etkinlik ve kurumsal katkı';
 
 $DIL_NOTU = ' DİKKAT: çalışma alanı bir yabancı dil olan bölümlerde yönerge AYRICA ilgili dilde '
     .'70 (doktor öğretim üyeliği) ya da 85 (doçentlik ve profesörlük) puan istiyor; bölümün '
@@ -94,7 +96,7 @@ $ikiYil = fn (string $md): array => Kalip::beyan(
 
 $drYayin = fn (?array $donem): array => Kalip::ve('Yayın koşulu', [
     Kalip::adet(
-        'Tablo 1\'in 1/a-b, 2/a-d ve 4/e-h maddelerindeki yayın türlerinde en az 3 yayınınız olmalı',
+        'Makale, kitap ve bildiri türünden en az 3 yayınınız olmalı',
         ['DR-YAYIN'], 3, donem: $donem, madde: 'Madde 4(4)(a) / 4(5)(a)',
     ),
     Kalip::adet(
@@ -105,7 +107,7 @@ $drYayin = fn (?array $donem): array => Kalip::ve('Yayın koşulu', [
 
 $docYayin = Kalip::ve('Yayın koşulu', [
     Kalip::adet(
-        'Tablo 1\'in 1/a-b ve 2/a-d maddelerindeki yayın türlerinde en az 6 yayınınız olmalı',
+        'Makale ve kitap türünden en az 6 yayınınız olmalı',
         ['DOC-YAYIN'], 6, madde: 'Madde 5(3)(b) / 5(4)(c) / 5(5)(c) / 5(6)(a)',
     ),
     Kalip::adet(
@@ -276,14 +278,14 @@ $profesorEsik = function (string $anahtar, array $alanlar, array $kume, string $
 
 $esikler[] = $profesorEsik('genel', $FEN_SOSYAL, $T13, $LISTE13, 'kalan bütün fakülteler',
     [
-        Kalip::adet('Doçentlik sonrası Tablo 1\'in 1/a-b ve 2/a-d maddelerinde en az 3 yayın daha', ['DOC-YAYIN'], 3, donem: $DOCENTLIK, madde: 'Madde 6(2)'),
+        Kalip::adet('Doçentlik sonrası makale ve kitap türünden en az 3 yayın daha', ['DOC-YAYIN'], 3, donem: $DOCENTLIK, madde: 'Madde 6(2)'),
         Kalip::adet('Bu yayınlardan en az 1 tanesinde başlıca yazar olmalısınız', ['DOC-YAYIN'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'Madde 6(2)'),
     ],
     'biri başlıca yazar olmak üzere 3 yayın daha');
 
 $esikler[] = $profesorEsik('sanat', $SANAT, $T123, $LISTE123,
     'Güzel Sanatlar Fakültesi ve Mimarlık Bölümü',
-    [Kalip::puanDan('Doçentlik sonrası Tablo 2 (mimari ve sanatsal etkinlikler) kalemlerinizden en az 50 puan', ['T2'], 50, $DOCENTLIK, madde: 'Madde 6(2)')],
-    'Tablo 2\'den en az 50 puan getirecek etkinlik');
+    [Kalip::puanDan('Doçentlik sonrası mimari ve sanatsal etkinlik kalemlerinizden en az 50 puan', ['T2'], 50, $DOCENTLIK, madde: 'Madde 6(2)')],
+    'mimari ve sanatsal etkinliklerinizden en az 50 puan');
 
 return $esikler;

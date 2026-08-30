@@ -96,7 +96,7 @@ $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 $UYARI = ' DİKKAT: başlıca eser koşulu "tek yazar, ilk yazar ya da sorumlu yazar olmak" '
     .'dalıyla uygulanıyor; yönergenin "öğrencileriyle birlikte yapılmış yayın" ve "yazar '
     .'adları alfabetikse feragatname" alternatifleri kayıttan okunamadığı için koşul '
-    .'olduğundan ZOR görünür. MADDE 2.a\'nın "birimdeki GTÜ doktoralı öğretim üyesi oranı '
+    .'olduğundan ZOR görünür. Yönergenin "birimdeki GTÜ doktoralı öğretim üyesi oranı '
     .'%30\'u geçemez" kuralı birimin kadro bileşimine bağlı olduğu için hiç uygulanmıyor.';
 
 $postdoc = Kalip::beyan(
@@ -128,7 +128,7 @@ $doktoraTezi = Kalip::adet(
     1,
     telafi: Kalip::adet(
         'Ya da doktora programı olmayan bir bölümden başvuruyorsanız en az 4 lisansüstü tez '
-        .'tamamlatmış olmak (GEÇİCİ MADDE 2)',
+        .'tamamlatmış olmak',
         ['TEZ-ASIL'],
         4,
     ),
@@ -171,10 +171,10 @@ foreach ([
         'anahtar' => "gebze-teknik-{$anahtar}-dr",
         'aday_notu' => 'Mühendislik, Havacılık ve Uzay Bilimleri ve Temel Bilimler fakültelerinde '
             ."Dr. Öğretim Üyeliği için {$birim} adaylarından toplamda en az {$toplam} puan ve en az "
-            .'bir başlıca eser isteniyor. Yeniden atanma koşulları (MADDE 4) atama süresine bağlı '
+            .'bir başlıca eser isteniyor. Yeniden atanma koşulları atama süresine bağlı '
             .'olduğu için burada gösterilmiyor: 1 yıllık yeniden atamada 24, 2 yıllıkta 48, '
-            .'3 yıllıkta 72, 4 yıllıkta 96 puan ve bu puanın en az üçte biri 1, 3, 4.8, 7, 8, '
-            .'10.7-10.10 kodlu faaliyetlerden isteniyor.'.$UYARI,
+            .'3 yıllıkta 72, 4 yıllıkta 96 puan ve bu puanın en az üçte biri makale, kitap, '
+            .'bildiri, proje ve patent kalemlerinden isteniyor.'.$UYARI,
         'universite' => $UNIVERSITE,
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $alanlar,
@@ -280,7 +280,7 @@ $esikler[] = [
         $seminer,
         Kalip::adet('SCI, SCI-E, SSCI ya da AHCI kapsamındaki dergilerde en az 1 özgün makaleniz olmalı', ['SCI-MAKALE'], 1, madde: 'MADDE 7.ç'),
         Kalip::adet(
-            'MADDE 2.ç.ii\'de tanımlı kalemlerden (makale, tez yayını, kitap) tek yazar, ilk yazar ya '
+            'Makale, tez yayını ya da kitap türünden, tek yazar, ilk yazar ya '
             .'da sorumlu yazar olduğunuz en az 1 eseriniz olmalı (başlıca eser)',
             ['BASLICA-SBI'], 1, yazar: 'baslica', madde: 'MADDE 7.d',
         ),
@@ -305,7 +305,7 @@ $esikler[] = [
         .'b-e bentlerinden en az ikisi. Puan barajı yok.',
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine yeniden atanma — İşletme Fakültesi', [
         Kalip::adet(
-            'Son atamanızdan sonra, MADDE 2.ç.ii\'de tanımlı kalemlerden tek yazar, ilk yazar ya da '
+            'Son atamanızdan sonra makale, tez yayını ya da kitap türünden, tek yazar, ilk yazar ya da '
             .'sorumlu yazar olduğunuz en az 1 eseriniz olmalı (başlıca eser)',
             ['BASLICA-SBI'], 1, yazar: 'baslica', donem: $SON_ATAMA, madde: 'MADDE 8.a',
         ),
@@ -339,7 +339,7 @@ $esikler[] = [
         Kalip::adet('SCI, SCI-E, SSCI ya da AHCI kapsamındaki dergilerde en az 2 özgün makaleniz olmalı', ['SCI-MAKALE'], 2, madde: 'MADDE 9.ç'),
         Kalip::adet('Bu makalelerden en az 1\'i doktora derecenizi aldıktan sonra olmalı', ['SCI-MAKALE'], 1, donem: $DOKTORA, madde: 'MADDE 9.ç'),
         Kalip::adet(
-            'MADDE 2.ç.ii\'de tanımlı kalemlerden tek yazar, ilk yazar ya da sorumlu yazar olduğunuz '
+            'Makale, tez yayını ya da kitap türünden, tek yazar, ilk yazar ya da sorumlu yazar olduğunuz '
             .'en az 2 eseriniz olmalı (başlıca eser)',
             ['BASLICA-SBI'], 2, yazar: 'baslica', madde: 'MADDE 9.d',
         ),
@@ -373,7 +373,7 @@ $esikler[] = [
         Kalip::adet('SCI, SCI-E, SSCI ya da AHCI kapsamındaki dergilerde en az 4 özgün makaleniz olmalı', ['SCI-MAKALE'], 4, madde: 'MADDE 10.a'),
         Kalip::adet('Bu makalelerden en az 2\'si doçentlik unvanınızı aldıktan sonra olmalı', ['SCI-MAKALE'], 2, donem: $DOCENTLIK, madde: 'MADDE 10.a'),
         Kalip::adet(
-            'Doçentlik unvanınızı aldıktan sonra, MADDE 2.ç.ii\'de tanımlı kalemlerden tek yazar, ilk '
+            'Doçentlik unvanınızı aldıktan sonra makale, tez yayını ya da kitap türünden, tek yazar, ilk '
             .'yazar ya da sorumlu yazar olduğunuz en az 2 eseriniz olmalı (başlıca eser)',
             ['BASLICA-SBI'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: 'MADDE 10.c',
         ),
@@ -407,7 +407,7 @@ $esikler[] = [
         $postdoc,
         $seminer,
         Kalip::adet(
-            'MADDE 2.ç.iii\'te tanımlı kalemlerden (makale, tez yayını, kitap) tek yazar, ilk yazar ya '
+            'Makale, tez yayını ya da kitap türünden, tek yazar, ilk yazar ya '
             .'da sorumlu yazar olduğunuz en az 1 eseriniz ya da 4.1, 4.2, 4.3, 4.7, 4.8 kodlu '
             .'kalemlerden birine sahip olmanız gerekiyor (başlıca eser)',
             ['BASLICA-MPT'], 1, yazar: 'baslica', madde: 'MADDE 11.ç',
@@ -431,7 +431,7 @@ $esikler[] = [
         .'b-f bentlerinden en az üçü. Puan barajı yok.',
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine yeniden atanma — Mimarlık Fakültesi', [
         Kalip::adet(
-            'Son atamanızdan sonra, MADDE 2.ç.iii\'te tanımlı kalemlerden en az 1 başlıca eseriniz olmalı',
+            'Son atamanızdan sonra makale, tez yayını ya da kitap türünden en az 1 başlıca eseriniz olmalı',
             ['BASLICA-MPT'], 1, yazar: 'baslica', donem: $SON_ATAMA, madde: 'MADDE 12.a',
         ),
         Kalip::kIle('Aşağıdaki ölçütlerden en az 3 tanesini sağlamalısınız', 3, [
@@ -465,7 +465,7 @@ $esikler[] = [
         $postdoc,
         $seminer,
         Kalip::adet(
-            'MADDE 2.ç.iii\'te tanımlı kalemlerden en az 2 başlıca eseriniz olmalı',
+            'Makale, tez yayını ya da kitap türünden en az 2 başlıca eseriniz olmalı',
             ['BASLICA-MPT'], 2, yazar: 'baslica', madde: 'MADDE 13.ç',
         ),
         Kalip::adet(
@@ -500,7 +500,7 @@ $esikler[] = [
         $postdoc,
         $seminer,
         Kalip::adet(
-            'MADDE 2.ç.iii\'te tanımlı kalemlerden en az 4 başlıca eseriniz olmalı',
+            'Makale, tez yayını ya da kitap türünden en az 4 başlıca eseriniz olmalı',
             ['BASLICA-MPT'], 4, yazar: 'baslica', madde: 'MADDE 14.a',
         ),
         Kalip::adet(

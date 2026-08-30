@@ -81,7 +81,8 @@ $NOT_CETVEL = ' Q1, Q2 ve Q3 dergilerindeki makalelere verilen %50 çeyreklik pr
     .'gömüldü: bu makaleler 300 yerine 450 puan alıyor. Ortak çalışmalarda puan yazar sırasına '
     .'değil kişi sayısına bakıyor (iki yazarlıda %80, altı ve daha fazlada %40). Çizelgede tez '
     .'danışmanlığı, ders verme ve idari görev satırı yok; bu kayıtlarınız toplam puana katkı '
-    .'vermiyor. Tablo 2 makalelerin ÖZGÜN ARAŞTIRMA MAKALESİ olmasını istiyor; motor sayı '
+    .'vermiyor. Yönerge sayı koşullarındaki makalelerin ÖZGÜN ARAŞTIRMA MAKALESİ olmasını '
+    .'istiyor; motor sayı '
     .'koşullarında derleme ve kısa makaleleri de sayıyor, koşul burada olduğundan hafif '
     .'görünüyor.';
 
@@ -111,9 +112,8 @@ $grup = function (string $kod, array $alanlar, ?string $birim, string $ad, array
         'cetvel' => $CETVEL,
         'notlar' => $ad.' doktor öğretim üyesi ilk atama: Tablo 1\'den '.$drPuan.' puan ve '
             .'Tablo 2\'nin yayın koşulları.',
-        'aday_notu' => $ad.' alanlarında doktor öğretim üyesi kadrosuna İLK ATANMA. MADDE 4 '
-            .'Tablo 1\'in puan barajıyla Tablo 2\'nin yayın koşullarının BİRLİKTE sağlanmasını '
-            .'istiyor.'.$NOT_DIL.$NOT_CETVEL,
+        'aday_notu' => $ad.' alanlarında doktor öğretim üyesi kadrosuna İLK ATANMA. Yönerge '
+            .'puan barajıyla yayın koşullarının BİRLİKTE sağlanmasını istiyor.'.$NOT_DIL.$NOT_CETVEL,
         'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna ilk atanma — '.$ad,
             array_values([$DIL, $DIL_NOT, ...$drKosul, Kalip::toplam($drPuan)])),
     ];
@@ -128,7 +128,7 @@ $grup = function (string $kod, array $alanlar, ?string $birim, string $ad, array
         'notlar' => $ad.' doktor öğretim üyesi yeniden atama: son atamadan sonra Tablo 1\'den '
             .$yenidenPuan.' puan ve Tablo 2\'nin yayın koşulları.',
         'aday_notu' => $ad.' alanlarında doktor öğretim üyesi kadrosuna YENİDEN ATANMA. '
-            .'Tablo 1\'in [3] numaralı dipnotu uyarınca puanlar SON ATAMADAN SONRA alınmış '
+            .'Puan çizelgesinin dipnotu uyarınca puanlar SON ATAMADAN SONRA alınmış '
             .'olmalı.'.$NOT_DIL.$NOT_CETVEL,
         'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna yeniden atanma — '.$ad,
             array_values([$DIL, $DIL_NOT, ...$yenidenKosul, Kalip::toplam($yenidenPuan, $SON_ATAMA)])),
@@ -143,7 +143,7 @@ $grup = function (string $kod, array $alanlar, ?string $birim, string $ad, array
         'cetvel' => $CETVEL,
         'notlar' => $ad.' doçentlik: Tablo 1\'den '.$docPuan.' puan ve Tablo 2\'nin yayın '
             .'koşulları.',
-        'aday_notu' => $ad.' alanlarında doçent kadrosuna atanma. Tablo 1 bu grup için '
+        'aday_notu' => $ad.' alanlarında doçent kadrosuna atanma. Yönerge bu grup için '
             .$docPuan.' puan istiyor; puan barajında dönem sınırı yok, yayın koşullarının bir '
             .'kısmı ise doktora ya da uzmanlık derecesinden sonraki çalışmalardan '
             .'sağlanmalı.'.$NOT_DIL.$NOT_CETVEL,
@@ -160,7 +160,7 @@ $grup = function (string $kod, array $alanlar, ?string $birim, string $ad, array
         'cetvel' => $CETVEL,
         'notlar' => $ad.' profesörlük: Tablo 1\'den '.$profPuan.' puan (en az 700\'ü doçentlik '
             .'sonrası) ve Tablo 2\'nin yayın koşulları.',
-        'aday_notu' => $ad.' alanlarında profesör kadrosuna atanma. Tablo 1 bu grup için '
+        'aday_notu' => $ad.' alanlarında profesör kadrosuna atanma. Yönerge bu grup için '
             .$profPuan.' puan istiyor; [4] numaralı dipnot ayrıca bu puanın en az 700\'ünün '
             .'DOÇENTLİK UNVANI ALINDIKTAN SONRA kazanılmasını şart koşuyor.'
             .$NOT_DIL.$NOT_CETVEL,
