@@ -49,7 +49,7 @@ $dilNotu = 'Yabancı dil barajı birime göre yükseliyor: çalışma alanı yab
     .'seçilemediği için burada genel eşik gösteriliyor.';
 
 $yenidenAtamaNotu = 'Yeniden atanmada A1 (makale) kalemlerinden en az 20 puan almak şartıyla '
-    .'EK-1\'den en az 60 puan isteniyor; üç yıllık atama dönemine bağlı olduğu ve atama tarihi '
+    .'tüm faaliyetlerinizden en az 60 puan isteniyor; üç yıllık atama dönemine bağlı olduğu ve atama tarihi '
     .'burada tutulmadığı için yeniden atanma eşiği girilmedi. Koşulu sağlayamayan adaya bir '
     .'defaya mahsus 1 yıl daha verilebiliyor.';
 

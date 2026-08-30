@@ -412,9 +412,9 @@ $esikler[] = $docentEsigi('mimarlik', 'Mimarlık Fakültesi', ['mimarlik'],
     [$q1VeyaQ2Q3('8-2-ğ')],
     'MADDE 8(2)(ğ): Q1\'de 1 yayın veya Q2-Q3\'te 2 yayın.');
 
-$docentEkYok = 'MADDE 8(2)\'de bu fakülte için ek koşul belirtilmemiş; yalnız MADDE 8(1) '
+$docentEkYok = 'Yönergede bu fakülte için ek koşul belirtilmemiş; yalnız genel koşullar '
     .'koşulları uygulanır.';
-$docentEkYokNot = ' Yönerge bu fakülte için MADDE 8(2)\'de ayrı bir yayın koşulu belirtmiyor; '
+$docentEkYokNot = ' Yönerge bu fakülte için ayrı bir yayın koşulu belirtmiyor; '
     .'yalnız doçentlik unvanı, deneme dersi ve proje savunması aranıyor.';
 
 $esikler[] = $docentEsigi('hukuk', 'Hukuk Fakültesi', ['hukuk'], [], $docentEkYok, $docentEkYokNot);

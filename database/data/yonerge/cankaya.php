@@ -112,7 +112,7 @@ $telafi = fn (int $azami): array => [
 ];
 
 $sozluSinavNotu = 'Doçentlik sözlü sınav başarı belgeniz yoksa yönerge her alanda 2 özgün tam '
-    .'araştırma makalesi DAHA istiyor (MADDE 12/6). Sınav durumunuz burada tutulmadığı için '
+    .'araştırma makalesi DAHA istiyor. Sınav durumunuz burada tutulmadığı için '
     .'DÜŞÜK baraj gösteriliyor; belgeniz yoksa gerçek şartınız iki makale daha ağır.';
 
 $tezNotu = 'Doçentlik ve profesörlüğün temel makale şartı LİSANSÜSTÜ TEZLERİNİZDEN ÜRETİLMEMİŞ '
@@ -127,7 +127,7 @@ $telafiNotu = 'Yönerge makale şartını sağlayamayan adaya telafi tanıyor: T
 
 $kriterNotu = 'Çankaya PUAN İSTEMİYOR: her kadro için TEMEL KRİTERLERİN TÜMÜ ile ÖZEL '
     .'KRİTERLERİN EN AZ BELİRLİ SAYIDA olanı birlikte aranıyor. Ön değerlendirmede koşulları '
-    .'sağlamış olmak yönergenin kendi ifadesiyle "adaylar için bir hak oluşturmaz" (MADDE 9/1).';
+    .'sağlamış olmak yönergenin kendi ifadesiyle "adaylar için bir hak oluşturmaz".';
 
 $yenidenAtanma = 'Doktor öğretim üyeliği atamaları en çok 30 ay için yapılıyor ve yeniden '
     .'atanmada temel makale şartı son atama tarihinden sonrası için yeniden isteniyor; o tarih '

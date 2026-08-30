@@ -314,7 +314,7 @@ $esikler[] = [
     'notlar' => 'Madde 5.3.2: her atama dönemi için Ek-3 1(a) veya Ek-3 4(a)-(c)\'den veya Ek-3 '
         .'6(a)-(d) veya Ek-3 8(a)-(c)\'den olmak üzere en az 10 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine yeniden atanma — Eğitim Bilimleri', [
-        Kalip::toplam(10, $SON_ATAMA, ['E3-YENIDEN'], 'Ek-3 1(a), 4, 6 ve 8. maddeleri'),
+        Kalip::toplam(10, $SON_ATAMA, ['E3-YENIDEN'], 'Makale, atıf, proje ve ders'),
         $niyetMektubu,
     ]),
 ];

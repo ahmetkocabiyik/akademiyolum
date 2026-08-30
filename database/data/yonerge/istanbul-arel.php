@@ -85,8 +85,8 @@ $profOrtak = [
 ];
 
 $profYayinVeyaProje = fn (int $yayin): array => [
-    Kalip::veya('Son beş yılda A1a yayını ya da K1-K4 projelerinde yürütücülük', [
-        Kalip::adet('Son beş yılda A.1.a kategorisinde yayın', ['A1A'], $yayin, donem: Kalip::sonYil(5), madde: 'Ek Atanma Kriterleri — Profesörlük'),
+    Kalip::veya('Son beş yılda SCI-Expanded, SSCI ya da AHCI yayını, ya da proje yürütücülüğü', [
+        Kalip::adet('Son beş yılda SCI-Expanded, SSCI ya da AHCI dergisinde yayın', ['A1A'], $yayin, donem: Kalip::sonYil(5), madde: 'Ek Atanma Kriterleri — Profesörlük'),
         Kalip::adet('Son beş yılda K1, K2, K3 ya da K4 gruplarından en az bir projede yürütücü olmak', ['K1-4-YURUTUCU'], 1, donem: Kalip::sonYil(5), madde: 'Ek Atanma Kriterleri — Profesörlük'),
     ]),
 ];

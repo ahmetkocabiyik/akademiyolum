@@ -79,14 +79,14 @@ $tumAlanlar = [...$bilimAlanlari, 'guzel_sanatlar', 'spor', 'ziraat'];
 $genelSartBeyani = Kalip::beyan('657 sayılı Devlet Memurları Kanununun 48. maddesindeki genel '
     .'şartlara sahip olmak', 'Madde 6/1-a, 7/1-a, 8/1-a');
 
-$baglayiciDegil = 'Kırklareli yönergesi MADDE 12/1\'de puanlamanın tek başına bir '
+$baglayiciDegil = 'Kırklareli yönergesi puanlamanın tek başına bir '
     .'değerlendirme unsuru olmadığını, puan ve yayın koşulunu sağlamanın adaya bağlayıcı bir '
     .'hak vermediğini açıkça yazıyor. Buradaki sonuç ön değerlendirmedir; jüri raporu ayrıca '
     .'yayınlarınızın sürekliliğini, aldığınız atıfları ve eğitime katkınızı da değerlendiriyor.';
 
 $kadroEksigi = 'Başvurduğunuz programdaki öğretim üyesi ve öğretim görevlisi sayısı YÖK\'ün o '
     .'program için gerekli gördüğü asgarinin altındaysa yayın, puan ve yabancı dil koşullarının '
-    .'hiçbiri aranmıyor (MADDE 8/1-e). Bu durum program kadrosuna bağlı olduğu için burada '
+    .'hiçbiri aranmıyor. Bu durum program kadrosuna bağlı olduğu için burada '
     .'hesaplanamıyor.';
 
 $yenidenAtanma = 'Yeniden atanmada baraj atama sürenize bağlı (2 yıl için 200, 3 yıl için 300, '

@@ -98,10 +98,10 @@ $senyorNotu = 'Yönerge "senyör yazar"ı (alanınızda en az on uluslararası y
 
 $sozluSinav = 'Doçentlik unvanını SÖZLÜ SINAVSIZ aldıysanız yönerge iki kol sunuyor: ya ÜAK '
     .'sözlü sınavında başarılı olduğunuzu belgeleyeceksiniz ya da örnek ders anlatıp buradaki '
-    .'bütün barajları %20 fazlasıyla sağlayacaksınız (Madde 11/1-b). Burada DÜŞÜK baraj '
+    .'bütün barajları %20 fazlasıyla sağlayacaksınız. Burada DÜŞÜK baraj '
     .'gösteriliyor; sözlü sınavsız doçentseniz gerçek barajınız %20 daha yüksek.';
 
-$yenidenAtanma = 'Doktor öğretim üyeliğine YENİDEN ATANMA eşiği girilmedi: EK-1 yeniden '
+$yenidenAtanma = 'Doktor öğretim üyeliğine YENİDEN ATANMA eşiği girilmedi: yönerge yeniden '
     .'atamayı üç, iki ve bir yıllık üç ayrı sütunla veriyor (80 / 60 / 40 puan) ve hangisinin '
     .'geçerli olduğu son atanma tarihinize bağlı.';
 
@@ -217,7 +217,7 @@ $esikler = [
         'EK-1: doktora sonrası asgari toplam 325 puan (PUAN-1 25 + PUAN-2 300). Dipnot (h): '
         .'bu puan ÜAK doçentlik asgari puanına İLAVEDİR.',
         'Buradaki 325 puan, ÜAK\'ın doçentlik için istediği asgari puana EK olarak isteniyor '
-        .'(EK-1 dipnot h). '.$docNotu,
+        .'. '.$docNotu,
         [$puan1Kosulu(25, 'EK-1 PUAN-1'), $docentlikUnvani, $dersBeyani]),
     $esik('docentlik-guzel-sanatlar', 'docentlik', 'Doçent', ['guzel_sanatlar'], 325, $DOKTORA, 13, 65,
         'EK-1 dipnot (i): Güzel Sanatlar temel alanında PUAN-1\'in %50\'si yeterli — 25 yerine '

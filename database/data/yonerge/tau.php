@@ -70,7 +70,7 @@ $NOT_DIL = ' Yabancı dil koşulu, Yükseköğretim Kurumlarında Yabancı Dil �
 $NOT_SUNUM = ' İlk kez başvuranlardan eğiticinin eğitilmesi sertifikası ya da kurul huzurunda '
     .'başarılı bulunan bir ders sunumu isteniyor; Türkçe dışında okutulmayacak dersler için '
     .'ayrıca Almanca deneme dersi sunumu gerekebiliyor.';
-$NOT_POSTER = ' Özet olarak yayımlanan bildirileriniz sayılmıyor: EK-1\'in E türü posteri hariç '
+$NOT_POSTER = ' Özet olarak yayımlanan bildirileriniz sayılmıyor: yönerge posteri hariç '
     .'tutuyor, kaynak sözlüğü ise sözlü özet bildiriyi posterden ayırmıyor.';
 
 $dil = Kalip::yds(85);

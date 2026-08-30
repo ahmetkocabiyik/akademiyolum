@@ -76,11 +76,11 @@ $CMIM = 'bilecik-2025-mimarlik';
 $CSOS = 'bilecik-2025-sosyal';
 $CGS = 'bilecik-2025-guzel-sanatlar';
 
-$yenidenAtanma = 'Doktor öğretim üyeliğine YENİDEN ATANMA eşiği girilmedi: Tablo 2\'nin '
+$yenidenAtanma = 'Doktor öğretim üyeliğine YENİDEN ATANMA eşiği girilmedi: ilk atamanın '
     .'koşulları son atandığınız tarihten sonraki dönemde ölçülüyor, o tarih burada '
     .'tutulmuyor. Yeniden atanmada toplam baraj 140 değil 80 puan. '
     .'2547 sayılı Kanunun 50/d maddesine göre görev yapan ve kadrosu bir yıl uzatılmış '
-    .'araştırma görevlisiyseniz toplam barajın YARISI (70 puan) yetiyor (MADDE 10/12); '
+    .'araştırma görevlisiyseniz toplam barajın YARISI (70 puan) yetiyor; '
     .'bu istisna kadro durumunuza bağlı olduğu için burada hesaplanmıyor.';
 
 $dersNotu = 'EĞİTİM-ÖĞRETİM koşulu hesaplanamıyor: yönerge puanı haftalık ders SAATİ başına '

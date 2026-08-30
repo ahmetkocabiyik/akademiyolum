@@ -151,7 +151,7 @@ foreach ([
 
     $esikler[] = [
         'anahtar' => "ktun-{$anahtar}-dr",
-        'aday_notu' => "Madde {$mdDr} ({$alanAdi}): başlıca eser niteliğinde 1 faaliyet, "
+        'aday_notu' => "{$alanAdi}: başlıca eser niteliğinde 1 faaliyet, "
             ."{$drYayinAdi} 60 puan, ulusal makale ve bildiri sayısı, K-L-M faaliyetlerinden 15 "
             .'puan, A-G ile K-L-M faaliyetlerinden 130 puan ve tüm faaliyetlerden 190 puan '
             .'isteniyor. Ayrıca en az biri doktora tezinizden olmak üzere lisansüstü '
@@ -169,7 +169,7 @@ foreach ([
     // ── DOÇENTLİK (madde 10 / 11) ──
     $esikler[] = [
         'anahtar' => "ktun-{$anahtar}-docentlik",
-        'aday_notu' => "Madde {$mdDoc} ({$alanAdi}): doktora unvanınızı aldıktan sonra başlıca "
+        'aday_notu' => "{$alanAdi}: doktora unvanınızı aldıktan sonra başlıca "
             .'eser niteliğinde 2 faaliyet ve bunlardan ayrı en az 1 nitelikli yayın, seçili '
             .'yayın türlerinden 80 puan, B-C-D-E-F kategorilerinden 70 puan (en az yarısı '
             .'doktora sonrası), K-L-M faaliyetlerinden 30 puan (doktora sonrası), A-G ile '
@@ -236,7 +236,7 @@ foreach ([
     // ── PROFESÖRLÜK (madde 12 / 13) ──
     $esikler[] = [
         'anahtar' => "ktun-{$anahtar}-profesorluk",
-        'aday_notu' => "Madde {$mdProf} ({$alanAdi}): başlıca eser niteliğinde 3 faaliyet "
+        'aday_notu' => "{$alanAdi}: başlıca eser niteliğinde 3 faaliyet "
             .'(en az 1\'i doçentlik unvanınızdan sonra), doçentlik sonrası seçili yayın '
             .'türlerinden 2 faaliyet, doçentlik sonrası K-1/K-2/K-3, L ve M faaliyetlerinden '
             .'50 puan, doçentlik sonrası A-G ile K-L-M faaliyetlerinden 200 puan, aynı '

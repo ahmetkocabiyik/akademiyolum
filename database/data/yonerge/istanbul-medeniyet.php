@@ -73,7 +73,7 @@ $DIGER_ALANLAR = ['sosyal', 'fen', 'muhendislik', 'saglik', 'egitim', 'ilahiyat'
 $SANAT_ALANLARI = ['guzel_sanatlar', 'mimarlik'];
 
 $DIL_NOTU = ' Yabancı dille eğitim yapan bir lisans programına başvuruyorsanız YDS yerine '
-    .'"ilgili yabancı dilde ders verebilme" şartı geçerli (MADDE 7/1); bu şart profilden '
+    .'"ilgili yabancı dilde ders verebilme" şartı geçerli; bu şart profilden '
     .'okunamadığı için burada herkese 65 puanlık dil eşiği uygulanıyor.';
 
 $dil = Kalip::yds(65);
@@ -183,7 +183,7 @@ $profesorNotu = 'Doçent unvanınızı aldığınız tarihten sonraki çalışma
 
 $sanatNotu = ' Sanat, Tasarım ve Mimarlık Fakültesi adaylarında bu puanın en az 30\'u Puanlama '
     .'Tablosunun 1. (uluslararası makale), 2. (ulusal makale) ve 4. (kitap) bölümlerinden gelmeli '
-    .'(MADDE 8/4).';
+    .'.';
 
 $esikler[] = [
     'anahtar' => 'istanbul-medeniyet-docentlik',

@@ -279,12 +279,10 @@ her eşiğin bütün düğüm `aciklama`'larını ve `aday_notu`'sunu tarıyor; 
 Tablo-N, EK-N, Çizelge-N, A.1, A1.1 desenlerinden biri geçerse kırılıyor ve
 hangi üniversitenin hangi eşiğinde ne bulduğunu yazıyor.
 
-Kural korpusa SONRADAN eklendi ve o an 111 üniversite kirliydi. Test bu yüzden
-bir **borç listesi** (`$BORCLU`) taşıyor: henüz süpürülmemiş üniversiteler
-listede bekliyor, temizlenenler korumaya giriyor. **Liste yalnızca KISALIR.**
-Bir üniversiteyi temizleyince adını sil; ikinci test zaten "listede olup da
-temiz olan" isimleri yakalayıp seni uyarıyor. Yeni bir yönerge girildiğinde
-listede olmadığı için doğrudan korunuyor.
+Kural korpusa SONRADAN eklendi ve o an 111 üniversite kirliydi; süpürme on
+dokuz partide tamamlandı (bkz. "Aday metni süpürmesi N/N" commit'leri) ve
+geçici borç listesi kaldırıldı. **Test artık bütün korpusu koşulsuz tarıyor.**
+Yeni bir yönerge girildiğinde aday metnine kod sızarsa doğrudan kırılıyor.
 
 Desen NOKTALI kodların (A.1, A1.1) yanında noktasız ARALIKLARI da yakalıyor
 (A1-A4, C1-C7, D1-D4). Dergi çeyrekleri (Q1-Q3) bilinçli olarak dışlandı: onlar

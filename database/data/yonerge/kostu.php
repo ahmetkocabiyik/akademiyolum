@@ -81,7 +81,7 @@ $sanatNotu = 'Çizelgede sanatsal etkinlik satırı hiç yok; sergi, konser, tas
 
 $yeniBirimNotu = 'Yeni kurulan bir fakülte ya da bölüme başvuruyorsanız, birim YÖK\'ün '
     .'öğrenci alımı için aradığı asgari öğretim üyesi sayısına ulaşana ya da mezun verene '
-    .'kadar bu ek koşullar aranmıyor (Madde 13); bu muafiyet burada hesaplanamıyor.';
+    .'kadar bu ek koşullar aranmıyor; bu muafiyet burada hesaplanamıyor.';
 
 return [
     [

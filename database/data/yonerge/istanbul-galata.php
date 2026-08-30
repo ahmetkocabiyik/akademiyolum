@@ -39,7 +39,7 @@ $fenGrubu = ['fen', 'muhendislik', 'saglik', 'ziraat'];
 $sosyalGrubu = ['egitim', 'ilahiyat', 'filoloji', 'hukuk', 'spor', 'sosyal', 'mimarlik'];
 $sanatGrubu = ['guzel_sanatlar'];
 
-$drNotu = 'İstanbul Galata yönergesi Dr. Öğr. Üyeliği için akademik koşul koymuyor; Madde 5 '
+$drNotu = 'İstanbul Galata yönergesi Dr. Öğr. Üyeliği için akademik koşul koymuyor; yalnızca '
     .'yalnızca ilan, jüri ve atama usulünü düzenliyor. Bu kadro için eşik yazılmadı.';
 
 /**

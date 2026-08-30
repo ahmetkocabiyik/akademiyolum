@@ -12,10 +12,10 @@ use App\Services\Scoring\Sart\SartDeposu;
  * ve motorun onun yerine ne saydığını göremiyor. Kod, düğümün `madde` alanına
  * ve `notlar`a yazılır; ikisi de adaya gösterilmiyor.
  *
- * BORÇ LİSTESİ. Bu test korpusa sonradan eklendi ve 111 üniversite kirliydi.
- * Temizlenenler burada korumaya alınıyor, kalanlar `$BORCLU` listesinde
- * bekliyor. Süpürme ilerledikçe listeden isim SİLİNİR — hiçbir zaman isim
- * EKLENMEZ. Yeni bir üniversite girildiğinde bu test onu doğrudan yakalar.
+ * Kural korpusa SONRADAN eklendi ve o an 111 üniversite kirliydi; süpürme on
+ * dokuz partide tamamlandı ve geçici borç listesi kaldırıldı. Test artık
+ * BÜTÜN korpusu koşulsuz tarıyor: yeni bir yönerge girildiğinde aday metnine
+ * kod sızarsa doğrudan kırılır.
  */
 $KOD_DESENI = '/('
     .'\bMADDE\s'          // MADDE 5/1-b
@@ -31,33 +31,6 @@ $KOD_DESENI = '/('
     // KOD DEĞİL, adayın tanıdığı bir ad — desenden dışlanıyor.
     .'|\b(?!Q)[A-Z]\d{1,2}-(?!Q)[A-Z]?\d{1,2}\b'
     .')/u';
-
-/**
- * Henüz süpürülmemiş üniversiteler. BU LİSTE YALNIZCA KISALIR.
- *
- * @var list<string>
- */
-$BORCLU = [
-    'Ataşehir Adıgüzel Meslek Yüksekokulu',
-    'Bilecik Şeyh Edebali Üniversitesi',
-    'Kahramanmaraş İstiklal Üniversitesi',
-    'Kocaeli Sağlık ve Teknoloji Üniversitesi',
-    'Konya Teknik Üniversitesi',
-    'Kırklareli Üniversitesi',
-    'Tarsus Üniversitesi',
-    'Tekirdağ Namık Kemal Üniversitesi',
-    'Türk-Alman Üniversitesi',
-    'Ufuk Üniversitesi',
-    'Yeditepe Üniversitesi',
-    'Çankaya Üniversitesi',
-    'İnönü Üniversitesi',
-    'İstanbul Arel Üniversitesi',
-    'İstanbul Galata Üniversitesi',
-    'İstanbul Medeniyet Üniversitesi',
-    'İstanbul Rumeli Üniversitesi',
-    'İzmir Bakırçay Üniversitesi',
-    'İzmir Yüksek Teknoloji Enstitüsü',
-];
 
 /**
  * Adaya gösterilen bütün metinleri toplar: düğüm açıklamaları ve aday notu.
@@ -80,15 +53,11 @@ function adayMetinleri(array $dugum): array
     return $metinler;
 }
 
-test('temizlenmiş üniversitelerin aday metinlerinde yönerge kodu yok', function () use ($KOD_DESENI, $BORCLU) {
+test('aday metinlerinde yönerge kodu yok', function () use ($KOD_DESENI) {
     $depo = app(SartDeposu::class);
     $sizinti = [];
 
     foreach ($depo->esikler() as $esik) {
-        if (in_array($esik['universite'], $BORCLU, true)) {
-            continue;
-        }
-
         $metinler = adayMetinleri($esik['sart']);
 
         if ($esik['aday_notu'] !== null) {
@@ -103,29 +72,4 @@ test('temizlenmiş üniversitelerin aday metinlerinde yönerge kodu yok', functi
     }
 
     expect(array_values(array_unique($sizinti)))->toBe([]);
-});
-
-test('borç listesindeki her üniversite hâlâ korpusta ve hâlâ kirli', function () use ($KOD_DESENI, $BORCLU) {
-    $depo = app(SartDeposu::class);
-    $kirli = [];
-
-    foreach ($depo->esikler() as $esik) {
-        $metinler = adayMetinleri($esik['sart']);
-
-        if ($esik['aday_notu'] !== null) {
-            $metinler[] = $esik['aday_notu'];
-        }
-
-        foreach ($metinler as $metin) {
-            if (preg_match($KOD_DESENI, $metin)) {
-                $kirli[$esik['universite']] = true;
-            }
-        }
-    }
-
-    // Temizlenen bir üniversite listede kalırsa süpürme ilerlemesi görünmez
-    // olur; listeden silinmesi gerekir.
-    $bosunaBekleyen = array_values(array_diff($BORCLU, array_keys($kirli)));
-
-    expect($bosunaBekleyen)->toBe([], 'Bu üniversiteler temizlenmiş: borç listesinden silin.');
 });

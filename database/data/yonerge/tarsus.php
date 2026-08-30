@@ -44,10 +44,10 @@ $DOC = Kalip::DOCENTLIK_SONRASI;
 $matematikBirimi = 'Matematik ve İstatistik Bilimleri';
 $fenBirimi = 'Fen Bilimleri (Matematik ve İstatistik dışındaki bölümler)';
 
-$dilNotu = 'Yüzde yüz yabancı dille eğitim yapan birimlere başvuruda dil barajı 85 (Madde 2); '
+$dilNotu = 'Yüzde yüz yabancı dille eğitim yapan birimlere başvuruda dil barajı 85; '
     .'burada Türkçe eğitim veren birim varsayılarak 65 gösteriliyor.';
 
-$yenidenAtamaNotu = 'Yeniden atanmada (Madde 4) ilk atanma koşullarının son atama tarihinizden '
+$yenidenAtamaNotu = 'Yeniden atanmada ilk atanma koşullarının son atama tarihinizden '
     .'sonraki çalışmalarla yeniden sağlanması isteniyor; sayılar aynı. Atama tarihi burada '
     .'tutulmadığı için ayrı bir yeniden atanma eşiği girilmedi.';
 

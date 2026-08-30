@@ -105,7 +105,7 @@ $sanayiNotu = 'Mimarlık ve mühendislik proje etkinlikleri bölümünün on dok
     .'toplamınız olduğundan düşük görünür.';
 
 $ingilizceNotu = 'Eğitim dili İngilizce olan bir programa başvuruyorsanız birim başkanı '
-    .'sizden İngilizce seminer ya da deneme dersi isteyebilir (MADDE 16/7); takdire bağlı '
+    .'sizden İngilizce seminer ya da deneme dersi isteyebilir; takdire bağlı '
     .'olduğu için koşul olarak yazılmadı.';
 
 return [

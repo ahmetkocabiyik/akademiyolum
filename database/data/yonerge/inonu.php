@@ -88,7 +88,7 @@ $dil = [
 ];
 
 $lNotu = 'Yönerge bu kadroda ayrıca girişimcilik, teknopark ve teknoloji transfer '
-    .'faaliyetlerinden (L1-L18) puan istiyor. O bölümün kalemleri sisteme girilemediği için '
+    .'faaliyetlerinden puan istiyor. O bölümün kalemleri sisteme girilemediği için '
     .'baraj burada gösterilmiyor; gerçek başvuruda aranacak.';
 
 /**

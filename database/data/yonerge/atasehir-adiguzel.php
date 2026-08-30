@@ -45,7 +45,7 @@ $TUM_ALANLAR = ['fen', 'saglik', 'muhendislik', 'sosyal', 'egitim', 'spor', 'fil
 
 $NOT_ORTAK = ' Yönerge bütün temel alanlara aynı barajları uyguluyor; alan ayrımı yok. '
     .'Tabloda tez izleme ve jüri üyeliği, idari görev ve topluma katkı satırı bulunmadığı için '
-    .'bu kayıtlarınız toplam puanınıza katkı vermiyor. Ortak çalışmalarda puan MADDE 6(10)\'un '
+    .'bu kayıtlarınız toplam puanınıza katkı vermiyor. Ortak çalışmalarda puan yönergenin '
     .'yazar sayısı × sıra matrisine göre bölünüyor; sorumlu yazar birinci isim sayılıyor.';
 
 return [

@@ -39,7 +39,7 @@ $DIL_NOTU = 'Yabancı dil koşulu programın diline bağlı: öğretim dili kıs
     .'İngilizce olan programlarda 85, Türkçe ders verecekler için 55 puan. Araç program dilini '
     .'bilmediği için 55 üzerinden değerlendiriyor.';
 
-$PUAN_NOTU = 'Ek-2\'nin atıf satırları (atıf sayısının 0,5 ve 0,3 katı) ile ders satırları '
+$PUAN_NOTU = 'Atıf satırları (atıf sayısının 0,5 ve 0,3 katı) ile ders satırları '
     .'(dönemlik ders saatiyle çarpılan katsayılar) ondalıklı olduğu için araca girilemedi; '
     .'atıflarınız ve ders kayıtlarınız toplam puana katkı vermiyor. Lisansüstü tezinizden '
     .'üretilmiş yayınlar için ayrı ve düşük olan 4. madde de girilemediğinden bu yayınlar tam '

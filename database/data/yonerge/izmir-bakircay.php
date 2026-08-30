@@ -48,7 +48,7 @@ $FEN = ['fen', 'mimarlik', 'muhendislik', 'saglik', 'ziraat'];
 $SOSYAL = ['egitim', 'filoloji', 'hukuk', 'sosyal'];
 $TUM = [...$FEN, ...$SOSYAL];
 
-$PROF_NOTU = 'Profesörlükte İzmir Bakırçay puan barajı koymuyor; MADDE 11, doçentlik '
+$PROF_NOTU = 'Profesörlükte İzmir Bakırçay puan barajı koymuyor; yönerge doçentlik '
     .'unvanını aldıktan sonraki YENİ çalışmalarla ÜAK\'ın doçentlik başvuru şartlarını '
     .'yeniden sağlamanızı istiyor. Bu şartlar temel alana ve başvuru dönemine göre '
     .'değiştiğinden araç hesaplayamıyor. Doçentlik dosyanızda kullandığınız yayın ve '
@@ -56,7 +56,7 @@ $PROF_NOTU = 'Profesörlükte İzmir Bakırçay puan barajı koymuyor; MADDE 11,
     .'sonra birinci yazar olduğunuz, araştırmaya dayalı bir eseri başlıca araştırma eseri '
     .'olarak göstermeniz gerekiyor.';
 
-$DOC_NOTU = 'Doçent kadrosuna atanmak için puan barajı yok. MADDE 12 iki koşul arıyor: '
+$DOC_NOTU = 'Doçent kadrosuna atanmak için puan barajı yok. Yönerge iki koşul arıyor: '
     .'başvurulan bilim alanında doçent unvanına sahip olmak ve doktora, tıpta uzmanlık ya da '
     .'sanatta yeterlik unvanını aldığınız tarihten sonra en az iki farklı akademik yarıyılda '
     .'fiilen ders vermiş olmak.';
