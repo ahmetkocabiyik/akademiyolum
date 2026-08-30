@@ -54,13 +54,13 @@ return [
         'cetvel' => 'ufuk-2025',
         'notlar' => 'MADDE 5 ve Ek-1: uluslararası yayınlar, ulusal yayınlar, kongre bildirileri '
             .'ve lisansüstü tezlerden üretilen yayınlar kalemlerinden en az toplam 20 puan.',
-        'aday_notu' => 'Doktor öğretim üyeliği için Ek-2\'nin yayın ve bildiri maddelerinden 20 '
+        'aday_notu' => 'Doktor öğretim üyeliği için makale ve bildiri kalemlerinizden 20 '
             .'puan yeterli. Baraj yalnız bu kalemlerden hesaplanıyor; kitap, patent, proje, tez '
             .'danışmanlığı, editörlük, ödül ve idari görev puanlarınız 20 puanlık barajın '
             .'DIŞINDA kalıyor. '.$PUAN_NOTU.' '.$DIL_NOTU,
         'sart' => Kalip::ve('Doktor öğretim üyeliği koşulları', [
             Kalip::yds(55),
-            Kalip::toplam(20, maddeler: ['DR-KRITER'], liste: 'MADDE 5 / Ek-1'),
+            Kalip::toplam(20, maddeler: ['DR-KRITER'], liste: 'Makale ve bildiri'),
         ]),
     ],
     [
@@ -72,9 +72,9 @@ return [
         'notlar' => 'Yönerge yeniden atamayı ayrıca düzenlemiyor; MADDE 5\'in ilk atama koşulu '
             .'uygulandı.',
         'aday_notu' => 'Yönergede yeniden atama için ayrı bir ölçüt yok; ilk atamanın 20 puanlık '
-            .'koşulu uygulandı. Ek-2\'nin 8. maddesi yalnızca "yeniden atamalar için devam eden '
+            .'koşulu uygulandı. Yönerge yalnızca "yeniden atamalar için devam eden '
             .'tez danışmanlıkları bir kez puanlanır" diyor. '.$PUAN_NOTU,
-        'sart' => Kalip::toplam(20, maddeler: ['DR-KRITER'], liste: 'MADDE 5 / Ek-1'),
+        'sart' => Kalip::toplam(20, maddeler: ['DR-KRITER'], liste: 'Makale ve bildiri'),
     ],
     [
         'anahtar' => 'ufuk-docentlik',
@@ -86,7 +86,7 @@ return [
             .'alanda doçent unvanını almış olmak yeterli.',
         'aday_notu' => 'Ufuk Üniversitesinde doçent kadrosuna atanmak için yönergenin koyduğu ek '
             .'bir puan koşulu yok. Yönerge doğrudan 2547 sayılı Kanun ile Öğretim Üyeliğine '
-            .'Yükseltilme ve Atanma Yönetmeliğine atıf yapıyor; Ek-1 tablosu da yalnızca '
+            .'Yükseltilme ve Atanma Yönetmeliğine atıf yapıyor; puan çizelgesi de yalnızca '
             .'Üniversitelerarası Kurul tarafından ilgili alanda doçent unvanının alınmış olmasını '
             .'arıyor. '.$DIL_NOTU,
         'sart' => Kalip::ve('Doçentlik koşulları', [
@@ -117,7 +117,7 @@ return [
             Kalip::metrik('Doçentlik unvanını aldığı tarihten sonra en az altı yarıyıl alanında ve bir yükseköğretim kurumunda ders vermiş olmak', 'ders_yariyil', 6, Kalip::DOCENTLIK_SONRASI),
             Kalip::adet('Uluslararası yayın maddelerinden en az 1 yayın', ['ULUSLARARASI-YAYIN'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Ek-1 (Kriterler 1)'),
             Kalip::adet('Ulusal yayın maddelerinden en az 2 yayın', ['ULUSAL-YAYIN'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Ek-1 (Kriterler 2)'),
-            Kalip::toplam(50, donem: Kalip::DOCENTLIK_SONRASI, liste: 'MADDE 7 / Ek-1'),
+            Kalip::toplam(50, donem: Kalip::DOCENTLIK_SONRASI),
         ]),
     ],
 ];

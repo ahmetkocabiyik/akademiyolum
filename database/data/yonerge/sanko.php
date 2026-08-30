@@ -94,7 +94,7 @@ $cizelgeNotu = 'ÖNEMLİ: SANKO\'nun Puanlama Çizelgesi ve Asgari Koşullar Çi
     .'koşullar yönergenin kendi maddelerinde yazılı olanlar; çizelgeler ek koşul getiriyor '
     .'olabilir, başvurmadan önce üniversiteden isteyin.';
 
-$onkosulNotu = 'Yönerge bu ölçütleri bir ÖN KOŞUL sayıyor (MADDE 5/2): sağlamak tek başına '
+$onkosulNotu = 'Yönerge bu ölçütleri bir ÖN KOŞUL sayıyor: sağlamak tek başına '
     .'atanmaya yetmiyor, asıl değerlendirmeyi jüri yapıyor.';
 
 return [

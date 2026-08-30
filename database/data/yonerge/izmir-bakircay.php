@@ -93,7 +93,7 @@ foreach ([
         'sart' => Kalip::ve('Doktor öğretim üyeliğine ilk atanma koşulları', [
             Kalip::adet('Puan Tablosunun '.$g['cekirdekAd'].' en az 1 eser', [$g['cekirdek']], 1, madde: 'MADDE 13/1'),
             Kalip::adet('Puan Tablosunun '.$g['eserAd'].' en az 3 eser', [$g['eser']], 3, madde: 'MADDE 13/1'),
-            Kalip::toplam(40, liste: 'MADDE 13/1-c'),
+            Kalip::toplam(40),
         ]),
     ]);
 
@@ -118,7 +118,7 @@ foreach ([
                 ]),
                 Kalip::adet('Proje koşulu sağlanmıyorsa Puan Tablosunun '.$g['yenidenAd'].' en az 3 eser', [$g['yeniden']], 3, donem: Kalip::SON_ATAMA_SONRASI, madde: 'MADDE 14/3-c'),
             ]),
-            Kalip::toplam(40, donem: Kalip::SON_ATAMA_SONRASI, liste: 'MADDE 14/3-d'),
+            Kalip::toplam(40, donem: Kalip::SON_ATAMA_SONRASI),
         ]),
     ]);
 }

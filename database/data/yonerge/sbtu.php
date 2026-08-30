@@ -42,7 +42,7 @@ $CETVEL = 'sbtu-2021';
 $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 
-$NOT_ALAN = 'Bu koşullar yönergenin Ek-1 Tablo 1\'inden; tablo Mühendislik ve Doğa Bilimleri, '
+$NOT_ALAN = 'Bu koşullar yönergenin puan tablosundan; tablo Mühendislik ve Doğa Bilimleri, '
     .'Havacılık ve Uzay Bilimleri ile Tarım Bilimleri ve Teknolojileri fakültelerinin bölümleri '
     .'ve Meslek Yüksekokulu programları için yazılmış.';
 $NOT_DIL = ' Yabancı dil (İngilizce) puanının en az 70 olması gerekiyor; lisans ya da doktora '

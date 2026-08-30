@@ -111,7 +111,7 @@ $telafiNotu = 'Yönerge birçok koşula telafi tanıyor: başlıca yazar koşulu
     .'ya da iki makale. Bu telafiler eksik miktara bağlı olduğu için hesaplanamıyor; koşulu '
     .'sağlamayan aday KIRMIZI değil BELİRSİZ görüyor ve telafiyi belgeyle göstermesi gerekiyor.';
 
-$ekBirNotu = 'EK-1\'in bütün kadrolara koyduğu ortak koşullar beyan olarak duruyor: '
+$ekBirNotu = 'Yönergenin bütün kadrolara koyduğu ortak koşullar beyan olarak duruyor: '
     .'profesörlükte doçentlik sonrası en az üç yıl fiilen çalışmış olmak, doçentlik ve '
     .'profesörlükte ÜAK sözlü sınavında başarılı olmak (Web of Science h-indeksiniz 25 ya da 20 '
     .'ise bu şart aranmıyor) ve lisans sonrası alanınızda en az 89 gün yurt dışı gözlem, eğitim '

@@ -43,7 +43,7 @@ $SOSYAL = ['sosyal', 'egitim', 'filoloji', 'ilahiyat', 'hukuk', 'spor', 'guzel_s
 $MAKALE_NOTU = 'Ek-I\'in 1. maddesinin dipnotu ayrıca "bu alandan en az 8 puan almış olmak '
     .'zorunludur" diyor; yani puanınızın bir bölümü mutlaka makalelerden gelmeli.';
 
-$EK2_NOTU = 'Yönergenin Ek-2\'si (sinema, plastik sanatlar, tasarım, geleneksel Türk sanatları, '
+$EK2_NOTU = 'Yönergenin sanat eki (sinema, plastik sanatlar, tasarım, geleneksel Türk sanatları, '
     .'müzik, dans ve halk dansları) araca girilemedi: her bölüm ayrı bir sanat dalına kilitli, '
     .'koşullar "tüm şartlar zorunludur" biçiminde kurgulanmış ve puanlar tek esere değil '
     .'dosyanın tamamına veriliyor. Güzel Sanatlar alanından başvuruyorsanız sanatsal '
@@ -72,8 +72,8 @@ foreach ([
             .'olumlu görüş almanız gerekiyor.'.$sanatEk,
         'sart' => Kalip::ve('Doktor öğretim üyeliği koşulları', [
             Kalip::beyan('Doktora, tıpta uzmanlık ya da sanatta yeterlik derecesi almış veya Üniversitelerarası Kurulca denkliği kabul edilmiş olmak', 'MADDE 5/1-a'),
-            Kalip::toplam(8, maddeler: ['MAKALE'], liste: 'Ek-I madde 1'),
-            Kalip::toplam($g['dr'], liste: 'MADDE 5/1-b'),
+            Kalip::toplam(8, maddeler: ['MAKALE'], liste: 'Makale'),
+            Kalip::toplam($g['dr']),
             Kalip::beyan('Başvurulan birimin kurduğu üç kişilik komisyona sunulan deneme dersinden en az iki jüri üyesinin olumlu görüşünü almak', 'MADDE 5/1-c'),
         ]),
     ]);
@@ -107,8 +107,8 @@ foreach ([
             .'görev puanlarınız 150 puanlık toplama giriyor ama 75 puanlık yayın payına '
             .'sayılmıyor.'.$sanatEk,
         'sart' => Kalip::ve('Profesörlük koşulları', [
-            Kalip::toplam(150, donem: Kalip::DOCENTLIK_SONRASI, liste: 'MADDE 8/1-b'),
-            Kalip::toplam(75, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['YAYIN'], liste: 'MADDE 8/1-b'),
+            Kalip::toplam(150, donem: Kalip::DOCENTLIK_SONRASI),
+            Kalip::toplam(75, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['YAYIN'], liste: 'Makale, kitap ve editörlük'),
         ]),
     ]);
 }

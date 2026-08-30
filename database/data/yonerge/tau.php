@@ -170,7 +170,7 @@ $esikler[] = [
     'anahtar' => 'tau-sosyal-dr-yeniden',
     'aday_notu' => "{$SOSYAL_AD} bünyesindeki doktor öğretim üyesi kadrolarına YENİDEN ATANMA "
         .'koşulları. Bir atanma dönemi kural olarak dört yıldır; daha kısa dönemlerde koşullar '
-        .'oranlanır. Puanlar EK-1 faaliyet türlerinin ağırlıklarından geliyor: makale (SCI, '
+        .'oranlanır. Puanlar faaliyet türlerinin ağırlıklarından geliyor: makale (SCI, '
         .'SSCI, AHCI), kitap, proje ve patent 3\'er puan; uluslararası indeksli ve TR Dizin '
         .'makaleleri 2\'şer puan; diğer ulusal makale ve bildiri 1\'er puan.'.$NOT_POSTER,
     'universite' => $UNIVERSITE,
@@ -206,7 +206,7 @@ $esikler[] = [
     'anahtar' => 'tau-fen-dr-yeniden',
     'aday_notu' => "{$FEN_AD} bünyesindeki doktor öğretim üyesi kadrolarına YENİDEN ATANMA "
         .'koşulları. Bir atanma dönemi kural olarak dört yıldır; daha kısa dönemlerde koşullar '
-        .'oranlanır. Puanlar EK-1 faaliyet türlerinin ağırlıklarından geliyor: makale (SCI, '
+        .'oranlanır. Puanlar faaliyet türlerinin ağırlıklarından geliyor: makale (SCI, '
         .'SSCI, AHCI), proje ve patent 3\'er puan; uluslararası indeksli makale, TR Dizin '
         .'makalesi ve kitap 2\'şer puan; diğer ulusal makale ve bildiri 1\'er puan.'.$NOT_POSTER,
     'universite' => $UNIVERSITE,

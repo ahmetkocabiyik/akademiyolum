@@ -198,7 +198,7 @@ $esikler[] = [
         .'dergilerinde, en az birinde birinci isim olmak koşuluyla en az üç özgün makale '
         .'isteniyor. Ayrıca üç koşuldan en az birini sağlamalısınız: desteklenen bir projede '
         .'yürütücü veya yardımcı araştırmacı olmak; en az biri SSCI/SCI Expanded/ESCI/AHCI/Scopus '
-        .'olmak üzere iki özgün makale daha; ya da Tablo 1 ve Tablo 2\'den toplam 100 puan. '
+        .'olmak üzere iki özgün makale daha; ya da tüm faaliyetlerinizden toplam 100 puan. '
         .'Yayınların doktora ya da uzmanlık çalışmanızın bir parçası olmaması gerekiyor; kayıt '
         .'bunu ayırt edemediği için koşul olduğundan kolay görünebilir.',
     'universite' => $UNIVERSITE,
@@ -241,7 +241,7 @@ $esikler[] = [
     'aday_notu' => 'Doçentlik unvanına ek olarak beş koşuldan EN AZ İKİSİNİ sağlamanız '
         .'gerekiyor: üç ay akademik amaçlı yurt dışı deneyimi; bir projede yürütücü ya da iki '
         .'projede araştırmacı olmak; tek yazarlı veya editör olarak bilimsel kitap ya da BKCI '
-        .'kitap bölümü; Tablo 1 ve Tablo 2\'den toplam 500 puan; en az üçünde birinci isim ve en '
+        .'kitap bölümü; tüm faaliyetlerinizden toplam 500 puan; en az üçünde birinci isim ve en '
         .'az ikisi SSCI/SCI Expanded/ESCI/AHCI kapsamında olmak üzere beş özgün makale.',
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
@@ -254,7 +254,7 @@ $esikler[] = [
             $yurtdisiSarti,
             $projeSarti(null, '16-1-b-2'),
             $kitapSarti(null, '16-1-b-3'),
-            Kalip::toplam(500, liste: 'Tablo 1 ve Tablo 2'),
+            Kalip::toplam(500),
             Kalip::ve('Beş özgün makale koşulu', [
                 Kalip::adet(
                     'Atanacağınız temel alanda en az beş özgün makale yayımlamış olmak',
@@ -282,12 +282,12 @@ $esikler[] = [
     'anahtar' => 'lokman-hekim-profesorluk',
     'aday_notu' => 'Doçentlik unvanınızı aldıktan sonraki çalışmalarınız sayılıyor. SCI '
         .'Expanded, SSCI, AHCI ya da ESCI kapsamındaki dergilerde en az üç özgün araştırma '
-        .'makalesi, Tablo 1 ve Tablo 2\'den toplam en az 500 puan ve en az dört yarıyıl ders '
+        .'makalesi, tüm faaliyetlerinizden toplam en az 500 puan ve en az dört yarıyıl ders '
         .'vermiş olmanız isteniyor. Bunlara ek olarak beş koşuldan EN AZ İKİSİNİ sağlamalısınız: '
         .'bir projede yürütücü ya da iki projede araştırmacı olmak; en az bir yüksek lisans, '
         .'doktora veya uzmanlık tezi yönetmiş olmak; üç ay akademik amaçlı yurt dışı deneyimi; '
-        .'tek yazarlı veya editör olarak bilimsel kitap ya da BKCI kitap bölümü; Tablo 1 ve '
-        .'Tablo 2\'den 500 puan DAHA (yani toplam 1000 puan).',
+        .'tek yazarlı veya editör olarak bilimsel kitap ya da BKCI kitap bölümü; tüm '
+        .'faaliyetlerinizden 500 puan DAHA (yani toplam 1000 puan).',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
     'alan' => ['saglik', 'spor'],
@@ -302,7 +302,7 @@ $esikler[] = [
             .'kapsamındaki dergilerde en az üç özgün araştırma makalesi yayımlamış olmak',
             ['SCI-ESCI'], 3, donem: $DOCENTLIK, madde: '21-1-b',
         ),
-        Kalip::toplam(500, $DOCENTLIK, liste: 'Tablo 1 ve Tablo 2'),
+        Kalip::toplam(500, $DOCENTLIK),
         Kalip::metrik(
             'Başvurduğunuz alanda ön lisans, lisans ya da lisansüstü programlardan en az birinde '
             .'toplam dört yarıyıl ders vermiş ya da veriyor olmak',
@@ -317,7 +317,7 @@ $esikler[] = [
             ),
             $yurtdisiSarti,
             $kitapSarti($DOCENTLIK, '21-1-d-4'),
-            Kalip::toplam(1000, $DOCENTLIK, liste: 'Tablo 1 ve Tablo 2'),
+            Kalip::toplam(1000, $DOCENTLIK),
         ]),
     ]),
 ];

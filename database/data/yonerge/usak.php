@@ -178,7 +178,7 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'usak-dr-yeniden',
     'aday_notu' => 'Doktor öğretim üyesi kadrosuna YENİDEN ATANMA koşulları: son atanma '
-        .'tarihinizden sonra Ek-1 tablosunun yayın bölümlerinden en az 30 puan ve aşağıdaki altı '
+        .'tarihinizden sonra yayın kalemlerinizden en az 30 puan ve aşağıdaki altı '
         .'koşuldan en az ikisi. Asgari şartı sağlayamayanlara bir defaya mahsus iki yıllık '
         .'yeniden atama yapılıyor; bu sürenin sonunda da sağlanamazsa yeniden atama '
         .'yapılmıyor.'.$NOT_YURTDISI,

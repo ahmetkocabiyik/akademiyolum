@@ -62,14 +62,14 @@ $pencereNotu = 'Bezmiâlem makale sayısının TAMAMINI SON BEŞ YILA bağlıyor
     .'yayınlarınız bu koşula sayılmaz.';
 
 $yenidenAtamaNotu = 'Yeniden atanmada Bezmiâlem adresli yayın şartı ve 65 yabancı dil puanı '
-    .'isteniyor (Madde 10-11); yayının kurum adresi burada tutulmadığı için yeniden atanma '
+    .'isteniyor; yayının kurum adresi burada tutulmadığı için yeniden atanma '
     .'eşiği girilmedi.';
 
 $derlemeNotu = 'Yönerge "bunlardan en fazla 2\'si derleme olabilir" diyor; motor bir sayı '
     .'koşulunun içinde alt tür tavanı tanımlayamadığı için bu sınır uygulanmıyor.';
 
 $tezNotu = 'Ayrıca en az bir yüksek lisans, doktora veya uzmanlık tezi yönetmiş olmanız '
-    .'gerekiyor (Madde 21). Kurumunuzda son beş yılda tez yapılmadığını belgelerseniz bu koşul '
+    .'gerekiyor. Kurumunuzda son beş yılda tez yapılmadığını belgelerseniz bu koşul '
     .'aranmıyor.';
 
 return [

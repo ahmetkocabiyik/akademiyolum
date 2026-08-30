@@ -44,7 +44,7 @@ $tumAlanlar = ['fen', 'muhendislik', 'mimarlik', 'saglik', 'spor', 'hukuk', 'ila
     'filoloji', 'sosyal', 'egitim', 'guzel_sanatlar', 'ziraat'];
 
 $yenidenAtamaNotu = 'Yeniden atanmada son atama döneminden sonraki çalışmalarınızla en az 100 '
-    .'puan ve Tablo 2\'deki alan özel şartları isteniyor. Atama tarihi burada tutulmadığı için '
+    .'puan ve alana özgü şartlar isteniyor. Atama tarihi burada tutulmadığı için '
     .'yeniden atanma eşiği girilmedi.';
 
 $drNotu = 'Osmaniye Korkut Ata ilk atamada PUAN BARAJI KOYMUYOR; yalnızca belirli maddelerden '

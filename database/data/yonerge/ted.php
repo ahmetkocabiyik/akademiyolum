@@ -81,7 +81,7 @@ $drNotu = 'TED PUAN İSTEMİYOR; koşullar makale sayısı ve çeyreklik üzerin
     .'belirtilmek şartıyla eğitim ağırlıklı bir pozisyona başvuruyorsanız yayın koşulu hiç '
     .'aranmayabilir.';
 
-$yenidenAtamaNotu = 'Yeniden atanmada (Madde 7) son sözleşme dönemi içinde Q1-Q2 dergide '
+$yenidenAtamaNotu = 'Yeniden atanmada son sözleşme dönemi içinde Q1-Q2 dergide '
     .'1 yayın ve altı seçenekten biri isteniyor; sözleşme tarihi burada tutulmadığı için ayrı '
     .'eşik girilmedi.';
 

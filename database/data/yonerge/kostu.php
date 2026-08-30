@@ -73,7 +73,7 @@ $dilBeyani = Kalip::beyan(
 );
 
 $tavanNotu = 'Lisansüstü tez danışmanlığı ile üniversite fonlarınca desteklenen '
-    .'projelerden gelecek puan, bu kadronun asgari puanının yarısını aşamıyor (Madde 14).';
+    .'projelerden gelecek puan, bu kadronun asgari puanının yarısını aşamıyor.';
 
 $sanatNotu = 'Çizelgede sanatsal etkinlik satırı hiç yok; sergi, konser, tasarım ve sahne '
     .'çalışmalarınız puan almıyor. Güzel Sanatlar adayıysanız toplamınız olduğundan düşük '

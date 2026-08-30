@@ -93,7 +93,7 @@ $ikiKatman = 'Bilecik\'in barajları İKİ KATMANLI: alt koşullar yalnızca son
     .'gerçekte biraz daha uzun; burada DAR olanı uygulandı, yani pencerenin başına denk '
     .'gelen bir yayınınız sayılmamış olabilir.';
 
-$dilNotu85 = 'Bu bölümde yabancı dil barajı 65 değil 85 (MADDE 9).';
+$dilNotu85 = 'Bu bölümde yabancı dil barajı 65 değil 85.';
 
 /**
  * Kadro parametreleri: [toplam puan, toplamın dönemi, alt koşulların penceresi,

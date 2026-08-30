@@ -48,7 +48,7 @@ $saglikDisi = array_values(array_filter($tumAlanlar, fn (string $a) => $a !== 's
 $tipFakulteleri = 'Tıp, Diş Hekimliği, Eczacılık ve Veterinerlik Fakülteleri';
 $digerSaglik = 'Diğer Sağlık Bilimleri birimleri';
 
-$yenidenAtamaNotu = 'Yeniden atanmada (Madde 8/B) son atama tarihinden sonraki eserlerinizle '
+$yenidenAtamaNotu = 'Yeniden atanmada son atama tarihinden sonraki eserlerinizle '
     .'toplam 450 puan, bunun en az 225\'i makale, bildiri, kitap, çeviri ve sanat '
     .'kalemlerinden isteniyor; tıp, diş hekimliği, eczacılık ve veterinerlik fakültelerinde '
     .'toplam 225, en az 75\'i aynı kalemlerden. Bu sayılar bir önceki atamanın 3 yıl süreyle '

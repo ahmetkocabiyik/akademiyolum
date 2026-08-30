@@ -68,7 +68,7 @@ $yenidenAtamaNotu = 'Yeniden atanma koşulları her üç yıllık sürenin sonun
     .'girilmedi.';
 
 $eserNotu = 'Boğaziçi PUAN İSTEMİYOR; koşullar "en az N başlıca eser" biçiminde. "Başlıca eser" '
-    .'burada yazarlık sırası değil, Madde 9\'daki dört yayın kategorisinden biri anlamına '
+    .'burada yazarlık sırası değil, yönergenin dört yayın kategorisinden biri anlamına '
     .'geliyor: SCIE/SSCI/AHCI makalesi, Scopus/ESCI makalesi ya da uluslararası yayınevi kitabı '
     .'veya kitap bölümü (derleme kitap editörlüğü sayılmıyor).';
 
@@ -155,7 +155,7 @@ return [
     // ══════════ HUKUK VE TÜRK DİLİ (TR Dizin de başlıca eser sayılıyor) ══════════
     $esik('hukuk', 'dr_ogr_uyesi', 'Dr. Öğr. Üyesi', $birimHukuk, ['hukuk', 'filoloji'],
         2, 1, $baslicaEserHukuk, ['1b', '1c'], 'SSCI, AHCI, ESCI veya Scopus tarafından',
-        'Bu iki birimde TR Dizin makaleleri de başlıca eser sayılıyor (Madde 9/4); korpustaki '
+        'Bu iki birimde TR Dizin makaleleri de başlıca eser sayılıyor; korpustaki '
         .'diğer Boğaziçi birimlerinde sayılmıyor. '.$yenidenAtamaNotu),
     $esik('hukuk', 'docentlik', 'Doçent', $birimHukuk, ['hukuk', 'filoloji'],
         6, null, $baslicaEserHukuk, [], '',

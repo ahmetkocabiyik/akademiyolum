@@ -61,7 +61,7 @@ return [
     // ══════════════════ DR. ÖĞRETİM ÜYESİ ══════════════════
     [
         'anahtar' => 'kocaeli-dr-g1',
-        'aday_notu' => 'Dört makalenin dağılımı kademeli: en az biri Q1-Q2, en az ikisi Q1-Q4, en az biri ESCI dâhil kümede olmalı. Ayrıca Tablo 2\'nin puan barajları da sağlanmalı.',
+        'aday_notu' => 'Dört makalenin dağılımı kademeli: en az biri Q1-Q2, en az ikisi Q1-Q4, en az biri ESCI dâhil kümede olmalı. Ayrıca puan barajları da sağlanmalı.',
         'universite' => 'Kocaeli Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $grup1,
@@ -113,7 +113,7 @@ return [
     ],
     [
         'anahtar' => 'kocaeli-dr-g4',
-        'aday_notu' => 'Güzel Sanatlarda sanatsal etkinlik zorunlu: 2 kişisel ve 8 karma etkinlik. Sağlanamıyorsa A1-A7 kapsamında ek bir makaleyle karşılanabiliyor.',
+        'aday_notu' => 'Güzel Sanatlarda sanatsal etkinlik zorunlu: 2 kişisel ve 8 karma etkinlik. Sağlanamıyorsa dizinli dergide ek bir makaleyle karşılanabiliyor.',
         'universite' => 'Kocaeli Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => ['guzel_sanatlar'],

@@ -69,7 +69,7 @@ $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 
 $genelNot = 'Piri Reis\'in ölçütleri yönergenin kendi ifadesiyle "en alt düzeyi belirler, '
     .'yeterlilik anlamı taşımaz" ve yalnız başvurunun kabulü ya da reddi için kullanılır '
-    .'(MADDE 3/c-d). Jüri ayrıca akademik niteliğinizi ve yayın etiğini ayrıntılı '
+    .'. Jüri ayrıca akademik niteliğinizi ve yayın etiğini ayrıntılı '
     .'değerlendiriyor.';
 
 $dersNotu = 'DERS KOŞULLARI BEYAN olarak duruyor: yönergenin eğitime katkı bölümü puanı derse '

@@ -38,7 +38,7 @@ use App\Services\Scoring\Sart\Kalip;
 $TUM_ALANLAR = ['fen', 'muhendislik', 'saglik', 'ziraat', 'sosyal', 'egitim', 'filoloji',
     'ilahiyat', 'spor', 'hukuk', 'guzel_sanatlar', 'mimarlik'];
 
-$PUAN_NOTU = 'Ek-1/IV\'ün puanlama ölçütlerinde ders puanı AKTS başına verildiği için ders '
+$PUAN_NOTU = 'Puanlama ölçütlerinde ders puanı AKTS başına verildiği için ders '
     .'kayıtlarınız toplama girmiyor; TR Dizin dışındaki ulusal hakemli dergiler, çeviriler, '
     .'sanatsal etkinlikler ve toplumsal katkı kalemleri de ölçütlerde hiç yok. Scopus '
     .'makaleleri ESCI ile aynı etikette olduğu için 5 puandan sayılıyor.';
@@ -59,7 +59,7 @@ return [
             .'ikinci ya da üçüncü yazar olduğunuz bir yayınla koşulu sağlıyorsanız burada '
             .'görünmez. '.$PUAN_NOTU,
         'sart' => Kalip::ve('Doktor öğretim üyeliği koşulları', [
-            Kalip::toplam(100, liste: 'Ek-1/III-1-a'),
+            Kalip::toplam(100),
             Kalip::adet('Puanlama cetvelindeki nitelikleri taşıyan yayınlardan en az biri özgün araştırma makalesi olmak', ['OZGUN'], 1, madde: 'Ek-1/III-1-b'),
             Kalip::veya('Yayınlardan en az birinde ilk üç ismin içinde olmak', [
                 Kalip::adet('Tek yazarlı en az 1 yayın', ['MAKALE'], 1, yazar: 'tek', madde: 'Ek-1/III-1-c'),
@@ -100,7 +100,7 @@ return [
             .'yayımlanmış olmalı. '.$PUAN_NOTU,
         'sart' => Kalip::ve('Doçentlik koşulları', [
             Kalip::beyan('Üniversitelerarası Kuruldan doçent unvanını almış olmak', 'Ek-1/II-2'),
-            Kalip::toplam(200, donem: Kalip::DOKTORA_SONRASI, liste: 'Ek-1/II-1'),
+            Kalip::toplam(200, donem: Kalip::DOKTORA_SONRASI),
             Kalip::adet('Web of Science indekslerinde son üç yılda en az 4 makale', ['WOS'], 4, donem: Kalip::sonYil(3), madde: 'Ek-1/II-3'),
             Kalip::adet('Bu makalelerden en az 1\'inde tek yazar olmak', ['WOS'], 1, yazar: 'tek', donem: Kalip::sonYil(3), madde: 'Ek-1/II-3'),
             Kalip::adet('Bu makalelerden en az 2\'sinde birinci yazar olmak', ['WOS'], 2, yazar: 'ilk', donem: Kalip::sonYil(3), madde: 'Ek-1/II-3'),
@@ -123,8 +123,8 @@ return [
             .'olmalı. '.$PUAN_NOTU,
         'sart' => Kalip::ve('Profesörlük koşulları', [
             Kalip::beyan('Doçent unvanını aldıktan sonra ilan edilen bilim alanında en az beş yıl görev yapmış olmak', 'Ek-1/I-2'),
-            Kalip::toplam(400, liste: 'Ek-1/I-1'),
-            Kalip::toplam(200, donem: Kalip::DOCENTLIK_SONRASI, liste: 'Ek-1/I-1'),
+            Kalip::toplam(400),
+            Kalip::toplam(200, donem: Kalip::DOCENTLIK_SONRASI),
             Kalip::adet('Web of Science indekslerinde en az 6 makale', ['WOS'], 6, madde: 'Ek-1/I-2'),
             Kalip::adet('Bu makalelerden en az 3\'ü doçentlik sonrasında yayımlanmış olmak', ['WOS'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Ek-1/I-2'),
             Kalip::adet('Doçentlik sonrası makalelerden en az 1\'inde tek yazar olmak', ['WOS'], 1, yazar: 'tek', donem: Kalip::DOCENTLIK_SONRASI, madde: 'Ek-1/I-2'),

@@ -75,7 +75,7 @@ $kayitlar = function (string $ekAdi, string $cetvel, array $alanlar, int $yenide
                 .'koşulu yok. Yönergenin yazar sayısı × sıra tablosu olduğu için çok yazarlı '
                 .'yayınlarınızda sıranızı girmeniz puanı doğrudan etkiliyor.'.$ortakNot,
             'sart' => Kalip::ve('Doktor öğretim üyesi ilk atama koşulları', [
-                Kalip::toplam(90, maddeler: ['TUM'], liste: 'Ek-1'),
+                Kalip::toplam(90, maddeler: ['TUM']),
             ]),
         ],
         [
@@ -94,7 +94,7 @@ $kayitlar = function (string $ekAdi, string $cetvel, array $alanlar, int $yenide
                 .'kullanılan puanlar tekrar sayılmaz" kaydı uygulanmıyor.'.$ortakNot,
             'sart' => Kalip::veya('Doktor öğretim üyesi yeniden atama koşulları', [
                 Kalip::adet('Ulusal ya da uluslararası bir projede yürütücü olarak yer almış olmak', ['PROJE-YURUTUCU'], 1, madde: 'MADDE 4/2'),
-                Kalip::toplam($yenidenPuan, donem: Kalip::sonYil(2), maddeler: ['TUM'], liste: 'Ek-1'),
+                Kalip::toplam($yenidenPuan, donem: Kalip::sonYil(2), maddeler: ['TUM']),
             ]),
         ],
         [
@@ -110,7 +110,7 @@ $kayitlar = function (string $ekAdi, string $cetvel, array $alanlar, int $yenide
                 .'yani doktora öncesi faaliyetleriniz de toplama giriyor.'.$ortakNot,
             'sart' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
                 Kalip::beyan('Üniversitelerarası Kuruldan doçent unvanını almış olmak', 'MADDE 5/a'),
-                Kalip::toplam(120, maddeler: ['TUM'], liste: 'Ek-1'),
+                Kalip::toplam(120, maddeler: ['TUM']),
             ]),
         ],
         [
@@ -124,7 +124,7 @@ $kayitlar = function (string $ekAdi, string $cetvel, array $alanlar, int $yenide
             'aday_notu' => 'Profesörlükte de tek sayısal koşul puan: 150. Yönerge doçentlik sonrası '
                 .'için ayrı bir pay ayırmıyor, bütün faaliyetleriniz sayılıyor.'.$ortakNot,
             'sart' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
-                Kalip::toplam(150, maddeler: ['TUM'], liste: 'Ek-1'),
+                Kalip::toplam(150, maddeler: ['TUM']),
             ]),
         ],
     ];

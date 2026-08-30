@@ -37,7 +37,7 @@ $DOC = Kalip::DOCENTLIK_SONRASI;
 $tumAlanlar = ['fen', 'muhendislik', 'mimarlik', 'saglik', 'spor', 'hukuk', 'ilahiyat',
     'filoloji', 'sosyal', 'egitim', 'guzel_sanatlar', 'ziraat'];
 
-$muafiyetNotu = 'Hakkari yönergesi Madde 6\'da iki muafiyet tanıyor: bir bölüme öğrenci alımı '
+$muafiyetNotu = 'Hakkari yönergesi iki muafiyet tanıyor: bir bölüme öğrenci alımı '
     .'için gerekli asgari öğretim üyesi sayısına ulaşılıncaya kadar ve öğretim üyesi temininde '
     .'güçlük çekilen kadrolarda, Yönetim Kurulu kararı ve Rektörün uygun görmesiyle puan şartı '
     .'hiç aranmıyor.';

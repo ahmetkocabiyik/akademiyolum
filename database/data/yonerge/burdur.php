@@ -73,10 +73,10 @@ $ikiKatman = 'Burdur MAKÜ\'nün barajı İKİ KATMANLI: toplam puanın yanında
     .'sportif faaliyetler yalnız toplam puana giriyor.';
 
 $myoNotu = 'Önlisans eğitimi verilen Meslek Yüksekokullarına yapılacak öğretim üyesi '
-    .'atamalarında bu değerlendirme kriterleri UYGULANMIYOR (MADDE 5/5).';
+    .'atamalarında bu değerlendirme kriterleri UYGULANMIYOR.';
 
 $tekAlanNotu = 'Yönergenin taban puan tablosu alan ayrımı yapmıyor: tek satırda "Sağlık '
-    .'Bilimleri, Fen Bilimleri, Sosyal Bilimler" diyor ve MADDE 2 güzel sanatlar bölümlerini de '
+    .'Bilimleri, Fen Bilimleri, Sosyal Bilimler" diyor ve yönerge güzel sanatlar bölümlerini de '
     .'kapsama alıyor. Bütün temel alanlar aynı barajlara tabi.';
 
 $yenidenAtanma = 'Doktor öğretim üyeliğine yeniden atanma eşiği girilmedi: koşul "bir önceki '

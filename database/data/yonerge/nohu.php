@@ -161,7 +161,7 @@ $MERDIVEN = ' Yeniden atanma SÜREYE bağlı dört basamaklı bir merdiven: dör
     .'yıllık atama için bir SCI-ESCI makalesi ya da iki alan endeksli makale ile toplam 30 puan; '
     .'iki yıllık atama için bir alan endeksli makale ya da iki hakemli makale ile toplam 20 '
     .'puan; bir yıllık atama için bir hakemli makale ile toplam 10 puan. Aşağıda bu TABAN '
-    .'gösteriliyor. Madde 10(g): 10 puanın altında kalanlar da bir yıl atanıyor, ancak ÜST ÜSTE '
+    .'gösteriliyor. 10 puanın altında kalanlar da bir yıl atanıyor, ancak ÜST ÜSTE '
     .'İKİ KEZ 10 puanın altında kalanın görev süresi üçüncü kez yenilenmiyor.';
 
 foreach ([

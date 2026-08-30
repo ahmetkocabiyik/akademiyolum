@@ -93,7 +93,7 @@ $gruplar = [
     ],
 ];
 
-$onkosulNotu = 'Yönerge bu kriterleri bir ÖN KOŞUL sayıyor (Madde 5/e): sağlamak tek başına '
+$onkosulNotu = 'Yönerge bu kriterleri bir ÖN KOŞUL sayıyor: sağlamak tek başına '
     .'atanmaya yetmiyor.';
 
 $atifNotu = 'Atıf puanınız olduğundan yüksek çıkabilir: yönerge kendi yayınlarınıza '
@@ -101,7 +101,7 @@ $atifNotu = 'Atıf puanınız olduğundan yüksek çıkabilir: yönerge kendi ya
     .'kaydınız ikisini de ayırt etmiyor.';
 
 $muafiyetNotu = 'Öğretim üyesi temininde güçlük çekilen alanlarda bu koşullar Üniversite '
-    .'Yönetim Kurulu kararı ve rektör onayıyla aranmayabiliyor (Madde 5/b); bu muafiyet '
+    .'Yönetim Kurulu kararı ve rektör onayıyla aranmayabiliyor; bu muafiyet '
     .'burada hesaplanamıyor.';
 
 $esikler = [];
