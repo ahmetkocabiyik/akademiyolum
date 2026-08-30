@@ -268,6 +268,27 @@ class SartDeposu
     }
 
     /**
+     * Üniversite + kadro + temel alan için TÜM aday eşikler, birim ayrımı
+     * yapılmadan.
+     *
+     * `bul()` boş dönünce iki ayrı durum söz konusudur ve aday için anlamları
+     * bambaşkadır: hiç aday yoksa o temel alan yönergede yok; birden çok aday
+     * varsa alan kapsanıyor ama birim seçilmediği için seçim yapılamıyor.
+     * Arayüz bu ikisini ayırabilsin diye adaylar ayrıca sorulabiliyor.
+     *
+     * @return list<Esik>
+     */
+    public function adaylar(string $universite, string $kadro, string $alan): array
+    {
+        return array_values(array_filter(
+            $this->dogrulanmisEsikler(),
+            fn (array $esik) => $esik['universite'] === $universite
+                && $esik['kadro'] === $kadro
+                && $esik['alan'] === $alan,
+        ));
+    }
+
+    /**
      * Üniversite + kadro + temel alan için tam eşleşen eşik. Yoksa null döner
      * ve üniversite listede gösterilmez — tahmini eşik üretilmez.
      *
@@ -281,12 +302,7 @@ class SartDeposu
      */
     public function bul(string $universite, string $kadro, string $alan, ?string $birim = null): ?array
     {
-        $adaylar = array_values(array_filter(
-            $this->dogrulanmisEsikler(),
-            fn (array $esik) => $esik['universite'] === $universite
-                && $esik['kadro'] === $kadro
-                && $esik['alan'] === $alan,
-        ));
+        $adaylar = $this->adaylar($universite, $kadro, $alan);
 
         // Program yalnızca BELİRSİZLİK varsa gerekir: tek aday varsa program
         // bilinmese de o kullanılır. Birden fazla aday varsa (Sabancı gibi

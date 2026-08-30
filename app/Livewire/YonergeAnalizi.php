@@ -127,13 +127,20 @@ class YonergeAnalizi extends Component
 
     /**
      * Yönergesi girili olduğu hâlde adayın kadro + temel alan (ve varsa birim)
-     * bileşimi için eşik ÜRETMEYEN üniversiteler.
+     * bileşimi için eşik ÜRETMEYEN üniversiteler, gerekçeye göre AYRILMIŞ.
      *
      * Bunlar listeden sessizce düşüyordu: aday Marmara'yı arayıp bulamayınca
      * "yönergesi hiç yok mu, yoksa benim alanım mı kapsanmıyor?" sorusuna
      * cevap bulamıyordu. Kart sayısı doğru ama tek başına yanıltıcı.
      *
-     * @return list<string>
+     * İki gerekçe adaya bambaşka şey söylüyor, bu yüzden ayrı duruyorlar:
+     *   `birim`    → alanı kapsanıyor ama yönerge BİRİME göre ölçüt koyuyor;
+     *                birden çok aday eşik var, motor seçim yapmayı reddediyor.
+     *                Aday profiline birimini girerse listede belirirler.
+     *   `alan_yok` → o temel alan için hiç eşik tanımlanmamış. Yapılabilecek
+     *                bir şey yok; aday yalnız bunu bilmek istiyor.
+     *
+     * @return array{birim: list<string>, alan_yok: list<string>}
      */
     #[Computed]
     public function kapsamDisi(): array
@@ -141,11 +148,18 @@ class YonergeAnalizi extends Component
         $depo = $this->depo();
         $kullanici = Auth::user();
         $temelAlan = ($kullanici->temel_alan ?? TemelAlan::Sosyal)->value;
+        $ayrim = ['birim' => [], 'alan_yok' => []];
 
-        return array_values(array_filter(
-            $depo->universiteler(),
-            fn (string $ad) => $depo->bul($ad, $this->hedefKadro, $temelAlan, $kullanici->birim) === null,
-        ));
+        foreach ($depo->universiteler() as $ad) {
+            if ($depo->bul($ad, $this->hedefKadro, $temelAlan, $kullanici->birim) !== null) {
+                continue;
+            }
+
+            $adayVar = $depo->adaylar($ad, $this->hedefKadro, $temelAlan) !== [];
+            $ayrim[$adayVar ? 'birim' : 'alan_yok'][] = $ad;
+        }
+
+        return $ayrim;
     }
 
     /**

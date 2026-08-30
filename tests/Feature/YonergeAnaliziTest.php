@@ -527,20 +527,61 @@ test('kartta en fazla 6 koşul gösterilir, kalanı sayıyla belirtilir', functi
 });
 
 test('kadro veya alanı kapsamayan üniversiteler gerekçesiyle bildirilir', function () {
+    // İki gerekçe adaya bambaşka şey söylüyor, bu yüzden ayrı gösteriliyor:
+    //   Ankara → alanı kapsanıyor ama ölçüt BİRİME bağlı ve birden çok aday
+    //            var; aday birimini seçerse listeye girer.
+    //   Mersin → o temel alan için hiç eşik yok; yapılabilecek bir şey yok.
+    $birimli = fn (string $birim): array => [
+        ...testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        'anahtar' => 'ankara-dr-sosyal-'.Str::slug($birim),
+        'birim' => $birim,
+    ];
+
+    depoBagla([
+        $birimli('Hukuk Fakültesi'),
+        $birimli('Siyasal Bilgiler Fakültesi'),
+        testEsik('Mersin Üniversitesi', 90, 'dr_ogr_uyesi', 'ilahiyat'),
+    ]);
+
     $kullanici = User::factory()->onboarded()->create([
         'temel_alan' => TemelAlan::Sosyal,
-        'unvan' => 'Dr. Öğr. Üyesi',
+        'unvan' => 'Arş. Gör.',
         'birim' => null,
     ]);
 
-    // Marmara yalnızca sağlık, fen ve eğitim alanlarını kapsıyor; Sabancı'nın
-    // bütün eşikleri birime bağlı. Sosyal alandaki, birimi seçilmemiş aday
-    // ikisini de listede göremiyor — kart sayısı doğru ama sebebi söylenmezse
-    // aday "yönergesi hiç yok mu?" diye düşünüyor.
-    Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)
+    $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)
         ->assertOk()
-        ->assertSee('bu listede yok')
-        ->assertSee('Marmara Üniversitesi');
+        ->assertSee('birim seçilmesini bekliyor')
+        ->assertSee('Temel alanınıza ölçüt tanımlamayan üniversiteler')
+        ->assertSee('Bu üniversitede sizin temel alanınıza ait bir eşik bulunamadı.');
+
+    $kapsamDisi = $bilesen->instance()->kapsamDisi();
+
+    expect($kapsamDisi['birim'])->toBe(['Ankara Üniversitesi'])
+        ->and($kapsamDisi['alan_yok'])->toBe(['Mersin Üniversitesi']);
+});
+
+test('birim seçilince kapsam dışı uyarısı kalkar', function () {
+    // "Birim seçin" uyarısının işe yaradığının kanıtı: aynı korpusta profiline
+    // birimini yazan aday üniversiteyi listede görüyor.
+    $birimli = fn (string $birim): array => [
+        ...testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        'anahtar' => 'ankara-dr-sosyal-'.Str::slug($birim),
+        'birim' => $birim,
+    ];
+
+    depoBagla([$birimli('Hukuk Fakültesi'), $birimli('Siyasal Bilgiler Fakültesi')]);
+
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal,
+        'unvan' => 'Arş. Gör.',
+        'birim' => 'Hukuk Fakültesi',
+    ]);
+
+    $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)->assertOk();
+
+    expect($bilesen->instance()->kapsamDisi())->toBe(['birim' => [], 'alan_yok' => []])
+        ->and($bilesen->instance()->sonuclar())->toHaveCount(1);
 });
 
 test('bütün üniversiteler kapsandığında uyarı çıkmaz', function () {
@@ -549,9 +590,13 @@ test('bütün üniversiteler kapsandığında uyarı çıkmaz', function () {
     $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class);
     $kapsamDisi = $bilesen->instance()->kapsamDisi();
 
-    // Kapsam dışı listesi ile gösterilen kart sayısı birlikte tüm korpusu
-    // vermeli; aradaki fark sessizce kaybolan üniversite demek olurdu.
+    // Her iki kapsam dışı liste ile gösterilen kart sayısı birlikte tüm
+    // korpusu vermeli; aradaki fark sessizce kaybolan üniversite demek olurdu.
+    // İki listenin kesişmemesi de şart: bir üniversite tek gerekçeye düşer.
     $depo = app(SartDeposu::class);
-    expect(count($kapsamDisi) + count($bilesen->instance()->sonuclar()))
-        ->toBe(count($depo->universiteler()));
+    $toplam = count($kapsamDisi['birim']) + count($kapsamDisi['alan_yok']);
+
+    expect($toplam + count($bilesen->instance()->sonuclar()))
+        ->toBe(count($depo->universiteler()))
+        ->and(array_intersect($kapsamDisi['birim'], $kapsamDisi['alan_yok']))->toBe([]);
 });
