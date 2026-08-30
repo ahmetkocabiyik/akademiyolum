@@ -19,6 +19,11 @@
  * çıkarıldı. Baraj bu yüzden gerçekte olduğundan zor görünür — aday koşulu
  * sağladığı hâlde sağlamamış gibi görünebilir, tersi olmaz.
  *
+ * 2.3 GRUBUNUN BAŞLIĞI İKİ SATIR ve ikinci satırı ilk girişte düşmüştü:
+ * "...Tıp Fakültesi, Sağlık Bilimleri Fakültesi ve Diş Hekimliği Fakültesi".
+ * Sağlık temel alanı bu yüzden kapsam dışı görünüyordu; düzeltildi. PDF'ten
+ * tablo çıkarırken başlığın SATIR SONUNDA BİTMEDİĞİNİ kontrol et.
+ *
  * FAKÜLTE → TEMEL ALAN eşlemesi yaklaşık: yönerge fakülteye göre grupluyor,
  * uygulama doçentlik temel alanına göre. 2.3 (Mühendislik ve Fen'in Kimya,
  * Fizik, Biyoloji bölümleri) `muhendislik`, 2.4 (Fen'in Matematik bölümü)
@@ -41,17 +46,18 @@
 use App\Services\Scoring\Sart\Kalip;
 
 return [
-    // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Dr. Öğr. Üyesi ══
+    // ══ 2.3 Mühendislik, Bilişim, Fen (Kimya-Fizik-Biyoloji), Tıp, Sağlık Bil., Diş Hek. — Dr. Öğr. Üyesi ══
     [
         'anahtar' => 'sakarya-dr-2_3',
-        'aday_notu' => 'Sakarya eşiği fakülte grubuna göre belirlenir; bu eşik Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, '
-            .'için geçerlidir. Dört bölüm barajının her biri ayrı ayrı sağlanmalı.',
+        'aday_notu' => 'Sakarya eşiği fakülte grubuna göre belirlenir; bu eşik Mühendislik, Bilgisayar ve '
+            .'Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji), Tıp, Sağlık Bilimleri ve Diş '
+            .'Hekimliği fakülteleri için geçerlidir. Dört bölüm barajının her biri ayrı ayrı sağlanmalı.',
         'universite' => 'Sakarya Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
-        'alan' => ['muhendislik'],
+        'alan' => ['muhendislik', 'saglik'],
         'cetvel' => 'sakarya-2026',
-        'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Dr. Öğr. Üyesi sütunu.',
-        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji)', [
+        'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji), Tıp, Sağlık Bilimleri ve Diş Hekimliği fakülteleri — Dr. Öğr. Üyesi sütunu.',
+        'sart' => Kalip::ve('Dr. Öğr. Üyesi kadrosuna atanma', [
             Kalip::toplam(1000),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 350 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
@@ -74,17 +80,18 @@ return [
             Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde bir adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.3 dipnot'),
         ]),
     ],
-    // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Doçent ══
+    // ══ 2.3 Mühendislik, Bilişim, Fen (Kimya-Fizik-Biyoloji), Tıp, Sağlık Bil., Diş Hek. — Doçent ══
     [
         'anahtar' => 'sakarya-docent-2_3',
-        'aday_notu' => 'Sakarya eşiği fakülte grubuna göre belirlenir; bu eşik Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, '
-            .'için geçerlidir. Dört bölüm barajının her biri ayrı ayrı sağlanmalı.',
+        'aday_notu' => 'Sakarya eşiği fakülte grubuna göre belirlenir; bu eşik Mühendislik, Bilgisayar ve '
+            .'Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji), Tıp, Sağlık Bilimleri ve Diş '
+            .'Hekimliği fakülteleri için geçerlidir. Dört bölüm barajının her biri ayrı ayrı sağlanmalı.',
         'universite' => 'Sakarya Üniversitesi',
         'kadro' => 'docentlik',
-        'alan' => ['muhendislik'],
+        'alan' => ['muhendislik', 'saglik'],
         'cetvel' => 'sakarya-2026',
-        'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Doçent sütunu.',
-        'sart' => Kalip::ve('Doçent — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji)', [
+        'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji), Tıp, Sağlık Bilimleri ve Diş Hekimliği fakülteleri — Doçent sütunu.',
+        'sart' => Kalip::ve('Doçent kadrosuna atanma', [
             Kalip::toplam(1600),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 700 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',
@@ -111,17 +118,18 @@ return [
             Kalip::beyan('Nitelikli yayın ve proje ölçütleri için ek koşul: SCI-E, SSCI, AHCI veya Scopus dergilerinde iki adet yayın ya da desteklenen araştırma projeleri kapsamında bir adet araştırma projesi', '2.3 dipnot'),
         ]),
     ],
-    // ══ 2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Profesör ══
+    // ══ 2.3 Mühendislik, Bilişim, Fen (Kimya-Fizik-Biyoloji), Tıp, Sağlık Bil., Diş Hek. — Profesör ══
     [
         'anahtar' => 'sakarya-profesor-2_3',
-        'aday_notu' => 'Sakarya eşiği fakülte grubuna göre belirlenir; bu eşik Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, '
-            .'için geçerlidir. Dört bölüm barajının her biri ayrı ayrı sağlanmalı.',
+        'aday_notu' => 'Sakarya eşiği fakülte grubuna göre belirlenir; bu eşik Mühendislik, Bilgisayar ve '
+            .'Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji), Tıp, Sağlık Bilimleri ve Diş '
+            .'Hekimliği fakülteleri için geçerlidir. Dört bölüm barajının her biri ayrı ayrı sağlanmalı.',
         'universite' => 'Sakarya Üniversitesi',
         'kadro' => 'profesorluk',
-        'alan' => ['muhendislik'],
+        'alan' => ['muhendislik', 'saglik'],
         'cetvel' => 'sakarya-2026',
-        'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji) — Profesör sütunu.',
-        'sart' => Kalip::ve('Profesör — Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji)', [
+        'notlar' => '2.3 Mühendislik, Bilgisayar ve Bilişim Bilimleri, Fen (Kimya, Fizik, Biyoloji), Tıp, Sağlık Bilimleri ve Diş Hekimliği fakülteleri — Profesör sütunu.',
+        'sart' => Kalip::ve('Profesör kadrosuna atanma', [
             Kalip::toplam(1800),
             Kalip::puanDan('Nitelikli yayın ve proje ölçütlerinden en az 750 puan', [
                 '1.1a', '1.1b', '1.1c', '1.1d', '1.1e', '2.1a', '2.1b', '2.1d',

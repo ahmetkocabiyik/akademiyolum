@@ -2014,8 +2014,13 @@ test('Sakarya fakülte grupları temel alanlara çakışmadan dağılıyor', fun
         expect($depo->bul('Sakarya Üniversitesi', 'profesorluk', $alan))->not->toBeNull($alan);
     }
 
+    // 2.3'ün başlığı iki satır ve ikinci satırı ilk girişte düşmüştü; Tıp,
+    // Sağlık Bilimleri ve Diş Hekimliği o gruba dâhil, sağlık kapsam içinde.
+    expect($depo->bul('Sakarya Üniversitesi', 'docentlik', 'saglik')['anahtar'])
+        ->toStartWith('sakarya-docent-2_3');
+
     // Yönergede karşılığı olmayan alanlar eşik üretmemeli.
-    foreach (['saglik', 'filoloji', 'spor', 'ziraat'] as $alan) {
+    foreach (['filoloji', 'spor', 'ziraat'] as $alan) {
         expect($depo->bul('Sakarya Üniversitesi', 'docentlik', $alan))->toBeNull($alan);
     }
 });

@@ -461,6 +461,30 @@ diyorsa hukuk, ilahiyat, filoloji, spor, ziraat için eşik **yazma**. O alanlar
 bir gruba katmak, adaya yönergede yazmayan bir baraj göstermek olur. Kapsam dışı
 kalması doğrusudur; Yönerge Analizi sayfası zaten bunu listeliyor.
 
+**TEK İSTİSNA: BELGE EŞLEMEYİ KENDİSİ DOĞRULUYORSA.** Kuralın amacı uydurma
+baraj göstermemek; belgenin kendi içinden okunabilen bir eşleme uydurma
+değildir. İstisnaya girebilmek için İKİSİ BİRDEN gerekir:
+
+  1. Grup listesi KAPALI olmalı — anılan gruplar temel alan uzayını tüketmeli,
+     yani anılmayan alanın düşebileceği başka bir kova kalmamalı.
+  2. Belge, eşlemeyi en az bir yerden AÇIKÇA doğrulamalı — o alanın adını
+     anmalı, o fakülteyi bir grubun içinde saymalı ya da o alana özel bir ek
+     koşul getirmeli.
+
+Ankara Üniversitesi ikisini de sağlıyor: üç bölüm var (Fen-Mühendislik-Sağlık,
+Sosyal Bilimler, Güzel Sanatlar) ve belge IV/b'de "Sosyal Bilimler alanından
+başvuru yapabilecek bölümler" listesinde SPOR BİLİMLERİ FAKÜLTESİ'ni sayıyor,
+I/ı'da da HUKUK TEMEL ALANI'na ayrı bir monografi koşulu getiriyor. Eğitim,
+filoloji, hukuk, ilahiyat ve spor Sosyal'e, ziraat Fen'e bağlandı.
+
+Ege Üniversitesi sağlamıyor: altı grup var ama eğitim, filoloji ve ziraat
+belgede HİÇ geçmiyor — doğrulama yok, eşik de yok. Iğdır da öyle: dört grup
+sayılıyor, mühendislik ve ziraat hiç anılmıyor; "Fen ve Sağlık" adının kendisi
+mühendisliği dışarıda bırakıyor.
+
+Ölçüt tek soruya iniyor: **belge bu alanı bir yerde anıyor mu?** Anıyorsa
+eşleme okunabilir, anmıyorsa tahmindir.
+
 ### Barajın saydığı küme tablonun tamamı olmayabilir
 
 Bir yönerge "tablodan toplam N puan" dese bile tablonun kendi ara toplam
