@@ -41,20 +41,20 @@ $GENEL = ['fen', 'muhendislik', 'saglik', 'ziraat', 'sosyal', 'egitim', 'filoloj
     'ilahiyat', 'spor', 'hukuk'];
 $SANAT = ['guzel_sanatlar', 'mimarlik'];
 
-$SANAT_NOTU = 'Sanat ve Mimarlık alanlarında MADDE 6.5 gereği Ek-3\'ün sanat satırları da bu '
-    .'toplama giriyor. Yönergenin Güzel Sanatlar Fakültesi için öngördüğü ek bazlı yüzde '
-    .'dağılımı (Ek-1 %30, Ek-2 %10-20, Ek-3 %50-60) araçta uygulanamıyor; yalnızca sayısal '
+$SANAT_NOTU = 'Sanat ve Mimarlık alanlarında sanatsal etkinlik satırları da bu toplama '
+    .'giriyor. Yönergenin Güzel Sanatlar Fakültesi için öngördüğü yüzde dağılımı (yayın %30, '
+    .'diğer akademik faaliyet %10-20, sanatsal etkinlik %50-60) araçta uygulanamıyor; yalnızca sayısal '
     .'baraj değerlendiriliyor.';
 
-$DR_NOTU = 'Doktor öğretim üyeliğinin 30 puanlık barajı Ek-1\'in TAMAMINDAN değil, MADDE '
-    .'6.1\'in tek tek saydığı satırlardan hesaplanıyor: A1-A5 (uluslararası makale, kitap ve '
-    .'kitap bölümü) ile B1-B5, B7 ve B12 (ulusal makale, kitap, kitap bölümü, ders kitabı, '
-    .'kitap editörlüğü ve ulusal tam bildiri). Atıf, proje, hakemlik, ödül, patent, tez '
-    .'danışmanlığı ve idari görev puanlarınız bu barajın DIŞINDA kalıyor. Bu listedeki A.3 '
-    .'(önde gelen ülkelerin hakemli dergileri) ve B.5 (ders notu) satırlarının faaliyet '
+$DR_NOTU = 'Doktor öğretim üyeliğinin 30 puanlık barajı puan çizelgesinin TAMAMINDAN değil, '
+    .'yönergenin tek tek saydığı satırlardan hesaplanıyor: uluslararası makale, kitap ve '
+    .'kitap bölümü ile ulusal makale, kitap, kitap bölümü, ders kitabı, kitap editörlüğü ve '
+    .'ulusal tam bildiri. Atıf, proje, hakemlik, ödül, patent, tez danışmanlığı ve idari görev '
+    .'puanlarınız bu barajın DIŞINDA kalıyor. Bu listedeki "önde gelen ülkelerin hakemli '
+    .'dergileri" ve "ders notu" satırlarının faaliyet '
     .'kaydında karşılığı olmadığı için onlar da sayılamıyor.';
 
-$drSarti = fn (): array => Kalip::toplam(30, maddeler: ['DR-30'], liste: 'MADDE 6.1');
+$drSarti = fn (): array => Kalip::toplam(30, maddeler: ['DR-30'], liste: 'Makale, kitap, editörlük ve bildiri');
 
 $esikler = [];
 
@@ -62,6 +62,10 @@ foreach ([['genel', $GENEL, false], ['sanat', $SANAT, true]] as [$anahtar, $alan
     $ortak = ['universite' => 'İstanbul Aydın Üniversitesi', 'alan' => $alan,
         'cetvel' => 'istanbul-aydin-2020'];
     $grup = $sanat ? 'A-B-EK3' : 'A-B';
+    // Adaya gösterilen küme adı (KONVANSIYONLAR §2).
+    $grupAdi = $sanat
+        ? 'Yayın, atıf ve sanatsal etkinlik'
+        : 'Yayın ve atıf';
     $ek = $sanat ? ' '.$SANAT_NOTU : '';
 
     $esikler[] = array_merge($ortak, [
@@ -91,14 +95,14 @@ foreach ([['genel', $GENEL, false], ['sanat', $SANAT, true]] as [$anahtar, $alan
         'aday_notu' => 'İstanbul Aydın\'da doçent kadrosuna atanmanın koşulu, hâlen bir '
             .'yükseköğretim kurumunda akademik kadroda çalışıp çalışmadığınıza bağlı. '
             .'Çalışıyorsanız doçentlik belgeniz yeterli; çalışmıyorsanız ve doçent unvanınızı '
-            .'aldıktan sonra üç yıldan fazla geçmişse Ek-1\'in A ve B bölümlerinden 40 puan '
+            .'aldıktan sonra üç yıldan fazla geçmişse yayın ve atıf kalemlerinizden 40 puan '
             .'gerekiyor. Araç hangi durumda olduğunuzu bilmediği için ikisini de gösteriyor.'
             .$ek,
         'sart' => Kalip::ve('Doçentlik koşulları', [
             Kalip::beyan('Üniversitelerarası Kuruldan doçentlik belgesi almış olmak', 'MADDE 6.2'),
             Kalip::veya('Kadro ya da puan koşulu', [
                 Kalip::beyan('Bir yükseköğretim kurumunda akademik kadroda çalışıyor olmak (bu durumda puan koşulu aranmaz)', 'MADDE 6.2'),
-                Kalip::toplam(40, maddeler: [$grup], liste: 'MADDE 6.2'),
+                Kalip::toplam(40, maddeler: [$grup], liste: $grupAdi),
             ]),
         ]),
     ]);
@@ -110,11 +114,11 @@ foreach ([['genel', $GENEL, false], ['sanat', $SANAT, true]] as [$anahtar, $alan
             .'sağlamak, yani A ve B maddelerinden 40 puan. MADDE 6.4 dışarıdan atamada da aynı '
             .'40 puanı arıyor.',
         'aday_notu' => 'Profesörlüğe yükseltilerek atanmak için doçent unvanınızı aldıktan '
-            .'sonra doçentlik koşullarını yeniden sağlamanız, yani Ek-1\'in A ve B '
-            .'bölümlerinden 40 puan toplamanız gerekiyor. Yükseköğretim kurumlarından ayrılıp '
+            .'sonra doçentlik koşullarını yeniden sağlamanız, yani yayın ve atıf '
+            .'kalemlerinizden 40 puan toplamanız gerekiyor. Yükseköğretim kurumlarından ayrılıp '
             .'üç yıldan fazla dışarıda kalan profesörlerin yeniden atanmasında da aynı 40 puan '
             .'aranıyor.'.$ek,
-        'sart' => Kalip::toplam(40, donem: Kalip::DOCENTLIK_SONRASI, maddeler: [$grup], liste: 'MADDE 6.3'),
+        'sart' => Kalip::toplam(40, donem: Kalip::DOCENTLIK_SONRASI, maddeler: [$grup], liste: $grupAdi),
     ]);
 }
 

@@ -94,7 +94,7 @@ $DOC = Kalip::DOCENTLIK_SONRASI;
 
 $baslicaNotu = '"Başlıca eser" yönergede tek yazar olduğunuz, tek yazar değilseniz sorumlu '
     .'yazar (corresponding author) olduğunuz ya da yürütücüsü olduğunuz bir araştırma '
-    .'projesinden üretilmiş yayın olarak tanımlı (Madde 8). Burada yalnızca yazarlık '
+    .'projesinden üretilmiş yayın olarak tanımlı. Burada yalnızca yazarlık '
     .'tarafı denetlenebiliyor ve birinci isim olduğunuz yayınlar da kabul ediliyor; '
     .'proje şıkkı hiç hesaplanamıyor. Koşul bu yüzden olduğundan kolay görünebilir. Aynı '
     .'eser yalnızca bir yükseltilme aşamasında ve bir kişi için kullanılabilir.';
@@ -102,7 +102,7 @@ $baslicaNotu = '"Başlıca eser" yönergede tek yazar olduğunuz, tek yazar değ
 $ortakNotu = 'Yönerge ayrıca İngilizce seminerde başarılı olmayı ve referans mektuplarını '
     .'şart koşuyor; ikisi de belgeyle sağlanıyor, faaliyet kaydından hesaplanamıyor. '
     .'Yurt dışından başvuruyorsanız yalnızca genel ilkeler ve değerlendirme maddeleri '
-    .'uygulanıyor, EK-3\'teki sayısal koşullar aranmıyor (esasların dipnotu).';
+    .'uygulanıyor, alana özgü sayısal koşullar aranmıyor (esasların dipnotu).';
 
 $tezdenNotu = 'Yönerge bu yayınların lisansüstü tezinizden üretilmemiş olmasını istiyor; '
     .'kaydınız yayının tezden üretilip üretilmediğini tutmadığı için koşul olduğundan '

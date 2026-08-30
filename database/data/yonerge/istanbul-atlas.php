@@ -48,14 +48,14 @@ $PUAN_NOTU = 'Scopus atıfları (atıf başına 0,5) ondalık olduğu için giri
     .'haftalık ders saati başına verildiği hâlde ders başına tek puan sayılıyor.';
 
 $genel = fn (int $kitapMakale, int $toplam): array => Kalip::ve('Atama koşulları', [
-    Kalip::toplam($kitapMakale, maddeler: ['KITAP-MAKALE'], liste: 'EK-1\'in 1.1 Kitaplar ve 1.2 Makaleler başlıkları'),
-    Kalip::toplam($toplam, maddeler: ['TUM'], liste: 'EK-1'),
+    Kalip::toplam($kitapMakale, maddeler: ['KITAP-MAKALE'], liste: 'Kitap ve makale'),
+    Kalip::toplam($toplam, maddeler: ['TUM']),
 ]);
 
 $tasarim = fn (int $sanat, int $bilimsel, int $toplam): array => Kalip::ve('Atama koşulları', [
-    Kalip::toplam($sanat, maddeler: ['SANAT'], liste: 'EK-1\'in 3. Sanatsal Faaliyetler bölümü'),
-    Kalip::toplam($bilimsel, maddeler: ['BILIMSEL'], liste: 'EK-1\'in 1, 2 ve 4. bölümleri'),
-    Kalip::toplam($toplam, maddeler: ['TUM'], liste: 'EK-1'),
+    Kalip::toplam($sanat, maddeler: ['SANAT'], liste: 'Sanatsal faaliyet'),
+    Kalip::toplam($bilimsel, maddeler: ['BILIMSEL'], liste: 'Sanatsal faaliyet dışındaki bilimsel faaliyet'),
+    Kalip::toplam($toplam, maddeler: ['TUM']),
 ]);
 
 $docentBeyani = Kalip::beyan('Üniversitelerarası Kurul tarafından doçent unvanını almış olmak', 'MADDE 5/3');
@@ -87,8 +87,8 @@ return [
             .'de toplama giriyor. '.$PUAN_NOTU,
         'sart' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
             $docentBeyani,
-            Kalip::toplam(45, maddeler: ['KITAP-MAKALE'], liste: 'EK-1\'in 1.1 Kitaplar ve 1.2 Makaleler başlıkları'),
-            Kalip::toplam(100, maddeler: ['TUM'], liste: 'EK-1'),
+            Kalip::toplam(45, maddeler: ['KITAP-MAKALE'], liste: 'Kitap ve makale'),
+            Kalip::toplam(100, maddeler: ['TUM']),
         ]),
     ],
     [
@@ -135,9 +135,9 @@ return [
             .'gerekiyor. '.$PUAN_NOTU,
         'sart' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
             $docentBeyani,
-            Kalip::toplam(45, maddeler: ['SANAT'], liste: 'EK-1\'in 3. Sanatsal Faaliyetler bölümü'),
-            Kalip::toplam(55, maddeler: ['BILIMSEL'], liste: 'EK-1\'in 1, 2 ve 4. bölümleri'),
-            Kalip::toplam(100, maddeler: ['TUM'], liste: 'EK-1'),
+            Kalip::toplam(45, maddeler: ['SANAT'], liste: 'Sanatsal faaliyet'),
+            Kalip::toplam(55, maddeler: ['BILIMSEL'], liste: 'Sanatsal faaliyet dışındaki bilimsel faaliyet'),
+            Kalip::toplam(100, maddeler: ['TUM']),
         ]),
     ],
     [

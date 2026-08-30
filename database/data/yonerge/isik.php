@@ -75,22 +75,22 @@ $profesorSuresi = Kalip::beyan(
     'Madde 8(1)',
 );
 
-$carpanNotu = 'Biriminizde yönergenin "A.1 ve B grubu faaliyetler 1,3 katsayısı ile çarpılarak '
-    .'değerlendirilir" kuralı geçerli; uluslararası yayın ve proje puanlarınız o çarpanla '
+$carpanNotu = 'Biriminizde yönergenin "uluslararası yayın ve proje faaliyetleri 1,3 katsayısı '
+    .'ile çarpılarak değerlendirilir" kuralı geçerli; bu puanlarınız o çarpanla '
     .'hesaplandı.';
 
 return [
     // ══════════════════ DR. ÖĞRETİM ÜYESİ (Madde 6) ══════════════════
     [
         'anahtar' => 'isik-dr-sosyal',
-        'aday_notu' => 'İki koşul birlikte: A.1 kapsamında (uluslararası indeksli dergi ya da '
+        'aday_notu' => 'İki koşul birlikte: uluslararası yayın kalemlerinizde (indeksli dergi ya da '
             .'uluslararası yayınevi kitabı) en az bir yayın ve toplam 15 puan. '.$carpanNotu,
         'universite' => 'Işık Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => ['sosyal'],
         'cetvel' => 'isik-2019-carpanli',
         'notlar' => 'Madde 6(2)-a (İİBF tüm bölümleri + Fen-Edebiyat İnsan ve Toplum Bilimleri '
-            .'ve Psikoloji): "En az bir adet A.1 kapsamında yayınlanmış veya yayına kabul '
+            .'ve Psikoloji): "En az bir adet uluslararası yayın kalemlerinizde yayımlanmış veya yayına kabul '
             .'edilmiş makale ve en az 15 puan."',
         'sart' => Kalip::ve('Dr. Öğr. Üyeliğine atanma — İktisadi ve İdari Bilimler, İnsan ve Toplum Bilimleri', [
             $seminer,
@@ -100,7 +100,7 @@ return [
     ],
     [
         'anahtar' => 'isik-dr-mimarlik',
-        'aday_notu' => 'İki koşul birlikte: A.1 kapsamında en az bir yayın ve toplam 15 puan. '
+        'aday_notu' => 'İki koşul birlikte: uluslararası yayın kalemlerinizde en az bir yayın ve toplam 15 puan. '
             .$carpanNotu,
         'universite' => 'Işık Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
@@ -115,7 +115,7 @@ return [
     ],
     [
         'anahtar' => 'isik-dr-muhendislik',
-        'aday_notu' => 'Mühendislik ve Fizik\'te yayın koşulu daha dar: A.1.1 (SSCI, AHCI veya '
+        'aday_notu' => 'Mühendislik ve Fizik\'te yayın koşulu daha dar: SSCI, AHCI veya '
             .'SCI-Expanded) kapsamında en az bir makale gerekiyor, ESCI ya da alan indeksi '
             .'yetmiyor. Bu birimlerde 1,3 çarpanı da UYGULANMIYOR.',
         'universite' => 'Işık Üniversitesi',
@@ -152,7 +152,7 @@ return [
     ],
     [
         'anahtar' => 'isik-dr-guzel-sanatlar',
-        'aday_notu' => 'Güzel Sanatlarda yayın koşulu en geniş: A.1 (uluslararası) ya da A.2 '
+        'aday_notu' => 'Güzel Sanatlarda yayın koşulu en geniş: uluslararası ya da ulusal yayın kalemlerinizde '
             .'(ulusal) kapsamında bir yayın yeterli. '.$carpanNotu,
         'universite' => 'Işık Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
@@ -170,13 +170,13 @@ return [
     // ══════════════════ DOÇENT (Madde 7) ══════════════════
     [
         'anahtar' => 'isik-docent-sosyal',
-        'aday_notu' => 'Üç koşul birlikte: A.1.1 kapsamında en az bir makale, A.1 kaleminden '
+        'aday_notu' => 'Üç koşul birlikte: ssci, ahci ve sci-expanded dergilerindeki makalelerinizden en az bir makale, uluslararası yayın kalemlerinizden '
             .'30 puan ve toplam 100 puan. '.$carpanNotu,
         'universite' => 'Işık Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => ['sosyal'],
         'cetvel' => 'isik-2019-carpanli',
-        'notlar' => 'Madde 7(2)-a: "En az bir adet A.1.1 kapsamında makale ve A.1 kapsamında en '
+        'notlar' => 'Madde 7(2)-a: "En az bir adet ssci, ahci ve sci-expanded dergilerindeki makalesi ve uluslararası yayın kalemlerinizden en '
             .'az 30 puan; toplamda ise en az 100 puan."',
         'sart' => Kalip::ve('Doçent kadrosuna atanma — İktisadi ve İdari Bilimler, İnsan ve Toplum Bilimleri', [
             $docentUnvani,
@@ -187,8 +187,9 @@ return [
     ],
     [
         'anahtar' => 'isik-docent-mimarlik',
-        'aday_notu' => 'Mimarlık ve Tasarımda makale sayısı iki ve dergi kümesi daha geniş '
-            .'(A.1.1, A.1.2 veya A.1.3). Otuz puanlık alt baraj uluslararası yayınlara ek '
+        'aday_notu' => 'Mimarlık ve Tasarımda makale sayısı iki ve dergi kümesi daha geniş: '
+            .'SSCI, AHCI, SCI-Expanded ve diğer uluslararası indeksli dergiler sayılıyor. Otuz '
+            .'puanlık alt baraj uluslararası yayınlara ek '
             .'olarak ulusal hakemli dergiden de toplanabiliyor. '.$carpanNotu,
         'universite' => 'Işık Üniversitesi',
         'kadro' => 'docentlik',
@@ -205,14 +206,14 @@ return [
     ],
     [
         'anahtar' => 'isik-docent-muhendislik',
-        'aday_notu' => 'Mühendislik ve Fizik\'te makale SAYISI aranmıyor; onun yerine A.1.1 '
-            .'yayınlarından 45 puanlık bir alt baraj var. Bu birimlerde 1,3 çarpanı '
+        'aday_notu' => 'Mühendislik ve Fizik\'te makale SAYISI aranmıyor; onun yerine '
+            .'SSCI, AHCI ve SCI-Expanded dergilerindeki makalelerinizden 45 puanlık bir alt baraj var. Bu birimlerde 1,3 çarpanı '
             .'uygulanmıyor.',
         'universite' => 'Işık Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => ['muhendislik', 'fen'],
         'cetvel' => 'isik-2019',
-        'notlar' => 'Madde 7(2)-c: "En az 45 puanı A.1.1 kapsamında bulunan yayınlardan olmak '
+        'notlar' => 'Madde 7(2)-c: "En az 45 puanı ssci, ahci ve sci-expanded dergilerindeki makalelerinizden olmak '
             .'üzere toplam en az 100 puan."',
         'sart' => Kalip::ve('Doçent kadrosuna atanma — Mühendislik ve Fizik', [
             $docentUnvani,
@@ -264,14 +265,14 @@ return [
     // ══════════════════ PROFESÖR (Madde 8) ══════════════════
     [
         'anahtar' => 'isik-profesor-sosyal',
-        'aday_notu' => 'İki A.1.1 makalesinin en az biri doçentlik unvanınızdan sonra üretilmiş '
-            .'olmalı. Ayrıca A.1 kaleminden 45 ve toplamda 200 puan aranıyor. '.$carpanNotu,
+        'aday_notu' => 'İki ssci, ahci ve sci-expanded dergilerindeki makalesinin en az biri doçentlik unvanınızdan sonra üretilmiş '
+            .'olmalı. Ayrıca uluslararası yayın kalemlerinizden 45 ve toplamda 200 puan aranıyor. '.$carpanNotu,
         'universite' => 'Işık Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => ['sosyal'],
         'cetvel' => 'isik-2019-carpanli',
         'notlar' => 'Madde 8(2)-a: "Biri doçentlik unvanını aldıktan sonraki faaliyetlerden '
-            .'olmak üzere en az iki adet A.1.1 kapsamında makale ve A.1 kapsamında en az 45 '
+            .'olmak üzere en az iki adet ssci, ahci ve sci-expanded dergilerindeki makalesi ve uluslararası yayın kalemlerinizden en az 45 '
             .'puan, toplamda ise en az 200 puan."',
         'sart' => Kalip::ve('Profesör kadrosuna atanma — İktisadi ve İdari Bilimler, İnsan ve Toplum Bilimleri', [
             $profesorSuresi,
@@ -283,14 +284,15 @@ return [
     ],
     [
         'anahtar' => 'isik-profesor-mimarlik',
-        'aday_notu' => 'Mimarlık ve Tasarımda makale sayısı aranmıyor; A.1 yayınlarından 60 '
+        'aday_notu' => 'Mimarlık ve Tasarımda makale sayısı aranmıyor; uluslararası yayın '
+            .'kalemlerinizden 60 '
             .'puan isteniyor ve bunun en az 30\'u doçentlik sonrası olmalı. '.$carpanNotu,
         'universite' => 'Işık Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => ['mimarlik'],
         'cetvel' => 'isik-2019-carpanli',
         'notlar' => 'Madde 8(2)-b: "En az 30 puanı doçentlik unvanını aldıktan sonraki '
-            .'faaliyetlerden olmak üzere A.1 grubu yayınlardan en az 60 puan ve toplamda 200 '
+            .'faaliyetlerden olmak üzere uluslararası yayın kalemlerinizden en az 60 puan ve toplamda 200 '
             .'puan."',
         'sart' => Kalip::ve('Profesör kadrosuna atanma — Mimarlık ve Tasarım', [
             $profesorSuresi,
@@ -301,7 +303,7 @@ return [
     ],
     [
         'anahtar' => 'isik-profesor-muhendislik',
-        'aday_notu' => 'Mühendislik ve Fizik\'te üç baraj birlikte: A.1.1 yayınlarından 80 puan '
+        'aday_notu' => 'Mühendislik ve Fizik\'te üç baraj birlikte: SSCI, AHCI ve SCI-Expanded dergilerindeki makalelerinizden 80 puan '
             .'(en az 35\'i doçentlik sonrası) ve toplam 200 puan (en az 80\'i doçentlik '
             .'sonrası). Bu birimlerde 1,3 çarpanı uygulanmıyor.',
         'universite' => 'Işık Üniversitesi',
@@ -309,7 +311,7 @@ return [
         'alan' => ['muhendislik', 'fen'],
         'cetvel' => 'isik-2019',
         'notlar' => 'Madde 8(2)-c: "En az 35 puanı doçentlik unvanını aldıktan sonra olmak '
-            .'üzere A.1.1 grubu yayınlardan en az 80 puan ve en az 80 puanı doçentlik sonrası '
+            .'üzere ssci, ahci ve sci-expanded dergilerindeki makalelerinizden en az 80 puan ve en az 80 puanı doçentlik sonrası '
             .'faaliyetlerden olmak üzere toplamda en az 200 puan."',
         'sart' => Kalip::ve('Profesör kadrosuna atanma — Mühendislik ve Fizik', [
             $profesorSuresi,
@@ -340,8 +342,9 @@ return [
     ],
     [
         'anahtar' => 'isik-profesor-guzel-sanatlar',
-        'aday_notu' => 'Güzel Sanatlarda profesörlük koşulu iki okumada da aynı: A.1 (ya da '
-            .'Güzel Sanatlar temel alanından doçent olanlar için A.1 ve A.2) yayınlarından 60 '
+        'aday_notu' => 'Güzel Sanatlarda profesörlük koşulu iki okumada da aynı: uluslararası '
+            .'(Güzel Sanatlar temel alanından doçent olanlar için uluslararası ve ulusal) '
+            .'yayın kalemlerinizden 60 '
             .'puan, en az 30\'u doçentlik sonrası, toplamda 200 puan. Doçentlikten farklı '
             .'olarak burada makale SAYISI aranmıyor. '.$carpanNotu,
         'universite' => 'Işık Üniversitesi',

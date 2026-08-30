@@ -58,16 +58,23 @@ $HUKUK = ['hukuk'];
 $SANAT = ['guzel_sanatlar', 'mimarlik'];
 
 /** Doktor öğretim üyeliği: MADDE 6/1-a ile 6/2-b ve 6/2-c. */
+// Adaya gösterilen küme adları (KONVANSIYONLAR §2).
+$ASGARI_ADI = [
+    'ASGARI' => 'Makale, bildiri, kitap ve proje',
+    'ASGARI-SANAT' => 'Makale, bildiri, kitap, proje ve sanatsal etkinlik',
+    'ASGARI-HUKUK' => 'Makale, bildiri, kitap, proje, atıf ve toplumsal katkı',
+];
+
 $doktorSarti = fn (string $grup, string $madde): array => Kalip::ve('Doktor öğretim üyeliği koşulları', [
     Kalip::beyan('Doktora, tıpta/diş hekimliğinde/eczacılıkta/veteriner hekimlikte uzmanlık ya da sanatta yeterlik unvanına sahip olmak; yabancı dilde eğitim veren bölümlerde ilgili dil belgesini sunmak', 'MADDE 5/2'),
-    Kalip::toplam(15, maddeler: [$grup], liste: $madde),
+    Kalip::toplam(15, maddeler: [$grup], liste: $ASGARI_ADI[$grup]),
 ]);
 
 /** Profesörlükte her alanda ortak koşullar: MADDE 9/2, 9/3 ve 10/7-b. */
 $profesorOrtak = [
     Kalip::beyan('Doçentlik unvanını aldıktan sonra en az beş yıl, başvurulan profesörlük kadrosuyla ilgili bilim alanında çalışmış olmak', 'MADDE 9/2'),
     Kalip::beyan('Yayınlarınızdan birini başlıca araştırma eseri olarak göstermek', 'MADDE 9/3'),
-    Kalip::toplam(40, donem: Kalip::DOCENTLIK_SONRASI, liste: 'MADDE 10/7-b'),
+    Kalip::toplam(40, donem: Kalip::DOCENTLIK_SONRASI),
 ];
 
 return [
@@ -80,11 +87,11 @@ return [
         'cetvel' => 'dogus-2022',
         'notlar' => 'MADDE 6/1-a: Ek-1 puanlama sisteminin A, B, C, D, E, F ve S maddelerinde '
             .'tanımlanmış etkinliklerden asgari 15 puan.',
-        'aday_notu' => 'Doktor öğretim üyeliği için tek sayısal koşul, Ek-1\'in A (uluslararası '
-            .'makale), B (uluslararası bildiri), C (uluslararası kitap), D (ulusal makale), E '
-            .'(ulusal bildiri), F (ulusal kitap) ve S (araştırma projesi) maddelerinden toplam 15 '
+        'aday_notu' => 'Doktor öğretim üyeliği için tek sayısal koşul, uluslararası ve ulusal '
+            .'makale, bildiri, kitap ile araştırma projesi kalemlerinizden toplam 15 '
             .'puan. Atıf, hakemlik, editörlük, patent ve ödül puanlarınız bu barajın DIŞINDA '
-            .'kalıyor. Puanların Mühendislik, Fen ve Sağlık alanlarında A maddesinden gelmesi '
+            .'kalıyor. Puanların Mühendislik, Fen ve Sağlık alanlarında uluslararası '
+            .'makalelerden gelmesi '
             .'yönergeye göre "tercih sebebi"; zorunluluk olmadığı için ayrı bir koşul olarak '
             .'aranmıyor. Atamalar en fazla dört yıllık yapılıyor.',
         'sart' => $doktorSarti('ASGARI', 'MADDE 6/1-a'),
@@ -97,7 +104,7 @@ return [
         'cetvel' => 'dogus-2022',
         'notlar' => 'MADDE 6/6 görev süresi sona erenlerin tekrar atanabileceğini söylüyor, ayrı '
             .'bir ölçüt koymuyor; ilk atama koşulları uygulandı.',
-        'aday_notu' => 'Yönerge yeniden atama için ayrı bir ölçüt tanımlamıyor; MADDE 6/6 yalnızca '
+        'aday_notu' => 'Yönerge yeniden atama için ayrı bir ölçüt tanımlamıyor; yalnızca '
             .'"görev süresi sona erenler tekrar atanabilirler" diyor. Bu yüzden ilk atamanın 15 '
             .'puanlık koşulu uygulandı. Biriminizin ayrıca bir yeniden atama beklentisi olabilir.',
         'sart' => $doktorSarti('ASGARI', 'MADDE 6/1-a'),
@@ -162,7 +169,7 @@ return [
         'aday_notu' => 'Doğuş\'ta doçent kadrosuna atanmak için yönergenin koyduğu tek koşul, '
             .'Üniversitelerarası Kurulun verdiği doçentlik unvanına sahip olmak (ya da yurt dışında '
             .'kazanılan unvanın ÜAK kararıyla Türkiye\'de geçerli sayılması). Yönerge ayrıca bir '
-            .'puan barajı koymuyor; MADDE 8/6\'da sayılan yayın sürekliliği, atıflar, hocalık '
+            .'puan barajı koymuyor; yönergede sayılan yayın sürekliliği, atıflar, hocalık '
             .'yeteneği, tez danışmanlıkları, ödüller ve yurt dışı deneyimi gibi başlıklar üç '
             .'profesörden oluşan jürinin nitel değerlendirme ölçütleri.',
         'sart' => Kalip::beyan('Üniversitelerarası Kurul tarafından verilen doçentlik unvanına sahip olmak ya da yurt dışında kazanılan doçentlik unvanının ÜAK kararıyla Türkiye\'de geçerli sayılması', 'MADDE 8/1'),
@@ -177,7 +184,7 @@ return [
         'cetvel' => 'dogus-2022',
         'notlar' => 'MADDE 10/7-b ve 10/7-1: 40 puan ile biri başlıca yazar olmak üzere en az üç '
             .'adet A maddesinde tanımlı uluslararası yayın.',
-        'aday_notu' => 'Mühendislik, Fen ve Sağlık dallarında profesörlük için Ek-1\'den 40 puan '
+        'aday_notu' => 'Mühendislik, Fen ve Sağlık dallarında profesörlük için tüm faaliyetlerinizden 40 puan '
             .'ile A maddesinde tanımlı (SCI-Expanded, SSCI, AHCI ya da diğer uluslararası indeksli '
             .'dergilerde) en az üç uluslararası yayın gerekiyor; bunlardan birinde ÜAK doçentlik '
             .'ölçütlerine göre başlıca yazar olmalısınız. Yönerge 40 puanın hangi döneme ait '
@@ -198,7 +205,7 @@ return [
         'cetvel' => 'dogus-2022',
         'notlar' => 'MADDE 10/7-b ve 10/7-2: 40 puan ile en az biri A, B veya C maddesinde tanımlı '
             .'olmak üzere toplam bir adet uluslararası yayın.',
-        'aday_notu' => 'Hukuk dışındaki sosyal bilim alanlarında profesörlük için Ek-1\'den 40 puan '
+        'aday_notu' => 'Hukuk dışındaki sosyal bilim alanlarında profesörlük için tüm faaliyetlerinizden 40 puan '
             .'ile A (uluslararası makale), B (uluslararası bildiri) veya C (uluslararası kitap) '
             .'maddesinde tanımlı en az bir uluslararası yayın gerekiyor. Yönerge 40 puanın hangi '
             .'döneme ait olduğunu açıkça yazmadığı için puan doçentlik sonrasından sayıldı.',
@@ -215,9 +222,10 @@ return [
         'cetvel' => 'dogus-2022',
         'notlar' => 'MADDE 10/7-b. 10/7\'nin 1, 2 ve 3 numaralı bentleri hukuk dallarını kapsam '
             .'dışında bırakıyor; hukukta yalnızca 40 puan koşulu var.',
-        'aday_notu' => 'Hukuk dallarında profesörlük için Ek-1\'den 40 puan tek sayısal koşul. '
-            .'MADDE 10/7\'nin uluslararası yayın sayısı isteyen bentleri hukuku kapsamıyor; MADDE '
-            .'9/2 de "hukuk bilim dalları hariç" diyerek uluslararası orijinal eser koşulunu hukuk '
+        'aday_notu' => 'Hukuk dallarında profesörlük için tüm faaliyetlerinizden 40 puan tek sayısal koşul. '
+            .'Yönergenin uluslararası yayın sayısı isteyen bentleri hukuku kapsamıyor; başlıca '
+            .'eser maddesi de "hukuk bilim dalları hariç" diyerek uluslararası orijinal eser '
+            .'koşulunu hukuk '
             .'dışında bırakıyor. Yönerge 40 puanın hangi döneme ait olduğunu açıkça yazmadığı için '
             .'puan doçentlik sonrasından sayıldı.',
         'sart' => Kalip::ve('Profesörlük koşulları', $profesorOrtak),
@@ -231,7 +239,7 @@ return [
         'notlar' => 'MADDE 10/7-b ve 10/7-3: 40 puan ile en az iki adet V maddesinde tanımlı yurt '
             .'dışı etkinlik. Yurt dışı ayrımı yalnızca V-1 ve V-3 satırlarında kesin olduğundan '
             .'sayım bu iki kalemle sınırlı tutuldu.',
-        'aday_notu' => 'Sanatla ilgili dallarda profesörlük için Ek-1\'den 40 puan ile V '
+        'aday_notu' => 'Sanatla ilgili dallarda profesörlük için tüm faaliyetlerinizden 40 puan ile V '
             .'maddesinde tanımlı en az iki YURT DIŞI etkinlik gerekiyor. Yönergenin V bölümündeki '
             .'kişisel sergi, karma sergi ve sinema satırları yurt içi ile yurt dışı etkinlikleri '
             .'aynı kalemde topladığı için sayıma yalnızca uluslararası olduğu satırdan belli olan '
