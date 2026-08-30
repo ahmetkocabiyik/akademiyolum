@@ -71,7 +71,7 @@ $UNVAN = Kalip::beyan(
     'MADDE 9'
 );
 
-$NOT_CETVEL = ' Ortak çalışmalarda puan Tablo 2\'nin yazar sayısı × isim sırası matrisine göre '
+$NOT_CETVEL = ' Ortak çalışmalarda puan yönergenin yazar sayısı × isim sırası matrisine göre '
     .'hesaplanıyor (iki yazarlıda birinci isim %95; yedi ve daha fazla yazarlıda yedinci ve '
     .'sonraki isimler %40). Başlıkların çoğunda azami puan var: ödül 35, diğer etkinlikler 30, '
     .'atıf, eğitim-öğretim, tez ve editörlük 20\'şer, bilimsel toplantı 15 puan. Makalelere '
@@ -152,8 +152,8 @@ $grup = function (string $kod, array $alanlar, string $ad, string $cetvel, bool 
         'notlar' => $ad.' doktor öğretim üyeliğine yeniden atanma (MADDE 6): zorunlu şartlar '
             .'aranmıyor; bir önceki görev süresinden itibaren asgari puanın %50\'si (40 puan) '
             .'ve alan grubuna özgü yayın koşulu.',
-        'aday_notu' => $ad.' için doktor öğretim üyesi kadrosuna YENİDEN ATANMA. MADDE 6 '
-            .'uyarınca MADDE 16\'daki zorunlu şartları sağlama zorunluluğu YOK; bir önceki '
+        'aday_notu' => $ad.' için doktor öğretim üyesi kadrosuna YENİDEN ATANMA. İlk '
+            .'atamadaki zorunlu şartları sağlama zorunluluğu YOK; bir önceki '
             .'görev süresinin başlamasından ya da uzatımından itibaren asgari puanın %50\'si '
             .'kadar puan (40) ve alan grubunuza özgü yayın koşulu aranıyor.'.$NOT_CETVEL,
         'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna yeniden atanma — '.$ad,
@@ -171,7 +171,7 @@ $grup = function (string $kod, array $alanlar, string $ad, string $cetvel, bool 
         'aday_notu' => $ad.' için doçent kadrosuna atanma. Doçentlik unvanının yanı sıra en az '
             .'dört yarıyıl (iki yıl) ders vermiş olmanız, asıl ya da eş danışman olarak en az '
             .'bir tez yönetmiş olmanız (yoksa ek yayın koşulu) ve en az altı ay yurt dışı '
-            .'deneyiminiz (yoksa 150 puanlık ek yayın koşulu) gerekiyor. MADDE 11 kullanılan '
+            .'deneyiminiz (yoksa 150 puanlık ek yayın koşulu) gerekiyor. Yönerge kullanılan '
             .'puanların en az %75\'inin lisansüstü eğitim sırasındaki çalışmalar dışından '
             .'gelmesini istiyor; bu koşul asgari puanın %75\'i olarak (doktora sonrası 90 puan) '
             .'yazıldı.'.$NOT_CETVEL,
@@ -197,7 +197,7 @@ $grup = function (string $kod, array $alanlar, string $ad, string $cetvel, bool 
         'aday_notu' => $ad.' için profesör kadrosuna atanma. En az altı yarıyıl (üç yıl) ders '
             .'vermiş olmanız, öğretim üyeliği süresi boyunca asıl ya da eş danışman olarak en '
             .'az iki tez yönetmiş olmanız (yoksa ek yayın koşulu) ve en az altı ay yurt dışı '
-            .'deneyiminiz (yoksa 200 puanlık ek yayın koşulu) gerekiyor. MADDE 14 kullanılan '
+            .'deneyiminiz (yoksa 200 puanlık ek yayın koşulu) gerekiyor. Yönerge kullanılan '
             .'puanların en az %75\'inin doçentlik başvurusundan sonraki çalışmalardan gelmesini '
             .'istiyor; bu koşul asgari puanın %75\'i olarak (doçentlik sonrası 120 puan) '
             .'yazıldı.'.$NOT_CETVEL,

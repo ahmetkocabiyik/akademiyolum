@@ -114,14 +114,14 @@ $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
  */
 $ozelKriterler = function (string $kadro) use ($DOKTORA, $DOCENTLIK): array {
     return match ($kadro) {
-        'dr_ogr_uyesi' => Kalip::ve('EK1 özel kriterleri', [
+        'dr_ogr_uyesi' => Kalip::ve('Üniversitenin özel kriterleri', [
             Kalip::puanDan(
                 'Kitap ve makale kalemlerinizden en az 8 puan',
                 ['KITAP-MAKALE'], 8, madde: 'Madde 37',
             ),
             Kalip::toplam(20),
         ]),
-        'docentlik' => Kalip::ve('EK1 özel kriterleri', [
+        'docentlik' => Kalip::ve('Üniversitenin özel kriterleri', [
             Kalip::puanDan(
                 'Kitap ve makale kalemlerinizden doktora unvanınızdan sonra en az 10 puan',
                 ['KITAP-MAKALE'], 10, $DOKTORA, madde: 'Madde 37',
@@ -132,7 +132,7 @@ $ozelKriterler = function (string $kadro) use ($DOKTORA, $DOCENTLIK): array {
             ),
             Kalip::toplam(30),
         ]),
-        default => Kalip::ve('EK1 özel kriterleri', [
+        default => Kalip::ve('Üniversitenin özel kriterleri', [
             Kalip::puanDan(
                 'Kitap ve makale kalemlerinizden doçentlik unvanınızdan sonra en az 10 puan',
                 ['KITAP-MAKALE'], 10, $DOCENTLIK, madde: 'Madde 37',
@@ -217,17 +217,17 @@ $esikler[] = [
     'anahtar' => 'ankara-bilim-muhendislik-dr',
     'aday_notu' => 'İki kapı var: temel kriter olarak ulusal, uluslararası ya da alan '
         .'indeksinde taranan dergilerde iki özgün tam araştırma makalesi; özel kriter olarak '
-        .'EK1 tablosundan toplam 20 puan (bunun en az 8 puanı kitap ve makale kalemlerinden). '
+        .'tüm faaliyetlerinizden toplam 20 puan (bunun en az 8 puanı kitap ve makale kalemlerinden). '
         .'Derleme, kısa makale ve editöre mektup puana giriyor ama "özgün tam araştırma '
         .'makalesi" sayısına girmiyor; faaliyetlerinizde makale türünü doğru seçin. '
-        .'Doktor öğretim üyeliği en çok iki yıllık atanıyor (Madde 11/11).',
+        .'Doktor öğretim üyeliği en çok iki yıllık atanıyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
     'alan' => ['muhendislik'],
     'cetvel' => $CETVEL,
     'notlar' => 'Madde 14/1: doktora derecesi ve "ulusal, uluslararası veya alan indeksi '
         .'tarafından taranan dergilerde olmak koşuluyla, en az iki özgün tam araştırma '
-        .'makalesi". Madde 37: EK1\'den toplam 20 puan, 1.1 ve/veya 1.2 kısmından en az 8.',
+        .'makalesi". Madde 37: tüm faaliyetlerinizden toplam 20 puan, 1.1 ve/veya 1.2 kısmından en az 8.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna atanma', [
         Kalip::beyan('İlgili alanda doktora derecesine sahip olmak', 'Madde 14/1'),
         Kalip::adet(
@@ -243,7 +243,7 @@ $esikler[] = [
     'aday_notu' => 'Yeniden atanmada iki koşul SON ATAMANIZDAN SONRAKİ çalışmalarınıza '
         .'bakıyor: iki özgün tam araştırma makalesi ve araştırma projesi kalemlerinden puan '
         .'almış olmak. İlk atamanın toplam puan barajı yeniden atanmada aranmıyor. '
-        .'Proje koşulunu sağlayamazsanız Madde 11/12 "başvuru ve değerlendirme süreci devam '
+        .'Proje koşulunu sağlayamazsanız yönerge "başvuru ve değerlendirme süreci devam '
         .'eden ulusal/uluslararası bir projede bulunmayı" Üniversite Yönetim Kurulu kararıyla '
         .'yeterli sayabiliyor; takdire bağlı olduğu için koşula yazılmadı. Doçentlik unvanını '
         .'kazandıysanız unvandan sonraki ilk atamada yeniden atanma kriterleri aranmıyor.',
@@ -271,7 +271,7 @@ $esikler[] = [
     'anahtar' => 'ankara-bilim-muhendislik-docent',
     'aday_notu' => 'Temel kriter yalnızca uluslararası indeksi (SCI, SCI-Expanded, SSCI, '
         .'AHCI) kabul ediyor; alan indeksi ya da TR Dizin makaleleri bu iki makalelik sayıya '
-        .'girmiyor, ama puan tablosunda tam puan alıyor. Özel kriter EK1\'den toplam 30 puan; '
+        .'girmiyor, ama puan tablosunda tam puan alıyor. Özel kriter tüm faaliyetlerinizden toplam 30 puan; '
         .'bunun en az 15\'i makale kalemlerinden ve en az 10\'u doktora unvanınızdan sonra '
         .'olmalı. Türkçe programlarda yabancı dil sınavından 60 puan isteniyor; İngilizce '
         .'programlarda YÖK mevzuatının (daha yüksek) eşiği geçerli.',
@@ -301,7 +301,7 @@ $esikler[] = [
         .'İKİ projeyle. İki ikame kullanacaksanız ikisi farklı türden olmalı ve elinizde her '
         .'hâlde en az üç uluslararası indeksli makale bulunmalı. Ayrıca beş makalenin en az '
         .'üçü doçentlik sonrası olmalı ve en az birinde ilk ya da sorumlu yazar olmalısınız. '
-        .'Özel kriter EK1\'den toplam 50 puan; en az 35\'i makale kalemlerinden, en az 10\'u '
+        .'Özel kriter tüm faaliyetlerinizden toplam 50 puan; en az 35\'i makale kalemlerinden, en az 10\'u '
         .'doçentlik unvanınızdan sonra.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
@@ -336,7 +336,7 @@ $esikler[] = [
     'aday_notu' => 'Hukuk alanının doktor öğretim üyeliği diğer alanlardan bir noktada '
         .'ayrılıyor: iki makalenin BİRİNDE ilk isim olmanız isteniyor. Dergi kümesi de daha '
         .'geniş — uluslararası alan indeksleri ve ulusal hakemli dergilerin tamamı sayılıyor. '
-        .'Özel kriter EK1\'den toplam 20 puan, en az 8\'i kitap ve makale kalemlerinden.',
+        .'Özel kriter tüm faaliyetlerinizden toplam 20 puan, en az 8\'i kitap ve makale kalemlerinden.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
     'alan' => ['hukuk'],
@@ -365,7 +365,7 @@ $esikler[] = [
     'aday_notu' => 'Yeniden atanmada iki koşul SON ATAMANIZDAN SONRAKİ çalışmalarınıza '
         .'bakıyor: iki özgün tam makale (birinde ilk isim) ve araştırma projesi kalemlerinden '
         .'puan almış olmak. İlk atamanın toplam puan barajı aranmıyor. Proje koşulunu '
-        .'sağlayamazsanız Madde 11/12 devam eden bir proje başvurusunu Üniversite Yönetim '
+        .'sağlayamazsanız yönerge devam eden bir proje başvurusunu Üniversite Yönetim '
         .'Kurulu kararıyla yeterli sayabiliyor; takdire bağlı olduğu için koşula yazılmadı.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi_yeniden',
@@ -391,7 +391,7 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'ankara-bilim-hukuk-docent',
     'aday_notu' => 'Doçentlikte dergi kümesi mühendislikten geniş: ulusal indeks (TR Dizin) '
-        .'makaleleri de sayılıyor. Özel kriter EK1\'den toplam 30 puan; en az 15\'i makale '
+        .'makaleleri de sayılıyor. Özel kriter tüm faaliyetlerinizden toplam 30 puan; en az 15\'i makale '
         .'kalemlerinden, en az 10\'u doktora unvanınızdan sonra. Türkçe programlarda yabancı '
         .'dil sınavından 60 puan isteniyor.',
     'universite' => $UNIVERSITE,
@@ -418,7 +418,7 @@ $esikler[] = [
         .'isim olmalısınız ve üçü de doçentlik unvanınızdan sonra olmalı. Yönergenin '
         .'"hakemli armağan bir özgün tam makale yerine geçebilir" istisnası girilemedi '
         .'(armağan yazısının puan satırı yok), yani koşul burada olduğundan biraz ZOR '
-        .'görünür. Özel kriter EK1\'den toplam 50 puan.',
+        .'görünür. Özel kriter tüm faaliyetlerinizden toplam 50 puan.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
     'alan' => ['hukuk'],
@@ -454,7 +454,7 @@ $esikler[] = [
     'anahtar' => 'ankara-bilim-sosyal-dr',
     'aday_notu' => 'Temel kriter iki özgün tam makale; ulusal, uluslararası ya da alan '
         .'indeksinde taranan dergiler sayılıyor ve yazar sırası aranmıyor. Özel kriter '
-        .'EK1\'den toplam 20 puan, en az 8\'i kitap ve makale kalemlerinden.',
+        .'tüm faaliyetlerinizden toplam 20 puan, en az 8\'i kitap ve makale kalemlerinden.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
     'alan' => ['sosyal'],
@@ -475,8 +475,8 @@ $esikler[] = [
     'anahtar' => 'ankara-bilim-sosyal-dr-yeniden',
     'aday_notu' => 'Yeniden atanmada iki koşul SON ATAMANIZDAN SONRAKİ çalışmalarınıza '
         .'bakıyor: iki özgün tam makale ve araştırma projesi kalemlerinden puan almış olmak. '
-        .'İlk atamanın toplam puan barajı aranmıyor. Proje koşulunu sağlayamazsanız Madde '
-        .'11/12 devam eden bir proje başvurusunu Üniversite Yönetim Kurulu kararıyla yeterli '
+        .'İlk atamanın toplam puan barajı aranmıyor. Proje koşulunu sağlayamazsanız yönerge '
+        .'devam eden bir proje başvurusunu Üniversite Yönetim Kurulu kararıyla yeterli '
         .'sayabiliyor; takdire bağlı olduğu için koşula yazılmadı.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi_yeniden',
@@ -498,7 +498,7 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'ankara-bilim-sosyal-docent',
     'aday_notu' => 'Doçentlikte ulusal indeks (TR Dizin) makaleleri de sayılıyor. Özel '
-        .'kriter EK1\'den toplam 30 puan; en az 15\'i makale kalemlerinden, en az 10\'u '
+        .'kriter tüm faaliyetlerinizden toplam 30 puan; en az 15\'i makale kalemlerinden, en az 10\'u '
         .'doktora unvanınızdan sonra. Türkçe programlarda yabancı dil sınavından 60 puan '
         .'isteniyor.',
     'universite' => $UNIVERSITE,
@@ -523,7 +523,7 @@ $esikler[] = [
         .'en az birinde ilk isim veya sorumlu yazar olmalısınız; üçü de doçentlik unvanınızdan '
         .'sonra sayılıyor. Üç yayından BİRİ yerine ulusal ya da uluslararası kitap '
         .'kullanabilirsiniz, ama kitap ne uluslararası indeksli makalenin ne de ilk '
-        .'isim/sorumlu yazar koşulunun yerine geçiyor. Özel kriter EK1\'den toplam 50 puan.',
+        .'isim/sorumlu yazar koşulunun yerine geçiyor. Özel kriter tüm faaliyetlerinizden toplam 50 puan.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
     'alan' => ['sosyal'],
@@ -571,8 +571,8 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'ankara-bilim-guzel-sanatlar-dr',
     'aday_notu' => 'Güzel sanatlar alanında da temel kriter iki özgün tam makale; sanat '
-        .'etkinliği yayının yerine geçmiyor. Sanat ve tasarım etkinlikleriniz yalnızca EK1 '
-        .'puanına giriyor (özel kriter toplam 20 puan, en az 8\'i kitap ve makale '
+        .'etkinliği yayının yerine geçmiyor. Sanat ve tasarım etkinlikleriniz yalnızca '
+        .'toplam puana giriyor (özel kriter toplam 20 puan, en az 8\'i kitap ve makale '
         .'kalemlerinden — yani sergileriniz o 8 puanlık alt kapıya da girmiyor).',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
@@ -595,8 +595,8 @@ $esikler[] = [
     'anahtar' => 'ankara-bilim-guzel-sanatlar-dr-yeniden',
     'aday_notu' => 'Yeniden atanmada iki koşul SON ATAMANIZDAN SONRAKİ çalışmalarınıza '
         .'bakıyor: iki özgün tam makale ve araştırma projesi kalemlerinden puan almış olmak. '
-        .'İlk atamanın toplam puan barajı aranmıyor. Proje koşulunu sağlayamazsanız Madde '
-        .'11/12 devam eden bir proje başvurusunu Üniversite Yönetim Kurulu kararıyla yeterli '
+        .'İlk atamanın toplam puan barajı aranmıyor. Proje koşulunu sağlayamazsanız yönerge '
+        .'devam eden bir proje başvurusunu Üniversite Yönetim Kurulu kararıyla yeterli '
         .'sayabiliyor; takdire bağlı olduğu için koşula yazılmadı.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi_yeniden',
@@ -618,7 +618,7 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'ankara-bilim-guzel-sanatlar-docent',
     'aday_notu' => 'Doçentlikte ulusal indeks (TR Dizin) makaleleri de sayılıyor; sanatsal '
-        .'etkinlik yine yayının yerine geçmiyor. Özel kriter EK1\'den toplam 30 puan; en az '
+        .'etkinlik yine yayının yerine geçmiyor. Özel kriter tüm faaliyetlerinizden toplam 30 puan; en az '
         .'15\'i makale kalemlerinden, en az 10\'u doktora unvanınızdan sonra. Türkçe '
         .'programlarda yabancı dil sınavından 60 puan isteniyor.',
     'universite' => $UNIVERSITE,
@@ -642,7 +642,7 @@ $esikler[] = [
     'aday_notu' => 'Üç makalenin en az biri SCI, SCI-Expanded, SSCI ya da AHCI dergisinde '
         .'olmalı; üçü de doçentlik unvanınızdan sonra sayılıyor. Sosyal alandan farkı: burada '
         .'ne kitap ikamesi ne de ilk isim koşulu var. Sanat ve tasarım etkinlikleriniz temel '
-        .'kritere girmiyor, yalnızca EK1 puanına katkı veriyor (toplam 50 puan; en az 35\'i '
+        .'kritere girmiyor, yalnızca toplam puana katkı veriyor (toplam 50 puan; en az 35\'i '
         .'makale kalemlerinden, en az 10\'u doçentlik unvanınızdan sonra). Yayın ağırlıklı bu '
         .'yapı güzel sanatlar adayı için korpustaki zor eşiklerden.',
     'universite' => $UNIVERSITE,

@@ -92,7 +92,7 @@ $esikler[] = [
     'anahtar' => 'musku-fen-dr',
     'aday_notu' => 'Temel bilimler, mühendislik, su ürünleri ve teknoloji alanlarında ilk '
         .'atanma için SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde en az 1 makale veya ulusal '
-        .'ya da uluslararası hakemli dergilerde 2 makale yayımlamış olmanız ve EK-1\'den toplam '
+        .'ya da uluslararası hakemli dergilerde 2 makale yayımlamış olmanız ve tüm faaliyetlerinizden toplam '
         .'250 puan almanız gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
@@ -106,7 +106,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'musku-fen-dr-yeniden',
-    'aday_notu' => 'Son üç yıldaki çalışmalarınız sayılıyor. En az biri EK-1\'in A kapsamındaki '
+    'aday_notu' => 'Son üç yıldaki çalışmalarınız sayılıyor. En az biri makale kalemlerinizdeki '
         .'akademik etkinliklerinden (makaleler) olmak üzere en az 125 puan isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi_yeniden',
@@ -114,7 +114,7 @@ $esikler[] = [
     'cetvel' => 'musku-2013-fen',
     'notlar' => 'Madde 6(1)-b: son 3 yılda 125 puan, en az biri A kapsamından.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna yeniden atanma — temel bilimler, mühendislik, su ürünleri ve teknoloji', [
-        Kalip::adet('Son üç yılda EK-1\'in A kapsamında (makaleler) en az bir akademik etkinlik', ['A'], 1, donem: $SON_3_YIL, madde: '6-1-b'),
+        Kalip::adet('Son üç yılda en az bir makale', ['A'], 1, donem: $SON_3_YIL, madde: '6-1-b'),
         Kalip::toplam(125, $SON_3_YIL),
     ]),
 ];
@@ -141,7 +141,7 @@ foreach ([
     $esikler[] = [
         'anahtar' => "musku-{$anahtar}-profesorluk",
         'aday_notu' => "{$ad} için doçent unvanınızı aldıktan sonra bir yükseköğretim kurumunda "
-            .'ya da araştırma merkezinde en az üç yıl çalışmış olmanız, EK-1\'den toplam 1000 '
+            .'ya da araştırma merkezinde en az üç yıl çalışmış olmanız, tüm faaliyetlerinizden toplam 1000 '
             .'puan almanız (en az yarısı doçentlik sonrası) ve doçentlik sonrası A-1 '
             ."kapsamındaki dergilerde en az {$makale} makale yayımlamış olmanız gerekiyor.",
         'universite' => $UNIVERSITE,
@@ -169,7 +169,7 @@ foreach ([
 
 $esikler[] = [
     'anahtar' => 'musku-gsf-dr',
-    'aday_notu' => 'Güzel sanatlar alanında ilk atanma için 250 puanı EK-3\'teki sanatsal '
+    'aday_notu' => 'Güzel sanatlar alanında ilk atanma için 250 puanı sanatsal sanatsal '
         .'etkinlikler tablosundan olmak üzere toplam 300 puan isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
@@ -178,20 +178,20 @@ $esikler[] = [
     'notlar' => 'Madde 7(1)-a: EK-3\'ten 250 puan, toplam 300 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna ilk atanma — güzel sanatlar', [
         $doktora,
-        Kalip::puanDan('EK-3 sanatsal etkinlikler tablosundan en az 250 puan', ['EK3'], 250, madde: '7-1-a'),
+        Kalip::puanDan('Sanatsal etkinlik kalemlerinizden en az 250 puan', ['EK3'], 250, madde: '7-1-a'),
         Kalip::toplam(300),
     ]),
 ];
 
 $esikler[] = [
     'anahtar' => 'musku-gsf-dr-yeniden',
-    'aday_notu' => 'Son üç yıldaki çalışmalarınız sayılıyor. EK-1 ve EK-3\'teki etkinliklerden '
+    'aday_notu' => 'Son üç yıldaki çalışmalarınız sayılıyor. akademik ve sanatsal etkinliklerinizden '
         .'en az 150 puan isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi_yeniden',
     'alan' => ['guzel_sanatlar'],
     'cetvel' => 'musku-2013-gsf',
-    'notlar' => 'Madde 7(1)-b: son 3 yılda EK-1 ve EK-3\'ten 150 puan.',
+    'notlar' => 'Madde 7(1)-b: son 3 yılda akademik ve sanatsal etkinliklerden 150 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna yeniden atanma — güzel sanatlar', [
         Kalip::toplam(150, $SON_3_YIL),
     ]),
@@ -211,7 +211,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'musku-gsf-profesorluk',
-    'aday_notu' => 'EK-1 ve EK-3\'teki etkinliklerden toplam 1000 puan isteniyor; bunun en az '
+    'aday_notu' => 'akademik ve sanatsal etkinliklerinizden toplam 1000 puan isteniyor; bunun en az '
         .'500 puanı doçentlik unvanınızı aldıktan sonra gelmeli.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
@@ -232,7 +232,7 @@ $esikler[] = [
     'anahtar' => 'musku-saglik-dr',
     'aday_notu' => 'Tıp ve sağlık bilimlerinde ilk atanma için SCI, SCI-Expanded, SSCI ya da '
         .'AHCI dergilerinde en az 1 makale veya ulusal ya da uluslararası hakemli dergilerde 2 '
-        .'makale yayımlamış olmanız ve EK-1\'den toplam 150 puan almanız gerekiyor.',
+        .'makale yayımlamış olmanız ve tüm faaliyetlerinizden toplam 150 puan almanız gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
     'alan' => ['saglik'],
@@ -245,7 +245,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'musku-saglik-dr-yeniden',
-    'aday_notu' => 'Son üç yıldaki çalışmalarınız sayılıyor. EK-1\'in A (makaleler), B '
+    'aday_notu' => 'Son üç yıldaki çalışmalarınız sayılıyor. makale, bildiri '
         .'(bildiriler) ve C (kitaplar) kapsamındaki akademik etkinliklerinden en az 125 puan '
         .'isteniyor.',
     'universite' => $UNIVERSITE,
@@ -272,7 +272,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'musku-saglik-profesorluk',
-    'aday_notu' => 'EK-1\'den toplam 1000 puan isteniyor; bunun en az 500 puanı doçentlik '
+    'aday_notu' => 'tüm faaliyetlerinizden toplam 1000 puan isteniyor; bunun en az 500 puanı doçentlik '
         .'unvanınızı aldıktan sonra gelmeli. Ayrıca doçent unvanınızı aldıktan sonra bir '
         .'yükseköğretim kurumunda, araştırma merkezinde ya da eğitim ve araştırma hastanesinde '
         .'en az üç yıl çalışmış olmalısınız.',
@@ -297,7 +297,7 @@ $SOSYAL = ['sosyal', 'egitim', 'filoloji', 'spor'];
 $esikler[] = [
     'anahtar' => 'musku-sosyal-dr',
     'aday_notu' => 'Sosyal bilimler, eğitim bilimleri ve öğretmen yetiştirme alanlarında ilk '
-        .'atanma için EK-1\'in A (makaleler), B (bildiriler) ve C (kitaplar) grubu akademik '
+        .'atanma için makale, bildiri ve kitap '
         .'etkinliklerinden toplam 250 puan isteniyor; bu etkinliklerden en az birinin doktora '
         .'tezinizden üretilmiş olması gerekiyor.',
     'universite' => $UNIVERSITE,
@@ -307,14 +307,14 @@ $esikler[] = [
     'notlar' => 'Madde 9(1)-a: A, B, C grubundan 250 puan; en az biri doktora tezinden.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna ilk atanma — sosyal ve eğitim bilimleri', [
         $doktora,
-        Kalip::puanDan('EK-1\'in A, B ve C grubu akademik etkinliklerinden toplam en az 250 puan', ['ABC'], 250, madde: '9-1-a'),
+        Kalip::puanDan('Makale, bildiri ve kitap kalemlerinizden toplam en az 250 puan', ['ABC'], 250, madde: '9-1-a'),
         Kalip::beyan('Bu etkinliklerden en az birinin doktora tezinizden üretilmiş olması', '9-1-a'),
     ]),
 ];
 
 $esikler[] = [
     'anahtar' => 'musku-sosyal-dr-yeniden',
-    'aday_notu' => 'Son üç yıldaki çalışmalarınız sayılıyor. 125 puanı EK-1\'in A, B ve C '
+    'aday_notu' => 'Son üç yıldaki çalışmalarınız sayılıyor. 125 puanı makale, bildiri ve kitap '
         .'grubuna ait akademik etkinliklerden olmak üzere toplam 150 puan isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi_yeniden',
@@ -341,7 +341,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'musku-sosyal-profesorluk',
-    'aday_notu' => 'EK-1\'den toplam 1000 puan isteniyor; bunun en az 500 puanı doçentlik '
+    'aday_notu' => 'tüm faaliyetlerinizden toplam 1000 puan isteniyor; bunun en az 500 puanı doçentlik '
         .'unvanınızı aldıktan sonra ve A, B, C grubu akademik etkinliklerden gelmeli.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',

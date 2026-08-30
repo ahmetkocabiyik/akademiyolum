@@ -64,7 +64,7 @@ $DIL_DR = ' Kısmen ya da tamamen yabancı dille eğitim-öğretim yürütülen 
 $DIL = ' Yabancı dil koşulu 55 puandan uygulanıyor; kısmen ya da tamamen yabancı dille '
     .'eğitim-öğretim yürütülen bölümlerde en az 80 puan gerekiyor.';
 
-$YENIDEN_NOTU = ' Madde 5(b) "asgari toplam puanın her bir atama yılı başına en az dörtte '
+$YENIDEN_NOTU = ' Yönerge "asgari toplam puanın her bir atama yılı başına en az dörtte '
     .'birinin sağlanmasını" istiyor: bir yıllık atamada 25, iki yıllıkta 50, üç yıllıkta 75, '
     .'dört yıllıkta 100 puan. Profil atama sürenizi tutmadığı için §0 uyarınca en yüksek olan '
     .'(100 puan) uygulanıyor; kısa süreli bir atamanız varsa koşul olduğundan katı görünür. '
@@ -85,7 +85,7 @@ $esikler = [];
  */
 $drEsigi = fn (string $anahtar, array $alanlar, string $alanAdi, array $kosullar, string $not): array => [
     'anahtar' => "ordu-{$anahtar}-dr",
-    'aday_notu' => "{$alanAdi} için {$not} Ayrıca EK-1 akademik etkinlik puanlama tablosundan "
+    'aday_notu' => "{$alanAdi} için {$not} Ayrıca tüm faaliyetlerinizden "
         .'toplam en az 100 puan gerekiyor.'.$DIL_DR,
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
@@ -98,34 +98,34 @@ $drEsigi = fn (string $anahtar, array $alanlar, string $alanAdi, array $kosullar
 
 $esikler[] = $drEsigi('sosyal', $SOSYAL,
     'Eğitim Bilimleri, Filoloji, Hukuk, İlahiyat ile Sosyal, Beşeri ve İdari Bilimler', [
-        Kalip::adet('En az biri A.1 kapsamındaki dergilerde yayımlanmış tam metin makale olmak üzere A, B ve C puan gruplarından toplam iki bilimsel makaleniz olmak', ['ABC'], 2, madde: '4-a'),
-        Kalip::adet('Bunlardan en az birinin A.1 kapsamındaki dergilerde yayımlanmış tam metin makale olması', ['A.1-TAM'], 1, madde: '4-a'),
+        Kalip::adet('En az biri uluslararası indeksli dergide yayımlanmış tam metin makale olmak üzere, makale ve kitap kalemlerinizden toplam iki bilimsel makaleniz olmak', ['ABC'], 2, madde: '4-a'),
+        Kalip::adet('Bunlardan en az birinin uluslararası indeksli dergide yayımlanmış tam metin makale olması', ['A.1-TAM'], 1, madde: '4-a'),
     ],
-    'en az biri A.1 kapsamındaki (uluslararası) dergilerde yayımlanmış tam metin makale olmak '
+    'en az biri uluslararası indeksli dergide yayımlanmış tam metin makale olmak '
     .'üzere A, B ve C puan gruplarından toplam iki bilimsel makale isteniyor.');
 
 $esikler[] = $drEsigi('fen', $FEN,
     'Fen Bilimleri ve Matematik, Mimarlık-Planlama-Tasarım, Mühendislik ile Ziraat, Orman ve Su Ürünleri', [
-        Kalip::adet('En az biri A.1.1 kapsamındaki (SCI, SCI-Expanded, SSCI, AHCI) dergilerde yayımlanmış tam metin makale olmak üzere A puan grubundan toplam iki bilimsel makaleniz olmak', ['A'], 2, madde: '4-a'),
-        Kalip::adet('Bunlardan en az birinin A.1.1 kapsamındaki dergilerde yayımlanmış tam metin makale olması', ['A.1.1-TAM'], 1, madde: '4-a'),
+        Kalip::adet('En az biri SCI, SCI-Expanded, SSCI ya da AHCI dergisinde yayımlanmış tam metin makale olmak üzere, makale kalemlerinizden toplam iki bilimsel makaleniz olmak', ['A'], 2, madde: '4-a'),
+        Kalip::adet('Bunlardan en az birinin SCI, SCI-Expanded, SSCI ya da AHCI dergisinde yayımlanmış tam metin makale olması', ['A.1.1-TAM'], 1, madde: '4-a'),
     ],
     'en az biri SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde yayımlanmış tam metin makale '
-    .'olmak üzere A puan grubundan toplam iki bilimsel makale isteniyor.');
+    .'olmak üzere makale kalemlerinizden toplam iki bilimsel makale isteniyor.');
 
 $esikler[] = $drEsigi('saglik', ['saglik'], 'Sağlık Bilimleri', [
-    Kalip::adet('A puan grubu kapsamındaki dergilerde en az bir yayın (tam metin makale, derleme, olgu sunumu, kısa rapor ya da editöre mektup) yayımlamış olmak', ['A'], 1, madde: '4-a'),
-], 'A puan grubu kapsamındaki dergilerde en az bir yayın isteniyor. Bir programdaki öğretim '
+    Kalip::adet('Hakemli dergilerde en az bir yayın (tam metin makale, derleme, olgu sunumu, kısa rapor ya da editöre mektup) yayımlamış olmak', ['A'], 1, madde: '4-a'),
+], 'Hakemli dergilerde en az bir yayın isteniyor. Bir programdaki öğretim '
     .'üyesi sayısı YÖK\'ün o programın açılması için gerekli gördüğü sayının altındaysa bu yayın '
     .'ve puan koşulu uygulanmıyor; motor bu istisnayı uygulayamıyor.');
 
 $esikler[] = $drEsigi('guzel-sanatlar', ['guzel_sanatlar'], 'Güzel Sanatlar', [
-    Kalip::puanDan('A, B, C, L ve M puanlama gruplarındaki akademik etkinliklerden en az 100 puan', ['ABCLM'], 100, madde: '4-a'),
-], 'A, B, C, L ve M puanlama gruplarındaki akademik etkinliklerden en az 100 puan isteniyor '
+    Kalip::puanDan('Makale, bildiri, kitap, editörlük ve sanatsal etkinlik kalemlerinizden en az 100 puan', ['ABCLM'], 100, madde: '4-a'),
+], 'makale, bildiri, kitap, editörlük ve sanatsal etkinlik kalemlerinizden en az 100 puan isteniyor '
     .'(ayrı bir yayın sayısı koşulu yok).');
 
 $esikler[] = $drEsigi('spor', ['spor'], 'Spor Bilimleri', [
-    Kalip::puanDan('A, B, C ve K puanlama gruplarındaki akademik etkinliklerden en az 100 puan', ['ABCK'], 100, madde: '4-a'),
-], 'A, B, C ve K puanlama gruplarındaki akademik etkinliklerden en az 100 puan isteniyor '
+    Kalip::puanDan('Makale, bildiri, kitap ve editörlük kalemlerinizden en az 100 puan', ['ABCK'], 100, madde: '4-a'),
+], 'makale, bildiri, kitap ve editörlük kalemlerinizden en az 100 puan isteniyor '
     .'(ayrı bir yayın sayısı koşulu yok).');
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -168,7 +168,7 @@ $TUM_ALANLAR = array_merge($SOSYAL, $FEN, ['saglik', 'guzel_sanatlar', 'spor']);
 $esikler[] = [
     'anahtar' => 'ordu-docentlik',
     'aday_notu' => 'Üniversitelerarası Kurul tarafından verilen doçentlik unvanına sahip olmanız '
-        .'ve EK-1 puanlama tablosunun A, B, C, G, I, K, L ve M puan gruplarındaki '
+        .'ve makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal etkinlik kalemlerinizden '
         .'faaliyetlerden en az 300 puan almanız gerekiyor.'.$DIL,
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
@@ -179,7 +179,7 @@ $esikler[] = [
         Kalip::beyan('Üniversitelerarası Kurul tarafından verilen doçentlik unvanına sahip olmak', '8'),
         Kalip::yds(55),
         Kalip::puanDan(
-            'EK-1 puanlama tablosunun A, B, C, G, I, K, L ve M puan gruplarındaki faaliyetlerden '
+            'Makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal etkinlik kalemlerinizden '
             .'en az 300 puan',
             ['ABCGIKLM'], 300, madde: '8',
         ),
@@ -206,7 +206,7 @@ $profesorGovde = [
         ['BASLICA-ESER'], 1, yazar: 'ilk', madde: '9-c',
     ),
     Kalip::puanDan(
-        'EK-1 puanlama tablosunun A, B, C, G, I, K, L ve M puan gruplarındaki faaliyetlerden '
+        'Makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal etkinlik kalemlerinizden '
         .'toplam en az 500 puan',
         ['ABCGIKLM'], 500, madde: '9-b',
     ),
@@ -224,7 +224,7 @@ $profesorGovde = [
 
 $esikler[] = [
     'anahtar' => 'ordu-profesorluk',
-    'aday_notu' => 'EK-1 puanlama tablosunun A, B, C, G, I, K, L ve M puan gruplarındaki '
+    'aday_notu' => 'Makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal etkinlik kalemlerinizden '
         .'faaliyetlerden toplam en az 500 puan isteniyor; bunun en az 250 puanı doçentlik sonrası '
         .'bilimsel yayın ve araştırma faaliyetlerinden gelmeli. Ayrıca doçent unvanınızı '
         .'aldığınız temel alan için ÜAK\'ın belirlediği yayın koşullarını yeniden sağlamanız '
@@ -244,7 +244,8 @@ $esikler[] = [
         .'aldıktan sonra yurt içinde ya da yurt dışında kamuya ait bir yükseköğretim kurumunda, '
         .'araştırma merkezinde, enstitüde veya eğitim ve araştırma hastanesinde en az üç yıl '
         .'çalışmış ve eğitim-öğretim ile araştırma faaliyetlerinde yer almış olmanız gerekiyor. '
-        .'EK-1\'in A, B, C, G, I, K, L ve M gruplarından toplam 500 puan (en az 250\'si '
+        .'makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal '
+        .'etkinlik kalemlerinizden toplam 500 puan (en az 250\'si '
         .'doçentlik sonrası) ve bir başlıca eser isteniyor.'.$DIL,
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
