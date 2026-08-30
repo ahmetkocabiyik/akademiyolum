@@ -138,7 +138,7 @@ $grup = function (
         [
             'anahtar' => "dicle-{$anahtar}-dr",
             'aday_notu' => "Dicle'de ilk atanma eşiği düşük ama iki koşullu: {$makaleMetni} "
-                .'birinci isim olarak en az 1 makaleniz olmalı ve EK-1 faaliyetlerinden toplam '
+                .'birinci isim olarak en az 1 makaleniz olmalı ve tüm faaliyetlerinizden toplam '
                 .'en az 40 puan almalısınız. Merkezi yabancı dil sınavından en az 60 puan şart. '
                 .'DİKKAT: yönerge "bir madde için kullanılan faaliyet başka bir madde için '
                 .'kullanılamaz" diyor; bu kural burada uygulanamıyor, aynı yayınınız birden '
@@ -189,7 +189,7 @@ $grup = function (
         // ── Doçent ──
         [
             'anahtar' => "dicle-{$anahtar}-docent",
-            'aday_notu' => 'Doçentlikte EK-1 faaliyetlerinden toplam en az 100 puan gerekiyor. '
+            'aday_notu' => 'Doçentlikte tüm faaliyetlerinizden toplam en az 100 puan gerekiyor. '
                 .'Ayrıca BAP hariç en az bir proje yürütücülüğü (sağlayamazsanız makale, '
                 .'bildiri, kitap ve proje kalemlerinizden 50 puan daha) ve '
                 ."{$etkinlikMetni} en az 10 puan (sağlayamazsanız {$makaleMetni} 10 puan daha) "
@@ -220,7 +220,7 @@ $grup = function (
         // ── Profesör ──
         [
             'anahtar' => "dicle-{$anahtar}-profesor",
-            'aday_notu' => 'Profesörlükte EK-1 faaliyetlerinden toplam en az 300 puan gerekiyor '
+            'aday_notu' => 'Profesörlükte tüm faaliyetlerinizden toplam en az 300 puan gerekiyor '
                 .'(doçentlik başvurunuzdaki puanlar da bu 300\'ün içinde sayılıyor). Doçentlik '
                 ."unvanınızdan sonra {$makaleMetni} birinci isim olarak en az 1 makaleniz ve en "
                 .'az bir proje yürütücülüğünüz olmalı; atıf kalemlerinizden en az 10 puan, '

@@ -56,7 +56,7 @@
  * faaliyetleri bakımından tekrar sağlamak (lisansüstü tezlerden en az bir
  * yayın zorunluluğu hariç)".
  *
- * PUANLAMA BAĞLAYICI DEĞİL (Madde 5/b ve 9/1-c): yönerge "adayın yüksek puan
+ * PUANLAMA BAĞLAYICI DEĞİL : yönerge "adayın yüksek puan
  * almış olması atanması için yeterli bir ölçüt değildir" ve "ön değerlendirme
  * koşullarının sağlanması adaylar için bağlayıcı bir hak oluşturmaz" diyor.
  *
@@ -70,7 +70,7 @@ $DOKTORA = Kalip::DOKTORA_SONRASI;
 $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 
 $baglayiciDegil = 'Munzur yönergesi puanlamanın tek başına yeterli olmadığını açıkça yazıyor '
-    .'(Madde 5/b ve 9/1-c): yüksek puan atanma için yeterli değil, ön değerlendirme koşullarını '
+    .': yüksek puan atanma için yeterli değil, ön değerlendirme koşullarını '
     .'sağlamak adaya bağlayıcı bir hak vermiyor. Jüri ayrıca yayınlarınızın sürekliliğini, '
     .'aldığınız atıfları ve eğitime katkınızı değerlendiriyor.';
 
@@ -141,7 +141,7 @@ return [
         [Kalip::puanDan("{$yayinKumesi} en az 50 puan", ['A1A2A3A4B2'], 50, madde: 'Madde 10/2-c')],
         'Madde 10: Fen Bilimleri (Fen ve Su Ürünleri Fakülteleri) — toplam 100 puan; A1, A2, A3, '
         .'A4 ve B2 kapsamında en az 50 puan.',
-        'Munzur Fen Bilimleri alanına Su Ürünleri Fakültesini de dâhil ediyor (Madde 4/c). '.$drNotu),
+        'Munzur Fen Bilimleri alanına Su Ürünleri Fakültesini de dâhil ediyor '.$drNotu),
     $esik('dr-sosyal', 'dr_ogr_uyesi', 'Dr. Öğr. Üyesi', ['sosyal', 'filoloji', 'egitim', 'spor'],
         'munzur-2025-sosyal', 100, null,
         [
@@ -153,7 +153,7 @@ return [
         'Madde 10/2-ç: toplam 100 puan; hakemli dergilerden en az 20 puan olmak üzere A1, A2, A3 '
         .'ile B1, B2 kapsamından toplam 75 puan.',
         'Munzur\'un Sosyal Bilimler tanımı Spor Bilimlerini, Eğitim Bilimlerini, İletişimi ve '
-        .'Edebiyatı da kapsıyor (Madde 4/ç). Bu alanlarda SCI, SSCI ve AHCI makalelerinizin '
+        .'Edebiyatı da kapsıyor Bu alanlarda SCI, SSCI ve AHCI makalelerinizin '
         .'puanı 1,5 KATI hesaplanıyor. '.$drNotu),
     $esik('dr-mimarlik', 'dr_ogr_uyesi', 'Dr. Öğr. Üyesi', ['mimarlik'],
         'munzur-2025', 75, null,

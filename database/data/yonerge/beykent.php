@@ -67,7 +67,7 @@ $NOT_CETVEL = ' Ortak çalışmalarda puan A-F kategorilerinde bölünüyor: iki
     .'yazar %60, ikinci %40; üç ve daha fazla yazarlıda birinci yazar %40, kalan %60 öbür '
     .'yazarlar arasında eşit paylaşılıyor. Kısa bildiri, teknik not, vaka takdimi ve editöre '
     .'mektup gibi yayınlar ilgili satırın %60\'ı kadar puan alıyor; bu oran cetvele gömüldü. '
-    .'Ek-1\'de ders verme puanı ders KREDİSİ başına verildiği için girilemedi; ders '
+    .'Puan çizelgesinde ders verme puanı ders KREDİSİ başına verildiği için girilemedi; ders '
     .'kayıtlarınız toplam puana katkı vermiyor.';
 
 $esikler = [];
@@ -85,7 +85,7 @@ $esikler[] = [
     'notlar' => 'MADDE 4: doktor öğretim üyeliğinde sayısal puan barajı yok; Ek-1 puanı '
         .'hesaplanıp üç profesör ya da doçentin mütalaasıyla değerlendiriliyor.',
     'aday_notu' => 'Doktor öğretim üyesi kadrosuna İLK ATANMA. İstanbul Beykent Üniversitesi '
-        .'bu kadro için SAYISAL BİR PUAN BARAJI KOYMUYOR: MADDE 4 yalnız Ek-1 puanlama '
+        .'bu kadro için SAYISAL BİR PUAN BARAJI KOYMUYOR: yalnız puanlama '
         .'sistemine göre akademik performans puanınızın hesaplanacağını, kararın biri birim '
         .'yöneticisi biri de üniversite dışından olmak üzere üç profesör ya da doçentin yazılı '
         .'mütalaasıyla verileceğini söylüyor. Atama en az bir en çok dört yıl süreyle '
@@ -108,7 +108,7 @@ $esikler[] = [
         .'Yönergesindeki A grubu faaliyetlerden yıllık ortalama 40 puan. O yönerge elimizde '
         .'olmadığı için koşul hesaplanamıyor.',
     'aday_notu' => 'Doktor öğretim üyesi kadrosuna YENİDEN ATANMA. Yönerge yıllık ortalama 40 '
-        .'puanı, elimizdeki Ek-1 çizelgesinden değil, İstanbul Beykent Üniversitesi Akademik '
+        .'puanı, elimizdeki puan çizelgesinden değil, İstanbul Beykent Üniversitesi Akademik '
         .'Personel Performans Ölçme-Değerlendirme Yönergesinin A GRUBU faaliyetlerinden '
         .'istiyor. O belge bu motorda girili olmadığı için koşul HESAPLANAMIYOR olarak '
         .'işaretli; kendiniz kontrol etmelisiniz. Başvuru dosyanızı, bir önceki atama '
@@ -144,8 +144,8 @@ foreach ($docKosullari as [$kod, $alanlar, $ad, $kosul]) {
         'cetvel' => $CETVEL,
         'notlar' => $ad.' doçentlik (MADDE 5): Ek-1\'den toplam en az 40 puan ve alana özgü '
             .'yayın koşulu.',
-        'aday_notu' => $ad.' alanlarında doçent kadrosuna atanma. İki koşul var: Ek-1\'de '
-            .'tanımlı etkinliklerden toplam en az 40 puan ve alanınıza özgü yayın koşulu. '
+        'aday_notu' => $ad.' alanlarında doçent kadrosuna atanma. İki koşul var: tüm '
+            .'faaliyetlerinizden toplam en az 40 puan ve alanınıza özgü yayın koşulu. '
             .'Yönerge bu koşullar için dönem sınırı koymuyor, bütün akademik geçmişiniz '
             .'sayılıyor.'.$NOT_CETVEL,
         'sart' => Kalip::ve('Doçent kadrosuna atanma — '.$ad, [
@@ -196,8 +196,8 @@ foreach ($profKosullari as [$kod, $alanlar, $ad, $kosullar]) {
         'cetvel' => $CETVEL,
         'notlar' => $ad.' profesörlük (MADDE 6): Ek-1\'den en az 100 puan (en az 30\'u '
             .'doçentlik sonrası) ve doçentlik sonrası alana özgü yayın koşulu.',
-        'aday_notu' => $ad.' alanlarında profesör kadrosuna atanma. Ek-1\'de tanımlı '
-            .'etkinliklerden toplam en az 100 puan gerekiyor ve bunun en az 30\'u DOÇENTLİK '
+        'aday_notu' => $ad.' alanlarında profesör kadrosuna atanma. Tüm '
+            .'faaliyetlerinizden toplam en az 100 puan gerekiyor ve bunun en az 30\'u DOÇENTLİK '
             .'SONRASI çalışmalardan gelmeli. Alana özgü yayın koşulu da doçentlik sonrası '
             .'çalışmalardan sağlanmalı. Ayrıca doçentlik unvanını aldıktan sonra en az beş yıl '
             .'ilgili bilim alanında çalışmış olmanız ve doçentlik sonrası yayınlarınızdan '

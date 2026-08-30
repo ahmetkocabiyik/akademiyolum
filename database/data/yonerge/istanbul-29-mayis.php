@@ -38,21 +38,21 @@ $TUM_ALANLAR = ['fen', 'muhendislik', 'saglik', 'ziraat', 'sosyal', 'egitim', 'f
     'ilahiyat', 'spor', 'hukuk', 'guzel_sanatlar', 'mimarlik'];
 
 $DR_NOTU = 'Doktor öğretim üyeliği için iki yoldan biri yeterli: alanınızla ilgili hakemli bir '
-    .'dergide yayımlanmış en az bir makale ya da MADDE 8 tablosundaki çalışmalardan 15 puan. '
+    .'dergide yayımlanmış en az bir makale ya da tüm faaliyetlerinizden 15 puan. '
     .'İkinci yol bildiri, atıf, proje, editörlük, tez danışmanlığı ve idari görev puanlarını da '
     .'kapsıyor.';
 
 /** MADDE 6 ve 7: alt baraj MADDE 8/1'den, toplam bütün tablodan. */
 $puanSarti = fn (int $alt, int $toplam, ?array $donem, string $madde): array => Kalip::ve('Puan koşulları', [
-    Kalip::toplam($alt, donem: $donem, maddeler: ['MADDE-8-1'], liste: $madde),
-    Kalip::toplam($toplam, donem: $donem, liste: $madde),
+    Kalip::toplam($alt, donem: $donem, maddeler: ['MADDE-8-1'], liste: 'Makale ve kitap'),
+    Kalip::toplam($toplam, donem: $donem),
 ]);
 
 $drSarti = Kalip::ve('Doktor öğretim üyeliği koşulları', [
     Kalip::beyan('İlgili alanda Türkiye\'de geçerli doktora belgesine sahip olmak', 'MADDE 5'),
     Kalip::veya('Yayın ya da puan koşulu', [
         Kalip::adet('Alanınızla ilgili hakemli bir dergide yayımlanmış en az 1 makale', ['MAKALE'], 1, madde: 'MADDE 5'),
-        Kalip::toplam(15, liste: 'MADDE 5'),
+        Kalip::toplam(15),
     ]),
 ]);
 
@@ -107,9 +107,9 @@ foreach ($alanlar as $a) {
         'kadro' => 'docentlik',
         'notlar' => 'MADDE 6: doktora sonrasında MADDE 8/1 çalışmalarından en az '.$a['docAlt']
             .', MADDE 8\'in tamamından en az '.$a['docToplam'].' puan.',
-        'aday_notu' => $a['ad'].' temel alanında doçent kadrosu için iki baraj birden: MADDE '
-            .'8/1\'de sayılan yayınlardan (makale, kitap ve kitap bölümü) en az '.$a['docAlt']
-            .' puan ve tablonun tamamından en az '.$a['docToplam'].' puan. Her ikisi de DOKTORA '
+        'aday_notu' => $a['ad'].' temel alanında doçent kadrosu için iki baraj birden: '
+            .'makale, kitap ve kitap bölümü kalemlerinizden en az '.$a['docAlt']
+            .' puan ve tüm faaliyetlerinizden en az '.$a['docToplam'].' puan. Her ikisi de DOKTORA '
             .'unvanını aldıktan sonraki çalışmalardan hesaplanıyor. Aradaki '
             .($a['docToplam'] - $a['docAlt']).' puanlık farkı bildiri, atıf, proje, editörlük, '
             .'hakemlik, tez danışmanlığı, ders, ödül ve idari görev kalemleriyle '
@@ -122,8 +122,9 @@ foreach ($alanlar as $a) {
         'kadro' => 'profesorluk',
         'notlar' => 'MADDE 7: doçent unvanını aldıktan sonra MADDE 8/1 çalışmalarından en az '
             .$a['profAlt'].', MADDE 8\'in tamamından en az '.$a['profToplam'].' puan.',
-        'aday_notu' => $a['ad'].' temel alanında profesörlük için MADDE 8/1 yayınlarından '
-            .$a['profAlt'].' puan ve tablonun tamamından '.$a['profToplam'].' puan gerekiyor; '
+        'aday_notu' => $a['ad'].' temel alanında profesörlük için makale, kitap ve kitap '
+            .'bölümü kalemlerinizden '.$a['profAlt'].' puan ve tüm faaliyetlerinizden '
+            .$a['profToplam'].' puan gerekiyor; '
             .'ikisi de DOÇENT unvanını aldıktan sonraki çalışmalardan sayılıyor. Alt baraj '
             .'doçentlikle aynı, değişen yalnızca toplam.',
         'sart' => $puanSarti($a['profAlt'], $a['profToplam'], Kalip::DOCENTLIK_SONRASI, 'MADDE 7'),

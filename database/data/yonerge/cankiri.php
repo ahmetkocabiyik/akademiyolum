@@ -80,10 +80,10 @@ $NOT_CETVEL = ' Çok yazarlı yayınlarda puan, yazar sayısı × isim sırası 
     .'yürütücülüğü 100 yerine 33 puandan sayılıyor. Hakemlikten en fazla 50, atıflardan 100, '
     .'derslerden 30, idari görevlerden 100 puan alınabiliyor.';
 
-$NOT_TABLO2 = ' Tablo 2 "Seçenekli Etkinlik Listesi" koşulu HESAPLANAMIYOR olarak işaretli: '
+$NOT_TABLO2 = ' Yönergenin "Seçenekli Etkinlik Listesi" koşulu HESAPLANAMIYOR olarak işaretli: '
     .'otuz yedi maddenin çoğu (proje destek ofisinde görev, teknokent şirketi, öğrenci '
     .'topluluğu danışmanlığı, dernek üyeliği, açık erişim üyeliği gibi) faaliyet olarak '
-    .'kaydedilemiyor. Bu koşulu sağlayamıyorsanız yönerge alternatif olarak Tablo 1\'den ilave '
+    .'kaydedilemiyor. Bu koşulu sağlayamıyorsanız yönerge alternatif olarak ilave '
     .'puan istiyor; motor o alternatifi hesaplıyor.';
 
 /**
@@ -121,14 +121,14 @@ $tez2209 = fn (int $proje2209, int $tez, int $ilave, ?array $donem): array => Ka
     'TÜBİTAK 2209 danışmanlığı, lisansüstü tez yönetimi ya da ilave puan koşulunu sağlamak', [
         Kalip::beyan('Akademik danışman olarak yer aldığınız en az '.$proje2209.' TÜBİTAK 2209-A veya 2209-B projesinin başvuru sürecini tamamlamış olmak', 'Asgari koşullar'),
         Kalip::adet('Danışmanlığını yaptığınız en az '.$tez.' lisansüstü tez çalışmasını tamamlamış olmak', ['7.2', '7.3'], $tez, donem: $donem, madde: 'Asgari koşullar'),
-        Kalip::puanDan('Bu koşulları sağlayamayanlar için Tablo 1\'in 1-6 numaralı kategorilerinden ilave '.$ilave.' puan almak', ['KATEGORI-1-6'], $ilave, $donem, madde: 'Asgari koşullar'),
+        Kalip::puanDan('Bu koşulları sağlayamayanlar için makale, bildiri, kitap, editörlük ve atıf kalemlerinden ilave '.$ilave.' puan almak', ['KATEGORI-1-6'], $ilave, $donem, madde: 'Asgari koşullar'),
     ]
 );
 
 /** Tablo 2 seçenekli etkinlik listesi koşulu ve ilave puan telafisi. */
 $tablo2 = fn (int $madde, int $ilave, ?array $donem): array => Kalip::veya(
     'Seçenekli etkinlik listesi ya da ilave puan koşulunu sağlamak', [
-        Kalip::hesaplanamiyor('Tablo 2 "Seçenekli Etkinlik Listesi" içerisinden en az '.$madde.' maddeyi belgelendirerek karşılamak', 'Asgari koşullar'),
+        Kalip::hesaplanamiyor('Yönergenin "Seçenekli Etkinlik Listesi"nden en az '.$madde.' maddeyi belgelendirerek karşılamak', 'Asgari koşullar'),
         Kalip::toplam($ilave, $donem),
     ]
 );
@@ -198,10 +198,10 @@ foreach ($yenidenTablosu as [$kod, $alanlar, $ad, $makale]) {
         'aday_notu' => $ad.' alanlarında doktor öğretim üyesi kadrosuna YENİDEN ATANMA. Yalnız '
             .'SON ATANMA İÇİN YAPILAN BAŞVURU TARİHİNDEN SONRAKİ yayın ve faaliyetler (atıflar '
             .'dâhil) sayılıyor; önceki atanmalarda puanlanmış çalışmalar kullanılamıyor. Son '
-            .'atanma süresi BİR YIL olan adaylarda makale koşulu yerine Tablo 1\'in 1.1-1.8 '
-            .'maddelerinden 60 ve toplamda 120 puan yetiyor; motor tam (üç yıllık) değerleri '
+            .'atanma süresi BİR YIL olan adaylarda makale koşulu yerine makale '
+            .'kalemlerinizden 60 ve toplamda 120 puan yetiyor; motor tam (üç yıllık) değerleri '
             .'uyguluyor, bir yıllık atama süreniz varsa koşul burada olduğundan ağır görünür. '
-            .'MADDE 9/1-e\'nin iki TÜBİTAK 2209 danışmanlığı şartı, yönergenin yürürlüğe '
+            .'Yönergenin iki TÜBİTAK 2209 danışmanlığı şartı, yürürlüğe '
             .'girdiği 30.10.2025\'ten itibaren bir yıl içindeki atanmalarda uygulanmıyor.'
             .$NOT_CETVEL,
         'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna yeniden atanma — '.$ad, [

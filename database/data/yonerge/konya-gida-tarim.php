@@ -58,7 +58,9 @@ $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 
 $ARA = ['ABC'];
-$ARA_ADI = 'A.1-6, B.1-5 ve C.1-6 maddeleri';
+// Adaya gösterilen küme adı (KONVANSIYONLAR §2); yönergenin madde kodları
+// yalnızca `notlar`da ve düğümlerin `madde` alanında kalıyor.
+$ARA_ADI = 'makale, bildiri ve kitap kalemleri';
 
 $dil = Kalip::beyan(
     'Yabancı dille eğitim-öğretim yapan bölümlerde YÖK\'ün yabancı dille öğretim yeterliliği '
@@ -101,7 +103,7 @@ foreach ([
             : 'İlk atamanızdan sonraki çalışmalarınız sayılıyor. Yönerge bu çalışmaların KGTÜ '
                 .'adresli olmasını istiyor; kayıt adres bilgisi taşımadığı için bu koşul '
                 .'uygulanmıyor, başka kurum adresli yayınlarınız da sayılıyor. ')
-            ."EK-1 tablosunun {$ARA_ADI} kapsamından en az {$araPuan} puan, tablonun tamamından "
+            ."{$ARA_ADI} kapsamından en az {$araPuan} puan, tüm faaliyetlerinizden "
             ."en az {$toplamPuan} puan isteniyor. Ayrıca SCI, SCI-Expanded, SSCI, AHCI ya da "
             .'ULAKBİM dergilerinde en az bir özgün yayınınız olmalı. Bölüm Ç (h faktörü) '
             .'girilemediği için toplam puanınız olduğundan düşük görünür.',
@@ -114,7 +116,7 @@ foreach ([
         'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna atanma', [
             $dil,
             $doktora,
-            Kalip::puanDan("EK-1'in {$ARA_ADI} kapsamından en az {$araPuan} puan", $ARA, $araPuan, $donem, madde: '6.a.1'),
+            Kalip::puanDan(ucfirst($ARA_ADI)." kapsamından en az {$araPuan} puan", $ARA, $araPuan, $donem, madde: '6.a.1'),
             $ozgunYayin($donem),
             Kalip::toplam($toplamPuan, $donem),
         ]),
@@ -127,15 +129,15 @@ foreach ([
 
 foreach ([
     ['sosyal', ['sosyal'], 'Sosyal, Beşerî ve İdari Bilimler Temel Alanı', 'A1235',
-        'A.1, A.2, A.3 ve A.5 maddeleri kapsamında', 3, 20, 50, 5, 60, 20, 150],
+        'SCI-Expanded, SSCI, AHCI, ESCI, Scopus ve TR Dizin dergilerinde', 3, 20, 50, 5, 60, 20, 150],
     ['fen', ['fen', 'muhendislik', 'ziraat'], 'Fen, Mühendislik ve Tarım Temel Alanı', 'A123',
-        'A.1, A.2 ve A.3 maddeleri kapsamında', 3, 50, 100, 5, 100, 40, 200],
+        'SCI-Expanded, SSCI, AHCI, ESCI ve Scopus dergilerinde', 3, 50, 100, 5, 100, 40, 200],
 ] as [$anahtar, $alanlar, $grupAdi, $makaleGrubu, $makaleAdi,
     $dcMakale, $dcAra, $dcToplam, $prMakale, $prAra, $prDocentlikSonrasi, $prToplam]) {
     $esikler[] = [
         'anahtar' => "kgtu-{$anahtar}-docentlik",
         'aday_notu' => "{$grupAdi} için doçentlik kadrosunda {$makaleAdi} toplam en az "
-            ."{$dcMakale} makalede yer almanız, EK-1'in {$ARA_ADI} kapsamından en az {$dcAra} "
+            ."{$dcMakale} makalede yer almanız, {$ARA_ADI} kapsamından en az {$dcAra} "
             ."puan ve tablonun tamamından en az {$dcToplam} puan almanız isteniyor. Yönerge bu "
             .'puanlar için dönem sınırı koymuyor, bütün akademik geçmişiniz sayılıyor. Bölüm Ç '
             .'(h faktörü) girilemediği için toplam puanınız olduğundan düşük görünür.',
@@ -149,7 +151,7 @@ foreach ([
             $dil,
             $docentUnvani,
             Kalip::adet("{$makaleAdi} toplam en az {$dcMakale} makalede yer almak", [$makaleGrubu], $dcMakale, madde: '6.b.1'),
-            Kalip::puanDan("EK-1'in {$ARA_ADI} kapsamından en az {$dcAra} puan", $ARA, $dcAra, madde: '6.b.1'),
+            Kalip::puanDan(ucfirst($ARA_ADI)." kapsamından en az {$dcAra} puan", $ARA, $dcAra, madde: '6.b.1'),
             Kalip::toplam($dcToplam),
         ]),
     ];
@@ -157,7 +159,7 @@ foreach ([
     $esikler[] = [
         'anahtar' => "kgtu-{$anahtar}-profesorluk",
         'aday_notu' => "{$grupAdi} için profesörlük kadrosunda {$makaleAdi} toplam en az "
-            ."{$prMakale} makalede yer almanız, EK-1'in {$ARA_ADI} kapsamından en az {$prAra} "
+            ."{$prMakale} makalede yer almanız, {$ARA_ADI} kapsamından en az {$prAra} "
             ."puan (bunun en az {$prDocentlikSonrasi} puanı doçentlik unvanını aldıktan sonra) "
             ."ve tablonun tamamından en az {$prToplam} puan almanız isteniyor. Bölüm Ç "
             .'(h faktörü) girilemediği için toplam puanınız olduğundan düşük görünür.',
@@ -172,7 +174,7 @@ foreach ([
             $dil,
             $besYil,
             Kalip::adet("{$makaleAdi} toplam en az {$prMakale} makalede yer almak", [$makaleGrubu], $prMakale, madde: '6.b.1'),
-            Kalip::puanDan("EK-1'in {$ARA_ADI} kapsamından en az {$prAra} puan", $ARA, $prAra, madde: '6.b.1'),
+            Kalip::puanDan(ucfirst($ARA_ADI)." kapsamından en az {$prAra} puan", $ARA, $prAra, madde: '6.b.1'),
             Kalip::puanDan(
                 "Bu puanın en az {$prDocentlikSonrasi} puanı doçentlik unvanını aldıktan sonra",
                 $ARA, $prDocentlikSonrasi, $DOCENTLIK, madde: '6.b.1',
