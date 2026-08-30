@@ -286,6 +286,10 @@ Bir üniversiteyi temizleyince adını sil; ikinci test zaten "listede olup da
 temiz olan" isimleri yakalayıp seni uyarıyor. Yeni bir yönerge girildiğinde
 listede olmadığı için doğrudan korunuyor.
 
+Desen NOKTALI kodların (A.1, A1.1) yanında noktasız ARALIKLARI da yakalıyor
+(A1-A4, C1-C7, D1-D4). Dergi çeyrekleri (Q1-Q3) bilinçli olarak dışlandı: onlar
+yönergenin kodu değil, adayın tanıdığı bir ad.
+
 Sızıntının dört yeri var, dördüne de bak:
 
 1. `Kalip::toplam`'ın `liste` argümanı (aşağıdaki paragraf).

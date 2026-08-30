@@ -62,7 +62,7 @@ $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 $FEN = ['muhendislik', 'fen', 'saglik', 'ziraat'];
 $SOSYAL = ['egitim', 'filoloji', 'ilahiyat', 'mimarlik', 'spor', 'sosyal'];
 
-$ILETISIM_NOTU = ' İletişim Fakültesi kadrolarında ayrıca D1-D4 kapsamındaki görsel '
+$ILETISIM_NOTU = ' İletişim Fakültesi kadrolarında ayrıca görsel '
     .'etkinliklerden en az 50 puan isteniyor; koşul fakülteye bağlı olduğu için motor bunu '
     .'uygulamıyor, kendiniz kontrol etmelisiniz.';
 

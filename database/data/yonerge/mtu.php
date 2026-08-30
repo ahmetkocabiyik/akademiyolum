@@ -153,7 +153,7 @@ foreach ([
                 ."az {$bPuan} puan",
                 ['B-HARIC'], $bPuan, madde: '8-2',
             ),
-            Kalip::puanDan("A-C kapsamındaki faaliyetlerden en az {$acPuan} puan", ['A-C'], $acPuan, madde: '8-2'),
+            Kalip::puanDan("Makale, bildiri, kitap ve editörlük kalemlerinizden en az {$acPuan} puan", ['A-C'], $acPuan, madde: '8-2'),
             Kalip::toplam(250),
         ]),
     ];
@@ -163,8 +163,8 @@ $esikler[] = [
     'anahtar' => 'mtu-gs-uygulamali-dr',
     'aday_notu' => 'Güzel Sanatlar uygulamalı alanları için '
         .'yayınlarınızdan en az 20 puan, B kapsamındaki bilimsel etkinliklerden (düzenleme '
-        .'kurulu üyelikleri hariç) en az 20 puan, A-C kapsamındaki faaliyetlerden en az 50 puan, '
-        .'N1-N25 kapsamındaki sanat ve tasarım etkinliklerinden en az 80 puan ve toplamda en az '
+        .'kurulu üyelikleri hariç) en az 20 puan, makale, bildiri, kitap ve editörlük kalemlerinizden en az 50 puan, '
+        .'Sanat ve tasarım etkinliklerinizden en az 80 puan ve toplamda en az '
         .'250 puan isteniyor.'.$DIL_NOTU,
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
@@ -180,8 +180,8 @@ $esikler[] = [
             'B kapsamındaki bilimsel etkinliklerden (düzenleme kurulu üyelikleri hariç) en az 20 puan',
             ['B-HARIC'], 20, madde: '8-2-e',
         ),
-        Kalip::puanDan('A-C kapsamındaki faaliyetlerden en az 50 puan', ['A-C'], 50, madde: '8-2-e'),
-        Kalip::puanDan('N1-N25 kapsamındaki sanat ve tasarım etkinliklerinden en az 80 puan', ['N'], 80, madde: '8-2-e'),
+        Kalip::puanDan('Makale, bildiri, kitap ve editörlük kalemlerinizden en az 50 puan', ['A-C'], 50, madde: '8-2-e'),
+        Kalip::puanDan('Sanat ve tasarım etkinliklerinizden en az 80 puan', ['N'], 80, madde: '8-2-e'),
         Kalip::toplam(250),
     ]),
 ];
@@ -243,7 +243,7 @@ $esikler[] = [
     'anahtar' => 'mtu-sosyal-docentlik',
     'aday_notu' => 'Sosyal Bilimler ve Güzel Sanatlar gruplarında doçentlik için doçentlik '
         .'unvanına ek olarak proje faaliyetlerinizden en az 40 puan ya da '
-        .'A1 ve/veya A2 kapsamındaki yayınlardan 40 ek puan isteniyor.'.$GECICI_2,
+        .'dizinli dergilerdeki makalelerinizden 40 ek puan isteniyor.'.$GECICI_2,
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
     'alan' => array_merge($SOSYAL, ['guzel_sanatlar']),
@@ -253,7 +253,7 @@ $esikler[] = [
         $docentUnvani,
         Kalip::veya('Proje ya da ek yayın koşulu', [
             Kalip::puanDan('Proje faaliyetlerinizden en az 40 puan', ['G'], 40, madde: '9-1-b'),
-            Kalip::puanDan('Ya da A1 ve/veya A2 kapsamındaki yayınlarınızdan en az 40 ek puan', ['A1-A2'], 40, madde: '9-1-b'),
+            Kalip::puanDan('Ya da dizinli dergilerdeki makalelerinizden en az 40 ek puan', ['A1-A2'], 40, madde: '9-1-b'),
         ]),
     ]),
 ];
@@ -285,12 +285,12 @@ $profesorEsigi = function (
         $besYil,
         $ders,
         Kalip::puanDan("Doçentlik sonrası A kapsamındaki yayınlarınızdan en az {$aPuan} puan", ['A'], $aPuan, $DOCENTLIK, madde: '10-4'),
-        Kalip::puanDan("Doçentlik sonrası A-C kapsamındaki faaliyetlerden en az {$acPuan} puan", ['A-C'], $acPuan, $DOCENTLIK, madde: '10-4'),
+        Kalip::puanDan("Doçentlik sonrası makale, bildiri, kitap ve editörlük kalemlerinizden en az {$acPuan} puan", ['A-C'], $acPuan, $DOCENTLIK, madde: '10-4'),
     ];
 
     if ($ilkIsim) {
         $kosullar[] = Kalip::adet(
-            'Doçentlik sonrası A1 ve/veya A2 kapsamındaki yayınlardan en az ikisinde birinci '
+            'Doçentlik sonrası dizinli dergilerdeki makalelerinizden en az ikisinde birinci '
             .'isim olmak',
             ['A1-A2'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: '10-4',
         );
@@ -302,7 +302,7 @@ $profesorEsigi = function (
         $kosullar[] = Kalip::veya('Proje ya da ek yayın koşulu', [
             Kalip::puanDan("Doçentlik sonrası {$gAd} en az {$gPuan} puan", array_values($gGrup), $gPuan, $DOCENTLIK, madde: '10-4'),
             Kalip::puanDan(
-                'Ya da doçentlik sonrası A1 ve/veya A2 kapsamındaki yayınlarınızdan en az '
+                'Ya da doçentlik sonrası dizinli dergilerdeki makalelerinizden en az '
                 ."{$ekPuan} puan ({$gPuan} puanı ek olmak üzere)",
                 ['A1-A2'], $ekPuan, $DOCENTLIK, madde: '10-4',
             ),
@@ -360,12 +360,12 @@ $esikler[] = [
         $besYil,
         $ders,
         Kalip::puanDan('Doçentlik sonrası A kapsamındaki yayınlarınızdan en az 150 puan', ['A'], 150, $DOCENTLIK, madde: '10-4-e'),
-        Kalip::puanDan('Doçentlik sonrası A-C kapsamındaki faaliyetlerden en az 300 puan', ['A-C'], 300, $DOCENTLIK, madde: '10-4-e'),
+        Kalip::puanDan('Doçentlik sonrası makale, bildiri, kitap ve editörlük kalemlerinizden en az 300 puan', ['A-C'], 300, $DOCENTLIK, madde: '10-4-e'),
         Kalip::veya('Proje ya da ek yayın koşulu', [
             Kalip::puanDan('Doçentlik sonrası G ya da İ kapsamındaki faaliyetlerden en az 40 puan', ['G-I'], 40, $DOCENTLIK, madde: '10-4-e'),
-            Kalip::puanDan('Ya da doçentlik sonrası A1 ve/veya A2 kapsamındaki yayınlarınızdan en az 190 puan (40 puanı ek olmak üzere)', ['A1-A2'], 190, $DOCENTLIK, madde: '10-4-e'),
+            Kalip::puanDan('Ya da doçentlik sonrası dizinli dergilerdeki makalelerinizden en az 190 puan (40 puanı ek olmak üzere)', ['A1-A2'], 190, $DOCENTLIK, madde: '10-4-e'),
         ]),
-        Kalip::puanDan('Doçentlik sonrası N1-N25 kapsamındaki sanat ve tasarım etkinliklerinden en az 400 puan', ['N'], 400, $DOCENTLIK, madde: '10-4-e'),
+        Kalip::puanDan('Doçentlik sonrası sanat ve tasarım etkinliklerinizden en az 400 puan', ['N'], 400, $DOCENTLIK, madde: '10-4-e'),
         $baslicaEser(true),
         Kalip::toplam(1000, $DOCENTLIK),
     ]),

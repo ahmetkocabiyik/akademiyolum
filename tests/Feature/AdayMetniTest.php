@@ -27,6 +27,9 @@ $KOD_DESENI = '/('
     .'|\bÇizelge[-\s]?\d'
     .'|\b[A-Z]\.\d'        // A.1, B.7
     .'|\b[A-Z]\d\.\d'      // A1.1
+    // Noktasız kod aralıkları: A1-A4, C1-C7, D1-D4. Dergi çeyrekleri (Q1-Q3)
+    // KOD DEĞİL, adayın tanıdığı bir ad — desenden dışlanıyor.
+    .'|\b(?!Q)[A-Z]\d{1,2}-(?!Q)[A-Z]?\d{1,2}\b'
     .')/u';
 
 /**

@@ -165,7 +165,7 @@ return [
     [
         'anahtar' => 'bolu-aibu-profesor-fen',
         'aday_notu' => 'Alt baraj İKİ KEZ isteniyor: hem toplam puanın %25\'i, hem doçentlik '
-            .'sonrası puanın %25\'i A1-A8 kategorilerinden gelmeli.',
+            .'sonrası puanın %25\'i makale ve kitap kalemlerinizden gelmeli.',
         'universite' => 'Bolu Abant İzzet Baysal Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => $fenGrubu,
@@ -186,7 +186,7 @@ return [
     [
         'anahtar' => 'bolu-aibu-profesor-sosyal',
         'aday_notu' => 'Alt baraj İKİ KEZ isteniyor: hem toplam puanın %25\'i, hem doçentlik '
-            .'sonrası puanın %25\'i A1-A8 kategorilerinden gelmeli.',
+            .'sonrası puanın %25\'i makale ve kitap kalemlerinizden gelmeli.',
         'universite' => 'Bolu Abant İzzet Baysal Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => $sosyalGrubu,

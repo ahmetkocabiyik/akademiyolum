@@ -200,15 +200,16 @@ $esikler[] = [
         .'120 puan; toplam en az 240 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna atanma', [
         Kalip::beyan('İlgili alanda doktora derecesine sahip olmak', 'Madde 7/1-b'),
-        Kalip::adet('A1-A4 kategorilerinde en az 1 yayında başlıca yazar olmalısınız', ['A1-A2-A3-A4'], 1, yazar: 'baslica', madde: 'Madde 7/1-b/1'),
-        Kalip::puanDan('A1-A4 kalemlerinizden en az 120 puan', ['A1-A2-A3-A4'], 120, madde: 'Madde 7/1-b/1'),
+        Kalip::adet('SCI-Expanded, SSCI, AHCI, ESCI, Scopus ve TR Dizin dergilerindeki yayınlarınızdan en az 1 tanesinde başlıca yazar olmalısınız', ['A1-A2-A3-A4'], 1, yazar: 'baslica', madde: 'Madde 7/1-b/1'),
+        Kalip::puanDan('SCI-Expanded, SSCI, AHCI, ESCI, Scopus ve TR Dizin dergilerindeki yayınlarınızdan en az 120 puan', ['A1-A2-A3-A4'], 120, madde: 'Madde 7/1-b/1'),
         Kalip::toplam(240),
     ]),
 ];
 
 $esikler[] = [
     'anahtar' => 'atu-iisbf-dr-yeniden',
-    'aday_notu' => 'A1-A4 kategorilerinden en az 60 puan ve tüm faaliyetlerden toplamda en az '
+    'aday_notu' => 'SCI-Expanded, SSCI, AHCI, ESCI, Scopus ve TR Dizin dergilerindeki yayınlarınızdan en az 60 puan ve tüm '
+        .'faaliyetlerden toplamda en az '
         .'160 puan gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi_yeniden',
@@ -216,18 +217,19 @@ $esikler[] = [
     'cetvel' => $CETVEL,
     'notlar' => "Madde 8/1-b: A1-A4'ten en az 60 puan; toplam en az 160 puan.",
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine yeniden atanma', [
-        Kalip::puanDan('A1-A4 kalemlerinizden en az 60 puan', ['A1-A2-A3-A4'], 60, madde: 'Madde 8/1-b'),
+        Kalip::puanDan('SCI-Expanded, SSCI, AHCI, ESCI, Scopus ve TR Dizin dergilerindeki yayınlarınızdan en az 60 puan', ['A1-A2-A3-A4'], 60, madde: 'Madde 8/1-b'),
         Kalip::toplam(160),
     ]),
 ];
 
 $esikler[] = [
     'anahtar' => 'atu-iisbf-docent',
-    'aday_notu' => 'Doktora unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: A1, A2 veya A3\'ten '
-        .'en az 2 yayınında başlıca yazar olmalısınız; A1-A6 kalemlerinden en az 200 puan; kitap '
-        .'kategorilerinden (D1-D4) en az 1 yayınınız olmalı (bu kalemden en fazla 150 puan '
-        .'sayılıyor); bildiri (B veya C) kalemlerinden en az 50 puan (en fazla 100 puan '
-        .'sayılıyor); atıf (K) kaleminden en az 10 puan ve doktora sonrası toplamdan en az 450 '
+    'aday_notu' => 'Doktora unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: dizinli '
+        .'dergilerdeki yayınlarınızdan en az 2 tanesinde başlıca yazar olmalısınız; makale '
+        .'kalemlerinizden en az 200 puan; kitap kalemlerinizden en az 1 yayınınız olmalı (bu '
+        .'kalemden en fazla 150 puan sayılıyor); bildirilerinizden en az 50 puan (en fazla 100 '
+        .'puan sayılıyor); atıf kalemlerinizden en az 10 puan ve doktora sonrası toplamdan en '
+        .'az 450 '
         .'puan gerekiyor. Türk Dili ve Edebiyatı, Mütercim-Tercümanlık ve ÜAK Hukuk temel '
         .'alanından doçentlik alanlar için yönerge biraz daha dar bir küme tanımlıyor; bu eşik '
         .'genel (daha geniş) kümeyi kullanıyor.',
@@ -246,11 +248,11 @@ $esikler[] = [
             ['A1-A2-A3'], 1, yazar: 'baslica', donem: $DOKTORA, madde: 'Madde 9/3-a/1',
         ),
         Kalip::puanDan(
-            'Doktora unvanınızdan sonra A1-A6 kalemlerinizden en az 200 puan',
+            'Doktora unvanınızdan sonra sci-expanded, ssci, ahci, esci, scopus ve tr dizin dergilerindeki yayınlarınızdan en az 200 puan',
             ['A1-A2-A3-A4-A5-A6'], 200, $DOKTORA, madde: 'Madde 9/3-a/2',
         ),
         Kalip::adet(
-            'Doktora unvanınızdan sonra kitap kalemlerinizden (D1-D4) en az 1 yayınınız olmalı',
+            'Doktora unvanınızdan sonra kitap kalemlerinizden en az 1 yayınınız olmalı',
             ['D1-D2-D3-D4'], 1, donem: $DOKTORA, madde: 'Madde 9/3-a/3',
         ),
         Kalip::puanDan(
@@ -264,10 +266,11 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'atu-iisbf-profesor',
-    'aday_notu' => 'Doçentlik unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: A1 veya A2\'den en '
-        .'az biri olmak üzere, A1-A3\'ten en az 2 yayınında başlıca yazar olmalısınız; A1-A6 '
-        .'kalemlerinden en az 250 puan; bildiri (B veya C) kalemlerinden en az 50 puan (en '
-        .'fazla 100 puan sayılıyor); atıf (K) kaleminden en az 20 puan ve doçentlik sonrası '
+    'aday_notu' => 'Doçentlik unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: en az biri '
+        .'SCI-Expanded, SSCI ya da AHCI dergisinde olmak üzere, dizinli dergilerdeki '
+        .'yayınlarınızdan en az 2 tanesinde başlıca yazar olmalısınız; makale kalemlerinizden '
+        .'en az 250 puan; bildirilerinizden en az 50 puan (en fazla 100 puan sayılıyor); atıf '
+        .'kalemlerinizden en az 20 puan ve doçentlik sonrası '
         .'toplamdan en az 600 puan gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
@@ -288,7 +291,7 @@ $esikler[] = [
             ['A1-A2'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'Madde 10/3-a/1',
         ),
         Kalip::puanDan(
-            'Doçentlik unvanınızdan sonra A1-A6 kalemlerinizden en az 250 puan',
+            'Doçentlik unvanınızdan sonra sci-expanded, ssci, ahci, esci, scopus ve tr dizin dergilerindeki yayınlarınızdan en az 250 puan',
             ['A1-A2-A3-A4-A5-A6'], 250, $DOCENTLIK, madde: 'Madde 10/3-a/2',
         ),
         Kalip::puanDan(
@@ -317,15 +320,15 @@ $esikler[] = [
         .'120 puan; toplam en az 240 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna atanma', [
         Kalip::beyan('İlgili alanda doktora derecesine sahip olmak', 'Madde 7/1-c'),
-        Kalip::adet('A1-A4 kategorilerinde en az 1 yayında başlıca yazar olmalısınız', ['A1-A2-A3-A4'], 1, yazar: 'baslica', madde: 'Madde 7/1-c/1'),
-        Kalip::puanDan('A1-A4 kalemlerinizden en az 120 puan', ['A1-A2-A3-A4'], 120, madde: 'Madde 7/1-c/1'),
+        Kalip::adet('SCI-Expanded, SSCI, AHCI, ESCI, Scopus ve TR Dizin dergilerindeki yayınlarınızdan en az 1 tanesinde başlıca yazar olmalısınız', ['A1-A2-A3-A4'], 1, yazar: 'baslica', madde: 'Madde 7/1-c/1'),
+        Kalip::puanDan('SCI-Expanded, SSCI, AHCI, ESCI, Scopus ve TR Dizin dergilerindeki yayınlarınızdan en az 120 puan', ['A1-A2-A3-A4'], 120, madde: 'Madde 7/1-c/1'),
         Kalip::toplam(240),
     ]),
 ];
 
 $esikler[] = [
     'anahtar' => 'atu-mimarlik-dr-yeniden',
-    'aday_notu' => 'A1-A5 kategorilerinden en az 100 puan ve tüm faaliyetlerden toplamda en az '
+    'aday_notu' => 'sci-expanded, ssci, ahci, esci, scopus ve tr dizin dergilerindeki yayınlarınızdan en az 100 puan ve tüm faaliyetlerden toplamda en az '
         .'200 puan gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi_yeniden',
@@ -333,16 +336,17 @@ $esikler[] = [
     'cetvel' => $CETVEL,
     'notlar' => "Madde 8/1-c: A1-A5'ten en az 100 puan; toplam en az 200 puan.",
     'sart' => Kalip::ve('Doktor Öğretim Üyeliğine yeniden atanma', [
-        Kalip::puanDan('A1-A5 kalemlerinizden en az 100 puan', ['A1-A2-A3-A4-A5'], 100, madde: 'Madde 8/1-c'),
+        Kalip::puanDan('SCI-Expanded, SSCI, AHCI, ESCI, Scopus ve TR Dizin dergilerindeki yayınlarınızdan en az 100 puan', ['A1-A2-A3-A4-A5'], 100, madde: 'Madde 8/1-c'),
         Kalip::toplam(200),
     ]),
 ];
 
 $esikler[] = [
     'anahtar' => 'atu-mimarlik-docent',
-    'aday_notu' => 'Doktora unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: A1 veya A2\'den en '
-        .'az biri olmak üzere A1-A4 kalemlerinizden en az 200 puan; bildiri (B veya C) '
-        .'kalemlerinizden en az 70 puan; atıf (K) kaleminizden en az 10 puan ve doktora sonrası '
+    'aday_notu' => 'Doktora unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: en az biri '
+        .'dizinli dergide olmak üzere sci-expanded, ssci, ahci, esci, scopus ve tr dizin dergilerindeki '
+        .'yayınlarınızdan en az 200 puan; bildirilerinizden en az 70 puan; atıf '
+        .'kalemlerinizden en az 10 puan ve doktora sonrası '
         .'toplamdan en az 450 puan gerekiyor. Yabancı dilde eğitim yapılan bölümlerde ayrıca en '
         .'az bir makalenizin eğitim diliyle yayımlanmış olması aranıyor; bu koşul (bölümün '
         .'eğitim dili profilde tutulmadığı için) eşiğe yazılmadı, başvurmadan önce üniversiteye '
@@ -361,7 +365,7 @@ $esikler[] = [
             ['A1-A2'], 1, donem: $DOKTORA, madde: 'Madde 9/4-a/1',
         ),
         Kalip::puanDan(
-            'Doktora unvanınızdan sonra A1-A4 kalemlerinizden en az 200 puan',
+            'Doktora unvanınızdan sonra sci-expanded, ssci, ahci, esci, scopus ve tr dizin dergilerindeki yayınlarınızdan en az 200 puan',
             ['A1-A2-A3-A4'], 200, $DOKTORA, madde: 'Madde 9/4-a/1',
         ),
         Kalip::puanDan(
@@ -377,7 +381,7 @@ $esikler[] = [
     'anahtar' => 'atu-mimarlik-profesor',
     'aday_notu' => 'Doçentlik unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: A1 veya A2\'den '
         .'en az biri başlıca yazarlı olmak üzere bu iki kategoriden toplam en az 2 yayınınız '
-        .'olmalı; A1-A4 kalemlerinizden en az 300 puan; bildiri (B veya C) kalemlerinizden en '
+        .'olmalı; sci-expanded, ssci, ahci, esci, scopus ve tr dizin dergilerindeki yayınlarınızdan en az 300 puan; bildiri (B veya C) kalemlerinizden en '
         .'az 100 puan; atıf (K) kaleminizden en az 20 puan ve doçentlik sonrası toplamdan en '
         .'az 600 puan gerekiyor. Yabancı dilde eğitim yapılan bölümlerde ayrıca en az bir '
         .'makalenizin eğitim diliyle yayımlanmış olması aranıyor; bu koşul eşiğe yazılmadı.',
@@ -399,7 +403,7 @@ $esikler[] = [
             ['A1-A2'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'Madde 10/4-a/1',
         ),
         Kalip::puanDan(
-            'Doçentlik unvanınızdan sonra A1-A4 kalemlerinizden en az 300 puan',
+            'Doçentlik unvanınızdan sonra sci-expanded, ssci, ahci, esci, scopus ve tr dizin dergilerindeki yayınlarınızdan en az 300 puan',
             ['A1-A2-A3-A4'], 300, $DOCENTLIK, madde: 'Madde 10/4-a/2',
         ),
         Kalip::puanDan(

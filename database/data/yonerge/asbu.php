@@ -85,7 +85,8 @@ $grup = function (string $kod, array $alanlar, ?string $birim, string $ad, bool 
     $SON_ATAMA, $NOT_CETVEL, $a1b1b2, $digerYayin): void {
     $ingilizceNotu = $ingilizce
         ? ' Eğitim dili İNGİLİZCE olan programlarda yayın şartının tek yolu var: A1, B1 ya da '
-            .'B2 kalemlerinden yayın. Türkçe programların alternatif yolu (A2, A3 ve B3-B6\'dan '
+            .'kitap kalemlerinden yayın. Türkçe programların alternatif yolu (alan indeksli '
+            .'dergiler ve kitap kalemlerinden '
             .'daha çok sayıda yayın) burada geçerli değil.'
         : '';
 

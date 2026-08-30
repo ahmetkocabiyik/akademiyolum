@@ -304,7 +304,7 @@ $esikler[] = [
         .'Madde 5(7): dil koşulu 55 puan.',
     'aday_notu' => 'Doçent kadrosuna atanma. Yönergenin on iki alt tablosu doçentlik için aynı '
         .'koşulu koyuyor, bu yüzden alan ayrımı yok: doçentlik unvanına sahip olmak ve '
-        .'doçentlik başvurunuzla kadro başvurunuz arasında A1-A5 kalemlerinden en az 50 puan '
+        .'doçentlik başvurunuzla kadro başvurunuz arasında makale kalemlerinizden en az 50 puan '
         .'almış olmak. Motor doçentlik BAŞVURU tarihini değil unvanın alındığı tarihi tuttuğu '
         .'için pencere biraz daralıyor; koşul olduğundan sıkı görünüyor. Ayrıca deneme dersi '
         .'vermeniz ve 2026 Mart döneminden sonra doçentlik belgesi aldıysanız ÜAK jürisinin '
@@ -314,7 +314,7 @@ $esikler[] = [
         Kalip::yds(55),
         $SOZLU_SINAV,
         $DENEME_DERSI,
-        Kalip::puanDan('Doçentlik başvurunuz ile kadro başvurunuz arasında A1-A5 kalemlerinden en az 50 puan almak', ['A1-A5'], 50, $DOCENTLIK, madde: 'Ek 3'),
+        Kalip::puanDan('Doçentlik başvurunuz ile kadro başvurunuz arasında makale kalemlerinizden en az 50 puan almak', ['A1-A5'], 50, $DOCENTLIK, madde: 'Ek 3'),
     ]),
 ];
 
