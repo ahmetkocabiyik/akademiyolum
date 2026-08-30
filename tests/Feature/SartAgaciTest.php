@@ -1511,10 +1511,8 @@ test('Ankara iki katmanlı baraj uyguluyor', function () {
     expect($puan('Bölüm 1 · 1A-1B'))->toBe(0)
         ->and($puan('Bölüm 1 · 1A-1G'))->toBe(30);
 
-    // Bölüm başlıklarında adı geçmeyen alanlarda eşik üretilmedi.
-    foreach (['egitim', 'hukuk', 'ilahiyat', 'mimarlik', 'ziraat', 'spor', 'filoloji'] as $alan) {
-        expect($depo->bul('Ankara Üniversitesi', 'docentlik', $alan))->toBeNull();
-    }
+    // Alan dağılımı ayrı testte; burada yalnız mimarlığın kapsam dışı olduğu.
+    expect($depo->bul('Ankara Üniversitesi', 'docentlik', 'mimarlik'))->toBeNull();
 });
 
 test('yayın türü aynı dergideki çalışmaları farklı puanlıyor', function () {
@@ -1714,6 +1712,57 @@ test('Marmara dr. öğr. üyeliği koşulu temel alana göre gerçekten değişi
     );
 
     expect($docent('sosyal'))->toBe($docent('muhendislik'));
+});
+
+test('Ankara üç alan bölümünü on bir temel alana dağıtıyor', function () {
+    $depo = sartDepo();
+
+    // Yönerge üç bölüm veriyor (Fen-Mühendislik-Sağlık, Sosyal, Güzel
+    // Sanatlar) ve fakülte→grup tablosu YOK. Bölüm sayısı üç olduğu için her
+    // temel alan birine düşmek zorunda; belge iki yerden doğruluyor: IV/b
+    // spor bilimleri fakültesini Sosyal kapsamında sayıyor, I/ı hukuk temel
+    // alanına ek koşul getiriyor.
+    // Anahtara temel alan soneki ekleniyor; ön eki karşılaştırmak yeterli.
+    foreach (['fen', 'muhendislik', 'saglik', 'ziraat'] as $alan) {
+        expect($depo->bul('Ankara Üniversitesi', 'docentlik', $alan)['anahtar'])
+            ->toStartWith('ankara-docent-fen-muh-saglik');
+    }
+
+    foreach (['sosyal', 'egitim', 'filoloji', 'ilahiyat', 'spor'] as $alan) {
+        expect($depo->bul('Ankara Üniversitesi', 'docentlik', $alan)['anahtar'])
+            ->toStartWith('ankara-docent-sosyal');
+    }
+
+    // Mimarlık yönergede hiç geçmiyor; Ankara'da o fakülte yok.
+    expect($depo->bul('Ankara Üniversitesi', 'docentlik', 'mimarlik'))->toBeNull();
+});
+
+test('Ankara hukuk barajı Sosyal ile aynı ama monografi koşulu ekliyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yurtdisiAy: 3);
+
+    $hukuk = $depo->bul('Ankara Üniversitesi', 'dr_ogr_uyesi', 'hukuk');
+    $sosyal = $depo->bul('Ankara Üniversitesi', 'dr_ogr_uyesi', 'sosyal');
+
+    // Puan barajı aynı, koşul sayısı bir fazla: md. I/ı'nın monografisi.
+    expect($hukuk)->not->toBeNull()
+        ->and($hukuk['sart']['cocuklar'])->toHaveCount(count($sosyal['sart']['cocuklar']) + 1);
+
+    // Tek yazarlı kitap koşulu karşılıyor.
+    $kitap = sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap, 'tek', '2020-01-01');
+    $monografi = fn (array $esik, array $faaliyetler) => collect($depo->degerlendir($esik, $faaliyetler, $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'monografik'));
+
+    expect($monografi($hukuk, [$kitap])->saglandi())->toBeTrue();
+
+    // Ortak yazarlı kitap karşılamıyor; Q1 telafisi iki tek yazarlı makale istiyor.
+    $ortak = sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap, 'diger', '2020-01-01');
+    expect($monografi($hukuk, [$ortak])->saglandi())->toBeFalse();
+
+    $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01', yazarRolu: 'tek');
+    $telafi = $monografi($hukuk, [$ortak, $q1(), $q1()]);
+    expect($telafi->saglandi())->toBeTrue()
+        ->and($telafi->telafiIleSaglandi())->toBeTrue();
 });
 
 test('Erciyes yayın barajı alan grubuna göre farklı küme sayıyor', function () {

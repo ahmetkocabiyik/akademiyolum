@@ -20,10 +20,26 @@
  * FEN bölümündeki iki katmanlılık ayırt edici: doçentlikte (1A-1B)'den en az
  * 190 VE (1A-1G)'den en az 230 isteniyor. İkisi ayrı düğüm.
  *
- * ALAN EŞLEMESİ YALNIZCA BÖLÜM BAŞLIKLARINDA ADI GEÇENLERLE SINIRLI TUTULDU.
- * Yönerge Gazi'deki gibi bir fakülte→grup tablosu vermiyor; eğitim, filoloji,
- * hukuk, ilahiyat, mimarlık, ziraat ve spor alanlarının hangi bölüme tabi
- * olduğu belgeden okunamıyor, bu yüzden eşik girilmedi.
+ * ALAN EŞLEMESİ ÜÇ BÖLÜMÜN ZORUNLU SONUCU. Yönerge Gazi'deki gibi bir
+ * fakülte→grup tablosu vermiyor ama BÖLÜM SAYISI ÜÇ: on iki temel alanın her
+ * biri bunlardan birine düşmek zorunda. Eğitim, filoloji, hukuk, ilahiyat ve
+ * spor Sosyal Bilimler'e, ziraat Fen-Mühendislik-Sağlık'a bağlandı — Siirt
+ * dosyasındaki fen-sosyal ayrımıyla aynı akıl yürütme. Belge bu okumayı iki
+ * yerden doğruluyor:
+ *
+ *   IV/b, "Sosyal Bilimler alanından başvuru yapabilecek bölümler" listesinde
+ *       SPOR BİLİMLERİ FAKÜLTESİ sayılıyor.
+ *   I/ı, "HUKUK TEMEL ALANI için" ayrı bir monografi koşulu getiriyor; yani
+ *       hukuk adayı başvurabiliyor ve Güzel Sanatlar ya da Fen bölümüne ait
+ *       olamayacağına göre Sosyal Bilimler ölçütlerine tabi.
+ *
+ * MİMARLIK GİRİLMEDİ: Ankara Üniversitesi'nde mimarlık fakültesi yok, yönerge
+ * de bu alandan hiç söz etmiyor. Eşik uydurmak yerine kapsam dışı bırakıldı.
+ *
+ * HUKUKUN EK KOŞULU (md. I/ı): tek yazarlı monografik bir çalışma; telafisi
+ * Q1-Q2 dergilerde iki tek yazarlı özgün makale. Profesörlükte bu çalışmanın
+ * doçentlik sonrası olması isteniyor. Monografi kaydı kitap kaleminden
+ * ayrılamadığı için koşul telafi dalıyla birlikte yazıldı.
  *
  * SANATSAL ETKİNLİK bölümü girildi; Güzel Sanatlar barajı makale, kitap ve
  * sanatsal etkinlik puanlarının toplamından hesaplanıyor.
@@ -63,6 +79,32 @@ $baslicaYazar = fn (?array $donem = null): array => Kalip::adet(
     'Ya da: en az 4 makale, ikisinde başlıca yazar', ['1A-1B'], 2, 'baslica', donem: $donem,
 )];
 
+/** Üç bölümün temel alan karşılıkları (bkz. dosya başı). */
+$FEN = ['fen', 'muhendislik', 'saglik', 'ziraat'];
+$SOSYAL = ['sosyal', 'egitim', 'filoloji', 'ilahiyat', 'spor'];
+
+$SOSYAL_NOTU = ' Yönerge üç alan bölümü tanıyor: Fen-Mühendislik-Sağlık, Sosyal Bilimler ve '
+    .'Güzel Sanatlar. Eğitim, filoloji, hukuk, ilahiyat ve spor bilimleri bu üçlü içinde '
+    .'Sosyal Bilimler ölçütlerine tabi; yönerge spor bilimleri fakültesini bu kapsamda '
+    .'açıkça sayıyor ve hukuk temel alanına ayrı bir ek koşul getiriyor.';
+
+/**
+ * Md. I/ı: Hukuk temel alanının monografi koşulu ve Q1-Q2 telafisi.
+ *
+ * Profesörlükte çalışmanın doçentlik unvanından sonra yayımlanmış olması
+ * isteniyor; doçentlik ve dr. öğr. üyeliğinde dönem kısıtı yok.
+ *
+ * @param  array<string, mixed>|null  $donem
+ * @return array<string, mixed>
+ */
+$hukukMonografi = fn (?array $donem = null): array => Kalip::adet(
+    'Başvurduğunuz alanla ilgili tek yazarlı monografik bir çalışma', ['MONOGRAFI'], 1,
+    'tek', donem: $donem, madde: 'Madde I/ı',
+) + ['telafi' => Kalip::adet(
+    'Ya da: Q1 veya Q2 dergilerde iki tek yazarlı özgün makale', ['1A-Q1-Q2'], 2,
+    'tek', donem: $donem, madde: 'Madde I/ı',
+)];
+
 return [
     // ══════════════ FEN, MÜHENDİSLİK ve SAĞLIK BİLİMLERİ ══════════════
     [
@@ -70,7 +112,7 @@ return [
         'aday_notu' => 'İki katmanlı baraj var: dar makale kümesinden (1A-1E) en az 50, tüm makale kalemlerinden (1A-1G) en az 90 puan.',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
-        'alan' => ['fen', 'muhendislik', 'saglik'],
+        'alan' => $FEN,
         'cetvel' => 'ankara-2023',
         'notlar' => 'FEN/MÜH/SAĞLIK, Dr. Öğr. Üyesi. Zorunlu puan (1A-1E) en az 50; bölümden toplam (1A-1G) en az 90. Ek koşul a) (1A-1B) makalelerinden en az 2, biri son iki yılda.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Fen / Mühendislik / Sağlık', [
@@ -86,7 +128,7 @@ return [
         'aday_notu' => 'Başlıca yazarlık koşulu telafili: üç yayında başlıca yazar olamıyorsanız, dördünün ikisinde başlıca yazar olmak yeterli.',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'docentlik',
-        'alan' => ['fen', 'muhendislik', 'saglik'],
+        'alan' => $FEN,
         'cetvel' => 'ankara-2023',
         'notlar' => 'FEN/MÜH/SAĞLIK, Doçent. Zorunlu puan (1A-1B) en az 190; bölümden toplam (1A-1G) en az 230. Ek koşul a) başlıca yazar olduğu en az 3 yayın.',
         'sart' => Kalip::ve('Doçent — Fen / Mühendislik / Sağlık', [
@@ -100,7 +142,7 @@ return [
         'aday_notu' => 'Zorunlu 300 puanın en az 190\'ı doçentlik unvanından sonra kazanılmış olmalı.',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'profesorluk',
-        'alan' => ['fen', 'muhendislik', 'saglik'],
+        'alan' => $FEN,
         'cetvel' => 'ankara-2023',
         'notlar' => 'FEN/MÜH/SAĞLIK, Profesör. Zorunlu puan (1A-1C) en az 300, en az 190 puanı doçentlik unvanı sonrası (1A-1B). Bölümden toplam (1A-1G) en az 450.',
         'sart' => Kalip::ve('Profesör — Fen / Mühendislik / Sağlık', [
@@ -117,7 +159,7 @@ return [
         'aday_notu' => 'Sosyal Bilimlerde tek baraj var ve tüm makale kalemleri sayılıyor.',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
-        'alan' => ['sosyal'],
+        'alan' => $SOSYAL,
         'cetvel' => 'ankara-2023',
         'notlar' => 'SOSYAL BİLİMLER, Dr. Öğr. Üyesi. (1A-1G) faaliyetlerinden en az 100 puan.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sosyal Bilimler', [
@@ -129,7 +171,7 @@ return [
         'anahtar' => 'ankara-docent-sosyal',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'docentlik',
-        'alan' => ['sosyal'],
+        'alan' => $SOSYAL,
         'cetvel' => 'ankara-2023',
         'notlar' => 'SOSYAL BİLİMLER, Doçent. (1A-1G) faaliyetlerinden en az 250 puan.',
         'sart' => Kalip::ve('Doçent — Sosyal Bilimler', [
@@ -141,12 +183,70 @@ return [
         'aday_notu' => 'Zorunlu 370 puanın en az 210\'u doçentlik unvanından sonra kazanılmış olmalı.',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'profesorluk',
-        'alan' => ['sosyal'],
+        'alan' => $SOSYAL,
         'cetvel' => 'ankara-2023',
         'notlar' => 'SOSYAL BİLİMLER, Profesör. (1A-1G) faaliyetlerinden en az 370 puan, en az 210 puanı doçentlik unvanı sonrası.',
         'sart' => Kalip::ve('Profesör — Sosyal Bilimler', [
             Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 370 puan', ['1A-1G'], 370, madde: 'Bölüm 1 · 1A-1G'),
             Kalip::puanDan('Bunun en az 210 puanı doçentlik sonrası olmalı', ['1A-1G'], 210, Kalip::DOCENTLIK_SONRASI),
+        ]),
+    ],
+
+    // ══════════════════════ HUKUK ══════════════════════
+    // Sosyal Bilimler barajlarının aynısı + md. I/ı'nın monografi koşulu.
+    [
+        'anahtar' => 'ankara-dr-hukuk',
+        'aday_notu' => 'Hukukta Sosyal Bilimler barajı geçerli ama yönerge BİR EK KOŞUL daha '
+            .'koyuyor: alanınızla ilgili tek yazarlı monografik bir çalışma. Bunun yerine Q1 ya '
+            .'da Q2 dergilerde iki tek yazarlı özgün makale de kabul ediliyor. Monografi olarak yalnız kitap '
+            .'YAZARLIĞI sayılıyor; kitap bölümü ve çeviri bu koşulu karşılamıyor.'.$SOSYAL_NOTU,
+        'universite' => 'Ankara Üniversitesi',
+        'kadro' => 'dr_ogr_uyesi',
+        'alan' => ['hukuk'],
+        'cetvel' => 'ankara-2023',
+        'notlar' => 'SOSYAL BİLİMLER, Dr. Öğr. Üyesi. (1A-1G) faaliyetlerinden en az 100 puan. '
+            .'MADDE I/ı: hukuk temel alanı için tek yazarlı monografik çalışma; telafisi Q1-Q2 '
+            .'dergilerde iki tek yazarlı özgün makale.',
+        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Hukuk', [
+            Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 100 puan', ['1A-1G'], 100, madde: 'Bölüm 1 · 1A-1G'),
+            $hukukMonografi(),
+            $yurtDisi(),
+        ]),
+    ],
+    [
+        'anahtar' => 'ankara-docent-hukuk',
+        'aday_notu' => 'Hukukta Sosyal Bilimler barajı geçerli ama yönerge BİR EK KOŞUL daha '
+            .'koyuyor: alanınızla ilgili tek yazarlı monografik bir çalışma. Bunun yerine Q1 ya '
+            .'da Q2 dergilerde iki tek yazarlı özgün makale de kabul ediliyor.'.$SOSYAL_NOTU,
+        'universite' => 'Ankara Üniversitesi',
+        'kadro' => 'docentlik',
+        'alan' => ['hukuk'],
+        'cetvel' => 'ankara-2023',
+        'notlar' => 'SOSYAL BİLİMLER, Doçent. (1A-1G) faaliyetlerinden en az 250 puan. '
+            .'MADDE I/ı: tek yazarlı monografik çalışma; telafisi Q1-Q2 dergilerde iki tek '
+            .'yazarlı özgün makale.',
+        'sart' => Kalip::ve('Doçent — Hukuk', [
+            Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 250 puan', ['1A-1G'], 250, madde: 'Bölüm 1 · 1A-1G'),
+            $hukukMonografi(),
+        ]),
+    ],
+    [
+        'anahtar' => 'ankara-profesor-hukuk',
+        'aday_notu' => 'Zorunlu 370 puanın en az 210\'u doçentlik unvanından sonra kazanılmış '
+            .'olmalı. Hukukta bir EK KOŞUL daha var: alanınızla ilgili tek yazarlı monografik '
+            .'bir çalışma ya da Q1-Q2 dergilerde iki tek yazarlı özgün makale. Profesörlükte '
+            .'bu çalışmanın DOÇENTLİK SONRASI yayımlanmış olması gerekiyor.'.$SOSYAL_NOTU,
+        'universite' => 'Ankara Üniversitesi',
+        'kadro' => 'profesorluk',
+        'alan' => ['hukuk'],
+        'cetvel' => 'ankara-2023',
+        'notlar' => 'SOSYAL BİLİMLER, Profesör. (1A-1G) faaliyetlerinden en az 370 puan, en az '
+            .'210 puanı doçentlik unvanı sonrası. MADDE I/ı: monografi ya da Q1-Q2 telafisi, '
+            .'doçentlik unvanından sonra yayımlanmış olmalı.',
+        'sart' => Kalip::ve('Profesör — Hukuk', [
+            Kalip::puanDan('WoS, Scopus, uluslararası indeksli ve TR-Dizin dergilerindeki makalelerinizden en az 370 puan', ['1A-1G'], 370, madde: 'Bölüm 1 · 1A-1G'),
+            Kalip::puanDan('Bunun en az 210 puanı doçentlik sonrası olmalı', ['1A-1G'], 210, Kalip::DOCENTLIK_SONRASI),
+            $hukukMonografi(Kalip::DOCENTLIK_SONRASI),
         ]),
     ],
 

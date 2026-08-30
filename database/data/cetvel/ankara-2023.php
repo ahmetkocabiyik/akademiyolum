@@ -132,11 +132,17 @@ return [
     'gruplar' => [
         // Koşulların birebir kullandığı atıflar.
         '1A' => ['1A*'],
+        // Md. I/ı: Hukuk temel alanının monografi koşulunun telafisi "Q1, Q2
+        // kapsamındaki dergilerde iki adet tek yazarlı özgün makale".
+        '1A-Q1-Q2' => ['1Aa', '1Ab'],
         '1A-1B' => ['1A*', '1B*'],
         '1A-1C' => ['1A*', '1B*', '1C*'],
         '1A-1E' => ['1A*', '1B*', '1C*', '1Ea', '1Eç'],
         '1A-1G' => ['1*'],
         'KITAP' => ['2*'],
+        // Md. I/ı "monografik çalışma" diyor: kitap bölümü ve çeviri değil,
+        // yalnız kitap/monografi YAZARLIĞI satırları.
+        'MONOGRAFI' => ['2Aa', '2Ba'],
         'SANATSAL' => ['3*'],
         'PROJE' => ['5*'],
         'PROJE_YURUTUCU' => ['5a', '5ç', '5f', '5h'],
