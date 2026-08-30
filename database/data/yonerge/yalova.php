@@ -87,7 +87,7 @@ $UAK = fn (): array => Kalip::beyan(
 );
 
 $DISARIDAN = 'Yükseköğretim kurumları dışından başvuruyorsanız yönerge ek olarak '
-    .'9. maddedeki eğitim-öğretim faaliyetlerinden en az 6 puan istiyor; sistem hâlen bir '
+    .'eğitim-öğretim faaliyetlerinden en az 6 puan istiyor; sistem hâlen bir '
     .'yükseköğretim kurumunda olup olmadığınızı bilmediği için bu koşul hesaba katılmadı.';
 
 /**
@@ -115,22 +115,44 @@ $herBirinden = function (array $bolumler, ?array $donem, string $madde): array {
  * @param  array<string, mixed>|null  $donem
  * @return array<string, mixed>
  */
-$besMadde = fn (?array $donem, string $madde): array => Kalip::kIle(
-    'Değerlendirme puan tablosunun en az BEŞ ayrı maddesinden faaliyetiniz olmalı',
-    5,
-    array_map(
-        fn (string $g): array => Kalip::adet("{$g}. maddeden en az 1 faaliyet", [$g], 1, donem: $donem, madde: $madde),
-        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
-    ),
-);
+/**
+ * Puan tablosunun on bir bölümünün adaya gösterilecek adları.
+ *
+ * @var array<string, string>
+ */
+$BOLUM_ADI = [
+    '1' => 'Uluslararası makale',
+    '2' => 'Ulusal makale',
+    '3' => 'Tezden üretilmiş yayın',
+    '4' => 'Kitap',
+    '5' => 'Atıf',
+    '6' => 'Lisansüstü tez danışmanlığı',
+    '7' => 'Araştırma projesi',
+    '8' => 'Bildiri',
+    '9' => 'Eğitim-öğretim',
+    '10' => 'Patent',
+    '11' => 'Ödül',
+];
+
+$besMadde = function (?array $donem, string $madde) use ($BOLUM_ADI): array {
+    return Kalip::kIle(
+        'Değerlendirme puan tablosunun en az BEŞ ayrı bölümünden faaliyetiniz olmalı',
+        5,
+        array_map(
+            fn (string $g): array => Kalip::adet("{$BOLUM_ADI[$g]} kalemlerinizden en az 1 faaliyet", [$g], 1, donem: $donem, madde: $madde),
+            array_keys($BOLUM_ADI),
+        ),
+    );
+};
 
 $esikler = [];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // EK-A · SOSYAL, BEŞERÎ VE İDARİ BİLİMLER
 // ═══════════════════════════════════════════════════════════════════════════
-$sosyalNotu = 'EK-A tablosu kullanılıyor. Doktor öğretim üyeliği paragrafındaki '
-    .'"1., 2. veya 3. madde kapsamında birer makale olmak şartıyla ile en az 2 yayın" '
+$sosyalNotu = 'Sosyal, beşerî ve idari bilimler tablosu kullanılıyor. Doktor öğretim üyeliği paragrafındaki '
+    .'"uluslararası makale, ulusal makale ya da tez yayınından birer makale olmak '
+    .'"şartıyla ile en az 2 yayın" '
     .'cümlesi kaynakta bozuk; ölçülebilir olan "en az 2 yayın" koşulu yazıldı.';
 
 $esikler[] = [
@@ -151,7 +173,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-sosyal-dr-yeniden',
-    'aday_notu' => 'EK-A tablosu kullanılıyor. Yeniden atanmada dönem son atama tarihinizden başlıyor.',
+    'aday_notu' => 'Sosyal, beşerî ve idari bilimler tablosu kullanılıyor. Yeniden atanmada dönem son atama tarihinizden başlıyor.',
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi_yeniden',
     'alan' => ['sosyal'],
@@ -166,7 +188,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-sosyal-docent',
-    'aday_notu' => 'EK-A tablosu kullanılıyor. '.$DISARIDAN,
+    'aday_notu' => 'Sosyal, beşerî ve idari bilimler tablosu kullanılıyor. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'docentlik',
     'alan' => ['sosyal'],
@@ -184,7 +206,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-sosyal-profesor',
-    'aday_notu' => 'EK-A tablosu kullanılıyor. Profesörlükte puanın en az beş AYRI maddeye '
+    'aday_notu' => 'Sosyal, beşerî ve idari bilimler tablosu kullanılıyor. Profesörlükte puanın en az beş AYRI maddeye '
         .'dağılmış olması isteniyor: tek bölümden toplanan 150 puan yetmiyor. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'profesorluk',
@@ -207,7 +229,7 @@ $esikler[] = [
 // ═══════════════════════════════════════════════════════════════════════════
 $esikler[] = [
     'anahtar' => 'yalova-muhendislik-dr',
-    'aday_notu' => 'EK-B tablosu kullanılıyor. Mühendislikte SCIE/SSCI/AHCI koşulu doğrudan '
+    'aday_notu' => 'Mühendislik tablosu kullanılıyor. Mühendislikte SCIE/SSCI/AHCI koşulu doğrudan '
         .'1a bendine bağlı; tezden üretilmiş bir SCIE makalesi (3a) de kabul ediliyor. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi',
@@ -224,7 +246,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-muhendislik-dr-yeniden',
-    'aday_notu' => 'EK-B tablosu kullanılıyor. Yeniden atanmada dönem son atama tarihinizden başlıyor.',
+    'aday_notu' => 'Mühendislik tablosu kullanılıyor. Yeniden atanmada dönem son atama tarihinizden başlıyor.',
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi_yeniden',
     'alan' => ['muhendislik'],
@@ -240,7 +262,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-muhendislik-docent',
-    'aday_notu' => 'EK-B tablosu kullanılıyor. Doçentlikte SCIE/SSCI/AHCI koşulu üç yayın ve '
+    'aday_notu' => 'Mühendislik tablosu kullanılıyor. Doçentlikte SCIE/SSCI/AHCI koşulu üç yayın ve '
         .'doktora sonrası olmak zorunda. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'docentlik',
@@ -258,7 +280,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-muhendislik-profesor',
-    'aday_notu' => 'EK-B tablosu kullanılıyor. Profesörlükte puanın en az beş AYRI maddeye '
+    'aday_notu' => 'Mühendislik tablosu kullanılıyor. Profesörlükte puanın en az beş AYRI maddeye '
         .'dağılmış olması ve BAP dışı bir projede görev almış olmanız isteniyor. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'profesorluk',
@@ -289,7 +311,7 @@ $saglikDipnotlari = fn (): array => [
     Kalip::puanDan('Atıflardan en az 4 puan', ['5'], 4, madde: 'EK-C · 5. bölüm dipnotu'),
 ];
 
-$saglikNotu = 'EK-C tablosu kullanılıyor. Kadro paragrafının yanı sıra puan tablosunun kendi '
+$saglikNotu = 'Sağlık bilimleri tablosu kullanılıyor. Kadro paragrafının yanı sıra puan tablosunun kendi '
     .'dipnotları da zorunluluk getiriyor: TR Dizin makalelerinden 10 puan, tezden üretilmiş '
     .'en az 1 yayın ve atıflardan en az 4 puan. Bunlar da koşullara eklendi.';
 
@@ -404,8 +426,8 @@ $mimarlikYarisma = fn (): array => Kalip::puanDan(
 
 $esikler[] = [
     'anahtar' => 'yalova-mimarlik-dr',
-    'aday_notu' => 'EK-Ç tablosu kullanılıyor. Doktor öğretim üyeliğinde 13. bölümün '
-        .'(yarışma, proje, yazılım) asgari puan sınırı aranmıyor. '.$DISARIDAN,
+    'aday_notu' => 'Mimarlık, planlama ve tasarım tablosu kullanılıyor. Doktor öğretim üyeliğinde yarışma, proje ve '
+        .'yazılım bölümünün asgari puan sınırı aranmıyor. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi',
     'alan' => ['mimarlik'],
@@ -422,7 +444,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-mimarlik-dr-yeniden',
-    'aday_notu' => 'EK-Ç tablosu kullanılıyor. Yeniden atanmada dönem son atama tarihinizden başlıyor.',
+    'aday_notu' => 'Mimarlık, planlama ve tasarım tablosu kullanılıyor. Yeniden atanmada dönem son atama tarihinizden başlıyor.',
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi_yeniden',
     'alan' => ['mimarlik'],
@@ -437,7 +459,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-mimarlik-docent',
-    'aday_notu' => 'EK-Ç tablosu kullanılıyor. Doçentlikte TEK YAZARLI bir uluslararası makale '
+    'aday_notu' => 'Mimarlık, planlama ve tasarım tablosu kullanılıyor. Doçentlikte TEK YAZARLI bir uluslararası makale '
         .'zorunlu; ortak yazarlı yayınlar bu koşulu karşılamıyor. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'docentlik',
@@ -457,8 +479,8 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-mimarlik-profesor',
-    'aday_notu' => 'EK-Ç tablosu kullanılıyor. Profesörlükte ALTI ayrı bölümün her birinden en '
-        .'az bir faaliyet ve 1. maddeden tek başına 50 puan isteniyor. '.$DISARIDAN,
+    'aday_notu' => 'Mimarlık, planlama ve tasarım tablosu kullanılıyor. Profesörlükte ALTI ayrı bölümün her birinden en '
+        .'az bir faaliyet ve yalnız makalelerden 50 puan isteniyor. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'profesorluk',
     'alan' => ['mimarlik'],
@@ -486,12 +508,12 @@ $esikler[] = [
 // ═══════════════════════════════════════════════════════════════════════════
 // EK-D · GÜZEL SANATLAR
 // ═══════════════════════════════════════════════════════════════════════════
-$gsNotu = 'EK-D tablosu kullanılıyor. Güzel Sanatlar\'da puanın çoğu 13. bölümden '
-    .'(sanatsal faaliyetler) gelmek zorunda.';
+$gsNotu = 'Güzel sanatlar tablosu kullanılıyor. Güzel Sanatlar\'da puanın çoğu sanatsal '
+    .'faaliyetlerden gelmek zorunda.';
 
 $esikler[] = [
     'anahtar' => 'yalova-guzel-sanatlar-dr',
-    'aday_notu' => $gsNotu.' İlk başvuruda 13. bölümden 35, bilimsel bölümlerden 15 puan '
+    'aday_notu' => $gsNotu.' İlk başvuruda sanatsal faaliyetlerden 35, bilimsel bölümlerden 15 puan '
         .'isteniyor; toplam baraj yalnızca 50 puan.',
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi',
@@ -543,7 +565,7 @@ $gsUstKadro = fn (array $DOKTORA): array => [
 
 $esikler[] = [
     'anahtar' => 'yalova-guzel-sanatlar-docent',
-    'aday_notu' => $gsNotu.' Doçentlikte 13. bölümden 80 puan zorunlu. '
+    'aday_notu' => $gsNotu.' Doçentlikte sanatsal faaliyetlerden 80 puan zorunlu. '
         .'Yükseköğretim kurumları dışından başvuruyorsanız yönerge ayrıca son beş yılda bir '
         .'eğitim-öğretim döneminde ders vermiş olmanızı istiyor; bu koşul hesaba katılmadı.',
     'universite' => 'Yalova Üniversitesi',
@@ -579,7 +601,7 @@ $esikler[] = [
 // ═══════════════════════════════════════════════════════════════════════════
 $esikler[] = [
     'anahtar' => 'yalova-spor-dr',
-    'aday_notu' => 'EK-E tablosu kullanılıyor. '.$DISARIDAN,
+    'aday_notu' => 'Spor bilimleri tablosu kullanılıyor. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi',
     'alan' => ['spor'],
@@ -595,7 +617,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-spor-dr-yeniden',
-    'aday_notu' => 'EK-E tablosu kullanılıyor. Yeniden atanmada dönem son atama tarihinizden başlıyor.',
+    'aday_notu' => 'Spor bilimleri tablosu kullanılıyor. Yeniden atanmada dönem son atama tarihinizden başlıyor.',
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi_yeniden',
     'alan' => ['spor'],
@@ -610,7 +632,7 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-spor-docent',
-    'aday_notu' => 'EK-E tablosu kullanılıyor. Doçentlikte 20 puanlık uluslararası makale '
+    'aday_notu' => 'Spor bilimleri tablosu kullanılıyor. Doçentlikte 20 puanlık uluslararası makale '
         .'koşulunun BAŞLICA YAZAR olduğunuz yayınlardan gelmesi gerekiyor. '.$DISARIDAN,
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'docentlik',
@@ -629,9 +651,10 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'yalova-spor-profesor',
-    'aday_notu' => 'EK-E tablosu kullanılıyor. Profesörlükte BEŞ ayrı bölümün her birinden en '
+    'aday_notu' => 'Spor bilimleri tablosu kullanılıyor. Profesörlükte BEŞ ayrı bölümün her birinden en '
         .'az bir faaliyet isteniyor. Yükseköğretim kurumları dışından başvuruyorsanız yönerge '
-        .'ek olarak 6. ve 9. maddelerden altışar puan istiyor; bu koşul hesaba katılmadı.',
+        .'ek olarak lisansüstü tez danışmanlığı ile eğitim-öğretim '
+        .'kalemlerinden altışar puan istiyor; bu koşul hesaba katılmadı.',
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'profesorluk',
     'alan' => ['spor'],

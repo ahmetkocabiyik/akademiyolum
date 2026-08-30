@@ -105,7 +105,7 @@ $esikler[] = [
     'alan' => $TUM_ALANLAR,
     'cetvel' => $CETVEL,
     'notlar' => 'MADDE 4: yeniden atanma için Akademik Personel Performans Ölçme-Değerlendirme '
-        .'Yönergesindeki A grubu faaliyetlerden yıllık ortalama 40 puan. O yönerge elimizde '
+        .'Yönergesindeki akademik faaliyetlerden yıllık ortalama 40 puan. O yönerge elimizde '
         .'olmadığı için koşul hesaplanamıyor.',
     'aday_notu' => 'Doktor öğretim üyesi kadrosuna YENİDEN ATANMA. Yönerge yıllık ortalama 40 '
         .'puanı, elimizdeki puan çizelgesinden değil, İstanbul Beykent Üniversitesi Akademik '
@@ -116,7 +116,7 @@ $esikler[] = [
         .'önce ilgili birime teslim etmeniz gerekiyor.'.$NOT_CETVEL,
     'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna yeniden atanma', [
         $DOKTORA_BEYANI,
-        Kalip::hesaplanamiyor('Akademik Personel Performans Ölçme-Değerlendirme Yönergesi kapsamındaki A grubu faaliyetlerden yıllık ortalama en az 40 puan almak', 'MADDE 4'),
+        Kalip::hesaplanamiyor('Akademik Personel Performans Ölçme-Değerlendirme Yönergesi kapsamındaki akademik faaliyetlerden yıllık ortalama en az 40 puan almak', 'MADDE 4'),
         Kalip::beyan('Başvuru dosyasını görev süresinin bitiminden en az iki ay önce ilgili birim yönetimine teslim etmek', 'MADDE 4'),
     ]),
 ];

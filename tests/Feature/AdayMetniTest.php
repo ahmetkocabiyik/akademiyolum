@@ -36,6 +36,13 @@ $KOD_DESENI = '/('
     .'|\b\d{1,2}(-\d{1,2})? numaralı madde'
     .'|\b\d[.\/][a-zçğıöşü] bend'
     .'|\bTABLO [A-Z]\b'
+    // Roma rakamlı ve harfli ekler (Ek-I, EK-II, EK-A, EK-Ç), sıra sayılı
+    // madde atıfları ("20. maddesi", "5.2 maddesi") ve harfle anılan kümeler
+    // ("A grubu", "B tablosu"). Sıra noktası ZORUNLU: "3 madde belgelemek"
+    // düz Türkçe, kod değil.
+    .'|\b[Ee][Kk][-\s]?(?:[IVX]{1,4}|[A-DÇ])\b'
+    .'|\b\d+(?:\.\d+)?\.\s*madde'
+    .'|\b[A-ZÇĞİÖŞÜ] (?:grubu|tablosu|çizelgesi|listesi)\b'
     .')/u';
 
 /**
@@ -71,8 +78,17 @@ test('aday metinlerinde yönerge kodu yok', function () use ($KOD_DESENI) {
         }
 
         foreach ($metinler as $metin) {
-            if (preg_match($KOD_DESENI, $metin, $eslesme)) {
-                $sizinti[] = "{$esik['universite']} ({$esik['anahtar']}): \"{$eslesme[1]}\" — ".mb_substr($metin, 0, 110);
+            preg_match_all($KOD_DESENI, $metin, $eslesmeler);
+
+            foreach ($eslesmeler[1] as $eslesme) {
+                // KANUN madde numaraları KOD DEĞİL: 2547 sayılı Yükseköğretim
+                // Kanunu'nun 26. maddesi ya da 657'nin 48. maddesi adayın
+                // zaten tanıdığı atıflar. "... sayılı" ibaresi bunları ayırıyor.
+                if (preg_match('/sayılı[^.]{0,60}'.preg_quote($eslesme, '/').'/u', $metin)) {
+                    continue;
+                }
+
+                $sizinti[] = "{$esik['universite']} ({$esik['anahtar']}): \"{$eslesme}\" — ".mb_substr($metin, 0, 110);
             }
         }
     }

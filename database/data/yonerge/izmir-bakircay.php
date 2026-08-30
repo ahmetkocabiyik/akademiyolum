@@ -114,7 +114,7 @@ foreach ([
             Kalip::veya('Eser ve proje koşulu', [
                 Kalip::ve('İki eser ve bir proje', [
                     Kalip::adet('Puan Tablosunun '.$g['yenidenAd'].' en az 2 eser', [$g['yeniden']], 2, donem: Kalip::SON_ATAMA_SONRASI, madde: 'MADDE 14/3'),
-                    Kalip::adet('7. madde kapsamında en az 1 projede yürütücü, koordinatör, araştırmacı ya da danışman olarak görev almak', ['PROJE'], 1, donem: Kalip::SON_ATAMA_SONRASI, madde: 'MADDE 14/3-c'),
+                    Kalip::adet('En az 1 araştırma projesinde yürütücü, koordinatör, araştırmacı ya da danışman olarak görev almak', ['PROJE'], 1, donem: Kalip::SON_ATAMA_SONRASI, madde: 'MADDE 14/3-c'),
                 ]),
                 Kalip::adet('Proje koşulu sağlanmıyorsa Puan Tablosunun '.$g['yenidenAd'].' en az 3 eser', [$g['yeniden']], 3, donem: Kalip::SON_ATAMA_SONRASI, madde: 'MADDE 14/3-c'),
             ]),

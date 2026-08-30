@@ -42,7 +42,7 @@ $DIL_NOTU = 'Yabancı dil koşulu programın diline bağlı: öğretim dili kıs
 $PUAN_NOTU = 'Atıf satırları (atıf sayısının 0,5 ve 0,3 katı) ile ders satırları '
     .'(dönemlik ders saatiyle çarpılan katsayılar) ondalıklı olduğu için araca girilemedi; '
     .'atıflarınız ve ders kayıtlarınız toplam puana katkı vermiyor. Lisansüstü tezinizden '
-    .'üretilmiş yayınlar için ayrı ve düşük olan 4. madde de girilemediğinden bu yayınlar tam '
+    .'üretilmiş yayınlar için ayrı ve düşük olan satır da girilemediğinden bu yayınlar tam '
     .'satırlardan puanlanıyor.';
 
 return [

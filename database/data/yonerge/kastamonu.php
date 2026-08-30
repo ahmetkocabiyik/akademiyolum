@@ -127,11 +127,11 @@ $drYenidenOrtak = fn (int $toplam) => [
         ['1abc-2a-3abcg'], 2, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Ek özel şartlar · Dr. yeniden atama',
     ),
     Kalip::veya('Kitap ya da proje koşulu', [
-        Kalip::adet('Kitap bölümündeki (4. madde) bentlerden birinde yayın yapmış olmak', ['4'], 1, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Ek özel şartlar · Dr. yeniden atama'),
+        Kalip::adet('Kitap bölümündeki satırlardan birinde yayın yapmış olmak', ['4'], 1, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Ek özel şartlar · Dr. yeniden atama'),
         Kalip::adet('Ya da araştırma projelerinden birinde koordinatör, yürütücü veya araştırmacı olmak', ['7-PY-YA'], 1, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Ek özel şartlar · Dr. yeniden atama'),
         Kalip::adet('Ya da bu projelerden ikisinde danışmanlık yapmak', ['7-PY-D'], 2, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Ek özel şartlar · Dr. yeniden atama'),
     ]),
-    Kalip::toplam($toplam, Kalip::SON_ATAMA_SONRASI, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+    Kalip::toplam($toplam, Kalip::SON_ATAMA_SONRASI),
 ];
 
 $esikler = [];
@@ -152,7 +152,7 @@ $setEsikleri = function (string $anahtar, array $alanlar, ?string $birim, string
                 .'Cetvelinin 1-13\'üncü maddelerinden toplam en az 400 puan gerekiyor.'],
         'docentlik' => ['ad' => 'Doçent kadrosuna yükseltilme ve atanma', 'on' => $docentOn,
             'not' => 'Doktora ya da sanatta yeterlik unvanınızı aldıktan sonraki çalışmalarınız '
-                .'sayılıyor. Puanlama Cetvelinin 1-13\'üncü maddelerinden toplam en az 300 puan '
+                .'sayılıyor. Puanlama Cetvelinin tamamından toplam en az 300 puan '
                 .'gerekiyor.'],
         'dr_ogr_uyesi' => ['ad' => 'İlk defa doktor öğretim üyeliği kadrosuna atanma', 'on' => $drOn,
             'not' => 'İlk atama üç yıl için yapılıyor.'],
@@ -202,24 +202,24 @@ $esikler = array_merge($esikler, $setEsikleri(
                     Kalip::adet('Bunlardan en az 1 tanesi Q1, Q2 veya Q3 kapsamında olmalı', ['1a-Q123'], 1, donem: $DOCENTLIK, madde: 'Ek özel şartlar · Profesör'),
                 ]),
             ]),
-            Kalip::puanDan('Puanlama Cetvelinin 1-8. maddelerinden en az 250 puan', ['1-8'], 250, $DOCENTLIK, madde: 'Ek özel şartlar · Profesör'),
+            Kalip::puanDan('Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri kalemlerinizden en az 250 puan', ['1-8'], 250, $DOCENTLIK, madde: 'Ek özel şartlar · Profesör'),
             $proje('7-P-YA', '7-P-D', $DOCENTLIK, 'Ek özel şartlar · Profesör'),
             $m14(7),
-            Kalip::toplam(400, $DOCENTLIK, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+            Kalip::toplam(400, $DOCENTLIK),
         ],
         'docentlik' => [
-            Kalip::puanDan('Puanlama Cetvelinin 1-8. maddelerinden en az 180 puan', ['1-8'], 180, $DOKTORA, madde: 'Ek özel şartlar · Doçent'),
+            Kalip::puanDan('Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri kalemlerinizden en az 180 puan', ['1-8'], 180, $DOKTORA, madde: 'Ek özel şartlar · Doçent'),
             $proje('7-P-YA', '7-P-D', $DOKTORA, 'Ek özel şartlar · Doçent'),
             $m14(4),
-            Kalip::toplam(300, $DOKTORA, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+            Kalip::toplam(300, $DOKTORA),
         ],
         'dr_ogr_uyesi' => [
             Kalip::adet('SCI-Expanded ve SSCI dergilerinde (tez yayınları dahil) en az 2 makale', ['1a-3a'], 2, madde: 'Ek özel şartlar · Dr. ilk atama'),
             Kalip::adet('1/b-c, 2/a veya 3/b-c-g bendindeki dergilerde en az 2 makale', ['1bc-2a-3bcg'], 2, madde: 'Ek özel şartlar · Dr. ilk atama'),
-            Kalip::puanDan('Puanlama Cetvelinin 1-8. maddelerinden en az 125 puan', ['1-8'], 125, madde: 'Ek özel şartlar · Dr. ilk atama'),
+            Kalip::puanDan('Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri kalemlerinizden en az 125 puan', ['1-8'], 125, madde: 'Ek özel şartlar · Dr. ilk atama'),
             Kalip::adet('Araştırma projelerinden en az 1 tanesinde koordinatör, yürütücü ya da araştırmacı olmak', ['7-PH-YA'], 1, madde: 'Ek özel şartlar · Dr. ilk atama'),
             $m14(3),
-            Kalip::toplam(150, null, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+            Kalip::toplam(150, null),
         ],
         'dr_ogr_uyesi_yeniden' => array_merge($drYenidenOrtak(120), [$m14(3)]),
     ],
@@ -233,8 +233,8 @@ $egitimProfesorMakale = Kalip::veya('Makale koşulu', [
     Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 1 makale', ['1a'], 1, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
     Kalip::adet('Ya da 1/b-c bentlerindeki dergilerde en az 3 makale', ['1bc'], 3, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
     Kalip::adet('Ya da TR Dizin dergilerinde en az 5 makale', ['2a'], 5, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
-    Kalip::ve('Ya da 1/b-c\'den 2 ve 2/a\'dan 3 olmak üzere toplam 5 makale', [
-        Kalip::adet('1/b-c bentlerinde en az 2 makale', ['1bc'], 2, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
+    Kalip::ve('Ya da AHCI-ESCI-Scopus dergilerinde 2 ve TR Dizin dergilerinde 3 olmak üzere toplam 5 makale', [
+        Kalip::adet('AHCI, ESCI ve Scopus dergilerinde en az 2 makale', ['1bc'], 2, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
         Kalip::adet('TR Dizin dergilerinde en az 3 makale', ['2a'], 3, donem: $DOCENTLIK, madde: 'Ek-2 · Profesör'),
     ]),
 ]);
@@ -248,23 +248,23 @@ $drIlkMakaleSosyal = fn (string $md): array => Kalip::veya('Makale koşulu', [
 $esikler = array_merge($esikler, $setEsikleri('egitim', ['egitim'], null, 'Eğitim Fakültesi', [
     'profesorluk' => [
         $egitimProfesorMakale,
-        Kalip::puanDan('Puanlama Cetvelinin 1-8. maddelerinden en az 250 puan', ['1-8'], 250, $DOCENTLIK, madde: 'Ek-2 · Profesör'),
+        Kalip::puanDan('Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri kalemlerinizden en az 250 puan', ['1-8'], 250, $DOCENTLIK, madde: 'Ek-2 · Profesör'),
         $proje('7-P-YA', '7-P-D', $DOCENTLIK, 'Ek-2 · Profesör'),
         $m14(7),
-        Kalip::toplam(400, $DOCENTLIK, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+        Kalip::toplam(400, $DOCENTLIK),
     ],
     'docentlik' => [
-        Kalip::puanDan('Puanlama Cetvelinin 1-8. maddelerinden en az 180 puan', ['1-8'], 180, $DOKTORA, madde: 'Ek-2 · Doçent'),
+        Kalip::puanDan('Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri kalemlerinizden en az 180 puan', ['1-8'], 180, $DOKTORA, madde: 'Ek-2 · Doçent'),
         $proje('7-P-YA', '7-P-D', $DOKTORA, 'Ek-2 · Doçent'),
         $m14(4),
-        Kalip::toplam(300, $DOKTORA, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+        Kalip::toplam(300, $DOKTORA),
     ],
     'dr_ogr_uyesi' => [
         $drIlkMakaleSosyal('Ek-2 · Dr. ilk atama'),
-        Kalip::puanDan('Puanlama Cetvelinin 1-8. maddelerinden en az 100 puan', ['1-8'], 100, madde: 'Ek-2 · Dr. ilk atama'),
+        Kalip::puanDan('Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri kalemlerinizden en az 100 puan', ['1-8'], 100, madde: 'Ek-2 · Dr. ilk atama'),
         Kalip::adet('Araştırma projelerinden en az 1 tanesinde koordinatör, yürütücü ya da araştırmacı olmak', ['7-PH-YA'], 1, madde: 'Ek-2 · Dr. ilk atama'),
         $m14(3),
-        Kalip::toplam(125, null, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+        Kalip::toplam(125, null),
     ],
     'dr_ogr_uyesi_yeniden' => array_merge($drYenidenOrtak(120), [$m14(3)]),
 ]));
@@ -280,17 +280,17 @@ $esikler = array_merge($esikler, $setEsikleri('sanat', ['guzel_sanatlar'], null,
                 Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 2 makale', ['1a'], 2, donem: $DOCENTLIK, madde: 'Ek-4 · Profesör'),
                 Kalip::adet('Ya da 1/b-c-ç-d ve 2/a-b bentlerindeki dergilerde en az 5 makale', ['1bcçd-2ab'], 5, donem: $DOCENTLIK, madde: 'Ek-4 · Profesör'),
             ]),
-            Kalip::adet('9. maddeden en az 2 sanat faaliyeti', ['9'], 2, donem: $DOCENTLIK, madde: 'Ek-4 · Profesör'),
-            Kalip::puanDan('Puanlama Cetvelinin 1-9. maddelerinden en az 250 puan', ['1-9'], 250, $DOCENTLIK, madde: 'Ek-4 · Profesör'),
+            Kalip::adet('İletişim, sanat ve spor faaliyetlerinden en az 2 etkinlik', ['9'], 2, donem: $DOCENTLIK, madde: 'Ek-4 · Profesör'),
+            Kalip::puanDan('Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri, sanat ve spor faaliyeti kalemlerinizden en az 250 puan', ['1-9'], 250, $DOCENTLIK, madde: 'Ek-4 · Profesör'),
             $proje('7-P-YA', '7-P-D', $DOCENTLIK, 'Ek-4 · Profesör'),
             $m14(7),
-            Kalip::toplam(400, $DOCENTLIK, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+            Kalip::toplam(400, $DOCENTLIK),
         ],
         'docentlik' => [
-            Kalip::puanDan('Puanlama Cetvelinin 1-9. maddelerinden en az 180 puan', ['1-9'], 180, $DOKTORA, madde: 'Ek-4 · Doçent'),
+            Kalip::puanDan('Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri, sanat ve spor faaliyeti kalemlerinizden en az 180 puan', ['1-9'], 180, $DOKTORA, madde: 'Ek-4 · Doçent'),
             $proje('7-P-YA', '7-P-D', $DOKTORA, 'Ek-4 · Doçent'),
             $m14(4),
-            Kalip::toplam(300, $DOKTORA, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+            Kalip::toplam(300, $DOKTORA),
         ],
         'dr_ogr_uyesi' => [
             Kalip::veya('Makale koşulu', [
@@ -300,11 +300,11 @@ $esikler = array_merge($esikler, $setEsikleri('sanat', ['guzel_sanatlar'], null,
                     Kalip::adet('Bu makalelerden en az 1 tanesinde tek yazar olmalısınız', ['1bcçd-2ab-3bcçgğ'], 1, yazar: 'tek', madde: 'Ek-4 · Dr. ilk atama'),
                 ]),
             ]),
-            Kalip::adet('9. maddeden en az 1 sanat faaliyeti', ['9'], 1, madde: 'Ek-4 · Dr. ilk atama'),
-            Kalip::puanDan('Puanlama Cetvelinin 1-9. maddelerinden en az 100 puan', ['1-9'], 100, madde: 'Ek-4 · Dr. ilk atama'),
+            Kalip::adet('İletişim, sanat ve spor faaliyetlerinden en az 1 etkinlik', ['9'], 1, madde: 'Ek-4 · Dr. ilk atama'),
+            Kalip::puanDan('Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri, sanat ve spor faaliyeti kalemlerinizden en az 100 puan', ['1-9'], 100, madde: 'Ek-4 · Dr. ilk atama'),
             Kalip::adet('Araştırma projelerinden en az 1 tanesinde koordinatör, yürütücü ya da araştırmacı olmak', ['7-PH-YA'], 1, madde: 'Ek-4 · Dr. ilk atama'),
             $m14(3),
-            Kalip::toplam(125, null, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+            Kalip::toplam(125, null),
         ],
         'dr_ogr_uyesi_yeniden' => [
             Kalip::adet(
@@ -312,13 +312,13 @@ $esikler = array_merge($esikler, $setEsikleri('sanat', ['guzel_sanatlar'], null,
                 ['1abcç-2ab-3abcçgğ'], 1, donem: $SON_ATAMA, madde: 'Ek-4 · Dr. yeniden atama',
             ),
             Kalip::veya('Kitap ya da proje koşulu', [
-                Kalip::adet('Kitap bölümündeki (4. madde) bentlerden birinde yayın yapmış olmak', ['4'], 1, donem: $SON_ATAMA, madde: 'Ek-4 · Dr. yeniden atama'),
+                Kalip::adet('Kitap bölümündeki satırlardan birinde yayın yapmış olmak', ['4'], 1, donem: $SON_ATAMA, madde: 'Ek-4 · Dr. yeniden atama'),
                 Kalip::adet('Ya da araştırma projelerinden birinde koordinatör, yürütücü veya araştırmacı olmak', ['7-PY-YA'], 1, donem: $SON_ATAMA, madde: 'Ek-4 · Dr. yeniden atama'),
                 Kalip::adet('Ya da bu projelerden ikisinde danışmanlık yapmak', ['7-PY-D'], 2, donem: $SON_ATAMA, madde: 'Ek-4 · Dr. yeniden atama'),
             ]),
-            Kalip::adet('Son atanma tarihinizden itibaren 9. maddeden en az 1 sanat faaliyeti', ['9'], 1, donem: $SON_ATAMA, madde: 'Ek-4 · Dr. yeniden atama'),
+            Kalip::adet('Son atanma tarihinizden itibaren iletişim, sanat ve spor faaliyetlerinden en az 1 etkinlik', ['9'], 1, donem: $SON_ATAMA, madde: 'Ek-4 · Dr. yeniden atama'),
             $m14(3),
-            Kalip::toplam(100, $SON_ATAMA, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+            Kalip::toplam(100, $SON_ATAMA),
         ],
     ]));
 
@@ -332,18 +332,28 @@ $sosyalProfesorMakale = fn (string $md): array => Kalip::veya('Makale koşulu', 
     Kalip::adet('Ya da TR Dizin dergilerinde en az 5 makale', ['2a'], 5, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
     Kalip::ve('Ya da 1/a\'dan 1 ve 1/b-c\'den 2 olmak üzere toplam 3 makale', [
         Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 1 makale', ['1a'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
-        Kalip::adet('1/b-c bentlerinde en az 2 makale', ['1bc'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
+        Kalip::adet('AHCI, ESCI ve Scopus dergilerinde en az 2 makale', ['1bc'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
     ]),
     Kalip::ve('Ya da 1/a\'dan 1, 1/b-c\'den 1 ve 2/a\'dan 3 olmak üzere toplam 5 makale', [
         Kalip::adet('SCI-Expanded ve SSCI dergilerinde en az 1 makale', ['1a'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
         Kalip::adet('1/b-c bentlerinde en az 1 makale', ['1bc'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
         Kalip::adet('TR Dizin dergilerinde en az 3 makale', ['2a'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
     ]),
-    Kalip::ve('Ya da 1/b-c\'den 2 ve 2/a\'dan 3 olmak üzere toplam 5 makale', [
-        Kalip::adet('1/b-c bentlerinde en az 2 makale', ['1bc'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
+    Kalip::ve('Ya da AHCI-ESCI-Scopus dergilerinde 2 ve TR Dizin dergilerinde 3 olmak üzere toplam 5 makale', [
+        Kalip::adet('AHCI, ESCI ve Scopus dergilerinde en az 2 makale', ['1bc'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
         Kalip::adet('TR Dizin dergilerinde en az 3 makale', ['2a'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: $md),
     ]),
 ]);
+
+/**
+ * Puan alt kümelerinin adaya gösterilecek adları.
+ *
+ * @var array<string, string>
+ */
+$ALT_GRUP_ADI = [
+    '1-8' => 'Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri',
+    '1-9' => 'Makale, tez yayını, kitap, atıf, tez danışmanlığı, proje ve bildiri, sanat ve spor faaliyeti',
+];
 
 /**
  * @param  list<string>  $alanlar
@@ -352,23 +362,23 @@ $sosyalProfesorMakale = fn (string $md): array => Kalip::veya('Makale koşulu', 
 $sosyalSeti = fn (string $anahtar, array $alanlar, ?string $birim, string $setAdi, string $altGrup, string $ekAdi): array => $setEsikleri($anahtar, $alanlar, $birim, $setAdi, [
     'profesorluk' => [
         $sosyalProfesorMakale("{$ekAdi} · Profesör"),
-        Kalip::puanDan("Puanlama Cetvelinin {$altGrup}. maddelerinden en az 250 puan", [$altGrup], 250, $DOCENTLIK, madde: "{$ekAdi} · Profesör"),
+        Kalip::puanDan("{$ALT_GRUP_ADI[$altGrup]} kalemlerinizden en az 250 puan", [$altGrup], 250, $DOCENTLIK, madde: "{$ekAdi} · Profesör"),
         $proje('7-P-YA', '7-P-D', $DOCENTLIK, "{$ekAdi} · Profesör"),
         $m14(7),
-        Kalip::toplam(400, $DOCENTLIK, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+        Kalip::toplam(400, $DOCENTLIK),
     ],
     'docentlik' => [
-        Kalip::puanDan("Puanlama Cetvelinin {$altGrup}. maddelerinden en az 180 puan", [$altGrup], 180, $DOKTORA, madde: "{$ekAdi} · Doçent"),
+        Kalip::puanDan("{$ALT_GRUP_ADI[$altGrup]} kalemlerinizden en az 180 puan", [$altGrup], 180, $DOKTORA, madde: "{$ekAdi} · Doçent"),
         $proje('7-P-YA', '7-P-D', $DOKTORA, "{$ekAdi} · Doçent"),
         $m14(4),
-        Kalip::toplam(300, $DOKTORA, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+        Kalip::toplam(300, $DOKTORA),
     ],
     'dr_ogr_uyesi' => [
         $drIlkMakaleSosyal("{$ekAdi} · Dr. ilk atama"),
-        Kalip::puanDan("Puanlama Cetvelinin {$altGrup}. maddelerinden en az 100 puan", [$altGrup], 100, madde: "{$ekAdi} · Dr. ilk atama"),
+        Kalip::puanDan("{$ALT_GRUP_ADI[$altGrup]} kalemlerinizden en az 100 puan", [$altGrup], 100, madde: "{$ekAdi} · Dr. ilk atama"),
         Kalip::adet('Araştırma projelerinden en az 1 tanesinde koordinatör, yürütücü ya da araştırmacı olmak', ['7-PH-YA'], 1, madde: "{$ekAdi} · Dr. ilk atama"),
         $m14(3),
-        Kalip::toplam(125, null, ['1-13'], 'Puanlama Cetveli 1-13. maddeler'),
+        Kalip::toplam(125, null),
     ],
     'dr_ogr_uyesi_yeniden' => array_merge($drYenidenOrtak(120), [$m14(3)]),
 ]);

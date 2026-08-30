@@ -49,7 +49,7 @@ $DIL_NOTU = 'Bütün kadrolarda merkezi bir yabancı dil sınavından en az 60 p
     .'almanız yeterli, araç 60 üzerinden değerlendiriyor.';
 
 /** Doçentlik ve profesörlüğün 4. maddesindeki seçenekler. */
-$dortuncuMadde = fn (string $makaleGrubu, int $toplam, int $yayinPuani, ?array $donem, string $madde): array => Kalip::veya('4. maddedeki şartlardan en az biri', [
+$dortuncuMadde = fn (string $makaleGrubu, int $toplam, int $yayinPuani, ?array $donem, string $madde): array => Kalip::veya('Kitap, proje, patent ve benzeri ek şartlardan en az biri', [
     Kalip::adet('Lisansüstü tezlerinizden üretilmemiş, Web of Science Book Citation Index\'te taranan bir kitap, kitap bölümü ya da kitap editörlüğü', ['BKCI'], 1, donem: $donem, madde: $madde.'/a'),
     Kalip::adet('Uluslararası kuruluşlar, COST, AB, TÜBİTAK, TÜBA, TÜSEB, TAGEM ya da diğer kamu kuruluşları projelerinden en az 1\'inde yürütücü olmak', ['PROJE-YURUTUCU'], 1, donem: $donem, madde: $madde.'/b'),
     Kalip::adet('Aynı projelerden en az 2\'sinde araştırmacı olmak', ['PROJE-ARASTIRMACI'], 2, donem: $donem, madde: $madde.'/b'),
@@ -146,7 +146,7 @@ foreach ([
         'kadro' => 'profesorluk',
         'notlar' => 'Profesörlük Madde 1-6: doçentlik başvuru döneminden sonra ÜAK temel alan '
             .'şartlarını tekrar sağlamak; toplam en az 500 puan; bunun en az 250 puanı makale, '
-            .'bildiri, kitap ya da projelerden; 4. maddedeki şartlardan en az biri ya da 750 ve '
+            .'bildiri, kitap ya da projelerden; kitap, proje ya da patent şartlarından en az biri ya da 750 ve '
             .'375 puan; başlıca araştırma eseri.',
         'aday_notu' => 'Profesörlük için doçentlik unvanınızı aldığınız başvuru döneminden '
             .'sonraki çalışmalardan 500 puan gerekiyor ve bunun en az 250\'si makale, bildiri, '

@@ -67,8 +67,8 @@ $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 $tumAlanlar = ['fen', 'muhendislik', 'saglik', 'sosyal', 'egitim', 'hukuk', 'ilahiyat',
     'filoloji', 'guzel_sanatlar', 'mimarlik', 'spor', 'ziraat'];
 
-$ikiKatman = 'Burdur MAKÜ\'nün barajı İKİ KATMANLI: toplam puanın yanında "1-24. maddelerden" '
-    .'ayrı bir eşik var. Bu ikinci küme makale, bildiri, kitap, çeviri, editörlük, atıf ve '
+$ikiKatman = 'Burdur MAKÜ\'nün barajı İKİ KATMANLI: toplam puanın yanında yayın ve etkinlik '
+    .'kalemleri için ayrı bir eşik var. Bu ikinci küme makale, bildiri, kitap, çeviri, editörlük, atıf ve '
     .'sanatsal etkinliklerden oluşuyor; ders, tez, proje, ödül, idari görev, toplumsal katkı ve '
     .'sportif faaliyetler yalnız toplam puana giriyor.';
 
@@ -80,7 +80,8 @@ $tekAlanNotu = 'Yönergenin taban puan tablosu alan ayrımı yapmıyor: tek sat�
     .'kapsama alıyor. Bütün temel alanlar aynı barajlara tabi.';
 
 $yenidenAtanma = 'Doktor öğretim üyeliğine yeniden atanma eşiği girilmedi: koşul "bir önceki '
-    .'atanma döneminden sonra 1-24. maddelerden en az 50 puan" biçiminde ve her atama üç '
+    .'atanma döneminden sonra makale, bildiri, kitap, atıf ve sanatsal etkinlik '
+    .'kalemlerinden en az 50 puan" biçiminde ve her atama üç '
     .'yıllık; önceki atama tarihi burada tutulmuyor.';
 
 $dilNotu = 'Yabancı dil barajı YDS\'den 60; YABANCI DİL KADROLARI için 80. Kadro ayrımı burada '

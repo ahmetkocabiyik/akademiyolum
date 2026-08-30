@@ -48,7 +48,7 @@ $FEN_SAGLIK = ['muhendislik', 'fen', 'saglik', 'ziraat'];
 $SOSYAL = ['sosyal', 'egitim', 'ilahiyat', 'hukuk', 'filoloji', 'spor'];
 
 $PUAN_NOTU = 'Kaynak PDF taranmış ve OCR\'lanmış; cetvelin iki satırı eksik metinden daraltıcı '
-    .'okundu. 13. madde (etkinlik düzenlemelerinde yer almak), 18. madde (h-indeksi) ve 19. madde '
+    .'okundu. Etkinlik düzenlemelerinde yer almak, h-indeksi ve '
     .'(yabancı dil sınavından 85 ve üzeri) faaliyet kaydına çevrilemediği için girilmedi; dergi '
     .'editörlüğü, lisansüstü tezden üretilmiş yayın, idari görev ve toplumsal katkı için cetvelde '
     .'satır yok.';

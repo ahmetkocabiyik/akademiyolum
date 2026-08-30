@@ -187,9 +187,9 @@ $ek2 = [
 $ek3 = [
     'dr_ogr_uyesi' => Kalip::ve('Doktor öğretim üyesi ilk atama koşulları', [
         $YDS_DR,
-        Kalip::adet('1 ve 2. maddelerden (lisansüstü tezlerden üretilenler dâhil) en az iki yayın', ['M12'], 2, madde: 'EK-3 Fakülte Dr. Öğr. Üyesi ilk atama 1)'),
+        Kalip::adet('Uluslararası ve ulusal makalelerden (lisansüstü tezlerden üretilenler dâhil) en az iki yayın', ['M12'], 2, madde: 'EK-3 Fakülte Dr. Öğr. Üyesi ilk atama 1)'),
         Kalip::adet('Bu yayınlardan en az biri 1.a, 1.b ya da 1.c kategorisinde olmalı', ['M1ABC'], 1, madde: 'EK-3 Fakülte Dr. Öğr. Üyesi ilk atama 1)'),
-        Kalip::adet('1 ve 2. maddelerden en az bir çalışmada başlıca yazar olmak', ['M12'], 1, yazar: 'baslica', madde: 'EK-3 Fakülte Dr. Öğr. Üyesi ilk atama 2)'),
+        Kalip::adet('Uluslararası ve ulusal makalelerden en az bir çalışmada başlıca yazar olmak', ['M12'], 1, yazar: 'baslica', madde: 'EK-3 Fakülte Dr. Öğr. Üyesi ilk atama 2)'),
         Kalip::toplam(50, maddeler: ['TUM']),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
@@ -208,7 +208,7 @@ $ek3 = [
         Kalip::adet('Doçentlik sonrası 1.a, 1.b, 1.c ya da 2.a kategorilerinde başlıca yazar olduğunuz en az iki yayın', ['M1ABC', '2a'], 2, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-3 Fakülte Profesör 1)'),
         Kalip::toplam(200, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
         Kalip::adet('Doçentlik sonrası alanınızda en az iki lisansüstü tez danışmanlığı', ['5a', '5b'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-3 Fakülte Profesör 3)'),
-        Kalip::adet('6. maddede tamamlanmış ya da devam eden en az bir araştırma projesinde yürütücü olmak', ['6a-y', '6b-y', '6c-y', '6d-y'], 1, madde: 'EK-3 Fakülte Profesör 4)'),
+        Kalip::adet('Tamamlanmış ya da devam eden en az bir araştırma projesinde yürütücü olmak', ['6a-y', '6b-y', '6c-y', '6d-y'], 1, madde: 'EK-3 Fakülte Profesör 4)'),
     ]),
 ];
 
@@ -394,7 +394,7 @@ $ORTAK_ADAY = 'Yeniden atamalarda yönergenin aradığı "bir önceki atamada ku
 $MYO_ADAY = 'Meslek yüksekokulu doktor öğretim üyeliğinde fakülte kriterleri değil, temel '
     .'alanınızın meslek yüksekokulu koşulları aranıyor. Doçentlik ve profesörlükte ise fakülte kriterleri '
     .'geçerli; o kadrolar için "'.$BIRIM_FAKULTE.'" seçeneğiyle aynı eşik kullanılıyor. '
-    .'Disiplinlerarası ve hibrit anabilim dallarına ilişkin Özel Durumlar 5.2 maddesi girilmedi.';
+    .'Disiplinlerarası ve hibrit anabilim dallarına ilişkin özel durumlar girilmedi.';
 
 /** @var array<string, array<string, array{0: string, 1: string}>> */
 $METIN = [
@@ -420,7 +420,7 @@ $METIN = [
         'dr_ogr_uyesi' => ['EK-4 Fakülte Dr. Öğr. Üyesi ilk atama: toplam 50 puan; 1.a-1.d, 2.a, 2.b, 4 ve 8. kategorilerden en az 30 puan; lisansüstü tezden üretilmiş en az bir yayın.', 'Güzel Sanatlar Eğitimi bölümlerinde koşul farklı: 50 puanın en az 15\'i 1, 4 ve 8. kategorilerdeki uluslararası yayınlardan olmalı ve tez yayını aranmıyor. Araç bölüm ayrımı yapmadığı için genel koşulu uyguluyor.'],
         'dr_ogr_uyesi_yeniden' => ['EK-4 Fakülte Dr. Öğr. Üyesi yeniden atama: toplam 50 puan, en az yarısı 1.a-1.d, 2.a, 2.b, 4 ve 8. kategorilerden.', 'Yeniden atamada tez yayını koşulu düşüyor; yerine puanın yarısının belirli kategorilerden gelmesi isteniyor.'],
         'docentlik' => ['EK-4 Fakülte Doçent: ÜAK doçentlik puanının en az %20 fazlası; ders verme, proje ve yönetim görevlerinden en az üçü.', 'Puan koşulu ÜAK\'ın dönemsel bilim alanı listesine bağlı olduğu için araç hesaplayamıyor, "hesaplanamıyor" olarak işaretliyor. Dört koşuldan üçünü sağlama şartında kayıt ders sayısını ve düzeyini ayıramadığı için iki ders koşulu aynı ders-yarıyıl ölçüsünün iki eşiği olarak yazıldı.'],
-        'profesorluk' => ['EK-4 Fakülte Profesör: doçentlik sonrası 150 puan; en az 100 puanı 1, 2, 4, 8, 15 ve 16. kategorilerden, en az 60 puanı uluslararası yayın ve performanstan; dört yayın koşulundan biri; 5. kategoriden 15 puan atıf; 7.a-7.d\'de proje; doçentlik sonrası ders verme.', 'Yönergenin 2. maddesindeki dört alternatiften biri yeterli: tek yazarlı kitap, 1.a-1.c\'de iki tek/ilk isimli makale, 1. kategoriden beş yayın ya da 1.a-1.b\'de bir tek yazarlı makalenin yanında 1.c-1.d\'de üç tek/ilk isimli makale. Dördüncü alternatifin "tek yazarlı 1.a/1.b makalesi" ön koşulu araçta ayrıca aranmıyor.'],
+        'profesorluk' => ['EK-4 Fakülte Profesör: doçentlik sonrası 150 puan; en az 100 puanı 1, 2, 4, 8, 15 ve 16. kategorilerden, en az 60 puanı uluslararası yayın ve performanstan; dört yayın koşulundan biri; 5. kategoriden 15 puan atıf; 7.a-7.d\'de proje; doçentlik sonrası ders verme.', 'Yönerge dört alternatiften birini yeterli sayıyor: tek yazarlı kitap; SCIE-SSCI, AHCI ya da ESCI-Scopus dergilerinde iki tek/ilk isimli makale; uluslararası dergilerden beş yayın; ya da SCIE-SSCI veya AHCI dergisinde bir tek yazarlı makalenin yanında ESCI, Scopus ve diğer uluslararası indeksli dergilerde üç tek/ilk isimli makale. Dördüncü alternatifin tek yazarlı makale ön koşulu araçta ayrıca aranmıyor.'],
     ],
     'ek5' => [
         'dr_ogr_uyesi' => ['EK-5 Dr. Öğr. Üyesi ilk atama: 1, 2, 3 ve 4. kategorilerden en az 15 puan; toplam 100 puan.', 'Devlet Konservatuvarında baraj yüksek (100 puan) ama bunun yalnız 15 puanı makale, tez yayını ve kitap kategorilerinden gelmek zorunda; kalanı sanatsal ve akademik faaliyetlerden toplanabiliyor.'],
@@ -429,15 +429,15 @@ $METIN = [
         'profesorluk' => ['EK-5 Profesör: doçentlik sonrası 1 ve 2. kategorilerden en az 30 puan; toplam 300 puan.', 'Profesörlükte sayılan bütün faaliyetlerin doçent unvanını aldıktan sonrasına ait olması gerekiyor.'],
     ],
     'ek6' => [
-        'dr_ogr_uyesi' => ['EK-6 Fakülte Dr. Öğr. Üyesi ilk atama: 1-17. kategorilerden en az 150 puan.', 'Güzel Sanatlar temel alanında tek koşul 150 puan; 17. maddedeki sergi, bienal, festival ve müzeye kabul satırları bu puanın büyük bölümünü karşılayabiliyor.'],
+        'dr_ogr_uyesi' => ['EK-6 Fakülte Dr. Öğr. Üyesi ilk atama: 1-17. kategorilerden en az 150 puan.', 'Güzel Sanatlar temel alanında tek koşul 150 puan; sergi, bienal, festival ve müzeye kabul satırları bu puanın büyük bölümünü karşılayabiliyor.'],
         'dr_ogr_uyesi_yeniden' => ['EK-6 Fakülte Dr. Öğr. Üyesi yeniden atama: 1-5. kategorilerden en az 10 puan; toplam 150 puan.', 'Yeniden atamada toplam baraj aynı kalıyor; yeni olan, puanın en az 10\'unun makale, tez yayını, kitap ve atıf kategorilerinden gelme koşulu.'],
         'docentlik' => ['EK-6 Fakülte Doçent: doktora/sanatta yeterlik sonrası 1-17. kategorilerden en az 200 puan.', 'Doçentlikte sayılan faaliyetlerin doktora ya da sanatta yeterlik sonrasına ait olması gerekiyor.'],
-        'profesorluk' => ['EK-6 Fakülte Profesör: doçentlik sonrası 1 ve/veya 2. kategorilerden en az iki yayın; 1-16. kategorilerden en az 150 puan; toplam 300 puan.', 'Profesörlükte sanatsal etkinlik puanı tek başına yetmiyor: 150 puanın 17. madde dışındaki kategorilerden, iki yayının da makale kategorilerinden gelmesi gerekiyor.'],
+        'profesorluk' => ['EK-6 Fakülte Profesör: doçentlik sonrası 1 ve/veya 2. kategorilerden en az iki yayın; 1-16. kategorilerden en az 150 puan; toplam 300 puan.', 'Profesörlükte sanatsal etkinlik puanı tek başına yetmiyor: 150 puanın sanatsal etkinlik dışındaki kategorilerden, iki yayının da makale kategorilerinden gelmesi gerekiyor.'],
     ],
     'ek7' => [
         'dr_ogr_uyesi' => ['EK-7 Dr. Öğr. Üyesi ilk atama: doktora tezinden üretilmiş en az bir yayın; 1, 2, 3, 4, 8 ve 16. kategorilerden en az 15 puan; toplam 30 puan.', 'Sportif performans kalemleri kayıtta karşılığı olmadığı için hiç girilmedi: sporcu yetiştirme, millî takım görevi, antrenörlük ve hakemlik belgeleri sayılmıyor. Bu maddeye dayanan puanınız varsa gerçek puanınız buradakinden yüksektir.'],
-        'dr_ogr_uyesi_yeniden' => ['EK-7 Dr. Öğr. Üyesi yeniden atama: 1, 2, 3, 4, 6, 7, 8 ve 16. kategorilerden en az 20 puan; toplam 40 puan.', '16. madde (sportif performans) girilmediği için kategori payı yalnız yayın, tez danışmanlığı, proje ve bildiri kalemlerinden doluyor.'],
-        'docentlik' => ['EK-7 Doçent: 1-18. kategorilerden toplam en az 120 puan.', 'Doçentlikte tek koşul 120 puan; yönerge burada dönem kısıtı koymuyor. 16. madde girilmediği için sportif performansınız bu toplama girmiyor.'],
+        'dr_ogr_uyesi_yeniden' => ['EK-7 Dr. Öğr. Üyesi yeniden atama: 1, 2, 3, 4, 6, 7, 8 ve 16. kategorilerden en az 20 puan; toplam 40 puan.', 'Sportif performans satırı girilmediği için kategori payı yalnız yayın, tez danışmanlığı, proje ve bildiri kalemlerinden doluyor.'],
+        'docentlik' => ['EK-7 Doçent: 1-18. kategorilerden toplam en az 120 puan.', 'Doçentlikte tek koşul 120 puan; yönerge burada dönem kısıtı koymuyor. Sportif performans satırı girilmediği için bu faaliyetiniz bu toplama girmiyor.'],
         'profesorluk' => ['EK-7 Profesör: doçentlik sonrası birinci danışman olarak tamamlanmış bir lisansüstü tez; doçentlik sonrası 1, 2 ve 4. kategorilerden birer, 8. kategoriden iki yayın ve bu kalemlerden en az 50 puan; toplam 150 puan.', 'Profesörlükte kategori dağılımı zorunlu: uluslararası makale, ulusal makale, kitap ve bildiri kalemlerinin her birinden ayrı ayrı yayın isteniyor.'],
     ],
 ];

@@ -135,7 +135,7 @@ return [
             Kalip::beyan('Bu makalelerin doktora veya uzmanlık tezinizden üretilmemiş olması',
                 'Madde 15'),
             Kalip::beyan('Doçentlik unvanını almış olmak ve Öğretim Üyeliğine Yükseltilme ve '
-                .'Atanma Yönetmeliğinin 10. maddesine göre doçentlik sözlü sınavında başarılı '
+                .'Atanma Yönetmeliğine göre doçentlik sözlü sınavında başarılı '
                 .'olmak', 'Madde 12'),
         ]),
     ],

@@ -103,11 +103,11 @@ $esikler = [];
 
 $esikler[] = [
     'anahtar' => 'ikcu-sosyal-dr',
-    'aday_notu' => 'Sosyal Bilimler alanında Dr. Öğretim Üyeliği için tablonun 1., 2., 3., 4. ve 7. '
-        .'maddelerinden toplam en az 50 puan ve uluslararası makalelerinizin birinde başlıca yazar '
-        .'olma koşulu isteniyor. Alan indeksi belirlenmemiş alanlarda 1.2.a (ULAKBİM TR Dizin) '
+    'aday_notu' => 'Sosyal Bilimler alanında Dr. Öğretim Üyeliği için makale, tez yayını, kitap, '
+        .'atıf ve bildiri kalemlerinden toplam en az 50 puan ve uluslararası makalelerinizin birinde başlıca yazar '
+        .'olma koşulu isteniyor. Alan indeksi belirlenmemiş alanlarda ULAKBİM TR Dizin '
         .'yayınları da kabul ediliyor.'.$YENIDEN
-        .' Yeniden atanmada 1., 2. ve 3. maddelerden en az 20/30/40/50 puan olmak üzere toplam '
+        .' Yeniden atanmada makale, tez yayını ve kitap kalemlerinden en az 20/30/40/50 puan olmak üzere toplam '
         .'40/60/80/100 puan sırasıyla 1, 2, 3 ve 4 yıllık atama sağlıyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'dr_ogr_uyesi',
@@ -122,7 +122,7 @@ $esikler[] = [
             Kalip::adet('SSCI/SCI/SCI-E/AHCI ya da uluslararası alan endeksli dergide başlıca yazar olduğunuz en az 1 makaleniz olmalı', ['A1.1'], 1, yazar: 'baslica', madde: 'EK-A/3'),
             Kalip::adet('Alan indeksi belirlenmemiş alanlarda ULAKBİM TR Dizin dergisinde başlıca yazar olduğunuz en az 1 makaleniz olmalı', ['A1.2.a'], 1, yazar: 'baslica', madde: 'EK-A/3'),
         ]),
-        Kalip::toplam(50, null, ['A-DR-TOPLAM'], 'Tablonun 1., 2., 3., 4. ve 7. maddeleri'),
+        Kalip::toplam(50, null, ['A-DR-TOPLAM'], 'Makale, tez yayını, kitap, atıf ve bildiri'),
     ]),
 ];
 
@@ -146,13 +146,14 @@ $esikler[] = [
         $dil,
         $docentUnvani,
         Kalip::adet('Makalelerinizden en az 1\'inde başlıca yazar olmalısınız', ['A1'], 1, yazar: 'baslica', madde: 'EK-A/2'),
-        Kalip::kIle('Puanınızın 1., 3., 6., 7. ve 8. maddelerin en az 3\'ünden gelmesi gerekiyor', 3, [
-            Kalip::adet('Makale kalemlerinizden en az 1 faaliyet', ['A1'], 1, madde: 'EK-A/2'),
-            Kalip::adet('Kitap kalemlerinizden en az 1 faaliyet', ['A3'], 1, madde: 'EK-A/2'),
-            Kalip::adet('Bilimsel araştırma projesi kalemlerinizden en az 1 faaliyet', ['A6'], 1, madde: 'EK-A/2'),
-            Kalip::adet('Bilimsel toplantı ve faaliyet görevlerinden en az 1 faaliyet', ['A7'], 1, madde: 'EK-A/2'),
-            Kalip::adet('Eğitim öğretim faaliyetlerinden en az 1 faaliyet', ['A8'], 1, madde: 'EK-A/2'),
-        ]),
+        Kalip::kIle('Puanınız makale, kitap, araştırma projesi, bilimsel toplantı ve eğitim-öğretim '
+            .'kalemlerinin en az 3\'ünden gelmeli', 3, [
+                Kalip::adet('Makale kalemlerinizden en az 1 faaliyet', ['A1'], 1, madde: 'EK-A/2'),
+                Kalip::adet('Kitap kalemlerinizden en az 1 faaliyet', ['A3'], 1, madde: 'EK-A/2'),
+                Kalip::adet('Bilimsel araştırma projesi kalemlerinizden en az 1 faaliyet', ['A6'], 1, madde: 'EK-A/2'),
+                Kalip::adet('Bilimsel toplantı ve faaliyet görevlerinden en az 1 faaliyet', ['A7'], 1, madde: 'EK-A/2'),
+                Kalip::adet('Eğitim öğretim faaliyetlerinden en az 1 faaliyet', ['A8'], 1, madde: 'EK-A/2'),
+            ]),
         Kalip::hesaplanamiyor(
             'Kadro ilanında duyurulan asgari puanın en az %80\'ini almış olmak — asgari puan '
             .'yönergede sayı olarak verilmediği için hesaplanamıyor',
@@ -259,7 +260,7 @@ $esikler[] = [
     'aday_notu' => 'Doçentlik unvanınızı aldığınız başvuru döneminden sonraki çalışmalarınız '
         .'sayılıyor. Fen Bilimleri alanında profesörlük için toplam en az 200 puan, 1.a maddesinden '
         .'(SCI/SCI-E/SSCI/AHCI tam araştırma makalesi) en az 50 puan, en az iki Q1/Q2 yayını ve '
-        .'tablonun 2., 3., 4. ve 10. maddeleri dışındaki her maddeden en az bir etkinlik '
+        .'tez yayını, kitap, atıf ile idari görev dışındaki her kalem türünden en az bir etkinlik '
         .'isteniyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
@@ -277,7 +278,7 @@ $esikler[] = [
         $qKurali(2, 'EK-B/1'),
         Kalip::adet('1.a kapsamındaki makalelerinizden en az 1\'inde başlıca yazar olmalısınız', ['B1.a'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'EK-B/1'),
         Kalip::puanDan('SCI/SCI-E, SSCI veya AHCI tam araştırma makalelerinizden en az 50 puan', ['B1.a'], 50, $DOCENTLIK, madde: 'EK-B/1'),
-        Kalip::ve('Tablonun 2., 3., 4. ve 10. maddeleri dışındaki her maddeden en az bir etkinlik', [
+        Kalip::ve('Tez yayını, kitap, atıf ve idari görev dışındaki her kalem türünden en az bir etkinlik', [
             Kalip::adet('Makale kalemlerinizden en az 1 faaliyet', ['B1'], 1, donem: $DOCENTLIK, madde: 'EK-B/1'),
             Kalip::adet('Atıf kalemlerinizden en az 1 faaliyet', ['B5'], 1, donem: $DOCENTLIK, madde: 'EK-B/1'),
             Kalip::adet('Lisansüstü tez danışmanlığı kalemlerinizden en az 1 faaliyet', ['B6'], 1, donem: $DOCENTLIK, madde: 'EK-B/1'),
@@ -298,12 +299,13 @@ $esikler[] = [
 // ══════════════════════════════════════════════════════════════════════════
 
 $sosyalHizmetNotu = ' Sağlık Bilimleri Fakültesi Sosyal Hizmet Bölümü adaylarına yönerge '
-    .'"Sosyal Bilimler Alanı" (EK-A) kriterlerini uyguluyor; bölüm bilgisi profilde tutulmadığı '
-    .'için burada EK-C kriterleri gösteriliyor.';
+    .'"Sosyal Bilimler Alanı" kriterlerini uyguluyor; bölüm bilgisi profilde tutulmadığı '
+    .'için burada Sağlık Bilimleri kriterleri gösteriliyor.';
 
 /** EK-C'nin "1., 2., 5., 8. ve 9. maddelerin her birinden en az bir faaliyet" koşulu. */
 $cFaaliyetler = fn (?array $donem, string $madde): array => Kalip::ve(
-    '1., 2., 5., 8. ve 9. maddelerin her birinden en az bir faaliyet',
+    'Uluslararası makale, ulusal makale, atıf, bilimsel toplantı ve eğitim-öğretim '
+    .'kalemlerinin her birinden en az bir faaliyet',
     [
         Kalip::adet('Uluslararası makale kalemlerinizden en az 1 faaliyet', ['C1'], 1, donem: $donem, madde: $madde),
         Kalip::adet('Ulusal makale kalemlerinizden en az 1 faaliyet', ['C2'], 1, donem: $donem, madde: $madde),
@@ -340,9 +342,10 @@ $esikler[] = [
     'anahtar' => 'ikcu-saglik-docentlik',
     'aday_notu' => 'Sağlık Bilimleri alanında doçentlik için toplam en az 150 puan, uluslararası ve '
         .'ulusal makale maddelerinin toplamından en az 100 puan, 1.a kapsamında başlıca yazarlık ve '
-        .'1., 2., 5., 8., 9. maddelerin her birinden en az bir faaliyet isteniyor. DİKKAT: yönerge '
-        .'metni eğitim öğretim faaliyetlerinden "en az 25 puan" derken aynı tablonun 9. madde '
-        .'dipnotu bu maddeden EN FAZLA 15 puan alınabileceğini söylüyor; 25 puanlık eşik '
+        .'uluslararası makale, ulusal makale, atıf, bildiri ve '
+        .'eğitim-öğretim kalemlerinin her birinden en az bir faaliyet isteniyor. DİKKAT: yönerge '
+        .'metni eğitim öğretim faaliyetlerinden "en az 25 puan" derken aynı tablonun dipnotu '
+        .'bu kalemden EN FAZLA 15 puan alınabileceğini söylüyor; 25 puanlık eşik '
         .'sağlanamayacağı için burada ulaşılabilir en sıkı değer olan 15 puan uygulanıyor. '
         .'Başvurmadan önce üniversiteye teyit ettirin.'.$sosyalHizmetNotu,
     'universite' => $UNIVERSITE,
@@ -369,8 +372,8 @@ $esikler[] = [
     'anahtar' => 'ikcu-saglik-profesorluk',
     'aday_notu' => 'Doçentlik başvurunuzu yaptığınız tarihten sonraki çalışmalarınız sayılıyor. '
         .'Sağlık Bilimleri alanında profesörlük için toplam en az 250 puan, 1.a kapsamında '
-        .'doçentlik sonrası başlıca yazarlık ve 1., 2., 5., 8., 9. maddelerin her birinden en az '
-        .'bir faaliyet isteniyor.'.$sosyalHizmetNotu,
+        .'doçentlik sonrası başlıca yazarlık ve uluslararası makale, ulusal makale, atıf, bildiri '
+        .'ile eğitim-öğretim kalemlerinin her birinden en az bir faaliyet isteniyor.'.$sosyalHizmetNotu,
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
     'alan' => ['saglik'],
@@ -404,7 +407,9 @@ $MUZIK = 'Müzik';
 
 /** EK-D'nin "1, 2, 4, 5, 6, 8 ve 9'uncu maddelerin her birinden en az bir faaliyet" koşulu. */
 $dFaaliyetler = fn (?array $donem, string $madde): array => Kalip::ve(
-    'Genel başvuru şartlarının 1., 2., 4., 5., 6., 8. ve 9. maddelerinin her birinden en az bir faaliyet',
+    'Genel başvuru şartlarının uluslararası makale, ulusal makale, kitap, atıf, tez '
+    .'danışmanlığı, bilimsel toplantı ve eğitim-öğretim kalemlerinin her birinden en az '
+    .'bir faaliyet',
     [
         Kalip::adet('Uluslararası makale kalemlerinizden en az 1 faaliyet', ['D-G1'], 1, donem: $donem, madde: $madde),
         Kalip::adet('Ulusal makale kalemlerinizden en az 1 faaliyet', ['D-G2'], 1, donem: $donem, madde: $madde),
@@ -434,7 +439,7 @@ $muzikIkiEtkinlik = fn (string $madde): array => Kalip::veya(
     ],
 );
 
-$dNotu = 'DİKKAT: EK-D\'nin özel başvuru şartlarında puanı bir PORTFÖYE bağlı satırlar (en az on '
+$dNotu = 'DİKKAT: Güzel Sanatlar özel başvuru şartlarında puanı bir PORTFÖYE bağlı satırlar (en az on '
     .'eserlik kişisel sergi, dört saatlik şeflik kaydı, iki opera eseri gibi) eser başına '
     .'bölünemediği için etkinlik başına en düşük okunabilir değerden sayılıyor; alt disiplin '
     .'kayıtta tutulmadığı için solo ve karma konser icracılığı da en düşük değerden (5 puan) '
@@ -446,8 +451,8 @@ foreach ([
 ] as [$anahtar, $birim, $tip]) {
     $ozelDr = $tip === 'plastik'
         ? [
-            Kalip::adet('Plastik sanatlarda 1. madde kapsamında en az 3 etkinlik', ['D-O1'], 3, madde: 'EK-D/3-b'),
-            Kalip::puanDan('Plastik sanatlarda 1. madde kapsamında en az 50 puan', ['D-O1'], 50, madde: 'EK-D/3-b'),
+            Kalip::adet('Plastik sanatlarda sergi, film, workshop gibi özgün sanat etkinliklerinden en az 3 etkinlik', ['D-O1'], 3, madde: 'EK-D/3-b'),
+            Kalip::puanDan('Plastik sanatlarda sergi, film, workshop gibi özgün sanat etkinliklerinden en az 50 puan', ['D-O1'], 50, madde: 'EK-D/3-b'),
         ]
         : [
             $muzikIkiEtkinlik('EK-D/3-b'),
@@ -455,7 +460,7 @@ foreach ([
         ];
 
     $ozelDocent = $tip === 'plastik'
-        ? [Kalip::puanDan('Plastik sanatlarda 1. madde kapsamında en az 60 puan', ['D-O1'], 60, madde: 'EK-D/2-c')]
+        ? [Kalip::puanDan('Plastik sanatlarda sergi, film, workshop gibi özgün sanat etkinliklerinden en az 60 puan', ['D-O1'], 60, madde: 'EK-D/2-c')]
         : [
             $muzikIkiEtkinlik('EK-D/2-c'),
             Kalip::puanDan('Müzik alanında özel başvuru şartlarından en az 60 puan', ['D-MUZIK'], 60, madde: 'EK-D/2-c'),
@@ -464,7 +469,7 @@ foreach ([
     $ozelProfesor = $tip === 'plastik'
         ? [
             Kalip::adet('Plastik sanatlarda kişisel sergi türünden en az 2 etkinlik', ['D-O1.a'], 2, madde: 'EK-D/1-c'),
-            Kalip::puanDan('Plastik sanatlarda 1. madde toplamında en az 100 puan', ['D-O1'], 100, madde: 'EK-D/1-c'),
+            Kalip::puanDan('Plastik sanatlarda sergi, film, workshop gibi özgün sanat etkinliklerinden en az 100 puan', ['D-O1'], 100, madde: 'EK-D/1-c'),
         ]
         : [
             $muzikIkiEtkinlik('EK-D/1-c'),
@@ -474,8 +479,9 @@ foreach ([
     $esikler[] = [
         'anahtar' => "ikcu-gsf-{$anahtar}-dr",
         'aday_notu' => "Güzel Sanatlar alanında ({$birim}) Dr. Öğretim Üyeliği için genel başvuru "
-            .'şartlarının 1., 2. ve 8. maddelerinin her birinden en az bir faaliyet, 1. ve 2. '
-            .'maddelerin toplamından en az 40 puan ve özel başvuru şartlarından en az 50 puan '
+            .'şartlarının uluslararası makale, ulusal makale ve bilimsel toplantı kalemlerinin '
+            .'her birinden en az bir faaliyet, uluslararası ve ulusal makalelerin '
+            .'toplamından en az 40 puan ve özel başvuru şartlarından en az 50 puan '
             .'isteniyor. '.$dNotu.$YENIDEN.' Yeniden atanmada genel ve özel şartların her birinden '
             .'en az 15/20/30/40 puan olmak üzere toplam 30/40/60/80 puan sırasıyla 1, 2, 3 ve 4 '
             .'yıllık atama sağlıyor.',
@@ -489,11 +495,12 @@ foreach ([
             .'başvuru şartlarından en az 50 puan.',
         'sart' => Kalip::ve("Doktor Öğretim Üyesi kadrosuna atanma — Güzel Sanatlar ({$birim})", [
             $dil,
-            Kalip::ve('Genel başvuru şartlarının 1., 2. ve 8. maddelerinin her birinden en az bir faaliyet', [
-                Kalip::adet('Uluslararası makale kalemlerinizden en az 1 faaliyet', ['D-G1'], 1, madde: 'EK-D/3-a'),
-                Kalip::adet('Ulusal makale kalemlerinizden en az 1 faaliyet', ['D-G2'], 1, madde: 'EK-D/3-a'),
-                Kalip::adet('Bilimsel toplantı kalemlerinizden en az 1 faaliyet', ['D-G8'], 1, madde: 'EK-D/3-a'),
-            ]),
+            Kalip::ve('Genel başvuru şartlarının uluslararası makale, ulusal makale ve bilimsel '
+                .'toplantı kalemlerinin her birinden en az bir faaliyet', [
+                    Kalip::adet('Uluslararası makale kalemlerinizden en az 1 faaliyet', ['D-G1'], 1, madde: 'EK-D/3-a'),
+                    Kalip::adet('Ulusal makale kalemlerinizden en az 1 faaliyet', ['D-G2'], 1, madde: 'EK-D/3-a'),
+                    Kalip::adet('Bilimsel toplantı kalemlerinizden en az 1 faaliyet', ['D-G8'], 1, madde: 'EK-D/3-a'),
+                ]),
             Kalip::puanDan('Uluslararası ve ulusal makale kalemlerinizden en az 40 puan', ['D-G1-G2'], 40, madde: 'EK-D/3-a'),
             ...$ozelDr,
         ]),

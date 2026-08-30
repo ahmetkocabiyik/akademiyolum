@@ -290,9 +290,21 @@ yönergenin madde numarasını SÖZLE anan biçimler ("01-06 numaralı maddeler"
 "1/a bendi", "TABLO B"). Dergi çeyrekleri (Q1-Q3) bilinçli olarak dışlandı:
 onlar yönergenin kodu değil, adayın tanıdığı bir ad.
 
-Desen üç turda bu hâle geldi; her seferinde temiz sanılan dosyalarda yeni
-sızıntı çıktı. Yeni bir kod biçimi görürsen deseni genişlet, sonra bütün
-korpusu yeniden tara — eski dosyalarda da bulunması olağan.
+Buna Roma rakamlı ve harfli ekler (Ek-I, EK-A, EK-Ç), sıra sayılı madde
+atıfları ("20. maddesi", "1., 2. ve 8. maddelerin") ve harfle anılan kümeler
+("A grubu", "B tablosu") de dâhil. İki İSTİSNA var, ikisi de testte ayrı ayrı
+elenmiş durumda: KANUN madde numaraları ("2547 sayılı Kanun'un 26. maddesi")
+adayın zaten tanıdığı atıflar, ve sıra noktası olmayan "3 madde belgelemek"
+düz Türkçe.
+
+Desen dört turda bu hâle geldi; her seferinde temiz sanılan dosyalarda yeni
+sızıntı çıktı. İki ders:
+
+  1. Yeni bir kod biçimi görürsen deseni genişlet, sonra BÜTÜN korpusu yeniden
+     tara — eski dosyalarda da bulunması olağan.
+  2. Tarayıcın `preg_match` değil `preg_match_all` kullanmalı. Tek eşleşmeye
+     bakan tarayıcı, ilk eşleşme meşru bir kanun atfıysa metnin geri kalanını
+     hiç görmüyor; bu yüzden bir tur "sıfır" raporlarken 208 sızıntı duruyordu.
 
 Sızıntının dört yeri var, dördüne de bak:
 

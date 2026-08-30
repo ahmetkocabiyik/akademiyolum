@@ -40,7 +40,7 @@ use App\Services\Scoring\Sart\Kalip;
 $FEN = ['fen', 'muhendislik', 'ziraat', 'saglik', 'mimarlik'];
 $SOSYAL = ['sosyal', 'egitim', 'filoloji', 'ilahiyat', 'hukuk', 'spor', 'guzel_sanatlar'];
 
-$MAKALE_NOTU = 'Ek-I\'in 1. maddesinin dipnotu ayrıca "bu alandan en az 8 puan almış olmak '
+$MAKALE_NOTU = 'Cetvelin makale satırının dipnotu ayrıca "bu alandan en az 8 puan almış olmak '
     .'zorunludur" diyor; yani puanınızın bir bölümü mutlaka makalelerden gelmeli.';
 
 $EK2_NOTU = 'Yönergenin sanat eki (sinema, plastik sanatlar, tasarım, geleneksel Türk sanatları, '
@@ -66,7 +66,8 @@ foreach ([
         'notlar' => 'MADDE 5: doktora, tıpta uzmanlık ya da sanatta yeterlik derecesi; Ek-I ve '
             .'Ek-II\'den en az '.$g['dr'].' puan; deneme dersi komisyonundan olumlu görüş. '
             .'Ek-I 1. madde dipnotu: makalelerden en az 8 puan.',
-        'aday_notu' => $g['ad'].' alanlarında doktor öğretim üyeliği için Ek-I ve Ek-II\'den '
+        'aday_notu' => $g['ad'].' alanlarında doktor öğretim üyeliği için bilimsel ve sanatsal faaliyet '
+            .'cetvellerinden '
             .'toplam '.$g['dr'].' puan gerekiyor. '.$MAKALE_NOTU.' Ayrıca başvurduğunuz birimin '
             .'kuracağı üç kişilik komisyona deneme dersi vermeniz ve en az iki jüri üyesinden '
             .'olumlu görüş almanız gerekiyor.'.$sanatEk,

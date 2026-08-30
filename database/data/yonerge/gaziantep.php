@@ -253,7 +253,8 @@ return [
     [
         'anahtar' => 'gaziantep-dr-mimarlik',
         'aday_notu' => 'Güzel sanatlar ve konservatuvarın UYGULAMALI alanlarında ayrıca puanlama '
-            .'tablosunun 15-34. maddelerinden, en az ikisi kişisel etkinlik olmak üzere 45 puan '
+            .'tablosunun sanatsal etkinlik satırlarından, en az ikisi kişisel etkinlik '
+            .'olmak üzere 45 puan '
             .'gerekiyor. O kalemler kaynak sözlüğünde karşılıksız olduğu için burada beyan olarak duruyor.',
         'universite' => 'Gaziantep Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
@@ -265,7 +266,8 @@ return [
                 ['1a', '1c', '1e', '1g'], 45, madde: 'MADDE 15/1-a'),
             Kalip::puanDan('Bildirilerinizden en az 6 puan', ['4'], 6, madde: 'MADDE 15/1-b'),
             Kalip::beyan('Başvurunuza uygun alandan en az 30 puan almış olmak; güzel sanatlar ve '
-                .'konservatuvarın uygulamalı alanlarında puanlama tablosunun 15-34. maddelerinden, '
+                .'konservatuvarın uygulamalı alanlarında puanlama tablosunun sanatsal '
+                .'etkinlik satırlarından, '
                 .'en az ikisi kişisel etkinlik olmak üzere toplam 45 puan', 'MADDE 15/1-c'),
         ]),
     ],

@@ -172,7 +172,7 @@ $birim = function (
             'aday_notu' => 'Yeniden atanmada dört ayrı taban var: yayın kalemlerinden en az '
                 ."{$p['dr_yeniden_yayin']} puan, eğitim kalemlerinden en az {$p['dr_yeniden_egitim']} puan, "
                 ."katkı kalemlerinden en az {$p['dr_yeniden_katki']} puan ve toplamda en az 30 puan. "
-                .'Yönerge ayrıca yürütücü olarak yaptığınız bir A grubu proje BAŞVURUSUNA (kabul '
+                .'Yönerge ayrıca yürütücü olarak yaptığınız bir dış kaynaklı proje BAŞVURUSUNA (kabul '
                 .'edilmese de) 2 puan tanıyor; bu bonus faaliyet kaydında proje başvurusu '
                 .'tutulmadığı için hesaba katılamadı.',
             'universite' => $UNIVERSITE,
@@ -198,7 +198,7 @@ $birim = function (
                 ."toplamda en az {$p['doc_toplam']} puan (kalan puan herhangi bir kalemden gelebilir). "
                 ."Ayrıca yayınlarınızdan en az {$p['doc_sci']} tanesi SCI, SCI-Expanded, SSCI, "
                 .'SSCI-Expanded, ESCI veya AHCI kapsamındaki bir dergide olmalı; en az bir devam '
-                .'eden veya tamamlanmış A grubu proje yürütücülüğünüz ve danışmanlığını '
+                .'eden veya tamamlanmış dış kaynaklı proje yürütücülüğünüz ve danışmanlığını '
                 .'sürdürdüğünüz en az bir yüksek lisans veya doktora teziniz bulunmalı.'
                 .($p['doc_hindex'] !== null ? " h-indeksiniz en az {$p['doc_hindex']} olmalı." : ''),
             'universite' => $UNIVERSITE,
@@ -220,7 +220,7 @@ $birim = function (
                     ['YAYIN'], (int) ceil($p['doc_yayin'] / 2), $DOKTORA, madde: $maddeBaslangic,
                 ),
                 Kalip::adet(
-                    'En az 1 devam eden veya tamamlanmış A grubu proje yürütücülüğünüz olmalı',
+                    'En az 1 devam eden veya tamamlanmış dış kaynaklı proje yürütücülüğünüz olmalı',
                     ['PROJE-YURUTUCU'], 1, madde: $maddeBaslangic,
                 ),
                 $projeTelafisi($p['doc_proje'], null, $maddeBaslangic),
@@ -242,7 +242,8 @@ $birim = function (
                 ."en az {$p['prof_egitim']} puan, katkı kalemlerinden en az {$p['prof_katki']} puan ve "
                 ."toplamda en az {$p['prof_toplam']} puan. Ayrıca yayınlarınızdan en az "
                 ."{$p['prof_sci']} tanesi SCI, SCI-Expanded, SSCI, SSCI-Expanded, ESCI veya AHCI "
-                .'kapsamındaki bir dergide olmalı; yürütücü olarak tamamladığınız en az bir A grubu '
+                .'kapsamındaki bir dergide olmalı; yürütücü olarak tamamladığınız en az bir dış '
+                .'kaynaklı '
                 .'projeniz ve bitirdiğiniz en az bir yüksek lisans veya doktora tez danışmanlığınız '
                 .'bulunmalı.'
                 .($p['prof_hindex'] !== null ? " h-indeksiniz en az {$p['prof_hindex']} olmalı." : ''),
@@ -265,7 +266,7 @@ $birim = function (
                     ['YAYIN'], (int) ceil($p['prof_yayin'] / 2), $DOCENTLIK, madde: $maddeBaslangic,
                 ),
                 Kalip::adet(
-                    'Yürütücü olarak tamamladığınız en az 1 A grubu projeniz olmalı',
+                    'Yürütücü olarak tamamladığınız en az 1 dış kaynaklı projeniz olmalı',
                     ['PROJE-YURUTUCU'], 1, madde: $maddeBaslangic,
                 ),
                 $projeTelafisi($p['prof_proje'], null, $maddeBaslangic),

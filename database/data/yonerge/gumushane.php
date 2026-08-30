@@ -366,7 +366,7 @@ return [
 
     [
         'anahtar' => 'gumushane-dr-guzel-sanatlar',
-        'aday_notu' => 'Sanatsal etkinlik puanı (P grubu) bu alanda zorunlu ve ayrı sınanıyor; makale puanıyla birbirinin yerine geçmiyor. P grubundan en fazla 60 puan sayılıyor.',
+        'aday_notu' => 'Sanatsal etkinlik puanı bu alanda zorunlu ve ayrı sınanıyor; makale puanıyla birbirinin yerine geçmiyor. Sanatsal etkinliklerden en fazla 60 puan sayılıyor.',
         'universite' => 'Gümüşhane Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => ['guzel_sanatlar'],
@@ -385,7 +385,7 @@ return [
     ],
     [
         'anahtar' => 'gumushane-dr-yeniden-guzel-sanatlar',
-        'aday_notu' => 'Sanatsal etkinlik puanı (P grubu) bu alanda zorunlu ve ayrı sınanıyor; makale puanıyla birbirinin yerine geçmiyor. P grubundan en fazla 60 puan sayılıyor.',
+        'aday_notu' => 'Sanatsal etkinlik puanı bu alanda zorunlu ve ayrı sınanıyor; makale puanıyla birbirinin yerine geçmiyor. Sanatsal etkinliklerden en fazla 60 puan sayılıyor.',
         'universite' => 'Gümüşhane Üniversitesi',
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'alan' => ['guzel_sanatlar'],
@@ -406,7 +406,7 @@ return [
     ],
     [
         'anahtar' => 'gumushane-docent-guzel-sanatlar',
-        'aday_notu' => 'Sanatsal etkinlik puanı (P grubu) bu alanda zorunlu ve ayrı sınanıyor; makale puanıyla birbirinin yerine geçmiyor. P grubundan en fazla 60 puan sayılıyor.',
+        'aday_notu' => 'Sanatsal etkinlik puanı bu alanda zorunlu ve ayrı sınanıyor; makale puanıyla birbirinin yerine geçmiyor. Sanatsal etkinliklerden en fazla 60 puan sayılıyor.',
         'universite' => 'Gümüşhane Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => ['guzel_sanatlar'],
@@ -438,7 +438,7 @@ return [
     ],
     [
         'anahtar' => 'gumushane-profesor-guzel-sanatlar',
-        'aday_notu' => 'Sanatsal etkinlik puanı (P grubu) bu alanda zorunlu ve ayrı sınanıyor; makale puanıyla birbirinin yerine geçmiyor. P grubundan en fazla 60 puan sayılıyor.',
+        'aday_notu' => 'Sanatsal etkinlik puanı bu alanda zorunlu ve ayrı sınanıyor; makale puanıyla birbirinin yerine geçmiyor. Sanatsal etkinliklerden en fazla 60 puan sayılıyor.',
         'universite' => 'Gümüşhane Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => ['guzel_sanatlar'],

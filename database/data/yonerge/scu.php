@@ -69,7 +69,7 @@ $GRUP2_AD = 'Eğitim, Spor, Filoloji, Güzel Sanatlar, Hukuk, İlahiyat, Mimarl�
 $NOT_TAVAN = ' Bölüm tavanları kadronun asgari puanının yüzdesi olarak hesaplanıyor '
     .'(bildiri, kitap, atıf, editörlük ve sanatsal etkinliklerde %25, patentte %40, projede %30, '
     .'tez danışmanlığı ve derste %15, ödülde %20, idari görevde %15).';
-$NOT_ESKI = ' Yönergenin 20. maddesi uyarınca doktor öğretim üyeliğine ilk atamalarda ve '
+$NOT_ESKI = ' Yönergenin geçiş hükmü uyarınca doktor öğretim üyeliğine ilk atamalarda ve '
     .'profesörlük atamalarında bir yıl, doktor öğretim üyeliğine yeniden atanmada iki yıl '
     .'süreyle 29.11.2018 tarihli eski yönerge uygulanıyor.';
 $NOT_KAZI = ' Kazı ve yüzey araştırması faaliyetleri ile Üniversiteye bağlı '

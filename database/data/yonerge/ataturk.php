@@ -31,7 +31,7 @@ return [
         'notlar' => 'A grubu: 0 ve 2. bölgelerden toplam en az 100 puan; makalelerden en az 40 puan. '
             .'Tablo dipnotu: "En az 18 puanın SCIE, SSCI veya AHCI kapsamındaki dergilerde yapılan '
             .'tam metin makalelerden alınması gerekir." YDS en az 70.',
-        'sart' => ['tip' => 've', 'aciklama' => 'A grubu — Dr. Öğr. Üyesi', 'cocuklar' => [
+        'sart' => ['tip' => 've', 'aciklama' => 'Dr. Öğr. Üyesi kadrosuna atanma', 'cocuklar' => [
             Kalip::toplam(100),
             Kalip::puanDan('Makalelerden en az 40 puan', ['MAKALE'], 40),
             Kalip::puanDan('Bunun en az 18 puanı SCIE/SSCI/AHCI dergilerden', ['INDEKS_SCIE_SSCI_AHCI'], 18),
@@ -49,7 +49,7 @@ return [
             .'"İç Mimarlık, Mimarlık, Şehir ve Bölge Planlama, Matematik ve İstatistik bölümleri için '
             .'en az 9 puanın SCIE, SSCI veya AHCI kapsamındaki dergilerde yapılan yayınlardan '
             .'alınması gerekir." YDS en az 70.',
-        'sart' => ['tip' => 've', 'aciklama' => 'A grubu (Mimarlık) — Dr. Öğr. Üyesi', 'cocuklar' => [
+        'sart' => ['tip' => 've', 'aciklama' => 'Dr. Öğr. Üyesi kadrosuna atanma (Mimarlık)', 'cocuklar' => [
             Kalip::toplam(100),
             Kalip::puanDan('Makalelerden en az 40 puan', ['MAKALE'], 40),
             Kalip::puanDan('Bunun en az 9 puanı SCIE/SSCI/AHCI dergilerden', ['INDEKS_SCIE_SSCI_AHCI'], 9),
@@ -66,7 +66,7 @@ return [
         'notlar' => 'B grubu: 0 ve 2. bölgelerden toplam en az 100 puan; makalelerden en az 30 puan. '
             .'Tablo dipnotu: "En az 12 puanın SCIE, SSCI, AHCI, ESCI veya SCOPUS kapsamındaki '
             .'dergilerde yapılan yayınlardan alınması gerekir." YDS en az 70.',
-        'sart' => ['tip' => 've', 'aciklama' => 'B grubu — Dr. Öğr. Üyesi', 'cocuklar' => [
+        'sart' => ['tip' => 've', 'aciklama' => 'Dr. Öğr. Üyesi kadrosuna atanma', 'cocuklar' => [
             Kalip::toplam(100),
             Kalip::puanDan('Makalelerden en az 30 puan', ['MAKALE'], 30),
             Kalip::puanDan('Bunun en az 12 puanı SCIE/SSCI/AHCI/ESCI/Scopus dergilerden', ['INDEKS_GENIS'], 12),
@@ -82,7 +82,7 @@ return [
         'cetvel' => 'ataturk-2026',
         'notlar' => 'B grubu (Hukuk): Tablo dipnotu: "Hukuk temel alanı için en az 5 puanın SCIE, SSCI, '
             .'AHCI, ESCI veya SCOPUS kapsamındaki dergilerde yapılan yayınlardan alınması gerekir." YDS en az 70.',
-        'sart' => ['tip' => 've', 'aciklama' => 'B grubu (Hukuk) — Dr. Öğr. Üyesi', 'cocuklar' => [
+        'sart' => ['tip' => 've', 'aciklama' => 'Dr. Öğr. Üyesi kadrosuna atanma (Hukuk)', 'cocuklar' => [
             Kalip::toplam(100),
             Kalip::puanDan('Makalelerden en az 30 puan', ['MAKALE'], 30),
             Kalip::puanDan('Bunun en az 5 puanı SCIE/SSCI/AHCI/ESCI/Scopus dergilerden', ['INDEKS_GENIS'], 5),
@@ -99,7 +99,7 @@ return [
         'alan' => ['fen', 'mimarlik', 'muhendislik', 'saglik', 'ziraat'],
         'cetvel' => 'ataturk-2026',
         'notlar' => 'A grubu: ÜAK doçent unvanı + doçentlik havuz puanından toplam en az 100 puan. YDS en az 70.',
-        'sart' => ['tip' => 've', 'aciklama' => 'A grubu — Doçent', 'cocuklar' => [
+        'sart' => ['tip' => 've', 'aciklama' => 'Doçent kadrosuna atanma', 'cocuklar' => [
             Kalip::toplam(100),
             Kalip::adet('SCIE/SSCI veya AHCI dergilerinde en az 2 tam metin makale', ['INDEKS_SCIE_SSCI_AHCI'], 2),
             Kalip::ve('AR-GE projesi koşulu', [
@@ -122,7 +122,7 @@ return [
         'alan' => ['sosyal', 'egitim', 'filoloji', 'guzel_sanatlar', 'hukuk', 'ilahiyat', 'spor'],
         'cetvel' => 'ataturk-2026',
         'notlar' => 'B grubu: ÜAK doçent unvanı + doçentlik havuz puanından toplam en az 80 puan. YDS en az 70.',
-        'sart' => ['tip' => 've', 'aciklama' => 'B grubu — Doçent', 'cocuklar' => [
+        'sart' => ['tip' => 've', 'aciklama' => 'Doçent kadrosuna atanma', 'cocuklar' => [
             Kalip::toplam(80),
             Kalip::adet('SCIE/SSCI/AHCI/ESCI/Scopus kapsamında en az 1 tam metin makale', ['INDEKS_GENIS'], 1),
             Kalip::ve('AR-GE projesi koşulu', [
@@ -146,7 +146,7 @@ return [
         'notlar' => 'A grubu: ÜAK doçentlik belgesi + tüm bölgelerden toplam en az 250 puan; makalelerden '
             .'en az 60 puan. Tablo dipnotu: "En az 30 puanın SCIE, SSCI veya AHCI kapsamındaki '
             .'dergilerde yapılan tam metin makalelerden alınması gerekir." YDS en az 70.',
-        'sart' => ['tip' => 've', 'aciklama' => 'A grubu — Profesör', 'cocuklar' => [
+        'sart' => ['tip' => 've', 'aciklama' => 'Profesör kadrosuna atanma', 'cocuklar' => [
             Kalip::toplam(250),
             Kalip::puanDan('Makalelerden en az 60 puan', ['MAKALE'], 60),
             Kalip::puanDan('Bunun en az 30 puanı SCIE/SSCI/AHCI dergilerden', ['INDEKS_SCIE_SSCI_AHCI'], 30),
@@ -168,7 +168,7 @@ return [
         'notlar' => 'A grubu (Mimarlık): Tablo dipnotu: "İç Mimarlık, Mimarlık, Şehir ve Bölge Planlama, '
             .'Matematik ve İstatistik bölümleri için en az 20 puanın SCIE, SSCI veya AHCI kapsamındaki '
             .'dergilerde yapılan yayınlardan alınması gereklidir." YDS en az 70.',
-        'sart' => ['tip' => 've', 'aciklama' => 'A grubu (Mimarlık) — Profesör', 'cocuklar' => [
+        'sart' => ['tip' => 've', 'aciklama' => 'Profesör kadrosuna atanma (Mimarlık)', 'cocuklar' => [
             Kalip::toplam(250),
             Kalip::puanDan('Makalelerden en az 60 puan', ['MAKALE'], 60),
             Kalip::puanDan('Bunun en az 20 puanı SCIE/SSCI/AHCI dergilerden', ['INDEKS_SCIE_SSCI_AHCI'], 20),
@@ -190,7 +190,7 @@ return [
         'notlar' => 'B grubu: ÜAK doçentlik belgesi + tüm bölgelerden toplam en az 200 puan; makalelerden '
             .'en az 30 puan. Tablo dipnotu: "En az 20 puanın SCIE, SSCI, AHCI, ESCI veya SCOPUS '
             .'kapsamındaki dergilerde yapılan yayınlardan alınması gerekir." YDS en az 70.',
-        'sart' => ['tip' => 've', 'aciklama' => 'B grubu — Profesör', 'cocuklar' => [
+        'sart' => ['tip' => 've', 'aciklama' => 'Profesör kadrosuna atanma', 'cocuklar' => [
             Kalip::toplam(200),
             Kalip::puanDan('Makalelerden en az 30 puan', ['MAKALE'], 30),
             Kalip::puanDan('Bunun en az 20 puanı SCIE/SSCI/AHCI/ESCI/Scopus dergilerden', ['INDEKS_GENIS'], 20),

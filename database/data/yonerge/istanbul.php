@@ -321,8 +321,8 @@ $SON_DORT_YIL = Kalip::sonYil(4);
 
 $KONSERVATUVAR_NOTU = 'Sanatsal etkinliklerin uluslararası ve ulusal satırları kayıtta ayrı etiketi '
     .'olmayan kalemlerde (orkestra ve koro üyeliği, audio yayın, radyo-televizyon katılımı, '
-    .'yarışma derecesi) tek satıra düştü ve ulusal değerden sayılıyor; 2. maddenin çeviri '
-    .'bentleri ile 4 ve 6. maddelerin karma dinleti ve oda müziği organizasyonu bentleri '
+    .'yarışma derecesi) tek satıra düştü ve ulusal değerden sayılıyor; çeviri '
+    .'satırları ile karma dinleti ve oda müziği organizasyonu satırları '
     .'kayıtta karşılıksız olduğu için girilmedi. Akademik faaliyet çizelgesinin formüllü kalemleri (makalede '
     .'etki faktörü, h-indeksi) burada da eksik, yani toplam puanınız gerçeğinden düşük '
     .'olabilir, yüksek olamaz.';

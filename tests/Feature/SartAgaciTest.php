@@ -3647,7 +3647,7 @@ test('Yalova profesörlüğü puanın beş ayrı maddeye dağılmasını istiyor
     $depo = sartDepo();
     $esik = $depo->bul('Yalova Üniversitesi', 'profesorluk', 'sosyal');
     $profil = new Profil(docentlikTarihi: Carbon::parse('2019-01-01'));
-    $ad = 'en az BEŞ ayrı maddesinden';
+    $ad = 'en az BEŞ ayrı bölümünden';
 
     // Sekiz Q1 makale 160 puan eder ama hepsi tek maddeden; beş madde koşulu
     // açılmıyor.

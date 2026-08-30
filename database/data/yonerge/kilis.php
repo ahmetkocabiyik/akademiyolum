@@ -50,7 +50,8 @@ $sanatNotu = 'Sanat ve Tasarım Dalları girilemedi: o alanın koşulu çizelgen
     .'puan sütunu kaynak yönergeden çıkarılamadı.';
 
 $yenidenAtamaNotu = 'Yeniden atanmada koşullar bir önceki atanma tarihinden sonraki '
-    .'çalışmalara bakıyor (1-6. maddelerden 40 puan ya da belirli sayıda makale). Atama '
+    .'çalışmalara bakıyor (makale, kitap, bildiri, atıf, proje yürütücülüğü ve konferans kalemlerinden 40 puan ya '
+    .'da belirli sayıda makale). Atama '
     .'tarihi burada tutulmadığı için yeniden atanma eşiği girilmedi.';
 
 return [
@@ -65,7 +66,8 @@ return [
         'alan' => $fenGrubu,
         'cetvel' => 'kilis-2019',
         'notlar' => 'Madde 7/3-a: SCI, SCI-Expanded veya AHCI dergide birinci isim 1 makale ya '
-            .'da aynı gruptan 2 makale ya da çizelgenin 1-6. maddelerinden en az 50 puan.',
+            .'da aynı gruptan 2 makale ya da çizelgenin makale, kitap, bildiri, atıf, proje yürütücülüğü ve konferans kalemlerinden '
+            .'en az 50 puan.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Fen ve Sağlık Bilimleri', [
             Kalip::veya('Aşağıdaki seçeneklerden birini sağlamak', [
                 Kalip::adet('SCI, SCI-Expanded veya AHCI dergide birinci isim olarak en az 1 makale',
@@ -88,8 +90,9 @@ return [
         'alan' => $sosyalGrubu,
         'cetvel' => 'kilis-2019',
         'notlar' => 'Madde 7/3-b: uluslararası hakemli dergide birinci isim 1 makale ya da '
-            .'ulusal hakemli dergide birinci isim 2 makale ya da çizelgenin 1-6. maddelerinden '
-            .'en az 50 puan.',
+            .'ulusal hakemli dergide birinci isim 2 makale ya da çizelgenin '
+            .'makale, kitap, bildiri, atıf, proje yürütücülüğü ve konferans '
+            .'kalemlerinden en az 50 puan.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sosyal Bilimler, Beden Eğitimi ve Spor', [
             Kalip::veya('Aşağıdaki seçeneklerden birini sağlamak', [
                 Kalip::adet('Uluslararası hakemli dergide birinci isim olarak en az 1 makale',

@@ -323,7 +323,7 @@ $esikler[] = [
     'cetvel' => 'musku-2013-sosyal',
     'notlar' => 'Madde 9(1)-b: A, B, C grubundan 125 puan, toplam 150 puan.',
     'sart' => Kalip::ve('Doktor Öğretim Üyesi kadrosuna yeniden atanma — sosyal ve eğitim bilimleri', [
-        Kalip::puanDan('Son üç yılda A, B ve C grubu akademik etkinliklerden en az 125 puan', ['ABC'], 125, $SON_3_YIL, madde: '9-1-b'),
+        Kalip::puanDan('Son üç yılda makale, bildiri ve kitap kalemlerinizden en az 125 puan', ['ABC'], 125, $SON_3_YIL, madde: '9-1-b'),
         Kalip::toplam(150, $SON_3_YIL),
     ]),
 ];
@@ -343,14 +343,14 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'musku-sosyal-profesorluk',
     'aday_notu' => 'tüm faaliyetlerinizden toplam 1000 puan isteniyor; bunun en az 500 puanı doçentlik '
-        .'unvanınızı aldıktan sonra ve A, B, C grubu akademik etkinliklerden gelmeli.',
+        .'unvanınızı aldıktan sonra ve makale, bildiri ile kitap kalemlerinden gelmeli.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
     'alan' => $SOSYAL,
     'cetvel' => 'musku-2013-sosyal',
     'notlar' => 'Madde 9(3)-a: 1000 puan, 500\'ü doçentlik sonrası A, B, C grubundan.',
     'sart' => Kalip::ve('Profesör kadrosuna atanma — sosyal ve eğitim bilimleri', [
-        Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra A, B ve C grubu akademik etkinliklerden en az 500 puan', ['ABC'], 500, $DOCENTLIK, madde: '9-3-a'),
+        Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra makale, bildiri ve kitap kalemlerinizden en az 500 puan', ['ABC'], 500, $DOCENTLIK, madde: '9-3-a'),
         Kalip::toplam(1000),
     ]),
 ];

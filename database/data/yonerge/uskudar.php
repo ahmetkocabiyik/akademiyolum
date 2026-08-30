@@ -164,7 +164,7 @@ return [
         'anahtar' => 'uskudar-dr-yeniden',
         'aday_notu' => 'Doktor öğretim üyeliğinin görev süresi en çok üç yıl; uzatma için üç '
             .'koşul da SON ATAMANIZDAN SONRAKİ çalışmalarınıza bakıyor: tablodan 80 puan, '
-            .'A grubu (Scopus veya WoS) dergilerde en az bir özgün makale ya da onun yerine '
+            .'Scopus ya da WoS dergilerinde en az bir özgün makale ya da onun yerine '
             .'TR Dizin dergilerinde en az iki makale, ve bir proje ya da patent başvurusu. '
             .'Son atama tarihinizi profilinize girmezseniz bu eşik hesaplanamaz. '.$carpanNotu,
         'universite' => 'Üsküdar Üniversitesi',
@@ -181,7 +181,7 @@ return [
             Kalip::toplam(80, $SON_ATAMA),
             Kalip::veya('Son atamanızdan sonra yayın koşulu', [
                 Kalip::adet(
-                    'A grubu (Scopus veya WoS) dergilerde en az 1 makale ya da derleme',
+                    'Scopus ya da WoS dergilerinde en az 1 makale ya da derleme',
                     ['A-GRUBU-DERGI'], 1, donem: $SON_ATAMA, madde: 'Madde 17/b',
                 ),
                 Kalip::adet(

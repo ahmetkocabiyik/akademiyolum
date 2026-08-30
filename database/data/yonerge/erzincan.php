@@ -82,7 +82,7 @@ $drYeniden = fn (string $grup, int $sayi, string $madde): array => Kalip::ve('Do
  * Madde 1 dergilerinde, en az birinde sorumlu yazar olmak üzere 2 yayın.
  */
 $profFen = fn (string $madde): array => Kalip::ve('Profesörlük koşulları', [
-    Kalip::adet('Makaleler başlığının 1. maddesinde tanımlanan dergilerde en az 2 yayın', ['MAKALE-1-TUM'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
+    Kalip::adet('SSCI, SCI-Expanded ve AHCI dergilerinde en az 2 yayın', ['MAKALE-1-TUM'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
     Kalip::adet('Bu yayınlardan en az birinde sorumlu yazar olmak', ['MAKALE-1-TUM'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
     Kalip::toplam(200, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['PUAN'], liste: $PUAN_ADI),
     Kalip::toplam(250, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM-DERS-HARIC'], liste: 'Verdiğiniz dersler dışındaki tüm faaliyet'),
@@ -95,9 +95,9 @@ $profFen = fn (string $madde): array => Kalip::ve('Profesörlük koşulları', [
  */
 $profSosyal = fn (int $puan, int $toplam, string $puanGrup, string $madde): array => Kalip::ve('Profesörlük koşulları', [
     Kalip::veya('Makaleler başlığında yayın koşulu', [
-        Kalip::adet('1, 2, 3 ve 4. maddelerde tanımlanan dergilerde en az 4 yayın', ['MAKALE-1-4-TUM'], 4, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
-        Kalip::adet('1. maddede tanımlanan dergilerde en az 1 yayın', ['MAKALE-1-TUM'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
-        Kalip::adet('2. maddede tanımlanan dergilerde en az 2 yayın', ['MAKALE-2-TUM'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
+        Kalip::adet('SSCI-SCI-AHCI, ESCI, diğer uluslararası indeksli ve TR Dizin dergilerinde en az 4 yayın', ['MAKALE-1-4-TUM'], 4, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
+        Kalip::adet('SSCI, SCI-Expanded ya da AHCI dergilerinde en az 1 yayın', ['MAKALE-1-TUM'], 1, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
+        Kalip::adet('ESCI, Scopus ve TR Dizin dergilerinde en az 2 yayın', ['MAKALE-2-TUM'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
     ]),
     Kalip::adet('Yayınlarınızdan en az birinde sorumlu yazar olmak', ['MAKALE-1-4-TUM'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: $madde.'/1'),
     Kalip::toplam($puan, donem: Kalip::DOCENTLIK_SONRASI, maddeler: [$puanGrup], liste: $PUAN_GRUP_ADI[$puanGrup]),
@@ -188,7 +188,7 @@ return [
         'cetvel' => 'erzincan-2021',
         'notlar' => 'Madde 6/b: 1, 2, 3 veya 4. maddelerde en az 1 özgün makale; yılda ortalama '
             .'15 puan.',
-        'aday_notu' => 'Yeniden atamada 1-4. maddelerdeki dergilerde en az bir özgün makale '
+        'aday_notu' => 'Yeniden atamada uluslararası indeksli ve TR Dizin dergilerinde en az bir özgün makale '
             .'aranıyor. '.$YENIDEN_NOTU,
         'sart' => $drYeniden('MAKALE-1-4', 1, 'Madde 6/b'),
     ],
@@ -200,7 +200,8 @@ return [
         'cetvel' => 'erzincan-2021',
         'notlar' => 'Madde 8/b: en az 1 yayında sorumlu yazar olmak koşuluyla 1-4. maddelerde 4 '
             .'veya 1. maddede 1 veya 2. maddede 2 yayın; 200 ve 250 puan barajları.',
-        'aday_notu' => 'Yayın koşulunu üç yoldan biriyle sağlayabilirsiniz: 1-4. maddelerdeki '
+        'aday_notu' => 'Yayın koşulunu üç yoldan biriyle sağlayabilirsiniz: uluslararası indeksli '
+            .'ve TR Dizin '
             .'dergilerde toplam dört yayın, ya da SSCI-SCI-AHCI kapsamında tek bir yayın, ya da '
             .'ESCI-alan indeksleri kapsamında iki yayın. Hangi yolu seçerseniz seçin en az bir '
             .'yayında sorumlu yazar olmanız gerekiyor. Puan barajları 200 (makale, kitap, '
@@ -257,7 +258,8 @@ return [
         'notlar' => 'Madde 5/ç: 1, 2, 3 veya 4. maddelerde en az 1 özgün makale; ilgili '
             .'başlıklardan en az 40 puan.',
         'aday_notu' => 'İlahiyat, Filoloji, Sosyal-Beşerî-İdari Bilimler ve Eğitim Bilimleri '
-            .'temel alanlarında zorunlu makale 1-4. maddelerdeki dergilerin herhangi birinden '
+            .'temel alanlarında zorunlu makale uluslararası indeksli ve TR Dizin '
+            .'dergilerinin herhangi birinden '
             .'olabilir; TR-Dizin makalesi de kabul ediliyor. '.$DR_NOTU,
         'sart' => $drIlk('MAKALE-1-4', 'PUAN', 'Madde 5/ç'),
     ],
@@ -281,7 +283,8 @@ return [
         'cetvel' => 'erzincan-2021',
         'notlar' => 'Madde 8/ç: en az 1 yayında sorumlu yazar olmak koşuluyla 1-4. maddelerde 4 '
             .'veya 1. maddede 1 veya 2. maddede 2 yayın; 200 ve 250 puan barajları.',
-        'aday_notu' => 'Yayın koşulunu üç yoldan biriyle sağlayabilirsiniz: 1-4. maddelerdeki '
+        'aday_notu' => 'Yayın koşulunu üç yoldan biriyle sağlayabilirsiniz: uluslararası indeksli '
+            .'ve TR Dizin '
             .'dergilerde toplam dört yayın, SSCI-SCI-AHCI kapsamında tek yayın, ya da ESCI-alan '
             .'indeksleri kapsamında iki yayın. En az bir yayında sorumlu yazar olmanız '
             .'gerekiyor. '.$PROF_NOTU,
@@ -297,7 +300,8 @@ return [
         'cetvel' => 'erzincan-2021',
         'notlar' => 'Madde 5/d: 1, 2, 3 veya 4. maddelerde en az 1 özgün makale; ilgili '
             .'başlıklardan en az 40 puan.',
-        'aday_notu' => 'Hukuk temel alanında ilk atama için 1-4. maddelerdeki dergilerin '
+        'aday_notu' => 'Hukuk temel alanında ilk atama için uluslararası indeksli ve TR Dizin '
+            .'dergilerinin '
             .'herhangi birinde bir özgün makale yeterli. '.$DR_NOTU,
         'sart' => $drIlk('MAKALE-1-4', 'PUAN', 'Madde 5/d'),
     ],
@@ -311,14 +315,15 @@ return [
             .'üretilmemiş, ders kitabı niteliği dışında en az 1 özgün bilimsel kitap; yılda '
             .'ortalama 15 puan.',
         'aday_notu' => 'Hukukta yeniden atamanın yayın koşulunu iki yoldan sağlayabilirsiniz: '
-            .'1-4. maddelerdeki dergilerde iki özgün makale, ya da ders kitabı niteliğinde '
+            .'uluslararası indeksli ve TR Dizin dergilerinde iki özgün makale, ya da ders '
+            .'kitabı niteliğinde '
             .'olmayan ve lisansüstü tezinizden üretilmemiş bir özgün bilimsel kitap. Araç '
             .'kitabın tezden üretilip üretilmediğini bilmediği için bu ayrımı '
             .'değerlendiremiyor; kitabınız tezinizden üretildiyse koşul sağlanmış '
             .'görünse de kabul edilmez. '.$YENIDEN_NOTU,
         'sart' => Kalip::ve('Doktor öğretim üyeliğine yeniden atama koşulları', [
             Kalip::veya('Yayın koşulu', [
-                Kalip::adet('1, 2, 3 veya 4. maddelerde tanımlanan dergilerde en az 2 özgün makale', ['MAKALE-1-4'], 2, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Madde 6/d-1'),
+                Kalip::adet('SSCI-SCI-AHCI, ESCI, diğer uluslararası indeksli ve TR Dizin dergilerinde en az 2 özgün makale', ['MAKALE-1-4'], 2, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Madde 6/d-1'),
                 Kalip::adet('Ders kitabı niteliği dışında, lisansüstü tezlerden üretilmemiş en az 1 özgün bilimsel kitap', ['KITAP-OZGUN'], 1, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Madde 6/d-1'),
             ]),
             Kalip::hesaplanamiyor('Makaleler, Kitap-Kitap Bölümleri, Bildiriler, Atıflar ve Projeler başlığındaki faaliyetlerden her bir yıl için ortalama en az 15 puan almak', 'Madde 6/d-2'),
@@ -334,8 +339,9 @@ return [
             .'200 (diğer alanlarda 200 ve 250).',
         'aday_notu' => 'Hukuk temel alanında puan barajları diğer alanlardan düşük: makale, '
             .'kitap, bildiri, atıf ve projeden 150 puan; dersler dışındaki tüm faaliyetlerden '
-            .'200 puan. Yayın koşulu ise aynı: 1-4. maddelerde dört yayın, 1. maddede bir yayın '
-            .'ya da 2. maddede iki yayın; en az birinde sorumlu yazar. '.$PROF_NOTU,
+            .'200 puan. Yayın koşulu ise aynı: makale kalemlerinden dört yayın, '
+            .'SSCI-SCI-AHCI dergilerinde bir yayın '
+            .'ya da ESCI, Scopus ve TR Dizin dergilerinde iki yayın; en az birinde sorumlu yazar. '.$PROF_NOTU,
         'sart' => $profSosyal(150, 200, 'PUAN', 'Madde 8/d'),
     ],
 
@@ -355,7 +361,7 @@ return [
             .'olduğundan düşük çıkabilir. '.$DR_NOTU,
         'sart' => Kalip::ve('Doktor öğretim üyeliğine ilk atama koşulları', [
             Kalip::yds(55),
-            Kalip::adet('1, 2, 3 veya 4. maddelerde tanımlanan dergilerde en az 1 özgün makale', ['MAKALE-1-4'], 1, madde: 'Madde 5/e-1'),
+            Kalip::adet('SSCI-SCI-AHCI, ESCI, diğer uluslararası indeksli ve TR Dizin dergilerinde en az 1 özgün makale', ['MAKALE-1-4'], 1, madde: 'Madde 5/e-1'),
             Kalip::toplam(40, maddeler: ['PUAN'], liste: $PUAN_ADI),
             Kalip::toplam(50, maddeler: ['SANAT'], liste: 'Sanatsal etkinlik ve ödül'),
         ]),
@@ -369,11 +375,11 @@ return [
         'notlar' => 'Madde 6/e: 1-5. maddelerde en az 2 özgün makale; yılda ortalama 15 puan; '
             .'Sanat ve Tasarım Etkinliklerinden yılda ortalama 15 puan.',
         'aday_notu' => 'Yeniden atamada iki özgün makale isteniyor ve makale koşulu diğer '
-            .'alanlardan geniş: 5. maddedeki diğer hakemli dergiler de sayılıyor. İki ayrı '
+            .'alanlardan geniş: diğer hakemli dergiler de sayılıyor. İki ayrı '
             .'yıllık ortalama koşulu (15 puan bilimsel, 15 puan sanatsal) araç tarafından '
             .'hesaplanamıyor. '.$YENIDEN_NOTU,
         'sart' => Kalip::ve('Doktor öğretim üyeliğine yeniden atama koşulları', [
-            Kalip::adet('1, 2, 3, 4 veya 5. maddelerde tanımlanan dergilerde en az 2 özgün makale', ['MAKALE-1-5'], 2, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Madde 6/e-1'),
+            Kalip::adet('SSCI-SCI-AHCI, ESCI, diğer uluslararası indeksli, TR Dizin ve diğer hakemli dergilerde en az 2 özgün makale', ['MAKALE-1-5'], 2, donem: Kalip::SON_ATAMA_SONRASI, madde: 'Madde 6/e-1'),
             Kalip::hesaplanamiyor('Makaleler, Kitap-Kitap Bölümleri, Bildiriler, Atıflar ve Projeler başlığındaki faaliyetlerden her bir yıl için ortalama en az 15 puan almak', 'Madde 6/e-2'),
             Kalip::hesaplanamiyor('Sanat ve Tasarım Etkinlikleri başlığındaki faaliyetlerden her bir yıl için ortalama en az 15 puan almak', 'Madde 6/e-3'),
         ]),
@@ -386,13 +392,14 @@ return [
         'cetvel' => 'erzincan-2021',
         'notlar' => 'Madde 8/e: 1-4. maddelerde en az 3 yayın; ilgili başlıklardan 80 puan; '
             .'Dersler dışındaki tüm faaliyetlerden 250 puan. Sorumlu yazar koşulu yok.',
-        'aday_notu' => 'Güzel Sanatlarda profesörlük için 1-4. maddelerdeki dergilerde üç yayın '
+        'aday_notu' => 'Güzel Sanatlarda profesörlük için uluslararası indeksli ve TR Dizin '
+            .'dergilerinde üç yayın '
             .'gerekiyor; bu alanda sorumlu yazarlık koşulu aranmıyor. Puan barajları da farklı: '
             .'makale, kitap, bildiri, atıf ve projeden yalnızca 80 puan, ama dersler dışındaki '
             .'tüm faaliyetlerden 250 puan. Aradaki farkı Sanat ve Tasarım Etkinlikleri '
             .'kapatıyor. '.$PROF_NOTU,
         'sart' => Kalip::ve('Profesörlük koşulları', [
-            Kalip::adet('1, 2, 3 veya 4. maddelerde tanımlanan dergilerde en az 3 yayın', ['MAKALE-1-4-TUM'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 8/e-1'),
+            Kalip::adet('SSCI-SCI-AHCI, ESCI, diğer uluslararası indeksli ve TR Dizin dergilerinde en az 3 yayın', ['MAKALE-1-4-TUM'], 3, donem: Kalip::DOCENTLIK_SONRASI, madde: 'Madde 8/e-1'),
             Kalip::toplam(80, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['PUAN'], liste: $PUAN_ADI),
             Kalip::toplam(250, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM-DERS-HARIC'], liste: 'Verdiğiniz dersler dışındaki tüm faaliyet'),
         ]),
@@ -421,7 +428,7 @@ return [
         'alan' => $SPOR,
         'cetvel' => 'erzincan-2021',
         'notlar' => 'Madde 6/f: 1-5. maddelerde en az 2 özgün makale; yılda ortalama 15 puan.',
-        'aday_notu' => 'Yeniden atamada iki özgün makale isteniyor; 5. maddedeki diğer hakemli '
+        'aday_notu' => 'Yeniden atamada iki özgün makale isteniyor; diğer hakemli '
             .'dergiler de sayılıyor. '.$YENIDEN_NOTU,
         'sart' => $drYeniden('MAKALE-1-5', 2, 'Madde 6/f'),
     ],
