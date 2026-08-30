@@ -80,7 +80,7 @@ $alan = function (
         [
             'anahtar' => "adiyaman-docent-{$anahtar}",
             'aday_notu' => 'Adıyaman yönergesi doçentlik için kendi puan tablosunu uygulamıyor; '
-                .'Madde 21 yalnızca ÜAK doçentlik unvanını şart koşuyor. Bu yüzden burada puan '
+                .'Yönerge yalnızca ÜAK doçentlik unvanını şart koşuyor. Bu yüzden burada puan '
                 .'barajı görmüyorsunuz — eksik veri değil, yönergede öyle.',
             'universite' => 'Adıyaman Üniversitesi',
             'kadro' => 'docentlik',
@@ -95,7 +95,7 @@ $alan = function (
         ],
         [
             'anahtar' => "adiyaman-profesor-{$anahtar}",
-            'aday_notu' => 'Ön koşul iki seçenekli: doçentlik sonrası A.1 kapsamında bir makale '
+            'aday_notu' => 'Ön koşul iki seçenekli: doçentlik sonrası dizinli bir dergide bir makale '
                 .'ya da tek yazarlı veya lisansüstü öğrencinizle birlikte yazılmış, tezinizden '
                 .'üretilmemiş bir kitap.',
             'universite' => 'Adıyaman Üniversitesi',

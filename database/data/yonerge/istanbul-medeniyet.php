@@ -141,7 +141,7 @@ $esikler = [
     [
         'anahtar' => 'istanbul-medeniyet-dr-yeniden',
         'aday_notu' => 'Yeniden atanmada (görev süresi uzatımı) yönerge ilk atanma şartlarının '
-            .'aynısını arıyor (MADDE 8/1 son cümle); dönem kısıtı koymadığı için bütün '
+            .'aynısını arıyor; dönem kısıtı koymadığı için bütün '
             .'çalışmalarınız sayılıyor. '.$drNotu,
         'universite' => $UNIVERSITE,
         'kadro' => 'dr_ogr_uyesi_yeniden',

@@ -166,10 +166,11 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'afyon-saglik-profesor-fen-saglik',
-    'aday_notu' => 'Doçentlik unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: A.1 veya A.2 '
-        .'kategorisinde (SCI, SCI-Expanded, SSCI, AHCI) en az 1 başlıca yazarlı makaleniz; A.1, '
-        .'A.2 veya TR Dizin\'de en az 1 başlıca yazarlı makale DAHA (toplamda en az 2 başlıca '
-        .'yazarlı makale, en az biri A.1/A.2\'den); A.1-A.3 kalemlerinden en az 400 puan ve '
+    'aday_notu' => 'Doçentlik unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: SCI, '
+        .'SCI-Expanded, SSCI ya da AHCI dergisinde en az 1 başlıca yazarlı makaleniz; bu '
+        .'dergilerde ya da TR Dizin\'de en az 1 başlıca yazarlı makale DAHA (toplamda en az 2 '
+        .'başlıca yazarlı makale, en az biri dizinli dergiden); dizinli dergilerdeki '
+        .'makalelerinizden en az 400 puan ve '
         .'doçentlik sonrası toplamdan en az 800 puan gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
@@ -182,15 +183,15 @@ $esikler[] = [
     'sart' => Kalip::ve('Profesör kadrosuna atanma', [
         Kalip::beyan('Doçent unvanını aldıktan sonra en az 5 yıl süreyle ilgili bilim alanında çalışmış olmak', 'Madde VII/1-c'),
         Kalip::adet(
-            'Doçentlik unvanınızdan sonra A.1 veya A.2 kategorisinde en az 1 başlıca yazarlı makaleniz olmalı',
+            'Doçentlik unvanınızdan sonra SCI, SCI-Expanded, SSCI ve AHCI dergilerinde en az 1 başlıca yazarlı makaleniz olmalı',
             ['A1-A2'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'Madde VII/1-e',
         ),
         Kalip::adet(
-            'Doçentlik unvanınızdan sonra A.1, A.2 veya TR Dizin\'de toplam en az 2 başlıca yazarlı makaleniz olmalı',
+            'Doçentlik unvanınızdan sonra SCI, SCI-Expanded, SSCI, AHCI ya da TR Dizin dergilerinde toplam en az 2 başlıca yazarlı makaleniz olmalı',
             ['A1-A2-TRDIZIN'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: 'Madde VII/1-f',
         ),
         Kalip::puanDan(
-            'Doçentlik unvanınızdan sonra A.1-A.3 kalemlerinizden en az 400 puan',
+            'Doçentlik unvanınızdan sonra SCI, SCI-Expanded, SSCI, AHCI, ESCI ve TR Dizin dergilerindeki makalelerinizden en az 400 puan',
             ['A1-A2-A3'], 400, $DOCENTLIK, madde: 'Madde VII/1-h',
         ),
         Kalip::toplam(800, $DOCENTLIK),
@@ -199,8 +200,9 @@ $esikler[] = [
 
 $esikler[] = [
     'anahtar' => 'afyon-saglik-profesor-sosyal',
-    'aday_notu' => 'Doçentlik unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: A.1, A.2 veya '
-        .'A.3 kategorisinde toplam en az 2 başlıca yazarlı makaleniz olmalı; aynı kalemlerden '
+    'aday_notu' => 'Doçentlik unvanınızdan SONRAKİ çalışmalarınıza bakılıyor: SCI, '
+        .'SCI-Expanded, SSCI, AHCI, ESCI ya da TR Dizin dergilerinde toplam en az 2 başlıca '
+        .'yazarlı makaleniz olmalı; aynı kalemlerden '
         .'en az 400 puan ve doçentlik sonrası toplamdan en az 800 puan gerekiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
@@ -212,11 +214,11 @@ $esikler[] = [
     'sart' => Kalip::ve('Profesör kadrosuna atanma', [
         Kalip::beyan('Doçent unvanını aldıktan sonra en az 5 yıl süreyle ilgili bilim alanında çalışmış olmak', 'Madde VII/1-c'),
         Kalip::adet(
-            'Doçentlik unvanınızdan sonra A.1, A.2 veya A.3 kategorisinde toplam en az 2 başlıca yazarlı makaleniz olmalı',
+            'Doçentlik unvanınızdan sonra SCI, SCI-Expanded, SSCI, AHCI, ESCI ve TR Dizin dergilerinde toplam en az 2 başlıca yazarlı makaleniz olmalı',
             ['A1-A2-A3'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: 'Madde VII/1-g',
         ),
         Kalip::puanDan(
-            'Doçentlik unvanınızdan sonra A.1-A.3 kalemlerinizden en az 400 puan',
+            'Doçentlik unvanınızdan sonra SCI, SCI-Expanded, SSCI, AHCI, ESCI ve TR Dizin dergilerindeki makalelerinizden en az 400 puan',
             ['A1-A2-A3'], 400, $DOCENTLIK, madde: 'Madde VII/1-h',
         ),
         Kalip::toplam(800, $DOCENTLIK),

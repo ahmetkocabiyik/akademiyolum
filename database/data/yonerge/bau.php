@@ -345,7 +345,7 @@ $esikler[] = [
     'notlar' => 'MADDE 7: sözleşme yenilenmesi puan barajına değil, son üç yıllık eğitim ve '
         .'araştırma faaliyetlerini değerlendiren üç kişilik jürinin raporuna bağlı.',
     'aday_notu' => 'Doktor öğretim üyesi kadrosunda SÖZLEŞME YENİLENMESİ. Bahçeşehir '
-        .'Üniversitesi yeniden atamaya sayısal bir puan barajı koymuyor: MADDE 7 her dört yılın '
+        .'Üniversitesi yeniden atamaya sayısal bir puan barajı koymuyor: yönerge her dört yılın '
         .'sonunda bir değerlendirme öngörüyor ve bu değerlendirmede son ÜÇ YILDAKİ eğitim ve '
         .'araştırma faaliyetleriniz, biri üniversite dışından olmak üzere üç kişilik bir jüri '
         .'tarafından raporlanıyor. Sözleşmeler bir ya da iki yıllık sürelerle yenileniyor.',

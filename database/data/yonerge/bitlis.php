@@ -46,8 +46,9 @@ return [
     [
         'anahtar' => 'bitlis-dr-fen',
         'aday_notu' => 'Yeniden atanmada ayrı bir puan tablosu yok; yönerge yalnızca '
-            .'"yeniden atanma puanının en az yüzde 50\'sini A.1-A.8 kategorilerinden almak", '
-            .'A.1\'den 1 yayın veya A.2 ile A.5\'ten toplam 2 yayın, ve 2 eserinize en az 10 atıf '
+            .'"yeniden atanma puanının en az yüzde 50\'sini makale ve kitap kalemlerinden almak", '
+            .'SCI-Expanded, SSCI ya da AHCI dergisinden 1 yayın veya alan indeksli ve TR Dizin '
+        .'dergilerinden toplam 2 yayın, ve 2 eserinize en az 10 atıf '
             .'şartlarını arıyor. Burada gördükleriniz ilk atama koşullarıdır.',
         'universite' => 'Bitlis Eren Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
@@ -67,8 +68,9 @@ return [
     [
         'anahtar' => 'bitlis-dr-sosyal',
         'aday_notu' => 'Yeniden atanmada ayrı bir puan tablosu yok; yönerge yalnızca '
-            .'"yeniden atanma puanının en az yüzde 50\'sini A.1-A.8 kategorilerinden almak", '
-            .'A.1\'den 1 yayın veya A.2, A.5 ve A.7.1\'den toplam 2 yayın, ve 2 eserinize en az 10 '
+            .'"yeniden atanma puanının en az yüzde 50\'sini makale ve kitap kalemlerinden almak", '
+            .'SCI-Expanded, SSCI ya da AHCI dergisinden 1 yayın veya alan indeksli, TR Dizin ve '
+        .'diğer hakemli dergilerden toplam 2 yayın, ve 2 eserinize en az 10 '
             .'atıf şartlarını arıyor. Burada gördükleriniz ilk atama koşullarıdır.',
         'universite' => 'Bitlis Eren Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
@@ -91,7 +93,7 @@ return [
         'anahtar' => 'bitlis-docent-fen',
         'aday_notu' => 'Toplam 400 puanın 200\'ü doktora unvanınızı aldıktan sonraki '
             .'çalışmalarınızdan gelmeli; ayrıca toplamın yarısı makale ve kitap kalemlerinden '
-            .'(A.1-A.8) olmalı.',
+            .'(makale ve kitap kalemlerinden) olmalı.',
         'universite' => 'Bitlis Eren Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => $fenGrubu,
@@ -112,7 +114,7 @@ return [
         'anahtar' => 'bitlis-docent-sosyal',
         'aday_notu' => 'Toplam 300 puanın 150\'si doktora unvanınızı aldıktan sonraki '
             .'çalışmalarınızdan gelmeli; ayrıca toplamın yarısı makale ve kitap kalemlerinden '
-            .'(A.1-A.8) olmalı.',
+            .'(makale ve kitap kalemlerinden) olmalı.',
         'universite' => 'Bitlis Eren Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => $sosyalGrubu,
@@ -135,8 +137,8 @@ return [
         'anahtar' => 'bitlis-profesor-fen',
         'aday_notu' => 'Atıf koşulu (8.1/d) burada beyan olarak duruyor: en az 2 eserinize '
             .'SCI-E/AHCI/ESCI/SSCI dergilerinde toplam 30 atıf, bu yoksa tüm eserlerinize '
-            .'(tezler hariç) en az 40 atıf gerekiyor. Hiçbirini sağlamıyorsanız A.1, A.2 veya '
-            .'A.5\'ten 2 yayın daha yapmanız zorunlu.',
+            .'(tezler hariç) en az 40 atıf gerekiyor. Hiçbirini sağlamıyorsanız dizinli '
+            .'dergilerden 2 yayın daha yapmanız zorunlu.',
         'universite' => 'Bitlis Eren Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => $fenGrubu,
@@ -165,7 +167,7 @@ return [
         'aday_notu' => 'Yayın koşulunun (8.1/c) üç alternatifi var; herhangi birini sağlamanız '
             .'yeterli. Atıf koşulu (8.1/d) beyan olarak duruyor: en az 2 eserinize '
             .'SCI-E/AHCI/ESCI/SSCI dergilerinde 30 atıf, bu yoksa tüm eserlerinize en az 40 atıf. '
-            .'Hiçbirini sağlamıyorsanız A.1, A.2 veya A.5\'ten 2 yayın daha yapmanız zorunlu.',
+            .'Hiçbirini sağlamıyorsanız dizinli dergilerden 2 yayın daha yapmanız zorunlu.',
         'universite' => 'Bitlis Eren Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => $sosyalGrubu,

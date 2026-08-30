@@ -99,7 +99,7 @@ return [
     [
         'anahtar' => 'batman-docent',
         'aday_notu' => 'Batman yönergesi doçentlik için kendi puan tablosunu uygulamıyor; '
-            .'Madde 11 yalnızca doçentlik unvanı ve yabancı dil şartı koyuyor. Burada puan '
+            .'Yönerge yalnızca doçentlik unvanı ve yabancı dil şartı koyuyor. Burada puan '
             .'barajı görmüyorsunuz — eksik veri değil, yönergede öyle.',
         'universite' => 'Batman Üniversitesi',
         'kadro' => 'docentlik',

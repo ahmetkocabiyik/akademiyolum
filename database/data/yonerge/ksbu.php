@@ -97,7 +97,7 @@ $esikler = [];
 
 $esikler[] = [
     'anahtar' => 'ksbu-dr-ilk',
-    'aday_notu' => 'Doktor Öğretim Üyesi kadrosuna ilk atanma üç yıl için yapılıyor. EK-1\'in '
+    'aday_notu' => 'Doktor Öğretim Üyesi kadrosuna ilk atanma üç yıl için yapılıyor. Puan çizelgesinin '
         .'makale, bildiri, kitap, proje, patent, Erasmus, ödül ve tez yönetimi kategorilerinden '
         .'toplam en az 50 puan ve Üniversitelerarası Kurulun doçentlik başvurusunda kabul ettiği '
         .'yabancı dil sınavlarının birinden dil koşulu isteniyor.',
@@ -120,7 +120,7 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'ksbu-dr-yeniden',
     'aday_notu' => 'İlk atanma tarihinizden (mükerrer atamada son atanma tarihinizden) sonraki '
-        .'faaliyetleriniz sayılıyor. EK-1\'den 50 puanı A (uluslararası makaleler) ve F (ulusal '
+        .'faaliyetleriniz sayılıyor. 50 puanı uluslararası ve ulusal '
         .'makaleler) kategorilerinden olmak üzere toplam en az 100 puan; ayrıca son üç yıl '
         .'içinde sekiz koşuldan en az birini sağlamış olmanız isteniyor. Doçentlik unvanı almış '
         .'doktor öğretim üyelerinde yeniden atanma için asgari koşul aranmıyor. Koşulları '
@@ -190,7 +190,7 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'ksbu-docentlik',
     'aday_notu' => 'Yönerge doçent kadrosuna atanmada ek bir koşul aramıyor: 2547 sayılı '
-        .'Kanunun 24. maddesi uyarınca doçentlik unvanını almış olmanız yeterli. EK-1 puan '
+        .'Kanunun 24. maddesi uyarınca doçentlik unvanını almış olmanız yeterli. Puan '
         .'tablosundan bir baraj istenmiyor.',
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
@@ -266,7 +266,7 @@ foreach ([
 ] as [$anahtar, $alanlar, $alanAdi, $toplam, $afPuan, $baslicaGrup, $baslicaAd, $md]) {
     $esikler[] = [
         'anahtar' => "ksbu-{$anahtar}-profesorluk",
-        'aday_notu' => "{$alanAdi} için EK-1'den toplam en az {$toplam} puan isteniyor; bunun "
+        'aday_notu' => "{$alanAdi} için tüm faaliyetlerinizden toplam en az {$toplam} puan isteniyor; bunun "
             .'en az 200 puanı doçentlik unvanınızı aldıktan sonraki eserlerden gelmeli. Ayrıca '
             ."doçentlik sonrası A ve F kategorilerinden en az {$afPuan} puan almanız ve "
             .mb_strtolower(mb_substr($baslicaAd, 0, 1)).mb_substr($baslicaAd, 1)

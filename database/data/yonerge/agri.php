@@ -96,7 +96,7 @@ return [
     [
         'anahtar' => 'agri-profesor-fen',
         'aday_notu' => 'Atıf kaleminden profesörlük hesabına en fazla 30 puan sayılabiliyor '
-            .'(Madde 7.1.1); bu sınır burada uygulanmıyor, atıf puanınız yüksekse gerçek '
+            .'; bu sınır burada uygulanmıyor, atıf puanınız yüksekse gerçek '
             .'toplamınız görünenden düşük olabilir. Ayrıca yayınlarınızdan birini başlıca '
             .'araştırma eseri olarak belirtmeniz gerekiyor.',
         'universite' => 'Ağrı İbrahim Çeçen Üniversitesi',

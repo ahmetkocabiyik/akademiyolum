@@ -114,7 +114,7 @@ return [
             .'maddelerden en az 350 puan ve toplam en az 700 puan.',
         'aday_notu' => 'Profesör kadrosuna atanma. Doçent unvanını aldıktan SONRA tablonun 1-12 '
             .'numaralı maddelerinden en az 350 puan ve bütün etkinliklerden toplam en az 700 '
-            .'puan gerekiyor. Ayrıca profesörlük başlıca eseri göstermelisiniz; MADDE 6(7) bunu '
+            .'puan gerekiyor. Ayrıca profesörlük başlıca eseri göstermelisiniz; yönerge bunu '
             .'beş yoldan biriyle karşılamaya izin veriyor: uluslararası indeksli bir dergide tek '
             .'yazarlı ya da ilk isim olduğunuz makale, danışmanlığını yaptığınız lisansüstü '
             .'öğrencilerle birlikte yayımlanmış makale, yürütücüsü olduğunuz projeden üretilmiş '

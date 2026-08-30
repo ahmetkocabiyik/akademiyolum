@@ -107,7 +107,7 @@ return [
     // ══════════ DOÇENT (Madde 9 — puan koşulu yok) ══════════
     [
         'anahtar' => 'kilis-docent',
-        'aday_notu' => 'Kilis 7 Aralık yönergesi doçentlik için puan koşulu koymuyor; Madde 9 '
+        'aday_notu' => 'Kilis 7 Aralık yönergesi doçentlik için puan koşulu koymuyor; yalnızca '
             .'yalnızca 2547 sayılı Kanunun 24\'üncü maddesindeki şartları arıyor. Burada baraj '
             .'görmüyorsunuz — eksik veri değil, yönergede öyle.',
         'universite' => 'Kilis 7 Aralık Üniversitesi',

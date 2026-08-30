@@ -72,7 +72,7 @@ $kayitlar = function (string $ekAdi, string $cetvel, array $alanlar, int $yenide
             'cetvel' => $cetvel,
             'notlar' => 'MADDE 4/1: Ek-1 ve Ek-2\'de verilen puanlama sistemine göre en az 90 puan.',
             'aday_notu' => 'Yönerge ilk atamada yalnız puan barajı koyuyor; yayın sayısı ya da tür '
-                .'koşulu yok. Ek-2 yazar sayısı × sıra tablosu olduğu için çok yazarlı '
+                .'koşulu yok. Yönergenin yazar sayısı × sıra tablosu olduğu için çok yazarlı '
                 .'yayınlarınızda sıranızı girmeniz puanı doğrudan etkiliyor.'.$ortakNot,
             'sart' => Kalip::ve('Doktor öğretim üyesi ilk atama koşulları', [
                 Kalip::toplam(90, maddeler: ['TUM'], liste: 'Ek-1'),

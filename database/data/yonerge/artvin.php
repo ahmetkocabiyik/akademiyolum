@@ -65,8 +65,8 @@ return [
     // ══════════ DOÇENT (puan barajı yok) ══════════
     [
         'anahtar' => 'artvin-docent',
-        'aday_notu' => 'Artvin Çoruh yönergesi doçentlik için puan barajı koymuyor; Madde 10 '
-            .'yalnızca ÜAK doçentlik unvanını şart koşuyor. Burada baraj görmüyorsunuz — eksik '
+        'aday_notu' => 'Artvin Çoruh yönergesi doçentlik için puan barajı koymuyor; yalnızca '
+            .'ÜAK doçentlik unvanını şart koşuyor. Burada baraj görmüyorsunuz — eksik '
             .'veri değil, yönergede öyle.',
         'universite' => 'Artvin Çoruh Üniversitesi',
         'kadro' => 'docentlik',
@@ -127,7 +127,7 @@ return [
     // ══════════ PROFESÖR — HUKUK, FİLOLOJİ, İLAHİYAT, SOSYAL ══════════
     [
         'anahtar' => 'artvin-profesor-sosyal',
-        'aday_notu' => 'Bu grupta makale barajı A1-A2 kümesinden ölçülüyor ve ayrıca makale, '
+        'aday_notu' => 'Bu grupta makale barajı dizinli dergilerden ölçülüyor ve ayrıca makale, '
             .'bildiri ve kitap kalemlerinin toplamından 220 puan isteniyor.',
         'universite' => 'Artvin Çoruh Üniversitesi',
         'kadro' => 'profesorluk',
@@ -136,9 +136,9 @@ return [
         'notlar' => 'Madde 9/c: A1-A2\'de 3 ilk yazar, A1-A2 110, A+B+C 220, D 10, E projesi, toplam 400.',
         'sart' => Kalip::ve('Profesör — Hukuk, Filoloji, İlahiyat, Sosyal ve Beşeri Bilimler', [
             Kalip::toplam(400, $P),
-            Kalip::adet('A1-A2 dergilerinde ilk yazar olduğunuz en az 3 makale',
+            Kalip::adet('SCI, SCI-Expanded, SSCI, AHCI ve TR Dizin dergilerinde ilk yazar olduğunuz en az 3 makale',
                 ['A1-A2'], 3, 'ilk', $P, madde: 'Madde 9/c-1'),
-            Kalip::puanDan('A1-A2 dergilerindeki makalelerinizden en az 110 puan',
+            Kalip::puanDan('SCI, SCI-Expanded, SSCI, AHCI ve TR Dizin dergilerindeki makalelerinizden en az 110 puan',
                 ['A1-A2'], 110, $P, madde: 'Madde 9/c-2'),
             Kalip::puanDan('Makale, bildiri ve kitap kalemlerinizden toplam en az 220 puan',
                 ['A-B-C'], 220, $P, madde: 'Madde 9/c-3'),
@@ -153,7 +153,7 @@ return [
     [
         'anahtar' => 'artvin-profesor-egitim',
         'aday_notu' => 'Eğitim Bilimlerinde diğer alanlardan farklı olarak makale SAYISI ayrıca '
-            .'şart: A1-A2 kapsamında en az 4 yayın, bunların en az ikisinde ilk yazar.',
+            .'şart: dizinli dergilerde en az 4 yayın, bunların en az ikisinde ilk yazar.',
         'universite' => 'Artvin Çoruh Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => ['egitim'],
@@ -163,9 +163,9 @@ return [
             Kalip::toplam(320, $P),
             Kalip::adet('SCI, SCI-Expanded, SSCI veya AHCI dergilerinde ilk yazar olduğunuz en az 1 makale',
                 ['A1'], 1, 'ilk', $P, madde: 'Madde 9/ç-1'),
-            Kalip::puanDan('A1-A2 dergilerindeki makalelerinizden en az 85 puan',
+            Kalip::puanDan('SCI, SCI-Expanded, SSCI, AHCI ve TR Dizin dergilerindeki makalelerinizden en az 85 puan',
                 ['A1-A2'], 85, $P, madde: 'Madde 9/ç-2'),
-            Kalip::adet('A1-A2 dergilerinde en az 4 yayın', ['A1-A2'], 4, donem: $P, madde: 'Madde 9/ç-3'),
+            Kalip::adet('SCI, SCI-Expanded, SSCI, AHCI ve TR Dizin dergilerinde en az 4 yayın', ['A1-A2'], 4, donem: $P, madde: 'Madde 9/ç-3'),
             Kalip::adet('Bu yayınların en az ikisinde ilk yazar olmak', ['A1-A2'], 2, 'ilk', $P, madde: 'Madde 9/ç-3'),
             Kalip::puanDan('Makale ve kitap kalemlerinizden toplam en az 160 puan',
                 ['A-C'], 160, $P, madde: 'Madde 9/ç-4'),

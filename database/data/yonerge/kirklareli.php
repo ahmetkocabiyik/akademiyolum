@@ -159,7 +159,7 @@ return [
     // ══════════ DOÇENT (MADDE 7) ══════════
     [
         'anahtar' => 'kirklareli-docentlik',
-        'aday_notu' => 'Kırklareli doçent kadrosu için SAYISAL HİÇBİR KOŞUL KOYMUYOR: MADDE 7 '
+        'aday_notu' => 'Kırklareli doçent kadrosu için SAYISAL HİÇBİR KOŞUL KOYMUYOR: yönerge '
             .'yalnızca 657 sayılı Kanunun genel şartlarını ve ÜAK doçentlik unvanını istiyor. '
             .'Puan tablosu bu kadroda hiç kullanılmıyor. '.$baglayiciDegil,
         'universite' => $UNI,
@@ -192,7 +192,7 @@ return [
         'anahtar' => 'kirklareli-profesorluk-sanat',
         'aday_notu' => 'Sanat Alanlarında iki çalışma koşulu yalnız makalelerden değil; makale, '
             .'bildiri, kitap, çeviri ile sanat ve tasarım etkinliklerinin tamamından sayılıyor '
-            .'(MADDE 6/1-c-2). Öteki alanlarda koşul yalnızca makalelere bakıyor. '
+            .'. Öteki alanlarda koşul yalnızca makalelere bakıyor. '
             .$baglayiciDegil,
         'universite' => $UNI,
         'kadro' => 'profesorluk',

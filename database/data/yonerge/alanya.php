@@ -35,14 +35,14 @@ use App\Services\Scoring\Sart\Kalip;
 
 $tumAlanlar = array_column(TemelAlan::cases(), 'value');
 
-$onkosulNotu = 'Yönerge bu puanı bir ÖNKOŞUL sayıyor (Madde 9): barajı geçmek atanmaya yetmez, '
+$onkosulNotu = 'Yönerge bu puanı bir ÖNKOŞUL sayıyor: barajı geçmek atanmaya yetmez, '
     .'asıl değerlendirmeyi jüri yapıyor. Barajın korpusun en düşükleri arasında olması bu '
     .'yüzden.';
 
 return [
     [
         'anahtar' => 'alanya-dr',
-        'aday_notu' => 'Tek koşul: EK-1 tablosundan 20 puan. Tek bir SSCI/SCI-E makale '
+        'aday_notu' => 'Tek koşul: tüm faaliyetlerinizden 20 puan. Tek bir SSCI/SCI-E makale '
             .'(20 puan) tek başına yetiyor. '.$onkosulNotu,
         'universite' => 'Alanya Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
@@ -55,7 +55,7 @@ return [
     ],
     [
         'anahtar' => 'alanya-docent',
-        'aday_notu' => 'Tek sayısal koşul EK-1 tablosundan 50 puan; yönerge dönem kısıtı '
+        'aday_notu' => 'Tek sayısal koşul tüm faaliyetlerinizden 50 puan; yönerge dönem kısıtı '
             .'koymuyor, doktoradan önceki çalışmalarınız da sayılıyor. '.$onkosulNotu,
         'universite' => 'Alanya Üniversitesi',
         'kadro' => 'docentlik',
@@ -69,7 +69,7 @@ return [
     ],
     [
         'anahtar' => 'alanya-profesor',
-        'aday_notu' => 'Tek sayısal koşul EK-1 tablosundan 60 puan — doçentlik barajının '
+        'aday_notu' => 'Tek sayısal koşul tüm faaliyetlerinizden 60 puan — doçentlik barajının '
             .'yalnızca 10 puan üstünde. Yönerge doçentlik sonrası için ayrı bir pay istemiyor. '
             .$onkosulNotu,
         'universite' => 'Alanya Üniversitesi',

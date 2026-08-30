@@ -63,7 +63,7 @@ $PUAN_NOTU = 'Yönergenin kısa bildiri, teknik not ve editöre mektup için tan
 $drSart = Kalip::ve('Doktor öğretim üyesi koşulları', [
     $DIL_BEYANI,
     Kalip::beyan('Doktora eğitimini tamamlamış olmak', 'MADDE 4/1'),
-    Kalip::toplam(8, maddeler: ['ABCDEFGH'], liste: 'Ek-1\'in A-H maddeleri'),
+    Kalip::toplam(8, maddeler: ['ABCDEFGH'], liste: 'Makale, bildiri, kitap, editörlük ve atıf'),
 ]);
 
 return [
@@ -107,7 +107,7 @@ return [
         'notlar' => 'MADDE 8: doçentlik unvanını almış olmak (yurt dışında alınan unvanın ÜAK '
             .'tarafından Türkiye\'de geçerli sayılmış olması dâhil). MADDE 10: üniversite ayrıca '
             .'sözlü sınav şartı öngörmüyor. Puan barajı yok.',
-        'aday_notu' => 'Çağ Üniversitesi doçent kadrosu için Ek-1\'den ayrı bir puan barajı '
+        'aday_notu' => 'Çağ Üniversitesi doçent kadrosu için ayrı bir puan barajı '
             .'koymuyor; tek koşul doçentlik unvanı. Sözlü sınav şartı da yönergeyle açıkça '
             .'kaldırılmış. '.$PUAN_NOTU,
         'sart' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
@@ -134,8 +134,8 @@ return [
             Kalip::beyan('Doçentlik unvanını aldıktan sonra en az beş yıl açık bulunan profesörlük kadrosuyla ilgili bilim alanında çalışmış olmak', 'MADDE 12/1'),
             Kalip::beyan('Kendi bilim alanında uluslararası düzeyde orijinal eserler vermiş olmak ve uygulama alanı bulunan dallarda uygulamaya yönelik çalışmalarda bulunmak', 'MADDE 12/1'),
             Kalip::beyan('Yayınlarınızdan birini başlıca araştırma eseri olarak göstermiş olmak', 'MADDE 14/1'),
-            Kalip::toplam(100, maddeler: ['TUM'], liste: 'Ek-1'),
-            Kalip::toplam(40, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'Ek-1'),
+            Kalip::toplam(100, maddeler: ['TUM']),
+            Kalip::toplam(40, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM']),
         ]),
     ],
 ];

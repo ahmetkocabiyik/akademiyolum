@@ -347,7 +347,7 @@ foreach ($sutunlar as $s) {
         'anahtar' => "{$s['anahtar']}-profesor",
         'kadro' => 'profesorluk',
         'aday_notu' => 'Bütün çalışmalarınızın doçentlik unvanından SONRA üretilmiş olması gerekiyor '
-            .'(Madde 16/2). Ayrıca bir "başlıca araştırma eseri" şartı var: belirli bir dergi '
+            .'. Ayrıca bir "başlıca araştırma eseri" şartı var: belirli bir dergi '
             .'kademesinde başlıca yazar olduğunuz bir yayın. '.$lNotu,
         'notlar' => "Madde 16 + Tablo 5, {$s['ad']} sütunu. Toplam {$toplam} (doçentlik sonrası), "
             ."A puanı {$aPuan}, proje puanı {$projePuan} ({$projeKume}), h-indeksi {$h}. "
