@@ -51,7 +51,18 @@ return [
 
     // Madde 10/1 — Eserdeki yazar sayısına ve sıraya göre tam puanın yüzdesi.
     'yazar_katsayisi' => [
-        'haric' => ['atif', 'proje', 'patent', 'editorluk', 'odul', 'egitim_ogretim',
+        'haric' => ['atif', 'egitim_ogretim',
+            // Yönerge makale dışındaki kalemler için AYRI bir kural veriyor:
+            // "Diğer durumlarda ise çevirmen, raportör, proje yapanlar, editör,
+            // ödül alanlar, patent sahibi veya düzenleyici sayısına eşit olarak
+            // bölünecektir." Yani makalenin sıraya bağlı kademe tablosu değil,
+            // düz 1/n. Bunları `haric`te bırakmak FAZLA SAYMAK olurdu (§0).
+            'kategoriler' => [
+                'proje' => ['sonrasi_pay' => 1.0],
+                'patent' => ['sonrasi_pay' => 1.0],
+                'editorluk' => ['sonrasi_pay' => 1.0],
+                'odul' => ['sonrasi_pay' => 1.0],
+            ],
             'tez_danismanligi', 'idari_gorev', 'toplumsal_katki'],
         'roller' => [
             'tek' => ['kademeler' => [1 => 1.0]],

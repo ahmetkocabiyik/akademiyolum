@@ -15,10 +15,20 @@
  * paylaşım kuralını yazıyor ("yazar sayısına bölünür"). Motorun `haric` alanı
  * tam bunun için: çarpan kitap, proje, patent ve tez kalemlerinde uygulanmıyor.
  *
- * KİTAP VE PROJE PAY KURALLARI GİRİLMEDİ: B ve D bölümleri puanı "yazar
- * sayısına bölünür", "her bir araştırmacıya" gibi kendi paylaşım cümleleriyle
- * veriyor. Bu bölme faaliyet kaydından türetilemediği için uygulanmıyor; çok
- * yazarlı kitap ve çok araştırmacılı projede puan olduğundan YÜKSEK görünür.
+ * KİTAPTA PAY KURALI MAKALEDEN BAŞKA: B bölümü "çok yazarlı kitaplarda
+ * kitabın toplam puanı yazar sıralamasına bakılmaksızın yazar sayısına
+ * bölünür" diyor — sıra hiç sayılmıyor, düz 1/n. Makalenin sıraya bağlı
+ * kademe tablosu burada geçerli değil; `yazar_katsayisi.kategoriler` ile ayrı
+ * yazıldı.
+ *
+ * PROJE VE PATENTTE BÖLME YOK: D.1-D.2 ve G.1-G.4 "araştırmacıların HER
+ * BİRİNE" sabit puan veriyor, yani çok araştırmacılı projede kimsenin puanı
+ * düşmüyor. İkisi de `haric` listesinde.
+ *
+ * KİTAPTAKİ EDİTÖRLÜK PAYI GİRİLEMEDİ: "her bir editörlük görevi +1 yazarlık
+ * olarak değerlendirilir" bölen sayısını artırıyor; kayıt editör sayısını
+ * yazar listesinden ayıramıyor. Editörlü kitaplarda puan bir miktar YÜKSEK
+ * kalıyor.
  *
  * GİRİLMEYEN BÖLÜMLER: H (mesleki/bilimsel organizasyon görevleri), I ve
  * sonrası idari görev ve ödül kalemleri, K sanatsal etkinlik alt kırılımları.
@@ -29,13 +39,24 @@ return [
     'kapsam_notu' => 'Puanlar Amasya Üniversitesi Çizelge 1\'den. Makale, kongre ve atıf '
         .'kalemlerinde puan yazar sayısına ve sıranıza göre azaltılır (Çizelge 2) — bu hesap '
         .'uygulanıyor, ancak YAZAR LİSTESİNİ BOŞ BIRAKTIĞINIZ faaliyetlerde uygulanamaz. Kitap '
-        .'ve proje kalemlerindeki "yazar sayısına bölünür" kuralı faaliyet kaydından '
-        .'türetilemediği için uygulanmıyor; o kalemlerde puanınız olduğundan yüksek görünebilir. '
+        .'Kitapta puan yazar sayısına bölünüyor (sıra sayılmaz); projede ve patentte bölme '
+        .'yok, yönerge her araştırmacıya sabit puan veriyor. Kitaptaki "her editörlük +1 '
+        .'yazarlık" payı kayıttan türetilemediği için editörlü kitaplarda puanınız bir miktar '
+        .'yüksek kalabilir. '
         .'Organizasyon görevleri ve sanatsal etkinlik alt kırılımları girilmedi.',
 
     // Çizelge 2 — yalnızca makale, kongre ve atıf kalemlerinde geçerli.
     'yazar_katsayisi' => [
-        'haric' => ['kitap', 'proje', 'patent', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev'],
+        'haric' => ['proje', 'patent', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev'],
+        // Kitapta kural makaleden BAŞKA: "çok yazarlı kitaplarda kitabın
+        // toplam puanı yazar sıralamasına bakılmaksızın yazar sayısına
+        // bölünür" (B.1, B.2, B.5). Sıra hiç sayılmıyor, düz 1/n.
+        //
+        // Proje ve patent `haric` kalıyor çünkü onlarda bölme yok: yönerge
+        // "araştırmacıların HER BİRİNE" sabit puan veriyor (D.1-D.2, G.1-G.4).
+        'kategoriler' => [
+            'kitap' => ['sonrasi_pay' => 1.0],
+        ],
         'roller' => [
             'tek' => ['kademeler' => [1 => 1.0]],
             'ilk' => ['kademeler' => [1 => 1.0, 2 => 0.95, 3 => 0.90, 4 => 0.85, 5 => 0.80], 'sonrasi' => 0.75],

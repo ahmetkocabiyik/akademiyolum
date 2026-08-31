@@ -55,6 +55,13 @@ return [
     'yazar_katsayisi' => [
         'haric' => ['atif', 'proje', 'editorluk', 'odul', 'egitim_ogretim',
             'tez_danismanligi', 'idari_gorev', 'toplumsal_katki'],
+        // Düzce'nin bölme kuralı yalnız SANATSAL ETKİNLİĞE özgü: "Sanat ve
+        // tasarım etkinliği ortak gerçekleştirilmişse, söz konusu puan
+        // katılımcı sayısına bölünür." Proje ve editörlükte böyle bir cümle
+        // yok, onlar `haric` kalıyor.
+        'kategoriler' => [
+            'sanatsal_etkinlik' => ['sonrasi_pay' => 1.0],
+        ],
         'roller' => [
             'tek' => ['kademeler' => [1 => 1.0]],
             'ilk' => ['kademeler' => [1 => 1.0, 2 => 1.0, 3 => 0.90, 4 => 0.85, 5 => 0.80,

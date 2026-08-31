@@ -2602,9 +2602,11 @@ test('Batman kendi cetveli olmadan ÜAK tablolarını kullanıyor', function () 
 test('Amasya yazar çarpanını yalnızca makale, kongre ve atıfta uyguluyor', function () {
     $katalog = sartDepo()->katalog('amasya-2024');
 
-    // Çizelge 2 yalnızca "Makale, Kongre ve Atıf Alanındaki Eserler" için;
-    // kitap ve projede yönerge kendi paylaşım kuralını yazıyor, o yüzden
-    // çarpan oralarda uygulanmamalı.
+    // Çizelge 2 yalnızca "Makale, Kongre ve Atıf Alanındaki Eserler" için.
+    // Kitapta yönerge kendi kuralını yazıyor: "kitabın toplam puanı yazar
+    // SIRALAMASINA BAKILMAKSIZIN yazar sayısına bölünür" — düz 1/n, sıra
+    // sayılmaz. Projede ise bölme yok, "araştırmacıların her birine" sabit
+    // puan veriliyor.
     $carpan = function (string $kategori, string $kaynak) use ($katalog): float {
         $f = sartFaaliyet($kaynak, tarih: '2020-01-01');
         $f->kategori = Kategori::from($kategori);
@@ -2616,7 +2618,8 @@ test('Amasya yazar çarpanını yalnızca makale, kongre ve atıfta uyguluyor', 
 
     expect($carpan('makale', 'SCIE/SSCI (Q1)'))->toBe(0.65)
         ->and($carpan('atif', 'WoS / Scopus'))->toBe(0.65)
-        ->and($carpan('kitap', 'BKCI / Scopus Kitap'))->toBe(1.0)
+        // Dört yazarlı kitap: 1/4. Sıra ('yazar_3') hiç sayılmıyor.
+        ->and($carpan('kitap', 'BKCI / Scopus Kitap'))->toBe(0.25)
         ->and($carpan('proje', 'TÜBİTAK'))->toBe(1.0);
 });
 

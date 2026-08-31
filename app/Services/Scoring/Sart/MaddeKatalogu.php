@@ -32,6 +32,7 @@ use App\Models\Faaliyet;
  *     sonrasi_pay?: float,
  *     bol?: array{pay: float, eksi?: int, ek?: float},
  *     roller?: array<string, YazarKademe>,
+ *     kategoriler?: array<string, array{roller?: array<string, YazarKademe>}&YazarKademe>,
  *     haric?: list<string>,
  *     taban?: float,
  * }
@@ -104,6 +105,28 @@ readonly class MaddeKatalogu
      */
     private function rolTablosu(Faaliyet $faaliyet): array
     {
+        // Yönergelerin bir kısmı yazar payını KATEGORİYE göre başka türlü
+        // hesaplıyor: makalede isim sırasına bağlı bir kademe tablosu,
+        // kitap ve projede düz "puan / yazar sayısı". `kategoriler` bu ikinci
+        // kuralı taşıyor ve varsa genel tabloyu geçersiz kılıyor.
+        //
+        // Böyle bir kural varken kategoriyi `haric`e yazmak FAZLA SAYMAK
+        // olur (§0): çok yazarlı kitap tam puan alır. Kategori kuralını
+        // yazamıyorsan `haric` yerine en sıkı kademeyi kullan.
+        $kategori = $this->yazarKatsayisi['kategoriler'][$faaliyet->kategori->value] ?? null;
+
+        if ($kategori !== null) {
+            $kategoriRolleri = $kategori['roller'] ?? [];
+
+            if ($kategoriRolleri === []) {
+                return $kategori;
+            }
+
+            $rol = $faaliyet->rol ?? 'ortak';
+
+            return $kategoriRolleri[$rol] ?? $kategoriRolleri['ortak'] ?? [];
+        }
+
         $roller = $this->yazarKatsayisi['roller'] ?? [];
 
         if ($roller === []) {

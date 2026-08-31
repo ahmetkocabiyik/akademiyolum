@@ -255,6 +255,34 @@ kadro atlamayı engelleyen tek pratik.
 Fakülteye kapalı bölümler ("Diğer Fakülteler: Bu bölümden puan alamaz") için
 satırları silmek yerine o varyantta tavanı **0** yaz; gövde tek kalır.
 
+### Yazar payı KATEGORİYE göre değişiyorsa `kategoriler` yaz, `haric` DEĞİL
+
+Yönergelerin çoğu makaleye isim sırasına bağlı bir kademe tablosu uygularken
+kitap, proje, editörlük ve ödülde düz "puan / kişi sayısı" diyor (Amasya:
+"kitabın toplam puanı yazar SIRALAMASINA BAKILMAKSIZIN yazar sayısına
+bölünür"; Bolu AİBÜ ve Bitlis: "çevirmen, raportör, proje yapanlar, editör,
+ödül alanlar, patent sahibi veya düzenleyici sayısına eşit olarak
+bölünecektir").
+
+Bu kural `yazar_katsayisi.kategoriler` ile yazılır:
+
+    'yazar_katsayisi' => [
+        'haric' => ['atif', 'egitim_ogretim'],
+        'kategoriler' => [
+            'kitap' => ['sonrasi_pay' => 1.0],   // düz 1/n
+        ],
+        'roller' => [ /* makalenin kademe tablosu */ ],
+    ],
+
+**Kategoriyi `haric`e yazmak çözüm DEĞİLDİR**: `haric` çarpanı tamamen
+kapatır, yani çok yazarlı esere TAM puan verilir — §0'ın yasakladığı fazla
+sayma. `haric` yalnız yönergenin gerçekten bölme yapmadığı yerde doğrudur;
+Amasya projede "araştırmacıların HER BİRİNE" sabit puan verdiği için proje
+orada haklı olarak `haric`.
+
+Bir kategori hem `kategoriler`de hem `haric`te olursa `haric` kazanır ve
+kural sessizce yok sayılır; `CetvelKaynakTest` bu çakışmayı yakalıyor.
+
 ### Yüzde tavanını ASGARİ PUANDAN SABİTE ÇEVİR
 
 Bazı yönergeler tavanı sayıyla değil yüzdeyle veriyor: "Bu madde kapsamında

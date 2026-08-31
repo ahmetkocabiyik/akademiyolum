@@ -221,3 +221,32 @@ test('hiçbir puan barajı grup tavanının üstünde değil', function () {
 
     expect(array_values(array_unique($sizinti)))->toBe([]);
 });
+
+/**
+ * `yazar_katsayisi.kategoriler` yazılmışsa o kategori `haric`te OLMAMALI.
+ *
+ * İkisi birden yazılırsa `haric` kazanır ve kategori kuralı sessizce
+ * yok sayılır — çok yazarlı esere tam puan verilir, yani FAZLA SAYILIR (§0).
+ * Bu çelişki gözle fark edilmiyor çünkü iki liste dosyanın ayrı yerlerinde.
+ */
+test('kategori bazlı yazar çarpanı haric listesiyle çakışmıyor', function () {
+    $sizinti = [];
+
+    foreach (app(SartDeposu::class)->cetveller() as $ad => $katalog) {
+        $katsayi = $katalog->yazarKatsayisi;
+
+        if ($katsayi === null) {
+            continue;
+        }
+
+        $haric = $katsayi['haric'] ?? [];
+
+        foreach (array_keys($katsayi['kategoriler'] ?? []) as $kategori) {
+            if (in_array($kategori, $haric, true)) {
+                $sizinti[] = "{$ad}: \"{$kategori}\" hem `kategoriler`de hem `haric`te";
+            }
+        }
+    }
+
+    expect(array_values(array_unique($sizinti)))->toBe([]);
+});
