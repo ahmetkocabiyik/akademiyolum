@@ -6,8 +6,8 @@
  *         Senato 03.04.2024 ve 2024-58)
  *
  * 2017 SÜRÜMÜNÜN YERİNE GEÇTİ. Yeni yönergenin MADDE 14'ü eskisini açıkça
- * yürürlükten kaldırıyor. Eski cetvel `ordu-2017.php` dosyada duruyor ama
- * artık hiçbir eşiğe bağlı değil.
+ * yürürlükten kaldırıyor. Eski `ordu-2017.php` cetveli silindi — hiçbir eşiğe
+ * bağlı değildi ve canlı sanılıp düzenlenme riski taşıyordu; geçmişi git'te.
  *
  * MADDE KODLARI tablonun kendi numaralandırması (A.1, E.13, M.6 …).
  * TABLO-3'ten TABLO-13'e kadarki alan tabloları koşullarını HARF BÖLÜMÜNE

@@ -68,3 +68,52 @@ test('cetvel kaynakları kategori sözlüğünde var', function () {
 
     expect($sizinti)->toBe([]);
 });
+
+/**
+ * GRUP DESENLERİNİN GERÇEKTEN BİR ŞEYE UYDUĞUNU DOĞRULAR.
+ *
+ * Gruplar üyelerini üç biçimde yazabiliyor: tam kod ('A.1'), önek deseni
+ * ('A.1*') ve aralık ('A.1..A.4'). Önek deseni hiçbir koda uymuyorsa grup
+ * SESSİZCE BOŞ kalır; ona bağlı baraj ya hiç sağlanamaz ya da sıfır puanla
+ * sağlanmış sayılır. Yazım hatası tam bu yolla kaybolur ('A1.*' yazılıp
+ * kodlar 'A.1.*' iken).
+ *
+ * TAM KOD üyeleri bu testin dışında: Yalova gibi cetveller ortak bir grup
+ * tanımını birden çok varyantta kullanıyor ve varyantlar bazı kodları
+ * siliyor. Orada eksik kod TASARIM GEREĞİ — motor bulamadığını saymıyor.
+ * Desen ise başka: hiçbir koda uymayan desen her zaman hatadır.
+ *
+ * İlk taramada tek bulgu Fırat'ın 'B1-B3' grubuydu; B3 (ulusal bilimsel
+ * toplantılar) bölümü hiç girilmemişti.
+ */
+test('grup desenleri en az bir maddeye uyuyor', function () {
+    $sizinti = [];
+
+    foreach (app(SartDeposu::class)->cetveller() as $ad => $katalog) {
+        $kodlar = array_map(strval(...), array_keys($katalog->maddeler));
+
+        foreach ($katalog->gruplar as $grup => $uyeler) {
+            foreach ((array) $uyeler as $uye) {
+                $uye = (string) $uye;
+
+                if ($uye !== '*' && str_ends_with($uye, '*')) {
+                    $onek = rtrim($uye, '*');
+
+                    if (array_filter($kodlar, fn (string $k): bool => str_starts_with($k, $onek)) === []) {
+                        $sizinti[] = "{$ad} · {$grup}: \"{$uye}\" hiçbir madde koduna uymuyor";
+                    }
+                }
+
+                if (str_contains($uye, '..')) {
+                    [$bas, $son] = explode('..', $uye, 2);
+
+                    if (! in_array($bas, $kodlar, true) || ! in_array($son, $kodlar, true)) {
+                        $sizinti[] = "{$ad} · {$grup}: \"{$uye}\" aralığının ucu cetvelde yok";
+                    }
+                }
+            }
+        }
+    }
+
+    expect(array_values(array_unique($sizinti)))->toBe([]);
+});

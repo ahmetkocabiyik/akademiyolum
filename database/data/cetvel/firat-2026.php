@@ -101,7 +101,12 @@ return [
         'A2.1-A2.3' => ['A2.1-*', 'A2.2-*', 'A2.3'],
         'A2.1-A2.4' => ['A2.1-*', 'A2.2-*', 'A2.3', 'A2.4'],
         'A1-A4' => ['A1.*', 'A2.*', 'A3.*', 'A4.*'],
-        'B1-B3' => ['B1.*', 'B2.*', 'B3.*'],
+        // B3 (ULUSAL BİLİMSEL TOPLANTILAR) için satır yok: kaynak sözlüğü
+        // "ulusal kuruluşça düzenlenen uluslararası toplantıda Türkçe bildiri"
+        // (A4.2) ile "ulusal toplantıda bildiri" (B3.1) arasını ayıramıyor.
+        // §0 gereği DÜŞÜK puanlı A4 satırlarına bağlandı; faaliyet yine bu
+        // eşiğe giriyor çünkü A1-A4 de aynı koşulun içinde.
+        'B1-B3' => ['B1.*', 'B2.*'],
         'C2-C6' => ['C2.*', 'C3.*', 'C4.*'],
         'C1' => ['C1.*'],
         'MAKALE' => ['A2.*', 'B2.*'],

@@ -4,7 +4,8 @@
  * BURSA ULUDAĞ ÜNİVERSİTESİ — şart ağaçları.
  *
  * Kaynak: pdf/1766060294419.bursa-uludag-kriter-18122025.pdf
- * Cetvel: database/data/cetvel/bursa-uludag-turler.php (puansız)
+ * Cetvel: uak-2024-mart-{alan} — yönergenin kendi puan tablosu yok, MADDE 6
+ * doğrudan ÜAK 2024 Mart puan sistemine gönderiyor.
  *
  * ARKETİP: puanlamayı dış cetvele devreden yönerge. Tablo-1 ve Tablo-2 birer
  * eşik tablosu; sütunları doğrudan ağaç düğümü oluyor ([A] ve [B] birer çocuk,

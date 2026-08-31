@@ -10,7 +10,7 @@
  * yürürlükten kaldırıyor: "Bu yönergenin yürürlüğe girmesiyle halen
  * yürürlükte olan Ordu Üniversitesi Öğretim Üyeliği Kadrolarına Başvuru ve
  * Atama Koşulları ve Uygulama Yönergesi yürürlükten kalkar." Eski cetvel
- * `ordu-2017.php` dosyada duruyor ama artık hiçbir eşiğe bağlı değil.
+ * `ordu-2017.php` cetveli silindi; geçmişi git'te duruyor.
  *
  * ── YAPI: ON BİR ALAN TABLOSU × DÖRT KADRO ──
  * 2017 sürümü tek tablo ve alandan bağımsız toplam baraj kullanıyordu.
