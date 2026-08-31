@@ -67,6 +67,15 @@
  * (tavanın kendisi, 15) yazıldı ve çelişki `notlar` ile aday notunda
  * açıkça söylendi.
  *
+ * ── EK-B 9. MADDESİ DE TAVANIN ÜSTÜNDE BARAJ İSTİYOR ──
+ * EK-C'nin aynı sorunu (25 puan şartı, 15 puan tavanı) girişte fark edilip
+ * ulaşılabilir değere çekilmişti; EK-B'ninki atlanmıştı. Dipnot: "Bu madde
+ * kapsamında en fazla 10 puan alınabilir. Doçentlik ve Profesörlük
+ * atamalarında 12 puan şartının 4 puanı puana tahvil edilir, geriye kalan 8
+ * puan ise başvuru şartının sağlanması için gereklidir." Motor grup tavanını
+ * koşulu ölçerken de uyguladığı için 12 hiçbir zaman ulaşılamıyordu; 10
+ * yazıldı ve çelişki aday notunda duruyor.
+ *
  * Ortak kalıplar: App\Services\Scoring\Sart\Kalip · cetvel: cetvel/ikcu-2023.php
  */
 
@@ -237,21 +246,24 @@ $esikler[] = [
         .'ulusal proje yürütücülüğü ve eğitim öğretim faaliyetlerinden 12 puan isteniyor. '
         .'Yükseköğretim kurumları dışından başvuruyorsanız yönerge ayrıca son beş yılda eğitim '
         .'öğretim faaliyetlerinden en az 8 puan istiyor; nereden başvurduğunuz profilden '
-        .'okunamadığı için bu koşul burada uygulanmıyor.',
+        .'okunamadığı için bu koşul burada uygulanmıyor.'
+        .' DİKKAT: yönergenin puan tablosu dipnotu eğitim öğretim faaliyetlerinden 12 puan isterken aynı dipnot bu kalemden en fazla 10 puan alınabileceğini söylüyor; sağlanamayacak bir eşik yerine ulaşılabilir en sıkı değer olan 10 puan uygulanıyor. Başvurmadan önce üniversiteye teyit ettirin.',
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
     'alan' => ['fen'],
     'cetvel' => 'ikcu-2023-fen',
     'notlar' => 'EK-B/2: ÜAK doçentlik unvanı; en az bir Q1/Q2 yayını (yoksa iki Q3/Q4); en az bir '
         .'TÜBİTAK ya da uluslararası projede görev ve en az iki diğer ulusal projede yürütücülük; '
-        .'9. madde dipnotu doçentlik atamalarında 12 puanlık eğitim öğretim şartı koyuyor.',
+        .'9. madde dipnotu doçentlik ve profesörlük atamalarında 12 puanlık eğitim öğretim '
+        .'şartı koyuyor ama AYNI dipnot "bu madde kapsamında en fazla 10 puan alınabilir" '
+        .'diyor; ulaşılabilir en sıkı değer olan 10 puan yazıldı.',
     'sart' => Kalip::ve('Doçent kadrosuna atanma — Fen Bilimleri', [
         $dil,
         $docentUnvani,
         $qKurali(1, 'EK-B/2'),
         Kalip::adet('En az 1 TÜBİTAK ya da uluslararası araştırma projesinde görev almış olmak', ['B7-TUBITAK-ULUSLARARASI'], 1, madde: 'EK-B/2'),
         Kalip::adet('En az 2 diğer ulusal araştırma projesinde (BAP, kamu kurumu) yürütücülük yapmış olmak', ['B7-ULUSAL-YURUTUCU'], 2, madde: 'EK-B/2'),
-        Kalip::puanDan('Eğitim öğretim faaliyetlerinizden en az 12 puan', ['B9'], 12, madde: 'EK-B tablo 9. madde dipnotu'),
+        Kalip::puanDan('Eğitim öğretim faaliyetlerinizden en az 10 puan', ['B9'], 10, madde: 'EK-B tablo 9. madde dipnotu'),
     ]),
 ];
 
@@ -261,7 +273,8 @@ $esikler[] = [
         .'sayılıyor. Fen Bilimleri alanında profesörlük için toplam en az 200 puan, 1.a maddesinden '
         .'(SCI/SCI-E/SSCI/AHCI tam araştırma makalesi) en az 50 puan, en az iki Q1/Q2 yayını ve '
         .'tez yayını, kitap, atıf ile idari görev dışındaki her kalem türünden en az bir etkinlik '
-        .'isteniyor.',
+        .'isteniyor.'
+        .' DİKKAT: yönergenin puan tablosu dipnotu eğitim öğretim faaliyetlerinden 12 puan isterken aynı dipnot bu kalemden en fazla 10 puan alınabileceğini söylüyor; sağlanamayacak bir eşik yerine ulaşılabilir en sıkı değer olan 10 puan uygulanıyor. Başvurmadan önce üniversiteye teyit ettirin.',
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
     'alan' => ['fen'],
@@ -289,7 +302,7 @@ $esikler[] = [
         Kalip::adet('Doçentlik sonrası en az 1 TÜBİTAK ya da uluslararası araştırma projesinde görev almış olmak', ['B7-TUBITAK-ULUSLARARASI'], 1, donem: $DOCENTLIK, madde: 'EK-B/1'),
         Kalip::adet('Doçentlik sonrası en az 1 diğer ulusal araştırma projesinde yürütücülük yapmış olmak', ['B7-ULUSAL-YURUTUCU'], 1, donem: $DOCENTLIK, madde: 'EK-B/1'),
         Kalip::puanDan('Bilimsel toplantı kalemlerinizden en az 5 puan', ['B8'], 5, $DOCENTLIK, madde: 'EK-B tablo 8. madde dipnotu'),
-        Kalip::puanDan('Eğitim öğretim faaliyetlerinizden en az 12 puan', ['B9'], 12, madde: 'EK-B tablo 9. madde dipnotu'),
+        Kalip::puanDan('Eğitim öğretim faaliyetlerinizden en az 10 puan', ['B9'], 10, madde: 'EK-B tablo 9. madde dipnotu'),
         Kalip::toplam(200, $DOCENTLIK),
     ]),
 ];

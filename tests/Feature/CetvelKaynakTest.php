@@ -117,3 +117,107 @@ test('grup desenleri en az bir maddeye uyuyor', function () {
 
     expect(array_values(array_unique($sizinti)))->toBe([]);
 });
+
+/**
+ * `turler` ve `roller` değerlerinin sözlükte olduğunu doğrular.
+ *
+ * Kaynak etiketiyle aynı sessiz hata: cetvel satırı 'turler' => ['derleme']
+ * yazıyorsa ve kategori o türü tanımıyorsa satır hiçbir faaliyetle eşleşmez.
+ * Tanınan değerler Kategori::yayinTurleri() ve Kategori::roller()'da.
+ */
+test('cetvel tür ve rol değerleri sözlükte var', function () {
+    $turler = [];
+    $roller = [];
+
+    foreach (Kategori::cases() as $kategori) {
+        $turler[$kategori->value] = array_keys($kategori->yayinTurleri());
+        $roller[$kategori->value] = array_keys($kategori->roller());
+    }
+
+    $sizinti = [];
+
+    foreach (app(SartDeposu::class)->cetveller() as $ad => $katalog) {
+        foreach ($katalog->maddeler as $kod => $madde) {
+            $kategori = $madde['kategori'] ?? null;
+
+            if ($kategori === null) {
+                continue;
+            }
+
+            foreach ($madde['turler'] ?? [] as $tur) {
+                if (! in_array($tur, $turler[$kategori] ?? [], true)) {
+                    $sizinti[] = "{$ad} · {$kod} ({$kategori}): tür \"{$tur}\" tanınmıyor";
+                }
+            }
+
+            foreach ($madde['roller'] ?? [] as $rol) {
+                if (! in_array($rol, $roller[$kategori] ?? [], true)) {
+                    $sizinti[] = "{$ad} · {$kod} ({$kategori}): rol \"{$rol}\" tanınmıyor";
+                }
+            }
+        }
+    }
+
+    expect(array_values(array_unique($sizinti)))->toBe([]);
+});
+
+/**
+ * GRUP TAVANININ ÜSTÜNDE BARAJ = SAĞLANAMAZ EŞİK.
+ *
+ * Motor grup tavanını `topla()` içinde uyguluyor, yani bir koşulu ÖLÇERKEN
+ * de: tavanı 100 olan bir gruptan 300 puan isteyen koşul hiçbir zaman
+ * sağlanamaz. Aday "asla yeterli değilsiniz" cevabı alır ve sebebini göremez.
+ *
+ * Bu genelde kaynaktaki çelişkiden doğuyor: yönergenin gövdesi tablonun kendi
+ * tavanından yüksek bir baraj istiyor (ESOGÜ atıflardan 300/500 isterken atıf
+ * bölümü "en fazla 100" diyor; İzmir Kâtip Çelebi EK-B eğitim öğretimden 12
+ * isterken aynı dipnot "en fazla 10" diyor). KONVANSIYONLAR "Sağlanamaz eşik
+ * yazma" uyarınca ulaşılabilir en sıkı değer — tavanın kendisi — yazılır ve
+ * çelişki `notlar` ile `aday_notu`'na birebir aktarılır.
+ *
+ * Test yalnız TEK gruba bağlı puan koşullarını sınıyor; birden çok grubu
+ * toplayan koşulda tavanlar birbirini tamamlayabilir.
+ */
+test('hiçbir puan barajı grup tavanının üstünde değil', function () {
+    $depo = app(SartDeposu::class);
+    $cetveller = $depo->cetveller();
+    $sizinti = [];
+
+    $gez = function (array $dugum, callable $bak) use (&$gez): void {
+        $bak($dugum);
+
+        foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+            $gez($cocuk, $bak);
+        }
+    };
+
+    foreach ($depo->esikler() as $esik) {
+        $katalog = $cetveller[$esik['cetvel']] ?? null;
+
+        if ($katalog === null || $katalog->grupTavanlari === []) {
+            continue;
+        }
+
+        $gez($esik['sart'], function (array $dugum) use (&$sizinti, $esik, $katalog): void {
+            if (($dugum['tip'] ?? null) !== 'puan' || ! isset($dugum['min_puan'])) {
+                return;
+            }
+
+            $maddeler = $dugum['maddeler'] ?? [];
+
+            if (count($maddeler) !== 1) {
+                return;
+            }
+
+            $grup = (string) $maddeler[0];
+            $tavan = $katalog->grupTavanlari[$grup] ?? null;
+
+            if ($tavan !== null && $tavan < $dugum['min_puan']) {
+                $sizinti[] = "{$esik['anahtar']} [{$esik['cetvel']}] {$grup}: "
+                    ."baraj {$dugum['min_puan']} > tavan {$tavan}";
+            }
+        });
+    }
+
+    expect(array_values(array_unique($sizinti)))->toBe([]);
+});

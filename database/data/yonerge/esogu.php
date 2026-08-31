@@ -65,6 +65,16 @@
  *   Madde 1.2'nin yağmacı dergi eleme kuralı ve 1.8'in "bir çıktı bir
  *       koşulda" kuralı — kayıt düzeyinde uygulanamıyor.
  *
+ * ── KAYNAKTAKİ ÇELİŞKİ: ATIF BARAJI TAVANIN ÜSTÜNDE ──
+ * Madde 4.7e doçentlikte atıflardan 300, madde 5.7e profesörlükte 500 puan
+ * istiyor; aynı belgenin ATIF bölümü ise "bu madde kapsamında (adayın yazar
+ * olarak yer almadığı yayınlardan her birinde, metin içindeki atıf sayısına
+ * bakılmaksızın) toplamda en fazla 100 puan alınabilir" diyor. Yazıldığı gibi
+ * bırakılsaydı bu SEÇENEĞİ hiçbir aday sağlayamazdı (ikisi de bir `veya`
+ * dalının içinde, eşiğin tamamı sağlanabilir kalıyordu ama bu kol ölüydü).
+ * KONVANSIYONLAR "Sağlanamaz eşik yazma" uyarınca ulaşılabilir en sıkı değer
+ * — tavanın kendisi, 100 puan — uygulandı ve çelişki aday notuna yazıldı.
+ *
  * Ortak kalıplar: App\Services\Scoring\Sart\Kalip · cetvel: cetvel/esogu-2023.php
  */
 
@@ -85,6 +95,12 @@ $CAKISMA_UYARISI = ' DİKKAT: yönerge "aynı bilimsel çıktı bir başka koşu
     .'kullanılamaz" diyor ve doçentlik ile profesörlükte aynı toplam puanın iki ayrı seçenek '
     .'listesinde birden kullanılmasını yasaklıyor; bu iki kural burada uygulanamıyor, '
     .'dolayısıyla yalnızca puanla ilerliyorsanız gerçek durumunuz buradakinden zayıf olabilir.';
+
+$ATIF_UYARISI = ' DİKKAT: yönergenin gövdesi atıf seçeneğinde doçentlikte 300, '
+    .'profesörlükte 500 puan istiyor ama aynı belgenin atıf bölümü "bu madde kapsamında '
+    .'toplamda en fazla 100 puan alınabilir" diyor. Yazıldığı gibi bırakılsaydı bu seçeneği '
+    .'hiçbir aday sağlayamazdı; ulaşılabilir en sıkı değer olan 100 puan uygulanıyor. Bu '
+    .'seçeneğe güveniyorsanız başvurmadan önce üniversiteye teyit ettirin.';
 
 /**
  * Madde 2.2'nin yayın şartı: en az biri üst basamaktan olmak üzere
@@ -245,12 +261,13 @@ $esikler[] = [
         .'yürütücülüğü ya da 300 puanlık toplam; ikincisi yurt dışı araştırma, kitap/patent, '
         .'teknopark şirketi, 300 puanlık toplam, üç kişisel sanat etkinliği ya da 300 puanlık '
         .'atıf. Doçentlik unvanına ve YÖK dil şartına (en az 65 puan) sahip olmalısınız.'
-        .$CAKISMA_UYARISI,
+        .$CAKISMA_UYARISI.$ATIF_UYARISI,
     'universite' => $UNIVERSITE,
     'kadro' => 'docentlik',
     'alan' => $TUM,
     'cetvel' => $CETVEL,
-    'notlar' => 'Madde 4.5: doktora sonrası toplam 200 puan. Madde 4.6 ve 4.7: iki seçenek '
+    'notlar' => 'Madde 4.7e atıflardan 300 puan istiyor ama ATIF bölümü tavanı 100; ulaşılabilir '
+        .'en sıkı değer yazıldı. Madde 4.5: doktora sonrası toplam 200 puan. Madde 4.6 ve 4.7: iki seçenek '
         .'listesi. Madde 4.1-4.4 beyan (ÜAK doçentlik yetkisi, dört yarıyıl ders, YDS 65, '
         .'sözlü sınav).',
     'sart' => Kalip::ve('Doçent kadrosuna atanma', [
@@ -270,7 +287,7 @@ $esikler[] = [
             Kalip::adet('Teknoloji geliştirme bölgesinde faaliyet gösteren bir şirketin sahibi ya da ortağı olmalısınız', ['TEKNOPARK'], 1, donem: $DOKTORA, madde: 'Madde 4.7c'),
             Kalip::toplam(300, $DOKTORA),
             $sanatKosulu(3, $DOKTORA, 'Madde 4.7d'),
-            Kalip::puanDan('Bilimsel çalışmalarınıza yapılan atıflardan toplam en az 300 puan', ['ATIF'], 300, $DOKTORA, madde: 'Madde 4.7e'),
+            Kalip::puanDan('Bilimsel çalışmalarınıza yapılan atıflardan toplam en az 100 puan', ['ATIF'], 100, $DOKTORA, madde: 'Madde 4.7e'),
         ]),
     ]),
 ];
@@ -288,12 +305,13 @@ $esikler[] = [
         .'puanlık toplam, dört kişisel sanat etkinliği ya da 500 puanlık atıf. Doçentlik '
         .'unvanınızı aldıktan sonra en az beş yıl üniversitede çalışmış olmanız ve ÜAK\'ın son '
         .'üç yıldaki doçentlik başvuru koşullarından birini yeniden sağlamanız da aranıyor.'
-        .$CAKISMA_UYARISI,
+        .$CAKISMA_UYARISI.$ATIF_UYARISI,
     'universite' => $UNIVERSITE,
     'kadro' => 'profesorluk',
     'alan' => $TUM,
     'cetvel' => $CETVEL,
-    'notlar' => 'Madde 5.5: doçentlik başvurusu sonrası toplam 300 puan. Madde 5.6 ve 5.7: iki '
+    'notlar' => 'Madde 5.7e atıflardan 500 puan istiyor ama ATIF bölümü tavanı 100; ulaşılabilir '
+        .'en sıkı değer yazıldı. Madde 5.5: doçentlik başvurusu sonrası toplam 300 puan. Madde 5.6 ve 5.7: iki '
         .'seçenek listesi (450 puanlık toplam ikisinde de seçenek; çakışma kuralı '
         .'uygulanamadı). Madde 5.1-5.4 beyan.',
     'sart' => Kalip::ve('Profesör kadrosuna atanma', [
@@ -317,7 +335,7 @@ $esikler[] = [
             Kalip::adet('Doçentlik unvanınızdan sonra teknoloji geliştirme bölgesinde faaliyet gösteren bir şirketin sahibi ya da ortağı olmalısınız', ['TEKNOPARK'], 1, donem: $DOCENTLIK, madde: 'Madde 5.7c'),
             Kalip::toplam(450, $DOCENTLIK),
             $sanatKosulu(4, $DOCENTLIK, 'Madde 5.7d'),
-            Kalip::puanDan('Bilimsel çalışmalarınıza yapılan atıflardan toplam en az 500 puan', ['ATIF'], 500, $DOCENTLIK, madde: 'Madde 5.7e'),
+            Kalip::puanDan('Bilimsel çalışmalarınıza yapılan atıflardan toplam en az 100 puan', ['ATIF'], 100, $DOCENTLIK, madde: 'Madde 5.7e'),
         ]),
     ]),
 ];
