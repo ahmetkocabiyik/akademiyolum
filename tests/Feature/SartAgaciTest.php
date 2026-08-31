@@ -1777,13 +1777,39 @@ test('Ordu 2024 yönergesi on bir alanı dört kadroda ayrı ayrı tanımlıyor'
     foreach ($alanlar as $alan) {
         foreach (['profesorluk', 'docentlik', 'dr_ogr_uyesi', 'dr_ogr_uyesi_yeniden'] as $kadro) {
             $esik = $depo->bul('Ordu Üniversitesi', $kadro, $alan);
+            // Cetvel kadroya göre varyantlanıyor: tavanlar kadroya, kitap
+            // tavanı ayrıca tabloya bağlı (ordu-2024-docentlik-c120 …).
             expect($esik)->not->toBeNull("{$kadro}/{$alan}")
-                ->and($esik['cetvel'])->toBe('ordu-2024');
+                ->and($esik['cetvel'])->toStartWith('ordu-2024-');
         }
     }
 
     // Ordu'da Hukuk Fakültesi yok; yönergenin on bir tablosunda da hukuk yok.
     expect($depo->bul('Ordu Üniversitesi', 'docentlik', 'hukuk'))->toBeNull();
+});
+
+test('Ordu kategori tavanları toplam puanı kesiyor', function () {
+    $depo = sartDepo();
+
+    // Yönerge her kategoriye "en fazla ... değerlendirmeye alınır" diyor;
+    // doçentlikte bildiri tavanı 30. On uluslararası tam metin bildiri 100
+    // puan eder ama toplama yalnız 30'u girmeli — tavan uygulanmazsa aday
+    // barajın üstünde görünürdü ve §0 ihlal edilirdi.
+    $esik = $depo->bul('Ordu Üniversitesi', 'docentlik', 'fen');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2018-01-01'), yds: 60);
+
+    $bildiriler = array_map(
+        fn (): object => sartFaaliyet('Uluslararası Tam Metin', Kategori::Bildiri, 'tek', '2022-01-01'),
+        range(1, 10),
+    );
+
+    $sonuc = $depo->degerlendir($esik, $bildiriler, $profil);
+
+    $puan = fn (string $parca): int => collect($sonuc->kosullar())
+        ->first(fn (SartSonucu $k): bool => str_contains($k->aciklama, $parca))->mevcut;
+
+    expect($puan('bildirilerinizden en az 15'))->toBe(30)
+        ->and($puan('Tüm faaliyetlerden'))->toBe(30);
 });
 
 test('Ordu alan farkı makale bendi seçiminde, toplam barajda değil', function () {

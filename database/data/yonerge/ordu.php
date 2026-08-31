@@ -39,12 +39,18 @@
  * dr. öğr. üyeliğinde 10) A ve B kategorilerinden İLAVE olarak sağlar.
  * Telafi ayrı bir düğüm olarak değil, beyanın metninde anlatılıyor.
  *
- * ── TAVANLAR GİRİLMEDİ, ALT BARAJLAR GİRİLDİ ──
+ * ── TAVANLAR DA ALT BARAJLAR DA GİRİLDİ ──
  * Her kategori satırı hem "en az" hem "en fazla değerlendirmeye alınır"
- * diyor (ör. atıflarda profesörlükte en az 20, en fazla 200). §0 gereği
- * yalnız alt barajlar koşula çevrildi; tavanlar toplam puanı DÜŞÜRECEĞİ
- * için uygulanmamaları adayı yanlış yere geçirmez, yalnız toplam puanını
- * gerçeğinden yüksek gösterebilir. Aday notunda söyleniyor.
+ * diyor. Alt barajlar eşiğin düğümlerinde; tavanlar cetvelin
+ * `grup_tavanlari`'nda. Tavan KADROYA göre değiştiği ve kitapta TABLOYA da
+ * bağlı olduğu için cetvel varyantlarla üretiliyor (ordu-2024-profesorluk,
+ * ordu-2024-docentlik-c120 …) — KONVANSIYONLAR "Tavan FAKÜLTE × KADRO ise
+ * cetveli çarpanla üret".
+ *
+ * İlk girişte tavanlar atlanmıştı ve aday notu "uygulanmadı, puanınız
+ * gerçeğinden yüksek görünebilir" diyordu. Bu §0'a AYKIRIYDI: eksik saymak
+ * serbest, fazla saymak değil. Tavansız bir toplam adayı barajın üstünde
+ * gösterebilirdi.
  *
  * ── TEK YAZARLI YAYIN DİPNOTLARI GİRİLMEDİ ──
  * Dipnot (3) ve (4) bazı alanlarda "en az üçü tek yazarlı olmak üzere farklı
@@ -210,6 +216,29 @@ $KADROLAR = [
     'dr_ogr_uyesi_yeniden' => ['ad' => 'Dr. Öğr. Üyesi (yeniden atanma)', 'toplam' => 100],
 ];
 
+/**
+ * Kitap tavanı tablodan tabloya değişiyor; beş tabloda kitap satırı hiç yok.
+ * Cetvel varyantı bu tavana göre seçiliyor (bkz. cetvel/ordu-2024.php).
+ *
+ * @var array<string, array<string, int>>
+ */
+$KITAP_TAVANI = [
+    'spor' => ['profesorluk' => 75, 'docentlik' => 75],
+    'egitim' => ['profesorluk' => 120, 'docentlik' => 60],
+    'filoloji' => ['profesorluk' => 180, 'docentlik' => 120],
+    'ilahiyat' => ['profesorluk' => 180, 'docentlik' => 120],
+    'sosyal' => ['profesorluk' => 120, 'docentlik' => 60],
+    'guzel_sanatlar' => ['profesorluk' => 180, 'docentlik' => 120],
+];
+
+/** Kadro anahtarının cetvel varyantındaki karşılığı. */
+$CETVEL_KADRO = [
+    'profesorluk' => 'profesorluk',
+    'docentlik' => 'docentlik',
+    'dr_ogr_uyesi' => 'dr',
+    'dr_ogr_uyesi_yeniden' => 'dr-yeniden',
+];
+
 /** Her tablonun "ZORUNLU ALANLARDA ASGARİ PUAN" satırı — aday notunda anılıyor. */
 $ZORUNLU = [
     'spor' => [235, 205, 95, 95], 'egitim' => [295, 195, 75, 95],
@@ -220,9 +249,10 @@ $ZORUNLU = [
     'guzel_sanatlar' => [175, 115, 55, 75],
 ];
 
-$TAVAN_NOTU = ' Yönerge her kategoriye bir de TAVAN koyuyor (ör. atıflardan profesörlükte en '
-    .'fazla 200 puan değerlendirmeye alınır). Bu tavanlar burada uygulanmadı; toplam puanınız '
-    .'gerçeğinden yüksek görünebilir, düşük görünmez.';
+$TAVAN_NOTU = ' Yönerge her kategoriye bir de TAVAN koyuyor (atıflardan profesörlükte en '
+    .'fazla 200, doçentlikte 150; bildirilerden 40/30; öğretim faaliyetlerinden 80/40; kitap '
+    .'tavanı alana göre 60 ile 180 arasında). Bu tavanlar UYGULANIYOR, yani bir kategoriden '
+    .'tavanın üstünde topladığınız puan toplama girmiyor.';
 
 $TEK_YAZAR_NOTU = ' Yönerge bazı alanlarda ayrıca "en az üçü tek yazarlı olmak üzere farklı '
     .'dergilerde yayımlanmış" yayın istiyor; koşulun kapsamı tablodan tabloya değiştiği ve '
@@ -317,7 +347,8 @@ foreach ($TABLOLAR as $alan => $t) {
             'universite' => $UNI,
             'kadro' => $kadro,
             'alan' => [$alan],
-            'cetvel' => $CETVEL,
+            'cetvel' => $CETVEL.'-'.$CETVEL_KADRO[$kadro]
+            .(isset($KITAP_TAVANI[$alan][$kadro]) ? '-c'.$KITAP_TAVANI[$alan][$kadro] : ''),
             'notlar' => "{$t['tablo']} ({$t['ad']}) — {$k['ad']} sütunu. ZORUNLU ALANLARDA "
                 ."ASGARİ PUAN {$ZORUNLU[$alan][$sira]}, TOPLAM ASGARİ PUAN {$k['toplam']}. "
                 .'Dipnot (1): M kategorisini sağlayamayan toplam asgari puanın %10\'unu A ve B '
