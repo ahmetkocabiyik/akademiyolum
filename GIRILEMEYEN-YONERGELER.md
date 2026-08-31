@@ -17,9 +17,26 @@ Bir üniversite bu listeden ancak `database/data/yonerge/` altına eşiği ve
 | **Kısmen girildi, kalanı korpus içinde hazır** | 0 | — |
 | **Kısmen girildi, çizelge dışarıdan gelmeli** | 2 | SANKO, İstanbul Okan |
 
-Yani **dışarıdan belge beklemeden yapılabilecek iş KALMADI**; listedeki beş
-üniversite için ilgili üniversiteden puanlama ya da ölçüt tablosunu istemek
-gerekiyor.
+Yani **bu listedeki beş üniversite için dışarıdan belge beklemek gerekiyor**;
+ilgili üniversiteden puanlama ya da ölçüt tablosunu istemek gerek.
+
+**AMA LİSTE TEK BAŞINA YETMİYOR: `pdf/` KLASÖRÜNE SONRADAN BELGE DÜŞÜYOR.**
+31.08.2026'da Ordu Üniversitesi'nin 03.04.2024 tarihli YENİ yönergesi
+(`1785505490169.ODÜ Atanma Yönergesi.pdf`, 31 sayfa) klasörde dururken korpus
+hâlâ 2017 sürümünü kullanıyordu — oysa yeni belgenin MADDE 14'ü eskisini
+açıkça yürürlükten kaldırıyor. Bu dosya "engelli" olmadığı için bu listede
+görünmüyordu; kimse aramadığı için de fark edilmemişti. (Aynı gün girildi:
+`ordu-2024` cetveli ve on bir alan × dört kadro eşiği.)
+
+Bu yüzden kuyruk sorgusu iki soruya çıktı: (1) bu listede kim var, (2) `pdf/`
+altında hiçbir yönerge dosyasının ANMADIĞI belge var mı. İkincisini sorarken
+kaynak satırının SARMALANMIŞ olabileceğine dikkat et — dosya adı iki satıra
+bölünmüşse düz `grep` bulamaz, satır sonlarını ve yorum yıldızlarını silerek
+ara. (İlk denemede Adana ATÜ ile AYBU bu yüzden yanlışlıkla "eksik" çıktı.)
+
+Çıkanların çoğu ZATEN GİRİLİ üniversitelerin eski nüshaları olur; her birini
+"korpusta var mı" diye değil, **kaydın hangi tarihli belgeye dayandığı** diye
+kontrol et. Yeni belge eskisini yürürlükten kaldırıyorsa kayıt bayattır.
 
 **Bu tablo 29.08.2026'da iki kez yeniden sayıldı.** İlkinde Karamanoğlu, Sağlık
 Bilimleri ve Biruni girilmiş olmalarına rağmen üç hafta "giriş bekliyor"

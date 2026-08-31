@@ -3,265 +3,329 @@
 /**
  * ORDU ÜNİVERSİTESİ — Öğretim Üyeliği Kadrolarına Başvuru ve Atanma
  * Koşulları ve Uygulama Yönergesi
- * Kaynak: pdf/17537005692.orduuniverstesi.pdf (13 sayfa; Senato
- * 04.08.2017-2017/84 ve altı değişiklik kararı)
+ * Kaynak: pdf/1785505490169.ODÜ Atanma Yönergesi.pdf (31 sayfa;
+ *         Senato 03.04.2024 ve 2024-58)
  *
- * ── YAPI: TEK TABLO, ALAN BAZLI YAYIN KOŞULU ──
- * Tek puan tablosu (EK-1). Bütün kadrolarda toplam puan barajı alandan
- * bağımsız (doktor öğretim üyeliğinde 100, doçentlikte 300,
- * profesörlükte 500); değişen tek şey hangi puan grubundan kaç yayın
- * istendiği. Madde 4 doktor öğretim üyeliğinde beş, madde 5 yeniden
- * atanmada dört koşul kümesi tanımlıyor.
+ * 2017 SÜRÜMÜNÜN YERİNE GEÇTİ. Yeni yönergenin MADDE 14'ü eskisini açıkça
+ * yürürlükten kaldırıyor: "Bu yönergenin yürürlüğe girmesiyle halen
+ * yürürlükte olan Ordu Üniversitesi Öğretim Üyeliği Kadrolarına Başvuru ve
+ * Atama Koşulları ve Uygulama Yönergesi yürürlükten kalkar." Eski cetvel
+ * `ordu-2017.php` dosyada duruyor ama artık hiçbir eşiğe bağlı değil.
  *
- * ── YENİDEN ATANMADA "ATAMA YILI BAŞINA DÖRTTE BİR" ──
- * Madde 5(a) her alan için 100 puan istiyor; madde 5(b) ise "asgari
- * toplam puanın her bir atama yılı başına en az dörtte birinin
- * sağlanması" diyor — yani bir yıllık atamada 25, dört yıllıkta 100
- * puan. Profil atama süresini tutmadığı için §0 uyarınca YÜKSEK olan
- * (100 puan, dört yıllık atama) uygulandı; kısa süreli atamalarda koşul
- * olduğundan katı görünür. Merdiven aday notunda.
- * Madde 5(b) ayrıca "en az bir yayın koşulu 3 yıl ve üzeri atamalarda
- * aranır" diyor; o koşul da yazıldı.
+ * ── YAPI: ON BİR ALAN TABLOSU × DÖRT KADRO ──
+ * 2017 sürümü tek tablo ve alandan bağımsız toplam baraj kullanıyordu.
+ * 2024 sürümü her temel alana ayrı bir tablo veriyor (TABLO-3 … TABLO-13) ve
+ * her tabloda dört kadro sütunu var: Profesör, Doçent, Dr. Öğr. Üyesi (ilk
+ * atanma) ve Dr. Öğr. Üyesi (yeniden atanma).
  *
- * ── YABANCI DİL ──
- * Doktor öğretim üyeliğinde yönerge YALNIZCA kısmen ya da tamamen
- * yabancı dille öğretim yapan bölümler için 80 puan istiyor; Türkçe
- * bölümler için sayısal bir dil şartı yok. Bu yüzden `Kalip::yds`
- * kullanılmadı, koşul aday notunda. Doçentlik ve profesörlükte Türkçe
- * bölümlerde 55, yabancı dille öğretim yapan bölümlerde 80 isteniyor;
- * §0 uyarınca 55 uygulandı.
+ * TOPLAM ASGARİ PUAN ON BİR TABLODA DA AYNI: profesörlük 500, doçentlik 400,
+ * dr. öğr. üyeliği 100 (ilk ve yeniden atanmada). Alan farkı KATEGORİ ALT
+ * BARAJLARINDA: hangi makale bendinden ne kadar puan geleceği tablodan
+ * tabloya değişiyor ve fark büyük — Filoloji ile İlahiyat profesörlükte
+ * yalnız TR Dizin makalelerinden (A.6) 120 puan isterken Mimarlık aynı
+ * kadroda makale bentleri arasında hiç ayrım yapmıyor.
  *
- * ── GİRİLMEYEN KOŞULLAR ──
- *   Madde 4(a) Sağlık Bilimleri a.3: bir programdaki öğretim üyesi
- *       sayısı YÖK'ün gerekli gördüğü sayının altındaysa yayın ve puan
- *       koşulunun uygulanmaması.
- *   Madde 4(c): 2547 sayılı Kanunun Ek 38. maddesi kapsamındaki %30
- *       kota ataması — ilk atanma koşullarının aynısı.
- *   Madde 7: askerlik, hamilelik ve hastalık nedeniyle üç ay ve üzeri
- *       görevden uzak kalanlarda puanın oranlanması.
- *   Madde 9(a): "doçent unvanını aldığı temel alan için ÜAK'ın
- *       belirlediği yayın koşullarını TEKRAR sağlamış olmak" —
- *       `hesaplanamiyor`.
- *   Madde 9(e): YÖK yönetmeliğindeki profesörlüğe atanma şartları —
- *       `beyan`.
+ * "ZORUNLU ALANLARDA ASGARİ PUAN" SATIRI ALT BARAJLARIN TOPLAMI, ayrı bir
+ * koşul değil: örneğin Eğitim profesörlüğünde 295 = makale 180 + bildiri 15
+ * + kitap 60 + atıf 20 + öğretim 20. Bu yüzden düğüm olarak yazılmadı;
+ * alt barajların her biri kendi düğümünde duruyor. Sayı aday notunda.
  *
- * Ortak kalıplar: App\Services\Scoring\Sart\Kalip · cetvel: cetvel/ordu-2017.php
+ * ── M. PROJELER: PUAN DEĞİL, BAŞVURU ŞARTI ──
+ * "Son üç yıl içinde yürütücü olarak en az bir TÜBİTAK proje (Bilim Şenliği
+ * hariç) BAŞVURUSU olma şartı aranmaktadır." Proje kabul edilmiş olması
+ * gerekmiyor, başvurmuş olmak yeterli; başvuru kaydı tutulmadığı için koşul
+ * `beyan` olarak duruyor. Dipnot (1) telafisini de veriyor: sağlayamayan
+ * aday toplam asgari puanın %10'unu (profesörlükte 50, doçentlikte 40,
+ * dr. öğr. üyeliğinde 10) A ve B kategorilerinden İLAVE olarak sağlar.
+ * Telafi ayrı bir düğüm olarak değil, beyanın metninde anlatılıyor.
+ *
+ * ── TAVANLAR GİRİLMEDİ, ALT BARAJLAR GİRİLDİ ──
+ * Her kategori satırı hem "en az" hem "en fazla değerlendirmeye alınır"
+ * diyor (ör. atıflarda profesörlükte en az 20, en fazla 200). §0 gereği
+ * yalnız alt barajlar koşula çevrildi; tavanlar toplam puanı DÜŞÜRECEĞİ
+ * için uygulanmamaları adayı yanlış yere geçirmez, yalnız toplam puanını
+ * gerçeğinden yüksek gösterebilir. Aday notunda söyleniyor.
+ *
+ * ── TEK YAZARLI YAYIN DİPNOTLARI GİRİLMEDİ ──
+ * Dipnot (3) ve (4) bazı alanlarda "en az üçü tek yazarlı olmak üzere farklı
+ * dergilerde yayınlanmış en az … yayın" istiyor; koşul tablodan tabloya hem
+ * sayı hem kapsam olarak değişiyor ve hangi bende bağlandığı metinden net
+ * okunamıyor. Yanlış bir okumayla adayı eleme riski yerine aday notunda
+ * uyarı olarak duruyor.
+ *
+ * ── HUKUK KAPSAM DIŞI ──
+ * Yönergenin on bir tablosu arasında hukuk temel alanı yok; Ordu
+ * Üniversitesi'nde Hukuk Fakültesi de bulunmuyor.
+ *
+ * ── GÜZEL SANATLARIN ÖZEL ŞARTLARI ──
+ * TABLO-13 "Genel Başvuru Şartları"; TABLO-14'ten sonrası müzik ve sahne
+ * sanatları alt dallarına (kompozisyon, yorumculuk, müzikoloji, tiyatro
+ * kuramı, oyunculuk-reji …) ÖZEL başvuru şartları veriyor. Bunlar alt dala
+ * bağlı ve profilde alt dal tutulmadığı için girilmedi; TABLO-13'ün genel
+ * şartları yazıldı ve dipnot (6) uyarınca toplam asgari puanın özel şartları
+ * da kapsadığı aday notunda söyleniyor.
+ *
+ * Ortak kalıplar: App\Services\Scoring\Sart\Kalip · cetvel: ordu-2024
  */
 
 use App\Services\Scoring\Sart\Kalip;
 
-$UNIVERSITE = 'Ordu Üniversitesi';
-$CETVEL = 'ordu-2017';
+$UNI = 'Ordu Üniversitesi';
+$CETVEL = 'ordu-2024';
+$DOKTORA = Kalip::DOKTORA_SONRASI;
 $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 
-$SOSYAL = ['egitim', 'filoloji', 'hukuk', 'ilahiyat', 'sosyal'];
-$FEN = ['fen', 'mimarlik', 'muhendislik', 'ziraat'];
+/**
+ * Makale bent aralıklarının adaya gösterilecek adları.
+ *
+ * @var array<string, string>
+ */
+$MAKALE_ADI = [
+    'A.1-A.4' => 'SCI, SSCI, SCI-Expanded ve AHCI dergilerindeki',
+    'A.1-A.5' => 'SCI-SSCI-AHCI, ESCI ve Scopus dergilerindeki',
+    'A.1-A.6' => 'SCI-SSCI-AHCI, ESCI, Scopus ve TR Dizin dergilerindeki',
+    'A.1-A.7' => 'SCI-SSCI-AHCI, ESCI, Scopus, TR Dizin ve diğer uluslararası dergilerdeki',
+    'A.1-A.8' => 'bütün hakemli dergilerdeki',
+    'A.5-A.6' => 'ESCI, Scopus, alan indeksli ve TR Dizin dergilerindeki',
+    'A.6' => 'TR Dizin dergilerindeki',
+    'A' => 'bütün',
+];
 
-$DIL_DR = ' Kısmen ya da tamamen yabancı dille eğitim-öğretim yürütülen bölümlere '
-    .'başvuruyorsanız merkezi bir yabancı dil sınavından en az 80 puan gerekiyor; Türkçe eğitim '
-    .'yapan bölümler için yönerge doktor öğretim üyeliğinde sayısal bir dil şartı koymuyor.';
-$DIL = ' Yabancı dil koşulu 55 puandan uygulanıyor; kısmen ya da tamamen yabancı dille '
-    .'eğitim-öğretim yürütülen bölümlerde en az 80 puan gerekiyor.';
+/**
+ * Kategori alt barajları on bir tabloda büyük ölçüde aynı; değişen yalnız
+ * makale (A) ve kitap (C) satırları.
+ *
+ * @param  array<string, mixed>|null  $donem
+ * @return list<array<string, mixed>>
+ */
+$ortakKosullar = function (string $kadro, ?array $donem, string $madde): array {
+    $dugumler = [
+        Kalip::puanDan('Ulusal ve uluslararası bildirilerinizden en az 15 puan', ['B'], 15, $donem, madde: $madde),
+    ];
 
-$YENIDEN_NOTU = ' Yönerge "asgari toplam puanın her bir atama yılı başına en az dörtte '
-    .'birinin sağlanmasını" istiyor: bir yıllık atamada 25, iki yıllıkta 50, üç yıllıkta 75, '
-    .'dört yıllıkta 100 puan. Profil atama sürenizi tutmadığı için §0 uyarınca en yüksek olan '
-    .'(100 puan) uygulanıyor; kısa süreli bir atamanız varsa koşul olduğundan katı görünür. '
-    .'"En az bir yayın" koşulu yalnızca üç yıl ve üzeri atamalarda aranıyor.';
+    // Atıf ve öğretim satırları dr. öğr. üyeliğinin İLK atamasında yok.
+    if ($kadro !== 'dr_ogr_uyesi') {
+        if ($kadro !== 'dr_ogr_uyesi_yeniden') {
+            $dugumler[] = Kalip::puanDan(
+                'Atıflarınızdan en az '.($kadro === 'profesorluk' ? 20 : 10).' puan',
+                ['E'], $kadro === 'profesorluk' ? 20 : 10, $donem, madde: $madde,
+            );
+        }
 
-$doktora = Kalip::beyan('Doktora, sanatta yeterlik ya da tıpta uzmanlık unvanını almış olmak', '4');
+        $dugumler[] = Kalip::puanDan('Öğretim faaliyetlerinizden en az 20 puan', ['L'], 20, $donem, madde: $madde);
+        $dugumler[] = Kalip::beyan(
+            'Son üç yıl içinde yürütücü olarak en az bir TÜBİTAK projesine (Bilim Şenliği hariç) '
+            .'BAŞVURMUŞ olmak — projenin kabul edilmiş olması gerekmiyor. Sağlayamıyorsanız '
+            .'toplam asgari puanın %10\'unu makale ve bildiri kalemlerinizden İLAVE olarak '
+            .'toplamanız gerekiyor',
+            $madde,
+        );
+    }
+
+    return $dugumler;
+};
+
+/**
+ * On bir alan tablosu. Her satır: temel alan, tablo adı ve dört kadronun
+ * makale/kitap koşulları. Makale koşulu `[[grup, puan], …]` biçiminde;
+ * son eleman her zaman toplam makale barajı.
+ *
+ * @var array<string, array{tablo: string, ad: string, kosul: array<string, array{makale: list<array{0: string, 1: int}>, kitap?: int, kitapAdet?: int}>}>
+ */
+$TABLOLAR = [
+    'spor' => ['tablo' => 'TABLO-3', 'ad' => 'Spor Bilimleri', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.1-A.5', 100], ['A.6', 80], ['A', 180]]],
+        'docentlik' => ['makale' => [['A.1-A.4', 50], ['A.6', 60], ['A', 110]], 'kitap' => 50],
+        'dr_ogr_uyesi' => ['makale' => [['A.1-A.7', 80]]],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A.1-A.7', 60]]],
+    ]],
+    'egitim' => ['tablo' => 'TABLO-4', 'ad' => 'Eğitim Bilimleri', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.1-A.5', 75], ['A', 180]], 'kitap' => 60],
+        'docentlik' => ['makale' => [['A.1-A.4', 60], ['A', 120]], 'kitap' => 30],
+        'dr_ogr_uyesi' => ['makale' => [['A', 60]]],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 60]]],
+    ]],
+    'fen' => ['tablo' => 'TABLO-5', 'ad' => 'Fen Bilimleri ve Matematik', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.1-A.4', 120], ['A.1-A.6', 180]]],
+        'docentlik' => ['makale' => [['A.1-A.4', 70], ['A.1-A.6', 120]]],
+        'dr_ogr_uyesi' => ['makale' => [['A', 60]], 'birinciMakale' => true],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 60]]],
+    ]],
+    'filoloji' => ['tablo' => 'TABLO-6', 'ad' => 'Filoloji', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.6', 120], ['A', 180]], 'kitap' => 90],
+        'docentlik' => ['makale' => [['A.6', 100], ['A', 120]], 'kitap' => 60],
+        'dr_ogr_uyesi' => ['makale' => [['A', 60]]],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 60]]],
+    ]],
+    'ilahiyat' => ['tablo' => 'TABLO-7', 'ad' => 'İlahiyat', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.6', 120], ['A', 180]], 'kitap' => 90],
+        'docentlik' => ['makale' => [['A.6', 100], ['A', 120]], 'kitap' => 60],
+        'dr_ogr_uyesi' => ['makale' => [['A', 60]]],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 60]]],
+    ]],
+    'mimarlik' => ['tablo' => 'TABLO-8', 'ad' => 'Mimarlık, Planlama ve Tasarım', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.1-A.6', 160]]],
+        'docentlik' => ['makale' => [['A.1-A.5', 60], ['A.6', 40], ['A', 100]]],
+        'dr_ogr_uyesi' => ['makale' => [['A', 60]]],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 60]]],
+    ]],
+    'muhendislik' => ['tablo' => 'TABLO-9', 'ad' => 'Mühendislik', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.1-A.4', 120], ['A.6', 40], ['A', 160]]],
+        'docentlik' => ['makale' => [['A.1-A.4', 60], ['A.6', 40], ['A', 100]]],
+        'dr_ogr_uyesi' => ['makale' => [['A', 60]]],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 60]]],
+    ]],
+    'saglik' => ['tablo' => 'TABLO-10', 'ad' => 'Sağlık Bilimleri', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.1-A.4', 70], ['A.5-A.6', 90], ['A', 160]]],
+        'docentlik' => ['makale' => [['A.1-A.4', 50], ['A.5-A.6', 60], ['A', 110]]],
+        'dr_ogr_uyesi' => ['makale' => [['A', 60]], 'birinciMakale' => true],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 60]]],
+    ]],
+    'sosyal' => ['tablo' => 'TABLO-11', 'ad' => 'Sosyal, Beşeri ve İdari Bilimler', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.1-A.5', 100], ['A.6', 80], ['A', 180]], 'kitap' => 60],
+        'docentlik' => ['makale' => [['A.1-A.5', 50], ['A.6', 90], ['A', 140]], 'kitap' => 30],
+        'dr_ogr_uyesi' => ['makale' => [['A', 60]]],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 60]]],
+    ]],
+    'ziraat' => ['tablo' => 'TABLO-12', 'ad' => 'Ziraat, Orman ve Su Ürünleri', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.1-A.4', 120], ['A.6', 40], ['A', 160]]],
+        'docentlik' => ['makale' => [['A.1-A.4', 60], ['A.6', 60], ['A', 120]]],
+        'dr_ogr_uyesi' => ['makale' => [['A', 60]], 'birinciMakale' => true],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 60]]],
+    ]],
+    'guzel_sanatlar' => ['tablo' => 'TABLO-13', 'ad' => 'Güzel Sanatlar', 'kosul' => [
+        'profesorluk' => ['makale' => [['A.1-A.5', 80], ['A.6', 40], ['A', 120]], 'kitapAdet' => 2],
+        'docentlik' => ['makale' => [['A.1-A.5', 40], ['A.6', 30], ['A', 70]], 'kitapAdet' => 1],
+        'dr_ogr_uyesi' => ['makale' => [['A', 40]]],
+        'dr_ogr_uyesi_yeniden' => ['makale' => [['A', 40]]],
+    ]],
+];
+
+/** Kadro adları ve toplam barajları. */
+$KADROLAR = [
+    'profesorluk' => ['ad' => 'Profesör', 'toplam' => 500],
+    'docentlik' => ['ad' => 'Doçent', 'toplam' => 400],
+    'dr_ogr_uyesi' => ['ad' => 'Dr. Öğr. Üyesi', 'toplam' => 100],
+    'dr_ogr_uyesi_yeniden' => ['ad' => 'Dr. Öğr. Üyesi (yeniden atanma)', 'toplam' => 100],
+];
+
+/** Her tablonun "ZORUNLU ALANLARDA ASGARİ PUAN" satırı — aday notunda anılıyor. */
+$ZORUNLU = [
+    'spor' => [235, 205, 95, 95], 'egitim' => [295, 195, 75, 95],
+    'fen' => [235, 165, 75, 95], 'filoloji' => [325, 225, 75, 95],
+    'ilahiyat' => [325, 225, 75, 95], 'mimarlik' => [265, 170, 75, 95],
+    'muhendislik' => [215, 145, 75, 95], 'saglik' => [215, 155, 75, 95],
+    'sosyal' => [295, 215, 75, 95], 'ziraat' => [215, 165, 75, 95],
+    'guzel_sanatlar' => [175, 115, 55, 75],
+];
+
+$TAVAN_NOTU = ' Yönerge her kategoriye bir de TAVAN koyuyor (ör. atıflardan profesörlükte en '
+    .'fazla 200 puan değerlendirmeye alınır). Bu tavanlar burada uygulanmadı; toplam puanınız '
+    .'gerçeğinden yüksek görünebilir, düşük görünmez.';
+
+$TEK_YAZAR_NOTU = ' Yönerge bazı alanlarda ayrıca "en az üçü tek yazarlı olmak üzere farklı '
+    .'dergilerde yayımlanmış" yayın istiyor; koşulun kapsamı tablodan tabloya değiştiği ve '
+    .'hangi bende bağlandığı metinden net okunamadığı için hesaba katılmadı.';
+
+$DIL_NOTU = ' Yabancı dil koşulu: Türkçe eğitim yapan bölümlerde merkezi sınavdan en az 55, '
+    .'tamamen yabancı dille eğitim yapan bölümlerde en az 85 puan. Bölümün eğitim dili burada '
+    .'tutulmadığı için 55 uygulandı.';
 
 $esikler = [];
 
-// ══════════════════════════════════════════════════════════════════════════
-// DOKTOR ÖĞRETİM ÜYESİ — İLK ATANMA (Madde 4)
-// ══════════════════════════════════════════════════════════════════════════
+foreach ($TABLOLAR as $alan => $t) {
+    foreach ($KADROLAR as $kadro => $k) {
+        $kosul = $t['kosul'][$kadro];
+        $madde = "{$t['tablo']} · {$k['ad']}";
+        $sira = array_search($kadro, array_keys($KADROLAR), true);
 
-/**
- * @param  list<string>  $alanlar
- * @param  list<array<string, mixed>>  $kosullar
- * @return array<string, mixed>
- */
-$drEsigi = fn (string $anahtar, array $alanlar, string $alanAdi, array $kosullar, string $not): array => [
-    'anahtar' => "ordu-{$anahtar}-dr",
-    'aday_notu' => "{$alanAdi} için {$not} Ayrıca tüm faaliyetlerinizden "
-        .'toplam en az 100 puan gerekiyor.'.$DIL_DR,
-    'universite' => $UNIVERSITE,
-    'kadro' => 'dr_ogr_uyesi',
-    'alan' => $alanlar,
-    'cetvel' => $CETVEL,
-    'notlar' => "Madde 4(a) ({$alanAdi}): alana özgü yayın koşulu; toplam 100 puan.",
-    'sart' => Kalip::ve("Doktor Öğretim Üyesi kadrosuna ilk atanma — {$alanAdi}",
-        array_values(array_merge([$doktora], $kosullar, [Kalip::toplam(100)]))),
-];
+        // Profesörlükte bütün koşullar doçentlik SONRASI dönemi ölçüyor
+        // (dipnot 2); yeniden atanmada son atama sonrası.
+        $donem = match ($kadro) {
+            'profesorluk' => $DOCENTLIK,
+            'dr_ogr_uyesi_yeniden' => $SON_ATAMA,
+            default => null,
+        };
 
-$esikler[] = $drEsigi('sosyal', $SOSYAL,
-    'Eğitim Bilimleri, Filoloji, Hukuk, İlahiyat ile Sosyal, Beşeri ve İdari Bilimler', [
-        Kalip::adet('En az biri uluslararası indeksli dergide yayımlanmış tam metin makale olmak üzere, makale ve kitap kalemlerinizden toplam iki bilimsel makaleniz olmak', ['ABC'], 2, madde: '4-a'),
-        Kalip::adet('Bunlardan en az birinin uluslararası indeksli dergide yayımlanmış tam metin makale olması', ['A.1-TAM'], 1, madde: '4-a'),
-    ],
-    'en az biri uluslararası indeksli dergide yayımlanmış tam metin makale olmak '
-    .'üzere A, B ve C puan gruplarından toplam iki bilimsel makale isteniyor.');
+        $cocuklar = [];
 
-$esikler[] = $drEsigi('fen', $FEN,
-    'Fen Bilimleri ve Matematik, Mimarlık-Planlama-Tasarım, Mühendislik ile Ziraat, Orman ve Su Ürünleri', [
-        Kalip::adet('En az biri SCI, SCI-Expanded, SSCI ya da AHCI dergisinde yayımlanmış tam metin makale olmak üzere, makale kalemlerinizden toplam iki bilimsel makaleniz olmak', ['A'], 2, madde: '4-a'),
-        Kalip::adet('Bunlardan en az birinin SCI, SCI-Expanded, SSCI ya da AHCI dergisinde yayımlanmış tam metin makale olması', ['A.1.1-TAM'], 1, madde: '4-a'),
-    ],
-    'en az biri SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde yayımlanmış tam metin makale '
-    .'olmak üzere makale kalemlerinizden toplam iki bilimsel makale isteniyor.');
+        if ($kadro === 'docentlik') {
+            $cocuklar[] = Kalip::beyan('Üniversitelerarası Kurul tarafından verilen doçentlik '
+                .'unvanına sahip olmak', 'Madde 6');
+        }
 
-$esikler[] = $drEsigi('saglik', ['saglik'], 'Sağlık Bilimleri', [
-    Kalip::adet('Hakemli dergilerde en az bir yayın (tam metin makale, derleme, olgu sunumu, kısa rapor ya da editöre mektup) yayımlamış olmak', ['A'], 1, madde: '4-a'),
-], 'Hakemli dergilerde en az bir yayın isteniyor. Bir programdaki öğretim '
-    .'üyesi sayısı YÖK\'ün o programın açılması için gerekli gördüğü sayının altındaysa bu yayın '
-    .'ve puan koşulu uygulanmıyor; motor bu istisnayı uygulayamıyor.');
+        if ($kadro === 'profesorluk') {
+            $cocuklar[] = Kalip::beyan('Doçentlik unvanını aldıktan sonra, doçentliğe hak '
+                .'kazandığınız dönemde yürürlükte olan ÜAK yayın koşullarını yeniden '
+                .'sağlamış olmak', 'Madde 7/a');
+            $cocuklar[] = Kalip::beyan('Başlıca eser olarak, birinci isim olduğunuz hakemli '
+                .'dergi makalesi ya da ISBN\'li basılı kitap veya kitap bölümü göstermek',
+                'Madde 7/b');
+        }
 
-$esikler[] = $drEsigi('guzel-sanatlar', ['guzel_sanatlar'], 'Güzel Sanatlar', [
-    Kalip::puanDan('Makale, bildiri, kitap, editörlük ve sanatsal etkinlik kalemlerinizden en az 100 puan', ['ABCLM'], 100, madde: '4-a'),
-], 'makale, bildiri, kitap, editörlük ve sanatsal etkinlik kalemlerinizden en az 100 puan isteniyor '
-    .'(ayrı bir yayın sayısı koşulu yok).');
+        if (($kosul['birinciMakale'] ?? false) === true) {
+            $cocuklar[] = Kalip::adet('SCI, SSCI, SCI-Expanded ya da AHCI dergilerinde en az '
+                .'1 yayın', ['A.1-A.4'], 1, donem: $donem, madde: $madde);
+        }
 
-$esikler[] = $drEsigi('spor', ['spor'], 'Spor Bilimleri', [
-    Kalip::puanDan('Makale, bildiri, kitap ve editörlük kalemlerinizden en az 100 puan', ['ABCK'], 100, madde: '4-a'),
-], 'makale, bildiri, kitap ve editörlük kalemlerinizden en az 100 puan isteniyor '
-    .'(ayrı bir yayın sayısı koşulu yok).');
+        foreach ($kosul['makale'] as [$grup, $puan]) {
+            $ad = $MAKALE_ADI[$grup];
+            $cocuklar[] = Kalip::puanDan(
+                $grup === 'A'
+                    ? "Bütün makale kalemlerinizden en az {$puan} puan"
+                    : "{$ad} makalelerinizden en az {$puan} puan",
+                [$grup], $puan, $donem, madde: $madde,
+            );
+        }
 
-// ══════════════════════════════════════════════════════════════════════════
-// DOKTOR ÖĞRETİM ÜYESİ — YENİDEN ATANMA (Madde 5)
-// ══════════════════════════════════════════════════════════════════════════
+        if (isset($kosul['kitap'])) {
+            $cocuklar[] = Kalip::puanDan(
+                "Kitap ve kitap bölümü kalemlerinizden en az {$kosul['kitap']} puan",
+                ['C'], $kosul['kitap'], $donem, madde: $madde,
+            );
+        }
 
-foreach ([
-    ['sosyal', $SOSYAL, 'Eğitim Bilimleri, Filoloji, Hukuk, İlahiyat ile Sosyal, Beşeri ve İdari Bilimler', 'ABC', 'A, B ve C puan grubu'],
-    ['fen', array_merge($FEN, ['saglik']), 'Fen Bilimleri ve Matematik, Mimarlık, Mühendislik, Sağlık Bilimleri ile Ziraat, Orman ve Su Ürünleri', 'A', 'A puan grubu'],
-    ['guzel-sanatlar', ['guzel_sanatlar'], 'Güzel Sanatlar', 'ABCLM', 'A, B, C, L ve M puan grubu'],
-    ['spor', ['spor'], 'Spor Bilimleri', 'ABCK', 'A, B, C ve K puan grubu'],
-] as [$anahtar, $alanlar, $alanAdi, $grup, $grupAdi]) {
-    $esikler[] = [
-        'anahtar' => "ordu-{$anahtar}-dr-yeniden",
-        'aday_notu' => 'Bir önceki atama tarihinizden itibaren yaptığınız faaliyetler sayılıyor. '
-            ."{$alanAdi} için {$grupAdi} kapsamında en az bir yayın ya da akademik etkinlik ve "
-            .'tüm puanlama gruplarından toplam en az 100 puan isteniyor.'.$YENIDEN_NOTU,
-        'universite' => $UNIVERSITE,
-        'kadro' => 'dr_ogr_uyesi_yeniden',
-        'alan' => $alanlar,
-        'cetvel' => $CETVEL,
-        'notlar' => "Madde 5 ({$alanAdi}): {$grupAdi}'ndan 1 yayın; toplam 100 puan.",
-        'sart' => Kalip::ve("Doktor Öğretim Üyesi kadrosuna yeniden atanma — {$alanAdi}", [
-            Kalip::adet(
-                "Son atamanızdan sonra {$grupAdi} kapsamında en az bir yayın ya da akademik "
-                .'etkinlik yapmış olmak',
-                [$grup], 1, donem: $SON_ATAMA, madde: '5-a',
-            ),
-            Kalip::toplam(100, $SON_ATAMA),
-        ]),
-    ];
+        if (isset($kosul['kitapAdet'])) {
+            $cocuklar[] = Kalip::adet(
+                "Alanınızla ilgili en az {$kosul['kitapAdet']} kitap ya da kitap bölümü",
+                ['C'], $kosul['kitapAdet'],
+                donem: $kadro === 'profesorluk' ? $DOCENTLIK : $DOKTORA, madde: $madde,
+            );
+        }
+
+        $cocuklar = [...$cocuklar, ...$ortakKosullar($kadro, $donem, $madde)];
+        $cocuklar[] = Kalip::toplam($k['toplam'], $donem);
+        $cocuklar[] = Kalip::yds(55);
+
+        $donemNotu = match ($kadro) {
+            'profesorluk' => 'Bütün koşullar DOÇENTLİK unvanınızı aldıktan sonraki '
+                .'çalışmalarınızla sağlanmalı. ',
+            'dr_ogr_uyesi_yeniden' => 'Bütün koşullar BİR ÖNCEKİ ATANMA tarihinizden sonraki '
+                .'çalışmalarınızla sağlanmalı; atama üç yıllık. Koşulları sağlayamazsanız '
+                .'yönerge bir defaya mahsus olmak üzere yarısıyla yeniden atanmaya izin '
+                .'veriyor. ',
+            default => '',
+        };
+
+        $esikler[] = [
+            'anahtar' => "ordu-{$kadro}-{$alan}",
+            'aday_notu' => $donemNotu."{$t['ad']} alanında toplam asgari puan {$k['toplam']}; "
+                ."bunun {$ZORUNLU[$alan][$sira]} puanı yukarıdaki kategori alt barajlarından "
+                .'gelmek zorunda. Alt barajların her biri ayrı ayrı sağlanmalı, toplamı '
+                .'yetmiyor.'.$TAVAN_NOTU.$TEK_YAZAR_NOTU.$DIL_NOTU,
+            'universite' => $UNI,
+            'kadro' => $kadro,
+            'alan' => [$alan],
+            'cetvel' => $CETVEL,
+            'notlar' => "{$t['tablo']} ({$t['ad']}) — {$k['ad']} sütunu. ZORUNLU ALANLARDA "
+                ."ASGARİ PUAN {$ZORUNLU[$alan][$sira]}, TOPLAM ASGARİ PUAN {$k['toplam']}. "
+                .'Dipnot (1): M kategorisini sağlayamayan toplam asgari puanın %10\'unu A ve B '
+                .'kategorilerinden ilave sağlar. Dipnot (2): profesörlük sütunundaki koşullar '
+                .'doçentlik unvanından sonraki dönemi kapsar.',
+            'sart' => Kalip::ve("{$k['ad']} kadrosuna atanma — {$t['ad']}", $cocuklar),
+        ];
+    }
 }
-
-// ══════════════════════════════════════════════════════════════════════════
-// DOÇENT (Madde 8)
-// ══════════════════════════════════════════════════════════════════════════
-
-$TUM_ALANLAR = array_merge($SOSYAL, $FEN, ['saglik', 'guzel_sanatlar', 'spor']);
-
-$esikler[] = [
-    'anahtar' => 'ordu-docentlik',
-    'aday_notu' => 'Üniversitelerarası Kurul tarafından verilen doçentlik unvanına sahip olmanız '
-        .'ve makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal etkinlik kalemlerinizden '
-        .'faaliyetlerden en az 300 puan almanız gerekiyor.'.$DIL,
-    'universite' => $UNIVERSITE,
-    'kadro' => 'docentlik',
-    'alan' => $TUM_ALANLAR,
-    'cetvel' => $CETVEL,
-    'notlar' => 'Madde 8: doçentlik unvanı; A-B-C-G-I-K-L-M gruplarından 300 puan; dil 55.',
-    'sart' => Kalip::ve('Doçent kadrosuna atanma', [
-        Kalip::beyan('Üniversitelerarası Kurul tarafından verilen doçentlik unvanına sahip olmak', '8'),
-        Kalip::yds(55),
-        Kalip::puanDan(
-            'Makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal etkinlik kalemlerinizden '
-            .'en az 300 puan',
-            ['ABCGIKLM'], 300, madde: '8',
-        ),
-    ]),
-];
-
-// ══════════════════════════════════════════════════════════════════════════
-// PROFESÖR (Madde 9)
-// ══════════════════════════════════════════════════════════════════════════
-
-$profesorGovde = [
-    Kalip::yds(55),
-    Kalip::hesaplanamiyor(
-        'Doçent unvanını aldıktan sonraki çalışma ve yayınlarınızla, unvanı aldığınız temel alan '
-        .'için ÜAK\'ın belirlediği ve başarılı olduğunuz doçentlik başvuru dönemi için yürürlükte '
-        .'olan yayın koşullarını TEKRAR sağlamış olmak (lisansüstü tezlerden üretilmiş yayın '
-        .'koşulu hariç) — ÜAK\'ın kendi ölçütlerine bağlı olduğu için motor hesaplayamıyor',
-        '9-a',
-    ),
-    Kalip::adet(
-        'Başlıca eser olarak makale sunuyorsanız birinci isim olduğunuz, ulusal ya da '
-        .'uluslararası hakemli bir dergide yayımlanmış makaleniz; kitap veya kitap bölümü '
-        .'sunuyorsanız ISBN numarası alınmış basılı eseriniz olmak',
-        ['BASLICA-ESER'], 1, yazar: 'ilk', madde: '9-c',
-    ),
-    Kalip::puanDan(
-        'Makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal etkinlik kalemlerinizden '
-        .'toplam en az 500 puan',
-        ['ABCGIKLM'], 500, madde: '9-b',
-    ),
-    Kalip::puanDan(
-        'Bu puanın en az 250\'sinin doçentlik sonrası bilimsel yayın ve araştırma '
-        .'faaliyetlerinden alınmış olması',
-        ['ABCGIKLM'], 250, $DOCENTLIK, madde: '9-b',
-    ),
-    Kalip::beyan(
-        'Yükseköğretim Kurulunun Öğretim Üyeliğine Yükseltilme ve Atanma Yönetmeliğindeki '
-        .'profesörlüğe atanma şartlarını sağlamış olmak',
-        '9-e',
-    ),
-];
-
-$esikler[] = [
-    'anahtar' => 'ordu-profesorluk',
-    'aday_notu' => 'Makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal etkinlik kalemlerinizden '
-        .'faaliyetlerden toplam en az 500 puan isteniyor; bunun en az 250 puanı doçentlik sonrası '
-        .'bilimsel yayın ve araştırma faaliyetlerinden gelmeli. Ayrıca doçent unvanınızı '
-        .'aldığınız temel alan için ÜAK\'ın belirlediği yayın koşullarını yeniden sağlamanız '
-        .'(motor bunu hesaplayamıyor) ve bir başlıca eser sunmanız gerekiyor.'.$DIL,
-    'universite' => $UNIVERSITE,
-    'kadro' => 'profesorluk',
-    'alan' => array_merge($SOSYAL, $FEN, ['guzel_sanatlar', 'spor']),
-    'cetvel' => $CETVEL,
-    'notlar' => 'Madde 9: ÜAK yayın koşullarını yeniden sağlama; 500 puan (250\'si doçentlik '
-        .'sonrası); başlıca eser; dil 55.',
-    'sart' => Kalip::ve('Profesör kadrosuna atanma', $profesorGovde),
-];
-
-$esikler[] = [
-    'anahtar' => 'ordu-saglik-profesorluk',
-    'aday_notu' => 'Sağlık Bilimleri temel alanında, genel koşullara ek olarak doçent unvanınızı '
-        .'aldıktan sonra yurt içinde ya da yurt dışında kamuya ait bir yükseköğretim kurumunda, '
-        .'araştırma merkezinde, enstitüde veya eğitim ve araştırma hastanesinde en az üç yıl '
-        .'çalışmış ve eğitim-öğretim ile araştırma faaliyetlerinde yer almış olmanız gerekiyor. '
-        .'makale, bildiri, kitap, editörlük, proje, tez danışmanlığı, ders ve sanatsal '
-        .'etkinlik kalemlerinizden toplam 500 puan (en az 250\'si '
-        .'doçentlik sonrası) ve bir başlıca eser isteniyor.'.$DIL,
-    'universite' => $UNIVERSITE,
-    'kadro' => 'profesorluk',
-    'alan' => ['saglik'],
-    'cetvel' => $CETVEL,
-    'notlar' => 'Madde 9 (Sağlık Bilimleri): genel koşullar + doçentlik sonrası 3 yıl çalışma.',
-    'sart' => Kalip::ve('Profesör kadrosuna atanma — Sağlık Bilimleri', array_merge(
-        [Kalip::beyan(
-            'Doçent unvanını aldıktan sonra yurt içinde ya da yurt dışında kamuya ait bir '
-            .'yükseköğretim kurumunda, araştırma merkezinde, enstitüde veya eğitim ve araştırma '
-            .'hastanesinde en az üç yıl çalışmış ve eğitim-öğretim ile araştırma faaliyetlerinde '
-            .'yer almış olmak',
-            '9-a',
-        )],
-        $profesorGovde,
-    )),
-];
 
 return $esikler;

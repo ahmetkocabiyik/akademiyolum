@@ -1765,6 +1765,102 @@ test('Ankara hukuk barajı Sosyal ile aynı ama monografi koşulu ekliyor', func
         ->and($telafi->telafiIleSaglandi())->toBeTrue();
 });
 
+test('Ordu 2024 yönergesi on bir alanı dört kadroda ayrı ayrı tanımlıyor', function () {
+    $depo = sartDepo();
+
+    // 2024 sürümü (Senato 03.04.2024) 2017'nin yerine geçti: MADDE 14 eskisini
+    // açıkça yürürlükten kaldırıyor. Eski sürüm tek tablo ve alandan bağımsız
+    // baraj kullanıyordu; yenisi her temel alana ayrı tablo veriyor.
+    $alanlar = ['spor', 'egitim', 'fen', 'filoloji', 'ilahiyat', 'mimarlik',
+        'muhendislik', 'saglik', 'sosyal', 'ziraat', 'guzel_sanatlar'];
+
+    foreach ($alanlar as $alan) {
+        foreach (['profesorluk', 'docentlik', 'dr_ogr_uyesi', 'dr_ogr_uyesi_yeniden'] as $kadro) {
+            $esik = $depo->bul('Ordu Üniversitesi', $kadro, $alan);
+            expect($esik)->not->toBeNull("{$kadro}/{$alan}")
+                ->and($esik['cetvel'])->toBe('ordu-2024');
+        }
+    }
+
+    // Ordu'da Hukuk Fakültesi yok; yönergenin on bir tablosunda da hukuk yok.
+    expect($depo->bul('Ordu Üniversitesi', 'docentlik', 'hukuk'))->toBeNull();
+});
+
+test('Ordu alan farkı makale bendi seçiminde, toplam barajda değil', function () {
+    $depo = sartDepo();
+
+    $aciklamalar = function (string $alan, string $kadro) use ($depo): string {
+        $esik = $depo->bul('Ordu Üniversitesi', $kadro, $alan);
+
+        return implode(' | ', array_map(fn (array $d): string => $d['aciklama'], $esik['sart']['cocuklar']));
+    };
+
+    // Toplam baraj on bir tabloda da aynı: profesörlük 500, doçentlik 400.
+    foreach (['filoloji', 'muhendislik', 'guzel_sanatlar'] as $alan) {
+        expect($aciklamalar($alan, 'profesorluk'))->toContain('toplam en az 500 puan')
+            ->and($aciklamalar($alan, 'docentlik'))->toContain('toplam en az 400 puan');
+    }
+
+    // Fark makale bendinde: Filoloji profesörlükte YALNIZ TR Dizin'den 120
+    // isterken Mühendislik SCI-SSCI-AHCI'dan 120 istiyor.
+    expect($aciklamalar('filoloji', 'profesorluk'))->toContain('TR Dizin dergilerindeki makalelerinizden en az 120 puan')
+        ->and($aciklamalar('muhendislik', 'profesorluk'))->toContain('SCI, SSCI, SCI-Expanded ve AHCI dergilerindeki makalelerinizden en az 120 puan');
+
+    // Mimarlık profesörlüğü makale bentleri arasında hiç ayrım yapmıyor:
+    // tek bir makale koşulu var (A.1-A.6'dan 160), diğerlerinde iki ya da üç.
+    $makaleSayisi = function (string $alan, string $kadro) use ($depo): int {
+        $esik = $depo->bul('Ordu Üniversitesi', $kadro, $alan);
+
+        return count(array_filter(
+            $esik['sart']['cocuklar'],
+            fn (array $d): bool => str_contains($d['aciklama'], 'makale kalemlerinizden')
+                || str_contains($d['aciklama'], 'makalelerinizden en az'),
+        ));
+    };
+
+    expect($makaleSayisi('mimarlik', 'profesorluk'))->toBe(1)
+        ->and($makaleSayisi('muhendislik', 'profesorluk'))->toBe(3)
+        ->and($makaleSayisi('filoloji', 'profesorluk'))->toBe(2);
+
+    // Dr. öğr. üyeliğinin İLK atamasında atıf ve öğretim koşulu yok;
+    // yeniden atanmada öğretim var, atıf yok.
+    expect($aciklamalar('fen', 'dr_ogr_uyesi'))->not->toContain('Atıflarınızdan')
+        ->and($aciklamalar('fen', 'dr_ogr_uyesi'))->not->toContain('Öğretim faaliyetlerinizden')
+        ->and($aciklamalar('fen', 'dr_ogr_uyesi_yeniden'))->toContain('Öğretim faaliyetlerinizden')
+        ->and($aciklamalar('fen', 'dr_ogr_uyesi_yeniden'))->not->toContain('Atıflarınızdan');
+});
+
+test('Ordu profesörlük koşulları doçentlik sonrası dönemi ölçüyor', function () {
+    $depo = sartDepo();
+
+    // Dipnot (2): profesörlük sütunundaki koşullar doçentlik unvanından
+    // sonraki yayınları, atıfları, öğretim faaliyetlerini ve projeleri kapsar.
+    $esik = $depo->bul('Ordu Üniversitesi', 'profesorluk', 'sosyal');
+    $profil = new Profil(docentlikTarihi: Carbon::parse('2020-01-01'), yds: 60);
+
+    // Doçentlikten ÖNCEKİ dört TR Dizin makalesi (80 puan) sayılmamalı.
+    $onceki = array_map(
+        fn (): object => sartFaaliyet('TR Dizin', tarih: '2018-01-01'),
+        range(1, 4),
+    );
+
+    $trDizin = collect($depo->degerlendir($esik, $onceki, $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'TR Dizin dergilerindeki'));
+
+    expect($trDizin->mevcut)->toBe(0);
+
+    // Aynı dört makale doçentlikten SONRA olsaydı 80 puan sayılacaktı.
+    $sonraki = array_map(
+        fn (): object => sartFaaliyet('TR Dizin', tarih: '2022-01-01'),
+        range(1, 4),
+    );
+
+    $trDizinSonra = collect($depo->degerlendir($esik, $sonraki, $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'TR Dizin dergilerindeki'));
+
+    expect($trDizinSonra->mevcut)->toBe(80);
+});
+
 test('Erciyes yayın barajı alan grubuna göre farklı küme sayıyor', function () {
     $depo = sartDepo();
     $profil = new Profil(doktoraTarihi: Carbon::parse('2015-01-01'), yds: 70);
