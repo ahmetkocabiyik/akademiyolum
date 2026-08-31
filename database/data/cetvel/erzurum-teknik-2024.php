@@ -248,5 +248,15 @@ return [
     'grup_tavanlari' => [
         // H3 dipnotu: "aktif görevde bulunduğu son iki yılda en fazla 30 puan".
         'H3' => 30,
+        // Eğitim (H) tavanı bütün fakülte ve kadro bloklarında aynı: "Bu
+        // maddeden en fazla 150 puan alınabilir." Cetvel geneline yazıldı.
+        'H' => 150,
+        // ATIF (G) TAVANI YAZILAMADI. Kadroya göre çok değişiyor: alt
+        // kadrolarda 20-30, profesörlükte ise G barajının KENDİSİ 50, yani
+        // tavan ondan büyük olmak zorunda. "En sıkı değeri yaz" kısayolu
+        // burada işlemiyor — 20 yazınca profesörlük eşiği sağlanamaz hâle
+        // geliyor ve bunu `CetvelKaynakTest` yakaladı. Blok blok tavan
+        // çıkarmak için kaynağın sayfa görüntüsünden okunması gerekiyor;
+        // o yapılana kadar G tavansız, yani o kalemde puan yüksek kalabilir.
     ],
 ];

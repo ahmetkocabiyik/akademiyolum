@@ -283,6 +283,23 @@ orada haklı olarak `haric`.
 Bir kategori hem `kategoriler`de hem `haric`te olursa `haric` kazanır ve
 kural sessizce yok sayılır; `CetvelKaynakTest` bu çakışmayı yakalıyor.
 
+### "En sıkı değeri yaz" kısayolu tavanda İŞLEMEYEBİLİR
+
+Kadroya göre değişen bir tavanı cetvel geneline yazmak gerektiğinde ilk akla
+gelen, en düşük değeri seçmektir: eksik saymak serbest. AMA TAVAN BARAJIN
+ALTINA DÜŞERSE EŞİK SAĞLANAMAZ HÂLE GELİR ve bu, fazla saymaktan da kötüdür —
+aday "asla yeterli değilsiniz" cevabı alır.
+
+Erzurum Teknik'te atıf (G) tavanı alt kadrolarda 20-30, profesörlükte ise G
+barajının KENDİSİ 50. En sıkı değeri (20) yazınca üç profesörlük eşiği
+sağlanamaz oldu; `CetvelKaynakTest`'in tavan-baraj kontrolü yakaladı.
+
+Sıra şu: (1) tavan bütün kadrolarda AYNI mı, öyleyse doğrudan yaz (Erzurum'da
+eğitim tavanı her blokta 150). (2) Değişiyorsa cetveli kadroya göre varyantla
+(Ordu, Yalova, Acıbadem, MEF). (3) Varyantlayacak kadar güvenilir okuyamıyorsan
+tavanı YAZMA ve sebebini yaz — ama en düşük değeri gelişigüzel yazma, önce
+her kadronun BARAJININ altına düşmediğini doğrula.
+
 ### Yüzde tavanını ASGARİ PUANDAN SABİTE ÇEVİR
 
 Bazı yönergeler tavanı sayıyla değil yüzdeyle veriyor: "Bu madde kapsamında

@@ -42,10 +42,17 @@
  * ── "EN FAZLA N PUAN ALINABİLİR" SINIRLARI KOŞUL DEĞİL, TAVAN ──
  * Tabloların çoğu bir grubun hem alt barajını hem üst sınırını yazıyor
  * ("G grubu etkinliklerinden en az 10 puan almış olmak. Bu gruptan en fazla
- * 20 puan alınabilir."). Alt baraj `Kalip::puanDan` ile yazıldı; ÜST SINIR
- * yazılamadı, çünkü motorun `grup_tavanlari` alanı cetvel geneline
- * uygulanıyor ve aynı grup her kadroda farklı tavan taşıyor. Bu, adayın
- * toplam puanını YÜKSEK gösterebilir; aday notunda uyarıldı.
+ * 20 puan alınabilir."). Alt baraj `Kalip::puanDan` ile yazıldı. ÜST SINIR
+ * kadroya göre değişiyor ve `grup_tavanlari` cetvel geneline uygulanıyor;
+ * H tavanı bütün bloklarda 150 olduğu için cetvel geneline yazıldı.
+ *
+ * G (ATIF) TAVANI YAZILAMADI ve "en sıkı değeri yaz" kısayolu burada
+ * İŞLEMİYOR: alt kadrolarda tavan 20-30 ama profesörlükte G barajının kendisi
+ * 50, yani tavan ondan büyük olmak zorunda. 20 yazınca profesörlük eşiği
+ * sağlanamaz hâle geliyor — `CetvelKaynakTest`'in tavan-baraj kontrolü bunu
+ * yakaladı. Kaynağın sütun düzeni iç içe geçtiği için blok blok tavan
+ * çıkarmak güvenilir olmadı; varyantlama gerekirse önce tabloların sayfa
+ * görüntüsünden okunması gerekiyor.
  *
  * Dr. Öğr. Üyesi ilk atanmada bazı birimlerde G grubu için YALNIZCA üst
  * sınır var ("G grubu etkinliklerinden en fazla 10/20 puan alınabilir"),
@@ -98,8 +105,8 @@ $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 
 $UYARI = ' DİKKAT: yönergenin "bu gruptan en fazla N puan alınabilir" üst sınırları '
-    .'hesaplanamıyor (aynı grup her kadroda farklı tavan taşıyor), bu yüzden toplam puanınız '
-    .'olduğundan yüksek görünebilir. Eğitim (H) barajı yönergede lisansüstü programı olmayan '
+    .'yalnız eğitim kaleminde uygulanabildi (her blokta 150). Atıf tavanı kadroya göre çok '
+    .'değiştiği için yazılamadı; o kalemde puanınız gerçeğinden yüksek görünebilir. Eğitim (H) barajı yönergede lisansüstü programı olmayan '
     .'birimler için hafifletiliyor, kurumsal katkı (K) barajı ise üniversite dışından '
     .'başvuranlarda hiç aranmıyor; ikisi de profilden okunamadığı için burada istisnasız '
     .'uygulanıyor.';
