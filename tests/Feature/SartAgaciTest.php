@@ -1814,6 +1814,38 @@ test('Yalova yüzde tabanlı tavanı asgari puandan hesaplanıp uygulanıyor', f
         ->and($esik['cetvel'])->toBe('yalova-2024-sosyal-a150');
 });
 
+test('tezden üretilmiş yayın, ayrı satırı olmayan cetvelde normal satırdan sayılır', function () {
+    $depo = sartDepo();
+
+    // Aday yayınını "Tezden Üretilmiş Yayın" olarak kaydettiğinde kayıt
+    // `tez_yayini` kategorisine düşüyor ve daha KABA bir indeks etiketi
+    // taşıyor (SCIE/SSCI/AHCI, çeyrek yok). Yönergelerin çoğu bu yayına ayrı
+    // satır vermiyor; karşılık aranmasa aday doğru etiketlediği için SIFIR
+    // alırdı.
+    $tezMakale = fn (): object => sartFaaliyet('SCIE/SSCI/AHCI', Kategori::TezYayini, 'tek', '2022-01-01');
+
+    $puan = function (string $cetvel) use ($depo, $tezMakale): int {
+        $katalog = $depo->katalog($cetvel);
+
+        return $katalog->topla([$tezMakale()], $katalog->coz(['*']));
+    };
+
+    // Tez satırı OLMAYAN cetvel: normal makale satırından sayılıyor.
+    expect($puan('marmara-sosyal'))->toBe(48);
+
+    // Çeyreğe göre ayrılmış cetvelde EN DÜŞÜK satır seçilir: kaba etiket
+    // hangi çeyrek olduğunu söylemiyor, Q1 saymak fazla saymak olurdu (§0).
+    // Ordu: Q1 50, Q2 45, Q3 40, Q4 35.
+    expect($puan('ordu-2024-docentlik'))->toBe(35);
+
+    // Tez satırı OLAN cetvel kendi kuralını kullanır, karşılık aranmaz.
+    expect($puan('marmara-egitim'))->toBe(24);
+
+    // Yönerge o kadroda tez yayınını hiç saymıyorsa (İzmir Kâtip Çelebi
+    // sosyal doçentlikte A2 grubunun tavanı 0) sonuç yine sıfır kalır.
+    expect($puan('ikcu-2023-sosyal-docent'))->toBe(0);
+});
+
 test('Marmara Eğitim tezden üretilmiş yayını yarım puanla sayıyor', function () {
     $depo = sartDepo();
     $katalog = $depo->katalog('marmara-egitim');
@@ -1829,13 +1861,14 @@ test('Marmara Eğitim tezden üretilmiş yayını yarım puanla sayıyor', funct
         ->and($puan(Kategori::TezYayini, 'SCIE/SSCI/AHCI'))->toBe(24);
 
     // Kural YALNIZ Eğitim bendinde geçiyor. Spor da Tablo 1'i kullanıyor ama
-    // kendi bendinde (7/d-11) böyle bir hüküm yok; oraya taşınmamalı.
+    // kendi bendinde (7/d-11) böyle bir hüküm yok; oraya taşınmadı. Spor'da
+    // tez satırı olmadığı için yayın normal makale satırından TAM puan alır.
     $spor = $depo->katalog('marmara-spor');
 
     expect($spor->topla(
         [sartFaaliyet('SCIE/SSCI/AHCI', Kategori::TezYayini, 'tek', '2022-01-01')],
         $spor->coz(['*']),
-    ))->toBe(0);
+    ))->toBe(48);
 });
 
 test('Ordu kategori tavanları toplam puanı kesiyor', function () {

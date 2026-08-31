@@ -86,6 +86,29 @@ $k = app(App\Services\Scoring\Sart\SartDeposu::class)->katalog("YENI-CETVEL");
 echo implode(", ", array_diff($k->coz(["*"]), $k->coz(["DIS_GRUP"])));'
 ```
 
+### Tezden üretilmiş yayına ayrı satır AÇMAK ZORUNDA DEĞİLSİN
+
+Kayıt tezden üretilmiş yayını `tez_yayini` kategorisinde ayrı tutuyor ve daha
+KABA bir indeks etiketi taşıyor (`SCIE/SSCI/AHCI` — çeyrek yok). Yönergelerin
+çoğu bu yayına ayrı satır vermiyor, normal makale gibi puanlıyor.
+
+Motor bunu kendisi çözüyor: `tez_yayini` kaydı cetvelde karşılık bulamazsa
+normal makale/kitap/bildiri satırına düşer (`MaddeKatalogu::tezYayiniKarsiligi`).
+İki güvenlik kuralıyla:
+
+  1. Cetvelde HİÇ `tez_yayini` satırı yoksa devreye girer. Satır varsa yönerge
+     o yayını bilerek başka türlü puanlıyordur ve ona dokunulmaz.
+  2. Kaba etiket birden çok satıra uyarsa EN DÜŞÜK puanlı seçilir — hangi
+     çeyrek olduğunu bilmiyoruz, Q1 saymak fazla saymak olurdu (§0).
+
+Yani cetvele tez satırı YALNIZCA yönerge farklı puan verdiğinde yazılır:
+Marmara Eğitim'in "tezden üretilen yayınlar mevcut puanın yarısı ile
+değerlendirilir" dipnotu gibi. Yönerge susuyorsa satır açma, motor halleder.
+
+Yönerge o kadroda tez yayınını hiç saymıyorsa yolu grup tavanını **0** yazmak:
+İzmir Kâtip Çelebi sosyal doçentlikte `'A2' => 0`. Tavan hem doğrudan
+eşleşmeyi hem karşılık aramasını birlikte keser.
+
 ### Kaynak sözlüğü
 
 `kaynaklar` alanındaki değerler `App\Enums\Kategori::kaynaklar()` içinde tanımlı

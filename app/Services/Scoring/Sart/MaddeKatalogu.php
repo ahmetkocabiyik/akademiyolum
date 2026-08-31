@@ -2,6 +2,7 @@
 
 namespace App\Services\Scoring\Sart;
 
+use App\Enums\Kategori;
 use App\Models\Faaliyet;
 
 /**
@@ -39,6 +40,38 @@ use App\Models\Faaliyet;
  */
 readonly class MaddeKatalogu
 {
+    /**
+     * `tez_yayini` kaynak etiketinin normal kalemlerdeki karşılıkları.
+     *
+     * Tez yayını sözlüğü indeksleri KABA tutuyor (çeyrek yok, "SCIE/SSCI/AHCI"
+     * tek etiket); makale sözlüğü ise çeyreğe göre ayrılmış. Bu yüzden bir
+     * etiket birden çok karşılığa açılıyor ve aralarından en düşük puanlı
+     * satır seçiliyor.
+     *
+     * @var array<string, list<array{0: Kategori, 1: string}>>
+     */
+    private const TEZ_KARSILIKLARI = [
+        'SCIE/SSCI/AHCI' => [
+            [Kategori::Makale, 'SCIE/SSCI (Q1)'], [Kategori::Makale, 'SCIE/SSCI (Q2)'],
+            [Kategori::Makale, 'SCIE/SSCI (Q3)'], [Kategori::Makale, 'SCIE/SSCI (Q4)'],
+            [Kategori::Makale, 'AHCI'],
+        ],
+        'ESCI / Scopus' => [[Kategori::Makale, 'ESCI / Scopus']],
+        'TR Dizin' => [[Kategori::Makale, 'TR Dizin']],
+        'BKCI / Scopus Kitap' => [[Kategori::Kitap, 'BKCI / Scopus Kitap']],
+        'BKCI / Scopus Kitap Bölümü' => [[Kategori::Kitap, 'BKCI / Scopus Kitap Bölümü']],
+        'Uluslararası/Ulusal Kitap' => [[Kategori::Kitap, 'Uluslararası/Ulusal Kitap']],
+        'Kitap Bölümü' => [[Kategori::Kitap, 'Kitap Bölümü']],
+        'CPCI Bildiri' => [
+            [Kategori::Bildiri, 'Uluslararası Tam Metin (CPCI)'],
+            [Kategori::Bildiri, 'Uluslararası Tam Metin'],
+        ],
+        'Diğer' => [
+            [Kategori::Makale, 'Diğer Ulusal Hakemli'],
+            [Kategori::Makale, 'Diğer Uluslararası İndeks'],
+        ],
+    ];
+
     /**
      * @param  array<string, Madde>  $maddeler  Kod → madde tanımı (sıralı)
      * @param  array<string, list<string>>  $gruplar  Takma ad → kod deseni listesi
@@ -431,7 +464,72 @@ readonly class MaddeKatalogu
             }
         }
 
+        return $enIyi ?? $this->tezYayiniKarsiligi($faaliyet, $kodlar);
+    }
+
+    /**
+     * Tezden üretilmiş yayının, ayrı satırı OLMAYAN cetveldeki karşılığı.
+     *
+     * Aday yayınını "Tezden Üretilmiş Yayın" olarak kaydettiğinde kayıt
+     * `tez_yayini` kategorisine düşüyor ve daha kaba bir indeks etiketi
+     * taşıyor (`SCIE/SSCI/AHCI`, çeyrek yok). Yönergelerin çoğu tezden
+     * üretilmiş yayına AYRI bir satır vermiyor — o yayın normal makale gibi
+     * puanlanıyor. Karşılık aranmazsa aday doğru etiketlediği için SIFIR
+     * alırdı; hassas davranan aday cezalandırılmış olurdu.
+     *
+     * İKİ GÜVENLİK KURALI:
+     *   1. Yalnız cetvelde HİÇ `tez_yayini` satırı yoksa devreye girer.
+     *      Satır varsa yönerge o yayını bilerek başka türlü puanlıyordur
+     *      (Marmara Eğitim yarım puan veriyor) ve ona dokunulmaz.
+     *   2. Kaba etiket birden çok satıra uyduğunda EN DÜŞÜK puanlı seçilir:
+     *      `SCIE/SSCI/AHCI` çeyrek taşımıyor, Q1 saymak fazla saymak olurdu
+     *      (§0).
+     *
+     * @param  list<string>  $kodlar
+     */
+    private function tezYayiniKarsiligi(Faaliyet $faaliyet, array $kodlar): ?string
+    {
+        if ($faaliyet->kategori !== Kategori::TezYayini || $this->tezSatiriVar()) {
+            return null;
+        }
+
+        $enIyi = null;
+        $enDusuk = PHP_INT_MAX;
+
+        foreach (self::TEZ_KARSILIKLARI[$faaliyet->kaynak] ?? [] as [$kategori, $kaynak]) {
+            $benzer = clone $faaliyet;
+            $benzer->kategori = $kategori;
+            $benzer->kaynak = $kaynak;
+
+            foreach ($kodlar as $kod) {
+                if (! $this->maddeyeUyar($benzer, $kod)) {
+                    continue;
+                }
+
+                $puan = $this->maddeler[$kod]['puan'] ?? 0;
+
+                if ($puan < $enDusuk) {
+                    $enDusuk = $puan;
+                    $enIyi = $kod;
+                }
+            }
+        }
+
         return $enIyi;
+    }
+
+    /**
+     * Cetvel tezden üretilmiş yayına ayrı satır veriyor mu?
+     */
+    private function tezSatiriVar(): bool
+    {
+        foreach ($this->maddeler as $madde) {
+            if (($madde['kategori'] ?? null) === Kategori::TezYayini->value) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
