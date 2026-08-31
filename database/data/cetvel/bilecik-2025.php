@@ -209,9 +209,18 @@ $M = array_keys($sanat);
 
 /** MADDE 11: Fen, Mühendislik, Ziraat, Spor, Sağlık, Mimarlık — makalede başlıca yazar ayrıcalıklı. */
 $digerYazar = ['kademeler' => [1 => 1.00], 'bol' => ['pay' => 0.5, 'eksi' => 1]];
+$esitBolusme = ['bol' => ['pay' => 1.0]];
 $katkiFen = [
     'haric' => ['atif', 'proje', 'patent', 'tez_danismanligi', 'egitim_ogretim',
         'editorluk', 'odul', 'idari_gorev', 'toplumsal_katki', 'diger'],
+    // MADDE 11 aynı satırda İKİ kural veriyor: makalede başlıca yazara
+    // ayrıcalıklı kademe, "diğer yayınlarda" (kitap, bildiri) daima eşit
+    // bölüşme. Kategori bazlı çarpan olmadığı sürece makale kuralı kitaba da
+    // uygulanıyordu ve başlıca yazarın kitap puanı FAZLA çıkıyordu.
+    'kategoriler' => [
+        'kitap' => $esitBolusme,
+        'bildiri' => $esitBolusme,
+    ],
     'roller' => [
         'tek' => ['kademeler' => [1 => 1.00]],
         'baslica' => ['kademeler' => [1 => 1.00, 2 => 0.80], 'sonrasi' => 0.50],
@@ -226,7 +235,6 @@ $katkiFen = [
 ];
 
 /** MADDE 11: Sosyal, İlahiyat, Filoloji, Hukuk, Eğitim, Güzel Sanatlar — daima eşit bölüşme. */
-$esitBolusme = ['bol' => ['pay' => 1.0]];
 $katkiSosyal = [
     'haric' => $katkiFen['haric'],
     'roller' => [
@@ -256,10 +264,8 @@ $ortakNot = 'Puanlar Bilecik Şeyh Edebali Üniversitesi Öğretim Üyeliğine Y
     .'lisanslanan patent tescilli patent değerinden (40/20), uluslararası ansiklopedi maddesi '
     .'ulusaldan (3), uluslararası sözlü tam metin bildiri poster değerinden (8), SCI-Scopus '
     .'hakemliği diğer hakemlikten (2), koordinatörlük anabilim dalı başkanlığından (5). '
-    .'PUANINIZ ŞU KALEMDE OLDUĞUNDAN YÜKSEK GÖRÜNEBİLİR: yönerge kitap ve bildiride puanı '
-    .'daima EŞİT bölerken makalede kademeli bölüyor; motor cetvel başına tek matris '
-    .'tanımladığı için makale kuralı seçildi (bütün alt barajlar makale üzerine kurulu). '
-    .'Çok yazarlı kitap ve bildiride başlıca yazarın puanı bu yüzden yüksek çıkabilir.';
+    .'Yönerge kitap ve bildiride puanı daima EŞİT bölerken makalede kademeli bölüyor; '
+    .'ikisi de uygulanıyor.';
 
 $sanatNotu = ' Bu cetvel M (Sanat ve Tasarım Etkinlikleri) bölümünü içerir; tablonun dipnotu '
     .'M bölümünü yalnızca Mimarlık, Planlama ve Tasarım ile Güzel Sanatlar temel alanları için '

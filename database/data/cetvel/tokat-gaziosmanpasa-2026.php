@@ -232,5 +232,20 @@ return [
         'EDITORLUK' => 100,
         'ETKINLIK' => 50,
         'TOPLUMSAL' => 60,
+        // Yönergenin ADET sınırları puana çevrildi: satır puanı sabit olduğu
+        // için "en fazla 10 hakemlik" = 10 × 3 = 30 puan (KONVANSIYONLAR
+        // "Adet tavanı puana ÇEVRİLEBİLİR").
+        //
+        // Kaynak atıf ve hakemlik satırlarını indekse göre AYIRIYOR ve her
+        // birine ayrı 10'luk sınır koyuyor; cetvel bunları tek satırda
+        // topladığı için tavan da tek uygulanıyor, yani gerçekte izin
+        // verilenden DAR. §0 gereği bu yönde sapma serbest.
+        '1.5.c' => 30,
+        '1.6.b' => 30,
+        '1.6.ç' => 20,
+        '1.6.d' => 20,
+        '1.6.e' => 10,
+        '2.1.a' => 60,
+        '2.1.b' => 40,
     ],
 ];
