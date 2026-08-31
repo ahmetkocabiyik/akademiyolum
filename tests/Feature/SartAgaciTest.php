@@ -1846,6 +1846,35 @@ test('tezden üretilmiş yayın, ayrı satırı olmayan cetvelde normal satırda
     expect($puan('ikcu-2023-sosyal-docent'))->toBe(0);
 });
 
+test('sonradan eklenen dar sanat etiketi eski cetvelde genel satırdan sayılır', function () {
+    $depo = sartDepo();
+
+    // Kaynak sözlüğü büyüdükçe daha özel etiketler giriyor ("TV Programı
+    // (Ulusal)", Dokuz Eylül'ün D bölümü için eklendi). Daha önce girilmiş
+    // cetveller bu etiketi tanımıyor; satırları genel etikete yazılmış
+    // ("Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)"). Karşılık aranmazsa aday
+    // kaydını DAHA DOĞRU etiketlediği için sıfır alırdı.
+    $katalog = $depo->katalog('marmara-guzel-sanatlar');
+
+    $puan = fn (string $kaynak): int => $katalog->topla(
+        [sartFaaliyet($kaynak, Kategori::SanatselEtkinlik, 'tek', '2022-01-01')],
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)'))->toBeGreaterThan(0)
+        ->and($puan('TV Programı (Ulusal)'))->toBe($puan('Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)'));
+
+    // Küratörlük ve koordinatörlük BİLEREK dışarıda: sergi düzenlemek, karma
+    // sergiye eserle katılmaktan başka bir iş. Genel etikete bağlamak hak
+    // edilmeyen puan verirdi.
+    $katalogDeu = $depo->katalog('marmara-sosyal');
+
+    expect($katalogDeu->topla(
+        [sartFaaliyet('Sergi Küratörlüğü (Ulusal)', Kategori::SanatselEtkinlik, 'tek', '2022-01-01')],
+        $katalogDeu->coz(['*']),
+    ))->toBe(0);
+});
+
 test('Marmara Eğitim tezden üretilmiş yayını yarım puanla sayıyor', function () {
     $depo = sartDepo();
     $katalog = $depo->katalog('marmara-egitim');

@@ -86,6 +86,26 @@ $k = app(App\Services\Scoring\Sart\SartDeposu::class)->katalog("YENI-CETVEL");
 echo implode(", ", array_diff($k->coz(["*"]), $k->coz(["DIS_GRUP"])));'
 ```
 
+### Sözlüğe YENİ ETİKET eklerken eski cetvelleri düşün
+
+Kaynak sözlüğü genişletilebilir, ama yeni ve DAHA ÖZEL bir etiket eklemek eski
+cetvelleri geriye dönük eksiltir: onların satırları genel etikete yazılmıştır
+ve yeni etiketi tanımaz. Aday kaydını daha doğru etiketlediği için SIFIR alır.
+
+Dokuz Eylül için eklenen on dokuz sanat etiketi tam bunu yaptı: "TV Programı
+(Ulusal)" 237 güzel sanatlar cetvelinin yalnız %10'unda puan alıyordu, oysa
+genel karşılığı "Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)" %61'inde alıyor.
+
+Çözüm cetvelleri tek tek düzenlemek değil, motorda EŞDEĞER TABLOSU:
+`MaddeKatalogu::SANAT_KARSILIKLARI` dar etiketi genel atasına bağlıyor ve
+doğrudan eşleşme bulunamadığında devreye giriyor. Yeni etiket eklerken
+atasını da bu tabloya yaz.
+
+**Her dar etiketin atası YOKTUR.** Sergi küratörlüğü ve festival
+koordinatörlüğü tabloya alınmadı: sergi DÜZENLEMEK, karma sergiye eserle
+KATILMAKTAN başka bir iş; genel etikete bağlamak hak edilmeyen puan verirdi.
+Ata ancak yeni etiket eskisinin gerçekten bir ALT TÜRÜYSE yazılır.
+
 ### Tezden üretilmiş yayına ayrı satır AÇMAK ZORUNDA DEĞİLSİN
 
 Kayıt tezden üretilmiş yayını `tez_yayini` kategorisinde ayrı tutuyor ve daha

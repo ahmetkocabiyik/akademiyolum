@@ -73,6 +73,39 @@ readonly class MaddeKatalogu
     ];
 
     /**
+     * Sonradan eklenmiş DAR sanat etiketlerinin eski GENEL karşılıkları.
+     *
+     * Kaynak sözlüğü büyüdükçe yeni ve daha özel etiketler giriyor (Dokuz
+     * Eylül'ün D bölümü için eklenen "TV Programı (Ulusal)" gibi). Daha önce
+     * girilmiş cetveller bu etiketleri tanımıyor — satırları genel etikete
+     * yazılmış. Karşılık aranmazsa aday, kaydını DAHA DOĞRU etiketlediği için
+     * sıfır alır.
+     *
+     * KÜRATÖRLÜK VE KOORDİNATÖRLÜK BİLEREK DIŞARIDA: sergi küratörlüğü
+     * düzenlemek, karma sergiye eserle katılmaktan başka bir iş. Genel
+     * etikete bağlamak hak edilmeyen puan verirdi.
+     *
+     * @var array<string, list<array{0: Kategori, 1: string}>>
+     */
+    private const SANAT_KARSILIKLARI = [
+        'Uzun Metrajlı Film / Belgesel (Uluslararası)' => [[Kategori::SanatselEtkinlik, 'Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)']],
+        'Uzun Metrajlı Film / Belgesel (Ulusal)' => [[Kategori::SanatselEtkinlik, 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)']],
+        'TV Filmi / Dizisi (Uluslararası)' => [[Kategori::SanatselEtkinlik, 'Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)']],
+        'TV Filmi / Dizisi (Ulusal)' => [[Kategori::SanatselEtkinlik, 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)']],
+        'TV Programı (Uluslararası)' => [[Kategori::SanatselEtkinlik, 'Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)']],
+        'TV Programı (Ulusal)' => [[Kategori::SanatselEtkinlik, 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)']],
+        'Reklam / Tanıtım Filmi (Uluslararası)' => [[Kategori::SanatselEtkinlik, 'Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)']],
+        'Reklam / Tanıtım Filmi (Ulusal)' => [[Kategori::SanatselEtkinlik, 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)']],
+        'Animasyon / Canlandırma Yapımı' => [[Kategori::SanatselEtkinlik, 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)']],
+        'Uygulanmış Tasarım / Koleksiyon' => [[Kategori::SanatselEtkinlik, 'Özgün Eser / Beste / Tasarım']],
+        'Müzik Teknolojisi Uygulaması' => [[Kategori::SanatselEtkinlik, 'Özgün Eser / Beste / Tasarım']],
+        'Kamusal Alanda Uygulanmış Yapıt (Yurt Dışı)' => [[Kategori::SanatselEtkinlik, 'Kişisel Etkinlik (Uluslararası)']],
+        'Kamusal Alanda Uygulanmış Yapıt (Yurt İçi)' => [[Kategori::SanatselEtkinlik, 'Kişisel Etkinlik (Ulusal)']],
+        'Grup Etkinliği (Uluslararası)' => [[Kategori::SanatselEtkinlik, 'Karma/Jürili Etkinlik (Uluslararası)']],
+        'Grup Etkinliği (Ulusal)' => [[Kategori::SanatselEtkinlik, 'Karma/Jürili Etkinlik (Ulusal)']],
+    ];
+
+    /**
      * @param  array<string, Madde>  $maddeler  Kod → madde tanımı (sıralı)
      * @param  array<string, list<string>>  $gruplar  Takma ad → kod deseni listesi
      * @param  array<string, int>  $grupTavanlari  Grup adı → o gruptan alınabilecek azami puan
@@ -464,11 +497,11 @@ readonly class MaddeKatalogu
             }
         }
 
-        return $enIyi ?? $this->tezYayiniKarsiligi($faaliyet, $kodlar);
+        return $enIyi ?? $this->esdegerKod($faaliyet, $kodlar);
     }
 
     /**
-     * Tezden üretilmiş yayının, ayrı satırı OLMAYAN cetveldeki karşılığı.
+     * Kaydın, doğrudan karşılığı bulunmayan cetveldeki EŞDEĞER satırı.
      *
      * Aday yayınını "Tezden Üretilmiş Yayın" olarak kaydettiğinde kayıt
      * `tez_yayini` kategorisine düşüyor ve daha kaba bir indeks etiketi
@@ -487,16 +520,23 @@ readonly class MaddeKatalogu
      *
      * @param  list<string>  $kodlar
      */
-    private function tezYayiniKarsiligi(Faaliyet $faaliyet, array $kodlar): ?string
+    private function esdegerKod(Faaliyet $faaliyet, array $kodlar): ?string
     {
-        if ($faaliyet->kategori !== Kategori::TezYayini || $this->tezSatiriVar()) {
-            return null;
-        }
+        $adaylar = match (true) {
+            // Tez yayını: cetvelde HİÇ tez satırı yoksa normal kaleme düşer.
+            // Satır varsa yönerge o yayını bilerek başka türlü puanlıyordur.
+            $faaliyet->kategori === Kategori::TezYayini && ! $this->tezSatiriVar() => self::TEZ_KARSILIKLARI[$faaliyet->kaynak] ?? [],
+            // Sanat etiketleri AYNI kategori içinde daraldığı için ek koruma
+            // gerekmiyor: genel satır zaten yönergenin o kalem için yazdığı
+            // satırdır.
+            $faaliyet->kategori === Kategori::SanatselEtkinlik => self::SANAT_KARSILIKLARI[$faaliyet->kaynak] ?? [],
+            default => [],
+        };
 
         $enIyi = null;
         $enDusuk = PHP_INT_MAX;
 
-        foreach (self::TEZ_KARSILIKLARI[$faaliyet->kaynak] ?? [] as [$kategori, $kaynak]) {
+        foreach ($adaylar as [$kategori, $kaynak]) {
             $benzer = clone $faaliyet;
             $benzer->kategori = $kategori;
             $benzer->kaynak = $kaynak;
