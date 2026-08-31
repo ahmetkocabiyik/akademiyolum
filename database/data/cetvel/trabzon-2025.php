@@ -185,6 +185,8 @@ return [
         // Yönergedeki değer 0,5. Motor tam sayı tuttuğu için aşağı yuvarlandı:
         // ulusal atıf puan getirmiyor. Kalem yine de duruyor ki koşulların
         // kapsam rozetinde ulusal atıfın sayıldığı görünsün.
+        // 3.2.1.1 yönergede 0,5 puan; motor tam sayı tuttuğu için aşağı yuvarlandı
+        // (§0: eksik say). Yalnız ulusal atıfı olan adayın atıf puanı 0 görünür.
         '3.2.1.1' => ['baslik' => 'Ulusal makale ve kitaplarda atıf (her bir atıf için)', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 0],
 
         // ══ 3.3. ÜYELİK, BİLİMSEL ETKİNLİK ORGANİZASYONU, SERGİLER ══
