@@ -74,7 +74,7 @@ return [
 
     'maddeler' => [
         // ══ A — ULUSLARARASI YAYIN VE ETKİNLİKLER ══
-        'A1' => ['baslik' => 'Tanınmış uluslararası yayınevinde bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 75],
+        'A1' => ['baslik' => 'Tanınmış uluslararası yayınevinde bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 75],
         'A2' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
         // Çeyreklik çarpanı uygulanamadığı için en düşük değer (Q4 × 1).
         'A3.a' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI dergide özgün araştırma, makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 50],
@@ -124,7 +124,7 @@ return [
         'C3.e' => ['baslik' => 'Üniversite Bilimsel Araştırma Projeleri (BAP) kapsamında proje', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'puan' => 21],
         'C4.b' => ['baslik' => 'Avrupa Birliği Ar-Ge destek programından alınan proje', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'puan' => 140],
         'C4.c' => ['baslik' => 'AB dışında uluslararası Ar-Ge programından alınan proje', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'puan' => 105],
-        'C5.c' => ['baslik' => 'Ulusal patent belgesi', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Patent'], 'puan' => 100],
+        'C5.c' => ['baslik' => 'Ulusal patent belgesi', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 100],
         'C5.ç' => ['baslik' => 'Uluslararası patent belgesi', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 200],
         'C5.d' => ['baslik' => 'Faydalı model veya endüstriyel tasarım belgesi', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 100],
         'C7.a' => ['baslik' => 'Uluslararası bilimsel kuruluşlarca verilen bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 100],

@@ -25,7 +25,7 @@
 return [
     'kapsam_notu' => 'Puanlar Marmara Üniversitesi Tablo 2\'den (Sağlık, Fen, Matematik, Mesleki '
         .'ve Teknik Eğitim). Belge 2018 öncesi terminoloji kullanıyor; kadro adları güncel '
-        .'karşılıklarına eşlendi. İdari faaliyetler (Tablo 8) ve bazı ödül/burs kalemleri '
+        .'karşılıklarına eşlendi. Akademik organizasyon yöneticiliği (27. satır), İdari faaliyetler (Tablo 8) ve bazı ödül/burs kalemleri '
         .'girilmedi. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
 
     'maddeler' => [

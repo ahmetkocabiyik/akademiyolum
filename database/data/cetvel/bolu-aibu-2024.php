@@ -85,10 +85,10 @@ return [
         'A.5.2' => ['baslik' => 'TR Dizin dergide olgu sunumu, teknik not veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
         'A.6.1' => ['baslik' => 'TR Dizin dışı ulusal hakemli dergide makale (derleme dâhil)', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
         'A.6.2' => ['baslik' => 'TR Dizin dışı ulusal dergide olgu sunumu, teknik not veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
-        'A.7.1' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 70],
+        'A.7.1' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 70],
         'A.7.3' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı veya kitapçık', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
         'A.8.1' => ['baslik' => 'Ulusal yayınevince Türkçe basılmış kitap veya ders kitabı yazarlığı (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
-        'A.8.2' => ['baslik' => 'Kitap editörlüğü (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 30],
+        'A.8.2' => ['baslik' => 'Kitap editörlüğü (en az 50 sayfa)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 30],
         'A.8.3' => ['baslik' => 'Kitapçık veya kitap bölümü yazarlığı (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
         'A.8.4' => ['baslik' => 'Kitap çevirmenliği (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
         'A.8.6' => ['baslik' => 'Kitap bölümü, kitapçık veya makale çevirmenliği (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
@@ -125,7 +125,7 @@ return [
         'D.3.6' => ['baslik' => 'Ulusal kuruluşlarca verilen bilim, kültür, sanat veya spor ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 10],
         'D.4.2.1' => ['baslik' => 'Bilimsel araştırma amaçlı burs (üç ay ve üzeri)', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 10],
         'D.5.1' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 60],
-        'D.5.2' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Patent', 'Faydalı Model', 'Endüstriyel Tasarım'], 'puan' => 30],
+        'D.5.2' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Faydalı Model', 'Endüstriyel Tasarım'], 'puan' => 30],
 
         // ══ E — EĞİTİM-ÖĞRETİM FAALİYETLERİ ══
         'E.1.1' => ['baslik' => 'Tamamlanan yüksek lisans tezinde danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 10],

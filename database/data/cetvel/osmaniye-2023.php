@@ -79,10 +79,10 @@ return [
         '1.2.4' => ['baslik' => 'Bilimsel ansiklopedide madde yazarlığı (en çok 5 madde)', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
 
         // ══ 2. KİTAPLAR ══
-        '2.1.1' => ['baslik' => 'Uluslararası yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 50],
+        '2.1.1' => ['baslik' => 'Uluslararası yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
         '2.1.3' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 25],
         '2.2.1' => ['baslik' => 'Ulusal yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 30],
-        '2.2.2' => ['baslik' => 'Bilimsel kitap editörlüğü', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+        '2.2.2' => ['baslik' => 'Bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
         '2.2.3' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
         '2.2.4' => ['baslik' => 'Ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 15],
 
@@ -135,7 +135,7 @@ return [
         '11.2' => ['baslik' => 'Ulusal ödül', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 30],
         '11.3' => ['baslik' => 'Üniversite ödülü veya yarışma derecesi', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 15],
         '11.4' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 150],
-        '11.5' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Patent'], 'puan' => 100],
+        '11.5' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 100],
         '11.6' => ['baslik' => 'Uluslararası veya ulusal faydalı model', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 40],
         '11.7' => ['baslik' => 'Tasarım tescili', 'kategori' => 'patent', 'kaynaklar' => ['Endüstriyel Tasarım'], 'puan' => 20],
         '11.8' => ['baslik' => 'Uluslararası araştırma bursu', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 15],

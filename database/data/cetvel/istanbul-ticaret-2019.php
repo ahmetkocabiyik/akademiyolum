@@ -75,10 +75,10 @@ return [
 
         // ══ I/D — KİTAPLAR, ÇEVİRİLER, EDİTÖRLÜK, ATIFLAR ══
         // çift değerli: yurt dışı 100 / yurt içi değeri kaynakta okunamadı
-        'I.D.1' => ['baslik' => 'Alanında kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 100],
+        'I.D.1' => ['baslik' => 'Alanında kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 100],
         // çift değerli
         'I.D.2' => ['baslik' => 'Alanında kitapta bölüm veya ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
-        'I.D.3' => ['baslik' => 'Derleme kitap çalışması', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
+        'I.D.3' => ['baslik' => 'Derleme kitap çalışması', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
         // çift değerli
         'I.D.4' => ['baslik' => 'Alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 40],
         // çift değerli: SCI/SSCI/AHCI dergide editörlük 120, diğerleri okunamadı
@@ -99,7 +99,7 @@ return [
         // ══ II/D — DİĞER BİLİMSEL ETKİNLİKLER ══
         'II.D.3' => ['baslik' => 'Alanında bilimsel araştırma için uluslararası burs almak', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 10],
         // çift değerli: uluslararası 50 / ulusal değeri kaynakta okunamadı
-        'II.D.7' => ['baslik' => 'Patentlenmiş buluş', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent', 'Ulusal Patent', 'Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 50],
+        'II.D.7' => ['baslik' => 'Patentlenmiş buluş', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent', 'Ulusal Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 50],
 
         // ══ II/E — ÖDÜLLER ══
         'II.E.1' => ['baslik' => 'Alanında uluslararası bilimsel nitelikli ödül', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 50],

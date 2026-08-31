@@ -19,7 +19,10 @@
  * "başvurduysa" alt satırı başvuru aşamasını faaliyet olarak tutmadığımız
  * için girilmedi.
  *
- * GİRİLMEYEN SATIRLAR: 16 (sorumlu yazar çarpanı), 43 (yükseltme jürisi),
+ * GİRİLMEYEN SATIRLAR: 27 (akademik organizasyon yöneticiliği ve
+ * düzenleme kurulu üyeliği — kaynak sözlüğünde kongre düzenleme etiketi yok;
+ * geniş bir "Diğer" kovasına bağlamak §0'a aykırı olurdu, fazla sayardı),
+ * 16 (sorumlu yazar çarpanı), 43 (yükseltme jürisi),
  * 51 (bilirkişi, proje değerlendirme, danışmanlık, laboratuvar yöneticiliği)
  * ve 52 (görev süresi). Tablo 8'in idari faaliyetleri de girilmedi.
  */
@@ -56,10 +59,6 @@ return [
         '24' => ['baslik' => 'Uluslararası kongrede özet bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 18],
         '25' => ['baslik' => 'Ulusal kongrede tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 12],
         '26' => ['baslik' => 'Ulusal kongrede özet bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 6],
-
-        // ── AKADEMİK ORGANİZASYON ── (27)
-        '27' => ['baslik' => 'Uluslararası akademik organizasyonda yöneticilik', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Uluslararası)'], 'puan' => 40],
-        '27b' => ['baslik' => 'Ulusal akademik organizasyonda yöneticilik veya düzenleme kurulu üyeliği', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Ulusal)'], 'puan' => 30],
 
         // ── DERS ── (32)
         '32' => ['baslik' => 'Verdiği lisansüstü ders (yarıyıl başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Yabancı Dilde Ders'], 'puan' => 4],
@@ -106,9 +105,9 @@ return [
         '1-12,16-26,48' => ['1', '3', '4', '5', '6', '8', '10', '12', '17', '18', '19', '20', '21', '21b', '23', '24', '25', '26', '48', '48b'],
         '32,50' => ['32', '32b', '49b'],
         // "27, 32-52 numaralı faaliyetler" — doçentlik koşulu (md. 13/a).
-        '27,32-52' => ['27', '27b', '32', '32b', '34', '34b', '34c', '34d', '36', '36b', '36c', '36d', '38', '41', '41b', '42', '45', '45b', '46', '47', '47b', '48', '48b', '49', '49b', '49c'],
+        '27,32-52' => ['32', '32b', '34', '34b', '34c', '34d', '36', '36b', '36c', '36d', '38', '41', '41b', '42', '45', '45b', '46', '47', '47b', '48', '48b', '49', '49b', '49c'],
         // "17, 18, 27, 34, 41, 49, 50" — profesörlük koşulu (md. 18/2-a).
-        'PROF-CEKIRDEK' => ['17', '18', '27', '27b', '34', '34b', '34c', '34d', '41', '41b', '49', '49b'],
+        'PROF-CEKIRDEK' => ['17', '18', '34', '34b', '34c', '34d', '41', '41b', '49', '49b'],
         // Md. 7/d-8 ve 8/b-8: "SCI-Expanded kapsamındaki dergilerde makale".
         'BIRINCIL' => ['1', '4'],
     ],

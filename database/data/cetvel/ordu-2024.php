@@ -49,12 +49,14 @@
  *       kayıt karşılığı yok.
  *   K.3 (ikinci danışmanlık, yarım puan) — kayıtta danışmanlık sırası
  *       tutulmuyor.
+ *   L.4 (üniversite bünyesinde kurs ya da seminerde ders vermek) — kaynak
+ *       sözlüğünde kurs eğitmenliği etiketi yok.
  */
 
 return [
     'kapsam_notu' => 'Puanlar Ordu Üniversitesi TABLO-1\'den (Senato 03.04.2024, 2024-58). '
         .'Ordu Üniversitesi dergilerine yapılan atıflar, milli takım antrenörlüğü, patent '
-        .'BAŞVURUSU, mimarlık yarışma ödülleri ve idari faaliyetler girilmedi. Sanat '
+        .'BAŞVURUSU, mimarlık yarışma ödülleri, üniversite içi kurs eğitmenliği ve idari faaliyetler girilmedi. Sanat '
         .'etkinliklerinin tekrar sergileme indirimi (2. sergileme %50, 3. %25) '
         .'uygulanamıyor; o satırlarda puanınız gerçeğinden YÜKSEK görünebilir.',
 
@@ -143,7 +145,6 @@ return [
         // ══ L. ÖĞRETİM FAALİYETLERİ ══
         'L.1' => ['baslik' => 'Lisansüstü düzeyde ders vermek (son beş yılda en fazla beş ders)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 5],
         'L.2' => ['baslik' => 'Lisans ya da önlisans düzeyinde ders vermek (son beş yılda en fazla beş ders)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders'], 'puan' => 5],
-        'L.4' => ['baslik' => 'Üniversite bünyesinde açılan kurs ya da seminerde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Sertifika / Kurs Eğitmenliği'], 'puan' => 2],
         'L.5' => ['baslik' => 'Uluslararası değişim programı çerçevesinde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi', 'Yabancı Dilde Ders'], 'puan' => 5],
 
         // ══ M. PROJELER ══

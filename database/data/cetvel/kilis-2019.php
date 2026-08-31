@@ -77,8 +77,8 @@ return [
         '1.f' => ['baslik' => 'Ulusal hakemsiz dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
 
         // ══ 2. KİTAPLAR ══
-        '2.a' => ['baslik' => 'Uluslararası yayımlanan mesleki kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 50],
-        '2.b' => ['baslik' => 'Ulusal yayımlanan mesleki kitap yazarlığı veya editörlüğü', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Kitap Editörlüğü'], 'puan' => 40],
+        '2.a' => ['baslik' => 'Uluslararası yayımlanan mesleki kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
+        '2.b' => ['baslik' => 'Ulusal yayımlanan mesleki kitap yazarlığı veya editörlüğü', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 40],
         '2.c' => ['baslik' => 'Uluslararası mesleki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Kitap Bölümü'], 'puan' => 20],
         '2.ç' => ['baslik' => 'Yardımcı ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 15],
         '2.d' => ['baslik' => 'Çeviri kitap (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 10],
@@ -111,7 +111,7 @@ return [
 
         // ══ 34. ÖDÜLLER, PATENTLER ══
         '34.a' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 30],
-        '34.b' => ['baslik' => 'Ulusal patent, faydalı model veya endüstriyel tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 20],
+        '34.b' => ['baslik' => 'Ulusal patent, faydalı model veya endüstriyel tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 20],
         '34.c' => ['baslik' => 'Bilim, sanat veya tasarım ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 10],
 
         // ══ 36. EĞİTİM-ÖĞRETİM FAALİYETLERİ ══

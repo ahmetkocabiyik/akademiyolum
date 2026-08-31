@@ -25,7 +25,10 @@
  * PATENT (48) YALNIZ TESCİL EDİLMİŞ OLANLAR: "başvurduysa" alt satırı
  * başvuru aşamasını faaliyet olarak tutmadığımız için girilmedi.
  *
- * GİRİLMEYEN SATIRLAR: 16 (sorumlu yazar çarpanı), 22 (bireysel yarışma
+ * GİRİLMEYEN SATIRLAR: 27 (akademik organizasyon yöneticiliği ve
+ * düzenleme kurulu üyeliği — kaynak sözlüğünde kongre düzenleme etiketi yok;
+ * geniş bir "Diğer" kovasına bağlamak §0'a aykırı olurdu, fazla sayardı),
+ * 16 (sorumlu yazar çarpanı), 22 (bireysel yarışma
  * derecesi — ulusal temsil görevi alt satırıyla birlikte), 43 (yükseltme
  * jürisi), 51 ve 52 (bilirkişilik, danışmanlık, atölye yöneticiliği).
  * Tablo 8'in idari faaliyetleri de girilmedi.
@@ -76,10 +79,6 @@ return [
         '25b' => ['baslik' => 'Ulusal seçici kurullu sergi, festival veya bienale eserinizin kabul edilmesi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 25],
         '26' => ['baslik' => 'Ulusal kongrede özet bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 12],
         '26b' => ['baslik' => 'Ulusal karma sergi veya sanat etkinliğine yapıtlarıyla katılma', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Elektronik Karma Sergi (Ulusal)'], 'puan' => 12],
-
-        // ── AKADEMİK ORGANİZASYON ── (27)
-        '27' => ['baslik' => 'Uluslararası akademik organizasyonda yöneticilik', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Uluslararası)'], 'puan' => 40],
-        '27b' => ['baslik' => 'Ulusal akademik organizasyonda yöneticilik veya düzenleme kurulu üyeliği', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Ulusal)'], 'puan' => 30],
 
         // ── MÜZİK ── (28)
         '28c' => ['baslik' => 'Yaratı formlarını çeşitlendirme ürünü vermek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Orkestrasyon/Transkripsiyon', 'Eğitim Müziği Düzenlemesi'], 'puan' => 10],
@@ -138,9 +137,9 @@ return [
 
     'gruplar' => [
         // "27, 32-52 numaralı faaliyetler" — doçentlik koşulu (md. 13/a).
-        '27,32-52' => ['27', '27b', '28c', '28d', '28d2', '28e', '28f', '29', '29b', '30', '30b', '31', '32', '32b', '34', '34b', '34c', '34d', '36', '36b', '36c', '36d', '38', '40', '40b', '41', '41b', '42', '45', '45b', '46', '47', '47b', '48', '48b', '49', '49b', '49c'],
+        '27,32-52' => ['28c', '28d', '28d2', '28e', '28f', '29', '29b', '30', '30b', '31', '32', '32b', '34', '34b', '34c', '34d', '36', '36b', '36c', '36d', '38', '40', '40b', '41', '41b', '42', '45', '45b', '46', '47', '47b', '48', '48b', '49', '49b', '49c'],
         // "17, 18, 27, 34, 41, 49, 50" — profesörlük koşulu (md. 18/2-a).
-        'PROF-CEKIRDEK' => ['17', '17b', '18', '18b', '27', '27b', '34', '34b', '34c', '34d', '41', '41b', '49', '49b'],
+        'PROF-CEKIRDEK' => ['17', '17b', '18', '18b', '34', '34b', '34c', '34d', '41', '41b', '49', '49b'],
         // Md. 8/b-4'ün üçüncü yenileme koşulu: özgün kitap ya da hakemli makale.
         'KITAP-MAKALE' => ['17', '19', '1', '3', '6', '10'],
     ],

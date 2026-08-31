@@ -112,7 +112,7 @@ return [
         '8d' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 40],
 
         // ══ C) KİTAPLAR (9-10) ══
-        '9a' => ['baslik' => 'Uluslararası yayınevince yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 100],
+        '9a' => ['baslik' => 'Uluslararası yayınevince yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
         '9b' => ['baslik' => 'Ulusal yayınevince yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 60],
         '9c' => ['baslik' => 'Çeviri kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
         '10a' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm veya ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
@@ -123,7 +123,7 @@ return [
         // ══ D) GİRİŞİM, YENİLİK VE PROJE (11-18) ══
         // Kayıt bireysel/grup ayrımı taşımadığı için GRUP satırı girildi.
         '11b1' => ['baslik' => 'Grup patenti (uluslararası, EPA/IPA veya eşdeğeri)', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 120],
-        '11b2' => ['baslik' => 'Grup patenti (ulusal)', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Patent'], 'puan' => 90],
+        '11b2' => ['baslik' => 'Grup patenti (ulusal)', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 90],
         '11c2' => ['baslik' => 'Faydalı model veya endüstriyel tasarım belgesi (ulusal)', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 45],
         '12a1' => ['baslik' => 'Yurt dışı kaynaklı uluslararası projede koordinatör veya yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 150],
         '12a2' => ['baslik' => 'Yurt dışı kaynaklı uluslararası projede araştırmacı veya danışman', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 90],

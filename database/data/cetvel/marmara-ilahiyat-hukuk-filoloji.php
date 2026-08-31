@@ -22,7 +22,10 @@
  * konmuş; alanla ilgisi kurulamadığı ve kayıt karşılığı sanatsal etkinlik
  * kategorisinde olduğu için girildi.
  *
- * GİRİLMEYEN SATIRLAR: 16 (sorumlu yazar çarpanı), 28 (müzik kompozisyonları
+ * GİRİLMEYEN SATIRLAR: 27 (akademik organizasyon yöneticiliği ve
+ * düzenleme kurulu üyeliği — kaynak sözlüğünde kongre düzenleme etiketi yok;
+ * geniş bir "Diğer" kovasına bağlamak §0'a aykırı olurdu, fazla sayardı),
+ * 16 (sorumlu yazar çarpanı), 28 (müzik kompozisyonları
  * — başlık dışında satır verilmemiş), 43 (yükseltme jürisi), 51 (bilirkişi,
  * proje değerlendirme, danışmanlık) ve 52 (görev süresi). Tablo 8'in idari
  * faaliyetleri de girilmedi.
@@ -31,7 +34,7 @@
 return [
     'kapsam_notu' => 'Puanlar Marmara Üniversitesi Tablo 3\'ten (İlahiyat, Hukuk ve Filoloji). '
         .'Belge 2018 öncesi terminoloji kullanıyor; kadro adları güncel karşılıklarına '
-        .'eşlendi. Sorumlu yazar çarpanı, müzik kompozisyonu, jüri görevleri, bilirkişilik ve '
+        .'eşlendi. Akademik organizasyon yöneticiliği (27), sorumlu yazar çarpanı, müzik kompozisyonu, jüri görevleri, bilirkişilik ve '
         .'görev süresi ile idari faaliyetler (Tablo 8) girilmedi. Gerçek toplamınız burada '
         .'görünenden yüksek olabilir, düşük olamaz.',
 
@@ -47,7 +50,7 @@ return [
         '17' => ['baslik' => 'Uzmanlık alanında uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
         '18' => ['baslik' => 'Uzmanlık alanında uluslararası kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 50],
         '18b' => ['baslik' => 'Uzmanlık alanında uluslararası kitap veya dergi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 20],
-        '19' => ['baslik' => 'Uzmanlık alanında ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkikli Neşir'], 'puan' => 50],
+        '19' => ['baslik' => 'Uzmanlık alanında ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 50],
         '20' => ['baslik' => 'Uzmanlık alanında ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
         '20b' => ['baslik' => 'Uzmanlık alanında ulusal kitap veya dergi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'TR Dizin Dergi'], 'puan' => 5],
         '21' => ['baslik' => 'Uzmanlık alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 15],
@@ -58,15 +61,11 @@ return [
         '25' => ['baslik' => 'Ulusal kongrede tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 24],
         '26' => ['baslik' => 'Ulusal kongrede özet bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 12],
 
-        // ── AKADEMİK ORGANİZASYON ── (27)
-        '27' => ['baslik' => 'Uluslararası akademik organizasyonda yöneticilik', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Uluslararası)'], 'puan' => 40],
-        '27b' => ['baslik' => 'Ulusal akademik organizasyonda yöneticilik veya düzenleme kurulu üyeliği', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Ulusal)'], 'puan' => 30],
-
         // ── KOREOGRAFİ ── (29-30) · kaynak belgede bu tabloda yer alıyor
-        '29' => ['baslik' => 'Uluslararası düzeyde koreografi eseri meydana getirmek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koreografi (Uluslararası)'], 'puan' => 60],
-        '29b' => ['baslik' => 'Ulusal düzeyde koreografi eseri meydana getirmek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koreografi (Ulusal)'], 'puan' => 30],
-        '30' => ['baslik' => 'Koreografisini yaptığı eseri uluslararası düzeyde sahnelemek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahneleme (Uluslararası)'], 'puan' => 35],
-        '30b' => ['baslik' => 'Koreografisini yaptığı eseri ulusal düzeyde sahnelemek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahneleme (Ulusal)'], 'puan' => 20],
+        '29' => ['baslik' => 'Uluslararası düzeyde koreografi eseri meydana getirmek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Tüm Perde Koreograflığı (Uluslararası)', 'Bölüm Koreograflığı (Uluslararası)', 'Bale/Dans Koreograflığı (Uluslararası)'], 'puan' => 60],
+        '29b' => ['baslik' => 'Ulusal düzeyde koreografi eseri meydana getirmek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koreografi', 'Tüm Perde Koreograflığı (Ulusal)', 'Bölüm Koreograflığı (Ulusal)', 'Bale/Dans Koreograflığı (Ulusal)'], 'puan' => 30],
+        '30' => ['baslik' => 'Koreografisini yaptığı eseri uluslararası düzeyde sahnelemek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahneleme/Repetitörlük — Tüm Perde (Uluslararası)', 'Sahneleme/Repetitörlük — Bölüm (Uluslararası)'], 'puan' => 35],
+        '30b' => ['baslik' => 'Koreografisini yaptığı eseri ulusal düzeyde sahnelemek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahneleme/Repetitörlük — Tüm Perde (Ulusal)', 'Sahneleme/Repetitörlük — Bölüm (Ulusal)'], 'puan' => 20],
 
         // ── DERS ── (32) · Tablo 3 tek satır veriyor
         '32' => ['baslik' => 'Verdiği ders (yarıyıl başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Yabancı Dilde Ders', 'Lisans/Önlisans Ders', 'Değişim Programı Dersi'], 'puan' => 5],
@@ -102,9 +101,9 @@ return [
         // "3-21, 23, 24, 32, 36, 37, 47, 49" — Filoloji dr. öğr. üyeliği toplamı.
         'FILOLOJI-TOPLAM' => ['3', '5', '11', '13', '15', '17', '18', '18b', '19', '20', '20b', '21', '23', '24', '32', '36', '36b', '47', '47b', '49', '49b'],
         // "27, 32-52 numaralı faaliyetler" — doçentlik koşulu (md. 13/a).
-        '27,32-52' => ['27', '27b', '29', '29b', '30', '30b', '32', '34', '34b', '36', '36b', '38', '41', '42', '45', '45b', '46', '47', '47b', '49', '49b'],
+        '27,32-52' => ['29', '29b', '30', '30b', '32', '34', '34b', '36', '36b', '38', '41', '42', '45', '45b', '46', '47', '47b', '49', '49b'],
         // "17, 18, 27, 34, 41, 49, 50" — profesörlük koşulu (md. 18/2-a).
-        'PROF-CEKIRDEK' => ['17', '18', '18b', '27', '27b', '34', '34b', '41', '49', '49b'],
+        'PROF-CEKIRDEK' => ['17', '18', '18b', '34', '34b', '41', '49', '49b'],
         // Md. 7/d-5 ve 7/d-6: "hakemli dergilerde iki makale" (Hukuk, İlahiyat).
         'HAKEMLI-MAKALE' => ['3', '11'],
         // Md. 7/d-3: "indekslerce taranan bir makale" (Filoloji).

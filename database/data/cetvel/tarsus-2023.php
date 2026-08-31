@@ -107,7 +107,7 @@ return [
         '7.d' => ['baslik' => 'Diğer hakemli dergide editörlük, yayın kurulu üyeliği ya da hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Hakemlik', 'Kitap Editörlüğü', 'BKCI Kitap'], 'puan' => 3],
 
         // ══ 8. KİTAP VE KİTAP BÖLÜMÜ ══
-        '8.a' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanmış özgün bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 20],
+        '8.a' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanmış özgün bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
         '8.c' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 6],
         '8.d' => ['baslik' => 'Tanınmış ulusal yayınevince yayımlanmış özgün bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 10],
         '8.f' => ['baslik' => 'Tanınmış ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 3],
@@ -126,7 +126,7 @@ return [
 
         // ══ 12. PATENT ══
         '12.a' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 120],
-        '12.b' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Patent'], 'puan' => 60],
+        '12.b' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 60],
         '12.c' => ['baslik' => 'Faydalı model veya endüstriyel tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 20],
 
         // ══ 13. ATIF (yalnızca SCI satırı; diğerleri birden küçük) ══

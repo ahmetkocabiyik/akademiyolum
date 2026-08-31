@@ -17,7 +17,10 @@
  * "görev süresi"). Spor Bilimleri bu tabloyu Tablo 7'nin ek satırlarıyla
  * birlikte kullanıyor; o birleşim marmara-spor.php'de.
  *
- * GİRİLMEYEN SATIRLAR: 16 (sorumlu yazar çarpanı) ve 43 (yükseltme jürisi
+ * GİRİLMEYEN SATIRLAR: 27 (akademik organizasyon yöneticiliği ve
+ * düzenleme kurulu üyeliği — kaynak sözlüğünde kongre düzenleme etiketi yok;
+ * geniş bir "Diğer" kovasına bağlamak §0'a aykırı olurdu, fazla sayardı),
+ * 16 (sorumlu yazar çarpanı) ve 43 (yükseltme jürisi
  * görevleri) — kayıt karşılığı yok. Tablo 8'in idari faaliyetleri de
  * girilmedi.
  */
@@ -25,7 +28,7 @@
 return [
     'kapsam_notu' => 'Puanlar Marmara Üniversitesi Tablo 1\'den (Eğitim Bilimleri ve Öğretmen '
         .'Yetiştirme). Belge 2018 öncesi terminoloji kullanıyor; kadro adları güncel '
-        .'karşılıklarına eşlendi. Sorumlu yazar çarpanı, yükseltme jürisi görevleri ve idari '
+        .'karşılıklarına eşlendi. Akademik organizasyon yöneticiliği (27), sorumlu yazar çarpanı, yükseltme jürisi görevleri ve idari '
         .'faaliyetler (Tablo 8) girilmedi. Gerçek toplamınız burada görünenden yüksek '
         .'olabilir, düşük olamaz.',
 
@@ -52,10 +55,6 @@ return [
         '24' => ['baslik' => 'Uluslararası kongrede özet bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 18],
         '25' => ['baslik' => 'Ulusal kongrede tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 20],
         '26' => ['baslik' => 'Ulusal kongrede özet bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 12],
-
-        // ── AKADEMİK ORGANİZASYON ── (27)
-        '27' => ['baslik' => 'Uluslararası akademik organizasyonda yöneticilik', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Uluslararası)'], 'puan' => 60],
-        '27b' => ['baslik' => 'Ulusal akademik organizasyonda yöneticilik veya düzenleme kurulu üyeliği', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Ulusal)'], 'puan' => 45],
 
         // ── DERS ── (32)
         '32' => ['baslik' => 'Verdiği lisansüstü ders (yarıyıl başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Yabancı Dilde Ders'], 'puan' => 4],
@@ -95,14 +94,14 @@ return [
     'gruplar' => [
         // Koşulların birebir kullandığı ARALIKLAR (md. 7/d-1, 8/b-1, 13/a, 18/2-a).
         '1-11' => ['1', '3', '7', '11'],
-        '17-27' => ['17', '18', '18b', '19', '20', '20b', '21', '21b', '23', '24', '25', '26', '27', '27b'],
+        '17-27' => ['17', '18', '18b', '19', '20', '20b', '21', '21b', '23', '24', '25', '26'],
         '34-37' => ['34', '34b', '34c', '36', '36b', '36c'],
         '49-50' => ['49', '49b'],
         '49-52' => ['49', '49b', '49c'],
         // "27, 32-52 numaralı faaliyetler" — doçentlik koşulu (md. 13/a).
-        '27,32-52' => ['27', '27b', '32', '32b', '34', '34b', '34c', '36', '36b', '36c', '38', '40', '40b', '41', '41b', '42', '45', '45b', '46', '47', '47b', '49', '49b', '49c'],
+        '27,32-52' => ['32', '32b', '34', '34b', '34c', '36', '36b', '36c', '38', '40', '40b', '41', '41b', '42', '45', '45b', '46', '47', '47b', '49', '49b', '49c'],
         // "17, 18, 27, 34, 41, 49, 50" — profesörlük koşulu (md. 18/2-a).
-        'PROF-CEKIRDEK' => ['17', '18', '18b', '27', '27b', '34', '34b', '34c', '41', '41b', '49', '49b'],
+        'PROF-CEKIRDEK' => ['17', '18', '18b', '34', '34b', '34c', '41', '41b', '49', '49b'],
         // Md. 8/b-1'in üçüncü yenileme koşulu: birincil indeksli tek yazarlı makale.
         'BIRINCIL' => ['1'],
     ],

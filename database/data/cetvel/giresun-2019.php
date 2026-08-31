@@ -64,7 +64,7 @@ return [
         'B.2.c' => ['baslik' => 'Uluslararası kongrede özeti yayımlanmış sözlü bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 6],
 
         // ══ C — ULUSLARARASI KİTAP VE KİTAP BÖLÜMÜ ══
-        'C.1' => ['baslik' => 'Uluslararası kitap yazarlığı (yurt dışında yayımlanmış, ISBN\'li)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 120],
+        'C.1' => ['baslik' => 'Uluslararası kitap yazarlığı (yurt dışında yayımlanmış, ISBN\'li)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 120],
         'C.2' => ['baslik' => 'Uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
 
         // ══ D — ULUSAL MAKALELER ══

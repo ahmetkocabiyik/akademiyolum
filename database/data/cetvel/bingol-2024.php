@@ -99,7 +99,7 @@ return [
         '10.a' => ['baslik' => 'Alanında ulusal yayımlanmış çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
         '10.b' => ['baslik' => 'Alanında ulusal yayımlanmış derleme veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 45],
         '10.c' => ['baslik' => 'Alanında ulusal yayımlanmış özgün araştırma veya bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 60],
-        '11.c' => ['baslik' => 'Alanında uluslararası yayımlanmış özgün araştırma veya bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 100],
+        '11.c' => ['baslik' => 'Alanında uluslararası yayımlanmış özgün araştırma veya bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
         '12.a' => ['baslik' => 'Ulusal yayımlanmış kitapta çeviri bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
         '12.c' => ['baslik' => 'Ulusal yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
         '13.c' => ['baslik' => 'Uluslararası yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
@@ -169,7 +169,7 @@ return [
 
         // ══ 47. TESCİLLENMİŞ FİKRÎ MÜLKİYET ══
         '47.a' => ['baslik' => 'Alanında uluslararası tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 100],
-        '47.b' => ['baslik' => 'Alanında ulusal tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Patent'], 'puan' => 80],
+        '47.b' => ['baslik' => 'Alanında ulusal tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 80],
         '47.d' => ['baslik' => 'Belgelendirilmiş faydalı model veya endüstriyel tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 40],
     ],
 

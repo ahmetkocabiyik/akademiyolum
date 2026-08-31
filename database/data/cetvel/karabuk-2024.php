@@ -107,7 +107,7 @@ return [
         '4.3.2' => ['baslik' => 'Ulusal bildiri kitabında özet metin poster veya sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 15],
 
         // ── 4.4 KİTAPLAR ──
-        '4.4.1' => ['baslik' => 'Uluslararası yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 100],
+        '4.4.1' => ['baslik' => 'Uluslararası yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
         '4.4.2' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı (aynı kitapta en fazla 2 bölüm)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
         '4.4.3' => ['baslik' => 'Ulusal yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 80],
         '4.4.4' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı (aynı kitapta en fazla 2 bölüm)', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
@@ -138,7 +138,7 @@ return [
 
         // ── 4.8 PATENTLER ──
         '4.8.1' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 200],
-        '4.8.2' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Patent'], 'puan' => 150],
+        '4.8.2' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 150],
         '4.8.3' => ['baslik' => 'Faydalı model veya endüstriyel tasarım tescili', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 100],
 
         // ── 4.9 ÖDÜLLER ──

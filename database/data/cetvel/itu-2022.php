@@ -222,7 +222,7 @@ $moda = [
     'M.3' => ['baslik' => 'Özgün tasarımlarıyla uluslararası karma etkinliğe katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)'], 'puan' => 20],
     'M.4' => ['baslik' => 'Özgün tasarımlarıyla ulusal karma etkinliğe katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 8],
     'M.5' => ['baslik' => 'Uluslararası sempozyum, festival veya bienale tasarımıyla katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt Dışı)'], 'puan' => 15],
-    'M.6' => ['baslik' => 'Ulusal sempozyum, festival veya bienale tasarımıyla katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt İçi)', 'Yarışma Derecesi / Mansiyon'], 'puan' => 6],
+    'M.6' => ['baslik' => 'Ulusal sempozyum, festival veya bienale tasarımıyla katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt İçi)'], 'puan' => 6],
 ];
 
 // ── G.7 ve N (yalnızca Mimarlık Fakültesi) ──────────────────────────────────

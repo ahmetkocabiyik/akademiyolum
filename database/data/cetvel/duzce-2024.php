@@ -81,10 +81,10 @@ return [
         '1.2.b' => ['baslik' => 'Diğer indeksli dergide olgu sunumu, teknik not veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 15],
         '1.3.a' => ['baslik' => 'Ulusal hakemli dergide makale veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
         '1.3.b' => ['baslik' => 'Ulusal hakemli dergide olgu sunumu, teknik not veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 7],
-        '1.4.a' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI Kitap', 'BKCI / Scopus Kitap'], 'puan' => 80],
+        '1.4.a' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 80],
         '1.4.b' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 50],
         '1.4.c' => ['baslik' => 'Ulusal yayınevince Türkçe basılmış bilimsel veya ders kitabı (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
-        '1.4.d' => ['baslik' => 'Türkçe kitapta bölüm yazarlığı, editörlük, kitapçık veya ansiklopedi maddesi', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Kitap Editörlüğü', 'Ansiklopedi Maddesi'], 'puan' => 30],
+        '1.4.d' => ['baslik' => 'Türkçe kitapta bölüm yazarlığı, editörlük, kitapçık veya ansiklopedi maddesi', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
         '1.4.e' => ['baslik' => 'Türkçe kitap çevirmenliği (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
         '1.4.f' => ['baslik' => 'Kitap bölümü, kitapçık veya makale çevirmenliği (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
         '1.5.a' => ['baslik' => 'SCI, SCI-E, SSCI veya AHCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
@@ -117,7 +117,7 @@ return [
 
         // ══ 5. FİKRÎ MÜLKİYET HAKLARI ══
         '5.a' => ['baslik' => 'Uluslararası patent belgesi', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 80],
-        '5.b' => ['baslik' => 'Ulusal patent belgesi', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Patent'], 'puan' => 60],
+        '5.b' => ['baslik' => 'Ulusal patent belgesi', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 60],
         '5.g' => ['baslik' => 'Faydalı model veya endüstriyel tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 30],
 
         // ══ 6. ÖDÜLLER (TÜBİTAK yayın teşvik ödülleri hariç) ══

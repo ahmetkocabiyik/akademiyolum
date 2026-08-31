@@ -222,7 +222,7 @@ return [
         'F6' => ['baslik' => 'Yurt dışında kişisel sanat/tasarım etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)'], 'puan' => 100],
         'F7' => ['baslik' => 'Yurt içinde kişisel sanat/tasarım etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Ulusal)'], 'puan' => 65],
         'F8' => ['baslik' => 'Yurt dışında karma veya grup sanat/tasarım etkinliğine katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Yurt Dışı, Jürisiz)'], 'puan' => 35],
-        'F9' => ['baslik' => 'Yurt içinde karma veya grup sanat/tasarım etkinliğine katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Yurt İçi, Jürisiz)'], 'puan' => 25],
+        'F9' => ['baslik' => 'Yurt içinde karma veya grup sanat/tasarım etkinliğine katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Jürisiz, Ulusal)'], 'puan' => 25],
         'F10' => ['baslik' => 'Uluslararası sempozyum, festival, çalıştay, bienal veya trienale eserle katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt Dışı)'], 'puan' => 40],
         'F11' => ['baslik' => 'Ulusal sempozyum, festival, çalıştay, bienal veya trienale eserle katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt İçi)'], 'puan' => 30],
         'F12' => ['baslik' => 'Sahne sanatlarında yönetmen, sanat yönetmeni, koreograf veya performans sanatçısı olarak yurt dışı sunum', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Yönetmenlik (Sahne/Ekran)'], 'puan' => 65],

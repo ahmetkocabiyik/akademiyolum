@@ -14,7 +14,10 @@
  * organizasyon yöneticiliği 60/45 (Tablo 3-5'te 40/30) ve atıf satırı bilim
  * dışında kültür-sanat-tasarım dergilerini de sayıyor.
  *
- * GİRİLMEYEN SATIRLAR: 16 (sorumlu yazar çarpanı — kayıtta yazar rolü var
+ * GİRİLMEYEN SATIRLAR: 27 (akademik organizasyon yöneticiliği ve
+ * düzenleme kurulu üyeliği — kaynak sözlüğünde kongre düzenleme etiketi yok;
+ * geniş bir "Diğer" kovasına bağlamak §0'a aykırı olurdu, fazla sayardı),
+ * 16 (sorumlu yazar çarpanı — kayıtta yazar rolü var
  * ama "makale sayısı x" çarpanı faaliyet olarak tutulmuyor), 22 ve 43
  * (jüri görevleri), 51 (bilirkişi, proje değerlendirme, danışmanlık) ve 52
  * (görev süresi) — hiçbirinin kayıt karşılığı yok. Tablo 8'in idari
@@ -25,7 +28,7 @@
 return [
     'kapsam_notu' => 'Puanlar Marmara Üniversitesi Tablo 6\'dan (Sosyal, Beşeri ve İdari '
         .'Bilimler). Belge 2018 öncesi terminoloji kullanıyor; kadro adları güncel '
-        .'karşılıklarına eşlendi. Sorumlu yazar çarpanı, jüri görevleri, bilirkişilik, '
+        .'karşılıklarına eşlendi. Akademik organizasyon yöneticiliği (27), sorumlu yazar çarpanı, jüri görevleri, bilirkişilik, '
         .'görev süresi ve idari faaliyetler (Tablo 8) girilmedi. Gerçek toplamınız burada '
         .'görünenden yüksek olabilir, düşük olamaz.',
 
@@ -56,10 +59,6 @@ return [
         '24' => ['baslik' => 'Uluslararası kongrede özet bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 18],
         '25' => ['baslik' => 'Ulusal kongrede tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 20],
         '26' => ['baslik' => 'Ulusal kongrede özet bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 12],
-
-        // ── AKADEMİK ORGANİZASYON ── (27)
-        '27' => ['baslik' => 'Uluslararası akademik organizasyonda yöneticilik', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Uluslararası)'], 'puan' => 60],
-        '27b' => ['baslik' => 'Ulusal akademik organizasyonda yöneticilik veya düzenleme kurulu üyeliği', 'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Ulusal)'], 'puan' => 45],
 
         // ── DERS ── (32)
         '32' => ['baslik' => 'Verdiği lisansüstü ders (yarıyıl başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Yabancı Dilde Ders'], 'puan' => 4],
@@ -104,9 +103,9 @@ return [
         '23-26' => ['23', '24', '25', '26'],
         '16-21' => ['17', '18', '18b', '19', '20', '20b', '21', '21b'],
         // "27, 32-52 numaralı faaliyetler" — doçentlik koşulu (md. 13/a).
-        '27,32-52' => ['27', '27b', '32', '32b', '34', '34b', '34c', '36', '36b', '36c', '38', '40', '40b', '41', '41b', '42', '45', '45b', '46', '47', '47b', '49', '49b', '49c'],
+        '27,32-52' => ['32', '32b', '34', '34b', '34c', '36', '36b', '36c', '38', '40', '40b', '41', '41b', '42', '45', '45b', '46', '47', '47b', '49', '49b', '49c'],
         // "17, 18, 27, 34, 41, 49, 50" — profesörlük koşulu (md. 18/2-a).
-        'PROF-CEKIRDEK' => ['17', '18', '18b', '27', '27b', '34', '34b', '34c', '41', '41b', '49', '49b'],
+        'PROF-CEKIRDEK' => ['17', '18', '18b', '34', '34b', '34c', '41', '41b', '49', '49b'],
     ],
 
     'grup_tavanlari' => [],

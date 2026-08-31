@@ -98,6 +98,32 @@ php artisan tinker --execute 'print_r(App\Enums\Kategori::Makale->kaynaklar());'
 Bir yönerge kalemi sözlükte karşılıksızsa **girme** ve dosya başlığındaki
 "GİRİLMEYEN KALEMLER" bölümüne yaz.
 
+**ETİKETİ UYDURMA — SESSİZCE ÖLÜ SATIR ÜRETİR.** Bir cetvel satırı `kategori`
++ `kaynaklar` çiftiyle faaliyet kaydına bağlanır. Etiket o kategorinin
+sözlüğünde yoksa satır hiçbir faaliyetle eşleşmez: aday puanı hak ettiği hâlde
+sıfır görür ve hiçbir yerde hata çıkmaz. Sinsi olması burada: motor patlamaz,
+test kırılmaz, yalnız cevap yanlış olur.
+
+31.08.2026'daki ilk taramada 63 eşleşmeyen etiket bulundu; otuzu satırın TEK
+kaynağıydı, yani o satırlar tamamen ölüydü. Üç tipik hata:
+
+    'kategori' => 'kitap',  'kaynaklar' => ['Kitap Editörlüğü']
+        → etiket `editorluk`e ait; satırın KATEGORİSİ yanlış
+    'kategori' => 'kitap',  'kaynaklar' => ['BKCI Kitap']
+        → `kitap` karşılığı 'BKCI / Scopus Kitap'; 'BKCI Kitap' atıf/editörlük
+    'kategori' => 'bildiri', 'kaynaklar' => ['Kongre Düzenleme (Uluslararası)']
+        → sözlükte hiç yok, uydurulmuş
+
+`tests/Feature/CetvelKaynakTest.php` artık bütün cetvelleri koşulsuz tarıyor;
+yeni bir cetvel girildiğinde uydurma etiket doğrudan kırılır.
+
+Karşılığı olmayan bir kaleme rastlarsan sırayla: (1) sözlükte gerçekten yok mu
+diye bak, (2) varsa satırın `kategori`sini düzelt, (3) yoksa sözlüğü genişlet,
+(4) genişletemiyorsan SATIRI HİÇ YAZMA ve sebebini `kapsam_notu`na yaz.
+Geniş bir "Diğer" kovasına bağlamak çözüm DEĞİLDİR — §0'a aykırıdır, fazla
+sayar. Marmara'nın 27. satırı (akademik organizasyon yöneticiliği) bu yüzden
+girilmedi; Anadolu'nun jüri ve düzenleme kurulu kalemleri de öyle.
+
 ### Yazar katsayısı
 
 `yazar_katsayisi.roller` altında her rol için `kademeler` (yazar sayısı → çarpan),
