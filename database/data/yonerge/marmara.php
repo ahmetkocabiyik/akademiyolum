@@ -93,8 +93,8 @@ $DR_KURALI = [
         'aday' => 'Eğitim Bilimleri barajı İKİ KATMANLI ve ikisi de dar: makalelerden en az 50 '
             .'puan, buna ek olarak kitap, bildiri, akademik organizasyon, proje ve tez '
             .'danışmanlığı kalemlerinden toplam 70 puan. Yönerge toplam puan barajı koymuyor. '
-            .'Lisansüstü tezinizden üretilen yayınlar YARIM puanla sayılıyor; bu indirim '
-            .'burada uygulanmadığı için makale puanınız gerçeğinden yüksek görünebilir.',
+            .'Lisansüstü tezinizden üretilen yayınlar YARIM puanla sayılıyor; faaliyeti '
+            .'"tez yayını" olarak kaydettiyseniz bu indirim uygulanıyor.',
         'cocuklar' => [
             Kalip::puanDan('Makale kalemlerinizden en az 50 puan', ['1-11'], 50, madde: 'Madde 7/d-1'),
             Kalip::puanDan('Kitap, bildiri, akademik organizasyon, proje ve tez danışmanlığı '

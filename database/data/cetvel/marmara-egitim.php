@@ -40,6 +40,24 @@ return [
         '11' => ['baslik' => 'Hakemli ulusal dergide Türkçe makale veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 18],
         '15' => ['baslik' => 'Hakemsiz dergide makale veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 5],
 
+        // ── LİSANSÜSTÜ TEZDEN ÜRETİLMİŞ YAYINLAR ── (yarım puan)
+        // Md. 7/d-1 dipnotu: "Yaptığı lisansüstü tez(ler)den üretilen yayınlar
+        // ölçütlerde gösterilen mevcut puanın YARISI ile değerlendirilir."
+        // Kayıt tezden üretilmiş yayını `tez_yayini` kategorisinde ayrı
+        // tuttuğu için kural yazılabiliyor: her satır karşılığının yarısı.
+        // Kural YALNIZ Eğitim Bilimleri bendinde geçiyor; Spor da Tablo 1'i
+        // kullanıyor ama kendi bendinde (7/d-11) böyle bir hüküm yok, o
+        // yüzden marmara-spor.php'de bu satırlar yok.
+        '1-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, birincil indeksli dergide makale veya derleme', 'kategori' => 'tez_yayini', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 24],
+        '3-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, ikincil indeksli dergide makale veya derleme', 'kategori' => 'tez_yayini', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 18],
+        '11-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, hakemli ulusal dergide makale veya derleme', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin'], 'puan' => 9],
+        '15-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, hakemsiz dergide makale veya derleme', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+        '17-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş uluslararası kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
+        '18-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş uluslararası kitapta bölüm', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
+        '19-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş ulusal kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 35],
+        '20-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş ulusal kitapta bölüm', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
+        '23-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş uluslararası kongre bildirisi', 'kategori' => 'tez_yayini', 'kaynaklar' => ['CPCI Bildiri'], 'puan' => 12],
+
         // ── KİTAP ── (17-21)
         '17' => ['baslik' => 'Uzmanlık alanında uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
         '18' => ['baslik' => 'Uzmanlık alanında uluslararası kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 60],
@@ -93,8 +111,9 @@ return [
 
     'gruplar' => [
         // Koşulların birebir kullandığı ARALIKLAR (md. 7/d-1, 8/b-1, 13/a, 18/2-a).
-        '1-11' => ['1', '3', '7', '11'],
-        '17-27' => ['17', '18', '18b', '19', '20', '20b', '21', '21b', '23', '24', '25', '26'],
+        '1-11' => ['1', '3', '7', '11', '1-tez', '3-tez', '11-tez'],
+        '17-27' => ['17', '18', '18b', '19', '20', '20b', '21', '21b', '23', '24', '25', '26',
+            '17-tez', '18-tez', '19-tez', '20-tez', '23-tez'],
         '34-37' => ['34', '34b', '34c', '36', '36b', '36c'],
         '49-50' => ['49', '49b'],
         '49-52' => ['49', '49b', '49c'],

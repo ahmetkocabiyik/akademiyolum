@@ -1814,6 +1814,30 @@ test('Yalova yüzde tabanlı tavanı asgari puandan hesaplanıp uygulanıyor', f
         ->and($esik['cetvel'])->toBe('yalova-2024-sosyal-a150');
 });
 
+test('Marmara Eğitim tezden üretilmiş yayını yarım puanla sayıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('marmara-egitim');
+
+    // Md. 7/d-1 dipnotu: "Yaptığı lisansüstü tez(ler)den üretilen yayınlar
+    // ölçütlerde gösterilen mevcut puanın YARISI ile değerlendirilir."
+    $puan = fn (Kategori $kategori, string $kaynak): int => $katalog->topla(
+        [sartFaaliyet($kaynak, $kategori, 'tek', '2022-01-01')],
+        $katalog->coz(['*']),
+    );
+
+    expect($puan(Kategori::Makale, 'SCIE/SSCI (Q1)'))->toBe(48)
+        ->and($puan(Kategori::TezYayini, 'SCIE/SSCI/AHCI'))->toBe(24);
+
+    // Kural YALNIZ Eğitim bendinde geçiyor. Spor da Tablo 1'i kullanıyor ama
+    // kendi bendinde (7/d-11) böyle bir hüküm yok; oraya taşınmamalı.
+    $spor = $depo->katalog('marmara-spor');
+
+    expect($spor->topla(
+        [sartFaaliyet('SCIE/SSCI/AHCI', Kategori::TezYayini, 'tek', '2022-01-01')],
+        $spor->coz(['*']),
+    ))->toBe(0);
+});
+
 test('Ordu kategori tavanları toplam puanı kesiyor', function () {
     $depo = sartDepo();
 
