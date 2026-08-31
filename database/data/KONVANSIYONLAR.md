@@ -255,6 +255,33 @@ kadro atlamayı engelleyen tek pratik.
 Fakülteye kapalı bölümler ("Diğer Fakülteler: Bu bölümden puan alamaz") için
 satırları silmek yerine o varyantta tavanı **0** yaz; gövde tek kalır.
 
+### Yüzde tavanını ASGARİ PUANDAN SABİTE ÇEVİR
+
+Bazı yönergeler tavanı sayıyla değil yüzdeyle veriyor: "Bu madde kapsamında
+ibraz edilen puan; başvuru şartlarında istenen asgari puanın %20'sinden
+fazlasını karşılayamaz" (Yalova 5. madde). Motorun `grup_tavanlari`'ı sabit
+sayı alıyor — ama yüzde UYGULANAMAZ değil: tabanı olan asgari puan kadro
+başına bilindiği için sabite çevrilebilir.
+
+Yalova doçentliğinde asgari 150 → atıf tavanı 30, yeniden atanmada asgari 40
+→ tavan 8. Cetvel bu yüzden asgari puana göre varyantlanıyor
+(`yalova-2024-sosyal-a150`, `-a40`). Acıbadem'in atıf tavanı da aynı yolla
+kuruldu (`acibadem-2025-atif6` … `-atif24`).
+
+**Tavanı uygulamamak §0 İHLALİDİR**, çünkü toplamı ŞİŞİRİR: aday barajın
+üstünde görünür. Eksik saymak serbest, fazla saymak değil. Bir tavanı
+uygulayamıyorsan sebebini yaz ve gerçekten uygulanamaz olduğundan emin ol:
+
+  Uygulanabilir → yüzde tavanı (tabanı kadro başına sabit)
+  Uygulanamaz   → AYNI ESERE özgü tavan (Yalova'nın "aynı ISBN'ye sahip
+                  eserde ... %30" kuralı: kayıt aynı esere ait kalemleri
+                  birbirine bağlamıyor)
+
+Bir de tavansızlığın gerçekten zarar verip vermediğine bak: İTÜ'nün idari
+görev tavanı uygulanmıyor ama o satırlar hiçbir grupta olmadığı için hiçbir
+koşulu beslemiyor — yalnız listede görünen puanı etkiliyor. Notu buna göre
+yaz; "puanınız yüksek görünebilir" demek, baraj etkilenmiyorsa yanıltıcıdır.
+
 ### `kapsam_notu`
 
 Adayın gördüğü metin. Şunları söylemeli:

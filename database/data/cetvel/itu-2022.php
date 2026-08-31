@@ -61,7 +61,10 @@
  *
  * ── UYGULANAMAYAN SINIRLAR ──
  *   O.1'in tavanı yüzdeye bağlı ("atama için istenilen asgari puanın %10'unu
- *       geçemez"); motor yalnızca sabit tavan tanıyor, uygulanmadı.
+ *       geçemez"); motor yalnızca sabit tavan tanıyor, uygulanmadı. AMA BU
+ *       BARAJI ŞİŞİRMİYOR: İTÜ'nün bütün koşulları ESER-PUANI grubuna bağlı
+ *       ve idari görev satırları o grupta değil. Tavansızlık yalnız faaliyet
+ *       listesinde görünen puanı etkiliyor, hiçbir eşiğe girmiyor.
  *   Hukuk ve Sosyoloji'de "A1/A2/A3 türü yayınların puanları 2 ile çarpılır"
  *       (Tablo 3) uygulanmadı; çarpan eser puanına özgü ama motor puanı
  *       cetvelden tek türlü okuyor. Eser puanı bu iki birimde olduğundan
@@ -80,7 +83,8 @@ $kapsamNotu = function (string $birim, string $ek = ''): string {
         .'yok. Editör yardımcılığı ve konuk editörlük kaynakta ayrılamadığı için girilmedi; '
         .'proje yürütücülüğünde baş yürütücü ile ortak yürütücü ayrılamadığı için düşük satır '
         .'alındı. İdari görev bölümünün yüzdeye bağlı tavanı (asgari puanın %10\'u) '
-        .'uygulanmıyor, o kalemde puanınız yüksek görünebilir.'.$ek;
+        .'uygulanmıyor; bu yalnız listede görünen puanı etkiliyor, koşulların hiçbiri '
+        .'idari görev kalemlerini saymıyor.'.$ek;
 };
 
 // ── ORTAK GÖVDE ─────────────────────────────────────────────────────────────

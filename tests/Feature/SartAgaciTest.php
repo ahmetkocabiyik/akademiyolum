@@ -1788,6 +1788,32 @@ test('Ordu 2024 yönergesi on bir alanı dört kadroda ayrı ayrı tanımlıyor'
     expect($depo->bul('Ordu Üniversitesi', 'docentlik', 'hukuk'))->toBeNull();
 });
 
+test('Yalova yüzde tabanlı tavanı asgari puandan hesaplanıp uygulanıyor', function () {
+    $depo = sartDepo();
+
+    // Sosyal tablosu atıf tavanını yüzdeyle veriyor: "başvuru şartlarında
+    // istenen asgari puanın %20'sinden fazlasını karşılayamaz." Doçentlikte
+    // asgari 150, yani tavan 30. Kırk atıf 120 puan eder ama toplama 30 girer.
+    $esik = $depo->bul('Yalova Üniversitesi', 'docentlik', 'sosyal');
+    $profil = new Profil(doktoraTarihi: Carbon::parse('2018-01-01'), yds: 60);
+
+    $atiflar = array_map(
+        fn (): object => sartFaaliyet('WoS / Scopus', Kategori::Atif, 'tek', '2022-01-01'),
+        range(1, 40),
+    );
+
+    $toplam = collect($depo->degerlendir($esik, $atiflar, $profil)->kosullar())
+        ->first(fn (SartSonucu $k): bool => str_contains($k->aciklama, 'Tüm faaliyetlerden'));
+
+    expect($toplam->mevcut)->toBe(30);
+
+    // Yeniden atanmada asgari 40, yani tavan 8 — aynı faaliyetler, farklı tavan.
+    $yeniden = $depo->bul('Yalova Üniversitesi', 'dr_ogr_uyesi_yeniden', 'sosyal');
+
+    expect($yeniden['cetvel'])->toBe('yalova-2024-sosyal-a40')
+        ->and($esik['cetvel'])->toBe('yalova-2024-sosyal-a150');
+});
+
 test('Ordu kategori tavanları toplam puanı kesiyor', function () {
     $depo = sartDepo();
 

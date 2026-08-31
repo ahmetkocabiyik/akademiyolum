@@ -39,11 +39,16 @@
  *   İKİ YAYIN için. Motor "en çok iki yayına uygulanan çarpan" tanımıyor;
  *   ek puan hiç verilmedi, Q1/Q2 makaleleriniz düz puanla sayılıyor.
  *
- *   Yüzdeye bağlı tavanlar (Sosyal ve Mimarlık'ta kitap %30, atıf %20, tez
- *   danışmanlığı %10; hepsi "başvuru şartında istenen asgari puanın"
- *   yüzdesi). Motor yüzde tavanı tanımıyor; uygulanmadı, bu kalemlerdeki
- *   puanınız olduğundan yüksek görünebilir. Mutlak tavanlar ("Bu maddeden en
- *   fazla 20 puan alınabilir") uygulandı.
+ *   Kitabın %30 tavanı: "Aynı ISBN'ye sahip eserde b, c, e, f, h, ı
+ *   maddelerinden alınacak toplam puan başvuru şartında istenen asgari puanın
+ *   %30'undan fazlasını karşılayamaz." Bu bir KATEGORİ tavanı değil, AYNI
+ *   ESERE özgü; kayıt aynı ISBN'li kalemleri birbirine bağlamadığı için
+ *   uygulanamadı. Aynı kitabın birden çok satırından puan alan adayın kitap
+ *   puanı olduğundan yüksek görünebilir.
+ *
+ *   Atıf (%20) ve tez danışmanlığı (%10) tavanları ise gerçek kategori
+ *   tavanı; asgari puana uygulanıp sabit sayıya çevrildi ve UYGULANIYOR
+ *   (bkz. dosya sonundaki varyant üretimi).
  *
  * ── GİRİLMEYEN SATIRLAR ──
  *   Kitap bölümünün "Yalova Üniversitesi Yayın Komisyonu onayıyla yayımlanmış
@@ -71,8 +76,10 @@ $kapsamNotu = 'Puanlar Yalova Üniversitesi\'nin alanınıza ait Değerlendirme 
     .'İKİ KURALIN DÜŞÜK OLANI kullanıldı — başlıca yazar olduğunuz iki yazarlı makalelerde '
     .'puanınız yönergenin verdiğinden düşük görünür. '
     .'Q1/Q2 dergilerdeki en çok iki yayına verilen %50 ek puan (MADDE 10/3) da uygulanmadı. '
-    .'Bölüm tavanları ("en fazla 20 puan") uygulandı; yüzdeye bağlı tavanlar (kitap %30, '
-    .'atıf %20, tez danışmanlığı %10) uygulanamadı, o kalemlerde puanınız YÜKSEK görünebilir. '
+    .'Bölüm tavanları uygulanıyor; atıf (%20) ve tez danışmanlığı (%10) tavanları asgari '
+    .'puandan hesaplanıp uygulandı. Yalnız aynı ISBN\'li kitabın %30 sınırı uygulanamadı — '
+    .'kayıt aynı esere ait kalemleri birbirine bağlamıyor; bir kitabın birden çok satırından '
+    .'puan aldıysanız kitap puanınız YÜKSEK görünebilir. '
     .'Patent başvurusu, toplantı başkanlığı, "Diğer" bölümü (h-indeksi, yurt dışı araştırma) '
     .'ve idari görev satırları kaynak sözlüğünde karşılıksız olduğu için girilmedi.';
 
@@ -275,7 +282,28 @@ $cetvel = function (string $notEki, array $tavanlar, array $fark = [], array $ek
     ];
 };
 
-return ['cetveller' => [
+/**
+ * YÜZDE TABANLI TAVANLAR: ASGARİ PUANA GÖRE VARYANT.
+ *
+ * Sosyal (EK-A) ve Mimarlık (EK-Ç) tabloları atıf ve tez danışmanlığı
+ * tavanını mutlak sayıyla değil YÜZDEYLE veriyor: "Bu madde kapsamında ibraz
+ * edilen puan; başvuru şartlarında istenen asgari puanın %20'sinden (tez
+ * danışmanlığında %10'undan) fazlasını karşılayamaz." Motor mutlak tavan
+ * aldığı için yüzde, kadronun asgari puanına uygulanıp sabit sayıya
+ * çevriliyor — Acıbadem'in atıf tavanında yaptığının aynısı.
+ *
+ * Yalova'nın asgari puanları: dr. öğr. üyeliği ilk atama 50, yeniden atanma
+ * 40, doçentlik ve profesörlük 150. Mimarlık'ın tez tavanı zaten mutlak (20),
+ * o yüzden yalnız atıf tavanı türetiliyor.
+ *
+ * DİĞER TABLOLARDA GEREKMİYOR: Mühendislik, Sağlık, Güzel Sanatlar ve Spor
+ * tabloları atıf ve tez tavanını zaten mutlak sayıyla veriyor.
+ *
+ * @var list<int>
+ */
+$asgariPuanlar = [40, 50, 150];
+
+$cetveller = [
     // ══════════ EK-A Sosyal, Beşerî ve İdari Bilimler ══════════
     'yalova-2024-sosyal' => $cetvel(
         ' Sosyal tablosunda şirket protokolüyle yürütülen proje satırı yok.',
@@ -352,4 +380,24 @@ return ['cetveller' => [
         [],
         ['11d', '11e'],
     ),
-]];
+];
+
+// Sosyal ve Mimarlık'ın yüzde tabanlı tavanları asgari puana göre sabit
+// sayıya çevriliyor; her kadro kendi varyantına bağlanıyor.
+foreach ($asgariPuanlar as $asgari) {
+    $atif = (int) round($asgari * 0.20);
+    $tez = (int) round($asgari * 0.10);
+
+    $cetveller["yalova-2024-sosyal-a{$asgari}"] = array_replace_recursive(
+        $cetveller['yalova-2024-sosyal'],
+        ['grup_tavanlari' => ['5' => $atif, '6' => $tez]],
+    );
+
+    // Mimarlık'ın tez tavanı zaten mutlak (20); yalnız atıf türetiliyor.
+    $cetveller["yalova-2024-mimarlik-a{$asgari}"] = array_replace_recursive(
+        $cetveller['yalova-2024-mimarlik'],
+        ['grup_tavanlari' => ['5' => $atif]],
+    );
+}
+
+return ['cetveller' => $cetveller];

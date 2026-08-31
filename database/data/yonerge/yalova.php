@@ -161,7 +161,7 @@ $esikler[] = [
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi',
     'alan' => ['sosyal'],
-    'cetvel' => 'yalova-2024-sosyal',
+    'cetvel' => 'yalova-2024-sosyal-a50',
     'notlar' => 'EK-A · 1. DOKTOR ÖĞRETİM ÜYESİ KADROSUNA BAŞVURU, ilk başvuru dalı: '
         .'1., 2. veya 3. maddeden en az 2 yayın; 1., 2., 3., 4., 5. veya 8. maddelerden 50 puan.',
     'sart' => Kalip::ve('Dr. Öğr. Üyeliğine ilk atanma — Sosyal, Beşerî ve İdari Bilimler', [
@@ -177,7 +177,7 @@ $esikler[] = [
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi_yeniden',
     'alan' => ['sosyal'],
-    'cetvel' => 'yalova-2024-sosyal',
+    'cetvel' => 'yalova-2024-sosyal-a40',
     'notlar' => 'EK-A · 1, yeniden atama dalı: son atama tarihinden itibaren en az 15 puanı '
         .'1., 2. veya 3. maddelerden olmak kaydıyla toplam en az 40 puan.',
     'sart' => Kalip::ve('Dr. Öğr. Üyeliğine yeniden atanma — Sosyal, Beşerî ve İdari Bilimler', [
@@ -192,7 +192,7 @@ $esikler[] = [
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'docentlik',
     'alan' => ['sosyal'],
-    'cetvel' => 'yalova-2024-sosyal',
+    'cetvel' => 'yalova-2024-sosyal-a150',
     'notlar' => 'EK-A · 2. DOÇENT KADROSUNA BAŞVURU: ÜAK doçentlik belgesi + 1., 2., 4., 7. veya '
         .'8. maddelerden en az 50 puan olmak şartıyla toplamda 150 puan. Paragraf bu koşullar '
         .'için bir dönem başlangıcı belirtmiyor; dönem sınırı konmadı.',
@@ -211,7 +211,7 @@ $esikler[] = [
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'profesorluk',
     'alan' => ['sosyal'],
-    'cetvel' => 'yalova-2024-sosyal',
+    'cetvel' => 'yalova-2024-sosyal-a150',
     'notlar' => 'EK-A · 3. PROFESÖR KADROSUNA BAŞVURU: doçentlik başvuru tarihinden sonra '
         .'1., 2. veya 4. madde kapsamında en az birer yayın olmak şartıyla maddelerin en az '
         .'beşinden asgari 150 puan.',
@@ -431,7 +431,7 @@ $esikler[] = [
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi',
     'alan' => ['mimarlik'],
-    'cetvel' => 'yalova-2024-mimarlik',
+    'cetvel' => 'yalova-2024-mimarlik-a50',
     'notlar' => 'EK-Ç · 1, ilk başvuru dalı: 1. veya 2. maddeden başlıca yazar olarak 1 makale '
         .'olmak şartıyla en az 2 yayın + 1., 2., 3., 4., 5. veya 8. maddelerden toplam 50 puan.',
     'sart' => Kalip::ve('Dr. Öğr. Üyeliğine ilk atanma — Mimarlık, Planlama ve Tasarım', [
@@ -448,7 +448,7 @@ $esikler[] = [
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'dr_ogr_uyesi_yeniden',
     'alan' => ['mimarlik'],
-    'cetvel' => 'yalova-2024-mimarlik',
+    'cetvel' => 'yalova-2024-mimarlik-a40',
     'notlar' => 'EK-Ç · 1, yeniden atama dalı: son atama tarihinden itibaren en az 15 puanı '
         .'1., 2. veya 3. maddelerden olmak kaydıyla toplam en az 40 puan.',
     'sart' => Kalip::ve('Dr. Öğr. Üyeliğine yeniden atanma — Mimarlık, Planlama ve Tasarım', [
@@ -464,7 +464,7 @@ $esikler[] = [
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'docentlik',
     'alan' => ['mimarlik'],
-    'cetvel' => 'yalova-2024-mimarlik',
+    'cetvel' => 'yalova-2024-mimarlik-a150',
     'notlar' => 'EK-Ç · 2: ÜAK doçentlik belgesi + doktora sonrası 1. madde (1ç bendi hariç) '
         .'kapsamında en az 1 tek yazarlı makale + toplamda en az 150 puan. 13. bölüm notu '
         .'ayrıca 15 puan istiyor (telafisi 1a-1c\'den bir yayın).',
@@ -484,7 +484,7 @@ $esikler[] = [
     'universite' => 'Yalova Üniversitesi',
     'kadro' => 'profesorluk',
     'alan' => ['mimarlik'],
-    'cetvel' => 'yalova-2024-mimarlik',
+    'cetvel' => 'yalova-2024-mimarlik-a150',
     'notlar' => 'EK-Ç · 3: doçentlik başvurusundan sonra 1., 2., 5., 7., 8. veya 9. maddelerin '
         .'HER BİRİNDEN en az bir faaliyet + 1a veya 1b kapsamında bir makalede başlıca yazarlık + '
         .'1. maddeden 50 puan + 9. maddeden 6 puan + toplamda 150 puan.',
