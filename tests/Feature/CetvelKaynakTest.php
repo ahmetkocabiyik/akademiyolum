@@ -229,7 +229,8 @@ test('hiçbir puan barajı grup tavanının üstünde değil', function () {
  * yok sayılır — çok yazarlı esere tam puan verilir, yani FAZLA SAYILIR (§0).
  * Bu çelişki gözle fark edilmiyor çünkü iki liste dosyanın ayrı yerlerinde.
  */
-test('kategori bazlı yazar çarpanı haric listesiyle çakışmıyor', function () {
+test('yazar katsayısı yapılandırması tutarlı', function () {
+    $gecerli = array_map(fn (Kategori $k): string => $k->value, Kategori::cases());
     $sizinti = [];
 
     foreach (app(SartDeposu::class)->cetveller() as $ad => $katalog) {
@@ -239,10 +240,25 @@ test('kategori bazlı yazar çarpanı haric listesiyle çakışmıyor', function
             continue;
         }
 
-        $haric = $katsayi['haric'] ?? [];
+        // `haric` düz bir kategori listesi olmalı. Bir alt dizi buraya
+        // düşerse (ör. `kategoriler` bloğu yanlış girintiyle içeri kayarsa)
+        // o blok SESSİZCE yok sayılır: `$katsayi['kategoriler']` tanımsız
+        // kalır, çarpan uygulanmaz ve çok yazarlı esere tam puan verilir.
+        // Bu tam olarak bir kez oldu (Bolu AİBÜ ve Bitlis).
+        foreach ($katsayi['haric'] ?? [] as $anahtar => $uye) {
+            if (! is_string($uye) || ! in_array($uye, $gecerli, true)) {
+                $sizinti[] = "{$ad}: `haric` içinde kategori olmayan üye (".var_export($anahtar, true).')';
+
+                continue;
+            }
+        }
 
         foreach (array_keys($katsayi['kategoriler'] ?? []) as $kategori) {
-            if (in_array($kategori, $haric, true)) {
+            if (! in_array($kategori, $gecerli, true)) {
+                $sizinti[] = "{$ad}: `kategoriler` içinde tanınmayan kategori \"{$kategori}\"";
+            }
+
+            if (in_array($kategori, $katsayi['haric'] ?? [], true)) {
                 $sizinti[] = "{$ad}: \"{$kategori}\" hem `kategoriler`de hem `haric`te";
             }
         }

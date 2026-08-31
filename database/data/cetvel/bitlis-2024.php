@@ -48,18 +48,18 @@ return [
     // Satır = yazar sayısı, sütun = adayın sırası.
     'yazar_katsayisi' => [
         'haric' => ['atif', 'egitim_ogretim',
-            // Yönerge makale dışındaki kalemler için AYRI bir kural veriyor:
-            // "Diğer durumlarda ise çevirmen, raportör, proje yapanlar, editör,
-            // ödül alanlar, patent sahibi veya düzenleyici sayısına eşit olarak
-            // bölünecektir." Yani makalenin sıraya bağlı kademe tablosu değil,
-            // düz 1/n. Bunları `haric`te bırakmak FAZLA SAYMAK olurdu (§0).
-            'kategoriler' => [
-                'proje' => ['sonrasi_pay' => 1.0],
-                'patent' => ['sonrasi_pay' => 1.0],
-                'editorluk' => ['sonrasi_pay' => 1.0],
-                'odul' => ['sonrasi_pay' => 1.0],
-            ],
             'tez_danismanligi', 'idari_gorev', 'toplumsal_katki'],
+        // Yönerge makale dışındaki kalemler için AYRI bir kural veriyor:
+        // "Diğer durumlarda ise çevirmen, raportör, proje yapanlar, editör,
+        // ödül alanlar, patent sahibi veya düzenleyici sayısına eşit olarak
+        // bölünecektir." Yani makalenin sıraya bağlı kademe tablosu değil,
+        // düz 1/n. Bunları `haric`te bırakmak FAZLA SAYMAK olurdu (§0).
+        'kategoriler' => [
+            'proje' => ['sonrasi_pay' => 1.0],
+            'patent' => ['sonrasi_pay' => 1.0],
+            'editorluk' => ['sonrasi_pay' => 1.0],
+            'odul' => ['sonrasi_pay' => 1.0],
+        ],
         'roller' => [
             'tek' => ['kademeler' => [1 => 1.0]],
             // 1. isim: 100, 100, 90, 85, 80, 75, 70, 65, 60, sonrası 55.
