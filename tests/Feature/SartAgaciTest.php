@@ -4180,3 +4180,52 @@ test('Hatay MKÜ patentleri puanlıyor, ödül satırları düşük kademeden sa
         ->and($odul('Ufuk Avrupa / ERC Ödülü'))->toBe(50)
         ->and($odul('YÖK Ödülü'))->toBe(60);
 });
+
+test('İstanbul Ticaret tez ve jüri satırlarında tavan değil satır puanı sayıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('istanbul-ticaret-2019');
+
+    // Kaynakta doktora tezi 10, yüksek lisans 5 puan; 75 bölümün TOPLAM sınırı.
+    // Cetvelde satır değeri olarak 75 yazılıydı: iki tez yöneten aday 150 görüyordu.
+    $tez = fn (string $kaynak, string $rol) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::TezDanismanligi, $rol),
+        $katalog->coz(['II.B.*']),
+    );
+
+    expect($tez('Doktora Tezi', 'danisman'))->toBe(10)
+        ->and($tez('Yüksek Lisans Tezi', 'danisman'))->toBe(5)
+        // II/B-3: ikinci danışmanlıkta puanın yarısı.
+        ->and($tez('Doktora Tezi', 'es_danisman'))->toBe(5)
+        // Jüri türü kayıtta yok; doktora 3, yüksek lisans 2 → §0 uyarınca 2.
+        ->and($tez('Tez İzleme / Jüri Üyeliği', 'danisman'))->toBe(2);
+
+    // Tavan artık uygulanıyor: on doktora tezi 100 değil 75 puan.
+    $tezler = array_fill(0, 10, sartFaaliyet('Doktora Tezi', Kategori::TezDanismanligi, 'danisman'));
+    expect($katalog->topla($tezler, $katalog->coz(['II.B.1'])))->toBe(75);
+});
+
+test('İstanbul Ticaret editörlük kademelerini dergi düzeyine göre ayırıyor', function () {
+    $katalog = (new SartDeposu)->katalog('istanbul-ticaret-2019');
+
+    // Bütün editörlük etiketleri tek satırda 120 puanla toplanmıştı: bir hakemlik
+    // kaydı olan aday 120 puan görüyordu.
+    $ed = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::Editorluk),
+        $katalog->coz(['I.D.5.*']),
+    );
+
+    expect($ed('WoS Dergi (Q1)'))->toBe(120)
+        ->and($ed('ESCI / Scopus Dergi'))->toBe(70)
+        ->and($ed('TR Dizin Dergi'))->toBe(25)
+        ->and($ed('Diğer Hakemli Dergi'))->toBe(20)
+        // Yardımcı editörlük yarısı, hakemlik beşte biri; dergi düzeyi kayıtta
+        // olmadığı için en düşük editörlük satırından (20) hesaplandı.
+        ->and($ed('Yayın Kurulu Üyeliği'))->toBe(10)
+        ->and($ed('Hakemlik'))->toBe(4);
+
+    // Atıf ve patent de kademeli.
+    expect($katalog->puan(sartFaaliyet('WoS / Scopus', Kategori::Atif), $katalog->coz(['I.D.6.*'])))->toBe(10)
+        ->and($katalog->puan(sartFaaliyet('Diğer', Kategori::Atif), $katalog->coz(['I.D.6.*'])))->toBe(2)
+        ->and($katalog->puan(sartFaaliyet('Uluslararası Patent', Kategori::Patent), $katalog->coz(['II.D.7.*'])))->toBe(50)
+        ->and($katalog->puan(sartFaaliyet('Ulusal Patent', Kategori::Patent), $katalog->coz(['II.D.7.*'])))->toBe(20);
+});
