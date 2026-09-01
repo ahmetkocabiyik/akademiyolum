@@ -47,11 +47,11 @@ use App\Services\Scoring\Sart\Kalip;
 $FEN_SAGLIK = ['muhendislik', 'fen', 'saglik', 'ziraat'];
 $SOSYAL = ['sosyal', 'egitim', 'ilahiyat', 'hukuk', 'filoloji', 'spor'];
 
-$PUAN_NOTU = 'Kaynak PDF taranmış ve OCR\'lanmış; cetvelin iki satırı eksik metinden daraltıcı '
-    .'okundu. Etkinlik düzenlemelerinde yer almak, h-indeksi ve '
-    .'(yabancı dil sınavından 85 ve üzeri) faaliyet kaydına çevrilemediği için girilmedi; dergi '
-    .'editörlüğü, lisansüstü tezden üretilmiş yayın, idari görev ve toplumsal katkı için cetvelde '
-    .'satır yok.';
+$PUAN_NOTU = 'Kaynak PDF taranmış ve OCR\'lanmış; metin katmanında eksik kalan iki satırın '
+    .'başlığı sayfa görüntüsünden okundu. Etkinlik düzenlemelerinde yer almak, iki yıl ders '
+    .'vermiş olmak, h-indeksi ve yabancı dil sınavından 85 ve üzeri puan almak faaliyet kaydına '
+    .'çevrilemediği için girilmedi; dergi editörlüğü, lisansüstü tezden üretilmiş yayın, idari '
+    .'görev ve toplumsal katkı için cetvelde satır yok.';
 
 /**
  * Aynı kadro koşulu üç cetvel varyantı için de yazılıyor; yalnız `cetvel`

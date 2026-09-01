@@ -6,9 +6,20 @@
  *
  * KAYNAK METNİN GLİF KAYBI VAR. PDF taranıp OCR'lanmış; "ı", "ş", "ğ" ve
  * "İ" harflerinin bir bölümü düşmüş ("Uluslararas at f indekslerince").
- * Puan değerlerinin ve madde başlıklarının TAMAMI okunabiliyor, bağlaç
- * metni yer yer eksik. Okunamayan yerlerde daraltıcı okuma seçildi ve
- * her biri aşağıda ayrıca yazıldı.
+ * Puan değerlerinin TAMAMI okunabiliyor, başlık metni yer yer eksik.
+ *
+ * EKSİK BAŞLIKLAR 01.09.2026'DA SAYFA GÖRÜNTÜSÜNDEN OKUNDU (220 dpi, 3. ve
+ * 5. sayfa). İki sonuç:
+ *   2.c ve 2.d doğru tahmin edilmiş: "Diğer uluslararası yayınevleri
+ *       tarafından yayımlanmış bilimsel kitap" (15) ve aynısının "editörlüğü
+ *       veya bölüm yazarlığı" (10). Satırlar olduğu gibi kaldı.
+ *   17. MADDE YANLIŞ OKUNMUŞ. Metin katmanı "2 ders … olmak" gösteriyordu ve
+ *       ders BAŞINA 2 puan girilmişti; görüntüde madde "Yükseköğretim
+ *       Kurumlarında 2 YIL ders vermiş olmak (En fazla 6 puan alınabilir)"
+ *       diyor. Yani puan ders sayısına değil GÖREV SÜRESİNE bağlı. Bir
+ *       dönemde dört ders veren aday tavanı tek dönemde dolduruyordu.
+ *       Faaliyet kaydı ders süresini yıl olarak tutmadığı için satır
+ *       kaldırıldı; §0 uyarınca eksik saymak fazla saymaya yeğ.
  *
  * ÜÇ CETVEL. Ek-1'in 15. maddesi "sadece güzel sanatlar temel alanı
  * için", 16. maddesi "sadece mimarlık, planlama ve tasarım temel alanı
@@ -23,11 +34,6 @@
  *       Kitaplar", (a) ve (b) BKCI; (c) 15 puan ve (d) 10 puan "veya
  *       bölüm" ekiyle bitiyor. BKCI dışındaki uluslararası kitap (15) ve
  *       bölümü/editörlüğü (10) olarak okundu.
- *   17. maddenin başlığı "… 2 ders … olmak (En fazla 6 puan)"; satır
- *       değeri 2. Ders başına 2 puan, madde toplamı en çok 6 olarak
- *       girildi. Kayıp metin "her iki ders için 2 puan" diyorsa bu
- *       kalemde puanınız OLDUĞUNDAN YÜKSEK görünür — ama tavan 6 olduğu
- *       için sapma en çok üç puanlık.
  *
  * ── EN ÇOK PUAN KAYBETTİREN KARARLAR ──
  *   13. MADDE (bilimsel ve sanatsal etkinlik düzenlemelerinde yer almak,
@@ -131,8 +137,6 @@ $genel = [
     '11b' => ['baslik' => 'Uluslararası yayınlarda yayın kurulu üyeliği ya da editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 2],
     '12b' => ['baslik' => 'Ulusal yayınlarda yayın kurulu üyeliği ya da editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 1],
 
-    // ══ 17. DERS ══
-    '17a' => ['baslik' => 'Verilen her bir ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
 ];
 
 // ══ 15. SANAT VE TASARIM ETKİNLİKLERİ (yalnız güzel sanatlar) ══
@@ -176,12 +180,11 @@ $KAPSAM = 'Puanlar İzmir Kavram Meslek Yüksekokulu Yükseltme ve Atama Yönerg
     .'yazarlıda birinci isim 0,6, beşinci ve sonraki isimler 0,2). Sorumlu yazar birinci isimle '
     .'aynı sayılıyor. Yazar listesini boş bırakırsanız çarpan hiç uygulanmaz ve puanınız '
     .'olduğundan YÜKSEK görünür. '
-    .'KAYNAK PDF TARANMIŞ VE OCR\'LANMIŞ; metinde harf kaybı var. Puan değerleri ve madde '
-    .'başlıkları okunabiliyor, iki satırın açıklaması eksikti ve daraltıcı okunarak girildi: '
-    .'2.c-2.d BKCI dışındaki uluslararası kitap (15) ve bölümü (10) olarak, 17. madde ders '
-    .'başına 2 puan ve madde toplamı en çok 6 olarak. '
+    .'KAYNAK PDF TARANMIŞ VE OCR\'LANMIŞ; metinde harf kaybı var. Eksik başlıklar sayfa '
+    .'görüntüsünden okundu: 2.c-2.d BKCI dışındaki uluslararası kitap (15) ve bölümü (10). '
     .'Puanınız şu kalemlerde OLDUĞUNDAN DÜŞÜK görünür: 13. madde (bilimsel ve sanatsal etkinlik '
-    .'düzenlemelerinde yer almak, 5 ve 3), 18. madde (h-indeksi, 5) ve 19. madde (yabancı dil '
+    .'düzenlemelerinde yer almak, 5 ve 3), 17. madde (Yükseköğretim kurumlarında 2 yıl ders '
+    .'vermiş olmak, en çok 6), 18. madde (h-indeksi, 5) ve 19. madde (yabancı dil '
     .'sınavından 85 ve üzeri, 5) faaliyet kaydına çevrilemediği için girilmedi. Dergi editörlüğü '
     .'için ayrı satır yok; editörlük kayıtlarınız yayın kurulu üyeliği satırından (uluslararası '
     .'2, ulusal 1) sayılıyor. Lisansüstü tezden üretilmiş yayın, idari görev ve toplumsal katkı '
@@ -193,14 +196,12 @@ $KAPSAM = 'Puanlar İzmir Kavram Meslek Yüksekokulu Yükseltme ve Atama Yönerg
 
 $GRUPLAR_ORTAK = [
     'ATIF' => ['6a', '6b', '6c'],
-    'DERS' => ['17a'],
     'PROJE' => ['5a', '5b', '5c', '5d'],
     'PROJE-YURUTUCU' => ['5a', '5c'],
 ];
 
 $TAVANLAR = [
     'ATIF' => 20, // 6. madde: en fazla 20 puan alınabilir
-    'DERS' => 6,  // 17. madde: en fazla 6 puan
 ];
 
 $gsf = array_merge($genel, $sanat);

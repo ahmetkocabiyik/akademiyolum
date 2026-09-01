@@ -4262,3 +4262,18 @@ test('Kahramanmaraş İstiklal proje puanını role göre ayırıyor', function 
     $editorlukler = array_fill(0, 2, sartFaaliyet('WoS Dergi (Q1)', Kategori::Editorluk));
     expect($katalog->topla($editorlukler, $katalog->coz(['A6'])))->toBe(50);
 });
+
+test('İzmir Kavram ders puanını görev süresine bağlı olduğu için saymıyor', function () {
+    $katalog = (new SartDeposu)->katalog('izmir-kavram-2025');
+
+    // 17. madde metin katmanında "2 ders … olmak" görünüyordu ve ders BAŞINA
+    // 2 puan girilmişti; sayfa görüntüsünde madde "2 YIL ders vermiş olmak"
+    // diyor. Bir dönemde dört ders veren aday 6 puanlık tavanı dolduruyordu.
+    $dersler = array_fill(0, 4, sartFaaliyet('Lisans/Önlisans Ders', Kategori::EgitimOgretim));
+
+    expect($katalog->topla($dersler, $katalog->coz(['TUM'])))->toBe(0);
+
+    // 2.c ve 2.d başlıkları görüntüden doğrulandı; değerler değişmedi.
+    expect($katalog->maddePuani('2c'))->toBe(15)
+        ->and($katalog->maddePuani('2d'))->toBe(10);
+});
