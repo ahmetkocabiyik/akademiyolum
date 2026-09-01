@@ -178,6 +178,54 @@ grep -oE "(puan|zorunludur|alınır|alınabilir)\.?[0-9](,[0-9])?" cikti.txt
 Bir tablo dipnotunu "hangi bende bağlandığı belirsiz" diye bırakmadan önce
 bunu dene.
 
+### FAZLA SAYAN SATIRI KORPUSUN KENDİSİYLE BUL
+
+01.09.2026'da 394 cetvel fazla sayan satır için tarandı. En verimli yöntem
+korpusu kendi ölçütü yapmak:
+
+1. Her cetvelde her kategori için etiketlerin ALDIĞI EN YÜKSEK puanı çıkar
+   (motor `puan()` içinde max alıyor, aday fiilen onu görür).
+2. Kategorinin o cetveldeki en yüksek değerine bölerek etiketin GÖRECE
+   KADEMESİNİ (0..1) bul.
+3. Korpus genelinde her etiketin MEDYAN kademesini hesapla — bu, "bu iş
+   normalde bölümün neresinde durur" sorusunun cevabı.
+4. Bir satırda tipik kademesi çok uzak iki etiket varsa VE satırın değeri
+   yüksek olanın kademesine yakınsa, düşük olan yukarı taşınmış demektir.
+
+Ham çift sayımı işe yaramıyor: sanatsal etkinlik kategorisinde 134 etiket var
+ve kaynaklar onları meşru biçimde tek satırda topluyor. İki kısıt gerekiyor —
+yalnız AYNI SATIRDAKİ etiketler ve yalnız kademe değil BAŞKA BİR İŞ olan
+çiftler (hakemlik ↔ baş editörlük, bursiyer ↔ yürütücü, burs ↔ bilim ödülü,
+kurul üyeliği ↔ rektörlük, 2209 danışmanlığı ↔ AB projesi).
+
+**Çeyreklik birleşmeleri YANLIŞ POZİTİFTİR.** Birçok yönerge SCI dergilerinin
+tamamına tek puan veriyor; `SCIE/SSCI (Q4)` ile `(Q1)` aynı satırda olması
+kaynağın kendi tercihi. Aynısı uluslararası/ulusal patent için de geçerli.
+Detektörü kategori bazında değil, ETİKETİN İŞ TÜRÜ bazında kur.
+
+İkinci detektör daha basit ve çok verimliydi: **proje satırı taşıyıp hiçbir
+satırında `roller` alanı olmayan cetveller.** On tane çıktı, dördü gerçekten
+rol kademesi taşıyordu; birinde bursiyer yürütücü puanını alıyordu (Amasya,
+10 yerine 150).
+
+### ROL AYRIMI ATLANIRSA KOŞUL DA SAHTE SAĞLANIR
+
+Fazla sayan satırın ikinci zararı puanda değil KOŞULDA. Sakarya UBÜ'de BAP ve
+özel sektör projeleri kaynağın 4.6-4.7 satırlarına aitken 4.4'e yazılmıştı;
+yönergenin "4.1, 4.2, 4.3, 4.4 proje faaliyetlerinden en az bir proje" koşulu
+bu yüzden bir BAP projesiyle sağlanıyordu. Kocaeli'de TÜBİTAK 2209
+danışmanlığı aynı biçimde "H.1-H.17" koşulunu sağlıyordu.
+
+Bir etiketi satıra yazarken **satırın hangi gruplara girdiğine** de bak: puanı
+doğru ama grubu yanlış bir satır, barajı olduğundan kolay gösterir.
+
+### İKİ SATIR AYNI ETİKETE DÜŞÜYORSA YÜKSEK OLANI YAZMA — SİL
+
+Motor `puan()` içinde eşleşen kodların EN YÜKSEĞİNİ alıyor. Yani §0'ın "düşük
+olanı gir" kuralı, yüksek satırı da yazıp düşüğüne güvenmekle sağlanmaz:
+yüksek satır varsa o kazanır. Düşük değeri geçerli kılmanın tek yolu YÜKSEK
+SATIRI HİÇ YAZMAMAK ya da etiketi ondan çıkarmaktır.
+
 ### İKİ YOLLU DİPNOTTA KOLLARIN DÜŞÜĞÜNÜ YAZ
 
 Dipnotlar sık sık "şu şartı sağlayamayan aday şunu yapar" biçiminde bir
