@@ -33,7 +33,11 @@ return [
         .'Scopus çeyreklik kademeleri ile "ilk %10\'luk dilim" kademesi kaynak sözlüğünde WoS '
         .'çeyrekliklerinden ayrılamadığı için girilmedi; kitap ve patent kalemlerinde ayrılamayan '
         .'kademe çiftlerinin düşük olanı kullanıldı. EK 2\'de kitap bölümü, çeviri ve ansiklopedi '
-        .'maddesi için satır yok. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
+        .'maddesi için satır yok. ÜNİVERSİTE BAP PROJELERİ VE ÖZEL SEKTÖR PROJELERİ '
+        .'SAYILMIYOR: EK 2\'nin tanım bölümü desteklenen projeyi TÜBİTAK ile bakanlık ve kamu '
+        .'Ar-Ge programlarıyla sınırlıyor, ikisi de o listede yok. Proje YÖNETİCİLİĞİ (120 puan) '
+        .'da girilemedi; faaliyet kaydı yöneticiliği yürütücülükten ayırmıyor, yürütücü puanı '
+        .'(90) uygulanıyor. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
 
     // Yönerge: iki yazarlı eserde ikinci yazar puanın 0,5'ini alır. Yazar
     // sayısı ikiden fazlaysa puanın yarısı başlıca yazara verilir; kalan yarı
@@ -72,8 +76,13 @@ return [
         'B-DIGER' => ['baslik' => 'Diğer ulusal/uluslararası bilimsel toplantıda sunulmuş bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Ulusal Tam Metin', 'Ulusal Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 5],
 
         // ── 4) ARAŞTIRMA PROJESİ ──
-        'P-YURUTUCU' => ['baslik' => 'Desteklenen araştırma projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon', 'TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK', 'BAP (Üniversite)'], 'roller' => ['yurutucu'], 'puan' => 90],
-        'P-ARASTIRMACI' => ['baslik' => 'Desteklenen araştırma projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon', 'TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK', 'BAP (Üniversite)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 45],
+        // EK 2'nin tanım bölümü fon kuruluşlarını SAYIYOR: TÜBİTAK, TÜBİTAK
+        // uluslararası iş birliği ve ulusal Ar-Ge destek programları (Sanayi ve
+        // Teknoloji Bakanlığı, KOSGEB, Savunma Sanayii Başkanlığı, TÜSEB,
+        // TENMAK ve diğer bakanlıklar). ÜNİVERSİTE BAP'I VE ÖZEL SEKTÖR LİSTEDE
+        // YOK; ikisi de satırdan çıkarıldı (01.09.2026).
+        'P-YURUTUCU' => ['baslik' => 'Desteklenen araştırma projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon', 'TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['yurutucu'], 'puan' => 90],
+        'P-ARASTIRMACI' => ['baslik' => 'Desteklenen araştırma projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon', 'TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 45],
 
         // ── 5) ÖDÜL ──
         'O-ODUL' => ['baslik' => 'YÖK, TÜBİTAK, TÜBA veya eş değeri ulusal/uluslararası ödül', 'kategori' => 'odul', 'kaynaklar' => ['YÖK Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'Ufuk Avrupa / ERC Ödülü', 'Uluslararası Bilim/Sanat Ödülü', 'Ulusal Bilim/Sanat Ödülü'], 'puan' => 60],

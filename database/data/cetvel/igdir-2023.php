@@ -192,7 +192,11 @@ return [
         // ══ J. ÖDÜLLER ve BURSLAR ══
         '26.a' => ['baslik' => 'Jürili uluslararası bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 350],
         '26.a.p' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 350],
-        '26.b' => ['baslik' => 'Ulusal bilim (TÜBİTAK, TÜBA vb.) veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 300],
+        // 'Yarışma Derecesi / Mansiyon' 01.09.2026'da çıkarıldı: 26. madde ödülü
+        // "(TÜBİTAK/TÜBA vb.)" parantezyle bu sınıfa bağlıyor, tek seferlik bir
+        // yarışma derecesi ya da mansiyon 300 puanlık bu satıra girmiyor. Kriter
+        // listesinde daha düşük bir ödül satırı yok; yarışma dereceniz sayılmıyor.
+        '26.b' => ['baslik' => 'Ulusal bilim (TÜBİTAK, TÜBA vb.) veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Ulusal Bilim/Sanat Ödülü'], 'puan' => 300],
         '26.b.p' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 300],
         '27.b' => ['baslik' => 'Bilimsel veya sanatsal çalışma için alınan burs', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 100],
     ],

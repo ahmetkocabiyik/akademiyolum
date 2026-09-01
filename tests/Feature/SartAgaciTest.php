@@ -4312,3 +4312,57 @@ test('Ordu tablo dipnotunun tek yazar koşulu doğru kadroya bağlanıyor', func
     $muh = $depo->degerlendir($depo->bul('Ordu Üniversitesi', 'docentlik', 'muhendislik'), [], $profil);
     expect($muh->topla(fn ($d) => str_contains($d->aciklama, 'tek yazar olmalısınız')))->toBeEmpty();
 });
+
+test('proje satırları rol ayrımını koruyor', function () {
+    $depo = sartDepo();
+    $puan = function (string $cetvel, string $kaynak, string $rol) use ($depo): int {
+        $k = $depo->katalog($cetvel);
+
+        return $k->puan(sartFaaliyet($kaynak, Kategori::Proje, $rol), $k->coz(['*']));
+    };
+
+    // Adıyaman J bölümünün üç satırı da yürütücü/araştırmacı diye ayrılıyor;
+    // cetvel rol ayrımı yapmıyordu, araştırmacı yürütücü puanını alıyordu.
+    expect($puan('adiyaman-2024', 'AB Çerçeve / Ufuk', 'yurutucu'))->toBe(250)
+        ->and($puan('adiyaman-2024', 'AB Çerçeve / Ufuk', 'arastirmaci'))->toBe(100)
+        ->and($puan('adiyaman-2024', 'TÜBİTAK', 'yurutucu'))->toBe(200)
+        ->and($puan('adiyaman-2024', 'TÜBİTAK', 'arastirmaci'))->toBe(75);
+
+    // Çukurova EK 2'nin tanım bölümü fon kuruluşlarını sayıyor; üniversite BAP'ı
+    // ve özel sektör listede yok, satırdan çıkarıldı.
+    expect($puan('cukurova-2024', 'TÜBİTAK', 'yurutucu'))->toBe(90)
+        ->and($puan('cukurova-2024', 'BAP (Üniversite)', 'yurutucu'))->toBe(0)
+        ->and($puan('cukurova-2024', 'Özel Sektör / STK', 'yurutucu'))->toBe(0);
+});
+
+test('küçük görevler bölümün en yüksek satırından sayılmıyor', function () {
+    $depo = sartDepo();
+    $p = function (string $cetvel, string $kaynak, Kategori $kat) use ($depo): int {
+        $k = $depo->katalog($cetvel);
+
+        return $k->puan(sartFaaliyet($kaynak, $kat), $k->coz(['*']));
+    };
+
+    // Adıyaman: yayın kurulu üyeliği 40/30/20 kademeli, en düşükten;
+    // kitap editörlüğü 100/60/50/40 kademeli, Türkçe kitap satırından.
+    expect($p('adiyaman-2024', 'Yayın Kurulu Üyeliği', Kategori::Editorluk))->toBe(20)
+        ->and($p('adiyaman-2024', 'Kitap Editörlüğü', Kategori::Editorluk))->toBe(50)
+        // Burs iki kademeli (yurt dışı 150 / yurt içi 75) → düşükten.
+        ->and($p('adiyaman-2024', 'Burs', Kategori::Odul))->toBe(75);
+
+    // Başkent'in kriter listesinde burs satırı yok; jürili ulusal ödül puanı almıyor.
+    expect($p('baskent-2024', 'Burs', Kategori::Odul))->toBe(0)
+        // 13. madde "kitap editörlüğü veya KİTAP çevirisi"; bölüm çevirisi satırı yok.
+        ->and($p('baskent-2024', 'Çeviri Kitap', Kategori::Kitap))->toBe(100)
+        ->and($p('baskent-2024', 'Çeviri Kitap Bölümü', Kategori::Kitap))->toBe(0);
+
+    // Eskişehir Teknik 12ç iki kademeli (yöneticilik 80, yardımcılık 60) ve
+    // dipnotu anabilim dalı başkanlıklarını kapsam dışı bırakıyor.
+    expect($p('eskisehir-teknik-2026', 'Rektör', Kategori::IdariGorev))->toBe(80)
+        ->and($p('eskisehir-teknik-2026', 'Rektör Yardımcısı', Kategori::IdariGorev))->toBe(60)
+        ->and($p('eskisehir-teknik-2026', 'Anabilim Dalı Başkanı / Koordinatörlük', Kategori::IdariGorev))->toBe(0)
+        ->and($p('eskisehir-teknik-2026', 'Kurul / Komisyon Üyeliği', Kategori::IdariGorev))->toBe(0);
+
+    // Iğdır 26. madde ödülü "(TÜBİTAK/TÜBA vb.)" sınıfına bağlı; yarışma derecesi 300 almaz.
+    expect($p('igdir-2023', 'Yarışma Derecesi / Mansiyon', Kategori::Odul))->toBe(0);
+});

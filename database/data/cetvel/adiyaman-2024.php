@@ -76,9 +76,16 @@ return [
 
         // ── F. EDİTÖRLÜK VE HAKEMLİK ──
         'F.1' => ['baslik' => 'SCI, SSCI veya AHCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 100],
-        'F.2' => ['baslik' => 'Diğer dergilerde editörlük veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 50],
-        'F.3' => ['baslik' => 'Hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 10],
-        'F.4' => ['baslik' => 'Kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Kitap Editörlüğü'], 'puan' => 100],
+        'F.2.a' => ['baslik' => 'Yurt dışı dergide editörlük (yıl başına)', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 70],
+        'F.3.a' => ['baslik' => 'Yurt içinde çıkan hakemli dergide editörlük (yıl başına)', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 50],
+        // Yayın kurulu üyeliği üç dergi düzeyinde 40/30/20; kayıt düzeyi
+        // taşımadığı için §0 uyarınca en düşükten (F.3.c).
+        'F.3.c' => ['baslik' => 'Dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 20],
+        'F.3.d' => ['baslik' => 'Dergi hakemliği (her yayın için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 10],
+        'F.4.a' => ['baslik' => 'Yabancı dilde, yurt dışında yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 100],
+        // Kitap editörlüğü dört kademeli (100/60/50/40); kayıt kitabın dilini ve
+        // yayım yerini taşımadığı için §0 uyarınca Türkçe kitap satırından (50).
+        'F.5.a' => ['baslik' => 'Türkçe bilimsel veya ders kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 50],
 
         // ── I. LİSANSÜSTÜ TEZ YÖNETİMİ ──
         'I.1' => ['baslik' => 'Yüksek lisans tezi yönetmiş olmak', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 50],
@@ -86,9 +93,15 @@ return [
         'I.3' => ['baslik' => 'İkinci danışmanlık veya tez izleme komitesi üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 30],
 
         // ── J. PROJELER ──
-        'J.1' => ['baslik' => 'Uluslararası destekli sonuçlandırılmış bilimsel proje', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'puan' => 250],
-        'J.2' => ['baslik' => 'TÜBİTAK, TÜSEB veya kamu destekli sonuçlandırılmış proje', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'puan' => 200],
-        'J.3' => ['baslik' => 'Üniversite (BAP) destekli sonuçlandırılmış proje', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'puan' => 50],
+        // J bölümünün ÜÇ SATIRI DA yürütücü/araştırmacı diye ikiye ayrılıyor;
+        // cetvel rol ayrımı yapmıyordu ve araştırmacı yürütücü puanını alıyordu
+        // (01.09.2026'da ayrıldı).
+        'J.1.yur' => ['baslik' => 'Uluslararası destekli sonuçlandırılmış projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 250],
+        'J.1.ara' => ['baslik' => 'Uluslararası destekli sonuçlandırılmış projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 100],
+        'J.2.yur' => ['baslik' => 'TÜBİTAK, KOSGEB veya bakanlık destekli sonuçlandırılmış projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['yurutucu'], 'puan' => 200],
+        'J.2.ara' => ['baslik' => 'TÜBİTAK, KOSGEB veya bakanlık destekli sonuçlandırılmış projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 75],
+        'J.3.yur' => ['baslik' => 'Üniversite (BAP) destekli sonuçlandırılmış projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 50],
+        'J.3.ara' => ['baslik' => 'Üniversite (BAP) destekli sonuçlandırılmış projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 25],
 
         // ── L. PATENTLER ──
         'L.1' => ['baslik' => 'Uluslararası veya PCT patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 500],
@@ -100,8 +113,14 @@ return [
         // ── M. ÖDÜLLER ──
         'M.1' => ['baslik' => 'TÜBİTAK veya TÜBA bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'YÖK Ödülü'], 'puan' => 250],
         'M.2' => ['baslik' => 'TÜBİTAK veya TÜBA teşvik ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 150],
-        'M.3' => ['baslik' => 'Yurt dışı ödül veya doktora sonrası araştırma bursu', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü', 'Burs'], 'puan' => 150],
-        'M.5' => ['baslik' => 'Jürili ulusal bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 50],
+        'M.3' => ['baslik' => 'Yurt dışı ödül', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 150],
+        // Burs iki kademeli: yurt dışı 150 (M.3), yurt içi 75 (M.4). Kayıt
+        // bursun nerede alındığını taşımadığı için §0 uyarınca yurt içinden.
+        'M.4' => ['baslik' => 'Doktora sonrası araştırma bursu (en az 6 ay)', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 75],
+        // 'Yarışma Derecesi / Mansiyon' M.5'ten çıkarıldı: M.5 "SÜREKLİ VE
+        // PERİYODİK olarak verilen, jürili" ödülleri sayıyor, tek seferlik bir
+        // yarışma derecesi bu tanıma girmiyor (01.09.2026).
+        'M.5' => ['baslik' => 'Sürekli ve periyodik olarak verilen jürili ulusal bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü'], 'puan' => 50],
 
         // ── N. SANAT VE TASARIM ETKİNLİKLERİ ──
         'N.1' => ['baslik' => 'Uluslararası bireysel sergi, bienal veya trienal', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)'], 'puan' => 200],

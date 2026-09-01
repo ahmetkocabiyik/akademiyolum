@@ -174,7 +174,7 @@ return [
         '5a' => ['baslik' => 'Tamamlanmış doktora veya sanatta yeterlik tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 150],
         '5a-es' => ['baslik' => 'Tamamlanmış doktora veya sanatta yeterlik tezinde ikinci danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['es_danisman'], 'puan' => 75],
         '5b' => ['baslik' => 'Tamamlanmış tezli yüksek lisans tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 75],
-        '5b-es' => ['baslik' => 'Tamamlanmış tezli yüksek lisans tezinde ikinci danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi', 'Tez İzleme / Jüri Üyeliği'], 'roller' => ['es_danisman'], 'puan' => 37],
+        '5b-es' => ['baslik' => 'Tamamlanmış tezli yüksek lisans tezinde ikinci danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['es_danisman'], 'puan' => 37],
 
         // ══ 6. EĞİTİM FAALİYETLERİ (grup tavanı 400, saat çarpanı uygulanamadı) ══
         '6a' => ['baslik' => 'Lisansüstü, lisans veya ön lisans düzeyinde ders vermek (haftalık ders saati başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 3],
@@ -215,7 +215,12 @@ return [
         // ══ 12. DİĞER FAALİYETLER ══
         '12a' => ['baslik' => 'Bilimsel toplantı, çalıştay, tasarım ya da sanat etkinliği düzenleme kurulunda görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 20],
         '12c' => ['baslik' => 'Kamu ya da özel kurum-kuruluşlar için danışmanlık yapmak veya eğitim vermek', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 15],
-        '12ç' => ['baslik' => 'Birim ya da alt birim yöneticiliği veya yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Uygulama ve Araştırma Merkezi Müdürü', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 60],
+        // 12ç iki kademeli: yöneticilik 80x(yıl), yardımcılık 60x(yıl). Madde
+        // altındaki dipnot ANABİLİM/ANASANAT DALI BAŞKANLIKLARINI KAPSAM DIŞI
+        // bırakıyor; kurul ve komisyon üyeliği de "birim yöneticiliği" değil.
+        // İkisi de satırdan çıkarıldı (01.09.2026).
+        '12ç-yonetici' => ['baslik' => 'Birim ya da alt birim yöneticiliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı'], 'puan' => 80],
+        '12ç-yardimci' => ['baslik' => 'Birim ya da alt birim yöneticiliği yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkan Yardımcısı'], 'puan' => 60],
         '12e' => ['baslik' => 'Üniversite-toplum ya da üniversite-endüstri işbirliği çerçevesinde sosyal sorumluluk çalışmasında görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 10],
     ],
 

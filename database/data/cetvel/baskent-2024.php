@@ -83,7 +83,10 @@ $maddeler = [
     'M11' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 150],
     'M12' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 60],
     'M13' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 100],
-    'M13.b' => ['baslik' => 'Kitap ya da kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 100],
+    // 13. madde "kitap editörlüğü VEYA KİTAP ÇEVİRİSİ" diyor; bölüm çevirisi
+    // için satır yok, 'Çeviri Kitap Bölümü' 01.09.2026'da çıkarıldı. 'Burs' da
+    // M36'dan çıkarıldı: kriter listesinde burs satırı hiç yok.
+    'M13.b' => ['baslik' => 'Kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 100],
 
     // ══ EK-1 YAYIN / ATIF ══
     'M15' => ['baslik' => 'Web of Science Core Collection ya da SCOPUS tarafından taranan makale veya kitaplarda eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 12],
@@ -113,7 +116,7 @@ $maddeler = [
 
     // ══ EK-1 BİLGİ TRANSFERİ ══
     'M35' => ['baslik' => 'Alanında bilimsel nitelikli, adaylar arasından jüri seçimine dayalı uluslararası ödül almak', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 200],
-    'M36' => ['baslik' => 'Alanında bilimsel nitelikli, adaylar arasından jüri seçimine dayalı ulusal ödül almak', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Burs'], 'puan' => 100],
+    'M36' => ['baslik' => 'Alanında bilimsel nitelikli, adaylar arasından jüri seçimine dayalı ulusal ödül almak', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 100],
     'M37' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI, ESCI ya da Scopus kapsamındaki dergilerde yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 100],
     'M38' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 200],
 
