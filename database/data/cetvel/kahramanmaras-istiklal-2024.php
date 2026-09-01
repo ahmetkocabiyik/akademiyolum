@@ -20,25 +20,44 @@
  * Korpusta derlemeyi özgün makaleden ayıran ama ikisini de anlamlı puanlayan
  * az sayıdaki cetvelden biri; `turler` alanıyla ayrıldı.
  *
- * ÇOK DEĞERLİ SATIRLAR EN DÜŞÜĞÜNDEN GİRİLDİ. Proje (A5), editörlük (A6),
- * organizasyon (B4), ödül (B7-B8) ve burs (B3.4) kalemleri "a) … b) … c) …"
- * biçiminde birden çok değer taşıyor ve PDF'te yalnızca ilki ayrıştırılabildi.
- * Kural gereği bu kalemler tek satır olarak, ROL AYRIMI YAPILMADAN girildi;
- * yani projede araştırmacı olan aday yürütücü puanını alıyor — puan
- * OLDUĞUNDAN YÜKSEK görünebilir.
+ * ── ÇOK DEĞERLİ SATIRLAR 01.09.2026'DA AÇILDI ──
+ * Dosya "proje (A5), editörlük (A6), ödül (B7-B8) ve burs (B3.4) kalemlerinde
+ * PDF'te yalnızca ilk değer ayrıştırılabildi, rol ayrımı yapılamadı" diyordu.
+ * `pdftotext -q -layout` ile bütün alt kırılımlar temiz çıkıyor. Düzeltilenler:
+ *
+ *   A5 (projeler) rolsüz tek satırdı: projede BURSİYER olan aday yürütücü
+ *       puanını (40/30/15) alıyordu. Üç satır da dört role ayrıldı
+ *       (40/20/10/15 · 30/15/6/10 · 15/10/5). ÇOK FAZLA sayıyordu.
+ *   A6.6 tek satırda dergi editörlüğünü, editör kurulu üyeliğini ve hakemliği
+ *       10 puanla topluyordu. Kaynak dört görev × dört dergi düzeyi veriyor;
+ *       kurul üyeliği 3, hakemlik 2 puana indi. FAZLA sayıyordu.
+ *   A6'nın "en fazla 50 puan" ve B2'nin "en fazla 30 puan" sınırları
+ *       uygulanmıyordu; `grup_tavanlari` ile girildi.
+ *   B7.3'te 'Yarışma Derecesi / Mansiyon' 15 puandaydı; yarışma ödülü B8'de
+ *       ayrı ve sekiz kademeli (30/25/20/15 · 20/15/10/5). Kayıt derece ve
+ *       düzey taşımadığı için §0 uyarınca 5'e indi. FAZLA sayıyordu.
+ *   B5 (davetli konuşmacı) 12 puandaydı; kaynak 20/15/12/10 diyor → 10.
+ *   A6.1 uluslararası kitap editörlüğü (40) ulusal satırla (30) birlikte
+ *       yazılmıştı; 'BKCI Kitap' kendi satırına alındı. EKSİK sayıyordu.
+ *
+ * Yeni girilenler: B1'in "ikinci danışman için puanın yarısı" kuralı
+ * (doktora 10, yüksek lisans 5) ve B9 (yarışma jüri üyeliği, 1).
  *
  * GİRİLMEYEN KALEMLER: B3.1-B3.3 (yurt dışı görevlendirme süreleri — profilde
- * tutulmuyor), B9 (uluslararası/ulusal üyelikler), C bölümünün alt kırılımları
- * kısmen.
+ * tutulmuyor), B4 (bilimsel toplantı düzenleme kurulu — sözlükte karşılık
+ * yok), B1.3-B1.4 (lisans öğrenci ve topluluk danışmanlığı), C bölümünün alt
+ * kırılımları kısmen.
  */
 
 return [
     'kapsam_notu' => 'Puanlar Kahramanmaraş İstiklal Üniversitesi EK-1 tablosundan. Puan yazar '
         .'sayınıza ve sıranıza göre azaltılır (Madde 9: iki isimli 90/80 · üç isimli 80/70/60 · '
         .'çok isimli 70/60/50 ve 4. isimden sonrası 40); sorumlu yazar birinci isimle aynı puanı '
-        .'alır. PROJE, EDİTÖRLÜK VE ÖDÜL KALEMLERİNDE PUANINIZ YÜKSEK GÖRÜNEBİLİR: yönergenin '
-        .'bu satırları yürütücü/araştırmacı ya da başkanlık/üyelik diye ayrılıyor, kaynakta '
-        .'yalnızca ilk değer okunabildiği için rol ayrımı yapılamadı.',
+        .'alır. Editörlük ve hakemlik bölümünden en fazla 50, verilen derslerden en fazla 30 '
+        .'puan sayılıyor. EDİTÖR KURULU ÜYELİĞİ, HAKEMLİK, DAVETLİ KONUŞMACILIK VE YARIŞMA '
+        .'ÖDÜLÜ PUANINIZ DÜŞÜK GÖRÜNEBİLİR: yönerge bunları dergi düzeyine, toplantı düzeyine '
+        .'ya da dereceye göre kademelendiriyor, faaliyet kaydı bu ayrımı taşımadığı için en '
+        .'düşük kademeden sayılıyor.',
 
     // Madde 9 — Çok Yazarlı Kitap, Makale ve Bildirilerde Puanlama Tablosu.
     'yazar_katsayisi' => [
@@ -93,26 +112,46 @@ return [
         'A4.1' => ['baslik' => 'Web of Science taranan dergide veya uluslararası kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 3],
         'A4.2' => ['baslik' => 'Diğer hakemli dergide veya ulusal bilimsel kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 2],
 
-        // ══ A5 — PROJELER (rol ayrımı yapılamadı, bkz. dosya başlığı) ══
-        'A5.1' => ['baslik' => 'Uluslararası kuruluşlarca desteklenen proje', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'puan' => 40],
-        'A5.2' => ['baslik' => 'TÜBİTAK, kalkınma ajansı veya bakanlık destekli proje', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'puan' => 30],
-        'A5.3' => ['baslik' => 'Üniversite döner sermaye veya BAP birimince desteklenen proje', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'puan' => 15],
+        // ══ A5 — PROJELER (her satır dört role ayrılıyor) ══
+        'A5.1.a' => ['baslik' => 'Uluslararası kuruluşlarca desteklenen projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 40],
+        'A5.1.b' => ['baslik' => 'Uluslararası kuruluşlarca desteklenen projede yardımcı araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['arastirmaci'], 'puan' => 20],
+        'A5.1.c' => ['baslik' => 'Uluslararası kuruluşlarca desteklenen projede bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['bursiyer'], 'puan' => 10],
+        'A5.1.d' => ['baslik' => 'Uluslararası kuruluşlarca desteklenen projede danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['danisman'], 'puan' => 15],
+        'A5.2.a' => ['baslik' => 'TÜBİTAK, kalkınma ajansı veya bakanlık destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['yurutucu'], 'puan' => 30],
+        'A5.2.b' => ['baslik' => 'TÜBİTAK, kalkınma ajansı veya bakanlık destekli projede yardımcı araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['arastirmaci'], 'puan' => 15],
+        'A5.2.c' => ['baslik' => 'TÜBİTAK, kalkınma ajansı veya bakanlık destekli projede bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['bursiyer'], 'puan' => 6],
+        'A5.2.d' => ['baslik' => 'TÜBİTAK, kalkınma ajansı veya bakanlık destekli projede danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['danisman'], 'puan' => 10],
+        'A5.3.a' => ['baslik' => 'Döner sermaye veya BAP destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 15],
+        'A5.3.b' => ['baslik' => 'Döner sermaye veya BAP destekli projede yardımcı araştırmacılık ya da danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman'], 'puan' => 10],
+        'A5.3.c' => ['baslik' => 'Döner sermaye veya BAP destekli projede bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['bursiyer'], 'puan' => 5],
 
-        // ══ A6 — EDİTÖRLÜK VE HAKEMLİK ══
-        'A6.2' => ['baslik' => 'Kitap editörlüğü, yardımcı editörlük veya hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'BKCI Kitap'], 'puan' => 30],
-        'A6.3' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 40],
-        'A6.4' => ['baslik' => 'ESCI veya alan indeksli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 30],
-        'A6.6' => ['baslik' => 'Ulusal hakemli dergide editörlük, yayın kurulu üyeliği veya hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Hakemlik'], 'puan' => 10],
+        // ══ A6 — EDİTÖRLÜK VE HAKEMLİK (bu bölümden en fazla 50 puan) ══
+        'A6.1.a' => ['baslik' => 'Uluslararası kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
+        // 'Kitap Editörlüğü' uluslararası/ulusal ayırmıyor → ulusal satır (30).
+        'A6.2.a' => ['baslik' => 'Ulusal kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 30],
+        'A6.3.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 40],
+        'A6.4.a' => ['baslik' => 'ESCI veya alan indeksli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 30],
+        // TR Dizin hem "diğer indeks" (A6.5, 20) hem "ulusal hakemli dergi" (A6.6, 10)
+        // okunabiliyor; §0 uyarınca 10.
+        'A6.6.a' => ['baslik' => 'Ulusal hakemli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 10],
+        // Editör kurulu üyeliği A6.3-A6.6'da 10/7/5/3, hakemlik 5/4/3/2; kayıt bu
+        // görevlerde dergi düzeyini taşımadığı için §0 uyarınca en düşükten.
+        'A6.6.c' => ['baslik' => 'Dergide editör kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 3],
+        'A6.6.d' => ['baslik' => 'Dergi hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
 
         // ══ B1-B2 — EĞİTİM-ÖĞRETİM ══
         'B1.1' => ['baslik' => 'Danışmanlığında tamamlanan doktora veya uzmanlık tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 20],
         'B1.2' => ['baslik' => 'Danışmanlığında tamamlanan yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 10],
+        // B1 başlığı: "İkinci danışman için puanın yarısı."
+        'B1.1-es' => ['baslik' => 'İkinci danışmanlığında tamamlanan doktora veya uzmanlık tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['es_danisman'], 'puan' => 10],
+        'B1.2-es' => ['baslik' => 'İkinci danışmanlığında tamamlanan yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['es_danisman'], 'puan' => 5],
         'B2.1' => ['baslik' => 'Ön lisans veya lisans dersi (dönem ve ders başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
         'B2.2' => ['baslik' => 'Lisansüstü ders (dönem ve ders başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
         'B3.4' => ['baslik' => 'Uluslararası araştırma bursu', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 15],
 
         // ══ B4-B5 — ORGANİZASYON VE DAVETLİ KONUŞMA ══
-        'B5.2' => ['baslik' => 'Kongre, konferans veya sempozyumda davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 12],
+        // B5 dört kademeli (20/15/12/10); kayıt toplantı düzeyini taşımıyor → §0 uyarınca 10.
+        'B5.2.b' => ['baslik' => 'Panel, çalıştay veya mesleki kursta davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
 
         // ══ B6 — JÜRİ ÜYELİĞİ ══
         'B6.2' => ['baslik' => 'Doktora, sanatta yeterlik, uzmanlık veya yüksek lisans jürisinde görev', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 5],
@@ -120,7 +159,12 @@ return [
         // ══ B7-B8 — ÖDÜLLER ══
         'B7.1' => ['baslik' => 'Jürili uluslararası bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 30],
         'B7.2' => ['baslik' => 'TÜBİTAK veya TÜBA bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 25],
-        'B7.3' => ['baslik' => 'Jürili ulusal bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 15],
+        'B7.3' => ['baslik' => 'Jürili ulusal bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü'], 'puan' => 15],
+        // B8 yarışma ödülü sekiz kademeli (uluslararası 30/25/20/15, ulusal 20/15/10/5);
+        // kayıt derece ve düzey ayrımı taşımıyor → §0 uyarınca 5.
+        'B8.2.d' => ['baslik' => 'Ulusal yarışmada mansiyon ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 5],
+        // B9 yarışma jüri üyeliği: uluslararası 2, ulusal 1 → §0 uyarınca 1.
+        'B9.2' => ['baslik' => 'Ulusal yarışmada jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 1],
 
         // ══ B10 — PATENT VE TESCİL ══
         'B10.1' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 70],
@@ -151,7 +195,14 @@ return [
         'A1' => ['A1.*'],
         // Profesörlükteki "EK-1'de yer alan yayınlar" — makale, kitap, bildiri.
         'YAYIN' => ['A1.*', 'A2.*', 'A3.*'],
+        // Bölüm tavanı olan iki küme.
+        'A6' => ['A6.*'],
+        'B2' => ['B2.*'],
     ],
 
-    'grup_tavanlari' => [],
+    'grup_tavanlari' => [
+        // Kaynaktaki iki bölüm sınırı: A6 "en fazla 50 puan", B2 "en fazla 30 puan".
+        'A6' => 50,
+        'B2' => 30,
+    ],
 ];

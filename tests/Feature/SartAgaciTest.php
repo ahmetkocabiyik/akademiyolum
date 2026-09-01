@@ -4229,3 +4229,36 @@ test('İstanbul Ticaret editörlük kademelerini dergi düzeyine göre ayırıyo
         ->and($katalog->puan(sartFaaliyet('Uluslararası Patent', Kategori::Patent), $katalog->coz(['II.D.7.*'])))->toBe(50)
         ->and($katalog->puan(sartFaaliyet('Ulusal Patent', Kategori::Patent), $katalog->coz(['II.D.7.*'])))->toBe(20);
 });
+
+test('Kahramanmaraş İstiklal proje puanını role göre ayırıyor', function () {
+    $katalog = (new SartDeposu)->katalog('kahramanmaras-istiklal-2024');
+
+    // A5 satırları rolsüzdü: projede bursiyer olan aday yürütücü puanını alıyordu.
+    $proje = fn (string $kaynak, string $rol) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::Proje, $rol),
+        $katalog->coz(['A5.*']),
+    );
+
+    expect($proje('AB Çerçeve / Ufuk', 'yurutucu'))->toBe(40)
+        ->and($proje('AB Çerçeve / Ufuk', 'arastirmaci'))->toBe(20)
+        ->and($proje('AB Çerçeve / Ufuk', 'danisman'))->toBe(15)
+        ->and($proje('AB Çerçeve / Ufuk', 'bursiyer'))->toBe(10)
+        ->and($proje('TÜBİTAK', 'yurutucu'))->toBe(30)
+        ->and($proje('TÜBİTAK', 'bursiyer'))->toBe(6)
+        ->and($proje('BAP (Üniversite)', 'bursiyer'))->toBe(5);
+
+    // A6.6 editörlüğü, kurul üyeliğini ve hakemliği 10 puanla topluyordu.
+    $ed = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::Editorluk),
+        $katalog->coz(['A6.*']),
+    );
+
+    expect($ed('TR Dizin Dergi'))->toBe(10)
+        ->and($ed('Yayın Kurulu Üyeliği'))->toBe(3)
+        ->and($ed('Hakemlik'))->toBe(2)
+        ->and($ed('BKCI Kitap'))->toBe(40);
+
+    // A6 bölüm tavanı (50) uygulanıyor: iki SCI editörlüğü 80 değil 50.
+    $editorlukler = array_fill(0, 2, sartFaaliyet('WoS Dergi (Q1)', Kategori::Editorluk));
+    expect($katalog->topla($editorlukler, $katalog->coz(['A6'])))->toBe(50);
+});
