@@ -33,6 +33,13 @@
  * GİRİLMEYEN KALEMLER: II/A (öğretim faaliyetleri — ders yükü ayrıntısı
  * ayrıştırılamadı), II/D-5 ve II/D-6 (panel ve söyleşi katılımı),
  * III bölümünün alt kırılımları.
+ *
+ * YURT İÇİ KİTAP DEĞERLERİ 01.09.2026'DA OKUNDU. D bölümünün kitap ve bölüm
+ * satırları çift değerli (yurt dışı / yurt içi); yurt içi değeri "kaynakta
+ * okunamadı" diye kayıtlıydı ve iki satır da YÜKSEK değerden sayılıyordu.
+ * Sayfa 190 dpi görüntüye çevrilip okundu: kitap yazarlığı yurt dışı 100 /
+ * yurt içi 80, bölüm yazarlığı yurt dışı 30 / yurt içi 20. Satırlar ayrıldı;
+ * yurt içi yayınlar artık fazla puan almıyor.
  */
 
 return [
@@ -74,12 +81,11 @@ return [
         'I.C.2' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan ve yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin', 'Ulusal Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 8],
 
         // ══ I/D — KİTAPLAR, ÇEVİRİLER, EDİTÖRLÜK, ATIFLAR ══
-        // çift değerli: yurt dışı 100 / yurt içi değeri kaynakta okunamadı
-        'I.D.1' => ['baslik' => 'Alanında kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 100],
-        // çift değerli
-        'I.D.2' => ['baslik' => 'Alanında kitapta bölüm veya ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
+        'I.D.1' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
+        'I.D.1-yi' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 80],
+        'I.D.2' => ['baslik' => 'Alanında yurt dışında yayımlanan kitapta bölüm ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
+        'I.D.2-yi' => ['baslik' => 'Alanında yurt içinde yayımlanan kitapta bölüm ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
         'I.D.3' => ['baslik' => 'Derleme kitap çalışması', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
-        // çift değerli
         'I.D.4' => ['baslik' => 'Alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 40],
         // çift değerli: SCI/SSCI/AHCI dergide editörlük 120, diğerleri okunamadı
         'I.D.5' => ['baslik' => 'Dergi editörlüğü veya hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Hakemlik', 'BKCI Kitap'], 'puan' => 120],

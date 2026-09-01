@@ -17,9 +17,11 @@
  *   PATENT BAŞVURULARI (yurt dışı 50, yurt içi 25) girilmedi; kayıt
  *       başvuruyu tescilden ayırmıyor. Faydalı model, endüstriyel tasarım
  *       ve yazılımın da tabloda satırı yok.
- *   A.3.c SATIRININ PUANI TABLODA BOŞ. "A1 ve A2 dışındaki uluslararası
- *       dergilerde editöre mektup, vaka raporu, teknik not, yorum"
- *       satırının değeri kaynak PDF'te okunamıyor; satır girilmedi.
+ *   A.3.c SATIRI ÖNCE "PUANI OKUNAMIYOR" DİYE GİRİLMEMİŞTİ; 01.09.2026'da
+ *       sayfa 190 dpi görüntüye çevrilip okundu, değer 5 puan. `pdftotext`
+ *       hücreyi kaybediyor çünkü satır iki satıra taşıyor ve puan sütunu
+ *       ikinci satırın hizasında. Taranmamış PDF'te bile metin çıkarımının
+ *       hücre kaybedebileceğinin örneği.
  *   O BÖLÜMÜNÜN organizasyon başkanlığı (150 ve 100), düzenleme ve bilim
  *       kurulu üyeliği (20) ile O.6 TÜBİTAK görevlendirmeleri (50)
  *       girilmedi; kayıtta bu görevlerin etiketi yok. Yalnız davetli
@@ -77,6 +79,7 @@ $maddeler = [
     'A.2.c' => ['baslik' => 'Scopus, ESCI, Avery, DAAI, Art Index, ICONDA ya da Ergo-Abs kapsamındaki dergide editöre mektup, vaka raporu, teknik not ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $KISA, 'puan' => 10],
     'A.3.a' => ['baslik' => 'Diğer uluslararası dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $OZGUN, 'puan' => 20],
     'A.3.b' => ['baslik' => 'Diğer uluslararası dergide derleme makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $DERLEME, 'puan' => 10],
+    'A.3.c' => ['baslik' => 'Diğer uluslararası dergide editöre mektup, vaka raporu, teknik not ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $KISA, 'puan' => 5],
 
     // ══ B. KİTAPLAR ══
     'B.1' => ['baslik' => 'Book Citation Index kapsamında taranan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
@@ -194,7 +197,7 @@ return [
         .'görünür. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN DÜŞÜK görünür: patent BAŞVURULARI (yurt dışı 50, '
         .'yurt içi 25) tescilliden ayrılamadığı için girilmedi, faydalı model ve endüstriyel '
-        .'tasarımın da tabloda satırı yok; A.3.c satırının puanı kaynak PDF\'te okunamıyor; O '
+        .'tasarımın da tabloda satırı yok; O '
         .'bölümünün organizasyon başkanlığı (150 ve 100), kurul üyeliği (20) ve TÜBİTAK '
         .'görevlendirmeleri (50) ile P.3 rektör danışmanlığı, P.8 öğrenci danışmanlığı '
         .'girilmedi; lisansüstü tezden üretilmiş yayın kategorisinin tabloda karşılığı yok. Ders '
@@ -229,7 +232,7 @@ return [
         // Profesörlükte "A1a'dan en az bir/iki yayın".
         'A1A' => ['A.1.a'],
         // Mimarlık profesörlüğünde "A veya B grubundan iki yayın".
-        'AB' => ['A.1.a', 'A.1.b', 'A.1.c', 'A.2.a', 'A.2.b', 'A.2.c', 'A.3.a', 'A.3.b',
+        'AB' => ['A.1.a', 'A.1.b', 'A.1.c', 'A.2.a', 'A.2.b', 'A.2.c', 'A.3.a', 'A.3.b', 'A.3.c',
             'B.1', 'B.2', 'B.3', 'B.4', 'B.5.b', 'B.5.c'],
         // Profesörlükte "K1, K2, K3 ve K4 gruplarından en az bir projede yürütücü".
         'K1-4-YURUTUCU' => ['K.1.a', 'K.2.a', 'K.3.a', 'K.4.a'],

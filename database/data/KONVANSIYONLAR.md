@@ -86,6 +86,30 @@ $k = app(App\Services\Scoring\Sart\SartDeposu::class)->katalog("YENI-CETVEL");
 echo implode(", ", array_diff($k->coz(["*"]), $k->coz(["DIS_GRUP"])));'
 ```
 
+### "Okunamadı" demeden önce SAYFA GÖRÜNTÜSÜNE bak
+
+`pdftotext` metin katmanı olan PDF'te bile hücre kaybediyor. İki tipik sebep:
+
+  Satır iki satıra taşıyor ve puan sütunu ikinci satırın hizasında kalıyor
+      (İstanbul Arel A.3.c — değer 5 puandı, "boş" sanılmıştı).
+  Tavan parantez içinde ve sütun sınırının dışına taşıyor
+      (Erzurum Teknik'in doçentlik tavanları — metin çıkarımı bir sayfada tek
+      bir 150 gösterirken görüntüde 40 ve 30 da vardı).
+
+Tarif:
+
+```bash
+pdftoppm -r 190 -f <sayfa> -l <sayfa> -png kaynak.pdf cikti
+magick cikti-<n>.png -crop 100%x40%+0+800 kirpik.png   # gerekiyorsa
+```
+
+Sonra görüntüyü doğrudan oku. 170-190 dpi tablo için yeterli; sayfanın
+tamamı büyükse dikey kırpma okunabilirliği artırıyor.
+
+Bu, taranmış PDF'ler için zaten kullanılan OCR tarifinin yerine geçmez —
+onun tamamlayıcısıdır ve METİN KATMANI OLAN dosyalarda da gerekir. Bir
+değeri "okunamıyor" diye kaydetmeden önce mutlaka dene.
+
 ### Sözlüğe YENİ ETİKET eklerken eski cetvelleri düşün
 
 Kaynak sözlüğü genişletilebilir, ama yeni ve DAHA ÖZEL bir etiket eklemek eski

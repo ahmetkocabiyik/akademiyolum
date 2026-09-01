@@ -140,7 +140,8 @@ kalması doğrudur.
 
 ## Balıkesir Üniversitesi
 
-**Dosya:** `pdf/17536971662.balikesiruniversitesi.pdf` (131 satır)
+**Dosya:** `pdf/17536930912.balikesiruniversitesi.pdf` (3 sayfa, 131 satır)
+*(Kayıt uzun süre `17536971662` diyordu; klasörde öyle bir dosya yok.)*
 
 **Puan tablosu PDF'te yok.** Ölçüt metni eksiksiz — profesör 300 puan (200'ü
 EK-2'nin 1-9 maddelerinden, 100'ü …), doçent 225 (150 + 75), güzel sanatlar /
@@ -150,6 +151,12 @@ hesaplanamayacak bir baraj göstermek olurdu.
 
 **Devam edilirse:** Balıkesir Üniversitesi'nin EK-2 puanlama tablosunu ayrıca
 indirmek gerekiyor; ölçüt tarafı hazır, yalnızca cetvel eksik.
+
+**01.09.2026'da yeniden doğrulandı.** Üç sayfanın üçü de düz metin; `pdfimages`
+gömülü görüntü bulmuyor, yani gizli bir taranmış tablo da yok. Aynı gün Türk
+Hava Kurumu (4 sayfa, görüntüsüz) ve Maltepe (3 sayfa; gömülü görüntüler yalnız
+imza şeridi) için de aynı kontrol yapıldı. Üçü de gerçekten eksik — bir daha
+PDF'e bakmaya gerek yok, belge dışarıdan gelmeli.
 
 ---
 
