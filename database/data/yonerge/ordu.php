@@ -265,7 +265,7 @@ $CETVEL_KADRO = [
  * "Farklı dergilerde yayımlanmış" kaydı ile dipnotların puan şartları
  * girilmedi; ikisi de aday notunda anılıyor.
  *
- * @var array<string, array<string, array{0: int, 1: string}>>
+ * @var array<string, array<string, array{0: int, 1: 'tek'|'ilk'}>>
  */
 $TEK_YAZAR = [
     // TABLO-5 dipnotu tek yazar değil BİRİNCİ İSİM istiyor ve doçentlikte
