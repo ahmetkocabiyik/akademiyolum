@@ -115,6 +115,11 @@ $ek3 = [
     'E3-10' => ['baslik' => 'Müzik topluluğunda çalmak ya da söylemek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatIcra, 'puan' => 25],
     'E3-13' => ['baslik' => 'Ses ve enstrüman toplulukları için çeşitli türlerde özgün eser yaratmış olmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatBeste, 'puan' => 250],
     'E3-19' => ['baslik' => 'Sanat ve tasarım atölye çalışmaları ile eğitim amaçlı sanat etkinlikleri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatBurs, 'puan' => 25],
+    // EK-3'ün 18. satırı: "Alanında sanatsal ve tasarıma yönelik araştırma ve
+    // çalışmalar için alınan burslar" (ulusal 50 / uluslararası 75). Ana
+    // tabloda burs satırı YOK; 'Burs' etiketi 01.09.2026'ya kadar 100 puanlık
+    // ulusal ödül satırındaydı. §0 uyarınca ulusal değerden.
+    'E3-18' => ['baslik' => 'Sanatsal ve tasarıma yönelik araştırma bursu', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 50],
 ];
 
 /**
@@ -174,7 +179,12 @@ $govde = fn (array $s): array => [
 
     // ══ H. ÖDÜLLER ══
     'H-1' => ['baslik' => 'Alanında uluslararası bilimsel nitelikli ödül almak', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 200],
-    'H-2' => ['baslik' => 'Alanında ulusal bilimsel nitelikli ödül almak', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs'], 'puan' => 100],
+    'H-2' => ['baslik' => 'Alanında ulusal bilimsel nitelikli ödül almak', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 100],
+    // Esasların 15. fıkrası yarışma derecelerini tablo puanına ORANLIYOR:
+    // birincilik tam, ikincilik %50, üçüncülük %25. Faaliyet kaydı dereceyi
+    // taşımadığı için §0 uyarınca en düşük derece (ulusal ödülün %25'i)
+    // uygulandı; 'Yarışma Derecesi / Mansiyon' 01.09.2026'da H-2'den alındı.
+    'H-2-yarisma' => ['baslik' => 'Ulusal veya uluslararası yarışmada derece', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 25],
 
     // ══ I. PATENT ══
     'I-1' => ['baslik' => 'Yurt dışında patentlenmiş buluş', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 700],

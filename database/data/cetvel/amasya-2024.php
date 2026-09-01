@@ -84,7 +84,10 @@ return [
         // ── B. KİTAPLAR ──
         'B1' => ['baslik' => 'Uluslararası yayınevi tarafından yabancı dilde yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
         'B2' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
-        'B3' => ['baslik' => 'Bilimsel kitap veya nadir eser çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 75],
+        'B3' => ['baslik' => 'Bilimsel kitap veya nadir eser çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 75],
+        // B.4 bölüm çevirisi ayrı bir satır (20); 01.09.2026'ya kadar kitap
+        // çevirisiyle birlikte 75 puandan sayılıyordu.
+        'B4' => ['baslik' => 'Bilimsel kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 20],
         'B5' => ['baslik' => 'Uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 125],
         'B8' => ['baslik' => 'Ulusal kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
         'B10' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan ISBN\'li kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 15],

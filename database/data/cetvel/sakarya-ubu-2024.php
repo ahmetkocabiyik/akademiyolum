@@ -58,7 +58,17 @@ return [
         '4.1' => ['baslik' => 'Dünya Bankası, Avrupa Birliği veya Avrupa Konseyi destekli Ar-Ge projesi', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'puan' => 100],
         '4.2' => ['baslik' => 'Diğer uluslararası kurum veya kuruluş destekli Ar-Ge projesi', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'puan' => 80],
         '4.3' => ['baslik' => 'TÜBA veya TÜBİTAK destekli Ar-Ge projesi', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'puan' => 80],
-        '4.4' => ['baslik' => 'Kamu kurumu, özel kuruluş veya üniversite destekli Ar-Ge projesi', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu', 'Özel Sektör / STK', 'BAP (Üniversite)'], 'puan' => 80],
+        // Kaynakta 4.4 Kalkınma Bakanlığı (80), 4.5 diğer kamu kuruluşları (80),
+        // 4.6 yükseköğretim kurumu/BAP (40), 4.7 özel kuruluş (40) diye AYRI
+        // satırlar. Cetvelde dördü tek 80 puanlık satırdaydı: BAP ve özel sektör
+        // projeleri hem 40 fazla puan alıyor hem de yönergenin "4.1, 4.2, 4.3,
+        // 4.4 proje faaliyetlerinden en az bir proje" koşulunu sahte biçimde
+        // sağlıyordu. 'Diğer Kamu Kurumu' 4.5'e alındı: kayıt Kalkınma
+        // Bakanlığı'nı öteki kamu kuruluşlarından ayırmıyor ve §0 uyarınca
+        // koşulu sağlayan tarafa yazılamaz (01.09.2026).
+        '4.5' => ['baslik' => 'Diğer kamu kuruluşlarınca desteklenmiş Ar-Ge projesi', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'puan' => 80],
+        '4.6' => ['baslik' => 'Yükseköğretim kurumunca desteklenmiş bilimsel araştırma projesi', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'puan' => 40],
+        '4.7' => ['baslik' => 'Özel kuruluşların Ar-Ge, yenilik veya özgün tasarım projesi', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'puan' => 40],
 
         // ── 6. PATENT ──
         '6.1' => ['baslik' => 'Alanında uluslararası tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 100],
@@ -78,7 +88,9 @@ return [
         // Atama koşullarının birebir andığı kümeler.
         '1.1-1.2' => ['1.1', '1.2'],
         '3.1-3.4' => ['3.1', '3.2', '3.3', '3.4'],
-        '4.1-4.4' => ['4.1', '4.2', '4.3', '4.4'],
+        // Yönerge koşulu birebir "4.1, 4.2, 4.3, 4.4" diyor; 4.4 (Kalkınma
+        // Bakanlığı) kayıttan ayrılamadığı için kümede karşılığı yok.
+        '4.1-4.4' => ['4.1', '4.2', '4.3'],
         'PATENT' => ['6.1', '6.2'],
         'MAKALE' => ['1.*'],
     ],

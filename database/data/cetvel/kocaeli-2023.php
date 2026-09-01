@@ -105,14 +105,23 @@ return [
         'H2' => ['baslik' => 'AB çerçeve/NSF/ERC projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['yurutucu'], 'puan' => 150],
         'H3' => ['baslik' => 'AB çerçeve/NSF/ERC projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 100],
         'H8' => ['baslik' => 'TÜBİTAK ARDEB/TEYDEB veya TÜSEB projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['yurutucu'], 'puan' => 100],
-        'H9' => ['baslik' => 'Diğer TÜBİTAK veya Kalkınma Ajansı projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 50],
+        'H9' => ['baslik' => 'Diğer TÜBİTAK veya Kalkınma Ajansı projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 50],
         'H10' => ['baslik' => 'Diğer kamu kurumu projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'roller' => ['yurutucu'], 'puan' => 40],
         'H11' => ['baslik' => 'Sanayi kuruluşu Ar-Ge projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['yurutucu'], 'puan' => 40],
         'H13' => ['baslik' => 'TÜBİTAK ARDEB/TEYDEB veya TÜSEB projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['arastirmaci', 'bursiyer'], 'puan' => 50],
-        'H14' => ['baslik' => 'Diğer TÜBİTAK veya Kalkınma Ajansı projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 25],
+        'H14' => ['baslik' => 'Diğer TÜBİTAK veya Kalkınma Ajansı projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 25],
         'H15' => ['baslik' => 'Diğer kamu kurumu projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
         'H16' => ['baslik' => 'Sanayi kuruluşu projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
-        'H18' => ['baslik' => 'TÜBİTAK projesinde danışman', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'puan' => 25],
+        // Kaynakta BAP projeleri role göre ayrı: yürütücü 18, araştırmacı 6,
+        // danışman 3 (madde 23-25). Cetvelde tek 25 puanlık rolsüz satırdı.
+        'H23' => ['baslik' => 'Üniversite (BAP) destekli araştırma projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['yurutucu'], 'puan' => 18],
+        'H24' => ['baslik' => 'Üniversite (BAP) destekli araştırma projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['arastirmaci', 'bursiyer'], 'puan' => 6],
+        'H25' => ['baslik' => 'Üniversite (BAP) destekli araştırma projesinde danışman', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['danisman'], 'puan' => 3],
+        // Madde 28: TÜBİTAK 2209-A, 2209-B ve 2242 projelerinde danışmanlık 10
+        // puan. 'Öğrenci Projesi (2209 vb.)' 01.09.2026'ya kadar 50 puanlık
+        // yürütücü (H9) ve 25 puanlık araştırmacı (H14) satırlarındaydı ve
+        // yönergenin "H.1-H.17" koşulunu da sahte biçimde sağlıyordu.
+        'H28' => ['baslik' => 'TÜBİTAK 2209-A, 2209-B veya 2242 projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 10],
 
         // ── SANATSAL ETKİNLİK ── (Güzel Sanatlar koşullarının saydığı kalemler)
         'S1' => ['baslik' => 'Kişisel sanat etkinliği (sergi, dinleti, gösterim)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Ulusal)'], 'puan' => 40],

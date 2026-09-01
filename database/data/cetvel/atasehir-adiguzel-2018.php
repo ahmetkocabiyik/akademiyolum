@@ -31,6 +31,9 @@
  *       (50), ulusal başkanlık (50) ve ulusal görev (25) tek 'Diğer'
  *       etiketine düşüyor → 25.
  *   Burslarda uluslararası (150) ile kamu bursu (100) → 100.
+ *   'Yarışma Derecesi / Mansiyon' 01.09.2026'da M26.b'den çıkarıldı: 26. madde
+ *       ödülü "(TÜBİTAK/TÜBA vb.)" parantezyle bu sınıfa bağlıyor, tek seferlik
+ *       bir yarışma derecesi 250 puanlık satıra girmiyor.
  *
  * ── GİRİLMEYEN SATIRLAR ──
  *   Madde 5 (ulusal diğer bilimsel dergiler, gazete ve dergiler, 20 puan,
@@ -161,7 +164,7 @@ return [
         // ══ H. ÖDÜLLER VE BURSLAR ══
         'M26.a' => ['baslik' => 'Alanında jürili uluslararası bilim veya sanat ödülü almak', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 350],
         'M26.a.p' => ['baslik' => 'Uluslararası patent almak', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 350],
-        'M26.b' => ['baslik' => 'Alanında ulusal bilim (TÜBİTAK, TÜBA vb.) ya da sanat ödülü almak', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 250],
+        'M26.b' => ['baslik' => 'Alanında ulusal bilim (TÜBİTAK, TÜBA vb.) ya da sanat ödülü almak', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 250],
         'M26.b.p' => ['baslik' => 'Ulusal patent, faydalı model ya da tasarım tescili almak', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili', 'Yazılım', 'Ticarileştirme'], 'puan' => 250],
         'M27.b' => ['baslik' => 'Alanında bilimsel ya da sanatsal çalışma ve araştırmalar için burs almak', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 100],
     ],

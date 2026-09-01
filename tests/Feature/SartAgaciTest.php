@@ -4401,3 +4401,47 @@ test('proje rol kademeleri üç cetvelde daha kaynağa uyuyor', function () {
         ->and($p('gibtu-2024', 'AB Çerçeve / Ufuk', 'arastirmaci'))->toBe(30)
         ->and($p('gibtu-2024', 'BAP (Üniversite)', 'yurutucu'))->toBe(10);
 });
+
+test('küçük kalemler kendi kaynak satırlarından sayılıyor — üçüncü parti', function () {
+    $depo = sartDepo();
+    $p = function (string $cetvel, string $kaynak, Kategori $kat, ?string $rol = 'tek') use ($depo): int {
+        $k = $depo->katalog($cetvel);
+
+        return $k->puan(sartFaaliyet($kaynak, $kat, $rol), $k->coz(['*']));
+    };
+
+    // Muşku: 15. fıkra yarışma derecesini tablo puanına oranlıyor (birincilik
+    // tam, ikincilik %50, üçüncülük %25); derece kayıtta yok → %25.
+    // Burs satırı yalnız EK-3'te var (ulusal 50) ve ana tabloda yok.
+    expect($p('musku-2013-fen', 'Yarışma Derecesi / Mansiyon', Kategori::Odul))->toBe(25)
+        ->and($p('musku-2013-fen', 'Burs', Kategori::Odul))->toBe(0)
+        ->and($p('musku-2013-gsf', 'Burs', Kategori::Odul))->toBe(50);
+
+    // Ataşehir Adıgüzel 26. madde de "(TÜBİTAK/TÜBA vb.)" sınıfına bağlı.
+    expect($p('atasehir-adiguzel-2018', 'Yarışma Derecesi / Mansiyon', Kategori::Odul))->toBe(0);
+
+    // Amasya B.4 bölüm çevirisi ayrı satır (20), kitap çevirisi 75.
+    expect($p('amasya-2024', 'Çeviri Kitap', Kategori::Kitap))->toBe(75)
+        ->and($p('amasya-2024', 'Çeviri Kitap Bölümü', Kategori::Kitap))->toBe(20);
+
+    // Sakarya UBÜ: BAP 40, özel kuruluş 40, diğer kamu 80 — üçü 80'de toplanmıştı.
+    expect($p('sakarya-ubu-2024', 'BAP (Üniversite)', Kategori::Proje, 'yurutucu'))->toBe(40)
+        ->and($p('sakarya-ubu-2024', 'Özel Sektör / STK', Kategori::Proje, 'yurutucu'))->toBe(40)
+        ->and($p('sakarya-ubu-2024', 'Diğer Kamu Kurumu', Kategori::Proje, 'yurutucu'))->toBe(80);
+
+    // Kocaeli: 2209 danışmanlığı 10 puan; BAP role göre 18/6/3.
+    expect($p('kocaeli-2023', 'Öğrenci Projesi (2209 vb.)', Kategori::Proje, 'danisman'))->toBe(10)
+        ->and($p('kocaeli-2023', 'BAP (Üniversite)', Kategori::Proje, 'yurutucu'))->toBe(18)
+        ->and($p('kocaeli-2023', 'BAP (Üniversite)', Kategori::Proje, 'danisman'))->toBe(3);
+});
+
+test('Sakarya UBÜ proje koşulu yönergenin saydığı dört kalemle sınırlı', function () {
+    $katalog = (new SartDeposu)->katalog('sakarya-ubu-2024');
+    $kodlar = $katalog->coz(['4.1-4.4']);
+
+    // BAP ve özel kuruluş projeleri koşulu SAĞLAMAMALI: yönerge "4.1, 4.2, 4.3,
+    // 4.4 proje faaliyetlerinden" diyor, bu ikisi 4.6 ve 4.7.
+    expect($katalog->eslesir(sartFaaliyet('BAP (Üniversite)', Kategori::Proje, 'yurutucu'), $kodlar))->toBeFalse()
+        ->and($katalog->eslesir(sartFaaliyet('Özel Sektör / STK', Kategori::Proje, 'yurutucu'), $kodlar))->toBeFalse()
+        ->and($katalog->eslesir(sartFaaliyet('AB Çerçeve / Ufuk', Kategori::Proje, 'yurutucu'), $kodlar))->toBeTrue();
+});
