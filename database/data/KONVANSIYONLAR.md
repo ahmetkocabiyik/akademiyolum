@@ -219,6 +219,35 @@ danışmanlığı aynı biçimde "H.1-H.17" koşulunu sağlıyordu.
 Bir etiketi satıra yazarken **satırın hangi gruplara girdiğine** de bak: puanı
 doğru ama grubu yanlış bir satır, barajı olduğundan kolay gösterir.
 
+### ETİKETİ SİLMEDEN ÖNCE KOŞUL ONA BAĞLI MI DİYE BAK
+
+Fazla sayan bir etiketi satırdan çıkarmak, o etikete dayanan bir KOŞULU da
+karşılıksız bırakabilir. Dokuz Eylül'de yarışma ödülü 18.b.1'e bağlıydı ve
+konservatuvar koşulu ("yarışma, festival veya bienalden ödül almış olmak")
+tam o kodu sayıyordu; etiket silinince koşul hiçbir faaliyetle eşleşmez oldu.
+Madde referans testi bunu anında yakaladı, ama doğru çözüm silmek değildi:
+kaynağın o kalemi için KENDİ SATIRINI açıp koşulu oraya bağlamaktı.
+
+Sıra şu: (1) etiket hangi satırlarda geçiyor, (2) o satırlar hangi gruplarda,
+(3) o gruplara hangi koşullar bağlı. Üçü de temizse sil; değilse doğru
+değerde yeni satır aç ve referansı taşı.
+
+### KUYRUĞU NEREDE KESMEK GEREKİR
+
+Detektörün kuyruğu uzun ve sonu getirilemez: 686 aday satırın çoğu kaynağın
+kendi kaba tablosudur. İki eleme kuralı işe yaradı:
+
+- **Satır başlığı etiketi zaten anıyorsa dokunma.** "Üniversite birimlerinde
+  yöneticilik VEYA YÖNETİCİ YARDIMCILIĞI" diyen bir satırda bölüm başkan
+  yardımcısının durması doğrudur (Çanakkale). Ölçüt istatistik değil, satırın
+  kendi metnidir.
+- **5 puanın altındaki sapmaları kovalama.** Aday toplamları yüzlerce puan
+  mertebesinde; üç puanlık bir yanlış yerleşim hiçbir barajı çevirmez.
+  Doğrulama maliyeti faydasını aşar.
+
+Kalan işaretlerin çoğu özet/poster bildiri ile kurul üyeliğinde toplanıyor ve
+bilinçli olarak bırakıldı.
+
 ### İKİ SATIR AYNI ETİKETE DÜŞÜYORSA YÜKSEK OLANI YAZMA — SİL
 
 Motor `puan()` içinde eşleşen kodların EN YÜKSEĞİNİ alıyor. Yani §0'ın "düşük
