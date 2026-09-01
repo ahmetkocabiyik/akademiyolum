@@ -4071,3 +4071,53 @@ test('Bayburt sanat cetvelinde aynı etikete düşen çiftlerde düşük değer 
         expect($katalog->coz([$kod]))->toBeEmpty("Fazla sayan satır girilmiş: {$kod}");
     }
 });
+
+test('Kilis sanat barajı çizelgenin yalnızca sayılan bölümlerini topluyor', function () {
+    $depo = sartDepo();
+
+    // 9-33 arası bölümler okunana kadar bu alan hiç girilmemişti.
+    $esik = $depo->bul('Kilis 7 Aralık Üniversitesi', 'dr_ogr_uyesi', 'guzel_sanatlar');
+    expect($esik)->not->toBeNull()
+        ->and($esik['anahtar'])->toBe('kilis-dr-sanat-guzel_sanatlar');
+
+    $ad = 'Sergi, koleksiyon, müzik, film, sahne ve tasarım kalemlerinizden en az 50 puan';
+    $sanat = fn (string $kaynak) => sartFaaliyet($kaynak, Kategori::SanatselEtkinlik);
+
+    // 9.b (20) + 12.a (25) + 13.a (20) = 65 → baraj doluyor.
+    $sonuc = $depo->degerlendir($esik, [
+        $sanat('Kişisel Etkinlik (Uluslararası)'),
+        $sanat('Opera/Bale Kompozisyonu'),
+        $sanat('Uzun Metrajlı Film / Belgesel (Ulusal)'),
+    ], new Profil);
+
+    expect(sartDugum($sonuc, $ad)->mevcut)->toBe(65)
+        ->and(sartDugum($sonuc, $ad)->durum)->toBe(Durum::Saglandi);
+
+    // Madde 7/3-c 22 ve 23 numaralı bölümleri SAYMIYOR: sanatsal ödül ve
+    // yarışma jüriliği puanı bu barajı doldurmaz.
+    $odul = sartFaaliyet('Uluslararası Bilim/Sanat Ödülü', Kategori::Odul);
+    expect(sartDugum($depo->degerlendir($esik, [$odul], new Profil), $ad)->mevcut)->toBe(0);
+});
+
+test('Kilis 34. bölümün ödül ve patent puanları kaynaktaki değerlerde', function () {
+    $katalog = (new SartDeposu)->katalog('kilis-2019');
+
+    // Çizelge: uluslararası bilim ödülü 40 · ulusal bilim ödülü 25 ·
+    // yabancı patent 20 · ulusal patent ya da çeşit tescili 10.
+    // Cetvelde patentler 30 ve 20 ile FAZLA, ödüller tek satırda 10 ile EKSİK yazılıydı.
+    expect($katalog->maddePuani('34.a'))->toBe(40)
+        ->and($katalog->maddePuani('34.b'))->toBe(25)
+        ->and($katalog->maddePuani('34.c'))->toBe(20)
+        ->and($katalog->maddePuani('34.ç'))->toBe(10);
+
+    // Sanatsal ödül (22, düşük) ile bilim ödülü (34, yüksek) kayıtta ayrılamıyor;
+    // genel ödül etiketleri §0 uyarınca 22'nin değerlerinden sayılıyor.
+    $puan = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::Odul),
+        ['22.a', '22.b', '34.a', '34.b'],
+    );
+
+    expect($puan('Uluslararası Bilim/Sanat Ödülü'))->toBe(20)
+        ->and($puan('Ulusal Bilim/Sanat Ödülü'))->toBe(5)
+        ->and($puan('TÜBİTAK / TÜBA Ödülü'))->toBe(25);
+});

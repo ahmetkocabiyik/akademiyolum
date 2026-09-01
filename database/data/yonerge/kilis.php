@@ -26,10 +26,23 @@
  * önünde deneme dersi vermesi ve gözlem formundan en az 75 puan alması
  * gerekiyor. Bu bir sınav sonucu olduğu için beyan olarak duruyor.
  *
- * SANAT VE TASARIM DALLARI GİRİLMEDİ: o alanın koşulu çizelgenin 9-34 numaralı
- * maddelerini (sergi, koleksiyon, müzik, film, tiyatro, mimarlık) sayıyor;
- * bu bölümlerin puan sütunu kaynak PDF'te ayrıştırılamadı. Eksik puanlarla eşik
- * yazmak adaya sağlanamayacak bir baraj gösterirdi.
+ * SANAT VE TASARIM DALLARI 01.09.2026'DA AÇILDI. Koşul (Madde 7/3-c) çizelgenin
+ * sanatsal bölümlerini sayıyor; o bölümler "puan sütunu ayrıştırılamadı" diye
+ * kayıtlıydı ve alan hiç girilmemişti. Bölümler okunup cetvele girildi.
+ *
+ * SAYILAN KÜME TABLONUN SANAT KISMININ TAMAMI DEĞİL. Madde 7/3-c "9, 10, 11,
+ * 12, 13, 14, 15, 16, 17, 20, 21, 25, 26, 27, 28, 29, 30, 31, 32, 33 ve 34"
+ * diye tek tek sayıyor: 18 (festival), 19 (belge çözümlenmesi), 22 (sanatsal
+ * ödüller), 23 (yarışma jüri üyeliği) ve 24 (tiyatro çalışmaları) LİSTEDE YOK.
+ * Grup birebir bu numaralardan kuruldu; atlanan bölümler yalnız genel toplama
+ * giriyor.
+ *
+ * KOŞULUN İLK ŞIKKI GİRİLMEDİ: 7/3-c "mesleki yayın ve bildirilerden en az 30
+ * puan VE sanat ve tasarım yapıtlarından en az 40 puan" alternatifini de
+ * tanıyor, ama "mesleki yayın ve bildiri" hangi çizelge bölümleri demek
+ * söylenmiyor. Bir `veya` kolunu tahminle yazmak barajı olduğundan KOLAY
+ * gösterirdi; §0 uyarınca yalnızca numaralarla tanımlı ikinci şık girildi ve
+ * ilki aday notunda anıldı. Yani eşik gerçekte olduğundan zor görünebilir.
  *
  * YENİDEN ATANMA GİRİLMEDİ: koşullar "bir önceki atanma tarihinden sonra"
  * penceresine bağlı; atama tarihi profilde tutulmuyor.
@@ -43,11 +56,17 @@ $DOC = Kalip::DOCENTLIK_SONRASI;
 
 $fenGrubu = ['fen', 'muhendislik', 'mimarlik', 'saglik', 'ziraat'];
 $sosyalGrubu = ['sosyal', 'egitim', 'hukuk', 'ilahiyat', 'filoloji', 'spor'];
-$tumAlanlar = [...$fenGrubu, ...$sosyalGrubu];
+$tumAlanlar = [...$fenGrubu, ...$sosyalGrubu, 'guzel_sanatlar'];
 
-$sanatNotu = 'Sanat ve Tasarım Dalları girilemedi: o alanın koşulu çizelgenin sanatsal etkinlik '
-    .'maddelerini (sergi, koleksiyon, müzik, film, tiyatro, mimarlık) sayıyor, bu bölümlerin '
-    .'puan sütunu kaynak yönergeden çıkarılamadı.';
+$sanatNotu = 'Sanat ve Tasarım Dallarındaysanız aşağıdaki Güzel Sanatlar eşiğine bakın; '
+    .'o alanın koşulu çizelgenin sanatsal bölümlerini sayıyor.';
+
+$sanatSecenegi = 'KOŞULUN İKİ ŞIKKINDAN BİRİ BURADA GÖRÜNMÜYOR: yönerge "mesleki yayın ve '
+    .'bildirilerden en az 30 puan VE sanat ve tasarım yapıtlarından en az 40 puan" '
+    .'alternatifini de tanıyor, ama "mesleki yayın ve bildiri" ile hangi çizelge '
+    .'bölümlerinin kastedildiğini söylemiyor. Tahmine dayalı bir kol barajı olduğundan '
+    .'kolay gösterirdi; bu yüzden yalnızca numaralarla tanımlı şık yazıldı. Eşiği '
+    .'sağlayamıyor görünüyorsanız bu alternatifi kendiniz kontrol edin.';
 
 $yenidenAtamaNotu = 'Yeniden atanmada koşullar bir önceki atanma tarihinden sonraki '
     .'çalışmalara bakıyor (makale, kitap, bildiri, atıf, proje yürütücülüğü ve konferans kalemlerinden 40 puan ya '
@@ -102,6 +121,26 @@ return [
                 Kalip::puanDan('Makale, kitap, bildiri, atıf, proje ve konferans kalemlerinizden '
                     .'en az 50 puan', ['1-6'], 50, madde: 'Madde 7/3-b'),
             ]),
+            Kalip::beyan('Deneme dersi değerlendirme komisyonu önünde deneme dersi vermek ve '
+                .'gözlem formundan en az 75 puan almak', 'Madde 7/4'),
+        ]),
+    ],
+
+    [
+        'anahtar' => 'kilis-dr-sanat',
+        'aday_notu' => 'Sanat ve Tasarım Dallarında baraj öteki alanlardan FARKLI bir kümeyi '
+            .'sayıyor: sergi, koleksiyon, müzik, film, tasarım, mimarlık yarışmaları ve '
+            .'ödül-patent bölümleri. Makale ve bildiri puanınız bu barajı doldurmuyor. '
+            .$sanatSecenegi.' '.$yenidenAtamaNotu,
+        'universite' => 'Kilis 7 Aralık Üniversitesi',
+        'kadro' => 'dr_ogr_uyesi',
+        'alan' => ['guzel_sanatlar'],
+        'cetvel' => 'kilis-2019',
+        'notlar' => 'Madde 7/3-c: çizelgenin 9, 10, 11, 12, 13, 14, 15, 16, 17, 20, 21, 25, 26, '
+            .'27, 28, 29, 30, 31, 32, 33 ve 34 numaralı maddelerinden en az 50 puan.',
+        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Sanat ve Tasarım Dalları', [
+            Kalip::puanDan('Sergi, koleksiyon, müzik, film, sahne ve tasarım kalemlerinizden '
+                .'en az 50 puan', ['9-34'], 50, madde: 'Madde 7/3-c'),
             Kalip::beyan('Deneme dersi değerlendirme komisyonu önünde deneme dersi vermek ve '
                 .'gözlem formundan en az 75 puan almak', 'Madde 7/4'),
         ]),
