@@ -1900,6 +1900,31 @@ test('Marmara Eğitim tezden üretilmiş yayını yarım puanla sayıyor', funct
     ))->toBe(48);
 });
 
+test('Erzurum Teknik tavanları birim ve kadroya göre ayrı uygulanıyor', function () {
+    $depo = sartDepo();
+
+    // Tablo tavanları koşul metninin İÇİNDE ve (birim × kadro) değişiyor.
+    // Eğitim (H): profesörlükte 150, doçentlikte 40, yeniden atanmada 30.
+    $tavan = fn (string $birim, string $kadro): array => $depo
+        ->cetveller()["erzurum-teknik-2024-{$birim}-{$kadro}"]->grupTavanlari;
+
+    expect($tavan('edebiyat', 'profesorluk')['H'])->toBe(150)
+        ->and($tavan('edebiyat', 'docentlik')['H'])->toBe(40)
+        ->and($tavan('edebiyat', 'dr_ogr_uyesi_yeniden')['H'])->toBe(30);
+
+    // Atıf (G) ayrıca birime bağlı: Edebiyat profesörlüğünde 20, Fen'in
+    // matematik dışı alanlarında 100.
+    expect($tavan('edebiyat', 'profesorluk')['G'])->toBe(20)
+        ->and($tavan('fen-diger', 'profesorluk')['G'])->toBe(100)
+        ->and($tavan('fen-matematik', 'profesorluk')['G'])->toBe(30);
+
+    // Eşikler doğru varyanta bağlı; Edebiyat'ın iki eşik grubu (sosyal ve
+    // filoloji) kaynakta tek fakülte sayfası olduğu için aynı varyantı
+    // kullanıyor.
+    expect($depo->bul('Erzurum Teknik Üniversitesi', 'docentlik', 'sosyal', 'Edebiyat Fakültesi')['cetvel'])
+        ->toBe('erzurum-teknik-2024-edebiyat-docentlik');
+});
+
 test('Ordu kategori tavanları toplam puanı kesiyor', function () {
     $depo = sartDepo();
 

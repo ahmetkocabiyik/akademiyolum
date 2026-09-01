@@ -44,15 +44,18 @@
  * ("G grubu etkinliklerinden en az 10 puan almış olmak. Bu gruptan en fazla
  * 20 puan alınabilir."). Alt baraj `Kalip::puanDan` ile yazıldı. ÜST SINIR
  * kadroya göre değişiyor ve `grup_tavanlari` cetvel geneline uygulanıyor;
- * H tavanı bütün bloklarda 150 olduğu için cetvel geneline yazıldı.
+ * Tavanlar (BİRİM × KADRO) matrisi olarak cetvele yazıldı; cetvel bu yüzden
+ * otuz altı varyant üretiyor. Eğitim (H) ve kurumsal katkı (K) tavanı yedi
+ * fakültede de aynı, yalnız kadroya göre değişiyor (H: profesörlükte 150,
+ * doçentlikte 40, yeniden atanmada 30); atıf (G) hem birime hem kadroya bağlı
+ * (20 ile 100 arasında).
  *
- * G (ATIF) TAVANI YAZILAMADI ve "en sıkı değeri yaz" kısayolu burada
- * İŞLEMİYOR: alt kadrolarda tavan 20-30 ama profesörlükte G barajının kendisi
- * 50, yani tavan ondan büyük olmak zorunda. 20 yazınca profesörlük eşiği
- * sağlanamaz hâle geliyor — `CetvelKaynakTest`'in tavan-baraj kontrolü bunu
- * yakaladı. Kaynağın sütun düzeni iç içe geçtiği için blok blok tavan
- * çıkarmak güvenilir olmadı; varyantlama gerekirse önce tabloların sayfa
- * görüntüsünden okunması gerekiyor.
+ * İLK DENEMEDE "EN SIKI DEĞERİ YAZ" KISAYOLU KULLANILDI VE YANLIŞTI: G'ye
+ * genel 20 yazılınca profesörlük eşikleri sağlanamaz hâle geldi, çünkü Fen ve
+ * Sağlık profesörlüğünde G barajının KENDİSİ 50. `CetvelKaynakTest`'in
+ * tavan-baraj kontrolü yakaladı. Doğru yol matrisi okumaktı; `pdftotext`
+ * sütunları iç içe verdiği ve parantez içindeki tavanları atladığı için yedi
+ * fakülte sayfası 170 dpi görüntüye çevrilip gözle okundu.
  *
  * Dr. Öğr. Üyesi ilk atanmada bazı birimlerde G grubu için YALNIZCA üst
  * sınır var ("G grubu etkinliklerinden en fazla 10/20 puan alınabilir"),
@@ -104,9 +107,8 @@ $DOKTORA = Kalip::DOKTORA_SONRASI;
 $DOCENTLIK = Kalip::DOCENTLIK_SONRASI;
 $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
 
-$UYARI = ' DİKKAT: yönergenin "bu gruptan en fazla N puan alınabilir" üst sınırları '
-    .'yalnız eğitim kaleminde uygulanabildi (her blokta 150). Atıf tavanı kadroya göre çok '
-    .'değiştiği için yazılamadı; o kalemde puanınız gerçeğinden yüksek görünebilir. Eğitim (H) barajı yönergede lisansüstü programı olmayan '
+$UYARI = ' Yönergenin "bu gruptan en fazla N puan alınabilir" üst sınırları uygulanıyor: '
+    .'eğitim, kurumsal katkı ve atıf tavanları birim ve kadronuza göre ayrı ayrı yazıldı. Eğitim (H) barajı yönergede lisansüstü programı olmayan '
     .'birimler için hafifletiliyor, kurumsal katkı (K) barajı ise üniversite dışından '
     .'başvuranlarda hiç aranmıyor; ikisi de profilden okunamadığı için burada istisnasız '
     .'uygulanıyor.';
@@ -173,7 +175,12 @@ $birimEsikleri = function (
             'kadro' => $kadro,
             'alan' => $alanlar,
             'birim' => $birim,
-            'cetvel' => $CETVEL,
+            // Tavanlar (birim × kadro) değiştiği için cetvel varyantlanıyor.
+            // Edebiyat iki eşik grubuna bölünmüş (sosyal ve filoloji) ama
+            // kaynakta tek fakülte sayfası; ikisi de aynı varyanta bağlanıyor.
+            'cetvel' => $CETVEL.'-'
+                .(str_starts_with($anahtar, 'edebiyat') ? 'edebiyat' : $anahtar)
+                ."-{$kadro}",
             'notlar' => "{$notOn} ({$birim}): toplam {$toplamlar[$kadro]} puan.",
             'sart' => Kalip::ve("{$c['ad']} — {$birim}", array_values(array_merge(
                 $c['on'],
