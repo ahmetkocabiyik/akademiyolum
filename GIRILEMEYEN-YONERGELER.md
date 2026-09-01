@@ -435,6 +435,39 @@ sıralı duruyor). İkinci fontun harf haritası glif sırasına bağlı ve elle
 
 ---
 
+## Okunamadı sanılan bölümler kapandı — 01.09.2026
+
+Korpusta "okunamadı / ayrıştırılamadı / OCR" notu taşıyan 42 dosya tarandı.
+Notların iki ayrı anlamı olduğu ortaya çıktı (bkz. KONVANSIYONLAR §1):
+**kayıttan** okunamayanlar (adayın faaliyet kaydı o niteliği taşımıyor) ve
+**kaynaktan** okunamayanlar (metin çıkarımı hücreyi düşürmüş). Birincisi
+düzeltilemez ve olduğu gibi kaldı; ikincisinin TAMAMI kapandı.
+
+**Kök sebep:** dosya başlıklarındaki `Kaynak: pdf/…` adlarının yirmisi var
+olmayan dosyalara işaret ediyordu (ön ekteki zaman damgası farklı). Kayıtlı
+dört "puan sütunu ayrıştırılamadı" notunun dördü de bu listedeydi. Adlar
+düzeltildi ve `CetvelKaynakTest` artık her başlıktaki dosyanın varlığını
+kontrol ediyor.
+
+| Üniversite | Neydi | Ne oldu |
+|---|---|---|
+| **Bayburt** | 11(2) sanat bölümü ve 12 toplumsal katkı okunamadı sanılıyordu; Güzel Sanatlar alanı HİÇ girilmemişti | 37 satır girildi, Güzel Sanatlar üç kadroda açıldı |
+| **Kilis 7 Aralık** | 9-33 sanat bölümleri okunamadı sanılıyordu; Sanat ve Tasarım Dalları HİÇ girilmemişti | 35 satır girildi, alan açıldı; ayrıca 34. bölümün ödül ve patent puanları kaynakla uyuşmuyordu, düzeltildi |
+| **Hatay MKÜ** | E2 (patentler) okunamadı sanılıyordu; patenti olan aday SIFIR görüyordu | Üç satır girildi; ödül satırlarındaki fazla sayma da düzeltildi |
+| **Osmaniye Korkut Ata** | 10.1.1-10.1.2 okunamadı sanılıyordu; etiketleri komşu satıra yığılmıştı | Bölüm 10 kaynağa göre yeniden dağıtıldı; bölüm 12'nin beş idari kademesi de açıldı |
+| **İstanbul Ticaret** | "Çok değerli satırlar ayrıştırılamadı, en yüksek değerle tek satır girildi" | Ek 1'in tamamı kaynağa göre yeniden yazıldı; sekiz ayrı fazla/eksik sayma düzeltildi, üç ara toplam tavanı uygulandı |
+| **Kahramanmaraş İstiklal** | Proje, editörlük ve ödül satırlarında rol ayrımı yapılamamıştı | A5 dört role ayrıldı, A6 kademelendi, iki bölüm tavanı uygulandı |
+| **İzmir Kavram MYO** | İki satırın başlığı OCR'da düşmüştü | Sayfa görüntüsünden okundu: 2.c-2.d tahmini doğruymuş; 17. madde YANLIŞ okunmuş ("2 ders" değil "2 YIL ders"), satır kaldırıldı |
+| **Ordu** | Tablo dipnotlarının hangi kadroya bağlandığı okunamıyor sanılıyordu | Bağlanma üst simgeden okundu; beş tabloda tek yazar / birinci isim koşulu girildi |
+
+En sık rastlanan hata bölümün eksik olması DEĞİL, eksik sanılan bölümün
+etiketlerinin komşu bir satıra yığılmış olmasıydı. İstanbul Ticaret'te bütün
+editörlük etiketleri 120 puanlık baş editörlük satırındaydı; bir hakemlik
+kaydı 120 puan ediyordu. Aynı dosyada tez ve jüri satırlarına BÖLÜM TAVANI
+satır değeri olarak yazılmıştı (75 ve 50).
+
+---
+
 # Kısmen girilen yönergeler
 
 Aşağıdaki üniversiteler korpusa girdi, ama bir bölümü cetvele giremedi. Üç
@@ -447,11 +480,9 @@ anlatılıyor — ayrıntı orada, bu tablo yalnızca dizin.
 
 | Üniversite | Eksik kalan | Sonuç |
 |---|---|---|
-| **Bayburt** | 11(2) Sanat ve Tasarım Etkinlikleri bölümünün puan sütunu | Güzel Sanatlar alanı hiç girilmedi; diğer alanlar tam |
-| **Kilis 7 Aralık** | Çizelgenin 9-34 numaralı bölümleri (sergi, koleksiyon, müzik, film, tiyatro, mimarlık) | Sanat ve Tasarım Dalları hiç girilmedi |
 | **Bitlis Eren** | "I" (sanat çalışmaları) bölümü kaynak sözlüğünde karşılıksız | Güzel Sanatlar hiç girilmedi |
 | **Bingöl** | 52 numaralı ihtisaslaşma kalemi (Tarım ve Havza Bazlı Kalkınma) | Fen ve sosyal alanların zorunlu barajı olduğundan zor görünür |
-| **Hatay MKÜ** | G bölümü (sanat tarihi, arkeoloji, antropoloji kazı çalışmaları) | Sosyal ve Güzel Sanatlar barajı olduğundan zor görünür |
+| **Hatay MKÜ** | G bölümü (sanat tarihi, arkeoloji, antropoloji kazı çalışmaları) — kazı projesi ve ruhsatı sözlükte karşılıksız | Sosyal ve Güzel Sanatlar barajı olduğundan zor görünür |
 | **Giresun** | M, O, P, R bölümleri (ödüller, görsel ve sanatsal etkinlikler) | Alt barajlara girmiyor; Güzel Sanatlar adayının genel toplamı düşük çıkar |
 | **Manisa CBÜ** | I (32-51), J (52-53) ve K (54-68) bölümleri | Güzel Sanatlar ve Konservatuvar toplamı düşük çıkar |
 | **Karabük** | Spor kalemleri 4.6.14-4.6.21 | Spor Bilimleri adayında 4.1-4.6 barajı zor görünür |
@@ -559,7 +590,7 @@ anlatılıyor — ayrıntı orada, bu tablo yalnızca dizin.
 | **Ufuk** | 7. MADDENİN TAMAMI (atıflar; puan atıf sayısının 0,5 ve 0,3 katı) ve 11/a-f (ders puanı dönemlik ders SAATİ ile çarpılan 0,025-0,15 katsayıları) — ikisi de ondalıklı; 4. MADDENİN TAMAMI (lisansüstü tezden üretilen yayınlar); h-indeksi eklentisi (h × 0,1); 14/a yabancı dil sınav başarısı, 14/c etki faktörü, 14/e-f yeterlilik sertifikaları, 14/g yeni birim kurma, 14/m yurt dışı üç ay, 14/o atama jürisi üyeliği | ATIFLAR VE DERSLER TOPLAM PUANA HİÇ KATKI VERMİYOR. Kitaplarda Sense Ranking A-E kategorileri kayıtta olmadığı için en düşük kategoriden sayılıyor. Yayın ve kitap için iki ayrı ortak yazar kuralı var; motor kategori bazlı çarpan tanımlayamadığından düşük olan yayın kuralı ikisine de uygulandı |
 | **Çağ** | Kısa bildiri, teknik not, tartışma ve editöre mektup için tanımlanan %60 KURALI (SCIE'de 9 puan) — kayıt bunları A-5'in kitap eleştirisinden ayırmadığı için 2 puanlık satır kullanılıyor; U bölümünün "eğitime katkı" satırı (kredi başına 0,5, hem ondalık hem kredi bazlı); T bölümünün TAMAMI (bilimsel toplantı düzenleme 20/5/10/2, seçici ve bilim kurulu üyeliği 5/2); lisansüstü tezden üretilmiş yayın | İdari görev puanları YIL SAYISIYLA ÇARPILMIYOR (10/5/3 × yıl); beş yıllık dekanlık 50 değil 10 puan. Uluslararası dergi hakemliği (3), uluslararası yayın kurulu üyeliği (15) ve yarışma dereceleri (10'a kadar) ulusal karşılıklarından ayrılamadığı için en düşükten. MADDE 3/1-c'nin dil koşulu yalnız %100 yabancı dille eğitim veren bölümler için geçerli olduğundan sayısal YDS düğümü yerine `beyan` yazıldı. PDF'in başlık fontundaki sistematik harf ikamesi (İ→Ġ, Ş→Ģ) çıkarma sırasında düzeltildi |
 | **İstanbul Gedik** | Üniversitenin kendi BAP projeleri (G bölümü yalnız uluslararası ve üniversite DIŞI kaynaklı projeleri puanlıyor); lisansüstü tezden üretilmiş yayın; idari görev; toplumsal katkı; yarışma dışındaki ödüller; eş danışmanlık ve tezsiz yüksek lisans danışmanlığı (1) | J bölümünün "son iki yılda alınan dersler" kaydı satır bazlı zaman penceresi olmadığı için uygulanmıyor, eski dersler de sayılıyor. "Tanınmış uluslararası" ile "tanınmış ulusal yayınevi" ayrımı kayıtta olmadığından BKCI/Scopus kitapları uluslararası (20/10), öteki kitaplar ulusal (10/5) satırından. MADDE 6.3'ün "uygulama projesi yayımlamış olmak" seçeneği ve MADDE 10'un yabancı dille öğretim yapan bölümlere özgü dil koşulu girilmedi |
-| **İzmir Kavram MYO** | 13. madde (bilimsel ve sanatsal etkinlik düzenlemelerinde yer almak, 5/3); 18. madde (Web of Science h-indeksi, 5); 19. madde (yabancı dil sınavından 85 ve üzeri, 5); dergi editörlüğü (cetvelde satır yok, editörlük kayıtları yayın kurulu üyeliğinden sayılıyor); 16.b (uygulama projesi yayımlamış olmak, 15); lisansüstü tezden üretilmiş yayın; idari görev; toplumsal katkı | KAYNAK PDF TARANMIŞ VE OCR'LANMIŞ; "ı", "ş", "ğ", "İ" harflerinin bir bölümü düşmüş. Puanlar ve madde başlıkları okunduğu için girilebildi, iki satır daraltıcı okundu (2.c-2.d BKCI dışındaki uluslararası kitap 15 ve bölümü 10; 17. madde ders başına 2 puan, tavan 6). E-SCI (20), uluslararası faydalı model (20), uluslararası hakemlik (3) ve davetli konuşmacılık (10) ulusal karşılıklarından ayrılamadığı için düşükten. Ek-1'in 15 ve 16. maddeleri tek temel alana kilitli olduğu için üç ayrı cetvel yazıldı |
+| **İzmir Kavram MYO** | 13. madde (bilimsel ve sanatsal etkinlik düzenlemelerinde yer almak, 5/3); 18. madde (Web of Science h-indeksi, 5); 19. madde (yabancı dil sınavından 85 ve üzeri, 5); dergi editörlüğü (cetvelde satır yok, editörlük kayıtları yayın kurulu üyeliğinden sayılıyor); 16.b (uygulama projesi yayımlamış olmak, 15); lisansüstü tezden üretilmiş yayın; idari görev; toplumsal katkı | KAYNAK PDF TARANMIŞ VE OCR'LANMIŞ; "ı", "ş", "ğ", "İ" harflerinin bir bölümü düşmüş. Puanlar ve madde başlıkları okunduğu için girilebildi, iki satırın başlığı sayfa görüntüsünden okundu (2.c-2.d BKCI dışındaki uluslararası kitap 15 ve bölümü 10). 17. madde ("2 yıl ders vermiş olmak", en çok 6) görev süresine bağlı olduğu için girilmedi. E-SCI (20), uluslararası faydalı model (20), uluslararası hakemlik (3) ve davetli konuşmacılık (10) ulusal karşılıklarından ayrılamadığı için düşükten. Ek-1'in 15 ve 16. maddeleri tek temel alana kilitli olduğu için üç ayrı cetvel yazıldı |
 | **İstanbul Arel** | A.3.c satırı (puanı kaynak PDF'te okunamıyor); patent BAŞVURULARI (yurt dışı 50, yurt içi 25), faydalı model ve endüstriyel tasarım; O bölümünün organizasyon başkanlığı (150/100), düzenleme ve bilim kurulu üyeliği (20) ile O.6 TÜBİTAK görevlendirmeleri (50); P.3 rektör danışmanlığı (30); P.8 öğrenci danışmanlığı (10); lisansüstü tezden üretilmiş yayın | IMPACT FAKTÖRÜ ÇARPANI UYGULANMIYOR: tablo makale puanlarının derginin etki faktörüyle çarpılmasını istiyor, kayıt etki faktörünü tutmuyor. "Senior isim" (alanında en az on uluslararası yayını olan son yazar) tam puan alıyor ama kayıtta böyle bir rol yok. Ders puanı haftalık ders SAATİ başına verildiği hâlde ders başına tek puan. TABLODA ULUSAL KİTAP YAZARLIĞI SATIRI YOK; Türkçe kitap da uluslararası kitap satırından (60) sayılıyor ve puan YÜKSEK çıkıyor — satırı hiç girmemek uluslararası kitapların tamamını sıfırlardı |
 | **İstanbul Atlas** | 1.4.a Scopus ATIFLARI (atıf başına 0,5; ondalık olduğu için atıf bölümü neredeyse boş kaldı, yalnız patent atfı girildi); 1.5 bilimsel toplantı düzenleme (10/5/2/1); dergi hakemliği ve yayın kurulu üyeliği (tabloda satır yok); 1.2.n üniversitenin kendi dergilerindeki yayın (15); 2.4.a Scopus h-indeksi (değer başına 2); patent BAŞVURULARI (30/20); lisansüstü tezden üretilmiş yayın; idari görev; toplumsal katkı | TÜBİTAK PROJELERİ 10 PUANDAN: tablo ARDEB, TEYDEB ve Kamu Ar-Ge yürütücülüğüne 60, TÜBİTAK 1002 ve Bilim-Toplum'a 10 veriyor, kayıt ikisini ayırmıyor. AHCI'nin tabloda satırı yok (tablo Scopus merkezli), "diğer uluslararası hakemli dergi"den (7) sayılıyor. Ders puanı haftalık ders saati başına verildiği hâlde ders başına tek puan; "son bir yıl" kısıtı satır bazlı olduğu için uygulanmıyor. Tablo kitap, bildiri ve sanatsal etkinlikte puanı eşit bölüyor, makalede kademeli; motor makale kuralını hepsine uyguluyor |
 

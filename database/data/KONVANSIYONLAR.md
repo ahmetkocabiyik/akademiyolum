@@ -110,6 +110,83 @@ Bu, taranmış PDF'ler için zaten kullanılan OCR tarifinin yerine geçmez —
 onun tamamlayıcısıdır ve METİN KATMANI OLAN dosyalarda da gerekir. Bir
 değeri "okunamıyor" diye kaydetmeden önce mutlaka dene.
 
+### ÖNCE DOSYA ADINI DOĞRULA — "okunamadı"ların çoğu buradan çıktı
+
+01.09.2026'daki taramada dosya başlıklarındaki `Kaynak: pdf/…` adlarının
+YİRMİSİ var olmayan dosyalara işaret ediyordu (ön ekteki zaman damgası
+farklı; üniversite adı son eki doğru). Kaynağı yoklamak isteyen "dosya yok"
+alıyor ve satırı "okunamadı" diye bırakıyordu.
+
+Kayıtlı "puan sütunu ayrıştırılamadı" notlarının DÖRDÜ DE (Bayburt, Kilis,
+Hatay MKÜ, Osmaniye) bu listedeydi; dördünde de tablo `pdftotext -q -layout`
+ile eksiksiz çıkıyordu. `CetvelKaynakTest` artık her başlıktaki dosyanın
+varlığını kontrol ediyor, ama bir değeri okuyamadığında ilk bakılacak yer
+yine dosya adı.
+
+### "OKUNAMADI" NOTUNUN İKİ AYRI ANLAMI VAR — KARIŞTIRMA
+
+Korpusta "okunamadı" iki bambaşka şeyi anlatıyor ve yalnızca biri düzeltilebilir:
+
+- **KAYITTAN okunamıyor** — adayın faaliyet kaydı o niteliği taşımıyor
+  (sorumlu yazar sırası, bursun süresi, derginin uluslararası mı ulusal mı
+  olduğu). Kaynak gayet okunuyor; sorun sözlükte. Bunlar düzeltilemez,
+  §0 uyarınca düşük satır girilir ve olduğu gibi kalır.
+- **KAYNAKTAN okunamadı** — metin çıkarımı hücreyi düşürmüş. Bunlar
+  DÜZELTİLEBİLİR ve düzeltilmelidir.
+
+Tarama yaparken ayrım için şu kalıplara bak: "kayıttan / profilden /
+faaliyet kaydından / etiketten okunamıyor" birinci sınıf; "kaynakta /
+PDF'te okunamadı", "ayrıştırılamadı", "kesik", "sütunu eksik" ikinci sınıf.
+
+### "AYRIŞTIRILAMADI" NOTU ÇOĞU ZAMAN FAZLA SAYAN BİR SATIR SAKLIYOR
+
+Bir bölüm okunamadığında iki şey oluyor ve İKİNCİSİ daha zararlı:
+
+1. Bölüm hiç girilmiyor — aday o kalemden sıfır alıyor (Hatay MKÜ'de
+   patentler, Bayburt ve Kilis'te bütün sanat bölümü).
+2. Bölüm TEK SATIRA İNDİRİLİP EN YÜKSEK DEĞERLE giriliyor — aday hak
+   etmediği puanı alıyor. İstanbul Ticaret'te bütün editörlük etiketleri
+   120 puanlık baş editörlük satırındaydı: bir hakemlik kaydı 120 puan
+   ediyordu. Kahramanmaraş İstiklal'de proje satırları rolsüzdü, bursiyer
+   yürütücü puanı alıyordu.
+
+Bir "ayrıştırılamadı" notu gördüğünde bölümü yalnızca EKLEME diye değil,
+**mevcut satırların değerlerini kaynakla karşılaştırma** işi olarak da ele al.
+
+### TAVAN DEĞERİ SATIR DEĞERİ SANILABİLİR
+
+İstanbul Ticaret'te "Yönetiminde tamamlanan her tez için: (Toplamı 75 puanı
+aşamaz) a. Doktora 10 b. Yüksek Lisans 5" satırı cetvele HER TEZ 75 PUAN diye
+girilmişti; iki tez yöneten aday 150 puan görüyordu. Aynı hata jüri satırında
+da vardı (50).
+
+Parantez içindeki "toplamı … aşamaz" bir SATIR değeri değil `grup_tavanlari`
+kaydıdır. Bir satırın puanı bölümün toplam sınırına eşitse dur ve alt
+şıklara bak.
+
+### DİPNOT HANGİ SÜTUNA BAĞLI? ÜST SİMGEYE BAK
+
+Ordu'nun tablolarında dipnot numaraları hücrelerin içinde üst simge olarak
+duruyor ve metin katmanına düz rakam olarak düşüyor: profesör sütununda
+"en az 120 puan⁴", doçent sütununda "en az 100 puan³". Yani "(3) hangi
+kadroya bağlı" sorusu tahmin işi değil, okuma işi. Aramak için:
+
+```bash
+grep -oE "(puan|zorunludur|alınır|alınabilir)\.?[0-9](,[0-9])?" cikti.txt
+```
+
+Bir tablo dipnotunu "hangi bende bağlandığı belirsiz" diye bırakmadan önce
+bunu dene.
+
+### İKİ YOLLU DİPNOTTA KOLLARIN DÜŞÜĞÜNÜ YAZ
+
+Dipnotlar sık sık "şu şartı sağlayamayan aday şunu yapar" biçiminde bir
+telafi kolu taşıyor. İki kol farklı sayı istiyorsa (Ordu'da Sosyal
+tablosunda birinci kol üç, telafi kolu bir tek yazarlı yayın) motorda tek
+sayı yazılabiliyorsa **DÜŞÜK olanı** yaz: yüksek olanı yazmak telafi
+yolundan gidebilecek adayı haksız yere eler. §0 puanı aşağı çeker, ama
+adaya sağlayabileceği bir yolu da kapatmaz.
+
 ### Sözlüğe YENİ ETİKET eklerken eski cetvelleri düşün
 
 Kaynak sözlüğü genişletilebilir, ama yeni ve DAHA ÖZEL bir etiket eklemek eski
