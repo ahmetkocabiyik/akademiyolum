@@ -4484,3 +4484,34 @@ test('kuyruk taraması: küçük kalemler kendi kademelerinde', function () {
     expect($itu->puan(sartFaaliyet('Öğrenci Projesi (2209 vb.)', Kategori::Proje, 'yurutucu'), $itu->coz(['*'])))->toBe(0)
         ->and($itu->puan(sartFaaliyet('BAP (Üniversite)', Kategori::Proje, 'yurutucu'), $itu->coz(['*'])))->toBe(25);
 });
+
+test('Dokuz Eylül yarışma ödülü kendi maddesinden sayılıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('dokuz-eylul-2024');
+
+    // Yarışma ödülü 18.b.1'in (sürekli ve periyodik jürili ulusal ödül, 15)
+    // etiketlerine bağlıydı; kaynağın 37. maddesi bunu ayrı ve düşük puanlıyor.
+    expect($katalog->puan(sartFaaliyet('Yarışma Derecesi / Mansiyon', Kategori::Odul), $katalog->coz(['*'])))->toBe(10)
+        ->and($katalog->puan(sartFaaliyet('Ulusal Bilim/Sanat Ödülü', Kategori::Odul), $katalog->coz(['*'])))->toBe(15);
+
+    // Konservatuvar koşulu ("yarışma, festival veya bienalden ödül") artık
+    // 37. maddeye bağlı; bir bilim ödülü onu SAĞLAMAMALI.
+    $esik = $depo->bul('Dokuz Eylül Üniversitesi', 'dr_ogr_uyesi', 'guzel_sanatlar',
+        'Konservatuvar — Dans ve Koreografi');
+    $ad = 'Yarışma, festival veya bienalden ödül almış olmak';
+
+    expect(sartDugum($depo->degerlendir($esik, [sartFaaliyet('Yarışma Derecesi / Mansiyon', Kategori::Odul)], new Profil), $ad)->durum)
+        ->toBe(Durum::Saglandi)
+        ->and(sartDugum($depo->degerlendir($esik, [sartFaaliyet('TÜBİTAK / TÜBA Ödülü', Kategori::Odul)], new Profil), $ad)->mevcut)
+        ->toBe(0);
+});
+
+test('MSGSÜ koordinatörlük idari görev satırından sayılmıyor', function () {
+    $katalog = (new SartDeposu)->katalog('msgsu-2023');
+    $p = fn (string $k) => $katalog->puan(sartFaaliyet($k, Kategori::IdariGorev), $katalog->coz(['*']));
+
+    // Etiket anabilim dalı başkanlığını (6.5.1, 10) koordinatörlükle (6.6, 1-3)
+    // birleştiriyor; kayıt süreyi taşımadığı için en düşükten.
+    expect($p('Anabilim Dalı Başkanı / Koordinatörlük'))->toBe(1)
+        ->and($p('Rektör'))->toBe(10);
+});

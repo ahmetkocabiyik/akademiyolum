@@ -656,7 +656,7 @@ $alanlar = [
         'dr' => fn (string $m): array => [
             Kalip::adet('Solist olarak en az 1 eserde rol almış olmalısınız', ['DANS-SOLIST'], 1, madde: $m),
             Kalip::veya('Alanınızda ödül ya da sonuçlandırılmış tez danışmanlığı', [
-                Kalip::adet('Yarışma, festival veya bienalden ödül almış olmak', ['18.b.1'], 1, madde: $m),
+                Kalip::adet('Yarışma, festival veya bienalden ödül almış olmak', ['37.a'], 1, madde: $m),
                 Kalip::adet('Ya da yürütücüsü olduğunuz sonuçlandırılmış bir lisansüstü tez danışmanlığı', ['19.a', '19.d'], 1, madde: $m),
             ]) + ['madde' => $m],
             Kalip::adet('Koreografisini yaptığınız en az 1 eseri sahnelemiş olmalısınız', ['DANS-KOREOGRAFI'], 1, madde: $m),
@@ -665,7 +665,7 @@ $alanlar = [
         'docent' => fn (string $m, array $d, string $dad): array => [
             Kalip::adet("{$dad}, solist olarak en az 2 eserde rol almak ya da 2 eserden bölüm sahnelemek", ['DANS-SOLIST'], 2, donem: $d, madde: $m),
             Kalip::veya('Alanınızda ödül ya da sonuçlandırılmış tez danışmanlığı', [
-                Kalip::adet('Yarışma, festival veya bienalden ödül almış olmak', ['18.b.1'], 1, donem: $d, madde: $m),
+                Kalip::adet('Yarışma, festival veya bienalden ödül almış olmak', ['37.a'], 1, donem: $d, madde: $m),
                 Kalip::adet('Ya da yürütücüsü olduğunuz sonuçlandırılmış bir lisansüstü tez danışmanlığı', ['19.a', '19.d'], 1, donem: $d, madde: $m),
             ]) + ['madde' => $m],
             Kalip::adet('Koreografisini yaptığınız en az 1 eseri sahnelemiş olmalısınız', ['DANS-KOREOGRAFI'], 1, donem: $d, madde: $m),

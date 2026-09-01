@@ -231,8 +231,13 @@ $maddeler = [
     '6.4.18' => ['baslik' => 'Bilimsel ya da sanatsal toplantı düzenleme, küratörlük, oturum başkanlığı ve benzeri görevler', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
 
     // ══ 6.5 İDARİ GÖREVLER ══
-    '6.5.1' => ['baslik' => 'Akademik teşkilat yönetmeliğinde tanımlanan idari görevleri üstlenmek (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 10],
-    '6.6.2' => ['baslik' => 'Altı aydan uzun süreli komisyon, kurul üyeliği ve koordinatörlükler (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 3],
+    '6.5.1' => ['baslik' => 'Akademik teşkilat yönetmeliğinde tanımlanan idari görevleri üstlenmek (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 10],
+
+    // 'Anabilim Dalı Başkanı / Koordinatörlük' etiketi anabilim dalı
+    // başkanlığını (6.5.1, 10 puan) koordinatörlükle birleştiriyor;
+    // koordinatörlük 6.6'da 1 ya da 3 puan ve kayıt süreyi taşımıyor,
+    // §0 uyarınca altı aydan kısa satırdan sayılıyor (01.09.2026).
+    '6.6.1' => ['baslik' => 'Altı aydan kısa süreli komisyon, kurul üyeliği veya koordinatörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 1],    '6.6.2' => ['baslik' => 'Altı aydan uzun süreli komisyon, kurul üyeliği ve koordinatörlükler (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 3],
 ];
 
 /** @param list<string> $onekler */

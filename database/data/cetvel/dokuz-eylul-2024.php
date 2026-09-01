@@ -215,8 +215,21 @@ return [
         '11.c' => ['baslik' => 'Faydalı model veya endüstriyel tasarım belgesi', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Yazılım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 15],
         '11.d' => ['baslik' => 'Lisans anlaşmasıyla sanayiye devredilmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ticarileştirme'], 'puan' => 30],
         '18.a' => ['baslik' => 'Sürekli ve periyodik verilen jürili uluslararası bilim, sanat veya tasarım ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 20],
-        '18.b.1' => ['baslik' => 'Bilim, sanat veya tasarım ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'YÖK Ödülü', 'Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 15],
+
+        // 18.b maddesi SÜREKLİ VE PERİYODİK olarak verilen jürili ödülleri
+        // sayıyor; tek seferlik bir yarışma derecesi bu tanıma girmiyor,
+        // etiket 01.09.2026'da satırdan çıkarıldı.
+        '18.b.1' => ['baslik' => 'Bilim, sanat veya tasarım ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'YÖK Ödülü', 'Ulusal Bilim/Sanat Ödülü'], 'puan' => 15],
         '18.b.2' => ['baslik' => 'Teşvik ödülü veya burs', 'kategori' => 'odul', 'kaynaklar' => ['TÜBA GEBİP / TWAS Teşvik Ödülü', 'Burs'], 'puan' => 10],
+
+        // ── 37. MİMARLIK, SANAT VE TASARIM ÖDÜLLERİ ──
+        // 01.09.2026'da ayrı satır açıldı. Daha önce yarışma ödülleri 18.b.1'in
+        // (jürili ulusal bilim ödülü, 15) etiketlerine bağlıydı; oysa 18.b
+        // "SÜREKLİ VE PERİYODİK olarak verilen" ödülleri sayıyor ve tek
+        // seferlik bir yarışma derecesi oraya girmiyor. Madde 37 derece ve
+        // mansiyonu uluslararası 20/15, ulusal 10 puanlıyor; kayıt ne dereceyi
+        // ne düzeyi taşıdığı için §0 uyarınca ulusal kademeden.
+        '37.a' => ['baslik' => 'Mimarlık, sanat veya tasarım yarışmasında derece, mansiyon ya da jüri özel ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 10],
 
         // ══ C. EĞİTİME KATKI (19-22) ══
         '19.a' => ['baslik' => 'Danışmanlığında tamamlanmış doktora, tıpta uzmanlık veya sanatta yeterlik tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman', 'es_danisman'], 'puan' => 10],
@@ -363,12 +376,10 @@ return [
         // hem Madde 1.10.1/c'de hem de kadro puan çizelgelerinin ilk satırında
         // yazılı; ikisi de aynı listeyi veriyor.
         //
-        // MADDE 37 KÜMELERE AYRICA YAZILMADI. Mimarlık ve Konservatuvar
-        // kümeleri "Madde 37" (Mimarlık, Sanat ve Tasarım Ödülleri) diyor ama
-        // o maddenin bütün satırları 18.a/18.b.1'in kaynak etiketlerine
-        // düşüyor ve 18 zaten B bölümünün parçası olarak her kümede var. Ayrı
-        // satır açmak ölü kod olurdu: motor kayıt başına en yüksek maddeyi
-        // seçtiği için ödül daima 18'den sayılıyor.
+        // MADDE 37 (Mimarlık, Sanat ve Tasarım Ödülleri) 01.09.2026'da kendi
+        // satırına ayrıldı. Önce "bütün satırları 18.a/18.b.1'e düşüyor" diye
+        // bırakılmıştı; oysa 18.b SÜREKLİ VE PERİYODİK ödülleri sayıyor ve tek
+        // seferlik bir yarışma derecesi 15 puan alıyordu. Artık 37.a'dan 10.
         'ZORUNLU-FEN' => ['1.*', '2.a', '8.a', '8.a.a', '8.b', '8.b.a', 'B-GIRISIMCILIK'],
         'ZORUNLU-SOSYAL' => ['1.*', '2.*', '5.*', '22.*', '8.a', '8.a.a', '8.b', '8.b.a', 'B-GIRISIMCILIK'],
         'ZORUNLU-MIMARLIK' => ['1.*', '2.*', '5.*', '22.*', '8.a', '8.a.a', '8.b', '8.b.a', '8.f', 'B-GIRISIMCILIK'],
