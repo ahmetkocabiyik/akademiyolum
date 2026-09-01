@@ -2,7 +2,7 @@
 
 /**
  * GİRESUN ÜNİVERSİTESİ — EK-1: Bilimsel Araştırma ve Yayın Faaliyetleri
- * Kaynak: pdf/17536996152.giresununiverstesi.pdf (2019 yönergesi, 2025 değişikliğiyle)
+ * Kaynak: pdf/17536995062.giresununiverstesi.pdf (2019 yönergesi, 2025 değişikliğiyle)
  *
  * TEK ORTAK PUAN TABLOSU, TEMEL ALAN AYRIMI YOK. Koşullar tabloya BÖLÜM HARFİYLE
  * atıf yapıyor ("A, B, C, D, E, F, G, H ve K bölümlerinden"), bu yüzden harf

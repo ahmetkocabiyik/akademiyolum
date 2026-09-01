@@ -2,7 +2,7 @@
 
 /**
  * DÜZCE ÜNİVERSİTESİ — EK-1: Akademik Etkinlik Puanlama Sistemi
- * Kaynak: pdf/17536994292.duzceuniverstesi.pdf
+ * Kaynak: pdf/17536992892.duzceuniverstesi.pdf
  *
  * TEK ORTAK PUAN TABLOSU, ÜÇ ALAN GRUBUNA GÖRE AYRI EŞİK. Koşullar tabloya
  * bölüm numarasıyla değil, "bilimsel/sanatsal yayınlar" gibi adla atıf yapıyor;

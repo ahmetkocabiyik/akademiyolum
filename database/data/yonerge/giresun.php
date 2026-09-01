@@ -4,7 +4,7 @@
  * GİRESUN ÜNİVERSİTESİ — Öğretim Üyeliği Kadrolarına Yükseltilme ve Atanma
  * Yönergesi (2019; Yükseköğretim Genel Kurulunun 30.01.2025 kararıyla
  * değiştirilmiş hâliyle)
- * Kaynak: pdf/17536996152.giresununiverstesi.pdf
+ * Kaynak: pdf/17536995062.giresununiverstesi.pdf
  *
  * TEMEL ALAN AYRIMI YOK. Giresun bütün alanlardan aynı puanı istiyor; alan
  * yalnızca "profesörlük başlıca eseri"nin tanımında ayrışıyor (Güzel Sanatlar

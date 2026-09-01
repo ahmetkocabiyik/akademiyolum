@@ -2,7 +2,7 @@
 
 /**
  * BİNGÖL ÜNİVERSİTESİ — EK 1: Puanlama Listesi
- * Kaynak: pdf/17536988712.bingoluniverstesi.pdf
+ * Kaynak: pdf/17536931942.bingoluniverstesi.pdf
  *
  * TEK ORTAK PUAN TABLOSU, ALAN GRUBUNA GÖRE FARKLI ZORUNLU MADDE KÜMESİ.
  * Koşullar tabloya SIRA NUMARASIYLA atıf yapıyor ("en az 100 puanı 1, 2, 6, 10,

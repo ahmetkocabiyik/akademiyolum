@@ -2,7 +2,7 @@
 
 /**
  * BAYBURT ÜNİVERSİTESİ — Öğretim Üyeliğine Yükseltilme ve Atanma Ölçütleri
- * Kaynak: pdf/17536973432.bayburtuniverstesi.pdf (Madde 10)
+ * Kaynak: pdf/17536931482.bayburtuniverstesi.pdf (Madde 10)
  *
  * ÜÇ KATMANLI ALT BARAJ — korpusta ender bir yapı. Her kadroda üç alt baraj
  * üst üste biniyor ve hepsi aynı puanları farklı kümelerden sayıyor:

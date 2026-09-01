@@ -3,7 +3,7 @@
 /**
  * BANDIRMA ONYEDİ EYLÜL ÜNİVERSİTESİ — Öğretim Üyeliğine Atanma ve Yükseltme
  * Yönergesi (Madde 7-9)
- * Kaynak: pdf/17536971992.bandirmaonyedieyluluniverstesi.pdf
+ * Kaynak: pdf/17536931052.bandirmaonyedieyluluniverstesi.pdf
  *
  * İKİ ALAN GRUBU, ÜÇ KADRO. Puan barajları iki grupta AYNI (Dr. yeniden atama
  * 100, doçent 200, profesör 300) ama ALT BARAJ FARKLI KÜMEDEN sayılıyor:

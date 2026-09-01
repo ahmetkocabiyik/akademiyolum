@@ -3,7 +3,7 @@
 /**
  * OSMANİYE KORKUT ATA ÜNİVERSİTESİ — Öğretim Üyeliğine Akademik Yükseltme ve
  * Atama Yönergesi (Madde 5-8)
- * Kaynak: pdf/17537010842.osmaniyekorkutatauniverstesi.pdf
+ * Kaynak: pdf/17537006032.osmaniyekorkutatauniverstesi.pdf
  *
  * DR. ÖĞR. ÜYELİĞİNDE PUAN BARAJI YOK, ÇALIŞMA SAYISI VAR (Tablo 1) — korpusta
  * ender. On iki temel alanın her biri kendi sayım kuralını taşıyor ve kuralların

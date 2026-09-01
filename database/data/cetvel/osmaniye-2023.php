@@ -3,7 +3,7 @@
 /**
  * OSMANİYE KORKUT ATA ÜNİVERSİTESİ — Ek-1: Akademik Faaliyet ve Etkinlik
  * Puanları
- * Kaynak: pdf/17537010842.osmaniyekorkutatauniverstesi.pdf (01/01/2023 yürürlük)
+ * Kaynak: pdf/17537006032.osmaniyekorkutatauniverstesi.pdf (01/01/2023 yürürlük)
  *
  * TEK ORTAK PUAN TABLOSU, ALANA GÖRE ÇOK AYRINTILI ÖZEL ŞARTLAR. Koşullar
  * tabloya madde koduyla atıf yapıyor ("1.1.1 maddesinden 1 çalışma veya
@@ -35,9 +35,34 @@
  *   'Hakemlik' ve 'Yayın Kurulu Üyeliği' dergi düzeyi taşımıyor → 9.4 (2).
  *   'Davetli Konuşmacı' ulusal/uluslararası ayırmıyor → 4.2.4 (3).
  *
+ * ── 10. VE 12. BÖLÜMLER 01.09.2026'DA YENİDEN OKUNDU ──
+ * 10.1.1-10.1.2 "puan sütunu ayrıştırılamadı" diye kayıtlıydı. Dosya
+ * başlığındaki kaynak adı yanlıştı (pdf/17537010842…, gerçek dosya
+ * 17537006032…); doğru dosyada iki satır da `pdftotext -q -layout` ile temiz
+ * çıkıyor (60 ve 40) ve girildi.
+ *
+ * Aynı okumada bölüm 10'un ETİKET DAĞILIMI DÜZELTİLDİ. Girilmeyen iki satırın
+ * etiketleri 10.1.3 ve 10.2.3'e yığılmıştı; bu bazı kalemleri EKSİK (kişisel
+ * etkinlik 40 yerine 60), bazılarını FAZLA (jürisiz karma etkinlik 20 yerine
+ * 10, resital 40 yerine 20) sayıyordu. Jürisiz katılım için 10.1.6 ve 10.2.6,
+ * jürili kişisel ve karma etkinlik için 10.1.1-10.1.2 ve 10.2.1-10.2.2
+ * satırları açıldı; icracı etiketleri (resital, solistlik) tanımı birebir
+ * karşılayan 10.1.5 ve 10.2.5'e taşındı.
+ *
+ * ── 12. BÖLÜM DE FAZLA SAYIYORDU ──
+ * Bütün idari görev etiketleri 12.2'de (15 puan) toplanmıştı; tablo bu
+ * görevleri 20/15/10/5/1 diye beş kademeye ayırıyor. Kademeler açıldı: bölüm
+ * başkan yardımcısı, anabilim dalı başkanı ve koordinatörlükler artık dekan
+ * yardımcılığı puanı almıyor. İki etiket birden çok kademeyi birleştirdiği
+ * için §0 uyarınca düşükten sayılıyor: 'Senato / Üniversite Yönetim Kurulu
+ * Üyesi' 5'ten (senato üyeliği), 'Anabilim Dalı Başkanı / Koordinatörlük'
+ * 1'den (bölüm koordinatörlüğü). 'Kurul / Komisyon Üyeliği' satırdan çıkarıldı;
+ * tablo yalnızca senato ve yönetim kurulu üyeliğini puanlıyor.
+ *
  * GİRİLMEYEN KALEMLER: 3 (çeviri alt kırılımları), 7 (yurt dışı görevlendirme
  * süreleri — profilde tutulmuyor), 8.4 (komisyon ve kulüp danışmanlıkları),
- * 10.1.1-10.1.2 (puan sütunu ayrıştırılamadı), 11.9, 12.3 ve sonrası.
+ * 11.9 (bilimsel toplantı düzenleme kurulu — sözlükte karşılık yok),
+ * 13 (jüri üyelikleri — doçentlik ve atama jürileri kayıtta tutulmuyor).
  */
 
 return [
@@ -45,8 +70,10 @@ return [
         .'sayınıza ve sıranıza göre azaltılır (Tablo 4). Atıf (en fazla 75) ve dergi '
         .'editörlüğü-hakemlik (en fazla 75) tavanları uygulanıyor. Uluslararası projelerde '
         .'yönergenin "listede olmayan kuruluşlar için puanın %30\'u" kuralı uygulanmıyor; fon '
-        .'kuruluşu kayıtta bu ayrıntıda tutulmuyor. Sanatsal etkinliklerin bir kısmı (10.1.1 ve '
-        .'10.1.2) puan sütunu ayrıştırılamadığı için girilemedi.',
+        .'kuruluşu kayıtta bu ayrıntıda tutulmuyor. İDARİ GÖREV PUANINIZ DÜŞÜK GÖRÜNEBİLİR: '
+        .'tablo senato üyeliği ile yönetim kurulu üyeliğini, anabilim dalı başkanlığı ile '
+        .'koordinatörlüğü ayrı puanlıyor, faaliyet kaydı ikisini ayırmadığı için her biri '
+        .'düşük kademeden sayılıyor.',
 
     // Tablo 4 — Akademik çalışmalarla ilgili katkı oranları.
     'yazar_katsayisi' => [
@@ -123,12 +150,18 @@ return [
         '9.4' => ['baslik' => 'Diğer ulusal hakemli dergide editörlük, yayın kurulu üyeliği veya hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Hakemlik', 'BKCI Kitap'], 'puan' => 2],
 
         // ══ 10. SANATSAL ETKİNLİKLER ══
-        '10.1.3' => ['baslik' => 'Uluslararası sempozyum, festival veya bienale eserleriyle katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Sempozyum/Çalıştay/Bienal (Yurt Dışı)', 'Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Resital (Uluslararası)', 'Solistlik (Uluslararası)', 'Masterclass (Uluslararası)'], 'puan' => 40],
+        '10.1.1' => ['baslik' => 'Uluslararası jürili sergi, bienal, gösteri, dinleti veya festivalde kişisel etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt İçi, Uluslararası Jürili)'], 'puan' => 60],
+        '10.1.2' => ['baslik' => 'Uluslararası jürili sergi, bienal, gösteri, dinleti veya festivalde karma-ortak etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Karma Etkinlik (Yurt İçi, Uluslararası Jürili)'], 'puan' => 40],
+        '10.1.3' => ['baslik' => 'Uluslararası sempozyum, festival, workshop veya bienale eserleriyle katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt Dışı)', 'Masterclass (Uluslararası)'], 'puan' => 40],
         '10.1.4' => ['baslik' => 'Uluslararası kişisel sergi veya eserin satın alınması ya da yayında yer alması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt Dışı)', 'Eserin Haber Olması (Uluslararası)', 'Elektronik Kişisel Sergi (Uluslararası)'], 'puan' => 30],
-        '10.1.5' => ['baslik' => 'Uluslararası sanat etkinliğinde icracı olarak yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Uluslararası)', 'Opera Birinci Rol (Uluslararası)', 'Koro Şefliği (Uluslararası)', 'Orkestra Şefliği (Uluslararası)', 'Karma Etkinlik (Yurt Dışı, Jürisiz)', 'Elektronik Karma Sergi (Uluslararası)'], 'puan' => 20],
-        '10.2.3' => ['baslik' => 'Ulusal sempozyum, festival veya bienale eserleriyle katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)', 'Sempozyum/Çalıştay/Bienal (Yurt İçi)', 'Kişisel Etkinlik (Ulusal)', 'Kişisel Etkinlik (Yurt İçi, Jürisiz)', 'Resital (Ulusal)', 'Solistlik (Ulusal)', 'Masterclass (Ulusal)'], 'puan' => 20],
+        '10.1.5' => ['baslik' => 'Uluslararası sanat etkinliğinde icracı olarak yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Uluslararası)', 'Opera Birinci Rol (Uluslararası)', 'Koro Şefliği (Uluslararası)', 'Orkestra Şefliği (Uluslararası)', 'Resital (Uluslararası)', 'Solistlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)'], 'puan' => 20],
+        '10.1.6' => ['baslik' => 'Yarışmasız, jürisiz uluslararası etkinliğe karma ya da grup olarak katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Yurt Dışı, Jürisiz)', 'Karma Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Elektronik Karma Sergi (Uluslararası)'], 'puan' => 10],
+        '10.2.1' => ['baslik' => 'Ulusal jürili sergi, bienal, gösteri, dinleti veya festivalde kişisel etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Ulusal)'], 'puan' => 30],
+        '10.2.2' => ['baslik' => 'Ulusal jürili sergi, bienal, gösteri, dinleti veya festivalde karma-ortak etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 25],
+        '10.2.3' => ['baslik' => 'Ulusal sempozyum, festival, workshop veya bienale eserleriyle katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt İçi)', 'Masterclass (Ulusal)'], 'puan' => 20],
         '10.2.4' => ['baslik' => 'Ulusal kişisel sergi veya eserin satın alınması ya da yayında yer alması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt İçi)', 'Eserin Satın Alınması (Yurt İçi)', 'Eserin Yayında Yer Alması / Satın Alınması', 'Eserin Haber Olması (Ulusal)', 'Elektronik Kişisel Sergi (Ulusal)'], 'puan' => 15],
-        '10.2.5' => ['baslik' => 'Ulusal sanat etkinliğinde icracı olarak yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Ulusal)', 'Orkestra / Koro Üyeliği', 'Opera Birinci Rol (Ulusal)', 'Koro Şefliği (Ulusal)', 'Orkestra Şefliği (Ulusal)', 'Karma Etkinlik (Jürisiz, Ulusal)', 'Elektronik Karma Sergi (Ulusal)', 'Özgün Eser / Beste / Tasarım'], 'puan' => 10],
+        '10.2.5' => ['baslik' => 'Ulusal sanat etkinliğinde icracı olarak yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Ulusal)', 'Orkestra / Koro Üyeliği', 'Opera Birinci Rol (Ulusal)', 'Koro Şefliği (Ulusal)', 'Orkestra Şefliği (Ulusal)', 'Resital (Ulusal)', 'Solistlik (Ulusal)', 'Kişisel Etkinlik (Yurt İçi, Jürisiz)', 'Özgün Eser / Beste / Tasarım'], 'puan' => 10],
+        '10.2.6' => ['baslik' => 'Yarışmasız, jürisiz ulusal etkinliğe karma ya da grup olarak katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Jürisiz, Ulusal)', 'Elektronik Karma Sergi (Ulusal)'], 'puan' => 5],
 
         // ══ 11. ÖDÜLLER VE PATENTLER ══
         '11.1' => ['baslik' => 'Uluslararası ödül', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 50],
@@ -142,7 +175,14 @@ return [
 
         // ══ 12. İDARİ GÖREVLER ══
         '12.1' => ['baslik' => 'Rektörlük (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 20],
-        '12.2' => ['baslik' => 'Rektör yardımcılığı, dekanlık veya müdürlük (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Uygulama ve Araştırma Merkezi Müdürü', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 15],
+        '12.2' => ['baslik' => 'Rektör yardımcılığı, dekanlık, enstitü, yüksekokul ya da merkez müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 15],
+        '12.3' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı veya bölüm başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 10],
+        // 'Senato / Üniversite Yönetim Kurulu Üyesi' iki kurulu birleştiriyor: ÜYK üyeliği
+        // 12.3'te 10, senato üyeliği 12.4'te 5 puan; §0 uyarınca 5'ten sayılıyor.
+        '12.4' => ['baslik' => 'Bölüm başkan yardımcılığı veya senatonun seçilmiş üyeliği (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
+        // Etiket anabilim dalı başkanlığı (12.4, 5) ile bölüm koordinatörlüğünü (12.5.c, 1)
+        // birleştiriyor; §0 uyarınca 1'den sayılıyor.
+        '12.5' => ['baslik' => 'Anabilim dalı başkanlığı veya ERASMUS, Mevlana ya da Farabi koordinatörlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 1],
 
         // ══ 13. JÜRİ ÜYELİKLERİ ══
         '13.5' => ['baslik' => 'Tez izleme komitesi veya tez savunma jürisi üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 1],

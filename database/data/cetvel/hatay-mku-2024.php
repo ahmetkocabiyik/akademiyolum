@@ -2,7 +2,7 @@
 
 /**
  * HATAY MUSTAFA KEMAL ÜNİVERSİTESİ — Akademik Etkinlikler ve Puanlar Listesi
- * Kaynak: pdf/17536997702.hataymustafakemaluniverstesi.pdf
+ * Kaynak: pdf/17536995922.hataymustafakemaluniverstesi.pdf
  *         (05.06.2024 senato ve 27.06.2024 YÖK Genel Kurulu değişiklikleriyle)
  *
  * BU CETVEL YALNIZCA DR. ÖĞR. ÜYELİĞİNDE KULLANILIYOR. Hatay MKÜ doçentlik ve
@@ -23,11 +23,25 @@
  *   'Hakemlik' dergi düzeyi taşımıyor → A3c (2).
  *   'Davetli Konuşmacı' ulusal/uluslararası ayırmıyor → B1b (10).
  *
+ * ── E BÖLÜMÜ 01.09.2026'DA YENİDEN OKUNDU ──
+ * E2 (patentler) "puan satırları PDF'te ayrıştırılamadı" diye kayıtlıydı;
+ * `pdftotext -q -layout` ile üç satır da temiz çıkıyor (uluslararası 50 ·
+ * ulusal 25 · çeşit geliştirme 50) ve girildi. PATENTİ OLAN ADAY BUGÜNE KADAR
+ * SIFIR GÖRÜYORDU.
+ *
+ * Aynı okumada E1'de fazla sayan iki satır bulundu: E1b (yurt dışı bilim
+ * ödülü, 50) ile E1d (uluslararası kongre ödülü, 15) ve E1c (yurt içi bilim
+ * ödülü, 25) ile E1e (ulusal kongre ödülü, 10) kayıtta tek etikete düşüyor.
+ * Genel ödül etiketleri §0 uyarınca düşük olan E1d ve E1e'ye taşındı; E1b'de
+ * yalnızca kendi etiketi olan ERC ödülü kaldı. 'Burs' etiketi de çıkarıldı,
+ * listede karşılığı yok.
+ *
  * GİRİLMEYEN KALEMLER: A4f (bestecinin eserinin uluslararası konserde
  * seslendirilmesi), A3d-A3e (proje hakemliği ve UDAP), C3 (yurt dışı araştırma
- * süresi — profilde tutulmuyor), E2 (patentler — puan satırları PDF'te
- * ayrıştırılamadı), G bölümü (sanat tarihi, arkeoloji ve antropoloji kazı
- * çalışmaları — kaynak sözlüğünde karşılığı yok).
+ * süresi — profilde tutulmuyor), G bölümü (sanat tarihi, arkeoloji ve
+ * antropoloji kazı çalışmaları — kazı projesi ve ruhsatı için kaynak
+ * sözlüğünde karşılık yok; proje etiketlerine bağlamak C bölümünün proje
+ * satırlarıyla çifte sayım olurdu).
  *
  * G BÖLÜMÜNÜN GİRİLEMEMESİ SOSYAL/GÜZEL SANATLAR ADAYINI ETKİLER: o alanların
  * 80 puanlık barajı "A-B-C-D-E-F-G" kümesinden sayılıyor; G girilmediği için
@@ -39,8 +53,10 @@ return [
         .'Listesi"nden. Hatay MKÜ çok yazarlı çalışmalar için oran tablosu içermiyor; puan '
         .'yazar sayısından bağımsız veriliyor. Bu tablo yalnızca Dr. Öğr. Üyeliği koşullarında '
         .'kullanılıyor — doçentlik ve profesörlük ÜAK doçentlik kriterlerine bağlı. Sanat '
-        .'tarihi, arkeoloji ve antropoloji kazı çalışmaları (G bölümü) ile patent kalemleri '
-        .'girilemedi.',
+        .'tarihi, arkeoloji ve antropoloji kazı çalışmaları (G bölümü) girilemedi. ÖDÜL '
+        .'PUANINIZ DÜŞÜK GÖRÜNEBİLİR: liste kurum ödülü ile kongre ödülünü ayrı puanlıyor, '
+        .'faaliyet kaydı ikisini ayırmadığı için genel ödül kayıtlarınız düşük olan kongre '
+        .'ödülü değerinden sayılıyor.',
 
     'maddeler' => [
         // ══ A. YAYINLAR — 1. Makaleler ══
@@ -99,8 +115,14 @@ return [
 
         // ══ E. ÖDÜLLER VE PATENTLER ══
         'E1a' => ['baslik' => 'YÖK, TÜBA veya TÜBİTAK bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['YÖK Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 60],
-        'E1b' => ['baslik' => 'Alanında yurt dışı kurum veya kuruluştan alınan bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 50],
-        'E1c' => ['baslik' => 'Alanında yurt içi kurum veya kuruluştan alınan bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs'], 'puan' => 25],
+        'E1b' => ['baslik' => 'Alanında yurt dışı kurum veya kuruluştan alınan bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ufuk Avrupa / ERC Ödülü'], 'puan' => 50],
+        // E1b (50) ile E1d (15), E1c (25) ile E1e (10) kayıtta tek etikete düşüyor;
+        // §0 uyarınca genel ödül etiketleri düşük olan kongre-ödülü satırlarından sayılıyor.
+        'E1d' => ['baslik' => 'Uluslararası kongre, sempozyum, konferans veya festivalin bilim ve sanat kurulunca verilen ödül', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü'], 'puan' => 15],
+        'E1e' => ['baslik' => 'Ulusal kongre, sempozyum, konferans veya festivalin bilim ve sanat kurulunca verilen ödül', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 10],
+        'E2a' => ['baslik' => 'Alanında uluslararası tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 50],
+        'E2b' => ['baslik' => 'Alanında ulusal tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 25],
+        'E2c' => ['baslik' => 'Çeşit geliştirme (Ziraat alanı)', 'kategori' => 'patent', 'kaynaklar' => ['Islahçı Hakkı / Çeşit Tescili'], 'puan' => 50],
 
         // ══ F. SANAT DALLARINDAKİ ETKİNLİKLER ══
         'F1a1' => ['baslik' => 'Uluslararası kişisel sanat etkinliği (sergi, festival, dinleti, gösterim)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Resital (Uluslararası)', 'Şan Resitali (Uluslararası)', 'Solistlik (Uluslararası)'], 'puan' => 60],

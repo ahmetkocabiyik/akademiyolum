@@ -2,7 +2,7 @@
 
 /**
  * BİNGÖL ÜNİVERSİTESİ — Öğretim Üyeliğine Yükseltilme ve Atanma Yönergesi
- * Kaynak: pdf/17536988712.bingoluniverstesi.pdf (Madde 9-15)
+ * Kaynak: pdf/17536931942.bingoluniverstesi.pdf (Madde 9-15)
  *
  * DOÇENTLİKTE PUAN BARAJI YOK (Madde 11): yönerge yalnızca ÜAK doçentlik
  * unvanını, doçentlik sözlü sınavında başarıyı ve 65 yabancı dil puanını şart

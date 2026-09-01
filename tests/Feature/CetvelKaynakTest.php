@@ -266,3 +266,24 @@ test('yazar katsayısı yapılandırması tutarlı', function () {
 
     expect(array_values(array_unique($sizinti)))->toBe([]);
 });
+
+test('dosya başlıklarındaki kaynak PDF adları gerçekten var', function () {
+    // Yanlış bir kaynak adı sessiz: motor okumaz, test kırılmaz, ama bir
+    // değeri doğrulamak isteyen "dosya yok" alır ve satırı "okunamadı" diye
+    // bırakır. Bayburt, Kilis, Hatay ve Osmaniye'de tam bu olmuştu.
+    $kok = dirname(__DIR__, 2);
+    $eksik = [];
+
+    foreach (glob("{$kok}/database/data/{cetvel,yonerge}/*.php", GLOB_BRACE) as $dosya) {
+        $basi = substr((string) file_get_contents($dosya), 0, 4000);
+        preg_match_all('#pdf/([^\s)\'"]+\.pdf)#u', $basi, $eslesme);
+
+        foreach (array_unique($eslesme[1]) as $ad) {
+            if (! is_file("{$kok}/pdf/{$ad}")) {
+                $eksik[] = basename($dosya).' → pdf/'.$ad;
+            }
+        }
+    }
+
+    expect($eksik)->toBe([]);
+});

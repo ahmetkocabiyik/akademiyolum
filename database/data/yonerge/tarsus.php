@@ -2,7 +2,7 @@
 
 /**
  * TARSUS ÜNİVERSİTESİ — Öğretim Üyeliğine Yükseltilme ve Atanma Yönergesi
- * Kaynak: pdf/17537009432.tarsusuniverstesi.pdf (EK 1 / Tablo 1)
+ * Kaynak: pdf/17537009022.tarsusuniverstesi.pdf (EK 1 / Tablo 1)
  *
  * KORPUSTAKİ EN DÜZENLİ EŞİK TABLOSU: altı alan grubu × üç kadro, her hücrede
  * yalnızca iki sayı — "asgari makale puanı" ve "Tablo 2'den alınması gereken

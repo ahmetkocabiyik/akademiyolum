@@ -2,7 +2,7 @@
 
 /**
  * DÜZCE ÜNİVERSİTESİ — Öğretim Üyeliğine Yükseltilme ve Atama Ek Koşulları
- * Kaynak: pdf/17536994292.duzceuniverstesi.pdf (B bölümü)
+ * Kaynak: pdf/17536992892.duzceuniverstesi.pdf (B bölümü)
  *
  * ÜÇ ALAN GRUBU, HER KADRODA AYRI TABLO:
  *   Sağlık Bilimleri

@@ -3,7 +3,7 @@
 /**
  * KİLİS 7 ARALIK ÜNİVERSİTESİ — Akademik Kadrolara Yükseltilme ve Atanma
  * Esaslarına İlişkin Puanlama Çizelgesi
- * Kaynak: pdf/17537001102.kilis7aralikuniverstesi.pdf
+ * Kaynak: pdf/17537001432.kilis7aralikuniverstesi.pdf
  *
  * TEK ORTAK ÇİZELGE. Koşullar çizelgeye SIRA NUMARASIYLA atıf yapıyor
  * ("en az 50 puanı 1, 2, 3, 4, 5 ve 6 numaralı maddelerden"), bu yüzden

@@ -2,7 +2,7 @@
 
 /**
  * BANDIRMA ONYEDİ EYLÜL ÜNİVERSİTESİ — Tablo 2: Faaliyetler ve Puanlama Tablosu
- * Kaynak: pdf/17536971992.bandirmaonyedieyluluniverstesi.pdf
+ * Kaynak: pdf/17536931052.bandirmaonyedieyluluniverstesi.pdf
  *
  * TEK ORTAK PUAN TABLOSU, ALAN GRUBUNA GÖRE FARKLI ALT BARAJ KÜMESİ. Koşullar
  * tabloya kod aralığıyla atıf yapıyor ("A1-A13 kapsamına giren maddelerden en

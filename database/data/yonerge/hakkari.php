@@ -2,7 +2,7 @@
 
 /**
  * HAKKARİ ÜNİVERSİTESİ — Öğretim Üyeliğine Yükseltilme ve Atanma Yönergesi
- * Kaynak: pdf/17536997352.hakkariuniverstesi.pdf (Madde 6-9)
+ * Kaynak: pdf/17536995622.hakkariuniverstesi.pdf (Madde 6-9)
  *
  * KORPUSTAKİ EN SADE YÖNERGE: temel alan ayrımı yok, alt baraj yok, dönem
  * kırılımı yalnızca profesörlükte var. Koşullar tek cümleyle yazılmış:

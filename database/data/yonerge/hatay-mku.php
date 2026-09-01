@@ -3,7 +3,7 @@
 /**
  * HATAY MUSTAFA KEMAL ÜNİVERSİTESİ — Öğretim Üyeliğine Yükseltilme ve Atanma
  * Kriterleri
- * Kaynak: pdf/17536997702.hataymustafakemaluniverstesi.pdf
+ * Kaynak: pdf/17536995922.hataymustafakemaluniverstesi.pdf
  *
  * İKİ FARKLI CETVEL KULLANIYOR — korpusta ilk kez:
  *   Dr. Öğr. Üyeliği    Hatay MKÜ'nün kendi "Akademik Etkinlikler ve Puanlar

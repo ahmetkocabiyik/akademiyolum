@@ -2,7 +2,7 @@
 
 /**
  * BAYBURT ÜNİVERSİTESİ — Akademik Yükseltilme ve Atanma Puan Tablosu
- * Kaynak: pdf/17536973432.bayburtuniverstesi.pdf (Bölüm 4)
+ * Kaynak: pdf/17536931482.bayburtuniverstesi.pdf (Bölüm 4)
  *
  * TEK ORTAK PUAN TABLOSU. Koşullar tabloya BÖLÜM NUMARASIYLA atıf yapıyor
  * ("4. maddesinden en az 20 puan, 1. ve 4. maddelerinden en az 60 puan,

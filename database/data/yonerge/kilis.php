@@ -3,7 +3,7 @@
 /**
  * KİLİS 7 ARALIK ÜNİVERSİTESİ — Öğretim Üyeliğine Yükseltilme ve Atanma
  * Yönergesi
- * Kaynak: pdf/17537001102.kilis7aralikuniverstesi.pdf
+ * Kaynak: pdf/17537001432.kilis7aralikuniverstesi.pdf
  *         (04/12/2018 ve 28/02/2019 senato değişiklikleriyle)
  *
  * DR. ÖĞR. ÜYELİĞİNDE KOŞUL "YA MAKALE SAYISI YA PUAN" BİÇİMİNDE — korpusta

@@ -2,7 +2,7 @@
 
 /**
  * TARSUS ÜNİVERSİTESİ — EK 1 / Tablo 2: Faaliyet Puanlama Tablosu
- * Kaynak: pdf/17537009432.tarsusuniverstesi.pdf
+ * Kaynak: pdf/17537009022.tarsusuniverstesi.pdf
  *         (01.06.2023 tarihli ve 06-2023/30 sayılı Senato kararı)
  *
  * PUANLAR FORMÜLLE VERİLMİŞ. Tablo 2'de doğrudan sayı değil çarpım yazıyor:

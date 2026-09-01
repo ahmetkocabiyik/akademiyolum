@@ -3,7 +3,7 @@
 /**
  * HAKKARİ ÜNİVERSİTESİ — EK-1: Öğretim Üyeliğine Atama ve Yükseltme Etkinlik
  * Puanları
- * Kaynak: pdf/17536997352.hakkariuniverstesi.pdf
+ * Kaynak: pdf/17536995622.hakkariuniverstesi.pdf
  *
  * KORPUSTAKİ EN SADE KOŞUL YAPISI: yönerge alt baraj, kategori aralığı ya da
  * dönem kırılımı istemiyor. Tek bir cümle — "Ek-1'de belirtilen puanlama

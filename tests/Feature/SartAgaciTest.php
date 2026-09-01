@@ -4121,3 +4121,62 @@ test('Kilis 34. bölümün ödül ve patent puanları kaynaktaki değerlerde', f
         ->and($puan('Ulusal Bilim/Sanat Ödülü'))->toBe(5)
         ->and($puan('TÜBİTAK / TÜBA Ödülü'))->toBe(25);
 });
+
+test('Osmaniye sanat ve idari görev kademeleri tabloya göre ayrışıyor', function () {
+    $katalog = (new SartDeposu)->katalog('osmaniye-2023');
+
+    // 10.1.1 ve 10.1.2 "puan sütunu ayrıştırılamadı" diye girilmemişti;
+    // etiketleri 10.1.3'e (40) yığılmıştı.
+    $sanat = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::SanatselEtkinlik),
+        $katalog->coz(['10.*']),
+    );
+
+    expect($sanat('Kişisel Etkinlik (Uluslararası)'))->toBe(60)
+        ->and($sanat('Karma/Jürili Etkinlik (Uluslararası)'))->toBe(40)
+        ->and($sanat('Kişisel Etkinlik (Ulusal)'))->toBe(30)
+        // Jürisiz karma katılım tabloda en alt satır (10 ve 5); önce 20 ve 10 sayılıyordu.
+        ->and($sanat('Karma Etkinlik (Yurt Dışı, Jürisiz)'))->toBe(10)
+        ->and($sanat('Karma Etkinlik (Jürisiz, Ulusal)'))->toBe(5)
+        // İcracı kalemleri 10.1.5/10.2.5'in tanımına giriyor, 10.1.3'ün değil.
+        ->and($sanat('Resital (Uluslararası)'))->toBe(20)
+        ->and($sanat('Resital (Ulusal)'))->toBe(10);
+
+    // 12. bölüm beş kademeli; hepsi 12.2'de (15) toplanmıştı.
+    $idari = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::IdariGorev),
+        $katalog->coz(['12.*']),
+    );
+
+    expect($idari('Rektör'))->toBe(20)
+        ->and($idari('Dekan / Enstitü-YO Müdürü'))->toBe(15)
+        ->and($idari('Bölüm Başkanı'))->toBe(10)
+        ->and($idari('Bölüm Başkan Yardımcısı'))->toBe(5)
+        ->and($idari('Anabilim Dalı Başkanı / Koordinatörlük'))->toBe(1);
+});
+
+test('Hatay MKÜ patentleri puanlıyor, ödül satırları düşük kademeden sayılıyor', function () {
+    $katalog = (new SartDeposu)->katalog('hatay-mku-2024');
+
+    // E2 "puan satırları ayrıştırılamadı" diye girilmemişti: patenti olan aday SIFIR görüyordu.
+    $patent = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::Patent),
+        $katalog->coz(['E*']),
+    );
+
+    expect($patent('Uluslararası Patent'))->toBe(50)
+        ->and($patent('Ulusal Patent'))->toBe(25)
+        ->and($patent('Islahçı Hakkı / Çeşit Tescili'))->toBe(50);
+
+    // E1b (50) ile E1d (15), E1c (25) ile E1e (10) kayıtta ayrılamıyor; §0 uyarınca düşükten.
+    $odul = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::Odul),
+        $katalog->coz(['E*']),
+    );
+
+    expect($odul('Uluslararası Bilim/Sanat Ödülü'))->toBe(15)
+        ->and($odul('Ulusal Bilim/Sanat Ödülü'))->toBe(10)
+        // Kendi etiketi olan ödüller kendi satırlarında kalıyor.
+        ->and($odul('Ufuk Avrupa / ERC Ödülü'))->toBe(50)
+        ->and($odul('YÖK Ödülü'))->toBe(60);
+});
