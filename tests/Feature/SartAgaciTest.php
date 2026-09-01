@@ -4445,3 +4445,42 @@ test('Sakarya UBÜ proje koşulu yönergenin saydığı dört kalemle sınırlı
         ->and($katalog->eslesir(sartFaaliyet('Özel Sektör / STK', Kategori::Proje, 'yurutucu'), $kodlar))->toBeFalse()
         ->and($katalog->eslesir(sartFaaliyet('AB Çerçeve / Ufuk', Kategori::Proje, 'yurutucu'), $kodlar))->toBeTrue();
 });
+
+test('kuyruk taraması: küçük kalemler kendi kademelerinde', function () {
+    $depo = sartDepo();
+    $p = function (string $cetvel, string $kaynak, Kategori $kat) use ($depo): int {
+        $k = $depo->katalog($cetvel);
+
+        return $k->puan(sartFaaliyet($kaynak, $kat), $k->coz(['*']));
+    };
+
+    // Marmara'nın her alan tablosunda hakemlik ve burs uluslararası/ulusal diye
+    // ikiye ayrılıyor (10/5 ve 30/10); kayıt düzeyi taşımıyor → ulusalden.
+    foreach (['marmara-fen-saglik', 'marmara-sosyal', 'marmara-spor'] as $cetvel) {
+        expect($p($cetvel, 'Hakemlik', Kategori::Editorluk))->toBe(5)
+            ->and($p($cetvel, 'Burs', Kategori::Odul))->toBe(10);
+    }
+
+    // İnönü: bölüm başkan yardımcılığı kaynakta puanlanmıyor; anabilim dalı
+    // başkanlığı ile koordinatörlük tek etikette (30/20) → düşükten.
+    expect($p('inonu-2026', 'Bölüm Başkan Yardımcısı', Kategori::IdariGorev))->toBe(0)
+        ->and($p('inonu-2026', 'Anabilim Dalı Başkanı / Koordinatörlük', Kategori::IdariGorev))->toBe(20);
+
+    // Düzce: proje/yarışma ödülü ayrı ve düşük satır (ulusal 10), bilim ödülü 30.
+    expect($p('duzce-2024', 'Yarışma Derecesi / Mansiyon', Kategori::Odul))->toBe(10)
+        ->and($p('duzce-2024', 'Ulusal Bilim/Sanat Ödülü', Kategori::Odul))->toBe(30);
+
+    // Burs satırı olmayan üç kaynakta burs puan üretmiyor.
+    expect($p('hakkari-2024', 'Burs', Kategori::Odul))->toBe(0)
+        ->and($p('sirnak-2024', 'Burs', Kategori::Odul))->toBe(0)
+        ->and($p('istanbul-29-mayis-2017', 'Burs', Kategori::Odul))->toBe(0);
+
+    // İstanbul Zaim: bölüm başkan yardımcılığı Y.2'nin listesinde yok, Y.3'ün
+    // "vb. görevler" kovasında.
+    expect($p('istanbul-zaim-2019', 'Bölüm Başkan Yardımcısı', Kategori::IdariGorev))->toBe(5);
+
+    // İTÜ'nün "ulusal projeler" tanımı 2209 öğrenci projesini saymıyor.
+    $itu = $depo->katalog('itu-2022');
+    expect($itu->puan(sartFaaliyet('Öğrenci Projesi (2209 vb.)', Kategori::Proje, 'yurutucu'), $itu->coz(['*'])))->toBe(0)
+        ->and($itu->puan(sartFaaliyet('BAP (Üniversite)', Kategori::Proje, 'yurutucu'), $itu->coz(['*'])))->toBe(25);
+});

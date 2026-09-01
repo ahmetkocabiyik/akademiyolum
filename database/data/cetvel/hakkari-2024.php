@@ -106,7 +106,7 @@ return [
         // ══ G — ÖDÜLLER ══
         'G1.1' => ['baslik' => 'Alanında uluslararası kuruluşlarca verilen bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 30],
         'G1.2' => ['baslik' => 'Alanında uluslararası kuruluşlarca verilen proje ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 25],
-        'G2.1' => ['baslik' => 'Alanında yurt içi kurum ve kuruluşlarca verilen bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Burs'], 'puan' => 20],
+        'G2.1' => ['baslik' => 'Alanında yurt içi kurum ve kuruluşlarca verilen bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 20],
 
         // ══ H — EĞİTİM-ÖĞRETİM FAALİYETLERİ ══
         'H1.1' => ['baslik' => 'Tamamlanmış doktora, tıpta uzmanlık veya sanatta yeterlik tezi yönetmek', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 30],

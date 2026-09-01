@@ -129,7 +129,11 @@ return [
 
         // ══ 6. ÖDÜLLER (TÜBİTAK yayın teşvik ödülleri hariç) ══
         '6.a' => ['baslik' => 'Uluslararası bilim, teşvik veya hizmet ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 50],
-        '6.b' => ['baslik' => 'Ulusal bilim, teşvik veya hizmet ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 30],
+        '6.b' => ['baslik' => 'Ulusal bilim, teşvik veya hizmet ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 30],
+        // Kaynakta proje ödülleri ayrı ve düşük: uluslararası 15, ulusal 10.
+        // 'Yarışma Derecesi / Mansiyon' 01.09.2026'ya kadar 30 puanlık ulusal
+        // bilim ödülü satırındaydı; §0 uyarınca ulusal proje ödülünden.
+        '6.d' => ['baslik' => 'Ulusal proje ya da yarışma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 10],
 
         // ══ 7. BURSLAR VE YURT DIŞI ÇALIŞMALAR (taban puanın %10'uyla sınırlı) ══
         '7.b' => ['baslik' => 'Bilimsel amaçlı burs', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 10],

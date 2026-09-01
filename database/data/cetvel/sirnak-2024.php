@@ -163,7 +163,7 @@ $maddeler = [
 
     // ══ I.17. ÖDÜLLER VE PATENTLER ══
     '17.1' => ['baslik' => 'Uluslararası bilim ya da sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 30],
-    '17.2' => ['baslik' => 'Ulusal bilim ödülü ya da ilanlı ve jürili ödül', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'YÖK Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs'], 'puan' => 20],
+    '17.2' => ['baslik' => 'Ulusal bilim ödülü ya da ilanlı ve jürili ödül', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'YÖK Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 20],
     '17.3' => ['baslik' => 'Yabancı ülkeden alınan patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 30],
     '17.4' => ['baslik' => 'Ulusal patent, faydalı model ya da çeşit tescili', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili', 'Yazılım', 'Ticarileştirme'], 'puan' => 20],
 

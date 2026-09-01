@@ -258,8 +258,12 @@ return [
         'R.1' => ['baslik' => 'Rektörlük veya rektör yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 50],
         'R.2' => ['baslik' => 'Dekanlık, yüksekokul/enstitü müdürlüğü, yardımcılıkları ve başhekimlik (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 40],
         'R.3' => ['baslik' => 'Rektörlükçe oluşturulan birim, koordinatörlük, komisyon ve kurullarda görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 30],
-        'R.4' => ['baslik' => 'Anabilim dalı, bölüm, program başkanlığı veya merkez müdürlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 30],
-        'R.5' => ['baslik' => 'Dekanlık veya müdürlükçe oluşturulan komisyon ve kurullarda görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 20],
+        // R.4 BAŞKANLIK satırı; bölüm başkan YARDIMCILIĞI için kaynakta karşılık
+        // yok, satırdan çıkarıldı. 'Anabilim Dalı Başkanı / Koordinatörlük'
+        // etiketi anabilim dalı başkanlığını (R.4, 30) koordinatörlükle (R.5,
+        // 20) birleştiriyor; §0 uyarınca R.5'e alındı (01.09.2026).
+        'R.4' => ['baslik' => 'Anabilim dalı, bölüm, program başkanlığı veya merkez müdürlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 30],
+        'R.5' => ['baslik' => 'Dekanlık veya müdürlükçe oluşturulan komisyon ve kurullarda görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 20],
         'R.6' => ['baslik' => 'Kamu veya özel sektörde danışmanlık ve eğiticilik', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 10],
 
         // ══ T. TOPLUMSAL KATKI ══ (bölüm tavanı 200 puan)

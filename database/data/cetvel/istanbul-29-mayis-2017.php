@@ -100,7 +100,7 @@ $maddeler = [
     'D46' => ['baslik' => 'Bilimsel toplantılarda düzenleme kurulu ya da oturum başkanlığı, kongre kitapçığı editörlüğü', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 3],
     'D52' => ['baslik' => 'Mesleki kurum ve kuruluşlarda görev, mesleki etkinliklerde görev ya da alanında mesleki tecrübe', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 4],
     'D59' => ['baslik' => 'Uluslararası ödül', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 40],
-    'D60' => ['baslik' => 'Ulusal ödül', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs'], 'puan' => 25],
+    'D60' => ['baslik' => 'Ulusal ödül', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 25],
     'D61' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 40],
     'D62' => ['baslik' => 'Ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Yazılım', 'Islahçı Hakkı / Çeşit Tescili', 'Ticarileştirme'], 'puan' => 25],
     'D63' => ['baslik' => 'Rektörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 30],

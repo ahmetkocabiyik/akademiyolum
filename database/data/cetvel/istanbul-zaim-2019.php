@@ -254,8 +254,8 @@ return [
         // ══ Y. İDARİ VE DİĞER FAALİYETLER ══
         // Yönerge puanı "× yıl sayısı" veriyor; cetvel sabit sayı tutuyor.
         'Y.1' => ['baslik' => 'Üniversitede üst düzey yöneticilik (rektör, rektör yardımcısı, dekan, enstitü müdürü)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 30],
-        'Y.2' => ['baslik' => 'Üniversitede yöneticilik (koordinatörlük, bölüm başkanlığı, dekan yardımcılığı, merkez müdürlüğü)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 20],
-        'Y.3' => ['baslik' => 'Üniversitede komisyon ya da kurul üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 5],
+        'Y.2' => ['baslik' => 'Üniversitede yöneticilik (koordinatörlük, bölüm başkanlığı, dekan yardımcılığı, merkez müdürlüğü)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 20],
+        'Y.3' => ['baslik' => 'Üniversitede komisyon ya da kurul üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı'], 'puan' => 5],
     ],
 
     'gruplar' => [
