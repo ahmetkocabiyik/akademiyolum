@@ -20,10 +20,15 @@
  * "1., 2., 3., 4., 5., 6. ve 11(2)" oluyor, yani sanat ve tasarım etkinlikleri
  * de sayılıyor.
  *
- * GÜZEL SANATLAR GİRİLMEDİ: 11(2) bölümünün (Sanat ve Tasarım Etkinlikleri)
- * puan sütunu kaynak PDF'te ayrıştırılamadı. O bölüm olmadan Güzel Sanatlar
- * eşiği yazmak, adaya sağlaması gerekenin bir parçasını gizlerdi ve baraj
- * gerçekte olduğundan zor görünürdü.
+ * GÜZEL SANATLAR 01.09.2026'DA AÇILDI. Alanın alt kümesi 11(2) bölümünü (Sanat
+ * ve Tasarım Etkinlikleri) de sayıyor; o bölüm "puan sütunu ayrıştırılamadı"
+ * diye kayıtlıydı ve alan hiç girilmemişti. Bölüm `pdftotext -layout` ile
+ * eksiksiz okundu ve cetvele girildi, eşikler yazıldı.
+ *
+ * GÜZEL SANATLAR'IN SAYILARI ÖTEKİLERLE AYNI; YALNIZCA KÜME GENİŞ. Madde
+ * 10 a.3, b.2, c.3 ve ç.2 aynı barajları tekrar ediyor, tek fark alt kümenin
+ * "1-6" yerine "1-6 ve 11(2)" olması. Yani alan ötekilerden bir tık kolay:
+ * sanat etkinlikleri de aynı barajı doldurabiliyor.
  *
  * DR. YENİDEN ATANMA GİRİLDİ AMA SÜRE KURALI GİRİLMEDİ: Madde 10/b.4 alınan
  * puana göre atama süresini belirliyor (asgari puanın 2 katından fazlası 3 yıl,
@@ -41,9 +46,9 @@ $DOC = Kalip::DOCENTLIK_SONRASI;
 $alanlar = ['fen', 'muhendislik', 'mimarlik', 'saglik', 'spor', 'hukuk', 'ilahiyat',
     'filoloji', 'sosyal', 'egitim', 'ziraat'];
 
-$gsNotu = 'Güzel Sanatlar alanı girilemedi: o alanın alt kümesi sanat ve tasarım etkinliklerini '
-    .'(11(2) bölümü) de sayıyor, ancak bu bölümün puan sütunu kaynak yönergeden '
-    .'çıkarılamadı.';
+$gsNotu = 'GÜZEL SANATLAR ALANINDA ALT BARAJ AYNI SAYILARI İSTİYOR ama sanat ve tasarım '
+    .'etkinliklerini (11(2) bölümü) de sayıyor; o alandaysanız aşağıdaki Güzel Sanatlar '
+    .'eşiğine bakın.';
 
 return [
     // ══════════ DR. ÖĞRETİM ÜYESİ (ilk atama, Madde 10/a) ══════════
@@ -116,6 +121,86 @@ return [
                 ['1 ve 4'], 250, $DOC, madde: 'Madde 10/ç.1'),
             Kalip::puanDan('Bilimsel araştırma projelerinizden en az 50 puan',
                 ['4'], 50, $DOC, madde: 'Madde 10/ç.1'),
+            Kalip::adet('Başlıca yazar olduğunuz en az 1 makale',
+                ['MAKALE'], 1, 'baslica', madde: 'Madde 10/ç.3'),
+        ]),
+    ],
+
+    // ══════════ GÜZEL SANATLAR (Madde 10 a.3 · c.3 · ç.2) ══════════
+    // Barajların sayıları ötekilerle birebir aynı; tek fark alt kümenin
+    // "1-6" yerine "1-6 ve 11(2)" olması.
+    [
+        'anahtar' => 'bayburt-gs-dr',
+        'aday_notu' => 'Güzel Sanatlar alanında alt baraj sanat ve tasarım etkinliklerinizi '
+            .'(cetvelin 11.2 bölümü) de sayıyor; sayılar öteki alanlarla aynı olduğu için bu '
+            .'alan bir tık kolay. İlk atamada proje şartı YOK; yayın ve sanat kalemlerinden 80, '
+            .'toplamda 100 puan isteniyor. Yeniden atamada projelerden en az 20, makale ve '
+            .'projelerden 60, sayılan bölümlerden 100 ve toplamda 200 puan gerekiyor. İlk atama '
+            .'en fazla 2 yıl süreyle yapılıyor.',
+        'universite' => 'Bayburt Üniversitesi',
+        'kadro' => 'dr_ogr_uyesi',
+        'alan' => ['guzel_sanatlar'],
+        'cetvel' => 'bayburt-2024',
+        'notlar' => 'Madde 10/a.3: puan tablosunun 1., 2., 3., 4., 5., 6. ve 11(2). '
+            .'maddelerinden en az 80, toplamda en az 100 puan.',
+        'sart' => Kalip::ve('Dr. Öğr. Üyesi — Bayburt Üniversitesi (Güzel Sanatlar)', [
+            Kalip::toplam(100),
+            Kalip::puanDan('Makale, kitap, bildiri, proje, patent, atıf ve sanat etkinliği '
+                .'kalemlerinizden en az 80 puan', ['1-6 ve 11.2'], 80, madde: 'Madde 10/a.3'),
+            Kalip::beyan('Doktora, tıpta uzmanlık veya sanatta yeterlik unvanına sahip olmak',
+                'Madde 10/a.1'),
+        ]),
+    ],
+
+    [
+        'anahtar' => 'bayburt-gs-docent',
+        'aday_notu' => 'ÜÇ ALT BARAJ ÜST ÜSTE: en içteki baraj yalnızca BİLİMSEL ARAŞTIRMA '
+            .'PROJESİ kalemini sayıyor (40 puan), yani projesi olmayan aday puanı ne olursa '
+            .'olsun geçemiyor. Güzel Sanatlar alanında en dıştaki alt baraj sanat ve tasarım '
+            .'etkinliklerinizi (cetvelin 11.2 bölümü) de sayıyor. Puanların tamamı doktora '
+            .'unvanınızı aldıktan sonraki çalışmalarınızdan gelmeli.',
+        'universite' => 'Bayburt Üniversitesi',
+        'kadro' => 'docentlik',
+        'alan' => ['guzel_sanatlar'],
+        'cetvel' => 'bayburt-2024',
+        'notlar' => 'Madde 10/c.3: doktora sonrası 4. maddeden en az 40, 1. ve 4. maddelerden '
+            .'en az 150, 1., 2., 3., 4., 5., 6. ve 11(2). maddelerden en az 200, genel toplamda '
+            .'en az 350 puan.',
+        'sart' => Kalip::ve('Doçent — Bayburt Üniversitesi (Güzel Sanatlar)', [
+            Kalip::toplam(350, $DR),
+            Kalip::puanDan('Makale, kitap, bildiri, proje, patent, atıf ve sanat etkinliği '
+                .'kalemlerinizden en az 200 puan', ['1-6 ve 11.2'], 200, $DR, madde: 'Madde 10/c.3'),
+            Kalip::puanDan('Makale ve proje kalemlerinizden en az 150 puan',
+                ['1 ve 4'], 150, $DR, madde: 'Madde 10/c.3'),
+            Kalip::puanDan('Bilimsel araştırma projelerinizden en az 40 puan',
+                ['4'], 40, $DR, madde: 'Madde 10/c.3'),
+            Kalip::beyan('ÜAK tarafından doçentlik için belirlenen asgari başvuru koşullarını '
+                .'yerine getirmiş ve doçent unvanını almış olmak', 'Madde 10/c.1'),
+        ]),
+    ],
+
+    [
+        'anahtar' => 'bayburt-gs-profesor',
+        'aday_notu' => 'ÜÇ ALT BARAJ ÜST ÜSTE: en içteki baraj yalnızca BİLİMSEL ARAŞTIRMA '
+            .'PROJESİ kalemini sayıyor (50 puan). Güzel Sanatlar alanında en dıştaki alt baraj '
+            .'sanat ve tasarım etkinliklerinizi (cetvelin 11.2 bölümü) de sayıyor. Puanların '
+            .'tamamı doçentlik unvanınızı aldıktan sonraki çalışmalarınızdan gelmeli ve en az '
+            .'bir makalenizde başlıca yazar olmanız gerekiyor.',
+        'universite' => 'Bayburt Üniversitesi',
+        'kadro' => 'profesorluk',
+        'alan' => ['guzel_sanatlar'],
+        'cetvel' => 'bayburt-2024',
+        'notlar' => 'Madde 10/ç.2: doçentlik sonrası 4. maddeden en az 50, 1. ve 4. maddelerden '
+            .'en az 250, 1., 2., 3., 4., 5., 6. ve 11(2). maddelerden en az 350, genel toplamda '
+            .'en az 700 puan. Madde 10/ç.3: en az bir makalede başlıca yazar olmak.',
+        'sart' => Kalip::ve('Profesör — Bayburt Üniversitesi (Güzel Sanatlar)', [
+            Kalip::toplam(700, $DOC),
+            Kalip::puanDan('Makale, kitap, bildiri, proje, patent, atıf ve sanat etkinliği '
+                .'kalemlerinizden en az 350 puan', ['1-6 ve 11.2'], 350, $DOC, madde: 'Madde 10/ç.2'),
+            Kalip::puanDan('Makale ve proje kalemlerinizden en az 250 puan',
+                ['1 ve 4'], 250, $DOC, madde: 'Madde 10/ç.2'),
+            Kalip::puanDan('Bilimsel araştırma projelerinizden en az 50 puan',
+                ['4'], 50, $DOC, madde: 'Madde 10/ç.2'),
             Kalip::adet('Başlıca yazar olduğunuz en az 1 makale',
                 ['MAKALE'], 1, 'baslica', madde: 'Madde 10/ç.3'),
         ]),

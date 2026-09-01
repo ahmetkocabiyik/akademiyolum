@@ -28,10 +28,13 @@
  * tanımlıyor; makale kuralı uygulandığı için ÇOK YAZARLI KİTAP VE BİLDİRİDE
  * PUAN OLDUĞUNDAN YÜKSEK görünür.
  *
- * GÜZEL SANATLAR CETVELE GİRMEDİ: o alanın koşulları 11(2) bölümünü (Sanat ve
- * Tasarım Etkinlikleri) sayıyor, ancak bu bölümün puan sütunu kaynak PDF'te
- * ayrıştırılamadı. Eksik puanlarla eşik yazmak adaya hiçbir zaman
- * sağlanamayacak bir baraj gösterirdi; bkz. yonerge/bayburt.php.
+ * 11(2) VE 12. BÖLÜMLER 01.09.2026'DA OKUNDU. İkisi de "puan sütunu
+ * ayrıştırılamadı" diye kayıtlıydı ve Güzel Sanatlar alanı bu yüzden hiç
+ * girilmemişti. `pdftotext -layout` ile tablo eksiksiz çıkıyor; puan sütununun
+ * kaydığı tek yer başlığı iki satıra taşan satırlar (11.2.1.a, 11.2.7.a-ç,
+ * 11.2.9.d-g, 11.2.10.a-b), orada da değer başlığın ORTA satırının hizasında
+ * duruyor. Sanat ve tasarım etkinlikleri (11.2) ve toplumsal katkı (12)
+ * girildi; Güzel Sanatlar eşikleri açıldı, bkz. yonerge/bayburt.php.
  *
  * AYNI KAYNAĞA DÜŞEN KALEMLERDE DÜŞÜK OLAN GİRİLDİ:
  *   'Kitap Editörlüğü' uluslararası/ulusal ayırmıyor → 2.1.c (50) yerine
@@ -39,9 +42,20 @@
  *   'Hakemlik' dergi düzeyi taşımıyor → 8.2.ç (2).
  *   'Yayın Kurulu Üyeliği' aynı şekilde → 8.2.b (10).
  *
- * GİRİLMEYEN BÖLÜMLER: 11.1 (spor bilimleri), 11.2 (sanat ve tasarım
- * etkinlikleri), 12 (toplumsal katkı). Kaynak sözlüğünde karşılıksız ya da
- * puan sütunu ayrıştırılamadı.
+ * 11.2'DE AYNI ETİKETE DÜŞÜP DÜŞÜĞÜ GİRİLEN ÇİFTLER (§0): restorasyonda
+ * "yapmak ve üstlenmek" ile "ekipte yer almak" (11.2.7.a/b ve c/ç), film
+ * gösterisinde "uluslararası etkinlik" ile "yurt dışı etkinlik" (11.2.8.a/b),
+ * mimari projede yurt dışı ile yurt içi yürütücülük (11.2.9.a/c — 11.2.9.f ve
+ * g de aynı etikete düşüyor), orkestra üyeliğinde yurt dışı ile yurt içi
+ * (11.2.10.d/e) ve senfonik özgün eserde yurt dışı ile yurt içi (11.2.10.j/k).
+ *
+ * GİRİLMEYEN BÖLÜMLER: 11.1 (spor bilimleri) — sözlükte spor kategorisi yok.
+ * 11.2.8.e-h (film yaratıcı kadrosunda yer almak) ve 11.2.9.e (logo, afiş,
+ * poster, kapak tasarımı) — sözlükte karşılıkları yok, geniş bir kovaya
+ * bağlamak fazla sayardı. 12. bölümün 12.a-12.h satırları (uluslararası ve
+ * ulusal kuruluş üyelikleri, teknopark, bilirkişilik, jüri üyelikleri) de
+ * karşılıksız; toplumsal katkı kategorisinin üç etiketi 12.ı, 12.j ve 12.k'ye
+ * bağlandı.
  */
 
 return [
@@ -50,8 +64,9 @@ return [
         .'başlıca 0,8 ikinci 0,5; üç ve daha fazlada başlıca yarısını, diğerleri kalan yarıyı '
         .'eşit paylaşır). ÇOK YAZARLI KİTAP VE BİLDİRİDE PUANINIZ YÜKSEK GÖRÜNÜR: yönerge o '
         .'kalemlerde puanı yazar sayısına eşit bölüyor, motor cetvel başına tek matris '
-        .'tanımladığı için makale kuralı uygulandı. Spor bilimleri (11.1), sanat ve tasarım '
-        .'etkinlikleri (11.2) ve toplumsal katkı (12) bölümleri girilemedi.',
+        .'tanımladığı için makale kuralı uygulandı. Spor bilimleri (11.1) bölümü girilemedi; '
+        .'toplumsal katkı (12) bölümünden yalnızca danışmanlık, topluma yönelik etkinlik ve '
+        .'yayın satırları girildi.',
 
     // Tanım 3 — Ortak Yazar Puan Dağılımı.
     'yazar_katsayisi' => [
@@ -153,6 +168,54 @@ return [
         '10.c' => ['baslik' => 'Dekanlık, yüksekokul veya enstitü müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Rektör', 'Rektör Yardımcısı'], 'puan' => 10],
         '10.ç' => ['baslik' => 'Dekan yardımcılığı veya müdür yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
         '10.d' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 10],
+
+        // ══ 11.2. SANAT VE TASARIM ETKİNLİKLERİ ══
+        // Güzel Sanatlar alt barajının saydığı bölüm (Madde 10 a.3/b.2/c.3/ç.2).
+        '11.2.1.a' => ['baslik' => 'Yurt dışında tanınmış müze, kültür merkezi ya da sanat galerisinde kişisel sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Elektronik Kişisel Sergi (Uluslararası)'], 'puan' => 80],
+        '11.2.1.b' => ['baslik' => 'Yurt içinde tanınmış müze, kültür merkezi ya da sanat galerisinde kişisel sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Ulusal)', 'Kişisel Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Kişisel Etkinlik (Yurt İçi, Jürisiz)', 'Elektronik Kişisel Sergi (Ulusal)'], 'puan' => 60],
+        '11.2.2.a' => ['baslik' => 'Yurt dışında tanınmış müze veya büyük koleksiyonda yapıtının yer alması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt Dışı)'], 'puan' => 60],
+        '11.2.2.b' => ['baslik' => 'Yurt içinde tanınmış müze veya büyük koleksiyonda yapıtının yer alması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt İçi)', 'Eserin Satın Alınması (Yurt İçi)', 'Eserin Yayında Yer Alması / Satın Alınması'], 'puan' => 30],
+        '11.2.3.a' => ['baslik' => 'Yurt dışında kamusal ya da özel alanda sergilenen sanat veya tasarım ürünü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kamusal Alanda Uygulanmış Yapıt (Yurt Dışı)'], 'puan' => 60],
+        '11.2.3.b' => ['baslik' => 'Yurt içinde kamusal ya da özel alanda sergilenen sanat veya tasarım ürünü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kamusal Alanda Uygulanmış Yapıt (Yurt İçi)'], 'puan' => 30],
+        '11.2.4.a' => ['baslik' => 'Uluslararası karma sergi veya çalıştay', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Karma Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Karma Etkinlik (Yurt Dışı, Jürisiz)', 'Karma Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Elektronik Karma Sergi (Uluslararası)'], 'puan' => 30],
+        '11.2.4.b' => ['baslik' => 'Ulusal karma sergi veya çalıştay', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)', 'Karma Etkinlik (Jürisiz, Ulusal)', 'Elektronik Karma Sergi (Ulusal)'], 'puan' => 15],
+        '11.2.5.a' => ['baslik' => 'Çağrılı veya jürili uluslararası sergi, bienal, trienal, festival, uygulamalı sempozyum ya da gösteri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt Dışı)'], 'puan' => 40],
+        '11.2.5.b' => ['baslik' => 'Çağrılı veya jürili ulusal sergi, bienal, trienal, festival, uygulamalı sempozyum ya da gösteri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt İçi)'], 'puan' => 20],
+        '11.2.6.a' => ['baslik' => 'Yurt dışı sanatsal faaliyetlerin düzenleyiciliği, kuruculuğu veya küratörlüğü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sergi Küratörlüğü (Uluslararası)', 'Festival Koordinatörlüğü (Uluslararası)'], 'puan' => 40],
+        '11.2.6.b' => ['baslik' => 'Ulusal sanatsal faaliyetlerin düzenleyiciliği, kuruculuğu veya küratörlüğü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sergi Küratörlüğü (Ulusal)', 'Festival Koordinatörlüğü (Ulusal)'], 'puan' => 20],
+        // 11.2.7.a (60) ile 11.2.7.b (30) tek etikete düşüyor; §0 uyarınca 30. Aynısı c (30) ile ç (15) için.
+        '11.2.7.b' => ['baslik' => 'Yurt dışında müze, kazı buluntusu, koleksiyon ya da film arşivi restorasyon ve konservasyon çalışmasında görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koruma-Onarım Uygulaması (Uluslararası)'], 'puan' => 30],
+        '11.2.7.ç' => ['baslik' => 'Ulusal müze, kazı buluntusu, koleksiyon ya da film arşivi restorasyon ve konservasyon çalışmasında görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koruma-Onarım Uygulaması (Ulusal)'], 'puan' => 15],
+        // 11.2.8.a (uluslararası etkinlik, 60) ile 11.2.8.b (yurt dışı etkinlik, 40) tek etikete düşüyor; §0 uyarınca 40.
+        '11.2.8.b' => ['baslik' => 'Yurt dışı etkinliklerde film gösterisi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Belgesel/Kısa Film (Uluslararası)', 'Uzun Metrajlı Film / Belgesel (Uluslararası)'], 'puan' => 40],
+        '11.2.8.c' => ['baslik' => 'Ulusal etkinliklerde film gösterisi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Belgesel/Kısa Film (Ulusal)', 'Uzun Metrajlı Film / Belgesel (Ulusal)'], 'puan' => 30],
+        '11.2.8.ç' => ['baslik' => 'Yurt dışında kitle iletişim araçlarıyla yapılan yayınlarda filminin yayımlanması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)', 'TV Filmi / Dizisi (Uluslararası)', 'TV Programı (Uluslararası)'], 'puan' => 50],
+        '11.2.8.d' => ['baslik' => 'Ulusal yayınlarda filminin yayımlanması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)', 'TV Filmi / Dizisi (Ulusal)', 'TV Programı (Ulusal)'], 'puan' => 30],
+        // 11.2.9.a (yurt dışı, 30) ile 11.2.9.c (yurt içi, 20) tek 'müellif' etiketine düşüyor; §0 uyarınca 20.
+        // 11.2.9.f ve 11.2.9.g de aynı etikete düşüyor (60 ve 30) ve zaten 20 geçerli.
+        '11.2.9.c' => ['baslik' => 'Mimari proje, planlama ya da tasarım çalışmasında yürütücü olmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif'], 'puan' => 20],
+        '11.2.9.ç' => ['baslik' => 'Mimari proje, planlama ya da tasarım çalışmasında görevli olmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Ekip', 'Uygulama Projesi — Ekip Yardımcısı', 'Uygulama Projesi — Danışman'], 'puan' => 10],
+        '11.2.9.d' => ['baslik' => 'Kamu kurumları ile özel hukuk tüzel kişileri bünyesinde uygulamaya konmuş sanatsal tasarım', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulanmış Tasarım / Koleksiyon'], 'puan' => 15],
+        '11.2.10.a' => ['baslik' => 'Yurt dışında sahne sanatlarında sanat grubu hazırlamak ve gösterisini sunmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Grup Etkinliği (Uluslararası)'], 'puan' => 60],
+        '11.2.10.b' => ['baslik' => 'Yurt içinde sahne sanatlarında sanat grubu hazırlamak ve gösterisini sunmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Grup Etkinliği (Ulusal)'], 'puan' => 30],
+        '11.2.10.c' => ['baslik' => 'Yurt dışı orkestra eşliğinde solistlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Solistlik (Uluslararası)'], 'puan' => 80],
+        '11.2.10.ç' => ['baslik' => 'Yurt içi orkestra eşliğinde solistlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Solistlik (Ulusal)'], 'puan' => 40],
+        // 11.2.10.d (yurt dışı, 60) ile 11.2.10.e (yurt içi, 30) tek etikete düşüyor; §0 uyarınca 30.
+        '11.2.10.e' => ['baslik' => 'Orkestra içinde görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Orkestra / Koro Üyeliği'], 'puan' => 30],
+        '11.2.10.f' => ['baslik' => 'Yurt dışı resital', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Resital (Uluslararası)'], 'puan' => 60],
+        '11.2.10.g' => ['baslik' => 'Yurt içi resital', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Resital (Ulusal)'], 'puan' => 40],
+        '11.2.10.ğ' => ['baslik' => 'Yurt dışı etkinliklerde şeflik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Grup Şefliği (Uluslararası)', 'Orkestra Şefliği (Uluslararası)', 'Koro Şefliği (Uluslararası)', 'Opera Şefliği (Uluslararası)', 'Bale Orkestra Şefliği (Uluslararası)'], 'puan' => 80],
+        '11.2.10.h' => ['baslik' => 'Yurt içi etkinliklerde şeflik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Grup Şefliği (Ulusal)', 'Orkestra Şefliği (Ulusal)', 'Koro Şefliği (Ulusal)', 'Opera Şefliği (Ulusal)', 'Bale Orkestra Şefliği (Ulusal)'], 'puan' => 40],
+        '11.2.10.ı' => ['baslik' => 'Yurt dışı oda müziği konserinde grup üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Uluslararası)'], 'puan' => 80],
+        '11.2.10.i' => ['baslik' => 'Yurt içi oda müziği konserinde grup üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Ulusal)'], 'puan' => 40],
+        // 11.2.10.j (yurt dışı, 80) ile 11.2.10.k (yurt içi, 60) tek etikete düşüyor; §0 uyarınca 60.
+        '11.2.10.k' => ['baslik' => 'Senfonik yapıt (senfoni, konçerto vb.) türünde özgün eser', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Senfoni Kompozisyonu', 'Konçerto/Senfonik Şiir'], 'puan' => 60],
+        '11.2.10.l' => ['baslik' => 'Metotlaştırılmış etüt, egzersiz vb. eğitim müziği dizini', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eğitim Müziği Düzenlemesi', 'Eğitim Müziği Albümü'], 'puan' => 60],
+
+        // ══ 12. TOPLUMSAL KATKI ══
+        '12.ı' => ['baslik' => 'Özel sektör, kamu ya da STK danışmanlığı', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 5],
+        '12.j' => ['baslik' => 'Topluma yönelik eğitim, seminer ya da çalıştay düzenlemek veya görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 5],
+        '12.k' => ['baslik' => 'Topluma yönelik yayın, sunum ya da konferans', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın'], 'puan' => 5],
     ],
 
     'gruplar' => [
@@ -161,6 +224,8 @@ return [
         '4' => ['4.*'],
         '1 ve 4' => ['1.*', '4.*'],
         '1-6' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*'],
+        // Güzel Sanatlar alt kümesi: aynı bölümler + sanat ve tasarım etkinlikleri.
+        '1-6 ve 11.2' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '11.2.*'],
         'MAKALE' => ['1.1.a', '1.1.b', '1.1.c', '1.1.ç', '1.1.d', '1.2.a', '1.2.b'],
     ],
 

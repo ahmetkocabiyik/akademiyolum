@@ -4023,3 +4023,51 @@ test('Yalova profesörlüğü puanın beş ayrı maddeye dağılmasını istiyor
     expect(sartDugum($depo->degerlendir($esik, $dagilmis, $profil), $ad)->durum)
         ->toBe(Durum::Saglandi);
 });
+
+test('Bayburt güzel sanatlar alt barajı sanat etkinliklerini de sayıyor', function () {
+    $depo = sartDepo();
+
+    // 11(2) bölümü okunana kadar bu alan hiç girilmemişti.
+    $gs = $depo->bul('Bayburt Üniversitesi', 'dr_ogr_uyesi', 'guzel_sanatlar');
+    expect($gs)->not->toBeNull()
+        ->and($gs['anahtar'])->toBe('bayburt-gs-dr-guzel_sanatlar');
+
+    $ad = 'Makale, kitap, bildiri, proje, patent, atıf ve sanat etkinliği kalemlerinizden en az 80 puan';
+
+    // Tek yurt dışı kişisel sergi = 80 puan (11.2.1.a) ve alt barajı tam dolduruyor.
+    $sergi = [sartFaaliyet('Kişisel Etkinlik (Uluslararası)', Kategori::SanatselEtkinlik)];
+
+    expect(sartDugum($depo->degerlendir($gs, $sergi, new Profil), $ad)->mevcut)->toBe(80);
+
+    // Aynı faaliyet öteki alanların "1-6" kümesine GİRMİYOR; sanat bölümü o
+    // kümenin dışında. Alt baraj orada sıfır kalıyor.
+    $genel = $depo->bul('Bayburt Üniversitesi', 'dr_ogr_uyesi', 'sosyal');
+    $genelAd = 'Makale, kitap, bildiri, proje, patent ve atıf kalemlerinizden en az 80 puan';
+
+    expect(sartDugum($depo->degerlendir($genel, $sergi, new Profil), $genelAd)->mevcut)->toBe(0);
+});
+
+test('Bayburt sanat cetvelinde aynı etikete düşen çiftlerde düşük değer geçerli', function () {
+    $katalog = (new SartDeposu)->katalog('bayburt-2024');
+
+    // Kaynakta 11.2.7.a 60 / 11.2.7.b 30 puan; ikisi de tek "Koruma-Onarım
+    // Uygulaması (Uluslararası)" etiketine düşüyor, §0 uyarınca 30 girildi.
+    // Aynı biçimde 11.2.10.j (80) yerine 11.2.10.k (60) yazıldı.
+    $puanlar = [];
+    foreach (['11.2.7.b', '11.2.7.ç', '11.2.9.c', '11.2.10.e', '11.2.10.k'] as $kod) {
+        $puanlar[$kod] = $katalog->maddePuani($kod);
+    }
+
+    expect($puanlar)->toBe([
+        '11.2.7.b' => 30,
+        '11.2.7.ç' => 15,
+        '11.2.9.c' => 20,
+        '11.2.10.e' => 30,
+        '11.2.10.k' => 60,
+    ]);
+
+    // Yüksek değerli eşleri hiç yazılmadı; yazılsaydı aday fazla puan görürdü.
+    foreach (['11.2.7.a', '11.2.7.c', '11.2.9.a', '11.2.10.d', '11.2.10.j'] as $kod) {
+        expect($katalog->coz([$kod]))->toBeEmpty("Fazla sayan satır girilmiş: {$kod}");
+    }
+});
