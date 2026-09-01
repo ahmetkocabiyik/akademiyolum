@@ -69,10 +69,36 @@ return [
         'D4' => ['baslik' => 'Diğer uluslararası veya TR Dizin dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 2],
 
         // ── E. PROJELER ──
-        'E1' => ['baslik' => 'Tamamlanmış uluslararası destekli araştırma projesi', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'puan' => 40],
-        'E2' => ['baslik' => 'Tamamlanmış TÜBİTAK, TÜSEB veya kamu destekli araştırma projesi', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'puan' => 25],
-        'E3' => ['baslik' => 'Tamamlanmış üniversite (BAP) destekli araştırma projesi', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'puan' => 10],
-        'E4' => ['baslik' => 'Patent, faydalı model veya tasarım tescili', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent', 'Ulusal Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Yazılım', 'Islahçı Hakkı / Çeşit Tescili', 'Ticarileştirme'], 'puan' => 30],
+        // E grubunun puanları 01.09.2026'da kaynağa göre düzeltildi; cetvelde
+        // 40/25/10 yazılıydı, tabloda 100/80/70/60/30. Grup başlığındaki rol
+        // kuralı da uygulandı: "araştırmacı ilgili puanın %70'ini, danışman
+        // (E6 hariç) %30'unu, bursiyer %15'ini alır" — kesirler §0 uyarınca
+        // aşağı yuvarlandı. Bölümün 100 puanlık tavanı grup_tavanlari'na girdi.
+        'E1.yur' => ['baslik' => 'AB Çerçeve programı destekli Ar-Ge projesinde yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['yurutucu'], 'puan' => 100],
+        'E1.ara' => ['baslik' => 'AB Çerçeve programı destekli Ar-Ge projesinde araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['arastirmaci'], 'puan' => 70],
+        'E1.dan' => ['baslik' => 'AB Çerçeve programı destekli Ar-Ge projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['danisman'], 'puan' => 30],
+        'E1.bur' => ['baslik' => 'AB Çerçeve programı destekli Ar-Ge projesinde bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['bursiyer'], 'puan' => 15],
+        // E2 (diğer uluslararası Ar-Ge, 80) ile E3 (üniversite dışı uluslararası
+        // kuruluşlarla araştırma projesi, 70) tek etikete düşüyor → §0, 70.
+        'E3.yur' => ['baslik' => 'Diğer uluslararası destekli araştırma projesinde yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 70],
+        'E3.ara' => ['baslik' => 'Diğer uluslararası destekli araştırma projesinde araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['arastirmaci'], 'puan' => 49],
+        'E3.dan' => ['baslik' => 'Diğer uluslararası destekli araştırma projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['danisman'], 'puan' => 21],
+        'E3.bur' => ['baslik' => 'Diğer uluslararası destekli araştırma projesinde bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['bursiyer'], 'puan' => 10],
+        'E4.yur' => ['baslik' => 'Üniversite dışı ulusal kuruluşlarla yürütülen araştırma projesinde yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['yurutucu'], 'puan' => 60],
+        'E4.ara' => ['baslik' => 'Üniversite dışı ulusal kuruluşlarla yürütülen araştırma projesinde araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['arastirmaci'], 'puan' => 42],
+        'E4.dan' => ['baslik' => 'Üniversite dışı ulusal kuruluşlarla yürütülen araştırma projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['danisman'], 'puan' => 18],
+        'E4.bur' => ['baslik' => 'Üniversite dışı ulusal kuruluşlarla yürütülen araştırma projesinde bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['bursiyer'], 'puan' => 9],
+        'E5.yur' => ['baslik' => 'Üniversite (BAP) destekli araştırma projesinde yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['yurutucu'], 'puan' => 30],
+        'E5.ara' => ['baslik' => 'Üniversite (BAP) destekli araştırma projesinde araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['arastirmaci'], 'puan' => 21],
+        'E5.dan' => ['baslik' => 'Üniversite (BAP) destekli araştırma projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['danisman'], 'puan' => 9],
+        'E5.bur' => ['baslik' => 'Üniversite (BAP) destekli araştırma projesinde bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['bursiyer'], 'puan' => 4],
+        'E6' => ['baslik' => 'TÜBİTAK 2209-A veya 2209-B projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 10],
+
+        // ── J. PATENTLER ── (cetvelde yanlışlıkla E grubunda tek satırda 30
+        // puanla duruyordu; kaynakta ayrı bir grup ve üç kademeli.)
+        'J1' => ['baslik' => 'Yurt dışı patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 100],
+        'J2' => ['baslik' => 'Yurt içi patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 50],
+        'J3' => ['baslik' => 'Faydalı model', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Yazılım', 'Islahçı Hakkı / Çeşit Tescili', 'Ticarileştirme'], 'puan' => 30],
 
         // ── F. TEZ DANIŞMANLIĞI ve EĞİTİM ──
         'F1' => ['baslik' => 'Tamamlanmış lisansüstü tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi', 'Yüksek Lisans Tezi', 'Tez İzleme / Jüri Üyeliği'], 'puan' => 10],
@@ -93,12 +119,18 @@ return [
         'A-C' => ['A1-*', 'A2', 'A2-derleme', 'A3', 'C*'],
         'A-B-C-D' => ['A1-*', 'A2', 'A2-derleme', 'A3', 'B*', 'C*', 'D*'],
         'A-B-C-D-E' => ['A1-*', 'A2', 'A2-derleme', 'A3', 'B*', 'C*', 'D*', 'E*'],
+        // Madde 9'un "E Puan Grubu kapsamında en az iki ULUSAL veya bir
+        // ULUSLARARASI proje" koşulunun saydığı iki küme.
+        'E-ULUSLARARASI' => ['E1.*', 'E3.*'],
+        'E-ULUSAL' => ['E4.*', 'E5.*', 'E6'],
         'MAKALE' => ['A1-*', 'A2', 'A2-derleme', 'A3'],
     ],
 
     // Yönergenin kendi üst sınırları.
     'grup_tavanlari' => [
         'B' => 50,
+        // "E PROJELER (…) (En fazla 100 puan)"
+        'E' => 100,
         'C' => 80,
         'D' => 100,
     ],

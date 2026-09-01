@@ -97,9 +97,33 @@ return [
         'C7' => ['baslik' => 'Ulusal hakemli konferansta özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
 
         // ── D. PROJELER ──
-        'D1' => ['baslik' => 'Uluslararası destekli araştırma projesi', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'puan' => 150],
-        'D2' => ['baslik' => 'TÜBİTAK, TÜSEB veya kamu destekli araştırma projesi', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'puan' => 50],
-        'D7' => ['baslik' => 'Üniversite (BAP) destekli araştırma projesi', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'puan' => 30],
+        // D bölümünün her satırı DÖRT ROLE ayrılıyor (yürütücü / araştırmacı /
+        // danışman / bursiyer); cetvel rol ayrımı yapmıyordu ve bursiyer bile
+        // yürütücü puanını alıyordu (01.09.2026'da ayrıldı).
+        'D.1.a' => ['baslik' => 'AB, UN, NSF, UNESCO gibi uluslararası kuruluş destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['yurutucu'], 'puan' => 150],
+        'D.1.b' => ['baslik' => 'AB, UN, NSF, UNESCO gibi uluslararası kuruluş destekli projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['arastirmaci'], 'puan' => 50],
+        'D.1.c' => ['baslik' => 'AB, UN, NSF, UNESCO gibi uluslararası kuruluş destekli projede danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['danisman'], 'puan' => 25],
+        'D.1.d' => ['baslik' => 'AB, UN, NSF, UNESCO gibi uluslararası kuruluş destekli projede bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['bursiyer'], 'puan' => 10],
+        'D.2.a' => ['baslik' => 'Diğer yabancı kurum ve üniversite destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 50],
+        'D.2.b' => ['baslik' => 'Diğer yabancı kurum ve üniversite destekli projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['arastirmaci'], 'puan' => 25],
+        'D.2.c' => ['baslik' => 'Diğer yabancı kurum ve üniversite destekli projede danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['danisman'], 'puan' => 10],
+        'D.2.d' => ['baslik' => 'Diğer yabancı kurum ve üniversite destekli projede bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['bursiyer'], 'puan' => 5],
+        'D.3.a' => ['baslik' => 'Kalkınma ajansı veya kamu kurumu destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['yurutucu'], 'puan' => 100],
+        'D.3.b' => ['baslik' => 'Kalkınma ajansı veya kamu kurumu destekli projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['arastirmaci'], 'puan' => 50],
+        'D.3.c' => ['baslik' => 'Kalkınma ajansı veya kamu kurumu destekli projede danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['danisman'], 'puan' => 30],
+        'D.3.d' => ['baslik' => 'Kalkınma ajansı veya kamu kurumu destekli projede bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['bursiyer'], 'puan' => 10],
+        // TÜBİTAK projesi normal destek (D.3: 100/50/30/10) ile Hızlı Destek
+        // (D.4: 50/30/10/5) arasında ayrılamıyor; §0 uyarınca Hızlı Destek'ten.
+        'D.4.a' => ['baslik' => 'TÜBİTAK destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['yurutucu'], 'puan' => 50],
+        'D.4.b' => ['baslik' => 'TÜBİTAK destekli projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['arastirmaci'], 'puan' => 30],
+        'D.4.c' => ['baslik' => 'TÜBİTAK destekli projede danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['danisman'], 'puan' => 10],
+        'D.4.d' => ['baslik' => 'TÜBİTAK destekli projede bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['bursiyer'], 'puan' => 5],
+        'D.5.a' => ['baslik' => 'Üniversite (BAP) destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['yurutucu'], 'puan' => 30],
+        'D.5.b' => ['baslik' => 'Üniversite (BAP) destekli projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 10],
+        'D.6.a' => ['baslik' => 'Bakanlık, resmî kurum ya da tasarım-planlama projesinde yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['yurutucu'], 'puan' => 50],
+        'D.6.b' => ['baslik' => 'Bakanlık, resmî kurum ya da tasarım-planlama projesinde araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['arastirmaci'], 'puan' => 20],
+        'D.6.c' => ['baslik' => 'Bakanlık, resmî kurum ya da tasarım-planlama projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['danisman'], 'puan' => 10],
+        'D.6.d' => ['baslik' => 'Bakanlık, resmî kurum ya da tasarım-planlama projesinde bursiyerlik', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['bursiyer'], 'puan' => 5],
         'D8' => ['baslik' => 'TÜBİTAK öğrenci projesi danışmanlığı', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 20],
 
         // ── E. ATIFLAR ──

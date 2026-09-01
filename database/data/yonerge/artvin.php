@@ -97,8 +97,8 @@ return [
             Kalip::puanDan('Tüm makale kalemlerinizden en az 140 puan', ['A'], 140, $P, madde: 'Madde 9/a-3'),
             Kalip::puanDan('Atıflarınızdan en az 10 puan', ['D'], 10, $P, madde: 'Madde 9/a-4'),
             Kalip::adet('Tamamlanmış en az bir uluslararası ya da iki ulusal projede görev almak',
-                ['E1'], 1, donem: $P, telafi: Kalip::adet('Ya da tamamlanmış en az iki ulusal proje',
-                    ['E2', 'E3'], 2, donem: $P), madde: 'Madde 9/a-5'),
+                ['E-ULUSLARARASI'], 1, donem: $P, telafi: Kalip::adet('Ya da tamamlanmış en az iki ulusal proje',
+                    ['E-ULUSAL'], 2, donem: $P), madde: 'Madde 9/a-5'),
         ]),
     ],
 
@@ -144,8 +144,8 @@ return [
                 ['A-B-C'], 220, $P, madde: 'Madde 9/c-3'),
             Kalip::puanDan('Atıflarınızdan en az 10 puan', ['D'], 10, $P, madde: 'Madde 9/c-4'),
             Kalip::adet('Tamamlanmış en az bir uluslararası ya da iki ulusal projede görev almak',
-                ['E1'], 1, donem: $P, telafi: Kalip::adet('Ya da tamamlanmış en az iki ulusal proje',
-                    ['E2', 'E3'], 2, donem: $P), madde: 'Madde 9/c-5'),
+                ['E-ULUSLARARASI'], 1, donem: $P, telafi: Kalip::adet('Ya da tamamlanmış en az iki ulusal proje',
+                    ['E-ULUSAL'], 2, donem: $P), madde: 'Madde 9/c-5'),
         ]),
     ],
 

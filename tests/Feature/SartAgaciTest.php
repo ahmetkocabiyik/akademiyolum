@@ -4366,3 +4366,38 @@ test('küçük görevler bölümün en yüksek satırından sayılmıyor', funct
     // Iğdır 26. madde ödülü "(TÜBİTAK/TÜBA vb.)" sınıfına bağlı; yarışma derecesi 300 almaz.
     expect($p('igdir-2023', 'Yarışma Derecesi / Mansiyon', Kategori::Odul))->toBe(0);
 });
+
+test('proje rol kademeleri üç cetvelde daha kaynağa uyuyor', function () {
+    $depo = sartDepo();
+    $p = function (string $cetvel, string $kaynak, string $rol) use ($depo): int {
+        $k = $depo->katalog($cetvel);
+
+        return $k->puan(sartFaaliyet($kaynak, Kategori::Proje, $rol), $k->coz(['*']));
+    };
+
+    // Amasya D bölümü dört role ayrılıyor; cetvel tek satırdı, bursiyer de
+    // yürütücü puanı alıyordu.
+    expect($p('amasya-2024', 'AB Çerçeve / Ufuk', 'yurutucu'))->toBe(150)
+        ->and($p('amasya-2024', 'AB Çerçeve / Ufuk', 'arastirmaci'))->toBe(50)
+        ->and($p('amasya-2024', 'AB Çerçeve / Ufuk', 'danisman'))->toBe(25)
+        ->and($p('amasya-2024', 'AB Çerçeve / Ufuk', 'bursiyer'))->toBe(10);
+
+    // Artvin: E grubunun puanları cetvelde 40/25/10 yazılıydı, kaynakta
+    // 100/…/30; grup başlığı ayrıca araştırmacıya %70, danışmana %30,
+    // bursiyere %15 veriyor.
+    expect($p('artvin-2024', 'AB Çerçeve / Ufuk', 'yurutucu'))->toBe(100)
+        ->and($p('artvin-2024', 'AB Çerçeve / Ufuk', 'arastirmaci'))->toBe(70)
+        ->and($p('artvin-2024', 'AB Çerçeve / Ufuk', 'danisman'))->toBe(30)
+        ->and($p('artvin-2024', 'AB Çerçeve / Ufuk', 'bursiyer'))->toBe(15);
+
+    // Artvin patentleri E grubunda tek 30 puanlık satırdaydı; kaynakta ayrı
+    // bir J grubu ve üç kademeli.
+    $ka = $depo->katalog('artvin-2024');
+    expect($ka->puan(sartFaaliyet('Uluslararası Patent', Kategori::Patent), $ka->coz(['*'])))->toBe(100)
+        ->and($ka->puan(sartFaaliyet('Ulusal Patent', Kategori::Patent), $ka->coz(['*'])))->toBe(50);
+
+    // GİBTÜ'de altı fon kademesi ve iki rol vardı, üçü tek 20 puanlık satırdaydı.
+    expect($p('gibtu-2024', 'AB Çerçeve / Ufuk', 'yurutucu'))->toBe(50)
+        ->and($p('gibtu-2024', 'AB Çerçeve / Ufuk', 'arastirmaci'))->toBe(30)
+        ->and($p('gibtu-2024', 'BAP (Üniversite)', 'yurutucu'))->toBe(10);
+});

@@ -61,9 +61,24 @@ return [
         '6.b' => ['baslik' => 'Ulusal bilim kurulu olan hakemli etkinlikte bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin', 'Ulusal Özet/Poster'], 'puan' => 10],
 
         // ── 7. BİLİMSEL PROJELER ──
-        '7.a' => ['baslik' => 'Uluslararası destekli bilimsel projede görev', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'puan' => 20],
-        '7.b' => ['baslik' => 'TÜBİTAK, TÜSEB veya kamu destekli bilimsel projede görev', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'puan' => 20],
-        '7.c' => ['baslik' => 'Üniversite (BAP) destekli bilimsel projede görev', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'puan' => 20],
+        // 7. maddenin altı fon kademesi ve her kademede iki rol var; cetvelde
+        // üçü de tek 20 puanlık satırdaydı (01.09.2026'da açıldı).
+        '7.a.yon' => ['baslik' => 'Uluslararası fonlarca desteklenen projede koordinatörlük ya da yöneticilik', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 50],
+        '7.a.ara' => ['baslik' => 'Uluslararası fonlarca desteklenen projede araştırmacılık ya da danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 30],
+        '7.b.yon' => ['baslik' => 'TÜBİTAK ya da ulusal fon destekli Ar-Ge projesinde koordinatörlük', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['yurutucu'], 'puan' => 40],
+        '7.b.ara' => ['baslik' => 'TÜBİTAK ya da ulusal fon destekli Ar-Ge projesinde araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
+        '7.c.yon' => ['baslik' => 'SAN-TEZ, KOSGEB, kalkınma ajansı ya da bakanlık destekli projede koordinatörlük', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'roller' => ['yurutucu'], 'puan' => 30],
+        '7.c.ara' => ['baslik' => 'SAN-TEZ, KOSGEB, kalkınma ajansı ya da bakanlık destekli projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 15],
+        // 7.d (BAP, 20/15) ile 7.e (lisansüstü tez BAP, 10/5) tek etikete
+        // düşüyor; §0 uyarınca 7.e'den.
+        '7.e.yon' => ['baslik' => 'Üniversite (BAP) destekli projede yöneticilik', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 10],
+        '7.e.ara' => ['baslik' => 'Üniversite (BAP) destekli projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 5],
+        // 7.f KAYNAKTA KENDİYLE ÇELİŞİYOR: satır metni "koordinatör 20, araştırmacı
+        // 15" derken sağdaki puan sütunu "(10-15)" diyor. §0 uyarınca her rol için
+        // iki okumanın DÜŞÜĞÜ alındı; bu, araştırmacıyı yöneticiden yüksek bırakıyor
+        // ama kaynaktaki hata düzeltilmeden kaydediliyor.
+        '7.f.yon' => ['baslik' => 'Diğer kamu ya da özel kurum destekli Ar-Ge projesinde koordinatörlük', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['yurutucu'], 'puan' => 10],
+        '7.f.ara' => ['baslik' => 'Diğer kamu ya da özel kurum destekli Ar-Ge projesinde araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 15],
 
         // ── 8. EDİTÖRLÜK ve YAYIN KURULU ──
         '8.a' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 25],
