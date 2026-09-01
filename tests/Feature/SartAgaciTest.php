@@ -4277,3 +4277,38 @@ test('İzmir Kavram ders puanını görev süresine bağlı olduğu için saymı
     expect($katalog->maddePuani('2c'))->toBe(15)
         ->and($katalog->maddePuani('2d'))->toBe(10);
 });
+
+test('Ordu tablo dipnotunun tek yazar koşulu doğru kadroya bağlanıyor', function () {
+    $depo = sartDepo();
+    $profil = new Profil(
+        doktoraTarihi: Carbon::parse('2010-01-01'),
+        docentlikTarihi: Carbon::parse('2018-01-01'),
+        yds: 70,
+    );
+
+    // Dipnot bağlanması üst simgeden okunuyor: (3) doçentliğe, (4) profesörlüğe.
+    // Filoloji'de doçentlik 1, profesörlük 2 tek yazarlı yayın istiyor.
+    $docent = $depo->bul('Ordu Üniversitesi', 'docentlik', 'filoloji');
+    $profesor = $depo->bul('Ordu Üniversitesi', 'profesorluk', 'filoloji');
+
+    $ad = 'tek yazar olmalısınız';
+    expect(sartDugum($depo->degerlendir($docent, [], $profil), $ad)->gerekli)->toBe(1)
+        ->and(sartDugum($depo->degerlendir($profesor, [], $profil), $ad)->gerekli)->toBe(2);
+
+    // Tek yazarlı bir yayın doçentlik koşulunu sağlıyor, çok yazarlı sağlamıyor.
+    $tek = sartFaaliyet('TR Dizin', tarih: '2015-01-01');
+    $ortak = sartFaaliyet('TR Dizin', yazarRolu: 'yazar_2', tarih: '2015-01-01');
+
+    expect(sartDugum($depo->degerlendir($docent, [$tek], $profil), $ad)->durum)->toBe(Durum::Saglandi)
+        ->and(sartDugum($depo->degerlendir($docent, [$ortak], $profil), $ad)->mevcut)->toBe(0);
+
+    // Fen'de dipnot tek yazar değil BİRİNCİ İSİM istiyor; kaynak doçentlikte
+    // profesörlükten fazlasını arıyor (2'ye 1) ve olduğu gibi girildi.
+    $fenAd = 'birinci isim ya da sorumlu yazar olmalısınız';
+    expect(sartDugum($depo->degerlendir($depo->bul('Ordu Üniversitesi', 'docentlik', 'fen'), [], $profil), $fenAd)->gerekli)->toBe(2)
+        ->and(sartDugum($depo->degerlendir($depo->bul('Ordu Üniversitesi', 'profesorluk', 'fen'), [], $profil), $fenAd)->gerekli)->toBe(1);
+
+    // Dipnotu olmayan tablolarda satır hiç görünmüyor.
+    $muh = $depo->degerlendir($depo->bul('Ordu Üniversitesi', 'docentlik', 'muhendislik'), [], $profil);
+    expect($muh->topla(fn ($d) => str_contains($d->aciklama, 'tek yazar olmalısınız')))->toBeEmpty();
+});

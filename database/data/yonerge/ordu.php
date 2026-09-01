@@ -52,12 +52,18 @@
  * serbest, fazla saymak değil. Tavansız bir toplam adayı barajın üstünde
  * gösterebilirdi.
  *
- * ── TEK YAZARLI YAYIN DİPNOTLARI GİRİLMEDİ ──
- * Dipnot (3) ve (4) bazı alanlarda "en az üçü tek yazarlı olmak üzere farklı
- * dergilerde yayınlanmış en az … yayın" istiyor; koşul tablodan tabloya hem
- * sayı hem kapsam olarak değişiyor ve hangi bende bağlandığı metinden net
- * okunamıyor. Yanlış bir okumayla adayı eleme riski yerine aday notunda
- * uyarı olarak duruyor.
+ * ── TEK YAZARLI YAYIN DİPNOTLARI 01.09.2026'DA GİRİLDİ ──
+ * Dipnot (3) ve (4) beş tabloda tek yazarlı ya da birinci isimli yayın
+ * istiyor. Daha önce "hangi bende bağlandığı metinden net okunamıyor" diye
+ * bırakılmıştı; bağlanma ÜST SİMGEDEN okunuyor ve metin katmanında duruyor:
+ * profesör sütununun makale hücresinde "en az 120 puan⁴", doçent sütununda
+ * "en az 100 puan³". Beş tabloda da aynı desen — (3) doçentliğe, (4)
+ * profesörlüğe bağlı. Bkz. $TEK_YAZAR.
+ *
+ * Dipnotların "farklı dergilerde yayımlanmış" kaydı ve yanlarındaki puan
+ * eşikleri girilmedi; ikisi de aday notunda anılıyor. TABLO-8'in (3) ve (4)
+ * dipnotları da girilmedi: onlar koşul EKLEMİYOR, N kategorilerini
+ * sağlayamayana telafi yolu açıyor
  *
  * ── HUKUK KAPSAM DIŞI ──
  * Yönergenin on bir tablosu arasında hukuk temel alanı yok; Ordu
@@ -240,6 +246,37 @@ $CETVEL_KADRO = [
 ];
 
 /** Her tablonun "ZORUNLU ALANLARDA ASGARİ PUAN" satırı — aday notunda anılıyor. */
+/**
+ * TABLO DİPNOTLARINDAKİ TEK YAZAR / BİRİNCİ İSİM KOŞULU.
+ *
+ * Beş tablo, doçentlik ve profesörlük sütunundaki makale hücresine üst simge
+ * bir dipnot numarası koyuyor (doçentlikte (3), profesörlükte (4)) ve o
+ * dipnot ayrıca tek yazarlı ya da birinci isimli yayın istiyor. Bağlanma
+ * ÜST SİMGEDEN okunuyor: TABLO-6'nın profesör sütununda "A.6 kategorisinde
+ * en az 120 puan⁴", doçent sütununda "en az 100 puan³" yazıyor.
+ *
+ * SAYILAR HER İKİ KOLUN ORTAK TABANI. Dipnotlar iki yollu: A.6 puan şartını
+ * sağlayan aday birinci cümledeki sayıyı, sağlayamayan ikinci cümledeki
+ * (telafi) sayıyı tutturmak zorunda. Filoloji, İlahiyat ve Güzel Sanatlar'da
+ * iki kol aynı sayıyı istiyor; Sosyal'de birinci kol üç, telafi kolu bir tek
+ * yazarlı yayın istiyor ve buraya İKİSİNİN DÜŞÜĞÜ yazıldı — yüksek olanı
+ * yazmak, telafi yolundan giden adayı haksız yere eler.
+ *
+ * "Farklı dergilerde yayımlanmış" kaydı ile dipnotların puan şartları
+ * girilmedi; ikisi de aday notunda anılıyor.
+ *
+ * @var array<string, array<string, array{0: int, 1: string}>>
+ */
+$TEK_YAZAR = [
+    // TABLO-5 dipnotu tek yazar değil BİRİNCİ İSİM istiyor ve doçentlikte
+    // profesörlükten fazlasını arıyor; kaynaktaki hâliyle girildi.
+    'fen' => ['docentlik' => [2, 'ilk'], 'profesorluk' => [1, 'ilk']],
+    'filoloji' => ['docentlik' => [1, 'tek'], 'profesorluk' => [2, 'tek']],
+    'ilahiyat' => ['docentlik' => [1, 'tek'], 'profesorluk' => [2, 'tek']],
+    'sosyal' => ['docentlik' => [1, 'tek'], 'profesorluk' => [1, 'tek']],
+    'guzel_sanatlar' => ['docentlik' => [1, 'tek'], 'profesorluk' => [2, 'tek']],
+];
+
 $ZORUNLU = [
     'spor' => [235, 205, 95, 95], 'egitim' => [295, 195, 75, 95],
     'fen' => [235, 165, 75, 95], 'filoloji' => [325, 225, 75, 95],
@@ -254,9 +291,12 @@ $TAVAN_NOTU = ' Yönerge her kategoriye bir de TAVAN koyuyor (atıflardan profes
     .'tavanı alana göre 60 ile 180 arasında). Bu tavanlar UYGULANIYOR, yani bir kategoriden '
     .'tavanın üstünde topladığınız puan toplama girmiyor.';
 
-$TEK_YAZAR_NOTU = ' Yönerge bazı alanlarda ayrıca "en az üçü tek yazarlı olmak üzere farklı '
-    .'dergilerde yayımlanmış" yayın istiyor; koşulun kapsamı tablodan tabloya değiştiği ve '
-    .'hangi bende bağlandığı metinden net okunamadığı için hesaba katılmadı.';
+$TEK_YAZAR_NOTU = ' Tablonuzun dipnotu ayrıca tek yazarlı (Fen\'de birinci isimli) yayın '
+    .'istiyorsa yukarıda ayrı bir satır olarak görürsünüz. DİKKAT: dipnot bu yayınların '
+    .'"FARKLI DERGİLERDE" yayımlanmış olmasını ve yanında bir puan eşiğini de arıyor; ikisi de '
+    .'burada hesaplanamıyor, kendiniz kontrol edin. Sosyal, Beşeri ve İdari Bilimler\'de dipnot '
+    .'iki yollu: TR Dizin puan şartını tutturan adaydan üç, tutturamayandan bir tek yazarlı '
+    .'yayın istiyor. Haksız yere elememek için düşük olan yazıldı; koşulunuz daha ağır olabilir.';
 
 $DIL_NOTU = ' Yabancı dil koşulu: Türkçe eğitim yapan bölümlerde merkezi sınavdan en az 55, '
     .'tamamen yabancı dille eğitim yapan bölümlerde en az 85 puan. Bölümün eğitim dili burada '
@@ -313,6 +353,17 @@ foreach ($TABLOLAR as $alan => $t) {
             $cocuklar[] = Kalip::puanDan(
                 "Kitap ve kitap bölümü kalemlerinizden en az {$kosul['kitap']} puan",
                 ['C'], $kosul['kitap'], $donem, madde: $madde,
+            );
+        }
+
+        if (isset($TEK_YAZAR[$alan][$kadro])) {
+            [$sayi, $rol] = $TEK_YAZAR[$alan][$kadro];
+            $cocuklar[] = Kalip::adet(
+                $rol === 'tek'
+                    ? "Bu yayınlardan en az {$sayi} tanesinde tek yazar olmalısınız"
+                    : "Bu yayınlardan en az {$sayi} tanesinde birinci isim ya da sorumlu yazar olmalısınız",
+                ['A.1-A.8'], $sayi, $rol, $donem,
+                madde: $madde.' · dipnot '.($kadro === 'profesorluk' ? '(4)' : '(3)'),
             );
         }
 
