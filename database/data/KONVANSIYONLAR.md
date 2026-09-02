@@ -380,6 +380,44 @@ kendi kaba tablosudur. İki eleme kuralı işe yaradı:
 Kalan işaretlerin çoğu özet/poster bildiri ile kurul üyeliğinde toplanıyor ve
 bilinçli olarak bırakıldı.
 
+### ETİKET LİSTELERİ KOPYALANIR: "KAYNAK BU KELİMEYİ HİÇ GEÇİRİYOR MU?" DİYE SOR
+
+Bir satırın `kaynaklar` listesi kaynaktan OKUNARAK değil, benzer bir
+satırdan KOPYALANARAK da dolabiliyor. Sonuç sessiz: etiket sözlükte var,
+satır ölü değil, test kırılmıyor — yalnız o etiketi kaydeden aday hak
+etmediği satırdan puan ve daha kötüsü SAYI alıyor.
+
+`Akreditasyon Faaliyeti` korpusun 59 cetvelinde DERS satırlarının etiket
+listesindeydi (63 satır). Etiket `egitim_ogretim`in ders DIŞI karşılığı;
+ilk kullanımı da öyleydi (Gümüşhane M4, "eğitim-öğretim danışmanlığı").
+
+**Teşhisi tek soru veriyor: kaynak metni o kavramı hiç anıyor mu?** 59
+kaynaktan ELLİSİ "akredit" sözcüğünü hiç geçirmiyordu — okunan bir şey
+olamayacağının kanıtı. Geçen dokuzun altısı da alakasızdı ("uluslararası
+akredite bir kuruluşun (QS, ARWU) sıralaması", "akredite olmuş programda
+verilen ders" — orada sıfat PROGRAMI niteliyor, faaliyeti değil).
+
+Tarama ucuz ve genelleştirilebilir:
+
+```bash
+# etiketi taşıyan cetvellerin kaynaklarında kavramın kökü geçiyor mu?
+grep -l "ETİKET" database/data/cetvel/*.php   # sonra her birinin Kaynak: satırından
+                                              # metne git ve kökü ara
+```
+
+Zarar PUANDA küçük, SAYIDA tam: `adet()` puana bakmadan faaliyet saydığı
+için akreditasyon kaydı olan aday "bir dönem ders vermiş olmak" koşulunu
+sağlamış görünüyordu.
+
+**Düzeltirken etiketi silmekle yetinme.** Kaynak o kalemi gerçekten
+puanlıyorsa KENDİ SATIRINI aç (Dokuz Eylül dersinin aynısı): OMÜ 14.4 (6),
+Yozgat B5.4.2 (3), Işık H.3.c (3) böyle açıldı. Kaynak puanlamıyorsa etiket
+o cetvelde karşılıksız kalır ve doğrusu budur — `kapsam_notu`'na uyarı da
+gerekmez, çünkü aday hak ettiği bir şeyi kaybetmiyor.
+
+Sızıntıyı `CetvelKaynakTest` artık koruyor: ders etiketlerinden biriyle
+`Akreditasyon Faaliyeti` aynı listede olamaz.
+
 ### SATIR BAŞLIĞI BİR ŞEYİ DIŞLIYORSA ETİKET ONU TAŞIMASIN
 
 En ucuz ve en kesin detektör bu: satırın KENDİ METNİ bir şeyi açıkça dışlıyor
