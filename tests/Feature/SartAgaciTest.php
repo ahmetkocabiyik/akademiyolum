@@ -4835,3 +4835,34 @@ test('OMÜ 14. bölüm idari görev ve toplumsal katkı satırları çalışıyo
     expect($katalog->coz(['1-14']))->toContain('14.1')
         ->and(count($katalog->coz(['1-15'])))->toBeGreaterThan(count($katalog->coz(['1-10'])));
 });
+
+test('OMÜ 15. bölüm görsel etkinlikleri en düşük bentten sayıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('omu-2025');
+    $tumu = $katalog->coz(['*']);
+    $p = fn (string $kaynak) => $katalog->puan(sartFaaliyet($kaynak, Kategori::SanatselEtkinlik), $tumu);
+
+    // Kaynak yönetmenliği (80/40) öteki görevlerden (36/18) ayırıyor; etiket
+    // rolü taşımadığı için §0 uyarınca DÜŞÜK bent yazıldı.
+    expect($p('Uzun Metrajlı Film / Belgesel (Uluslararası)'))->toBe(20)
+        ->and($p('Uzun Metrajlı Film / Belgesel (Ulusal)'))->toBe(10)
+        ->and($p('Belgesel/Kısa Film (Uluslararası)'))->toBe(20)
+        ->and($p('TV Programı (Uluslararası)'))->toBe(8)
+        ->and($p('TV Programı (Ulusal)'))->toBe(6);
+
+    // Girilmeyen etiketler puan üretmiyor: reklam (kaynak yalnız yönetmenliği
+    // sayıyor), sahne yönetmenliği ve animasyon.
+    expect($p('Reklam / Tanıtım Filmi (Uluslararası)'))->toBe(0)
+        ->and($p('Yönetmenlik (Sahne/Ekran)'))->toBe(0)
+        ->and($p('Animasyon / Canlandırma Yapımı'))->toBe(0);
+
+    // 15. bölüm yalnız B ve C gruplarının aralığında; A grubu ('1-14') dışında.
+    expect($katalog->coz(['1-15']))->toContain('15.2-15.4')
+        ->and($katalog->coz(['1-14']))->not->toContain('15.2-15.4');
+
+    // Aralıklar artık kesin artıyor.
+    $n = fn (string $g) => count($katalog->coz([$g]));
+    expect($n('1-10'))->toBeLessThan($n('1-14'))
+        ->and($n('1-14'))->toBeLessThan($n('1-15'))
+        ->and($n('1-15'))->toBeLessThan($n('1-16'));
+});

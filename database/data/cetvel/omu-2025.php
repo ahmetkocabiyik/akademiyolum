@@ -16,9 +16,8 @@
  * maddelere bölündü (1.1-Q1 … 1.1-Q4); kategori aralıkları önek eşleşmesiyle
  * bunları da yakalıyor.
  *
- * GİRİLMEYEN: 15. bölüm (görsel etkinlikler — İletişim Fakültesi'ne özgü),
- * 16. bölüm sanatsal etkinliklerin alt kırılımları ve 13. bölümün ödül dışı
- * hizmet kalemleri. Kaynak sözlüğünde karşılıkları yok.
+ * GİRİLMEYEN: 16. bölüm sanatsal etkinliklerin alt kırılımları ve 13.
+ * bölümün ödül dışı hizmet kalemleri. Kaynak sözlüğünde karşılıkları yok.
  *
  * 14. BÖLÜM GÖRSEL ETKİNLİK DEĞİL: başlığı "ONDOKUZ MAYIS ÜNİVERSİTESİNE
  * KATKI" ve içeriği idari görev. Bir tur 15. bölümle birlikte "görsel
@@ -68,10 +67,45 @@
  * boyutları kesin artmalı" kontrolünün yakaladığı desen. İkisine de '14.*'
  * eklendi ve 1-10 (38) → 1-14 (50) → 1-16 (53) artışı kuruldu.
  *
- * '1-14' İLE '1-15' HÂLÂ EŞİT VE BU DOĞRU: aradaki tek fark 15. bölüm ve o
- * bölümün (görsel etkinlikler) satırları kaynak sözlüğünde karşılıksız
- * olduğu için hiç girilmedi. Eşitlik artık bir sızıntı değil, girilemeyen
- * bir bölümün sonucu — tarama bunu yeniden işaretlerse buraya bakılsın.
+ * 15. bölüm de girilince aralıklar kesin artar oldu:
+ * 1-10 (38) → 1-14 (50) → 1-15 (54) → 1-16 (57).
+ *
+ * ── 15. GÖRSEL ETKİNLİKLER: ROL OKUNAMIYOR, DÜŞÜK BENT YAZILDI ──
+ * Bölüm bir tur "kaynak sözlüğünde karşılıksız" diye atlanmıştı; Dokuz Eylül
+ * için açılan film, TV ve reklam etiketleri çoğunu karşılıyor.
+ *
+ * Kaynak her mecrada YÖNETMENLİĞİ ile ÖTEKİ GÖREVLERİ ayrı puanlıyor
+ * (sinemada 80/36, belgeselde 40/20, TV programında 16/8). Sözlük etiketi ise
+ * YAPITIN TÜRÜNÜ ve düzeyini söylüyor, adayın rolünü değil. §0 uyarınca her
+ * etiket temsil edebileceği en DÜŞÜK bende yazıldı — "öteki görevler"
+ * değerine. Uluslararası bir sinema filmi yönetmeni 80 yerine 20 görür;
+ * buna karşılık kurgucu olan aday yönetmen puanı almaz.
+ *
+ * Dört satır bize ait kodlarla girildi (15.2-15.4 ve 15.7-15.8 birleşimleri).
+ *
+ * BÖLÜM İLETİŞİM FAKÜLTESİ'NE ÖZGÜ, CETVEL İSE ORTAK. Kaynağın başlığı
+ * "(İletişim Fakültesi için geçerlidir)" diyor ama motor tek cetveli
+ * paylaştırıyor ve İletişim, B grubunun ('1-15') içinde — grup ayrıca
+ * eğitim, filoloji, hukuk, ilahiyat, sosyal ve sporu da taşıyor. Ayrı bir
+ * `birim` eşiği açmak çözüm DEĞİL: `bul()` aynı (üniversite, kadro, alan)
+ * için iki aday bulunca birim boşsa null döner ve sosyal alanın TAMAMI
+ * kapsam dışı kalırdı. Bu yüzden satırlar ortak cetvelde duruyor ve
+ * `kapsam_notu` adaya "İletişim Fakültesi dışındaysanız bu kalemleri
+ * saymayın" diyor.
+ *
+ * 15. BÖLÜMDEN GİRİLMEYENLER:
+ *   15.5 reklam filmi yönetmenliği (20/10) — kaynak reklam filminde YALNIZ
+ *       yönetmenliği puanlıyor, "öteki görevler" bendi yok; etiket rolü
+ *       taşımadığı için yönetmen olduğu doğrulanamayan adaya puan vermek
+ *       fazla saymak olurdu.
+ *   15.6 gazete yayın yönetmenliği, görsel yönetmenlik ve editörlüğü
+ *       (16/8/4) ile 15.9 radyo programı/reklamı (6/5/4) — sözlükte
+ *       karşılıkları yok.
+ *   'Yönetmenlik (Sahne/Ekran)' etiketi hiçbir satıra yazılmadı: mecrayı da
+ *       düzeyi de taşımıyor, §0 değeri yerel TV'nin 4'üne inerdi ve etiket
+ *       ayrıca sahne yönetmenliğini de kapsıyor — bölümün hiç saymadığı bir
+ *       iş. Aynı sebeple 'Animasyon / Canlandırma Yapımı' ile geniş 'Sahne,
+ *       TV, Radyo, Sinema Yapıtı' etiketleri de dışarıda kaldı.
  */
 
 return [
@@ -89,6 +123,14 @@ return [
         .'fakültelerde bölüm başkanlığını saymıyor, anabilim dalı başkanlığını sayıyor. Kaydınız '
         .'fakülteyi taşımadığı için bölüm başkanlığı her fakültede 20 puan sayılıyor; bu '
         .'fakültelerdeyseniz ve bölüm başkanıysanız puanınız 20 puan YÜKSEK görünür. '
+        .'GÖRSEL ETKİNLİKLER (15.) BÖLÜMÜ İLETİŞİM FAKÜLTESİ İÇİNDİR: yönerge bu bölümü '
+        .'yalnız İletişim Fakültesi\'ne veriyor, ama puan cetveli bütün alanlarca paylaşıldığı '
+        .'için satırlar herkese görünüyor. İletişim Fakültesi dışındaysanız film ve televizyon '
+        .'kalemlerinizi saymayın, yoksa puanınız olduğundan yüksek görünür. Bu bölümde ayrıca '
+        .'yönetmenlik ile yapımcılık, kurgu ve senaryo görevleri kaynakta ayrı puanlanıyor '
+        .'(sinemada 80\'e karşı 36); faaliyet kaydınız rolünüzü taşımadığı için hepsi DÜŞÜK '
+        .'olan görev puanından sayılıyor — yönetmenseniz puanınız olduğundan düşük görünür. '
+        .'Reklam filmi yönetmenliği, gazete editörlüğü ve radyo programı kalemleri girilemedi. '
         .'Bunun dışında gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
 
     'maddeler' => [
@@ -182,6 +224,19 @@ return [
         '14.7' => ['baslik' => 'Bir ay ya da daha uzun süreli sosyal sorumluluk projesi görevi', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 6],
         '14.16' => ['baslik' => 'OMÜ adına resmî veya özel kurumlara bilimsel, kültürel ya da sanatsal danışmanlık', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 4],
 
+        // ── 15. GÖRSEL ETKİNLİKLER ──
+        // KODLAR BİZE AİT (kaynağın 15.2/15.4 ve 15.7/15.8 bentlerinin
+        // birleşimi). Kaynak her mecrada YÖNETMENLİK ile ÖTEKİ GÖREVLERİ
+        // ayrı puanlıyor (sinemada 80/36, belgeselde 40/20, TV'de 16/8);
+        // sözlük etiketi YAPITIN TÜRÜNÜ söylüyor, adayın rolünü değil.
+        // §0 uyarınca her etikete temsil edebileceği en DÜŞÜK bent yazıldı,
+        // yani "öteki görevler" değeri: yönetmen olan aday puanını düşük
+        // görür, kurgucu olan aday hak etmediği puanı görmez.
+        '15.2-15.4' => ['baslik' => 'Uluslararası sinema, belgesel ya da kısa metrajlı kurmaca filmde görev (yönetmenlik, yapımcılık, görsel yönetmenlik, kurgu ya da senaryo yazarlığı)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uzun Metrajlı Film / Belgesel (Uluslararası)', 'Belgesel/Kısa Film (Uluslararası)'], 'puan' => 20],
+        '15.2-15.4-ulusal' => ['baslik' => 'Ulusal sinema, belgesel ya da kısa metrajlı kurmaca filmde görev (yönetmenlik, yapımcılık, görsel yönetmenlik, kurgu ya da senaryo yazarlığı)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uzun Metrajlı Film / Belgesel (Ulusal)', 'Belgesel/Kısa Film (Ulusal)'], 'puan' => 10],
+        '15.7-15.8' => ['baslik' => 'Uluslararası televizyon programı ya da dizisinde görev (yönetmenlik, yapımcılık, görsel yönetmenlik, kurgu ya da senaryo yazarlığı)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['TV Programı (Uluslararası)', 'TV Filmi / Dizisi (Uluslararası)'], 'puan' => 8],
+        '15.7-15.8-ulusal' => ['baslik' => 'Ulusal televizyon programı ya da dizisinde görev (yönetmenlik, yapımcılık, görsel yönetmenlik, kurgu ya da senaryo yazarlığı)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['TV Programı (Ulusal)', 'TV Filmi / Dizisi (Ulusal)'], 'puan' => 6],
+
         // ── 16. SANATSAL ETKİNLİK ──
         '16.1' => ['baslik' => 'Uluslararası jürili kişisel sanatsal etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)'], 'puan' => 60],
         '16.2' => ['baslik' => 'Ulusal jürili kişisel sanatsal etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Ulusal)'], 'puan' => 40],
@@ -193,7 +248,7 @@ return [
         // göre değişiyor: A 1-14, B 1-15, C 1-16.
         '1-10' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '7.*', '8.*', '9.*', '10.*'],
         '1-14' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '7.*', '8.*', '9.*', '10.*', '11.*', '12.*', '13.*', '14.*'],
-        '1-15' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '7.*', '8.*', '9.*', '10.*', '11.*', '12.*', '13.*', '14.*'],
+        '1-15' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '7.*', '8.*', '9.*', '10.*', '11.*', '12.*', '13.*', '14.*', '15.*'],
         '1-16' => ['*'],
         '16' => ['16.*'],
         // Makale adet koşullarının andığı kategoriler.
