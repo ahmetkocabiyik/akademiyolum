@@ -140,7 +140,7 @@ return [
         'F.5' => ['baslik' => 'Tanınmış bir organizasyon tarafından tamamlanan bilimsel çalışmaya verilen ödül', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 1],
 
         // ══ G. DERS VE İDARİ GÖREV ══
-        'G.2' => ['baslik' => 'Lisans dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+        'G.2' => ['baslik' => 'Lisans dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
         'G.3' => ['baslik' => 'Yüksek lisans ya da doktora dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 2],
         'G.4' => ['baslik' => 'Sonuçlandırılmış yüksek lisans tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi', 'Tez İzleme / Jüri Üyeliği'], 'puan' => 2],
         'G.5' => ['baslik' => 'Sonuçlandırılmış doktora tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'puan' => 4],

@@ -212,7 +212,7 @@ $A = [
     'A7.n' => ['baslik' => 'Dergi ya da kitap hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
 
     'A8.a' => ['baslik' => 'Bir yarıyıl yüksek lisans veya doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-    'A8.b' => ['baslik' => 'Bir yarıyıl ön lisans veya lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+    'A8.b' => ['baslik' => 'Bir yarıyıl ön lisans veya lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
 
     'A9' => ['baslik' => 'Üniversitenin akademik ve idari birimlerinde görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => $IDARI, 'puan' => 5],
 
@@ -299,7 +299,7 @@ $B = [
     'B8.j' => ['baslik' => 'SCI, SCI-E, SSCI veya AHCI kapsamındaki dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
 
     'B9.a' => ['baslik' => 'Bir yarıyıl yüksek lisans veya doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 4],
-    'B9.b' => ['baslik' => 'Bir yarıyıl lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    'B9.b' => ['baslik' => 'Bir yarıyıl lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
 
     'B10' => ['baslik' => 'Üniversitenin akademik ve idari birimlerinde görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => $IDARI, 'puan' => 5],
 ];
@@ -392,7 +392,7 @@ $C = [
     'C8.j' => ['baslik' => 'Diğer dergilerde baş editörlük, editör yardımcılığı, editörler kurulu üyeliği ya da hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Hakemlik'], 'puan' => 3],
 
     'C9.a' => ['baslik' => 'Bir dönem yüksek lisans, doktora ya da tıpta uzmanlık dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-    'C9.b' => ['baslik' => 'Bir dönem ön lisans veya lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    'C9.b' => ['baslik' => 'Bir dönem ön lisans veya lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
 
     'C10' => ['baslik' => 'Üniversitenin akademik ve idari birimlerinde görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => $IDARI, 'puan' => 5],
 
@@ -529,7 +529,7 @@ $D = [
     'D-G8.g' => ['baslik' => 'Bilimsel toplantıda davetli ya da keynote konuşmacı olarak sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
 
     'D-G9.a' => ['baslik' => 'Bir yarıyıl yüksek lisans veya doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 2],
-    'D-G9.b' => ['baslik' => 'Bir yarıyıl ön lisans, lisans ya da üniversite ortak seçmeli dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    'D-G9.b' => ['baslik' => 'Bir yarıyıl ön lisans, lisans ya da üniversite ortak seçmeli dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
 
     'D-G10' => ['baslik' => 'Üniversitenin akademik ve idari birimlerinde görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => $IDARI, 'puan' => 5],
 

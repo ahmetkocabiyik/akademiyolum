@@ -157,7 +157,7 @@ $maddeler = [
 
     // ══ J. EĞİTİME KATKI (yalnız doktor öğretim üyeliği başvurularında) ══
     'J01' => ['baslik' => 'Lisansüstü düzeyde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 2],
-    'J02' => ['baslik' => 'Önlisans veya lisans düzeyinde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+    'J02' => ['baslik' => 'Önlisans veya lisans düzeyinde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
 
     // ══ K. ÖDÜL, YARIŞMA, UYGULAMA, YAZILIM VE PATENT ══
     'K01' => ['baslik' => 'Alanında uluslararası jürili bilimsel ya da sanatsal yarışma nitelikli etkinlikte ödül almak', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 5],

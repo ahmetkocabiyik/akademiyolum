@@ -201,7 +201,7 @@ $maddeler = [
     'T3-8d' => ['baslik' => 'Bölüm başkan yardımcısı, anabilim dalı başkanı, koordinatör ya da komisyon üyesi olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 3],
     'T3-10a' => ['baslik' => 'Lisansüstü tez jüri üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 2],
     'T3-10b' => ['baslik' => 'Bir dönem lisansüstü ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-    'T3-10c' => ['baslik' => 'Bir dönem ön lisans ya da lisans dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    'T3-10c' => ['baslik' => 'Bir dönem ön lisans ya da lisans dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
     'T3-10g' => ['baslik' => 'Kamu ya da özel sektörde danışman olarak resmî görev; üniversite-sanayi iş birliği görevlendirmesi', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 2],
     'T3-10e' => ['baslik' => 'İdari ve sosyal aktiviteler için resmî görevlendirme; bilirkişilik ve eğiticilik', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 1],
 ];

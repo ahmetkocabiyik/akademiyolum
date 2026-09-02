@@ -188,7 +188,7 @@ $maddeler = function (bool $hukuk): array {
         '8.b' => ['baslik' => 'Diğer bilimsel toplantıda yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Ulusal Tam Metin', 'Uluslararası Özet/Poster', 'Ulusal Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 3],
 
         // ══ 9. EĞİTİM-ÖĞRETİM ══
-        '9.a' => ['baslik' => 'Lisans ya da lisansüstü ders vermiş olmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+        '9.a' => ['baslik' => 'Lisans ya da lisansüstü ders vermiş olmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
 
         // ══ 10. PATENT / FAYDALI MODEL ══
         '10.a' => ['baslik' => 'Tescil edilmiş uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 20],

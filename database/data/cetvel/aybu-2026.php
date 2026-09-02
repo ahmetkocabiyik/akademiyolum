@@ -133,7 +133,7 @@ $maddeler = [
 
     // ══ EĞİTİM / ÖĞRETİM ══
     'E.a' => ['baslik' => 'Lisansüstü ya da uzmanlık dersi vermek (ders sayısı üzerinden)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 2],
-    'E.b' => ['baslik' => 'Ön lisans ya da lisans dersi vermek (ders sayısı üzerinden)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    'E.b' => ['baslik' => 'Ön lisans ya da lisans dersi vermek (ders sayısı üzerinden)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
 
     // ══ TEZ DANIŞMANLIĞI VE JÜRİ ÜYELİĞİ ══
     'T.a' => ['baslik' => 'Doktora, uzmanlık ya da sanatta yeterlik tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 10],

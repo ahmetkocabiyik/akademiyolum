@@ -129,7 +129,7 @@ $ekGovdesi = function (array $birATarama, array $birBTarama, array $ikiATarama, 
         "{$on}-8b" => ['baslik' => 'Ulusal bilimsel toplantıda sunulmuş ve tam metni basılmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 2],
 
         "{$on}-9a" => ['baslik' => 'Bir dönem yüksek lisans veya doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-        "{$on}-9b" => ['baslik' => 'Bir dönem ön lisans veya lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+        "{$on}-9b" => ['baslik' => 'Bir dönem ön lisans veya lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
     ];
 };
 
@@ -194,7 +194,7 @@ $E3 = [
     'E3-7b' => ['baslik' => 'Ulusal bilimsel toplantıda sunulmuş ve tam metni basılmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 2],
 
     'E3-8a' => ['baslik' => 'Bir dönem yüksek lisans veya doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-    'E3-8b' => ['baslik' => 'Bir dönem ön lisans veya lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    'E3-8b' => ['baslik' => 'Bir dönem ön lisans veya lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Değişim Programı Dersi'], 'puan' => 2],
     'E3-8c' => ['baslik' => 'Bir dönem yabancı dil hazırlık dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders'], 'puan' => 2],
 ];
 

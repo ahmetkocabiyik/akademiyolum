@@ -102,7 +102,7 @@ $maddeler = [
     '6.4' => ['baslik' => 'WOS BKCI ya da SCOPUS kapsamındaki kitaplarda eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
 
     // ══ 7. EĞİTİM, ÖĞRETİM VE ARAŞTIRMA FAALİYETLERİ ══
-    '7.1' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü ders vermek (son beş yılda verilen her bir ders için)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 3],
+    '7.1' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü ders vermek (son beş yılda verilen her bir ders için)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 3],
     '7.2' => ['baslik' => 'Yönetiminde doktora ya da sanatta yeterlik tezi (devam eden değerle)', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 10],
     '7.3' => ['baslik' => 'Yönetiminde yüksek lisans tezi (devam eden değerle)', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 6],
     '7.4' => ['baslik' => 'İkinci danışman olarak görev aldığınız lisansüstü tez (devam eden değerle)', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi', 'Yüksek Lisans Tezi'], 'roller' => ['es_danisman'], 'puan' => 3],

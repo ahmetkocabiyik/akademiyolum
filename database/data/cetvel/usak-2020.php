@@ -175,7 +175,7 @@ return [
         // ══ 10. EĞİTİM-ÖĞRETİM FAALİYETİ ══ (en fazla 10 puan)
         '10a' => ['baslik' => 'Bir dönem yüksek lisans ya da doktora dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
         '10b' => ['baslik' => 'Erasmus, Farabi ya da Mevlana programlarına en az bir hafta katılmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi'], 'puan' => 1],
-        '10c' => ['baslik' => 'Bir dönem ön lisans ya da lisans dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+        '10c' => ['baslik' => 'Bir dönem ön lisans ya da lisans dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders'], 'puan' => 2],
 
         // ══ 12. ÖDÜLLER ══ (en fazla 30 puan)
         '12a' => ['baslik' => 'TÜBA ya da TÜBİTAK ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 30],

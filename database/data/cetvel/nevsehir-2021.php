@@ -139,7 +139,7 @@ $govde = fn (int $a11, int $a12): array => [
     'C.2.4' => ['baslik' => 'Kamu kurumu ya da özel kuruluşla yapılan Ar-Ge projesinde yürütücü, araştırmacı veya danışman olmak', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'puan' => 5],
     'C.2.5' => ['baslik' => 'Üniversitenin BAP ya da ihtisaslaşma birimince desteklenmiş araştırma projesinde yürütücü olmak', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 5],
     'C.2.6' => ['baslik' => 'Üniversitenin BAP ya da ihtisaslaşma birimince desteklenmiş araştırma projesinde araştırmacı olmak', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 4],
-    'C.4' => ['baslik' => 'Son iki yılda ön lisans, lisans ya da lisansüstü düzeyde ders vermek (haftalık ders saati başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+    'C.4' => ['baslik' => 'Son iki yılda ön lisans, lisans ya da lisansüstü düzeyde ders vermek (haftalık ders saati başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders'], 'puan' => 1],
     'C.5' => ['baslik' => 'Yurt dışında ders ya da seminer vermek veya çağrılı konuşmacı olmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi'], 'puan' => 3],
 
     // ══ D. ÖDÜLLER VE DİĞER HİZMETLER ══

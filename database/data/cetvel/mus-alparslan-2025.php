@@ -190,7 +190,7 @@ $maddeler = array_merge([
         'C6.3' => ['baslik' => 'Sürekli ve periyodik olarak verilen, jürili ulusal bilim ve sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs'], 'puan' => 50],
 
         // ══ C7. EĞİTİME KATKI ══
-        'C7.1' => ['baslik' => 'Son iki yıl içinde Türkçe verilen ders (dönem başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+        'C7.1' => ['baslik' => 'Son iki yıl içinde Türkçe verilen ders (dönem başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Değişim Programı Dersi'], 'puan' => 2],
         'C7.2' => ['baslik' => 'Son iki yıl içinde yabancı dilde verilen ders (dönem başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders'], 'puan' => 4],
 
         // ══ C8. İDARİ GÖREVLER ══

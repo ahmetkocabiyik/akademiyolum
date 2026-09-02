@@ -123,7 +123,7 @@ $maddeler = [
     '15.ç' => ['baslik' => 'Kongrelerde davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
 
     // ══ 10. EĞİTİM-ÖĞRETİM ══
-    '10.a' => ['baslik' => 'Önlisans dersi vermiş olmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+    '10.a' => ['baslik' => 'Önlisans dersi vermiş olmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders'], 'puan' => 1],
     '10.c' => ['baslik' => 'Lisansüstü ders vermiş olmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 3],
 
     // ══ 11. PATENT / FAYDALI MODEL ══

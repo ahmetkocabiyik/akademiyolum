@@ -224,7 +224,7 @@ return [
         '10-ozgun-eser' => ['baslik' => 'Özgün sanat eseri, beste veya tasarım', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Özgün Eser / Beste / Tasarım', 'Albüm / Konser Kaydı', 'Karma Albüm / CD-DVD Katkısı', 'Bandrollü Kayıt (CD/DVD)'], 'puan' => 25],
 
         // ══ 13. DİĞER ETKİNLİKLER ══
-        '13.c' => ['baslik' => 'Erasmus, Mevlana veya Farabi gibi öğretim elemanı değişim programına katılmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 6],
+        '13.c' => ['baslik' => 'Erasmus, Mevlana veya Farabi gibi öğretim elemanı değişim programına katılmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi'], 'puan' => 6],
         '13.m' => ['baslik' => 'Yabancı dilde lisans, lisansüstü veya uzmanlık dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders'], 'puan' => 10],
         '13.d-13.h' => ['baslik' => 'Bilimsel toplantı düzenleme kurulunda görev almak ya da bildiri kitabı editörlüğü yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 10],
         '13.ı' => ['baslik' => 'Üniversite-toplum veya üniversite-endüstri işbirliği çerçevesinde sosyal sorumluluk çalışmasında görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 4],

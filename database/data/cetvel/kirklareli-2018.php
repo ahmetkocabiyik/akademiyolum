@@ -181,7 +181,7 @@ $maddeler = [
 
     // ══ K. ÖĞRETİM VE YÖNETİME KATKI ══
     'K-1' => ['baslik' => 'Lisansüstü düzeyde ders vermek (her ders için)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 5],
-    'K-2' => ['baslik' => 'Lisans ya da ön lisans düzeyinde ders vermek (her ders için)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 3],
+    'K-2' => ['baslik' => 'Lisans ya da ön lisans düzeyinde ders vermek (her ders için)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 3],
     'K-3' => ['baslik' => 'Müdürlük ya da müdür vekilliği (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 80],
     'K-4' => ['baslik' => 'Müdür yardımcılığı ya da dekan yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 40],
     'K-5' => ['baslik' => 'Bölüm başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 20],

@@ -164,7 +164,7 @@ $govde = function (bool $mps) use ($OZGUN, $DERLEME, $KISA, $VAKA, $TUM_KISA, $Q
         // ══ H. ÖNLİSANS, LİSANS VE LİSANSÜSTÜ EĞİTİM-ÖĞRETİM ══
         'H-1' => ['baslik' => 'Eğitim-öğretim faaliyeti kapsamında verilen her bir ders (yarıyıl başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders'], 'puan' => 1],
         'H-2' => ['baslik' => 'Tez savunma jüri üyeliği ya da doktora tez izleme komitesi üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 1],
-        'H-4' => ['baslik' => 'Uluslararası değişim programı kapsamında yabancı dilde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 5],
+        'H-4' => ['baslik' => 'Uluslararası değişim programı kapsamında yabancı dilde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 5],
 
         // ══ I. BİLİM İNSANI YETİŞTİRMEYE YÖNELİK ÇABALAR ══
         'I-1' => ['baslik' => 'Danışmanlığınızda tamamlanmış her bir yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 5],

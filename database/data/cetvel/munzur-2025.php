@@ -193,7 +193,7 @@ $ortakMaddeler = [
     'C6.3' => ['baslik' => 'Sürekli ve periyodik olarak verilen jürili ulusal bilim ya da sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Burs'], 'puan' => 50],
 
     // ══ C7. DERSLER ══
-    'C7.1' => ['baslik' => 'Son iki yıl içinde Türkçe verilen ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 4],
+    'C7.1' => ['baslik' => 'Son iki yıl içinde Türkçe verilen ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Değişim Programı Dersi'], 'puan' => 4],
     'C7.2' => ['baslik' => 'Son iki yıl içinde yabancı dilde verilen ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders'], 'puan' => 8],
 
     // ══ C8. İDARİ GÖREVLER ══

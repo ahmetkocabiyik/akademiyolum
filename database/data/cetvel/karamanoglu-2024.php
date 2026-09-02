@@ -128,7 +128,7 @@ $maddeler = [
     'J-6' => ['baslik' => 'Toplumsal katkı çalışması, kamu ya da sivil toplum kuruluşu danışmanlığı', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Kamu/STK Danışmanlığı', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 5],
 
     // ══ K. ÖĞRETİM FAALİYETLERİ (en çok 30 puan) ══
-    'K-1' => ['baslik' => 'Son üç yılda verilen ön lisans, lisans ya da lisansüstü ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 3],
+    'K-1' => ['baslik' => 'Son üç yılda verilen ön lisans, lisans ya da lisansüstü ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 3],
 
     // ══ L. SANAT VE TASARIM ETKİNLİKLERİ ══
     'L.1.1' => ['baslik' => 'Yurt dışında tanınmış müze, kültür merkezi ya da sanat galerisinde kişisel sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Elektronik Kişisel Sergi (Uluslararası)'], 'puan' => 60],

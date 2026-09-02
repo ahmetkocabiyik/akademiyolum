@@ -193,7 +193,7 @@ $maddeler = [
     '46' => ['baslik' => 'Üniversite fonu ya da dernek destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Özel Sektör / STK', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 15],
     '47' => ['baslik' => 'Üniversite fonu ya da dernek destekli projede araştırmacı ya da yardımcı', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Özel Sektör / STK', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 5],
     '48' => ['baslik' => 'Bir kurum ya da kuruluş tarafından talep edilen bilimsel rapor', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 5],
-    '49' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü düzeyde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    '49' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü düzeyde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
 
     // ══ G- BİLİMSEL BULUŞ PATENTLERİ ══
     '51' => ['baslik' => 'Bilimsel buluşa uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 100],

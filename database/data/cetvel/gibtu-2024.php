@@ -94,7 +94,7 @@ return [
 
         // ── 12. EĞİTİME KATKI ──
         '12.a' => ['baslik' => 'Yönettiği tamamlanmış lisansüstü tez', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi', 'Yüksek Lisans Tezi', 'Tez İzleme / Jüri Üyeliği'], 'puan' => 15],
-        '12.b' => ['baslik' => 'Normal ders yükü dışında verilen ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+        '12.b' => ['baslik' => 'Normal ders yükü dışında verilen ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
     ],
 
     'gruplar' => [

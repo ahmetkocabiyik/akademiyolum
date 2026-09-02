@@ -112,7 +112,7 @@ return [
         'E.4' => ['baslik' => 'Yönergesi bulunan merkez müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 3],
 
         // ══ F. DERS TECRÜBESİ ══
-        'F.1' => ['baslik' => 'Lisans veya ön lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+        'F.1' => ['baslik' => 'Lisans veya ön lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
         'F.2' => ['baslik' => 'Yüksek lisans veya doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
 
         // ══ G. YÖNETTİĞİ TEZLER ══

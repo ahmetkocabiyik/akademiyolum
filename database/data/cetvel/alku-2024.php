@@ -165,7 +165,7 @@ $maddeler = [
     '2.16' => ['baslik' => 'Danışmanı olarak sonuçlandırılmış tezli yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman', 'es_danisman'], 'puan' => 10],
     '2.17' => ['baslik' => 'Lisansüstü tez jüri üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 5],
     '2.18' => ['baslik' => 'Lisansüstü ders vermek (son beş eğitim-öğretim yılı, ders başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-    '2.19' => ['baslik' => 'Ön lisans ya da lisans dersi vermek (son beş eğitim-öğretim yılı, ders başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    '2.19' => ['baslik' => 'Ön lisans ya da lisans dersi vermek (son beş eğitim-öğretim yılı, ders başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
     '2.20' => ['baslik' => 'Fakülte dekanlığı, enstitü ya da yüksekokul müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 15],
     '2.21' => ['baslik' => 'Dekan yardımcılığı, enstitü ya da yüksekokul müdür yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 10],
     '2.22' => ['baslik' => 'Bölüm başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 10],

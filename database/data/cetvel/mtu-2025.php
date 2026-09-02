@@ -192,7 +192,7 @@ $maddeler = array_merge([
     'J2.3' => ['baslik' => 'En az altı aylık doktora sonrası araştırma bursu', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 50],
 
     // ══ K. EĞİTİM-ÖĞRETİM FAALİYETİ ══
-    'K1' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 5],
+    'K1' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 5],
 
     // ══ L. İDARİ GÖREVLER VE KURULLAR ══
     'L1.1' => ['baslik' => 'Dekan ya da müdür olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 50],

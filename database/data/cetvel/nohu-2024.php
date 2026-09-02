@@ -183,7 +183,7 @@ return [
 
         // ══ 11. EĞİTİM-ÖĞRETİM FAALİYETİ ══
         '11a' => ['baslik' => 'Bir dönem yüksek lisans ya da doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-        '11b' => ['baslik' => 'Bir dönem ön lisans ya da lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+        '11b' => ['baslik' => 'Bir dönem ön lisans ya da lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
 
         // ══ 12. SANAT DALLARINDAKİ ETKİNLİKLER ══
         '12a' => ['baslik' => 'Özgün sanat eserleri, tasarımlar ya da yorum çalışmalarıyla kişisel etkinlikte bulunmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatKisisel, 'puan' => 20],

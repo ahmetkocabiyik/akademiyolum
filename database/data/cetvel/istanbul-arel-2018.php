@@ -154,7 +154,7 @@ $maddeler = [
 
     // ══ N. EĞİTİM-ÖĞRETİM ══
     'N.1' => ['baslik' => 'Son iki yılda lisansüstü seviyesinde verilen ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 2],
-    'N.2' => ['baslik' => 'Son iki yılda lisans ya da ön lisans seviyesinde verilen ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+    'N.2' => ['baslik' => 'Son iki yılda lisans ya da ön lisans seviyesinde verilen ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
 
     // ══ P. YÖNETİM FAALİYETLERİ ══
     'P.1' => ['baslik' => 'Rektörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 50],

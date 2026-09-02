@@ -221,7 +221,7 @@ $maddeler = [
     '17.2' => ['baslik' => 'Yönetiminizde tamamlanan yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 8],
     '17.2e' => ['baslik' => 'İkinci danışman olduğunuz tamamlanmış yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['es_danisman'], 'puan' => 4],
     '17.3' => ['baslik' => 'Tez jürisi ya da tez izleme komitesinde görev almak', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 3],
-    '17.4' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü ders (son üç yılda her dönem için)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 5],
+    '17.4' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü ders (son üç yılda her dönem için)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 5],
 
     // ══ 18. İDARİ GÖREVLER ══
     '18.1' => ['baslik' => 'Rektörlük ya da rektör yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 15],

@@ -121,7 +121,7 @@ $maddeler = [
 
     // ══ 12. EĞİTİM ÖĞRETİM FAALİYETİ ══
     '12.a' => ['baslik' => 'Bir dönem yüksek lisans ya da doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-    '12.b' => ['baslik' => 'Bir dönem önlisans ya da lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    '12.b' => ['baslik' => 'Bir dönem önlisans ya da lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
 
     // ══ 13. ÖDÜL ══
     '13.a' => ['baslik' => 'Alanında yurt dışı kurum ve kuruluşlardan alınan bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 60],

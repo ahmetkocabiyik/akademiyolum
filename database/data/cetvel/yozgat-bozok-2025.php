@@ -135,7 +135,7 @@ $maddeler = [
 
     // ══ A8. EĞİTİM-ÖĞRETİM FAALİYETLERİ ══
     'A8.1' => ['baslik' => 'Lisansüstü ders vermek (her bir ders için dönemlik)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 2],
-    'A8.2' => ['baslik' => 'Ön lisans ya da lisans düzeyinde ders vermek (her bir ders için dönemlik)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+    'A8.2' => ['baslik' => 'Ön lisans ya da lisans düzeyinde ders vermek (her bir ders için dönemlik)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Değişim Programı Dersi'], 'puan' => 1],
     'A8.3' => ['baslik' => 'Kısmen yabancı dilde yürütülen programlarda yabancı dilde ders vermek (her bir ders için dönemlik)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders'], 'puan' => 3],
 
     // ══ A9. LİSANSÜSTÜ TEZ DANIŞMANLIĞI ══

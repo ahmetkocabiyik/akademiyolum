@@ -211,7 +211,7 @@ $maddeler = [
     '7.t' => ['baslik' => 'Ticarileştirilmiş patent belgesi', 'kategori' => 'patent', 'kaynaklar' => ['Ticarileştirme'], 'puan' => 200],
 
     // ══ 8. EĞİTİM ÖĞRETİM FAALİYETLERİ (bölüm tavanı 50 puan) ══
-    '8.d' => ['baslik' => 'Lisans veya lisansüstü ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    '8.d' => ['baslik' => 'Lisans veya lisansüstü ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
 
     // ══ 9. BİLİMSEL ÖDÜL (bölüm tavanı 100 puan) ══
     '9.a' => ['baslik' => 'Cumhurbaşkanlığı, TÜBA veya TÜBİTAK Bilim Ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü'], 'puan' => 100],

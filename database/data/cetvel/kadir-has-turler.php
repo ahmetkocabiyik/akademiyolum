@@ -111,7 +111,7 @@ return [
         'I-2' => ['baslik' => 'Diğer yurt içi dergilerde makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli']],
 
         // ══ GRUP-2: Eğitim-Öğretim ve Bilim Adamı Yetiştirme ══
-        'J' => ['baslik' => 'Ön lisans, lisans ve lisansüstü düzeyde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti']],
+        'J' => ['baslik' => 'Ön lisans, lisans ve lisansüstü düzeyde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi']],
         'K-1' => ['baslik' => 'Yönettiğiniz yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi']],
         'K-2' => ['baslik' => 'Yönettiğiniz doktora ya da sanatta yeterlik tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi']],
 

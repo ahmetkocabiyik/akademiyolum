@@ -146,7 +146,7 @@ return [
 
         // ══ F. ÖĞRETİM ETKİNLİKLERİ ══
         'M20.a' => ['baslik' => 'Son beş yılda verilmiş lisansüstü ders (her yarıyılda en fazla dört ders)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 5],
-        'M20.b' => ['baslik' => 'Son beş yılda verilmiş ön lisans ya da lisans dersi (her yarıyılda en fazla dört ders)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 3],
+        'M20.b' => ['baslik' => 'Son beş yılda verilmiş ön lisans ya da lisans dersi (her yarıyılda en fazla dört ders)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 3],
         'M21.a' => ['baslik' => 'Yönetiminde tamamlanan doktora tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'puan' => 20],
         'M21.b' => ['baslik' => 'Yönetiminde tamamlanan yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 10],
 

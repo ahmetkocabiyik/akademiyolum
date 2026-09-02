@@ -99,7 +99,7 @@ return [
 
         // ══ J. EĞİTİM-ÖĞRETİM FAALİYETLERİ ══
         'J.1' => ['baslik' => 'Bir dönem verilen lisansüstü ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-        'J.2' => ['baslik' => 'Bir dönem verilen lisans veya ön lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+        'J.2' => ['baslik' => 'Bir dönem verilen lisans veya ön lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
     ],
 
     'gruplar' => [

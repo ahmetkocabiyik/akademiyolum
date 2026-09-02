@@ -186,7 +186,7 @@ return [
         'TZ.6' => ['baslik' => 'Tezinizden üretilmiş, tam metni basılmış bildiri', 'kategori' => 'tez_yayini', 'kaynaklar' => ['CPCI Bildiri', 'Diğer'], 'puan' => 15],
 
         // ══ MADDE 2: EĞİTİM-ÖĞRETİM ══
-        'M2.1' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 5],
+        'M2.1' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 5],
         'M2.2.1' => ['baslik' => 'Sonuçlanmış doktora tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'puan' => 10],
         'M2.2.2' => ['baslik' => 'Sonuçlanmış yüksek lisans tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 5],
 

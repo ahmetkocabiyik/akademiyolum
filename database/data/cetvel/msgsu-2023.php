@@ -205,7 +205,7 @@ $maddeler = [
     '4.1.3' => ['baslik' => 'Doktora ya da sanatta yeterlik tezinde ikinci danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['es_danisman'], 'puan' => 5],
     '4.1.4' => ['baslik' => 'Jüri tarafından kabul edilmiş yüksek lisans tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 5],
     '4.1.5' => ['baslik' => 'Tez jüri üyeliği ya da tez izleme jüri üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi', 'Tez İzleme / Jüri Üyeliği'], 'roller' => ['es_danisman'], 'puan' => 2],
-    '4.2.1' => ['baslik' => 'Son iki yılda verilen ön lisans, lisans ya da lisansüstü ders yürütücülüğü', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Akreditasyon Faaliyeti'], 'puan' => 3],
+    '4.2.1' => ['baslik' => 'Son iki yılda verilen ön lisans, lisans ya da lisansüstü ders yürütücülüğü', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders'], 'puan' => 3],
     '4.2.4' => ['baslik' => 'Yurt dışında ders vermek üzere konuk öğretim üyeliği', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi'], 'puan' => 5],
 
     // ══ 5. ÖDÜLLER ══

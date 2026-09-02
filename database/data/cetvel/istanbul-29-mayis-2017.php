@@ -95,7 +95,7 @@ $maddeler = [
     'D39' => ['baslik' => 'Tamamlanan yüksek lisans tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 5],
     'D43' => ['baslik' => 'Lisansüstü tez savunma ya da tez izleme jürisi üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 1],
     'D40' => ['baslik' => 'Lisansüstü seviyede son üç yılda verilen her bir ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 2],
-    'D41' => ['baslik' => 'Lisans seviyesinde son üç yılda verilen her bir ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+    'D41' => ['baslik' => 'Lisans seviyesinde son üç yılda verilen her bir ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders'], 'puan' => 1],
     'D42' => ['baslik' => 'Erasmus programı dahil yurt dışında verilen her bir ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
     'D46' => ['baslik' => 'Bilimsel toplantılarda düzenleme kurulu ya da oturum başkanlığı, kongre kitapçığı editörlüğü', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 3],
     'D52' => ['baslik' => 'Mesleki kurum ve kuruluşlarda görev, mesleki etkinliklerde görev ya da alanında mesleki tecrübe', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 4],

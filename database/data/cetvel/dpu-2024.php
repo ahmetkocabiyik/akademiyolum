@@ -211,7 +211,7 @@ $govde = function (array $s) use ($SCI, $MAKALE, $KISA, $sanatJuri): array {
         'H123' => ['baslik' => 'Tamamlanmış yüksek lisans tezinde eş danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi', 'Tez İzleme / Jüri Üyeliği'], 'roller' => ['es_danisman'], 'puan' => 1],
         'H211' => ['baslik' => 'Bir dönem yüksek lisans ya da doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
         'H212' => ['baslik' => 'Bir dönem ön lisans ya da lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders'], 'puan' => 2],
-        'H311' => ['baslik' => 'Erasmus, Mevlana gibi uluslararası değişim programlarından yararlanmak ya da misafir öğretim üyeliği', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi', 'Yabancı Dilde Ders', 'Akreditasyon Faaliyeti'], 'puan' => 5],
+        'H311' => ['baslik' => 'Erasmus, Mevlana gibi uluslararası değişim programlarından yararlanmak ya da misafir öğretim üyeliği', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi', 'Yabancı Dilde Ders'], 'puan' => 5],
 
         // ══ I. ÜYELİK VE HAKEMLİKLER ══
         'I208' => ['baslik' => 'Bilimsel dergilerde yayın hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 1],

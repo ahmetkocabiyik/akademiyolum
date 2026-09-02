@@ -198,7 +198,7 @@ $govde = function (?int $birFTavani): array {
             '5b-es' => ['baslik' => 'Tamamlanmış tezli yüksek lisans tezinde ikinci danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['es_danisman'], 'puan' => 37],
 
             // ══ 6. EĞİTİM FAALİYETLERİ (grup tavanı 400, saat çarpanı uygulanamadı) ══
-            '6a' => ['baslik' => 'Lisansüstü, lisans veya ön lisans düzeyinde ders vermek (haftalık ders saati başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 3],
+            '6a' => ['baslik' => 'Lisansüstü, lisans veya ön lisans düzeyinde ders vermek (haftalık ders saati başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 3],
 
             // ══ 7. PLANLAMA, TASARIM VE SANAT FAALİYETLERİ ══
             '7a-uluslararasi' => ['baslik' => 'Alanınızda uluslararası kişisel sergi açmak ya da koleksiyon hazırlayıp sunmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Elektronik Kişisel Sergi (Uluslararası)'], 'puan' => 200],

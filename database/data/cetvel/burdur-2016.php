@@ -130,7 +130,7 @@ $maddeler = [
     'M24-2e' => ['baslik' => 'Basılmış afiş, poster, broşür, katalog, dergi ya da kitapta eserinizin yer alması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Haber Olması (Uluslararası)', 'Eserin Haber Olması (Ulusal)'], 'puan' => 5],
 
     // ══ ÖĞRETİM FAALİYETLERİ (25) ══
-    'M25' => ['baslik' => 'Son beş yılda verilmiş ders (her yarıyılda en fazla üç ders)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+    'M25' => ['baslik' => 'Son beş yılda verilmiş ders (her yarıyılda en fazla üç ders)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
 
     // ══ TEZ YÖNETİMİ (26-28) ══
     'M26a' => ['baslik' => 'Yönetiminizde tamamlanan doktora, uzmanlık ya da sanatta yeterlik tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 15],

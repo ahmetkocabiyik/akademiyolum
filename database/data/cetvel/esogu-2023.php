@@ -196,7 +196,7 @@ return [
 
         // ══ 10. EĞİTİM-ÖĞRETİM (grup tavanı 20) ══
         '10a' => ['baslik' => 'Bir dönem lisansüstü ders vermiş olmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
-        '10b' => ['baslik' => 'Bir dönem ön lisans veya lisans dersi vermiş olmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 1],
+        '10b' => ['baslik' => 'Bir dönem ön lisans veya lisans dersi vermiş olmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
 
         // ══ 11. EDİTÖRLÜK VE HAKEMLİK (grup tavanı 30) ══
         '11a' => ['baslik' => 'SSCI, SCI, SCI-Expanded veya AHCI dergisinde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 14],

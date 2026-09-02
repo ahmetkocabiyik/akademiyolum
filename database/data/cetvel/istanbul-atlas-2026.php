@@ -144,7 +144,7 @@ $maddeler = [
     '3.4.d' => ['baslik' => 'Sahne sanatları, radyo, televizyon ya da sinema alanında yayımlanmış veya sahnelenmiş bir metnin yazarlığını yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)', 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)'], 'puan' => 10],
 
     // ══ 4.1 DERS VERME — 4.2 TEZ DANIŞMANLIĞI ══
-    '4.1.a' => ['baslik' => 'Ön lisans ya da lisans düzeyinde teorik ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 2],
+    '4.1.a' => ['baslik' => 'Ön lisans ya da lisans düzeyinde teorik ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
     '4.1.b' => ['baslik' => 'Lisansüstü düzeyde teorik ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
     '4.2.a' => ['baslik' => 'Yüksek lisans tezi yönetmek', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 2],
     '4.2.b' => ['baslik' => 'Doktora tezi yönetmek', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 4],

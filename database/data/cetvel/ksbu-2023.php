@@ -147,7 +147,7 @@ return [
         'I2' => ['baslik' => 'Yurt içi patent ya da faydalı model almak', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Faydalı Model'], 'puan' => 75],
 
         // ══ İ. ERASMUS ÖĞRETİM ELEMANI DEĞİŞİMİ ══
-        'IE' => ['baslik' => 'Erasmus kapsamında öğretim elemanı değişim aktivitesi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi', 'Yabancı Dilde Ders', 'Akreditasyon Faaliyeti'], 'puan' => 10],
+        'IE' => ['baslik' => 'Erasmus kapsamında öğretim elemanı değişim aktivitesi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi', 'Yabancı Dilde Ders'], 'puan' => 10],
 
         // ══ J. ARAŞTIRMA PROJELERİ ══
         'J1' => ['baslik' => 'Uluslararası kurum ve kuruluşlarca desteklenen projede yürütücü ya da yönetici olmak', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 100],

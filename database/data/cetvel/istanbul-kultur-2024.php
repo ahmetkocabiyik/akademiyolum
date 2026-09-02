@@ -113,7 +113,7 @@ $maddeler = [
     '7.b.ozet' => ['baslik' => 'Diğer uluslararası veya ulusal toplantıda özet metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Ulusal Özet/Poster'], 'puan' => 2],
 
     // ══ 8. EĞİTİM-ÖĞRETİM ══ (bölüm tavanı 15)
-    '8.a' => ['baslik' => 'Önlisans, lisans veya lisansüstü seviyesinde verilen her bir ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], 'puan' => 3],
+    '8.a' => ['baslik' => 'Önlisans, lisans veya lisansüstü seviyesinde verilen her bir ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 3],
 
     // ══ 9. PATENT / FAYDALI MODEL ══
     '9.a' => ['baslik' => 'Tescil edilmiş uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent', 'Ticarileştirme'], 'puan' => 30],

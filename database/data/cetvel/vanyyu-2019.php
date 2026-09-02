@@ -126,7 +126,7 @@ return [
         'O-BURS' => ['baslik' => 'Bilimsel etkinlikler için burs kazanmak', 'kategori' => 'odul', 'kaynaklar' => ['Burs']],
 
         // ── Eğitim-öğretim ──
-        'EG-DERS' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü düzeyde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Akreditasyon Faaliyeti']],
+        'EG-DERS' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü düzeyde ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders']],
         'EG-YABANCI' => ['baslik' => 'Yabancı dilde gerçekleştirilen programlarda ders vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders']],
         'EG-DEGISIM' => ['baslik' => 'Öğretim elemanı değişim programlarına katılmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi']],
 

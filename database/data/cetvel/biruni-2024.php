@@ -55,7 +55,7 @@
  */
 $OZGUN = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
-$DERSLER = ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Akreditasyon Faaliyeti'];
+$DERSLER = ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders'];
 $ULUSLARARASI_PROJE = ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'];
 $ULUSAL_PROJE = ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu'];
 

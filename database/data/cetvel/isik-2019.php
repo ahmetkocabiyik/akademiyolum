@@ -162,7 +162,7 @@ $ham = [
     'G.1.2.a' => [4.0, 'Yüksek lisans tezi danışmanlığı (yıl başına)', 'tez_danismanligi', ['Yüksek Lisans Tezi'], null, ['danisman']],
     'G.1.2.c' => [2.0, 'Yüksek lisans tezi eş danışmanlığı (yıl başına)', 'tez_danismanligi', ['Yüksek Lisans Tezi'], null, ['es_danisman']],
     'G.1.1.d' => [0.5, 'Tez savunma, izleme veya yeterlik jürisi üyeliği', 'tez_danismanligi', ['Tez İzleme / Jüri Üyeliği'], null],
-    'G.2.a' => [2.0, 'Lisans veya ön lisans dersi (kodu farklı her ders için)', 'egitim_ogretim', ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi', 'Akreditasyon Faaliyeti'], null],
+    'G.2.a' => [2.0, 'Lisans veya ön lisans dersi (kodu farklı her ders için)', 'egitim_ogretim', ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], null],
     'G.2.b' => [3.0, 'Lisansüstü ders (kodu farklı her ders için)', 'egitim_ogretim', ['Lisansüstü Ders'], null],
 
     // ══ H ÜNİVERSİTEYE HİZMET ══ (profesörlük tavanı 20)
