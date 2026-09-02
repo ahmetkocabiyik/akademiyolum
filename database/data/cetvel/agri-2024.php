@@ -101,7 +101,23 @@ return [
         // Koşulların birebir andığı üst düzey madde numarası.
         '1' => ['1.*'],
         'MAKALE' => ['1.*'],
+        'ATIF' => ['7.1'],
     ],
 
-    'grup_tavanlari' => [],
+    /*
+     * MADDE 7'nin bütün profesörlük bentleri aynı parantezi taşıyor:
+     * "(7. maddeden en fazla 30 puan alınabilir.)" Tavan kaynakta yalnız
+     * 100 puanlık ALT BARAJA bağlı; motorunki toplamda da geçerli, yani
+     * kaynaktan sıkı — yön §0'a uygun.
+     *
+     * Asıl kazanç koşulda: 7.1 atıf başına 6 puan, tavansızken on yedi atıf
+     * tek başına "1, 4 ve 7 numaralı maddelerden en az 100 puan" barajını
+     * sağlıyordu.
+     *
+     * Spor Bilimleri bendinin "37. maddeden en fazla 70 puan" tavanı
+     * girilmedi: 37. maddenin cetvelde satırı yok.
+     */
+    'grup_tavanlari' => [
+        'ATIF' => 30,
+    ],
 ];
