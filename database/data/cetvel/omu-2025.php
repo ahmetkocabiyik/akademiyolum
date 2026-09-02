@@ -21,23 +21,75 @@
  * hizmet kalemleri. Kaynak sözlüğünde karşılıkları yok.
  *
  * 14. BÖLÜM GÖRSEL ETKİNLİK DEĞİL: başlığı "ONDOKUZ MAYIS ÜNİVERSİTESİNE
- * KATKI" ve içeriği idari görev (senato üyeliği, dekan yardımcılığı, bölüm
- * başkanlığı, kurul ve komisyon görevleri). Bir tur 15. bölümle birlikte
- * "görsel etkinlikler" diye kaydedilmişti; düzeltildi. Bölümden şimdilik
- * yalnız 14.4 (akreditasyon kurul görevi) girildi — ötekiler `idari_gorev`
- * karşılığı olduğu hâlde hâlâ girilmedi ve toplam olduğundan DÜŞÜK görünür.
+ * KATKI" ve içeriği idari görev. Bir tur 15. bölümle birlikte "görsel
+ * etkinlikler" diye kaydedilmişti; düzeltildi ve bölüm girildi.
+ *
+ * ── 14. BÖLÜMÜN PUANI YIL İLE ÇARPILIYOR ──
+ * Tablonun * dipnotu: "Puanlar görev alınan yıl ile çarpılarak toplam puana
+ * yansıtılır." 14.1-14.6 ve 14.17 bu dipnotu taşıyor. Faaliyet kaydı görev
+ * süresini tutmadığı için satırlar TEK YIL değeriyle girildi; üç yıl dekan
+ * yardımcılığı yapmış aday 90 yerine 30 görür. Bu bölümün puanı olduğundan
+ * DÜŞÜK çıkar.
+ *
+ * ── 14.2'DE FAKÜLTEYE BAĞLI ÇELİŞKİ ──
+ * Kaynak bölüm başkanlığını Tıp, Eczacılık, Diş Hekimliği ve Veteriner
+ * DIŞINDAKİ birimlerde sayıyor; o fakültelerde ise bölüm başkanlığını
+ * saymayıp anabilim dalı başkanlığını sayıyor. Kayıt fakülteyi taşımıyor ve
+ * iki okumadan biri seçilmek zorunda. Çoğunluğu yöneten okuma yazıldı
+ * (bölüm başkanlığı 20), anabilim dalı başkanlığı 14.3'ün düşük satırından
+ * (5) sayılıyor. Sapma: sağlık alanındaki bir anabilim dalı başkanı 20
+ * yerine 5 görür (DÜŞÜK, güvenli yön); sağlık alanındaki bir bölüm başkanı
+ * ise kaynağın hiç saymadığı 20 puanı görür (YÜKSEK). İkinci durum
+ * `kapsam_notu`'nda adaya söyleniyor.
+ *
+ * ── 14. BÖLÜMDEN GİRİLMEYENLER ──
+ *   14.6 öğrenci topluluğu akademik danışmanlığı (5), 14.8 sürdürülebilirlik
+ *       çalışmaları (4) — kaynak sözlüğünde karşılıkları yok.
+ *   14.9 yabancı dilde ders verme YETERLİLİĞİ (6) — bir yeterlilik, faaliyet
+ *       değil; 'Yabancı Dilde Ders' etiketi ders VERMEYİ anlatıyor ve 12.1'de.
+ *   14.10-14.13 (OMÜ dergi/kitap editörlüğü 7, hakemliği 3, OMÜ Yayınevi
+ *       kitabı 30, onaylı ders notu 10) — kayıt derginin ya da kitabın OMÜ
+ *       yayını olduğunu taşımıyor. Üstelik *** dipnotu bu puanların "ilgili
+ *       kategorideki puanlara İLAVE edileceğini" söylüyor; motor bir
+ *       faaliyete tek maddenin puanını veriyor, toplama yapmıyor. Satır
+ *       açmak ya ölü kalırdı (7 < editörlüğün 15-40'ı) ya da fazla saydırırdı
+ *       (30, ulusal yayınevi kitabının 15'inin üstünde).
+ *   14.14 ve 14.15 (görünürlüğe ve kurumsal kimliğe katkı, 4'er) — ** dipnotu
+ *       ölçütleri Rektörlük Eğitim Komisyonu'na bırakıyor; kapsam belirsiz ve
+ *       mevcut sanatsal etkinlik ile bildiri satırlarıyla çakışırdı.
+ *   14.17 kalite görevleri (8/6/4/2) — rolleri 14.3 ve 14.4'ün etiketleriyle
+ *       aynı kovaya düşüyor; ayrı satır motor en yükseği seçtiği için ya ölü
+ *       kalır ya fazla saydırır.
+ *   Rektörlük ve rektör yardımcılığı — kaynağın 14. bölümü bu iki görevi hiç
+ *       saymıyor, o yüzden satırları da yok.
  *
  * '1-14' ve '1-15' grupları 14. bölüm hiç girilmediği için 13'te bitiyordu
  * ve BİRBİRİNİN AYNISIYDI — konvansiyonun "ardışık aralık gruplarının
  * boyutları kesin artmalı" kontrolünün yakaladığı desen. İkisine de '14.*'
- * eklendi.
+ * eklendi ve 1-10 (38) → 1-14 (50) → 1-16 (53) artışı kuruldu.
+ *
+ * '1-14' İLE '1-15' HÂLÂ EŞİT VE BU DOĞRU: aradaki tek fark 15. bölüm ve o
+ * bölümün (görsel etkinlikler) satırları kaynak sözlüğünde karşılıksız
+ * olduğu için hiç girilmedi. Eşitlik artık bir sızıntı değil, girilemeyen
+ * bir bölümün sonucu — tarama bunu yeniden işaretlerse buraya bakılsın.
  */
 
 return [
     'kapsam_notu' => 'Puanlar Ondokuz Mayıs Üniversitesi Puan Cetvelinden (Mayıs 2025). Görsel '
         .'etkinlikler ve sanatsal etkinliklerin alt kırılımları kaynak sözlüğünde karşılıksız '
         .'olduğu için girilmedi; güzel sanatlar alanında 16. kategori barajı bu yüzden beyan '
-        .'olarak duruyor. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
+        .'olarak duruyor. '
+        .'ÜNİVERSİTEYE KATKI (14.) BÖLÜMÜNÜN PUANI DÜŞÜK GÖRÜNÜR: kaynak bu bölümün puanlarını '
+        .'görev alınan YIL SAYISIYLA çarpıyor, faaliyet kaydınız görev süresini tutmadığı için '
+        .'satırlar tek yıl değeriyle sayılıyor — üç yıl dekan yardımcılığı yaptıysanız 90 yerine '
+        .'30 puan görürsünüz. Aynı bölümün öğrenci topluluğu danışmanlığı, sürdürülebilirlik '
+        .'çalışmaları, kalite görevleri ve OMÜ\'nün kendi yayınlarına özgü kalemleri de '
+        .'girilemedi. '
+        .'TEK İSTİSNA — TIP, ECZACILIK, DİŞ HEKİMLİĞİ VE VETERİNER FAKÜLTELERİ: kaynak bu '
+        .'fakültelerde bölüm başkanlığını saymıyor, anabilim dalı başkanlığını sayıyor. Kaydınız '
+        .'fakülteyi taşımadığı için bölüm başkanlığı her fakültede 20 puan sayılıyor; bu '
+        .'fakültelerdeyseniz ve bölüm başkanıysanız puanınız 20 puan YÜKSEK görünür. '
+        .'Bunun dışında gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
 
     'maddeler' => [
         // ── 1. SCI, SCIE, SSCI veya AHCI ── (çeyrekliğe göre 80/70/60/50)
@@ -110,10 +162,25 @@ return [
         '13.2' => ['baslik' => 'Ulusal bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'YÖK Ödülü', 'Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 30],
 
         // ── 14. ONDOKUZ MAYIS ÜNİVERSİTESİNE KATKI ──
-        // Bölümün yalnız akreditasyon satırı girildi; ötekiler (senato
-        // üyeliği, dekan yardımcılığı, bölüm başkanlığı, kurul görevleri)
-        // hâlâ girilmedi ve `idari_gorev` karşılıkları var — ayrı bir iş.
-        '14.4' => ['baslik' => 'Fakülte, bölüm, program ya da laboratuvar akreditasyon kurulunda görev', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Akreditasyon Faaliyeti'], 'puan' => 6],
+        // Bölümün bütün satırlarının puanı GÖREV ALINAN YIL İLE ÇARPILIYOR
+        // (tablonun * dipnotu); kayıt görev süresini taşımadığı için hepsi
+        // TEK YIL değeriyle girildi. Bu bölümün puanı olduğundan düşük çıkar.
+        '14.1' => ['baslik' => 'Senato üyeliği, dekan yardımcılığı, müdürlük ya da müdür yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 30],
+        // Kaynak bölüm başkanlığını YALNIZCA Tıp/Eczacılık/Diş/Veteriner
+        // DIŞINDAKİ birimlerde sayıyor, o fakültelerde ise anabilim dalı
+        // başkanlığını. Kayıt fakülteyi taşımıyor; çoğunluğu yöneten okuma
+        // (bölüm başkanlığı) yazıldı, anabilim dalı başkanlığı 14.3'ün düşük
+        // satırından sayılıyor. Sapma dosya başlığında.
+        '14.2' => ['baslik' => 'Bölüm başkanlığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 20],
+        // Kaynak 10/5 diyor; hangi kademenin geçerli olduğu kayıttan
+        // okunamadığı için §0 uyarınca DÜŞÜK olan.
+        '14.3' => ['baslik' => 'Rektörlük, dekanlık ya da müdürlük tarafından oluşturulan kurul, komisyon ve koordinatörlük görevleri (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
+        '14.4' => ['baslik' => 'Fakülte, bölüm, program ya da laboratuvar akreditasyon kurulunda görev (yıl başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Akreditasyon Faaliyeti'], 'puan' => 6],
+        // 6/3 → §0 düşük. Tez izleme komitesi üyeliği bu bendin örneklerinde
+        // ama etiketi 10.2'de 20 puan alıyor, motor yükseği seçiyor.
+        '14.5' => ['baslik' => 'Rektörlük, dekanlık ya da müdürlük tarafından kurulmuş bir faaliyet alanındaki görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 3],
+        '14.7' => ['baslik' => 'Bir ay ya da daha uzun süreli sosyal sorumluluk projesi görevi', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 6],
+        '14.16' => ['baslik' => 'OMÜ adına resmî veya özel kurumlara bilimsel, kültürel ya da sanatsal danışmanlık', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 4],
 
         // ── 16. SANATSAL ETKİNLİK ──
         '16.1' => ['baslik' => 'Uluslararası jürili kişisel sanatsal etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)'], 'puan' => 60],

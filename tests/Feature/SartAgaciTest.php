@@ -4807,3 +4807,31 @@ test('akreditasyon faaliyeti ders sayılmıyor, kendi satırından puanlanıyor'
             ->and($katalog->puan($ders, $katalog->coz(['*'])))->toBeGreaterThan(0);
     }
 });
+
+test('OMÜ 14. bölüm idari görev ve toplumsal katkı satırları çalışıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('omu-2025');
+    $tumu = $katalog->coz(['*']);
+    $p = fn (string $kaynak, Kategori $k) => $katalog->puan(sartFaaliyet($kaynak, $k), $tumu);
+
+    // 14.1-14.3, 14.5: kaynağın kademeleri.
+    expect($p('Dekan / Enstitü-YO Müdürü', Kategori::IdariGorev))->toBe(30)
+        ->and($p('Bölüm Başkanı', Kategori::IdariGorev))->toBe(20)
+        ->and($p('Kurul / Komisyon Üyeliği', Kategori::IdariGorev))->toBe(5)
+        ->and($p('Uygulama ve Araştırma Merkezi Müdürü', Kategori::IdariGorev))->toBe(3);
+
+    // 14.7 ve 14.16: bölümden önce OMÜ'de hiç toplumsal katkı satırı yoktu.
+    expect($p('Topluma Hizmet Projesi', Kategori::ToplumsalKatki))->toBe(6)
+        ->and($p('Kamu/STK Danışmanlığı', Kategori::ToplumsalKatki))->toBe(4);
+
+    // Kaynak rektörlüğü 14. bölümde saymıyor; satırı da yok.
+    expect($p('Rektör', Kategori::IdariGorev))->toBe(0);
+
+    // Tez izleme komitesi üyeliği 14.5'in örneklerinde ama etiketi 10.2'de
+    // 20 puan alıyor; motor en yükseği seçtiği için 3'e düşmüyor.
+    expect($p('Tez İzleme / Jüri Üyeliği', Kategori::TezDanismanligi))->toBe(20);
+
+    // '1-14' ve '1-15' artık 14. bölümü sayıyor ve birbirinden farklı.
+    expect($katalog->coz(['1-14']))->toContain('14.1')
+        ->and(count($katalog->coz(['1-15'])))->toBeGreaterThan(count($katalog->coz(['1-10'])));
+});
