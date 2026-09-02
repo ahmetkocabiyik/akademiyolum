@@ -4550,3 +4550,20 @@ test('Akdeniz bölüm tavanları uygulanıyor', function () {
     // 7. bölüm 20: on CPCI bildirisi (8 puan) tavansız 80 ederdi.
     expect($katalog->topla(array_fill(0, 10, sartFaaliyet('Uluslararası Tam Metin (CPCI)', Kategori::Bildiri)), $tumu))->toBe(20);
 });
+
+test('Fırat çapraz tablo tavanları ve BAP tavanı uygulanıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('firat-2026');
+    $tumu = $katalog->coz(['*']);
+
+    // "A5+B4 toplamı en fazla 300": yüz WoS atfı (5) tavansız 500 ederdi.
+    expect($katalog->topla(array_fill(0, 100, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $tumu))->toBe(300);
+
+    // "A6+B5 toplamı en fazla 50": beş WoS editörlüğü (30) tavansız 150.
+    expect($katalog->topla(array_fill(0, 5, sartFaaliyet('WoS Dergi (Q1)', Kategori::Editorluk)), $tumu))->toBe(50);
+
+    // Asıl kazanç KOŞULDA: "C2-C6 kapsamında toplamda en az 30 puan" barajı
+    // altı BAP projesiyle (6×5) sahte biçimde sağlanıyordu; tavan 10.
+    $bap = array_fill(0, 6, sartFaaliyet('BAP (Üniversite)', Kategori::Proje, 'yurutucu'));
+    expect($katalog->topla($bap, $katalog->coz(['C2-C6'])))->toBe(10);
+});

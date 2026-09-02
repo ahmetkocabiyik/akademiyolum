@@ -110,7 +110,31 @@ return [
         'C2-C6' => ['C2.*', 'C3.*', 'C4.*'],
         'C1' => ['C1.*'],
         'MAKALE' => ['A2.*', 'B2.*'],
+
+        // Tablo başlıklarındaki tavanlar bölümleri ÇAPRAZ bağlıyor: A ve B
+        // tablolarının karşılık gelen bölümleri ortak bir tavanı paylaşıyor.
+        // B3'ün satırı yok (yukarıdaki nota bakınız), B4 ve B5'in var.
+        'A3-A4-B3' => ['A3.*', 'A4.*'],
+        'A5-B4' => ['A5.*', 'B4.*'],
+        'A6-B5' => ['A6.*', 'B5.*'],
+        'C2.16-BAP' => ['C2.16'],
     ],
 
-    'grup_tavanlari' => [],
+    /*
+     * Tablo başlıklarındaki tavanlar. Dördü de 01.09.2026'ya kadar
+     * girilmemişti; tavansız bölüm doğrudan fazla saydırır (§0).
+     *
+     * "zorunlu puanlamada en fazla N puan" notunu taşıyan maddelerden yalnız
+     * C2.16 (BAP) cetvelde var. Kaynak bu tavanı yalnızca asgari zorunlu
+     * puan koşullarına ("C2-C6 kapsamında toplamda en az 30 puan") bağlıyor;
+     * motorun tavanı toplamda da geçerli, yani girdiğimiz hâli kaynaktan
+     * SIKI. Yön §0'a uygun ve asıl kazanç koşulda: tavansızken altı BAP
+     * projesi 30 puan edip "C2-C6" barajını tek başına sağlıyordu.
+     */
+    'grup_tavanlari' => [
+        'A3-A4-B3' => 300,   // "A3+A4+B3 toplamı en fazla 300 puan kabul edilir."
+        'A5-B4' => 300,      // "A5+B4 toplamı en fazla 300 puan kabul edilir."
+        'A6-B5' => 50,       // "A6+B5 toplamı en fazla 50 puan"
+        'C2.16-BAP' => 10,   // "BAP projesi (zorunlu puanlamada en fazla 10 puan)"
+    ],
 ];
