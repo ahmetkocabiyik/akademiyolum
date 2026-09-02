@@ -149,10 +149,25 @@ return [
         'PROJE' => ['5*'],
         'PROJE_YURUTUCU' => ['5a1', '5b1', '5e1', '5g1'],
         'TEZ' => ['6*'],
+
+        // Md. 7a'nın tavanı KATEGORİNİN TAMAMINA ait ("Bu kategoride en çok
+        // 75 puan alınır."), tek çeyrekliğe değil.
+        '7a' => ['7a-Q1', '7a-Q2', '7a-Q3', '7a-Q4'],
     ],
 
+    /*
+     * TAVAN, MADDE KODUNA DEĞİL KATEGORİYE BAĞLANIR. Bu dosyada 75'lik
+     * tavan '7a-Q1' anahtarıyla duruyordu; o bir grup değil TEK MADDE, yani
+     * tavan yalnız Q1 editörlüğünü kesiyordu. Q2, Q3 ve Q4 dergilerde
+     * editörlüğü olan aday sınırsız puan topluyordu (§0 ihlali): on Q2
+     * editörlüğü (10 puan) 100 ediyordu, kaynağın verdiği en fazla 75.
+     *
+     * Kaynağın öteki tavanları girilmedi, satırları cetvelde yok: 7b-7h
+     * (hakemlik ve jüri üyeliği 30/50/25/10/45/30), 8e-8f (kongre ödülleri
+     * 40/20), 5ç (restorasyon 80) ve eğitim-öğretim bölümünün iki 10'luk
+     * tavanı.
+     */
     'grup_tavanlari' => [
-        // "Bu kategoride en çok 75 puan alınır." (md. 7a)
-        '7a-Q1' => 75,
+        '7a' => 75,
     ],
 ];

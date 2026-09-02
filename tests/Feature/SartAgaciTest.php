@@ -4674,3 +4674,14 @@ test('ADÜ ders verme ve jüri üyeliği tavanları uygulanıyor', function () {
     expect($katalog->topla(array_fill(0, 20, sartFaaliyet('Jüri Üyeliği (Uluslararası)', Kategori::SanatselEtkinlik)), $tumu))
         ->toBe(100);
 });
+
+test('Ege editörlük tavanı bütün çeyrekliklere uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('ege-2026');
+    $tumu = $katalog->coz(['*']);
+
+    // "Bu kategoride en çok 75 puan alınır." Tavan tek maddeye ('7a-Q1')
+    // bağlıydı; Q2 editörlüğü (10 puan) sınırsız sayılıyordu.
+    expect($katalog->topla(array_fill(0, 10, sartFaaliyet('WoS Dergi (Q2)', Kategori::Editorluk)), $tumu))->toBe(75)
+        ->and($katalog->topla(array_fill(0, 10, sartFaaliyet('WoS Dergi (Q4)', Kategori::Editorluk)), $tumu))->toBe(50)
+        ->and($katalog->topla(array_fill(0, 10, sartFaaliyet('WoS Dergi (Q1)', Kategori::Editorluk)), $tumu))->toBe(75);
+});
