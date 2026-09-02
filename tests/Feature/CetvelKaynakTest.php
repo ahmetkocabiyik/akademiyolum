@@ -162,6 +162,86 @@ test('cetvel tür ve rol değerleri sözlükte var', function () {
 });
 
 /**
+ * ÖLÜ TAVAN: HİÇBİR MADDEYE DÜŞMEYEN `grup_tavanlari` ANAHTARI.
+ *
+ * `grup_tavanlari` anahtarı `coz()` ile çözülüyor; anahtar bir grup adı,
+ * bir madde kodu ya da bir desen olabilir. Üçü de değilse tavan HİÇBİR
+ * maddeye düşmez ve sessizce yok sayılır: motor patlamaz, test kırılmaz,
+ * yalnız bölüm tavansız kalır ve fazla sayar (§0 ihlali).
+ *
+ * Aynı sınıfın ikinci hâli daha sinsi: anahtar bir GRUP değil TEK MADDE
+ * olduğunda tavan yazılmış görünür ama yalnız o satırı keser. Ege'de
+ * "Bu kategoride en çok 75 puan alınır" tavanı `'7a-Q1' => 75` diye
+ * duruyordu; Q2, Q3 ve Q4 editörlükleri sınırsız sayılıyordu. Testin
+ * ikinci beklentisi bu yüzden tek maddeye düşen tavanları RAPORLUYOR —
+ * hata saymıyor, çünkü kaynak gerçekten tek satırı sınırlıyor olabilir
+ * (Ardahan'ın "* Azami N puan" notları, MSGSÜ'nün adet tavanları); yeni
+ * bir tanesi eklendiğinde listeye yazılması, kapsamının bilerek
+ * seçildiğini gösterir. Tavanı `gruplar` içinde AÇIKÇA tanımlanmış tek
+ * maddelik kümeler (AYBÜ'nün AO.g-AO.s satırları gibi) listeye girmez:
+ * grubun kendisi kapsamın bilinçli olduğunu zaten söylüyor, tercih edilen
+ * biçim budur.
+ */
+test('hiçbir grup tavanı ölü değil ve tek maddeye düşenler bilinçli', function () {
+    $depo = app(SartDeposu::class);
+    $olu = [];
+    $tekMadde = [];
+
+    foreach ($depo->cetveller() as $ad => $katalog) {
+        foreach ($katalog->grupTavanlari as $grup => $tavan) {
+            $kodlar = $katalog->coz([(string) $grup]);
+
+            if ($kodlar === []) {
+                $olu[] = "{$ad}: '{$grup}' => {$tavan} hiçbir maddeye düşmüyor";
+
+                continue;
+            }
+
+            if (! isset($katalog->gruplar[$grup]) && count($kodlar) === 1) {
+                $tekMadde[] = "{$ad}: {$grup}";
+            }
+        }
+    }
+
+    expect($olu)->toBe([]);
+
+    // Tek maddeye düşen tavanların bilinen listesi; hepsinde kaynak
+    // gerçekten TEK SATIRI sınırlıyor ve gerekçesi cetvel dosyasında yazılı.
+    expect($tekMadde)->toBe([
+        'aksaray-2024: H-DERS',
+        'ardahan-2026: 3.3.12',
+        'ardahan-2026: 3.3.13',
+        'ardahan-2026: 3.3.15',
+        'ardahan-2026: 3.11.6',
+        'ardahan-2026: 3.13.11',
+        'ardahan-2026: 3.13.12',
+        'ardahan-2026: 4.1.13',
+        'ardahan-2026: 4.1.14',
+        'ardahan-2026: 4.1.16',
+        'ardahan-2026: 4.9.5',
+        'gazi-2024: Ta',
+        'igdir-2023: 10.b',
+        'igdir-2023: 11.b',
+        'igdir-2023: 12.b',
+        'mef-2024-mimarlik-dr: 2.b',
+        'mef-2024-mimarlik-dr: 2.c',
+        'mef-2024-mimarlik-docent: 2.b',
+        'mef-2024-mimarlik-docent: 2.c',
+        'mef-2024-mimarlik-profesor: 2.b',
+        'mef-2024-mimarlik-profesor: 2.c',
+        'mersin-2024: 2g',
+        'mersin-2024: 2h',
+        'tokat-gaziosmanpasa-2026: 1.5.c',
+        'tokat-gaziosmanpasa-2026: 1.6.b',
+        'tokat-gaziosmanpasa-2026: 1.6.ç',
+        'tokat-gaziosmanpasa-2026: 1.6.d',
+        'tokat-gaziosmanpasa-2026: 1.6.e',
+        'tokat-gaziosmanpasa-2026: 2.1.a',
+        'tokat-gaziosmanpasa-2026: 2.1.b',
+    ]);
+});
+
+/**
  * GRUP TAVANININ ÜSTÜNDE BARAJ = SAĞLANAMAZ EŞİK.
  *
  * Motor grup tavanını `topla()` içinde uyguluyor, yani bir koşulu ÖLÇERKEN
