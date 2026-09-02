@@ -147,7 +147,19 @@ return [
         'ULUSAL_MAKALE_KITAP' => ['A3.a', 'A4.a', 'A8.b', 'B3.a', 'B4.a', 'A1', 'A2', 'B1', 'B2'],
         'ALAN_INDEKS' => ['A8.b'],
         'PROJE_PATENT' => ['C3.*', 'C4.*', 'C5.*'],
+        'DIGER_ATIF' => ['B11.b'],
     ],
 
-    'grup_tavanlari' => [],
+    /*
+     * "B11.b) Diğer atıflar (En fazla 20 puan dikkate alınır.)" — satırın
+     * başlığında yazılıydı ama tavan girilmemişti; atıf başına 1 puan, yani
+     * yüz atfı olan aday 100 puan görüyordu (§0 ihlali).
+     *
+     * Kaynağın öteki tavanı ("B10 yurt içi hakemli olmayan dergilerdeki
+     * akademik yayınlar, en fazla 10 puan") girilmedi: B10 satırı cetvelde
+     * yok.
+     */
+    'grup_tavanlari' => [
+        'DIGER_ATIF' => 20,
+    ],
 ];

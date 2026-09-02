@@ -4644,3 +4644,19 @@ test('MSGSÜ adet tavanları puana çevrilip uygulanıyor', function () {
     $makaleler = array_fill(0, 10, sartFaaliyet('SCIE/SSCI (Q1)'));
     expect($katalog->topla($makaleler, $katalog->coz(['1'])))->toBeGreaterThanOrEqual(200);
 });
+
+test('Afyon atıf tavanı ve Bandırma diğer atıf tavanı uygulanıyor', function () {
+    $depo = sartDepo();
+
+    // Afyon: "Atıflardan en fazla 500 puan alınabilir." SCI atfı 7 puan.
+    $afyon = $depo->katalog('afyon-2026');
+    expect($afyon->topla(array_fill(0, 200, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $afyon->coz(['*'])))
+        ->toBe(500);
+
+    // Bandırma: "B11.b) Diğer atıflar (En fazla 20 puan dikkate alınır.)"
+    // Atıf başına 1 puan; TR Dizin atfı (B11.a, 2 puan) tavanın dışında.
+    $bandirma = $depo->katalog('bandirma-2024');
+    $tumu = $bandirma->coz(['*']);
+    expect($bandirma->topla(array_fill(0, 100, sartFaaliyet('Diğer', Kategori::Atif)), $tumu))->toBe(20)
+        ->and($bandirma->topla(array_fill(0, 100, sartFaaliyet('TR Dizin', Kategori::Atif)), $tumu))->toBe(200);
+});

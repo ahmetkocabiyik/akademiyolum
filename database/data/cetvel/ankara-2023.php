@@ -25,6 +25,17 @@
  * GİRİLMEYEN BÖLÜMLER: 3. Sanatsal Etkinlik (müzik, sahne, sergi — 40'tan
  * fazla kalem, kaynak sözlüğünde çoğunun karşılığı yok), 7. Bilimsel/Sanatsal
  * Toplantı'nın bir kısmı ve idari/ödül kalemleri.
+ *
+ * TAVAN TARAMASI (01.09.2026): kaynaktaki üç tavan ifadesinin hiçbiri
+ * uygulanabilir değil, `grup_tavanlari` bilerek boş:
+ *   9. bölüm (dergi editörlüğü) "yıllık en fazla 15 puan" — hem YIL BAŞINA
+ *     (motorda karşılığı yok) hem de o bölümün satırları hiç girilmemiş;
+ *     cetveldeki iki editörlük satırı KİTAP editörlüğü (2Ad, 2Bd).
+ *   8. bölüm (eğitim-öğretim) "en fazla 20 puan" — kadro sütununa bağlı
+ *     (Dr. ve doçentte 20, profesör ve yeniden atanmada sınırsız) ve bölümün
+ *     satırları cetvelde yok.
+ *   12/c yurt dışı ay "en fazla 18 puan" — satırı girilmedi (süre profilde
+ *     tutulmuyor).
  */
 
 return [

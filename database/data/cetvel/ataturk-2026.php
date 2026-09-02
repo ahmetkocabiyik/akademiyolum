@@ -13,6 +13,15 @@
  * Madde kodu → (kategori, kaynaklar, roller, puan). Bir faaliyet birden çok
  * maddeye giriyorsa puanı EN YÜKSEK maddeden alınır.
  * Şema ve projeksiyon notları: database/data/sart-agaci-taslak.php
+ *
+ * TAVAN TARAMASI (01.09.2026): kaynakta elli beş "en fazla N puan" ifadesi
+ * var ama HİÇBİRİ girilen bloklara ait değil, `grup_tavanlari` bilerek yok.
+ * Tavanlı satırların tamamı 00.04 (eğitim-öğretim etkinlikleri), 01.02
+ * (deney föyü), 02.11 (atıf), 05.02 (kurs ve dijital ders) ile 07.04-07.08
+ * (toplantı düzenleme) bloklarında; bu blokların hiçbiri girilmedi.
+ * Ayrıca 07.04-07.08 tavanları KADRO SÜTUNUNA göre değişiyor (aynı satır
+ * tabloda 60 ve 30 olarak iki kez geçiyor), yani girilecek olsalar cetvel
+ * kadroya göre varyantlanmalı.
  */
 
 return [

@@ -146,8 +146,15 @@ return [
         'A1a' => ['A1a'],
     ],
 
-    // "Her bir yıl için atıflardan en fazla 5 puan" sınırı yalnızca yeniden
-    // atanma koşulunda geçiyor; yeniden atanma eşiği girilmediği için
-    // uygulanmıyor.
+    /*
+     * "Her bir yıl için atıflardan en fazla 5 puan" sınırı yalnızca yeniden
+     * atanma koşulunda geçiyor; yeniden atanma eşiği girilmediği için
+     * uygulanmıyor.
+     *
+     * TAVAN TARAMASI (01.09.2026): kaynağın öteki iki tavanı da uygulanamaz —
+     * 8. madde (halkı bilgilendirme, röportaj) ile 9. maddenin (yayımlanmamış
+     * sunum, seminer) "Bu maddeden en fazla 10 puan alınabilir" notları;
+     * ikisinin de satırı cetvele girmedi.
+     */
     'grup_tavanlari' => [],
 ];

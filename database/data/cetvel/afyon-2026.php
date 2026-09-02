@@ -179,4 +179,17 @@ return [
         'CEVIRI' => ['6.*'],
         'ATIF' => ['8.*'],
     ],
+
+    /*
+     * Atıf bölümünün altındaki not: "Atıflardan en fazla 500 puan alınabilir."
+     * Girilmemişti; tavansız bölüm fazla saydırır (§0). SCI atfı 7 puan, yani
+     * yetmiş ikinci atıftan sonrası sayılmıyor.
+     *
+     * 14. bölümün "toplamda en fazla 30 puan" tavanı girilmedi: o bölümün
+     * (akademik/mesleki kuruluş üyelikleri, kulüp danışmanlığı) satırları
+     * cetvelde yok.
+     */
+    'grup_tavanlari' => [
+        'ATIF' => 500,
+    ],
 ];
