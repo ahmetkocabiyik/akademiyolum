@@ -360,12 +360,45 @@ kendi kaba tablosudur. İki eleme kuralı işe yaradı:
   yöneticilik VEYA YÖNETİCİ YARDIMCILIĞI" diyen bir satırda bölüm başkan
   yardımcısının durması doğrudur (Çanakkale). Ölçüt istatistik değil, satırın
   kendi metnidir.
-- **5 puanın altındaki sapmaları kovalama.** Aday toplamları yüzlerce puan
-  mertebesinde; üç puanlık bir yanlış yerleşim hiçbir barajı çevirmez.
-  Doğrulama maliyeti faydasını aşar.
+- **5 puanın altındaki sapmaları kovalama — AMA YALNIZ PUAN BARAJLARI İÇİN.**
+  Aday toplamları yüzlerce puan mertebesinde; üç puanlık bir yanlış yerleşim
+  hiçbir puan barajını çevirmez, doğrulama maliyeti faydasını aşar.
+
+  **Bu gerekçe SAYI SAYAN koşullarda geçersiz.** `SartDegerlendirici::adet()`
+  eşleşen faaliyetleri SAYIYOR, puanına hiç bakmıyor: iki puanlık bir satır
+  yanlış gruptaysa "en az üç bildiri" koşulunu iki yüz puanlık bir satır kadar
+  eksiksiz sağlar. Kuyruğu keserken ölçüt "sapma kaç puan" değil, **satır bir
+  `adet` koşulunun kümesinde mi** olmalı.
+
+  02.09.2026'da ölçüldü: kuyruğun 376 satırından 306'sı yalnız puan barajlarına
+  giriyor (kesilebilir), 27'si hiçbir koşula girmiyor (yalnız listedeki toplamı
+  etkiler), **43'ü bir `adet` koşulunu besliyor**. O 43'ün tekilleştirilmiş 21
+  satırı elle okundu; çoğu kaynağın meşru kaba tablosu, tek açık hata Yalova'nın
+  "poster hariç" satırlarıydı ve puan büyüklüğüyle değil SATIR BAŞLIĞIYLA
+  görülüyordu.
 
 Kalan işaretlerin çoğu özet/poster bildiri ile kurul üyeliğinde toplanıyor ve
 bilinçli olarak bırakıldı.
+
+### SATIR BAŞLIĞI BİR ŞEYİ DIŞLIYORSA ETİKET ONU TAŞIMASIN
+
+En ucuz ve en kesin detektör bu: satırın KENDİ METNİ bir şeyi açıkça dışlıyor
+ama etiketi onu içeriyor. İstatistik gerekmiyor, iki `preg_match` yetiyor.
+
+Yalova'nın 8a ve 8b satırları "Uluslararası/Ulusal bilimsel toplantıda sunulan
+bildiri (POSTER HARİÇ)" diyor ve `Uluslararası Özet/Poster` etiketini
+taşıyordu. Kaynak altı tablosunda da aynı parantezi kullanıyor, ayrı poster
+satırı yok.
+
+Karar kalıbı: sözlük etiketi **kaynağın saydığı** ile **saymadığı** şeyi tek
+etikette birleştiriyorsa (özet + poster) ve ayrılamıyorsa, §0 DIŞLAYAN kolu
+seçer. Aday o kalemde puanını ve SAYISINI düşük görür; alternatifi hak
+edilmeyen sayıyı vermek olurdu. Yönü ve büyüklüğünü `kapsam_notu`'na yaz.
+
+Korpus taraması sekiz aday satır buldu, altısı yanlış pozitifti: "yayın teşvik
+ödülü hariç" diyen satırlarda `TÜBA GEBİP / TWAS Teşvik Ödülü` etiketi duruyor
+— GEBİP bir ARAŞTIRMA teşvik ödülü, dışlanan ise yayın başına verilen nakit
+teşvik. **Olumsuzlamanın neyi dışladığını oku, kelimeye bakma.**
 
 ### İKİ SATIR AYNI ETİKETE DÜŞÜYORSA YÜKSEK OLANI YAZMA — SİL
 
