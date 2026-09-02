@@ -4722,3 +4722,27 @@ test('Ardahan satır düzeyindeki azami puanlar uygulanıyor', function () {
     expect($katalog->topla(array_fill(0, 10, sartFaaliyet('Bilim İletişimi / Popüler Yayın', Kategori::ToplumsalKatki)), $tumu))
         ->toBe(3);
 });
+
+test('Eskişehir Teknik 1f tavanı kadroya göre uygulanıyor', function () {
+    $depo = sartDepo();
+
+    // EK-5: Tablo 1'de 75, Tablo 2'de 45, Tablo 3-4'te 150.
+    $tavan = fn (string $anahtar): array => $depo->cetveller()[$anahtar]->grupTavanlari;
+    expect($tavan('eskisehir-teknik-2026-1f75')['1f'])->toBe(75)
+        ->and($tavan('eskisehir-teknik-2026-1f45')['1f'])->toBe(45)
+        ->and($tavan('eskisehir-teknik-2026-1f150')['1f'])->toBe(150)
+        ->and($tavan('eskisehir-teknik-2026'))->not->toHaveKey('1f');
+
+    // Eşikler doğru varyanta bağlı; mühendislik tavansız gövdede kalıyor.
+    expect($depo->bul('Eskişehir Teknik Üniversitesi', 'dr_ogr_uyesi_yeniden', 'sosyal')['cetvel'])
+        ->toBe('eskisehir-teknik-2026-1f45')
+        ->and($depo->bul('Eskişehir Teknik Üniversitesi', 'profesorluk', 'sosyal')['cetvel'])
+        ->toBe('eskisehir-teknik-2026-1f150')
+        ->and($depo->bul('Eskişehir Teknik Üniversitesi', 'profesorluk', 'muhendislik')['cetvel'])
+        ->toBe('eskisehir-teknik-2026');
+
+    // TR Dizin makalesi 75 puan; yeniden atanmada makale barajına en fazla
+    // 45 puan girebiliyor, tavansızken beş makale 375 puan sayılıyordu.
+    $katalog = $depo->katalog('eskisehir-teknik-2026-1f45');
+    expect($katalog->topla(array_fill(0, 5, sartFaaliyet('TR Dizin')), $katalog->coz(['1a-f'])))->toBe(45);
+});

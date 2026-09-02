@@ -39,10 +39,14 @@
  * ── "1f KAPSAMINDA EN FAZLA N PUAN" ALT SINIRLARI ──
  * Makale puanı sütunu sosyal, spor, mimarlık ve güzel sanatlar
  * gruplarında "1a-f kapsamında X puan (1f kapsamında en fazla Y puan
- * alınabilir)" diyor. Bu, kadro başına değişen bir grup tavanı; motorun
- * `grup_tavanlari` alanı cetvel geneline uygulandığı için YAZILAMADI.
- * TR Dizin yayını çok olan aday makale puanı barajını olduğundan kolay
- * geçiyor görünebilir; aday notunda uyarıldı.
+ * alınabilir)" diyor ve Y kadroya göre değişiyor: Tablo 1'de 75, Tablo 2'de
+ * 45, Tablo 3 ve 4'te 150. Bir tur "motorun `grup_tavanlari` alanı cetvel
+ * geneline uygulandığı için yazılamadı" diye bırakılmıştı; doğru çözüm
+ * CETVELİ KADROYA GÖRE VARYANTLAMAK (Ordu, Yalova, Acıbadem ve MEF'teki
+ * yol). Cetvel artık dört varyant döndürüyor ve her kadro kendi varyantına
+ * bağlı. Mühendislik, Fen ve Matematik grupları '1a-e' kümesini kullandığı
+ * için tavansız gövdede kaldı — 1f zaten barajlarının dışında ve kaynak
+ * onlara tavan koymuyor.
  *
  * ── TEZ YAYINI SÜTUNU İÇİN AYNA SATIR ──
  * Tablo 1'in "Lisansüstü Tezlerden Üretilmiş Yayın Sayısı" sütunu 1a-g
@@ -103,6 +107,16 @@ $grupEsikleri = function (string $anahtar, string $ad, array $alanlar, ?string $
     $yayinKume = $c['yayin_kume'];
     $yayinKumeAd = $c['yayin_kume_ad'];
 
+    // EK-5'in makale puanı hücresi "1a-f kapsamında X puan (1f kapsamında en
+    // fazla Y puan alınabilir)" diyor ve Y kadroya göre değişiyor: Tablo 1'de
+    // 75, Tablo 2'de 45, Tablo 3 ve 4'te 150. Cetvelin kadro varyantları bu
+    // tavanı taşıyor. Tavan yalnız makale kümesi '1a-f' olan gruplara ait;
+    // '1a-e' kullanan mühendislik, fen ve matematik tavansız gövdede kalır.
+    $birF = $c['dr_makale_puan_kume'] === '1a-f';
+    $cetvelDr = $birF ? "{$CETVEL}-1f75" : $CETVEL;
+    $cetvelYeniden = $birF ? "{$CETVEL}-1f45" : $CETVEL;
+    $cetvelUst = $birF ? "{$CETVEL}-1f150" : $CETVEL;
+
     /**
      * "Makale sayısı" hücresi: tek koşul ya da "N adet A kümesinden VEYA
      * M adet B kümesinden".
@@ -134,7 +148,7 @@ $grupEsikleri = function (string $anahtar, string $ad, array $alanlar, ?string $
             'kadro' => 'dr_ogr_uyesi',
             'alan' => $alanlar,
             'birim' => $birim,
-            'cetvel' => $CETVEL,
+            'cetvel' => $cetvelDr,
             'notlar' => "EK-5 Tablo 1 ({$ad}): tez yayını 1 adet; makale puanı {$c['dr_makale_puan']}; "
                 ."yayın puanı {$yayinKumeAd} 400; toplam 600.",
             'sart' => Kalip::ve("Doktor Öğretim Üyesi kadrosuna ilk kez atanma — {$ad}", array_merge(
@@ -163,7 +177,7 @@ $grupEsikleri = function (string $anahtar, string $ad, array $alanlar, ?string $
             'kadro' => 'dr_ogr_uyesi_yeniden',
             'alan' => $alanlar,
             'birim' => $birim,
-            'cetvel' => $CETVEL,
+            'cetvel' => $cetvelYeniden,
             'notlar' => "EK-5 Tablo 2 ({$ad}): makale puanı {$c['yeniden_makale_puan']}; yayın "
                 ."puanı {$yayinKumeAd} 240; eğitim 80; seçenek listesi; toplam 360.",
             'sart' => Kalip::ve("Doktor Öğretim Üyeliğine yeniden atanma — {$ad}", [
@@ -190,7 +204,7 @@ $grupEsikleri = function (string $anahtar, string $ad, array $alanlar, ?string $
             'kadro' => 'docentlik',
             'alan' => $alanlar,
             'birim' => $birim,
-            'cetvel' => $CETVEL,
+            'cetvel' => $cetvelUst,
             'notlar' => "EK-5 Tablo 3 ({$ad}): makale puanı {$c['docent_makale_puan']}; yayın "
                 ."puanı {$yayinKumeAd} 1000; eğitim 120; seçenek listesi; toplam 2200.",
             'sart' => Kalip::ve("Doçent kadrosuna atanma — {$ad}", [
@@ -224,7 +238,7 @@ $grupEsikleri = function (string $anahtar, string $ad, array $alanlar, ?string $
             'kadro' => 'profesorluk',
             'alan' => $alanlar,
             'birim' => $birim,
-            'cetvel' => $CETVEL,
+            'cetvel' => $cetvelUst,
             'notlar' => "EK-5 Tablo 4 ({$ad}): başlıca eser 1 adet; makale puanı "
                 ."{$c['docent_makale_puan']}; yayın puanı {$yayinKumeAd} 1000; eğitim 120; "
                 .'seçenek listesi; toplam 2500.',
