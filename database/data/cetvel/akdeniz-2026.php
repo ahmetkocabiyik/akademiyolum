@@ -244,5 +244,36 @@ return [
         'BOLUM_6_PROJE' => ['6.*'],
         'BOLUM_7_BILDIRI' => ['7.*'],
         'YAYIN' => ['1.*', '2.*', 'T.1'],
+
+        // 3. bölümün dipnot 1'i iki ayrı tavan koyuyor; alt tavan yalnız
+        // 3.2 ve 3.3'e ait, 3.1 (WoS atfı) onun dışında.
+        'ATIF_KITAP_DIGER' => ['3.2', '3.3'],
+    ],
+
+    /*
+     * Tablo dipnotlarındaki bölüm tavanları. Dördü de 01.09.2026'ya kadar
+     * girilmemişti (dosyada `grup_tavanlari` anahtarı hiç yoktu); tavansız
+     * bölüm doğrudan fazla saydırır (§0).
+     *
+     * 8-11. bölümlerin tavanları (eğitim 100, toplumsal katkı 100, sportif
+     * 200, TV/radyo 50) burada YOK, çünkü o bölümlerin maddeleri de cetvele
+     * girilmemiş. h-indeksi tavanı (200) da öyle: 3.5 maddesi girilmedi.
+     * Proje bütçesi ek puanının 150'lik tavanı ek puanın kendisi
+     * modellenmediği için uygulanmıyor.
+     */
+    'grup_tavanlari' => [
+        // "3.2 ve 3.3 kategorilerinden en fazla 120 puan ve toplam atıf
+        // puanından h-indeksi hariç en fazla 250 puan alınabilir."
+        'ATIF_KITAP_DIGER' => 120,
+        'BOLUM_3_ATIF' => 250,
+
+        // 4. bölüm başlığının taşıdığı dipnot 2: "Bu alandan en fazla 200
+        // puan alınır." Dipnot hem başlıkta hem 4.10-4.11'de anılıyor; iki
+        // satırlık okuma (25 puanlık maddelere 200 tavanı) anlamsız kalacağı
+        // için bölüm geneli alındı — aynı zamanda sıkı olan okuma (§0).
+        'BOLUM_4_PATENT' => 200,
+
+        // 7. bölüm dipnot 1: "bu kategorideki eserlerden en fazla 20 puan".
+        'BOLUM_7_BILDIRI' => 20,
     ],
 ];

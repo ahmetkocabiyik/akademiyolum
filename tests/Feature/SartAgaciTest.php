@@ -4532,3 +4532,21 @@ test('Çukurova bildiri ve diğer yayınevi kitabı tavanları uygulanıyor', fu
     expect($katalog->topla($diger, $tumu))->toBe(30)
         ->and($katalog->topla($bkci, $tumu))->toBe(180);
 });
+
+test('Akdeniz bölüm tavanları uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('akdeniz-2026');
+    $tumu = $katalog->coz(['*']);
+
+    // 3. bölüm iki katmanlı: 3.2+3.3 en fazla 120, bölüm toplamı en fazla 250.
+    // Kırk kitap atfı (4 puan) tavansız 160 ederdi.
+    expect($katalog->topla(array_fill(0, 40, sartFaaliyet('BKCI Kitap', Kategori::Atif)), $tumu))->toBe(120);
+
+    // Alt tavan 3.1'i kapsamıyor: yüz WoS atfı 500 değil, bölüm tavanı 250.
+    expect($katalog->topla(array_fill(0, 100, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $tumu))->toBe(250);
+
+    // 4. bölüm 200: iki uluslararası patent tavansız 500 ederdi.
+    expect($katalog->topla(array_fill(0, 2, sartFaaliyet('Uluslararası Patent', Kategori::Patent)), $tumu))->toBe(200);
+
+    // 7. bölüm 20: on CPCI bildirisi (8 puan) tavansız 80 ederdi.
+    expect($katalog->topla(array_fill(0, 10, sartFaaliyet('Uluslararası Tam Metin (CPCI)', Kategori::Bildiri)), $tumu))->toBe(20);
+});
