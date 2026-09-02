@@ -4567,3 +4567,23 @@ test('Fırat çapraz tablo tavanları ve BAP tavanı uygulanıyor', function () 
     $bap = array_fill(0, 6, sartFaaliyet('BAP (Üniversite)', Kategori::Proje, 'yurutucu'));
     expect($katalog->topla($bap, $katalog->coz(['C2-C6'])))->toBe(10);
 });
+
+test('Sakarya madde ve bölüm tavanları uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('sakarya-2026');
+    $tumu = $katalog->coz(['*']);
+
+    // "1.3 yayınları için toplamda en fazla 60 puan": TR Dizin makalesi 25,
+    // beş tane tavansız 125 ederdi.
+    expect($katalog->topla(array_fill(0, 5, sartFaaliyet('TR Dizin')), $tumu))->toBe(60);
+
+    // 11. bölümün iki katmanlı tavanı: 11.3 (WoS atfı) 500'e kadar, öteki
+    // atıflar TOPLAMDA 100'de kesiliyor.
+    $wos = array_fill(0, 300, sartFaaliyet('WoS / Scopus', Kategori::Atif));
+    $ulusal = array_fill(0, 200, sartFaaliyet('TR Dizin', Kategori::Atif));
+    expect($katalog->topla($wos, $tumu))->toBe(500)
+        ->and($katalog->topla($ulusal, $tumu))->toBe(100);
+
+    // 9. bölüm (editörlük) 300: on baş editörlük (40) tavansız 400 ederdi.
+    expect($katalog->topla(array_fill(0, 10, sartFaaliyet('WoS Dergi (Q1)', Kategori::Editorluk)), $tumu))
+        ->toBe(300);
+});

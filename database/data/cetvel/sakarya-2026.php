@@ -173,7 +173,45 @@ return [
         '12' => ['12.*'],
         '13' => ['13.*'],
         '14' => ['14.*'],
+
+        // Tavanı olan tek maddeler ve tavanı PAYLAŞAN madde kümeleri.
+        'T-1.3' => ['1.3'],
+        'T-1.2b' => ['1.2b'],
+        'T-2.15' => ['2.15'],
+        'T-3.2' => ['3.2'],
+        'T-3.7' => ['3.7'],
+        'T-4.6' => ['4.6'],
+        'T-5-SERGI' => ['5.5', '5.6'],
+        // 11. bölümün tavanı ikiye ayrılıyor: 11.3'ün kendi tavanı var,
+        // öteki atıf satırları ortak ve çok daha düşük bir tavanı paylaşıyor.
+        'T-ATIF-DIGER' => ['11.1', '11.2', '11.4', '11.6'],
+        'T-11.3' => ['11.3'],
     ],
 
-    'grup_tavanlari' => [],
+    /*
+     * Kaynağın madde ve bölüm tavanları. Hiçbiri girilmemişti (`grup_tavanlari`
+     * boş diziydi); tavansız bölüm doğrudan fazla saydırır (§0).
+     *
+     * "Faaliyetlerin Puanlanması" başlığındaki madde tavanları (2.2 maddesi,
+     * 5. sayfa) ile 3, 5, 9, 11 ve 14. bölümlerin tablo başlıklarındaki bölüm
+     * tavanları. Kaynak bunların bir kısmını "Bölüm 1 ve Bölüm 2'de bulunan"
+     * diye eşik kümesine göre yazıyor; cetvel tek ortak tablo olduğu için
+     * tavan doğrudan madde koduna bağlandı.
+     *
+     * Cetvelde satırı olmayan tavanlar girilmedi: 2.14 (panelistlik 60),
+     * 4.7 (buluş bildirimi 25), 14.31 ve 14.32 (40).
+     */
+    'grup_tavanlari' => [
+        'T-1.3' => 60,          // "Bölüm 1 ve Bölüm 2'de bulunan 1.3 yayınları için toplamda en fazla 60 puan"
+        'T-1.2b' => 60,         // "… 1.2b. maddesi için toplamda en fazla 60 puan"
+        'T-2.15' => 60,         // "Bölüm 1'de bulunan 2.15 projelerinden en fazla 60 puan"
+        'T-3.2' => 50,          // "2. Bölümde bulunan 3.2 maddesi için en fazla 50 puan"
+        'T-3.7' => 30,          // "Bölüm 2'de yer alan 3.7 maddesi için en fazla 30 puan"
+        'T-4.6' => 50,          // "(En fazla 50 puan alınabilir)" — 4.6 satırının kendi notu
+        'T-5-SERGI' => 160,     // "5.1, 5.2, 5.5, 5.6, 5.7 maddelerinden toplamda en fazla 160 puan"
+        '9' => 300,             // 9. bölüm başlığı: "Bu bölümden en fazla 300 puan alınabilir."
+        'T-ATIF-DIGER' => 100,  // 11. bölüm başlığı: "11.3'ün dışındaki atıflardan en fazla 100 puan"
+        'T-11.3' => 500,        // "11.3'ten en fazla 500 puan alınır"
+        '14' => 300,            // 14. bölüm başlığı: "Bu bölümden en fazla 300 puan alınabilir."
+    ],
 ];
