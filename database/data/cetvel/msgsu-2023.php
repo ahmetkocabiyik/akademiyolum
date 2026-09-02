@@ -288,7 +288,56 @@ return [
         '5' => $onek(['5.']),
         '6.1' => $onek(['6.1.']),
         '6' => $onek(['6.']),
+
+        // Adet tavanı olan satırlar. Motorda "en fazla N faaliyet" düğümü
+        // yok, ama satırın puanı sabit olduğu için tavan puana çevriliyor
+        // (KONVANSIYONLAR: "Adet tavanı puana ÇEVRİLEBİLİR").
+        'A-1.4.1' => ['1.4.1'],
+        'A-1.4.2' => ['1.4.2'],
+        'A-1.6.4' => ['1.6.4'],
+        'A-2.8.6' => ['2.8.6'],
+        'A-3.3.8' => ['3.3.8'],
+        'A-3.4.2' => ['3.4.2'],
+        'A-4.1.4' => ['4.1.4'],
+        'A-4.1.5' => ['4.1.5'],
+        'A-6.6.1' => ['6.6.1'],
     ],
 
-    'grup_tavanlari' => [],
+    /*
+     * EK 3'ün satır başlıklarındaki ADET TAVANLARI, puana çevrilmiş hâli.
+     * Hiçbiri girilmemişti; tavansız satır doğrudan fazla saydırır (§0).
+     * Çeviri: adet × satırın puanı.
+     *
+     *   1.4.1 kitap çevirisi          en çok bir adet × 15 =  15
+     *   1.4.2 bölüm çevirisi          en çok üç adet  ×  5 =  15
+     *   1.6.4 ansiklopedi yazarlığı   en çok iki adet ×  5 =  10
+     *   2.8.6 koro / korist           en çok beş adet ×  5 =  25
+     *   3.3.8 hakemlik                en çok beş adet ×  3 =  15
+     *   3.4.2 etkinlikte jüri üyeliği en çok üç adet  × 10 =  30
+     *   4.1.4 YL tez danışmanlığı     en çok üç adet  ×  5 =  15
+     *   4.1.5 tez jüri üyeliği        en çok üç adet  ×  2 =   6
+     *   6.6.1 kısa süreli komisyon    en çok üç adet  ×  1 =   3
+     *
+     * ÜÇ SATIR KAYNAKTA BİRDEN ÇOK SATIRIN BİRLEŞİMİ (1.6.4 = 1.6.1-1.6.4,
+     * 3.4.2 = 3.4.1-3.4.2, 4.1.5 = 4.1.5-4.1.7) ve kaynak adet tavanını her
+     * satıra AYRI AYRI veriyor. Birleşik satırın adedi hangi alt satıra ait
+     * olduğunu bilemediğimiz için TEK satırın tavanı yazıldı; aday bu
+     * kalemlerde puanını olduğundan DÜŞÜK görebilir. Yön §0'a uygun,
+     * alternatifi (tavansız bırakmak) fazla saydırırdı.
+     *
+     * GİRİLMEYEN ADET TAVANLARI: 6.6.2 ve 6.5.1 (tavan yıl ile çarpılıyor,
+     * puana sabit çevrilemiyor) ve 6.4.18 (kaynakta tavan yalnız YENİDEN
+     * ATANMADA geçerli, cetvel kadroya göre varyantlanmıyor).
+     */
+    'grup_tavanlari' => [
+        'A-1.4.1' => 15,
+        'A-1.4.2' => 15,
+        'A-1.6.4' => 10,
+        'A-2.8.6' => 25,
+        'A-3.3.8' => 15,
+        'A-3.4.2' => 30,
+        'A-4.1.4' => 15,
+        'A-4.1.5' => 6,
+        'A-6.6.1' => 3,
+    ],
 ];

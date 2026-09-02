@@ -4628,3 +4628,19 @@ test('KTÜN O bölümü ve ders tavanları iki varyantta da uygulanıyor', funct
             ->toBe(20);
     }
 });
+
+test('MSGSÜ adet tavanları puana çevrilip uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('msgsu-2023');
+    $tumu = $katalog->coz(['*']);
+
+    // "Hakemlik (en çok beş adet)" × 3 puan = 15; yirmi hakemlik 60 ederdi.
+    expect($katalog->topla(array_fill(0, 20, sartFaaliyet('Hakemlik', Kategori::Editorluk)), $tumu))->toBe(15);
+
+    // "Kitap çevirisi (en çok bir adet)" × 15 = 15; üç çeviri 45 ederdi.
+    expect($katalog->topla(array_fill(0, 3, sartFaaliyet('Çeviri Kitap', Kategori::Kitap)), $tumu))->toBe(15);
+
+    // Tavan 1. kısmın 200 puanlık barajını sağlanamaz yapmıyor: bölümün
+    // tavansız satırları (makale, kitap) barajı tek başına taşıyabiliyor.
+    $makaleler = array_fill(0, 10, sartFaaliyet('SCIE/SSCI (Q1)'));
+    expect($katalog->topla($makaleler, $katalog->coz(['1'])))->toBeGreaterThanOrEqual(200);
+});
