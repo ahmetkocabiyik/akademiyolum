@@ -101,10 +101,47 @@ return [
         '5-BAP-haric' => ['5-tubitak-*', '5-ab-*', '5-ulus-*', '5-kamu-*', '5-sanayi-*', '5n', '5o', '5r'],
         '8a' => ['8a*'],
         'MAKALE' => ['1*'],
+
+        // Yalnızca tavan taşıyan kümeler.
+        'ATIF' => ['2*'],
+        '3c-KITAP' => ['3c'],
+        '3d-BOLUM' => ['3d'],
+        '5-KAMU' => ['5-kamu-*'],
+        '5-SANAYI' => ['5-sanayi-*'],
+        '5-BAP' => ['5-bap-*'],
+        '6b-EDITORLUK' => ['6b'],
+        'EDITORLUK-KURUL' => ['6*'],
+        'HAKEMLIK' => ['7*'],
     ],
 
+    /*
+     * Kaynağın tavanları. 01.09.2026'ya kadar yalnızca "8) Eğitime Katkı
+     * (Toplamda en fazla 200 puan)" girilmişti; kalan dokuzu tavansızdı ve
+     * tavansız bölüm doğrudan fazla saydırır (§0).
+     *
+     * En pahalısı ATIF: kaynak "Not 1: Atıflardan en fazla 200 puan
+     * hesaplamada kullanılabilir" diyor, cetvel sınırsız sayıyordu.
+     *
+     * EDİTÖRLÜK İKİ KATMANLI: 6b'nin kendi tavanı (100) var, ayrıca "Not 2:
+     * Editörlük ve Yayın Kurulu Üyeliği kısmından en fazla 150 puan
+     * hesaplamada kullanılabilir" bölümün tamamını 150'de kesiyor. Hakemlik
+     * (7) ayrı bir bölüm, 150'nin dışında.
+     *
+     * Cetvelde satırı olmadığı için girilmeyenler: 3e-3f (ulusal kitap
+     * 28/20), 5f TGB (40), 5ı Bilim ve Toplum (50), 5i BİDEB (40), 6c ulusal
+     * kitap editörlüğü (100) ve "DİĞER PUANLAMALAR" bölümünün 80/20'lik
+     * tavanları (ödül satırları girilmedi).
+     */
     'grup_tavanlari' => [
-        // "8) Eğitime Katkı (Toplamda en fazla 200 puan)"
-        '8a' => 200,
+        'ATIF' => 200,              // "Not 1: Atıflardan en fazla 200 puan"
+        '3c-KITAP' => 120,          // "Bu kapsamda en fazla 120 puan alınabilir."
+        '3d-BOLUM' => 40,           // "Bu kapsamında en fazla 40 puan alınabilir."
+        '5-KAMU' => 50,             // "ğ) Diğer kamu kurum … (en fazla 50 puan)"
+        '5-SANAYI' => 50,           // "h) Üniversite-Sanayi İşbirliği (en fazla 50 puan)"
+        '5-BAP' => 50,              // "j) BAP (en fazla 50 puan alınabilir)"
+        '6b-EDITORLUK' => 100,      // "b) … editörlük. (Bu kapsamda en fazla 100 puan)"
+        'EDITORLUK-KURUL' => 150,   // "Not 2: Editörlük ve Yayın Kurulu Üyeliği kısmından en fazla 150 puan"
+        'HAKEMLIK' => 20,           // "7) Hakemlik (Bu kapsamda en fazla 20 puan alınabilir)"
+        '8a' => 200,                // "8) Eğitime Katkı (Toplamda en fazla 200 puan)"
     ],
 ];

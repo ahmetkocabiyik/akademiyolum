@@ -4685,3 +4685,25 @@ test('Ege editörlük tavanı bütün çeyrekliklere uygulanıyor', function () 
         ->and($katalog->topla(array_fill(0, 10, sartFaaliyet('WoS Dergi (Q4)', Kategori::Editorluk)), $tumu))->toBe(50)
         ->and($katalog->topla(array_fill(0, 10, sartFaaliyet('WoS Dergi (Q1)', Kategori::Editorluk)), $tumu))->toBe(75);
 });
+
+test('Gaziantep atıf, proje ve editörlük tavanları uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('gaziantep-2026');
+    $tumu = $katalog->coz(['*']);
+
+    // "Not 1: Atıflardan en fazla 200 puan hesaplamada kullanılabilir."
+    expect($katalog->topla(array_fill(0, 300, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $tumu))->toBe(200);
+
+    // "j) BAP (en fazla 50 puan alınabilir)" — yürütücülük 10 puan.
+    expect($katalog->topla(array_fill(0, 10, sartFaaliyet('BAP (Üniversite)', Kategori::Proje, 'yurutucu')), $tumu))
+        ->toBe(50);
+
+    // Editörlük iki katmanlı: 6b'nin kendi tavanı 100, bölümün tamamı 150.
+    $digerKitap = array_fill(0, 10, sartFaaliyet('Kitap Editörlüğü', Kategori::Editorluk));
+    expect($katalog->topla($digerKitap, $tumu))->toBe(100);
+
+    $bkci = array_fill(0, 10, sartFaaliyet('BKCI Kitap', Kategori::Editorluk));
+    expect($katalog->topla($bkci, $tumu))->toBe(150);
+
+    // Hakemlik ayrı bir bölüm; 150'nin dışında ve kendi tavanı 20.
+    expect($katalog->topla(array_fill(0, 40, sartFaaliyet('Hakemlik', Kategori::Editorluk)), $tumu))->toBe(20);
+});
