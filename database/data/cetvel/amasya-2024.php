@@ -156,7 +156,20 @@ return [
         // o koşullar yalnızca A1-A16'yı sayıyor, yani baraj olduğundan zor
         // görünür.
         'MAKALE' => ['A*'],
+
+        'TEZ-JURI' => ['F7'],
+        'DERSLER' => ['F9'],
     ],
 
-    'grup_tavanlari' => [],
+    /*
+     * F bölümünün iki ara başlığı tavan taşıyor; ikisi de girilmemişti ve
+     * tavansız bölüm doğrudan fazla saydırır (§0).
+     *
+     *   "Tez Jüri Üyeliği (… en fazla 20 puan alınabilir)"
+     *   "Dersler (Son beş yılda verilen derslerden en fazla 40 puan alınabilir)"
+     */
+    'grup_tavanlari' => [
+        'TEZ-JURI' => 20,
+        'DERSLER' => 40,
+    ],
 ];

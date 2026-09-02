@@ -4587,3 +4587,26 @@ test('Sakarya madde ve bölüm tavanları uygulanıyor', function () {
     expect($katalog->topla(array_fill(0, 10, sartFaaliyet('WoS Dergi (Q1)', Kategori::Editorluk)), $tumu))
         ->toBe(300);
 });
+
+test('Ağrı atıf tavanı alt barajı sahte sağlamayı kesiyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('agri-2024');
+
+    // 7.1 atıf başına 6 puan. "1, 4 ve 7 numaralı maddelerden en az 100 puan"
+    // barajı tavansızken yirmi atıfla (120) tek başına sağlanıyordu.
+    $atiflar = array_fill(0, 20, sartFaaliyet('WoS / Scopus', Kategori::Atif));
+    expect($katalog->topla($atiflar, $katalog->coz(['1', '4.1', '4.2', '4.3', '7.1'])))->toBe(30);
+});
+
+test('Amasya tez jürisi ve ders tavanları uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('amasya-2024');
+    $tumu = $katalog->coz(['*']);
+
+    // "Tez Jüri Üyeliği (… en fazla 20 puan)": on jüri üyeliği (4) 40 ederdi.
+    expect($katalog->topla(array_fill(0, 10, sartFaaliyet('Tez İzleme / Jüri Üyeliği', Kategori::TezDanismanligi)), $tumu))
+        ->toBe(20);
+
+    // "Dersler … en fazla 40 puan": kırk ders tavansız çok daha fazla ederdi.
+    expect($katalog->topla(array_fill(0, 40, sartFaaliyet('Lisansüstü Ders', Kategori::EgitimOgretim)), $tumu))
+        ->toBe(40);
+});
