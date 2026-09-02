@@ -198,11 +198,22 @@ return [
         // Bölüm tavanı olan iki küme.
         'A6' => ['A6.*'],
         'B2' => ['B2.*'],
+        'A2.1.5' => ['A2.1.5'],
     ],
 
     'grup_tavanlari' => [
         // Kaynaktaki iki bölüm sınırı: A6 "en fazla 50 puan", B2 "en fazla 30 puan".
         'A6' => 50,
         'B2' => 30,
+
+        // A2.1.5'in ADET sınırı puana çevrildi: "Uluslararası Bilimsel
+        // ansiklopedilerde madde yazarlığı (En fazla altı maddeden puan
+        // alınabilir)" — madde başına 10 puan, yani 6 × 10 = 60.
+        //
+        // Kaynağın "BİR KİTAPTAN en fazla …" biçimindeki sınırları
+        // (A2.1.4 iki bölüm, A2.2 başlığı 40 puan) uygulanamıyor: kayıt
+        // aynı esere ait kalemleri birbirine bağlamıyor. A2.2.6'nın altı
+        // madde sınırı da girilmedi, o satır cetvelde yok.
+        'A2.1.5' => 60,
     ],
 ];

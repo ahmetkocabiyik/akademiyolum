@@ -65,6 +65,11 @@
  *   A6'nın "aynı toplantıda en fazla 2 bildiri" kuralı.
  *   A10.2 ve A10.3'ün seri üretim ve uygulanmama çarpanları.
  *
+ * TAVAN TARAMASI (01.09.2026): kaynağın "Not 2: A8.1, A8.2 ve A8.3'de yer
+ * alan faaliyetlerden BİR YARIYILDA en fazla 5 puan alınabilir" sınırı
+ * uygulanamıyor — tavan yarıyıl başına ve faaliyet kaydı yarıyıl bilgisi
+ * taşımıyor. Ders puanı bu yüzden olduğundan yüksek görünebilir.
+ *
  * Yönerge: yonerge/yozgat-bozok.php
  */
 $TAM = ['ozgun_makale', 'derleme'];

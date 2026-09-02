@@ -4746,3 +4746,12 @@ test('Eskişehir Teknik 1f tavanı kadroya göre uygulanıyor', function () {
     $katalog = $depo->katalog('eskisehir-teknik-2026-1f45');
     expect($katalog->topla(array_fill(0, 5, sartFaaliyet('TR Dizin')), $katalog->coz(['1a-f'])))->toBe(45);
 });
+
+test('Kahramanmaraş İstiklal ansiklopedi adet tavanı puana çevrilip uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('kahramanmaras-istiklal-2024');
+    $tumu = $katalog->coz(['*']);
+
+    // "En fazla altı maddeden puan alınabilir" × 10 puan = 60.
+    expect($katalog->topla(array_fill(0, 20, sartFaaliyet('Ansiklopedi Maddesi', Kategori::Kitap)), $tumu))
+        ->toBe(60);
+});
