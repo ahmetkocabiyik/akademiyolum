@@ -103,7 +103,17 @@ return [
         'MAKALE' => ['M-*'],
         'BILDIRI' => ['B-*'],
         'KITAP' => ['K-*'],
+
+        // Tavanı yalnız "diğer yayınevi" kademesi taşıyor; BKCI/Scopus kitabı
+        // sınırsız. Bu yüzden K-* değil tek madde.
+        'KITAP-DIGER' => ['K-DIGER'],
     ],
 
-    'grup_tavanlari' => [],
+    // EK 2'nin tanım bölümündeki iki bölüm tavanı (23. sayfa). İkisi de
+    // 01.09.2026'ya kadar girilmemişti; tavansız bir bölüm doğrudan fazla
+    // saydırır (§0).
+    'grup_tavanlari' => [
+        'BILDIRI' => 30,        // "Bildiri kategorisinde en fazla 30 puan alınabilir."
+        'KITAP-DIGER' => 30,    // "Diğer ulusal/uluslararası yayınevleri ... en fazla 30 puan"
+    ],
 ];

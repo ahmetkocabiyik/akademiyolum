@@ -4515,3 +4515,20 @@ test('MSGSÜ koordinatörlük idari görev satırından sayılmıyor', function 
     expect($p('Anabilim Dalı Başkanı / Koordinatörlük'))->toBe(1)
         ->and($p('Rektör'))->toBe(10);
 });
+
+test('Çukurova bildiri ve diğer yayınevi kitabı tavanları uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('cukurova-2024');
+    $tumu = $katalog->coz(['*']);
+
+    // EK 2'nin tanım bölümü: "Bildiri kategorisinde en fazla 30 puan
+    // alınabilir." Dört CPCI bildirisi tavansız 60 ederdi.
+    $bildiriler = array_fill(0, 4, sartFaaliyet('Uluslararası Tam Metin (CPCI)', Kategori::Bildiri));
+    expect($katalog->topla($bildiriler, $tumu))->toBe(30);
+
+    // Tavan yalnız "diğer yayınevi" kademesinde: üç kitap 90 yerine 30, ama
+    // BKCI kitabı sınırsız (üç tane 180).
+    $diger = array_fill(0, 3, sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap));
+    $bkci = array_fill(0, 3, sartFaaliyet('BKCI / Scopus Kitap', Kategori::Kitap));
+    expect($katalog->topla($diger, $tumu))->toBe(30)
+        ->and($katalog->topla($bkci, $tumu))->toBe(180);
+});
