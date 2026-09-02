@@ -4866,3 +4866,39 @@ test('OMÜ 15. bölüm görsel etkinlikleri en düşük bentten sayıyor', funct
         ->and($n('1-14'))->toBeLessThan($n('1-15'))
         ->and($n('1-15'))->toBeLessThan($n('1-16'));
 });
+
+test('OMÜ 16. bölüm sanatsal etkinlikleri üç eksende ayırıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('omu-2025');
+    $tumu = $katalog->coz(['*']);
+    $p = fn (string $kaynak) => $katalog->puan(sartFaaliyet($kaynak, Kategori::SanatselEtkinlik), $tumu);
+
+    // Yer × jüri × katılım biçimi: kaynağın on yedi bendinin kademeleri.
+    expect($p('Kişisel Etkinlik (Uluslararası)'))->toBe(60)          // 16.3 yurt dışı, uluslararası jürili
+        ->and($p('Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)'))->toBe(35)   // 16.5
+        ->and($p('Kişisel Etkinlik (Yurt Dışı, Jürisiz)'))->toBe(20)         // 16.7
+        ->and($p('Kişisel Etkinlik (Yurt İçi, Uluslararası Jürili)'))->toBe(15) // 16.10
+        ->and($p('Kişisel Etkinlik (Ulusal)'))->toBe(20)                     // 16.12
+        ->and($p('Kişisel Etkinlik (Yurt İçi, Jürisiz)'))->toBe(15);         // 16.14
+
+    expect($p('Karma/Jürili Etkinlik (Uluslararası)'))->toBe(30)     // 16.4
+        ->and($p('Karma Etkinlik (Yurt Dışı, Ulusal Jürili)'))->toBe(30)     // 16.6
+        ->and($p('Karma Etkinlik (Yurt Dışı, Jürisiz)'))->toBe(10)           // 16.8
+        ->and($p('Karma Etkinlik (Yurt İçi, Uluslararası Jürili)'))->toBe(10) // 16.11
+        ->and($p('Karma/Jürili Etkinlik (Ulusal)'))->toBe(5)                 // 16.13
+        ->and($p('Karma Etkinlik (Jürisiz, Ulusal)'))->toBe(10);             // 16.15
+
+    // 16.17 bölümün en yüksek bendi; müze kabulü yurt içi ve dışı aynı puan.
+    expect($p('Eserin Müzeye Kabulü (Yurt Dışı)'))->toBe(100)
+        ->and($p('Eserin Müzeye Kabulü (Yurt İçi)'))->toBe(100);
+
+    // Önceki eşleme ulusal kalemleri fazla sayıyordu: kişisel 40 (doğrusu
+    // 20), ulusal karma 20 (doğrusu 5).
+    expect($p('Kişisel Etkinlik (Ulusal)'))->toBeLessThan(40)
+        ->and($p('Karma/Jürili Etkinlik (Ulusal)'))->toBeLessThan(20);
+
+    // Bendi okunamayan etiketler puan üretmiyor.
+    expect($p('Elektronik Kişisel Sergi (Uluslararası)'))->toBe(0)
+        ->and($p('Grup Şefliği (Uluslararası)'))->toBe(0)
+        ->and($p('Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)'))->toBe(0);
+});

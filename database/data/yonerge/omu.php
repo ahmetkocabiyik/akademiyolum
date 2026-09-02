@@ -35,6 +35,18 @@
  * yurt dışı araştırma, ödül, danışmanlık gibi — ve faaliyet kaydından
  * türetilemedikleri için beyan olarak duruyor.
  *
+ * 16. KATEGORİ BARAJI ARTIK GERÇEK BİR PUAN KOŞULU. C grubunun sanatsal
+ * etkinlik barajı (60 · 180 · 360) cetvelde yalnız üç satır varken de
+ * `puanDan` olarak duruyordu ama kaba ölçüyordu; 02.09.2026'da 16. bölümün
+ * on yedi bendi girilince baraj kaynağın kademeleriyle ölçülür oldu.
+ *
+ * MADDE 11/4-a'NIN "en az 1 jürili kişisel sanatsal etkinlik" KOŞULU HÂLÂ
+ * BEYAN. Sayının kendisi artık hesaplanabilir (16.3, 16.5, 16.10 ve 16.12
+ * jürili kişisel bentler), ama koşul yalnızca "Sanat ve Tasarım alanında
+ * sanatta yeterlik veya doktora yapanlar" için geçerli ve profil doktoranın
+ * hangi alanda yapıldığını taşımıyor. Koşulu düğüme çevirmek, kuralın
+ * bağlamadığı adaya da "sağlanmadı" gösterirdi.
+ *
  * Ortak kalıplar: App\Services\Scoring\Sart\Kalip · cetvel: cetvel/omu-2025.php
  */
 
