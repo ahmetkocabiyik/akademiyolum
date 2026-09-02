@@ -128,6 +128,12 @@
  *       uygulandı — Mimarlık adayının B/C katkısı TOPLAM'a olduğundan az
  *       yansır, "eksik say" yönünde güvenli bir sapma.
  *
+ * TAVAN TARAMASI (01.09.2026): kaynağın beşinci tavanı ("-F16
+ * faaliyetlerinden toplamda en fazla 30 puan değerlendirmeye alınır",
+ * 10. sayfa — görüntüden doğrulandı, ifade gerçekten YALNIZ F16'ya ait)
+ * girilmedi: F16 satırı (sempozyum, festival, bienal düzenlemek) cetvelde
+ * yok. Öteki dört tavan yukarıda uygulanıyor.
+ *
  * Yönerge: yonerge/adana-alparslan-turkes.php
  */
 

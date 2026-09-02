@@ -4755,3 +4755,19 @@ test('Kahramanmaraş İstiklal ansiklopedi adet tavanı puana çevrilip uygulan�
     expect($katalog->topla(array_fill(0, 20, sartFaaliyet('Ansiklopedi Maddesi', Kategori::Kitap)), $tumu))
         ->toBe(60);
 });
+
+test('AYBÜ alanlara özgü satır tavanları bölüm tavanının altında uygulanıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('aybu-2026');
+    $tumu = $katalog->coz(['*']);
+
+    // "g) … podcast yayınlarına katılmak (En fazla 10 puan alınabilir)" — 4 puan.
+    // Bölüm tavanı 30, yani satır tavanı olmadan beş katılım 20 puan sayardı.
+    expect($katalog->topla(array_fill(0, 5, sartFaaliyet('Bilim İletişimi / Popüler Yayın', Kategori::ToplumsalKatki)), $tumu))
+        ->toBe(10);
+
+    // Sanat varyantında bölüm tavanı 60'a çıkıyor ama satır tavanı aynı kalıyor.
+    $sanat = $depo->katalog('aybu-2026-sanat');
+    expect($sanat->grupTavanlari['ALANLARA-OZGU'])->toBe(60)
+        ->and($sanat->grupTavanlari['AO.g'])->toBe(10);
+});

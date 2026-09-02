@@ -204,6 +204,11 @@ $gruplar = [
     'ODUL' => $kodlar('O.'),
     'PATENT' => $kodlar('PT.'),
     'ALANLARA-OZGU' => $kodlar('AO.'),
+    // Bölüm tavanının (30/60) ALTINDA kendi tavanı olan satırlar.
+    'AO.g' => ['AO.g'],
+    'AO.h' => ['AO.h'],
+    'AO.o' => ['AO.o'],
+    'AO.s' => ['AO.s'],
     'DIGER' => $kodlar('DG.'),
     // MADDE 8'in yurt dışı deneyimi muafiyetinde sayılan kümeler.
     'MAKALE-PROJE-ATIF-KITAP-PATENT' => [...$kodlar('M.'), ...$kodlar('P.'), ...$kodlar('A.'),
@@ -211,6 +216,7 @@ $gruplar = [
 ];
 
 $grupTavanlari = [
+    // Başlık düzeyi.
     'BILIMSEL-TOPLANTI' => 15,
     'ATIF' => 20,
     'EGITIM' => 20,
@@ -218,6 +224,15 @@ $grupTavanlari = [
     'EDITORLUK' => 20,
     'ODUL' => 35,
     'DIGER' => 30,
+
+    // Satır düzeyi: "Alanlara Özgü Etkinlikler" bölümünün dört satırı bölüm
+    // tavanının (30/60) altında kendi tavanını taşıyor. Bölüm tavanı bunları
+    // tek başına bağlamıyor — üç podcast katılımı (4 puan) 12 eder, bölüm
+    // tavanına takılmadan satır tavanını aşar; kaynak 10'da kesiyor (§0).
+    'AO.g' => 10,   // televizyon/radyo/podcast — "(En fazla 10 puan alınabilir)"
+    'AO.h' => 10,   // albüm — "(En fazla 10 puan alınabilir)"
+    'AO.o' => 10,   // uygulanmış/tamamlanmış proje — "(En fazla 10 puan)"
+    'AO.s' => 20,   // beste, ses/video kaydı — "(En fazla 20 puan)"
 ];
 
 $kapsamNotu = 'Puanlar Ankara Yıldırım Beyazıt Üniversitesi Akademik Yükseltilme ve Atanma '
