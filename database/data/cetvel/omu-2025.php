@@ -16,9 +16,21 @@
  * maddelere bölündü (1.1-Q1 … 1.1-Q4); kategori aralıkları önek eşleşmesiyle
  * bunları da yakalıyor.
  *
- * GİRİLMEYEN: 14 ve 15. bölümler (görsel etkinlikler — İletişim Fakültesi'ne
- * özgü), 16. bölüm sanatsal etkinliklerin alt kırılımları ve 13. bölümün ödül
- * dışı hizmet kalemleri. Kaynak sözlüğünde karşılıkları yok.
+ * GİRİLMEYEN: 15. bölüm (görsel etkinlikler — İletişim Fakültesi'ne özgü),
+ * 16. bölüm sanatsal etkinliklerin alt kırılımları ve 13. bölümün ödül dışı
+ * hizmet kalemleri. Kaynak sözlüğünde karşılıkları yok.
+ *
+ * 14. BÖLÜM GÖRSEL ETKİNLİK DEĞİL: başlığı "ONDOKUZ MAYIS ÜNİVERSİTESİNE
+ * KATKI" ve içeriği idari görev (senato üyeliği, dekan yardımcılığı, bölüm
+ * başkanlığı, kurul ve komisyon görevleri). Bir tur 15. bölümle birlikte
+ * "görsel etkinlikler" diye kaydedilmişti; düzeltildi. Bölümden şimdilik
+ * yalnız 14.4 (akreditasyon kurul görevi) girildi — ötekiler `idari_gorev`
+ * karşılığı olduğu hâlde hâlâ girilmedi ve toplam olduğundan DÜŞÜK görünür.
+ *
+ * '1-14' ve '1-15' grupları 14. bölüm hiç girilmediği için 13'te bitiyordu
+ * ve BİRBİRİNİN AYNISIYDI — konvansiyonun "ardışık aralık gruplarının
+ * boyutları kesin artmalı" kontrolünün yakaladığı desen. İkisine de '14.*'
+ * eklendi.
  */
 
 return [
@@ -97,6 +109,12 @@ return [
         '13.1' => ['baslik' => 'Uluslararası bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 60],
         '13.2' => ['baslik' => 'Ulusal bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'YÖK Ödülü', 'Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 30],
 
+        // ── 14. ONDOKUZ MAYIS ÜNİVERSİTESİNE KATKI ──
+        // Bölümün yalnız akreditasyon satırı girildi; ötekiler (senato
+        // üyeliği, dekan yardımcılığı, bölüm başkanlığı, kurul görevleri)
+        // hâlâ girilmedi ve `idari_gorev` karşılıkları var — ayrı bir iş.
+        '14.4' => ['baslik' => 'Fakülte, bölüm, program ya da laboratuvar akreditasyon kurulunda görev', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Akreditasyon Faaliyeti'], 'puan' => 6],
+
         // ── 16. SANATSAL ETKİNLİK ──
         '16.1' => ['baslik' => 'Uluslararası jürili kişisel sanatsal etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)'], 'puan' => 60],
         '16.2' => ['baslik' => 'Ulusal jürili kişisel sanatsal etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Ulusal)'], 'puan' => 40],
@@ -107,8 +125,8 @@ return [
         // Koşulların birebir andığı KATEGORİ ARALIKLARI. Üst sınır alan grubuna
         // göre değişiyor: A 1-14, B 1-15, C 1-16.
         '1-10' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '7.*', '8.*', '9.*', '10.*'],
-        '1-14' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '7.*', '8.*', '9.*', '10.*', '11.*', '12.*', '13.*'],
-        '1-15' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '7.*', '8.*', '9.*', '10.*', '11.*', '12.*', '13.*'],
+        '1-14' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '7.*', '8.*', '9.*', '10.*', '11.*', '12.*', '13.*', '14.*'],
+        '1-15' => ['1.*', '2.*', '3.*', '4.*', '5.*', '6.*', '7.*', '8.*', '9.*', '10.*', '11.*', '12.*', '13.*', '14.*'],
         '1-16' => ['*'],
         '16' => ['16.*'],
         // Makale adet koşullarının andığı kategoriler.

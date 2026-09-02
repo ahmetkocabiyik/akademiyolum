@@ -4787,3 +4787,23 @@ test('Yalova poster bildirisi "poster hariç" satırlarından sayılmıyor', fun
     // ve orada puanın küçüklüğü hiçbir şeyi korumuyor.
     expect($katalog->coz(['8']))->not->toBeEmpty();
 });
+
+test('akreditasyon faaliyeti ders sayılmıyor, kendi satırından puanlanıyor', function () {
+    $depo = sartDepo();
+    $akreditasyon = sartFaaliyet('Akreditasyon Faaliyeti', Kategori::EgitimOgretim);
+    $ders = sartFaaliyet('Lisans/Önlisans Ders', Kategori::EgitimOgretim);
+
+    // Kaynağı akreditasyonu puanlayan üç cetvelde kendi satırından geliyor.
+    foreach (['omu-2025' => 6, 'yozgat-bozok-2025' => 3, 'isik-2019' => 3] as $anahtar => $puan) {
+        $katalog = $depo->katalog($anahtar);
+        expect($katalog->puan($akreditasyon, $katalog->coz(['*'])))->toBe($puan);
+    }
+
+    // Kaynağı akreditasyonu HİÇ ANMAYAN cetvellerde artık sıfır; önceden
+    // ders satırından puan alıyor ve ders SAYISI koşullarını besliyordu.
+    foreach (['mef-2024-muhendislik-docent', 'gaziantep-2026', 'anadolu-2023'] as $anahtar) {
+        $katalog = $depo->katalog($anahtar);
+        expect($katalog->puan($akreditasyon, $katalog->coz(['*'])))->toBe(0)
+            ->and($katalog->puan($ders, $katalog->coz(['*'])))->toBeGreaterThan(0);
+    }
+});

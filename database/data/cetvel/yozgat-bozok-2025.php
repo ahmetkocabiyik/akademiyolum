@@ -202,6 +202,10 @@ $maddeler = [
     'B5.2.2' => ['baslik' => 'Kurul ya da komisyon üyeliği, birim temsilciliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
     'B5.4.1' => ['baslik' => 'Bakanlık, YÖK, TÜBİTAK gibi kamu kurumları ile meslek kuruluşlarının komisyon, danışmanlık, panel ve kurul üyeliklerinde görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 4],
 
+    // Kaynağın B5.4 bölümünün 2. satırı. Akreditasyon kurulu görevi DERS
+    // DEĞİL; etiket bir tur B ve C tablolarının ders satırlarında duruyordu.
+    'B5.4.2' => ['baslik' => 'Akredite olmuş alt birimin akreditasyon kurulunda görev yapmak (akreditasyon dönemi başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Akreditasyon Faaliyeti'], 'puan' => 3],
+
     // ══ B6. TOPLUMA HİZMET ÇALIŞMALARI ══
     'B6.1' => ['baslik' => 'Teknopark ve benzeri alanlarda şirket kurmuş olmak', 'kategori' => 'patent', 'kaynaklar' => ['Ticarileştirme'], 'puan' => 15],
     'B6.3' => ['baslik' => 'Bilimsel ya da sanat kurulu üyeliği', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 10],
@@ -219,7 +223,7 @@ $TABLO_A = ['A1.1', 'A1.2', 'A1.3', 'A1.4', 'A1.5', 'A2.1', 'A2.2', 'A3.1', 'A3.
 $TABLO_B = ['B1.1', 'B1.2', 'B1.3', 'B1.4', 'B2.2', 'B3.1.1', 'B3.1.2', 'B3.1.3',
     'B3.1.4', 'B3.1.5', 'B3.1.6', 'B3.2', 'B3.3', 'B3.4.2', 'B3.4.3', 'B4.2', 'B4.3',
     'B4.4', 'B4.5', 'B5.1.4', 'B5.1.5', 'B5.1.6', 'B5.1.7', 'B5.2.1', 'B5.2.2',
-    'B5.4.1', 'B6.1', 'B6.3'];
+    'B5.4.1', 'B5.4.2', 'B6.1', 'B6.3'];
 
 return [
     'kapsam_notu' => 'Puanlar Yozgat Bozok Üniversitesi Akademik Yükseltilme ve Atanma '

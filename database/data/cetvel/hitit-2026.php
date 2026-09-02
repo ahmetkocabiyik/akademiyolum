@@ -47,7 +47,11 @@
  *       puanlanıyor ve toplamınız olduğundan YÜKSEK çıkar.
  *   Ondalıklı satırlar: D.5 (indekssiz dergide atıf, 0,5), F.2 ve F.4
  *       (hakemlik, 1,5 ve 0,5), N bölümünün 0,75 ve 0,5 puanlı satırları
- *       (jüri üyeliği, akreditasyon, sertifika, burs).
+ *       (jüri üyeliği, akreditasyon, sertifika, burs). Akreditasyon
+ *       satırlarının dördü de (N.12 0,5 · N.13 1,25 · N.14 0,5 · N.15 0,75)
+ *       ya sıfıra yuvarlanıyor ya da görev YILIYLA çarpılıyor; bu yüzden
+ *       'Akreditasyon Faaliyeti' etiketinin Hitit'te hiç satırı yok.
+ *       Etiket bir tur J02 ders satırında duruyordu, çıkarıldı.
  *   L KAZI FAALİYETLERİ ve M SPOR FAALİYETLERİ bölümlerinin TAMAMI —
  *       faaliyet kaydında karşılığı yok.
  *   N bölümünün Hitit Üniversitesine özgü satırlarının çoğu (MİTAM,

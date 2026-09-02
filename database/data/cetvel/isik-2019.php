@@ -170,6 +170,9 @@ $ham = [
     'H.1.b' => [5.0, 'Müdür veya bölüm başkan yardımcılığı (yıl başına)', 'idari_gorev', ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], null],
     'H.2.a' => [4.0, 'Fakülte, enstitü veya yüksekokul yönetim kurulu üyeliği', 'idari_gorev', ['Senato / Üniversite Yönetim Kurulu Üyesi'], null],
     'H.2.g' => [1.0, 'Diğer aktif kurul, komisyon veya merkez üyelikleri', 'idari_gorev', ['Kurul / Komisyon Üyeliği'], null],
+    // H.3.c — bölüm görevleri arasında. Akreditasyon koordinatörlüğü DERS
+    // DEĞİL; etiket bir tur G.2.a ders satırında duruyordu.
+    'H.3.c' => [3.0, 'Bölüm akreditasyon koordinatörlüğü', 'egitim_ogretim', ['Akreditasyon Faaliyeti'], null],
 ];
 
 // Açıklama 2 — pay yazar SIRASINA bağlı, sayıya değil. Bütün roller
