@@ -4660,3 +4660,17 @@ test('Afyon atıf tavanı ve Bandırma diğer atıf tavanı uygulanıyor', funct
     expect($bandirma->topla(array_fill(0, 100, sartFaaliyet('Diğer', Kategori::Atif)), $tumu))->toBe(20)
         ->and($bandirma->topla(array_fill(0, 100, sartFaaliyet('TR Dizin', Kategori::Atif)), $tumu))->toBe(200);
 });
+
+test('ADÜ ders verme ve jüri üyeliği tavanları uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('adu-2024');
+    $tumu = $katalog->coz(['*']);
+
+    // "C2 Ders Verme — En fazla 100 puan alınabilir." Koordinatörlük 5 puan.
+    expect($katalog->topla(array_fill(0, 40, sartFaaliyet('Anabilim Dalı Başkanı / Koordinatörlük', Kategori::IdariGorev)), $tumu))
+        ->toBe(100);
+
+    // "D5 Jüri ve Komisyon Üyelikleri — En fazla 100 puan alınabilir."
+    // Jüri üyeliği 15 puan; yirmi üyelik tavansız 300 ederdi.
+    expect($katalog->topla(array_fill(0, 20, sartFaaliyet('Jüri Üyeliği (Uluslararası)', Kategori::SanatselEtkinlik)), $tumu))
+        ->toBe(100);
+});

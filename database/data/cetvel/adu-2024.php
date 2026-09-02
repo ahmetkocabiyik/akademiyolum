@@ -231,7 +231,27 @@ return [
         'B' => [...$kodlar('B1.'), ...$kodlar('B2.')],
         'C1' => $kodlar('C1.'),
         'F1-F2' => [...$kodlar('F1.'), ...$kodlar('F2.')],
+
+        // Tavanı olan iki bölüm. Hiçbir koşul bunları saymıyor (koşullar
+        // A1*, B, C1 ve F1-F2 kullanıyor), yani tavanlar barajları değil
+        // listede görünen toplam puanı düzeltiyor.
+        'C2' => $kodlar('C2.'),
+        'D5' => $kodlar('D5.'),
     ],
 
-    'grup_tavanlari' => [],
+    /*
+     * Tablonun iki bölüm başlığı tavan taşıyor; ikisi de girilmemişti ve
+     * tavansız bölüm doğrudan fazla saydırır (§0).
+     *
+     *   C2 Ders Verme            — "En fazla 100 puan alınabilir."
+     *   D5 Jüri ve Komisyon Üyelikleri — "En fazla 100 puan alınabilir."
+     *
+     * Kaynağın öteki tavanları girilmedi, satırları cetvelde yok: kazı
+     * başkanlığı ve kazılarda görev alma (B1.3-B1.4 360/60, B2.7-B2.8
+     * 180/30) ile C3 danışmanlıkları (25/30).
+     */
+    'grup_tavanlari' => [
+        'C2' => 100,
+        'D5' => 100,
+    ],
 ];
