@@ -350,8 +350,26 @@ return [
         'KISISEL-SERGI' => ['4.6.6.1', '4.10.6.1'],
     ],
 
-    // Yönergenin başlık düzeyindeki azami puanları.
+    /*
+     * Yönergenin azami puanları İKİ DÜZEYDE: başlık ("3.4 TEZ DANIŞMANLIKLARI
+     * … Bu başlıktan azami 30 puan alınabilir") ve SATIR ("* Azami N puan
+     * alınabilir." notu tek bir kodun altında). Başlık düzeyindekiler
+     * girilmişti; satır düzeyindekiler 01.09.2026'ya kadar girilmemişti ve
+     * tavansız satır doğrudan fazla saydırır (§0).
+     *
+     * Kaynakta otuz dokuz satır tavanı var; onunun cetvelde karşılığı
+     * bulunuyor, kalan yirmi dokuzun satırı girilmemiş.
+     *
+     * ÜÇ SATIR KAYNAKTA BİRDEN ÇOK SATIRIN BİRLEŞİMİ: 3.11.6 (davetli
+     * konuşmacı + moderatör + oturum başkanı, kaynakta 3.11.6-3.11.9),
+     * 3.13.11 (dergi türüne bakmadan editör kurulu üyeliği) ve 3.13.12
+     * (baş editörlük + özel sayı editörlüğü). Birleşik satırda hangi alt
+     * satırın tavanının geçerli olduğu bilinemediği için o alt satırın
+     * tavanı yazıldı; aday bu üç kalemde puanını olduğundan DÜŞÜK görebilir.
+     * Yön §0'a uygun, alternatifi (tavansız bırakmak) fazla saydırırdı.
+     */
     'grup_tavanlari' => [
+        // Başlık düzeyi.
         'KURUMSAL-KATKI' => 20,
         'EGITIME-KATKI' => 20,
         '3.4' => 30,
@@ -359,5 +377,17 @@ return [
         '3.9' => 45,
         '3.10' => 60,
         '3.14' => 50,
+
+        // Satır düzeyi ("* Azami N puan alınabilir.").
+        '3.3.12' => 40,
+        '3.3.13' => 50,
+        '3.3.15' => 40,
+        '3.11.6' => 10,
+        '3.13.11' => 6,
+        '3.13.12' => 4,
+        '4.1.13' => 30,
+        '4.1.14' => 45,
+        '4.1.16' => 45,
+        '4.9.5' => 3,
     ],
 ];

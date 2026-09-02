@@ -4707,3 +4707,18 @@ test('Gaziantep atıf, proje ve editörlük tavanları uygulanıyor', function (
     // Hakemlik ayrı bir bölüm; 150'nin dışında ve kendi tavanı 20.
     expect($katalog->topla(array_fill(0, 40, sartFaaliyet('Hakemlik', Kategori::Editorluk)), $tumu))->toBe(20);
 });
+
+test('Ardahan satır düzeyindeki azami puanlar uygulanıyor', function () {
+    $katalog = (new SartDeposu)->katalog('ardahan-2026');
+    $tumu = $katalog->coz(['*']);
+
+    // "4.1.14 Ulusal Faydalı Model tescili * Azami 45 puan alınabilir." (15 puan)
+    expect($katalog->topla(array_fill(0, 10, sartFaaliyet('Faydalı Model', Kategori::Patent)), $tumu))->toBe(45);
+
+    // "3.11.6 … Davetli Konuşmacı * Azami 10 puan alınabilir." (5 puan)
+    expect($katalog->topla(array_fill(0, 10, sartFaaliyet('Davetli Konuşmacı', Kategori::Bildiri)), $tumu))->toBe(10);
+
+    // "4.9.5 … medyada katılımcı * Azami 3 puan alınabilir." (1 puan)
+    expect($katalog->topla(array_fill(0, 10, sartFaaliyet('Bilim İletişimi / Popüler Yayın', Kategori::ToplumsalKatki)), $tumu))
+        ->toBe(3);
+});
