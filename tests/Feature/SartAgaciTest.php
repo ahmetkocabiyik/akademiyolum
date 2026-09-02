@@ -4902,3 +4902,37 @@ test('OMÜ 16. bölüm sanatsal etkinlikleri üç eksende ayırıyor', function 
         ->and($p('Grup Şefliği (Uluslararası)'))->toBe(0)
         ->and($p('Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)'))->toBe(0);
 });
+
+test('OMÜ 13. bölüm ödülleri verene ve dereceye göre ayırıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('omu-2025');
+    $tumu = $katalog->coz(['*']);
+    $p = fn (string $kaynak, Kategori $k = Kategori::Odul) => $katalog->puan(sartFaaliyet($kaynak, $k), $tumu);
+
+    // Kaynağın kademeleri: 13.3-13.4 (80), 13.7 (50), 13.8 (30),
+    // yarışma derecesi en düşük 15, burs 40/25.
+    expect($p('TÜBİTAK / TÜBA Ödülü'))->toBe(80)
+        ->and($p('YÖK Ödülü'))->toBe(80)
+        ->and($p('Uluslararası Bilim/Sanat Ödülü'))->toBe(50)
+        ->and($p('TÜBA GEBİP / TWAS Teşvik Ödülü'))->toBe(50)
+        ->and($p('Ulusal Bilim/Sanat Ödülü'))->toBe(30)
+        ->and($p('Ufuk Avrupa / ERC Ödülü'))->toBe(40)
+        ->and($p('Burs'))->toBe(25)
+        ->and($p('Yarışma Derecesi / Mansiyon'))->toBe(15);
+
+    // Ödül dışı hizmet kalemleri.
+    expect($p('Festival Koordinatörlüğü (Uluslararası)', Kategori::SanatselEtkinlik))->toBe(20)
+        ->and($p('Festival Koordinatörlüğü (Ulusal)', Kategori::SanatselEtkinlik))->toBe(10)
+        ->and($p('Davetli Konuşmacı', Kategori::Bildiri))->toBe(10)
+        ->and($p('Öğrenci Projesi (2209 vb.)', Kategori::Proje))->toBe(8);
+
+    // Önceki eşlemenin fazla saydığı üç kalem artık kaynağın değerinde.
+    // (Davetli konuşmacı 20 → 10, öğrenci projesi 20 → 8, yarışma 30 → 15.)
+    expect($p('Davetli Konuşmacı', Kategori::Bildiri))->toBeLessThan(20)
+        ->and($p('Öğrenci Projesi (2209 vb.)', Kategori::Proje))->toBeLessThan(20)
+        ->and($p('Yarışma Derecesi / Mansiyon'))->toBeLessThan(30);
+
+    // Etiketi zaten 14. bölümde minimumda olanlara ayrı satır açılmadı.
+    expect($p('Kurul / Komisyon Üyeliği', Kategori::IdariGorev))->toBe(5)
+        ->and($p('Kamu/STK Danışmanlığı', Kategori::ToplumsalKatki))->toBe(4);
+});

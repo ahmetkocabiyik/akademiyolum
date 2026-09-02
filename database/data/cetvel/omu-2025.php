@@ -16,8 +16,39 @@
  * maddelere bölündü (1.1-Q1 … 1.1-Q4); kategori aralıkları önek eşleşmesiyle
  * bunları da yakalıyor.
  *
- * GİRİLMEYEN: 13. bölümün ödül dışı hizmet kalemleri — kaynak sözlüğünde
- * karşılıkları yok.
+ * ── 13. ÖDÜLLER VE DİĞER HİZMETLER ──
+ * Kaynağın yirmi iki bendi ödülü VERENE (YÖK/TÜBİTAK/TÜBA, uluslararası
+ * kuruluş, üniversite) ve yarışmalarda DERECEYE göre ayırıyor; sözlük
+ * etiketleri daha kaba. Her etiket temsil edebileceği bentlerin EN
+ * DÜŞÜĞÜNE yazıldı (§0).
+ *
+ * ÖNCEKİ İKİ SATIR HEM EKSİK HEM FAZLA SAYIYORDU:
+ *   '13.1' 60 puanla dört etiketi topluyordu. 'Uluslararası Bilim/Sanat
+ *       Ödülü' kaynakta 50 (13.7) — ON PUAN FAZLA; 'Ufuk Avrupa / ERC'
+ *       en yakın bendi 13.9 uluslararası burs (40) — YİRMİ PUAN FAZLA.
+ *   '13.2' 30 puanla 'TÜBİTAK / TÜBA Ödülü' ve 'YÖK Ödülü'nü de taşıyordu;
+ *       kaynak bunlara 13.3'te 120, 13.4'te 80 veriyor — ELLİ PUAN EKSİK.
+ *       Aynı satırdaki 'Yarışma Derecesi / Mansiyon' ise kaynakta en düşük
+ *       15 (13.2 ulusal en iyi bildiri) — ON BEŞ PUAN FAZLA.
+ *
+ * İKİ ETİKET BAŞKA BÖLÜMLERDEN ALINDI:
+ *   'Davetli Konuşmacı' 5.2 bildiri satırında 20 puan alıyordu; kaynağın 5.
+ *       bölümünde davetli konuşma bendi YOK, açılış konuşması yalnız
+ *       13.16'da ve 10 puan. ON PUAN FAZLA sayıyordu.
+ *   'Öğrenci Projesi (2209 vb.)' 8.5 BAP satırında 20 puan alıyordu;
+ *       kaynağın 8. bölümü öğrenci projesi saymıyor, 2209 danışmanlığı
+ *       yalnız 13.21'de ve 8 puan. ON İKİ PUAN FAZLA sayıyordu.
+ *
+ * 13. BÖLÜMDEN GİRİLMEYENLER — ETİKETİ ZATEN DAHA DÜŞÜK BİR BENTTE:
+ *   13.14-13.15 (TÜBİTAK kurul üyeliği 30, panelistlik 15) ve 13.17-13.19
+ *       (kurum yönetim, kurul, komisyon ve jüri üyelikleri 13/11/8) —
+ *       hepsinin karşılığı 'Kurul / Komisyon Üyeliği' ve o etiket 14.3'te
+ *       zaten 5 puanda, yani §0 minimumunda. Ayrı satır açmak motor en
+ *       yükseği seçtiği için fazla saydırırdı.
+ *   13.20 (kamu görevlendirmesi 8) — 'Kamu/STK Danışmanlığı' 14.16'da 4
+ *       puanda, yine minimumda.
+ *   13.12 (uluslararası düzenleme kurulu ÜYELİĞİ 15) — sözlükte
+ *       koordinatörlük/başkanlık var, üyelik yok.
  *
  * ── 16. SANATSAL ETKİNLİK: ÜÇ EKSEN, BİREBİR EŞLEME ──
  * Kaynak etkinlikleri YER (yurt dışı / yurt içi), JÜRİ (uluslararası jürili /
@@ -200,7 +231,7 @@ return [
 
         // ── 5. BİLİMSEL TOPLANTILAR ── (uluslararası/ulusal ikili değer)
         '5.1' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 24],
-        '5.2' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 20],
+        '5.2' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 20],
         '5.4' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 12],
         '5.5' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 10],
 
@@ -220,7 +251,7 @@ return [
         '8.2' => ['baslik' => 'Uluslararası destekli tamamlanmış projede araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 50],
         '8.3' => ['baslik' => 'TÜBİTAK, TÜSEB veya kamu destekli tamamlanmış projede yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['yurutucu'], 'puan' => 70],
         '8.4' => ['baslik' => 'TÜBİTAK, TÜSEB veya kamu destekli tamamlanmış projede araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 35],
-        '8.5' => ['baslik' => 'Üniversite (BAP) destekli tamamlanmış proje', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'puan' => 20],
+        '8.5' => ['baslik' => 'Üniversite (BAP) destekli tamamlanmış proje', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'puan' => 20],
 
         // ── 9. PATENT, FAYDALI MODEL, TESCİL ──
         '9.1' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 100],
@@ -238,9 +269,26 @@ return [
         // ── 12. EĞİTİM-ÖĞRETİM ──
         '12.1' => ['baslik' => 'Verilen ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 10],
 
-        // ── 13. ÖDÜLLER ──
-        '13.1' => ['baslik' => 'Uluslararası bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 60],
-        '13.2' => ['baslik' => 'Ulusal bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'YÖK Ödülü', 'Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 30],
+        // ── 13. ÖDÜLLER VE DİĞER HİZMETLER ──
+        // Kaynağın yirmi iki bendi ödülü VERENE ve DERECEYE göre ayırıyor;
+        // sözlük etiketleri daha kaba. Her etiket, temsil edebileceği
+        // bentlerin EN DÜŞÜĞÜNE yazıldı (§0).
+        '13.3-13.4' => ['baslik' => 'YÖK, TÜBİTAK ya da TÜBA bilim, teşvik veya akademi ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'YÖK Ödülü'], 'puan' => 80],
+        // 'TÜBA GEBİP / TWAS Teşvik Ödülü' birleşik: GEBİP 13.4'e (80) düşer
+        // ama TWAS kaynağın hiçbir bendinde adı geçmeyen uluslararası bir
+        // ödül, en yakını 13.7 (50) — §0 uyarınca düşüğü.
+        '13.7' => ['baslik' => 'Uluslararası bilim, sanat veya tasarım ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 50],
+        '13.8' => ['baslik' => 'Üniversite ödülü ya da ulusal bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü'], 'puan' => 30],
+        // Yarışma dereceleri kaynakta düzeye VE dereceye göre kademeli
+        // (uluslararası 60-45, ulusal 40-25, en iyi bildiri 30/15, Türk
+        // Patent ve Teknofest 25). Etiket ikisini de taşımıyor → en düşük.
+        '13.2-13.5-13.6-13.22' => ['baslik' => 'Bilim, sanat ya da tasarım yarışmasında derece, mansiyon veya en iyi bildiri ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 15],
+        '13.9' => ['baslik' => 'En az üç dönem süreli bilimsel araştırma için alınan uluslararası burs', 'kategori' => 'odul', 'kaynaklar' => ['Ufuk Avrupa / ERC Ödülü'], 'puan' => 40],
+        '13.10' => ['baslik' => 'En az üç dönem süreli bilimsel araştırma için alınan burs', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 25],
+        '13.11' => ['baslik' => 'Uluslararası sanat etkinliği düzenleme kurulu başkanlığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Festival Koordinatörlüğü (Uluslararası)'], 'puan' => 20],
+        '13.13' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme kurulu görevi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Festival Koordinatörlüğü (Ulusal)'], 'puan' => 10],
+        '13.16' => ['baslik' => 'Bilimsel faaliyette alanıyla ilgili açılış konuşması', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
+        '13.21' => ['baslik' => 'TÜBİTAK 2209, 2241, 2242, BAP ya da öğrenci topluluğu projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 8],
 
         // ── 14. ONDOKUZ MAYIS ÜNİVERSİTESİNE KATKI ──
         // Bölümün bütün satırlarının puanı GÖREV ALINAN YIL İLE ÇARPILIYOR
