@@ -258,6 +258,7 @@ $gruplariKur = function (array $maddeler, bool $mps) use ($onek): array {
     $k = $onek($maddeler, 'K-');
     $l = $onek($maddeler, 'L-');
     $m = $onek($maddeler, 'M-');
+    $o = $onek($maddeler, 'O-');
 
     // 8b: A-1a / A-1b / A-2a / A-2b türü yayınlar.
     $aQ = ['A-1a', 'A-1b', 'A-2a', 'A-2b'];
@@ -267,6 +268,12 @@ $gruplariKur = function (array $maddeler, bool $mps) use ($onek): array {
     return [
         'A' => $a, 'B' => $b, 'C' => $c, 'D' => $d, 'E' => $e, 'F' => $f, 'G' => $g,
         'K' => $k, 'L' => $l, 'M' => $m,
+
+        // Tavanı olan iki küme. Hiçbir koşul bunları saymıyor (koşullar
+        // yalnız A-G, K, L, M kullanıyor), yani tavanlar barajları değil
+        // listede görünen toplam puanı düzeltiyor.
+        'O' => $o,
+        'H-DERS' => ['H-1'],
 
         'AG-KLM' => array_merge($a, $b, $c, $d, $e, $f, $g, $k, $l, $m),
         'BCDEF' => array_merge($b, $c, $d, $e, $f),
@@ -332,8 +339,9 @@ $KAPSAM = 'Puanlar Konya Teknik Üniversitesi Akademik Atama-Yükseltme Ölçüt
     .'Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünebilir: patentlerde Tablo 2 başvuru aşamasına '
     .'puanın dörtte birini, araştırma onayına yarısını veriyor; kayıt aşamayı taşımadığı için '
     .'hepsi TESCİLLİ sayılıyor. Ayrıca "aynı toplantıdan en fazla 3 bildiri", "son 2 yıl '
-    .'içindeki dersler", "yılda en fazla 10 hakemlik", "O bölümünden en fazla 100 puan" ve '
-    .'"atıf puanı asgari puanın %20\'sini geçemez" sınırları uygulanmıyor.';
+    .'içindeki dersler" ve "yılda en fazla 10 hakemlik" sınırları ile atıf puanının '
+    .'asgari puana bağlı %20 sınırı uygulanmıyor. Buna karşılık "O bölümünden en fazla '
+    .'100 puan" ile ders satırının 20 puanlık tavanı UYGULANIYOR.';
 
 // Ek-1 Tablo 3: ortak çalışmalar için çarpanlar (A, B, D, E kategorileri).
 // On yazardan fazlasında ilk isim (puan × 4) / n, diğerleri (puan × 1,4) / n.
@@ -357,6 +365,24 @@ $YAZAR = [
 $genel = $govde(false);
 $mps = $govde(true);
 
+/*
+ * Tablo 2'nin iki tavanı. İkisi de 01.09.2026'ya kadar uygulanmıyordu ve
+ * `kapsam_notu` bunu "uygulanmıyor" diye sayıyordu; oysa ikisi de sabit sayı,
+ * yani `grup_tavanlari`'na birebir giriyor. Tavansız bölüm fazla saydırır (§0).
+ *
+ *   O bölümü başlığı: "(O bölümünün tamamından en fazla 100 puan kullanılabilir)"
+ *   H-1 dipnotu: "… bu faaliyet kapsamında aday en fazla 20 puan alabilir."
+ *
+ * Kaynağın öteki sınırları hâlâ uygulanamıyor ve notta sayılıyor: "aynı
+ * toplantıdan en fazla 3 bildiri" ile "yılda en fazla 10 hakemlik" adet
+ * tavanları, "atıf puanı asgari puanın %20'sini geçemez" ise başka bir
+ * toplama bağlı olduğu için.
+ */
+$TAVANLAR = [
+    'O' => 100,
+    'H-DERS' => 20,
+];
+
 return [
     'cetveller' => [
         'ktun-2024' => [
@@ -364,7 +390,7 @@ return [
             'yazar_katsayisi' => $YAZAR,
             'maddeler' => $genel,
             'gruplar' => $gruplariKur($genel, false),
-            'grup_tavanlari' => [],
+            'grup_tavanlari' => $TAVANLAR,
         ],
         'ktun-2024-mps' => [
             'kapsam_notu' => $KAPSAM.' Mimarlık, Planlama ve Tasarım ile Sosyal, Beşeri ve İdari '
@@ -376,7 +402,7 @@ return [
             'yazar_katsayisi' => $YAZAR,
             'maddeler' => $mps,
             'gruplar' => $gruplariKur($mps, true),
-            'grup_tavanlari' => [],
+            'grup_tavanlari' => $TAVANLAR,
         ],
     ],
 ];

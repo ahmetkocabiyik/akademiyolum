@@ -4610,3 +4610,21 @@ test('Amasya tez jürisi ve ders tavanları uygulanıyor', function () {
     expect($katalog->topla(array_fill(0, 40, sartFaaliyet('Lisansüstü Ders', Kategori::EgitimOgretim)), $tumu))
         ->toBe(40);
 });
+
+test('KTÜN O bölümü ve ders tavanları iki varyantta da uygulanıyor', function () {
+    $depo = sartDepo();
+
+    foreach (['ktun-2024', 'ktun-2024-mps'] as $anahtar) {
+        $katalog = $depo->katalog($anahtar);
+        $tumu = $katalog->coz(['*']);
+
+        // "O bölümünün tamamından en fazla 100 puan kullanılabilir":
+        // yüz hakemlik (2) tavansız 200 ederdi.
+        expect($katalog->topla(array_fill(0, 100, sartFaaliyet('Hakemlik', Kategori::Editorluk)), $tumu))
+            ->toBe(100);
+
+        // H-1 dipnotu: "bu faaliyet kapsamında aday en fazla 20 puan alabilir."
+        expect($katalog->topla(array_fill(0, 40, sartFaaliyet('Lisansüstü Ders', Kategori::EgitimOgretim)), $tumu))
+            ->toBe(20);
+    }
+});
