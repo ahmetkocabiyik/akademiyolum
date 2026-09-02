@@ -4771,3 +4771,19 @@ test('AYBÜ alanlara özgü satır tavanları bölüm tavanının altında uygul
     expect($sanat->grupTavanlari['ALANLARA-OZGU'])->toBe(60)
         ->and($sanat->grupTavanlari['AO.g'])->toBe(10);
 });
+
+test('Yalova poster bildirisi "poster hariç" satırlarından sayılmıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('yalova-2024-sosyal-a150');
+    $tumu = $katalog->coz(['*']);
+
+    // 8a ve 8b'nin başlığı "(poster hariç)" diyor; etiket bu satırlardan
+    // çıkarıldı. Tam metin bildiri sayılmaya devam ediyor.
+    expect($katalog->topla([sartFaaliyet('Uluslararası Tam Metin (CPCI)', Kategori::Bildiri)], $tumu))->toBe(5)
+        ->and($katalog->topla([sartFaaliyet('Uluslararası Özet/Poster', Kategori::Bildiri)], $tumu))->toBe(0)
+        ->and($katalog->topla([sartFaaliyet('Ulusal Özet/Poster', Kategori::Bildiri)], $tumu))->toBe(0);
+
+    // Asıl kazanç SAYIDA: "8 kapsamında en az N bildiri" koşulu adet sayıyor
+    // ve orada puanın küçüklüğü hiçbir şeyi korumuyor.
+    expect($katalog->coz(['8']))->not->toBeEmpty();
+});

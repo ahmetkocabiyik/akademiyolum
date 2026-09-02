@@ -81,7 +81,11 @@ $kapsamNotu = 'Puanlar Yalova Üniversitesi\'nin alanınıza ait Değerlendirme 
     .'kayıt aynı esere ait kalemleri birbirine bağlamıyor; bir kitabın birden çok satırından '
     .'puan aldıysanız kitap puanınız YÜKSEK görünebilir. '
     .'Patent başvurusu, toplantı başkanlığı, "Diğer" bölümü (h-indeksi, yurt dışı araştırma) '
-    .'ve idari görev satırları kaynak sözlüğünde karşılıksız olduğu için girilmedi.';
+    .'ve idari görev satırları kaynak sözlüğünde karşılıksız olduğu için girilmedi. '
+    .'ÖZET BİLDİRİLERİNİZ SAYILMAZ: yönerge bildiri satırlarını "poster hariç" diye '
+    .'tanımlıyor, faaliyet kaydında ise özet ile poster tek etikette birleşik. İkisi '
+    .'ayrılamadığı için etiket hiç sayılmadı; özet bildiriniz varsa bildiri puanınız ve '
+    .'bildiri SAYINIZ olduğundan düşük görünür.';
 
 // MADDE 10/4 — iki kuralın düşüğü. Yayın dışı kalemlerde yönerge sessiz.
 $yazarKatsayisi = [
@@ -160,8 +164,15 @@ $maddeler = [
     '7i' => ['baslik' => 'Şirket veya sivil kurum protokolüyle yürütülen projede araştırmacı olmak', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 2],
 
     // ══ 8. BİLİMSEL TOPLANTI VE BİLİMSEL FAALİYET GÖREVLERİ ══
-    '8a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan bildiri (poster hariç)', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Uluslararası Özet/Poster'], 'puan' => 5],
-    '8b' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan bildiri (poster hariç)', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin', 'Ulusal Özet/Poster'], 'puan' => 3],
+    // POSTER ETİKETİ BİLEREK YOK. Kaynak 8a ve 8b'yi "tam metni veya özeti
+    // … yayımlanmış bildiri (POSTER HARİÇ)" diye tanımlıyor. Sözlükteki
+    // 'Uluslararası Özet/Poster' etiketi özeti (kaynağın SAYDIĞI) posterle
+    // (kaynağın SAYMADIĞI) birleştiriyor ve ikisi ayrılamıyor; §0 uyarınca
+    // dışlayan kol seçildi. Özet bildiriniz bu iki satırdan puan almaz ve
+    // bildiri SAYISI koşullarına da girmez — puanınız olduğundan düşük
+    // görünür. Poster sayılsaydı ters yönde, yani yasak yönde saparlardı.
+    '8a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan bildiri (poster hariç)', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 5],
+    '8b' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan bildiri (poster hariç)', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 3],
     '8ç' => ['baslik' => 'Uluslararası bilimsel toplantıda davetli konuşmacı olarak sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 4],
     '8d' => ['baslik' => 'SCIE, SSCI, AHCI veya ESCI kapsamındaki dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 6],
     '8e' => ['baslik' => 'Alan indeksli diğer dergilerde baş editörlük veya editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 4],
