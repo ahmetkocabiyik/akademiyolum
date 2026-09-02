@@ -76,6 +76,10 @@ $grup = function (
 ) use ($P): array {
     $alanlar = array_values($alanlar);
 
+    // Cetvel (alan grubu × kadro) ile varyantlanıyor: 5, 7 ve 12. bölümlerin
+    // tavanları "1-10 asgari puanının yüzdesi" ve o taban her kadroda farklı.
+    $cetvel = fn (string $kadro): string => "omu-2025-{$anahtar}-{$kadro}";
+
     /** @return list<array<string, mixed>> */
     $sanat = fn (int $puan, ?array $donem, string $madde) => $puan > 0
         ? [Kalip::puanDan("Sanatsal etkinliklerinizden en az {$puan} puan", ['16'], $puan, $donem, madde: $madde)]
@@ -90,7 +94,7 @@ $grup = function (
             'universite' => 'Ondokuz Mayıs Üniversitesi',
             'kadro' => 'dr_ogr_uyesi',
             'alan' => $alanlar,
-            'cetvel' => 'omu-2025',
+            'cetvel' => $cetvel('dr'),
             'notlar' => "Madde 11: 1-10 kategorilerinden {$dr[0]}, {$ikinciKume} kategorilerinden {$dr[1]} puan.",
             'sart' => Kalip::ve("Dr. Öğr. Üyesi — {$ad} temel alanları", [
                 Kalip::yds(65),
@@ -111,7 +115,7 @@ $grup = function (
             'universite' => 'Ondokuz Mayıs Üniversitesi',
             'kadro' => 'docentlik',
             'alan' => $alanlar,
-            'cetvel' => 'omu-2025',
+            'cetvel' => $cetvel('doc'),
             'notlar' => "Madde 12: 1-10 kategorilerinden {$docent[0]}, {$ikinciKume} kategorilerinden {$docent[1]} puan.",
             'sart' => Kalip::ve("Doçent — {$ad} temel alanları", [
                 Kalip::beyan('ÜAK tarafından verilen doçentlik unvanını almış olmak', 'Madde 12/1-a'),
@@ -132,7 +136,7 @@ $grup = function (
             'universite' => 'Ondokuz Mayıs Üniversitesi',
             'kadro' => 'profesorluk',
             'alan' => $alanlar,
-            'cetvel' => 'omu-2025',
+            'cetvel' => $cetvel('prof'),
             'notlar' => "Madde 13: 1-10 kategorilerinden {$profesor[0]} (en az {$profesor[1]} doçentlik sonrası), {$ikinciKume} kategorilerinden {$profesor[2]} puan.",
             'sart' => Kalip::ve("Profesör — {$ad} temel alanları", [
                 Kalip::puanDan("Yayın, proje, patent ve tez danışmanlığı kalemlerinizden en az {$profesor[0]} puan",

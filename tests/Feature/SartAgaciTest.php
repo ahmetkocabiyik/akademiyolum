@@ -4827,9 +4827,9 @@ test('OMÜ 14. bölüm idari görev ve toplumsal katkı satırları çalışıyo
     // Kaynak rektörlüğü 14. bölümde saymıyor; satırı da yok.
     expect($p('Rektör', Kategori::IdariGorev))->toBe(0);
 
-    // Tez izleme komitesi üyeliği 14.5'in örneklerinde ama etiketi 10.2'de
-    // 20 puan alıyor; motor en yükseği seçtiği için 3'e düşmüyor.
-    expect($p('Tez İzleme / Jüri Üyeliği', Kategori::TezDanismanligi))->toBe(20);
+    // Tez izleme komitesi üyeliği kaynağın 10. bölümünde YOK, 14.5'in
+    // örneklerinde var (6/3 → §0 düşük). Bir tur 10.2'de 20 puandaydı.
+    expect($p('Tez İzleme / Jüri Üyeliği', Kategori::TezDanismanligi))->toBe(3);
 
     // '1-14' ve '1-15' artık 14. bölümü sayıyor ve birbirinden farklı.
     expect($katalog->coz(['1-14']))->toContain('14.1')
@@ -4935,4 +4935,67 @@ test('OMÜ 13. bölüm ödülleri verene ve dereceye göre ayırıyor', function
     // Etiketi zaten 14. bölümde minimumda olanlara ayrı satır açılmadı.
     expect($p('Kurul / Komisyon Üyeliği', Kategori::IdariGorev))->toBe(5)
         ->and($p('Kamu/STK Danışmanlığı', Kategori::ToplumsalKatki))->toBe(4);
+});
+
+test('OMÜ 1-12. bölümleri kaynağın kademeleriyle puanlıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('omu-2025-a-doc');
+    $tumu = $katalog->coz(['*']);
+    $p = fn (string $kaynak, Kategori $k, ?string $rol = 'tek') => $katalog->puan(sartFaaliyet($kaynak, $k, $rol), $tumu);
+
+    // 1.3 editörlük çeyrekliğe göre kademeli (70/60/50/40); tek satırda
+    // 40'ta toplanmıştı, etiketler çeyrekliği taşıyor.
+    expect($p('WoS Dergi (Q1)', Kategori::Editorluk))->toBe(70)
+        ->and($p('WoS Dergi (Q4)', Kategori::Editorluk))->toBe(40);
+
+    // Hakemlik ve yayın kurulu üyeliği derginin indeksini taşımıyor;
+    // kaynak dört bölümde ayrı puanlıyor → en düşüğü (2 ve 6).
+    // Hakemlik 15, yayın kurulu 21 puandaydı.
+    expect($p('Hakemlik', Kategori::Editorluk))->toBe(2)
+        ->and($p('Yayın Kurulu Üyeliği', Kategori::Editorluk))->toBe(6);
+
+    // Bildiri: kaynağın ekseni indeks, kayıt indeksi taşımıyor → 5.5/5.6.
+    // Özet/poster 20 ve 10 puandaydı; kaynakta 3 ve 2.
+    expect($p('Uluslararası Özet/Poster', Kategori::Bildiri))->toBe(3)
+        ->and($p('Ulusal Özet/Poster', Kategori::Bildiri))->toBe(2)
+        ->and($p('Uluslararası Tam Metin (CPCI)', Kategori::Bildiri))->toBe(10);
+
+    // Tez danışmanlığı kaynakta 20/10; cetvelde 40/20 idi.
+    expect($p('Doktora Tezi', Kategori::TezDanismanligi))->toBe(20)
+        ->and($p('Yüksek Lisans Tezi', Kategori::TezDanismanligi))->toBe(10);
+
+    // Proje: fon kademesi × rol matrisi.
+    expect($p('AB Çerçeve / Ufuk', Kategori::Proje, 'yurutucu'))->toBe(120)
+        ->and($p('TÜBİTAK', Kategori::Proje, 'yurutucu'))->toBe(90)
+        ->and($p('TÜBİTAK', Kategori::Proje, 'arastirmaci'))->toBe(35)
+        ->and($p('BAP (Üniversite)', Kategori::Proje, 'yurutucu'))->toBe(40);
+
+    // Patent tescil değerleri 150/75 (100/60 idi).
+    expect($p('Uluslararası Patent', Kategori::Patent))->toBe(150)
+        ->and($p('Ulusal Patent', Kategori::Patent))->toBe(75);
+});
+
+test('OMÜ yüzde tavanları alan grubu ve kadroya göre uygulanıyor', function () {
+    $depo = sartDepo();
+    $tavan = fn (string $anahtar): array => $depo->cetveller()[$anahtar]->grupTavanlari;
+
+    // 5. bölüm A ve B'de %20, C'de %45; taban 1-10 asgari puanı.
+    expect($tavan('omu-2025-a-doc')['5'])->toBe(72)      // 360 × %20
+        ->and($tavan('omu-2025-b-doc')['5'])->toBe(66)   // 330 × %20
+        ->and($tavan('omu-2025-c-doc')['5'])->toBe(67);  // 150 × %45 = 67,5 → 67
+
+    // 7. bölüm A %20, B %30, C %60.
+    expect($tavan('omu-2025-a-prof')['7'])->toBe(144)    // 720 × %20
+        ->and($tavan('omu-2025-b-prof')['7'])->toBe(198) // 660 × %30
+        ->and($tavan('omu-2025-c-prof')['7'])->toBe(180); // 300 × %60
+
+    // Her eşik kendi varyantına bağlı.
+    expect($depo->bul('Ondokuz Mayıs Üniversitesi', 'dr_ogr_uyesi', 'fen')['cetvel'])->toBe('omu-2025-a-dr')
+        ->and($depo->bul('Ondokuz Mayıs Üniversitesi', 'profesorluk', 'guzel_sanatlar')['cetvel'])->toBe('omu-2025-c-prof');
+
+    // Tavan gerçekten kesiyor: yirmi uluslararası tam metin bildiri (10)
+    // tavansız 200 ederdi, C doçentlikte 67'de kesiliyor.
+    $katalog = $depo->katalog('omu-2025-c-doc');
+    expect($katalog->topla(array_fill(0, 20, sartFaaliyet('Uluslararası Tam Metin (CPCI)', Kategori::Bildiri)), $katalog->coz(['*'])))
+        ->toBe(67);
 });
