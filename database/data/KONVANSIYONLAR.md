@@ -232,6 +232,125 @@ Sıra şu: (1) etiket hangi satırlarda geçiyor, (2) o satırlar hangi gruplard
 (3) o gruplara hangi koşullar bağlı. Üçü de temizse sil; değilse doğru
 değerde yeni satır aç ve referansı taşı.
 
+### EKSİK SAYAN SATIR TARAMASI: TERS YÖN VERİMSİZ, SEBEBİNİ BİL
+
+Fazla sayan satır detektörünün (yukarıdaki başlık) sapma işareti ters
+çevrilerek EKSİK SAYAN satırlar da arandı: bir etiketin, korpustaki tipik
+kademesine göre ÇOK DÜŞÜK bir satırda durduğu yerler. 02.09.2026'da 394
+cetvel tarandı; 606 ham işaretten yalnız 171'i "bu satır etiketin o
+cetveldeki EN YÜKSEĞİ" kısıtından geçti (kısıt şart: etiket başka bir
+satırdan yüksek puan alıyorsa motor zaten onu seçiyor, bulgu boş).
+
+**Kalanın hemen tamamı YANLIŞ POZİTİF çıktı ve sebebi yapısal:** ters yön,
+kaynağın KABA TABLO tercihiyle gerçek hatayı ayıramıyor. Bir yönerge dergi
+editörlüğünün tamamına 1 puan veriyorsa (Işık F.3.a), sanatsal etkinliğin
+otuz türünü tek satırda topluyorsa (nevşehir E.5, 96 etiket) ya da ERC
+ödülünü "bilimsel araştırma bursu" satırına koyuyorsa (İstanbul Arel M.3.b)
+bu KAYNAĞIN KENDİ KARARI, cetvelin hatası değil. İleri yönde aynı belirsizlik
+FAZLA saydırdığı için düzeltilmesi zorunluydu; ters yönde §0 zaten hoş
+görüyor.
+
+Ters taramanın bir işi var, o da şu: sayısal sapmayı değil, **satır
+başlığının etiketle ilgisizliğini** aramak. "BKCI Kitap"ın "diğer hakemli
+DERGİDE editörlük" satırında durması (Tarsus 7.d) sayı olarak da anlamsız,
+metin olarak da. Ama bu, istatistikle değil okumayla bulunuyor.
+
+Pratik sonuç: **ters yönü tekrar taramaya değmez.** Aynı emek grup tavanı
+taramasına harcanırsa (aşağıdaki başlık) doğrudan §0 ihlali bulur.
+
+### GRUP TAVANI TARAMASI: KAYNAKTAKİ "EN FAZLA N PUAN"I CETVELLE KARŞILAŞTIR
+
+02.09.2026'da bütün korpus bu yöntemle tarandı ve **on dört üniversitede
+elli beş eksik tavan** bulundu. Tavansız bir bölüm doğrudan fazla saydırır,
+yani her bulgu bir §0 ihlali. En verimli tarama bu oldu.
+
+Yöntem:
+
+1. Her cetvel dosyasının docblock'undaki `Kaynak: pdf/…` adından kaynak
+   metnini bul, `pdftotext -q -layout` ile aç.
+2. Metinde tavan ifadelerini ara. İşe yarayan desen:
+
+   ```
+   (en fazla|en çok|azami) …{0,30} N puan
+   N puan(ı|ın)? (aşamaz|geçemez|aşmamak|sınırlıdır|aşan kısmı)
+   ```
+
+   **"en az" geçen eşleşmeyi ELE**: "toplamda en az 100 puan" baraj, tavan
+   değil. Bu filtre olmadan gürültü üç katına çıkıyor.
+3. Bulunan değerleri cetvelin `grup_tavanlari`'ndaki değerlerle karşılaştır.
+   İki kova ayır: `grup_tavanlari` HİÇ YOK olanlar (en verimli) ve tavanı
+   olup bazı değerleri eksik olanlar.
+4. Her bulgu için **tavanlı satırın cetvelde karşılığı var mı** diye bak.
+   Yoksa bulgu düşer — tavan zaten uygulanamaz.
+
+Tarama üç yanlış pozitif sınıfı üretiyor, üçünü de tanı:
+
+- **ÖLÇEKLİ TAVAN.** Harran bütün tavanlarını 0,7 (A bölümü) ve 0,3 (C)
+  ile çarparak yazıyor: kaynakta 30, cetvelde 21. Değer karşılaştıran tarama
+  hepsini "eksik" sanıyor; otuz altı işaretin tamamı yanlış pozitifti.
+- **SATIRI GİRİLMEMİŞ BÖLÜM.** Kaynağın tavanı var ama o bölümün maddeleri
+  kaynak sözlüğünde karşılıksız olduğu için hiç girilmemiş (Ankara'nın dergi
+  editörlüğü, Atatürk'ün elli beş tavanının tamamı, Ordu'nun F.34-F.59'u).
+- **UYGULANAMAZ TAVAN.** Üç biçimi var ve üçü de motorda karşılıksız:
+  YIL/YARIYIL başına ("yıllık en fazla 15 puan" — Ankara; "bir yarıyılda en
+  fazla 5 puan" — Yozgat Bozok), AYNI ESERE özgü ("bir kitaptan en fazla 40
+  puan" — Kahramanmaraş İstiklal; Yalova'nın ISBN kuralıyla aynı sınıf) ve
+  MAKALE BAŞINA ("bir makale için en çok 50 puan" — PAÜ).
+
+**KAYNAK ADI EŞLEŞTİRMESİNİ BOŞLUKTA KESME.** İlk turda desen
+`Kaynak: pdf/([^\s]+)` idi ve dosya adında BOŞLUK olan yirmi dört cetveli
+sessizce taramanın dışında bıraktı ("…Aydın Adnan Menderes Üniversitesi.pdf").
+Desen ".pdf" uzantısında bitmeli. Docblock'ta İKİ SATIRA taşan adlar (Adana
+ATÜ, AYBÜ) satır bazlı desenle yine bulunmuyor; sayı azsa elle tara.
+
+### TAVAN KAPSAMI: ANAHTAR GRUP MU, TEK MADDE Mİ?
+
+`grup_tavanlari` anahtarı `coz()` ile çözülüyor ve bir grup adı, bir madde
+kodu ya da bir desen olabilir. Bu esneklik iki sessiz hata üretiyor:
+
+- **ÖLÜ TAVAN**: anahtar hiçbir maddeye düşmüyor, tavan yok sayılıyor.
+- **KAPSAMI DAR TAVAN**: anahtar bir GRUP değil TEK MADDE. Tavan yazılmış
+  görünür ama yalnız o satırı keser. Ege'de "Bu kategoride en çok 75 puan
+  alınır" tavanı `'7a-Q1' => 75` diye duruyordu; Q2, Q3 ve Q4 dergilerdeki
+  editörlükler sınırsız sayılıyordu.
+
+`CetvelKaynakTest` ikisini de tarıyor: ölü tavan doğrudan kırıyor, tek
+maddeye düşenler bilinen listeye karşı doğrulanıyor. Yeni bir tavan
+yazarken sor: **kaynak bu sınırı SATIRA mı KATEGORİYE mi koyuyor?**
+Kategoriye koyuyorsa `gruplar` altında kümeyi açıkça tanımla ve tavanı ona
+bağla. Tek maddelik bir küme bile olsa grup olarak tanımlamak tercih
+edilir: kapsamın bilinçli seçildiğini gösterir.
+
+### TAVAN KADROYA GÖRE DEĞİŞİYORSA VARYANTLA, "YAZILAMADI" DEME
+
+Eskişehir Teknik'in EK-5'i makale puanı hücresinde "1a-f kapsamında X puan
+(1f kapsamında en fazla Y puan alınabilir)" diyor ve Y kadroya göre
+değişiyor (75 · 45 · 150). Dosya bunu bir tur "motorun `grup_tavanlari`
+alanı cetvel geneline uygulandığı için YAZILAMADI" diye kaydetmişti.
+
+Yazılabilir: cetveli kadroya göre varyantla. Gövde bir kapanışa alınır,
+tavan parametre olur, `return ['cetveller' => …]` varyantları birden
+döndürür ve her eşik kendi varyantına bağlanır. Ordu, Yalova, Acıbadem ve
+MEF'te kullanılan yolun aynısı.
+
+Varyantlarken **tavanın hangi alan gruplarına ait olduğuna** da bak:
+Eskişehir Teknik'te tavan yalnız makale barajı `1a-f` olan gruplara ait,
+`1a-e` kullanan mühendislik ve fen tavansız gövdede kaldı. Tavanı onlara da
+uygulamak kaynağın koymadığı bir sınır getirirdi.
+
+### ADET TAVANI PUANA ÇEVRİLİRKEN BİRLEŞİK SATIRA DİKKAT
+
+MSGSÜ ve Ardahan tavanlarını adet olarak veriyor ("en çok üç adet", "* Azami
+N puan"). Satır puanı sabitse çeviri düz: adet × puan. Ama cetvel kaynağın
+BİRDEN ÇOK SATIRINI tek satırda topladıysa (MSGSÜ 4.1.5 = kaynağın
+4.1.5-4.1.7'si; Ardahan 3.11.6 = 3.11.6-3.11.9) kaynak tavanı her alt satıra
+AYRI veriyor ve birleşik satırda hangisinin geçerli olduğu bilinemiyor.
+
+Karar: **tek alt satırın tavanını yaz.** Aday o kalemde puanını olduğundan
+düşük görebilir; alternatifi (tavansız bırakmak) fazla saydırır ve §0'ı
+ihlal eder. Birleşmeyi cetvel dosyasında yaz ki sonraki tur bunu hata
+sanmasın.
+
 ### KUYRUĞU NEREDE KESMEK GEREKİR
 
 Detektörün kuyruğu uzun ve sonu getirilemez: 686 aday satırın çoğu kaynağın
@@ -1049,7 +1168,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 175 üniversite · 6637 eşik · 329 cetvel |
+| Girildi | 175 üniversite · 6693 eşik · 397 cetvel |
 | Okuma engeli çözüldü, giriş bekliyor | 0 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |
@@ -1064,6 +1183,13 @@ $e = $d->esikler(); $u = [];
 foreach ($e as $x) { $u[$x["universite"]] = true; }
 printf("esik=%d universite=%d cetvel=%d\n", count($e), count($u), count($d->cetveller()));'
 ```
+
+**GRUP TAVANI TURU BİTTİ (02.09.2026).** Bütün korpus kaynak metinlerine
+karşı tarandı; on dört üniversitede elli beş eksik tavan girildi, altı
+üniversitede tavanın neden uygulanamadığı dosya başlığına yazıldı. Yöntem ve
+yanlış pozitif sınıfları §1'in "GRUP TAVANI TARAMASI" başlığında. Kalan
+tavanların hepsi ya satırı girilmemiş bölümlere ait ya da motorda karşılığı
+olmayan biçimde (yıl/yarıyıl başına, aynı esere özgü, makale başına).
 
 **SIRADAKİ İŞ — KUYRUK BOŞ.** Ne okunamayan ne girilmemiş ne de yarım kalmış
 dosya var. Geriye yalnızca DIŞARIDAN BELGE bekleyen beş üniversite kaldı:
