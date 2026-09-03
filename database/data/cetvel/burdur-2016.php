@@ -68,6 +68,12 @@
  * yazıldığı 1-24 kümesinin ağırlığı makalelerde.
  *
  * Yönerge: yonerge/burdur.php
+ *
+ * KODLAR BİZE AİT — KAYNAKTA SATIR KODU YOK. Cetvel kodlarının SAYISAL
+ * ÇEKİRDEĞİ kaynağın madde/bölüm numarasıdır; baştaki harf tabloyu ya da
+ * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
+ * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
+ * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $YARIM = ['kisa_makale', 'vaka_teknik_not'];

@@ -26,6 +26,12 @@
  * GİRİLMEYENLER: sanatsal etkinlik bölümleri (12-32 arası maddeler; tiyatro,
  * opera, icra, bestecilik, şeflik, müzik teknolojisi), burslar, jüri üyelikleri
  * ve sportif etkinlikler — kaynak sözlüğünde karşılıkları yok.
+ *
+ * KODLAR BİZE AİT — KAYNAKTA SATIR KODU YOK. Cetvel kodlarının SAYISAL
+ * ÇEKİRDEĞİ kaynağın madde/bölüm numarasıdır; baştaki harf tabloyu ya da
+ * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
+ * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
+ * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
  */
 
 return [

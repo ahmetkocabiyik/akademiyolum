@@ -453,6 +453,36 @@ Yani bu tarayıcı ADAY LİSTESİ üretir, karar değil. Listedeki her satır
 kaynaktan okunarak doğrulanmalı — Adıyaman'ın gerçek hatası (ulusal bildiri
 20 puandaydı, kaynakta özet 15) ancak okuyunca çıktı.
 
+### KODUN KAYNAKLA BAĞI: ÜÇ SINIF, ÜÇÜNÜ DE DOSYA BAŞLIĞINA YAZ
+
+"Yönergenin kendi kodlarını birebir koru" kuralı korpusun her yerinde
+uygulanabilir değil, çünkü kaynakların bir kısmında SATIR KODU YOK.
+03.09.2026'da 162 cetvel kaynağıyla karşılaştırıldı; üç sınıf çıktı:
+
+1. **Kod birebir kaynağın** — en iyi durum, kod bir ÇAPA: bir satırı
+   kaynakla eşlemek için kodu aramak yeterli.
+2. **Kodun SAYISAL ÇEKİRDEĞİ kaynağın, gerisi bizim** — en yaygın durum.
+   Baştaki harf tabloyu ya da eki (`T1-`, `EK1.`, `A`), sondaki harf şıkkı
+   gösteriyor. Çekirdek hâlâ çapa; karşılaştırırken ona bak.
+3. **Kod tamamen bizim, kaynakta karşılığı YOK** — puan tablosu satırları
+   numarasız, düz metin açıklamalar hâlinde. Çukurova ve Abdullah Gül böyle.
+   **Burada kod bir çapa DEĞİL**; bir satırı kaynakla eşlemenin tek yolu
+   BAŞLIK METNİDİR.
+
+Üçüncü sınıf denetim için en riskli olan: OMÜ'de bulunan türden bir
+mis-mapping (satır kaynağın komşu bendinin değerini almış) kodu okuyarak
+yakalanamaz. O dosyalarda satır satır BAŞLIK karşılaştırması gerekir.
+
+**Her cetvel dosyası hangi sınıfta olduğunu söylemeli.** 03.09.2026'da yirmi
+dosyada bu not eksikti ve eklendi. Yeni cetvel girerken kodların nereden
+geldiğini yazmak, sonraki denetim turunun neye güvenebileceğini söyler.
+
+**ÖLÇÜM GÜRÜLTÜLÜ, SIRALAMA ÜRETMEYE ÇALIŞMA.** "Kaç kod eşleşti" oranı hem
+yanlış pozitif hem yanlış negatif veriyor: kodun harfli önekini koruyan
+dosyalar sayısal çekirdek testinde düşük, çekirdeği koruyanlar birebir
+testinde düşük çıkıyor; taranmış kaynaklarda OCR kodu bozuyor. Oran bir
+SINIFLANDIRMA aracıdır (çapa var mı yok mu), bir kalite sıralaması değil.
+
 ### KORPUS GENELİ DENETİM BİR KAMPANYA, TEK TUR DEĞİL
 
 OMÜ'nün on altı bölümünün tamamı kaynakla karşılaştırıldı ve yirmi dokuz

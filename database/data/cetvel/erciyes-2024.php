@@ -23,6 +23,12 @@
  * Bunlar Tablo 1-6'da yalnızca AZAMİ sınırla anılıyor, asgari koşul
  * üretmiyorlar; toplam puana katkıları girilmediği için hesaplanan toplam
  * eksik kalabilir.
+ *
+ * KODLAR BİZE AİT — KAYNAKTA SATIR KODU YOK. Cetvel kodlarının SAYISAL
+ * ÇEKİRDEĞİ kaynağın madde/bölüm numarasıdır; baştaki harf tabloyu ya da
+ * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
+ * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
+ * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
  */
 
 return [

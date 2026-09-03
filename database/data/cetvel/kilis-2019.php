@@ -72,6 +72,12 @@
  *   33'ün sonundaki "Ulusal bilimsel dergilerde hakemlik" satırı kaynakta
  *       yanlış bölüme düşmüş bir kopyala-yapıştır artığı; hakemlik 8.c'de
  *       zaten puanlanıyor, ikinci kez yazmak çifte sayım olurdu.
+ *
+ * KODLAR BİZE AİT — KAYNAKTA SATIR KODU YOK. Cetvel kodlarının SAYISAL
+ * ÇEKİRDEĞİ kaynağın madde/bölüm numarasıdır; baştaki harf tabloyu ya da
+ * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
+ * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
+ * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
  */
 
 return [

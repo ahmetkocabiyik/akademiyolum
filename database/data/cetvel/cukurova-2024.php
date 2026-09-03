@@ -26,6 +26,11 @@
  * üretmiyor; motor tarafında beyan olarak duruyor. Ayrıca 4) bölümündeki proje
  * YÖNETİCİLİĞİ (120) ve jürili yarışma satırları ile kitap bölümü / çeviri /
  * ansiklopedi maddesi — bunların EK 2'de karşılığı yok.
+ *
+ * KODLAR TAMAMEN BİZE AİT — KAYNAĞIN TABLOSUNDA SATIR KODU YOK. Puan
+ * tablosu satırları düz metin açıklamalar hâlinde, numarasız veriliyor;
+ * kodlar okunabilirlik için türetildi. Bu yüzden bir satırı kaynakla
+ * eşlemenin tek yolu BAŞLIK METNİDİR — kod bir çapa değil.
  */
 
 return [

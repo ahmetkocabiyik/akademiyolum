@@ -40,6 +40,12 @@
  * GİRİLMEYEN BÖLÜMLER: 9 (sportif faaliyetler), 10 (mimari tasarım), 12.2-12.5
  * (sahne sanatları — kuram, oyunculuk, reji, dramatik yazarlık, sahne tasarımı).
  * Kaynak sözlüğünde karşılıkları yok.
+ *
+ * KODLAR BİZE AİT — KAYNAKTA SATIR KODU YOK. Cetvel kodlarının SAYISAL
+ * ÇEKİRDEĞİ kaynağın madde/bölüm numarasıdır; baştaki harf tabloyu ya da
+ * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
+ * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
+ * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
  */
 
 return [

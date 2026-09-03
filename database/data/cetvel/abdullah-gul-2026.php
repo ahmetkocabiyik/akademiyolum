@@ -120,6 +120,11 @@
  *       karşılıksız.
  *
  * Yönerge: yonerge/abdullah-gul.php
+ *
+ * KODLAR TAMAMEN BİZE AİT — KAYNAĞIN TABLOSUNDA SATIR KODU YOK. Puan
+ * tablosu satırları düz metin açıklamalar hâlinde, numarasız veriliyor;
+ * kodlar okunabilirlik için türetildi. Bu yüzden bir satırı kaynakla
+ * eşlemenin tek yolu BAŞLIK METNİDİR — kod bir çapa değil.
  */
 
 return [

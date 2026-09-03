@@ -43,6 +43,12 @@
  *         ve p (sahne tasarımı) bentleri sözlükte karşılıksız.
  *
  * Yönerge: yonerge/istanbul-kultur.php
+ *
+ * KODLAR BİZE AİT — KAYNAKTA SATIR KODU YOK. Cetvel kodlarının SAYISAL
+ * ÇEKİRDEĞİ kaynağın madde/bölüm numarasıdır; baştaki harf tabloyu ya da
+ * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
+ * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
+ * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
  */
 $kapsamNotu = 'Puanlar İstanbul Kültür Üniversitesi EK-1 Puanlama Sisteminden. '
     .'Çok yazarlı çalışmalarda yönerge "1,5 × puan / yazar sayısı" formülünü uyguluyor '
