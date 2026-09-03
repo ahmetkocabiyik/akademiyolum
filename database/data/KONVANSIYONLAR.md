@@ -418,6 +418,66 @@ gerekmez, çünkü aday hak ettiği bir şeyi kaybetmiyor.
 Sızıntıyı `CetvelKaynakTest` artık koruyor: ders etiketlerinden biriyle
 `Akreditasyon Faaliyeti` aynı listede olamaz.
 
+### SATIRIN PUANI KAYNAKTA O KODUN YANINDA GEÇİYOR MU?
+
+OMÜ'nün baştan sona denetimi (02.09.2026) yirmi iki fazla, yedi eksik sayan
+eşleme çıkardı ve hepsinin ortak sebebi tekti: **kaynak bir kalemi bizim
+etiketimizin TAŞIMADIĞI bir eksende kademelendiriyor** — derginin indeksi,
+yayınevinin sınıfı, fon kademesi, çeyreklik, tam metin/özet — ve satır o
+kademelerin ortasından ya da en üstünden yazılmış.
+
+Mekanik sınaması var: madde kodunu kaynak metninde bul, o kodun çevresindeki
+PUAN SÜTUNU sayılarını topla, cetvelin puanı bu kümede mi diye bak. Değilse
+ya §0 gereği bilerek düşürülmüştür ya da hatadır; ayrımı **yön** veriyor:
+
+- cetvel puanı kümenin ALTINDA → §0 taban, olağan.
+- cetvel puanı kümenin ÜSTÜNDE → §0 ile açıklanamaz, oku.
+
+**Tarayıcı sayıyı sütun olarak tanımalı**, yoksa kod içindeki rakamları
+("A1.1" → 1) puan sanır. İşe yarayan kural: sayı ya satır sonunda ya da en
+az iki boşlukla ayrılmış bir kolonda; ardında dipnot yıldızı ya da çarpan
+eki olabilir (`100*`, `50*sayı`). "20/10" gibi kademe çiftleri parçalanır.
+
+**PRECİSİON DÜŞÜK, TEK BAŞINA KARAR VERDİRMEZ.** 03.09.2026'da korpusa
+uygulandığında 164 cetvelde 22 "üstünde" adayı çıktı; elle okununca çoğu
+YANLIŞ POZİTİFTİ. Üç sebep:
+
+1. **Cetvelin kodları kaynağın kodları değil.** Ağrı'da 4.3 cetvelde kitap
+   bölümü, kaynakta çeyreklik çarpanı kuralı. Kod eşleşmesi anlamsızlaşıyor.
+2. **Çok sütunlu kadro tabloları.** Gebze Teknik'te değer kadro sütununda,
+   kodun satırında değil.
+3. **Aynı numara birden çok tabloda.** Şırnak'ta 2.1.1 hem kitap hem tez
+   bölümünde var.
+
+Yani bu tarayıcı ADAY LİSTESİ üretir, karar değil. Listedeki her satır
+kaynaktan okunarak doğrulanmalı — Adıyaman'ın gerçek hatası (ulusal bildiri
+20 puandaydı, kaynakta özet 15) ancak okuyunca çıktı.
+
+### KORPUS GENELİ DENETİM BİR KAMPANYA, TEK TUR DEĞİL
+
+OMÜ'nün on altı bölümünün tamamı kaynakla karşılaştırıldı ve yirmi dokuz
+eşleme düzeldi. Bu, ÜNİVERSİTE BAŞINA saatler süren bir iş: kaynağın her
+bölümünü okumak, her etiketin temsil edebileceği bentleri çıkarmak, en
+düşüğünü seçmek.
+
+175 üniversiteye aynı derinlikte uygulamak tek oturumluk bir iş değil.
+Pratik yol, ucuz ve kesin detektörleri korpusa uygulayıp derin denetimi
+işaret verenlere saklamak:
+
+| Detektör | Kesinlik | Bulduğu |
+|---|---|---|
+| Grup tavanı (sabit "en fazla N puan") | yüksek | 14 üniversite, 55 tavan |
+| Yüzde tavanı (asgari puana bağlı) | yüksek | 3 üniversite |
+| Ölü / kapsamı dar tavan (test) | kesin | Ege |
+| Satır başlığı olumsuzlaması | yüksek | Yalova |
+| Etiket kaynakta hiç geçmiyor mu | yüksek | 59 cetvel (akreditasyon) |
+| Satırın puanı kaynakta yok | DÜŞÜK | aday listesi |
+| Fazla/eksik sayan satır (korpus medyanı) | orta | 22 üniversite |
+
+Derin denetime önce ŞUNLAR alınmalı: kaynağı kademeli olduğu hâlde cetveli
+tek satıra inmiş bölümler, kodları kaynağınkiyle uyuşmayan dosyalar ve
+`grup_tavanlari` boş olup kaynağında sınır ifadesi geçen cetveller.
+
 ### SATIR BAŞLIĞI BİR ŞEYİ DIŞLIYORSA ETİKET ONU TAŞIMASIN
 
 En ucuz ve en kesin detektör bu: satırın KENDİ METNİ bir şeyi açıkça dışlıyor
