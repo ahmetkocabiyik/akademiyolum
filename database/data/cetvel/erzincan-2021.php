@@ -69,6 +69,18 @@
  *       "spor etkinliklerinde her maddeden en fazla 5 adet" sınırları.
  *
  * Yönerge: yonerge/erzincan.php
+ *
+ * ── 28.08.2025 MÜLGA MADDELERİ: CETVELDE KARŞILIĞI YOK, DOĞRUSU BU ──
+ * YÖK Genel Kurulunun 28.08.2025 kararı beş maddeyi mülga etti. İkisi PUAN
+ * SATIRI: "C. MESLEKİ FAALİYETLER / 1. Kurum Dışı Görevler" başlığı altındaki
+ * Yönetim Kurulu Üyeliği ve Komisyon Üyeliği. Cetveldeki 'EG.KOMISYON' ve
+ * 'YN5' satırları bunlar DEĞİL — ikisi de üniversite İÇİ kurul ve komisyon
+ * görevleri, ayrı bölümden geliyor. Kaldırılan kurum DIŞI satırların
+ * karşılığı hiç girilmemiş, yani fazla sayma yok.
+ *
+ * Kalan üç mülga madde koşul metnindeydi (Sağlık Bilimleri profesörlüğünün
+ * 3. bendi ile iki genel not); yönergedeki koşullar zaten yalnız yürürlükte
+ * kalan 1. ve 2. bentleri sayıyor.
  */
 $OZGUN = ['ozgun_makale'];
 $DERLEME = ['derleme'];

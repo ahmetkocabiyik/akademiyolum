@@ -5122,3 +5122,30 @@ test('YÖK 27.11.2025 değişikliği: SBÜ idari görev bölümü Dr. kadrosunda
     $firat = $depo->katalog('firat-2026');
     expect(array_keys($firat->maddeler))->not->toContain('C6');
 });
+
+test('Bayburt yabancı dil koşulu altı eşikte de sorulıyor', function () {
+    $depo = sartDepo();
+    $sayac = 0;
+
+    foreach ($depo->esikler() as $esik) {
+        if (($esik['universite'] ?? '') !== 'Bayburt Üniversitesi') {
+            continue;
+        }
+
+        $sayac++;
+        $bulundu = false;
+        $gez = function (array $d) use (&$gez, &$bulundu): void {
+            if (($d['metrik'] ?? null) === 'yds') {
+                $bulundu = true;
+            }
+            foreach ($d['cocuklar'] ?? [] as $c) {
+                $gez($c);
+            }
+        };
+        $gez($esik['sart']);
+
+        expect($bulundu)->toBeTrue("{$esik['anahtar']} eşiğinde yabancı dil koşulu yok");
+    }
+
+    expect($sayac)->toBeGreaterThanOrEqual(6);
+});

@@ -35,6 +35,21 @@
  * arası 2 yıl). Bu süre hesabı eşik değil sonuç olduğu için aday notunda anıldı.
  *
  * Ortak kalıplar: App\Services\Scoring\Sart\Kalip · cetvel: cetvel/bayburt-2024.php
+ *
+ * ── YABANCI DİL KOŞULU (MADDE 7) ──
+ * Kaynak öğretim üyesi başvurularının tamamında en az 55 yabancı dil puanı
+ * istiyor; koşul bir tur hiç girilmemişti (ne düğüm ne not vardı), yani
+ * aday dil şartını sağlamadan koşulları sağlamış görünüyordu. Altı eşiğe de
+ * `Kalip::yds(55)` eklendi.
+ *
+ * 14/02/2024 Senato Kararı bu maddeye "(Doktor Öğretim Üyesi kadrosuna
+ * yapılacak yeniden atamalar hariç)" istisnasını eklemiş; Bayburt'ta yeniden
+ * atanma eşiği zaten girilmediği için istisnanın karşılığı yok.
+ *
+ * MADDE 7/b'nin 85 puanlık koşulu (tamamen yabancı dilde eğitim veren
+ * programlar ile yabancı dil bölümleri) girilmedi: eşikler birime değil
+ * temel alana bağlı, hangi programın yabancı dilde eğitim verdiği profilde
+ * yok. O bölümlerin adayı için dil barajı olduğundan DÜŞÜK görünür.
  */
 
 use App\Services\Scoring\Sart\Kalip;
@@ -65,6 +80,7 @@ return [
         'notlar' => 'Madde 10/a.2: puan tablosunun 1-6. maddelerinden en az 80, toplamda en az '
             .'100 puan.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Bayburt Üniversitesi', [
+            Kalip::yds(55),
             Kalip::toplam(100),
             Kalip::puanDan('Makale, kitap, bildiri, proje, patent ve atıf kalemlerinizden en az 80 puan',
                 ['1-6'], 80, madde: 'Madde 10/a.2'),
@@ -87,6 +103,7 @@ return [
         'notlar' => 'Madde 10/c.2: doktora sonrası 4. maddeden en az 40, 1. ve 4. maddelerden '
             .'en az 150, 1-6. maddelerden en az 200, genel toplamda en az 350 puan.',
         'sart' => Kalip::ve('Doçent — Bayburt Üniversitesi', [
+            Kalip::yds(55),
             Kalip::toplam(350, $DR),
             Kalip::puanDan('Makale, kitap, bildiri, proje, patent ve atıf kalemlerinizden en az 200 puan',
                 ['1-6'], 200, $DR, madde: 'Madde 10/c.2'),
@@ -114,6 +131,7 @@ return [
             .'en az 250, 1-6. maddelerden en az 350, genel toplamda en az 700 puan. '
             .'Madde 10/ç.3: en az bir makalede başlıca yazar olmak.',
         'sart' => Kalip::ve('Profesör — Bayburt Üniversitesi', [
+            Kalip::yds(55),
             Kalip::toplam(700, $DOC),
             Kalip::puanDan('Makale, kitap, bildiri, proje, patent ve atıf kalemlerinizden en az 350 puan',
                 ['1-6'], 350, $DOC, madde: 'Madde 10/ç.1'),
@@ -144,6 +162,7 @@ return [
         'notlar' => 'Madde 10/a.3: puan tablosunun 1., 2., 3., 4., 5., 6. ve 11(2). '
             .'maddelerinden en az 80, toplamda en az 100 puan.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Bayburt Üniversitesi (Güzel Sanatlar)', [
+            Kalip::yds(55),
             Kalip::toplam(100),
             Kalip::puanDan('Makale, kitap, bildiri, proje, patent, atıf ve sanat etkinliği '
                 .'kalemlerinizden en az 80 puan', ['1-6 ve 11.2'], 80, madde: 'Madde 10/a.3'),
@@ -167,6 +186,7 @@ return [
             .'en az 150, 1., 2., 3., 4., 5., 6. ve 11(2). maddelerden en az 200, genel toplamda '
             .'en az 350 puan.',
         'sart' => Kalip::ve('Doçent — Bayburt Üniversitesi (Güzel Sanatlar)', [
+            Kalip::yds(55),
             Kalip::toplam(350, $DR),
             Kalip::puanDan('Makale, kitap, bildiri, proje, patent, atıf ve sanat etkinliği '
                 .'kalemlerinizden en az 200 puan', ['1-6 ve 11.2'], 200, $DR, madde: 'Madde 10/c.3'),
@@ -194,6 +214,7 @@ return [
             .'en az 250, 1., 2., 3., 4., 5., 6. ve 11(2). maddelerden en az 350, genel toplamda '
             .'en az 700 puan. Madde 10/ç.3: en az bir makalede başlıca yazar olmak.',
         'sart' => Kalip::ve('Profesör — Bayburt Üniversitesi (Güzel Sanatlar)', [
+            Kalip::yds(55),
             Kalip::toplam(700, $DOC),
             Kalip::puanDan('Makale, kitap, bildiri, proje, patent, atıf ve sanat etkinliği '
                 .'kalemlerinizden en az 350 puan', ['1-6 ve 11.2'], 350, $DOC, madde: 'Madde 10/ç.2'),
