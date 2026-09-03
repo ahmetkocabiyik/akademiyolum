@@ -90,7 +90,7 @@ return [
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $FEN,
         'birim' => null,
-        'cetvel' => 'sbu-2025',
+        'cetvel' => 'sbu-2025-dr',
         'notlar' => 'MADDE 6/2: SCI, SCI-Expanded, SSCI ya da AHCI kapsamında tezlerden '
             .'üretilmemiş en az 3 makale; bu şartı sağlayamayanlarda en az 1 böyle makale ile '
             .'birlikte alan indekslerinde en az 2 yayın. MADDE 6/3: A ve B kapsamından en az 30 '
@@ -117,7 +117,7 @@ return [
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'alan' => $FEN,
         'birim' => null,
-        'cetvel' => 'sbu-2025',
+        'cetvel' => 'sbu-2025-dr',
         'notlar' => 'MADDE 8/1: ilk atama koşullarına ek olarak toplam puan şartının yarısını '
             .'ilave olarak karşılamak ve Sağlık Bilimleri Üniversitesi adıyla WoS kapsamında '
             .'birinci isim ya da sorumlu yazar olduğunuz en az 1 özgün araştırma makalesi. '
@@ -211,7 +211,7 @@ return [
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $SOSYAL,
         'birim' => null,
-        'cetvel' => 'sbu-2025',
+        'cetvel' => 'sbu-2025-dr',
         'notlar' => 'MADDE 6/2: WoS kapsamında en az 3 makale; ya da 1 WoS makalesi + alan '
             .'indekslerinde 2 yayın; ya da alan indeksleri, EBSCO, Index Copernicus veya '
             .'ULAKBİM taranan dergilerde 2 makale ile birlikte doktora tezinin kitap olarak '
@@ -244,7 +244,7 @@ return [
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'alan' => $SOSYAL,
         'birim' => null,
-        'cetvel' => 'sbu-2025',
+        'cetvel' => 'sbu-2025-dr',
         'notlar' => 'MADDE 8/1: ilk atama koşullarına ek olarak toplam puan şartının yarısını '
             .'ilave olarak karşılamak ve üniversite adıyla WoS kapsamında birinci isim ya da '
             .'sorumlu yazar olduğunuz en az 1 makale; Sosyal ve Sporda bu makale derleme ya da '

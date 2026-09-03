@@ -5099,3 +5099,26 @@ test('YÖK 30.01.2025 jürili yarışma maddeleri beş cetvelde de sayılıyor',
     expect($kocaeli->coz(['H.1-H.22']))->not->toContain('H29')
         ->and($kocaeli->coz(['H.1-H.22']))->not->toContain('H28');
 });
+
+test('YÖK 27.11.2025 değişikliği: SBÜ idari görev bölümü Dr. kadrosunda sayılmıyor', function () {
+    $depo = sartDepo();
+    $rektor = sartFaaliyet('Rektör', Kategori::IdariGorev);
+
+    // Kaynağın D başlığı "(Yalnızca Profesör ve Doçent kadroları için)" diyor.
+    $doc = $depo->katalog('sbu-2025');
+    $dr = $depo->katalog('sbu-2025-dr');
+
+    expect($doc->grupTavanlari['D'])->toBe(50)
+        ->and($dr->grupTavanlari['D'])->toBe(0)
+        ->and($doc->puan($rektor, $doc->coz(['*'])))->toBe(50)
+        // Tavan 0 hem doğrudan eşleşmeyi hem karşılık aramasını kesiyor.
+        ->and($dr->topla([$rektor], $dr->coz(['*'])))->toBe(0);
+
+    // Her kadro kendi varyantına bağlı.
+    expect($depo->bul('Sağlık Bilimleri Üniversitesi', 'dr_ogr_uyesi', 'saglik')['cetvel'])->toBe('sbu-2025-dr')
+        ->and($depo->bul('Sağlık Bilimleri Üniversitesi', 'profesorluk', 'saglik')['cetvel'])->toBe('sbu-2025');
+
+    // Fırat'ın C6'sı kaynakta duruyor ama tablodan çıkarılmış; satırı yok.
+    $firat = $depo->katalog('firat-2026');
+    expect(array_keys($firat->maddeler))->not->toContain('C6');
+});

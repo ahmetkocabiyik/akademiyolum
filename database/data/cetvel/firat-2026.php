@@ -25,6 +25,13 @@
  * dolaşım programları (Farabi, Mevlana, Erasmus+), sertifika programları,
  * görsel etkinlikler (D), sanat ve tasarım etkinlikleri (F) ile sportif
  * etkinlikler (E) bölümlerinin çoğu — kaynak sözlüğünde karşılıkları yok.
+ *
+ * ── C6 SATIRI KAYNAKTA DURUYOR AMA YÜRÜRLÜKTE DEĞİL ──
+ * Tablodaki "C6 … 100" satırının metni "Yükseköğretim Genel Kurulu'nun
+ * 27.11.2025 tarihli toplantısında uygun bulunmayarak TABLODAN
+ * ÇIKARILMIŞTIR" diyor; 100 rakamı çıkarılan satırdan kalma. Cetvelde C6
+ * YOK ve olmamalı — sayıyı görüp satır açmak 100 puanlık bir fazla sayma
+ * üretir. 'C2-C6' kümesi de C6'yı saymıyor.
  */
 
 return [

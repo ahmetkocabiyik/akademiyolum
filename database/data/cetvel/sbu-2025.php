@@ -20,6 +20,15 @@
  *       çevrilemedi ve atıf puanı OLDUĞUNDAN YÜKSEK çıkıyor. B ve C
  *       bölümlerinin sabit tavanları (50 ve 100) ile D bölümünün 50
  *       puanlık tavanı uygulanıyor.
+ *
+ * ── D BÖLÜMÜNÜN KADRO KISITI (27/11/2025) ──
+ * YÖK Genel Kurulunun 27/11/2025 kararıyla değişen D başlığı iki şey birden
+ * söylüyor: "Bu alandan en fazla 50 puan alınabilir" VE "(Yalnızca Profesör
+ * ve Doçent kadroları için)". Tavan girilmişti, KADRO KISITI girilmemişti;
+ * dört kadro tek cetveli paylaştığı için Dr. Öğr. Üyesi adayı da idari görev
+ * puanı topluyordu — 50 puana kadar FAZLA sayma. Cetvel kadroya göre
+ * varyantlandı ve Dr. varyantında D tavanı 0 (İzmir Kâtip Çelebi'deki yol:
+ * tavan 0 hem doğrudan eşleşmeyi hem karşılık aramasını keser).
  *   ÜNİVERSİTENİN KENDİ DERGİLERİ (B.3, 8 ve 5 puan) ile alanı kilitli
  *       satırlar — B.10 kitap ve karar tahlilleri (Tıp Tarihi, Etik,
  *       Sağlık Hukuku), B.11 ve A.4.d hakemsiz dergi yayınları (yalnız
@@ -130,56 +139,80 @@ $AB = ['A.2.a', 'A.2.b', 'A.2.c', 'A.4.a', 'A.4.b', 'A.4.c', 'A.3.a', 'A.3.b', '
     'A.13.a', 'A.13.c', 'B.1.a', 'B.1.b', 'B.2.a', 'B.2.b', 'B.4', 'B.5.a', 'B.5.b',
     'B.6', 'B.7', 'B.8.a', 'B.9.a', 'B.9.b', 'B.12'];
 
-return [
-    'kapsam_notu' => 'Puanlar Sağlık Bilimleri Üniversitesi Akademik Yükseltilme ve Atanma '
-        .'Kriterlerinin Ek-1 tablosundan. Kaynak PDF taranmış; 300 dpi görüntüden OCR ile '
-        .'okundu. Yazar çarpanı: tek yazar tam puan, iki yazarlıda birinci isim 0,8 ikinci '
-        .'yazar 0,5; üç ve daha fazla yazarlıda birinci isim puanın yarısını, diğerleri kalan '
-        .'yarıyı eşit paylaşır. Yazar listesini boş bırakırsanız çarpan hiç uygulanmaz ve '
-        .'puanınız olduğundan YÜKSEK görünür. '
-        .'Puanınız şu kalemlerde OLDUĞUNDAN DÜŞÜK görünür: h-indeksi satırı (A.1) profil '
-        .'ölçütü olduğu için, proje ve patent BAŞVURULARI (5-10) alınmış proje ve belgeden '
-        .'ayrılamadığı için, üniversitenin kendi dergilerindeki yayınlar (B.3, 8 ve 5 puan) ile '
-        .'alanı kilitli satırlar (B.10 kitap ve karar tahlilleri, B.11 ve A.4.d hakemsiz dergi '
-        .'yayınları) ve C.5.b sertifika programı girilmedi. Derleme Sosyal Bilimlerde 20 '
-        .'(ötekilerde 10) ve diğer uluslararası dergide 10 (ötekilerde 5) puan alıyor; cetvel '
-        .'alana göre bölünmediği için ikisinde de düşük olan alındı. Lisanslanan patent, faydalı '
-        .'model ve endüstriyel tasarım belgeleri (20) lisanssızlardan ayrılamadığı için tescil '
-        .'satırlarından sayılıyor. '
-        .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: A.13\'ün atıf tavanı '
-        .'("başvurulan kadro için gerekli asgari puanın %20\'si") kadroya bağlı olduğu için '
-        .'sabit tavana çevrilemedi ve uygulanmıyor. D bölümünün "en fazla bir dönem puanlanır" '
-        .'ve "eş zamanlı görevlerden yalnız en yükseği sayılır" kuralları da uygulanamıyor. '
-        .'B (50), C (100) ve D (50) bölümlerinin sabit tavanları uygulanıyor.',
+$govde = function (int $idariTavan) use ($maddeler, $AB): array {
+    return [
+        'kapsam_notu' => 'Puanlar Sağlık Bilimleri Üniversitesi Akademik Yükseltilme ve Atanma '
+            .'Kriterlerinin Ek-1 tablosundan. Kaynak PDF taranmış; 300 dpi görüntüden OCR ile '
+            .'okundu. Yazar çarpanı: tek yazar tam puan, iki yazarlıda birinci isim 0,8 ikinci '
+            .'yazar 0,5; üç ve daha fazla yazarlıda birinci isim puanın yarısını, diğerleri kalan '
+            .'yarıyı eşit paylaşır. Yazar listesini boş bırakırsanız çarpan hiç uygulanmaz ve '
+            .'puanınız olduğundan YÜKSEK görünür. '
+            .'Puanınız şu kalemlerde OLDUĞUNDAN DÜŞÜK görünür: h-indeksi satırı (A.1) profil '
+            .'ölçütü olduğu için, proje ve patent BAŞVURULARI (5-10) alınmış proje ve belgeden '
+            .'ayrılamadığı için, üniversitenin kendi dergilerindeki yayınlar (B.3, 8 ve 5 puan) ile '
+            .'alanı kilitli satırlar (B.10 kitap ve karar tahlilleri, B.11 ve A.4.d hakemsiz dergi '
+            .'yayınları) ve C.5.b sertifika programı girilmedi. Derleme Sosyal Bilimlerde 20 '
+            .'(ötekilerde 10) ve diğer uluslararası dergide 10 (ötekilerde 5) puan alıyor; cetvel '
+            .'alana göre bölünmediği için ikisinde de düşük olan alındı. Lisanslanan patent, faydalı '
+            .'model ve endüstriyel tasarım belgeleri (20) lisanssızlardan ayrılamadığı için tescil '
+            .'satırlarından sayılıyor. '
+            .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: A.13\'ün atıf tavanı '
+            .'("başvurulan kadro için gerekli asgari puanın %20\'si") kadroya bağlı olduğu için '
+            .'sabit tavana çevrilemedi ve uygulanmıyor. D bölümünün "en fazla bir dönem puanlanır" '
+            .'ve "eş zamanlı görevlerden yalnız en yükseği sayılır" kuralları da uygulanamıyor. '
+            .'B (50) ve C (100) bölümlerinin sabit tavanları uygulanıyor. D (idari görevler) '
+            .'bölümü yönergenin 27/11/2025 değişikliğine göre YALNIZCA PROFESÖR VE DOÇENT '
+            .'kadroları için geçerli: o iki kadroda 50 puan tavanıyla sayılıyor, Dr. Öğr. Üyesi '
+            .'kadrolarında ise hiç sayılmıyor.',
 
-    'yazar_katsayisi' => [
-        'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev', 'odul',
-            'editorluk', 'toplumsal_katki', 'proje', 'patent', 'sanatsal_etkinlik', 'diger'],
-        'roller' => [
-            'tek' => ['kademeler' => [1 => 1.00]],
-            'ilk' => ['kademeler' => [1 => 1.00, 2 => 0.80], 'sonrasi' => 0.50],
-            'baslica' => ['kademeler' => [1 => 1.00, 2 => 0.50], 'sonrasi' => 0.30],
-            'ortak' => ['kademeler' => [1 => 1.00], 'bol' => ['pay' => 0.50, 'eksi' => 1]],
+        'yazar_katsayisi' => [
+            'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev', 'odul',
+                'editorluk', 'toplumsal_katki', 'proje', 'patent', 'sanatsal_etkinlik', 'diger'],
+            'roller' => [
+                'tek' => ['kademeler' => [1 => 1.00]],
+                'ilk' => ['kademeler' => [1 => 1.00, 2 => 0.80], 'sonrasi' => 0.50],
+                'baslica' => ['kademeler' => [1 => 1.00, 2 => 0.50], 'sonrasi' => 0.30],
+                'ortak' => ['kademeler' => [1 => 1.00], 'bol' => ['pay' => 0.50, 'eksi' => 1]],
+            ],
         ],
-    ],
 
-    'maddeler' => $maddeler,
+        'maddeler' => $maddeler,
 
-    'gruplar' => [
-        'TUM' => array_keys($maddeler),
-        'AB' => $AB,
-        'C' => ['C.1.b', 'C.1.c', 'C.1.ç', 'C.2.b', 'C.2.c', 'C.3', 'C.4.c', 'C.4.ç',
-            'C.4.d', 'C.4.f', 'C.5.a', 'C.5.b', 'C.6', 'C.7'],
-        'B' => ['B.1.a', 'B.1.b', 'B.2.a', 'B.2.b', 'B.4', 'B.5.a', 'B.5.b', 'B.6', 'B.7',
-            'B.8.a', 'B.9.a', 'B.9.b', 'B.12'],
-        'D' => ['D.1', 'D.2', 'D.4', 'D.6', 'D.9', 'D.11'],
-        // MADDE 6, 10 ve 13'ün andığı yayın kümeleri.
-        'WOS-MAKALE' => ['A.2.a'],
-        'ALAN-INDEKSI' => ['A.4.a'],
-        'PROJE-PATENT' => ['C.1.b', 'C.1.c', 'C.1.ç', 'C.2.b', 'C.2.c', 'C.3',
-            'C.4.c', 'C.4.ç', 'C.4.d', 'C.4.f'],
-        'TEZ' => ['T.1'],
-    ],
+        'gruplar' => [
+            'TUM' => array_keys($maddeler),
+            'AB' => $AB,
+            'C' => ['C.1.b', 'C.1.c', 'C.1.ç', 'C.2.b', 'C.2.c', 'C.3', 'C.4.c', 'C.4.ç',
+                'C.4.d', 'C.4.f', 'C.5.a', 'C.5.b', 'C.6', 'C.7'],
+            'B' => ['B.1.a', 'B.1.b', 'B.2.a', 'B.2.b', 'B.4', 'B.5.a', 'B.5.b', 'B.6', 'B.7',
+                'B.8.a', 'B.9.a', 'B.9.b', 'B.12'],
+            'D' => ['D.1', 'D.2', 'D.4', 'D.6', 'D.9', 'D.11'],
+            // MADDE 6, 10 ve 13'ün andığı yayın kümeleri.
+            'WOS-MAKALE' => ['A.2.a'],
+            'ALAN-INDEKSI' => ['A.4.a'],
+            'PROJE-PATENT' => ['C.1.b', 'C.1.c', 'C.1.ç', 'C.2.b', 'C.2.c', 'C.3',
+                'C.4.c', 'C.4.ç', 'C.4.d', 'C.4.f'],
+            'TEZ' => ['T.1'],
+        ],
 
-    'grup_tavanlari' => ['B' => 50, 'C' => 100, 'D' => 50],
-];
+        'grup_tavanlari' => ['B' => 50, 'C' => 100, 'D' => $idariTavan],
+    ];
+};
+
+/*
+ * D BÖLÜMÜ YALNIZCA PROFESÖR VE DOÇENT KADROLARI İÇİN.
+ *
+ * YÖK Genel Kurulunun 27/11/2025 kararıyla değişen D başlığı iki şey birden
+ * söylüyor: "Bu alandan en fazla 50 puan alınabilir" VE "(Yalnızca Profesör
+ * ve Doçent kadroları için)". Tavan girilmişti, KADRO KISITI girilmemişti;
+ * dört kadro tek cetveli paylaştığı için Dr. Öğr. Üyesi adayı da idari görev
+ * puanı topluyordu (50 puana kadar FAZLA sayma, §0 ihlali).
+ *
+ * Çözüm İzmir Kâtip Çelebi'dekiyle aynı: kadronun saymadığı bölüme grup
+ * tavanı 0 yazmak. Tavan hem doğrudan eşleşmeyi hem karşılık aramasını
+ * birlikte kesiyor. Hiçbir koşul D grubunu saymadığı için bu değişiklik
+ * yalnız listede görünen toplamı düzeltiyor, baraj sonucunu değil.
+ */
+return ['cetveller' => [
+    'sbu-2025' => $govde(50),      // doçentlik ve profesörlük
+    'sbu-2025-dr' => $govde(0),    // Dr. Öğr. Üyesi ilk atama ve yeniden atama
+]];
