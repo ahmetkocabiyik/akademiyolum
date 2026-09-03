@@ -36,7 +36,9 @@
  *   'Kitap Editörlüğü' uluslararası/ulusal ayırmıyor → I.1 (60) yerine J.3 (20).
  *
  * GİRİLMEYEN BÖLÜMLER: L.1 (ders başına 0,5 puan — motor kesirli puan
- * tutmuyor), M (ödüller, idari görevler ve diğer hizmetler), O (görsel
+ * tutmuyor), M'nin M.18 ve M.19 DIŞINDAKİ maddeleri (ödüller, idari görevler
+ * ve diğer hizmetler; M.18 ile M.19 YÖK Genel Kurulunun 30.01.2025 kararıyla
+ * eklendi ve sözlükte karşılıkları olduğu için girildi), O (görsel
  * etkinlikler), P (sanatsal etkinlikler) ve R (sanatsal ödüller). M, O, P ve R
  * koşulların alt baraj kümesine girmiyor; yalnızca genel toplamı etkiliyorlar,
  * dolayısıyla GÜZEL SANATLAR ADAYLARININ TOPLAMI OLDUĞUNDAN DÜŞÜK çıkar.
@@ -131,6 +133,14 @@ return [
         'L.6' => ['baslik' => 'Ders vermek (dönem ve ders başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
 
         // ══ N — PATENT, FAYDALI MODEL VE ÜRÜN TESCİLİ ══
+        // ── M. ÖDÜLLER, İDARİ GÖREVLER VE DİĞER HİZMETLER ──
+        // Bölümün tamamı girilmedi (aşağıdaki nota bakınız); yalnız YÖK Genel
+        // Kurulunun 30.01.2025 kararıyla EKLENEN iki madde girildi, çünkü
+        // ikisinin de sözlükte karşılığı var. M.18'in 7,5 puanı §0 uyarınca
+        // aşağı yuvarlandı.
+        'M.18' => ['baslik' => 'Ulusal ya da uluslararası düzeyde gerçekleştirilen jürili yarışmaya katılmak', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 7],
+        'M.19' => ['baslik' => 'Jürili yarışmada danışmanlık yapmak ya da jüri üyesi olarak görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 15],
+
         'N.1.a' => ['baslik' => 'Yurt dışı patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 400],
         'N.1.c' => ['baslik' => 'Yurt içi patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 200],
         'N.2.b' => ['baslik' => 'Faydalı model veya ürün tescili', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 50],

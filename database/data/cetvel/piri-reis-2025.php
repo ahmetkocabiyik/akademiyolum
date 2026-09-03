@@ -164,6 +164,10 @@ $ortak = [
 
     // ══ R. DİĞER AKADEMİK FAALİYETLER ══
     'R.1.f' => ['baslik' => 'Jürili yarışmalara katılmak, danışmanlık yapmak ya da jüri üyesi olarak görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 2],
+    // R.1.f katılmayı da sayıyor ama 'Yarışma Derecesi / Mansiyon' etiketi
+    // `odul` kategorisinde; aynı bendin ikinci satırı olmadan yarışmaya
+    // katılan aday hiç puan almıyordu.
+    'R.1.f-katilim' => ['baslik' => 'Jürili yarışmaya katılmak', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 2],
 ];
 
 $A1 = ['A.1.a', 'A.1.b', 'A.1.c', 'A.1.d'];

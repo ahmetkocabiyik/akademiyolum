@@ -5067,3 +5067,35 @@ test('Çukurova ve Abdullah Gül başlık denetiminin bulduğu satırlar', funct
     expect($agu->puan(sartFaaliyet('BKCI / Scopus Kitap', Kategori::Kitap), $at))->toBe(40)
         ->and($agu->puan(sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap), $at))->toBe(10);
 });
+
+test('YÖK 30.01.2025 jürili yarışma maddeleri beş cetvelde de sayılıyor', function () {
+    $depo = sartDepo();
+    $yarisma = sartFaaliyet('Yarışma Derecesi / Mansiyon', Kategori::Odul);
+    $juri = sartFaaliyet('Jüri Üyeliği (Ulusal)', Kategori::SanatselEtkinlik);
+
+    // Kaynağın verdiği değerler; hepsi bu turdan önce SIFIR alıyordu.
+    $beklenen = [
+        'cukurova-2024' => [45, 90],
+        'giresun-2019' => [7, 15],     // M.18 7,5 → §0 aşağı yuvarlandı
+        'kocaeli-2023' => [null, 25],  // yarışma ödülleri J bölümünde, girilmedi
+        'acibadem-2025-atif18' => [10, 10],
+        'piri-reis-2025-fen' => [2, 2],
+    ];
+
+    foreach ($beklenen as $anahtar => [$y, $j]) {
+        $katalog = $depo->katalog($anahtar);
+        $tumu = $katalog->coz(['*']);
+
+        if ($y !== null) {
+            expect($katalog->puan($yarisma, $tumu))->toBe($y);
+        }
+
+        expect($katalog->puan($juri, $tumu))->toBe($j);
+    }
+
+    // Kocaeli'nin H.1-H.22 kümesi önek deseniyle H23-H29'u da yakalıyordu;
+    // açık listeye çevrildi ve yeni satır kümenin dışında kaldı.
+    $kocaeli = $depo->katalog('kocaeli-2023');
+    expect($kocaeli->coz(['H.1-H.22']))->not->toContain('H29')
+        ->and($kocaeli->coz(['H.1-H.22']))->not->toContain('H28');
+});

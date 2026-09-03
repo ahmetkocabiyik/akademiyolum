@@ -122,6 +122,9 @@ return [
         // yürütücü (H9) ve 25 puanlık araştırmacı (H14) satırlarındaydı ve
         // yönergenin "H.1-H.17" koşulunu da sahte biçimde sağlıyordu.
         'H28' => ['baslik' => 'TÜBİTAK 2209-A, 2209-B veya 2242 projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 10],
+        // Kaynağın H bölümünün 29. maddesi; hiç girilmemişti ve jüri
+        // etiketleri Kocaeli'de hiçbir satıra düşmüyordu.
+        'H29' => ['baslik' => 'Ulusal ya da uluslararası jürili yarışmada danışmanlık yapmak veya jüri üyesi olarak görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 25],
 
         // ── SANATSAL ETKİNLİK ── (Güzel Sanatlar koşullarının saydığı kalemler)
         'S1' => ['baslik' => 'Kişisel sanat etkinliği (sergi, dinleti, gösterim)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Ulusal)'], 'puan' => 40],
@@ -140,7 +143,12 @@ return [
         'E.1-E.4' => ['E*'],
         'F.1-F.2' => ['F1', 'F2'],
         'H.1-H.17' => ['H2', 'H3', 'H8', 'H9', 'H10', 'H11', 'H13', 'H14', 'H15', 'H16'],
-        'H.1-H.22' => ['H*'],
+        // ÖNEK DESENİ DEĞİL AÇIK LİSTE: 'H*' deseni H23-H29'u da yakalıyor
+        // ve aralığın dışına taşıyordu. Kaynağın 18-22. maddelerinin cetvelde
+        // satırı olmadığı için küme fiilen H.1-H.17 ile aynı; grup hiçbir
+        // koşulda kullanılmıyor ama deseni bırakmak sonraki satır eklendiğinde
+        // sessizce sızardı.
+        'H.1-H.22' => ['H2', 'H3', 'H8', 'H9', 'H10', 'H11', 'H13', 'H14', 'H15', 'H16'],
         'KISISEL_SANAT' => ['S1'],
         'KARMA_SANAT' => ['S2'],
     ],

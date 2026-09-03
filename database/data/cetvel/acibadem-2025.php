@@ -150,7 +150,11 @@ $maddeler = [
     '6.B.12' => ['baslik' => 'Üniversiteler dışındaki kamu ya da özel kurumlarla yapılan bilimsel araştırma projesinde danışman', 'kategori' => 'proje', 'kaynaklar' => [...$KAMU, 'Özel Sektör / STK'], 'roller' => ['danisman'], 'puan' => 5],
     '6.B.13' => ['baslik' => 'Üniversite tarafından fonlanan bilimsel araştırma projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 5],
     '6.B.14' => ['baslik' => 'Üniversite tarafından fonlanan bilimsel araştırma projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 2],
-    '6.B.15' => ['baslik' => 'Ulusal ya da uluslararası jürili yarışmaya katılmak, danışmanlık yapmak veya jüri üyesi olarak görev yapmak', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 10],
+    '6.B.15' => ['baslik' => 'Ulusal ya da uluslararası jürili yarışmaya katılmak veya danışmanlık yapmak', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 10],
+    // Kaynağın 6.B.15'i katılmayı, danışmanlığı VE jüri üyeliğini tek bende
+    // topluyor; jüri etiketleri `sanatsal_etkinlik` kategorisinde olduğu için
+    // aynı bendin ikinci satırı gerekiyor, yoksa jüri üyeliği hiç sayılmıyor.
+    '6.B.15-juri' => ['baslik' => 'Ulusal ya da uluslararası jürili yarışmada jüri üyesi olarak görev yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 10],
 
     // ══ 7. PATENT ══
     '7.A.1' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 20],
