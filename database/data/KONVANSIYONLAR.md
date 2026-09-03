@@ -453,6 +453,43 @@ Yani bu tarayıcı ADAY LİSTESİ üretir, karar değil. Listedeki her satır
 kaynaktan okunarak doğrulanmalı — Adıyaman'ın gerçek hatası (ulusal bildiri
 20 puandaydı, kaynakta özet 15) ancak okuyunca çıktı.
 
+### YÖK KARAR İZLERİNİ TARA: SATIR EKLENİR, ÇIKARILIR, KISITLANIR
+
+Kaynak metinler yürürlükteki hâli gösterir ama değişikliğin izini de taşır:
+`(Değişik: … tarihli karar)`, `(Mülga: …)`, `(Ek: …)`, "tablodan
+çıkarılmıştır", "… eklenmiştir". Bu izler üç ayrı riski işaret ediyor ve
+üçü de SESSİZ — kaynağın metni değişir, cetvel eski hâlde kalır, test kırılmaz:
+
+1. **Satır EKLENMİŞ** → cetvelde karşılığı yok, aday hak ettiği puanı
+   alamıyor. (YÖK'ün 30.01.2025 kararı jürili yarışma satırlarını ekledi;
+   Giresun'da M.18-M.19, Kocaeli'de H29, Çukurova'da iki satır eksikti.)
+2. **Satır ÇIKARILMIŞ** → cetvelde duruyorsa fazla saydırır. Tuzak şu:
+   çıkarılan satırın PUANI ÇOĞU ZAMAN METİNDE KALIYOR. Fırat'ın C6'sı
+   "uygun bulunmayarak tablodan çıkarılmıştır" diyor ama yanında hâlâ 100
+   yazıyor; sayıyı görüp satır açmak 100 puanlık bir hata üretir.
+3. **Satıra KISIT GETİRİLMİŞ** → en sinsi hâli, çünkü başlık İKİ KURAL
+   birden taşır ve biri alınıp öteki atlanır. SBÜ'nün D başlığı hem "en
+   fazla 50 puan" hem "(Yalnızca Profesör ve Doçent kadroları için)"
+   diyordu; tavan girilmiş, kadro kısıtı atlanmıştı ve Dr. adayı 50 puana
+   kadar fazla topluyordu.
+
+Tarama komutu:
+
+```bash
+grep -nE "\(Değişik|\(Mülga|\(Ek ?:|tablodan çıkarılmıştır|eklenmiştir" kaynak.txt
+```
+
+**Gürültünün büyük kısmı tek kalıptan geliyor:** "Bu Yönergenin yürürlüğe
+girmesiyle … yürürlükten kaldırılmıştır" her yönergenin son maddesi. 138
+izin 100'ü buydu; madde düzeyinde iz taşıyan yalnız 13 cetvel kaldı ve
+hepsi bir oturumda okunabildi.
+
+**İzin yanında duran maddeyi de oku, sadece izi değil.** Bayburt'un en
+büyük eksiği izin kendisinden değil, izin BULUNDUĞU maddeden çıktı:
+14/02/2024 Senato Kararı MADDE 7'ye bir istisna eklemişti (bizde karşılığı
+yoktu, çünkü o kadro girilmemiş) ama maddeyi okuyunca ASIL KOŞULUN —
+bütün başvurularda 55 yabancı dil puanı — hiç girilmediği görüldü.
+
 ### KODUN KAYNAKLA BAĞI: ÜÇ SINIF, ÜÇÜNÜ DE DOSYA BAŞLIĞINA YAZ
 
 "Yönergenin kendi kodlarını birebir koru" kuralı korpusun her yerinde
