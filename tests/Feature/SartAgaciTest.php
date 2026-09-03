@@ -4999,3 +4999,37 @@ test('OMÜ yüzde tavanları alan grubu ve kadroya göre uygulanıyor', function
     expect($katalog->topla(array_fill(0, 20, sartFaaliyet('Uluslararası Tam Metin (CPCI)', Kategori::Bildiri)), $katalog->coz(['*'])))
         ->toBe(67);
 });
+
+test('Adıyaman ve Manisa CBÜ yüzde tavanları kadroya göre uygulanıyor', function () {
+    $depo = sartDepo();
+    $tavan = fn (string $anahtar): array => $depo->cetveller()[$anahtar]->grupTavanlari;
+
+    // Adıyaman: B %15, D ve F %20; taban Tablo 3'ün asgari toplamı
+    // (fen Dr. 400 / profesör 900, sosyal 300 / 700).
+    expect($tavan('adiyaman-2024-fen-dr')['B'])->toBe(60)
+        ->and($tavan('adiyaman-2024-fen-prof')['D'])->toBe(180)
+        ->and($tavan('adiyaman-2024-sosyal-prof')['B'])->toBe(105)
+        // Doçentlikte toplam puan barajı yok, taban da yok → tavansız.
+        ->and($tavan('adiyaman-2024'))->toBe([]);
+
+    expect($depo->bul('Adıyaman Üniversitesi', 'dr_ogr_uyesi', 'fen')['cetvel'])->toBe('adiyaman-2024-fen-dr')
+        ->and($depo->bul('Adıyaman Üniversitesi', 'docentlik', 'fen')['cetvel'])->toBe('adiyaman-2024');
+
+    // Adıyaman bildiri satırları kaynağın uluslararası/ulusal blokuna göre
+    // yeniden kuruldu; ulusal bildiri tek satırda 20 puandaydı, kaynakta
+    // tam metin 30, özet 15 → §0 uyarınca özet 15.
+    $katalog = $depo->katalog('adiyaman-2024-fen-dr');
+    $tumu = $katalog->coz(['*']);
+    expect($katalog->puan(sartFaaliyet('Ulusal Özet/Poster', Kategori::Bildiri), $tumu))->toBe(15)
+        ->and($katalog->puan(sartFaaliyet('Uluslararası Özet/Poster', Kategori::Bildiri), $tumu))->toBe(30);
+
+    // Manisa CBÜ: atıf tavanı kadronun toplam puanının %20'si.
+    expect($tavan('manisa-cbu-2024-docent')['ATIF'])->toBe(120)      // 600 × %20
+        ->and($tavan('manisa-cbu-2024-profesor')['ATIF'])->toBe(240) // 1200 × %20
+        ->and($tavan('manisa-cbu-2024'))->toBe([]);
+
+    // Tavan gerçekten kesiyor: elli WoS atfı doçentlikte 120'de duruyor.
+    $mcbu = $depo->katalog('manisa-cbu-2024-docent');
+    expect($mcbu->topla(array_fill(0, 50, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $mcbu->coz(['*'])))
+        ->toBe(120);
+});

@@ -110,7 +110,7 @@ return [
         'universite' => 'Manisa Celal Bayar Üniversitesi',
         'kadro' => 'docentlik',
         'alan' => $tumAlanlar,
-        'cetvel' => 'manisa-cbu-2024',
+        'cetvel' => 'manisa-cbu-2024-docent',
         'notlar' => 'Madde B: AED\'den toplam 600, bunun en az 400\'ü 1-24. maddelerden, '
             .'en az 30\'u 28-30. maddelerden; merkezî yabancı dil sınavından en az 65.',
         'sart' => Kalip::ve('Doçent — Manisa Celal Bayar Üniversitesi', [
@@ -133,7 +133,7 @@ return [
         'universite' => 'Manisa Celal Bayar Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => $tumAlanlar,
-        'cetvel' => 'manisa-cbu-2024',
+        'cetvel' => 'manisa-cbu-2024-profesor',
         'notlar' => 'Madde A: AED\'den toplam 1200, en az 300\'ü doçentlik sonrası; 1-24. '
             .'maddelerden en az 800; 28-30. maddelerden en az 50 (en az 25\'i doçentlik sonrası); '
             .'merkezî yabancı dil sınavından en az 65.',

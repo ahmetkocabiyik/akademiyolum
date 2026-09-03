@@ -51,6 +51,17 @@ use App\Enums\Kategori;
  * (madde 5-4) kuralları da uygulanmıyor.
  *
  * Yönerge: yonerge/pau.php
+ *
+ * YÜZDE TAVANI TARAMASI (03.09.2026): 9. maddenin "B, C, D ve E grubundaki
+ * bilimsel aktivitelerden alınabilecek maksimum puan, adayın A GRUBUNDAN
+ * ALDIĞI PUANIN %20'sini geçemez" sınırı UYGULANAMAZ ve öyle kalmalı.
+ * Sebep yüzdenin kendisi değil TABANI: taban kadro başına sabit bir asgari
+ * puan değil, ADAYIN KENDİ A grubu puanı. Motorun `grup_tavanlari`'ı sabit
+ * sayı alıyor, başka bir grubun toplamına bağlı tavan tanımlamıyor.
+ * Kaynağın kendisi de bu sınırı asgari şart değerlendirmesinin dışında
+ * tutuyor ("Asgari şartların sağlanması ile ilgili değerlendirmede ise bu
+ * kısıtlama söz konusu değildir"), yani barajları etkilemiyor; yalnız
+ * listede görünen toplam puan yüksek çıkar.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI',
     'ESCI / Scopus'];

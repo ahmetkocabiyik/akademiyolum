@@ -55,6 +55,11 @@ $alan = function (
     ?string $adayNotu = null,
 ) use ($P): array {
     $alanlar = array_values($alanlar);
+
+    // B, D ve F bölümlerinin tavanı "asgari toplam puanlamanın yüzdesi" ve
+    // taban kadro × alan grubuna göre değişiyor; cetvel bu yüzden
+    // varyantlanıyor. Doçentlikte toplam puan barajı yok, taban da yok.
+    $cetvel = fn (string $kadro): string => "adiyaman-2024-{$anahtar}-{$kadro}";
     $ek = array_values($ek);
 
     return [
@@ -66,7 +71,7 @@ $alan = function (
             'universite' => 'Adıyaman Üniversitesi',
             'kadro' => 'dr_ogr_uyesi',
             'alan' => $alanlar,
-            'cetvel' => 'adiyaman-2024',
+            'cetvel' => $cetvel('dr'),
             'notlar' => "Madde 19 ve Tablo 3 ({$ad}): A-D arası faaliyetlerden en az {$dr[0]}, asgari toplam {$dr[1]} puan.",
             'sart' => Kalip::ve("Dr. Öğr. Üyesi — {$ad}", [
                 Kalip::yds(65),
@@ -101,7 +106,7 @@ $alan = function (
             'universite' => 'Adıyaman Üniversitesi',
             'kadro' => 'profesorluk',
             'alan' => $alanlar,
-            'cetvel' => 'adiyaman-2024',
+            'cetvel' => $cetvel('prof'),
             'notlar' => "Madde 22 ve Tablo 4 ({$ad}): A-D arası faaliyetlerden en az {$prof[0]}, asgari toplam {$prof[1]} puan.",
             'sart' => Kalip::ve("Profesör — {$ad}", [
                 Kalip::toplam($prof[1]),
