@@ -453,6 +453,30 @@ Yani bu tarayıcı ADAY LİSTESİ üretir, karar değil. Listedeki her satır
 kaynaktan okunarak doğrulanmalı — Adıyaman'ın gerçek hatası (ulusal bildiri
 20 puandaydı, kaynakta özet 15) ancak okuyunca çıktı.
 
+### SENATO İZLERİ AYRI KALIPLARLA ARANIR
+
+YÖK izleri taraması senato değişikliklerini tam yakalamıyor; senatolar başka
+künye kullanıyor:
+
+```bash
+grep -nE "\(.{0,60}(Senato ?Karar|ÜS-|Senatosunun|Senatonun).{0,110}\)" kaynak.txt
+```
+
+03.09.2026'da korpusa uygulandı: 14 cetvelde 72 iz çıktı, **hiçbiri hata
+değildi.** Uşak (21 iz, 04.03.2026'da bir profesörlük bendi kaldırılmış),
+İsparta UBÜ (19 iz), Siirt (puan tablosunun tamamı 26.02.2025'te değişmiş),
+Muşku, Bayburt, ESOGÜ ve ötekiler tek tek okundu; hepsinde cetvel yürürlükteki
+metni yansıtıyordu.
+
+Sebebi yapısal ve rahatlatıcı: **senato değişiklikleri kaynağın İÇİNE işlenmiş
+hâlde geliyor.** PDF yürürlükteki metni gösteriyor, iz yalnızca "burası
+değişti" diyor. YÖK kararlarında bu her zaman doğru değildi — Fırat'ın C6'sı
+gibi çıkarılan satırların PUANI metinde kalabiliyor.
+
+**İki iz türünü de yine de tara:** bir "(Değişik: … Senato Kararı)" künyesi
+o maddenin dikkatle okunması gereken yer olduğunu söylüyor. Bayburt'un
+yabancı dil koşulu eksiği tam da böyle bir künyenin yanındaki maddeden çıktı.
+
 ### YÖK KARAR İZLERİNİ TARA: SATIR EKLENİR, ÇIKARILIR, KISITLANIR
 
 Kaynak metinler yürürlükteki hâli gösterir ama değişikliğin izini de taşır:
@@ -580,6 +604,17 @@ tablosunda birinci kol üç, telafi kolu bir tek yazarlı yayın) motorda tek
 sayı yazılabiliyorsa **DÜŞÜK olanı** yaz: yüksek olanı yazmak telafi
 yolundan gidebilecek adayı haksız yere eler. §0 puanı aşağı çeker, ama
 adaya sağlayabileceği bir yolu da kapatmaz.
+
+**AMA YALNIZCA KOLLAR SADECE SAYIYLA AYRILIYORSA.** Telafi kolu FAZLADAN
+BİR KOŞUL taşıyorsa düşüğü yazmak o koşulu tamamen düşürür ve adaya sahte
+bir "sağlandı" gösterir. Hatay MKÜ'nün dil şartı böyle: "en az 65 puan VEYA
+en az 60 puan alıp AYRICA Ar-Ge projesi yürütücülüğü ya da Q1/Q2 yayın".
+Burada 60 yazmak, dil puanı 60 olan ama projesi olmayan adayı sağlamış
+gösterirdi; o yüzden 65 yazıldı ve alternatif `aday_notu`'nda anlatıldı.
+
+Ayrım tek soruya iniyor: **düşük kol, yüksek kolun İSTEDİĞİNDEN BAŞKA bir
+şey de istiyor mu?** İstemiyorsa (Ordu'da üç yayın ↔ bir yayın) düşüğü yaz;
+istiyorsa yükseği yaz ve telafi yolunu aday notunda söyle.
 
 ### Sözlüğe YENİ ETİKET eklerken eski cetvelleri düşün
 
