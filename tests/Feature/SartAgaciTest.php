@@ -5033,3 +5033,37 @@ test('Adıyaman ve Manisa CBÜ yüzde tavanları kadroya göre uygulanıyor', fu
     expect($mcbu->topla(array_fill(0, 50, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $mcbu->coz(['*'])))
         ->toBe(120);
 });
+
+test('Çukurova ve Abdullah Gül başlık denetiminin bulduğu satırlar', function () {
+    $depo = sartDepo();
+
+    // ── ÇUKUROVA: üç kalem hiç sayılmıyordu ──
+    $cu = $depo->katalog('cukurova-2024');
+    $ct = $cu->coz(['*']);
+    expect($cu->puan(sartFaaliyet('Ticarileştirme', Kategori::Patent), $ct))->toBe(60)
+        ->and($cu->puan(sartFaaliyet('Yarışma Derecesi / Mansiyon', Kategori::Odul), $ct))->toBe(45)
+        ->and($cu->puan(sartFaaliyet('Jüri Üyeliği (Ulusal)', Kategori::SanatselEtkinlik), $ct))->toBe(90);
+
+    // Girilen satırlar kaynağın değerinde kalmalı (denetim fazla sayma bulmadı).
+    expect($cu->puan(sartFaaliyet('SCIE/SSCI (Q1)'), $ct))->toBe(90)
+        ->and($cu->puan(sartFaaliyet('BKCI / Scopus Kitap', Kategori::Kitap), $ct))->toBe(60);
+
+    // ── ABDULLAH GÜL ──
+    $agu = $depo->katalog('abdullah-gul-2026');
+    $at = $agu->coz(['*']);
+
+    // TR Dizin makalesinin satırı yoktu, sıfır alıyordu.
+    expect($agu->puan(sartFaaliyet('TR Dizin'), $at))->toBe(6);
+
+    // "B grubu projeler: A Grubu / 2" — etiket A/B ayrımını taşımıyor,
+    // §0 uyarınca düşük kademe. Yürütücü 20 → 10, araştırmacı 10 → 5.
+    expect($agu->puan(sartFaaliyet('TÜBİTAK', Kategori::Proje, 'yurutucu'), $at))->toBe(10)
+        ->and($agu->puan(sartFaaliyet('TÜBİTAK', Kategori::Proje, 'arastirmaci'), $at))->toBe(5);
+
+    // Çok ortaklı yöneticilik (50) ile düz yürütücülük (30) ayrılamıyor.
+    expect($agu->puan(sartFaaliyet('AB Çerçeve / Ufuk', Kategori::Proje, 'yurutucu'), $at))->toBe(30);
+
+    // Kitapta "ulusal = uluslararası / 2,5" kademesi zaten doğruydu.
+    expect($agu->puan(sartFaaliyet('BKCI / Scopus Kitap', Kategori::Kitap), $at))->toBe(40)
+        ->and($agu->puan(sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap), $at))->toBe(10);
+});

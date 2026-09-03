@@ -39,6 +39,20 @@
  * ayrı bir madde açıldı (M-Q1-DERLEME, 30×1,2=36); diğer çeyreklerde
  * `turler` alanına 'derleme' de eklenerek özgün makaleyle aynı satıra alındı.
  *
+ * ── BAŞLIK METNİ ÜZERİNDEN DENETİM (03.09.2026) ──
+ * Bu dosyanın kodları tamamen bize ait (kaynağın tablosunda satır kodu yok),
+ * yani bir satırı kaynakla eşlemenin tek yolu BAŞLIK METNİ. Puan tablosunun
+ * tamamı satır satır karşılaştırıldı; makale, bildiri, kitap, atıf, patent
+ * ve ödül bölümlerinin değerleri kaynakla birebir çıktı. Kitap bölümünün
+ * "ulusal = uluslararası / 2,5" kuralı da doğru uygulanmış.
+ *
+ * Metin katmanı bu tablonun puan sütununu kısmen düşürüyor (B grubu
+ * editörlük "1" görünüyor, doğrusu 10); değerler 7-9. sayfaların GÖRÜNTÜSÜ
+ * okunarak doğrulandı.
+ *
+ * Denetimin bulduğu iki hata yukarıdaki proje notunda; üçüncüsü makale
+ * bölümündeki eksik TR Dizin satırıydı.
+ *
  * ── KİTAPTA A/B GRUBU VE ULUSAL/2,5 SÖZLÜKTE AYRILAMADI ──
  * Tablo her kitap faaliyetini (yazarlık, bölüm, editörlük, hakemlik, çeviri,
  * bölüm çevirisi) "A grubu uluslararası yayınevi" ve "B grubu uluslararası
@@ -56,7 +70,19 @@
  * hakemliğinin 5/3/2/1 kademesini de aynı etikete eklemek dergi hakemliğini
  * (2 puan) 1'e düşürürdü.
  *
- * ── PROJE: A/B GRUBU AYRIMI BİR KISMI GİRİLEMEDİ ──
+ * ── PROJE: A/B GRUBU AYRIMI ETİKETTE YOK, §0 DÜŞÜK KADEME ──
+ * 03.09.2026 denetimi: "B grubu projeler: A Grubu / 2" kuralı bir tur
+ * "girilemedi" diye kaydedilmişti, ama satırlar A GRUBU DEĞERİYLE
+ * duruyordu — yani TÜBİTAK 1002 ya da 3001 gibi bir B grubu projesi
+ * A grubunun puanını alıyordu (yürütücülükte 20, doğrusu 10). Etiket A/B
+ * ayrımını taşımadığı için §0 uyarınca DÜŞÜK kademe yazıldı: ulusal
+ * yürütücü 20 → 10, ulusal araştırmacı 10 → 5.
+ *
+ * Aynı sebeple 'AB Çerçeve / Ufuk' + yürütücü satırı 50'den 30'a indi:
+ * kaynak "çok ortaklı projede yönetici/koordinatör" (50) ile düz
+ * "yürütücü" (30) kademelerini ayırıyor, etiket ayırmıyor.
+ *
+ * ── PROJE: KADEMELERİN BİR KISMI HÂLÂ GİRİLEMEDİ ──
  * "B grubu projeler: A Grubu / 2" diyor ama `Proje` sözlüğünün kaynak
  * etiketleri A/B ayrımı taşımıyor; B grubu (TÜBİTAK 1002, 3001, 1512, 1812 ve
  * TÜSEB'in KENDİ "A grubu" AR-Ge projeleri — burada TÜSEB'in içindeki A/B/C/D
@@ -182,6 +208,8 @@ return [
         'M-Q3Q4-KISA' => ['baslik' => 'WoS Core Collection Q3 veya Q4 dergide editöre mektup, teknik not veya vaka incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 2],
         'M-MIMARLIK-INDEKS' => ['baslik' => 'Architectural Publications Index, Art Index, Avery Index veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
         'M-DIGERINDEKS' => ['baslik' => 'ISI indeksi dışındaki uluslararası indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 10],
+        // Kaynağın makale bloğunun son satırı; bir tur girilmemişti ve
+        // 'TR Dizin' etiketi hiçbir satıra düşmediği için SIFIR alıyordu.
         'M-TRDIZIN' => ['baslik' => "TR Dizin'de taranan ulusal hakemli dergide makale", 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 6],
 
         // ══ BİLDİRİ ══
@@ -204,11 +232,11 @@ return [
         'AT-A' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide ya da tanınmış uluslararası yayınevi kitabında, yazar olmadığınız bir esere yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 1],
 
         // ══ BİLİMSEL ARAŞTIRMA PROJESİ ══
-        'P-ULUS-COK-YONETICI' => ['baslik' => 'Çok ortaklı uluslararası projede (EU, NSF, Newton, Marie Curie vb.) yönetici veya koordinatör', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['yurutucu'], 'puan' => 50],
+        'P-ULUS-COK-YONETICI' => ['baslik' => 'Uluslararası projede (EU, NSF, Newton, Marie Curie vb.) yürütücü ya da çok ortaklı projede yönetici', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['yurutucu'], 'puan' => 30],
         'P-ULUS-YURUTUCU' => ['baslik' => 'A grubu uluslararası projede yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 30],
         'P-ULUS-ARASTIRMACI' => ['baslik' => 'A grubu uluslararası projede araştırmacı veya danışman', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['arastirmaci', 'danisman'], 'puan' => 15],
-        'P-ULUSAL-YURUTUCU' => ['baslik' => 'A grubu ulusal projede (TÜBİTAK, TÜSEB, bakanlık vb.) yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['yurutucu'], 'puan' => 20],
-        'P-ULUSAL-ARASTIRMACI' => ['baslik' => 'A grubu ulusal projede araştırmacı veya danışman', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['arastirmaci', 'danisman'], 'puan' => 10],
+        'P-ULUSAL-YURUTUCU' => ['baslik' => 'Ulusal projede (TÜBİTAK, TÜSEB, bakanlık vb.) yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['yurutucu'], 'puan' => 10],
+        'P-ULUSAL-ARASTIRMACI' => ['baslik' => 'Ulusal projede araştırmacı veya danışman', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu'], 'roller' => ['arastirmaci', 'danisman'], 'puan' => 5],
         'P-BAP-YURUTUCU' => ['baslik' => 'Üniversite Destekli Proje (BAP) yürütücüsü', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['yurutucu'], 'puan' => 5],
         'P-BAP-ARASTIRMACI' => ['baslik' => 'Üniversite Destekli Proje (BAP) araştırmacı veya danışman', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['arastirmaci', 'danisman'], 'puan' => 2],
         'P-OGRENCI-DANISMAN' => ['baslik' => 'Dış kaynaklı öğrenci projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'roller' => ['danisman'], 'puan' => 2],

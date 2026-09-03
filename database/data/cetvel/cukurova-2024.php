@@ -24,8 +24,24 @@
  * GİRİLMEYEN: EK 4 (genel akademik etkinlikler listesi) — doçent ve profesör
  * koşullarında "en az beş tanesini sağlamak" biçiminde anılıyor, puan
  * üretmiyor; motor tarafında beyan olarak duruyor. Ayrıca 4) bölümündeki proje
- * YÖNETİCİLİĞİ (120) ve jürili yarışma satırları ile kitap bölümü / çeviri /
- * ansiklopedi maddesi — bunların EK 2'de karşılığı yok.
+ * YÖNETİCİLİĞİ (120): kayıt yöneticiliği yürütücülükten ayırmıyor, §0 uyarınca
+ * yürütücü puanı (90) uygulanıyor. Kitap bölümü, çeviri ve ansiklopedi
+ * maddesinin EK 2'de karşılığı yok.
+ *
+ * ── BAŞLIK METNİ ÜZERİNDEN DENETİM (03.09.2026) ──
+ * Bu dosyanın kodları tamamen bize ait (kaynağın tablosunda satır kodu yok),
+ * yani bir satırı kaynakla eşlemenin tek yolu BAŞLIK METNİ. EK 2'nin altı
+ * bölümü satır satır karşılaştırıldı: GİRİLEN ON DOKUZ SATIRIN HEPSİ
+ * KAYNAĞIN DEĞERİNDE, fazla sayan tek satır yok.
+ *
+ * Denetim ÜÇ EKSİK SATIR buldu — etiketleri hiçbir satıra düşmediği için
+ * SIFIR alıyorlardı:
+ *   'Ticarileştirme' — kaynak ticarileşmiş kademeyi ayrıca puanlıyor (60/60/90).
+ *   'Yarışma Derecesi / Mansiyon' ile jürili karma etkinlik — YÖK Genel
+ *       Kurulu'nun 30.01.2025 eklemesi "jürili yarışmalara katılmak" (45).
+ *   Jüri üyeliği ve başkanlığı — aynı eklemenin ikinci satırı, "jürili
+ *       yarışmalarda danışmanlık ya da jüri üyeliği" (90).
+ * Üçü de EKSİK sayıyordu; eklenmeleri puanı yalnız yukarı taşır.
  *
  * KODLAR TAMAMEN BİZE AİT — KAYNAĞIN TABLOSUNDA SATIR KODU YOK. Puan
  * tablosu satırları düz metin açıklamalar hâlinde, numarasız veriliyor;
@@ -99,6 +115,17 @@ return [
         'F-ULUSAL' => ['baslik' => 'Tescillenmiş ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 45],
         'F-MODEL' => ['baslik' => 'Tescillenmiş faydalı model veya tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım'], 'puan' => 45],
         'F-CESIT' => ['baslik' => 'Tescillenmiş çeşit', 'kategori' => 'patent', 'kaynaklar' => ['Islahçı Hakkı / Çeşit Tescili'], 'puan' => 45],
+        // Kaynak TİCARİLEŞMİŞ kademeyi de puanlıyor (çeşit 60, ulusal patent
+        // 60, uluslararası patent 90); etiket hangisi olduğunu taşımadığı
+        // için §0 uyarınca en düşüğü. Bu satır açılana kadar 'Ticarileştirme'
+        // etiketi Çukurova'da hiçbir satıra düşmüyor ve SIFIR alıyordu.
+        'F-TICARI' => ['baslik' => 'Ticarileşmiş patent, faydalı model, tasarım ya da çeşit', 'kategori' => 'patent', 'kaynaklar' => ['Ticarileştirme'], 'puan' => 60],
+
+        // ── 4) ARAŞTIRMA PROJESİ — JÜRİLİ YARIŞMA SATIRLARI ──
+        // YÖK Genel Kurulu'nun 30.01.2025 eklemesi; bir tur girilmemişti.
+        'P-YARISMA' => ['baslik' => 'Ulusal veya uluslararası düzeyde gerçekleştirilen jürili yarışmaya katılmak', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 45],
+        'P-YARISMA-SANAT' => ['baslik' => 'Ulusal veya uluslararası düzeyde gerçekleştirilen jürili yarışmaya katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 45],
+        'P-JURI' => ['baslik' => 'Jürili yarışmada danışmanlık yapmak ya da jüri üyesi olarak görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 90],
     ],
 
     'gruplar' => [
