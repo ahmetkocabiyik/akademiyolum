@@ -747,6 +747,34 @@ satır girilmez. Usul koşulları (ders bilgi paketi tamamlanmışlığı gibi,
 Akdeniz dipnot 3) bu sınıfa girmez — başvuru öncesi herkesin tamamlaması
 beklenen adımlardır, kimin hak ettiğini ayırmazlar.
 
+**PARANTEZ TARAMASI KORPUSA UYGULANDI (04.09.2026).** 179 kaynak metinde
+bölüm başlığı deseni (sıralayıcı + BÜYÜK HARFLİ öbek + parantez) arandı: 67
+kaynakta 274 başlık. Dört aileye ayrılıyor ve yalnız biri iş çıkardı.
+
+| Aile | Sayı | Sonuç |
+|---|---|---|
+| Birim/alan kısıtı | 10 | **üç gerçek bulgu** (aşağıda), üçü yanlış pozitif |
+| Bölüm tavanı | 41 | hepsi cetvelde vardı — tavan turu bu aileyi kapamış |
+| Kadro kısıtı | 0 | başlıkta hiç yok (SBÜ'nünki dipnottaydı) |
+| Diğer | 223 | indeks listesi, "… hariç", proje kodu; kısıt değil |
+
+Üç bulgu: OMÜ 15. bölüm (İletişim Fakültesi), İstanbul Sabahattin Zaim V.
+bölüm (Güzel Sanatlar Temel Alanında), Muş Alparslan E bölümü (Devlet
+Konservatuvarı). Yanlış pozitifler: Fırat ile Kocaeli'nin konservatuvar/güzel
+sanatlar bölümleri zaten girilmemiş, MEF'in 13-14. bölümleri zaten
+varyantlanmış.
+
+**Muş Alparslan bir sınır durum gösterdi: KISITIN SAHİBİ HİÇ YOKSA SATIR
+BÜSBÜTÜN SİLİNİR.** O yönergenin Madde 5'i güzel sanatlar temel alanını hiç
+anmıyor, yani konservatuvar adayına eşik de yazılamamış. Bölüm hak edene
+ulaşmıyor, yalnız hak etmeyen on temel alana puan veriyordu; varyant açmanın
+anlamı yok, etiketler boşaltıldı.
+
+**BAŞLIK PARANTEZİ TAVAN DEĞİL DE ÇARPAN OLABİLİR.** Kocaeli'nin C bölümü
+"(Yabancı dildeki kitapların puanları 1.5 ile çarpıldıktan sonra…)" diyor;
+kayıt kitabın dilini tutmuyor, motorun çarpan alanı da yok. Uygulanamaz, ama
+`kapsam_notu` ya da dosya başlığına yazılır.
+
 **BÖLÜM BAŞLIĞINDAKİ PARANTEZ DE BİR UYGUNLUK KOŞULUDUR.** OMÜ'nün 15.
 bölümü "GÖRSEL ETKİNLİKLER (İletişim Fakültesi için geçerlidir)" diye
 başlıyor; parantez tabloların içinde değil BAŞLIĞINDA duruyor ve kolayca

@@ -204,9 +204,21 @@ $maddeler = array_merge([
         'D1.3' => ['baslik' => 'Sinema filmi, belgesel, kısa metrajlı film, reklam filmi ya da televizyon programı yönetmenliği veya ekibinde görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatFilm, 'puan' => 25],
 
         // ══ E. KONSERVATUVAR ETKİNLİKLERİ ══
-        'E1.1' => ['baslik' => 'Sahne yapıtı ya da senfonik yapıt', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $muzikEser, 'puan' => 50],
-        'E1.3' => ['baslik' => 'Sanat etkinliklerinde bireysel icracı olarak yer almak (solo konser, dinleti, resital)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $muzikSolo, 'puan' => 30],
-        'E1.4' => ['baslik' => 'Sanat etkinliklerinde karma ya da eşlikçi olarak yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => [...$muzikKarma, ...$sanatKalan], 'puan' => 15],
+        /*
+         * E BÖLÜMÜ SADECE DEVLET KONSERVATUVARI İÇİN (04.09.2026).
+         *
+         * Kaynağın bölüm başlığı: "E- KONSERVATUAR ETKİNLİKLERİ (Sadece Devlet
+         * Konservatuarı için geçerlidir)". Kısıt adayın BİRİMİNE ait, hiçbir sözlük
+         * etiketi taşıyamıyor. Üstelik bu yönergenin Madde 5'i güzel sanatlar temel
+         * alanını hiç anmıyor, yani konservatuvar adayına eşik de yazılamadı:
+         * satırlar HAK EDENE ulaşmıyor, yalnız hak etmeyen on temel alana puan
+         * veriyordu (eşiklerin toplam barajı `*` üzerinden geçiyor). Etiketler bu
+         * yüzden boşaltıldı; satırlar kaynağı belgelemek için duruyor. F bölümü
+         * (SANAT VE TASARIM ETKİNLİKLERİ) kısıtsız, ona dokunulmadı.
+         */
+        'E1.1' => ['baslik' => 'Sahne yapıtı ya da senfonik yapıt', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => [], 'puan' => 50],
+        'E1.3' => ['baslik' => 'Sanat etkinliklerinde bireysel icracı olarak yer almak (solo konser, dinleti, resital)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => [], 'puan' => 30],
+        'E1.4' => ['baslik' => 'Sanat etkinliklerinde karma ya da eşlikçi olarak yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => [], 'puan' => 15],
 
         // ══ F. SANAT VE TASARIM ETKİNLİKLERİ ══
         'F1.1' => ['baslik' => 'Yurt dışında tanınmış müze, kültür merkezi ya da sanat galerisinde kişisel sergi, koleksiyonda veya kamusal alanda eserinizin yer alması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatKisiselU, 'puan' => 60],

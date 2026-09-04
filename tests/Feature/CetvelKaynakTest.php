@@ -594,6 +594,11 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
         '1.6 · ESCI dergide makale',
         '1c · Diğer uluslararası alan indekslerinde taranan dergide makale',
         'A.16a · Millî takımlarda görev almak ya da antrenör ve hakem eğitim kurslarında eğitici olarak görev almak',
+        // Muş Alparslan E bölümü: "Sadece Devlet Konservatuarı için
+        // geçerlidir" — o üniversitede güzel sanatlar eşiği hiç yok.
+        'E1.1 · Sahne yapıtı ya da senfonik yapıt',
+        'E1.3 · Sanat etkinliklerinde bireysel icracı olarak yer almak (solo konser, dinleti, resital)',
+        'E1.4 · Sanat etkinliklerinde karma ya da eşlikçi olarak yer almak',
         'T4.1.a · Uluslararası meslek başarı ödülü',
         'T4.1.b · Ulusal meslek başarı ödülü',
     ]);

@@ -15,6 +15,13 @@
  * GİRİLMEYEN BÖLÜMLER: I (editörlük), J (ödüller), K (idari görevler) ve
  * sanatsal/müzikal üretim blokları. Tablo 2'de yalnızca azami sınırla
  * anılıyorlar (K için 50 puan), asgari koşul üretmiyorlar.
+ *
+ * ── BAŞLIK PARANTEZİ: UYGULANAMAYAN ÇARPAN ──
+ * C bölümünün başlığı "(Yabancı dildeki kitapların puanları 1.5 ile
+ * çarpıldıktan sonra hesaplama kullanılır)" diyor. Kayıt kitabın DİLİNİ
+ * tutmuyor ve motorun çarpan alanı da yok; satırlar taban değerle duruyor.
+ * Yabancı dilde kitabı olan adayın gerçek puanı burada görünenden yüksek —
+ * eksik sayma, §0 serbest.
  */
 
 return [

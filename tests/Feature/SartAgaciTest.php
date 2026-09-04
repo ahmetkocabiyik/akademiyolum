@@ -5370,3 +5370,45 @@ test('OMÜ B grubunun iki kaydı da aynı ölçütü uyguluyor', function () {
     // Ayrım yalnız cetvelde; şart ağaçları birebir aynı olmalı.
     expect($sart('hukuk'))->toBe($sart('sosyal'));
 });
+
+/**
+ * BÖLÜM BAŞLIĞINDAKİ PARANTEZ TARAMASI (04.09.2026).
+ *
+ * Kaynak metinlerin bölüm başlıklarındaki parantezler tarandı; ikisi adayın
+ * BİRİMİNE ya da TEMEL ALANINA kısıt koyuyordu ve cetvelde karşılıksızdı.
+ */
+test('İstanbul Zaim V. bölümü yalnız güzel sanatlar alanında sayılıyor', function () {
+    $depo = sartDepo();
+    $eser = sartFaaliyet('Eserin Müzeye Kabulü (Yurt Dışı)', Kategori::SanatselEtkinlik, null);
+
+    $puan = function (string $alan) use ($depo, $eser): int {
+        $esik = $depo->bul('İstanbul Sabahattin Zaim Üniversitesi', 'docentlik', $alan);
+        $katalog = $depo->katalog($esik['cetvel'] ?? '');
+
+        return $katalog === null ? -1 : $katalog->puan($eser, $katalog->coz(['*']));
+    };
+
+    // "V. UYGULAMALI FAALİYETLER (Güzel Sanatlar Temel Alanında)" → V.1 100 puan.
+    expect($puan('guzel_sanatlar'))->toBe(100)
+        ->and($puan('mimarlik'))->toBe(0)
+        ->and($puan('sosyal'))->toBe(0)
+        ->and($puan('egitim'))->toBe(0);
+});
+
+test('Muş Alparslan konservatuvar bölümü hiçbir alanda sayılmıyor', function () {
+    $katalog = sartDepo()->katalog('mus-alparslan-2025');
+    expect($katalog)->not->toBeNull();
+    $hepsi = $katalog->coz(['*']);
+
+    $sanat = fn (string $kaynak) => sartFaaliyet($kaynak, Kategori::SanatselEtkinlik, null);
+
+    // "E- KONSERVATUAR ETKİNLİKLERİ (Sadece Devlet Konservatuarı için
+    // geçerlidir)" — bu yönergenin Madde 5'i güzel sanatlar temel alanını hiç
+    // anmadığı için o kadroya eşik de yok; satırlar yalnız hak etmeyen
+    // alanlara puan veriyordu.
+    expect($katalog->puan($sanat('Senfoni Kompozisyonu'), $hepsi))->toBe(0)
+        ->and($katalog->puan($sanat('Solistlik (Uluslararası)'), $hepsi))->toBe(0)
+        ->and($katalog->puan($sanat('Orkestra / Koro Üyeliği'), $hepsi))->toBe(0)
+        // F bölümü (SANAT VE TASARIM ETKİNLİKLERİ) kısıtsız, dokunulmadı.
+        ->and($katalog->puan($sanat('Kişisel Etkinlik (Uluslararası)'), $hepsi))->toBe(60);
+});

@@ -214,7 +214,7 @@ $profesor = function (string $anahtar, array $alanlar, ?int $altKapi, int $topla
     ];
 };
 
-return [
+$esikler = [
     [
         'anahtar' => 'zaim-dr',
         'aday_notu' => 'Tek kapı: makale, bildiri, kitap, çeviri, atıf ve patent '
@@ -287,3 +287,34 @@ return [
     $profesor('saglik', ['saglik'], 200, 1000, 'Madde 3/d'),
     $profesor('hukuk-egitim', ['hukuk', 'egitim'], null, 900, 'Madde 3/e'),
 ];
+
+/*
+ * V. BÖLÜM (UYGULAMALI FAALİYETLER) YALNIZCA GÜZEL SANATLAR TEMEL ALANINDA.
+ *
+ * Kaynağın bölüm başlığı bunu birebir söylüyor: "V. UYGULAMALI FAALİYETLER
+ * (Güzel Sanatlar Temel Alanında)". Şart ağaçları değişmiyor, yalnız eşiğin
+ * bağlandığı CETVEL değişiyor; `guzel_sanatlar` V'yi taşıyan varyanta,
+ * ötekiler taşımayan varyanta gidiyor. Anahtara alan EKLENMİYOR —
+ * `SartDeposu::esikler()` zaten ekliyor.
+ */
+$bolunmus = [];
+
+foreach ($esikler as $esik) {
+    $alanlar = array_values(array_filter(
+        $esik['alan'],
+        fn (string $alan): bool => $alan !== 'guzel_sanatlar',
+    ));
+
+    if ($alanlar !== []) {
+        $bolunmus[] = [...$esik, 'alan' => $alanlar];
+    }
+
+    if (in_array('guzel_sanatlar', $esik['alan'], true)) {
+        $bolunmus[] = [...$esik,
+            'alan' => ['guzel_sanatlar'],
+            'cetvel' => 'istanbul-zaim-2019-guzel-sanatlar',
+        ];
+    }
+}
+
+return $bolunmus;
