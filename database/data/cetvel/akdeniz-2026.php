@@ -8,6 +8,13 @@
  * maddeye giriyorsa puanı EN YÜKSEK maddeden alınır.
  * Şema ve projeksiyon notları: database/data/sart-agaci-taslak.php
  *
+ * ÜST SİMGE DİPNOTU TARAMASI (04.09.2026): eşik tablolarının "En az puan"
+ * SÜTUNUNA bağlı üst simge dipnotları okundu. GRUP 3'ün 4 numaralı dipnotu
+ * ("Güzel Sanatlar için bu puanın en az %40'ı 1. Bölüm: Bilimsel
+ * Makaleler'den") yönergede uygulanıyor; GRUP 4'ün (Devlet Konservatuvarı)
+ * 3 numaralı dipnotu 11.4'e işaret ediyor ve o bölümün satırları cetvelde
+ * yok — gerekçesi yonerge/akdeniz.php başlığında.
+ *
  * DİPNOT TARAMASI (04.09.2026): kaynağın üç ÇARPAN dipnotu da girilmemiş
  * bölümlere ait, bu yüzden karşılıksız kalmaları doğru — 8. bölümde "puan
  * dersin AKTS'si ile çarpılır", 9. bölümde "öğrenci sayısı ile çarpılır" ve

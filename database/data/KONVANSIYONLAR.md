@@ -453,6 +453,31 @@ Yani bu tarayıcı ADAY LİSTESİ üretir, karar değil. Listedeki her satır
 kaynaktan okunarak doğrulanmalı — Adıyaman'ın gerçek hatası (ulusal bildiri
 20 puandaydı, kaynakta özet 15) ancak okuyunca çıktı.
 
+### ÜST SİMGE DİPNOTUNU SÜTUN BAŞLIĞINDA DA ARA
+
+"DİPNOT HANGİ SÜTUNA BAĞLI? ÜST SİMGEYE BAK" kuralı hücre içindeki dipnotlar
+için yazılmıştı (Ordu'nun kadro sütunları). Aynı iz EŞİK TABLOSUNUN SÜTUN
+BAŞLIĞINDA da duruyor ve orada daha çok şey söylüyor: "En az puan³" başlığı,
+o sütundaki bütün barajlara bir ALT KOŞUL bağlar.
+
+Akdeniz'in eşik tabloları böyle: "Kadro | Asgari yayın sayısı | En az puan³ |
+Diğer Kriterler" ve dipnot 3 "Bu puanın en az yarısı … karşılanmış olmalıdır"
+diyor. Yani sütun başlığındaki tek rakam, üç kadronun toplam barajını da
+ikiye bölüyor.
+
+**AYNI NUMARA FARKLI TABLODA FARKLI ŞEY GÖSTERİR.** Akdeniz'de GRUP 3'ün
+4 numaralı dipnotu "%40'ı 1. Bölüm: Bilimsel Makaleler'den", GRUP 4'ün
+3 numaralı dipnotu ise "yarısı 11.4 Disipline Özgü Etkinlikler'den" diyor.
+Dipnot numaraları TABLO BAŞINA yeniden başlıyor; bir tablodan okunan
+dipnotu ötekine taşımak yanlış koşul üretir.
+
+Tarama, "puan"/"zorunludur"/"alınır" gibi kelimelerin hemen ardındaki
+rakamı arar; **madde atıflarını elemek şart**, yoksa "en az 30 puanı 1-11
+numaralı faaliyetlerden" satırı dipnot sanılır. Ayıklama kuralı: rakamın
+ardında `numaralı`, `kodlu`, `ve/veya`, tire ya da başka rakam varsa o bir
+KOD ATFIDIR, dipnot değil. Bu filtre olmadan 98 iz çıkıyor, filtreyle 68 —
+ve elenen otuzun tamamı yanlış pozitif.
+
 ### DİPNOT TARAMASI: TAVANDAN BAŞKA DÖRT KURAL TÜRÜ
 
 "Tablo dipnotları da eşiğin parçası" kuralı sabit tavanlar için ayrı

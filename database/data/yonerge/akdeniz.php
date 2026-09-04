@@ -16,6 +16,30 @@ return [
     | Kaynak: pdf/17536928172.akdenizuniversitesi.pdf · Cetvel: akdeniz-2026
     | GRUP 1: Sağlık, Ziraat, Mühendislik, Fen · GRUP 2: Sosyal, Eğitim, Spor,
     | Mimarlık · GRUP 3: Hukuk, İlahiyat, Güzel Sanatlar · GRUP 5: diğerleri
+    |
+    | GRUP 4 (DEVLET KONSERVATUVARI) GİRİLMEDİ — üst simge dipnotu taraması
+    | (04.09.2026) ortaya çıkardı. Kaynakta beş grup var; dördüncüsü "Klasik
+    | Batı Müziği / Türk Müziği Yorumculuk, Bestecilik, Orkestra Şefliği,
+    | Tiyatro, Bale ve Dans" alanları için ayrı bir tablo ve ayrı bir dipnot
+    | taşıyor: "Bu puanın en az yarısı 11.4 DİSİPLİNE ÖZGÜ ETKİNLİK VE
+    | FAALİYETLER'den karşılanmış olmalıdır." (GRUP 3'ün dipnotu ise
+    | "%40'ı 1. Bölüm: Bilimsel Makaleler'den" diyor ve aşağıda uygulanıyor.)
+    |
+    | İki sebeple girilmedi:
+    |   1. Cetvelde 11. bölümün HİÇ SATIRI YOK (o bölümün kalemleri kaynak
+    |      sözlüğünde karşılıksız). Koşulu literal yazmak, hiçbir faaliyetle
+    |      karşılanamayacak bir `min_oran` üretirdi — KONVANSIYONLAR
+    |      "Sağlanamaz eşik yazma" kuralının yasakladığı şey.
+    |   2. Ayrım temel alana değil BİRİME bağlı (konservatuvar ↔ güzel
+    |      sanatlar fakültesi). Ayrı bir `birim` kaydı açmak, `bul()` aynı
+    |      (üniversite, kadro, alan) için iki aday bulunca birim boşsa null
+    |      döndürdüğü için güzel sanatlar alanını tamamen kapsam dışı
+    |      bırakırdı.
+    |
+    | SONUÇ: konservatuvar adayı şu an GRUP 3'ün ölçütleriyle değerlendiriliyor
+    | (aynı puan barajları, ama "toplamın %40'ı bilimsel makaleden" koşuluyla).
+    | Kaynağın konservatuvara koyduğu koşul bu değil; disipline özgü
+    | etkinlikleri olan bir aday kendini olduğundan ZOR durumda görür.
     | (Akdeniz'de Filoloji). Tüm kadrolarda YDS en az 70.
     */
 
