@@ -747,6 +747,20 @@ satır girilmez. Usul koşulları (ders bilgi paketi tamamlanmışlığı gibi,
 Akdeniz dipnot 3) bu sınıfa girmez — başvuru öncesi herkesin tamamlaması
 beklenen adımlardır, kimin hak ettiğini ayırmazlar.
 
+**BÖLÜM BAŞLIĞINDAKİ PARANTEZ DE BİR UYGUNLUK KOŞULUDUR.** OMÜ'nün 15.
+bölümü "GÖRSEL ETKİNLİKLER (İletişim Fakültesi için geçerlidir)" diye
+başlıyor; parantez tabloların içinde değil BAŞLIĞINDA duruyor ve kolayca
+atlanıyor. Aynı yönergenin B grubu barajı "1-15 kategorilerinden" dediği için
+hukuk, ilahiyat ve spor adayları da o puanı topluyordu. Bölüm başlıklarını
+tararken parantezleri ayrıca oku; "… için geçerlidir", "… fakültesi",
+"… bölümü", "yalnızca …" kalıpları bir BİRİM kısıtı işaret eder.
+
+Çözüm §"Alan başına ayrı tablo" başlığındaki varyantlama: bölümü, o fakülteyi
+içeren temel alanın varyantına koy, ötekilerde satırlarını hiç yazma. Grup
+DESENİNİ de düşürmeyi unutma — satırı olmayan `15.*` deseni ölü desendir ve
+`CetvelKaynakTest` onu yakalar. Grubun ADI korunur (koşul metni onu anıyor),
+yalnız içeriği daralır.
+
 **Aynı tuzağın tersi: DAR koşullu yeni satır GENİŞ eski satırı bastırır.**
 Akdeniz 9.9/9.10 "YABANCI UYRUKLU öğrenci" tez danışmanlığına 25/15 veriyor;
 cetvelde 5.1/5.3 zaten 15/7 puanla duruyor. Yeni satırlar yazılsaydı etiket

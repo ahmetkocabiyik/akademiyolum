@@ -242,8 +242,25 @@
  * Kesirli tavanlar AŞAĞI yuvarlandı (C doçentlikte %45 × 150 = 67,5 → 67):
  * tavanı düşük tutmak eksik saydırır, §0'ın istediği yön.
  */
-$govde = function (int $bildiri, int $ulusalKitap, int $egitim): array {
-    return [
+/*
+ * 15. BÖLÜM YALNIZCA İLETİŞİM FAKÜLTESİNE AİT (04.09.2026'da düzeltildi).
+ *
+ * Kaynağın bölüm başlığı birebir şöyle: "15. GÖRSEL ETKİNLİKLER (İletişim
+ * Fakültesi için geçerlidir)". Kısıt faaliyetin bir NİTELİĞİ değil, ADAYIN
+ * BİRİMİNİN durumu; hiçbir sözlük etiketi taşıyamıyor. Buna karşılık B
+ * grubunun barajı "1-15 kategorilerinden", C grubununki "1-16
+ * kategorilerinden" diyor — yani hukuk, ilahiyat, spor ve güzel sanatlar
+ * adayları da kaynağın onlara vermediği görsel etkinlik puanını topluyordu
+ * (§0). A grubu zaten 1-14'te bittiği için etkilenmiyordu.
+ *
+ * Motorun ayırabildiği en ince eksen `alan` ve İletişim Fakültesi `sosyal`
+ * temel alanına düşüyor. Bölüm bu yüzden yalnız `sosyal` varyantında
+ * duruyor, öteki varyantlarda satırları hiç yazılmıyor. Kalan sızıntı
+ * `sosyal` alanının kendi genişliği (iktisat, psikoloji de orada) —
+ * Akdeniz'in 11. bölümünde kabul edilen ödünün aynısı.
+ */
+$govde = function (int $bildiri, int $ulusalKitap, int $egitim, bool $gorselEtkinlik): array {
+    $cetvel = [
         'kapsam_notu' => 'Puanlar Ondokuz Mayıs Üniversitesi Puan Cetvelinden (Mayıs 2025). '
             .'ÜÇ BÖLÜMÜN TAVANI VAR: bildiri, ulusal yayınevi kitabı ve eğitim-öğretim '
             .'bölümlerinden alınacak toplam puan, kadronuzun 1-10 kategorilerinden istediği asgari '
@@ -515,6 +532,21 @@ $govde = function (int $bildiri, int $ulusalKitap, int $egitim): array {
             '12' => $egitim,
         ],
     ];
+
+    if (! $gorselEtkinlik) {
+        $cetvel['maddeler'] = array_filter(
+            $cetvel['maddeler'],
+            fn (string $kod): bool => ! str_starts_with($kod, '15.'),
+            ARRAY_FILTER_USE_KEY,
+        );
+
+        // Desen de düşmeli: satırı olmayan `15.*` ölü desen olurdu ve
+        // `CetvelKaynakTest` onu yakalıyor. `1-15` adı yönergedeki koşulda
+        // geçtiği için grubun ADI korunuyor, yalnız içeriği daralıyor.
+        $cetvel['gruplar']['1-15'] = array_diff($cetvel['gruplar']['1-15'], ['15.*']);
+    }
+
+    return $cetvel;
 };
 
 /*
@@ -526,9 +558,14 @@ $TAVAN = [
     'a-dr' => [24, 24, 24],      // asgari 120 · %20 · %20 · %20
     'a-doc' => [72, 72, 72],     // asgari 360
     'a-prof' => [144, 144, 144], // asgari 720
+    // B temel alanları iki varyant: `b` yalnız `sosyal` (İletişim Fakültesi
+    // orada) ve 15. bölümü taşıyor, `bx` öteki beş alan ve taşımıyor.
     'b-dr' => [24, 36, 24],      // asgari 120 · %20 · %30 · %20
     'b-doc' => [66, 99, 66],     // asgari 330
     'b-prof' => [132, 198, 132], // asgari 660
+    'bx-dr' => [24, 36, 24],
+    'bx-doc' => [66, 99, 66],
+    'bx-prof' => [132, 198, 132],
     'c-dr' => [22, 30, 10],      // asgari  50 · %45 · %60 · %20 (22,5 → 22)
     'c-doc' => [67, 90, 30],     // asgari 150 (67,5 → 67)
     'c-prof' => [135, 180, 60],  // asgari 300
@@ -537,11 +574,12 @@ $TAVAN = [
 $cetveller = [];
 
 foreach ($TAVAN as $anahtar => [$bildiri, $ulusalKitap, $egitim]) {
-    $cetveller["omu-2025-{$anahtar}"] = $govde($bildiri, $ulusalKitap, $egitim);
+    // 15. bölüm yalnız `b` (sosyal) varyantlarında.
+    $cetveller["omu-2025-{$anahtar}"] = $govde($bildiri, $ulusalKitap, $egitim, str_starts_with($anahtar, 'b-'));
 }
 
 // Tavansız gövde: hiçbir eşik buna bağlı değil ama cetvel anahtarı
 // korpusta başka yerlerden anılabiliyor.
-$cetveller['omu-2025'] = $govde(24, 24, 24);
+$cetveller['omu-2025'] = $govde(24, 24, 24, true);
 
 return ['cetveller' => $cetveller];

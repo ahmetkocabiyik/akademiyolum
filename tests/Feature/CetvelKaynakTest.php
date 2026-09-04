@@ -770,15 +770,21 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
         'itu-2022: 32/44',
 
         // OMÜ Madde 11-13: A grubu 1-14, B grubu 1-15 kategorilerinden
-        // toplanıyor. 15. bölüm (görsel etkinlikler) A'da, 16. bölüm
-        // (sanatsal etkinlikler) hem A'da hem B'de barajın dışında; yalnız
-        // güzel sanatlar (C) 1-16'yı sayıyor ve orada dışarıda satır yok.
-        'omu-2025-a-doc: 21/101',
-        'omu-2025-a-dr: 21/101',
-        'omu-2025-a-prof: 21/101',
+        // toplanıyor; 16. bölüm (sanatsal etkinlik) ikisinde de barajın
+        // dışında, yalnız güzel sanatlar (C) 1-16'yı sayıyor ve orada
+        // dışarıda satır kalmıyor. 15. bölüm (görsel etkinlikler) kaynakta
+        // İletişim Fakültesine özgü olduğu için yalnız `b` (sosyal)
+        // varyantında var; `a`, `bx` ve `c` varyantlarında satırları hiç
+        // yazılmıyor, o yüzden onların toplamı 101 değil 97.
+        'omu-2025-a-doc: 17/97',
+        'omu-2025-a-dr: 17/97',
+        'omu-2025-a-prof: 17/97',
         'omu-2025-b-doc: 17/101',
         'omu-2025-b-dr: 17/101',
         'omu-2025-b-prof: 17/101',
+        'omu-2025-bx-doc: 17/97',
+        'omu-2025-bx-dr: 17/97',
+        'omu-2025-bx-prof: 17/97',
 
         // Bölüm toplamı "1.1; 1.2; 1.3; 1.4; 1.6" diye sınırlı; 1.5
         // (hakemlik) ve 1.7 (atıf) ayrı raporlanıyor.

@@ -5327,3 +5327,46 @@ test('Akdeniz 10. bölüm toplumsal destek projesi en düşük kademeden yazıld
 
     expect($katalog->puan($proje, $katalog->coz(['BOLUM_10_TOPLUMSAL'])))->toBe(20);
 });
+
+/**
+ * OMÜ 15. BÖLÜM İLETİŞİM FAKÜLTESİNE ÖZGÜ.
+ *
+ * Kaynağın bölüm başlığı "15. GÖRSEL ETKİNLİKLER (İletişim Fakültesi için
+ * geçerlidir)" diyor. Kısıt faaliyetin niteliği değil ADAYIN BİRİMİNİN
+ * durumu; hiçbir sözlük etiketi taşıyamıyor. B grubunun barajı ise "1-15
+ * kategorilerinden" olduğu için hukuk, ilahiyat, spor, eğitim ve filoloji
+ * adayları da bu puanı topluyordu.
+ */
+test('OMÜ görsel etkinlik puanı yalnız sosyal alanda sayılıyor', function () {
+    $depo = sartDepo();
+    $film = sartFaaliyet('Belgesel/Kısa Film (Uluslararası)', Kategori::SanatselEtkinlik, null);
+
+    $puan = function (string $alan) use ($depo, $film): int {
+        $esik = $depo->bul('Ondokuz Mayıs Üniversitesi', 'dr_ogr_uyesi', $alan);
+        $katalog = $depo->katalog($esik['cetvel'] ?? '');
+
+        return $katalog === null ? -1 : $katalog->puan($film, $katalog->coz(['*']));
+    };
+
+    // İletişim Fakültesi `sosyal` temel alanına düşüyor: 15.2-15.4 → 20 puan.
+    expect($puan('sosyal'))->toBe(20)
+        // Öteki B alanları 15. bölümü hiç taşımıyor.
+        ->and($puan('hukuk'))->toBe(0)
+        ->and($puan('ilahiyat'))->toBe(0)
+        ->and($puan('spor'))->toBe(0)
+        ->and($puan('egitim'))->toBe(0)
+        ->and($puan('filoloji'))->toBe(0)
+        // A grubunda bölüm zaten barajın (1-14) dışındaydı, artık satırı da yok.
+        ->and($puan('fen'))->toBe(0)
+        // C grubunun barajı 1-16 diyor ama 15. bölüm ona da ait değil.
+        ->and($puan('guzel_sanatlar'))->toBe(0);
+});
+
+test('OMÜ B grubunun iki kaydı da aynı ölçütü uyguluyor', function () {
+    $depo = sartDepo();
+
+    $sart = fn (string $alan): array => $depo->bul('Ondokuz Mayıs Üniversitesi', 'dr_ogr_uyesi', $alan)['sart'];
+
+    // Ayrım yalnız cetvelde; şart ağaçları birebir aynı olmalı.
+    expect($sart('hukuk'))->toBe($sart('sosyal'));
+});

@@ -164,7 +164,31 @@ return [
             .'yazar olduğunuz 3 makale', ['1.1'], 3, 'baslica', Kalip::DOCENTLIK_SONRASI, madde: 'Madde 13/2-a')]),
 
     // ══════════ B TEMEL ALANLARI ══════════
-    ...$grup('b', 'B', ['egitim', 'filoloji', 'hukuk', 'ilahiyat', 'sosyal', 'spor'], '1-15',
+    //
+    // İKİ KAYIT, TEK ÖLÇÜT. B'nin barajı "1-15 kategorilerinden" diyor ama
+    // 15. bölümün başlığı "(İletişim Fakültesi için geçerlidir)" kısıtını
+    // taşıyor. Kısıt adayın BİRİMİNE ait, hiçbir etiket taşıyamıyor; bu
+    // yüzden ayrım cetvel varyantıyla kuruldu: `sosyal` (İletişim Fakültesi
+    // orada) `omu-2025-b-*`, öteki beş alan 15. bölümü hiç taşımayan
+    // `omu-2025-bx-*`. Şart ağaçları birebir aynı.
+    ...$grup('b', 'B', ['sosyal'], '1-15',
+        [120, 200, 0], [330, 500, 0], [660, 330, 1000, 0],
+        [Kalip::veya('Makale koşulu (seçeneklerden biri)', [
+            Kalip::adet('SCI, SCIE, SSCI veya AHCI dergisinde başlıca yazar olduğunuz en az 1 makale',
+                ['1.1'], 1, 'baslica', madde: 'Madde 11/3-a'),
+            Kalip::adet('Ya da ESCI/Scopus dergilerinde en az birinde başlıca yazar olduğunuz 2 makale',
+                ['2.1'], 2, 'baslica', madde: 'Madde 11/3-a'),
+            Kalip::adet('Ya da (hukuk, filoloji ve ilahiyat için) TR Dizin dergilerinde en az ikisinde '
+                .'başlıca yazar olduğunuz makaleler', ['3.1'], 2, 'baslica', madde: 'Madde 11/3-a'),
+        ])],
+        [Kalip::veya('Makale koşulu (seçeneklerden biri)', [
+            Kalip::adet('Doçentlik sonrası SCI, SCIE, SSCI veya AHCI dergisinde başlıca yazar olduğunuz en az 1 makale',
+                ['1.1'], 1, 'baslica', Kalip::DOCENTLIK_SONRASI, madde: 'Madde 13/3-a'),
+            Kalip::adet('Ya da doçentlik sonrası ESCI/Scopus dergilerinde en az ikisinde başlıca yazar '
+                .'olduğunuz makaleler', ['2.1'], 2, 'baslica', Kalip::DOCENTLIK_SONRASI, madde: 'Madde 13/3-a'),
+        ])]),
+
+    ...$grup('bx', 'B', ['egitim', 'filoloji', 'hukuk', 'ilahiyat', 'spor'], '1-15',
         [120, 200, 0], [330, 500, 0], [660, 330, 1000, 0],
         [Kalip::veya('Makale koşulu (seçeneklerden biri)', [
             Kalip::adet('SCI, SCIE, SSCI veya AHCI dergisinde başlıca yazar olduğunuz en az 1 makale',
