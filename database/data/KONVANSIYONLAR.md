@@ -651,6 +651,33 @@ olanı gir" kuralı, yüksek satırı da yazıp düşüğüne güvenmekle sağla
 yüksek satır varsa o kazanır. Düşük değeri geçerli kılmanın tek yolu YÜKSEK
 SATIRI HİÇ YAZMAMAK ya da etiketi ondan çıkarmaktır.
 
+### KADEME Mİ UYGUNLUK MU? "EN DÜŞÜĞÜNÜ YAZ" YALNIZ KADEMEDE İŞLER
+
+§0'ın kısayolu şudur: etiket kaynağın kademesini taşımıyorsa en düşük
+kademeyi yaz. Kısayol **satırlar arasındaki fark bir DERECE farkıysa**
+geçerli — uluslararası/ulusal, Q1/Q4, yürütücü/araştırmacı. Fark KİMİN HAK
+ETTİĞİ ise işlemez, çünkü en düşük değer de hak etmeyene veriliyor.
+
+Akdeniz 8.1 böyle: "kadrosunun olduğu birimin AKREDİTE OLMUŞ programlarında
+eğitim-öğretim faaliyetinde bulunmak", 5 puan × AKTS, bölüm tavanı 100. Kayıt
+programın akredite olup olmadığını taşımıyor. Ders etiketlerine bağlansaydı
+ders veren HER aday puan alırdı; 5'i 1'e indirmek de bunu düzeltmezdi.
+**Uygunluk koşulu taşınamıyorsa satır YAZILMAZ** ve sebebi cetvele yazılır.
+
+Ayrımı yapmak için sor: satırın koşulu **faaliyetin bir NİTELİĞİ mi**
+(nerede yayımlandı, hangi rolle) yoksa **adayın/biriminin bir DURUMU mu**
+(programı akredite mi, öğrencisi yabancı uyruklu mu)? İkincisi kayıtta yoksa
+satır girilmez. Usul koşulları (ders bilgi paketi tamamlanmışlığı gibi,
+Akdeniz dipnot 3) bu sınıfa girmez — başvuru öncesi herkesin tamamlaması
+beklenen adımlardır, kimin hak ettiğini ayırmazlar.
+
+**Aynı tuzağın tersi: DAR koşullu yeni satır GENİŞ eski satırı bastırır.**
+Akdeniz 9.9/9.10 "YABANCI UYRUKLU öğrenci" tez danışmanlığına 25/15 veriyor;
+cetvelde 5.1/5.3 zaten 15/7 puanla duruyor. Yeni satırlar yazılsaydı etiket
+uyruğu taşımadığı için `puan()` en yükseği alır ve HER tez danışmanlığı
+yükselirdi. Yeni satır eklerken hep sor: bu satır, koşulunu taşıyamadığı
+hâlde eskisini bastırıyor mu?
+
 ### İKİ YOLLU DİPNOTTA KOLLARIN DÜŞÜĞÜNÜ YAZ
 
 Dipnotlar sık sık "şu şartı sağlayamayan aday şunu yapar" biçiminde bir
@@ -684,7 +711,20 @@ genel karşılığı "Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)" %61'inde alıy
 Çözüm cetvelleri tek tek düzenlemek değil, motorda EŞDEĞER TABLOSU:
 `MaddeKatalogu::SANAT_KARSILIKLARI` dar etiketi genel atasına bağlıyor ve
 doğrudan eşleşme bulunamadığında devreye giriyor. Yeni etiket eklerken
-atasını da bu tabloya yaz.
+atasını da bu tabloya yaz. Tablo kategori başına ayrı:
+`EGITIM_KARSILIKLARI` 04.09.2026'da `Akreditasyon Kurulu Görevi` için açıldı.
+
+**Etiketi ne zaman BÖLMEK gerekir:** aynı etiket altında toplanan kalemler
+arasında derece farkından fazlası varsa ve §0 kısayolu ağır kalemi yok
+ediyorsa. Akdeniz 8.2 (YÖKAK akreditasyon KURULUNDA görev, 30 × yıl) ile
+8.5/8.6 (eğitici eğitimi ve ölçme değerlendirme BELGESİ, 10 ve 5) tek
+`Akreditasyon Faaliyeti` etiketindeydi; en düşüğü yazmak 8.2'yi tamamen
+düşürürdü. Bölmenin maliyeti bir etiket ve bir eşdeğer satırı, kazancı
+korpusun tamamında bozulma OLMAMASI.
+
+**Eşdeğer tablosu `topla()` yolunda aranıyor, `puan()` yolunda değil.**
+Testi buna göre yaz: dar etiketin eski cetvelde puan aldığını `topla()` ile
+doğrula, `puan()` sıfır döndürür.
 
 **Her dar etiketin atası YOKTUR.** Sergi küratörlüğü ve festival
 koordinatörlüğü tabloya alınmadı: sergi DÜZENLEMEK, karma sergiye eserle

@@ -5232,3 +5232,98 @@ test('Akdeniz eşikleri temel alana göre kendi 11. bölüm cetvelini buluyor', 
         ->and($cetvel('hukuk'))->toBe('akdeniz-2026')
         ->and($cetvel('egitim'))->toBe('akdeniz-2026');
 });
+
+/**
+ * AKDENİZ 8-10. BÖLÜMLER.
+ *
+ * 8. bölümün tavanı ("Bu kategoriden en fazla 100 puan alınır") üst simgesi
+ * yalnız 8.1'de duruyor ama "kategori" bölümün kendisi; bölüm geneline
+ * yazmak aynı zamanda sıkı olan okuma.
+ */
+test('Akdeniz 8. bölüm tavanı 100 puanda kesiyor', function () {
+    $katalog = sartDepo()->katalog('akdeniz-2026');
+    expect($katalog)->not->toBeNull();
+
+    // 8.2 yıl başına 30 puan; beş yıllık görev ham 150 eder.
+    $gorev = array_fill(0, 5, sartFaaliyet(
+        'Akreditasyon Kurulu Görevi', Kategori::EgitimOgretim, null,
+    ));
+
+    expect($katalog->topla($gorev, $katalog->coz(['BOLUM_8_EGITIM'])))->toBe(100);
+});
+
+/**
+ * `Akreditasyon Kurulu Görevi` 04.09.2026'da sözlüğe eklendi.
+ *
+ * Akdeniz 8.2 (YÖKAK kurulunda görev, 30 x yıl) ile 8.5/8.6 (eğitici eğitimi
+ * ve ölçme değerlendirme BELGESİ, 10 ve 5) tek etikette toplansaydı §0
+ * uyarınca en düşük kademe yazılmak zorunda kalınır, 8.2 yok olurdu.
+ */
+test('akreditasyon kurulu görevi dar etiketi eski cetvellerde de puan alıyor', function () {
+    $depo = sartDepo();
+    $kurul = sartFaaliyet('Akreditasyon Kurulu Görevi', Kategori::EgitimOgretim, null);
+    $belge = sartFaaliyet('Akreditasyon Faaliyeti', Kategori::EgitimOgretim, null);
+
+    $akdeniz = $depo->katalog('akdeniz-2026');
+    expect($akdeniz)->not->toBeNull();
+
+    expect($akdeniz->puan($kurul, $akdeniz->coz(['BOLUM_8_EGITIM'])))->toBe(30)
+        ->and($akdeniz->puan($belge, $akdeniz->coz(['BOLUM_8_EGITIM'])))->toBe(5);
+
+    // Dar etiketi tanımayan cetvelde karşılık aranıyor: OMÜ 14.4 yalnız
+    // `Akreditasyon Faaliyeti` taşıyor ama kaydını daha doğru etiketleyen
+    // aday yine 6 puanını alıyor. (Karşılık `topla()` yolunda aranıyor;
+    // `puan()` yalnız doğrudan eşleşmeye bakar.)
+    $omu = $depo->katalog('omu-2025');
+    expect($omu)->not->toBeNull();
+    expect($omu->topla([$kurul], $omu->coz(['*'])))->toBe(6)
+        ->and($omu->topla([$belge], $omu->coz(['*'])))->toBe(6);
+});
+
+test('Akdeniz 9. bölüm ödülleri etiketin taşıyabildiği kademeden yazıldı', function () {
+    $depo = sartDepo();
+    $odul = fn (string $kaynak) => sartFaaliyet($kaynak, Kategori::Odul, null);
+
+    $akdeniz = $depo->katalog('akdeniz-2026');
+    expect($akdeniz)->not->toBeNull();
+    $hepsi = $akdeniz->coz(['*']);
+
+    // 9.1 TÜBA 1000 ile 9.2 TÜBİTAK 750 tek etiketi paylaşıyor → 750.
+    expect($akdeniz->puan($odul('TÜBİTAK / TÜBA Ödülü'), $hepsi))->toBe(750)
+        ->and($akdeniz->puan($odul('Uluslararası Bilim/Sanat Ödülü'), $hepsi))->toBe(500)
+        ->and($akdeniz->puan($odul('TÜBA GEBİP / TWAS Teşvik Ödülü'), $hepsi))->toBe(500);
+
+    // 9. bölüm dipnot 1: aynı ödül disipline özgü bölümde de varsa YÜKSEK
+    // olan geçerli. Mimarlık varyantındaki 11.2.3 (125) bu yüzden 9.3'ün
+    // altında kalıyor.
+    $mimarlik = $depo->katalog('akdeniz-2026-mimarlik-dr');
+    expect($mimarlik)->not->toBeNull();
+    expect($mimarlik->puan($odul('Uluslararası Bilim/Sanat Ödülü'), $mimarlik->coz(['*'])))->toBe(500);
+});
+
+/**
+ * 9.9/9.10 YABANCI UYRUKLU öğrenci tez danışmanlığına 25/15 veriyor; etiket
+ * öğrencinin uyruğunu taşımadığı için satırlar girilmedi. Girilselerdi 5.1 ve
+ * 5.3'ü bastırıp HER tez danışmanlığını yükseltirlerdi.
+ */
+test('Akdeniz tez danışmanlığı puanı 9. bölümle şişmiyor', function () {
+    $katalog = sartDepo()->katalog('akdeniz-2026');
+    expect($katalog)->not->toBeNull();
+    $hepsi = $katalog->coz(['*']);
+
+    $tez = fn (string $kaynak) => sartFaaliyet($kaynak, Kategori::TezDanismanligi, null);
+
+    expect($katalog->puan($tez('Doktora Tezi'), $hepsi))->toBe(15)
+        ->and($katalog->puan($tez('Yüksek Lisans Tezi'), $hepsi))->toBe(7);
+});
+
+test('Akdeniz 10. bölüm toplumsal destek projesi en düşük kademeden yazıldı', function () {
+    $katalog = sartDepo()->katalog('akdeniz-2026');
+    expect($katalog)->not->toBeNull();
+
+    // 10.1 (bütçeli, iki ay süreli) 100 · 10.2 (hedefi ve çıktıları olan) 20.
+    // Tek `Topluma Hizmet Projesi` etiketi bütçe/süre eşiğini ayıramıyor.
+    $proje = sartFaaliyet('Topluma Hizmet Projesi', Kategori::ToplumsalKatki, null);
+
+    expect($katalog->puan($proje, $katalog->coz(['BOLUM_10_TOPLUMSAL'])))->toBe(20);
+});

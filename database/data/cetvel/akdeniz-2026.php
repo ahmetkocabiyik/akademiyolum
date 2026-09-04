@@ -15,12 +15,12 @@
  * 3 numaralı dipnotu 11.4'e işaret ediyor ve o bölümün satırları cetvelde
  * yok — gerekçesi yonerge/akdeniz.php başlığında.
  *
- * DİPNOT TARAMASI (04.09.2026): kaynağın üç ÇARPAN dipnotu da girilmemiş
- * bölümlere ait, bu yüzden karşılıksız kalmaları doğru — 8. bölümde "puan
- * dersin AKTS'si ile çarpılır", 9. bölümde "öğrenci sayısı ile çarpılır" ve
- * "yurt dışında kalınan ay sayısı ile çarpılır". O bölümlerin satırları
- * cetvelde yok; girilecek olsalar motorun çarpan alanı olmadığı için
- * satırlar TEK BİRİM değeriyle yazılmak zorunda kalırdı.
+ * DİPNOT TARAMASI (04.09.2026): kaynağın üç ÇARPAN dipnotu — 8. bölümde
+ * "puan dersin AKTS'si ile çarpılır", 9. bölümde "öğrenci sayısı ile
+ * çarpılır" ve "yurt dışında kalınan ay sayısı ile çarpılır" — motorda
+ * karşılıksız. 8. bölüm girildiğinde satırlar bu yüzden TEK BİRİM değeriyle
+ * yazıldı (eksik sayma, §0 serbest); 9. bölümün iki çarpanlı satırı ise
+ * başka sebeple girilmedi (aşağıda).
  */
 
 /*
@@ -266,6 +266,109 @@ $ortak = [
         'baslik' => 'Lisansüstü tezden üretilmiş yayın',
         'kategori' => 'tez_yayini',
         'puan' => 15,
+    ],
+
+    /*
+     * 8. BÖLÜM: EĞİTİM-ÖĞRETİM VE AKREDİTASYON (04.09.2026'da girildi)
+     *
+     * 8.1 GİRİLMEDİ. Satır "kadrosunun olduğu birimin AKREDİTE OLMUŞ
+     * program(lar)ında eğitim-öğretim faaliyetinde bulunmak" diyor; kayıt
+     * programın akredite olup olmadığını taşımıyor. Ders etiketlerine
+     * bağlansaydı ders veren HER aday 5 puan (bölüm tavanına kadar 100)
+     * alırdı — kaynağın adayların çoğuna vermediği puan (§0). Ayrım satırın
+     * KADEMESİNDE değil UYGUNLUĞUNDA olduğu için "en düşüğünü yaz" kısayolu
+     * da işlemiyor. 8.3 ve 8.4 girildi: onların dipnotları (ders bilgi
+     * paketi/TYYÇ tamamlanmışlığı) başvuru öncesi tamamlanması beklenen
+     * usul koşulları, kimin hak ettiğini ayıran bir olgu değil.
+     *
+     * Dipnot 4 "bu maddeden alınan puan dersin AKTS'si ile çarpılır" diyor;
+     * motorun çarpan alanı olmadığı için satırlar TEK BİRİM değeriyle duruyor.
+     */
+    '8.2' => [
+        'baslik' => 'YÖKAK kurumsal/program akreditasyon kurul ve komisyonlarında görev (yıl başına)',
+        'kategori' => 'egitim_ogretim',
+        'kaynaklar' => ['Akreditasyon Kurulu Görevi'],
+        'puan' => 30,
+    ],
+    '8.3' => [
+        'baslik' => 'Yabancı dilde ders vermek',
+        'kategori' => 'egitim_ogretim',
+        'kaynaklar' => ['Yabancı Dilde Ders'],
+        'puan' => 5,
+    ],
+    '8.4' => [
+        'baslik' => 'Ortak diploma programında (lisans/lisansüstü) ders vermek',
+        'kategori' => 'egitim_ogretim',
+        'kaynaklar' => ['Değişim Programı Dersi'],
+        'puan' => 5,
+    ],
+    // 8.5 "Eğitici Eğitimi Belgesi" 10, 8.6 "Ölçme Değerlendirme Belgesi" 5.
+    // İkisi de `Akreditasyon Faaliyeti` etiketinin kapsamında; etiket belge
+    // türünü taşımadığı için en düşük kademe yazıldı (§0).
+    '8.6' => [
+        'baslik' => 'Eğitici eğitimi veya ölçme değerlendirme belgesine sahip olmak',
+        'kategori' => 'egitim_ogretim',
+        'kaynaklar' => ['Akreditasyon Faaliyeti'],
+        'puan' => 5,
+    ],
+
+    /*
+     * 9. BÖLÜM: ULUSLARARASILAŞMA FAALİYETLERİ VE ÖDÜLLER (04.09.2026)
+     *
+     * Girilmeyenler ve sebepleri:
+     *   9.5/9.6  uluslararası kongre başkanlığı (100) ve sekreterliği (20) —
+     *            sözlükte karşılığı yok.
+     *   9.7/9.8  KA2 projeleri (100/20) — kayıt AB fonlu proje olarak zaten
+     *            6.1 (200) ve 6.2 (50) satırlarına düşüyor, `puan()` en
+     *            yükseği aldığı için satır yazmak hiçbir şeyi değiştirmezdi.
+     *   9.9/9.10 YABANCI UYRUKLU öğrenci tez danışmanlığı (25/15) — etiket
+     *            öğrencinin uyruğunu taşımıyor. Yazılsaydı 5.1 (15) ve 5.3
+     *            (7) satırlarını bastırıp HER tez danışmanlığını yükseltirdi.
+     *   9.11     yurt dışında gözlem/araştırma (5 x ay) — karşılığı yok.
+     *
+     * Dipnot 1: "Disipline özgü etkinlik ve faaliyetler alanında aynı ödül
+     * alınmış ise YÜKSEK PUANI olan kategori dikkate alınır." Motor zaten
+     * öyle çalışıyor; 11.2.3'ün 125 puanlık satırı bu yüzden 9.3'ün altında
+     * kalıyor ve bu kaynağın istediği sonuç.
+     */
+    '9.2' => [
+        'baslik' => 'TÜBİTAK/TÜBA bilim, teşvik veya sanat ödülü',
+        'kategori' => 'odul',
+        // 9.1 (TÜBA, 1000) ile 9.2 (TÜBİTAK, 750) tek etiketi paylaşıyor.
+        'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü'],
+        'puan' => 750,
+    ],
+    '9.3' => [
+        'baslik' => 'Uluslararası bilim/sanat kurumlarınca verilen bilim, teşvik, hizmet veya araştırma ödülü',
+        'kategori' => 'odul',
+        'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü'],
+        'puan' => 500,
+    ],
+    '9.4' => [
+        'baslik' => 'GEBİP Ödülü',
+        'kategori' => 'odul',
+        'kaynaklar' => ['TÜBA GEBİP / TWAS Teşvik Ödülü'],
+        'puan' => 500,
+    ],
+
+    /*
+     * 10. BÖLÜM: TOPLUMSAL DESTEK FAALİYETLERİ/PROJELERİ (04.09.2026)
+     *
+     * 10.1 (bütçeli, en az iki ay süreli proje yürütmek) 100, 10.2 (hedefi ve
+     * çıktıları olan proje yürütmek) 20 — tek `Topluma Hizmet Projesi`
+     * etiketi ikisini de taşıyor ve bütçe/süre eşiğini ayıramıyor; en düşük
+     * kademe yazıldı (§0).
+     *
+     * 10.3 (SEM'de sertifikalı eğitim, 5, kendi tavanı 100) ve 10.4
+     * (üniversite-toplum/endüstri iş birliğinde görev almak, 5) girilmedi:
+     * ikisinin de sözlükte temiz karşılığı yok. 10.4'ü `Topluma Hizmet
+     * Projesi`ne bağlamak o etiketin kademesini 20'den 5'e düşürürdü.
+     */
+    '10.2' => [
+        'baslik' => 'Hedefi ve çıktıları olan toplumsal destek projesi yürütmek',
+        'kategori' => 'toplumsal_katki',
+        'kaynaklar' => ['Topluma Hizmet Projesi'],
+        'puan' => 20,
     ],
 ];
 
@@ -649,6 +752,9 @@ $govde = function (string $disiplin, int $onbirTavan) use ($ortak, $onbir): arra
         'BOLUM_5_TEZ' => ['5.*'],
         'BOLUM_6_PROJE' => ['6.*'],
         'BOLUM_7_BILDIRI' => ['7.*'],
+        'BOLUM_8_EGITIM' => ['8.*'],
+        'BOLUM_9_ULUSLARARASI' => ['9.*'],
+        'BOLUM_10_TOPLUMSAL' => ['10.*'],
         'YAYIN' => ['1.*', '2.*', 'T.1'],
 
         // 3. bölümün dipnot 1'i iki ayrı tavan koyuyor; alt tavan yalnız
@@ -661,10 +767,11 @@ $govde = function (string $disiplin, int $onbirTavan) use ($ortak, $onbir): arra
      * girilmemişti (dosyada `grup_tavanlari` anahtarı hiç yoktu); tavansız
      * bölüm doğrudan fazla saydırır (§0).
      *
-     * 8-10. bölümlerin tavanları (eğitim 100, toplumsal katkı 100) burada
-     * YOK, çünkü o bölümlerin maddeleri de cetvele girilmemiş. h-indeksi
-     * tavanı (200) da öyle: 3.5 maddesi girilmedi. Proje bütçesi ek puanının
-     * 150'lik tavanı ek puanın kendisi modellenmediği için uygulanmıyor.
+     * 9. ve 10. bölümlerin bölüm geneli tavanı YOK (kaynak koymuyor);
+     * 10.3'ün kendi 100'lük tavanı o satır girilmediği için karşılıksız.
+     * h-indeksi tavanı (200) da öyle: 3.5 maddesi girilmedi. Proje bütçesi
+     * ek puanının 150'lik tavanı ek puanın kendisi modellenmediği için
+     * uygulanmıyor.
      */
     $tavanlar = [
         // "3.2 ve 3.3 kategorilerinden en fazla 120 puan ve toplam atıf
@@ -680,6 +787,11 @@ $govde = function (string $disiplin, int $onbirTavan) use ($ortak, $onbir): arra
 
         // 7. bölüm dipnot 1: "bu kategorideki eserlerden en fazla 20 puan".
         'BOLUM_7_BILDIRI' => 20,
+
+        // 8. bölüm dipnot 1: "Bu kategoriden en fazla 100 puan alınır."
+        // Üst simge yalnız 8.1'de duruyor ama "kategori" bölümün kendisi;
+        // bölüm geneline yazmak aynı zamanda sıkı olan okuma (§0).
+        'BOLUM_8_EGITIM' => 100,
     ];
 
     if ($disiplin !== '') {

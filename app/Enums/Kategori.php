@@ -154,9 +154,16 @@ enum Kategori: string
                 'Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi', 'Yüksek Lisans Tezi',
                 'Tez İzleme / Jüri Üyeliği',
             ],
+            // `Akreditasyon Faaliyeti` bu kategorinin ders DIŞI etiketi:
+            // eğitici eğitimi belgesi, ölçme-değerlendirme belgesi, eğitim
+            // öğretim danışmanlığı. Akdeniz 8.2 bunlardan çok daha ağır bir
+            // kalemi (YÖKAK kurumsal akreditasyon KURULUNDA görev, 30 x yıl)
+            // aynı ailede sayıyor; tek etikete toplansaydı §0 uyarınca en
+            // düşük kademe (belge, 5 puan) yazılmak zorunda kalınırdı.
             self::EgitimOgretim => [
                 'Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders',
-                'Değişim Programı Dersi', 'Akreditasyon Faaliyeti',
+                'Değişim Programı Dersi', 'Akreditasyon Kurulu Görevi',
+                'Akreditasyon Faaliyeti',
             ],
             // Editörlükte ÇEYREKLİK ayrımı var: Afyon 7.1 aynı işi Q1'de 100,
             // Q4'te 60 puanlıyor. Tek "WoS / Scopus Dergi" etiketiyle bu

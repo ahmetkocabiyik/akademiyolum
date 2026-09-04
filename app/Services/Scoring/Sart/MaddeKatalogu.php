@@ -106,6 +106,21 @@ readonly class MaddeKatalogu
     ];
 
     /**
+     * Yeni ve DAR `egitim_ogretim` etiketlerinin eski GENEL karşılıkları.
+     *
+     * `Akreditasyon Kurulu Görevi`, korpusun 04.09.2026'ya kadar tek etikette
+     * topladığı iki ayrı kalemden ağır olanı (YÖKAK kurumsal akreditasyon
+     * kurulunda görev) için açıldı. Korpustaki cetvellerin tamamı hâlâ genel
+     * `Akreditasyon Faaliyeti` satırını taşıyor; karşılık aranmazsa kaydını
+     * DAHA DOĞRU etiketleyen aday sıfır alırdı.
+     *
+     * @var array<string, list<array{0: Kategori, 1: string}>>
+     */
+    private const EGITIM_KARSILIKLARI = [
+        'Akreditasyon Kurulu Görevi' => [[Kategori::EgitimOgretim, 'Akreditasyon Faaliyeti']],
+    ];
+
+    /**
      * @param  array<string, Madde>  $maddeler  Kod → madde tanımı (sıralı)
      * @param  array<string, list<string>>  $gruplar  Takma ad → kod deseni listesi
      * @param  array<string, int>  $grupTavanlari  Grup adı → o gruptan alınabilecek azami puan
@@ -530,6 +545,8 @@ readonly class MaddeKatalogu
             // gerekmiyor: genel satır zaten yönergenin o kalem için yazdığı
             // satırdır.
             $faaliyet->kategori === Kategori::SanatselEtkinlik => self::SANAT_KARSILIKLARI[$faaliyet->kaynak] ?? [],
+            // Akreditasyon etiketleri de aynı kategori içinde daraldı.
+            $faaliyet->kategori === Kategori::EgitimOgretim => self::EGITIM_KARSILIKLARI[$faaliyet->kaynak] ?? [],
             default => [],
         };
 

@@ -175,20 +175,24 @@ test('cetvel tür ve rol değerleri sözlükte var', function () {
  * bakmadan faaliyet saydığı için akreditasyon kaydı olan aday "bir dönem
  * ders vermiş olmak" koşulunu sağlamış görünüyordu.
  *
- * Kural: bir satır ders etiketlerinden birini taşıyorsa `Akreditasyon
- * Faaliyeti` ile aynı listede olamaz. Kaynak akreditasyonu puanlıyorsa
+ * Kural: bir satır ders etiketlerinden birini taşıyorsa akreditasyon
+ * etiketleriyle aynı listede olamaz. Kaynak akreditasyonu puanlıyorsa
  * KENDİ SATIRI açılır (14 cetvelde öyle duruyor).
+ *
+ * 04.09.2026'da eklenen dar etiket `Akreditasyon Kurulu Görevi` de aynı
+ * kurala tabi: o da bir ders değil, kurulda görev.
  */
 test('akreditasyon etiketi ders satırlarında değil', function () {
     $depo = app(SartDeposu::class);
     $ders = ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'];
+    $akreditasyon = ['Akreditasyon Faaliyeti', 'Akreditasyon Kurulu Görevi'];
     $sizinti = [];
 
     foreach ($depo->cetveller() as $ad => $katalog) {
         foreach ($katalog->maddeler as $kod => $madde) {
             $kaynaklar = $madde['kaynaklar'] ?? [];
 
-            if (! in_array('Akreditasyon Faaliyeti', $kaynaklar, true)) {
+            if (array_intersect($akreditasyon, $kaynaklar) === []) {
                 continue;
             }
 
