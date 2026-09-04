@@ -665,18 +665,30 @@ hak ettiği puanı sessizce yutar — bu yüzden liste teste bağlandı.
 | B | tavanı 0 olan grubun içindekiler | 15 (cetvel, grup) çifti — hepsi kasıtlı |
 | C | hiçbir eşiğin şart ağacında geçmeyen | 33 cetvelde 756 satır — hepsi tasarım |
 
-**C sınıfı teste bağlanmadı, çünkü kural değil cetvelin şekli.** Dokuz
-cetvelin eşiklerinde PUAN DÜĞÜMÜ HİÇ YOK (barajlar `adet` üzerinden: MEF,
-Manisa CBÜ, Bartın, Kadir Has, Sakarya UBÜ, Van YYÜ, Yeditepe, Adıyaman'ın
-doçentliği). Kalanlarda baraj kaynağın KENDİ bölüm kümesine bağlı: OMÜ'de A
-grubu `1-14`, B grubu `1-15`, yalnız güzel sanatlar `1-16`; İTÜ'de her şey
-`ESER-PUANI`; Giresun'da `A-L` (M ödülleri ve N patentleri dışarıda);
-Rumeli'de 1.5 hakemlik ve 1.7 atıf hariç. Bir satırın hiçbir barajı
-beslememesi tek başına hata değil — ama `Kalip::toplam()` varsayılanı `['*']`
-olduğu için toplam barajı OLAN cetvellerde böyle bir satır zaten çıkmıyor.
+**C sınıfı da teste bağlandı, ama İKİ AYRI LİSTEYLE** — çünkü iki ayrı sebep
+var. BARAJSIZ CETVEL: eşiklerinde hiç `puan` düğümü yok, barajlar `adet` ve
+`metrik` üzerinden kurulu (MEF, Manisa CBÜ, Bartın, Kadir Has, Sakarya UBÜ,
+Van YYÜ, Yeditepe, Adıyaman'ın doçentliği, İKÇÜ'nün doçentliği); o cetvelin
+bütün satırları tanımı gereği dışarıda, sayı vermek anlamsız — yalnız ADLARI
+listelenir. BARAJ VAR AMA SATIR DIŞARIDA: `cetvel: dışarıda/toplam` sayısı
+yazılır ve baraj kaynağın KENDİ bölüm kümesine bağlıdır — OMÜ'de A grubu
+`1-14`, B grubu `1-15`, yalnız güzel sanatlar `1-16`; İTÜ'de her şey
+`ESER-PUANI`; Giresun'da `A-L`; İKÇÜ'de "1., 2., 3., 4. ve 7. maddeler";
+Yalova'da `1-2-3-4-5-8`; Rumeli'de 1.5 ve 1.7 hariç.
 
-`CetvelKaynakTest` A ve B listelerini tutuyor; yeni bir ölü satır eklenince
-test kırılıyor (enjeksiyonla doğrulandı).
+Sayıyı kırdıran iki değişiklik türü var, ikisi de gözden geçirilmeli: bir
+grup deseni daraltılmış (satırlar sessizce barajın dışına düşer) ya da yeni
+bir bölüm girilip hiçbir gruba eklenmemiş. İkincisi bu kampanyanın en olası
+hatası — bölüm girilir, `gruplar` güncellenmez, satır kimseye görünmeden
+kapsam dışı kalır.
+
+**Satır listesi yerine SAYI yaz.** Önek sıkıştırması denendi ve işe yaramadı:
+bölümlü kod uzaylarında (OMÜ `15.`, `16.`) güzel çalışıyor ama düz kod
+uzaylarında (Manisa CBÜ, Yalova, MEF) 363 satıra çıkıyor. Sayı hem kısa hem
+de her değişikliği yakalıyor; kırıldığında tarayıcıyı tekrar çalıştırıp hangi
+satırın çıktığına bakılır.
+
+`CetvelKaynakTest` üç listeyi de tutuyor; üçü de enjeksiyonla doğrulandı.
 
 ### İKİ SATIR AYNI ETİKETE DÜŞÜYORSA YÜKSEK OLANI YAZMA — SİL
 

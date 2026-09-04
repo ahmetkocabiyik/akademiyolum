@@ -626,3 +626,169 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
         'sbu-2025-dr: D',
     ]);
 });
+
+/**
+ * C SINIFI: HİÇBİR BARAJIN SAYMADIĞI SATIRLAR.
+ *
+ * Bir madde ölmenin üçüncü biçimi, kayda uymamak değil KOŞULA GİRMEMEKTİR:
+ * cetvelde durur, faaliyet listesinde puanı da görünür, ama hiçbir eşiğin
+ * şart ağacı onu içeren bir grup anmaz. Aday o kalemi girer, sonuç değişmez.
+ *
+ * Bu çoğu zaman kaynağın kendi tercihidir — baraj "1-14 kategorilerinden"
+ * ya da "A-L bölümlerinden" der ve kalan bölümler barajın dışındadır. Ama
+ * SESSİZ bir hata biçimi de aynı desene düşüyor: grup deseni eksik yazılınca
+ * ya da yeni bir bölüm girilip gruba eklenmeyince satır kimseye görünmeden
+ * kapsam dışı kalır. İkisini ayıran şey listenin kendisi; bu yüzden liste
+ * teste bağlandı.
+ *
+ * İki ayrı liste var, çünkü iki ayrı sebep var:
+ *   BARAJSIZ CETVEL — eşiklerinde HİÇ `puan` düğümü yok, barajlar `adet` ve
+ *       `metrik` üzerinden kurulu. O cetvelin bütün satırları tanımı gereği
+ *       dışarıda; sayı vermek anlamsız.
+ *   BARAJ VAR, SATIR DIŞARIDA — sayı veriliyor. Değişince kaynağa dönüp
+ *       hangi bölümün barajın dışında olduğunu doğrula.
+ *
+ * Tarama 04.09.2026'da yapıldı; listedeki her satırın gerekçesi ya kaynak
+ * metinden ya da cetvelin kendi grup adından doğrulandı. Gruplar kaynağın
+ * ifadesini birebir taşıyor: OMÜ'de `1-14` ve `1-15`, İTÜ'de `ESER-PUANI`,
+ * Giresun'da `A-L`, İKÇÜ'de "1., 2., 3., 4. ve 7. maddeler", Yalova'da
+ * `1-2-3-4-5-8`, Rumeli'de 1.5 ve 1.7 hariç bölüm toplamı.
+ *
+ * Testi kırdıran iki değişiklik türü var ve ikisi de gözden geçirilmeli:
+ * bir grup deseni daraltılmış (satırlar sessizce barajın dışına düşer) ya da
+ * yeni bir bölüm girilip hiçbir gruba eklenmemiş. Enjeksiyonla doğrulandı:
+ * Rumeli'nin TOPLAM grubundan `8.*` desenini düşürmek testi kırıyor.
+ */
+test('hiçbir barajın saymadığı satırlar bilinçli', function () {
+    $depo = app(SartDeposu::class);
+    $cetveller = $depo->cetveller();
+
+    /** @var array<string, array{kodlar: array<string, true>, puanDugumu: bool}> $kapsam */
+    $kapsam = [];
+
+    $gez = function (array $dugum, $katalog, array &$kodlar, bool &$puanDugumu) use (&$gez): void {
+        if (($dugum['tip'] ?? null) === 'puan') {
+            $puanDugumu = true;
+        }
+
+        foreach (['maddeler', 'oran_payda'] as $alan) {
+            if (isset($dugum[$alan])) {
+                foreach ($katalog->coz($dugum[$alan]) as $kod) {
+                    $kodlar[$kod] = true;
+                }
+            }
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+            $gez($cocuk, $katalog, $kodlar, $puanDugumu);
+        }
+    };
+
+    foreach ($depo->esikler() as $esik) {
+        $katalog = $cetveller[$esik['cetvel']] ?? null;
+
+        if ($katalog === null) {
+            continue;
+        }
+
+        $kapsam[$esik['cetvel']] ??= ['kodlar' => [], 'puanDugumu' => false];
+        $gez($esik['sart'], $katalog, $kapsam[$esik['cetvel']]['kodlar'], $kapsam[$esik['cetvel']]['puanDugumu']);
+    }
+
+    $barajsiz = [];
+    $disarida = [];
+
+    foreach ($kapsam as $ad => $bilgi) {
+        $tumu = array_keys($cetveller[$ad]->maddeler);
+        $disi = array_values(array_filter($tumu, fn (string $kod): bool => ! isset($bilgi['kodlar'][$kod])));
+
+        if ($disi === []) {
+            continue;
+        }
+
+        if (! $bilgi['puanDugumu']) {
+            $barajsiz[] = $ad;
+
+            continue;
+        }
+
+        $disarida[] = "{$ad}: ".count($disi).'/'.count($tumu);
+    }
+
+    sort($barajsiz);
+    sort($disarida);
+
+    // Eşiklerinde hiç puan barajı olmayan cetveller: koşullar `adet` ve
+    // `metrik` üzerinden kurulu, dolayısıyla hiçbir satır barajı beslemiyor.
+    expect($barajsiz)->toBe([
+        'adiyaman-2024',            // doçentlik yalnız ÜAK unvanını istiyor
+        'bartin-2022',
+        'ikcu-2023-sosyal-docent',
+        'kadir-has-turler',
+        'manisa-cbu-2024',
+        'mef-2024-egitim-dr',
+        'mef-2024-hukuk-dr',
+        'mef-2024-mimarlik-dr',
+        'mef-2024-muhendislik-dr',
+        'mef-2024-sosyal-dr',
+        'sakarya-ubu-2024',
+        'vanyyu-2019',
+        'yeditepe-2024',
+    ]);
+
+    // Sayı DEĞİŞİRSE kaynağa dön: hangi bölümün barajın dışında olduğunu
+    // doğrula, sonra listeyi güncelle. Aşağıdakilerin hepsi 04.09.2026'da
+    // kaynağa karşı okundu.
+    expect($disarida)->toBe([
+        // "1. maddeden" barajları; 4-7. bölümler (ödül, idari görev, hizmet)
+        // hiçbir koşulun kümesinde değil.
+        'ankara-2023: 18/65',
+
+        // Yalnız EG5 (yarıyıl başına 1 puanlık ders) dışarıda; `PUAN` grubu
+        // ders satırlarını kapsamıyor.
+        'erzincan-2021: 1/113',
+
+        // Toplam baraj A-L; M (ödüller, idari görevler) ile N (patent)
+        // kaynağın kendi ifadesiyle barajın dışında.
+        'giresun-2019: 5/56',
+
+        // EK-A/3: "1., 2., 3., 4. ve 7. maddelerden en az 50 puan." Proje,
+        // tez danışmanlığı ve ders bölümleri barajın dışında; 40/80/120/160
+        // puanlık YENİDEN ATANMA merdiveni ise `aday_notu`'nda.
+        'ikcu-2023-sosyal-dr: 24/59',
+
+        'istanbul-aydin-2020: 17/54',
+
+        // İTÜ'nün BÜTÜN koşulları ESER-PUANI grubuna bağlı ve grubun içeriği
+        // birime göre değişiyor. Dosya başlığındaki "uygulanamayan sınırlar"
+        // notu da buna dayanıyor: idari görev tavanının yazılamaması barajı
+        // şişirmiyor, çünkü o satırlar zaten hiçbir koşulda yok.
+        'itu-2022-hs: 18/44',
+        'itu-2022-mf: 21/47',
+        'itu-2022-moda: 26/50',
+        'itu-2022-tmdk: 20/52',
+        'itu-2022: 32/44',
+
+        // OMÜ Madde 11-13: A grubu 1-14, B grubu 1-15 kategorilerinden
+        // toplanıyor. 15. bölüm (görsel etkinlikler) A'da, 16. bölüm
+        // (sanatsal etkinlikler) hem A'da hem B'de barajın dışında; yalnız
+        // güzel sanatlar (C) 1-16'yı sayıyor ve orada dışarıda satır yok.
+        'omu-2025-a-doc: 21/101',
+        'omu-2025-a-dr: 21/101',
+        'omu-2025-a-prof: 21/101',
+        'omu-2025-b-doc: 17/101',
+        'omu-2025-b-dr: 17/101',
+        'omu-2025-b-prof: 17/101',
+
+        // Bölüm toplamı "1.1; 1.2; 1.3; 1.4; 1.6" diye sınırlı; 1.5
+        // (hakemlik) ve 1.7 (atıf) ayrı raporlanıyor.
+        'rumeli-2024: 5/46',
+
+        // EK-3 YBF'nin tek puan koşulu danışmanlık ağırlıklarına bağlı.
+        'sabanci-turler: 13/21',
+
+        // Baraj "1, 2, 3, 4, 5 ve 8. maddeler" kümesine bağlı.
+        'yalova-2024-mimarlik-a50: 26/61',
+        'yalova-2024-sosyal-a50: 21/56',
+    ]);
+});
