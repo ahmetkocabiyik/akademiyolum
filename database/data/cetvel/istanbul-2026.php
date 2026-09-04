@@ -230,8 +230,17 @@ $maddeler = [
 
 // ── TABLO 4 (yalnızca Mimarlık Fakültesi) ───────────────────────────────────
 $tablo4 = [
-    'T4.1.a' => ['baslik' => 'Uluslararası meslek başarı ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü'], 'puan' => 100],
-    'T4.1.b' => ['baslik' => 'Ulusal meslek başarı ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü'], 'puan' => 50],
+    // MESLEK BAŞARI ÖDÜLÜ ≠ BİLİM/SANAT ÖDÜLÜ. İki satır da ilk girişte genel
+    // ödül etiketlerini taşıyordu; ortak tablonun 9.i satırı ("Diğer bilimsel
+    // ödül veya burs", 10 puan) aynı etiketleri taşıdığı için `puan()` en
+    // yükseği alıyor ve mimarlık adayının HERHANGİ bir uluslararası bilim
+    // ödülü 100 puan sayılıyordu. Etiket sözlükte "Bilim/Sanat" diyor, satır
+    // ise mesleki başarıyı; ayrım kayıtta yok, bu yüzden etiketler ortak
+    // tablonun düşük satırında bırakıldı (§0). Konservatuvar ekindeki
+    // T2.7.a/T2.7.e AYNI DURUMDA DEĞİL: onların başlığı da "sanat ödülü",
+    // yani etiketin birebir karşılığı; oradaki 50/40 doğru.
+    'T4.1.a' => ['baslik' => 'Uluslararası meslek başarı ödülü', 'kategori' => 'odul', 'kaynaklar' => [], 'puan' => 100],
+    'T4.1.b' => ['baslik' => 'Ulusal meslek başarı ödülü', 'kategori' => 'odul', 'kaynaklar' => [], 'puan' => 50],
     'T4.1.h' => ['baslik' => 'Yarışmada derece, mansiyon veya satın alma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 15],
     'T4.1.i' => ['baslik' => 'Yarışmada jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 10],
     'T4.2.c' => ['baslik' => 'Ulusal düzeyde proje, planlama veya tasarım sürecini yürütmek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif'], 'puan' => 20],

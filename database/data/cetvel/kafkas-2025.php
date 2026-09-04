@@ -353,7 +353,12 @@ $alanlar = [
         'ek' => [
             'YU-a' => ['baslik' => 'Meslek odaları, yerel yönetimler, bakanlıklar ya da uluslararası kuruluşların düzenlediği mimarlık, planlama veya tasarım yarışmasında derece ya da mansiyon', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon', 'Uluslararası Bilim/Sanat Ödülü', 'Ulusal Bilim/Sanat Ödülü'], 'puan' => 15],
             'YU-b' => ['baslik' => 'Ürettiğiniz bir uygulama projesi hakkında yayımlanmış makale, kitap bölümü ya da kitap', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif', 'Uygulama Projesi — Ekip', 'Uygulama Projesi — Ekip Yardımcısı', 'Uygulama Projesi — Danışman', 'Koruma-Onarım Uygulaması (Uluslararası)', 'Koruma-Onarım Uygulaması (Ulusal)'], 'puan' => 15],
-            'YU-c' => ['baslik' => 'Proje ve yapım yönetimi, tasarım ya da planlama alanlarında yazılım üreticisi veya patent sahibi olmak', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent', 'Ulusal Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Yazılım', 'Islahçı Hakkı / Çeşit Tescili', 'Ticarileştirme'], 'puan' => 15],
+            // YU-c'nin kapsamı YALNIZ patent ve yazılım: kaynak "yazılım üreticisi
+            // veya PATENT SAHİBİ olmak" diyor. İlk girişte bütün sınai hak
+            // etiketleri listeye kopyalanmıştı; 15 puanı PT-c'nin 10'undan yüksek
+            // olduğu için faydalı model, endüstriyel tasarım, ıslahçı hakkı ve
+            // ticarileştirme kayıtları kaynağın vermediği puanı alıyordu (§0).
+            'YU-c' => ['baslik' => 'Proje ve yapım yönetimi, tasarım ya da planlama alanlarında yazılım üreticisi veya patent sahibi olmak', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent', 'Ulusal Patent', 'Yazılım'], 'puan' => 15],
         ]],
     'muhendislik' => ['ad' => 'Mühendislik Temel Alanı', 'makale' => $makaleOrtak(5), 'p' => $ORTAK_P, 'ek' => $organizasyon],
     'saglik' => ['ad' => 'Sağlık Bilimleri Temel Alanı', 'makale' => $makaleOrtak(5), 'p' => $ORTAK_P, 'ek' => $organizasyon],

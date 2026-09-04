@@ -733,7 +733,18 @@ $onbir = [
     // Edebiyat ve İletişim fakültelerinin ikisi de kaynakta GRUP 2'de ve
     // ikisi de `sosyal` temel alanına düşüyor; İletişim Fakültesi 11.4
     // tablosunu Güzel Sanatlar ve Konservatuvarla paylaşıyor.
-    'sosyal' => [...$edebiyat, ...$guzelSanatlar],
+    //
+    // İki tablo tek varyantta birleşince ÜÇ ETİKET ÇAKIŞIYOR ve 11.3 tarafı
+    // yüksek kalıyor; `puan()` en yükseği aldığı için İletişim adayı kaynağın
+    // vermediği puanı alırdı. Çakışan iki satır bu varyanttan çıkarıldı (§0):
+    //   Belgesel/Kısa Film       11.3.13 50 ↔ 11.4.8 40 · 11.4.8u 20
+    //   Sergi Küratörlüğü (Ulusal) 11.3.7 30 ↔ 11.4.4u 25
+    // İkisi de `edebiyat` varyantında (filoloji) olduğu gibi duruyor; orada
+    // 11.4 tablosu yok, dolayısıyla çakışma da yok.
+    'sosyal' => [
+        ...array_diff_key($edebiyat, array_flip(['11.3.7', '11.3.13'])),
+        ...$guzelSanatlar,
+    ],
     'guzel-sanatlar' => $guzelSanatlar,
     'ilahiyat' => $ilahiyat,
 ];

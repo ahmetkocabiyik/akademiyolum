@@ -413,3 +413,127 @@ test('dosya başlıklarındaki kaynak PDF adları gerçekten var', function () {
 
     expect($eksik)->toBe([]);
 });
+
+/**
+ * AYNI CETVELDE AYNI ETİKETE DÜŞEN İKİ SATIRIN PUANI AYRIYSA BİLİNÇLİDİR.
+ *
+ * `MaddeKatalogu::puan()` eşleşen kodların EN YÜKSEĞİNİ alıyor. İki satır
+ * aynı (kategori, kaynak, rol, tür) imzasını paylaşıp farklı puan taşıyorsa
+ * düşük satır ÖLÜDÜR ve o etiketi taşıyan her kayıt yüksek satırın puanını
+ * alır. Yüksek satır, etiketin taşıyamadığı bir kısıt taşıyorsa (program
+ * kodu, ödülün türü, indeks listesi) bu doğrudan fazla saymadır (§0).
+ *
+ * 04.09.2026'da korpus taranıp altı cetvel düzeltildi:
+ *   yalova-2024      1c (alan indeksi 8) ↔ 1ç (diğer indeks 5) — dipnottaki
+ *                    ÜAK alan indeksi listesi kayıtta yok, etiket 1ç'de kaldı.
+ *   sakarya-2026     TÜBİTAK program kodları: 2.3 ailesi 2.4'ün 80/20
+ *                    kademesine indirildi (öbür fon aileleri zaten öyleydi).
+ *   kafkas-2025      YU-c "yazılım üreticisi veya patent sahibi" satırı bütün
+ *                    sınai hak etiketlerini taşıyordu; patent ve yazılıma
+ *                    daraltıldı.
+ *   istanbul-2026    "meslek başarı ödülü" satırları genel bilim/sanat ödülü
+ *                    etiketini taşıyordu.
+ *   pau-2023         torba `Diğer` etiketi iki satırdaydı.
+ *   akdeniz-2026     `sosyal` varyantı 11.3 ile 11.4'ü birleştirdiği için üç
+ *                    etiket çakışıyordu.
+ *
+ * Aşağıdaki liste ELDEN GEÇİRİLMİŞ çakışmalar: her birinde iki satır da
+ * adayın aynı kaydına meşru biçimde uyuyor ve kaynağın kendi kuralı da "en
+ * yükseği al" diyor. Isparta ÜBÜ'nün yirmi bir satırı özel bir durum: üç
+ * tablosu farklı aday gruplarına ait ve barajlar `T1`/`T2`/`T3` gruplarına
+ * bağlı, cetvelin tamamına değil.
+ */
+test('cetvel içi etiket çakışmaları elden geçirilmiş', function () {
+    $depo = app(SartDeposu::class);
+    $bulgu = [];
+
+    foreach ($depo->cetveller() as $ad => $katalog) {
+        $grup = [];
+
+        foreach ($katalog->maddeler as $kod => $madde) {
+            if (($madde['kaynaklar'] ?? []) === []) {
+                continue;
+            }
+
+            $imza = implode('|', [
+                $madde['kategori'] ?? '',
+                implode(',', $madde['roller'] ?? []),
+                implode(',', $madde['turler'] ?? []),
+            ]);
+
+            foreach ($madde['kaynaklar'] as $kaynak) {
+                $grup["{$imza}|{$kaynak}"][] = [(string) $kod, $madde['puan'] ?? 0];
+            }
+        }
+
+        foreach ($grup as $satirlar) {
+            if (count(array_unique(array_column($satirlar, 1))) < 2) {
+                continue;
+            }
+
+            usort($satirlar, fn (array $a, array $b): int => $b[1] <=> $a[1]);
+            $dusuk = end($satirlar);
+            $bulgu["{$ad}: {$satirlar[0][0]} > {$dusuk[0]}"] = true;
+        }
+    }
+
+    $bulunan = array_keys($bulgu);
+    sort($bulunan);
+
+    expect($bulunan)->toBe([
+        // Kaynağın 9. bölüm dipnotu: "Disipline özgü etkinlik ve faaliyetler
+        // alanında aynı ödül alınmış ise YÜKSEK PUANI olan kategori dikkate
+        // alınır." Motor zaten öyle davranıyor.
+        'akdeniz-2026-mimarlik-docent: 9.3 > 11.2.3',
+        'akdeniz-2026-mimarlik-dr: 9.3 > 11.2.3',
+        'akdeniz-2026-mimarlik-profesor: 9.3 > 11.2.3',
+
+        // Üç tablo, üç ayrı aday grubu; barajlar tablo gruplarına bağlı.
+        'isparta-ubu-2022: A4-bolum > T1-K5',
+        'isparta-ubu-2022: A4-kitap > T1-K3',
+        'isparta-ubu-2022: A4-tez > T1-TEZ-B1',
+        'isparta-ubu-2022: A5 > T1-B1',
+        'isparta-ubu-2022: A5 > T1-B2',
+        'isparta-ubu-2022: A5 > T1-B3',
+        'isparta-ubu-2022: A5 > T1-B4',
+        'isparta-ubu-2022: A5 > T1-B5',
+        'isparta-ubu-2022: T1-K1 > A4-kitap',
+        'isparta-ubu-2022: T1-K2 > A4-kitap',
+        'isparta-ubu-2022: T1-K8 > A4-ceviri-kitap',
+        'isparta-ubu-2022: T1-K9 > A4-ceviri-makale',
+        'isparta-ubu-2022: T1-TEZ-A1 > A4-tez',
+        'isparta-ubu-2022: T1-TEZ-A2 > A4-tez',
+        'isparta-ubu-2022: T1-TEZ-A4 > A4-tez',
+        'isparta-ubu-2022: T1-TEZ-A5 > A4-tez',
+        'isparta-ubu-2022: T1-TEZ-K1 > A4-tez',
+        'isparta-ubu-2022: T1-TEZ-K2 > A4-tez',
+        'isparta-ubu-2022: T1-TEZ-K4 > A4-tez',
+        'isparta-ubu-2022: T1-TEZ-K5 > A4-tez',
+        'isparta-ubu-2022: T3-TEZ > T2-DA5',
+
+        // Konservatuvar ekinin satırları etiketin birebir karşılığı
+        // ("uluslararası SANAT ödülü" ↔ `Uluslararası Bilim/Sanat Ödülü`,
+        // "yarışma ödülü" ↔ `Yarışma Derecesi / Mansiyon`); ortak tablonun
+        // 9.i torba satırı da aynı etiketleri taşıyor ve düşük kalıyor.
+        'istanbul-2026-konservatuvar: T2.7.a > 9.i',
+        'istanbul-2026-konservatuvar: T2.7.d > 9.i',
+        'istanbul-2026-konservatuvar: T2.7.e > 9.i',
+        'istanbul-2026-mimarlik: T4.1.h > 9.i',
+
+        // Mimarlık varyantında yarışma derecesi zaten mimarlık yarışmasıdır.
+        'izmir-kavram-2025-mim: 16a > 7c',
+
+        // Patent sahibi olan aday YU-c'yi de sağlıyor; kaynağın kendi kuralı
+        // en yükseği almak. `Yazılım` kaydı da hem YU-c hem PT-c'ye uyuyor.
+        'kafkas-2025-mimarlik: PT-a > YU-c',
+        'kafkas-2025-mimarlik: PT-b > YU-c',
+        'kafkas-2025-mimarlik: YU-c > PT-c',
+
+        // Yüksek satır DAHA GENEL olan: "alanıyla ilgili etkinliklerde jüri
+        // üyeliği" sanat yarışması jüriliğini de kapsıyor. Yüksek satırda
+        // etiketin taşıyamadığı bir kısıt yok, dolayısıyla fazla sayma yok.
+        'trakya-2025-ek6: 17m-n > 14ab-u',
+        'trakya-2025-ek6: 17o > 14ab-n',
+        'trakya-2025-ek7: 7f-sos > 17a2',
+    ]);
+});

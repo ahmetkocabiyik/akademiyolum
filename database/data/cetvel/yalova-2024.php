@@ -109,7 +109,15 @@ $maddeler = [
     // ══ 1. ULUSLARARASI MAKALE (lisansüstü tezlerden üretilmemiş) ══
     '1a' => ['baslik' => 'SCIE, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
     '1b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
-    '1c' => ['baslik' => 'Diğer uluslararası alan indekslerinde taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],
+    // 1c'nin yıldız dipnotu KAPALI BİR LİSTE: "Diğer Uluslararası Alan
+    // İndeksleri" başlığı altında AATA'dan Current Law Index'e uzanan ÜAK
+    // listesi. 1ç ise o listenin DIŞINDA kalan her indeks. Sözlükteki tek
+    // `Diğer Uluslararası İndeks` etiketi ikisini ayıramıyor; `puan()` en
+    // yükseği aldığı için etiket burada da dursaydı listede olmayan bir
+    // indeksteki makale 1c'nin puanını alırdı (§0). Etiket 1ç'de duruyor,
+    // 1c bilerek ölü. Aynı sebeple mimarlık doçentliğinin "1. madde (1ç
+    // hariç)" koşulu bu etiketle sağlanamıyor — eksik sayma, serbest.
+    '1c' => ['baslik' => 'Diğer uluslararası alan indekslerinde taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => [], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],
     '1ç' => ['baslik' => 'Diğer uluslararası indekslerde taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 5],
     '1d' => ['baslik' => 'Uluslararası dergide editöre mektup, araştırma notu, özet veya kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 3],
 

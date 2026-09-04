@@ -57,12 +57,29 @@ return [
         '2.2d' => ['baslik' => 'ERA-NET, Uluslararası İkili veya Çoklu İş Birlikleri, Birleşmiş', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 30],
         '2.2e' => ['baslik' => 'ERA-NET, Uluslararası İkili veya Çoklu İş Birlikleri, Birleşmiş', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 10],
         '2.2f' => ['baslik' => 'ERA-NET, Uluslararası İkili veya Çoklu İş Birlikleri, Birleşmiş', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 10],
-        '2.3a' => ['baslik' => 'TÜBİTAK (1001, 1003, 1005, 1505, 2232, 2236, 2244, 2247, 3005,', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['yurutucu'], 'puan' => 120],
-        '2.3b' => ['baslik' => 'TÜBİTAK (1001, 1003, 1005, 1505, 2232, 2236, 2244, 2247, 3005,', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 30],
-        '2.3c' => ['baslik' => 'TÜBİTAK (1001, 1003, 1005, 1505, 2232, 2236, 2244, 2247, 3005,', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 30],
-        '2.3d' => ['baslik' => 'TÜBA projesinde yürütücü olmak', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['yurutucu'], 'puan' => 120],
-        '2.3e' => ['baslik' => 'TÜBA projesinde araştırmacı olmak', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 30],
-        '2.3f' => ['baslik' => 'TÜBA projesinde danışman/bursiyer olmak', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 30],
+        /*
+         * TÜBİTAK ETİKETİ PROGRAM KODUNU TAŞIMIYOR — 2.4 KADEMESİNE İNDİRİLDİ.
+         *
+         * Kaynak TÜBİTAK desteklerini üç kademede puanlıyor: 2.3 (1001, 1003,
+         * 1005, 1505, 2232, 2236, 2244, 2247, 3005, 3501 + BOREN, SSB,
+         * TENMAK, TAGEM, TÜSEB B) yürütücü 240, 2.4a (1002, 3001 ve TÜSEB A)
+         * 80, 2.4d (YÖK DOSAP veya 2213, 2214, 2216, 2218, 2219, 2221) 80.
+         * Sözlükteki tek `TÜBİTAK` etiketi program kodunu taşımıyor.
+         *
+         * 2.3a ilk girişte 240 yerine 120 yazılmıştı (TÜBA'nın 2.3d satırına
+         * göre tabanlanmış) ama taban yeterince aşağı çekilmemişti: aynı
+         * etiket 2.4'te 80/20 puan alıyor ve `puan()` en yükseği aldığı için
+         * her TÜBİTAK yürütücüsü 120 alıyordu. Dosyanın öbür fon aileleri
+         * (AB, Diğer Uluslararası Fon, Diğer Kamu Kurumu) zaten tek kademeye
+         * indirilmişti; TÜBİTAK ailesi atlanmış. 04.09.2026'da 80/20'ye
+         * çekildi (§0).
+         */
+        '2.3a' => ['baslik' => 'TÜBİTAK (1001, 1003, 1005, 1505, 2232, 2236, 2244, 2247, 3005,', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['yurutucu'], 'puan' => 80],
+        '2.3b' => ['baslik' => 'TÜBİTAK (1001, 1003, 1005, 1505, 2232, 2236, 2244, 2247, 3005,', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
+        '2.3c' => ['baslik' => 'TÜBİTAK (1001, 1003, 1005, 1505, 2232, 2236, 2244, 2247, 3005,', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
+        '2.3d' => ['baslik' => 'TÜBA projesinde yürütücü olmak', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['yurutucu'], 'puan' => 80],
+        '2.3e' => ['baslik' => 'TÜBA projesinde araştırmacı olmak', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
+        '2.3f' => ['baslik' => 'TÜBA projesinde danışman/bursiyer olmak', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
         '2.4a' => ['baslik' => 'TÜBİTAK (1002, 3001) ve TÜSEB A destekli projede yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['yurutucu'], 'puan' => 80],
         '2.4b' => ['baslik' => 'TÜBİTAK (1002, 3001) ve TÜSEB A destekli projede araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
         '2.4c' => ['baslik' => 'TÜBİTAK (1002, 3001) ve TÜSEB A destekli projede', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],

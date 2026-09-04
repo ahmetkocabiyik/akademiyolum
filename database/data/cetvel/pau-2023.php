@@ -158,7 +158,12 @@ $maddeler = [
     'A.15c' => ['baslik' => 'Kayıt, yayın, atölye (workshop) ya da ustalık sınıfı (masterclass) etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $muzikKayit, 'puan' => 15],
 
     // ══ A.16 SPOR BİLİMLERİ UYGULAMA ══
-    'A.16a' => ['baslik' => 'Millî takımlarda görev almak ya da antrenör ve hakem eğitim kurslarında eğitici olarak görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 10],
+    // `Diğer` SAF BİR TORBA ETİKET: aday sınıflandıramadığı her kaydı ona
+    // yazıyor. Bu cetvelde iki satır onu taşıyordu (A.16a 10, D.6b 5) ve
+    // `puan()` en yükseği aldığı için sempozyum organizasyonunu "Diğer"
+    // olarak kaydeden aday da 10 alıyordu. Torba etiket, taşıyabileceği en
+    // düşük satırda kalmalı (§0); A.16a bilerek ölü.
+    'A.16a' => ['baslik' => 'Millî takımlarda görev almak ya da antrenör ve hakem eğitim kurslarında eğitici olarak görev almak', 'kategori' => 'diger', 'kaynaklar' => [], 'puan' => 10],
 
     // ══ B. KONGRELER ══
     'B.2' => ['baslik' => 'Kongre ve sempozyumlarda davetli konuşmacı ya da panelist olmak, kurs eğitmeni olarak katılmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 7],

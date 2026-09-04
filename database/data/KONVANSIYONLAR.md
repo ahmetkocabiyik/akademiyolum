@@ -651,6 +651,36 @@ olanı gir" kuralı, yüksek satırı da yazıp düşüğüne güvenmekle sağla
 yüksek satır varsa o kazanır. Düşük değeri geçerli kılmanın tek yolu YÜKSEK
 SATIRI HİÇ YAZMAMAK ya da etiketi ondan çıkarmaktır.
 
+**BU KURALI KORPUSA UYGULAYAN TARAMA (04.09.2026).** Her cetvelde aynı
+(kategori, kaynak, rol, tür) imzasını paylaşan ama puanı farklı satırları
+ara. Ucuz, tam ve kaynak metni okumadan çalışıyor; ilk turda 51 imza çıktı,
+altısı gerçek hataydı:
+
+| Cetvel | Çakışma | Etiketin taşıyamadığı ayrım |
+|---|---|---|
+| yalova-2024 | 1c 8 ↔ 1ç 5 | dipnottaki KAPALI ÜAK alan indeksi listesi |
+| sakarya-2026 | 2.3 ailesi 120/30 ↔ 2.4 80/20 | TÜBİTAK PROGRAM KODU |
+| kafkas-2025 | YU-c 15 ↔ PT-c 10 | satır bütün sınai hak etiketlerini kopyalamış |
+| istanbul-2026 | T4.1.a 100 ↔ 9.i 10 | "meslek başarı ödülü" ≠ bilim/sanat ödülü |
+| pau-2023 | A.16a 10 ↔ D.6b 5 | torba `Diğer` etiketi iki satırda |
+| akdeniz-2026 | 11.3.13 50 ↔ 11.4.8 40 | iki FAKÜLTE tablosu tek varyantta |
+
+Üç yanlış pozitif sınıfı:
+
+- **ÜÇ TABLO, ÜÇ ADAY GRUBU.** Isparta ÜBÜ'nün yirmi bir çakışmasının hepsi
+  böyle: barajlar `T1`/`T2`/`T3` gruplarına bağlı, cetvelin tamamına değil.
+  Motor her grubun İÇİNDEKİ en iyi kodu seçtiği için doğru çalışıyor.
+- **YÜKSEK SATIR DAHA GENEL OLAN.** Trakya ek6'da "alanıyla ilgili
+  etkinliklerde jüri üyeliği" (10) sanat yarışması jüriliğini (5) zaten
+  kapsıyor. Yüksekte etiketin taşıyamadığı bir kısıt yoksa fazla sayma yok.
+- **İKİSİ DE MEŞRU, KAYNAK ZATEN "EN YÜKSEĞİ AL" DİYOR.** Kafkas'ta patent
+  sahibi YU-c'yi de sağlıyor; Akdeniz'in 9. bölüm dipnotu bunu açıkça yazıyor.
+
+Ayrımı yapan soru hep aynı: **yüksek satır, etiketin TAŞIYAMADIĞI bir kısıt
+mı taşıyor?** Taşıyorsa etiketi ondan çıkar (satır ölür, kod grupta kalır);
+taşımıyorsa çakışma doğrudur. `CetvelKaynakTest` elden geçirilmiş listeyi
+tutuyor, yenisi eklenince test kırılıyor.
+
 ### KADEME Mİ UYGUNLUK MU? "EN DÜŞÜĞÜNÜ YAZ" YALNIZ KADEMEDE İŞLER
 
 §0'ın kısayolu şudur: etiket kaynağın kademesini taşımıyorsa en düşük
