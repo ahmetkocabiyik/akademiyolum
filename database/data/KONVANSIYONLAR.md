@@ -453,6 +453,29 @@ Yani bu tarayıcı ADAY LİSTESİ üretir, karar değil. Listedeki her satır
 kaynaktan okunarak doğrulanmalı — Adıyaman'ın gerçek hatası (ulusal bildiri
 20 puandaydı, kaynakta özet 15) ancak okuyunca çıktı.
 
+### "BU PUANIN EN AZ YARISI" = ASGARİ PUANIN YARISI, ADAYIN TOPLAMININ DEĞİL
+
+Eşik tablolarının en yaygın dipnotu şu: **"Bu puanın en az yarısı '1. Bölüm:
+Bilimsel Makaleler'den karşılanmış olmalıdır."** Üst simge "En az puan"
+SÜTUNUNA bağlı, dolayısıyla "bu puan" o sütundaki değerdir — yani ASGARİ
+PUAN. Adayın kendi toplamı değil.
+
+Akdeniz ilk girişte oransal düğümle (`min_oran`, payda `['*']`) yazılmıştı;
+bu, barajın çok üstünde puanı olan ama makale ağırlığı düşük adaya YANLIŞ
+"sağlanmadı" gösteriyordu. Dr. Öğr. Üyeliğinde asgari 100, dolayısıyla koşul
+"makaleden en az 50 puan" — 1000 puanı olan adaydan 500 istemek değil.
+04.09.2026'da on altı düğüm sabit `puanDan` tabanına çevrildi (50/150/250,
+Güzel Sanatlarda 40/120/200).
+
+Ayrım tek soruya iniyor: **üst simge SÜTUN BAŞLIĞINDA mı, yoksa cümle adayın
+sunduğu puandan mı söz ediyor?** Sütuna bağlıysa sabit taban yaz. Gerçekten
+adayın kendi toplamına bağlı örnekler de var (Trakya "puanınızın en az yarısı
+uluslararası faaliyetlerden"); orada `Kalip::oran` doğrudur.
+
+Yan etki: sabit taban, §"Yüzde tavanını ASGARİ PUANDAN SABİTE ÇEVİR"
+başlığındaki türetmeyi BOZMAZ — zincir `diğer bölümler ≥ makale ≥ oran ×
+asgari` olarak kısalır, alt sınır aynı kalır.
+
 ### DİPNOT NUMARASI TABLOYA YERELDİR — "DİPNOT 3" DİYE NOT ALMA
 
 Bir belgede aynı rakam birden çok şey anlatabilir: her tablo kendi dipnot
@@ -1365,6 +1388,21 @@ alıp iki kadroda iki farklı dönemle çağır; kapanışa dönem ADINI da geç
 aday metni "Doktora sonrası" derken motor doçentlik sonrasını filtreler.
 
 Dönem sabitleri: `DOKTORA_SONRASI`, `DOCENTLIK_SONRASI`, `SON_ATAMA_SONRASI`.
+
+### KAYNAK KENDİYLE ÇELİŞİYORSA ÖZEL KURAL GENELE ÜSTÜN
+
+Akdeniz'in 11. bölüm başlığı "bu bölümden alınan puan diğer bölümlerden
+alınan puanın %40'ını geçemez" diyor; GRUP 4 (Devlet Konservatuvarı)
+tablosunun dipnotu ise "bu puanın en az YARISI 11.4'ten karşılanmış
+olmalıdır". İkisi aynı anda sağlanamaz: %40 kuralı 11. bölümü toplamın en çok
+%28,6'sında tutar.
+
+Çözüm sırası: (1) çelişkiyi düzeltme, KAYDET; (2) eşiği sağlanamaz bırakma —
+aday "asla yeterli değilsiniz" cevabı alır ve bu fazla saymaktan da kötüdür;
+(3) ÖZEL kuralı genel kurala tercih et ve yalnız o varyantta uygula. Akdeniz'de
+konservatuvar varyantında 11. bölüm tavansız bırakıldı, öteki varyantlarda
+tavan yerinde; çelişki `aday_notu`'nda birebir aktarılıyor ve adaya
+"başvurmadan önce üniversiteye teyit ettirin" deniyor.
 
 ### Sağlanamaz eşik yazma: TAVANIN ÜSTÜNDEKİ BARAJ
 

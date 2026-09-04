@@ -813,7 +813,17 @@ $govde = function (string $disiplin, int $onbirTavan) use ($ortak, $onbir): arra
     if ($disiplin !== '') {
         $maddeler = [...$maddeler, ...$onbir[$disiplin]];
         $gruplar['BOLUM_11_DISIPLIN'] = ['11.*'];
-        $tavanlar['BOLUM_11_DISIPLIN'] = $onbirTavan;
+
+        // GRUP 4'ün (Devlet Konservatuvarı) barajı doğrudan 11.4'ü anıyor.
+        if ($disiplin === 'guzel-sanatlar') {
+            $gruplar['BOLUM_11_4'] = ['11.4.*'];
+        }
+
+        // Tavan 0 verilirse bölüm tavansız kalıyor; yalnız konservatuvar
+        // varyantı böyle (gerekçesi aşağıda).
+        if ($onbirTavan > 0) {
+            $tavanlar['BOLUM_11_DISIPLIN'] = $onbirTavan;
+        }
 
         if ($disiplin === 'ilahiyat') {
             // 11.6.1: "Bu etkinlikten en fazla 50 puan alınabilir."
@@ -835,12 +845,13 @@ $govde = function (string $disiplin, int $onbirTavan) use ($ortak, $onbir): arra
  *
  * Bölüm başlığı "Bu bölümden alınan puan diğer bölümlerden alınan puanın
  * %40'ını geçemez" diyor. Taban adayın KENDİ puanı olduğu için motorun sabit
- * `grup_tavanlari`'ına doğrudan yazılamaz. Ama her Akdeniz eşiği iki şeyi
- * birden şart koşuyor: toplam ≥ asgari puan VE makale ≥ oran × toplam
- * (Güzel Sanatlarda %40, diğerlerinde %50). Makale 11. bölümün dışında
- * olduğuna göre, eşiği sağlayan her adayda
+ * `grup_tavanlari`'ına doğrudan yazılamaz. Ama her Akdeniz eşiği makaleden
+ * SABİT bir taban istiyor: "En az puan" sütununun dipnotu "bu puanın en az
+ * yarısı 1. Bölüm'den" diyor ve "bu puan" sütundaki ASGARİ PUAN (Güzel
+ * Sanatlarda %40). Makale 11. bölümün dışında olduğuna göre, eşiği sağlayan
+ * her adayda
  *
- *     diğer bölümler ≥ makale ≥ oran × toplam ≥ oran × asgari puan
+ *     diğer bölümler ≥ makale ≥ oran × asgari puan
  *
  * ve dolayısıyla kaynağın izin verdiği tavan ≥ %40 × oran × asgari puan.
  * Bu ALT SINIR sabit; yazıldığında hiçbir adayda fazla saymaz, kaynağın daha
@@ -862,6 +873,26 @@ foreach (['spor', 'mimarlik', 'edebiyat', 'sosyal', 'ilahiyat'] as $disiplin) {
 
 foreach ($KADRO as $kadro => $asgari) {
     $cetveller["akdeniz-2026-guzel-sanatlar-{$kadro}"] = $govde('guzel-sanatlar', (int) (0.4 * 0.4 * $asgari));
+}
+
+/*
+ * KONSERVATUVAR VARYANTI: 11. BÖLÜM TAVANSIZ (04.09.2026).
+ *
+ * GRUP 4 (Devlet Konservatuvarı) tablosunun "En az puan" dipnotu şöyle: "Bu
+ * puanın en az yarısı 11.4 Disipline Özgü Etkinlik ve Faaliyetler'den
+ * karşılanmış olmalıdır." 11. bölüm başlığı ise "Bu bölümden alınan puan
+ * diğer bölümlerden alınan puanın %40'ını geçemez" diyor. İKİSİ AYNI ANDA
+ * SAĞLANAMAZ: %40 kuralı 11. bölümü toplamın en çok %28,6'sında tutar, GRUP
+ * 4 ise en az %50'sini ister.
+ *
+ * KAYNAKTAKİ ÇELİŞKİ DÜZELTİLMİYOR, KAYDEDİLİYOR — ama eşiği sağlanamaz
+ * bırakmak fazla saymaktan da kötü ("Sağlanamaz eşik yazma" istisnası). Bu
+ * varyantta ÖZEL kural (GRUP 4 dipnotu) genel kurala (bölüm başlığı) tercih
+ * edildi ve 11. bölüm tavansız bırakıldı; öteki varyantlarda tavan yerinde
+ * duruyor. Aday notunda çelişki birebir aktarılıyor.
+ */
+foreach ($KADRO as $kadro => $asgari) {
+    $cetveller["akdeniz-2026-konservatuvar-{$kadro}"] = $govde('guzel-sanatlar', 0);
 }
 
 return ['cetveller' => $cetveller];

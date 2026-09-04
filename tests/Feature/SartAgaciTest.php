@@ -211,11 +211,22 @@ test('bir eser puanını en yüksek maddeden alır, Faaliyet->puan alanına bak�
 // Eski şemanın taşıyamadığı koşullar
 // ─────────────────────────────────────────────────────────────────────────────
 
-test('oransal koşul: "puanın en az yarısı makalelerden" gerçekten hesaplanır', function () {
+/**
+ * "BU PUANIN EN AZ YARISI …" ASGARİ PUANIN YARISIDIR, TOPLAMIN DEĞİL.
+ *
+ * Akdeniz'in eşik tablolarında üst simge "En az puan" SÜTUNUNA bağlı ve
+ * dipnot "BU PUANIN en az yarısı 1. Bölüm'den karşılanmış olmalıdır" diyor.
+ * "Bu puan" sütundaki değer, yani asgari puan (Dr. 100 · Doçent 300 ·
+ * Profesör 500) — adayın kendi toplamı değil. İlk girişte oran adayın
+ * toplamına bağlanmıştı; bu, barajın çok üstünde puanı olan ama makale
+ * ağırlığı düşük adaya YANLIŞ "sağlanmadı" gösteriyordu.
+ */
+test('Akdeniz makale barajı asgari puanın yarısı, adayın toplamının değil', function () {
     $depo = sartDepo();
     $esik = $depo->bul('Akdeniz Üniversitesi', 'dr_ogr_uyesi', 'sosyal');
 
-    // Makale 15 (TR-Dizin), kitap 4 × 30 = 120 → toplam 135, yarısı 68 > 15.
+    // Makale 15 (TR Dizin) + 4 kitap × 30 = 135 toplam. Eski (oransal) okuma
+    // 68 puan makale isterdi; kaynağın istediği ise sabit 50.
     $sonuc = $depo->degerlendir($esik, [
         sartFaaliyet('TR Dizin'),
         sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap),
@@ -224,30 +235,55 @@ test('oransal koşul: "puanın en az yarısı makalelerden" gerçekten hesaplan�
         sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap),
     ], new Profil(yds: 70));
 
-    $oran = sartDugum($sonuc, 'en az yarısı bilimsel makalelerden');
+    $makale = sartDugum($sonuc, 'Bilimsel makalelerinizden en az 50 puan');
 
-    expect($oran->durum)->toBe(Durum::Saglanmadi)
-        ->and($oran->mevcut)->toBe(15)
-        ->and($oran->gerekli)->toBe(68);
+    expect($makale->gerekli)->toBe(50)
+        ->and($makale->mevcut)->toBe(15)
+        ->and($makale->durum)->toBe(Durum::Saglanmadi);
 });
 
-test('Güzel Sanatlar %40 oranı Hukuk/İlahiyat %50 oranından ayrı kayıttır', function () {
+test('Güzel Sanatlar %40 barajı Hukuk/İlahiyat %50 barajından ayrı kayıttır', function () {
     $depo = sartDepo();
 
     $gs = $depo->bul('Akdeniz Üniversitesi', 'dr_ogr_uyesi', 'guzel_sanatlar');
     $hukuk = $depo->bul('Akdeniz Üniversitesi', 'dr_ogr_uyesi', 'hukuk');
 
-    $faaliyetler = [
-        sartFaaliyet('TR Dizin'),                                   // makale 15
-        sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap), // 30
-    ];
+    $faaliyetler = [sartFaaliyet('TR Dizin')];
+    $profil = new Profil(yds: 70);
 
-    // Toplam 45 → %40 = 18, %50 = 23. Oranların FARKLI hesaplandığını doğruluyoruz.
-    $gsOran = sartDugum($depo->degerlendir($gs, $faaliyetler, new Profil(yds: 70)), 'en az %40');
-    $hukukOran = sartDugum($depo->degerlendir($hukuk, $faaliyetler, new Profil(yds: 70)), 'en az yarısı');
+    // Asgari puan ikisinde de 100; GRUP 3'ün dipnot 4'ü Güzel Sanatlara %40,
+    // dipnot 3'ü Hukuk ve İlahiyata yarısını istiyor.
+    expect(sartDugum($depo->degerlendir($gs, $faaliyetler, $profil), 'en az 40 puan')->gerekli)->toBe(40)
+        ->and(sartDugum($depo->degerlendir($hukuk, $faaliyetler, $profil), 'en az 50 puan')->gerekli)->toBe(50);
+});
 
-    expect($gsOran->gerekli)->toBe(18)
-        ->and($hukukOran->gerekli)->toBe(23);
+/**
+ * Motorun ORANSAL düğümü (min_oran) Akdeniz'den çıkınca sahipsiz kalmasın:
+ * Trakya gerçekten adayın KENDİ toplamına bağlı bir oran istiyor.
+ */
+test('oransal koşul adayın kendi toplamından hesaplanıyor (Trakya)', function () {
+    $depo = sartDepo();
+    // `bul()` birim ayrımı yüzünden null dönüyor (Trakya'nın MYO ve enstitü
+    // kayıtları aynı alanı paylaşıyor); eşik anahtarla çekiliyor.
+    $esik = $depo->esik('trakya-ek7-myo-dr-ogr-uyesi-yeniden-spor');
+
+    expect($esik)->not->toBeNull();
+
+    $oranli = function (array $dugum) use (&$oranli): bool {
+        if (isset($dugum['min_oran'])) {
+            return true;
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+            if ($oranli($cocuk)) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    expect($oranli($esik['sart']))->toBeTrue();
 });
 
 test('telafi: Afyon TR Dizin şartı uluslararası makaleyle karşılanabilir', function () {
@@ -5464,11 +5500,11 @@ test('HBV yarışma bölümü yalnız mimarlık alanında sayılıyor', function
 test('Akdeniz makale oranları her grubun kendi dipnotundan geliyor', function () {
     $depo = sartDepo();
 
-    $oran = function (string $alan) use ($depo): ?float {
+    $oran = function (string $alan) use ($depo): ?int {
         $esik = $depo->bul('Akdeniz Üniversitesi', 'dr_ogr_uyesi', $alan);
-        $bul = function (array $dugum) use (&$bul): ?float {
-            if (isset($dugum['min_oran'])) {
-                return (float) $dugum['min_oran'];
+        $bul = function (array $dugum) use (&$bul): ?int {
+            if (($dugum['maddeler'] ?? []) === ['BOLUM_1_MAKALE'] && isset($dugum['min_puan'])) {
+                return (int) $dugum['min_puan'];
             }
 
             foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
@@ -5485,10 +5521,60 @@ test('Akdeniz makale oranları her grubun kendi dipnotundan geliyor', function (
         return $esik === null ? null : $bul($esik['sart']);
     };
 
-    expect($oran('fen'))->toBe(0.5)          // GRUP 1 · dipnot 3
-        ->and($oran('sosyal'))->toBe(0.5)    // GRUP 2 · dipnot 5
-        ->and($oran('hukuk'))->toBe(0.5)     // GRUP 3 · dipnot 3
-        ->and($oran('ilahiyat'))->toBe(0.5)  // GRUP 3 · dipnot 3
-        ->and($oran('guzel_sanatlar'))->toBe(0.4) // GRUP 3 · dipnot 4
-        ->and($oran('filoloji'))->toBe(0.5); // GRUP 5 · dipnot 4
+    // Dr. Öğr. Üyesinde asgari puan 100; yarısı 50, Güzel Sanatlarda %40'ı 40.
+    expect($oran('fen'))->toBe(50)          // GRUP 1 · dipnot 3
+        ->and($oran('sosyal'))->toBe(50)    // GRUP 2 · dipnot 5
+        ->and($oran('hukuk'))->toBe(50)     // GRUP 3 · dipnot 3
+        ->and($oran('ilahiyat'))->toBe(50)  // GRUP 3 · dipnot 3
+        ->and($oran('guzel_sanatlar'))->toBe(40) // GRUP 3 · dipnot 4
+        ->and($oran('filoloji'))->toBe(50); // GRUP 5 · dipnot 4
+});
+
+/**
+ * AKDENİZ GRUP 4 — DEVLET KONSERVATUVARI (04.09.2026'da girildi).
+ *
+ * Ayrım `birim` ile kuruluyor ve ASİMETRİK: konservatuvar kaydı birim
+ * taşıyor, GRUP 3'ün güzel sanatlar kaydı taşımıyor. `bul()` iki aday
+ * bulunca birimi birebir eşleşeni döndürdüğü için, ikisine de birim
+ * yazılsaydı programını boş bırakan güzel sanatlar adayı kapsam dışı
+ * kalırdı — mevcut davranış korunmalı.
+ */
+test('Akdeniz konservatuvar eşiği birimle ayrılıyor, güzel sanatlar kapsamı korunuyor', function () {
+    $depo = sartDepo();
+
+    $anahtar = fn (string $kadro, ?string $birim): ?string => $depo->bul(
+        'Akdeniz Üniversitesi', $kadro, 'guzel_sanatlar', $birim,
+    )['anahtar'] ?? null;
+
+    expect($anahtar('dr_ogr_uyesi', null))->toBe('akdeniz-dr-grup3-gs-guzel_sanatlar')
+        ->and($anahtar('dr_ogr_uyesi', 'Antalya Devlet Konservatuvarı'))->toBe('akdeniz-dr-grup4-guzel_sanatlar')
+        ->and($anahtar('profesorluk', null))->toBe('akdeniz-profesor-grup3-gs-guzel_sanatlar')
+        ->and($anahtar('profesorluk', 'Antalya Devlet Konservatuvarı'))->toBe('akdeniz-profesor-grup4-guzel_sanatlar');
+
+    // Program seçeneği eşik verisinden üretiliyor; profil ekranında yalnız bu
+    // görünüyor ve boş bırakmak GRUP 3 demek.
+    expect($depo->birimler('Akdeniz Üniversitesi'))->toBe(['Antalya Devlet Konservatuvarı']);
+});
+
+test('Akdeniz GRUP 4 barajı 11.4 etkinlikleriyle sağlanabiliyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Akdeniz Üniversitesi', 'dr_ogr_uyesi', 'guzel_sanatlar', 'Antalya Devlet Konservatuvarı');
+
+    expect($esik)->not->toBeNull()
+        // 11. bölüm tavanı bu varyantta YOK: GRUP 4 puanın yarısını 11.4'ten
+        // isterken 16 puanlık tavan eşiği sağlanamaz kılardı.
+        ->and($depo->katalog($esik['cetvel'])->grupTavanlari)->not->toHaveKey('BOLUM_11_DISIPLIN');
+
+    // 11.4.1 (eserin yurt dışı koleksiyonda daimî yer alması) 150 puan;
+    // bir makale 15. Toplam 165 ≥ 100 ve 11.4'ten 150 ≥ 50.
+    $sonuc = $depo->degerlendir($esik, [
+        sartFaaliyet('Eserin Müzeye Kabulü (Yurt Dışı)', Kategori::SanatselEtkinlik, null),
+        sartFaaliyet('TR Dizin', Kategori::Makale, 'baslica'),
+    ], new Profil(yds: 70));
+
+    $onbirDort = sartDugum($sonuc, '11.4 disipline özgü etkinliklerinizden en az 50 puan');
+
+    expect($onbirDort->gerekli)->toBe(50)
+        ->and($onbirDort->mevcut)->toBe(150)
+        ->and($onbirDort->durum)->toBe(Durum::Saglandi);
 });

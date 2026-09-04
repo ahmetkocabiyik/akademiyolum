@@ -17,33 +17,28 @@ $temel = [
     | GRUP 1: Sağlık, Ziraat, Mühendislik, Fen · GRUP 2: Sosyal, Eğitim, Spor,
     | Mimarlık · GRUP 3: Hukuk, İlahiyat, Güzel Sanatlar · GRUP 5: diğerleri
     |
-    | GRUP 4 (DEVLET KONSERVATUVARI) GİRİLMEDİ — üst simge dipnotu taraması
-    | (04.09.2026) ortaya çıkardı. Kaynakta beş grup var; dördüncüsü "Klasik
-    | Batı Müziği / Türk Müziği Yorumculuk, Bestecilik, Orkestra Şefliği,
-    | Tiyatro, Bale ve Dans" alanları için ayrı bir tablo ve ayrı bir dipnot
-    | taşıyor: "Bu puanın en az yarısı 11.4 DİSİPLİNE ÖZGÜ ETKİNLİK VE
-    | FAALİYETLER'den karşılanmış olmalıdır." (GRUP 3'ün dipnotu ise
-    | "%40'ı 1. Bölüm: Bilimsel Makaleler'den" diyor ve aşağıda uygulanıyor.)
+    | GRUP 4 (DEVLET KONSERVATUVARI) 04.09.2026'DA GİRİLDİ. Kaynakta beş grup
+    | var; dördüncüsü "Klasik Batı Müziği / Türk Müziği Yorumculuk, Bestecilik,
+    | Orkestra Şefliği, Tiyatro, Bale ve Dans" alanları için ayrı bir tablo ve
+    | ayrı bir dipnot taşıyor: "Bu puanın en az yarısı 11.4 DİSİPLİNE ÖZGÜ
+    | ETKİNLİK VE FAALİYETLER'den karşılanmış olmalıdır."
     |
-    | Birinci engel 04.09.2026'da kalktı: 11.4 artık cetvelde
-    | (`akdeniz-2026-guzel-sanatlar-*` varyantları). GERİYE KALAN ENGEL BİRİM:
-    | ayrım temel alana değil BİRİME bağlı (Antalya Devlet Konservatuvarı ↔
-    | Güzel Sanatlar Fakültesi) ve ikisi de `guzel_sanatlar` alanına düşüyor.
-    | Ayrı bir `birim` kaydı açmak, `bul()` aynı (üniversite, kadro, alan)
-    | için iki aday bulunca YALNIZCA birimi birebir eşleşeni döndürdüğü için
-    | birimini "Güzel Sanatlar Fakültesi" yazan adayı kapsam dışı bırakırdı —
-    | bugün aldığı GRUP 3 cevabını da kaybederdi.
+    | İki engel vardı, ikisi de aşıldı:
+    |   1. 11.4 cetvelde yoktu → 04.09.2026'da 11. bölüm girildi.
+    |   2. Ayrım temel alana değil BİRİME bağlı (konservatuvar ↔ güzel sanatlar
+    |      fakültesi, ikisi de `guzel_sanatlar`). Çözüm ASİMETRİK BİRİM:
+    |      konservatuvar kaydı `birim` taşıyor, GRUP 3'ün güzel sanatlar kaydı
+    |      taşımıyor. `bul()` birimi birebir eşleşeni döndürdüğü için programını
+    |      "Belirtilmemiş" bırakan aday eskisi gibi GRUP 3'e gidiyor, açıkça
+    |      konservatuvarı seçen GRUP 4'e. İkisine de birim yazılsaydı boş
+    |      bırakan aday büsbütün kapsam dışı kalırdı.
     |
-    | İkinci engel de sürüyor: GRUP 4'ün dipnotu "bu puanın en az YARISI
-    | 11.4'ten" diyor, ama 11.4'ün kendi tavanı 16/48/80 (bölüm başlığındaki
-    | "%40" kuralının sabite çevrilmiş hâli). 50/150/250 puanlık bir baraj o
-    | tavanın çok üstünde kalır; KONVANSIYONLAR "Sağlanamaz eşik yazma"
-    | kuralının tarif ettiği durum.
-    |
-    | SONUÇ: konservatuvar adayı şu an GRUP 3'ün ölçütleriyle değerlendiriliyor
-    | (aynı puan barajları, ama "toplamın %40'ı bilimsel makaleden" koşuluyla).
-    | Kaynağın konservatuvara koyduğu koşul bu değil; disipline özgü
-    | etkinlikleri olan bir aday kendini olduğundan ZOR durumda görür.
+    | ÜÇÜNCÜ ENGEL KAYNAĞIN KENDİ ÇELİŞKİSİYDİ ve kaydedildi: 11. bölüm başlığı
+    | "bu bölümden alınan puan diğer bölümlerden alınan puanın %40'ını geçemez"
+    | derken GRUP 4 aynı puanın en az YARISINI 11.4'ten istiyor. İkisi aynı anda
+    | sağlanamaz. Özel kural (GRUP 4 dipnotu) genel kurala tercih edildi ve
+    | konservatuvar varyantında 11. bölüm tavansız bırakıldı; çelişki
+    | `aday_notu`'nda birebir aktarılıyor.
     | (Akdeniz'de Filoloji). Tüm kadrolarda YDS en az 70.
     */
 
@@ -65,8 +60,7 @@ $temel = [
             Kalip::toplam(100),
             Kalip::adet('Son beş yılda en az 3 yayın', ['YAYIN'], 3, donem: Kalip::sonYil(5)),
             Kalip::adet('En az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica'),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 50 puan', ['BOLUM_1_MAKALE'], 50, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::beyan('Yayınlardan biri lisansüstü tezden üretilmiş olmalı; sağlanamazsa asgari yayın sayısına bir yayın eklenir'),
             Kalip::yds(70),
         ]],
@@ -84,8 +78,7 @@ $temel = [
             Kalip::toplam(100),
             Kalip::adet('En az 2 yayın', ['YAYIN'], 2),
             Kalip::adet('En az 1 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 1, 'baslica'),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 50 puan', ['BOLUM_1_MAKALE'], 50, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::beyan('Yayınlardan biri lisansüstü tezden üretilmiş olmalı'),
             Kalip::yds(70),
         ]],
@@ -104,8 +97,7 @@ $temel = [
             Kalip::toplam(100),
             Kalip::adet('En az 2 yayın', ['YAYIN'], 2),
             Kalip::adet('En az 1 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 1, 'baslica'),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 50 puan', ['BOLUM_1_MAKALE'], 50, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::beyan('Yayınlardan biri lisansüstü tezden üretilmiş olmalı'),
             Kalip::yds(70),
         ]],
@@ -126,8 +118,7 @@ $temel = [
             Kalip::toplam(100),
             Kalip::adet('En az 2 yayın', ['YAYIN'], 2),
             Kalip::adet('En az 1 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 1, 'baslica'),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az %40\'ı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.4, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 40 puan', ['BOLUM_1_MAKALE'], 40, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::beyan('Yayınlardan biri lisansüstü tezden üretilmiş olmalı'),
             Kalip::yds(70),
         ]],
@@ -146,8 +137,7 @@ $temel = [
             Kalip::toplam(100),
             Kalip::adet('En az 2 yayın', ['YAYIN'], 2),
             Kalip::adet('En az 1 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 1, 'baslica'),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 50 puan', ['BOLUM_1_MAKALE'], 50, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::beyan('Yayınlardan biri lisansüstü tezden üretilmiş olmalı'),
             Kalip::yds(70),
         ]],
@@ -168,8 +158,7 @@ $temel = [
             Kalip::adet('Doktora/tıpta uzmanlık sonrası en az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica', Kalip::DOKTORA_SONRASI),
             ['tip' => 'metrik', 'aciklama' => 'BAP/dış kaynaklı projede en az 1 yürütücülük',
                 'metrik' => 'proje_yurutuculuk', 'min' => 1],
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 150 puan', ['BOLUM_1_MAKALE'], 150, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 4\'ü doktora sonrası ve son 7 yılda', ['YAYIN'], 4, null,
                 ['baslangic' => 'doktora', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -189,8 +178,7 @@ $temel = [
             Kalip::adet('Doktora/sanatta yeterlik sonrası en az 1 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 1, 'baslica', Kalip::DOKTORA_SONRASI),
             ['tip' => 'metrik', 'aciklama' => 'BAP/dış kaynaklı projede en az 1 yürütücülük',
                 'metrik' => 'proje_yurutuculuk', 'min' => 1],
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 150 puan', ['BOLUM_1_MAKALE'], 150, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 2\'si doktora sonrası ve son 7 yılda', ['YAYIN'], 2, null,
                 ['baslangic' => 'doktora', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -209,8 +197,7 @@ $temel = [
         'sart' => ['tip' => 've', 'aciklama' => 'Grup 3 — Doçent', 'cocuklar' => [
             Kalip::toplam(300),
             Kalip::adet('Doktora/sanatta yeterlik sonrası en az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica', Kalip::DOKTORA_SONRASI),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 150 puan', ['BOLUM_1_MAKALE'], 150, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 4\'ü doktora sonrası ve son 7 yılda', ['YAYIN'], 4, null,
                 ['baslangic' => 'doktora', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -229,8 +216,7 @@ $temel = [
         'sart' => ['tip' => 've', 'aciklama' => 'Grup 3 (Güzel Sanatlar) — Doçent', 'cocuklar' => [
             Kalip::toplam(300),
             Kalip::adet('Sanatta yeterlik sonrası en az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica', Kalip::DOKTORA_SONRASI),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az %40\'ı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.4, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 120 puan', ['BOLUM_1_MAKALE'], 120, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 4\'ü sanatta yeterlik sonrası ve son 7 yılda', ['YAYIN'], 4, null,
                 ['baslangic' => 'doktora', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -248,8 +234,7 @@ $temel = [
         'sart' => ['tip' => 've', 'aciklama' => 'Grup 5 — Doçent', 'cocuklar' => [
             Kalip::toplam(300),
             Kalip::adet('Doktora sonrası en az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica', Kalip::DOKTORA_SONRASI),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 150 puan', ['BOLUM_1_MAKALE'], 150, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 4\'ü doktora sonrası ve son 7 yılda', ['YAYIN'], 4, null,
                 ['baslangic' => 'doktora', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -271,8 +256,7 @@ $temel = [
             Kalip::adet('Doçentlik sonrası en az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica', Kalip::DOCENTLIK_SONRASI),
             ['tip' => 'metrik', 'aciklama' => 'BAP/dış kaynaklı projede en az 2 yürütücülük',
                 'metrik' => 'proje_yurutuculuk', 'min' => 2],
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 250 puan', ['BOLUM_1_MAKALE'], 250, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 4\'ü doçentlik sonrası ve son 7 yılda', ['YAYIN'], 4, null,
                 ['baslangic' => 'docentlik', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -292,8 +276,7 @@ $temel = [
             Kalip::adet('Doçentlik sonrası en az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica', Kalip::DOCENTLIK_SONRASI),
             ['tip' => 'metrik', 'aciklama' => 'BAP/dış kaynaklı projede en az 2 yürütücülük',
                 'metrik' => 'proje_yurutuculuk', 'min' => 2],
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 250 puan', ['BOLUM_1_MAKALE'], 250, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 2\'si doçentlik sonrası ve son 7 yılda', ['YAYIN'], 2, null,
                 ['baslangic' => 'docentlik', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -312,8 +295,7 @@ $temel = [
         'sart' => ['tip' => 've', 'aciklama' => 'Grup 3 — Profesör', 'cocuklar' => [
             Kalip::toplam(500),
             Kalip::adet('Doçentlik sonrası en az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica', Kalip::DOCENTLIK_SONRASI),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 250 puan', ['BOLUM_1_MAKALE'], 250, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 4\'ü doçentlik sonrası ve son 7 yılda', ['YAYIN'], 4, null,
                 ['baslangic' => 'docentlik', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -332,8 +314,7 @@ $temel = [
         'sart' => ['tip' => 've', 'aciklama' => 'Grup 3 (Güzel Sanatlar) — Profesör', 'cocuklar' => [
             Kalip::toplam(500),
             Kalip::adet('Doçentlik sonrası en az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica', Kalip::DOCENTLIK_SONRASI),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az %40\'ı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.4, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 200 puan', ['BOLUM_1_MAKALE'], 200, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 4\'ü doçentlik sonrası ve son 7 yılda', ['YAYIN'], 4, null,
                 ['baslangic' => 'docentlik', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -351,8 +332,7 @@ $temel = [
         'sart' => ['tip' => 've', 'aciklama' => 'Grup 5 — Profesör', 'cocuklar' => [
             Kalip::toplam(500),
             Kalip::adet('Doçentlik sonrası en az 2 makalede başlıca yazar', ['BOLUM_1_MAKALE'], 2, 'baslica', Kalip::DOCENTLIK_SONRASI),
-            ['tip' => 'puan', 'aciklama' => 'Toplam puanın en az yarısı bilimsel makalelerden',
-                'maddeler' => ['BOLUM_1_MAKALE'], 'min_oran' => 0.5, 'oran_payda' => ['*']],
+            Kalip::puanDan('Bilimsel makalelerinizden en az 250 puan', ['BOLUM_1_MAKALE'], 250, madde: 'Tablo dipnotu · asgari puanın yarısı'),
             Kalip::adet('Yayınların en az 4\'ü doçentlik sonrası ve son 7 yılda', ['YAYIN'], 4, null,
                 ['baslangic' => 'docentlik', 'son_yil' => 7]),
             Kalip::yds(70),
@@ -373,6 +353,51 @@ $temel = [
  * tablosu olan alanlar için ayrı kayda bölünüyor, geri kalan alanlar temel
  * cetvelde kalıyor.
  */
+/*
+ * GRUP 4 — DEVLET KONSERVATUVARI (04.09.2026'da girildi).
+ *
+ * Üç kadro için ayrı kayıt; ayrım `birim` ile kuruluyor çünkü konservatuvar
+ * da güzel sanatlar fakültesi de `guzel_sanatlar` temel alanına düşüyor.
+ *
+ * BİRİM ASİMETRİK: konservatuvar kaydı `birim` taşıyor, GRUP 3'ün güzel
+ * sanatlar kaydı TAŞIMIYOR. `bul()` aynı (üniversite, kadro, alan) için iki
+ * aday bulunca birimi BİREBİR eşleşeni döndürüyor; ikisine de birim
+ * yazılsaydı programını "Belirtilmemiş" bırakan güzel sanatlar adayı
+ * büsbütün kapsam dışı kalırdı. Şimdiki hâlde varsayılan (boş) seçim GRUP
+ * 3'e, açık konservatuvar seçimi GRUP 4'e gidiyor. Program seçenekleri
+ * `SartDeposu::birimler()` ile eşik verisinden üretildiği için profil
+ * ekranında yalnız "Antalya Devlet Konservatuvarı" görünüyor.
+ */
+$konservatuvar = function (string $kadro, int $asgari, array $ek): array {
+    $ekKadro = ['dr_ogr_uyesi' => 'dr', 'docentlik' => 'docent', 'profesorluk' => 'profesor'][$kadro];
+
+    return [
+        'anahtar' => "akdeniz-{$ekKadro}-grup4",
+        'aday_notu' => 'DİKKAT — KAYNAKTA ÇELİŞKİ VAR. GRUP 4 tablosu "bu puanın en az yarısı 11.4 '
+            .'Disipline Özgü Etkinlik ve Faaliyetler\'den karşılanmalıdır" derken 11. bölümün '
+            .'başlığı "bu bölümden alınan puan diğer bölümlerden alınan puanın %40\'ını geçemez" '
+            .'diyor; ikisi aynı anda sağlanamaz. Burada GRUP 4\'ün kendi dipnotu esas alındı ve '
+            .'11. bölüme tavan uygulanmadı, yani puanınız %40 kuralıyla hesaplansaydı '
+            .'göreceğinizden DÜŞÜK olurdu. Başvurmadan önce üniversiteye teyit ettirin.',
+        'universite' => 'Akdeniz Üniversitesi',
+        'kadro' => $kadro,
+        'alan' => ['guzel_sanatlar'],
+        'birim' => 'Antalya Devlet Konservatuvarı',
+        'cetvel' => "akdeniz-2026-konservatuvar-{$ekKadro}",
+        'notlar' => 'GRUP 4 (Devlet Konservatuvarı Alanları — Klasik Batı Müziği/Türk Müziği '
+            .'Yorumculuk, Bestecilik, Orkestra Şefliği, Tiyatro, Bale ve Dans): toplamda en az '
+            ."{$asgari} puan. Tablo dipnot 3: \"Bu puanın en az yarısı 11.4 Disipline Özgü "
+            ."Etkinlik ve Faaliyetler'den karşılanmış olmalıdır.\" Son beş yılda üretilen "
+            .'yayınlar ve faaliyetler geçerlidir. YDS en az 70.',
+        'sart' => ['tip' => 've', 'aciklama' => "GRUP 4 (Devlet Konservatuvarı) — {$ekKadro}", 'cocuklar' => [
+            Kalip::toplam($asgari),
+            Kalip::puanDan('11.4 disipline özgü etkinliklerinizden en az '.intdiv($asgari, 2).' puan', ['BOLUM_11_4'], intdiv($asgari, 2), madde: 'Tablo dipnot 3'),
+            ...$ek,
+            Kalip::yds(70),
+        ]],
+    ];
+};
+
 $disiplin = [
     'spor' => 'spor',                     // 11.1 Spor Bilimleri Fakültesi
     'mimarlik' => 'mimarlik',             // 11.2 Mimarlık Fakültesi
@@ -412,4 +437,25 @@ foreach ($temel as $esik) {
     }
 }
 
-return $esikler;
+$P4 = Kalip::DOKTORA_SONRASI;
+$D4 = Kalip::DOCENTLIK_SONRASI;
+
+return [...$esikler,
+    $konservatuvar('dr_ogr_uyesi', 100, [
+        Kalip::adet('En az 1 bilimsel makalede başlıca yazar', ['BOLUM_1_MAKALE'], 1, 'baslica'),
+        Kalip::adet('1.1-1.8 kategorilerinden en az 1 yayın', ['BOLUM_1_MAKALE'], 1),
+        Kalip::beyan('Doktora/sanatta yeterlik sonrası 11.4 Disipline Özgü Etkinlik ve '
+            .'Faaliyetler\'den en az 2 tanesini başlıca eser olarak sunmak'),
+    ]),
+    $konservatuvar('docentlik', 300, [
+        Kalip::adet('Doktora/sanatta yeterlik sonrası en az 2 makalede başlıca yazar',
+            ['BOLUM_1_MAKALE'], 2, 'baslica', $P4),
+        Kalip::beyan('Doktora/sanatta yeterlik sonrası 11.4\'ten en az 2 tanesini başlıca eser '
+            .'olarak sunmak'),
+    ]),
+    $konservatuvar('profesorluk', 500, [
+        Kalip::adet('Doçentlik sonrası en az 2 makalede başlıca yazar',
+            ['BOLUM_1_MAKALE'], 2, 'baslica', $D4),
+        Kalip::beyan('Doçentlik sonrası 11.4\'ten en az 2 tanesini başlıca eser olarak sunmak'),
+    ]),
+];
