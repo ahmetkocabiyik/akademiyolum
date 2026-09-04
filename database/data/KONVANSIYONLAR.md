@@ -453,6 +453,32 @@ Yani bu tarayıcı ADAY LİSTESİ üretir, karar değil. Listedeki her satır
 kaynaktan okunarak doğrulanmalı — Adıyaman'ın gerçek hatası (ulusal bildiri
 20 puandaydı, kaynakta özet 15) ancak okuyunca çıktı.
 
+### DİPNOT NUMARASI TABLOYA YERELDİR — "DİPNOT 3" DİYE NOT ALMA
+
+Bir belgede aynı rakam birden çok şey anlatabilir: her tablo kendi dipnot
+listesini taşır ve numaralar her tabloda BAŞTAN BAŞLAR. Akdeniz'in beş
+değerlendirme grubunda "En az puan" sütununa bağlı üst simge sırasıyla
+**3, 5, 3-4, 3, 4**; beşi de aynı kuralı ("bu puanın en az yarısı 1.
+Bölüm'den") gösteriyor ama numaraları farklı. GRUP 4'ünki ise bambaşka bir
+şey diyor ("en az yarısı 11.4'ten"). Aynı belgede 11.2 tablosunun 1-4
+dipnotları da kuruluş listeleri.
+
+**Not alırken dipnotun NUMARASINI değil METNİNİ yaz.** "Dipnot 3 şunu diyor"
+biçiminde bir kayıt bu dosyada doğrudan yanıltıcıdır.
+
+04.09.2026'da korpus bu desen için tarandı: aynı rakamın farklı metinlerle
+tanımlandığı tek kaynak Akdeniz (Adana ATÜ'deki ikinci işaret satır kayması).
+Yani desen nadir ama bulunduğu yerde yoğun. Akdeniz'in beş grubunun oranları
+`SartAgaciTest`'te teste bağlandı; yanlış dipnota bakılırsa oran da yanlış
+olur ve test kırılır.
+
+**ÜST SİMGE TARAMASI PDF ÇIKARIMINA GÜVENEMEZ.** `pdftotext` üst simgeyi düz
+rakam olarak veriyor ve çoğunu büsbütün düşürüyor; "işaret bulunamadı"
+demek "kaynakta işaret yok" demek değildir. Bu yüzden "tanımı var ama
+işareti yok" taraması işe yaramadı (739 sahte işaret). Verimli olan yön
+tersi: SAĞ KALAN işaretlerden birden çok satıra düşenleri incele — korpusta
+altı tane çıktı, hepsi ya yerel numaralandırma ya OCR gürültüsüydü.
+
 ### ÜST SİMGE DİPNOTUNU SÜTUN BAŞLIĞINDA DA ARA
 
 "DİPNOT HANGİ SÜTUNA BAĞLI? ÜST SİMGEYE BAK" kuralı hücre içindeki dipnotlar

@@ -5442,3 +5442,53 @@ test('HBV yarışma bölümü yalnız mimarlık alanında sayılıyor', function
         ->and($puan('sosyal'))->toBe(0)
         ->and($puan('guzel_sanatlar'))->toBe(0);
 });
+
+/**
+ * ÜST SİMGE İŞARETİ TARAMASI (04.09.2026): DİPNOT NUMARASI TABLOYA YERELDİR.
+ *
+ * Akdeniz'in beş değerlendirme grubunun her biri kendi tablosunun altında
+ * KENDİ dipnot listesini taşıyor ve numaralar her tabloda BAŞTAN BAŞLIYOR.
+ * "En az puan" sütununa bağlı üst simge bu yüzden tablodan tabloya değişik:
+ *
+ *   GRUP 1  En az puan³ → 3 "Bu puanın en az yarısı 1. Bölüm'den"
+ *   GRUP 2  En az puan⁵ → 5 aynı cümle
+ *   GRUP 3  En az puan³’⁴ → 3 Hukuk/İlahiyat yarısı · 4 Güzel Sanatlar %40
+ *   GRUP 4  En az puan³ → 3 "en az yarısı 11.4'ten" (girilmedi, gerekçesi
+ *           yonerge/akdeniz.php başlığında)
+ *   GRUP 5  En az puan⁴ → 4 "Bu puanın en az yarısı 1. Bölüm'den"
+ *
+ * Aynı rakamın aynı belgede farklı şeyler anlatması korpusta YALNIZ burada
+ * görülüyor; "dipnot 3 şunu diyor" diye not almak bu dosyada yanıltıcıdır.
+ * Test oranları koruyor: yanlış dipnota bakılırsa oran da yanlış olur.
+ */
+test('Akdeniz makale oranları her grubun kendi dipnotundan geliyor', function () {
+    $depo = sartDepo();
+
+    $oran = function (string $alan) use ($depo): ?float {
+        $esik = $depo->bul('Akdeniz Üniversitesi', 'dr_ogr_uyesi', $alan);
+        $bul = function (array $dugum) use (&$bul): ?float {
+            if (isset($dugum['min_oran'])) {
+                return (float) $dugum['min_oran'];
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $sonuc = $bul($cocuk);
+
+                if ($sonuc !== null) {
+                    return $sonuc;
+                }
+            }
+
+            return null;
+        };
+
+        return $esik === null ? null : $bul($esik['sart']);
+    };
+
+    expect($oran('fen'))->toBe(0.5)          // GRUP 1 · dipnot 3
+        ->and($oran('sosyal'))->toBe(0.5)    // GRUP 2 · dipnot 5
+        ->and($oran('hukuk'))->toBe(0.5)     // GRUP 3 · dipnot 3
+        ->and($oran('ilahiyat'))->toBe(0.5)  // GRUP 3 · dipnot 3
+        ->and($oran('guzel_sanatlar'))->toBe(0.4) // GRUP 3 · dipnot 4
+        ->and($oran('filoloji'))->toBe(0.5); // GRUP 5 · dipnot 4
+});
