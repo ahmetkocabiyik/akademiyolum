@@ -31,6 +31,17 @@
  *       Sayı sınırı, uygunluk kısıtı değil; motorun zaten tutamadığı
  *       "aynı esere özgü tavan" sınıfı (KONVANSIYONLAR §1).
  */
+/**
+ * Satır, DİPNOT görünümünde mi?
+ *
+ * Ayırt edici işaret numaranın NOKTASIZ olması: tablo satırı "1." ile
+ * başlar, dipnot "1 " ile. Yıldız ve hançer işaretleri de dipnot sayılır.
+ */
+function dipnotSatiri(string $satir): bool
+{
+    return (bool) preg_match('/^\s{0,10}(?:\(\d{1,2}\)|\d{1,2}(?![.)\d])|[*†‡•])\s{0,3}\S/u', $satir);
+}
+
 /** Satır, tablo satırı görünümünde mi? */
 function tabloSatiri(string $satir): bool
 {
@@ -90,6 +101,15 @@ function parantezGurultusu(string $satir, string $parantez): ?string
         return 'ayni-esere-sinir';
     }
 
+    // d) BELGE ADI: parantez bir evrakı adlandırıyor, adayı kısıtlamıyor.
+    //    Dipnot taramasında ortaya çıktı ("Belgelemek kaydıyla (Doçentlik
+    //    unvanı başvuru beyannamesi) …"): içinde kadro sözcüğü geçtiği için
+    //    kısıt desenine takılıyor.
+    if (preg_match('/beyanname|belgesi|belgeleri|\bform\b|dilekçe|raporu|sertifika|karar[ıi]/u', $p)
+        && ! preg_match($kisitFiili, $p)) {
+        return 'belge-adi';
+    }
+
     return null;
 }
 
@@ -98,7 +118,7 @@ function parantezGurultusu(string $satir, string $parantez): ?string
  */
 function satirdanKisitlar(string $satir): array
 {
-    if (! tabloSatiri($satir)) {
+    if (! tabloSatiri($satir) && ! dipnotSatiri($satir)) {
         return [];
     }
 
@@ -156,6 +176,33 @@ test('gerçek uygunluk kısıtları filtreden geçiyor', function (string $satir
     ['h. Uluslararası atölye çalışmaları ve çalıştay düzenlemek. (Güzel sanat dalları ve Mimarlık Fakültesi kriterleri için geçerlidir.)   30',
         'Güzel sanat dalları ve Mimarlık Fakültesi kriterleri için geçerlidir.'],
 ]);
+
+test('belge adı kısıt sayılmıyor', function (string $satir) {
+    expect(satirdanKisitlar($satir))->toBe([]);
+})->with([
+    // Selçuk ve Kafkas'ın aynı dipnotu: parantez bir EVRAKI adlandırıyor,
+    // "Doçentlik" sözcüğü yüzünden kısıt desenine takılıyordu.
+    '* Belgelemek kaydıyla (Doçentlik unvanı başvuru beyannamesi) Üniversitelerarası Kurula yapılan başvuru',
+]);
+
+/**
+ * DİPNOT TARAMASI (04.09.2026).
+ *
+ * Aynı filtre dipnotlara uygulandı: numarası NOKTASIZ olan ya da yıldız/
+ * hançer taşıyan satırlar. Beş işaret çıktı ve YENİ HATA ÇIKMADI — dördü
+ * zaten doğru girilmişti (İzmir Kavram'ın 15. bölümü yalnız `-gsf`
+ * varyantında, Sinop'un dil muafiyeti `veya` düğümünde, Nişantaşı'nın
+ * "40 puanı doçentlik sonrası" koşulu ayrı düğümde), biri de yeni bir
+ * gürültü sınıfıydı (belge adı).
+ */
+test('dipnot satırı da taranıyor', function () {
+    // Tablo satırı değil ama dipnot: numara noktasız.
+    expect(satirdanKisitlar('15- Sanat ve tasarım etkinlikleri (sadece güzel sanatlar temel alanı için)'))
+        ->toContain('sadece güzel sanatlar temel alanı için');
+
+    expect(satirdanKisitlar('(2) Tüm atamalar için (Dr. Öğretim Üyesi yeniden atamaları hariç) yabancı dil şartı'))
+        ->toContain('Dr. Öğretim Üyesi yeniden atamaları hariç');
+});
 
 test('tablo satırı olmayan metin taranmıyor', function () {
     // Yönerge gövdesindeki düz cümleler ve tablo başlıkları sıralayıcıyla

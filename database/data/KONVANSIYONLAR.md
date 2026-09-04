@@ -772,6 +772,20 @@ doğrulanmış — **filtreyi yeniden yazma, oradan al**:
   biri)", "(Sadece 1 bölüm dikkate alınır)". Sayı sınırı, uygunluk kısıtı
   değil; motorun zaten tutamadığı sınıf.
 
+**DİPNOTLARA DA UYGULA — AYIRT EDİCİ İŞARET NUMARANIN NOKTASIZ OLMASI.**
+Tablo satırı "1." ile başlar, dipnot "1 " ile; yıldız ve hançer de dipnot
+sayılır. Aynı filtreyle dipnotlar tarandığında beş işaret çıktı ve YENİ HATA
+ÇIKMADI: dördü zaten doğru girilmişti (İzmir Kavram'ın "sadece güzel
+sanatlar temel alanı için" bölümü yalnız `-gsf` varyantında, Sinop'un dil
+muafiyeti `veya` düğümünde, Nişantaşı'nın "40 puanı doçentlik sonrası"
+koşulu ayrı düğümde).
+
+Beşincisi DÖRDÜNCÜ BİR GÜRÜLTÜ SINIFI verdi: **BELGE ADI** — "Belgelemek
+kaydıyla (Doçentlik unvanı başvuru beyannamesi) …". Parantez bir evrakı
+adlandırıyor ama içinde kadro sözcüğü geçtiği için kısıt desenine takılıyor.
+Tanıma kuralı: beyanname/belgesi/form/dilekçe/rapor/sertifika/karar geçiyor
+ve kısıt fiili yok. O da teste bağlı.
+
 **TÜRKÇE METİNDE `preg_match`'in `/i` BAYRAĞINA GÜVENME.** `İ` harfinin
 Unicode küçüğü noktalı `i̇` (iki kod noktası) ve desendeki `i` ile
 eşleşmiyor; Hacı Bayram Veli'nin "Temel Alanı İçin" ibaresi bu yüzden ilk
