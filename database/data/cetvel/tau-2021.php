@@ -49,6 +49,20 @@
  *       yönerge onları hiç saymıyor.
  *
  * Yönerge: yonerge/tau.php
+ *
+ * ── İİBF'NİN DAR İNDEKS TANIMI UYGULANMIYOR ──
+ * EK-1'in yıldız dipnotu: "İktisadi ve İdari Bilimler Fakültesinde yapılan
+ * atanmalarda YALNIZCA Web of Science ya da SCOPUS tarafından taranan
+ * dergiler uluslararası alan indeksli dergi olarak değerlendirilir." Yani
+ * B türü o fakültede daralıyor ve 'Diğer Uluslararası İndeks' sayılmıyor.
+ *
+ * Uygulanamadı çünkü kısıt FAKÜLTEYE bağlı, eşikler ise temel alana:
+ * `tau-2021-sosyal` varyantı İİBF'nin yanında Hukuk ile Kültür ve Sosyal
+ * Bilimler fakültelerini de taşıyor. 'Diğer Uluslararası İndeks'i B'den
+ * çıkarmak öteki iki fakültenin adayını eksik sayardı. Acıbadem ve
+ * Ardahan'daki karar kalıbı uygulandı: çoğunluğu yöneten okuma yazıldı,
+ * sapma burada söylendi. İİBF adayının B türünden puanı, yalnızca WoS ya
+ * da Scopus dışında bir indekste yayını varsa OLDUĞUNDAN YÜKSEK görünür.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'];
 $TUM_TUR = ['ozgun_makale', 'derleme', 'kisa_makale', 'vaka_teknik_not'];

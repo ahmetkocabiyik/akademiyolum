@@ -7,6 +7,13 @@
  * Madde kodu → (kategori, kaynaklar, roller, puan). Bir faaliyet birden çok
  * maddeye giriyorsa puanı EN YÜKSEK maddeden alınır.
  * Şema ve projeksiyon notları: database/data/sart-agaci-taslak.php
+ *
+ * DİPNOT TARAMASI (04.09.2026): kaynağın üç ÇARPAN dipnotu da girilmemiş
+ * bölümlere ait, bu yüzden karşılıksız kalmaları doğru — 8. bölümde "puan
+ * dersin AKTS'si ile çarpılır", 9. bölümde "öğrenci sayısı ile çarpılır" ve
+ * "yurt dışında kalınan ay sayısı ile çarpılır". O bölümlerin satırları
+ * cetvelde yok; girilecek olsalar motorun çarpan alanı olmadığı için
+ * satırlar TEK BİRİM değeriyle yazılmak zorunda kalırdı.
  */
 
 return [

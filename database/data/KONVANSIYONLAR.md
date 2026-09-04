@@ -453,6 +453,36 @@ Yani bu tarayıcı ADAY LİSTESİ üretir, karar değil. Listedeki her satır
 kaynaktan okunarak doğrulanmalı — Adıyaman'ın gerçek hatası (ulusal bildiri
 20 puandaydı, kaynakta özet 15) ancak okuyunca çıktı.
 
+### DİPNOT TARAMASI: TAVANDAN BAŞKA DÖRT KURAL TÜRÜ
+
+"Tablo dipnotları da eşiğin parçası" kuralı sabit tavanlar için ayrı
+tarandı; dipnotlar tavandan başka DÖRT kural türü daha taşıyor. Satır
+başında işaret (`*`, `**`, `(1)`, üst simge) + kural fiili aranarak taranır:
+
+| tür | desen | ne yapar |
+|---|---|---|
+| KAPSAM | "yalnızca", "sadece", "… için geçerlidir" | bölümü bir kadroya/alana/birime bağlar |
+| ÇARPAN | "yıl ile çarpılarak", "AKTS'si ile", "× ay" | puanı süre ya da adetle çarpar |
+| İLAVE | "%N ek puan", "ilave puan verilir" | puanı artırır |
+| KESİR | "puanın yarısı", "%N'i alınır" | puanı azaltır |
+| ADET | "en fazla N adet/kez/bölüm puanlanır" | sayıyı sınırlar (puana çevrilebilir) |
+
+**EN TEHLİKELİSİ KAPSAM.** Ötekiler puanı kaydırır, kapsam kuralı ise
+bölümü HİÇ HAK ETMEYEN adaya açar. SBÜ'nün D başlığı hem tavan hem kadro
+kısıtı taşıyordu; tavan alınmış, kısıt atlanmıştı ve Dr. adayı 50 puana
+kadar fazla topluyordu. Bilecik'in M bölümü ("Mimarlık ile Güzel Sanatlar
+için geçerlidir") aynı sınıf ama doğru ele alınmış: cetvel alan başına
+varyantlanıp öteki on alanda M satırları hiç açılmamış.
+
+**BAŞLIK İKİ KURAL TAŞIYABİLİR, İKİSİNİ DE OKU.** Bu turun tekrar eden
+dersi: bir tavan görünce yanındaki parantez kolayca atlanıyor.
+
+04.09.2026 taraması: 164 kaynakta 123 dipnot izi; kadro/alan/birim kısıtı
+gibi duran 22 tanesi elle okundu. Bilecik ve OMÜ zaten doğruydu; TAÜ'nün
+İİBF'ye özgü dar indeks tanımı ile Akdeniz'in üç çarpanı uygulanamaz çıktı
+ve gerekçeleriyle dosyalarına yazıldı. **Uygulanamaz olanı da yaz:** not
+yoksa sonraki tur aynı dipnotu yeniden bulur ve yeniden araştırır.
+
 ### SENATO İZLERİ AYRI KALIPLARLA ARANIR
 
 YÖK izleri taraması senato değişikliklerini tam yakalamıyor; senatolar başka
