@@ -644,6 +644,40 @@ Korpus taraması sekiz aday satır buldu, altısı yanlış pozitifti: "yayın t
 — GEBİP bir ARAŞTIRMA teşvik ödülü, dışlanan ise yayın başına verilen nakit
 teşvik. **Olumsuzlamanın neyi dışladığını oku, kelimeye bakma.**
 
+### ÖLÜ SATIR TARAMASI: ÜÇ ÖLÜM BİÇİMİ, İKİSİ TESTE BAĞLI
+
+`maddeyeUyar()` `isset` ile bakıyor. Anahtarın HİÇ OLMAMASI "bu alanı
+filtreleme", BOŞ DİZİ ise "hiçbir değere uyma" demek. `'kaynaklar' => []`
+yazan satır bu yüzden **sessizce ölü** — ne test kırılır ne uyarı çıkar.
+Tarayıcı yazarken ikisini karıştırma; ilk turda karıştırılınca Akdeniz'in
+`tez_yayini` satırı yanlışlıkla "ölü" sanılmıştı.
+
+Ölü satır çoğu zaman KASITLI ve §0'ın gereğidir: kaynak bir kademeyi
+sözlüğün taşıyamadığı bir eksende ayırıyorsa etiket ALT kademede bırakılır,
+üst satır puanıyla durur ama etiketsiz kalır. Kasıtsız olduğunda ise adayın
+hak ettiği puanı sessizce yutar — bu yüzden liste teste bağlandı.
+
+04.09.2026'da korpus üç ölüm biçimi için tarandı:
+
+| Sınıf | Ne | Sonuç |
+|---|---|---|
+| A | boş `kaynaklar`/`roller`/`turler` | 53 satır, 6 farklı — hepsi kasıtlı |
+| B | tavanı 0 olan grubun içindekiler | 15 (cetvel, grup) çifti — hepsi kasıtlı |
+| C | hiçbir eşiğin şart ağacında geçmeyen | 33 cetvelde 756 satır — hepsi tasarım |
+
+**C sınıfı teste bağlanmadı, çünkü kural değil cetvelin şekli.** Dokuz
+cetvelin eşiklerinde PUAN DÜĞÜMÜ HİÇ YOK (barajlar `adet` üzerinden: MEF,
+Manisa CBÜ, Bartın, Kadir Has, Sakarya UBÜ, Van YYÜ, Yeditepe, Adıyaman'ın
+doçentliği). Kalanlarda baraj kaynağın KENDİ bölüm kümesine bağlı: OMÜ'de A
+grubu `1-14`, B grubu `1-15`, yalnız güzel sanatlar `1-16`; İTÜ'de her şey
+`ESER-PUANI`; Giresun'da `A-L` (M ödülleri ve N patentleri dışarıda);
+Rumeli'de 1.5 hakemlik ve 1.7 atıf hariç. Bir satırın hiçbir barajı
+beslememesi tek başına hata değil — ama `Kalip::toplam()` varsayılanı `['*']`
+olduğu için toplam barajı OLAN cetvellerde böyle bir satır zaten çıkmıyor.
+
+`CetvelKaynakTest` A ve B listelerini tutuyor; yeni bir ölü satır eklenince
+test kırılıyor (enjeksiyonla doğrulandı).
+
 ### İKİ SATIR AYNI ETİKETE DÜŞÜYORSA YÜKSEK OLANI YAZMA — SİL
 
 Motor `puan()` içinde eşleşen kodların EN YÜKSEĞİNİ alıyor. Yani §0'ın "düşük

@@ -537,3 +537,92 @@ test('cetvel içi etiket çakışmaları elden geçirilmiş', function () {
         'trakya-2025-ek7: 7f-sos > 17a2',
     ]);
 });
+
+/**
+ * ÖLÜ SATIR TARAMASI: HİÇBİR KAYDIN UYAMAYACAĞI MADDELER BİLİNÇLİDİR.
+ *
+ * `MaddeKatalogu::maddeyeUyar()` `isset` ile bakıyor: anahtarın HİÇ OLMAMASI
+ * "bu alanı filtreleme" demek, BOŞ DİZİ ise "hiçbir değere uyma" demek. Yani
+ * `'kaynaklar' => []` satırı sessizce ölü — ne test kırılır ne uyarı çıkar.
+ *
+ * Ölü satır çoğu zaman KASITLI ve §0'ın gereği: kaynak bir kademeyi
+ * sözlüğün taşıyamadığı bir eksende ayırıyorsa etiket ALT kademede bırakılır,
+ * üst satır belgelemek için puanıyla durur ama etiketsiz kalır (Akdeniz'in
+ * "ilk %10" ve "ESCI" satırları, Yalova'nın alan indeksi satırı). Kasıtsız
+ * olduğunda ise adayın hak ettiği puanı sessizce yutar.
+ *
+ * 04.09.2026'da korpus üç ölüm biçimi için tarandı:
+ *   A) boş `kaynaklar`/`roller`/`turler` — 53 satır, 6 farklı; hepsi kasıtlı.
+ *   B) tavanı 0 olan grubun içindekiler — 15 (grup, cetvel) çifti; hepsi
+ *      kasıtlı (MEF'in mimarlık satırları öbür alanlarda, İKÇÜ'nün tez
+ *      yayını bölümü doçentlik ve profesörlükte, SBÜ'nün D bölümü Dr. Öğr.
+ *      Üyesi kadrosunda).
+ *   C) hiçbir eşiğin şart ağacında geçmeyenler — 33 cetvelde 756 satır ve
+ *      hepsi tasarım gereği: dokuz cetvelin eşiklerinde PUAN DÜĞÜMÜ YOK
+ *      (barajlar adet üzerinden), kalanlarda da baraj kaynağın kendi bölüm
+ *      kümesine bağlı (OMÜ'de A grubu 1-14, B grubu 1-15; İTÜ'de yalnız
+ *      ESER-PUANI; Giresun'da A-L; Rumeli'de 1.5 ve 1.7 hariç). C sınıfı bu
+ *      yüzden teste bağlanmadı — kural değil, cetvelin şekli.
+ */
+test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
+    $depo = app(SartDeposu::class);
+    $bos = [];
+    $sifirTavan = [];
+
+    foreach ($depo->cetveller() as $ad => $katalog) {
+        foreach ($katalog->maddeler as $kod => $madde) {
+            foreach (['kaynaklar', 'roller', 'turler'] as $alan) {
+                if (array_key_exists($alan, $madde) && $madde[$alan] === []) {
+                    $bos["{$kod} · ".($madde['baslik'] ?? '')] = true;
+                }
+            }
+        }
+
+        foreach ($katalog->grupTavanlari as $grup => $tavan) {
+            if ($tavan === 0) {
+                $sifirTavan["{$ad}: {$grup}"] = true;
+            }
+        }
+    }
+
+    $bosSatirlar = array_keys($bos);
+    sort($bosSatirlar);
+
+    // Her birinin gerekçesi kendi cetvel dosyasında yazılı.
+    expect($bosSatirlar)->toBe([
+        '1.1 · SCI-Expanded/SSCI/AHCI ilk %10 dergide makale',
+        '1.6 · ESCI dergide makale',
+        '1c · Diğer uluslararası alan indekslerinde taranan dergide makale',
+        'A.16a · Millî takımlarda görev almak ya da antrenör ve hakem eğitim kurslarında eğitici olarak görev almak',
+        'T4.1.a · Uluslararası meslek başarı ödülü',
+        'T4.1.b · Ulusal meslek başarı ödülü',
+    ]);
+
+    $sifirlar = array_keys($sifirTavan);
+    sort($sifirlar);
+
+    expect($sifirlar)->toBe([
+        // İKÇÜ: tez yayını bölümü yalnız Dr. Öğr. Üyesi kadrosunda sayılıyor.
+        'ikcu-2023-sosyal-docent: A2',
+        'ikcu-2023-sosyal-profesor: A2',
+
+        // MEF: 13. bölüm (mimarlık yarışması ve kamu yararı projesi) yalnız
+        // mimarlık alanında sayılıyor.
+        'mef-2024-egitim-docent: 13',
+        'mef-2024-egitim-dr: 13',
+        'mef-2024-egitim-profesor: 13',
+        'mef-2024-hukuk-docent: 13',
+        'mef-2024-hukuk-dr: 13',
+        'mef-2024-hukuk-profesor: 13',
+        'mef-2024-muhendislik-docent: 13',
+        'mef-2024-muhendislik-dr: 13',
+        'mef-2024-muhendislik-profesor: 13',
+        'mef-2024-sosyal-docent: 13',
+        'mef-2024-sosyal-dr: 13',
+        'mef-2024-sosyal-profesor: 13',
+
+        // SBÜ: YÖK'ün 27/11/2025 kararı D bölümünü profesör ve doçentle
+        // sınırladı.
+        'sbu-2025-dr: D',
+    ]);
+});
