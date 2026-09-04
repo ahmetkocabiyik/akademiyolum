@@ -955,6 +955,27 @@ görev tavanı uygulanmıyor ama o satırlar hiçbir grupta olmadığı için hi
 koşulu beslemiyor — yalnız listede görünen puanı etkiliyor. Notu buna göre
 yaz; "puanınız yüksek görünebilir" demek, baraj etkilenmiyorsa yanıltıcıdır.
 
+**TABAN ADAYIN KENDİ PUANIYSA DA PES ETME: EŞİĞİN ORAN KOŞULUNDAN ALT SINIR
+TÜRET.** Akdeniz'in 11. bölüm başlığı "Bu bölümden alınan puan DİĞER
+BÖLÜMLERDEN alınan puanın %40'ını geçemez" diyor; taban adayın kendi puanı
+olduğu için ilk bakışta PAÜ'nün "makale başına en çok 50 puan"ı gibi
+uygulanamaz görünüyor. Ama eşiğin KENDİ koşulları tabana alt sınır koyuyor:
+her Akdeniz eşiği hem `toplam ≥ asgari puan` hem `makale ≥ oran × toplam`
+istiyor ve makale o bölümün dışında. Buradan
+
+    diğer bölümler ≥ makale ≥ oran × toplam ≥ oran × asgari puan
+    kaynağın izin verdiği tavan = %40 × diğer bölümler ≥ %40 × oran × asgari
+
+çıkıyor; sağdaki çarpım kadro başına SABİT. Yazıldığında eşiği sağlayan
+hiçbir adayda fazla saymaz, kaynağın cömert davrandığı yerde eksik sayar (§0
+serbest). Akdeniz'de asgari 100/300/500 ve oran %50 → tavan 20/60/100; Güzel
+Sanatlar'da oran %40 → 16/48/80.
+
+İki kontrolü atlama: (1) o gruptan EN AZ puan isteyen bir baraj var mı — varsa
+alt sınır eşiği sağlanamaz kılar ("Sağlanamaz eşik yazma"); (2) `toplam`
+düğümü tavanlı puanı mı topluyor — evetse zincirdeki `toplam ≥ asgari` adımı
+geçerli.
+
 ### `kapsam_notu`
 
 Adayın gördüğü metin. Şunları söylemeli:
@@ -1157,6 +1178,30 @@ cetvel yazmak yerine bir gövde + üç varyant yeterli oldu; ÜAK dosyasındaki
 
 Ayrım genellikle cetvelde değil KOŞULDA: aynı puan tablosu üstüne her alan
 kendi alt kapısını koyuyor.
+
+**Tersi de var: tablolar GERÇEKTEN farklıysa birleştirmek fazla saydırır.**
+Akdeniz'in 11. bölümü altı FAKÜLTE tablosuna bölünmüş ("her temel bilim alanı
+kendi özel alanından puan alır") ve aynı sözlük etiketi tablodan tabloya
+farklı puan alıyor: `Yarışma Derecesi / Mansiyon` sporda 20, mimarlıkta 50,
+ilahiyatta 50. Hepsini tek cetvele koymak `puan()` en yükseği aldığı için
+HERKESE en cömert tabloyu verir. Motorun ayırabildiği en ince eksen `alan`
+olduğundan tablolar temel alana bağlanır; kendi tablosu olmayan alanlar temel
+cetvelde kalır.
+
+Eşikleri elle çoğaltma: şart ağacı değişmiyor, yalnız `cetvel` değişiyor.
+Eşik listesini `$temel` diye kur, sonunda bir döngüyle kendi tablosu olan
+alanları ayrı kayda böl (`akdeniz.php`). **Anahtara alanı EKLEME**:
+`SartDeposu::esikler()` `alan` dizisini kayda açarken anahtarın sonuna alanı
+zaten ekliyor; elle eklersen `akdeniz-dr-grup2-spor-spor` çıkar ve bölünmemiş
+eşiklerin anahtarları da sebepsiz değişir. Bölmenin doğru yapıldığını
+anlamanın ucuz yolu: bölmeden önceki ve sonraki anahtar KÜMESİNİ diff'le,
+ikisi birebir aynı olmalı.
+
+Bir fakültenin tablosu sözlükte hiç karşılık bulmuyorsa varyantını AÇMA:
+Akdeniz 11.5'in iki satırı da "uluslararası/ulusal kuruluşların YÖNETİM
+KURULLARINDA yer almak" diyor, sözlükteki tek yakın etiket
+(`Kurul / Komisyon Üyeliği`) üniversite İÇİ kurulları taşıyor ve bağlansaydı
+fakülte kurulu üyesi olan her sağlık adayı kaynağın vermediği puanı alırdı.
 
 ### `birim` ne zaman
 
@@ -1456,7 +1501,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 175 üniversite · 6693 eşik · 397 cetvel |
+| Girildi | 175 üniversite · 6693 eşik · 433 cetvel |
 | Okuma engeli çözüldü, giriş bekliyor | 0 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |

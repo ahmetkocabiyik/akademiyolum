@@ -8,7 +8,7 @@
  */
 use App\Services\Scoring\Sart\Kalip;
 
-return [
+$temel = [
     /*
     ╔══════════════════════════════════════════════════════════════════════════╗
     ║  AKDENİZ ÜNİVERSİTESİ
@@ -25,16 +25,20 @@ return [
     | FAALİYETLER'den karşılanmış olmalıdır." (GRUP 3'ün dipnotu ise
     | "%40'ı 1. Bölüm: Bilimsel Makaleler'den" diyor ve aşağıda uygulanıyor.)
     |
-    | İki sebeple girilmedi:
-    |   1. Cetvelde 11. bölümün HİÇ SATIRI YOK (o bölümün kalemleri kaynak
-    |      sözlüğünde karşılıksız). Koşulu literal yazmak, hiçbir faaliyetle
-    |      karşılanamayacak bir `min_oran` üretirdi — KONVANSIYONLAR
-    |      "Sağlanamaz eşik yazma" kuralının yasakladığı şey.
-    |   2. Ayrım temel alana değil BİRİME bağlı (konservatuvar ↔ güzel
-    |      sanatlar fakültesi). Ayrı bir `birim` kaydı açmak, `bul()` aynı
-    |      (üniversite, kadro, alan) için iki aday bulunca birim boşsa null
-    |      döndürdüğü için güzel sanatlar alanını tamamen kapsam dışı
-    |      bırakırdı.
+    | Birinci engel 04.09.2026'da kalktı: 11.4 artık cetvelde
+    | (`akdeniz-2026-guzel-sanatlar-*` varyantları). GERİYE KALAN ENGEL BİRİM:
+    | ayrım temel alana değil BİRİME bağlı (Antalya Devlet Konservatuvarı ↔
+    | Güzel Sanatlar Fakültesi) ve ikisi de `guzel_sanatlar` alanına düşüyor.
+    | Ayrı bir `birim` kaydı açmak, `bul()` aynı (üniversite, kadro, alan)
+    | için iki aday bulunca YALNIZCA birimi birebir eşleşeni döndürdüğü için
+    | birimini "Güzel Sanatlar Fakültesi" yazan adayı kapsam dışı bırakırdı —
+    | bugün aldığı GRUP 3 cevabını da kaybederdi.
+    |
+    | İkinci engel de sürüyor: GRUP 4'ün dipnotu "bu puanın en az YARISI
+    | 11.4'ten" diyor, ama 11.4'ün kendi tavanı 16/48/80 (bölüm başlığındaki
+    | "%40" kuralının sabite çevrilmiş hâli). 50/150/250 puanlık bir baraj o
+    | tavanın çok üstünde kalır; KONVANSIYONLAR "Sağlanamaz eşik yazma"
+    | kuralının tarif ettiği durum.
     |
     | SONUÇ: konservatuvar adayı şu an GRUP 3'ün ölçütleriyle değerlendiriliyor
     | (aynı puan barajları, ama "toplamın %40'ı bilimsel makaleden" koşuluyla).
@@ -355,3 +359,57 @@ return [
         ]],
     ],
 ];
+
+/*
+ * 11. BÖLÜM CETVELE GİRİLDİ (04.09.2026) → EŞİKLER TEMEL ALANA AYRILDI.
+ *
+ * "Disipline özgü etkinlik ve faaliyetler" kaynakta altı FAKÜLTE tablosuna
+ * bölünmüş ve "her temel bilim alanı kendi özel alanından puan alır" diyor.
+ * Aynı sözlük etiketi tablodan tabloya farklı puan aldığı için cetvel
+ * disipline göre varyantlandı (gerekçe cetvel dosyasının başlığında).
+ *
+ * Şart ağaçları değişmiyor; yalnızca eşiğin bağlandığı CETVEL değişiyor. Bu
+ * yüzden bloklar elle çoğaltılmadı: birden çok alana bakan bir eşik, kendi
+ * tablosu olan alanlar için ayrı kayda bölünüyor, geri kalan alanlar temel
+ * cetvelde kalıyor.
+ */
+$disiplin = [
+    'spor' => 'spor',                     // 11.1 Spor Bilimleri Fakültesi
+    'mimarlik' => 'mimarlik',             // 11.2 Mimarlık Fakültesi
+    'sosyal' => 'sosyal',                 // 11.3 Edebiyat + 11.4 İletişim
+    'filoloji' => 'edebiyat',             // 11.3 Edebiyat Fakültesi
+    'guzel_sanatlar' => 'guzel-sanatlar', // 11.4 Güzel Sanatlar + Konservatuvar
+    'ilahiyat' => 'ilahiyat',             // 11.6 İlahiyat Fakültesi
+];
+
+$kadroEki = ['dr_ogr_uyesi' => 'dr', 'docentlik' => 'docent', 'profesorluk' => 'profesor'];
+
+$esikler = [];
+
+foreach ($temel as $esik) {
+    $ayrilan = array_values(array_intersect(array_keys($disiplin), $esik['alan']));
+    $kalan = array_values(array_diff($esik['alan'], $ayrilan));
+
+    if ($kalan !== []) {
+        $esikler[] = [...$esik, 'alan' => $kalan];
+    }
+
+    foreach ($disiplin as $alan => $ek) {
+        if (! in_array($alan, $ayrilan, true)) {
+            continue;
+        }
+
+        // Anahtara alan eklenmiyor: `SartDeposu::esikler()` zaten `alan`
+        // dizisini kayda açarken anahtarın sonuna alanı ekliyor.
+        $esikler[] = [...$esik,
+            'alan' => [$alan],
+            'cetvel' => "akdeniz-2026-{$ek}-{$kadroEki[$esik['kadro']]}",
+            'notlar' => $esik['notlar'].' 11. Bölüm (Disipline Özgü Etkinlik ve Faaliyetler) bu '
+                .'alanda geçerli; bölüm başlığı "Bu bölümden alınan puan diğer bölümlerden alınan '
+                .'puanın %40\'ını geçemez" diyor ve cetvelde bu sınırın kadro başına sabit alt '
+                .'sınırı uygulanıyor.',
+        ];
+    }
+}
+
+return $esikler;

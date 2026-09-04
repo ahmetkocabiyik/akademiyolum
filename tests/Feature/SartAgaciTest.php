@@ -5149,3 +5149,86 @@ test('Bayburt yabancı dil koşulu altı eşikte de sorulıyor', function () {
 
     expect($sayac)->toBeGreaterThanOrEqual(6);
 });
+
+/**
+ * AKDENİZ 11. BÖLÜM: DİSİPLİNE ÖZGÜ ETKİNLİK VE FAALİYETLER.
+ *
+ * Kaynak bölümü altı FAKÜLTE tablosuna bölüyor ve "her temel bilim alanı
+ * kendi özel alanından puan alır" diyor. Aynı sözlük etiketi tablodan
+ * tabloya farklı puan aldığı için cetvel disipline göre varyantlandı; tek
+ * cetvele toplansaydı `puan()` en yükseği aldığı için herkes en cömert
+ * tabloyu alırdı.
+ */
+test('Akdeniz 11. bölüm satırları yalnız kendi disiplininin cetvelinde', function () {
+    $depo = sartDepo();
+    $derece = sartFaaliyet('Yarışma Derecesi / Mansiyon', Kategori::Odul, null);
+
+    $puan = function (string $cetvel) use ($depo, $derece): int {
+        $katalog = $depo->katalog($cetvel);
+
+        return $katalog === null ? -1 : $katalog->puan($derece, $katalog->coz(['*']));
+    };
+
+    // 11.1.10 Türkiye şampiyonası ilk üç 20 · 11.2.11 mimarlık yarışması 50
+    // 11.6.3 Kur'an-ı Kerim yarışması (ulusal) 50
+    expect($puan('akdeniz-2026-spor-dr'))->toBe(20)
+        ->and($puan('akdeniz-2026-mimarlik-dr'))->toBe(50)
+        ->and($puan('akdeniz-2026-ilahiyat-dr'))->toBe(50)
+        // Temel cetvelde (fen, mühendislik, sağlık, ziraat, eğitim, hukuk)
+        // 11. bölüm hiç yok: kaynak o fakültelere tablo vermiyor.
+        ->and($puan('akdeniz-2026'))->toBe(0);
+});
+
+test('Akdeniz 11. bölüm tavanı kadroya göre asgari puandan türetiliyor', function () {
+    $depo = sartDepo();
+
+    // Yurt dışı kişisel etkinlik (11.4.2) 75 puan; üç tanesi 225 eder.
+    $faaliyetler = array_fill(0, 3, sartFaaliyet(
+        'Kişisel Etkinlik (Uluslararası)', Kategori::SanatselEtkinlik, null,
+    ));
+
+    $topla = function (string $cetvel) use ($depo, $faaliyetler): int {
+        $katalog = $depo->katalog($cetvel);
+
+        return $katalog === null ? -1 : $katalog->topla($faaliyetler, $katalog->coz(['BOLUM_11_DISIPLIN']));
+    };
+
+    // "Bu bölümden alınan puan diğer bölümlerden alınan puanın %40'ını
+    // geçemez" → %40 × makale oranı × asgari puan.
+    expect($topla('akdeniz-2026-guzel-sanatlar-dr'))->toBe(16)
+        ->and($topla('akdeniz-2026-guzel-sanatlar-docent'))->toBe(48)
+        ->and($topla('akdeniz-2026-guzel-sanatlar-profesor'))->toBe(80)
+        // Güzel Sanatlar dışındaki alanlarda makale oranı %50, tavan da yüksek.
+        ->and($topla('akdeniz-2026-sosyal-dr'))->toBe(20)
+        ->and($topla('akdeniz-2026-sosyal-profesor'))->toBe(100);
+});
+
+test('Akdeniz 11.6.1 TV/radyo satırının kendi tavanı bölüm tavanından önce kesiyor', function () {
+    $katalog = sartDepo()->katalog('akdeniz-2026-ilahiyat-profesor');
+    expect($katalog)->not->toBeNull();
+
+    // 11.6.1 satırı 10 puan; kaynak "bu etkinlikten en fazla 50 puan" diyor.
+    // Bölüm tavanı profesörlükte 100, yani kesen şey satırın kendi tavanı.
+    $konusmalar = array_fill(0, 9, sartFaaliyet(
+        'Bilim İletişimi / Popüler Yayın', Kategori::ToplumsalKatki, null,
+    ));
+
+    expect($katalog->topla($konusmalar, $katalog->coz(['BOLUM_11_DISIPLIN'])))->toBe(50);
+});
+
+test('Akdeniz eşikleri temel alana göre kendi 11. bölüm cetvelini buluyor', function () {
+    $depo = sartDepo();
+
+    $cetvel = fn (string $alan): ?string => $depo->bul('Akdeniz Üniversitesi', 'dr_ogr_uyesi', $alan)['cetvel'] ?? null;
+
+    expect($cetvel('spor'))->toBe('akdeniz-2026-spor-dr')
+        ->and($cetvel('mimarlik'))->toBe('akdeniz-2026-mimarlik-dr')
+        ->and($cetvel('sosyal'))->toBe('akdeniz-2026-sosyal-dr')
+        ->and($cetvel('filoloji'))->toBe('akdeniz-2026-edebiyat-dr')
+        ->and($cetvel('guzel_sanatlar'))->toBe('akdeniz-2026-guzel-sanatlar-dr')
+        ->and($cetvel('ilahiyat'))->toBe('akdeniz-2026-ilahiyat-dr')
+        // Kendi tablosu olmayan alanlar bölünmedi, temel cetvelde kaldı.
+        ->and($cetvel('saglik'))->toBe('akdeniz-2026')
+        ->and($cetvel('hukuk'))->toBe('akdeniz-2026')
+        ->and($cetvel('egitim'))->toBe('akdeniz-2026');
+});
