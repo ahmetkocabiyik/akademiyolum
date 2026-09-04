@@ -757,11 +757,25 @@ satır verir ve okunamaz; filtre 56'ya indirdi ve içinden tek gerçek bulgu
 Planlama ve Tasarım Temel Alanı İçin)" bölümü iki cetvel varyantında da
 duruyordu.
 
-Gürültünün büyük kısmı üç desenden geliyor ve önceden elenebilir:
-BİRİM TÜRÜ LİSTESİ ("Müdür (Enstitü/Yüksekokul/Konservatuvar/MYO)" — kısıt
-değil, görevin kapsamı), TANIM CÜMLESİ ("Doktor Öğretim Üyesi (Dr. Öğr.
-Üyesi): …") ve AYNI ESERE ÖZGÜ SINIR ("Aynı kongrede yapılan görevlerden
-sadece biri").
+Gürültünün büyük kısmı üç desenden geliyor (56 işaretin 26'sı) ve önceden
+elenebilir. Üçü de `tests/Feature/KaynakTaramaTest.php` içinde kod olarak
+duruyor; kanıtları korpustan alınmış gerçek satırlar ve üçü de enjeksiyonla
+doğrulanmış — **filtreyi yeniden yazma, oradan al**:
+
+- **BİRİM TÜRÜ LİSTESİ** — "Müdür (Enstitü/Yüksekokul/Konservatuvar/MYO)".
+  Parantez görevin KAPSAMINI sayıyor. Tanıma kuralı: eğik çizgi var, birim
+  adı var, kısıt fiili (için/yalnızca/sadece/hariç) YOK. Tek başına Kafkas'ta
+  yirmi işaret üretiyordu.
+- **TANIM CÜMLESİ** — "Doktor Öğretim Üyesi (Dr. Öğr. Üyesi): …". Parantez
+  kısaltma; tanıma kuralı parantezden hemen sonra gelen iki nokta.
+- **AYNI ESERE ÖZGÜ SINIR** — "(Aynı kongrede yapılan görevlerden sadece
+  biri)", "(Sadece 1 bölüm dikkate alınır)". Sayı sınırı, uygunluk kısıtı
+  değil; motorun zaten tutamadığı sınıf.
+
+**TÜRKÇE METİNDE `preg_match`'in `/i` BAYRAĞINA GÜVENME.** `İ` harfinin
+Unicode küçüğü noktalı `i̇` (iki kod noktası) ve desendeki `i` ile
+eşleşmiyor; Hacı Bayram Veli'nin "Temel Alanı İçin" ibaresi bu yüzden ilk
+denemede filtreden geçmedi. Önce `İ→i`, `I→ı` çevir, sonra `mb_strtolower`.
 
 Doğru çıkanlar da taramanın işe yaradığının kanıtı: İKÇÜ'nün "sadece İletişim
 Bilimleri Alanı için" bölümü zaten yalnız `sosyal` varyantındaydı, "Yalnızca
