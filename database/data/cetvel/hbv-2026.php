@@ -265,10 +265,24 @@ $baslicaAgirlikli = [
     ],
 ];
 
-$cetvel = fn (array $yazar): array => [
+/*
+ * 15. BÖLÜM YALNIZCA MİMARLIK TEMEL ALANINDA (04.09.2026'da düzeltildi).
+ *
+ * Kaynağın bölüm başlığı: "15. Yarışma, Proje ve Yazılım (Mimarlık, Planlama
+ * ve Tasarım Temel Alanı İçin)". Kısıt doğrudan TEMEL ALANA bağlı, yani
+ * motorun `alan` ekseniyle birebir ifade edilebiliyor — ama 15.a satırı iki
+ * varyantta da duruyordu. `hbv-2026-esit` mimarlığı hiç içermiyor (eğitim,
+ * filoloji, hukuk, ilahiyat, sosyal, güzel sanatlar), `hbv-2026-baslica` ise
+ * mimarlığın yanında fen, mühendislik, sağlık, spor ve ziraatı da taşıyor:
+ * yarışma derecesi kaydı olan her aday kaynağın vermediği 15 puanı alıyordu
+ * (§0). Üçüncü varyant açıldı; yazar rejimi `baslica` ile aynı.
+ */
+$cetvel = fn (array $yazar, bool $mimarlik = false): array => [
     'kapsam_notu' => $kapsamNotu,
     'yazar_katsayisi' => $yazar,
-    'maddeler' => $maddeler,
+    'maddeler' => $mimarlik
+        ? $maddeler
+        : array_filter($maddeler, fn (string $kod): bool => ! str_starts_with($kod, '15.'), ARRAY_FILTER_USE_KEY),
     'gruplar' => $gruplar,
     'grup_tavanlari' => $grupTavanlari,
 ];
@@ -276,4 +290,5 @@ $cetvel = fn (array $yazar): array => [
 return ['cetveller' => [
     'hbv-2026-esit' => $cetvel($esitBolusme),
     'hbv-2026-baslica' => $cetvel($baslicaAgirlikli),
+    'hbv-2026-mimarlik' => $cetvel($baslicaAgirlikli, true),
 ]];

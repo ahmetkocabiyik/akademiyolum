@@ -5412,3 +5412,33 @@ test('Muş Alparslan konservatuvar bölümü hiçbir alanda sayılmıyor', funct
         // F bölümü (SANAT VE TASARIM ETKİNLİKLERİ) kısıtsız, dokunulmadı.
         ->and($katalog->puan($sanat('Kişisel Etkinlik (Uluslararası)'), $hepsi))->toBe(60);
 });
+
+/**
+ * SATIR BAŞLIĞINDAKİ PARANTEZ TARAMASI (04.09.2026).
+ *
+ * Başlık taramasının satır düzeyindeki hâli: kaynak metinlerin TABLO
+ * SATIRLARINDA birim/alan/kadro kısıtı taşıyan parantezler arandı. Elli altı
+ * işaretin tek gerçek bulgusu Ankara Hacı Bayram Veli'nin 15. bölümü.
+ */
+test('HBV yarışma bölümü yalnız mimarlık alanında sayılıyor', function () {
+    $depo = sartDepo();
+    $odul = sartFaaliyet('Yarışma Derecesi / Mansiyon', Kategori::Odul, null);
+
+    $puan = function (string $alan) use ($depo, $odul): int {
+        $esik = $depo->bul('Ankara Hacı Bayram Veli Üniversitesi', 'dr_ogr_uyesi', $alan);
+        $katalog = $depo->katalog($esik['cetvel'] ?? '');
+
+        return $katalog === null ? -1 : $katalog->puan($odul, $katalog->coz(['*']));
+    };
+
+    // "15. Yarışma, Proje ve Yazılım (Mimarlık, Planlama ve Tasarım Temel
+    // Alanı İçin)" → 15.a 15 puan.
+    expect($puan('mimarlik'))->toBe(15)
+        // `hbv-2026-baslica` mimarlığın yanında bu beş alanı da taşıyor.
+        ->and($puan('fen'))->toBe(0)
+        ->and($puan('muhendislik'))->toBe(0)
+        ->and($puan('saglik'))->toBe(0)
+        // `hbv-2026-esit` mimarlığı hiç içermiyor.
+        ->and($puan('sosyal'))->toBe(0)
+        ->and($puan('guzel_sanatlar'))->toBe(0);
+});

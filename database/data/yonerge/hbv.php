@@ -286,7 +286,7 @@ $alan('ilahiyat', ['ilahiyat'], 'İlahiyat', 'hbv-2026-esit',
     ]);
 
 // ── MİMARLIK, PLANLAMA VE TASARIM ──
-$alan('mimarlik', ['mimarlik'], 'Mimarlık, Planlama ve Tasarım', 'hbv-2026-baslica',
+$alan('mimarlik', ['mimarlik'], 'Mimarlık, Planlama ve Tasarım', 'hbv-2026-mimarlik',
     fn (?array $d): array => [
         $P('Uluslararası makale kaleminin a, b veya c bentlerinden en az 20 puan almak', '1.a-c', 20, $d),
         $A('Bu makalelerden en az birinde başlıca yazar olmak', '1.a-c', 1, $d, 'baslica'),

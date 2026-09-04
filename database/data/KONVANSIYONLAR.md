@@ -747,6 +747,29 @@ satır girilmez. Usul koşulları (ders bilgi paketi tamamlanmışlığı gibi,
 Akdeniz dipnot 3) bu sınıfa girmez — başvuru öncesi herkesin tamamlaması
 beklenen adımlardır, kimin hak ettiğini ayırmazlar.
 
+**SATIR DÜZEYİNDE DE TARA — AMA KISIT DESENİYLE FİLTRELE.** Başlık taraması
+bitince aynı desen tablo SATIRLARINA uygulandı: kod benzeri sıralayıcıyla
+başlayan satırlarda parantez ara, sonra parantezin İÇİNİ birim/alan/kadro
+kısıt desenine sok (fakülte, konservatuvar, "… için geçerlidir", "yalnızca",
+"sadece", "… temel alanı için", kadro adları). Filtresiz tarama binlerce
+satır verir ve okunamaz; filtre 56'ya indirdi ve içinden tek gerçek bulgu
+çıktı: Ankara Hacı Bayram Veli'nin "15. Yarışma, Proje ve Yazılım (Mimarlık,
+Planlama ve Tasarım Temel Alanı İçin)" bölümü iki cetvel varyantında da
+duruyordu.
+
+Gürültünün büyük kısmı üç desenden geliyor ve önceden elenebilir:
+BİRİM TÜRÜ LİSTESİ ("Müdür (Enstitü/Yüksekokul/Konservatuvar/MYO)" — kısıt
+değil, görevin kapsamı), TANIM CÜMLESİ ("Doktor Öğretim Üyesi (Dr. Öğr.
+Üyesi): …") ve AYNI ESERE ÖZGÜ SINIR ("Aynı kongrede yapılan görevlerden
+sadece biri").
+
+Doğru çıkanlar da taramanın işe yaradığının kanıtı: İKÇÜ'nün "sadece İletişim
+Bilimleri Alanı için" bölümü zaten yalnız `sosyal` varyantındaydı, "Yalnızca
+Doktor Öğretim Üyesi Atamalarında Geçerlidir" bölümünün tavanı doçentlik ve
+profesörlükte zaten sıfırdı, Gazi'nin ve SBÜ'nün alan kısıtlı satırları hiç
+girilmemişti, Afyon'un "güzel sanatlar temel alanı için" koşulu zaten o
+alanın eşiğindeydi.
+
 **PARANTEZ TARAMASI KORPUSA UYGULANDI (04.09.2026).** 179 kaynak metinde
 bölüm başlığı deseni (sıralayıcı + BÜYÜK HARFLİ öbek + parantez) arandı: 67
 kaynakta 274 başlık. Dört aileye ayrılıyor ve yalnız biri iş çıkardı.
