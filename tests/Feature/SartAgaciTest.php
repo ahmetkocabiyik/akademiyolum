@@ -5633,3 +5633,41 @@ test('Karamanoğlu fen grubunun barajları ve tür tabanları kaynakla birebir',
         // Profesör: 350 · 175; fen grubunda ilave 150 (öteki üç grupta 100).
         ->and($puanlar('kmu-fen-profesor-fen'))->toBe([350, 175, 500, 325]);
 });
+
+/**
+ * "İLAVE … PUAN DAHA" TELAFİSİ İKİ KOŞUL DEMEK (Dicle).
+ *
+ * Kaynak: "…doktor öğretim üyeliğine yeniden atanma koşullarında istenilen
+ * asgari 40 puana ilaveten A1-D2 kodları arasındaki faaliyetlerden 20 puan
+ * daha alarak puanlarını 60'a TAMAMLAMALARI gerekir." Ek puan hem belirli
+ * bir kümeden gelmeli hem de toplamı yükseltiyor. İlk yazımda tek düğüme
+ * sığdırılıp "A1-D2'den 60 puan" diye yazılmıştı — kaynağın istemediği
+ * kadar sıkıydı; doçentlik ve profesörlükte ise tersi olmuş, ek puan
+ * kümeye yazılıp toplamın yükseldiği atlanmıştı.
+ */
+test('Dicle telafi yolu hem kümeyi hem toplamı yükseltiyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->esik('dicle-spor-dr-yeniden-spor');
+
+    expect($esik)->not->toBeNull();
+
+    $telafi = null;
+    $ara = function (array $dugum) use (&$ara, &$telafi): void {
+        if (isset($dugum['telafi']) && str_contains($dugum['aciklama'] ?? '', 'proje ekibinde')) {
+            $telafi = $dugum['telafi'];
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+            $ara($cocuk);
+        }
+    };
+    $ara($esik['sart']);
+
+    expect($telafi)->not->toBeNull()
+        ->and($telafi['tip'])->toBe('ve');
+
+    $puanlar = array_map(fn (array $c): int => $c['min_puan'] ?? 0, $telafi['cocuklar']);
+
+    // Toplam 60'a tamamlanacak, ek 20 puan A1-D2 kümesinden gelecek.
+    expect($puanlar)->toBe([60, 20]);
+});

@@ -100,20 +100,46 @@ $SON_ATAMA = Kalip::SON_ATAMA_SONRASI;
  * "Sağlayamayan adayların bunun yerine şu kümeden N puan daha alması"
  * telafisini bir düğüme ekler.
  *
+ * "İLAVE … PUAN DAHA" İKİ KOŞUL DEMEK.
+ *
+ * Yönergenin telafi cümleleri hep aynı biçimde: "bu koşulu sağlayamayan
+ * adayların, bunun yerine A1-D2 kodları arasındaki faaliyetlerden ilave 50
+ * puan daha almış olmaları gerekir." Ek puan hem BELİRLİ BİR KÜMEDEN
+ * gelmeli hem de TOPLAMI yükseltiyor — biri yazılıp öteki atlanırsa telafi
+ * ya olduğundan kolay ya olduğundan zor olur. Dr. yeniden atanmada kaynak
+ * sonucu kendisi söylüyor: "20 puan daha alarak puanlarını 60'a
+ * tamamlamaları gerekir."
+ *
  * @param  array<string, mixed>  $dugum
  * @param  list<string>  $maddeler
+ * @param  int  $ilave  Kümeden gelmesi gereken ek puan
+ * @param  int  $toplam  Telafi yolunda ulaşılması gereken genel toplam
  * @param  array<string, mixed>|null  $donem
  * @return array<string, mixed>
  */
-$telafili = function (array $dugum, string $aciklama, array $maddeler, int $puan, ?array $donem, string $madde): array {
+$telafili = function (array $dugum, string $aciklama, array $maddeler, int $ilave, int $toplam, ?array $donem, string $madde): array {
     return $dugum + [
         'telafi' => [
-            'tip' => 'puan',
+            'tip' => 've',
             'aciklama' => $aciklama,
-            'madde' => $madde,
-            'maddeler' => $maddeler,
-            'min_puan' => $puan,
-            'donem' => $donem,
+            'cocuklar' => [
+                [
+                    'tip' => 'puan',
+                    'aciklama' => "Telafi yolunda tüm faaliyetlerden toplam en az {$toplam} puan",
+                    'madde' => $madde,
+                    'maddeler' => ['*'],
+                    'min_puan' => $toplam,
+                    'donem' => $donem,
+                ],
+                [
+                    'tip' => 'puan',
+                    'aciklama' => $aciklama,
+                    'madde' => $madde,
+                    'maddeler' => $maddeler,
+                    'min_puan' => $ilave,
+                    'donem' => $donem,
+                ],
+            ],
         ],
     ];
 };
@@ -181,7 +207,7 @@ $grup = function (
                 $telafili(
                     Kalip::adet('Son atamanızdan sonra bir proje ekibinde ya da bilimsel toplantı tertip kurulunda görev almış olmalısınız', ['D1-D5', 'M1-M2'], 1, donem: $SON_ATAMA, madde: "{$madde}/A-3-b"),
                     'Bu koşulu sağlayamazsanız: makale, bildiri, kitap ve proje kalemlerinizden 20 puan daha alarak toplamınızı 60\'a tamamlamalısınız',
-                    ['A1-D2'], 60, $SON_ATAMA, "{$madde}/A-3",
+                    ['A1-D2'], 20, 60, $SON_ATAMA, "{$madde}/A-3",
                 ),
                 Kalip::toplam(40, $SON_ATAMA),
             ]),
@@ -207,12 +233,12 @@ $grup = function (
                 $telafili(
                     Kalip::adet('BAP hariç en az 1 projede yürütücü olmalısınız', ['D1a-D2a'], 1, madde: "{$madde}/B-2"),
                     'Bu koşulu sağlayamazsanız: makale, bildiri, kitap ve proje kalemlerinizden 50 puan daha almalısınız',
-                    ['A1-D2'], 50, null, "{$madde}/B-2",
+                    ['A1-D2'], 50, 150, null, "{$madde}/B-2",
                 ),
                 $telafili(
                     Kalip::puanDan("{$etkinlikMetni} en az 10 puan", $etkinlikKume, 10, madde: "{$madde}/B-3"),
                     "Bu koşulu sağlayamazsanız: {$makaleMetni} 10 puan daha almalısınız",
-                    $makaleKume, 10, null, "{$madde}/B-3",
+                    $makaleKume, 10, 110, null, "{$madde}/B-3",
                 ),
                 Kalip::toplam(100),
             ]),
@@ -244,17 +270,17 @@ $grup = function (
                 $telafili(
                     Kalip::adet('Doçentlik unvanınızdan sonra BAP hariç en az 1 projede yürütücü olmalısınız', ['D1a-D2a'], 1, donem: $DOCENTLIK, madde: "{$madde}/C-6"),
                     'Bu koşulu sağlayamazsanız: makale, bildiri, kitap ve proje kalemlerinizden 50 puan daha almalısınız',
-                    ['A1-D2'], 50, null, "{$madde}/C-6",
+                    ['A1-D2'], 50, 350, null, "{$madde}/C-6",
                 ),
                 $telafili(
                     Kalip::puanDan("Doçentlik unvanınızdan sonra {$etkinlikMetni} en az 15 puan", $etkinlikKume, 15, $DOCENTLIK, madde: "{$madde}/C-7"),
                     "Bu koşulu sağlayamazsanız: {$makaleMetni} 15 puan daha almalısınız",
-                    $makaleKume, 15, null, "{$madde}/C-7",
+                    $makaleKume, 15, 315, null, "{$madde}/C-7",
                 ),
                 $telafili(
                     Kalip::puanDan('Lisansüstü tez yönetiminden en az 15 puan', ['J1-J2'], 15, madde: "{$madde}/C-8"),
                     "Bu koşulu sağlayamazsanız: {$makaleMetni} 10 puan daha almalısınız",
-                    $makaleKume, 10, null, "{$madde}/C-8",
+                    $makaleKume, 10, 310, null, "{$madde}/C-8",
                 ),
                 Kalip::toplam(300),
             ]),

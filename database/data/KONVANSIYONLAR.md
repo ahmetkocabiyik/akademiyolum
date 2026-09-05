@@ -476,6 +476,26 @@ puanı mı?** Türkçede ikisi de "toplam puanın yarısı" diye yazılıyor; ay
     "Adayın TOPLAM PUANININ %65'ini Tablo 2'den almış olması"
                                           → adayın kendi puanı, ORAN
 
+**"İLAVETEN … PUAN DAHA" KORPUSTA TARANDI (05.09.2026).** 35 kaynakta 242
+satır çıktı; gürültünün çoğu satır içi bonus ("ticarileştirilmesi hâlinde
+ilave 10 puan") ve tablo notu. Motorda gerçekten "ilave/daha" düğümü olan
+altı üniversite incelendi:
+
+| Üniversite | Kaynak | Durum |
+|---|---|---|
+| Dicle | "asgari 40 puana ilaveten A1-D2'den 20 puan daha alarak puanlarını 60'a tamamlamak" | **iki yönde de yanlıştı**, düzeltildi |
+| Karamanoğlu | "(a) bendindeki puana ilaveten … 100 puan daha" | önceki turda düzeltildi |
+| Isparta ÜBÜ | "Madde 6/2-b'deki puana ilaveten Tablo 1'den 20 puan" | DOĞRU — taban zaten Tablo 1'in kendi 40'ı |
+| Gaziantep | "1(a) ve/veya 8(a) maddelerinden toplamda en az 90 puan daha" | DOĞRU — ek puan zaten kümeye yazılı |
+| Gazi | "proje yoksa makalelerden ilave 30 puan" | DOĞRU |
+| Çankırı | telafi puanları | DOĞRU |
+
+**Dicle iki yönde birden sapmıştı ve bu desen öğreticidir:** Dr. yeniden
+atanmada tek düğüm "A1-D2'den 60 puan" diyordu (kaynak toplamı 60'a
+tamamlamak, kümeden yalnız 20 istiyor → ÇOK SIKI), doçentlik ve
+profesörlükte ise ek puan kümeye yazılıp toplamın yükseldiği atlanmıştı
+(→ ÇOK GEVŞEK). Tek düğüm iki koşulu birden taşıyamaz.
+
 **"İLAVETEN … PUAN DAHA" İKİ DÜĞÜM İSTER.** Aynı ailenin ikinci kalıbı:
 "(a) bendinde belirtilen PUANA İLAVETEN A, B, C, F, H ve İ türü
 aktivitelerden olmak üzere en az 100 puan DAHA almış olmak"
