@@ -5588,3 +5588,48 @@ test('Akdeniz GRUP 4 barajı 11.4 etkinlikleriyle sağlanabiliyor', function () 
         ->and($onbirDort->mevcut)->toBe(150)
         ->and($onbirDort->durum)->toBe(Durum::Saglandi);
 });
+
+/**
+ * KARAMANOĞLU FEN GRUBU — BARAJLAR SAYFA GÖRÜNTÜSÜNDEN DOĞRULANDI.
+ *
+ * Kaynak PDF taranmış ve OCR "%" işaretini "90", "96", "“" diye okuyor; fen
+ * grubunun satırı `Enaz “650'si` çıkıyordu. 200 dpi sayfa görüntüsünde
+ * (MADDE 6.(3)/b/3, 8.(3)/a, 9.(3)/a) metin net:
+ *
+ *   Dr.       "En az %50'si A, C, F, H ve İ türü aktivitelerden olmak üzere
+ *              bütün aktivitelerden toplam 150 puan almış olmak"
+ *   Doçent    "En az %50'sini A, B, C, F, H ve İ türü aktivitelerden olmak
+ *              üzere en az 300 puan almış olmak"
+ *   Profesör  "Doçent ünvanı aldıktan sonra en az %50'si … en az 350 puan"
+ *
+ * Yarının tabanı her üçünde de cümledeki SABİT sayı, adayın kendi toplamı
+ * değil — bu yüzden düğümler `puanDan` (75 · 150 · 175).
+ */
+test('Karamanoğlu fen grubunun barajları ve tür tabanları kaynakla birebir', function () {
+    $depo = sartDepo();
+
+    $puanlar = function (string $anahtar) use ($depo): array {
+        $esik = $depo->esik($anahtar);
+        $out = [];
+        $gez = function (array $dugum) use (&$gez, &$out): void {
+            if (($dugum['tip'] ?? null) === 'puan') {
+                $out[] = $dugum['min_puan'] ?? 0;
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+        };
+        $gez($esik['sart'] ?? []);
+
+        return $out;
+    };
+
+    // Dr: toplam 150, A/C/F/H/İ türlerinden 75.
+    expect($puanlar('kmu-fen-dr-fen'))->toBe([150, 75])
+        // Doçent: toplam 300 · türlerden 150; "(a)'ya İLAVETEN 100 puan daha"
+        // alternatifi ise toplamı 400'e, tür kümesini 250'ye çıkarıyor.
+        ->and($puanlar('kmu-fen-docent-fen'))->toBe([300, 150, 400, 250])
+        // Profesör: 350 · 175; fen grubunda ilave 150 (öteki üç grupta 100).
+        ->and($puanlar('kmu-fen-profesor-fen'))->toBe([350, 175, 500, 325]);
+});

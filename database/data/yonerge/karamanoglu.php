@@ -11,7 +11,20 @@ use App\Services\Scoring\Sart\Kalip;
  *
  * KAYNAK PDF TARANMIŞ; 300 dpi görüntüden `tesseract -l tur` ile okundu.
  * OCR "%" işaretini "90", "96", "©0" ve "“" olarak okumuş; koşullardaki
- * bütün yüzdeler bu düzeltmeyle alındı.
+ * bütün yüzdeler bu düzeltmeyle alındı. 05.09.2026'da fen grubunun üç
+ * barajı 200 dpi SAYFA GÖRÜNTÜSÜNDEN birebir doğrulandı (MADDE 6.(3)/b/3
+ * "toplam 150 puan", 8.(3)/a "en az 300 puan", 9.(3)/a "en az 350 puan";
+ * üçünde de oran %50). Fen grubunun profesörlük İLAVESİ 150, öteki üç
+ * grupta 100 — bu da görüntüden doğrulandı (satır 392/417/442/467).
+ *
+ * ── "İLAVETEN … PUAN DAHA" İKİ DÜĞÜM İSTER ──
+ * MADDE 8 ve 9'un alternatif bendi "(a) bendinde belirtilen PUANA İLAVETEN
+ * A, B, C, F, H ve İ türü aktivitelerden olmak üzere en az 100 puan DAHA
+ * almış olmak" diyor. Ek puan hem TOPLAMI hem TÜR KÜMESİNİ yükseltiyor:
+ * doçentlikte toplam 400 ve türlerden 250, profesörlükte 500 ve 325. İlk
+ * yazımda tek düğüme sığdırılıp "tür kümesinden 400/500" diye yazılmıştı;
+ * kaynağın istemediği kadar sıkıydı ve yalnız bu yoldan gidebilen adayı
+ * haksız yere eliyordu.
  *
  * ── EŞİKLERİN YAPISI ──
  * Dört alan grubu, her birinin kendi puan barajı ve kendi TÜR KÜMESİ var
@@ -145,7 +158,18 @@ foreach ($gruplar as $g) {
             Kalip::veya('Dört alternatiften en az biri', [
                 $YURTDISI('MADDE 8'),
                 $PROJE('MADDE 8'),
-                Kalip::toplam($g['docentPuan'] + 100, maddeler: [$g['docentTur']], liste: "{$g['docentTurAd']} türü etkinlikler"),
+                // "(a) bendinde belirtilen PUANA İLAVETEN … türü aktivitelerden
+                // olmak üzere en az 100 puan DAHA almış olmak": ek 100 puan
+                // hem TOPLAMI hem TÜR KÜMESİNİ yükseltiyor. Tek düğüme
+                // sığmıyor — ilk yazımda "tür kümesinden toplam+100" diye
+                // yazılmıştı ve kaynağın istemediği kadar sıkıydı.
+                Kalip::ve('İlave 100 puan koşulu', [
+                    Kalip::toplam($g['docentPuan'] + 100, maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
+                    Kalip::puanDan(
+                        "{$g['docentTurAd']} türü etkinliklerden en az ".(intdiv($g['docentPuan'], 2) + 100).' puan',
+                        [$g['docentTur']], intdiv($g['docentPuan'], 2) + 100, madde: 'MADDE 8',
+                    ),
+                ]),
                 $H_INDEKS($g['hDocent'], 'MADDE 8'),
             ]),
         ]),
@@ -297,7 +321,14 @@ foreach ($profesorler as $p) {
     $alternatifler = [
         $YURTDISI($p['madde']),
         $PROJE($p['madde']),
-        Kalip::toplam(350 + $p['ilave'], donem: Kalip::DOCENTLIK_SONRASI, maddeler: [$p['tur']], liste: "{$p['turAd']} türü etkinlikler"),
+        Kalip::ve("İlave {$p['ilave']} puan koşulu", [
+            Kalip::toplam(350 + $p['ilave'], donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'],
+                liste: 'Akademik Etkinlikler Listesi'),
+            Kalip::puanDan(
+                "{$p['turAd']} türü etkinliklerden en az ".(175 + $p['ilave']).' puan',
+                [$p['tur']], 175 + $p['ilave'], Kalip::DOCENTLIK_SONRASI, madde: $p['madde'],
+            ),
+        ]),
         $H_INDEKS($p['h'], $p['madde']),
     ];
 

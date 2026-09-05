@@ -476,6 +476,21 @@ puanı mı?** Türkçede ikisi de "toplam puanın yarısı" diye yazılıyor; ay
     "Adayın TOPLAM PUANININ %65'ini Tablo 2'den almış olması"
                                           → adayın kendi puanı, ORAN
 
+**"İLAVETEN … PUAN DAHA" İKİ DÜĞÜM İSTER.** Aynı ailenin ikinci kalıbı:
+"(a) bendinde belirtilen PUANA İLAVETEN A, B, C, F, H ve İ türü
+aktivitelerden olmak üzere en az 100 puan DAHA almış olmak"
+(Karamanoğlu MADDE 8/9). Ek puan hem TOPLAMI hem TÜR KÜMESİNİ yükseltiyor —
+doçentlikte toplam 400 ve türlerden 250 (300 + 100 · 150 + 100). Tek düğüme
+sığdırıp "tür kümesinden 400" yazmak kaynağın istemediği kadar sıkı olur ve
+yalnız bu yoldan gidebilen adayı haksız yere eler.
+
+**TARANMIŞ PDF'TE SAYIYI GÖRÜNTÜDEN DOĞRULA.** Karamanoğlu'nun kaynağı
+taranmış; OCR "%" işaretini "90", "96", "©0" ve "“" diye okuyor. Fen
+grubunun satırı `Enaz “650'si` çıkıyordu — "%50" mi "%65" mi belli değil ve
+ikisi 75 ile 97 puan arasında fark yaratıyor. `pdftoppm -r 200` + kırpma ile
+sayfa görüntüsüne bakmak dakikalar sürüyor ve kesin sonuç veriyor. Sayı
+belirsizse tahmin etme, GÖRÜNTÜYE BAK.
+
 **KORPUS TARAMASI (05.09.2026).** Motorda oransal düğüm taşıyan üç
 üniversite vardı; ikisi yanlış okumaydı:
 
