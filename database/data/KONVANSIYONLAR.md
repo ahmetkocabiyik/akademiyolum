@@ -490,6 +490,24 @@ altı üniversite incelendi:
 | Gazi | "proje yoksa makalelerden ilave 30 puan" | DOĞRU |
 | Çankırı | telafi puanları | DOĞRU |
 
+**KAÇ DÜĞÜM GEREKTİĞİNİ TABAN BELİRLER, KALIP DEĞİL.** Isparta ÜBÜ aynı
+kalıbı dört kez kullanıyor ve dördü de eksiksiz; sayı bentten bende
+değişiyor:
+
+    6/4-a   "Tablo 1'den en az 40 puan almak şartıyla … toplamda asgari 60"
+    6/4-b-5 "6/4-a bendine ilaveten, Tablo 1'den en az 20 puan"
+            → TEK DÜĞÜM yeter: T1 ≥ 60. Ek puan (a)'nın kısıtladığı KÜMEDEN
+              geliyor, toplam da kendiliğinden 60'ın üstünde kalıyor.
+
+    7/2-a   "Tablo 1 ve Tablo 2'den toplamda en az 100 puan"   (tablo tabanı YOK)
+    7/2-b-9 "7/2-a'daki puana ilaveten Tablo 1'den en az 10 ve Tablo 2'den
+             en az 10 olacak şekilde toplamda en az 20 puan"
+            → ÜÇ DÜĞÜM: T1 ≥ 10, T2 ≥ 10, toplam ≥ 120.
+
+Ayrım şu: **(a) bendinin tabanı, ek puanın geldiği kümeyle AYNI mı?** Aynıysa
+tek düğüm (tabanı topla), değilse her kısıt kendi düğümünü ister. Isparta bu
+kalıbın korpustaki referans uygulaması ve teste bağlı.
+
 **Dicle iki yönde birden sapmıştı ve bu desen öğreticidir:** Dr. yeniden
 atanmada tek düğüm "A1-D2'den 60 puan" diyordu (kaynak toplamı 60'a
 tamamlamak, kümeden yalnız 20 istiyor → ÇOK SIKI), doçentlik ve

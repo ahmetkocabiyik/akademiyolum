@@ -5671,3 +5671,80 @@ test('Dicle telafi yolu hem kümeyi hem toplamı yükseltiyor', function () {
     // Toplam 60'a tamamlanacak, ek 20 puan A1-D2 kümesinden gelecek.
     expect($puanlar)->toBe([60, 20]);
 });
+
+/**
+ * ISPARTA ÜBÜ — "İLAVETEN" KALIBININ REFERANS UYGULAMASI.
+ *
+ * Yönergede kalıbın dört örneği var ve dördü de eksiksiz yazılmış; korpusta
+ * bu kalıbın doğru kurulduğu tek yer burası, o yüzden teste bağlandı.
+ *
+ *   6/4-a   "Tablo 1'den en az 40 puan almak şartıyla, Tablo 1 ve Tablo 2'den
+ *            toplamda asgari 60 puan"
+ *   6/4-b-5 "Madde 6/4-a bendine ilaveten, Tablo 1'den en az 20 puan"
+ *            → Tablo 1 tabanı 40 + 20 = 60. Tek düğüm YETER, çünkü ek puan
+ *            zaten (a)'nın kısıtladığı KÜMEDEN geliyor ve toplam kendiliğinden
+ *            60'ın üstünde kalıyor.
+ *   7/2-b-9 "Madde 7/2-a'daki puana ilaveten Tablo 1'den en az 10 ve Tablo
+ *            2'den en az 10 puan olacak şekilde toplamda en az 20 puan"
+ *            → burada ek puan İKİ ayrı kümeye bölünüyor ve (a)'nın tabanı
+ *            tablo bazında değil TOPLAM (100). Üç düğüm gerekiyor:
+ *            T1 ≥ 10, T2 ≥ 10, toplam ≥ 120.
+ *   8/2-b-8 (a) "Tablo 1'den en az 60, toplamda en az 120" + ilave 10/10/20
+ *            → T1 ≥ 70, T2 ≥ 10, toplam ≥ 140.
+ */
+test('Isparta ÜBÜ "ilaveten" bentleri kaynaktaki tabanla toplanmış', function () {
+    $depo = sartDepo();
+
+    $dugumler = function (string $anahtar, string $madde) use ($depo): array {
+        $esik = $depo->esik($anahtar);
+        $out = [];
+        $gez = function (array $dugum) use (&$gez, &$out, $madde): void {
+            if (($dugum['tip'] ?? null) === 'puan' && ($dugum['madde'] ?? '') === $madde) {
+                $out[implode(',', $dugum['maddeler'] ?? [])] = $dugum['min_puan'] ?? 0;
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+        };
+        $gez($esik['sart'] ?? []);
+
+        return $out;
+    };
+
+    // 6/4-b-5: taban 40 + ilave 20 = 60, tek küme.
+    expect($dugumler('isparta-ubu-sosyal-dr-sosyal', 'MADDE 6/4-b-5'))->toBe(['T1' => 60])
+        // 6/2-c-6: fen tarafında aynı yapı.
+        ->and($dugumler('isparta-ubu-fen-muh-dr-fen', 'MADDE 6/2-c-6'))->toBe(['T1' => 60]);
+
+    // 7/2-b-9 ve 8/2-b-8: ek puan iki kümeye bölünüyor, toplam da yükseliyor.
+    $docent = $dugumler('isparta-ubu-fen-muh-docentlik-fen', 'MADDE 7/2-b-9');
+    $profesor = $dugumler('isparta-ubu-fen-muh-profesorluk-fen', 'MADDE 8/2-b-8');
+
+    expect($docent)->toBe(['T1' => 10, 'T2' => 10])
+        ->and($profesor)->toBe(['T1' => 70, 'T2' => 10]);
+
+    // Toplam düğümleri `Kalip::toplam` ile yazıldığı için `madde` taşımıyor;
+    // ilave yolunun toplamı ayrıca doğrulanıyor.
+    $toplamlar = function (string $anahtar) use ($depo): array {
+        $esik = $depo->esik($anahtar);
+        $out = [];
+        $gez = function (array $dugum) use (&$gez, &$out): void {
+            if (($dugum['tip'] ?? null) === 'puan' && str_contains($dugum['aciklama'] ?? '', 'toplam en az')) {
+                $out[] = $dugum['min_puan'] ?? 0;
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+        };
+        $gez($esik['sart'] ?? []);
+        sort($out);
+
+        return $out;
+    };
+
+    // Doçentlikte 100 (ana) + 120 (ilave yolu), profesörlükte 120 + 140.
+    expect($toplamlar('isparta-ubu-fen-muh-docentlik-fen'))->toBe([100, 120])
+        ->and($toplamlar('isparta-ubu-fen-muh-profesorluk-fen'))->toBe([120, 140]);
+});
