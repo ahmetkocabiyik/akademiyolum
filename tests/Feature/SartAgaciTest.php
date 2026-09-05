@@ -258,14 +258,15 @@ test('Güzel Sanatlar %40 barajı Hukuk/İlahiyat %50 barajından ayrı kayıtt�
 });
 
 /**
- * Motorun ORANSAL düğümü (min_oran) Akdeniz'den çıkınca sahipsiz kalmasın:
- * Trakya gerçekten adayın KENDİ toplamına bağlı bir oran istiyor.
+ * Motorun ORANSAL düğümü (min_oran) korpusta TEK BİR yerde doğru: Çanakkale
+ * "ADAYIN TOPLAM PUANININ %65'ini" diyor, yani gerçekten adayın kendi
+ * toplamına bağlı. Akdeniz, Karamanoğlu ve Trakya'da aynı kalıp sanılmıştı
+ * ama üçünde de taban SABİT bir barajdı; 04.09.2026'da sabit `puanDan`
+ * tabanına çevrildiler.
  */
-test('oransal koşul adayın kendi toplamından hesaplanıyor (Trakya)', function () {
+test('oransal koşul yalnız adayın kendi toplamına bağlıyken kullanılıyor', function () {
     $depo = sartDepo();
-    // `bul()` birim ayrımı yüzünden null dönüyor (Trakya'nın MYO ve enstitü
-    // kayıtları aynı alanı paylaşıyor); eşik anahtarla çekiliyor.
-    $esik = $depo->esik('trakya-ek7-myo-dr-ogr-uyesi-yeniden-spor');
+    $esik = $depo->bul('Çanakkale Onsekiz Mart Üniversitesi', 'dr_ogr_uyesi', 'sosyal');
 
     expect($esik)->not->toBeNull();
 
@@ -284,6 +285,15 @@ test('oransal koşul adayın kendi toplamından hesaplanıyor (Trakya)', functio
     };
 
     expect($oranli($esik['sart']))->toBeTrue();
+
+    // Öteki üçünde artık oransal düğüm kalmadı.
+    foreach (['Akdeniz Üniversitesi', 'Karamanoğlu Mehmetbey Üniversitesi', 'Trakya Üniversitesi'] as $universite) {
+        foreach ($depo->esikler() as $aday) {
+            if ($aday['universite'] === $universite) {
+                expect($oranli($aday['sart']))->toBeFalse();
+            }
+        }
+    }
 });
 
 test('telafi: Afyon TR Dizin şartı uluslararası makaleyle karşılanabilir', function () {

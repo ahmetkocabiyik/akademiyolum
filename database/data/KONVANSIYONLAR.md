@@ -467,10 +467,26 @@ bu, barajın çok üstünde puanı olan ama makale ağırlığı düşük adaya 
 04.09.2026'da on altı düğüm sabit `puanDan` tabanına çevrildi (50/150/250,
 Güzel Sanatlarda 40/120/200).
 
-Ayrım tek soruya iniyor: **üst simge SÜTUN BAŞLIĞINDA mı, yoksa cümle adayın
-sunduğu puandan mı söz ediyor?** Sütuna bağlıysa sabit taban yaz. Gerçekten
-adayın kendi toplamına bağlı örnekler de var (Trakya "puanınızın en az yarısı
-uluslararası faaliyetlerden"); orada `Kalip::oran` doğrudur.
+Ayrım tek soruya iniyor: **cümlenin öznesi SABİT BİR BARAJ mı, adayın kendi
+puanı mı?** Türkçede ikisi de "toplam puanın yarısı" diye yazılıyor; ayıran
+şey aynı cümlede bir SAYI geçip geçmediği:
+
+    "en az yarısı A, C, F, H'den olmak üzere bütün aktivitelerden
+     toplam 125 puan almış olmak"        → 125'in yarısı, SABİT (62)
+    "Adayın TOPLAM PUANININ %65'ini Tablo 2'den almış olması"
+                                          → adayın kendi puanı, ORAN
+
+**KORPUS TARAMASI (05.09.2026).** Motorda oransal düğüm taşıyan üç
+üniversite vardı; ikisi yanlış okumaydı:
+
+| Üniversite | Kaynak cümlesi | Karar |
+|---|---|---|
+| Karamanoğlu | "en az %50'si … olmak üzere toplam 125 puan" | sabite çevrildi (6 düğüm) |
+| Trakya | "en az yarısı … koşuluyla toplamda en az 300 puan" | sabite çevrildi (6 düğüm) |
+| Çanakkale | "**Adayın toplam puanının** %65'i" | ORAN doğru, kaldı |
+
+Akdeniz'le birlikte 28 düğüm sabit tabana çevrildi; 156 eşiği ilgilendiriyor.
+`Kalip::oran` korpusta artık YALNIZ Çanakkale'de ve test bunu koruyor.
 
 Yan etki: sabit taban, §"Yüzde tavanını ASGARİ PUANDAN SABİTE ÇEVİR"
 başlığındaki türetmeyi BOZMAZ — zincir `diğer bölümler ≥ makale ≥ oran ×

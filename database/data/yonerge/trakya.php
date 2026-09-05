@@ -104,7 +104,7 @@ $myo = function (string $ek, int $ilkPuan) use ($YDS_DR): array {
         'dr_ogr_uyesi_yeniden' => Kalip::ve('Meslek yüksekokulu doktor öğretim üyesi yeniden atama koşulları', [
             $YDS_DR,
             Kalip::toplam(40, maddeler: ['TUM']),
-            Kalip::oran('Puanınızın en az yarısı uluslararası faaliyetlerden gelmeli', ['ULUS'], 0.5, ['TUM'], madde: $ek.' MYO yeniden atama 1)'),
+            Kalip::puanDan('Uluslararası faaliyetlerden en az 20 puan', ['ULUS'], 20, madde: $ek.' MYO yeniden atama 1)'),
         ]),
     ];
 };
@@ -116,12 +116,12 @@ $ek1 = [
     'dr_ogr_uyesi' => Kalip::ve('Doktor öğretim üyesi ilk atama koşulları', [
         $YDS_DR,
         Kalip::toplam(30, maddeler: ['TUM']),
-        Kalip::oran('Toplam puanınızın en az üçte biri makale, kitap, atıf, proje ve uluslararası bildiri kalemlerinizden gelmeli', ['OZEL'], 1 / 3, ['TUM'], madde: 'EK-1 Fakülte Dr. Öğr. Üyesi ilk atama'),
+        Kalip::puanDan('Makale, kitap, atıf, proje ve uluslararası bildiri kalemlerinizden en az 10 puan', ['OZEL'], 10, madde: 'EK-1 Fakülte Dr. Öğr. Üyesi ilk atama'),
     ]),
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
         Kalip::toplam(40, maddeler: ['TUM']),
-        Kalip::oran('Toplam puanınızın en az dörtte biri makale, kitap, atıf, proje ve uluslararası bildiri kalemlerinizden gelmeli', ['OZEL'], 0.25, ['TUM'], madde: 'EK-1 Fakülte Dr. Öğr. Üyesi yeniden atama'),
+        Kalip::puanDan('Makale, kitap, atıf, proje ve uluslararası bildiri kalemlerinizden en az 10 puan', ['OZEL'], 10, madde: 'EK-1 Fakülte Dr. Öğr. Üyesi yeniden atama'),
     ]),
     'docentlik' => Kalip::ve('Doçent kadrosuna atanma koşulları', [
         ...$GENEL_DOCENT,
@@ -131,7 +131,7 @@ $ek1 = [
         ...$GENEL_PROF,
         Kalip::adet('Birinci danışman olarak en az iki lisansüstü ya da uzmanlık tezi yönetmiş olmak', ['5a', '5b'], 2, madde: 'EK-1 Fakülte Profesör 1)'),
         Kalip::toplam(300, maddeler: ['TUM']),
-        Kalip::oran('Toplam puanınızın en az yarısı makale, kitap, atıf, proje ve uluslararası bildiri kalemlerinizden gelmeli', ['OZEL'], 0.5, ['TUM'], madde: 'EK-1 Fakülte Profesör 2)'),
+        Kalip::puanDan('Makale, kitap, atıf, proje ve uluslararası bildiri kalemlerinizden en az 150 puan', ['OZEL'], 150, madde: 'EK-1 Fakülte Profesör 2)'),
         Kalip::adet('Doçentlik sonrası SCIE ya da SSCI kapsamında en az iki makale', ['M1A'], 2, donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-1 Fakülte Profesör 3)'),
         Kalip::adet('Bu makalelerden birinde birinci isim olmak', ['M1A'], 1, yazar: 'ilk', donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-1 Fakülte Profesör 3)'),
         Kalip::adet('Bu makalelerden birinde başlıca yazar olmak', ['M1A'], 1, yazar: 'baslica', donem: Kalip::DOCENTLIK_SONRASI, madde: 'EK-1 Fakülte Profesör 3)'),
@@ -246,7 +246,7 @@ $ek4 = [
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
         Kalip::toplam(50, maddeler: ['TUM']),
-        Kalip::oran('Toplam puanınızın en az yarısı makale, kitap ve bildiri kalemlerinizden gelmeli', ['OZEL'], 0.5, ['TUM'], madde: 'EK-4 Fakülte Dr. Öğr. Üyesi yeniden atama 1)'),
+        Kalip::puanDan('Makale, kitap ve bildiri kalemlerinizden en az 25 puan', ['OZEL'], 25, madde: 'EK-4 Fakülte Dr. Öğr. Üyesi yeniden atama 1)'),
     ]),
     'docentlik' => Kalip::ve('Doçent kadrosuna atanma koşulları', [...$GENEL_DOCENT, ...$DOCENT_4_ORTAK]),
     'profesorluk' => Kalip::ve('Profesör kadrosuna atanma koşulları', [
@@ -274,7 +274,7 @@ $ek4Enstitu = [
     'dr_ogr_uyesi_yeniden' => Kalip::ve('Araştırma enstitüsü doktor öğretim üyesi yeniden atama koşulları', [
         $YDS_DR,
         Kalip::toplam(75, maddeler: ['TUM']),
-        Kalip::oran('Toplam puanınızın en az yarısı makale, kitap ve bildiri kalemlerinizden gelmeli', ['OZELENS'], 0.5, ['TUM'], madde: 'EK-4 Araştırma Enstitüleri yeniden atama 1)'),
+        Kalip::puanDan('Makale, kitap ve bildiri kalemlerinizden en az 37 puan', ['OZELENS'], 37, madde: 'EK-4 Araştırma Enstitüleri yeniden atama 1)'),
         Kalip::adet('Bu yayınların en az biri 1.a, 1.b, 1.c, 4.a ya da 4.b\'de tanımlı, tek ya da ilk isimli olmalı', ['M1ABC', '4a', '4b'], 1, yazar: 'ilk', madde: 'EK-4 Araştırma Enstitüleri yeniden atama 1)'),
     ]),
     'docentlik' => Kalip::ve('Araştırma enstitüsü doçent kadrosuna atanma koşulları', [

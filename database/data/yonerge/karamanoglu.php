@@ -121,7 +121,7 @@ foreach ($gruplar as $g) {
                 $PROJE($g['madde']),
                 Kalip::ve('Puan alternatifi', [
                     Kalip::toplam($g['drPuan'], maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
-                    Kalip::oran("Puanın en az yarısı {$g['turAd']} türü etkinliklerden olmalı", [$g['tur']], 0.5, ['TUM'], madde: $g['madde']),
+                    Kalip::puanDan("{$g['turAd']} türü etkinliklerden en az ".intdiv($g['drPuan'], 2).' puan', [$g['tur']], intdiv($g['drPuan'], 2), madde: $g['madde']),
                 ]),
                 $H_INDEKS($g['hDr'], $g['madde']),
             ]),
@@ -141,7 +141,7 @@ foreach ($gruplar as $g) {
             Kalip::yds(65),
             Kalip::beyan('Doçentlik unvanını almış olmak', 'MADDE 8/1-a'),
             Kalip::toplam($g['docentPuan'], maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
-            Kalip::oran("Puanın en az yarısı {$g['docentTurAd']} türü etkinliklerden olmalı", [$g['docentTur']], 0.5, ['TUM'], madde: 'MADDE 8'),
+            Kalip::puanDan("{$g['docentTurAd']} türü etkinliklerden en az ".intdiv($g['docentPuan'], 2).' puan', [$g['docentTur']], intdiv($g['docentPuan'], 2), madde: 'MADDE 8'),
             Kalip::veya('Dört alternatiften en az biri', [
                 $YURTDISI('MADDE 8'),
                 $PROJE('MADDE 8'),
@@ -177,7 +177,7 @@ $esikler[] = $sanatOrtak + [
             Kalip::adet('Hakemli dergilerde en az 4 araştırma makalesi', ['HAKEMLI-MAKALE'], 4, madde: 'MADDE 6/4-c'),
             Kalip::ve('Puan alternatifi', [
                 Kalip::toplam(125, maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
-                Kalip::oran('Puanın en az yarısı A, C, F, H, İ ve L türü etkinliklerden olmalı', ['ACFHIL'], 0.5, ['TUM'], madde: 'MADDE 6/4-ç'),
+                Kalip::puanDan('A, C, F, H, İ ve L türü etkinliklerden en az 62 puan', ['ACFHIL'], 62, madde: 'MADDE 6/4-ç'),
             ]),
             $H_INDEKS(3, 'MADDE 6/4-d'),
         ]),
@@ -196,7 +196,7 @@ $esikler[] = $sanatOrtak + [
         Kalip::yds(65),
         Kalip::beyan('Doçentlik unvanını almış olmak', 'MADDE 8/1-a'),
         Kalip::toplam(200, maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
-        Kalip::oran('Puanın en az yarısı A, B, C, F, H, İ ve L türü etkinliklerden olmalı', ['ABCFHIL'], 0.5, ['TUM'], madde: 'MADDE 8/4-a'),
+        Kalip::puanDan('A, B, C, F, H, İ ve L türü etkinliklerden en az 100 puan', ['ABCFHIL'], 100, madde: 'MADDE 8/4-a'),
         Kalip::veya('Dört alternatiften en az biri', [
             $YURTDISI('MADDE 8/4-b'),
             $PROJE('MADDE 8/4-b'),
@@ -237,12 +237,12 @@ $esikler[] = $sosyalOrtak + [
             Kalip::ve('Yurt dışı deneyimi ile birlikte puan barajı', [
                 $YURTDISI('MADDE 6/5-c'),
                 Kalip::toplam(125, maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
-                Kalip::oran('Puanın en az yarısı A, B, C, F, G, H ve İ türü etkinliklerden olmalı', ['ABCFGHI'], 0.5, ['TUM'], madde: 'MADDE 6/5-c'),
+                Kalip::puanDan('A, B, C, F, G, H ve İ türü etkinliklerden en az 62 puan', ['ABCFGHI'], 62, madde: 'MADDE 6/5-c'),
             ]),
             Kalip::ve('İki uluslararası indeksli makale ile birlikte puan barajı', [
                 Kalip::adet('Diğer uluslararası indekslerde taranan dergilerde en az 2 makale', ['ALAN-INDEKSI'], 2, madde: 'MADDE 6/5-ç'),
                 Kalip::toplam(125, maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
-                Kalip::oran('Puanın en az yarısı A, C, F, H ve İ türü etkinliklerden olmalı', ['ACFHI'], 0.5, ['TUM'], madde: 'MADDE 6/5-ç'),
+                Kalip::puanDan('A, C, F, H ve İ türü etkinliklerden en az 62 puan', ['ACFHI'], 62, madde: 'MADDE 6/5-ç'),
             ]),
             $H_INDEKS(3, 'MADDE 6/5-d'),
         ]),
@@ -261,7 +261,7 @@ $esikler[] = $sosyalOrtak + [
         Kalip::yds(65),
         Kalip::beyan('Doçentlik unvanını almış olmak', 'MADDE 8/1-a'),
         Kalip::toplam(200, maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
-        Kalip::oran('Puanın en az yarısı A, B, C, F, H ve İ türü etkinliklerden olmalı', ['ABCFHI'], 0.5, ['TUM'], madde: 'MADDE 8/5-a'),
+        Kalip::puanDan('A, B, C, F, H ve İ türü etkinliklerden en az 100 puan', ['ABCFHI'], 100, madde: 'MADDE 8/5-a'),
         Kalip::veya('Dört alternatiften en az biri', [
             $YURTDISI('MADDE 8/5-b'),
             $PROJE('MADDE 8/5-b'),
@@ -313,7 +313,7 @@ foreach ($profesorler as $p) {
         Kalip::beyan('Doçent unvanını aldıktan sonraki yayınlarınızdan birini başlıca araştırma eseri olarak sunmak', 'MADDE 9/1-b'),
         Kalip::beyan('Doçent unvanını aldıktan sonra en az iki yıl üniversitede ya da alanıyla ilgili bir araştırma kuruluşunda fiilen çalışmış olmak', 'MADDE 9/1-c'),
         Kalip::toplam(350, donem: Kalip::DOCENTLIK_SONRASI, maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
-        Kalip::oran("Puanın en az yarısı {$p['turAd']} türü etkinliklerden olmalı", [$p['tur']], 0.5, ['TUM'], donem: Kalip::DOCENTLIK_SONRASI, madde: $p['madde']),
+        Kalip::puanDan("{$p['turAd']} türü etkinliklerden en az 175 puan", [$p['tur']], 175, Kalip::DOCENTLIK_SONRASI, madde: $p['madde']),
     ];
 
     if ($p['ceyreklikZorunlu']) {
@@ -374,7 +374,7 @@ foreach ([$SAGLIK, $FEN, $SANAT, $SOSYAL] as $i => $alan) {
         'sart' => Kalip::ve("Doktor öğretim üyeliğine yeniden atanma — {$adlar[$i]}", [
             Kalip::yds(60),
             Kalip::toplam(150, maddeler: ['TUM'], liste: 'Akademik Etkinlikler Listesi'),
-            Kalip::oran('Puanın en az yarısı A, B, C, D, F, G, H, İ ve L türü etkinliklerden olmalı', ['ABCDFGHIL'], 0.5, ['TUM'], madde: 'MADDE 7'),
+            Kalip::puanDan('A, B, C, D, F, G, H, İ ve L türü etkinliklerden en az 75 puan', ['ABCDFGHIL'], 75, madde: 'MADDE 7'),
         ]),
     ];
 }
