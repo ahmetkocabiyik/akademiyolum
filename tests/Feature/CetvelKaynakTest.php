@@ -948,3 +948,40 @@ test('toplantı organizasyonunda rol kademesi çökmüyor', function () {
         ->and($puan('Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'))->toBe(5)
         ->and($puan('Oturum Başkanlığı (Uluslararası)'))->toBe(2);
 });
+
+/**
+ * KADEMEYİ BİRLEŞTİREN SATIR EN DÜŞÜĞÜNÜ ALIR (06.09.2026).
+ *
+ * `Davetli Konuşmacı` etiketi kapsam (uluslararası/ulusal) taşımıyor; her
+ * iki kademeyi de temsil ettiği için satır ULUSAL değerde durmalı. Sekiz
+ * üniversitede uluslararası kademeye yazılmıştı — kaynak metinden okunan
+ * ulusal karşılıklarla düzeltildi.
+ */
+test('davetli konuşmacı etiketi ulusal kademede', function (string $cetvel, int $beklenen) {
+    $katalog = app(SartDeposu::class)->cetveller()[$cetvel] ?? null;
+    expect($katalog)->not->toBeNull("cetvel yok: {$cetvel}");
+
+    $faaliyet = sartFaaliyet('Davetli Konuşmacı', Kategori::Bildiri, null);
+
+    expect($katalog->puan($faaliyet, $katalog->coz(['*'])))->toBe($beklenen);
+})->with([
+    // Ankara ç) 12 · a) 25 idi.
+    ['ankara-2023', 12],
+    // Artvin B6 12 · B1 15 idi.
+    ['artvin-2024', 12],
+    // Ege d) 10 · a) 15 idi.
+    ['ege-2026', 10],
+    // Gümüşhane B6 5 · B2 8 idi.
+    ['gumushane-2026', 5],
+    // Kocaeli 10) 6 · 9) 8 idi (cetvelde 7).
+    ['kocaeli-2023', 6],
+    // Marmara 39 15 · 38 30 idi.
+    ['marmara-egitim', 15],
+    ['marmara-fen-saglik', 15],
+    // Ordu N.6 3 · N.4 10 idi.
+    ['ordu-2024-dr-yeniden-c60', 3],
+    // Bayburt 3.2.ç 15 · 3.1.d'nin 70'iyle karışmıştı.
+    ['bayburt-2024', 15],
+    // Ağrı 2.2.1 15 · 2.1.1'in 20'si yazılıydı.
+    ['agri-2024', 15],
+]);

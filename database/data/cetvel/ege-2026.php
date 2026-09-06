@@ -62,7 +62,7 @@ return [
         // ── 2. BİLİMSEL TOPLANTI (BİLDİRİ) ──
         // "8/4" = tam metin / özet. Sözlükte ikisi ayrı etiket olduğu için
         // yönergenin ikili değeri iki maddeye açıldı.
-        '2a' => ['baslik' => 'Uluslararası toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 15],
+        '2a-2d' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
         '2b' => ['baslik' => 'Uluslararası toplantıda sözlü bildiri (tam metin)', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 8],
         '2c' => ['baslik' => 'Uluslararası toplantıda poster bildiri (özet)', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 5],
         '2e' => ['baslik' => 'Ulusal toplantıda sözlü bildiri (tam metin)', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 6],

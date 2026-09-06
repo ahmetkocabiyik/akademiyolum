@@ -891,3 +891,14 @@ toplantıyı tarif ediyor (Niğde ÖHÜ, Pamukkale, Yıldız Teknik, Erzincan,
 Manisa CBÜ, Gaziantep, İzmir Kavram, İstanbul Atlas). Geri kalanlar önceki
 turlarda gerekçesiyle kayıtlı (Akdeniz, Çukurova, Kütahya DPÜ, Yozgat Bozok,
 Ahi Evran).
+
+### Kademe birleştirme taraması — açık kuyruk (06.09.2026)
+
+Kapsamsız etiketlerden `Davetli Konuşmacı` on üniversitede düzeltildi. Aynı
+tarama kapsamlı bildiri etiketleri için 96 işaret veriyor ama okunanların
+tamamı yanlış pozitif çıktı (Haliç, Necmettin Erbakan, Fırat, Marmara zaten
+doğru kademede). Tarayıcı bir etiketin havuzunu kurarken kapsamı blok
+başlığında yazılı satırları ve `CPCI` gibi nitelik kademelerini ayıramıyor.
+
+Kuyruk kapatılmadı; sıradaki tur kapsamsız öteki etiketlerle sürmeli:
+`Kitap Editörlüğü`, `Hakemlik`, `Kurul / Komisyon Üyeliği`.

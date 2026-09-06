@@ -35,7 +35,7 @@ return [
         'A5' => ['baslik' => 'TR Dizin dışı ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 4],
 
         // B. BİLDİRİ
-        'B2' => ['baslik' => 'Uluslararası etkinlikte çağrılı konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 8],
+        'B2-B6' => ['baslik' => 'Bilimsel etkinlikte çağrılı konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
         'B4a' => ['baslik' => 'Uluslararası etkinlikte sözlü/tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 6],
         'B4b' => ['baslik' => 'Uluslararası etkinlikte özet/poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 4],
         'B8a' => ['baslik' => 'Ulusal etkinlikte sözlü/tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 5],

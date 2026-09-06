@@ -154,7 +154,7 @@ $maddeler = [
     'M.6' => ['baslik' => 'Üniversite BAP destekli sonuçlandırılmış projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Özel Sektör / STK', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 5],
 
     // ══ N. DİĞER BİLİMSEL ETKİNLİKLER ══
-    'N.4' => ['baslik' => 'Uluslararası sempozyum, çalıştay ya da kongrede davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
+    'N.4-N.6' => ['baslik' => 'Sempozyum, çalıştay ya da kongrede davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 3],
     'N.8' => ['baslik' => 'Jürili yarışmalarda danışmanlık ya da jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 25],
 ];
 

@@ -73,7 +73,7 @@ $govde = [
 
         // ── B. BİLİMSEL TOPLANTI ──
         'B1' => ['baslik' => 'Uluslararası toplantıda sözlü, tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 8],
-        'B2' => ['baslik' => 'Uluslararası toplantıda sözlü, özet bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 7],
+        'B2' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 6],
         'B3' => ['baslik' => 'Uluslararası toplantıda poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 6],
         'B4' => ['baslik' => 'Ulusal toplantıda sözlü, tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 7],
         'B6' => ['baslik' => 'Ulusal toplantıda poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],

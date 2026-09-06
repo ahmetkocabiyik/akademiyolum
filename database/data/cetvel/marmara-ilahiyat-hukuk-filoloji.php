@@ -82,7 +82,7 @@ return [
         '36b' => ['baslik' => 'Tamamlanmış ulusal veya kurumsal projede katılımcılık', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'BAP (Üniversite)', 'Özel Sektör / STK', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 8],
 
         // ── DAVETLİ KONUŞMACI ve EDİTÖRLÜK ── (38-42)
-        '38' => ['baslik' => 'Uluslararası toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 30],
+        '38-39' => ['baslik' => 'Kongre ya da sempozyumda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 15],
         '41' => ['baslik' => 'Yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği', 'Diğer Hakemli Dergi'], 'puan' => 2],
         // Yönergenin her alan tablosunda bu satırlar ULUSLARARASI/ULUSAL diye
         // ikiye ayrılıyor; faaliyet kaydı dergi ya da bursun düzeyini taşımadığı

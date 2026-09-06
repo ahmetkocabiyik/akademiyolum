@@ -1150,6 +1150,46 @@ satır daha ekledi — üyelik etiketinin kapsamı 52 üniversiteden 71'e çıkt
 listeden düşüyor ve kaynak "aile yok" görünüyor. Terim başına yeniden tarama
 bunun tek pratik panzehiri.
 
+### KADEME BİRLEŞTİRME TARAMASI: HATA KAPSAMSIZ ETİKETTE TOPLANIYOR
+
+Ağrı'da bulunan sınıf ("birleşik satır kapsadığı kademelerin en düşüğünü
+almalı") korpusa tarandı. Ölçüt etiket bazlı: her etiketin kaynakta hangi
+satırlara denk düştüğü kalıpla bulunuyor, cetveldeki değeri o satırların en
+düşüğüyle karşılaştırılıyor.
+
+**Bulgu: hata KAPSAM TAŞIMAYAN etiketlerde toplanıyor.** `Davetli Konuşmacı`
+sözlükte uluslararası/ulusal ayrımı taşımıyor; cetveli yazan kişi doğal
+olarak tablonun ULUSLARARASI satırını alıyor ve ulusal davetli konuşma yapan
+aday fazla puan alıyor. On üniversitede tam bu desen çıktı:
+
+| | yazılı | doğrusu |
+|---|---|---|
+| Ordu | 10 | 3 |
+| Marmara (7 dosya) | 30 | 15 |
+| Ankara | 25 | 12 |
+| Bayburt | 70 | 15 |
+| Ağrı | 20 | 15 |
+| Ege | 15 | 10 |
+| Artvin | 15 | 12 |
+| Gümüşhane | 8 | 5 |
+| Kocaeli | 7 | 6 |
+
+Kapsamlı etiketlerde (`Uluslararası Tam Metin`, `Ulusal Özet/Poster`)
+tarayıcının verdiği 96 işaretin elle okunanları YANLIŞ POZİTİF çıktı: Haliç,
+Necmettin Erbakan, Fırat ve Marmara'nın satırları zaten doğru kademedeydi.
+Sebep tarayıcının havuz kurma sınırı — bir etiketin havuzuna, kapsamı
+satırda değil BLOK BAŞLIĞINDA yazılı satırlar ve `CPCI` gibi nitelik
+kademeleri de karışıyor.
+
+**Sıradaki tur için ölçüt:** taramayı kapsamsız etiketlerle sınırla
+(`Davetli Konuşmacı`, `Kitap Editörlüğü`, `Hakemlik`, `Kurul / Komisyon
+Üyeliği`). Kapsamlı etiketlerde işaret/gürültü oranı çalışmıyor.
+
+**Kod DEĞİŞTİRİRKEN yönergeye bak.** Artvin'in `B1` kodunu `B1-B6` yapınca
+`SartAgaciTest`'in "her madde referansı karşılık buluyor" testi kırıldı:
+kod yönergenin şart ağacında geçiyordu. Birleştirilen satırın kodunu
+değiştirmek serbest DEĞİL; önce `grep` ile yönergede aranır.
+
 ### KOD KAYMASI: SATIRIN KODU BİR MADDEYİ, BAŞLIĞI KOMŞUSUNU ANLATIR
 
 Bayburt'ta bulunan sınıf korpusa tarandı. Cetvel satırının kodu kaynakta bir

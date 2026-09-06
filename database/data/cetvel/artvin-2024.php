@@ -48,7 +48,7 @@ return [
         'A3' => ['baslik' => 'Diğer yurt içi hakemli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 8],
 
         // ── B. BİLDİRİLER (en fazla 50 puan) ──
-        'B1' => ['baslik' => 'Uluslararası kongrede çağrılı konuşmacı sunumu', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 15],
+        'B1' => ['baslik' => 'Kongrede çağrılı konuşmacı sunumu', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 12],
         'B2' => ['baslik' => 'Uluslararası kongrede sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 13],
         'B3' => ['baslik' => 'Uluslararası kongrede sözlü sunulan ve özeti yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 7],
         'B7' => ['baslik' => 'Ulusal kongrede sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 8],
