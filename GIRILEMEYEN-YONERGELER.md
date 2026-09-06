@@ -913,3 +913,13 @@ On dört işaretin on biri düzeltildi. Girilmeyen üçü:
 - **Trakya (4f ve 13. madde hakemliği)** — yedi ek tablosu var; tarayıcının
   havuzu ekler arası kuruluyor ve puan sütunları pdftotext'te kesik. Ekin
   kendi değerleri okunmadan değiştirilemez.
+
+### `Kurul / Komisyon Üyeliği` taraması (06.09.2026)
+
+On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
+
+- **Yozgat Bozok, Üsküdar, Tokat GOP** — eşleşen satırlar yönergenin komisyon
+  KURMA usulünü anlatan nesir cümleleri ("Komisyon üyeleri … profesörlerden
+  seçilir"); yanlarındaki sayı puan değil.
+- **Ankara MGÜ** — kaynağın tek komisyon satırı H.7 (10) ve cetvel onu
+  yazıyor; daha düşük bir kurul kademesi yok.

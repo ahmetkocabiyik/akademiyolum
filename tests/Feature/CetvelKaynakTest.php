@@ -987,6 +987,37 @@ test('davetli konuşmacı etiketi ulusal kademede', function (string $cetvel, in
 ]);
 
 /**
+ * KAPSAMSIZ ETİKETLERİN ÜÇÜNCÜ TURU: `Kurul / Komisyon Üyeliği`.
+ *
+ * Etiket kurulun HANGİSİ olduğunu taşımıyor (senato, fakülte kurulu, birim
+ * komisyonu, sınav komisyonu hepsi aynı etikete düşüyor); kaynak bunları
+ * kademelendiriyorsa satır en düşüğünde durmalı.
+ */
+test('kurul komisyon üyeliği en düşük kademede', function (string $cetvel, int $beklenen) {
+    $katalog = app(SartDeposu::class)->cetveller()[$cetvel] ?? null;
+    expect($katalog)->not->toBeNull("cetvel yok: {$cetvel}");
+
+    $faaliyet = sartFaaliyet('Kurul / Komisyon Üyeliği', Kategori::IdariGorev, null);
+
+    expect($katalog->puan($faaliyet, $katalog->coz(['*'])))->toBe($beklenen);
+})->with([
+    // Ardahan 1.1.29 birim komisyonu 1 · 1.1.14'ün 2'si yazılıydı.
+    ['ardahan-2026', 1],
+    // Kütahya DPÜ P12 birim/merkez kurulu 3 · P9'un 4'ü yazılıydı.
+    ['dpu-2024', 3],
+    // K.Maraş İstiklal B11.5 diğer kurul görevleri 5 · B11.4'ün 8'i
+    // yazılıydı (satır senato etiketini de taşıdığı için bölündü).
+    ['kahramanmaras-istiklal-2024', 5],
+    // Karabük sınav komisyonu 2 · 4.15.2'nin 10'u yazılıydı.
+    ['karabuk-2024', 2],
+    // Sakarya 14.35/14.41 kurul görevi 10 · 14.40'ın 20'si yazılıydı
+    // (üstelik o satır koordinatör YARDIMCILIĞI, kurul üyeliği değil).
+    ['sakarya-2026', 10],
+    // Selçuk h) Rektörlüğe bağlı komisyon üyesi 5 · 12f'nin 10'u yazılıydı.
+    ['selcuk-2024-egitim', 5],
+]);
+
+/**
  * KAPSAMSIZ ETİKETLERİN İKİNCİ TURU: `Kitap Editörlüğü` ve `Hakemlik`.
  *
  * İkisi de sözlükte kademe taşımıyor. `Kitap Editörlüğü` çeviri kitabın

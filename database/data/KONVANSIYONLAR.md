@@ -1150,6 +1150,35 @@ satır daha ekledi — üyelik etiketinin kapsamı 52 üniversiteden 71'e çıkt
 listeden düşüyor ve kaynak "aile yok" görünüyor. Terim başına yeniden tarama
 bunun tek pratik panzehiri.
 
+### KAPSAMSIZ ETİKET TARAMASI BİTTİ: DÖRT ETİKET, YİRMİ SEKİZ DÜZELTME
+
+Sözlükte kademe taşımayan dört etiketin tamamı tarandı:
+
+| Etiket | Düzeltilen | Taranan işaret |
+|---|---|---|
+| `Davetli Konuşmacı` | 10 üniversite | 14 |
+| `Kitap Editörlüğü` | 8 | 10 |
+| `Hakemlik` | 3 | 4 |
+| `Kurul / Komisyon Üyeliği` | 6 | 10 |
+
+İşaret/gürültü oranı yüksek (28/38) — kapsamlı etiketlerdeki 96 işaretin
+tamamının yanlış pozitif çıkmasıyla tam zıt. **Sebep yapısal:** kapsamsız
+etiket kaynağın kademesini AYIRT EDEMEDİĞİ için cetveli yazan kişi tabloda
+gördüğü ilk (= en üst) satırı alıyor. Kapsamlı etikette ise satırın kendisi
+hangi kademe olduğunu söylüyor ve yanlış yazmak için ayrı bir hata gerekiyor.
+
+`Kurul / Komisyon Üyeliği` turunun kendi dersi: etiket kurulun HANGİSİ
+olduğunu taşımıyor — senato, fakülte kurulu, birim komisyonu, öğretim
+elemanı alım sınav komisyonu hepsi aynı etikete düşüyor. Karabük'te fark
+beş kat çıktı (10 → 2). Sakarya'da satır zaten yanlış kalemdeydi: `14.40`
+kurul üyeliği değil KOORDİNATÖR YARDIMCILIĞI (20); kurul görevinin kendi
+satırı 10.
+
+**Yanlış pozitiflerin ortak sebebi nesir.** Yönergelerin komisyon KURMA
+usulü ("Komisyon üyeleri … profesörlerden seçilir", "görevi biten komisyon
+üyesi yeniden görevlendirilebilir") aynı deseni taşıyor ve yanındaki sayı
+puan değil. Yozgat, Üsküdar ve Tokat işaretlerinin tamamı buradan geldi.
+
 ### ETİKETİN TEMSİL ETTİĞİ KADEMEYİ SÖZLÜKTEN OKU, BAŞLIKTAN DEĞİL
 
 `Kitap Editörlüğü` ve `Hakemlik` de kapsamsız etiketler; taranınca on

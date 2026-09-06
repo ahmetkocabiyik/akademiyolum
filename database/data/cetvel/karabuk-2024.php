@@ -177,7 +177,7 @@ return [
         '4.14.10' => ['baslik' => 'BAP kapsamındaki projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 20],
 
         // ── 4.15 KOORDİNATÖRLÜK VE ÜYELİKLER ──
-        '4.15.2' => ['baslik' => 'Eğitim, kalite vb. komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
+        '4.15.2' => ['baslik' => 'Eğitim, kalite vb. komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
 
         // ── 4.16 JÜRİ ÜYELİKLERİ ──
         '4.16.1' => ['baslik' => 'Tez, yeterlik veya atama jüri üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 2],

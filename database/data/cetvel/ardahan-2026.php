@@ -105,7 +105,7 @@ $maddeler = [
     '1.1.11' => ['baslik' => 'Bölüm başkanı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 3],
     '1.1.12' => ['baslik' => 'Bölüm başkan yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 2],
     '1.1.13' => ['baslik' => 'Anabilim ya da bilim dalı başkanı, koordinatörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 2],
-    '1.1.14' => ['baslik' => 'Fakülte, enstitü, konservatuvar, yüksekokul veya MYO kurulu ya da yönetim kurulu üyesi', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
+    '1.1.14' => ['baslik' => 'Fakülte, enstitü, konservatuvar, yüksekokul veya MYO kurulu ya da yönetim kurulu üyesi', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
 
     // ══ 2. EĞİTİME KATKI — 2.1 DERS YÜKÜ ══
     '2.1.1' => ['baslik' => 'Ön lisans ya da lisans dersi (dönem başına her bir ders)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Değişim Programı Dersi'], 'puan' => 2],

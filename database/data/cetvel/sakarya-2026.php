@@ -171,7 +171,7 @@ return [
         '14.34' => ['baslik' => 'Resmi Kurumlara, sivil toplum kuruluşlarına ve özel kuruluşlara', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 20],
         '14.38' => ['baslik' => 'Üniversitenin bilim iletişimi (bilim söyleşileri, podcast, video vb.)', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın'], 'puan' => 10],
         '14.39' => ['baslik' => 'Rektörlüğe Bağlı Ofis/Koordinatörlüklerde Koordinatör *', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 30],
-        '14.40' => ['baslik' => 'Rektörlüğe Bağlı Ofis/Koordinatörlük Koordinatör Yardımcısı *', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 20],
+        '14.40' => ['baslik' => 'Rektörlüğe Bağlı Ofis/Koordinatörlük Koordinatör Yardımcısı *', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
         '14.42' => ['baslik' => 'Araştırma Merkez Müdürlüğü *', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 20],
         '14.43' => ['baslik' => 'Müdür yardımcılığı, Dekan yardımcılığı, Bölüm başkanlığı *', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 15],
         '14.44' => ['baslik' => 'Bölüm başkan yardımcılığı *', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 10],

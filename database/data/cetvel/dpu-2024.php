@@ -150,7 +150,7 @@ $ortak = [
     'P3' => ['baslik' => 'Rektörlüğe bağlı merkezlerde müdürlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 6],
     'P5' => ['baslik' => 'Bölüm başkanlığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 4],
     'P6' => ['baslik' => 'Bölüm başkan yardımcılığı ya da anabilim dalı başkanlığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 3],
-    'P9' => ['baslik' => 'Komisyonlarda üyelik ya da koordinatörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 4],
+    'P9' => ['baslik' => 'Komisyonlarda üyelik ya da koordinatörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 3],
     'P13' => ['baslik' => 'Üniversite yönetim kurulu ya da senato üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Rektör', 'Rektör Yardımcısı'], 'puan' => 6],
 ];
 
