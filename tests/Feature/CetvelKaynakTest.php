@@ -592,6 +592,9 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
     expect($bosSatirlar)->toBe([
         '1.1 · SCI-Expanded/SSCI/AHCI ilk %10 dergide makale',
         '1.6 · ESCI dergide makale',
+        // Siirt 13.c (10) ile 13.d (4) aynı etiketlere düşüyor; etiketler en
+        // düşük kademeye taşındı, bu satır belgelemek için duruyor.
+        '13.c · Meslek odaları ya da bilimsel amaçlı vakıflar tarafından verilen ödül',
         '1c · Diğer uluslararası alan indekslerinde taranan dergide makale',
         'A.16a · Millî takımlarda görev almak ya da antrenör ve hakem eğitim kurslarında eğitici olarak görev almak',
         // Muş Alparslan E bölümü: "Sadece Devlet Konservatuarı için

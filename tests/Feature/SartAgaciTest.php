@@ -6097,3 +6097,38 @@ test('İTÜ yarışma ödülü satırı kademelerin en düşüğünde', function
         // Satır MF barajının kümesinde: değer doğrudan eşiğe giriyor.
         ->and($mf->coz(['ESER-PUANI']))->toContain('G.7d');
 });
+
+/**
+ * SİİRT 13. BÖLÜM — ÖDÜLÜ VEREN KURUMA GÖRE İKİ KADEME, TEK ETİKET.
+ *
+ * Kaynak: c) meslek odaları veya vakıflar tarafından verilen ödül 10 ·
+ * d) kurum içi/dışı alınan bilimsel ödül 4. Sözlük ödülü VERENİ taşımıyor;
+ * etiket 13.c'de kalsaydı sıradan bir kurum ödülü de 10 sayılırdı.
+ */
+test('Siirt ulusal ödül etiketi en düşük kademede', function () {
+    $katalog = sartDepo()->katalog('siirt-2025');
+    expect($katalog)->not->toBeNull();
+
+    $odul = sartFaaliyet('Ulusal Bilim/Sanat Ödülü', Kategori::Odul, null);
+
+    expect($katalog->puan($odul, $katalog->coz(['*'])))->toBe(4);
+});
+
+/**
+ * AYBÜ u) BENDİ — DIŞ KURUL GÖREVİ, KENDİ TAVANIYLA.
+ *
+ * "Yükseköğretim Kurulu, ÜAK, TÜBİTAK, TÜBA vb. kamu kurum ve kuruluşlarında
+ * … komisyon ve üyeliklerinde ya da MESLEK ODALARI YÖNETİM KURULLARINDA
+ * görev almak" — 1/yıl, en fazla 3 puan. Dosya başlığı bu bendi "sözlükte
+ * karşılıksız" diye kaydetmişti; etiket eklenince girilebildi.
+ */
+test('AYBÜ dış kurul görevi girildi ve kendi tavanını taşıyor', function () {
+    $depo = sartDepo();
+    $katalog = $depo->katalog('aybu-2026');
+    expect($katalog)->not->toBeNull();
+
+    $gorev = array_fill(0, 5, sartFaaliyet('Dış Kuruluş Kurul Üyeliği (Ulusal)', Kategori::IdariGorev, null));
+
+    // Yıl başına 1 puan, ama beş yıllık görev 3'te kesiliyor.
+    expect($katalog->topla($gorev, $katalog->coz(['DG-DIS-KURUL'])))->toBe(3);
+});

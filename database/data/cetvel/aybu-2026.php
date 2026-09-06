@@ -175,6 +175,12 @@ $maddeler = [
     'DG.f' => ['baslik' => 'Topluma yönelik akademik ve sosyal sorumluluk çalışmaları, eğitimler ve projelerde yer almak; üniversite-toplum ya da üniversite-endüstri iş birliğinde görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Kamu/STK Danışmanlığı'], 'puan' => 2],
     'DG.g' => ['baslik' => 'Ulusal ya da uluslararası bir bilimsel etkinliğin düzenleme veya bilimsel değerlendirme komitesinde yer almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
     'DG.i' => ['baslik' => 'Üniversite birimlerinde yöneticilik, yönetici yardımcılığı ya da kurul, komisyon ve koordinatörlüklerde görev yapmak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
+    // Kaynağın u) bendi: "Yükseköğretim Kurulu, ÜAK, TÜBİTAK, TÜBA vb. kamu
+    // kurum ve kuruluşlarında … komisyon ve üyeliklerinde ya da MESLEK ODALARI
+    // YÖNETİM KURULLARINDA görev almak" (1/yıl, en fazla 3 puan). Dosya
+    // başlığındaki "komisyon üyelikleri sözlükte karşılıksız" notu 06.09.2026'da
+    // `Dış Kuruluş Kurul Üyeliği` etiketleri eklenince geçersizleşti.
+    'DG.u' => ['baslik' => 'Kamu kurum ve kuruluşlarının komisyonlarında ya da meslek odası yönetim kurullarında görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 1],
 ];
 
 $kodlar = fn (string $onek): array => array_values(array_filter(
@@ -183,6 +189,7 @@ $kodlar = fn (string $onek): array => array_values(array_filter(
 ));
 
 $gruplar = [
+    'DG-DIS-KURUL' => ['DG.u'],
     // Zorunlu şartların atıf yaptığı kümeler.
     'WOS-Q1-Q2' => ['M.a.q1', 'M.a.q2'],
     'WOS-Q3' => ['M.a.q3'],
@@ -216,6 +223,8 @@ $gruplar = [
 ];
 
 $grupTavanlari = [
+    // u) bendinin kendi tavanı: "(En fazla 3 puan.)"
+    'DG-DIS-KURUL' => 3,
     // Başlık düzeyi.
     'BILIMSEL-TOPLANTI' => 15,
     'ATIF' => 20,

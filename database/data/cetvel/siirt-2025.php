@@ -126,7 +126,13 @@ $maddeler = [
     // ══ 13. ÖDÜL ══
     '13.a' => ['baslik' => 'Alanında yurt dışı kurum ve kuruluşlardan alınan bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 60],
     '13.b' => ['baslik' => 'YÖK, TÜBA veya TÜBİTAK\'tan alınan bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['YÖK Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 50],
-    '13.c' => ['baslik' => 'Meslek odaları ya da bilimsel amaçlı vakıflar tarafından verilen ödül', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Burs'], 'puan' => 10],
+    // 13.c (10) ile 13.d (4) AYNI ETİKETLERE düşüyor: kaynak ödülü veren
+    // kuruma göre ayırıyor (meslek odası/vakıf ↔ kurum içi/dışı), sözlük
+    // ayırmıyor. `puan()` en yükseği aldığı için etiket 13.c'de kalsaydı
+    // sıradan bir kurum ödülü de 10 sayılırdı; etiketler en düşük kademeye,
+    // 13.d'ye taşındı ve 13.c bilerek ölü bırakıldı (§0).
+    '13.c' => ['baslik' => 'Meslek odaları ya da bilimsel amaçlı vakıflar tarafından verilen ödül', 'kategori' => 'odul', 'kaynaklar' => [], 'puan' => 10],
+    '13.d' => ['baslik' => 'Kurum içi ya da dışından alınan bilimsel ödül', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Burs'], 'puan' => 4],
     '13.ç' => ['baslik' => 'Kongre ve sempozyumlarda kazanılan ödül', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 5],
 
     // ══ 14. İDARİ GÖREV VE KOMİSYONLAR ══
