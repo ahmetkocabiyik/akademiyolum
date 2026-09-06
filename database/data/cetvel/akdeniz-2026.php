@@ -36,11 +36,12 @@
  * Bu yüzden cetvel DİSİPLİNE göre varyantlanıyor; motorun ayırabildiği en
  * ince eksen `alan` olduğu için tablolar temel alana bağlanıyor.
  *
- * 11.5 (Sağlık Bilimleri) girilmedi: iki satırı da "uluslararası/ulusal
- * kuruluşların YÖNETİM KURULLARINDA yer almak" diyor. Sözlükteki tek karşılık
- * `Kurul / Komisyon Üyeliği` ve o etiket ÜNİVERSİTE İÇİ kurulları taşıyor;
- * bağlansaydı fakülte kurulu üyesi olan her sağlık adayı kaynağın vermediği
- * 20-35 puanı alırdı (§0).
+ * 11.5 (Sağlık Bilimleri) 06.09.2026'da girildi. Önce atlanmıştı: iki satırı
+ * da "uluslararası/ulusal kuruluşların YÖNETİM KURULLARINDA yer almak" diyor
+ * ve sözlükteki tek yakın etiket `Kurul / Komisyon Üyeliği` ÜNİVERSİTE İÇİ
+ * kurulları taşıyordu. Korpus taraması aynı kalemin 22 kaynakta puanlandığını
+ * gösterince sözlüğe `Dış Kuruluş Kurul Üyeliği` etiketleri eklendi ve bölüm
+ * girilebilir oldu.
  */
 
 $ortak = [
@@ -383,6 +384,14 @@ $spor = [
     // kurul üyeliği ve müsabaka hakemliği — sözlükte karşılığı yok. Yazılan
     // tek satır yarışma derecesi; etiket organizasyonun düzeyini taşımadığı
     // için kademenin EN DÜŞÜĞÜ (11.1.10, Türkiye şampiyonası) alındı (§0).
+    // 11.1.7: sözlüğe `Spor Federasyonu Kurul Üyeliği` eklenene kadar
+    // karşılıksızdı (06.09.2026).
+    '11.1.7' => [
+        'baslik' => 'Uluslararası spor federasyonlarında kurul üyeliği',
+        'kategori' => 'idari_gorev',
+        'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'],
+        'puan' => 40,
+    ],
     '11.1.10' => [
         'baslik' => 'Antrenörü olduğu sporcunun/takımın Türkiye Şampiyonasında ilk üçe girmesi',
         'kategori' => 'odul',
@@ -691,6 +700,25 @@ $guzelSanatlar = [
  * %50'sini alır (11.6.2, 11.6.3 ve 11.6.5'te). 11.6.1'in kendi tavanı var:
  * "Bu etkinlikten en fazla 50 puan alınabilir."
  */
+/*
+ * 11.5 SAĞLIK BİLİMLERİ FAKÜLTESİ — iki satır, ikisi de kurum DIŞI kurul
+ * görevi. Dipnotu yok; uluslararası 35, ulusal 20.
+ */
+$saglik = [
+    '11.5.1' => [
+        'baslik' => 'Sağlık hizmetleriyle ilgili uluslararası kuruluşun yönetim kurulunda yer almak',
+        'kategori' => 'idari_gorev',
+        'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'],
+        'puan' => 35,
+    ],
+    '11.5.2' => [
+        'baslik' => 'Sağlık hizmetleriyle ilgili ulusal kuruluşun yönetim kurulunda yer almak',
+        'kategori' => 'idari_gorev',
+        'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'],
+        'puan' => 20,
+    ],
+];
+
 $ilahiyat = [
     '11.6.1' => [
         'baslik' => 'Alanıyla ilgili TV ve radyo programlarında konuşmacı olarak görev yapmak',
@@ -752,6 +780,7 @@ $onbir = [
     ],
     'guzel-sanatlar' => $guzelSanatlar,
     'ilahiyat' => $ilahiyat,
+    'saglik' => $saglik,
 ];
 
 /**
@@ -865,7 +894,7 @@ $KADRO = ['dr' => 100, 'docent' => 300, 'profesor' => 500];
 
 $cetveller = ['akdeniz-2026' => $govde('', 0)];
 
-foreach (['spor', 'mimarlik', 'edebiyat', 'sosyal', 'ilahiyat'] as $disiplin) {
+foreach (['spor', 'mimarlik', 'edebiyat', 'sosyal', 'ilahiyat', 'saglik'] as $disiplin) {
     foreach ($KADRO as $kadro => $asgari) {
         $cetveller["akdeniz-2026-{$disiplin}-{$kadro}"] = $govde($disiplin, (int) (0.4 * 0.5 * $asgari));
     }

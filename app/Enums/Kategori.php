@@ -285,6 +285,15 @@ enum Kategori: string
             // Yönergeler idari görevleri tek tek puanlıyor (Atatürk 00.01.01-12):
             // rektör ile rektör yardımcısı ayrı satır, ayrı puan. Birleşik
             // etiketler bu ayrımı taşıyamıyordu.
+            // `Kurul / Komisyon Üyeliği` ÜNİVERSİTE İÇİ kurulları taşıyor.
+            // Yönergelerin çoğu bunun yanında KURUM DIŞI görevleri de ayrı
+            // ve çok farklı puanlarla sayıyor; tek etikete toplansalardı §0
+            // uyarınca en düşük kademe yazılmak zorunda kalınır, ikisi
+            // birden yok olurdu. Korpus taraması (06.09.2026) iki ayrı aile
+            // gösterdi: bilimsel/mesleki kuruluş kurulları 22 kaynakta,
+            // spor federasyonu kurulları 26 kaynakta. Puanları da bambaşka —
+            // Bitlis Eren bilimsel kuruluş üyeliğine 8, Bartın olimpik spor
+            // federasyonu yöneticiliğine 100 veriyor.
             self::IdariGorev => [
                 'Rektör', 'Rektör Yardımcısı',
                 'Senato / Üniversite Yönetim Kurulu Üyesi',
@@ -292,6 +301,10 @@ enum Kategori: string
                 'Uygulama ve Araştırma Merkezi Müdürü',
                 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı',
                 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği',
+                'Dış Kuruluş Kurul Üyeliği (Uluslararası)',
+                'Dış Kuruluş Kurul Üyeliği (Ulusal)',
+                'Spor Federasyonu Kurul Üyeliği (Uluslararası)',
+                'Spor Federasyonu Kurul Üyeliği (Ulusal)',
             ],
             self::ToplumsalKatki => [
                 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın',

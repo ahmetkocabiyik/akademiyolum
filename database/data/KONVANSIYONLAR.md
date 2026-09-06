@@ -1072,6 +1072,28 @@ doğrudan eşleşme bulunamadığında devreye giriyor. Yeni etiket eklerken
 atasını da bu tabloya yaz. Tablo kategori başına ayrı:
 `EGITIM_KARSILIKLARI` 04.09.2026'da `Akreditasyon Kurulu Görevi` için açıldı.
 
+**ETİKET EKLEMEDEN ÖNCE AİLEYİ SAY.** "Bu kaleme etiket yok" diye atlanan bir
+satır tek başına etiket açmayı hak etmeyebilir; korpusta kaç kaynağın aynı
+kalemi puanladığını say. 06.09.2026'da Kocaeli'nin K.10-K.12'si için bakıldı
+ve tek bir kalem değil İKİ AYRI AİLE çıktı: bilimsel/mesleki kuruluş kurulları
+22 kaynakta, spor federasyonu kurulları 26 kaynakta. Puanları da bambaşka —
+Bitlis Eren bilimsel kuruluş üyeliğine 8, Bartın olimpik spor federasyonu
+yöneticiliğine 100 veriyor; tek etikete toplansalardı §0 ikisini birden
+en düşük kademeye indirirdi. Dört etiket eklendi (her aile için
+uluslararası/ulusal).
+
+**ATASI OLMAYAN ETİKETE EŞDEĞER YAZMA.** `Dış Kuruluş Kurul Üyeliği`
+eşdeğer tablosuna GİRMEDİ: kurum dışı bir kurul üyeliği, üniversite komisyonu
+üyeliğinin alt türü değil — tam tersine, ikisini ayırmak için açıldı. Eşdeğer
+ancak yeni etiket eskisinin gerçek bir ALT TÜRÜYSE yazılır
+(`Akreditasyon Kurulu Görevi` → `Akreditasyon Faaliyeti` öyleydi).
+
+**ETİKET AÇMAK ESKİ "GİRİLEMEDİ" NOTLARINI AÇAR.** Yeni etiket eklendiğinde
+onun yokluğu yüzünden atlanmış satırları da ara: Akdeniz'in 11.5'i (sağlık
+kuruluşları yönetim kurulu 35/20) ve 11.1.7'si (uluslararası spor federasyonu
+kurul üyeliği 40) bu turda girilebilir oldu; 11.5 için yeni bir `saglik`
+cetvel varyantı açıldı.
+
 **Etiketi ne zaman BÖLMEK gerekir:** aynı etiket altında toplanan kalemler
 arasında derece farkından fazlası varsa ve §0 kısayolu ağır kalemi yok
 ediyorsa. Akdeniz 8.2 (YÖKAK akreditasyon KURULUNDA görev, 30 × yıl) ile
@@ -1914,7 +1936,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 175 üniversite · 6716 eşik · 442 cetvel |
+| Girildi | 175 üniversite · 6716 eşik · 445 cetvel |
 | Okuma engeli çözüldü, giriş bekliyor | 0 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |

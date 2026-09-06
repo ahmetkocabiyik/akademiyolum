@@ -5275,8 +5275,10 @@ test('Akdeniz eşikleri temel alana göre kendi 11. bölüm cetvelini buluyor', 
         ->and($cetvel('filoloji'))->toBe('akdeniz-2026-edebiyat-dr')
         ->and($cetvel('guzel_sanatlar'))->toBe('akdeniz-2026-guzel-sanatlar-dr')
         ->and($cetvel('ilahiyat'))->toBe('akdeniz-2026-ilahiyat-dr')
+        // 11.5 (Sağlık Bilimleri) 06.09.2026'da, sözlüğe `Dış Kuruluş Kurul
+        // Üyeliği` etiketleri eklenince girilebildi.
+        ->and($cetvel('saglik'))->toBe('akdeniz-2026-saglik-dr')
         // Kendi tablosu olmayan alanlar bölünmedi, temel cetvelde kaldı.
-        ->and($cetvel('saglik'))->toBe('akdeniz-2026')
         ->and($cetvel('hukuk'))->toBe('akdeniz-2026')
         ->and($cetvel('egitim'))->toBe('akdeniz-2026');
 });
@@ -6021,4 +6023,55 @@ test('Kocaeli yeniden atanmada ders ve idari görev ortak 50 tavanını paylaş�
         ->and($ortak->topla($idari, $ortak->coz(['E-K'])))->toBe(50)
         // Ortak tavan grubu hem E hem K satırlarını kapsıyor.
         ->and(count($ortak->coz(['E-K'])))->toBeGreaterThan(count($ortak->coz(['K.1-K.11'])));
+});
+
+/**
+ * DIŞ KURULUŞ VE SPOR FEDERASYONU ETİKETLERİ (06.09.2026'da eklendi).
+ *
+ * `Kurul / Komisyon Üyeliği` ÜNİVERSİTE İÇİ kurulları taşıyor. Yönergelerin
+ * çoğu bunun yanında KURUM DIŞI görevleri ayrı ve çok farklı puanlarla
+ * sayıyor; korpus taraması bilimsel/mesleki kuruluş kurullarını 22, spor
+ * federasyonu kurullarını 26 kaynakta buldu. Tek etikete toplansalardı §0
+ * uyarınca en düşük kademe yazılır, ikisi birden yok olurdu.
+ *
+ * Etiketlerin ATASI YOK: eşdeğer tablosuna yazılmadılar, çünkü kurum dışı
+ * bir kurul üyeliği üniversite komisyonu üyeliğinin alt türü değil.
+ */
+test('dış kuruluş kurul üyeliği üniversite içi komisyondan ayrı puanlanıyor', function () {
+    $depo = sartDepo();
+    $gorev = fn (string $kaynak) => sartFaaliyet($kaynak, Kategori::IdariGorev, null);
+
+    $kocaeli = $depo->katalog('kocaeli-2023');
+    expect($kocaeli)->not->toBeNull();
+    $hepsi = $kocaeli->coz(['*']);
+
+    // Kocaeli K.10 uluslararası 5, K.11 ulusal 4, K.12 yerel 3; sözlükte
+    // ulusal/yerel ayrımı olmadığı için `(Ulusal)` etiketi 3 alıyor.
+    expect($kocaeli->puan($gorev('Dış Kuruluş Kurul Üyeliği (Uluslararası)'), $hepsi))->toBe(5)
+        ->and($kocaeli->puan($gorev('Dış Kuruluş Kurul Üyeliği (Ulusal)'), $hepsi))->toBe(3)
+        // Üniversite içi komisyon üyeliği kendi kademesinde kalıyor.
+        ->and($kocaeli->puan($gorev('Kurul / Komisyon Üyeliği'), $hepsi))->toBe(4);
+
+    // Akdeniz 11.5: etiket yokken hiç girilememişti.
+    $akdeniz = $depo->katalog('akdeniz-2026-saglik-dr');
+    expect($akdeniz)->not->toBeNull();
+
+    expect($akdeniz->puan($gorev('Dış Kuruluş Kurul Üyeliği (Uluslararası)'), $akdeniz->coz(['*'])))->toBe(35)
+        ->and($akdeniz->puan($gorev('Dış Kuruluş Kurul Üyeliği (Ulusal)'), $akdeniz->coz(['*'])))->toBe(20)
+        // Üniversite içi komisyon Akdeniz'de hiç puanlanmıyor.
+        ->and($akdeniz->puan($gorev('Kurul / Komisyon Üyeliği'), $akdeniz->coz(['*'])))->toBe(0);
+});
+
+test('spor federasyonu kurul üyeliği ayrı etikette', function () {
+    $depo = sartDepo();
+
+    // Akdeniz 11.1.7: uluslararası spor federasyonunda kurul üyeliği 40.
+    $spor = $depo->katalog('akdeniz-2026-spor-dr');
+    expect($spor)->not->toBeNull();
+
+    $federasyon = sartFaaliyet('Spor Federasyonu Kurul Üyeliği (Uluslararası)', Kategori::IdariGorev, null);
+
+    expect($spor->puan($federasyon, $spor->coz(['*'])))->toBe(40)
+        // Spor dışındaki varyantlar bu satırı taşımıyor.
+        ->and($depo->katalog('akdeniz-2026')->puan($federasyon, $depo->katalog('akdeniz-2026')->coz(['*'])))->toBe(0);
 });

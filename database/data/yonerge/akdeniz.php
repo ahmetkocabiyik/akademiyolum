@@ -405,6 +405,7 @@ $disiplin = [
     'filoloji' => 'edebiyat',             // 11.3 Edebiyat Fakültesi
     'guzel_sanatlar' => 'guzel-sanatlar', // 11.4 Güzel Sanatlar + Konservatuvar
     'ilahiyat' => 'ilahiyat',             // 11.6 İlahiyat Fakültesi
+    'saglik' => 'saglik',                 // 11.5 Sağlık Bilimleri Fakültesi
 ];
 
 $kadroEki = ['dr_ogr_uyesi' => 'dr', 'docentlik' => 'docent', 'profesorluk' => 'profesor'];

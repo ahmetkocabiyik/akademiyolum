@@ -170,6 +170,13 @@ $govde = [
         'K3' => ['baslik' => 'Bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 10],
         'K4' => ['baslik' => 'Anabilim dalı başkanlığı ya da rektörlükçe görevlendirilen koordinatörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 8],
         'K8' => ['baslik' => 'Görevlendirmeyle komisyon ya da kurul üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 4],
+
+        // K.10-K.12 06.09.2026'da sözlüğe eklenen DIŞ KURULUŞ etiketleriyle
+        // girildi. Kaynak üç kademe sayıyor (uluslararası 5, ulusal 4, yerel
+        // 3); sözlükte yerel/ulusal ayrımı yok, `(Ulusal)` etiketi ikisini
+        // birden taşıdığı için en düşük kademe yazıldı (§0).
+        'K10' => ['baslik' => 'Uluslararası bilimsel ya da mesleki kuruluşun yönetiminde, kurulunda veya komisyonunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 5],
+        'K12' => ['baslik' => 'Ulusal ya da yerel bilimsel/mesleki kuruluşun yönetiminde, kurulunda veya komisyonunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 3],
     ],
 
     'gruplar' => [
