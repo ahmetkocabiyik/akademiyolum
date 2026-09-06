@@ -1150,6 +1150,36 @@ satır daha ekledi — üyelik etiketinin kapsamı 52 üniversiteden 71'e çıkt
 listeden düşüyor ve kaynak "aile yok" görünüyor. Terim başına yeniden tarama
 bunun tek pratik panzehiri.
 
+### AYNI AİLENİN ÜÇÜNCÜ TERİMİ: DOYUM NOKTASI VE TANIM CÜMLESİ GÜRÜLTÜSÜ
+
+"Bilim kurulu" taraması (üçüncü terim) 100 kaynak buldu ama yalnız **üç yeni
+kaynak** çıkardı: Ankara MGÜ, Dokuz Eylül, İstanbul Arel. Aile doymuş
+demektir; dördüncü terimi taramak zorunlu değil.
+
+Açık kalan 26 kaynağın çoğu **tanım cümlesi** gürültüsü: "Uluslararası
+Bilimsel Toplantı: farklı ülkelerden bilim insanlarının BİLİM KURULUNDA
+BULUNDUĞU ve sunumların değerlendirildiği toplantı." Cümle toplantıyı
+tarif ediyor, bir görevi değil — sekiz kaynakta birebir aynı metin.
+Eleme deseni: `kurulu olan|kurulunda bulunduğu|kurulunun … oluş`.
+
+### BİR SATIR EKLERKEN ANAHTAR ÇAKIŞMASINI PHPStan YAKALAR
+
+Bayburt'a eklediğim `'3.1.d'` satırı dosyada zaten VARDI ve eskisini sessizce
+ezdi — PHP aynı anahtarı ikinci kez görünce üstüne yazıyor, hata vermiyor.
+Testler de geçti, çünkü ezilen satırın etiketi (`Davetli Konuşmacı`) korpusta
+başka cetvellerde de var. Yakalayan tek şey **PHPStan'in `duplicateKey`
+uyarısı** oldu (17 → 18).
+
+Ders çift: (1) toplu ekleme betiğinde kodun mevcut olup olmadığını ÖNCE
+sına, (2) veri dosyası değiştiren her turda PHPStan'i de çalıştır — testler
+bu sınıfı görmüyor.
+
+Uyarıyı kovalarken asıl hata çıktı: cetveldeki `3.1.d` "davetli konuşmacı,
+70" diyordu, oysa kaynağın 3.1.d'si DÜZENLEME KURULU BAŞKANI (70); davetli
+konuşmacı 3.1.ç (25). **Kod bir satır kaymış**, uluslararası davetli konuşma
+yapan aday 25 yerine 70 alıyordu. Etiket kapsam taşımadığı için satır §0
+uyarınca ulusal kademeye (3.2.ç, 15) çekildi.
+
 ### SÜTUN BOŞ ÇIKIYORSA SAYFAYI GÖRÜNTÜ OLARAK OKU
 
 `pdftotext` puan sütununu boş bırakan on kaynak sayfa görüntüsünden okundu

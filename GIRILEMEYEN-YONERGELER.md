@@ -876,3 +876,18 @@ Beşi girildi (RTE, Rumeli, Toros, Kırklareli, Bilecik). Kalan beşi:
   görevi değil ETKİNLİĞİ tarif ediyor: "jürili/küratörlü/düzenleme kurulu
   olan etkinlik", "düzenleme kurulunun en az yarısı Türkiye dışından olan
   uluslararası bilimsel toplantı".
+
+### "Bilim kurulu" taraması (06.09.2026)
+
+Üçüncü terim 100 kaynak buldu, 74'ü zaten girilmişti. Yeni girilen üç kaynak:
+Ankara MGÜ (40/20 · 10/5 · 10/5), Dokuz Eylül (15/12 · 7/5 · 7/5), İstanbul
+Arel (150/100 · 20 · 20). Bayburt da bu turda düzeltilip girildi (70/35 ·
+20/8 · 10/5).
+
+Açık kalan 26 kaynağın sekizinde cetvel yok. Kalanların çoğu **tanım cümlesi**
+yanlış pozitifi: "Uluslararası Bilimsel Toplantı: … bilim kurulunda bulunduğu
+… toplantı" cümlesi sekiz kaynakta birebir geçiyor ve bir görevi değil
+toplantıyı tarif ediyor (Niğde ÖHÜ, Pamukkale, Yıldız Teknik, Erzincan,
+Manisa CBÜ, Gaziantep, İzmir Kavram, İstanbul Atlas). Geri kalanlar önceki
+turlarda gerekçesiyle kayıtlı (Akdeniz, Çukurova, Kütahya DPÜ, Yozgat Bozok,
+Ahi Evran).

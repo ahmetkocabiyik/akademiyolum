@@ -356,6 +356,12 @@ return [
         '41.e' => ['baslik' => '5 dakikadan kısa solo çalgı, ses, koro, oda müziği veya elektronik müzik eseri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda/Koro Müziği Eseri (<15 dk)', 'Elektronik Müzik Eseri (<15 dk)'], 'puan' => 10],
         '41.f' => ['baslik' => 'Film müziği, tiyatro müziği ya da eşdeğeri eser kompozisyonu', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sahne/Ekran Müziği'], 'puan' => 15],
         '41.g' => ['baslik' => 'Eğitim müziği albümü kompozisyonu', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eğitim Müziği Albümü'], 'puan' => 8],
+        '47.a.1' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+        '47.b.1' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 12],
+        '47.a.4' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 7],
+        '47.b.4' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
+        '47.a.3' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 7],
+        '47.b.3' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 5],
     ],
 
     'gruplar' => [

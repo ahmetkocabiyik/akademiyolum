@@ -182,6 +182,10 @@ $maddeler = [
     'S.7.b' => ['baslik' => 'Satın alınan ya da uygulanan tasarım veya proje', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Yayında Yer Alması / Satın Alınması', 'Eserin Satın Alınması (Yurt İçi)', 'Özgün Eser / Beste / Tasarım', 'Uygulama Projesi — Müellif', 'Uygulama Projesi — Ekip'], 'puan' => 50],
     'S.8.a' => ['baslik' => 'Uluslararası mimarlık ya da tasarım yarışmasına katılım', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Uluslararası)'], 'puan' => 60],
     'S.8.b' => ['baslik' => 'Ulusal mimarlık ya da tasarım yarışmasına katılım', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Üyeliği (Ulusal)', 'Jüri Başkanlığı (Ulusal)'], 'puan' => 30],
+    'O.4.a' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 150],
+    'O.5.a' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 100],
+    'O.4.b' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 20],
+    'O.4.ck' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 20],
 ];
 
 return [

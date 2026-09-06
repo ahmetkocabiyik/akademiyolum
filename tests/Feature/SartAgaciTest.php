@@ -6164,3 +6164,26 @@ test('İTÜ moda adayının yarışma ödülü eser barajına giriyor', function
         // Satır açılırken toplam puan kademesi kaymadı.
         ->and($moda->puan($odul, $moda->coz(['*'])))->toBe(5);
 });
+
+/**
+ * BAYBURT 3. BÖLÜM — KODU BİR SATIR KAYMIŞ DAVETLİ KONUŞMACI.
+ *
+ * Cetvelde `3.1.d` "davetli konuşmacı, 70" yazıyordu. Kaynağın 3.1.d'si
+ * DÜZENLEME KURULU BAŞKANI (70); davetli konuşmacı 3.1.ç (25) ve ulusal
+ * karşılığı 3.2.ç (15). Uluslararası davetli konuşma yapan aday 25 yerine
+ * 70 alıyordu — §0 ihlali. Etiket kapsam taşımadığı için satır en düşük
+ * kademeye (ulusal, 15) yazıldı; 70 artık başkanlık satırının.
+ *
+ * Hata "bilim kurulu" taramasında değil, PHPStan'in "aynı dizide iki kez
+ * '3.1.d' anahtarı" uyarısında görüldü: yeni satır eskisini eziyordu.
+ */
+test('Bayburt davetli konuşmacı satırı doğru kademede', function () {
+    $katalog = sartDepo()->katalog('bayburt-2024');
+    expect($katalog)->not->toBeNull();
+
+    $davetli = sartFaaliyet('Davetli Konuşmacı', Kategori::Bildiri, null);
+    $baskan = sartFaaliyet('Toplantı Düzenleme Başkanlığı (Uluslararası)', Kategori::Diger, null);
+
+    expect($katalog->puan($davetli, $katalog->coz(['*'])))->toBe(15)
+        ->and($katalog->puan($baskan, $katalog->coz(['*'])))->toBe(70);
+});

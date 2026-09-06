@@ -363,6 +363,12 @@ return [
         'N.7' => ['baslik' => 'Kurumsal danışmanlık', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 20],
         'N.8' => ['baslik' => 'Alanıyla ilgili seminer veya hizmet içi eğitim vermek', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın'], 'puan' => 15],
         'N.1-N.3-N.4-N.5-N.6-N.9' => ['baslik' => 'Bilimsel veya sanatsal toplantıda düzenleme, bilim kurulu, oturum başkanlığı ya da sekreterlik görevi; bilirkişilik; yayımlanmış ders notu', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+        'N.1-u' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 40],
+        'N.1-n' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 20],
+        'N.3-u' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 10],
+        'N.3-n' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
+        'N.4-u' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 10],
+        'N.4-n' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 5],
     ],
 
     // Koşulların andığı kümeler. NOKTA ZORUNLU: 'J1.*' deseni J10/J11/J12'yi

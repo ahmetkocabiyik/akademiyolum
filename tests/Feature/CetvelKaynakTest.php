@@ -913,18 +913,20 @@ test('toplantı organizasyonu etiketleri korpusta puan alıyor', function (strin
 
     foreach ($depo->cetveller() as $ad => $katalog) {
         if ($katalog->puan($faaliyet, $katalog->coz(['*'])) > 0) {
-            $universite[preg_replace('/-.*/', '', $ad)] = true;
+            // İlk tireye kadar kesmek `ankara-mgu`yu `ankara`ya katıyordu;
+            // ayrım YIL ekinde: `ankara-2023` ile `ankara-mgu-2026` ayrı.
+            $universite[preg_replace('/-(?:19|20)\d{2}.*$/', '', $ad)] = true;
         }
     }
 
     expect(count($universite))->toBeGreaterThanOrEqual($enAz, "{$etiket} yeterince yayılmamış");
 })->with([
-    ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 46],
-    ['Toplantı Düzenleme Başkanlığı (Ulusal)', 42],
-    ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 72],
-    ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 69],
-    ['Oturum Başkanlığı (Uluslararası)', 27],
-    ['Oturum Başkanlığı (Ulusal)', 26],
+    ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 50],
+    ['Toplantı Düzenleme Başkanlığı (Ulusal)', 47],
+    ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 85],
+    ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 83],
+    ['Oturum Başkanlığı (Uluslararası)', 32],
+    ['Oturum Başkanlığı (Ulusal)', 31],
 ]);
 
 /**
