@@ -859,3 +859,20 @@ girildi. Kalan 25'in sekizinde cetvel hiç yok (İskenderun Teknik, KTÜ, Ordu,
   pdftotext çıktısında boş; değer okunmadan girilemez.
 - **Bayburt** — uluslararası kademeler girildi (3.1.d 70, 3.1.f 20); ulusal
   karşılıkları (3.2.x) okunmadığı için ulusal etiketler yazılmadı.
+
+### PDF'ten okunan on kaynak (06.09.2026)
+
+`pdftotext` puan sütununu boş bırakan on kaynak sayfa görüntüsünden okundu.
+Beşi girildi (RTE, Rumeli, Toros, Kırklareli, Bilecik). Kalan beşi:
+
+- **Eskişehir Teknik 12a** — puanı okundu (80/40/20) ama satır "Üniversite
+  Yönetim Kurulu kararıyla görevlendirilmiş olmak kaydıyla" koşuluna bağlı.
+  Görevlendirme kararı faaliyet kaydında yok; satır girilseydi kararı
+  olmayan adaya da puan verirdi.
+- **Kadir Has (O bölümü)** — tabloda puan sütunu yok, bölüm bir beyan formu.
+- **Ahi Evran (Tablo 1/B.12)** — yönerge puan değil ÖLÇÜT sayıyor; Tablo 1'in
+  nitel kalemleri Ek-1'de puanlı satır bulmuyor (dosya başlığında yazılı).
+- **Kütahya DPÜ** ve **Cerrahpaşa** — yanlış pozitif. Eşleşen satırlar bir
+  görevi değil ETKİNLİĞİ tarif ediyor: "jürili/küratörlü/düzenleme kurulu
+  olan etkinlik", "düzenleme kurulunun en az yarısı Türkiye dışından olan
+  uluslararası bilimsel toplantı".

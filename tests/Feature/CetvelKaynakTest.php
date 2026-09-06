@@ -796,7 +796,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
 
         // Bölüm toplamı "1.1; 1.2; 1.3; 1.4; 1.6" diye sınırlı; 1.5
         // (hakemlik) ve 1.7 (atıf) ayrı raporlanıyor.
-        'rumeli-2024: 5/46',
+        'rumeli-2024: 5/50',
 
         // EK-3 YBF'nin tek puan koşulu danışmanlık ağırlıklarına bağlı.
         'sabanci-turler: 13/21',
@@ -919,12 +919,12 @@ test('toplantı organizasyonu etiketleri korpusta puan alıyor', function (strin
 
     expect(count($universite))->toBeGreaterThanOrEqual($enAz, "{$etiket} yeterince yayılmamış");
 })->with([
-    ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 40],
-    ['Toplantı Düzenleme Başkanlığı (Ulusal)', 38],
-    ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 65],
-    ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 62],
-    ['Oturum Başkanlığı (Uluslararası)', 25],
-    ['Oturum Başkanlığı (Ulusal)', 24],
+    ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 46],
+    ['Toplantı Düzenleme Başkanlığı (Ulusal)', 42],
+    ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 72],
+    ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 69],
+    ['Oturum Başkanlığı (Uluslararası)', 27],
+    ['Oturum Başkanlığı (Ulusal)', 26],
 ]);
 
 /**

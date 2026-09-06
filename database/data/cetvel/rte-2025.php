@@ -192,6 +192,7 @@ $maddeler = [
     '13j' => ['baslik' => 'Ulusal ya da uluslararası kongre, sempozyum, panel veya çalıştay düzenlenmesinde başkanlık ya da düzenleme kurulu üyeliği yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 5],
     '13k-m' => ['baslik' => 'Başarı ile tamamlanmış bilim ve toplum projesinde ya da en az iki ay süreli toplumsal destek projesinde görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın', 'Kamu/STK Danışmanlığı'], 'puan' => 3],
     '13l' => ['baslik' => 'TÜBİTAK 2209-A, 2209-B ya da TEKNOFEST destekli öğrenci projesinde danışman olarak görev yapmak', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 3],
+    '13j-kurul' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı ya da kurul üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
 ];
 
 $gruplar = [

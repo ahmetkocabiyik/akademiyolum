@@ -1150,6 +1150,28 @@ satır daha ekledi — üyelik etiketinin kapsamı 52 üniversiteden 71'e çıkt
 listeden düşüyor ve kaynak "aile yok" görünüyor. Terim başına yeniden tarama
 bunun tek pratik panzehiri.
 
+### SÜTUN BOŞ ÇIKIYORSA SAYFAYI GÖRÜNTÜ OLARAK OKU
+
+`pdftotext` puan sütununu boş bırakan on kaynak sayfa görüntüsünden okundu
+(`pdftoppm -r 150 -f N -l N -png`, sonra Read). Tur ucuz: sayfa numarası
+zaten metinden bulunuyor, on kaynağın tamamı on render ile bitti. Sonuç:
+
+- **Beşinde değer okundu ve satır girildi** — RTE (5), Rumeli (30/20/20/10),
+  Toros (1), Kırklareli (300/200/100/50/40), Bilecik (10/5).
+- **Üçü YANLIŞ POZİTİF çıktı** ve bu ancak sayfayı görünce anlaşıldı:
+  Kütahya DPÜ ile Cerrahpaşa'nın eşleşen satırları **etkinliği tarif
+  ediyor** ("jürili/küratörlü/düzenleme kurulu OLAN etkinlik", "düzenleme
+  kurulunun yarısı yurt dışından olan toplantı"), bir görevi değil. Kadir
+  Has'ın O bölümünde ise puan sütunu gerçekten YOK — tablo bir beyan formu.
+- **İkisi girilmedi ama sebebi puan değil**: Eskişehir Teknik 12a'nın puanı
+  okundu (80/40/20) ama satır "Üniversite Yönetim Kurulu kararıyla
+  görevlendirilmiş olmak kaydıyla" diyor — taşınamayan bir UYGUNLUK kısıtı.
+  Ahi Evran'ın Tablo 1'i puan değil ölçüt sayıyor.
+
+**Ders: "puan sütunu boş" tek başına bir sınıf değil.** Altında üç ayrı
+durum var — değer var ama çıkarılamadı, değer hiç yok, satır zaten aileye
+ait değil. Üçünü ayırmanın tek yolu sayfayı görmek.
+
 ### EKLEME ÇAPASI TUTMAZSA SATIR SESSİZCE DÜŞER
 
 Toplu satır ekleyen bir betik yazarken çapayı `'maddeler' => [` etiketine
