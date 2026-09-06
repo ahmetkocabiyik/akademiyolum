@@ -365,7 +365,7 @@ $C = [
     'C4.b' => ['baslik' => 'Uluslararası yayınevi kitabının (ya da çeviri kitabın) editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 6],
     'C4.c' => ['baslik' => 'Uluslararası yayınevi kitabında (ya da çeviri kitapta) bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 6],
     'C4.d' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 15],
-    'C4.e' => ['baslik' => 'Ulusal yayınevi kitabının editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 8],
+    'C4.e' => ['baslik' => 'Ulusal yayınevi kitabının editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
     'C4.f' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 6],
     'C4.h' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 8],
     'C4.j' => ['baslik' => 'Çeviri kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 6],

@@ -94,7 +94,7 @@ $maddeler = [
     '1.2.1.1' => ['baslik' => 'ULAKBİM taranan ulusal hakemli dergide tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'puan' => 10],
     '1.2.2.1' => ['baslik' => 'Tanınmış ulusal yayınevinde bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 25],
     '1.2.3.1' => ['baslik' => 'Ulusal bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 6],
-    '1.2.4.1' => ['baslik' => 'Ulusal bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 8],
+    '1.2.4.1' => ['baslik' => 'Ulusal bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
     '1.2.5.1' => ['baslik' => 'Ulusal hakemli konferansta tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 3],
     '1.2.5.2' => ['baslik' => 'Ulusal hakemli konferansta bildiri özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
     '1.2.8.2' => ['baslik' => 'Tercüme edilip yayımlanmış ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],

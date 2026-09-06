@@ -985,3 +985,43 @@ test('davetli konuşmacı etiketi ulusal kademede', function (string $cetvel, in
     // Ağrı 2.2.1 15 · 2.1.1'in 20'si yazılıydı.
     ['agri-2024', 15],
 ]);
+
+/**
+ * KAPSAMSIZ ETİKETLERİN İKİNCİ TURU: `Kitap Editörlüğü` ve `Hakemlik`.
+ *
+ * İkisi de sözlükte kademe taşımıyor. `Kitap Editörlüğü` çeviri kitabın
+ * editörlüğünü de temsil etmek zorunda (sözlükte ayrı etiketi yok;
+ * `Çeviri Kitap` Kitap kategorisinde ve YAZARLIĞI anlatıyor), `Hakemlik`
+ * ise derginin indeksini taşımıyor. İkisi de kaynağın EN DÜŞÜK kademesine
+ * yazılmalı.
+ */
+test('kapsamsız editörlük etiketleri en düşük kademede', function (string $cetvel, string $etiket, int $beklenen) {
+    $depo = app(SartDeposu::class);
+    $katalog = $depo->cetveller()[$cetvel] ?? null;
+    expect($katalog)->not->toBeNull("cetvel yok: {$cetvel}");
+
+    $faaliyet = sartFaaliyet($etiket, Kategori::Editorluk, null);
+
+    expect($katalog->puan($faaliyet, $katalog->coz(['*'])))->toBe($beklenen);
+})->with([
+    // Adıyaman F.5.b çeviri editörlük 40 · F.5.a 50 yazılıydı.
+    ['adiyaman-2024', 'Kitap Editörlüğü', 40],
+    // Bingöl 15.b çeviri 5 · 15.a 10 yazılıydı (BKCI satırdan ayrıldı).
+    ['bingol-2024', 'Kitap Editörlüğü', 5],
+    // Fırat B1.3 diğer ulusal 10 · A1.6 40 yazılıydı.
+    ['firat-2026', 'Kitap Editörlüğü', 10],
+    // İbn Haldun 1.2.4.2 → 5 · 8 yazılıydı.
+    ['ibn-haldun-2024', 'Kitap Editörlüğü', 5],
+    // İzmir Kavram f) çeviri 5 · 10 yazılıydı.
+    ['izmir-kavram-2025', 'Kitap Editörlüğü', 5],
+    // Osmaniye 3.2 çeviri kitap editörlüğü 15 · 2.2.2'nin 20'si yazılıydı.
+    ['osmaniye-2023', 'Kitap Editörlüğü', 15],
+    // Yalova j) ulusal çeviri 4 · 4e'nin 8'i yazılıydı.
+    ['yalova-2024-sosyal', 'Kitap Editörlüğü', 4],
+    // Artvin F6 (A3 dergisi) 1 · F3'ün 5'i yazılıydı.
+    ['artvin-2024', 'Hakemlik', 1],
+    // Gaziantep 7b (ESCI/ULAKBİM/ulusal) 1 · 7a'nın 2'si yazılıydı.
+    ['gaziantep-2026', 'Hakemlik', 1],
+    // Fırat B5.6 diğer ulusal hakemlik 2 · A6.6'nın 3'ü yazılıydı.
+    ['firat-2026', 'Hakemlik', 2],
+]);

@@ -101,7 +101,7 @@ $genel = [
     '2e' => ['baslik' => 'Çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
     '2f' => ['baslik' => 'Çeviri kitapta editörlük ya da bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
     '2b-ed' => ['baslik' => 'BKCI kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 20],
-    '2d-ed' => ['baslik' => 'BKCI dışındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
+    '2d-ed' => ['baslik' => 'BKCI dışındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
 
     // ══ 4. BİLDİRİLER — 14. DAVETLİ KONUŞMACI ══
     '4a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 8],

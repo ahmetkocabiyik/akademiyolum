@@ -52,7 +52,7 @@ return [
         'A1.2' => ['baslik' => 'A1.1 dışındaki diğer bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 150],
         'A1.3' => ['baslik' => 'Web of Science Book Citation Index (BKCI) kapsamındaki bilimsel kitap içinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 100],
         'A1.4' => ['baslik' => 'A1.3 dışındaki diğer bilimsel kitap içinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 40],
-        'A1.6' => ['baslik' => 'A1.5 dışındaki diğer bilimsel kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'BKCI Kitap'], 'puan' => 40],
+        'A1.6' => ['baslik' => 'A1.5 dışındaki diğer bilimsel kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
         'A2.1-Q1' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamındaki dergilerde yayımlanmış özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 200],
         'A2.1-Q2' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamındaki dergilerde yayımlanmış özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 160],
         'A2.1-Q3' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamındaki dergilerde yayımlanmış özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 120],
@@ -78,7 +78,7 @@ return [
         'A6.1' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamındaki dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 30],
         'A6.2' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamındaki dergilerde yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 20],
         'A6.3' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamı dışındaki uluslararası hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'Diğer Hakemli Dergi'], 'puan' => 10],
-        'A6.6' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamı dışındaki uluslararası hakemli dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 3],
+        'A6.6' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamı dışındaki uluslararası hakemli dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
         'B1.1' => ['baslik' => 'Bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 50],
         'B1.4' => ['baslik' => 'Bilimsel kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
         'B1.5' => ['baslik' => 'Bilimsel kitap içinde bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
@@ -105,6 +105,7 @@ return [
         'C9.1' => ['baslik' => 'Son 5 (beş) yıl içinde Türkçe verilen dersler (dönem/kurul başına her ders için çarpan 1\'dir.)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders'], 'puan' => 8],
         'C9.2' => ['baslik' => 'Son 5 (beş) yıl içinde yabancı dilde verilen dersler (dönem/kurul başına her ders için çarpan 1\'dir.)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 16],
         'A4.6' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
+        'B1.3' => ['baslik' => 'Diğer ulusal yayınlarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
     ],
 
     'gruplar' => [

@@ -1150,6 +1150,35 @@ satır daha ekledi — üyelik etiketinin kapsamı 52 üniversiteden 71'e çıkt
 listeden düşüyor ve kaynak "aile yok" görünüyor. Terim başına yeniden tarama
 bunun tek pratik panzehiri.
 
+### ETİKETİN TEMSİL ETTİĞİ KADEMEYİ SÖZLÜKTEN OKU, BAŞLIKTAN DEĞİL
+
+`Kitap Editörlüğü` ve `Hakemlik` de kapsamsız etiketler; taranınca on
+cetvelde üst kademede bulundu (Adıyaman 50→40, Fırat 40→10, Osmaniye 20→15,
+İzmir Kavram 10→5, Bingöl 10→5, İbn Haldun 8→5, İKÇÜ 8→5, Yalova 8→4;
+Hakemlik: Artvin 5→1, Gaziantep 2→1, Fırat 3→2).
+
+**Bir etiketin hangi kademeleri temsil ettiğini SÖZLÜĞÜN TAMAMINA bakarak
+belirle.** `Kitap Editörlüğü` çeviri kitabın editörlüğünü de temsil etmek
+ZORUNDA, çünkü sözlükte o kalemin ayrı etiketi yok — `Çeviri Kitap` Kitap
+kategorisinde ve YAZARLIĞI anlatıyor. Çeviri kitabı redakte eden adayın
+seçebileceği başka etiket olmadığına göre, kaynağın çeviri editörlüğü satırı
+da bu etiketin havuzundadır ve §0 en düşüğünü ister.
+
+Bu okuma 06.09.2026'da ÖNCEKİ BİR KARARI DEĞİŞTİRDİ: Adıyaman'ın satırı
+"kitap editörlüğü 100/60/50/40 kademeli, Türkçe kitap satırından" notuyla
+50'de bırakılmıştı; en alttaki 40 (çeviri editörlüğü) kapsam dışı
+sayılmıştı. Test yorumu düzeltmenin gerekçesini taşıyor.
+
+**Etiket paylaşan satırı İNDİRME, BÖL.** Artvin'in F3'ü editörlük, yayın
+kurulu ve hakemliği tek satırda taşıyordu; satırı 1'e indirmek dergi
+etiketlerini de düşürürdü. Doğrusu `Hakemlik`i satırdan alıp kendi
+kademesinde yeni satır açmak (F6, 1). Aynısı Bingöl ve Fırat'ta `BKCI
+Kitap` ile `Kitap Editörlüğü` için yapıldı.
+
+**Per-ek tablolu kaynakta tarayıcıya güvenme.** Trakya'nın yedi eki için
+tarayıcı havuzu ekler arası kuruyor; hangi değerin hangi eke ait olduğu
+ayrılamıyor ve puan sütunları da kesik. Bu turda dışarıda bırakıldı.
+
 ### KADEME BİRLEŞTİRME TARAMASI: HATA KAPSAMSIZ ETİKETTE TOPLANIYOR
 
 Ağrı'da bulunan sınıf ("birleşik satır kapsadığı kademelerin en düşüğünü

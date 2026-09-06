@@ -902,3 +902,14 @@ başlığında yazılı satırları ve `CPCI` gibi nitelik kademelerini ayıram�
 
 Kuyruk kapatılmadı; sıradaki tur kapsamsız öteki etiketlerle sürmeli:
 `Kitap Editörlüğü`, `Hakemlik`, `Kurul / Komisyon Üyeliği`.
+
+### `Kitap Editörlüğü` / `Hakemlik` taraması (06.09.2026)
+
+On dört işaretin on biri düzeltildi. Girilmeyen üçü:
+
+- **OMÜ 7.3** — yanlış pozitif; kaynağın ulusal kitap editörlüğü satırı
+  gerçekten 20 (sayfa görüntüsünden doğrulandı), daha düşük bir editörlük
+  kademesi yok (7.2 Çevirmenlik kitap YAZARLIĞI).
+- **Trakya (4f ve 13. madde hakemliği)** — yedi ek tablosu var; tarayıcının
+  havuzu ekler arası kuruluyor ve puan sütunları pdftotext'te kesik. Ekin
+  kendi değerleri okunmadan değiştirilemez.

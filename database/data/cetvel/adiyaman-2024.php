@@ -93,7 +93,7 @@ $govde = function (array $tavanlar): array {
             'F.4.a' => ['baslik' => 'Yabancı dilde, yurt dışında yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 100],
             // Kitap editörlüğü dört kademeli (100/60/50/40); kayıt kitabın dilini ve
             // yayım yerini taşımadığı için §0 uyarınca Türkçe kitap satırından (50).
-            'F.5.a' => ['baslik' => 'Türkçe bilimsel veya ders kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 50],
+            'F.5.a' => ['baslik' => 'Türkçe bilimsel veya ders kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 40],
 
             // ── I. LİSANSÜSTÜ TEZ YÖNETİMİ ──
             'I.1' => ['baslik' => 'Yüksek lisans tezi yönetmiş olmak', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 50],

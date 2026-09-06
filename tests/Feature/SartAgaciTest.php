@@ -4392,9 +4392,16 @@ test('küçük görevler bölümün en yüksek satırından sayılmıyor', funct
     };
 
     // Adıyaman: yayın kurulu üyeliği 40/30/20 kademeli, en düşükten;
-    // kitap editörlüğü 100/60/50/40 kademeli, Türkçe kitap satırından.
+    // kitap editörlüğü 100/60/50/40 kademeli.
+    //
+    // 06.09.2026 DÜZELTMESİ: burada 50 (Türkçe kitap satırı) yazılıydı, en
+    // alttaki 40 "ÇEVİRİ kitapta editörlük" satırı kapsam dışı sayılmıştı.
+    // Sözlükte çeviri editörlüğünün ayrı etiketi YOK (`Çeviri Kitap`
+    // Kitap kategorisinde ve YAZARLIĞI anlatıyor), yani çeviri kitabın
+    // editörü de bu etiketi seçmek zorunda. Etiket o kademeyi temsil
+    // ediyorsa §0 en düşüğünü ister.
     expect($p('adiyaman-2024', 'Yayın Kurulu Üyeliği', Kategori::Editorluk))->toBe(20)
-        ->and($p('adiyaman-2024', 'Kitap Editörlüğü', Kategori::Editorluk))->toBe(50)
+        ->and($p('adiyaman-2024', 'Kitap Editörlüğü', Kategori::Editorluk))->toBe(40)
         // Burs iki kademeli (yurt dışı 150 / yurt içi 75) → düşükten.
         ->and($p('adiyaman-2024', 'Burs', Kategori::Odul))->toBe(75);
 
