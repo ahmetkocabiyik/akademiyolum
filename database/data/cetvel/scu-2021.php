@@ -63,7 +63,11 @@
  *   E5-E9 (proje ve sanat etkinliği hakemliği), F4-F5 (firma sahipliği),
  *       G7 (teknopark danışmanlığı), H1-H4'ün bir kısmı, H5 ve H9
  *       (yarışma jüriliği; E10-E11 satırlarıyla karşılandı) — sözlükte
- *       karşılıksız ya da aynı etikete düşüyor.
+ *       karşılıksız ya da aynı etikete düşüyor. 06.09.2026'da yeniden
+ *       bakıldı: H9 ("Meslek Odaları, Yerel Yönetimler, Bakanlıklar vb.
+ *       mimari proje yarışmalarında jüri üyeliği", 16 puan) bir KURUL
+ *       ÜYELİĞİ değil JÜRİ ÜYELİĞİ satırı; E11 ile aynı etikete düştüğü ve
+ *       E11 daha düşük olduğu için etiket 5'te kalıyor (§0 doğrultusunda).
  *   D bölümünün "bir yayın için en fazla 10 atıf" kuralı ve E
  *       bölümünün "yardımcı editöre yarısı, alan editörüne üçte biri"
  *       kuralı motorda yok.

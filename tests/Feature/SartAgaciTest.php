@@ -6075,3 +6075,25 @@ test('spor federasyonu kurul üyeliği ayrı etikette', function () {
         // Spor dışındaki varyantlar bu satırı taşımıyor.
         ->and($depo->katalog('akdeniz-2026')->puan($federasyon, $depo->katalog('akdeniz-2026')->coz(['*'])))->toBe(0);
 });
+
+/**
+ * İTÜ G.7 — YARIŞMA ÖDÜLÜ ALTI KADEME, ETİKET TEK.
+ *
+ * Kaynak: uluslararası derece 20 · mansiyon 10 · satın alma 5, ulusal derece
+ * 10 · mansiyon 5 · satın alma 3. `Yarışma Derecesi / Mansiyon` etiketi
+ * yalnız derece ve mansiyon kademelerini temsil edebiliyor; dördünün en
+ * düşüğü ulusal mansiyon (5). İlk girişte ulusal derecenin 10'u yazılmıştı
+ * ve satır MF varyantının ESER-PUANI barajına girdiği için fazla sayma
+ * baraja da taşınıyordu.
+ */
+test('İTÜ yarışma ödülü satırı kademelerin en düşüğünde', function () {
+    $depo = sartDepo();
+    $odul = sartFaaliyet('Yarışma Derecesi / Mansiyon', Kategori::Odul, null);
+
+    $mf = $depo->katalog('itu-2022-mf');
+    expect($mf)->not->toBeNull();
+
+    expect($mf->puan($odul, $mf->coz(['*'])))->toBe(5)
+        // Satır MF barajının kümesinde: değer doğrudan eşiğe giriyor.
+        ->and($mf->coz(['ESER-PUANI']))->toContain('G.7d');
+});

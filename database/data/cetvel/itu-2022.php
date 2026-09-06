@@ -231,7 +231,15 @@ $moda = [
 
 // ── G.7 ve N (yalnızca Mimarlık Fakültesi) ──────────────────────────────────
 $mimarlik = [
-    'G.7d' => ['baslik' => 'Planlama, mimarlık, kentsel tasarım veya endüstriyel tasarım yarışmasında derece veya mansiyon', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 10],
+    // G.7 ALTI KADEME SAYIYOR, ETİKET TEK: uluslararası derece 20 · mansiyon
+    // 10 · satın alma 5, ulusal derece 10 · mansiyon 5 · satın alma 3.
+    // `Yarışma Derecesi / Mansiyon` bunlardan yalnız DERECE ve MANSİYON
+    // kademelerini temsil edebiliyor (satın alma ayrı bir sonuç ve sözlükte
+    // karşılığı yok, o kayıtlar 0 alır). Dört kademenin en düşüğü ulusal
+    // mansiyon: 5. İlk girişte ulusal derecenin 10'u yazılmıştı; mansiyon
+    // alan aday kaynağın verdiğinin iki katını alıyordu (§0) ve satır MF
+    // varyantının ESER-PUANI kümesinde olduğu için baraja da giriyordu.
+    'G.7d' => ['baslik' => 'Planlama, mimarlık, kentsel tasarım veya endüstriyel tasarım yarışmasında derece veya mansiyon', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 5],
     'N.1' => ['baslik' => 'Tasarım, planlama veya mimarlık yarışmasında jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 3],
     'N.3' => ['baslik' => 'Çalışma alanıyla ilgili yazılım üreticisi veya faydalı model sahibi olmak', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Yazılım'], 'puan' => 3],
 ];
