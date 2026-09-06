@@ -5797,3 +5797,68 @@ test('Gaziantep telafileri 1(a) tabanına ekleniyor', function () {
     expect($telafiler('gaziantep-docent-sosyal-sosyal'))->toBe([180, 170, 210])
         ->and($telafiler('gaziantep-profesor-sosyal-sosyal'))->toBe([200, 170, 230]);
 });
+
+/**
+ * GAZİ — DOKTOR ÖĞRETİM ÜYESİ YENİDEN ATANMA (06.09.2026'da girildi).
+ *
+ * Kaynağın dört alan grubunun her birinde ayrı bir "yeniden atanma" bölümü
+ * var; yürürlükteki "01.01.2024-KALICI" seti alındı. Proje koşulunun
+ * telafisi KÜMÜLATİF yazıldı, çünkü kaynak ek puanın "Kriter 1 için sunulan
+ * makaleler DIŞINDA" olmasını istiyor ve motor eser ayrıklığını tutamıyor.
+ */
+test('Gazi yeniden atanma eşikleri kaynaktaki barajları taşıyor', function () {
+    $depo = sartDepo();
+
+    $ozet = function (string $alan) use ($depo): array {
+        $esik = $depo->bul('Gazi Üniversitesi', 'dr_ogr_uyesi_yeniden', $alan);
+        $out = ['toplam' => null, 'kriter1' => null, 'telafi' => null];
+        $gez = function (array $dugum) use (&$gez, &$out): void {
+            if (($dugum['tip'] ?? null) === 'puan') {
+                if (($dugum['madde'] ?? '') === 'Kriter 1') {
+                    $out['kriter1'] = $dugum['min_puan'];
+                } elseif (str_contains($dugum['aciklama'] ?? '', 'toplam en az')) {
+                    $out['toplam'] = $dugum['min_puan'];
+                }
+            }
+
+            if (isset($dugum['telafi'])) {
+                $out['telafi'] = $dugum['telafi']['min_puan'] ?? null;
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+        };
+        $gez($esik['sart'] ?? []);
+
+        return $out;
+    };
+
+    // A1 Fen/Mühendislik ve A2 Sağlık: toplam 90, Kriter 1 = 30, telafi 30+30.
+    expect($ozet('fen'))->toBe(['toplam' => 90, 'kriter1' => 30, 'telafi' => 60])
+        ->and($ozet('saglik'))->toBe(['toplam' => 90, 'kriter1' => 30, 'telafi' => 60])
+        // A3 Sosyal ve A4 Mimarlık: toplam 80, Kriter 1 = 20, telafi 20+30.
+        ->and($ozet('sosyal'))->toBe(['toplam' => 80, 'kriter1' => 20, 'telafi' => 50])
+        ->and($ozet('mimarlik'))->toBe(['toplam' => 80, 'kriter1' => 20, 'telafi' => 50]);
+});
+
+test('Gazi yeniden atanmada proje koşulu araştırmacılığı da kabul ediyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Gazi Üniversitesi', 'dr_ogr_uyesi_yeniden', 'fen');
+
+    $proje = null;
+    $ara = function (array $dugum) use (&$ara, &$proje): void {
+        if (($dugum['madde'] ?? '') === 'Kriter 2' && ($dugum['tip'] ?? null) === 'adet') {
+            $proje = $dugum;
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+            $ara($cocuk);
+        }
+    };
+    $ara($esik['sart']);
+
+    // İlk atamada yalnız yürütücülük sayılıyor; yeniden atanmada araştırmacılık da.
+    expect($proje)->not->toBeNull()
+        ->and($proje['maddeler'])->toBe(['PROJE-e-haric']);
+});

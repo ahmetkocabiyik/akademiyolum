@@ -1864,7 +1864,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 175 üniversite · 6693 eşik · 433 cetvel |
+| Girildi | 175 üniversite · 6704 eşik · 441 cetvel |
 | Okuma engeli çözüldü, giriş bekliyor | 0 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |

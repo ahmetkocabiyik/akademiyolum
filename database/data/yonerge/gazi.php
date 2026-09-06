@@ -55,6 +55,79 @@ $profesorKidem = fn (): array => Kalip::ve('Kıdem ve ders yükü koşulları', 
     Kalip::beyan('Doçent unvanı sonrası en az 5 yıl alanında çalışmış olmak (en az 1 yılı yükseköğretim kurumunda)', 'Kriter 1'),
 ]);
 
+/**
+ * DOKTOR ÖĞRETİM ÜYESİ KADROSUNA YENİDEN ATANMA (06.09.2026'da girildi).
+ *
+ * Kaynakta dört alan grubunun her birinin ayrı bir "yeniden atanma" bölümü
+ * var ve yapı hepsinde aynı: bir toplam baraj, Kriter 1 (belirli makale
+ * kümesinden asgari puan) ve Kriter 2 (proje; sağlanamıyorsa aynı kümeden
+ * ilave puan). Bütün koşullar BİR ÖNCEKİ ATANMA TARİHİNDEN sonraki
+ * çalışmalara bakıyor.
+ *
+ * KAYNAKTA İKİ TARİHLİ SET VAR: "01.07.2023-31.12.2023" ve "01.01.2024-
+ * KALICI". Yürürlükteki KALICI set alındı.
+ *
+ * TELAFİ AYRI ESER İSTİYOR: "Kriter 1 için sunulan makaleler dışında olmak
+ * şartıyla … 30 puan almak." Motor aynı eserin iki koşulda sayılmasını
+ * engelleyemediği için telafi KÜMÜLATİF yazıldı (Kriter 1 puanı + telafi).
+ * Kaynağın "Kriter 2'nin makalelerden sağlanması durumunda 30 puan üzeri
+ * değerlendirmeye alınmaz" notu bir TAVAN ve uygulanamıyor.
+ *
+ * KRİTER 2'DE ROL YÜRÜTÜCÜ *VEYA ARAŞTIRMACI*: ilk atamadaki koşul yalnız
+ * yürütücülük istiyordu, yeniden atanmada araştırmacılık da yetiyor — bu
+ * yüzden `PROJE-e-haric` grubu kullanılıyor, `-yurutucu` değil.
+ *
+ * A1'in Kriter 1'i "(Matematik ve İstatistik Bölümleri için, 1-5 ve 6a
+ * kapsamında)" diye bir BÖLÜM istisnası taşıyor; motorun ayırabildiği en
+ * ince eksen temel alan olduğu için istisna yazılamadı, genel küme alındı.
+ *
+ * @param  list<string>  $alanlar
+ * @param  list<string>  $kume  Kriter 1 ve telafinin makale kümesi
+ * @return array<string, mixed>
+ */
+$yenidenAtama = function (string $anahtar, array $alanlar, string $ad, int $toplam,
+    array $kume, string $kumeAdi, int $kriter1, int $telafi): array {
+    $SON = Kalip::SON_ATAMA_SONRASI;
+
+    return [
+        'anahtar' => "gazi-dr-yeniden-{$anahtar}",
+        'aday_notu' => 'Yeniden atanmada yalnızca bir önceki atanma tarihinden sonraki '
+            ."çalışmalarınız sayılıyor: toplam {$toplam} puan, {$kumeAdi} kalemlerinden {$kriter1} puan "
+            .'ve bir proje görevi. Proje koşulunu sağlayamıyorsanız aynı kalemlerden '
+            ."{$telafi} puan daha gerekiyor; kaynak bu ek puanın AYRI eserlerden gelmesini "
+            .'istiyor, motor eser ayrıklığını tutamadığı için toplam olarak yazıldı.',
+        'universite' => 'Gazi Üniversitesi',
+        'kadro' => 'dr_ogr_uyesi_yeniden',
+        'alan' => $alanlar,
+        'cetvel' => 'gazi-2024',
+        'notlar' => "{$ad} · Doktor Öğretim Üyesi kadrosuna yeniden atanma (01.01.2024-KALICI seti): "
+            ."toplam en az {$toplam} puan; Kriter 1 {$kumeAdi} kapsamından en az {$kriter1} puan; "
+            .'Kriter 2 projelerde (e maddesi hariç) en az 1 yürütücülük ya da araştırmacılık, '
+            ."sağlanamazsa aynı kapsamdan {$telafi} puan daha.",
+        'sart' => Kalip::ve("Doktor Öğretim Üyesi kadrosuna yeniden atanma — {$ad}", [
+            Kalip::toplam($toplam, $SON),
+            [
+                'tip' => 'puan',
+                'aciklama' => "{$kumeAdi} kalemlerinizden en az {$kriter1} puan",
+                'madde' => 'Kriter 1',
+                'maddeler' => $kume,
+                'min_puan' => $kriter1,
+                'donem' => $SON,
+            ],
+            Kalip::adet('Projelerde (e maddesi hariç) en az 1 yürütücülük ya da araştırmacılık',
+                ['PROJE-e-haric'], 1, donem: $SON, madde: 'Kriter 2')
+                + ['telafi' => [
+                    'tip' => 'puan',
+                    'aciklama' => "Proje yoksa: {$kumeAdi} kalemlerinizden toplam en az ".($kriter1 + $telafi).' puan',
+                    'madde' => 'Kriter 2',
+                    'maddeler' => $kume,
+                    'min_puan' => $kriter1 + $telafi,
+                    'donem' => $SON,
+                ]],
+        ]),
+    ];
+};
+
 return [
     // ══════════════════ A1 · FEN VE MÜHENDİSLİK BİLİMLERİ ══════════════════
     [
@@ -260,4 +333,14 @@ return [
             Kalip::toplam(350, Kalip::DOCENTLIK_SONRASI),
         ]),
     ],
+
+    // ══════════════════ YENİDEN ATANMA (dört alan grubu) ══════════════════
+    $yenidenAtama('fen-muh', ['fen', 'muhendislik'], 'Fen ve Mühendislik Bilimleri', 90,
+        ['1a-c'], 'WoS Q1-Q3 makale', 30, 30),
+    $yenidenAtama('saglik', ['saglik'], 'Sağlık Bilimleri', 90,
+        ['1a-c'], 'WoS Q1-Q3 makale', 30, 30),
+    $yenidenAtama('sosyal', ['sosyal', 'egitim', 'filoloji', 'spor'], 'Sosyal Bilimler', 80,
+        ['1-5, 6a-b, 7a-b, 8a-b'], 'Makale, kitap ve bildiri', 20, 30),
+    $yenidenAtama('mimarlik', ['mimarlik'], 'Mimarlık Fakültesi', 80,
+        ['1-5, 6a-b, 7a-b'], 'Makale, kitap ve bildiri', 20, 30),
 ];
