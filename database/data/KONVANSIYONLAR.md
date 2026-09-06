@@ -490,6 +490,27 @@ altı üniversite incelendi:
 | Gazi | "proje yoksa makalelerden ilave 30 puan" | DOĞRU |
 | Çankırı | telafi puanları | DOĞRU |
 
+**İKİ BENDİN SAYISI BİRBİRİNE KARIŞABİLİR.** Gaziantep'te aynı blokta iki
+ayrı "ilaveten" bendi var ve ilk girişte proje bendinin telafisine ÖTEKİ
+bendin sayısı (90) ve kümesi ({1a,8a}) yazılmıştı:
+
+    (d) proje  "5 nolu maddeden en az 45 puan. Sağlayamayanların (c)'deki
+                puana ilaveten 1(a)'dan en az 45 puan DAHA"      → 1(a) 285
+    (e).3      "(c)'deki puana ilaveten 1(a) ve/veya 8(a)'dan
+                toplamda en az 90 puan daha"                     → {1a,8a} 330
+
+İki bendi ayırt etmenin işareti KÜMEDİR: proje telafisi yalnız 1(a)'dan,
+uluslararası deneyim telafisi 1(a) ve/veya 8(a)'dan. Telafi tutarı da proje
+koşulunun tutarıyla aynı (fen 45, sağlık 30) — 90 hiçbirinde proje telafisi
+değil.
+
+**GAZİ'DE AYNI KALIP AMA ARİTMETİK YOK.** "Bu kriter sağlanamıyorsa, Kriter 1
+için SUNULAN MAKALELER DIŞINDA olmak şartıyla … 30 puan almak" — burada taban
+bir puan değil, bir YAYIN SAYISI koşulu (dört yayın) ve ek puanın ayrı
+eserlerden gelmesi isteniyor. Motor "aynı eser iki koşulda sayılmasın"
+diyemediği için 30 doğru sayı; eksik olan tek şey ayrıklık ve o zaten
+"aynı esere özgü sınır" sınıfında.
+
 **KAÇ DÜĞÜM GEREKTİĞİNİ TABAN BELİRLER, KALIP DEĞİL.** Isparta ÜBÜ aynı
 kalıbı dört kez kullanıyor ve dördü de eksiksiz; sayı bentten bende
 değişiyor:

@@ -5748,3 +5748,52 @@ test('Isparta ÜBÜ "ilaveten" bentleri kaynaktaki tabanla toplanmış', functio
     expect($toplamlar('isparta-ubu-fen-muh-docentlik-fen'))->toBe([100, 120])
         ->and($toplamlar('isparta-ubu-fen-muh-profesorluk-fen'))->toBe([120, 140]);
 });
+
+/**
+ * GAZİANTEP — "İLAVETEN" TELAFİLERİ (b)/(c) BENDİNİN TABANINA EKLENİR.
+ *
+ * Kaynak her alanda aynı iki bendi taşıyor:
+ *   (c)/(b)  "1(a) nolu maddeden … en az T puan, 4 numaralı maddeden en az
+ *             12 ve genel toplamda en az … puan almış olmak."
+ *   proje    "5 nolu maddeden (BAP hariç) en az N puan. Bu şartı
+ *             sağlayamayanların (c) bendinde belirtilen PUANA İLAVETEN
+ *             1(a) kapsamındaki dergilerden en az N puan DAHA almış olması."
+ *   (d/e).3  "(c) bendinde belirtilen puana ilaveten 1(a) ve/veya 8(a)
+ *             maddelerinden toplamda en az 90 puan daha."
+ *
+ * İlk girişte telafilerin ikisi de TABANA EKLENMEMİŞTİ; üstelik proje
+ * telafisine öteki bendin sayısı (90) ve kümesi ({1a,8a}) yazılmıştı.
+ */
+test('Gaziantep telafileri 1(a) tabanına ekleniyor', function () {
+    $depo = sartDepo();
+
+    $telafiler = function (string $anahtar) use ($depo): array {
+        $esik = $depo->esik($anahtar);
+        $out = [];
+        $gez = function (array $dugum) use (&$gez, &$out): void {
+            if (($dugum['tip'] ?? null) === 'puan' && str_starts_with($dugum['aciklama'] ?? '', 'Ya da')) {
+                $out[] = $dugum['min_puan'] ?? 0;
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+        };
+        $gez($esik['sart'] ?? []);
+
+        return $out;
+    };
+
+    // Fen: 1(a) tabanı 240 · proje 45 → 285 · (e).3 90 → 330
+    expect($telafiler('gaziantep-docent-fen-fen'))->toBe([285, 330])
+        ->and($telafiler('gaziantep-profesor-fen-fen'))->toBe([285, 330])
+        // Sağlık doçent: taban 180 · proje 30 → 210 · 90 → 270
+        ->and($telafiler('gaziantep-docent-saglik-saglik'))->toBe([210, 270])
+        // Sağlık profesör: taban 150 → 180 ve 240
+        ->and($telafiler('gaziantep-profesor-saglik-saglik'))->toBe([180, 240]);
+
+    // Sosyal tarafta (b) bendi iki dallı (1a+1c 140 ya da MAKALE 180/200);
+    // telafi de iki dalı birden yükseltiyor.
+    expect($telafiler('gaziantep-docent-sosyal-sosyal'))->toBe([180, 170, 210])
+        ->and($telafiler('gaziantep-profesor-sosyal-sosyal'))->toBe([200, 170, 230]);
+});

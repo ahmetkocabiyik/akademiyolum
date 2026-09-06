@@ -48,14 +48,33 @@ $P = Kalip::DOCENTLIK_SONRASI;
  *
  * @return array<string, mixed>
  */
-$projeVeyaTelafi = function (int $proje, int $telafi, array $donem, string $madde): array {
-    return Kalip::veya('Proje ve patent koşulu (iki seçenekten biri)', [
+/**
+ * PROJE KOŞULU VE TELAFİSİ.
+ *
+ * Kaynak her alanda aynı: "5 nolu maddeden (BAP hariç) en az N puan almış
+ * olmak. Bu şartı sağlayamayan adayların (c) bendinde belirtilen PUANA
+ * İLAVETEN 1(a) kapsamındaki dergilerde … en az N puan DAHA almış olması
+ * gerekir." Yani telafi, (c)'nin 1(a) TABANINA eklenir ve tutarı proje
+ * koşuluyla aynıdır — ilk girişte tabana eklenmeyip sabit 90 yazılmıştı
+ * (90 aslında ÖTEKİ bendin, "yurt dışı/h-indeksi" alternatifinin sayısı).
+ *
+ * @param  list<array<string, mixed>>  $telafiDallari
+ * @param  array<string, mixed>  $donem
+ * @return array<string, mixed>
+ */
+$projeVeyaTelafi = function (int $proje, array $telafiDallari, array $donem, string $madde): array {
+    return Kalip::veya('Proje ve patent koşulu (iki seçenekten biri)', array_values([
         Kalip::puanDan("Proje ve patent kalemlerinizden en az {$proje} puan (BAP hariç)",
             ['5-BAP-haric'], $proje, $donem, madde: $madde),
-        Kalip::puanDan("Ya da WoS makaleleriniz ve tez danışmanlıklarınızdan en az {$telafi} puan daha",
-            ['1a', '8a'], $telafi, $donem, madde: $madde),
-    ]);
+        ...$telafiDallari,
+    ]));
 };
+
+/** (c)/(b) bendinin 1(a) tabanına telafi puanını ekleyen tek dal. */
+$makaleTelafisi = fn (int $taban, int $ilave, array $donem, string $madde): array => Kalip::puanDan(
+    'Ya da SCIE, SSCI veya AHCI dergilerindeki makalelerinizden en az '.($taban + $ilave).' puan',
+    ['1a'], $taban + $ilave, $donem, madde: $madde,
+);
 
 return [
     // ══════════ FEN VE MÜHENDİSLİK BİLİMLERİ (MADDE 12) ══════════
@@ -90,7 +109,14 @@ return [
             Kalip::puanDan('SCIE, SSCI veya AHCI dergilerindeki makalelerinizden en az 240 puan',
                 ['1a'], 240, $D, madde: 'MADDE 12/2-c'),
             Kalip::puanDan('Bildirilerinizden en az 12 puan', ['4'], 12, $D, madde: 'MADDE 12/2-c'),
-            $projeVeyaTelafi(45, 90, $D, 'MADDE 12/2-d'),
+            $projeVeyaTelafi(45, [$makaleTelafisi(240, 45, $D, 'MADDE 12/2-d')], $D, 'MADDE 12/2-d'),
+            Kalip::veya('Uluslararası deneyim veya etki koşulu (üç seçenekten biri)', [
+                Kalip::beyan('THE, ARWU veya QS sıralamasında ilk 700\'de yer alan bir yurt dışı kurumda '
+                    .'en az üç ay bilimsel amaçlı çalışmış olmak', 'MADDE 12/2-e.1'),
+                Kalip::metrik('Web of Science veya Scopus h-indeksiniz en az 7 olmalı', 'h_indeksi', 7),
+                Kalip::puanDan('Ya da WoS makaleleriniz ve tez danışmanlıklarınızdan en az 330 puan',
+                    ['1a', '8a'], 330, $D, madde: 'MADDE 12/2-e.3'),
+            ]),
         ]),
     ],
     [
@@ -108,13 +134,13 @@ return [
             Kalip::puanDan('SCIE, SSCI veya AHCI dergilerindeki makalelerinizden en az 240 puan',
                 ['1a'], 240, $P, madde: 'MADDE 12/3-b'),
             Kalip::puanDan('Bildirilerinizden en az 12 puan', ['4'], 12, $P, madde: 'MADDE 12/3-b'),
-            $projeVeyaTelafi(45, 90, $P, 'MADDE 12/3-c'),
+            $projeVeyaTelafi(45, [$makaleTelafisi(240, 45, $P, 'MADDE 12/3-c')], $P, 'MADDE 12/3-c'),
             Kalip::veya('Uluslararası deneyim veya etki koşulu (üç seçenekten biri)', [
                 Kalip::beyan('THE, ARWU veya QS sıralamasında ilk 700\'de yer alan bir yurt dışı kurumda '
                     .'en az üç ay bilimsel amaçlı çalışmış olmak', 'MADDE 12/3-d.1'),
                 Kalip::metrik('Web of Science veya Scopus h-indeksiniz en az 12 olmalı', 'h_indeksi', 12),
-                Kalip::puanDan('Ya da WoS makaleleriniz ve tez danışmanlıklarınızdan en az 90 puan daha',
-                    ['1a', '8a'], 90, $P, madde: 'MADDE 12/3-d.3'),
+                Kalip::puanDan('Ya da WoS makaleleriniz ve tez danışmanlıklarınızdan en az 330 puan',
+                    ['1a', '8a'], 330, $P, madde: 'MADDE 12/3-d.3'),
             ]),
             Kalip::puanDan('Tamamlanmış doktora veya uzmanlık tez danışmanlıklarınızdan en az 60 puan',
                 ['8a'], 60, $P, madde: 'MADDE 12/3-e'),
@@ -151,7 +177,14 @@ return [
             Kalip::puanDan('SCIE, SSCI veya AHCI dergilerindeki makalelerinizden en az 180 puan',
                 ['1a'], 180, $D, madde: 'MADDE 13/2-c'),
             Kalip::puanDan('Bildirilerinizden en az 12 puan', ['4'], 12, $D, madde: 'MADDE 13/2-c'),
-            $projeVeyaTelafi(30, 90, $D, 'MADDE 13/2-d'),
+            $projeVeyaTelafi(30, [$makaleTelafisi(180, 30, $D, 'MADDE 13/2-d')], $D, 'MADDE 13/2-d'),
+            Kalip::veya('Uluslararası deneyim veya etki koşulu (üç seçenekten biri)', [
+                Kalip::beyan('THE, ARWU veya QS sıralamasında ilk 700\'de yer alan bir yurt dışı kurumda '
+                    .'en az üç ay bilimsel amaçlı çalışmış olmak', 'MADDE 13/2-e.1'),
+                Kalip::metrik('Web of Science veya Scopus h-indeksiniz en az 7 olmalı', 'h_indeksi', 7),
+                Kalip::puanDan('Ya da WoS makaleleriniz ve tez danışmanlıklarınızdan en az 270 puan',
+                    ['1a', '8a'], 270, $D, madde: 'MADDE 13/2-e.3'),
+            ]),
         ]),
     ],
     [
@@ -167,13 +200,13 @@ return [
             Kalip::puanDan('SCIE, SSCI veya AHCI dergilerindeki makalelerinizden en az 150 puan',
                 ['1a'], 150, $P, madde: 'MADDE 13/3-b'),
             Kalip::puanDan('Bildirilerinizden en az 20 puan', ['4'], 20, $P, madde: 'MADDE 13/3-b'),
-            $projeVeyaTelafi(30, 90, $P, 'MADDE 13/3-c'),
+            $projeVeyaTelafi(30, [$makaleTelafisi(150, 30, $P, 'MADDE 13/3-c')], $P, 'MADDE 13/3-c'),
             Kalip::veya('Uluslararası deneyim veya etki koşulu (üç seçenekten biri)', [
                 Kalip::beyan('THE, ARWU veya QS sıralamasında ilk 700\'de yer alan bir yurt dışı kurumda '
                     .'en az üç ay bilimsel amaçlı çalışmış olmak', 'MADDE 13/3-d.1'),
                 Kalip::metrik('Web of Science veya Scopus h-indeksiniz en az 12 olmalı', 'h_indeksi', 12),
-                Kalip::puanDan('Ya da WoS makaleleriniz ve tez danışmanlıklarınızdan en az 90 puan daha',
-                    ['1a', '8a'], 90, $P, madde: 'MADDE 13/3-d.3'),
+                Kalip::puanDan('Ya da WoS makaleleriniz ve tez danışmanlıklarınızdan en az 240 puan',
+                    ['1a', '8a'], 240, $P, madde: 'MADDE 13/3-d.3'),
             ]),
             Kalip::puanDan('Tamamlanmış doktora veya uzmanlık tez danışmanlıklarınızdan en az 60 puan',
                 ['8a'], 60, $P, madde: 'MADDE 13/3-e'),
@@ -220,7 +253,12 @@ return [
                 Kalip::puanDan('Ya da tüm makale kalemlerinizden en az 180 puan',
                     ['MAKALE'], 180, $D, madde: 'MADDE 14/2-b'),
             ]),
-            $projeVeyaTelafi(30, 90, $D, 'MADDE 14/2-c'),
+            $projeVeyaTelafi(30, [
+                Kalip::puanDan('Ya da WoS ve ESCI/Scopus dergilerindeki makalelerinizden en az 170 puan',
+                    ['1a', '1c'], 170, $D, madde: 'MADDE 14/2-c'),
+                Kalip::puanDan('Ya da tüm makale kalemlerinizden en az 210 puan',
+                    ['MAKALE'], 210, $D, madde: 'MADDE 14/2-c'),
+            ], $D, 'MADDE 14/2-c'),
             Kalip::puanDan('Bildirilerinizden en az 7 puan', ['4'], 7, $D, madde: 'MADDE 14/2-d'),
         ]),
     ],
@@ -240,7 +278,12 @@ return [
                 Kalip::puanDan('Ya da tüm makale kalemlerinizden en az 200 puan',
                     ['MAKALE'], 200, $P, madde: 'MADDE 14/3-a'),
             ]),
-            $projeVeyaTelafi(30, 90, $P, 'MADDE 14/3-b'),
+            $projeVeyaTelafi(30, [
+                Kalip::puanDan('Ya da WoS ve ESCI/Scopus dergilerindeki makalelerinizden en az 170 puan',
+                    ['1a', '1c'], 170, $P, madde: 'MADDE 14/3-b'),
+                Kalip::puanDan('Ya da tüm makale kalemlerinizden en az 230 puan',
+                    ['MAKALE'], 230, $P, madde: 'MADDE 14/3-b'),
+            ], $P, 'MADDE 14/3-b'),
             Kalip::puanDan('Bildirilerinizden en az 10 puan', ['4'], 10, $P, madde: 'MADDE 14/3-c'),
             Kalip::puanDan('Tamamlanmış tez danışmanlıklarınızdan en az 25 puan',
                 ['8a'], 25, $P, madde: 'MADDE 14/3-d'),
