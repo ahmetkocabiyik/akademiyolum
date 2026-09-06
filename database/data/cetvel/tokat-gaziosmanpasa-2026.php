@@ -55,6 +55,11 @@
  *   5. bölümün "en az üç ay görev yapmış olma" şartı.
  *
  * Yönerge: yonerge/tokat-gaziosmanpasa.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -119,7 +124,7 @@ $maddeler = [
     '4.2' => ['baslik' => 'Üniversite-sanayi iş birliği kapsamındaki projede araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 30],
 
     // ══ 2.4 BİLİMSEL ETKİNLİKLERDE GÖREV ══
-    '2.4.d' => ['baslik' => 'Uluslararası ya da ulusal sempozyum, çalıştay ve kongrelerde düzenleme kurulu, bilim kurulu, sekretarya ya da oturum başkanlığı görevleri', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+    '2.4.d' => ['baslik' => 'Uluslararası ya da ulusal sempozyum, çalıştay ve kongrelerde düzenleme kurulu, bilim kurulu, sekretarya ya da oturum başkanlığı görevleri', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 3],
 
     // ══ 2.5 ÖDÜLLER ══
     '2.5.a' => ['baslik' => 'Uluslararası bilim, sanat, proje, teşvik ya da diğer bilimsel ödüller', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 20],

@@ -131,6 +131,7 @@ return [
         'F1b2' => ['baslik' => 'Ulusal jürili karma sanat veya tasarım etkinliğine kabul edilmek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)', 'Karma Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Sempozyum/Çalıştay/Bienal (Yurt İçi)', 'Masterclass (Ulusal)'], 'puan' => 15],
         'F1d1' => ['baslik' => 'Uluslararası karma sanat veya tasarım etkinliğinde yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Yurt Dışı, Jürisiz)', 'Elektronik Karma Sergi (Uluslararası)'], 'puan' => 5],
         'F1d2' => ['baslik' => 'Ulusal karma sanat veya tasarım etkinliğinde yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Jürisiz, Ulusal)', 'Elektronik Karma Sergi (Ulusal)'], 'puan' => 3],
+        'B4a' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 12],
     ],
 
     'gruplar' => [

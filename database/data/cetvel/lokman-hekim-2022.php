@@ -176,7 +176,7 @@ return [
         'T2-hakemlik' => ['baslik' => 'Dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
 
         // ══ TABLO 2 — BİLİMSEL TOPLANTI VE DİĞER ══
-        'T2-toplanti' => ['baslik' => 'Bilimsel toplantıda düzenleme kurulu başkanlığı, üyeliği, bilim kurulu üyeliği ya da raportörlük', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+        'T2-toplanti' => ['baslik' => 'Bilimsel toplantıda düzenleme kurulu başkanlığı, üyeliği, bilim kurulu üyeliği ya da raportörlük', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
 
         // ══ TABLO 2 — İDARİ GÖREVLER ══
         'T2-idari-25' => ['baslik' => 'Rektör, rektör yardımcısı ya da dekan olarak görev yapmak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 25],

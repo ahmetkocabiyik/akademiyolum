@@ -126,6 +126,11 @@
  *       yok; bu kalemlerde puan YÜKSEK görünür.
  *
  * Yönerge: yonerge/ankara-bilim.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -288,6 +293,11 @@ return [
 
         // ══ 6.7 DİĞER FAALİYETLER ══
         '6.7.3' => ['baslik' => 'Seminer, dizi konferans veya panel düzenleme', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 2],
+        '6.4.6' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 4],
+        '6.4.3' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 5],
+        '6.4.17' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
+        '6.4.7' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
+        '6.4.4' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 4],
     ],
 
     'gruplar' => [

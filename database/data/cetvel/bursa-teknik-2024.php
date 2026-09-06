@@ -88,6 +88,11 @@
  *       katkı oranı tablosuyla yaklaşıklandı.
  *
  * Yönerge: yonerge/bursa-teknik.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -214,7 +219,7 @@ return [
         'J.11-ulusal' => ['baslik' => 'Ulusal proje yarışmasında jüri üyeliği (Teknofest dâhil)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 2],
         'J.12-uluslararasi' => ['baslik' => 'Uluslararası sergi küratörlüğü ve sergiye ilişkin yayınların yazarlığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt Dışı)', 'Kişisel Etkinlik (Uluslararası)', 'Karma/Jürili Etkinlik (Uluslararası)'], 'puan' => 4],
         'J.12-ulusal' => ['baslik' => 'Ulusal sergi küratörlüğü ve sergiye ilişkin yayınların yazarlığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt İçi)', 'Kişisel Etkinlik (Ulusal)', 'Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 2],
-        'J.5-J.8' => ['baslik' => 'Bilimsel etkinlikte düzenleme kurulu, bilim kurulu, oturum başkanlığı ya da panelistlik', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+        'J.5-J.8' => ['baslik' => 'Bilimsel etkinlikte düzenleme kurulu, bilim kurulu, oturum başkanlığı ya da panelistlik', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
 
         // ══ K. İDARİ GÖREV (ay biriktirmesi uygulanamadı, görev başına 1) ══
         'K.1' => ['baslik' => 'Rektörlük, rektör yardımcılığı, enstitü, yüksekokul, merkezi araştırma laboratuvarı müdürlüğü, BAP koordinatörlüğü, TTO veya teknokent müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 1],

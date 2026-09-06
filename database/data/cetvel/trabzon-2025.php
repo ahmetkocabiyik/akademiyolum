@@ -63,6 +63,11 @@
  * başkanlığı vb. 0. Toplumsal katkı bölümü yok.
  *
  * Yönerge: yonerge/trabzon.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -203,6 +208,10 @@ return [
         // Eş danışmanlık yönergede anılmıyor; roller yalnızca 'danisman'.
         '4.1.1' => ['baslik' => 'Tamamlanmış doktora veya uzmanlık tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 8],
         '4.1.2' => ['baslik' => 'Tamamlanmış yüksek lisans tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 4],
+        '3.3.3.1' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 5],
+        '3.3.2.1' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+        '3.3.3.2' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
+        '3.3.2.2' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 4],
     ],
 
     'gruplar' => [

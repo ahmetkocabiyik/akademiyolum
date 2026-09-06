@@ -49,6 +49,11 @@
  * tablosuz tek kural (1/n) olarak yazıldı.
  *
  * Yönerge: yonerge/cag.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'];
 $OZGUN = ['ozgun_makale', 'derleme'];

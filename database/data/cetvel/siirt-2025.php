@@ -52,6 +52,11 @@
  *       taşımadığı için her idari görev bir kez sayılıyor.
  *
  * Yönerge: yonerge/siirt.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -117,7 +122,7 @@ $maddeler = [
     '9.c' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan ve tam metni ya da özeti yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 6],
     '9.ç' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 3],
     '10.ç' => ['baslik' => 'Kongre ve sempozyumlarda davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 3],
-    '10.a' => ['baslik' => 'Kongre ve sempozyumlarda düzenleme kurulu başkanlığı, oturum başkanlığı ya da düzenleme kurulunda görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 1],
+    '10.a' => ['baslik' => 'Kongre ve sempozyumlarda düzenleme kurulu başkanlığı, oturum başkanlığı ya da düzenleme kurulunda görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
 
     // ══ 12. EĞİTİM ÖĞRETİM FAALİYETİ ══
     '12.a' => ['baslik' => 'Bir dönem yüksek lisans ya da doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],

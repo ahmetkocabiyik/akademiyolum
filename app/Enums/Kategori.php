@@ -310,7 +310,21 @@ enum Kategori: string
                 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın',
                 'Kamu/STK Danışmanlığı',
             ],
-            self::Diger => ['Diğer'],
+            // BİLİMSEL TOPLANTI ORGANİZASYONU (06.09.2026). Korpusun 85
+            // kaynağı bu aileyi puanlıyor (551 satır) ve tamamı sözlükte
+            // karşılıksızdı; girilebilen cetveller satırı `Diğer`e yazmış,
+            // otuz kadarı bölümü hiç girmemişti. Rol kademeleri gerçek:
+            // medyan başkanlık 10, kurul üyeliği 5-6, oturum başkanlığı 3 —
+            // tek etikete toplansalardı §0 başkanlığı 3'e indirirdi.
+            self::Diger => [
+                'Toplantı Düzenleme Başkanlığı (Uluslararası)',
+                'Toplantı Düzenleme Başkanlığı (Ulusal)',
+                'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)',
+                'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)',
+                'Oturum Başkanlığı (Uluslararası)',
+                'Oturum Başkanlığı (Ulusal)',
+                'Diğer',
+            ],
         };
     }
 

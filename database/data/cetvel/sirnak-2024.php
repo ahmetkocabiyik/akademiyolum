@@ -142,7 +142,7 @@ $maddeler = [
     '6.2.3' => ['baslik' => 'Ulusal radyo ve televizyonda mesleki konularda konuşma yapmak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın', 'Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi'], 'puan' => 5],
 
     // ══ I.7. BİLİMSEL TOPLANTILAR ══
-    '7.2.2' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulunda üyelik', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+    '7.2.2' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulunda üyelik', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
 
     // ══ I.8. EDİTÖRLÜK VE HAKEMLİK ══
     '8.1' => ['baslik' => 'Uluslararası atıf endekslerince taranan bilimsel dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 15],

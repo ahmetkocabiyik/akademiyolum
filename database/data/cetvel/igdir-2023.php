@@ -64,6 +64,11 @@
  *   EK Madde 2'nin bir defalık 15 puanı (belirli bir dersi tamamlamak) girilmedi.
  *
  * Yönerge: yonerge/igdir.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -188,6 +193,7 @@ return [
 
         // ══ I. DİĞER BİLİMSEL VE SANATSAL ETKİNLİKLER ══
         '25.b' => ['baslik' => 'Sempozyum, kongre, çalıştay, sanat sergisi veya festival düzenlemesinde bilimsel komite ya da organizasyon kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 25],
+        '25.bk' => ['baslik' => 'Sempozyum, kongre ya da çalıştay düzenlemesinde bilimsel komite veya organizasyon kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 25],
 
         // ══ J. ÖDÜLLER ve BURSLAR ══
         '26.a' => ['baslik' => 'Jürili uluslararası bilim veya sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 350],

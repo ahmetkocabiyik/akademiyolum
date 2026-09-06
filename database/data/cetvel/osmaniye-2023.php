@@ -63,6 +63,11 @@
  * süreleri — profilde tutulmuyor), 8.4 (komisyon ve kulüp danışmanlıkları),
  * 11.9 (bilimsel toplantı düzenleme kurulu — sözlükte karşılık yok),
  * 13 (jüri üyelikleri — doçentlik ve atama jürileri kayıtta tutulmuyor).
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -186,6 +191,9 @@ return [
 
         // ══ 13. JÜRİ ÜYELİKLERİ ══
         '13.5' => ['baslik' => 'Tez izleme komitesi veya tez savunma jürisi üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 1],
+        'TOPLANTI-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 15],
+        'TOPLANTI-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
+        'TOPLANTI-OTR' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 3],
     ],
 
     'gruplar' => [

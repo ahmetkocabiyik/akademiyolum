@@ -70,6 +70,11 @@
  *       yalnız başlık düzeyinde tanımlanabiliyor).
  *
  * Yönerge: yonerge/ardahan.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $ARASTIRMA = ['ozgun_makale'];
 $DERLEME = ['derleme'];
@@ -184,6 +189,7 @@ $maddeler += [
 
     // ══ 3.11 BİLİMSEL TANINIRLIK ══
     '3.11.6' => ['baslik' => 'Ulusal ya da uluslararası bilimsel toplantıda davetli konuşmacı, moderatör veya oturum başkanı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
+    '3.11.6k' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı ya da moderatörlük', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 5],
 
     // ══ 3.12 SANAT / TASARIM, MİMARİ PROJE VE PLANLAR ══
     '3.12.1' => ['baslik' => 'Uluslararası mimari proje, kentsel tasarım projesi ya da imar planı çalışmalarında proje müellifi olmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif'], 'puan' => 20],

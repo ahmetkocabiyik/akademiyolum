@@ -815,3 +815,27 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   puanı dönemlik ders saatiyle çarpılan 0,025-0,15 katsayıları). Ufuk adayının
   ATIFLARI VE DERSLERİ toplam puana hiç katkı vermiyor. Yuvarlama yönü §0'a
   uygun ama kayıp burada bir istisna değil, kuralın kendisi.
+
+## Bilimsel toplantı organizasyonu — girilemeyen kaynaklar (06.09.2026)
+
+Aile için altı etiket açıldı ve 48 cetvele yayıldı. Aşağıdakiler dışarıda
+kaldı; hepsinin sebebi ayrı:
+
+- **Akdeniz** (9.5 kongre başkanlığı 100, 9.6 kongre sekreterliği 20) —
+  tablonun 2 numaralı dipnotu satırları "yalnız SCI-Expanded, SSCI ve AHCI
+  kapsamındaki dergilerde bildirileri yayımlanan kongreler" ile sınırlıyor.
+  Kongrenin indeksi faaliyet kaydında yok; satır girilseydi her kongre için
+  puan verirdi.
+- **Trakya** (e/g/ı/i bentleri) — puan sütunu "10/", "6/3" biçiminde çift
+  değerli ve pdftotext sütunların bir kısmını hiç çıkarmıyor. Değerler
+  okunamadan girilemez.
+- **Kilis** — düzenleme kurulu üyeliği `8/n` (n = üye sayısı); motor kayıttan
+  kurul büyüklüğünü bilmiyor.
+- **Çukurova, Erciyes, Hitit, Sakarya, Yozgat Bozok** — eşleşen satırlar
+  aileye ait değil: sırasıyla bir şart cümlesi, yarışma/festival jürisi,
+  sergi-yarışma düzenlemesi ve kurum (meslek kuruluşu) kurul üyeliği.
+- **Ankara Üniversitesi 6f/6g ile Giresun M.4.b** — satırlar girildi ama
+  kaynağın kendi eşikleri o bölümleri hiçbir kümeye almıyor; puanları hiçbir
+  baraja girmiyor. `CetvelKaynakTest`'in ölü satır listesinde.
+- **İTÜ P.4** — "kurul başkanlarının puanı iki ile çarpılır" çarpanı
+  girilemedi; satır üyelik değerinden (3) yazıldı, başkanlık eksik sayılıyor.

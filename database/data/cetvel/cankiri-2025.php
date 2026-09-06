@@ -118,7 +118,7 @@ $maddeler = [
 
     // ══ 8. BİLİMSEL, YÖNETSEL VE SANATSAL ETKİNLİKLERDE GÖREV ALMA ══
     '8.3' => ['baslik' => 'Panel, çalıştay ya da konferanslarda davetli konuşmacı veya moderatör olarak yer almak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
-    '8.6' => ['baslik' => 'Sempozyum, kongre ya da sanat etkinliklerinde düzenleme veya bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 10],
+    '8.6' => ['baslik' => 'Sempozyum, kongre ya da sanat etkinliklerinde düzenleme veya bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 10],
     '8.9' => ['baslik' => 'Ulusal ya da uluslararası sanat ve tasarım yarışmalarında jüri olarak görev almak veya küratörlük yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 10],
 
     // ══ 9. ÖDÜLLER ══

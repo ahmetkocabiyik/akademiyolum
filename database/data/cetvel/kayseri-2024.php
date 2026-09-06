@@ -190,7 +190,7 @@ $maddeler = [
     'T2-5b' => ['baslik' => 'Ulusal hakemli dergide editörlük, yardımcı editörlük ya da misafir editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 5],
     'T2-5c' => ['baslik' => 'Hakemli dergide yayın, bilim kurulu ya da komisyon üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],
     'T2-5d' => ['baslik' => 'Hakemli dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
-    'T2-6' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu, bilim kurulu ya da sekretarya görevi', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    'T2-6' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu, bilim kurulu ya da sekretarya görevi', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
     'T2-7a' => ['baslik' => 'Rektör ya da rektör yardımcısı olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 25],
     'T2-7b' => ['baslik' => 'Dekan, yüksekokul, meslek yüksekokulu, enstitü ya da merkez müdürü, başhekim olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 20],
     'T2-7c' => ['baslik' => 'Dekan yardımcısı, müdür yardımcısı ya da bölüm başkanı olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 15],

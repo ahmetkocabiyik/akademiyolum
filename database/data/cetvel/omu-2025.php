@@ -220,6 +220,11 @@
  *       ayrıca sahne yönetmenliğini de kapsıyor — bölümün hiç saymadığı bir
  *       iş. Aynı sebeple 'Animasyon / Canlandırma Yapımı' ile geniş 'Sahne,
  *       TV, Radyo, Sinema Yapıtı' etiketleri de dışarıda kaldı.
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 /*
@@ -438,7 +443,9 @@ $govde = function (int $bildiri, int $ulusalKitap, int $egitim, bool $gorselEtki
             '13.9' => ['baslik' => 'En az üç dönem süreli bilimsel araştırma için alınan uluslararası burs', 'kategori' => 'odul', 'kaynaklar' => ['Ufuk Avrupa / ERC Ödülü'], 'puan' => 40],
             '13.10' => ['baslik' => 'En az üç dönem süreli bilimsel araştırma için alınan burs', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 25],
             '13.11' => ['baslik' => 'Uluslararası sanat etkinliği düzenleme kurulu başkanlığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Festival Koordinatörlüğü (Uluslararası)'], 'puan' => 20],
+            '13.11k' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 20],
             '13.13' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme kurulu görevi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Festival Koordinatörlüğü (Ulusal)'], 'puan' => 10],
+            '13.13k' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme kurulu görevi (kurul görevi)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 10],
             '13.16' => ['baslik' => 'Bilimsel faaliyette alanıyla ilgili açılış konuşması', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
             '13.21' => ['baslik' => 'TÜBİTAK 2209, 2241, 2242, BAP ya da öğrenci topluluğu projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 8],
 

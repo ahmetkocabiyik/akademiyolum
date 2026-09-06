@@ -63,6 +63,11 @@ use App\Enums\Kategori;
  * eserleriniz tam puan alıyor.
  *
  * Yönerge: yonerge/msgsu.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 
@@ -228,7 +233,7 @@ $maddeler = [
     '6.3.3' => ['baslik' => 'Faydalı model belgesi ya da endüstriyel tasarım tescili', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım'], 'puan' => 30],
 
     // ══ 6.4 BİLİMSEL VE SANATSAL TOPLANTI DÜZENLEME ══
-    '6.4.18' => ['baslik' => 'Bilimsel ya da sanatsal toplantı düzenleme, küratörlük, oturum başkanlığı ve benzeri görevler', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    '6.4.18' => ['baslik' => 'Bilimsel ya da sanatsal toplantı düzenleme, küratörlük, oturum başkanlığı ve benzeri görevler', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
 
     // ══ 6.5 İDARİ GÖREVLER ══
     '6.5.1' => ['baslik' => 'Akademik teşkilat yönetmeliğinde tanımlanan idari görevleri üstlenmek (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 10],

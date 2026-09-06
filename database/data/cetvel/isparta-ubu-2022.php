@@ -102,6 +102,11 @@
  *       bulunulamayan sürenin düşülmesi) — profilde yok.
  *
  * Yönerge: yonerge/isparta-ubu.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 // MADDE 9: puan bölüşümü TEMEL ALANA göre değişiyor. Fen/Mühendislikte
@@ -211,7 +216,7 @@ $maddeler = [
     'T2-ED3' => ['baslik' => 'Süreli hakemli dergide yayın kurulu, bilim kurulu ya da komisyon üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 2],
     'T2-ED4' => ['baslik' => 'Süreli hakemli dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
 
-    'T2-TOP' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu, bilim kurulu ya da sekretarya görevi', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 1],
+    'T2-TOP' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu, bilim kurulu ya da sekretarya görevi', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
 
     'T2-ID1' => ['baslik' => 'Rektör ya da rektör yardımcısı olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 10],
     'T2-ID2' => ['baslik' => 'Dekan, yüksekokul, meslek yüksekokulu, enstitü ya da merkez müdürü olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 8],

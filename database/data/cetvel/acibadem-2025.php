@@ -74,6 +74,11 @@
  *       her eşik kendi tavanını taşıyan varyanta bağlı.
  *
  * Yönerge: yonerge/acibadem.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $OZGUN = ['ozgun_makale'];
 $DERLEME = ['derleme'];
@@ -163,7 +168,7 @@ $maddeler = [
     // ══ 8. KONGRE FAALİYETLERİ ══
     '8.A.5' => ['baslik' => 'Uluslararası kongrede indekslenmemiş sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin'], 'puan' => 5],
     '8.A.8' => ['baslik' => 'Ulusal ya da uluslararası kongrede davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
-    '8.A.10' => ['baslik' => 'Kongre başkanlığı, düzenleme kurulu ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+    '8.A.10' => ['baslik' => 'Kongre başkanlığı, düzenleme kurulu ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
 ];
 
 $gruplar = [

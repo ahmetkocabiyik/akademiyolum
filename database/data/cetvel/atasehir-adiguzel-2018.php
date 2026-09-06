@@ -51,6 +51,11 @@
  *   Editörlük ve hakemlik satırlarının "her yıl için" hesaplanması.
  *
  * Yönerge: yonerge/atasehir-adiguzel.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -167,6 +172,7 @@ return [
         'M26.b' => ['baslik' => 'Alanında ulusal bilim (TÜBİTAK, TÜBA vb.) ya da sanat ödülü almak', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 250],
         'M26.b.p' => ['baslik' => 'Ulusal patent, faydalı model ya da tasarım tescili almak', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili', 'Yazılım', 'Ticarileştirme'], 'puan' => 250],
         'M27.b' => ['baslik' => 'Alanında bilimsel ya da sanatsal çalışma ve araştırmalar için burs almak', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 100],
+        'TOPLANTI-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 25],
     ],
 
     'gruplar' => [

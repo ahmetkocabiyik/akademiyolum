@@ -213,7 +213,7 @@ return [
         '12d-12e' => ['baslik' => 'Bilim, sanat ve estetik (BSE) ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs'], 'puan' => 10],
 
         // ══ 13. BİLİMSEL, SANATSAL VE TASARIMA YÖNELİK ETKİNLİK (tavan 40) ══
-        '13a-13ç' => ['baslik' => 'Bilimsel etkinlikte başkanlık, yarışma jürisi üyeliği ya da düzenleme, yürütme veya bilim kurulunda görev', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+        '13a-13ç' => ['baslik' => 'Bilimsel etkinlikte başkanlık, yarışma jürisi üyeliği ya da düzenleme, yürütme veya bilim kurulunda görev', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
         '13d-13e' => ['baslik' => 'Bilimsel etkinlikte davetli konuşmacı ya da panelist olarak görev almak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
 
         // ══ 15. İDARİ GÖREVLER (grup tavanı 50, yıl çarpanı uygulanamadı) ══

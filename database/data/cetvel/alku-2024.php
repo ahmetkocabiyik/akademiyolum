@@ -73,6 +73,11 @@
  *       da h-indeksi 5/10/15) — koşulu hafifletir, girilmedi.
  *
  * Yönerge: yonerge/alku.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $ARASTIRMA = ['ozgun_makale'];
 $DERLEME = ['derleme'];
@@ -160,7 +165,7 @@ $maddeler = [
     '2.11' => ['baslik' => 'Ulusal bilimsel dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 30],
     '2.12' => ['baslik' => 'Bilimsel dergide yayın kurulu, bilim kurulu ya da komisyon üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 5],
     '2.13' => ['baslik' => 'Bilimsel dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 3],
-    '2.14' => ['baslik' => 'Bilimsel toplantılarda düzenleme kurulu başkanlığı, üyeliği, sekretarya, raportörlük ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+    '2.14' => ['baslik' => 'Bilimsel toplantılarda düzenleme kurulu başkanlığı, üyeliği, sekretarya, raportörlük ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
     '2.15' => ['baslik' => 'Danışmanı olarak sonuçlandırılmış doktora, sanatta yeterlik ya da tıpta uzmanlık tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman', 'es_danisman'], 'puan' => 20],
     '2.16' => ['baslik' => 'Danışmanı olarak sonuçlandırılmış tezli yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman', 'es_danisman'], 'puan' => 10],
     '2.17' => ['baslik' => 'Lisansüstü tez jüri üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 5],

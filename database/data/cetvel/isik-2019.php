@@ -61,6 +61,11 @@
  *   H.3      Erasmus ve akreditasyon koordinatörlükleri.
  *
  * Yönerge: yonerge/isik.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $kapsamNotu = 'Puanlar Işık Üniversitesi EK-1 Puanlama Tablosundan. '
     .'Çok yazarlı çalışmalarda pay yazar SIRASINA bağlı (birinci isim ve sorumlu yazar %100, '
@@ -155,6 +160,8 @@ $ham = [
     'F.2.1.a' => [18.0, 'Uluslararası yayınevince yayımlanan kitabın editörlüğü', 'editorluk', ['BKCI Kitap'], null],
     'F.3.a' => [1.0, 'Dergi yayın kurulu üyeliği veya editörlüğü', 'editorluk', ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Kitap Editörlüğü'], null],
     'F.3.b' => [1.0, 'Makale veya proje hakemliği', 'editorluk', ['Hakemlik'], null],
+    'F.4.c' => [6.0, 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'diger', ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], null],
+    'F.4.d' => [3.0, 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'diger', ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], null],
 
     // ══ G EĞİTİM-ÖĞRETİM ══ (profesörlük tavanı 20)
     'G.1.1.a' => [5.0, 'Doktora veya sanatta yeterlik tezi danışmanlığı (yıl başına)', 'tez_danismanligi', ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], null, ['danisman']],

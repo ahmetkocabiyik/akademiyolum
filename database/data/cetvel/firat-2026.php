@@ -32,6 +32,11 @@
  * ÇIKARILMIŞTIR" diyor; 100 rakamı çıkarılan satırdan kalma. Cetvelde C6
  * YOK ve olmamalı — sayıyı görüp satır açmak 100 puanlık bir fazla sayma
  * üretir. 'C2-C6' kümesi de C6'yı saymıyor.
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -99,6 +104,7 @@ return [
         'C8.3' => ['baslik' => 'Sürekli ve periyodik olarak verilen jürili ulusal bilim ve sanat ödülleri (Başarılı tez ödülü birinciliğ', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon'], 'puan' => 50],
         'C9.1' => ['baslik' => 'Son 5 (beş) yıl içinde Türkçe verilen dersler (dönem/kurul başına her ders için çarpan 1\'dir.)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders'], 'puan' => 8],
         'C9.2' => ['baslik' => 'Son 5 (beş) yıl içinde yabancı dilde verilen dersler (dönem/kurul başına her ders için çarpan 1\'dir.)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 16],
+        'A4.6' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
     ],
 
     'gruplar' => [

@@ -1129,6 +1129,65 @@ koordinatörlüğü tabloya alınmadı: sergi DÜZENLEMEK, karma sergiye eserle
 KATILMAKTAN başka bir iş; genel etikete bağlamak hak edilmeyen puan verirdi.
 Ata ancak yeni etiket eskisinin gerçekten bir ALT TÜRÜYSE yazılır.
 
+### BİLİMSEL TOPLANTI ORGANİZASYONU AİLESİ (06.09.2026)
+
+Korpusun **85 kaynağı** kongre/sempozyum organizasyonunu puanlıyor (551 satır)
+ve aile sözlükte tamamen karşılıksızdı: girilebilen otuz kadar cetvel satırı
+`Diğer`e yazmış, geri kalanı bölümü hiç girmemişti ("sözlükte kongre düzenleme
+kaynağı yok"). Altı etiket açıldı — **üç rol × uluslararası/ulusal**:
+
+| Rol | Korpus medyanı | Etiket |
+|---|---|---|
+| başkanlık | 10 | `Toplantı Düzenleme Başkanlığı (…)` |
+| kurul üyeliği | 5-6 | `Düzenleme/Bilim Kurulu Üyeliği (…)` |
+| oturum başkanlığı | 3 | `Oturum Başkanlığı (…)` |
+
+**Rolü bölmenin gerekçesi ölçüldü.** Tek etikete toplansalardı §0 hepsini
+oturum başkanlığının kademesine (3) indirirdi ve başkanlık satırları
+üçte-bire düşerdi. Sekretarya ve raportörlük üyelikle aynı medyanda olduğu
+için AYRI ETİKET AÇILMADI, üyeliğe katıldı.
+
+**Ailenin sınırı, taramanın en pahalı kısmı.** Dört komşu aile dışarıda
+bırakıldı, çünkü hepsi aynı kelimelerle yazılıyor:
+
+- **Derginin kurulu** — "yayın kurulu", "danışma kurulu" editörlük ailesi.
+- **Kurumun kurulu** — TÜBİTAK/TÜBA/YÖK kurul üyelikleri geçen turun
+  `Dış Kuruluş Kurul Üyeliği` etiketi.
+- **Bilimsel olmayan etkinliğin düzenlenmesi** — Atatürk sportif faaliyetin
+  düzenleme kuruluna 1, bilimsel toplantınınkine 20 veriyor; tek etikete
+  girselerdi §0 ikisini de 1'e indirirdi.
+- **Ödül satırları** — "bilimsel kuruluşlarca verilen ödül" deseni `kurul`
+  köküne takılıyor. Regexte `kurul(?!uş)` şart.
+
+**"En fazla N puan" ifadesi puan sütunu sanılıyor.** Atatürk'ün satırı
+"(… en fazla 60 puan alınabilir)" diyor ve tarayıcı 60'ı satırın değeri
+sandı; gerçek değer 15'ti, yani taban FAZLA saydıracaktı. Aynı tuzağın öteki
+yüzü Karamanoğlu'nun "(en çok 3 adet)"i. Satır içindeki sayıyı sütun sayma:
+sütunun önünde en az on harflik metin olmalı ve "en fazla/en çok/adet"
+ifadeleri elenmeli.
+
+**Etiketin kategorisi satırın kategorisini belirler.** Altı etiket `diger`
+kategorisinde; motor (kategori, kaynak) çiftiyle eşleştiği için etiketler
+ancak `diger` satırlara yapışıyor. Korpustaki aile satırlarının bir kısmı
+`bildiri`, `idari_gorev`, `toplumsal_katki` ya da `sanatsal_etkinlik`
+kategorisindeydi ve o satırlara yazılamazdı — kategorilerini değiştirmek de
+olmazdı, çünkü çoğu `Davetli Konuşmacı` gibi başka bir aileyi de taşıyor.
+Çözüm **aynı puanda paralel `diger` satırı** (İTÜ M.6y deseni): sekiz cetvelde
+uygulandı. `CetvelKaynakTest`'in "kaynaklar kategori sözlüğünde var" testi bu
+hatayı kendiliğinden yakalıyor.
+
+**`Diğer`e EŞDEĞER YAZILMADI.** Yeni etiketler eski `['Diğer']` satırlarının
+alt türü değil; eşdeğer yazsaydık oturum başkanlığı kaydı, `diger`
+kategorisindeki alakasız her satırdan (adıyla anılan formül, h-indeksi) puan
+alırdı. Aday `Diğer` yerine doğru etiketi seçtiğinde o rastlantısal puanı
+kaybediyor — bu bir gerileme değil, düzeltme.
+
+Yayma sonucu: **48 cetvel dosyası, 106 satır** (98'i yeni, 8'i paralel), her
+etiket 19-52 üniversitede puan alıyor. Girilmeyenler ve sebepleri
+`GIRILEMEYEN-YONERGELER.md`'de; en pahalısı Akdeniz (9.5/9.6 yalnız
+SCI-E/SSCI/AHCI kongreleri için geçerli, dipnot kısıtı taşınamıyor) ve
+Trakya (puan sütunları pdftotext'te kesik).
+
 ### Tezden üretilmiş yayına ayrı satır AÇMAK ZORUNDA DEĞİLSİN
 
 Kayıt tezden üretilmiş yayını `tez_yayini` kategorisinde ayrı tutuyor ve daha

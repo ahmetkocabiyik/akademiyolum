@@ -56,6 +56,11 @@
  *       ve 14/h-l'nin "her akademik yıl için" çarpanları.
  *
  * Yönerge: yonerge/ufuk.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $OZGUN = ['ozgun_makale'];
 $DIGER_TUR = ['derleme', 'kisa_makale', 'vaka_teknik_not'];
@@ -116,7 +121,7 @@ $maddeler = [
 
     // ══ 10. BİLİMSEL ETKİNLİKLERDE GÖREV ALMA ══
     '10.g' => ['baslik' => 'Toplantılarda davetli konuşmacı olarak sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 3],
-    '10.a' => ['baslik' => 'Kongre, kurs ve çalıştaylarda bilimsel düzenleme kurulu başkanlığı, üyeliği ya da oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 1],
+    '10.a' => ['baslik' => 'Kongre, kurs ve çalıştaylarda bilimsel düzenleme kurulu başkanlığı, üyeliği ya da oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
     '10.l' => ['baslik' => 'Jürili yarışmalarda danışmanlık ya da jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 4],
 
     // ══ 11. EĞİTİM-ÖĞRETİM FAALİYETLERİ ══

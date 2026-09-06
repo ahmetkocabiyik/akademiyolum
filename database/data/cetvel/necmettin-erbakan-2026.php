@@ -172,7 +172,7 @@ $maddeler = [
     'I_RAPOR' => ['baslik' => 'Yurt dışında ya da yurt içinde yayımlanmış bilimsel rapor yazarlığı', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 15],
     'O16' => ['baslik' => 'Öğrenci kulübü, topluluğu ya da sosyal sorumluluk danışmanlığı', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 5],
     'G16' => ['baslik' => 'Radyo, televizyon ve gazetelerde alanı ile ilgili konularda yorumcu ya da konuşmacı olarak katılım', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın'], 'puan' => 10],
-    'O3' => ['baslik' => 'Bilimsel toplantı düzenleme kurulunda görev almak, proje hakemliği ya da panelistlik', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+    'O3' => ['baslik' => 'Bilimsel toplantı düzenleme kurulunda görev almak, proje hakemliği ya da panelistlik', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
 
     // ══ J. ÖDÜLLER ══
     'J1' => ['baslik' => 'Cumhurbaşkanlığı Kültür ve Sanat Büyük Ödülü, YÖK ödülleri, TÜBA ve TÜBİTAK bilim, teşvik, GEBİP ya da TESEP ödülleri, ERC ödülü', 'kategori' => 'odul', 'kaynaklar' => ['YÖK Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 150],

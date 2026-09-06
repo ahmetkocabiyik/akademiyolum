@@ -125,7 +125,7 @@ $maddeler = [
     'S-9' => ['baslik' => 'C türü (diğer yurt içi) projede danışmanlık', 'kategori' => 'proje', 'kaynaklar' => $C_PROJE, 'roller' => ['danisman'], 'puan' => 2],
 
     // ══ T. BİLİMSEL VE SANATSAL TOPLANTI DÜZENLEME ══
-    'T' => ['baslik' => 'Bilimsel ya da sanatsal toplantı düzenleme kurulunda veya seçici/bilim kurulunda görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    'T' => ['baslik' => 'Bilimsel ya da sanatsal toplantı düzenleme kurulunda veya seçici/bilim kurulunda görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
 
     // ══ V. SANAT İLE İLGİLİ BİLİM DALLARI ETKİNLİKLERİ ══
     'V-1' => ['baslik' => 'Özgün sanat ve tasarım çalışmalarının uluslararası müzelerde ya da eşdeğer kurumlarda yer alması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt Dışı)', 'Eserin Yayında Yer Alması / Satın Alınması', 'Eserin Haber Olması (Uluslararası)'], 'puan' => 20],

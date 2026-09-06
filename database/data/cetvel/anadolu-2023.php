@@ -25,6 +25,11 @@
  * kaynak sözlüğünde yok; 33-38 sanatsal etkinlik alt kırılımları, 46-50 jüri
  * ve düzenleme kurulu görevleri, 53 görsel-işitsel yapım rolleri. Bunların
  * sözlükte karşılığı yok.
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -89,6 +94,7 @@ return [
         '57' => ['baslik' => 'Dekanlık, enstitü/yüksekokul/meslek yüksekokulu müdürlüğü, üniversite yönetim kurulu üyeliği, senato üye', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 20],
         '58' => ['baslik' => 'Araştırma merkezi müdürlüğü, Rektörlüğe bağlı koordinatörlüklerde koordinatörlük, bölüm başkan yardımcıl', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkanı'], 'puan' => 10],
         '59' => ['baslik' => 'Birim kurul üyeliği, birim yönetim kurulu üyeliği, Rektörlük uhdesinde görev yapan komisyon veya kurulla', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 7],
+        'TOPLANTI-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
     ],
 
     'gruplar' => [

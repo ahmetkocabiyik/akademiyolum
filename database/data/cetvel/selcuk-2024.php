@@ -103,6 +103,8 @@ return [
                 '12e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '12f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '12i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -196,6 +198,8 @@ return [
                 '11e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '11f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '11i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -288,6 +292,8 @@ return [
                 '11e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '11f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '11i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -385,6 +391,8 @@ return [
                 '12e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '12f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '12i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -475,6 +483,8 @@ return [
                 '12e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '12f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '12i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -568,6 +578,8 @@ return [
                 '11e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '11f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '11i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -652,6 +664,8 @@ return [
                 '11a' => ['baslik' => 'SCI, SCIE, SSCI, AHCI, ESCI veya Scopus kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 2],
                 '11b' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Kitap Editörlüğü'], 'puan' => 1],
                 '11c' => ['baslik' => 'TR Dizin kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 1],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -742,6 +756,8 @@ return [
                 '11e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '11f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '11i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -834,6 +850,8 @@ return [
                 '11e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '11f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '11i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -925,6 +943,8 @@ return [
                 '11e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '11f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '11i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -1021,6 +1041,8 @@ return [
                 '12e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '12f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '12i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],
@@ -1113,6 +1135,8 @@ return [
                 '11e' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
                 '11f' => ['baslik' => 'Rektörlüğe bağlı ofis/koordinatörlükte koordinatör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
                 '11i' => ['baslik' => 'Rektörlüğe bağlı komisyon veya üniversite/fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+                'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+                'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
                 '1' => ['1*'],

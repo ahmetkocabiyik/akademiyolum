@@ -75,6 +75,11 @@
  * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
  * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
  * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -190,6 +195,7 @@ return [
         'III.4.b' => ['baslik' => 'Eserin ulusal seçici kurullu müzede veya eşdeğer kurumda yer alması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt İçi)', 'Eserin Satın Alınması (Yurt İçi)', 'Eserin Yayında Yer Alması / Satın Alınması'], 'puan' => 80],
         'III.5.a' => ['baslik' => 'Alanında özgün uluslararası bireysel sanat veya tasarım etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Elektronik Kişisel Sergi (Uluslararası)'], 'puan' => 30],
         'III.5.b' => ['baslik' => 'Alanında özgün ulusal bireysel sanat veya tasarım etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Ulusal)', 'Kişisel Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Kişisel Etkinlik (Yurt İçi, Jürisiz)', 'Elektronik Kişisel Sergi (Ulusal)', 'Özgün Eser / Beste / Tasarım'], 'puan' => 20],
+        'TOPLANTI-OTR' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 4],
     ],
 
     'gruplar' => [

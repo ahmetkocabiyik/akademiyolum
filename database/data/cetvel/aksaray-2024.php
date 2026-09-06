@@ -87,6 +87,11 @@
  *       puan DÜŞÜK görünür.
  *
  * Yönerge: yonerge/aksaray.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -227,6 +232,7 @@ return [
         'M.5' => ['baslik' => 'Diğer uluslararası veya ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 2],
         'M.6' => ['baslik' => "ULAKBİM TR-Dizin'de indekslenmiş dergide editörlük", 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 2],
         'M.10-M.11' => ['baslik' => 'Bilimsel toplantı veya kamu/STK programında davetli konuşmacı, panelist ya da oturum başkanı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 1],
+        'M.10-M.11k' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
         'M.12' => ['baslik' => 'Mesleki kuruluşça organize edilen proje/tasarım/sergi yarışmasında jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 1],
 
         // ══ N. İDARİ GÖREVLER (yalnızca 1 yıllık taban değeri) ══

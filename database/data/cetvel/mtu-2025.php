@@ -60,6 +60,11 @@ use App\Enums\Kategori;
  * OLDUĞUNDAN DÜŞÜK görünür.
  *
  * Yönerge: yonerge/mtu.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $Q4 = ['SCIE/SSCI (Q4)', 'AHCI'];
@@ -146,7 +151,7 @@ $maddeler = array_merge([
     'B1.3' => ['baslik' => 'Uluslararası toplantıda poster sunum yapılan, özeti ya da tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 20],
     'B2.2' => ['baslik' => 'Ulusal toplantıda sözlü sunum yapılan, özeti ya da tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 20],
     'B2.3' => ['baslik' => 'Ulusal toplantıda poster sunum yapılan, özeti ya da tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 10],
-    'B2.4' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+    'B2.4' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
 
     // ══ C. KİTAPLAR ══
     'C1.1' => ['baslik' => 'Uluslararası, yabancı dilde basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 250],

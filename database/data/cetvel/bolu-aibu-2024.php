@@ -38,6 +38,11 @@
  * dereceleri), D.4 (burslar dışında kalanlar), F (etkinlik düzenleme kurulları),
  * G (toplumsal katkı alt kırılımları), H (jüri üyelikleri), J (mimari tasarım)
  * ve I bölümünün metot yazarlığı, derleme, okul müziği gibi alt kalemleri.
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -179,6 +184,9 @@ return [
         'I.2.5.1' => ['baslik' => 'Yurt dışında veya uluslararası etkinlikte sanat çalıştayı ya da atölye liderliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Masterclass (Uluslararası)'], 'puan' => 12],
         'I.2.5.4' => ['baslik' => 'Yurt içinde sanat çalıştayı veya atölye liderliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Masterclass (Ulusal)', 'Eğitim Amaçlı Sanat Etkinliği'], 'puan' => 6],
         'G.2.3' => ['baslik' => 'Bilimsel ya da mesleki kurum ve kuruluşların yönetiminde, kurullarında veya komisyonlarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 5],
+        'F.4.1' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 10],
+        'F.4.3' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
+        'F.4.4' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
     ],
 
     'gruplar' => [

@@ -71,6 +71,11 @@
  *       DÜŞÜK görünür, yani baraj olduğundan zor.
  *
  * Yönerge: yonerge/itu.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $kapsamNotu = function (string $birim, string $ek = ''): string {
     return "Puanlar İTÜ Akademik Yükseltme ve Atama Ölçütleri (2022) Tablo 1'den, {$birim} "
@@ -261,6 +266,7 @@ $mimarlik = [
     'G.7d' => ['baslik' => 'Planlama, mimarlık, kentsel tasarım veya endüstriyel tasarım yarışmasında derece veya mansiyon', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 5],
     'N.1' => ['baslik' => 'Tasarım, planlama veya mimarlık yarışmasında jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 3],
     'N.3' => ['baslik' => 'Çalışma alanıyla ilgili yazılım üreticisi veya faydalı model sahibi olmak', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Yazılım'], 'puan' => 3],
+    'P.4' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (başkanlık çarpanı girilemedi)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
 ];
 
 return ['cetveller' => [

@@ -750,7 +750,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
     expect($disarida)->toBe([
         // "1. maddeden" barajları; 4-7. bölümler (ödül, idari görev, hizmet)
         // hiçbir koşulun kümesinde değil.
-        'ankara-2023: 19/66',
+        'ankara-2023: 21/68',
 
         // Yalnız EG5 (yarıyıl başına 1 puanlık ders) dışarıda; `PUAN` grubu
         // ders satırlarını kapsamıyor.
@@ -758,7 +758,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
 
         // Toplam baraj A-L; M (ödüller, idari görevler) ile N (patent)
         // kaynağın kendi ifadesiyle barajın dışında.
-        'giresun-2019: 7/58',
+        'giresun-2019: 8/59',
 
         // EK-A/3: "1., 2., 3., 4. ve 7. maddelerden en az 50 puan." Proje,
         // tez danışmanlığı ve ders bölümleri barajın dışında; 40/80/120/160
@@ -772,7 +772,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
         // notu da buna dayanıyor: idari görev tavanının yazılamaması barajı
         // şişirmiyor, çünkü o satırlar zaten hiçbir koşulda yok.
         'itu-2022-hs: 18/44',
-        'itu-2022-mf: 21/47',
+        'itu-2022-mf: 22/48',
         'itu-2022-moda: 26/51',
         'itu-2022-tmdk: 20/52',
         'itu-2022: 32/44',
@@ -784,15 +784,15 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
         // İletişim Fakültesine özgü olduğu için yalnız `b` (sosyal)
         // varyantında var; `a`, `bx` ve `c` varyantlarında satırları hiç
         // yazılmıyor, o yüzden onların toplamı 101 değil 97.
-        'omu-2025-a-doc: 17/97',
-        'omu-2025-a-dr: 17/97',
-        'omu-2025-a-prof: 17/97',
-        'omu-2025-b-doc: 17/101',
-        'omu-2025-b-dr: 17/101',
-        'omu-2025-b-prof: 17/101',
-        'omu-2025-bx-doc: 17/97',
-        'omu-2025-bx-dr: 17/97',
-        'omu-2025-bx-prof: 17/97',
+        'omu-2025-a-doc: 17/99',
+        'omu-2025-a-dr: 17/99',
+        'omu-2025-a-prof: 17/99',
+        'omu-2025-b-doc: 17/103',
+        'omu-2025-b-dr: 17/103',
+        'omu-2025-b-prof: 17/103',
+        'omu-2025-bx-doc: 17/99',
+        'omu-2025-bx-dr: 17/99',
+        'omu-2025-bx-prof: 17/99',
 
         // Bölüm toplamı "1.1; 1.2; 1.3; 1.4; 1.6" diye sınırlı; 1.5
         // (hakemlik) ve 1.7 (atıf) ayrı raporlanıyor.
@@ -896,3 +896,53 @@ test('iki kollu satırların ikinci kolu korpusta duruyor', function (string $ce
     // ayırmadığı için uluslararası satıra yazılamaz.
     ['istanbul-atlas-2026', '3.1.e', 'Eserin Satın Alınması (Yurt İçi)'],
 ]);
+
+/**
+ * BİLİMSEL TOPLANTI ORGANİZASYONU AİLESİ (06.09.2026).
+ *
+ * Altı etiket korpusun 85 kaynağında karşılığı olan bir aile için açıldı;
+ * açmak tek başına işe yaramaz, satırlara YAYILMASI gerekir (KONVANSIYONLAR
+ * §1 "ETİKETİ AÇTIKTAN SONRA KORPUSA YAY"). Bu test yayılmanın geri
+ * alınmadığını koruyor: her etiket birden çok üniversitede puan almalı.
+ */
+test('toplantı organizasyonu etiketleri korpusta puan alıyor', function (string $etiket, int $enAz) {
+    $depo = app(SartDeposu::class);
+    $faaliyet = sartFaaliyet($etiket, Kategori::Diger, null);
+
+    $universite = [];
+
+    foreach ($depo->cetveller() as $ad => $katalog) {
+        if ($katalog->puan($faaliyet, $katalog->coz(['*'])) > 0) {
+            $universite[preg_replace('/-.*/', '', $ad)] = true;
+        }
+    }
+
+    expect(count($universite))->toBeGreaterThanOrEqual($enAz, "{$etiket} yeterince yayılmamış");
+})->with([
+    ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 25],
+    ['Toplantı Düzenleme Başkanlığı (Ulusal)', 25],
+    ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 45],
+    ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 45],
+    ['Oturum Başkanlığı (Uluslararası)', 15],
+    ['Oturum Başkanlığı (Ulusal)', 15],
+]);
+
+/**
+ * ROL KADEMESİ KORUNUYOR MU: aile tek etikete toplansaydı §0 hepsini oturum
+ * başkanlığının kademesine indirirdi. Bitlis'in F.4 bloğu üç rungu da tek
+ * kaynakta taşıyor (başkanlık 10 · üyelik 5 · oturum 2); üçünün de kendi
+ * değerini alması ayrımın çökmediğinin kanıtı.
+ */
+test('toplantı organizasyonunda rol kademesi çökmüyor', function () {
+    $katalog = app(SartDeposu::class)->cetveller()['bitlis-2024'] ?? null;
+    expect($katalog)->not->toBeNull();
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        sartFaaliyet($etiket, Kategori::Diger, null),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('Toplantı Düzenleme Başkanlığı (Uluslararası)'))->toBe(10)
+        ->and($puan('Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'))->toBe(5)
+        ->and($puan('Oturum Başkanlığı (Uluslararası)'))->toBe(2);
+});

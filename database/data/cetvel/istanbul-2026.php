@@ -166,6 +166,7 @@ $maddeler = [
     '4.g' => ['baslik' => 'Ulusal toplantıda sözlü sunulan ve yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 4],
     '4.h' => ['baslik' => 'Ulusal toplantıda yayımlanan poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
     '4.i' => ['baslik' => 'Bilimsel toplantı düzenleme komitesi veya bilim kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
+    '4.ik' => ['baslik' => 'Bilimsel toplantı düzenleme komitesi veya bilim kurulu üyeliği (kurul görevi)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
 
     // ══ 5. EDİTÖRLÜK VE DİĞER GÖREVLER ══
     '5.a' => ['baslik' => 'BKCI kapsamındaki bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],

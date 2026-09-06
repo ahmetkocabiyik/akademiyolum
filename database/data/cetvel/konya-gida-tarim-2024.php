@@ -56,6 +56,11 @@
  *       yönergenin tablosunda hiç yok.
  *
  * Yönerge: yonerge/konya-gida-tarim.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $OZGUN = ['ozgun_makale'];
@@ -152,7 +157,7 @@ return [
         'G1' => ['baslik' => 'Uluslararası bilim ya da teşvik ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 30],
         'G2' => ['baslik' => 'Ulusal bilim ya da teşvik ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 20],
         'G4' => ['baslik' => 'Yurt dışı araştırma bursu', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 5],
-        'G9' => ['baslik' => 'Kongre başkanlığı ya da kongre düzenleme kurulunda yer almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+        'G9' => ['baslik' => 'Kongre başkanlığı ya da kongre düzenleme kurulunda yer almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
     ],
 
     'gruplar' => [

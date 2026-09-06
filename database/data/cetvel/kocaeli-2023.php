@@ -177,6 +177,8 @@ $govde = [
         // birden taşıdığı için en düşük kademe yazıldı (§0).
         'K10' => ['baslik' => 'Uluslararası bilimsel ya da mesleki kuruluşun yönetiminde, kurulunda veya komisyonunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 5],
         'K12' => ['baslik' => 'Ulusal ya da yerel bilimsel/mesleki kuruluşun yönetiminde, kurulunda veya komisyonunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 3],
+        'E.8' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
+        'E.7' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 7],
     ],
 
     'gruplar' => [

@@ -38,6 +38,11 @@
  * 9 (kamu-üniversite-sanayi işbirliği), 23-24 (koordinatörlük ve kongre
  * düzenleme), 26-28, 32-42 (film, TV, tiyatro, sahne ve kostüm tasarımı),
  * 49-51. Kaynak sözlüğünde karşılıkları yok ya da ayırt edilemiyor.
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -171,6 +176,7 @@ return [
         '47.a' => ['baslik' => 'Alanında uluslararası tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 100],
         '47.b' => ['baslik' => 'Alanında ulusal tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 80],
         '47.d' => ['baslik' => 'Belgelendirilmiş faydalı model veya endüstriyel tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 40],
+        '7.c' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
     ],
 
     'gruplar' => [

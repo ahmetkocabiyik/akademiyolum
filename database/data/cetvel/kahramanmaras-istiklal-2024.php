@@ -47,6 +47,11 @@
  * tutulmuyor), B4 (bilimsel toplantı düzenleme kurulu — sözlükte karşılık
  * yok), B1.3-B1.4 (lisans öğrenci ve topluluk danışmanlığı), C bölümünün alt
  * kırılımları kısmen.
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -188,6 +193,8 @@ return [
         'C2.2' => ['baslik' => 'Ulusal karma veya ortak sanat etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)', 'Karma Etkinlik (Jürisiz, Ulusal)', 'Karma Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Elektronik Karma Sergi (Ulusal)'], 'puan' => 20],
         'C2.3' => ['baslik' => 'Ulusal sempozyum, festival veya bienale eserle katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt İçi)', 'Masterclass (Ulusal)', 'Özgün Eser / Beste / Tasarım'], 'puan' => 20],
         'C2.4' => ['baslik' => 'Eserin yurt içinde satın alınması veya koleksiyona kabulü', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt İçi)', 'Eserin Satın Alınması (Yurt İçi)', 'Eserin Yayında Yer Alması / Satın Alınması', 'Eserin Haber Olması (Ulusal)'], 'puan' => 15],
+        'TOPLANTI-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 15],
+        'TOPLANTI-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 6],
     ],
 
     'gruplar' => [

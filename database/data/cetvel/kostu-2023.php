@@ -94,6 +94,11 @@
  * verme" diyor; motor madde bazında kayan pencere tutmuyor, kısıt uygulanmadı.
  *
  * Yönerge: yonerge/kostu.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $kapsamNotu = 'Puanlar KOSTÜ EK-1 çizelgesinden. YAZAR ÇARPANI YALNIZCA MAKALE, BİLDİRİ VE '
     .'ATIF KALEMLERİNE uygulanır — çizelgenin dipnotu çarpanı "1.-13. sıradaki yayın '

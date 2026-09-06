@@ -50,6 +50,11 @@
  *       baskı esastır" kuralları.
  *
  * Yönerge: yonerge/fsmvu.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -114,7 +119,7 @@ $maddeler = [
     'A6.1.e' => ['baslik' => 'Uluslararası ya da ulusal bir yayınevince yayımlanan bilimsel, mesleki eser veya ders kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
     'A6.2' => ['baslik' => 'Yayın kurulu üyeliği ya da makale hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği', 'Hakemlik'], 'puan' => 3],
     'A6.3.d' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 7],
-    'A6.3' => ['baslik' => 'Bilimsel toplantılarda bildiri kitabı editörlüğü, bilim/danışma/düzenleme kurulu üyeliği ya da oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+    'A6.3' => ['baslik' => 'Bilimsel toplantılarda bildiri kitabı editörlüğü, bilim/danışma/düzenleme kurulu üyeliği ya da oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 3],
 
     // ══ A7. FİKRİ MÜLKİYET ══
     'A7.1.a' => ['baslik' => 'Tescil edilmiş uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 120],

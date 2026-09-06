@@ -66,6 +66,11 @@
  *       15. maddenin "en fazla 5 etkinlik" gibi adet sınırları.
  *
  * Yönerge: yonerge/zbeu.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -147,7 +152,7 @@ $maddeler = [
     '14.a' => ['baslik' => 'Hakemli dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
 
     // ══ 15. ETKİNLİK ══
-    '15.a' => ['baslik' => 'Bilimsel ve sanatsal kongre, sergi, konser ve etkinliklerin düzenleme ya da bilim kurullarında görev almak; oturum başkanlığı, seminer, değişim ve iş birliği faaliyetleri', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 1],
+    '15.a' => ['baslik' => 'Bilimsel ve sanatsal kongre, sergi, konser ve etkinliklerin düzenleme ya da bilim kurullarında görev almak; oturum başkanlığı, seminer, değişim ve iş birliği faaliyetleri', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
     '15.u' => ['baslik' => 'Topluma yönelik akademik ve sosyal sorumluluk çalışmalarında yer almak; bakanlık ve kamu kurumlarının bilim komisyonlarında görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın', 'Kamu/STK Danışmanlığı'], 'puan' => 1],
 
     // ══ 17. BİRİM YÖNETİCİLİĞİ ══

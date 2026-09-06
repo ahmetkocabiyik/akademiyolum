@@ -62,6 +62,11 @@
  * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
  * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
  * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $WOS = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $OZGUN = ['ozgun_makale'];

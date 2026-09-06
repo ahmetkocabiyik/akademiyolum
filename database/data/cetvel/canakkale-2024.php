@@ -226,7 +226,7 @@ return [
         // ══ 13. DİĞER ETKİNLİKLER ══
         '13.c' => ['baslik' => 'Erasmus, Mevlana veya Farabi gibi öğretim elemanı değişim programına katılmak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi'], 'puan' => 6],
         '13.m' => ['baslik' => 'Yabancı dilde lisans, lisansüstü veya uzmanlık dersi vermek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders'], 'puan' => 10],
-        '13.d-13.h' => ['baslik' => 'Bilimsel toplantı düzenleme kurulunda görev almak ya da bildiri kitabı editörlüğü yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 10],
+        '13.d-13.h' => ['baslik' => 'Bilimsel toplantı düzenleme kurulunda görev almak ya da bildiri kitabı editörlüğü yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 10],
         '13.ı' => ['baslik' => 'Üniversite-toplum veya üniversite-endüstri işbirliği çerçevesinde sosyal sorumluluk çalışmasında görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 4],
         '13.u' => ['baslik' => 'Teknoparklarda veya sanayi kuruluşlarının AR-GE birimlerinde danışmanlık hizmeti', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 6],
         '13.n-13.o' => ['baslik' => 'Sertifikalı bir eğitim kursuna eğitici olarak katılmak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın'], 'puan' => 5],

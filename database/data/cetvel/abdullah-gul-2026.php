@@ -151,6 +151,11 @@
  * tablosu satırları düz metin açıklamalar hâlinde, numarasız veriliyor;
  * kodlar okunabilirlik için türetildi. Bu yüzden bir satırı kaynakla
  * eşlemenin tek yolu BAŞLIK METNİDİR — kod bir çapa değil.
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 
 return [
@@ -284,6 +289,8 @@ return [
         'I-ABD-BASKANI' => ['baslik' => 'Anabilim dalı başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 10],
         'I-KOMISYON' => ['baslik' => 'Komisyonlarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
         'I-DIS-KOMISYON' => ['baslik' => 'Uluslararası saygın kuruluşlarda komisyon üyeliği (UNESCO, NATO vb.)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 20],
+        'B.KURUL-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 10],
+        'B.KURUL-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
     ],
 
     'gruplar' => [

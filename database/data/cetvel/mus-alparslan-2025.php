@@ -61,6 +61,11 @@ use App\Enums\Kategori;
  * satırlarında uygulandı).
  *
  * Yönerge: yonerge/mus-alparslan.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $TAM = ['ozgun_makale', 'derleme'];
@@ -131,7 +136,7 @@ $maddeler = array_merge([
     // ══ A3. ULUSLARARASI BİLİMSEL TOPLANTILAR ══
     'A3.1' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan, özeti ya da tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Davetli Konuşmacı'], 'puan' => 20],
     'A3.2' => ['baslik' => 'Uluslararası toplantıda özeti ya da tam metni yayımlanan poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 10],
-    'A3.4' => ['baslik' => 'Bilimsel toplantı düzenleme, organizasyon ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 1],
+    'A3.4' => ['baslik' => 'Bilimsel toplantı düzenleme, organizasyon ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
 
     // ══ A5. ATIFLAR ══
     'A5.1' => ['baslik' => 'SCI, SCIE, SSCI ya da AHCI dergilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],

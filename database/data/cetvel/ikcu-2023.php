@@ -390,7 +390,7 @@ $C = [
 
     'C8.a' => ['baslik' => 'Uluslararası bilimsel toplantıda sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 10],
     'C8.b' => ['baslik' => 'Ulusal bilimsel toplantıda sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 5],
-    'C8.c' => ['baslik' => 'Bilimsel toplantı düzenleme kurulunda ya da başkanlığında görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    'C8.c' => ['baslik' => 'Bilimsel toplantı düzenleme kurulunda ya da başkanlığında görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
     'C8.d' => ['baslik' => 'Uluslararası bilimsel toplantıda poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 5],
     'C8.e' => ['baslik' => 'Ulusal bilimsel toplantıda poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 3],
     'C8.f' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı olarak sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 4],

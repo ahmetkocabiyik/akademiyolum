@@ -198,7 +198,7 @@ $maddeler = [
     '8c' => ['baslik' => 'Diğer bilimsel toplantılarda sunulmuş ve tam metni yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Ulusal Tam Metin'], 'puan' => 6],
     '8ç' => ['baslik' => 'Diğer bilimsel toplantılarda sunulmuş ve özeti yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 3],
     '8de' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı olarak yer almak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 6],
-    '8f' => ['baslik' => 'Sempozyum, kongre, konferans, çalıştay ya da festival başkanlığı veya düzenleme kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+    '8f' => ['baslik' => 'Sempozyum, kongre, konferans, çalıştay ya da festival başkanlığı veya düzenleme kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
 
     // ══ 9. İLETİŞİM, SANAT VE SPOR FAALİYETLERİ ══
     '9a' => ['baslik' => 'Uluslararası bireysel sanat etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatKisiselU, 'puan' => 25],
