@@ -96,6 +96,7 @@ $maddeler = [
     // ══ J. EĞİTİM-ÖĞRETİM FAALİYETLERİ ══
     'J1' => ['baslik' => 'Bir dönem verilen lisansüstü ders', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],
     'J2' => ['baslik' => 'Bir dönem verilen lisans ya da ön lisans dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 1],
+    'J3' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
 ];
 
 return [

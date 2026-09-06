@@ -1129,6 +1129,42 @@ koordinatörlüğü tabloya alınmadı: sergi DÜZENLEMEK, karma sergiye eserle
 KATILMAKTAN başka bir iş; genel etikete bağlamak hak edilmeyen puan verirdi.
 Ata ancak yeni etiket eskisinin gerçekten bir ALT TÜRÜYSE yazılır.
 
+### YAYMA BİTTİ SANMA: ETİKETİ TEK TEK TERİMLERLE YENİDEN TARA
+
+Bir aileyi korpusa yaydıktan sonra **ailenin her terimi için taramayı ayrı
+ayrı tekrarla.** Toplantı organizasyonu ailesi "oturum başkanlığı" terimiyle
+kurulmuştu ve 85 kaynak bulmuştu; ardından "düzenleme kurulu" terimiyle
+tarayınca **100 kaynak** çıktı ve 45'i açıktaydı. İkinci dalga 18 cetvele 45
+satır daha ekledi — üyelik etiketinin kapsamı 52 üniversiteden 71'e çıktı.
+
+İkinci dalganın kaçırılma sebebi tek bir kural: birinci tarayıcı satırın
+**puan sütununu bulamadığı** satırları atlıyordu. Sütun bulunamayan üç kalıp:
+
+- tablo satırı iki-üç fiziksel satıra sarılmış, puan ortadaki satırda
+  (Bayburt, Karabük, İstanbul Zaim),
+- puan çift değerli ("10/5", "3/2") ve regex tek sayı bekliyor (Trakya),
+- puan ayrı bir kolonda, satır metniyle arasında sayfa genişliği kadar
+  boşluk var (Uşak, Sakarya).
+
+**Sütunu bulamamak sessiz bir eleme.** Tarayıcı hata vermiyor, satır
+listeden düşüyor ve kaynak "aile yok" görünüyor. Terim başına yeniden tarama
+bunun tek pratik panzehiri.
+
+### EKLEME ÇAPASI TUTMAZSA SATIR SESSİZCE DÜŞER
+
+Toplu satır ekleyen bir betik yazarken çapayı `'maddeler' => [` etiketine
+bağlama. Korpusun bir kısmı diziyi DEĞİŞKENDEN kuruyor (`'maddeler' =>
+$maddeler`, `'maddeler' => $tabloA + $tabloB`) ve satırlar o etiketin
+ÜSTÜNDE tanımlı; etiketten sonrasını arayan betik hiçbir madde satırı
+bulamıyor ve **o dosyayı sessizce atlıyor**. 06.09.2026'da on cetvel bu
+yüzden boş kaldı; hata ancak ertesi tur "etiket kaç üniversitede puan
+alıyor" diye ölçülünce görüldü.
+
+Doğru çapa **dosyanın son madde satırı** (KONVANSIYONLAR'ın ilk tarifi
+buydu). Betiği yazdıktan sonra da **eklediğini geri say**: karar tablosundaki
+her kodun dosyada gerçekten bulunduğunu doğrula. "N satır eklendi" çıktısı
+yetmez; N, atlanan dosyaları saymaz.
+
 ### BİLİMSEL TOPLANTI ORGANİZASYONU AİLESİ (06.09.2026)
 
 Korpusun **85 kaynağı** kongre/sempozyum organizasyonunu puanlıyor (551 satır)

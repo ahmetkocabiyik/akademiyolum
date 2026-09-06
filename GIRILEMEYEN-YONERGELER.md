@@ -839,3 +839,23 @@ kaldı; hepsinin sebebi ayrı:
   baraja girmiyor. `CetvelKaynakTest`'in ölü satır listesinde.
 - **İTÜ P.4** — "kurul başkanlarının puanı iki ile çarpılır" çarpanı
   girilemedi; satır üyelik değerinden (3) yazıldı, başkanlık eksik sayılıyor.
+
+### İkinci dalga (06.09.2026) — hâlâ açık kalan toplantı organizasyonu satırları
+
+"Düzenleme kurulu" terimiyle yapılan ikinci tarama 100 kaynak buldu; 75'i
+girildi. Kalan 25'in sekizinde cetvel hiç yok (İskenderun Teknik, KTÜ, Ordu,
+Çankaya, Topkapı, Piri Reis, TED, Bursa Uludağ). Cetveli olup girilemeyenler:
+
+- **Çukurova** — yönerge puan değil ÖLÇÜT sayıyor; "13" satırın numarası,
+  puanı değil.
+- **Kilis** — üyelik `15/n` ve `8/n` (n = kurul üye sayısı).
+- **Haliç** — satırlar EK-4 (Beden Eğitimi ve Spor) formunda; o ek girilmedi.
+- **Hitit** — "yarışmalar ve sergilerde düzenleme kurulu üyesi": bilimsel
+  toplantı değil.
+- **İnönü** — "başkan tablodaki puanın tamamını, düzenleme kurulu üyesi
+  yarısını alır" biçiminde oransal; satırın kendi puanı yok.
+- **Eskişehir Teknik (12a), Kütahya DPÜ, Cerrahpaşa, RTE, Rumeli, Kadir Has,
+  Toros, Ahi Evran, Kırklareli, Bilecik** — satır var ama puan sütunu
+  pdftotext çıktısında boş; değer okunmadan girilemez.
+- **Bayburt** — uluslararası kademeler girildi (3.1.d 70, 3.1.f 20); ulusal
+  karşılıkları (3.2.x) okunmadığı için ulusal etiketler yazılmadı.

@@ -76,6 +76,11 @@
  *       motorda yok.
  *
  * Yönerge: yonerge/erzurum-teknik.php
+ *
+ * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
+ * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
+ * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
+ * bu satırlar için artık geçerli değil.
  */
 $kapsamNotu = 'Puanlar Erzurum Teknik Üniversitesi "EK: Etkinlik Puanları" listesinden. '
         .'Yazar çarpanı yönergenin çok yazarlı çalışmalar tablosuna göre işliyor (tek yazar '
@@ -133,7 +138,7 @@ $maddeler = [
     'A8' => ['baslik' => 'Ulusal hakemli dergide yayın', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 6],
 
     // ══ B. KONGRE ÇALIŞMALARI ══
-    'B1-B7' => ['baslik' => 'Hakemli konferansta kongre başkanlığı, oturum başkanlığı ya da düzenleme kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 10],
+    'B1-B7' => ['baslik' => 'Hakemli konferansta kongre başkanlığı, oturum başkanlığı ya da düzenleme kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 10],
     'B3' => ['baslik' => 'Uluslararası hakemli konferansta sunulan ve tam metin yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 10],
     'B4-B5' => ['baslik' => 'Uluslararası hakemli konferansta özet olarak yayımlanan ya da poster olarak sunulan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
     'B8' => ['baslik' => 'Ulusal hakemli konferansta sunulan ve tam metin yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 5],

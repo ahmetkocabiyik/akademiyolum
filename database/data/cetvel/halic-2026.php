@@ -60,6 +60,11 @@
  * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
  * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
  * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
+ *
+ * EK-4 (Beden Eğitimi ve Spor Bilimleri) girilmedi; 06.09.2026'da açılan
+ * toplantı organizasyonu etiketleri de bu yüzden yazılamadı: A başlığının
+ * düzenleme kurulu üyeliği satırları (16/12) yalnız spor alanı formunda
+ * geçerli, EK-1/EK-2 adayına verilemez.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];

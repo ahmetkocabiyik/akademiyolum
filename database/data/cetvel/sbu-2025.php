@@ -137,6 +137,7 @@ $maddeler = [
 
     // ══ TEZ DANIŞMANLIĞI (MADDE 13/6'nın aradığı koşul) ══
     'T.1' => ['baslik' => 'Yönettiğiniz yüksek lisans, doktora ya da uzmanlık tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi', 'Yüksek Lisans Tezi'], 'roller' => ['danisman', 'es_danisman'], 'puan' => 5],
+    'TOPLANTI-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
 ];
 
 $AB = ['A.2.a', 'A.2.b', 'A.2.c', 'A.4.a', 'A.4.b', 'A.4.c', 'A.3.a', 'A.3.b', 'A.3.c',

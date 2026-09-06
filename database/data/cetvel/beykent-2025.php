@@ -150,6 +150,8 @@ $maddeler = [
     // ══ O: TEZ YÖNETİMİ ══
     'O-1' => ['baslik' => 'Tamamlanmış doktora, sanatta yeterlik ya da uzmanlık tezi danışmanlığı veya eş danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'puan' => 6],
     'O-2' => ['baslik' => 'Tamamlanmış yüksek lisans tezi danışmanlığı veya eş danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi', 'Tez İzleme / Jüri Üyeliği'], 'puan' => 3],
+    'N-6' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
+    'N-3' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
 ];
 
 return [

@@ -215,6 +215,9 @@ $tabloC = [
     '6a' => ['baslik' => 'Müzikoloji alanında atölye çalışması yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Müzikoloji Atölyesi'], 'puan' => 35],
     '6b-1' => ['baslik' => 'Eğitici konser programı etkinliği (uluslararası)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eğitici Konser Programı (Uluslararası)'], 'puan' => 35],
     '6b-2' => ['baslik' => 'Eğitici konser programı etkinliği (ulusal)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eğitici Konser Programı (Ulusal)'], 'puan' => 25],
+    '8f' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 6],
+    '8ç' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 10],
+    '8b' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
 ];
 
 return [

@@ -400,6 +400,8 @@ $tezAynalari = fn (array $p, int $ulusalDiger): array => [
     'K-b-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, uluslararası yayınevi kitabında bölüm', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => $p['K-b']],
     'K-c-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => $p['K-c']],
     'K-d-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, ulusal yayınevi kitabında bölüm', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => $p['K-d']],
+    'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+    'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
 ];
 
 $TAVANLAR = ['K' => 30, 'AT' => 30, 'TD' => 10, 'BAP' => 20, 'BT' => 20, 'ED' => 4,

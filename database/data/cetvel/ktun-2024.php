@@ -224,6 +224,7 @@ $govde = function (bool $mps) use ($OZGUN, $DERLEME, $KISA, $VAKA, $TUM_KISA, $Q
         'S-4' => ['baslik' => 'Bölüm başkanı, anabilim dalı başkanı ya da uygulama ve araştırma merkezi müdürü olarak görev yapmak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 4],
         'S-5' => ['baslik' => 'Üniversite yönetim kurulu, senato ya da komisyon üyeliği ve koordinatörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
         'S-7' => ['baslik' => 'Bölüm ya da birim işleyişiyle ilgili komisyon üyeliği ve koordinatörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı'], 'puan' => 1],
+        'O-5k' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı ya da kurul üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
     ];
 };
 

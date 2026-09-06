@@ -919,12 +919,12 @@ test('toplantı organizasyonu etiketleri korpusta puan alıyor', function (strin
 
     expect(count($universite))->toBeGreaterThanOrEqual($enAz, "{$etiket} yeterince yayılmamış");
 })->with([
-    ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 25],
-    ['Toplantı Düzenleme Başkanlığı (Ulusal)', 25],
-    ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 45],
-    ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 45],
-    ['Oturum Başkanlığı (Uluslararası)', 15],
-    ['Oturum Başkanlığı (Ulusal)', 15],
+    ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 40],
+    ['Toplantı Düzenleme Başkanlığı (Ulusal)', 38],
+    ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 65],
+    ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 62],
+    ['Oturum Başkanlığı (Uluslararası)', 25],
+    ['Oturum Başkanlığı (Ulusal)', 24],
 ]);
 
 /**
