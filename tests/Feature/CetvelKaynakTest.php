@@ -864,3 +864,35 @@ test('dış kuruluş etiketi üniversite içi komisyon etiketiyle aynı satırda
 
     expect(array_values(array_unique($sizinti)))->toBe([]);
 });
+
+/**
+ * "VE/VEYA" TARAMASINDAN GEÇEN İKİ KOLLU SATIRLAR (06.09.2026).
+ *
+ * Kaynaklar bazen iki AYRI faaliyeti tek bende sığdırıyor: "…etkinliklere
+ * katılmak ve/veya yarışmalarda derece almak". Korpusta 49 böyle puanlama
+ * satırı var (tarama kuralları `KaynakTaramaTest`'te); dördü ikinci kolu
+ * için ayrı satır ya da ayrı etiket gerektiriyordu. Bu test o dördünü
+ * donduruyor — biri geri alınırsa ikinci kol sessizce kaybolur.
+ */
+test('iki kollu satırların ikinci kolu korpusta duruyor', function (string $cetvel, string $kod, string $etiket) {
+    $katalog = app(SartDeposu::class)->cetveller()[$cetvel] ?? null;
+
+    expect($katalog)->not->toBeNull("cetvel yok: {$cetvel}")
+        ->and($katalog->maddeler)->toHaveKey($kod)
+        ->and($katalog->maddeler[$kod]['kaynaklar'] ?? [])->toContain($etiket);
+})->with([
+    // İTÜ M.5/M.6'nın yarışma kolu: M bölümünde ayrı satır, çünkü moda
+    // varyantının eser barajı G.7d'yi değil yalnız `M.*`ı görüyor.
+    ['itu-2022-moda', 'M.6y', 'Yarışma Derecesi / Mansiyon'],
+    // Iğdır 26.a/26.b "ödül veya patent almak": patent ayrı kategoride
+    // olduğu için aynı kodda duramıyordu.
+    ['igdir-2023', '26.a.p', 'Uluslararası Patent'],
+    ['igdir-2023', '26.b.p', 'Ulusal Patent'],
+    // İstanbul Aydın 7/8 "editörlük ve/veya hakemlik": hakemlik etiketi iki
+    // satıra da düşüyordu, §0 uyarınca düşük olanda (B08, 15) bırakıldı.
+    ['istanbul-aydin-2020', 'B08', 'Hakemlik'],
+    // İstanbul Atlas 3.1'in ikinci kolu ("kamusal alanda sergilenmesi,
+    // satın alınması") ulusal satırda; sözlük satın almada yurt dışını
+    // ayırmadığı için uluslararası satıra yazılamaz.
+    ['istanbul-atlas-2026', '3.1.e', 'Eserin Satın Alınması (Yurt İçi)'],
+]);

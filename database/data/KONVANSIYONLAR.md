@@ -1424,6 +1424,57 @@ Adayın gördüğü metin. Şunları söylemeli:
 3. **Hangi yönde saptığı**: "puanınız olduğundan yüksek/düşük görünebilir".
 4. Girilemeyen bölümler ve bunun kimi etkilediği.
 
+### "VE/VEYA" TARAMASI: İKİ KOL MU, TEK NİTELİK Mİ
+
+Kaynaklar iki AYRI faaliyeti tek bende sığdırabiliyor ("…etkinliklere
+katılmak **ve/veya** … yarışmalarda derece almak"). İlk giriş çoğu zaman
+yalnız birinci kolu okuyor. Korpusta 848 ham "ve/veya" var; okunabilir hâle
+iki elemeyle geliyor:
+
+| Sınıf | Sayı | Ne |
+|---|---|---|
+| nesir | 708 | puan sütunu yok — tanımlar maddesi, eşik nesri, atama usulü |
+| nitelik | 91 | ayraç faaliyeti değil NİTELİĞİ bölüyor |
+| iki-kol | 49 | gerçek aday, elle okunur |
+
+**Nitelik ayrımını sıfat listesiyle ayıklama, BİÇİMBİLİMLE ayıkla.** Sıfat
+listesi ("ulusal, uluslararası, basılı, elektronik, bilim, sanat…") her yeni
+kaynakta uzuyor ve "Dünya ve/veya Avrupa Şampiyonalarında" gibi bir satırda
+yine kaçırıyor. Dayanıklı ölçüt Türkçenin kendi eki: yönergeler faaliyeti ya
+mastarla ("katılmak", "görev almak") ya da `-lık` türevi eylem adıyla
+("editörlük", "hakemlik", "başkanlığı", "üyeliği") yazar. **İki kol da böyle
+bir baş taşıyorsa iki faaliyet vardır**; taşımayan kol ("bilim", "çoklu
+ortam", "karma ses") ortak adı niteleyen sıfattır. Filtre kod olarak
+`KaynakTaramaTest`'te.
+
+İkinci kolun üç âkıbeti var ve üçü de meşru:
+
+1. **Ayrı satır gerekiyor** — ikinci kol başka kategoride ya da başka
+   varyantın kümesinde. İTÜ M.6y, Iğdır'ın `26.a.p`/`26.b.p` patent satırları.
+2. **Zaten ayrı satırda** — Ordu'nun bestecilik (`F.23`) / icra (`F.25`,
+   `F.28`) ayrımı. Yapacak bir şey yok.
+3. **Sözlükte karşılıksız** — "oturum başkanlığı", "düzenleme kurulu
+   üyeliği" (Düzce 3.3/3.4, Aydın ADÜ D1.1) ve "yurt dışında ders/seminer
+   vermek" (Dicle F2, KOSTU 18) hiçbir etikete bağlanmıyor. Etiket açmak
+   ayrı bir tur: 42 kaynak "oturum başkanlığı", 91 kaynak "düzenleme
+   kurulu" puanlıyor, yani açılırsa korpusa yayılması gerekir.
+
+### BİLİNEN HATAYI BULMAYAN TARAYICI KALİBRE DEĞİLDİR
+
+Her tarayıcı bir hatadan doğuyor. **Yazdıktan sonra ilk iş, doğuran hatayı
+bulup bulmadığına bakmaktır.** "Ve/veya" tarayıcısının ilk sürümü 19 işaret
+üretti ve İTÜ M.5 İÇLERİNDE DEĞİLDİ — hâlbuki tarama onun için yazılmıştı.
+
+Sebep pdftotext'in satır sarması: ayracın iki kolu iki ayrı FİZİKSEL SATIRA
+düşüyordu ("…katılmak ve/veya uluslararası kuruluşlar tarafından düzenlenen
+15" / "tasarım yarışmalarında derece/mansiyon almak"). Satır bazlı tarayıcı
+ikinci kolu hiç görmüyor. ±2 satırlık BLOK üzerinde çalışınca 57 işaret ve
+İTÜ içlerinde.
+
+Kural: kaynak metinde satır bazlı tarama yapma; blok kur. Aynı tuzak dipnot
+ve üst simge taramalarında da vardı (KONVANSIYONLAR §1 "DİPNOT NUMARASI
+TABLOYA YERELDİR").
+
 ### VARYANTLARIN BARAJ KÜMELERİ AYRIK OLABİLİR — PUAN DOĞRUYKEN KÜME EKSİK
 
 Bir satırın puanı kaynağa birebir uysa bile, satır **o varyantın baraj

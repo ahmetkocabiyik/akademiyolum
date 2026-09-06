@@ -30,6 +30,36 @@
  *   AYNI ESERE ÖZGÜ SINIR "(Aynı kongrede yapılan görevlerden sadece biri)"
  *       Sayı sınırı, uygunluk kısıtı değil; motorun zaten tutamadığı
  *       "aynı esere özgü tavan" sınıfı (KONVANSIYONLAR §1).
+ *
+ * ── "VE/VEYA" TARAMASI (06.09.2026) ──
+ * Amaç: tek bende sığdırılmış İKİ AYRI FAALİYETİ bulmak. İTÜ'nün M.5/M.6'sı
+ * ("…etkinliklere tasarımlarıyla katılmak ve/veya … tasarım yarışmalarında
+ * derece/mansiyon almak") ilk girişte yalnız birinci koluyla okunmuştu.
+ *
+ * Korpusta 848 ham "ve/veya" var; okunabilir hâle iki elemeyle geliyor:
+ *
+ *   NESİR                 Puan sütunu yok. Tanımlar maddesi ("ğ) Kitap
+ *       Editörlüğü: … yurtiçi ve/veya yurtdışında…"), eşik nesri ("Kitap
+ *       bölümü 'a ve/veya c' bendi kapsamında…"), atama usulü. 708 satır.
+ *   NİTELİK AYRIMI        Ayraç iki faaliyeti değil, tek faaliyetin bir
+ *       NİTELİĞİNİ ikiye ayırıyor: "bilim ve/veya sanat kurulu tarafından
+ *       verilen ödül", "ulusal ve/veya uluslararası", "basılı ve/veya
+ *       elektronik", "takımı ve/veya sporcusu". 91 satır.
+ *
+ * Kalan 49 satır 26 kaynağa dağılıyor ve elle okundu. İkinci kolu ayrı bir
+ * karşılık gerektiren dördü `CetvelKaynakTest`'te donduruldu (İTÜ M.6y,
+ * Iğdır 26.a.p/26.b.p, İstanbul Aydın B08, İstanbul Atlas 3.1.e). Geri
+ * kalanda ikinci kol ya zaten ayrı satırda (Ordu'nun bestecilik/icra
+ * ayrımı) ya da SÖZLÜKTE KARŞILIKSIZ: "oturum başkanlığı" ve "düzenleme
+ * kurulu üyeliği" hiçbir etikete bağlanmıyor (Düzce 3.3/3.4, Aydın ADÜ
+ * D1.1) ve "yurt dışında ders/seminer vermek" de öyle (Dicle F2, KOSTU
+ * 18). Bunlar bu turun konusu değil; kendi etiket turlarını bekliyorlar.
+ *
+ * TARAMANIN KENDİSİNDEN ÇIKAN DERS: tarayıcı FİZİKSEL SATIRDA çalışırsa
+ * kendisini doğuran hatayı bulamıyor. pdftotext satırı sarıyor ve İTÜ'de
+ * ayracın iki kolu iki ayrı satıra düşüyor — ilk sürüm 19 işaret üretip
+ * İTÜ'yü kaçırdı. Blok (±2 satır) üzerinde çalışınca 57 işaret ve İTÜ
+ * içlerinde. **Bilinen hatayı bulmayan tarayıcı kalibre değildir.**
  */
 /**
  * Satır, DİPNOT görünümünde mi?
@@ -40,6 +70,57 @@
 function dipnotSatiri(string $satir): bool
 {
     return (bool) preg_match('/^\s{0,10}(?:\(\d{1,2}\)|\d{1,2}(?![.)\d])|[*†‡•])\s{0,3}\S/u', $satir);
+}
+
+/**
+ * "ve/veya" ayracının iki kolu. Blok verilmeli, fiziksel satır değil.
+ *
+ * @return array{0: string, 1: string}|null
+ */
+function veVeyaKollari(string $blok): ?array
+{
+    $parcalar = preg_split('#ve\s*/\s*veya|veya\s*/\s*ve#u', $blok, 2);
+
+    return is_array($parcalar) && count($parcalar) === 2 ? [$parcalar[0], $parcalar[1]] : null;
+}
+
+/**
+ * Kol bir FAALİYET mi anlatıyor, yoksa yalnız bir NİTELİK mi?
+ *
+ * Ayırt edici işaret Türkçenin kendi biçimbilimi: yönergeler faaliyeti ya
+ * mastarla ("katılmak", "görev almak", "derece almak") ya da `-lık` türevi
+ * eylem adıyla ("editörlük", "hakemlik", "başkanlığı", "üyeliği") yazar.
+ * Nitelik kolları böyle bir baş taşımaz — "bilim", "Dünya", "çoklu ortam",
+ * "karma ses". Sıfat listesi tutmaktan çok daha dayanıklı: liste her yeni
+ * kaynakta uzuyordu, bu ek kapalı bir küme.
+ */
+function eylemBasi(string $kol): bool
+{
+    return (bool) preg_match(
+        '/\w*(?:mak|mek|ması|mesi|lık|lik|luk|lük|lığı|liği|luğu|lüğü)\b/u',
+        kucult($kol),
+    );
+}
+
+/**
+ * Bloğun "ve/veya" sınıfı: `nesir`, `nitelik` ya da `iki-kol`.
+ *
+ * `$puanSutunu`, blokta puan SÜTUNU (satır sonunda ya da en az iki boşlukla
+ * ayrılmış sayı) bulunup bulunmadığıdır; puanlama satırı olmayan metin hiç
+ * taranmaz — tanımlar maddesi ve eşik nesri ham işaretlerin çoğunu üretiyor.
+ */
+function veVeyaSinifi(string $blok, bool $puanSutunu): ?string
+{
+    $kollar = veVeyaKollari($blok);
+    if ($kollar === null) {
+        return null;
+    }
+
+    return match (true) {
+        ! $puanSutunu => 'nesir',
+        eylemBasi($kollar[0]) && eylemBasi($kollar[1]) => 'iki-kol',
+        default => 'nitelik',
+    };
 }
 
 /** Satır, tablo satırı görünümünde mi? */
@@ -210,4 +291,60 @@ test('tablo satırı olmayan metin taranmıyor', function () {
     // üretirlerdi.
     expect(satirdanKisitlar('Bu yönerge, Güzel Sanatlar Fakültesi için ayrı ölçüt belirlemez.'))->toBe([])
         ->and(satirdanKisitlar('     (Sadece Devlet Konservatuvarı için geçerlidir)'))->toBe([]);
+});
+
+test('nitelik ayrımı iki kol sayılmıyor', function (string $blok) {
+    expect(veVeyaSinifi($blok, puanSutunu: true))->toBe('nitelik');
+})->with([
+    // Ağrı 36.7.4 — ayraç ödülü VEREN kurulu niteliyor, ödülü ikiye bölmüyor.
+    ['36.7.4. Uluslararası kongre, kurultay, sempozyum, konferans ve festival gibi etkinliklerin bilim ve/veya sanat kurulu tarafından verilen ödül   30'],
+    // Bayburt 11.1.ı — "takımı ve/veya sporcusu": tek faaliyet, iki özne.
+    ['11.1.ı) Üniversitelerarası Dünya ve/veya Avrupa Şampiyonalarında takımı ve/veya sporcusu ilk üç dereceye girmiş olmak   30'],
+    // Atatürk 01.02.01 — dersin niteliği.
+    ['Web tabanlı erişime açık çoklu ortam ve/veya etkileşimli açık ders hazırlama   5'],
+    // Sakarya UBÜ 7.8 — kaydın türü.
+    ['Ulusal boyutta performansa dayalı yayımlanmış karma ses ve/veya görüntü kaydı bulunmak   50'],
+]);
+
+test('puan sütunu olmayan metin taranmıyor', function (string $blok) {
+    expect(veVeyaSinifi($blok, puanSutunu: false))->toBe('nesir');
+})->with([
+    // FSMVÜ ğ) — tanımlar maddesi; "yurtiçi ve/veya yurtdışında" zaten nitelik
+    // ama sütun eleği tek başına da yetiyor.
+    ['ğ) Kitap Editörlüğü: ISBN numarası almış, kitapların içinde yer alan metinleri seçen, hakemler ve/veya yayınevinin ilgili editörü ile birlikte çalışan kişiyi,'],
+    // Selçuk — eşik nesri; "a ve/veya c" BENT kodu, faaliyet değil.
+    ['b) Başvuru Şartları Tablosu’nda yer alan “Kitap” bölümü “a ve/veya c” bendi kapsamında tek yazarlı olmak koşulu ile en az 25 puan almış olmak,'],
+    // Dokuz Eylül 1.13.4 — atama usulü.
+    ['1.13.4 Rektör, bilimsel ve/veya sanatsal değerlendirme jüri üyelerinin görüşlerine dayanarak, Üniversite Yönetim Kurulu’nun görüşünü de aldıktan sonra atamayı yapar.'],
+]);
+
+test('iki ayrı faaliyet taşıyan satır filtreden geçiyor', function (string $blok) {
+    expect(veVeyaSinifi($blok, puanSutunu: true))->toBe('iki-kol');
+})->with([
+    // İTÜ M.5 — taramayı doğuran satır: katılım + yarışma derecesi.
+    ['M.5 Uluslararası sempozyum, festival, çalıştay, bienal, gibi etkinliklere tasarımlarıyla katılmak ve/veya uluslararası kuruluşlar tarafından düzenlenen   15   tasarım yarışmalarında derece/mansiyon almak.'],
+    // Düzce e) — düzenlemede görev + oturum başkanlığı.
+    ['e. Uluslararası kurs ve yaz okulu düzenlenmesinde görev almak ve/veya oturum   5   başkanlığı yapmak'],
+    // Dicle F2 — davetli konuşmacılık + yurt dışında ders verme.
+    ['F 2 davetli konuşmacı olmak ve/veya yurt dışında ders, seminer,   15   konferans vermek'],
+]);
+
+/**
+ * TARAYICI KENDİ HATASINI BULABİLİYOR MU: pdftotext İTÜ'nün M.5 satırını
+ * ayracın ortasından sarıyor ve ikinci kol ("tasarım yarışmalarında
+ * derece/mansiyon almak") bir sonraki fiziksel satıra düşüyor. Satır
+ * bazlı tarayıcı bu yüzden kendi gerekçesini kaçırıyordu.
+ */
+test('kollar satır sarmasıyla ayrılmışsa blok gerekiyor', function () {
+    $satirlar = [
+        'M.5 Uluslararası sempozyum, festival, çalıştay, bienal, gibi etkinliklere',
+        'tasarımlarıyla katılmak ve/veya uluslararası kuruluşlar tarafından düzenlenen               15',
+        'tasarım yarışmalarında derece/mansiyon almak.',
+    ];
+
+    // Ayracın bulunduğu FİZİKSEL satırda ikinci kol yok: yarışma sözcüğü yok.
+    expect(veVeyaKollari($satirlar[1])[1])->not->toContain('yarışma');
+
+    // ±1 satırlık blokta iki kol da görünüyor.
+    expect(veVeyaKollari(implode(' ', $satirlar))[1])->toContain('yarışma');
 });
