@@ -303,6 +303,24 @@ sessizce taramanın dışında bıraktı ("…Aydın Adnan Menderes Üniversites
 Desen ".pdf" uzantısında bitmeli. Docblock'ta İKİ SATIRA taşan adlar (Adana
 ATÜ, AYBÜ) satır bazlı desenle yine bulunmuyor; sayı azsa elle tara.
 
+### AYNI İKİ BÖLÜM BİR KADRODA ORTAK, ÖTEKİNDE AYRI TAVANLI OLABİLİR
+
+Kocaeli'nin Tablo 2'si ders (E) ve idari görev (K) bölümlerini AYRI AYRI 50
+ile sınırlıyor; ama Madde 11/b yeniden atanmada ikisini BİRLİKTE sınırlıyor:
+"derslerden … ve varsa idari faaliyetlerden … en fazla 50 puan dikkate
+alınmak üzere". İki ayrı 50, yeniden atanmada 100'e kadar puan üretir.
+
+Bu fark BÖLÜM GİRİLENE KADAR GÖRÜNMEZ: K bölümünün satırı yokken E'nin tek
+başına 50'si ortak tavanı zaten sağlıyordu. Yeni bir bölüm girerken "bu
+bölüme atıf yapan başka madde var mı" diye ara; varsa tavanın kapsamı
+kadrodan kadroya değişiyor olabilir ve cetvel varyantı gerekir
+(`kocaeli-2023-yeniden`).
+
+**VARYANT BAĞLANDIĞINI DA TESTE YAZ.** Cetvelin içeriğini doğrulayan test,
+eşiğin o cetvele bağlı olduğunu doğrulamıyor: ilk yazımda yeniden atanma
+eşiğini eski cetvele geri bağlamak testi KIRMADI. `bul()` sonucunun `cetvel`
+alanını da assert et.
+
 ### TAVAN KAPSAMI: ANAHTAR GRUP MU, TEK MADDE Mİ?
 
 `grup_tavanlari` anahtarı `coz()` ile çözülüyor ve bir grup adı, bir madde
@@ -1896,7 +1914,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 175 üniversite · 6716 eşik · 441 cetvel |
+| Girildi | 175 üniversite · 6716 eşik · 442 cetvel |
 | Okuma engeli çözüldü, giriş bekliyor | 0 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |

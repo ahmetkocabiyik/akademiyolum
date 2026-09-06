@@ -23,8 +23,7 @@
  * Yabancı dilde kitabı olan adayın gerçek puanı burada görünenden yüksek —
  * eksik sayma, §0 serbest.
  */
-
-return [
+$govde = [
     'kapsam_notu' => 'Çok yazarlı eserlerde puan yönergenin yazar çarpanı tablosuna göre azaltılır; çarpan adayın yayındaki SIRASINA da bağlı olduğu için faaliyetinizde kaçıncı yazar olduğunuzu seçmeniz gerekir. Sırayı belirtmezseniz o yazar sayısındaki en düşük çarpan uygulanır; yazar listesi boşsa çarpan hiç uygulanmaz. Puanlar Kocaeli Üniversitesi TABLO 3\'ten (Aralık 2023). Editörlük, ödül, '
         .'idari görev ve sanatsal üretim blokları girilmedi; yönergede yalnızca azami sınır '
         .'taşıyorlar. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
@@ -136,6 +135,41 @@ return [
         // ── SANATSAL ETKİNLİK ── (Güzel Sanatlar koşullarının saydığı kalemler)
         'S1' => ['baslik' => 'Kişisel sanat etkinliği (sergi, dinleti, gösterim)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Ulusal)'], 'puan' => 40],
         'S2' => ['baslik' => 'Karma sanat etkinliği (sergi, bienal, festival)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 15],
+
+        /*
+         * ── K. İDARİ GÖREVLER VE ÜNİVERSİTEYE KATKI ── (06.09.2026'da girildi)
+         *
+         * Bölüm hiç girilmemişti; Madde 11/b'nin yeniden atanma koşulu ise
+         * "derslerden (E) ve idari faaliyetlerden (K) en fazla 50 puan"
+         * diyerek doğrudan bu bölüme atıf yapıyor.
+         *
+         * ETİKET KADEMEYİ TAŞIMADIĞINDA EN DÜŞÜĞÜ (§0):
+         *   `Anabilim Dalı Başkanı / Koordinatörlük` hem K.3'ün anabilim dalı
+         *       başkanlığını (10) hem K.4'ün koordinatörlüğünü (8) taşıyor → 8.
+         *   `Kurul / Komisyon Üyeliği` üç kademeyi birden taşıyor: üniversite
+         *       düzeyi (K.6, 6), fakülte/YO düzeyi (K.7, 5), bölüm düzeyi
+         *       (K.8, 4) → 4.
+         *
+         * GİRİLMEYENLER:
+         *   K.5 koordinatör yardımcılığı (7) — sözlükte karşılığı yok.
+         *   K.9 kurum içi/dışı eğitim ve iş birliği katkısı (3) — karşılığı yok.
+         *   K.10-K.12 uluslararası/ulusal/yerel bilimsel ve mesleki KURULUŞLARIN
+         *       yönetim ve kurullarında görev (5/4/3). `Kurul / Komisyon
+         *       Üyeliği` etiketi ÜNİVERSİTE İÇİ kurulları taşıyor; bağlansaydı
+         *       fakülte komisyonu üyesi olan aday kaynağın vermediği puanı da
+         *       alırdı (Akdeniz 11.5 ile aynı gerekçe).
+         *   Rektör ve rektör yardımcılığı KAYNAKTA YOK; o kayıtlar 0 puan alır.
+         *
+         * SÜRE KOŞULU UYGULANAMADI: "İdari görevlerde vekaleten de olsa en az
+         * 6 ay görev yapmış olmak şartı aranır." Kayıt görevin süresini
+         * tutmuyor; satırlar süre kısıtı olmadan duruyor, yani bu bölümden
+         * puanı olan aday olduğundan İYİ görünebilir.
+         */
+        'K1' => ['baslik' => 'Dekan, enstitü, yüksekokul, MYO ya da merkez müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 15],
+        'K2' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı ya da bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 12],
+        'K3' => ['baslik' => 'Bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 10],
+        'K4' => ['baslik' => 'Anabilim dalı başkanlığı ya da rektörlükçe görevlendirilen koordinatörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 8],
+        'K8' => ['baslik' => 'Görevlendirmeyle komisyon ya da kurul üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 4],
     ],
 
     'gruplar' => [
@@ -156,6 +190,7 @@ return [
         // koşulda kullanılmıyor ama deseni bırakmak sonraki satır eklendiğinde
         // sessizce sızardı.
         'H.1-H.22' => ['H2', 'H3', 'H8', 'H9', 'H10', 'H11', 'H13', 'H14', 'H15', 'H16'],
+        'K.1-K.11' => ['K*'],
         'KISISEL_SANAT' => ['S1'],
         'KARMA_SANAT' => ['S2'],
     ],
@@ -164,5 +199,32 @@ return [
         // Tablo 2'nin "Azami" sütunundan.
         'D.1-D.6' => 1500,
         'E.1-E.4' => 50,
+
+        // K bölümünün kendi başlığı: "Bu kısımda en fazla 50 puan dikkate
+        // alınır." Tablo 2'nin azami sütunu da 50 diyor.
+        'K.1-K.11' => 50,
     ],
 ];
+
+/*
+ * YENİDEN ATANMA VARYANTI: E VE K BÖLÜMLERİ İÇİN ORTAK 50 TAVANI.
+ *
+ * Tablo 2 iki bölümü AYRI AYRI 50 ile sınırlıyor, ama Madde 11/b yeniden
+ * atanmada ikisini BİRLİKTE sınırlıyor: "son atama döneminde verdiği
+ * derslerden (Tablo 3, E bölümü) ve varsa idari faaliyetlerden (Tablo 3, K
+ * bölümü) EN FAZLA 50 PUAN dikkate alınmak üzere…"
+ *
+ * K bölümü 06.09.2026'da girilene kadar fark yoktu (K'nin satırı yoktu, E'nin
+ * 50'si tek başına ortak tavanı sağlıyordu). Bölüm girilince iki ayrı 50,
+ * yeniden atanmada 100'e kadar puan üretmeye başladı — bu yüzden ortak tavanı
+ * taşıyan ayrı bir varyant açıldı. Öteki kadrolar ayrı tavanları kullanmaya
+ * devam ediyor.
+ */
+$yenidenAtama = $govde;
+$yenidenAtama['gruplar']['E-K'] = ['E*', 'K*'];
+$yenidenAtama['grup_tavanlari'] = ['D.1-D.6' => 1500, 'E-K' => 50];
+
+return ['cetveller' => [
+    'kocaeli-2023' => $govde,
+    'kocaeli-2023-yeniden' => $yenidenAtama,
+]];

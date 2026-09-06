@@ -5971,3 +5971,54 @@ test('Kocaeli yeniden atanma barajı geçiş hükmüyle ölçekleniyor', functio
         // Geçici Madde 2 yürürlükteyken makale şartı hiç yazılmıyor.
         ->and($ozet('fen')['makale'])->toBe(! $geciste);
 });
+
+/**
+ * KOCAELİ K BÖLÜMÜ — İDARİ GÖREVLER (06.09.2026'da girildi).
+ *
+ * Bölüm hiç girilmemişti; Madde 11/b'nin yeniden atanma koşulu ise doğrudan
+ * ona atıf yapıyor. Girilince İKİNCİ bir iş çıktı: madde E ve K bölümlerini
+ * BİRLİKTE 50 ile sınırlıyor, Tablo 2 ise ayrı ayrı. İki ayrı 50 tavanı
+ * yeniden atanmada 100'e kadar puan üretiyordu.
+ */
+test('Kocaeli idari görev kademeleri etiketin taşıyabildiği en düşük değerde', function () {
+    $katalog = sartDepo()->katalog('kocaeli-2023');
+    expect($katalog)->not->toBeNull();
+    $hepsi = $katalog->coz(['*']);
+
+    $gorev = fn (string $kaynak) => sartFaaliyet($kaynak, Kategori::IdariGorev, null);
+
+    expect($katalog->puan($gorev('Dekan / Enstitü-YO Müdürü'), $hepsi))->toBe(15)
+        ->and($katalog->puan($gorev('Bölüm Başkanı'), $hepsi))->toBe(12)
+        ->and($katalog->puan($gorev('Bölüm Başkan Yardımcısı'), $hepsi))->toBe(10)
+        // K.3 anabilim dalı başkanlığı 10, K.4 koordinatörlük 8; tek etiket → 8.
+        ->and($katalog->puan($gorev('Anabilim Dalı Başkanı / Koordinatörlük'), $hepsi))->toBe(8)
+        // K.6/K.7/K.8 üç kademe (6/5/4); tek etiket → 4.
+        ->and($katalog->puan($gorev('Kurul / Komisyon Üyeliği'), $hepsi))->toBe(4)
+        // Rektörlük kaynakta hiç anılmıyor.
+        ->and($katalog->puan($gorev('Rektör'), $hepsi))->toBe(0);
+});
+
+test('Kocaeli yeniden atanmada ders ve idari görev ortak 50 tavanını paylaşıyor', function () {
+    $depo = sartDepo();
+
+    $ortak = $depo->katalog('kocaeli-2023-yeniden');
+    $normal = $depo->katalog('kocaeli-2023');
+    expect($ortak)->not->toBeNull();
+
+    // Ortak tavan yalnız YENİDEN ATANMA eşiğine bağlı; öteki kadrolar Tablo
+    // 2'nin ayrı tavanlarını kullanmaya devam ediyor.
+    expect($depo->bul('Kocaeli Üniversitesi', 'dr_ogr_uyesi_yeniden', 'fen')['cetvel'])
+        ->toBe('kocaeli-2023-yeniden')
+        ->and($depo->bul('Kocaeli Üniversitesi', 'dr_ogr_uyesi', 'fen')['cetvel'])
+        ->toBe('kocaeli-2023');
+
+    // Beş dekanlık (5 × 15 = 75) ve E bölümünü dolduracak kadar ders.
+    $idari = array_fill(0, 5, sartFaaliyet('Dekan / Enstitü-YO Müdürü', Kategori::IdariGorev, null));
+
+    // Normal cetvelde K'nin kendi tavanı 50; yeniden atanma cetvelinde ortak
+    // tavan yine 50 ama E ile PAYLAŞILIYOR.
+    expect($normal->topla($idari, $normal->coz(['K.1-K.11'])))->toBe(50)
+        ->and($ortak->topla($idari, $ortak->coz(['E-K'])))->toBe(50)
+        // Ortak tavan grubu hem E hem K satırlarını kapsıyor.
+        ->and(count($ortak->coz(['E-K'])))->toBeGreaterThan(count($ortak->coz(['K.1-K.11'])));
+});

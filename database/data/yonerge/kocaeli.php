@@ -314,8 +314,10 @@ $esikler = [
  * Oran ve muafiyet TARİHTEN türetiliyor; sabit yazılsa veri 01.01.2027'de
  * sessizce yanlışa düşerdi (bkz. KONVANSIYONLAR "kademeli yürürlük").
  *
- * DERS/İDARİ TAVANI: cetvelin `E.1-E.4` tavanı zaten 50; K bölümü (idari
- * faaliyetler) hiç girilmediği için ortak 50 tavanı fiilen sağlanıyor.
+ * DERS/İDARİ ORTAK TAVANI: madde E ve K bölümlerini BİRLİKTE 50 ile
+ * sınırlıyor, Tablo 2 ise ayrı ayrı. K bölümü 06.09.2026'da girilince iki
+ * ayrı 50 tavanı yeniden atanmada 100'e kadar puan üretir oldu; bu yüzden
+ * ortak tavanı taşıyan `kocaeli-2023-yeniden` varyantı açıldı.
  */
 $GECIS_SONU = '2027-01-01';
 $geciste = date('Y-m-d') < $GECIS_SONU;
@@ -351,7 +353,7 @@ $yenidenAtama = function (string $anahtar, array $alanlar, string $ad, int $tabl
         'universite' => 'Kocaeli Üniversitesi',
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'alan' => $alanlar,
-        'cetvel' => 'kocaeli-2023',
+        'cetvel' => 'kocaeli-2023-yeniden',
         'notlar' => "Madde 11/b ({$ad}): Tablo 2 toplam puanı {$tabloIkiToplam}; A.1-A.6'dan en az 1 "
             .'makale ya da A.1-A.8\'den başlıca yazar olduğunuz en az 1 makale; ders ve idari '
             .'kalemlerden en fazla 50 puan.'.$gecisNotu,
