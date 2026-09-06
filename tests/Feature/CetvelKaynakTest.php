@@ -773,7 +773,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
         // şişirmiyor, çünkü o satırlar zaten hiçbir koşulda yok.
         'itu-2022-hs: 18/44',
         'itu-2022-mf: 21/47',
-        'itu-2022-moda: 26/50',
+        'itu-2022-moda: 26/51',
         'itu-2022-tmdk: 20/52',
         'itu-2022: 32/44',
 

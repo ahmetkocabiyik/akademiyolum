@@ -227,6 +227,25 @@ $moda = [
     'M.4' => ['baslik' => 'Özgün tasarımlarıyla ulusal karma etkinliğe katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)'], 'puan' => 8],
     'M.5' => ['baslik' => 'Uluslararası sempozyum, festival veya bienale tasarımıyla katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt Dışı)'], 'puan' => 15],
     'M.6' => ['baslik' => 'Ulusal sempozyum, festival veya bienale tasarımıyla katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Sempozyum/Çalıştay/Bienal (Yurt İçi)'], 'puan' => 6],
+
+    /*
+     * M.5 VE M.6 İKİ KOLLU: "…etkinliklere tasarımlarıyla katılmak VE/VEYA
+     * … tasarım yarışmalarında derece/mansiyon almak." Yarışma kolu ilk
+     * girişte hiç yazılmamıştı; sorun yalnız puan değil KÜME:
+     *
+     *   `itu-2022-mf`'in ESER-PUANI kümesi G.7d'yi içeriyor, M'yi içermiyor.
+     *   `itu-2022-moda`'nınki ise TERSİ: `M.*` var, G.7d yok.
+     *
+     * Yani moda adayının tasarım yarışması ödülü toplam puana giriyor ama
+     * ESER-PUANI barajına HİÇ girmiyordu — yanlış FAIL yönü. Ayrı bir satır
+     * açıldı: M bölümünde durduğu için moda barajına giriyor, puanı G.7d ile
+     * AYNI (5) olduğu için hiçbir yerde toplamı değiştirmiyor.
+     *
+     * Puan neden 6 değil 5: `Yarışma Derecesi / Mansiyon` etiketi G.7'nin
+     * dört derece/mansiyon kademesini de taşıyor ve en düşüğü ulusal
+     * mansiyon (G.7e, 5). M.6'nın 6'sını yazmak o kademeyi fazla saydırırdı.
+     */
+    'M.6y' => ['baslik' => 'Ulusal kuruluşlarca düzenlenen tasarım yarışmasında derece veya mansiyon', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 5],
 ];
 
 // ── G.7 ve N (yalnızca Mimarlık Fakültesi) ──────────────────────────────────

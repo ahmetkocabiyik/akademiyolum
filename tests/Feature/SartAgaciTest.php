@@ -6132,3 +6132,35 @@ test('AYBÜ dış kurul görevi girildi ve kendi tavanını taşıyor', function
     // Yıl başına 1 puan, ama beş yıllık görev 3'te kesiliyor.
     expect($katalog->topla($gorev, $katalog->coz(['DG-DIS-KURUL'])))->toBe(3);
 });
+
+/**
+ * İTÜ M.5/M.6 — İKİ KOLLU SATIRIN İKİNCİ KOLU VE VARYANTLARIN AYRIK KÜMELERİ.
+ *
+ * Kaynak: "…etkinliklere tasarımlarıyla katılmak VE/VEYA … tasarım
+ * yarışmalarında derece/mansiyon almak." Yarışma kolu girilmemişti ve eksik
+ * olan puan değil KÜMEYDİ: `itu-2022-mf`'in ESER-PUANI'sı G.7d'yi içeriyor
+ * ama M'yi içermiyor, `itu-2022-moda`'nınki tersi. Moda adayının yarışma
+ * ödülü toplam puana giriyor, esere HİÇ girmiyordu — yanlış FAIL yönü.
+ *
+ * M.6y satırının puanı G.7d ile aynı (5): §0 gereği etiketin taşıyabildiği
+ * en düşük kademe (G.7e ulusal mansiyon). Eşitlik toplamı değiştirmiyor,
+ * yalnız kümeyi açıyor.
+ */
+test('İTÜ moda adayının yarışma ödülü eser barajına giriyor', function () {
+    $depo = sartDepo();
+    $odul = sartFaaliyet('Yarışma Derecesi / Mansiyon', Kategori::Odul, null);
+
+    $moda = $depo->katalog('itu-2022-moda');
+    $mf = $depo->katalog('itu-2022-mf');
+    expect($moda)->not->toBeNull()->and($mf)->not->toBeNull();
+
+    // Kümeler gerçekten ayrık: her varyant ödülü kendi bölümünden görüyor.
+    expect($moda->coz(['ESER-PUANI']))->toContain('M.6y')->not->toContain('G.7d')
+        ->and($mf->coz(['ESER-PUANI']))->toContain('G.7d');
+
+    // Baraja katkı iki varyantta da var ve iki varyantta da aynı kademede.
+    expect($moda->topla([$odul], $moda->coz(['ESER-PUANI'])))->toBe(5)
+        ->and($mf->topla([$odul], $mf->coz(['ESER-PUANI'])))->toBe(5)
+        // Satır açılırken toplam puan kademesi kaymadı.
+        ->and($moda->puan($odul, $moda->coz(['*'])))->toBe(5);
+});

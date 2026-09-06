@@ -1424,6 +1424,42 @@ Adayın gördüğü metin. Şunları söylemeli:
 3. **Hangi yönde saptığı**: "puanınız olduğundan yüksek/düşük görünebilir".
 4. Girilemeyen bölümler ve bunun kimi etkilediği.
 
+### VARYANTLARIN BARAJ KÜMELERİ AYRIK OLABİLİR — PUAN DOĞRUYKEN KÜME EKSİK
+
+Bir satırın puanı kaynağa birebir uysa bile, satır **o varyantın baraj
+kümesinin dışında** duruyorsa aday puanı toplamda alır, barajda alamaz.
+Sessizdir: hiçbir tavan aşılmaz, hiçbir test kırılmaz, adayın toplamı doğru
+görünür — yalnız eşik sağlanmaz. §0'ın hoş gördüğü eksik sayma değil, **yanlış
+FAIL** yönüdür.
+
+İTÜ'de iki varyantın `ESER-PUANI` kümesi birbirinin tersiydi:
+
+| Varyant | Kümede | Kümede değil |
+|---|---|---|
+| `itu-2022-mf` | `G.7d` (yarışma ödülü) | `M.*` |
+| `itu-2022-moda` | `M.*` | `G.7d` |
+
+Yarışma ödülü etiketi yalnız `G.7d`de duruyordu; moda adayının tasarım
+yarışması ödülü esere hiç girmiyordu.
+
+Sebep **iki kollu satır**: kaynağın M.5/M.6'sı "…etkinliklere tasarımlarıyla
+katılmak **ve/veya** … tasarım yarışmalarında derece/mansiyon almak" diyor.
+İki ayrı faaliyet tek bende sığdırılmış; ilk girişte yalnız birinci kol
+okunmuş. **"ve/veya" gören satırda iki kolu da ayrı ayrı ara** — ikincisinin
+karşılığı çoğu zaman başka bir bölümde zaten vardır ve o zaman soru "puan kaç"
+değil, "hangi kümede".
+
+Çözüm, var olan satırın puanını değiştirmek değil, **aynı puanda ikinci bir
+satır** açmaktır (`M.6y`, 5 puan = `G.7d`). Eşit puan `puan()`in MAX'ını
+değiştirmez, yani hiçbir yerde fazla saydırmaz; yalnız satır artık ikinci
+varyantın kümesindedir. Puanı yüksek kolun değerine (M.6'nın 6'sı) çekmek
+yanlış olurdu: etiket `G.7`nin dört derece/mansiyon kademesini birden taşıyor
+ve §0 en düşüğünü (ulusal mansiyon, 5) seçtiriyor.
+
+Nerede aranır: bir cetvelde birden çok varyant varsa ve varyantların grup
+listeleri **farklı bölüm öneklerinden** kuruluysa (`M.*` ile `G.7d` gibi),
+aynı kavramın her varyantta bir karşılığı olup olmadığı elle kontrol edilir.
+
 ---
 
 ## 2. Yönerge dosyası (`database/data/yonerge/`)
