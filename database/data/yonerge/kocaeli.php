@@ -57,7 +57,7 @@ $tezKosulu = fn (int $yl, int $doktora): array => Kalip::veya(
     ],
 );
 
-return [
+$esikler = [
     // ══════════════════ DR. ÖĞRETİM ÜYESİ ══════════════════
     [
         'anahtar' => 'kocaeli-dr-g1',
@@ -294,4 +294,74 @@ return [
             Kalip::toplam(350),
         ]),
     ],
+];
+
+/*
+ * DOKTOR ÖĞRETİM ÜYESİ YENİDEN ATANMA (06.09.2026'da girildi).
+ *
+ * Madde 11/b: "Görev süresi sona eren Doktor Öğretim Üyelerinin yeniden
+ * atamalarında; son atama döneminde verdiği derslerden (Tablo 3, E bölümü) ve
+ * varsa idari faaliyetlerden (Tablo 3, K bölümü) EN FAZLA 50 PUAN dikkate
+ * alınmak üzere, ilgili temel alan için son dönem faaliyetlerinden Tablo 3'de
+ * belirtilen A1-A6 kapsamındaki faaliyetlerden en az bir adet makale veya
+ * A1-A8 kapsamındaki faaliyetlerden BAŞLICA YAZAR olmak koşuluyla en az bir
+ * adet makale yayınlaması ve buna ek olarak Tablo 2'de belirtilen TOPLAM PUAN
+ * şartını sağlaması gereklidir."
+ *
+ * İKİ GEÇİCİ MADDE BUGÜN YÜRÜRLÜKTE (01/01/2025-31/12/2026):
+ *   Geçici Madde 1 — Tablo 2 toplam puanının %70'i yeterli.
+ *   Geçici Madde 2 — yukarıdaki MAKALE ŞARTI aranmaz.
+ * Oran ve muafiyet TARİHTEN türetiliyor; sabit yazılsa veri 01.01.2027'de
+ * sessizce yanlışa düşerdi (bkz. KONVANSIYONLAR "kademeli yürürlük").
+ *
+ * DERS/İDARİ TAVANI: cetvelin `E.1-E.4` tavanı zaten 50; K bölümü (idari
+ * faaliyetler) hiç girilmediği için ortak 50 tavanı fiilen sağlanıyor.
+ */
+$GECIS_SONU = '2027-01-01';
+$geciste = date('Y-m-d') < $GECIS_SONU;
+$toplamOrani = $geciste ? 0.70 : 1.00;
+
+$yenidenAtama = function (string $anahtar, array $alanlar, string $ad, int $tabloIkiToplam) use ($geciste, $toplamOrani): array {
+    $SON = Kalip::SON_ATAMA_SONRASI;
+    $baraj = (int) ceil($tabloIkiToplam * $toplamOrani);
+
+    $kosullar = [Kalip::toplam($baraj, $SON)];
+
+    if (! $geciste) {
+        $kosullar[] = Kalip::veya('Son dönemde en az bir makale', [
+            Kalip::adet('A.1-A.6 kapsamında en az 1 makale', ['A.1-A.6'], 1, donem: $SON, madde: 'Madde 11/b'),
+            Kalip::adet('Ya da A.1-A.8 kapsamında başlıca yazar olduğunuz en az 1 makale',
+                ['A.1-A.8'], 1, 'baslica', $SON, madde: 'Madde 11/b'),
+        ]);
+    }
+
+    $gecisNotu = $geciste
+        ? ' Geçici Madde 1 ve 2 (01/01/2025-31/12/2026) yürürlükte: toplam puan şartı '
+            ."%70 oranında ({$baraj} puan) uygulanıyor ve makale şartı aranmıyor."
+        : '';
+
+    return [
+        'anahtar' => "kocaeli-dr-yeniden-{$anahtar}",
+        'aday_notu' => 'Yeniden atanmada yalnızca son atama döneminizdeki faaliyetler sayılıyor. '
+            .'Ders ve idari görev kalemlerinden en fazla 50 puan dikkate alınıyor.'
+            .($geciste
+                ? ' Şu an yürürlükteki geçiş hükmü sayesinde toplam puan şartı %70 oranında '
+                    .'uygulanıyor ve makale şartı aranmıyor; bu kolaylık 31.12.2026\'de bitiyor.'
+                : ''),
+        'universite' => 'Kocaeli Üniversitesi',
+        'kadro' => 'dr_ogr_uyesi_yeniden',
+        'alan' => $alanlar,
+        'cetvel' => 'kocaeli-2023',
+        'notlar' => "Madde 11/b ({$ad}): Tablo 2 toplam puanı {$tabloIkiToplam}; A.1-A.6'dan en az 1 "
+            .'makale ya da A.1-A.8\'den başlıca yazar olduğunuz en az 1 makale; ders ve idari '
+            .'kalemlerden en fazla 50 puan.'.$gecisNotu,
+        'sart' => Kalip::ve("Dr. Öğr. Üyesi yeniden atanma — {$ad}", $kosullar),
+    ];
+};
+
+return [...$esikler,
+    $yenidenAtama('g1', $grup1, 'Sağlık / Fen / Mühendislik / Ziraat', 100),
+    $yenidenAtama('g2', $grup2, 'Eğitim / Filoloji / Mimarlık / Sosyal / Spor', 100),
+    $yenidenAtama('g3', $grup3, 'Hukuk / İlahiyat', 100),
+    $yenidenAtama('gsf', ['guzel_sanatlar'], 'Güzel Sanatlar', 200),
 ];

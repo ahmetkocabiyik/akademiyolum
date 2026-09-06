@@ -5926,3 +5926,48 @@ test('Fırat barajları geçiş oranıyla ölçekleniyor, dil puanı ölçeklenm
 
     expect($adetler)->toBe([(int) ceil(3 * $oran)]);
 });
+
+/**
+ * KOCAELİ — DOKTOR ÖĞRETİM ÜYESİ YENİDEN ATANMA (06.09.2026'da girildi).
+ *
+ * Madde 11/b'nin üstüne İKİ GEÇİCİ MADDE biniyor ve ikisi de bugün
+ * yürürlükte (01/01/2025-31/12/2026): toplam puan şartı %70'e iniyor ve
+ * makale şartı hiç aranmıyor. Oran ve muafiyet TARİHTEN türetiliyor, bu
+ * yüzden test mutlak değeri değil tarih çözümlemesini doğruluyor.
+ */
+test('Kocaeli yeniden atanma barajı geçiş hükmüyle ölçekleniyor', function () {
+    $depo = sartDepo();
+
+    $geciste = date('Y-m-d') < '2027-01-01';
+    $oran = $geciste ? 0.70 : 1.00;
+
+    $ozet = function (string $alan) use ($depo): array {
+        $esik = $depo->bul('Kocaeli Üniversitesi', 'dr_ogr_uyesi_yeniden', $alan);
+        $toplam = null;
+        $makale = false;
+        $gez = function (array $dugum) use (&$gez, &$toplam, &$makale): void {
+            if (($dugum['rol'] ?? null) === 'toplam') {
+                $toplam = $dugum['min_puan'];
+            }
+
+            if (str_contains($dugum['aciklama'] ?? '', 'en az bir makale')) {
+                $makale = true;
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+        };
+        $gez($esik['sart'] ?? []);
+
+        return ['toplam' => $toplam, 'makale' => $makale];
+    };
+
+    // Tablo 2: Dr. Öğr. Üyesi toplam puanı üç alan grubunda 100, güzel
+    // sanatlarda 200.
+    expect($ozet('fen')['toplam'])->toBe((int) ceil(100 * $oran))
+        ->and($ozet('hukuk')['toplam'])->toBe((int) ceil(100 * $oran))
+        ->and($ozet('guzel_sanatlar')['toplam'])->toBe((int) ceil(200 * $oran))
+        // Geçici Madde 2 yürürlükteyken makale şartı hiç yazılmıyor.
+        ->and($ozet('fen')['makale'])->toBe(! $geciste);
+});

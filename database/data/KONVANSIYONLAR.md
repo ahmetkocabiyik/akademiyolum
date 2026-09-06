@@ -592,8 +592,9 @@ kendiliğinden bir sonraki kademeye geçer. TESTİ DE ORANA DEĞİL TABLOYA BAĞ
 tarih işareti çıktı; Fırat'ın üç kademeli tablosu HİÇ girilmemişti ve bütün
 Fırat eşikleri bugün olması gerekenin İKİ KATI baraj istiyordu. Kocaeli'nin
 iki geçici maddesi (yeniden atanmada toplam puanın %70'i, bir makale şartının
-kaldırılması) ise dayanacak bir kayıt bulamıyor: o üniversitede yeniden
-atanma kadrosu hiç girilmemiş — ayrı bir açık. Süresi DOLMUŞ bir hüküm
+kaldırılması) 06.09.2026'da girildi; dayanacak kayıt yoktu, çünkü o
+üniversitede yeniden atanma kadrosu hiç yazılmamıştı — geçici madde taraması
+EKSİK KADRO da ortaya çıkarabiliyor. Süresi DOLMUŞ bir hüküm
 (Bursa Uludağ'ın 31.12.2025'te biten 35. maddesi) girilmemişse bugün
 doğrudur, ama bunu da not et.
 
@@ -1895,7 +1896,7 @@ kısmen girilenler tablosu, motorun karşılayamadığı kurallar.
 
 | Durum | Sayı |
 |---|---|
-| Girildi | 175 üniversite · 6704 eşik · 441 cetvel |
+| Girildi | 175 üniversite · 6716 eşik · 441 cetvel |
 | Okuma engeli çözüldü, giriş bekliyor | 0 |
 | Kaynak sorunuyla bekleyen | 3 (Balıkesir, Türk Hava Kurumu, Maltepe — puan tablosu PDF'te yok) |
 | Girilmemiş, engeli bilinmeyen | 0 |
