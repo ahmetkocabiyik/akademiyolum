@@ -150,7 +150,7 @@ $genisDesen = [
     ],
 ];
 
-return [
+$esikler = [
     ...$alan('saglik', 'Sağlık bilimleri', ['saglik'], $wosDeseni),
     ...$alan('muhendislik', 'Mühendislik bilimleri', ['muhendislik'], $wosDeseni),
     ...$alan('fen', 'Fen bilimleri', ['fen', 'ziraat'], $wosDeseni),
@@ -209,3 +209,79 @@ return [
         ],
     ], guzelSanatlar: true),
 ];
+
+/*
+ * GEÇİCİ MADDE 14 — ASGARİ PUANLAR KADEMELİ YÜRÜRLÜKTE (06.09.2026'da girildi).
+ *
+ * Kaynak birebir: "Bu yönergede her bir bilim alanı için belirtilen DİL PUANI
+ * HARİÇ zorunlu asgari puanların, aşağıdaki tabloda verilen tarihlere karşılık
+ * gelen oranlarda karşılanması gerekir. Yayın sayıları aşağıdaki tabloda
+ * verilen oranlarla çarpıldığında çıkan sayının küsuratlı olması durumunda ÜST
+ * TAM SAYIYA yuvarlanır."
+ *
+ *     01.06.2026 - 31.12.2026   %50
+ *     01.01.2027 - 31.12.2027   %75
+ *     01.01.2028 -              %100
+ *
+ * Yönerge 01.06.2026'da yürürlüğe girdi; tam barajlar 2028'de başlıyor. Tablo
+ * hiç girilmemişti, yani bütün Fırat eşikleri bugün olması gerekenin İKİ KATI
+ * baraj istiyordu — yanlış FAIL, konvansiyonun "fazla saymaktan da kötü"
+ * dediği yön.
+ *
+ * ORAN TARİHTEN TÜRETİLİYOR, SABİT YAZILMIYOR: sabit yazılsa veri 01.01.2027'de
+ * sessizce yanlışa düşerdi. Test oranı değil TABLOYU ve tarih çözümlemesini
+ * doğruluyor, böylece takvim testi kırmıyor.
+ *
+ * Dil puanı (`metrik` düğümü) kaynağın açık istisnası, ölçeklenmiyor.
+ */
+$GECIS_TABLOSU = [
+    '2027-01-01' => 0.50,
+    '2028-01-01' => 0.75,
+];
+
+$gecisOrani = static function (string $bugun) use ($GECIS_TABLOSU): float {
+    foreach ($GECIS_TABLOSU as $sinir => $oran) {
+        if ($bugun < $sinir) {
+            return $oran;
+        }
+    }
+
+    return 1.0;
+};
+
+$oran = $gecisOrani(date('Y-m-d'));
+
+if ($oran < 1.0) {
+    $olcekle = function (array $dugum) use (&$olcekle, $oran): array {
+        // Dil puanı kaynağın açık istisnası: `metrik` düğümleri ölçeklenmez.
+        foreach (['min_puan', 'min_adet'] as $alan) {
+            if (isset($dugum[$alan]) && ($dugum['tip'] ?? null) !== 'metrik') {
+                $dugum[$alan] = (int) ceil($dugum[$alan] * $oran);
+            }
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $i => $cocuk) {
+            $dugum['cocuklar'][$i] = $olcekle($cocuk);
+        }
+
+        if (isset($dugum['telafi'])) {
+            $dugum['telafi'] = $olcekle($dugum['telafi']);
+        }
+
+        return $dugum;
+    };
+
+    $yuzde = (int) round($oran * 100);
+
+    foreach ($esikler as $i => $esik) {
+        $esikler[$i]['sart'] = $olcekle($esik['sart']);
+        $esikler[$i]['notlar'] = $esik['notlar']
+            ." GEÇİCİ MADDE 14: asgari puanlar ve yayın sayıları bugün %{$yuzde} oranında uygulanıyor "
+            .'(01.01.2027\'den itibaren %75, 01.01.2028\'den itibaren %100).';
+        $esikler[$i]['aday_notu'] = $esik['aday_notu']
+            .' DİKKAT: yönergenin geçiş hükmü gereği puan barajları ve yayın sayıları şu an '
+            ."%{$yuzde} oranında uygulanıyor; 01.01.2027'de ve 01.01.2028'de yükselecek.";
+    }
+}
+
+return $esikler;

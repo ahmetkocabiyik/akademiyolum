@@ -78,12 +78,26 @@ $NOT_CETVEL = ' Ortak çalışmalarda puan yönergenin yazar sayısı × isim s�
     .'verilen "iş birliğiyle üretilmişse %25 ek puan" kuralı, kayıt ortak yazarların kurumunu '
     .'taşımadığı için uygulanmıyor.';
 
-/** MADDE 8: yurt dışı deneyimi ya da asgari puanın %25 fazlası. */
-$yurtDisi = fn (int $esik): array => Kalip::veya('Yurt dışı deneyimi şartını sağlamak', [
+/*
+ * MADDE 8 + GEÇİCİ MADDE 1 — MUAFİYET ORANI TARİHE BAĞLI.
+ *
+ * Madde 8 muafiyeti "asgari puanın %50 fazlası" istiyor; Geçici Madde 1 bu
+ * oranı 01/03/2026-01/09/2027 arasında %25 olarak uyguluyor. Oran ilk
+ * girişte bugünkü değeriyle SABİT yazılmıştı; 01.09.2027'de veri sessizce
+ * yanlışa düşerdi. Fırat'ın geçiş tablosundaki gibi TARİHTEN türetiliyor.
+ */
+$AYBU_GECIS_SONU = '2027-09-01';
+$fazlaOrani = date('Y-m-d') < $AYBU_GECIS_SONU ? 0.25 : 0.50;
+$fazlaYuzde = (int) round($fazlaOrani * 100);
+
+/** MADDE 8: yurt dışı deneyimi ya da asgari puanın belirli oranda fazlası. */
+$yurtDisi = fn (int $asgari): array => Kalip::veya('Yurt dışı deneyimi şartını sağlamak', [
     Kalip::beyan('Lisansüstü eğitiminiz sırasında ya da doktora sonrası en az altı ay yurt dışında eğitim, araştırma veya mesleki faaliyette bulunmuş olmak (yüksek lisans ve/veya doktorasını yurt dışında tamamlayanlar bu şarttan muaftır)', 'MADDE 8'),
     Kalip::puanDan(
-        'Makale, proje, atıf, kitap ve patent kalemlerinden en az '.$esik.' puan almak (asgari puanın %25 fazlası)',
-        ['MAKALE-PROJE-ATIF-KITAP-PATENT'], $esik, madde: 'MADDE 8 / Geçici Madde 1'
+        'Makale, proje, atıf, kitap ve patent kalemlerinden en az '.((int) ceil($asgari * (1 + $fazlaOrani)))
+            ." puan almak (asgari puanın %{$fazlaYuzde} fazlası)",
+        ['MAKALE-PROJE-ATIF-KITAP-PATENT'], (int) ceil($asgari * (1 + $fazlaOrani)),
+        madde: 'MADDE 8 / Geçici Madde 1'
     ),
 ]);
 
@@ -179,7 +193,7 @@ $grup = function (string $kod, array $alanlar, string $ad, string $cetvel, bool 
             $UNVAN, $DIL, $DIL_NOT,
             Kalip::metrik('Ön lisans, lisans ya da lisansüstü programlarından en az birinde asgari dört yarıyıl (iki yıl) ders vermiş olmak', 'ders_yariyil', 4),
             $tezKosulu(1, 1, 2, $grup1),
-            $yurtDisi(150),
+            $yurtDisi(120),
             ...$docZorunlu,
             Kalip::toplam(120),
             Kalip::toplam(90, $DOKTORA),
@@ -205,7 +219,7 @@ $grup = function (string $kod, array $alanlar, string $ad, string $cetvel, bool 
             $UNVAN, $DIL, $DIL_NOT,
             Kalip::metrik('Ön lisans, lisans ya da lisansüstü programlarından en az birinde asgari altı yarıyıl (üç yıl) ders vermiş olmak', 'ders_yariyil', 6),
             $tezKosulu(2, 2, 4, $grup1),
-            $yurtDisi(200),
+            $yurtDisi(160),
             ...$profZorunlu,
             Kalip::toplam(160),
             Kalip::toplam(120, $DOCENTLIK),

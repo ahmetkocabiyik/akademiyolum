@@ -2518,7 +2518,10 @@ test('Fırat alan grupları üç ayrı desene ayrılıyor', function () {
         ->and($madde('sosyal', 'Madde 10 · a.1'))->toBeFalse()
         ->and($madde('sosyal', 'Madde 10 · ç.1'))->toBeTrue();
 
-    // Toplam baraj güzel sanatlarda düşük: 500 ↔ diğer alanlarda 1000.
+    // Toplam baraj güzel sanatlarda düşük: yönergede 500 ↔ diğer alanlarda
+    // 1000. Mutlak değer GEÇİŞ ORANIYLA ölçekleniyor (geçici madde 14), o
+    // yüzden burada ORAN korunuyor mu diye bakılıyor; oranın kendisi ayrı
+    // testte doğrulanıyor.
     $toplam = function (string $alan) use ($depo): int {
         $esik = $depo->bul('Fırat Üniversitesi', 'dr_ogr_uyesi', $alan);
 
@@ -2526,8 +2529,7 @@ test('Fırat alan grupları üç ayrı desene ayrılıyor', function () {
             ->first(fn (array $d) => ($d['rol'] ?? null) === 'toplam')['min_puan'];
     };
 
-    expect($toplam('guzel_sanatlar'))->toBe(500)
-        ->and($toplam('muhendislik'))->toBe(1000);
+    expect($toplam('muhendislik'))->toBe($toplam('guzel_sanatlar') * 2);
 });
 
 test('Gaziantep proje puanını göreve göre oranlıyor', function () {
@@ -5861,4 +5863,66 @@ test('Gazi yeniden atanmada proje koşulu araştırmacılığı da kabul ediyor'
     // İlk atamada yalnız yürütücülük sayılıyor; yeniden atanmada araştırmacılık da.
     expect($proje)->not->toBeNull()
         ->and($proje['maddeler'])->toBe(['PROJE-e-haric']);
+});
+
+/**
+ * FIRAT — GEÇİCİ MADDE 14: ASGARİ PUANLAR KADEMELİ YÜRÜRLÜKTE.
+ *
+ * Kaynak: "belirtilen DİL PUANI HARİÇ zorunlu asgari puanların, aşağıdaki
+ * tabloda verilen tarihlere karşılık gelen oranlarda karşılanması gerekir.
+ * Yayın sayıları … küsuratlı olması durumunda ÜST TAM SAYIYA yuvarlanır."
+ *
+ *     01.06.2026-31.12.2026 %50 · 2027 %75 · 01.01.2028'den sonra %100
+ *
+ * Tablo hiç girilmemişti; bütün Fırat eşikleri bugün olması gerekenin iki
+ * katı baraj istiyordu. Oran TARİHTEN türetiliyor, sabit yazılmıyor — bu
+ * yüzden test mutlak değeri değil, ORANIN TABLOYA UYGUNLUĞUNU doğruluyor:
+ * takvim ilerleyince veri kendiliğinden düzeliyor, test kırılmıyor.
+ */
+test('Fırat barajları geçiş oranıyla ölçekleniyor, dil puanı ölçeklenmiyor', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Fırat Üniversitesi', 'dr_ogr_uyesi', 'muhendislik');
+
+    $bugun = date('Y-m-d');
+    $oran = match (true) {
+        $bugun < '2027-01-01' => 0.50,
+        $bugun < '2028-01-01' => 0.75,
+        default => 1.0,
+    };
+
+    $toplam = collect($esik['sart']['cocuklar'])
+        ->first(fn (array $d): bool => ($d['rol'] ?? null) === 'toplam')['min_puan'];
+
+    // Yönergedeki ham baraj 1000.
+    expect($toplam)->toBe((int) ceil(1000 * $oran));
+
+    // Dil puanı kaynağın açık istisnası: her zaman 65.
+    $yds = null;
+    $ara = function (array $dugum) use (&$ara, &$yds): void {
+        if (($dugum['metrik'] ?? null) === 'yds') {
+            $yds = $dugum['min'];
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+            $ara($cocuk);
+        }
+    };
+    $ara($esik['sart']);
+
+    expect($yds)->toBe(65);
+
+    // Yayın SAYILARI da ölçekleniyor ve üste yuvarlanıyor (3 → 2 · %50).
+    $adetler = [];
+    $topla = function (array $dugum) use (&$topla, &$adetler): void {
+        if (isset($dugum['min_adet'])) {
+            $adetler[] = $dugum['min_adet'];
+        }
+
+        foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+            $topla($cocuk);
+        }
+    };
+    $topla($esik['sart']);
+
+    expect($adetler)->toBe([(int) ceil(3 * $oran)]);
 });

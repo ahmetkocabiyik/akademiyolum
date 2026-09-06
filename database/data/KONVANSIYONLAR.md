@@ -566,6 +566,37 @@ Yan etki: sabit taban, §"Yüzde tavanını ASGARİ PUANDAN SABİTE ÇEVİR"
 başlığındaki türetmeyi BOZMAZ — zincir `diğer bölümler ≥ makale ≥ oran ×
 asgari` olarak kısalır, alt sınır aynı kalır.
 
+### İKİ TARİHLİ SET VE KADEMELİ YÜRÜRLÜK: HANGİSİ BUGÜN GEÇERLİ?
+
+Yönergeler yeni ölçütleri çoğu zaman KADEMELİ yürürlüğe koyuyor ve iki ayrı
+biçimde yazıyor:
+
+1. **İKİ TAM SET.** Aynı bölüm baştan sona iki kez yazılır, başlıkları tarih
+   taşır: Gazi'de "A. ALANLARA ÖZEL KRİTERLER-(01.07.2023-31.12.2023)" ve
+   "A. ALANLARA ÖZEL KRİTERLER-01.01.2024-KALICI". Yürürlükteki set alınır,
+   ötekinin varlığı dosya başlığına yazılır (yoksa bir sonraki okuyan hangi
+   setin alındığını bilemez).
+2. **ORAN TABLOSU / GEÇİCİ MADDE.** Tek set yazılır ama barajlar bir süre
+   indirimli uygulanır. Fırat'ın geçici 14. maddesi: 01.06.2026-31.12.2026
+   %50, 2027 %75, 01.01.2028'den sonra %100 — "dil puanı hariç" ve "yayın
+   sayıları üst tam sayıya yuvarlanır". AYBÜ'nün geçici 1. maddesi bir
+   muafiyet oranını 01.09.2027'ye kadar %25, sonra %50 yapıyor.
+
+**ORANI SABİT YAZMA, TARİHTEN TÜRET.** Sabit yazılan oran, geçiş bittiği gün
+veriyi sessizce yanlışa düşürür — kimse fark etmez, hiçbir test kırılmaz.
+Tarih sınırlarını bir tabloya koy ve `date('Y-m-d')` ile çöz; veri
+kendiliğinden bir sonraki kademeye geçer. TESTİ DE ORANA DEĞİL TABLOYA BAĞLA
+(beklenen değeri aynı tablodan hesapla), yoksa takvim testi kırar.
+
+**Kaçırılması en kolay yer geçici maddeler.** Korpus taramasında 12 kaynakta
+tarih işareti çıktı; Fırat'ın üç kademeli tablosu HİÇ girilmemişti ve bütün
+Fırat eşikleri bugün olması gerekenin İKİ KATI baraj istiyordu. Kocaeli'nin
+iki geçici maddesi (yeniden atanmada toplam puanın %70'i, bir makale şartının
+kaldırılması) ise dayanacak bir kayıt bulamıyor: o üniversitede yeniden
+atanma kadrosu hiç girilmemiş — ayrı bir açık. Süresi DOLMUŞ bir hüküm
+(Bursa Uludağ'ın 31.12.2025'te biten 35. maddesi) girilmemişse bugün
+doğrudur, ama bunu da not et.
+
 ### DİPNOT NUMARASI TABLOYA YERELDİR — "DİPNOT 3" DİYE NOT ALMA
 
 Bir belgede aynı rakam birden çok şey anlatabilir: her tablo kendi dipnot
