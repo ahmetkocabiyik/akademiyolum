@@ -184,6 +184,7 @@ return [
         'N2b' => ['baslik' => 'Senfoni, konçerto gibi müzik yapıtı kompozisyonu', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Senfoni Kompozisyonu', 'Konçerto/Senfonik Şiir', 'Küçük Ölçekli Orkestra Eseri'], 'puan' => 15],
         'N2c-N2d' => ['baslik' => 'Dinleti, oda müziği, koro, solo yapıt ya da müzik ve sahne düzenlemesi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda/Koro Müziği Eseri (≥15 dk)', 'Oda/Koro Müziği Eseri (<15 dk)', 'Orkestrasyon/Transkripsiyon', 'Eğitim Müziği Düzenlemesi', 'Özgün Eser / Beste / Tasarım'], 'puan' => 7],
         'N2e' => ['baslik' => 'Elektronik müzik yapıtı (CD, DVD vb.)', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Elektronik Müzik Eseri (≥15 dk)', 'Elektronik Müzik Eseri (<15 dk)', 'Albüm / Konser Kaydı', 'Karma Albüm / CD-DVD Katkısı', 'Bandrollü Kayıt (CD/DVD)', 'Eğitim Müziği Albümü'], 'puan' => 10],
+        'T9' => ['baslik' => 'Ulusal spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 3],
     ],
 
     // Madde 12-15'in koşullarının andığı kod aralıkları.

@@ -91,6 +91,7 @@ return [
 
         // ── BİLİMSEL/SANATSAL TOPLANTI ── (bölüm tavanı 40 puan)
         'Ta' => ['baslik' => 'Uluslararası bilimsel/sanatsal toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 12],
+        'Kk' => ['baslik' => 'Kamu kurum ve kuruluşlarında uzmanlığınızla ilgili komisyonlarda görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 2],
     ],
 
     'gruplar' => [

@@ -255,6 +255,7 @@ $aileB = function (array $p, array $tavan, string $dp, bool $tasarim) use ($SCI,
         '10a' => ['baslik' => 'SCIE, SSCI, AHCI, ESCI ya da Scopus kapsamındaki dergide editörlük veya alan editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => $WOS_DERGI, 'puan' => 10],
         '10b' => ['baslik' => 'BKCI ya da Scopus kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
         '10c' => ['baslik' => 'TR Dizin kapsamındaki dergide editörlük veya alan editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 5],
+        'SPOR-FED' => ['baslik' => 'Olimpik spor federasyonunun kurullarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 2],
 
         // ══ DİĞER FAALİYETLER ══
         "{$dp}c" => ['baslik' => 'Uluslararası bilimsel toplantıya davetli konuşmacı olarak katılmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],

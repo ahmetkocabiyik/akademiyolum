@@ -142,6 +142,7 @@ $maddeler = [
     '15.2.d' => ['baslik' => 'Dijital müzik platformunda yayımlanmış albüm', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Albüm / Konser Kaydı', 'Eğitim Müziği Albümü'], 'puan' => 10],
     '15.2.f' => ['baslik' => 'Oda müziği konserinde icracı olarak bulunmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Oda Müziği Grup Üyeliği (Uluslararası)', 'Oda Müziği Grup Üyeliği (Ulusal)', 'Başkemancılık (Uluslararası)', 'Başkemancılık (Ulusal)'], 'puan' => 10],
     '15.2.e' => ['baslik' => 'Karma ya da koro konserinde icracı olarak bulunmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Orkestra / Koro Üyeliği', 'Karma Albüm / CD-DVD Katkısı', 'Corps de Ballet (Uluslararası)', 'Corps de Ballet (Ulusal)', 'Dansçı / Performans İcracısı (Uluslararası)', 'Dansçı / Performans İcracısı (Ulusal)'], 'puan' => 5],
+    'SPOR-FED' => ['baslik' => 'Olimpik spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 4],
 ];
 
 $MAKALE_1A = ['1.a.q1', '1.a.q2', '1.a.q3', '1.a.q4'];

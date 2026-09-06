@@ -747,7 +747,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
     expect($disarida)->toBe([
         // "1. maddeden" barajları; 4-7. bölümler (ödül, idari görev, hizmet)
         // hiçbir koşulun kümesinde değil.
-        'ankara-2023: 18/65',
+        'ankara-2023: 19/66',
 
         // Yalnız EG5 (yarıyıl başına 1 puanlık ders) dışarıda; `PUAN` grubu
         // ders satırlarını kapsamıyor.
@@ -755,7 +755,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
 
         // Toplam baraj A-L; M (ödüller, idari görevler) ile N (patent)
         // kaynağın kendi ifadesiyle barajın dışında.
-        'giresun-2019: 5/56',
+        'giresun-2019: 7/58',
 
         // EK-A/3: "1., 2., 3., 4. ve 7. maddelerden en az 50 puan." Proje,
         // tez danışmanlığı ve ders bölümleri barajın dışında; 40/80/120/160
@@ -802,4 +802,62 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
         'yalova-2024-mimarlik-a50: 26/61',
         'yalova-2024-sosyal-a50: 21/56',
     ]);
+});
+
+/**
+ * DIŞ KURULUŞ VE SPOR FEDERASYONU ETİKETLERİ ÖLÜ KALMASIN.
+ *
+ * Etiketler 06.09.2026'da eklendi ve korpusa yayıldı. Bir etiketi sözlüğe
+ * ekleyip hiçbir cetvele yazmamak, adayın o kaydı girip sıfır almasıyla
+ * sonuçlanır — sessiz ve ölçülmeyen bir kayıp. Bu test etiketlerin gerçekten
+ * kullanıldığını ve iki ailenin ayrı kaldığını koruyor.
+ */
+test('yeni kurul etiketleri korpusta karşılık buluyor', function () {
+    $depo = app(SartDeposu::class);
+    $sayim = [
+        'Dış Kuruluş Kurul Üyeliği (Uluslararası)' => 0,
+        'Dış Kuruluş Kurul Üyeliği (Ulusal)' => 0,
+        'Spor Federasyonu Kurul Üyeliği (Uluslararası)' => 0,
+        'Spor Federasyonu Kurul Üyeliği (Ulusal)' => 0,
+    ];
+
+    foreach ($depo->cetveller() as $katalog) {
+        foreach ($katalog->maddeler as $madde) {
+            foreach ($madde['kaynaklar'] ?? [] as $kaynak) {
+                if (isset($sayim[$kaynak])) {
+                    $sayim[$kaynak]++;
+                }
+            }
+        }
+    }
+
+    // Dördü de birden çok üniversitede karşılık bulmalı. Sayı satır başına
+    // (varyantlı cetveller aynı satırı birden çok kez taşıyor).
+    foreach ($sayim as $etiket => $adet) {
+        expect($adet)->toBeGreaterThanOrEqual(8, "{$etiket} korpusta karşılıksız kalmış");
+    }
+});
+
+/**
+ * İKİ AİLE AYRI KALSIN: kurum DIŞI kurul üyeliği, üniversite İÇİ komisyon
+ * üyeliğinden ayrı puanlansın diye açıldı. Aynı satırda ikisi birden
+ * bulunuyorsa ayrım çökmüş demektir.
+ */
+test('dış kuruluş etiketi üniversite içi komisyon etiketiyle aynı satırda değil', function () {
+    $depo = app(SartDeposu::class);
+    $dis = ['Dış Kuruluş Kurul Üyeliği (Uluslararası)', 'Dış Kuruluş Kurul Üyeliği (Ulusal)',
+        'Spor Federasyonu Kurul Üyeliği (Uluslararası)', 'Spor Federasyonu Kurul Üyeliği (Ulusal)'];
+    $sizinti = [];
+
+    foreach ($depo->cetveller() as $ad => $katalog) {
+        foreach ($katalog->maddeler as $kod => $madde) {
+            $kaynaklar = $madde['kaynaklar'] ?? [];
+
+            if (array_intersect($dis, $kaynaklar) !== [] && in_array('Kurul / Komisyon Üyeliği', $kaynaklar, true)) {
+                $sizinti[] = "{$ad} {$kod}";
+            }
+        }
+    }
+
+    expect(array_values(array_unique($sizinti)))->toBe([]);
 });

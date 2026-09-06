@@ -645,6 +645,8 @@ $ek7 = [
 
     // ══ 7.f. SOSYAL SORUMLULUK ══
     '7f-sos' => ['baslik' => 'Sosyal sorumluluk projelerinde görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 6],
+    '17k-uluslararasi' => ['baslik' => 'Uluslararası spor federasyonunun kurullarında görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 10],
+    '17k-ulusal' => ['baslik' => 'Ulusal spor federasyonunun kurullarında görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 10],
 ];
 
 $ek7 = array_merge(

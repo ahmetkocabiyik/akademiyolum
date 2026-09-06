@@ -216,6 +216,8 @@ return [
         '12.ı' => ['baslik' => 'Özel sektör, kamu ya da STK danışmanlığı', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 5],
         '12.j' => ['baslik' => 'Topluma yönelik eğitim, seminer ya da çalıştay düzenlemek veya görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 5],
         '12.k' => ['baslik' => 'Topluma yönelik yayın, sunum ya da konferans', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın'], 'puan' => 5],
+        '11.1.b' => ['baslik' => 'Uluslararası spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 50],
+        '11.1.p' => ['baslik' => 'Ulusal spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 8],
     ],
 
     'gruplar' => [

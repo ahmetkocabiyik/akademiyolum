@@ -239,6 +239,8 @@ $jSatirlari = [
     'J1171' => ['baslik' => 'Müze, kazı buluntusu, koleksiyon ve film arşivi restorasyon-konservasyonunda yürütücülük ya da başkanlık', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatKorumaN, 'puan' => 12],
     'J1181' => ['baslik' => 'Sahne sanatlarında (dans, bale, tiyatro, halk oyunları) grup oluşturmak ve gösterilerinin sunumunu sağlamak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatSahne, 'puan' => 12],
     'J11613' => ['baslik' => 'Basılı dergi ya da kitap kapağı, sayfa, afiş, poster, broşür ve katalog tasarımı yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatTasarim, 'puan' => 3],
+    'R7' => ['baslik' => 'Uluslararası spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 4],
+    'R9' => ['baslik' => 'Ulusal spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 3],
 ];
 
 /**

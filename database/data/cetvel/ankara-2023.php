@@ -138,6 +138,7 @@ return [
         // ── 7 · Bilimsel/sanatsal toplantı ──
         '7a' => ['baslik' => 'Uluslararası toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 25],
         '7b' => ['baslik' => 'Uluslararası toplantıda sunulmuş tam metin/özet bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 15],
+        '7k' => ['baslik' => 'Kamu kurum ve kuruluşlarında uzmanlığınızla ilgili komisyonlarda görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 2],
     ],
 
     'gruplar' => [

@@ -248,6 +248,8 @@ return [
         // ══ J. TEZ DANIŞMANLIĞI ══
         'J.1.b' => ['baslik' => 'Tamamlanmış doktora, sanatta yeterlik veya tıpta uzmanlık tezi yürütücülüğü', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'puan' => 8],
         'J.2' => ['baslik' => 'Tamamlanmış yüksek lisans tezi yürütücülüğü', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 5],
+        'K.13' => ['baslik' => 'Uluslararası spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 10],
+        'K.14' => ['baslik' => 'Ulusal spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 5],
     ],
 
     'gruplar' => [

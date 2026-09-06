@@ -144,6 +144,8 @@ return [
         'N.1.a' => ['baslik' => 'Yurt dışı patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 400],
         'N.1.c' => ['baslik' => 'Yurt içi patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 200],
         'N.2.b' => ['baslik' => 'Faydalı model veya ürün tescili', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 50],
+        'M.10' => ['baslik' => 'Uluslararası bilimsel ya da mesleki kuruluşun yönetiminde, kurullarında veya komisyonlarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 25],
+        'M.11' => ['baslik' => 'Bu kuruluşların Türkiye şubelerinin yönetiminde, kurullarında veya komisyonlarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 20],
     ],
 
     'gruplar' => [

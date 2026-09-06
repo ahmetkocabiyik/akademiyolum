@@ -283,6 +283,7 @@ return [
         'I-MERKEZ-MUDUR' => ['baslik' => 'Araştırma ve Uygulama Merkezi müdürlüğü veya koordinatörlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 20],
         'I-ABD-BASKANI' => ['baslik' => 'Anabilim dalı başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 10],
         'I-KOMISYON' => ['baslik' => 'Komisyonlarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
+        'I-DIS-KOMISYON' => ['baslik' => 'Uluslararası saygın kuruluşlarda komisyon üyeliği (UNESCO, NATO vb.)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 20],
     ],
 
     'gruplar' => [

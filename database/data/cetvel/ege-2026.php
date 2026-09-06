@@ -129,6 +129,8 @@ return [
         // ── 8. ÖDÜLLER ──
         '8a' => ['baslik' => 'Cumhurbaşkanlığı Kültür ve Sanat Büyük Ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü'], 'puan' => 100],
         '8b' => ['baslik' => 'YÖK, TÜBA veya TÜBİTAK bilim/başarı ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'YÖK Ödülü'], 'puan' => 100],
+        '9d' => ['baslik' => 'Spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 20],
+        '9d-ulusal' => ['baslik' => 'Spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 20],
     ],
 
     'gruplar' => [

@@ -148,5 +148,6 @@ return [
 
         // ══ I. KONGRE DÜZENLEME ══
         'I.2' => ['baslik' => 'Kongre, seminer veya sempozyum düzenleme kurulu üyeliği', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın', 'Kamu/STK Danışmanlığı'], 'puan' => 2],
+        'I.3' => ['baslik' => 'Uluslararası nitelikli bilimsel ya da mesleki kuruluşta görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 10],
     ],
 ];

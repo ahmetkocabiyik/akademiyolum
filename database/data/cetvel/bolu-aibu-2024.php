@@ -178,6 +178,7 @@ return [
         'I.2.4.2' => ['baslik' => 'Ulusal sanat etkinliğinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Üyeliği (Ulusal)', 'Jüri Başkanlığı (Ulusal)'], 'puan' => 5],
         'I.2.5.1' => ['baslik' => 'Yurt dışında veya uluslararası etkinlikte sanat çalıştayı ya da atölye liderliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Masterclass (Uluslararası)'], 'puan' => 12],
         'I.2.5.4' => ['baslik' => 'Yurt içinde sanat çalıştayı veya atölye liderliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Masterclass (Ulusal)', 'Eğitim Amaçlı Sanat Etkinliği'], 'puan' => 6],
+        'G.2.3' => ['baslik' => 'Bilimsel ya da mesleki kurum ve kuruluşların yönetiminde, kurullarında veya komisyonlarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 5],
     ],
 
     'gruplar' => [

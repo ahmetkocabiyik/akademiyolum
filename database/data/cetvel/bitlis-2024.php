@@ -149,6 +149,7 @@ return [
         // ── E. EĞİTİM-ÖĞRETİM (Dipnot 4: toplam puanın %10'unu geçemez) ──
         'E.1.1' => ['baslik' => 'Tamamlanmış yüksek lisans tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 10],
         'E.1.2' => ['baslik' => 'Tamamlanmış doktora, uzmanlık veya sanatta yeterlik tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 20],
+        'G.1.1' => ['baslik' => 'Bilimsel ya da mesleki kurum ve kuruluşların yönetiminde, kurullarında veya komisyonlarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 8],
     ],
 
     'gruplar' => [

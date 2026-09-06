@@ -213,6 +213,7 @@ $maddeler = [
     'P7' => ['baslik' => 'Üniversite yönetim kurulu ya da senato seçilmiş üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 10],
     'P8' => ['baslik' => 'Bölüm başkanlığı ya da bölüm başkan yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 10],
     'P9' => ['baslik' => 'Rektörlükçe görevlendirilen üniversite düzeyindeki kurul ya da komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 5],
+    'H16' => ['baslik' => 'Meslek odalarında, bakanlık komisyon ve kurullarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 5],
 ];
 
 $kodlar = fn (string ...$onekler): array => array_values(array_filter(

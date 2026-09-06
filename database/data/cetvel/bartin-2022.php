@@ -299,6 +299,7 @@ return [
 
         // ══ R. PLANLAMA, MİMARLIK, KENTSEL VE PEYZAJ TASARIM ══
         'R.1-R.6' => ['baslik' => 'Mimarlık, planlama ve tasarım alanında ürettiğiniz bir uygulama projesi hakkında hakemli dergide makale ya da tanınmış yayınevinde kitap veya kitap bölümü yayımlanmış olması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif', 'Uygulama Projesi — Ekip', 'Uygulama Projesi — Ekip Yardımcısı', 'Uygulama Projesi — Danışman', 'Koruma-Onarım Uygulaması (Uluslararası)', 'Koruma-Onarım Uygulaması (Ulusal)'], 'puan' => 40],
+        'N.6' => ['baslik' => 'Olimpik spor federasyonunun kurullarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 60],
     ],
 
     // Ölçütlerin andığı kümeler. Kod uzayı nokta ve harf karışık olduğu için

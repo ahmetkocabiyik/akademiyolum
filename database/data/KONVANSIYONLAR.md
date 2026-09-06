@@ -1088,6 +1088,24 @@ eşdeğer tablosuna GİRMEDİ: kurum dışı bir kurul üyeliği, üniversite ko
 ancak yeni etiket eskisinin gerçek bir ALT TÜRÜYSE yazılır
 (`Akreditasyon Kurulu Görevi` → `Akreditasyon Faaliyeti` öyleydi).
 
+**ETİKETİ AÇTIKTAN SONRA KORPUSA YAY.** Sözlüğe etiket eklemek tek başına
+işe yaramaz: aday kaydını girer ve sıfır alır. 06.09.2026'da dört etiket 26
+cetvele yazıldı (satır bazında 10-23 karşılık). Yayarken iki şeye dikkat:
+
+- **Yanlış pozitifleri ele.** Tarama "meslek odaları, yerel yönetimler,
+  bakanlıklar tarafından DÜZENLENEN yarışma" satırlarını da getiriyor; onlar
+  `Yarışma Derecesi / Mansiyon`, kurul üyeliği değil. İTÜ, Sivas, AYBÜ ve
+  Siirt'te tam bu desen çıktı ve girilmedi.
+- **Ekleme yeri, satır biçimi ve girintisi dosyanın kendisinden alınsın.**
+  Çapa olarak o cetvelin SON madde satırını bul, girintiyi ondan kopyala;
+  varyantlı dosyalarda `maddeler` dizisi genelde bir kez tanımlı olduğu için
+  tek ekleme yetiyor (Trakya gibi ek-başına ayrı dizi tutanlarda doğru
+  ekin dizisine yaz).
+
+`CetvelKaynakTest` iki şeyi koruyor: etiketler korpusta karşılıksız kalmasın
+ve kurum DIŞI etiketiyle üniversite İÇİ `Kurul / Komisyon Üyeliği` aynı
+satırda buluşmasın (buluşurlarsa ayrım çökmüş demektir).
+
 **ETİKET AÇMAK ESKİ "GİRİLEMEDİ" NOTLARINI AÇAR.** Yeni etiket eklendiğinde
 onun yokluğu yüzünden atlanmış satırları da ara: Akdeniz'in 11.5'i (sağlık
 kuruluşları yönetim kurulu 35/20) ve 11.1.7'si (uluslararası spor federasyonu

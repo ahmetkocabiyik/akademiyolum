@@ -163,6 +163,8 @@ return [
         '8.3' => ['baslik' => 'Diğer endeks ve özlerce taranan dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 4],
         '8.4' => ['baslik' => 'Hakemli dergi, tez veya bilimsel kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
         '8.5' => ['baslik' => 'Diğer yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 1],
+        '14.13' => ['baslik' => 'Uluslararası akademik ya da mesleki kuruluşta yönetim kurulu görevi veya üyelik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 10],
+        '14.14' => ['baslik' => 'Ulusal akademik ya da mesleki kuruluşta üyelik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 5],
     ],
     'gruplar' => [
         '1.1' => ['1.1a', '1.1b', '1.1c', '1.1d'],
