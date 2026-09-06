@@ -6187,3 +6187,44 @@ test('Bayburt davetli konuşmacı satırı doğru kademede', function () {
     expect($katalog->puan($davetli, $katalog->coz(['*'])))->toBe(15)
         ->and($katalog->puan($baskan, $katalog->coz(['*'])))->toBe(70);
 });
+
+/**
+ * AĞRI 2. BÖLÜM — ÜÇE İNDİRİLMİŞ BEŞ KADEME, HER BİRİ ÜST KADEMENİN PUANIYLA.
+ *
+ * Kaynak bildiriyi beş kademeye ayırıyor: davetli (20/15) · sözlü tam metin
+ * (14/10) · poster tam metin (10/8) · sözlü özet (8/6) · poster özet (6/4).
+ * Cetvel üç satıra indirmiş ama her satıra kendi kümesinin EN YÜKSEK
+ * kademesini yazmıştı. Sözlük sözlü/poster ayrımını taşımadığı için §0 en
+ * düşüğünü ister; `Davetli Konuşmacı` kapsam da taşımadığı için ulusal
+ * kademeye (15) iner.
+ */
+test('Ağrı bildiri kademeleri en düşük değerde', function () {
+    $katalog = sartDepo()->katalog('agri-2024');
+    expect($katalog)->not->toBeNull();
+
+    $puan = fn (string $kaynak) => $katalog->puan(
+        sartFaaliyet($kaynak, Kategori::Bildiri, null),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('Davetli Konuşmacı'))->toBe(15)
+        ->and($puan('Uluslararası Tam Metin'))->toBe(10)
+        ->and($puan('Uluslararası Özet/Poster'))->toBe(6)
+        ->and($puan('Ulusal Tam Metin'))->toBe(8)
+        ->and($puan('Ulusal Özet/Poster'))->toBe(4);
+});
+
+/**
+ * BAYBURT 8.1.g — KODU BAŞKA MADDEDEN, ETİKETİ BAŞKA AİLEDEN.
+ *
+ * Cetveldeki `8.1.g` "Uluslararası kitap editörlüğü / BKCI Kitap / 5"
+ * diyordu; kaynağın 8.1.g'si DERGİ HAKEMLİĞİ (5). Kitap editörlüğü 2.1.c
+ * (50) ve 2.1.e (30) maddelerinde; §0 uyarınca düşüğü yazıldı.
+ */
+test('Bayburt kitap editörlüğü doğru maddeden geliyor', function () {
+    $katalog = sartDepo()->katalog('bayburt-2024');
+    expect($katalog)->not->toBeNull();
+
+    expect($katalog->maddeler)->toHaveKey('2.1.e')->not->toHaveKey('8.1.g')
+        ->and($katalog->puan(sartFaaliyet('BKCI Kitap', Kategori::Editorluk, null), $katalog->coz(['*'])))->toBe(30);
+});

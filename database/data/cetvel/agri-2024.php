@@ -64,11 +64,11 @@ return [
         '1.4' => ['baslik' => 'Yurt içi hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
 
         // ── 2. BİLDİRİLER ──
-        '2.1.1' => ['baslik' => 'Uluslararası bilimsel toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 20],
-        '2.1.2' => ['baslik' => 'Uluslararası bilimsel toplantıda tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 15],
-        '2.1.3' => ['baslik' => 'Uluslararası bilimsel toplantıda özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
-        '2.2.1' => ['baslik' => 'Ulusal bilimsel toplantıda tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 10],
-        '2.2.2' => ['baslik' => 'Ulusal bilimsel toplantıda özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
+        '2.1.1-2.2.1' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 15],
+        '2.1.2-2.1.3' => ['baslik' => 'Uluslararası bilimsel toplantıda tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 10],
+        '2.1.4-2.1.5' => ['baslik' => 'Uluslararası bilimsel toplantıda özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 6],
+        '2.2.2-2.2.3' => ['baslik' => 'Ulusal bilimsel toplantıda tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 8],
+        '2.2.4-2.2.5' => ['baslik' => 'Ulusal bilimsel toplantıda özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 4],
 
         // ── 4. KİTAPLAR ──
         '4.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 80],

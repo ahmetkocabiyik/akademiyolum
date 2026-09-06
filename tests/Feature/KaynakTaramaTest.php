@@ -55,6 +55,29 @@
  * D1.1) ve "yurt dışında ders/seminer vermek" de öyle (Dicle F2, KOSTU
  * 18). Bunlar bu turun konusu değil; kendi etiket turlarını bekliyorlar.
  *
+ * ── KOD KAYMASI TARAMASI (06.09.2026) ──
+ * Amaç: cetvel satırının KODU kaynakta bir maddeyi gösterirken BAŞLIĞININ
+ * komşu maddeyi anlatması. Bayburt'un `3.1.d`'si "davetli konuşmacı 70"
+ * diyordu; kaynağın 3.1.d'si düzenleme kurulu başkanı, davetli konuşmacı
+ * 3.1.ç (25) — etiket bir üst kademenin puanını topluyordu.
+ *
+ * Karşılaştırma başlıkların KELİMESİ üzerinden yapılamaz: cetvel başlığı
+ * adaya yönelik yeniden yazılıyor. Ölçüt AYIRT EDİCİ KAVRAM: "davetli
+ * konuşmacı", "düzenleme kurulu", "atıf", "patent" gibi. Genel sözcükler
+ * (uluslararası, bilimsel, toplantı) iki tarafta da var, hiçbir şey ayırmaz.
+ *
+ * İki eleme şart:
+ *   AYNI KOVA          "eş danışmanlık" ↔ "ikinci yürütücü", "düzenleme
+ *       kurulu" ↔ "bilim kurulu", "tam metin" ↔ "özet" hepsi üslup farkı.
+ *       Ayrı kavram sayılırsa tarama yanlış pozitife boğuluyor.
+ *   KAYMA İMZASI       Cetvelin kavramı KOMŞU kodda bulunmalı. Bulunmuyorsa
+ *       işaret kod çakışması ya da pdftotext'in satırı bir sonraki bölüm
+ *       başlığına bağlaması demek. 62 ham işaretin 42'si buradan elendi.
+ *
+ * Kalan 20 işaretin ikisi gerçek çıktı: Bayburt 8.1.g (kodu dergi
+ * hakemliğinin, etiketi kitap editörlüğünün) ve Ağrı'nın 2.1/2.2 blokları
+ * (beş kademe üçe indirilmiş, her satıra üst kademenin puanı yazılmış).
+ *
  * TARAMANIN KENDİSİNDEN ÇIKAN DERS: tarayıcı FİZİKSEL SATIRDA çalışırsa
  * kendisini doğuran hatayı bulamıyor. pdftotext satırı sarıyor ve İTÜ'de
  * ayracın iki kolu iki ayrı satıra düşüyor — ilk sürüm 19 işaret üretip
@@ -121,6 +144,70 @@ function veVeyaSinifi(string $blok, bool $puanSutunu): ?string
         eylemBasi($kollar[0]) && eylemBasi($kollar[1]) => 'iki-kol',
         default => 'nitelik',
     };
+}
+
+/**
+ * Metnin taşıdığı AYIRT EDİCİ kavramlar. Aynı şeyin iki söylenişi tek
+ * kovaya düşer; genel sözcükler hiç listede yok.
+ *
+ * @return list<string>
+ */
+function kavramlar(string $metin): array
+{
+    $desenler = [
+        'davetli' => 'davetli konuşmacı|çağrılı konuşmacı|panelist',
+        'oturum' => 'oturum başkan|moderatör',
+        'duzenleme' => 'düzenleme kurul|organizasyon kurul|bilim kurul|danışma kurul',
+        'baskanlik' => '(?:kongre|sempozyum|toplantı|etkinlik)\w* başkan|genel koordinatör',
+        'bildiri' => 'tam metin|özet|poster',
+        'makale' => '\bmakale',
+        'kitap' => '\bkitap|kitab[ıi]',
+        'atif' => '\bat[ıi]f',
+        'proje' => '\bproje',
+        'patent' => 'patent|faydalı model',
+        'tez' => '\btez\b|tez danışman|danışmanlık',
+        'odul' => 'ödül|mansiyon|\bburs\b',
+        'editorluk' => 'editör|yayın kurul',
+        'hakemlik' => 'hakemli[kğ]|\bhakem\b',
+        'ders' => 'ders vermek|ders yükü|ders saati',
+    ];
+
+    $kucuk = kucult($metin);
+    $bulunan = [];
+
+    foreach ($desenler as $ad => $desen) {
+        if (preg_match('/'.$desen.'/u', $kucuk)) {
+            $bulunan[] = $ad;
+        }
+    }
+
+    return $bulunan;
+}
+
+/**
+ * Cetvel satırı kodunun gösterdiği maddeyi mi anlatıyor?
+ *
+ * `$komsular`, kaynakta kodun bir ve iki yanındaki maddelerin metinleri.
+ * Kavram kesişimi boşken cetvelin kavramı KOMŞUDA bulunuyorsa kayma var.
+ *
+ * @param  list<string>  $komsular
+ */
+function kaymaIsareti(string $cetvelBaslik, string $kaynakSatir, array $komsular): bool
+{
+    $a = kavramlar($cetvelBaslik);
+    $b = kavramlar($kaynakSatir);
+
+    if ($a === [] || $b === [] || array_intersect($a, $b) !== []) {
+        return false;
+    }
+
+    foreach ($komsular as $komsu) {
+        if (array_intersect($a, kavramlar($komsu)) !== []) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 /** Satır, tablo satırı görünümünde mi? */
@@ -347,4 +434,51 @@ test('kollar satır sarmasıyla ayrılmışsa blok gerekiyor', function () {
 
     // ±1 satırlık blokta iki kol da görünüyor.
     expect(veVeyaKollari(implode(' ', $satirlar))[1])->toContain('yarışma');
+});
+
+test('kod kayması gerçek örnekte işaret veriyor', function () {
+    // Bayburt 3.1.d — taramayı doğuran satır. Cetvel davetli konuşmacıyı
+    // anlatıyor, kaynağın 3.1.d'si düzenleme kurulu başkanlığını; davetli
+    // konuşmacı bir yanındaki 3.1.ç'de.
+    expect(kaymaIsareti(
+        'Uluslararası bilimsel toplantıda davetli konuşmacı olmak',
+        'Uluslararası kongre, sempozyum, panel ve çalıştay gibi bilimsel toplantı ve etkinliklerde düzenleme kurulu başkanı olmak',
+        ['Uluslararası kongre, sempozyum, panel ve çalıştay gibi bilimsel toplantı ve etkinliklerde davetli konuşmacı olmak'],
+    ))->toBeTrue();
+
+    // Bayburt 8.1.g — kodu dergi hakemliğinin, başlığı kitap editörlüğünün.
+    expect(kaymaIsareti(
+        'Uluslararası kitap editörlüğü',
+        'SCI, SCI-Exp, SSCI ve AHCI kapsamındaki dergilerde hakemlik yapmak 5',
+        ['Yabancı dilde uluslararası bilimsel ders kitap editörlüğü 30'],
+    ))->toBeTrue();
+});
+
+test('üslup farkı kayma sayılmıyor', function (string $baslik, string $kaynak) {
+    expect(kaymaIsareti($baslik, $kaynak, [$kaynak]))->toBeFalse();
+})->with([
+    // Ankara Bilim 4.1.3 — "eş danışmanlık" ile "ikinci yürütücü" aynı şey.
+    ['Tamamlanmış doktora veya sanatta yeterlik tezinde eş danışmanlık',
+        'Son 5 yılda tamamlanmış Doktora / Sanatta Yeterlik Tez Danışmanlığı İkinci Yürütücü 4'],
+    // Artvin H2 — cetvel "bilim kurulu", kaynak "düzenleme/yürütme kurulu".
+    ['Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)',
+        'Uluslararası bilimsel toplantı ve etkinliklerde düzenleme/yürütme kurulu üyeliği 7'],
+    // Trabzon 3.3.2.1 — "düzenleme kurulu başkanlığı" ile "sempozyum
+    // başkanlığı" aynı rol.
+    ['Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)',
+        'Uluslararası sempozyum başkanlığı / eşbaşkanlığı 15'],
+]);
+
+/**
+ * Kavramı komşuda BULUNMAYAN işaret elenmeli: bunlar pdftotext'in satırı
+ * bir sonraki bölüm başlığına bağlamasından ya da aynı kodun başka bir
+ * tabloda geçmesinden geliyor. Ham 62 işaretin 42'si bu elemeden düştü.
+ */
+test('komşuda karşılığı olmayan uyuşmazlık elenmiş', function () {
+    // Kütahya DPÜ E25: kaynak satırı bir sonraki bölüm başlığını yutmuş.
+    expect(kaymaIsareti(
+        'TR Dizin dışındaki dergilerde editörlük',
+        '1 1 1 1 için) F ÖDÜLLER VE TANINMIŞ ÇALIŞMALAR',
+        ['E24 satırı', 'E23 satırı'],
+    ))->toBeFalse();
 });

@@ -1150,6 +1150,45 @@ satır daha ekledi — üyelik etiketinin kapsamı 52 üniversiteden 71'e çıkt
 listeden düşüyor ve kaynak "aile yok" görünüyor. Terim başına yeniden tarama
 bunun tek pratik panzehiri.
 
+### KOD KAYMASI: SATIRIN KODU BİR MADDEYİ, BAŞLIĞI KOMŞUSUNU ANLATIR
+
+Bayburt'ta bulunan sınıf korpusa tarandı. Cetvel satırının kodu kaynakta bir
+maddeyi gösterirken başlığı ve etiketi YANINDAKİ maddeyi anlatıyor; sonuç
+etiketin komşu maddenin puanını toplaması. Sessiz: kod var, puan kaynakta
+gerçekten yazılı, hiçbir test kırılmıyor.
+
+**Karşılaştırma kelimeyle değil KAVRAMLA yapılır.** Cetvel başlığı adaya
+yönelik yeniden yazıldığı için birebir örtüşme beklenemez. Ayırt edici
+kavramlar ("davetli konuşmacı", "düzenleme kurulu", "atıf", "patent")
+karşılaştırılır; genel sözcükler (uluslararası, bilimsel, toplantı) iki
+tarafta da olduğu için hiçbir şey ayırmaz.
+
+İki eleme olmadan tarama okunamaz (62 ham işaret → 20):
+
+- **AYNI KOVA.** "Eş danışmanlık" ↔ "ikinci yürütücü", "düzenleme kurulu" ↔
+  "bilim kurulu", "sempozyum başkanlığı" ↔ "düzenleme kurulu başkanlığı",
+  "tam metin" ↔ "özet" — hepsi üslup farkı, hata değil.
+- **KAYMA İMZASI.** Cetvelin kavramı KOMŞU kodda bulunmalı. Bulunmuyorsa
+  işaret ya kod çakışmasıdır (aynı numara başka tabloda) ya da pdftotext'in
+  satırı bir sonraki bölüm başlığına bağlamasıdır.
+
+Kalan 20 işaretin ikisi gerçek çıktı:
+
+- **Bayburt 8.1.g** — kodu dergi hakemliğinin (5), başlığı ve `BKCI Kitap`
+  etiketi kitap editörlüğünün. Doğrusu 2.1.e (30).
+- **Ağrı 2.1/2.2** — kaynak bildiriyi BEŞ kademeye ayırıyor (davetli · sözlü
+  tam metin · poster tam metin · sözlü özet · poster özet); cetvel üçe
+  indirmiş ve her satıra kümesinin EN YÜKSEK kademesini yazmıştı. Sözlük
+  sözlü/poster ayrımını taşımadığı için beş değer birden düştü (20→15,
+  15→10, 8→6, 10→8, 5→4).
+
+**Ağrı'nın dersi kaymadan büyük: KADEMEYİ BİRLEŞTİREN SATIR EN DÜŞÜĞÜNÜ
+ALIR.** Kaynak beş satırı üçe indiriyorsan, üçün her biri kendi kapsadığı
+kademelerin EN DÜŞÜĞÜNÜ taşımalı. "Sözlü/poster ayrımı sözlükte yok" demek,
+poster kademesinin de o etikete düştüğü anlamına gelir.
+
+Filtre kod olarak `KaynakTaramaTest`'te (`kavramlar`, `kaymaIsareti`).
+
 ### AYNI AİLENİN ÜÇÜNCÜ TERİMİ: DOYUM NOKTASI VE TANIM CÜMLESİ GÜRÜLTÜSÜ
 
 "Bilim kurulu" taraması (üçüncü terim) 100 kaynak buldu ama yalnız **üç yeni
