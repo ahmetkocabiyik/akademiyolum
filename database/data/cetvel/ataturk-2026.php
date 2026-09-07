@@ -30,49 +30,98 @@ return [
             'baslik' => 'SCIE/SSCI/AHCI Q1 dergide araştırma makalesi',
             'kategori' => 'makale',
             'kaynaklar' => ['SCIE/SSCI (Q1)'],
+            'turler' => ['ozgun_makale', 'derleme'],
             'puan' => 30,
         ],
         '02.01.02' => [
             'baslik' => 'SCIE/SSCI/AHCI Q2 veya SCOPUS Q1 dergide makale',
             'kategori' => 'makale',
             'kaynaklar' => ['SCIE/SSCI (Q2)', 'AHCI'],
+            'turler' => ['ozgun_makale', 'derleme'],
             'puan' => 24,
         ],
         '02.01.03' => [
             'baslik' => 'SCIE/SSCI/AHCI Q3 veya SCOPUS Q2 dergide makale',
             'kategori' => 'makale',
             'kaynaklar' => ['SCIE/SSCI (Q3)'],
+            'turler' => ['ozgun_makale', 'derleme'],
             'puan' => 16,
         ],
         '02.01.04' => [
             'baslik' => 'SCIE/SSCI/AHCI Q4 veya SCOPUS Q3 dergide makale',
             'kategori' => 'makale',
             'kaynaklar' => ['SCIE/SSCI (Q4)'],
+            'turler' => ['ozgun_makale', 'derleme'],
             'puan' => 10,
         ],
         '02.01.06' => [
             'baslik' => 'SCOPUS Q4, ESCI veya alan endeksi dergide makale',
             'kategori' => 'makale',
             'kaynaklar' => ['ESCI / Scopus'],
+            'turler' => ['ozgun_makale', 'derleme'],
             'puan' => 8,
         ],
         '02.01.08' => [
             'baslik' => 'Diğer uluslararası hakemli dergide makale',
             'kategori' => 'makale',
             'kaynaklar' => ['Diğer Uluslararası İndeks'],
+            'turler' => ['ozgun_makale', 'derleme'],
             'puan' => 5,
         ],
         '02.02.01' => [
             'baslik' => 'TR Dizin dergide araştırma makalesi',
             'kategori' => 'makale',
             'kaynaklar' => ['TR Dizin'],
+            'turler' => ['ozgun_makale', 'derleme'],
             'puan' => 6,
         ],
         '02.02.03' => [
             'baslik' => 'Diğer ulusal hakemli dergide makale',
             'kategori' => 'makale',
             'kaynaklar' => ['Diğer Ulusal Hakemli'],
+            'turler' => ['ozgun_makale', 'derleme'],
             'puan' => 4,
+        ],
+        // KISA MAKALE MERDİVENİ (02.01.05/07/09, 02.02.02/04) önce hiç
+        // girilmemişti: kaynak her indeks kademesinde "kısa makale (editöre
+        // mektup, teknik not, vaka takdimi, tartışma, kitap incelemesi)" için
+        // ayrı ve DÜŞÜK bir satır tanımlıyor. Yüksek satırlar `turler`
+        // kısıtsız olduğu için editöre mektup kaydeden aday Q1'de 8 yerine
+        // 30 puan alıyordu (§0 ihlali).
+        '02.01.05' => [
+            'baslik' => 'SCIE/SSCI/AHCI dergide kısa makale, editöre mektup, teknik not, vaka takdimi ya da kitap incelemesi',
+            'kategori' => 'makale',
+            'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'],
+            'turler' => ['kisa_makale', 'vaka_teknik_not'],
+            'puan' => 8,
+        ],
+        '02.01.07' => [
+            'baslik' => 'ESCI ya da alan endeksi dergide kısa makale, editöre mektup, teknik not, vaka takdimi ya da kitap incelemesi',
+            'kategori' => 'makale',
+            'kaynaklar' => ['ESCI / Scopus'],
+            'turler' => ['kisa_makale', 'vaka_teknik_not'],
+            'puan' => 4,
+        ],
+        '02.01.09' => [
+            'baslik' => 'Diğer uluslararası hakemli dergide kısa makale, editöre mektup, teknik not, vaka takdimi ya da kitap incelemesi',
+            'kategori' => 'makale',
+            'kaynaklar' => ['Diğer Uluslararası İndeks'],
+            'turler' => ['kisa_makale', 'vaka_teknik_not'],
+            'puan' => 3,
+        ],
+        '02.02.02' => [
+            'baslik' => 'TR Dizin dergide kısa makale, editöre mektup, teknik not, vaka takdimi ya da kitap incelemesi',
+            'kategori' => 'makale',
+            'kaynaklar' => ['TR Dizin'],
+            'turler' => ['kisa_makale', 'vaka_teknik_not'],
+            'puan' => 3,
+        ],
+        '02.02.04' => [
+            'baslik' => 'Diğer ulusal hakemli dergide kısa makale, editöre mektup, teknik not, vaka takdimi ya da kitap incelemesi',
+            'kategori' => 'makale',
+            'kaynaklar' => ['Diğer Ulusal Hakemli'],
+            'turler' => ['kisa_makale', 'vaka_teknik_not'],
+            'puan' => 2,
         ],
         // Kitap kalemleri yönergede 01.03 (Özgün Bilimsel Araştırma veya Ders
         // Kitabı) altında; daha önce sehven 02.04 (Ulusal AR-GE Projesi)

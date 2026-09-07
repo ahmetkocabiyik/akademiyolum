@@ -64,18 +64,22 @@ $kapsamNotu = 'Puanlar İstanbul Kültür Üniversitesi EK-1 Puanlama Sisteminde
 // ── ORTAK GÖVDE (TABLO 1'in değerleri) ──────────────────────────────────────
 $maddeler = [
     // ══ 1. ULUSLARARASI MAKALE ══
-    '1.a.Q1' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI kapsamındaki Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 30],
-    '1.a.Q2' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI kapsamındaki Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'puan' => 20],
-    '1.a.Q3' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI kapsamındaki Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'puan' => 15],
-    '1.a.Q4' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI kapsamındaki Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'puan' => 10],
-    '1.b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 10],
-    '1.c' => ['baslik' => 'Diğer uluslararası indekslerde taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 5],
+    // 1.d ve 2.c satırları (editöre mektup, araştırma notu, özet, kitap
+    // kritiği) doğru türlerle girilmişti ama YÜKSEK satırlarda tür kısıtı
+    // yoktu; `puan()` en yükseği aldığı için düşük satır hiç kazanamıyor,
+    // Q1'de editöre mektup 3 yerine 30 puan alıyordu (§0 ihlali).
+    '1.a.Q1' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI kapsamındaki Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
+    '1.a.Q2' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI kapsamındaki Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
+    '1.a.Q3' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI kapsamındaki Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
+    '1.a.Q4' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI kapsamındaki Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
+    '1.b' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
+    '1.c' => ['baslik' => 'Diğer uluslararası indekslerde taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 5],
     // 1.d yalnızca 1.a-1.c dergilerindeki kısa yayınlar; kaynak ayrımı
     // olmadığı için tür ile sınırlandı.
     '1.d' => ['baslik' => 'Uluslararası indeksli dergide editöre mektup, araştırma notu, özet veya kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 3],
 
     // ══ 2. ULUSAL MAKALE ══
-    '2.a' => ['baslik' => 'TR Dizin kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
+    '2.a' => ['baslik' => 'TR Dizin kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
     '2.b' => ['baslik' => 'Diğer hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 4],
     '2.c' => ['baslik' => 'Diğer hakemli dergide editöre mektup, araştırma notu veya kitap incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 2],
 

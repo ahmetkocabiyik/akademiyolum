@@ -2669,3 +2669,72 @@ Bu üniversitede §0 uyarınca verilen kararların tamamı `GIRILEMEYEN-YONERGEL
 tablosunda; en pahalıları: %25 tavanlarının atama eşiğine bağlı olduğu için
 uygulanamaması, Matematik alanının EK-2'den ayrılamaması ve EK-7'nin sportif
 performans bölümünün tamamen dışarıda kalması.
+
+## MAKALE TÜRÜ AYRI BİR EKSEN: `turler`
+
+`kaynak` etiketi yalnız DERGİYİ taşır (indeks, çeyreklik). Yönergelerin
+büyük kısmı aynı dergideki iki çalışmayı **türüne** göre farklı puanlıyor:
+
+| tür anahtarı | kaynakta geçen adlar |
+|---|---|
+| `ozgun_makale` | özgün/tam araştırma makalesi (varsayılan) |
+| `derleme` | derleme, meta analiz |
+| `kisa_makale` | kısa makale, short/brief communication |
+| `vaka_teknik_not` | vaka takdimi/sunumu/incelemesi, teknik not, editöre mektup, tartışma, özet, kitap kritiği, araştırma notu |
+
+**Tür girilmemiş kayıt `ozgun_makale` sayılır** (form da bunu ön seçiyor), yani
+kısıtsız bir satır bütün türleri toplar.
+
+### İki sessiz hata biçimi
+
+1. **Düşük satır hiç girilmemiş.** Editöre mektup, özgün makale puanını alır.
+2. **Düşük satır girilmiş ama YÜKSEK satırda `turler` yok.** `puan()` MAX
+   aldığı için düşük satır hiç kazanamaz — ölü doğar. İstanbul Kültür'de
+   1.d/2.c doğru girilmişti ama Q1 editöre mektubu yine 30 puan alıyordu.
+
+İkincisi kaynağa hiç bakmadan bulunur: *"yalnız özgün-dışı türlere açık bir
+satırın puanı, motorun o tür için verdiği puandan küçükse gölgelenmiştir."*
+`CetvelKaynakTest` bu değişmezi korpus geneline uyguluyor.
+
+### Tarama tarifi
+
+Ucuz ve kesin sıralama:
+
+1. Kaynağı tara: satır hem makale/dergi kelimesi hem de tür sözcüğü
+   (`derleme|olgu sunum|vaka takdim|editöre mektup|teknik not|kısa makale|
+   kitap kritiği|araştırma notu|tam makale|diğer makale`) taşıyor ve sonunda
+   bir puan sütunu var mı.
+2. **BİRLEŞTİREN AYRAÇLARI ELE.** En büyük gürültü kaynağı: "özgün araştırma
+   **/** derleme makalesi" (Akdeniz), "araştırma **ve** derleme makaleleri"
+   (Marmara Tablo 1) — kaynak ikisine AYNI puanı veriyor, ayrım yok.
+   `/` ayracı da birleştirici; yalnız `45/35` gibi İKİ SAYI varsa ayrımdır.
+3. Kalanları motorla çapraz: o cetvelde dört tür de aynı puanı alıyor mu.
+4. **AYNI PUAN HER ZAMAN HATA DEĞİL.** Kaynak o kademeyi gerçekten
+   ayırmıyorsa (Hakkari A3 "makaleler, makale çevirisi, vaka takdimi vb.")
+   ya da iki ayrı satır tesadüfen aynı değere geliyorsa (SCU 8 = 8) bulgu
+   sahtedir.
+
+### En yaygın YANLIŞ POZİTİF deseni
+
+**Uluslararası satırlar türü dışlıyor, ULUSAL satırlar dışlamıyor.** Onlarca
+yönerge "SSCI … dergilerde editöre mektup, özet veya kitap kritiği HARİÇ
+olmak üzere yayımlanmış makale" deyip hemen altında "ULAKBİM tarafından
+taranan ulusal hakemli dergilerde yayımlanmış **makale**" diyor — ikinci
+satırda kısıt YOK ve kısıtsız girilmesi DOĞRU (İKÇÜ, İstanbul Medeniyet,
+Muş, Uşak, Haliç, İstanbul Atlas).
+
+### Düşük satırın KAPSAMINI bentten oku
+
+Kaynak düşük satırı çoğu zaman "**a ve b** bendi kapsamındaki dergilerde…"
+diye yazıyor. Bendleri açmadan yalnız birinci bendin etiketlerini yazmak
+sessiz bir fazla sayma üretir: Selçuk'un on iki tablosunda düşük satır
+"a ve b" (Eğitim'de "a, b veya c") diyordu, cetvelde yalnız SCI etiketleri
+vardı; ESCI/Scopus derlemesi 5 yerine 15 puan alıyordu.
+
+### İki merdiven ÇAPRAZLANIYORSA her kademede düşüğü yaz
+
+Yalova'nın sağlık tablosu olgu sunumunu (SCIE 5 · ESCI 2) ve editöre
+mektubu (her ikisinde 3) ayrı satırlarda tutuyor; sözlükte ikisi de
+`vaka_teknik_not`. Hangi satıra bağlansa bir kademede fazla sayıyordu, bu
+yüzden kova YÜKSEK satırlardan çıkarılıp düşük satır indeks kademesine göre
+ikiye bölündü (3 ve 2).

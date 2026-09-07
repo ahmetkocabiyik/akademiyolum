@@ -63,11 +63,25 @@ return [
         '1Cç' => ['baslik' => 'WoS Q4 dergide vaka, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['vaka_teknik_not'], 'puan' => 8],
 
         // ── 1E-1G · çeyrekliksiz indeks kümeleri ──
-        '1Ea' => ['baslik' => 'WoS All Databases / SCOPUS dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 22],
+        // E, F ve G bölümlerinin de A-C'deki gibi tam merdiveni var (özgün
+        // makale/derleme · short communication · vaka-teknik not-editöre
+        // mektup); yalnız "a" satırı girilmiş ve tür kısıtı olmadığı için
+        // editöre mektup kaydeden aday SCOPUS'ta 6 yerine 22 puan alıyordu
+        // (§0 ihlali).
+        '1Ea' => ['baslik' => 'WoS All Databases / SCOPUS dergide özgün araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 22],
+        '1Eb' => ['baslik' => 'WoS All Databases / SCOPUS dergide short/brief communication', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['kisa_makale'], 'puan' => 9],
+        '1Ec' => ['baslik' => 'WoS All Databases / SCOPUS dergide vaka, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['vaka_teknik_not'], 'puan' => 6],
         '1Eç' => ['baslik' => 'SCOPUS dergide kongre bildirisi tam metni/özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 5],
-        '1Fa' => ['baslik' => 'Diğer uluslararası indeksli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 20],
-        '1Ga' => ['baslik' => 'TR-Dizin dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 15],
-        '1Gb' => ['baslik' => 'TR-Dizin dergide short/brief communication', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 5],
+        '1Fa' => ['baslik' => 'Diğer uluslararası indeksli dergide özgün araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
+        '1Fb' => ['baslik' => 'Diğer uluslararası indeksli dergide short/brief communication', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['kisa_makale'], 'puan' => 8],
+        '1Fc' => ['baslik' => 'Diğer uluslararası indeksli dergide vaka, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['vaka_teknik_not'], 'puan' => 4],
+        '1Ga' => ['baslik' => 'TR-Dizin dergide özgün araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
+        // 1Gb'nin başlığı TR-Dizin diyordu ama etiketi `Diğer Ulusal Hakemli`
+        // taşıyordu (yerleştirme hatası). Kaynakta TR-Dizin dışı ulusal
+        // hakemli dergi için satır YOK; etiket bu cetvelde karşılıksız kalıyor
+        // ve doğrusu budur.
+        '1Gb' => ['baslik' => 'TR-Dizin dergide short/brief communication', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['kisa_makale'], 'puan' => 5],
+        '1Gc' => ['baslik' => 'TR-Dizin dergide vaka, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['vaka_teknik_not'], 'puan' => 4],
 
         // ── 2A · Uluslararası yayınevi kitapları ──
         '2Aa' => ['baslik' => 'Yabancı dilde kitap/monografi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],

@@ -356,17 +356,33 @@ $cetveller = [
         [
             // Sağlık tablosu derlemeyi özgün makaleden ayırıp daha düşük
             // puanlıyor (1e, 1f, 2c, 2ç); diğer tablolarda böyle bir ayrım yok.
+            //
+            // OLGU SUNUMU İLE EDİTÖRE MEKTUP AYNI TÜR KOVASINDA. Sözlüğün
+            // `vaka_teknik_not` türü "vaka sunumu, teknik not, editöre mektup"
+            // demek; kaynak ise ikisini AYIRIP ÇAPRAZLIYOR: SSCI/SCIE/AHCI'de
+            // olgu sunumu 5 · editöre mektup 3, ESCI/Scopus ve alan indeksinde
+            // olgu sunumu 2 · editöre mektup 3. Hangi satıra bağlansa bir
+            // yönde fazla sayardı (§0), bu yüzden `vaka_teknik_not` 1e/1f'ten
+            // ÇIKARILDI ve 1d indeks kademesine göre ikiye bölündü:
+            // indeksli dergilerde 3, ESCI/Scopus ve alan indeksinde 2.
+            '1d' => ['baslik' => 'SCIE, SSCI veya AHCI kapsamındaki dergide editöre mektup, araştırma notu, özet, kitap kritiği ya da olgu sunumu', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'puan' => 3],
             '1a' => ['turler' => ['ozgun_makale']],
             '1b' => ['turler' => ['ozgun_makale']],
             '1c' => ['turler' => ['ozgun_makale']],
             '1ç' => ['turler' => ['ozgun_makale']],
             '2a' => ['turler' => ['ozgun_makale']],
             '2b' => ['puan' => 4, 'turler' => ['ozgun_makale']],
-            '2c' => ['baslik' => 'TR Dizin kapsamındaki dergide olgu sunumu veya derleme', 'kaynaklar' => ['TR Dizin'], 'turler' => ['derleme', 'vaka_teknik_not'], 'puan' => 3],
+            // TR Dizin'de editöre mektup/özet/kitap kritiği satırı YOK (2d
+            // yalnız "diğer ulusal hakemli" diyor); `vaka_teknik_not` bu
+            // satırda kalsaydı karşılıksız bir puan verirdi.
+            '2c' => ['baslik' => 'TR Dizin kapsamındaki dergide olgu sunumu veya derleme', 'kaynaklar' => ['TR Dizin'], 'turler' => ['derleme'], 'puan' => 3],
         ] + $tubitakBilim,
         [
-            '1e' => ['baslik' => 'SCIE, SSCI veya AHCI kapsamındaki dergide olgu sunumu veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['derleme', 'vaka_teknik_not'], 'puan' => 5],
+            '1e' => ['baslik' => 'SCIE, SSCI veya AHCI kapsamındaki dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['derleme'], 'puan' => 5],
             '1f' => ['baslik' => 'ESCI, Scopus veya alan indeksli dergide olgu sunumu veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['derleme', 'vaka_teknik_not'], 'puan' => 2],
+            // 1d'nin ESCI/Scopus ve alan indeksi kolu: olgu sunumu 2, editöre
+            // mektup 3 → §0 uyarınca 2.
+            '1d2' => ['baslik' => 'ESCI, Scopus veya alan indeksli dergide editöre mektup, araştırma notu, özet ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 2],
             '2ç' => ['baslik' => 'Diğer ulusal hakemli dergide olgu sunumu veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['derleme', 'vaka_teknik_not'], 'puan' => 2],
             'e' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 5],
             'c' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],

@@ -15,43 +15,100 @@ return [
             'baslik' => 'Q1 kategorisinde özgün makale',
             'kategori' => 'makale',
             'kaynaklar' => ['SCIE/SSCI (Q1)'],
+            'turler' => ['ozgun_makale', 'derleme', 'kisa_makale'],
             'puan' => 160,
         ],
         '1.1b' => [
             'baslik' => 'Q2 kategorisinde özgün makale',
             'kategori' => 'makale',
             'kaynaklar' => ['SCIE/SSCI (Q2)', 'AHCI'],
+            'turler' => ['ozgun_makale', 'derleme', 'kisa_makale'],
             'puan' => 140,
         ],
         '1.1c' => [
             'baslik' => 'Q3 kategorisinde özgün makale',
             'kategori' => 'makale',
             'kaynaklar' => ['SCIE/SSCI (Q3)'],
+            'turler' => ['ozgun_makale', 'derleme', 'kisa_makale'],
             'puan' => 120,
         ],
         '1.1d' => [
             'baslik' => 'Q4 kategorisinde özgün makale',
             'kategori' => 'makale',
             'kaynaklar' => ['SCIE/SSCI (Q4)'],
+            'turler' => ['ozgun_makale', 'derleme', 'kisa_makale'],
             'puan' => 100,
         ],
         '1.2' => [
             'baslik' => 'ESCI veya SCOPUS dergide makale',
             'kategori' => 'makale',
             'kaynaklar' => ['ESCI / Scopus'],
+            'turler' => ['ozgun_makale', 'derleme', 'kisa_makale'],
             'puan' => 80,
         ],
         '1.3' => [
             'baslik' => 'TR Dizin dergide makale',
             'kategori' => 'makale',
             'kaynaklar' => ['TR Dizin'],
+            'turler' => ['ozgun_makale', 'derleme', 'kisa_makale'],
             'puan' => 80,
         ],
         '1.4' => [
             'baslik' => 'Diğer hakemli dergide makale',
             'kategori' => 'makale',
             'kaynaklar' => ['Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'],
+            'turler' => ['ozgun_makale', 'derleme', 'kisa_makale'],
             'puan' => 40,
+        ],
+        // 1.6: "1.1., 1.2., 1.3., 1.4., 1.5. maddelerinde belirtilen dergilerde
+        // yayımlanan, editöre mektup, özet veya kitap kritiği türünden yayınlar,
+        // adı geçen maddelerde belirtilen puanların YARISI (%50)". Yüksek
+        // satırlar tür kısıtsız olduğu için editöre mektup kaydeden aday Q1'de
+        // 80 yerine 160 puan alıyordu (§0 ihlali). Sözlükte "özet" ve "kitap
+        // kritiği" ayrı tür değil; en yakın kova `vaka_teknik_not`.
+        // `derleme` ve `kisa_makale` 1.6'nın listesinde YOK, yüksek satırlarda
+        // kalıyor.
+        '1.6a' => [
+            'baslik' => 'Q1 kategorisinde editöre mektup, özet ya da kitap kritiği',
+            'kategori' => 'makale',
+            'kaynaklar' => ['SCIE/SSCI (Q1)'],
+            'turler' => ['vaka_teknik_not'],
+            'puan' => 80,
+        ],
+        '1.6b' => [
+            'baslik' => 'Q2 kategorisinde editöre mektup, özet ya da kitap kritiği',
+            'kategori' => 'makale',
+            'kaynaklar' => ['SCIE/SSCI (Q2)', 'AHCI'],
+            'turler' => ['vaka_teknik_not'],
+            'puan' => 70,
+        ],
+        '1.6c' => [
+            'baslik' => 'Q3 kategorisinde editöre mektup, özet ya da kitap kritiği',
+            'kategori' => 'makale',
+            'kaynaklar' => ['SCIE/SSCI (Q3)'],
+            'turler' => ['vaka_teknik_not'],
+            'puan' => 60,
+        ],
+        '1.6d' => [
+            'baslik' => 'Q4 kategorisinde editöre mektup, özet ya da kitap kritiği',
+            'kategori' => 'makale',
+            'kaynaklar' => ['SCIE/SSCI (Q4)'],
+            'turler' => ['vaka_teknik_not'],
+            'puan' => 50,
+        ],
+        '1.6e' => [
+            'baslik' => 'ESCI, SCOPUS ya da TR Dizin dergide editöre mektup, özet ya da kitap kritiği',
+            'kategori' => 'makale',
+            'kaynaklar' => ['ESCI / Scopus', 'TR Dizin'],
+            'turler' => ['vaka_teknik_not'],
+            'puan' => 40,
+        ],
+        '1.6f' => [
+            'baslik' => 'Diğer hakemli dergide editöre mektup, özet ya da kitap kritiği',
+            'kategori' => 'makale',
+            'kaynaklar' => ['Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'],
+            'turler' => ['vaka_teknik_not'],
+            'puan' => 20,
         ],
         '2.1' => [
             'baslik' => 'Uluslararası toplantıda tam metin bildiri',

@@ -210,12 +210,18 @@ return [
         'M-Q3Q4' => ['baslik' => 'WoS Core Collection Q3 veya Q4 dergide özgün veya derleme makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
         'M-Q1-KISA' => ['baslik' => 'WoS Core Collection Q1 dergide editöre mektup, teknik not veya vaka incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 5],
         'M-Q2-KISA' => ['baslik' => 'WoS Core Collection Q2 dergide editöre mektup, teknik not veya vaka incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 3],
-        'M-Q3Q4-KISA' => ['baslik' => 'WoS Core Collection Q3 veya Q4 dergide editöre mektup, teknik not veya vaka incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 2],
-        'M-MIMARLIK-INDEKS' => ['baslik' => 'Architectural Publications Index, Art Index, Avery Index veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
-        'M-DIGERINDEKS' => ['baslik' => 'ISI indeksi dışındaki uluslararası indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 10],
+        'M-Q3Q4-KISA' => ['baslik' => 'WoS Core Collection Q3 veya Q4 dergide editöre mektup, teknik not veya vaka incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'ESCI / Scopus'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 2],
+        // Editöre mektup/teknik not/vaka incelemesi satırları YALNIZ Web of Science
+        // Core Collection kademelerinde var (Q1 5 · Q2 3 · Q3-Q4 2); indeks
+        // satırları ise "yayımlanmış makale(ler)" diyor. Tür kısıtı olmadığı için
+        // editöre mektup mimarlık indekslerinde 15 puan alıyordu (§0 ihlali).
+        // ESCI de Core Collection listesinde geçtiği için en düşük "kısa" satıra
+        // eklendi; çeyrekliği etiketten okunamadığı için §0 uyarınca Q3-Q4 kolu.
+        'M-MIMARLIK-INDEKS' => ['baslik' => 'Architectural Publications Index, Art Index, Avery Index veya Scopus kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
+        'M-DIGERINDEKS' => ['baslik' => 'ISI indeksi dışındaki uluslararası indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
         // Kaynağın makale bloğunun son satırı; bir tur girilmemişti ve
         // 'TR Dizin' etiketi hiçbir satıra düşmediği için SIFIR alıyordu.
-        'M-TRDIZIN' => ['baslik' => "TR Dizin'de taranan ulusal hakemli dergide makale", 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 6],
+        'M-TRDIZIN' => ['baslik' => "TR Dizin'de taranan ulusal hakemli dergide makale", 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 6],
 
         // ══ BİLDİRİ ══
         'B-ULUSTAM' => ['baslik' => 'Uluslararası hakemli kongre/çalıştay bildirisi (basılı tam metin)', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 4],

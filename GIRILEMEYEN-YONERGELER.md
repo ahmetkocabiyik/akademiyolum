@@ -976,3 +976,26 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
   notunda anlatıldı.
 - **Sözlü sınav ve WoS H-indeksi muafiyeti** (profesörde 25, doçentte 20)
   beyana bağlı.
+
+## Makale türü taraması (07.09.2026) — girilemeyen kalemler
+
+- **"Özet" ve "kitap kritiği" ayrı tür değil.** Sözlükteki `vaka_teknik_not`
+  "vaka sunumu, teknik not, editöre mektup" diyor; kaynakların çoğu bunlara
+  özeti, kitap kritiğini, tartışma yazısını ve araştırma notunu da ekliyor.
+  Aynı kovaya bağlandılar. Kaynak bunları birbirinden AYIRIP farklı
+  puanlıyorsa (Yalova sağlık: olgu sunumu 5, editöre mektup 3) her kademede
+  düşük değer yazılıyor.
+- **Amasya A.10/A.11** ("A.1'deki dergilerde özet" 10, "A.3'teki dergilerde
+  özet" 5) girilemedi: "özet" `vaka_teknik_not` kovasında ve o kova zaten
+  A.9'un 20 puanlık satırına bağlı; ayrı satır açmak fazla saydırırdı.
+- **Gümüşhane A4/A7 çelişkisi**: A4 "diğer uluslararası hakemli dergilerde
+  araştırma makalesi veya derleme 5" derken A7 aynı dergilerdeki derlemeye
+  2 diyor. Kaynağın kendi çelişkisi; A4/A5 daha açık olduğu için derleme
+  yüksek satırlarda bırakıldı.
+- **Ankara Üniversitesi'nde TR-Dizin dışı ulusal hakemli dergi satırı YOK**;
+  `Diğer Ulusal Hakemli` etiketi o cetvelde karşılıksız kaldı (önce 1Gb'ye
+  yanlış yerleştirilmişti). Aynı durum Ege'de de var.
+- **Kongre bildirisinin "tam metin / özet" ayrımı** (KTÜ 1.g-ı, Gazi 5,
+  Ankara Ç, Trakya) `Kategori::Bildiri` altında ve o kategorinin yayın türü
+  sözlüğü yok; yalnız etiket kademesiyle (tam metin ↔ özet/poster)
+  ayrılabiliyor.

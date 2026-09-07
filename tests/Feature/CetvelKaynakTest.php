@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Kategori;
+use App\Models\Faaliyet;
 use App\Services\Scoring\Sart\SartDeposu;
 
 /**
@@ -763,7 +764,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
     expect($disarida)->toBe([
         // "1. maddeden" barajları; 4-7. bölümler (ödül, idari görev, hizmet)
         // hiçbir koşulun kümesinde değil.
-        'ankara-2023: 21/68',
+        'ankara-2023: 21/73',
 
         // Yalnız EG5 (yarıyıl başına 1 puanlık ders) dışarıda; `PUAN` grubu
         // ders satırlarını kapsamıyor.
@@ -1096,3 +1097,185 @@ test('kurul komisyon etiketi kendi satırında', function (string $cetvel, int $
     // yardımcılığı, 10) idi; on bir varyantın hepsinde düzeltildi.
     ['selcuk-2024-egitim', 5],
 ]);
+
+/**
+ * MAKALE TÜRÜ EKSENİ (`turler`): yönergeler aynı dergideki iki çalışmayı
+ * TÜRÜNE göre farklı puanlıyor — özgün araştırma makalesi, derleme, kısa
+ * makale (short/brief communication), vaka takdimi-teknik not-editöre mektup.
+ * `kaynak` yalnızca DERGİYİ taşıdığı için bu ayrım oradan okunamıyor;
+ * cetvel maddeleri `turler` ile sınırlanıyor.
+ *
+ * İKİ SESSİZ HATA BİÇİMİ VAR ve ikisi de bu testle donduruldu:
+ *
+ *   1. Düşük satır hiç girilmemiş → editöre mektup, özgün makale puanını alır.
+ *   2. Düşük satır girilmiş ama YÜKSEK satırda tür kısıtı yok → `puan()` en
+ *      yükseği aldığı için düşük satır hiç kazanamaz, yani ölü doğar.
+ *      (İstanbul Kültür'de tam olarak bu vardı.)
+ *
+ * Aşağıdaki değerler 07.09.2026'da kaynak PDF'lerinden tek tek okundu.
+ */
+test('makale türü kademeleri korpusta ayrışıyor', function (string $cetvel, string $etiket, array $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $kodlar = $katalog->coz(['*']);
+    $gercek = [];
+    foreach (['ozgun_makale', 'derleme', 'kisa_makale', 'vaka_teknik_not'] as $tur) {
+        $gercek[$tur] = $katalog->puan(
+            new Faaliyet([
+                'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+                'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi', 'yayin_turu' => $tur,
+            ]),
+            $kodlar,
+        );
+    }
+
+    expect($gercek)->toBe($beklenen);
+})->with([
+    // KTÜ: "tam makale / diğer makale" — dipnot "diğer makale"yi derleme,
+    // kısa makale, vaka takdimi ve editöre mektup diye tanımlıyor.
+    ['ktu-2023-fen-profesor', 'SCIE/SSCI (Q1)',
+        ['ozgun_makale' => 45, 'derleme' => 35, 'kisa_makale' => 35, 'vaka_teknik_not' => 35]],
+    ['ktu-2023-fen-profesor', 'TR Dizin',
+        ['ozgun_makale' => 15, 'derleme' => 5, 'kisa_makale' => 5, 'vaka_teknik_not' => 5]],
+
+    // Atatürk: her indeks kademesinde ayrı "kısa makale (editöre mektup,
+    // teknik not, vaka takdimi, tartışma, kitap incelemesi)" satırı var;
+    // beşi de (02.01.05/07/09, 02.02.02/04) hiç girilmemişti.
+    ['ataturk-2026', 'SCIE/SSCI (Q1)',
+        ['ozgun_makale' => 30, 'derleme' => 30, 'kisa_makale' => 8, 'vaka_teknik_not' => 8]],
+    ['ataturk-2026', 'Diğer Ulusal Hakemli',
+        ['ozgun_makale' => 4, 'derleme' => 4, 'kisa_makale' => 2, 'vaka_teknik_not' => 2]],
+
+    // Afyon Kocatepe 1.6: editöre mektup, özet ve kitap kritiği ilgili
+    // satırın YARISINI alıyor; derleme ve kısa makale listede yok.
+    ['afyon-2026', 'SCIE/SSCI (Q1)',
+        ['ozgun_makale' => 160, 'derleme' => 160, 'kisa_makale' => 160, 'vaka_teknik_not' => 80]],
+
+    // Gümüşhane A6/A7 hiç girilmemişti.
+    ['gumushane-2026', 'SCIE/SSCI (Q1)',
+        ['ozgun_makale' => 35, 'derleme' => 35, 'kisa_makale' => 35, 'vaka_teknik_not' => 3]],
+    ['gumushane-2026', 'Diğer Ulusal Hakemli',
+        ['ozgun_makale' => 4, 'derleme' => 4, 'kisa_makale' => 4, 'vaka_teknik_not' => 2]],
+
+    // Gazi 6-9: bölümlerin c ve d bentleri girilmemişti.
+    ['gazi-2024', 'ESCI / Scopus',
+        ['ozgun_makale' => 20, 'derleme' => 20, 'kisa_makale' => 15, 'vaka_teknik_not' => 5]],
+
+    // Ankara E/F/G: b ve c bentleri girilmemişti; 1Gb'nin etiketi de
+    // başlığıyla çelişiyordu (TR-Dizin diyor, `Diğer Ulusal Hakemli` taşıyordu).
+    ['ankara-2023', 'TR Dizin',
+        ['ozgun_makale' => 15, 'derleme' => 15, 'kisa_makale' => 5, 'vaka_teknik_not' => 4]],
+
+    // Ege d/e/f ve g1/g2/g3 AYNI dergi kademesinin üç türü; önce iki ayrı
+    // etikete dağıtılmıştı.
+    ['ege-2026', 'ESCI / Scopus',
+        ['ozgun_makale' => 20, 'derleme' => 10, 'kisa_makale' => 5, 'vaka_teknik_not' => 5]],
+    ['ege-2026', 'TR Dizin',
+        ['ozgun_makale' => 10, 'derleme' => 6, 'kisa_makale' => 3, 'vaka_teknik_not' => 3]],
+
+    // Amasya: A.9 (editöre mektup 20) girilmemiş, A.2 ise "Letters (EDİTÖRE
+    // MEKTUP HARİÇ)" dediği hâlde editöre mektubu taşıyordu; A.14/A.15
+    // ulusal kademede hiç yoktu (7,5 → 7).
+    ['amasya-2024', 'SCIE/SSCI (Q1)',
+        ['ozgun_makale' => 80, 'derleme' => 25, 'kisa_makale' => 40, 'vaka_teknik_not' => 20]],
+    ['amasya-2024', 'TR Dizin',
+        ['ozgun_makale' => 40, 'derleme' => 25, 'kisa_makale' => 40, 'vaka_teknik_not' => 7]],
+
+    // İstanbul Kültür: düşük satırlar (1.d, 2.c) DOĞRU girilmişti ama yüksek
+    // satırlarda tür kısıtı yoktu, yani hiç kazanamıyorlardı.
+    ['istanbul-kultur-2024', 'SCIE/SSCI (Q1)',
+        ['ozgun_makale' => 30, 'derleme' => 30, 'kisa_makale' => 3, 'vaka_teknik_not' => 3]],
+
+    // Selçuk: düşük satır kaynakta "a VE B bendi" diyor, yani ESCI/Scopus da
+    // kapsıyordu; on iki varyantta da yalnız SCI etiketlerini taşıyordu.
+    ['selcuk-2024-muhendislik', 'ESCI / Scopus',
+        ['ozgun_makale' => 15, 'derleme' => 5, 'kisa_makale' => 5, 'vaka_teknik_not' => 5]],
+    // Eğitim tablosunun düşük satırı "a, b VEYA C" diyor.
+    ['selcuk-2024-egitim', 'Diğer Uluslararası İndeks',
+        ['ozgun_makale' => 10, 'derleme' => 5, 'kisa_makale' => 5, 'vaka_teknik_not' => 5]],
+
+    // Yalova sağlık: olgu sunumu (5/2) ile editöre mektup (3) kaynakta
+    // ÇAPRAZLANIYOR ama sözlükte tek kovada; §0 uyarınca her kademede
+    // düşüğü geçerli.
+    ['yalova-2024-saglik', 'SCIE/SSCI (Q1)',
+        ['ozgun_makale' => 20, 'derleme' => 5, 'kisa_makale' => 3, 'vaka_teknik_not' => 3]],
+    ['yalova-2024-saglik', 'ESCI / Scopus',
+        ['ozgun_makale' => 10, 'derleme' => 2, 'kisa_makale' => 2, 'vaka_teknik_not' => 2]],
+
+    // Çankırı 1.8 kaynakta açıkça "(özgün araştırma makalesi ve derleme)".
+    ['cankiri-2025', 'Diğer Ulusal Hakemli',
+        ['ozgun_makale' => 20, 'derleme' => 20, 'kisa_makale' => 0, 'vaka_teknik_not' => 0]],
+
+    // Abdullah Gül: editöre mektup satırları yalnız WoS Core Collection'da.
+    ['abdullah-gul-2026', 'ESCI / Scopus',
+        ['ozgun_makale' => 15, 'derleme' => 15, 'kisa_makale' => 2, 'vaka_teknik_not' => 2]],
+]);
+
+/**
+ * "DÜŞÜK SATIR YÜKSEK SATIRIN GÖLGESİNDE" TARAMASI — kaynağa hiç bakmayan,
+ * tamamen cetvel içi bir tutarlılık kontrolü: bir madde yalnız özgün-dışı
+ * türlere (derleme, kısa makale, vaka/teknik not) açıksa, motor o tür için
+ * o satırın puanından FAZLASINI vermemeli. Veriyorsa aynı etikete daha
+ * yüksek puanlı ve tür kısıtsız bir satır düşüyor demektir ve düşük satır
+ * ölü doğmuş olur.
+ *
+ * Ucuz ve kesin: 07.09.2026'da korpusa uygulandığında İstanbul Kültür'ün
+ * (1.d/2.c) ve Yalova sağlığın (1d/1e) gerçek hatalarını buldu.
+ */
+test('özgün-dışı tür satırları yüksek satırın gölgesinde kalmıyor', function () {
+    $depo = sartDepo();
+    $cetveller = [];
+    foreach ($depo->esikler() as $esik) {
+        $cetveller[$esik['cetvel']] = true;
+    }
+
+    $golgede = [];
+    foreach (array_keys($cetveller) as $ad) {
+        $katalog = $depo->katalog($ad);
+        if ($katalog === null) {
+            continue;
+        }
+
+        $kodlar = $katalog->coz(['*']);
+        $maddeler = (fn () => $this->maddeler)->call($katalog);
+
+        foreach ($maddeler as $kod => $madde) {
+            $turler = $madde['turler'] ?? null;
+            if (($madde['kategori'] ?? '') !== 'makale' || $turler === null || in_array('ozgun_makale', $turler, true)) {
+                continue;
+            }
+
+            foreach ($madde['kaynaklar'] ?? [] as $etiket) {
+                foreach ($turler as $tur) {
+                    $gercek = $katalog->puan(
+                        new Faaliyet([
+                            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+                            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi', 'yayin_turu' => $tur,
+                        ]),
+                        $kodlar,
+                    );
+
+                    if ($gercek > ($madde['puan'] ?? 0)) {
+                        $golgede[preg_replace('/-(?:19|20)\d{2}.*$/', '', $ad).": {$kod}"] = true;
+                    }
+                }
+            }
+        }
+    }
+
+    // Isparta UBÜ tek istisna ve BİLİNÇLİ: Tablo 3'ün A4 satırı ("alanınızla
+    // ilgili makale yayımlamak", 5) Tablo 1'in bütün makale satırlarıyla
+    // kasten örtüşüyor — Güzel Sanatlar adayı A4'ten, Fen adayı Tablo 1'den
+    // puanlanıyor. Motor her BARAJ GRUBUNUN içindeki en iyi kodu seçtiği
+    // için gerçek eşiklerde gölgeleme oluşmuyor; bu tarama ise bütün
+    // kodlara birden baktığı için işaret veriyor.
+    $bulunan = array_keys($golgede);
+    sort($bulunan);
+
+    expect($bulunan)->toBe([
+        'isparta-ubu: T1-C2',
+        'isparta-ubu: T1-C3',
+        'isparta-ubu: T1-D4',
+    ]);
+});

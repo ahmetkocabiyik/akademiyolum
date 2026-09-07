@@ -6295,8 +6295,10 @@ test('Piri Reis tavanları kadroya ve alana göre', function () {
  * sessizce yanlış puan verir: Edebiyat/İİBF adayının kitap tavanı 120 iken
  * Mühendislik adayınınki 60, Mimarlık'ınki 80.
  *
- * "Tam makale / diğer makale" ayrımı sözlükte olmadığı için makale satırları
- * §0 uyarınca DÜŞÜK değerde (Q1 45/35 → 35).
+ * "Tam makale / diğer makale" ayrımı `turler` ekseninde: her dergi kademesi
+ * iki satır. Kaynağın dipnotu "diğer makale"yi derleme, kısa makale, vaka
+ * takdimi ve editöre mektup diye tanımlıyor, yani `ozgun_makale` dışındaki
+ * üç türün tamamı.
  */
 test('KTÜ puan tablosu ve fakülte tavan aileleri', function () {
     $depo = sartDepo();
@@ -6311,11 +6313,11 @@ test('KTÜ puan tablosu ve fakülte tavan aileleri', function () {
     );
 
     // Puan tablosu üç ailede de aynı.
-    expect($puan($fen, 'SCIE/SSCI (Q1)', Kategori::Makale))->toBe(35)
-        ->and($puan($fen, 'SCIE/SSCI (Q4)', Kategori::Makale))->toBe(20)
-        ->and($puan($fen, 'ESCI / Scopus', Kategori::Makale))->toBe(15)
-        ->and($puan($fen, 'TR Dizin', Kategori::Makale))->toBe(5)
-        ->and($puan($sosyal, 'SCIE/SSCI (Q1)', Kategori::Makale))->toBe(35)
+    expect($puan($fen, 'SCIE/SSCI (Q1)', Kategori::Makale))->toBe(45)
+        ->and($puan($fen, 'SCIE/SSCI (Q4)', Kategori::Makale))->toBe(25)
+        ->and($puan($fen, 'ESCI / Scopus', Kategori::Makale))->toBe(20)
+        ->and($puan($fen, 'TR Dizin', Kategori::Makale))->toBe(15)
+        ->and($puan($sosyal, 'SCIE/SSCI (Q1)', Kategori::Makale))->toBe(45)
         ->and($puan($mimarlik, 'BKCI / Scopus Kitap', Kategori::Kitap))->toBe(60)
         ->and($puan($fen, 'Uluslararası Tam Metin', Kategori::Bildiri))->toBe(12)
         ->and($puan($fen, 'Davetli Konuşmacı', Kategori::Bildiri))->toBe(8)

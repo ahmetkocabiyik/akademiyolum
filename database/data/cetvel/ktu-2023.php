@@ -26,10 +26,12 @@
  * EK-14 (enstitü, yüksekokul, MYO) kendi sayısını vermiyor: "adayın
  * bulunduğu bilim alanı ile ilgili fakülte koşulları geçerlidir".
  *
- * "TAM MAKALE / DİĞER MAKALE" AYRIMI SÖZLÜKTE YOK. Kaynak her dergi
- * kademesini ikiye ayırıyor (Q1 45/35, Q2 35/30 …); "diğer makale" derleme,
- * teknik not, vaka takdimi, editöre mektup gibi kalemleri kapsıyor. Etiket
- * bu ayrımı taşımadığı için §0 uyarınca DÜŞÜK değer yazıldı.
+ * "TAM MAKALE / DİĞER MAKALE" AYRIMI `turler` EKSENİNDE. Kaynak her dergi
+ * kademesini ikiye ayırıyor (Q1 45/35, Q2 35/30 …) ve dipnotu "diğer
+ * makale"yi derleme, teknik not, kısa makale, vaka takdimi, editöre mektup,
+ * özet, kitap kritiği ve araştırma notu diye tanımlıyor — yani sözlüğün
+ * `ozgun_makale` dışındaki üç türünün tamamı. Bu yüzden her kademe İKİ
+ * satır: tam makale `ozgun_makale`, diğer makale öteki üç tür.
  *
  * KESİRLİ PUANLAR AŞAĞI YUVARLANDI (§0): atıf 2,5 → 2 · 1,5 → 1;
  * hakemlik 1,5 → 1; kurul üyeliği 1,5 → 1.
@@ -72,14 +74,30 @@ $yazarKatsayisi = [
     ],
 ];
 
+$TAM = ['ozgun_makale'];
+$DIGER = ['derleme', 'kisa_makale', 'vaka_teknik_not'];
+
 $maddeler = [
     // ══ 1. MAKALE ══
-    '1.a' => ['baslik' => 'Q1 dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 35],
-    '1.b' => ['baslik' => 'Q2 dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'puan' => 30],
-    '1.c' => ['baslik' => 'Q3 dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'puan' => 25],
-    '1.ç' => ['baslik' => 'Q4 ya da AHCI kapsamındaki dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'puan' => 20],
-    '1.e' => ['baslik' => 'ESCI ya da Scopus indeksindeki dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
-    '1.f' => ['baslik' => 'Diğer hakemli uluslararası ya da TR Dizin kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'puan' => 5],
+    // Kaynak her dergi kademesini TAM MAKALE / DİĞER MAKALE diye ikiye
+    // bölüyor ve dipnotta tanımlıyor: "Tam makale: verilerin ayrıntılı
+    // verildiği ve tartışıldığı 'diğer makale' kapsamı dışındaki araştırma
+    // makalesi; Diğer makale: teknik not, kısa (brief communication), yorum,
+    // vaka takdimi, vaka serisi, editöre mektup, özet, kitap kritiği,
+    // araştırma notu, DERLEME makale." Yani "diğer makale" sözlüğün
+    // `ozgun_makale` DIŞINDAKİ üç türünün tamamını kapsıyor.
+    '1.a' => ['baslik' => 'Q1 dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $TAM, 'puan' => 45],
+    '1.b' => ['baslik' => 'Q2 dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $TAM, 'puan' => 35],
+    '1.c' => ['baslik' => 'Q3 dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $TAM, 'puan' => 30],
+    '1.ç' => ['baslik' => 'Q4 ya da AHCI kapsamındaki dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => $TAM, 'puan' => 25],
+    '1.e' => ['baslik' => 'ESCI ya da Scopus indeksindeki dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $TAM, 'puan' => 20],
+    '1.f' => ['baslik' => 'Diğer hakemli uluslararası ya da TR Dizin kapsamındaki dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 15],
+    '1.a-d' => ['baslik' => 'Q1 dergide yayımlanmış derleme, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $DIGER, 'puan' => 35],
+    '1.b-d' => ['baslik' => 'Q2 dergide yayımlanmış derleme, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $DIGER, 'puan' => 30],
+    '1.c-d' => ['baslik' => 'Q3 dergide yayımlanmış derleme, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $DIGER, 'puan' => 25],
+    '1.ç-d' => ['baslik' => 'Q4 ya da AHCI kapsamındaki dergide yayımlanmış derleme, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => $DIGER, 'puan' => 20],
+    '1.e-d' => ['baslik' => 'ESCI ya da Scopus indeksindeki dergide yayımlanmış derleme, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $DIGER, 'puan' => 15],
+    '1.f-d' => ['baslik' => 'Diğer hakemli uluslararası ya da TR Dizin kapsamındaki dergide derleme, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'turler' => $DIGER, 'puan' => 5],
     '1.g' => ['baslik' => 'Dizinli dergide yayımlanmış kongre bildirisi', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 3],
 
     // ══ 2. KİTAP ══
@@ -155,9 +173,9 @@ $maddeler = [
 $gruplar = [
     'MAKALE' => ['1.*'],
     // EK'lerin "en az … (1a-1ç) maddesinden" koşulunun kümesi: Q1-Q4 ve AHCI.
-    '1a-1ç' => ['1.a', '1.b', '1.c', '1.ç'],
+    '1a-1ç' => ['1.a', '1.b', '1.c', '1.ç', '1.a-d', '1.b-d', '1.c-d', '1.ç-d'],
     // Edebiyat, İİBF ve Sağlık Bilimleri'nin kullandığı geniş küme: + ESCI/Scopus.
-    '1a-1e' => ['1.a', '1.b', '1.c', '1.ç', '1.e'],
+    '1a-1e' => ['1.a', '1.b', '1.c', '1.ç', '1.e', '1.a-d', '1.b-d', '1.c-d', '1.ç-d', '1.e-d'],
     'KITAP' => ['2.*'],
     'ATIF' => ['3.*'],
     'TEZ' => ['4.*'],

@@ -54,10 +54,23 @@ return [
         '1c-Q2' => ['baslik' => 'SCIE/SSCI/AHCI Q2 dergide editöre mektup, olgu sunumu, teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 20],
         '1c-Q3' => ['baslik' => 'SCIE/SSCI/AHCI Q3 dergide editöre mektup, olgu sunumu, teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 15],
         '1c-Q4' => ['baslik' => 'SCIE/SSCI/AHCI Q4 dergide editöre mektup, olgu sunumu, teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
-        '1d' => ['baslik' => 'Diğer uluslararası alan indeksli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 20],
-        '1e' => ['baslik' => 'Diğer uluslararası alan indeksli dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 10],
-        '1g1' => ['baslik' => 'ULAKBİM taranan ulusal dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
-        '1g3' => ['baslik' => 'Ulusal dergide editöre mektup, olgu sunumu, teknik not', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 3],
+        // d/e/f AYNI DERGİ KADEMESİNİN üç yayın türü ("SCI-Expanded, SSCI
+        // veya AHCI dışında, diğer uluslararası alan indekslerince taranan
+        // dergiler": özgün makale 20 · derleme 10 · editöre mektup-olgu
+        // sunumu-teknik not-kısa makale 5). Önce d ile e İKİ AYRI ETİKETE
+        // dağıtılmıştı (biri ESCI/Scopus, öteki Diğer Uluslararası İndeks);
+        // f hiç girilmemişti. Sonuç: derlemesi olan aday ESCI'de 20, editöre
+        // mektubu olan 20 puan alıyordu (§0 ihlali). g1/g2/g3 de aynı şekilde
+        // tek ULAKBİM kademesinin üç türü.
+        //
+        // Kaynakta TR-Dizin DIŞI ulusal hakemli dergi için satır yok; o etiket
+        // bu cetvelde karşılıksız kalıyor ve doğrusu budur.
+        '1d' => ['baslik' => 'Diğer uluslararası alan indeksli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale'], 'puan' => 20],
+        '1e' => ['baslik' => 'Diğer uluslararası alan indeksli dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['derleme'], 'puan' => 10],
+        '1f' => ['baslik' => 'Diğer uluslararası alan indeksli dergide editöre mektup, tartışma yazısı, olgu sunumu, teknik not, kısa makale, eleştiri ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 5],
+        '1g1' => ['baslik' => 'ULAKBİM taranan ulusal dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale'], 'puan' => 10],
+        '1g2' => ['baslik' => 'ULAKBİM taranan ulusal dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['derleme'], 'puan' => 6],
+        '1g3' => ['baslik' => 'ULAKBİM taranan ulusal dergide editöre mektup, tartışma yazısı, olgu sunumu, teknik not, kısa makale, eleştiri ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 3],
 
         // ── 2. BİLİMSEL TOPLANTI (BİLDİRİ) ──
         // "8/4" = tam metin / özet. Sözlükte ikisi ayrı etiket olduğu için

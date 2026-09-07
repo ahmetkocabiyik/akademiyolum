@@ -71,7 +71,10 @@ $maddeler = [
     '1.5' => ['baslik' => 'Diğer uluslararası indekslerde taranan dergide yayımlanmış teknik not, editöre mektup, tartışma, vaka takdimi, kitap tanıtımı veya özet', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $KISA, 'puan' => 15],
     '1.6' => ['baslik' => 'TR Dizin kapsamındaki dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $TAM, 'puan' => 60],
     '1.7' => ['baslik' => 'TR Dizin kapsamındaki dergide yayımlanmış teknik not, editöre mektup, tartışma, vaka takdimi, kitap tanıtımı veya özet', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $KISA, 'puan' => 15],
-    '1.8' => ['baslik' => 'Diğer bilimsel hakemli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 20],
+    // Kaynak 1.8'i açıkça "(özgün araştırma makalesi ve derleme)" diye
+    // tanımlıyor ve bu kademe için teknik not/editöre mektup satırı YOK;
+    // tür kısıtı olmadığı için editöre mektup 20 puan alıyordu (§0 ihlali).
+    '1.8' => ['baslik' => 'Diğer bilimsel hakemli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
 
     // ══ 2. BİLDİRİLER ══
     '2.1' => ['baslik' => 'Uluslararası bilimsel toplantıda sözlü sunulan ve tam metin olarak yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 40],

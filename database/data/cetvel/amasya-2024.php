@@ -74,12 +74,24 @@ return [
     'maddeler' => [
         // ── A. MAKALELER ──
         'A1' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 80],
-        'A2' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide kısa bildirim veya brief report', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 40],
+        'A2' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide kısa bildirim veya brief report', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['kisa_makale'], 'puan' => 40],
         'A3' => ['baslik' => 'Uluslararası alan indeksli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale'], 'puan' => 40],
         'A5' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['derleme'], 'puan' => 25],
         'A7' => ['baslik' => 'Uluslararası alan indeksli dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['derleme'], 'puan' => 15],
-        'A12' => ['baslik' => 'ULAKBİM TR Dizin ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 40],
-        'A13' => ['baslik' => 'Ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 25],
+        // A.9 önce girilmemişti ve A.2 hem kısa bildirimi hem editöre mektubu
+        // taşıyordu; oysa A.2 açıkça "Letters (EDİTÖRE MEKTUP HARİÇ)" diyor ve
+        // editöre mektup/teknik not/vaka incelemesi A.9'un 20 puanlık satırına
+        // ait. A.14 (derleme) ile A.15 (editöre mektup vb.) ulusal kademede de
+        // hiç girilmemişti; A.12/A.13 tür kısıtsız olduğu için TR Dizin'de
+        // derleme 25 yerine 40, editöre mektup 7 yerine 40 alıyordu (§0 ihlali).
+        'A9' => ['baslik' => 'Uluslararası dergide editöre mektup, teknik not, vaka incelemesi ya da tartışma', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['vaka_teknik_not'], 'puan' => 20],
+        'A12' => ['baslik' => 'ULAKBİM TR Dizin ulusal hakemli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'kisa_makale'], 'puan' => 40],
+        'A13' => ['baslik' => 'Ulusal hakemli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'kisa_makale'], 'puan' => 25],
+        'A14a' => ['baslik' => 'ULAKBİM TR Dizin ulusal hakemli dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['derleme'], 'puan' => 25],
+        'A14b' => ['baslik' => 'Ulusal hakemli dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['derleme'], 'puan' => 15],
+        // 7,5 → 7 (§0 aşağı yuvarlama).
+        'A15a' => ['baslik' => 'ULAKBİM TR Dizin ulusal hakemli dergide editöre mektup, teknik not, vaka incelemesi ya da tartışma', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['vaka_teknik_not'], 'puan' => 7],
+        'A15b' => ['baslik' => 'Ulusal hakemli dergide editöre mektup, teknik not, vaka incelemesi ya da tartışma', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not'], 'puan' => 5],
 
         // ── B. KİTAPLAR ──
         'B1' => ['baslik' => 'Uluslararası yayınevi tarafından yabancı dilde yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],

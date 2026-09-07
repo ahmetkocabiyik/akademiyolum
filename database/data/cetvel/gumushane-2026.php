@@ -21,18 +21,35 @@
  * 5 puan fazla sayılır. Kalıcı çözüm etiketi ikiye bölmek.
  * A6/A7 (teknik not, editöre mektup) karşılığı olan bir kaynak etiketi yok.
  */
+$YUKSEK = ['ozgun_makale', 'derleme', 'kisa_makale'];
 
 return [
     'maddeler' => [
         // A. MAKALE
-        'A1a' => ['baslik' => 'WOS Q1 dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 35],
-        'A1b' => ['baslik' => 'WOS Q2 veya SCOPUS Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)', 'AHCI'], 'puan' => 28],
-        'A1c' => ['baslik' => 'WOS Q3 veya SCOPUS Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'puan' => 22],
-        'A1d' => ['baslik' => 'WOS Q4 veya SCOPUS Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'puan' => 18],
-        'A2' => ['baslik' => 'ESCI/SPORTDiscus/SCOPUS Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
-        'A3' => ['baslik' => 'TR Dizin dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
-        'A4' => ['baslik' => 'Diğer uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 5],
-        'A5' => ['baslik' => 'TR Dizin dışı ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 4],
+        // A6 ve A7 önce girilmemişti: kaynak indeksli dergilerdeki teknik
+        // not/mektup/tartışma/vaka takdimi/özet yayınlarını 3 puana, diğer
+        // hakemli dergilerdekini 2 puana indiriyor. Yüksek satırlar tür
+        // kısıtsız olduğu için editöre mektup kaydeden aday Q1'de 3 yerine
+        // 35 puan alıyordu (§0 ihlali).
+        //
+        // `kisa_makale` YÜKSEK satırlarda bırakıldı: A6/A7'nin listesinde
+        // "kısa makale" geçmiyor, A1-A5 ise "araştırma makalesi" diyor ve
+        // brief communication bir araştırma makalesidir.
+        //
+        // `derleme` de yüksek satırlarda: A4 "diğer uluslararası hakemli
+        // dergilerde araştırma makalesi VEYA DERLEME 5" diyor, A7 aynı
+        // dergilerdeki derlemeye 2 diyor. Kaynağın kendi çelişkisi;
+        // A4/A5 daha açık olduğu için onlar esas alındı.
+        'A6' => ['baslik' => 'SCI, SCIE, SSCI, AHCI, ESCI ya da SCOPUS dergide teknik not, mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus'], 'turler' => ['vaka_teknik_not'], 'puan' => 3],
+        'A7' => ['baslik' => 'Diğer ulusal ya da uluslararası hakemli dergide editöre mektup, araştırma notu, teknik not, vaka takdimi, özet ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not'], 'puan' => 2],
+        'A1a' => ['baslik' => 'WOS Q1 dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $YUKSEK, 'puan' => 35],
+        'A1b' => ['baslik' => 'WOS Q2 veya SCOPUS Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)', 'AHCI'], 'turler' => $YUKSEK, 'puan' => 28],
+        'A1c' => ['baslik' => 'WOS Q3 veya SCOPUS Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $YUKSEK, 'puan' => 22],
+        'A1d' => ['baslik' => 'WOS Q4 veya SCOPUS Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => $YUKSEK, 'puan' => 18],
+        'A2' => ['baslik' => 'ESCI/SPORTDiscus/SCOPUS Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $YUKSEK, 'puan' => 15],
+        'A3' => ['baslik' => 'TR Dizin dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $YUKSEK, 'puan' => 10],
+        'A4' => ['baslik' => 'Diğer uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $YUKSEK, 'puan' => 5],
+        'A5' => ['baslik' => 'TR Dizin dışı ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $YUKSEK, 'puan' => 4],
 
         // B. BİLDİRİ
         'B2-B6' => ['baslik' => 'Bilimsel etkinlikte çağrılı konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],

@@ -55,14 +55,28 @@ return [
         '4d' => ['baslik' => 'WoS Q4 dergide vaka incelemesi, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['vaka_teknik_not'], 'puan' => 5],
 
         // ── MAKALELER 6-9 · çeyrekliksiz indeks kümeleri ──
-        '6a' => ['baslik' => 'WoS All Databases / SCOPUS dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 20],
+        // 6-9 bölümlerinin de 1-4'teki gibi tam a/b/c/d merdiveni var (özgün
+        // makale · derleme · kısa makale · vaka incelemesi-teknik not-editöre
+        // mektup-kitap incelemesi); yalnız "a" satırı girilmiş ve tür kısıtı
+        // olmadığı için editöre mektup kaydeden aday SCOPUS'ta 5 yerine 20
+        // puan alıyordu (§0 ihlali). a ve b aynı puanda olduğu için tek
+        // satırda birleştirildi.
+        '6a' => ['baslik' => 'WoS All Databases / SCOPUS dergide özgün araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
+        '6c' => ['baslik' => 'WoS All Databases / SCOPUS dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['kisa_makale'], 'puan' => 15],
+        '6d' => ['baslik' => 'WoS All Databases / SCOPUS dergide vaka incelemesi, teknik not, editöre mektup ya da kitap incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['vaka_teknik_not'], 'puan' => 5],
         '6e-tam' => ['baslik' => 'SCOPUS dergide kongre bildirisi tam metni', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 5],
         '6e-ozet' => ['baslik' => 'SCOPUS dergide kongre bildirisi özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
-        '7a' => ['baslik' => 'Uluslararası alan indeksli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 20],
-        '8a' => ['baslik' => 'TR-Dizin veya diğer uluslararası indeksli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 15],
+        '7a' => ['baslik' => 'Uluslararası alan indeksli dergide özgün araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
+        '7c' => ['baslik' => 'Uluslararası alan indeksli dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['kisa_makale'], 'puan' => 15],
+        '7d' => ['baslik' => 'Uluslararası alan indeksli dergide vaka incelemesi, teknik not, editöre mektup ya da kitap incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['vaka_teknik_not'], 'puan' => 5],
+        '8a' => ['baslik' => 'TR-Dizin veya diğer uluslararası indeksli dergide özgün araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
+        '8c' => ['baslik' => 'TR-Dizin veya diğer uluslararası indeksli dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['kisa_makale'], 'puan' => 10],
+        '8d' => ['baslik' => 'TR-Dizin veya diğer uluslararası indeksli dergide vaka incelemesi, teknik not, editöre mektup ya da kitap incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['vaka_teknik_not'], 'puan' => 4],
         '8e-tam' => ['baslik' => 'TR-Dizin dergide kongre bildirisi tam metni', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 4],
         '8e-ozet' => ['baslik' => 'TR-Dizin dergide kongre bildirisi özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
-        '9a' => ['baslik' => 'Üniversite Senatosunca kabul edilmiş uluslararası dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 6],
+        '9a' => ['baslik' => 'Üniversite Senatosunca kabul edilmiş uluslararası dergide özgün araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 6],
+        '9c' => ['baslik' => 'Üniversite Senatosunca kabul edilmiş uluslararası dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['kisa_makale'], 'puan' => 3],
+        '9d' => ['baslik' => 'Üniversite Senatosunca kabul edilmiş uluslararası dergide vaka incelemesi, teknik not, editöre mektup ya da kitap incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not'], 'puan' => 2],
 
         // ── KİTAP ── (bölüm tavanı 60 puan)
         'K1a' => ['baslik' => 'Uluslararası yayınevinden yabancı dilde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
