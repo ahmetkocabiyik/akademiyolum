@@ -136,7 +136,7 @@ return [
     ],
     [
         'anahtar' => 'ege-dr-sanat-mimarlik',
-        'aday_notu' => 'Güzel Sanatlar ve Mimarlıkta sanatsal/tasarım kalemleri de yayın sayısına giriyor; yönergenin 10.4 (k) müzik/dans metodu kalemi de sayılıyor.',
+        'aday_notu' => 'Güzel Sanatlar ve Mimarlıkta sanatsal/tasarım kalemleri de yayın sayısına giriyor; yayımlanmış müzik ya da dans metodu da sayılıyor.',
         'universite' => 'Ege Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $sanatMimarlik,

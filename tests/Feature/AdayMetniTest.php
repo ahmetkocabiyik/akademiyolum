@@ -36,6 +36,11 @@ $KOD_DESENI = '/('
     .'|\b\d{1,2}(-\d{1,2})? numaralı madde'
     .'|\b\d[.\/][a-zçğıöşü] bend'
     .'|\bTABLO [A-Z]\b'
+    // Puan tablosunun BÖLÜM atıfları: "1 (a, b, c, d) ya da 2 (a, b)",
+    // "Puan Tablosunun 1. bölümü", "1, 2 ya da 4. bölümlerden". Aday
+    // tablonun bölüm numarasını bilmiyor; eser TÜRÜ yazılmalı.
+    .'|\b\d{1,2}\s*\((?:[a-zçğıöşü]\s*,\s*)*[a-zçğıöşü]\)'
+    .'|\b\d{1,2}\.?\s*bölüm(?:ü|den|ünü|lerden|lerine|leri)\b'
     // Roma rakamlı ve harfli ekler (Ek-I, EK-II, EK-A, EK-Ç), sıra sayılı
     // madde atıfları ("20. maddesi", "5.2 maddesi") ve harfle anılan kümeler
     // ("A grubu", "B tablosu"). Sıra noktası ZORUNLU: "3 madde belgelemek"

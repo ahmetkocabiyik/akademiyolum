@@ -84,7 +84,7 @@ return [
     // ══════════════════ DR. ÖĞRETİM ÜYESİ ══════════════════ (toplam 100)
     [
         'anahtar' => 'ytu-dr-muh-fen',
-        'aday_notu' => 'Mühendislik ve Fen alanında 1(a) satırı yalnızca Q1-Q3 dergileri sayıyor; Q4 ve ESCI makaleleri 1(a,b,c) satırına giriyor.',
+        'aday_notu' => 'Mühendislik ve Fen alanında ilk baraj yalnızca Q1-Q3 dergilerindeki makaleleri sayıyor; Q4 ve ESCI makaleleriniz ise ikinci, daha geniş barajda değerlendiriliyor.',
         'universite' => 'Yıldız Teknik Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $muhFen,

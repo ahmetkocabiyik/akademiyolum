@@ -218,8 +218,9 @@ return [
     // bölümünden 90.
     [
         'anahtar' => 'gaziantep-dr-sosyal',
-        'aday_notu' => 'Daha önce öğrenci almamış bölümlerde bu şartlar yerine 1(a), 1(c) veya 1(e) '
-            .'kapsamında en az bir yayın koşulu aranır.',
+        'aday_notu' => 'Daha önce öğrenci almamış bölümlerde bu şartlar yerine SCI-Expanded, SSCI '
+            .'ya da AHCI kapsamındaki bir dergide, ESCI/Scopus dergisinde ya da TR Dizin '
+            .'kapsamındaki ulusal hakemli bir dergide en az bir araştırma makalesi koşulu aranır.',
         'universite' => 'Gaziantep Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => ['sosyal', 'egitim', 'filoloji', 'hukuk', 'ilahiyat', 'spor'],

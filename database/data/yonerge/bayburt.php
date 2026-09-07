@@ -150,7 +150,7 @@ return [
     [
         'anahtar' => 'bayburt-gs-dr',
         'aday_notu' => 'Güzel Sanatlar alanında alt baraj sanat ve tasarım etkinliklerinizi '
-            .'(cetvelin 11.2 bölümü) de sayıyor; sayılar öteki alanlarla aynı olduğu için bu '
+            .'de sayıyor; sayılar öteki alanlarla aynı olduğu için bu '
             .'alan bir tık kolay. İlk atamada proje şartı YOK; yayın ve sanat kalemlerinden 80, '
             .'toplamda 100 puan isteniyor. Yeniden atamada projelerden en az 20, makale ve '
             .'projelerden 60, sayılan bölümlerden 100 ve toplamda 200 puan gerekiyor. İlk atama '
@@ -176,7 +176,7 @@ return [
         'aday_notu' => 'ÜÇ ALT BARAJ ÜST ÜSTE: en içteki baraj yalnızca BİLİMSEL ARAŞTIRMA '
             .'PROJESİ kalemini sayıyor (40 puan), yani projesi olmayan aday puanı ne olursa '
             .'olsun geçemiyor. Güzel Sanatlar alanında en dıştaki alt baraj sanat ve tasarım '
-            .'etkinliklerinizi (cetvelin 11.2 bölümü) de sayıyor. Puanların tamamı doktora '
+            .'etkinliklerinizi de sayıyor. Puanların tamamı doktora '
             .'unvanınızı aldıktan sonraki çalışmalarınızdan gelmeli.',
         'universite' => 'Bayburt Üniversitesi',
         'kadro' => 'docentlik',
@@ -203,7 +203,7 @@ return [
         'anahtar' => 'bayburt-gs-profesor',
         'aday_notu' => 'ÜÇ ALT BARAJ ÜST ÜSTE: en içteki baraj yalnızca BİLİMSEL ARAŞTIRMA '
             .'PROJESİ kalemini sayıyor (50 puan). Güzel Sanatlar alanında en dıştaki alt baraj '
-            .'sanat ve tasarım etkinliklerinizi (cetvelin 11.2 bölümü) de sayıyor. Puanların '
+            .'sanat ve tasarım etkinliklerinizi de sayıyor. Puanların '
             .'tamamı doçentlik unvanınızı aldıktan sonraki çalışmalarınızdan gelmeli ve en az '
             .'bir makalenizde başlıca yazar olmanız gerekiyor.',
         'universite' => 'Bayburt Üniversitesi',

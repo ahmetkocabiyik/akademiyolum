@@ -1935,6 +1935,23 @@ unvanınızdan sonra en az 40 puan"). Yazılmazsa aday, yeniden atanma satırın
 ilk atamanınkiyle birebir aynı cümleyi görüp neden puanının sayılmadığını
 anlayamıyor (Nişantaşı'nda bu yüzden eklendi).
 
+**BÖLÜM ATFI DA KODDUR.** 07.09.2026'da desene üç kalıp eklendi, çünkü aday
+tablonun bölüm numarasını bilmiyor:
+
+- `1 (a, b, c, d) ya da 2 (a, b)` — parantez içinde virgüllü TEK HARFLER.
+  Çok kelimeli parantez (`70 (doktor öğretim üyeliği)`) kod değil, açıklama;
+  desen tek harfle sınırlı olmalı yoksa puan eşikleri de yakalanıyor.
+- `1(a)`, `1(a,b,c)` — boşluksuz hâli.
+- `3. bölümü`, `1, 2 ya da 4. bölümlerden`, `cetvelin 11.2 bölümü`.
+
+Beş üniversitede sızıntı buldu ve hepsi ESER TÜRÜYLE yeniden yazıldı:
+İzmir Bakırçay (altı ayrı ifade), Gaziantep, Yıldız Teknik, Bayburt, Ege.
+Yerine yazılacak metin satırın kendi başlığından çıkar: `1 (a, b)` yerine
+"SSCI, SCI, SCI-Expanded ya da AHCI kapsamındaki dergide yayımlanmış makale".
+
+`notlar` alanı bu kuralın DIŞINDA: iç belgeleme oraya yazılır ve madde/bölüm
+atfı orada kalmalı ki satırın kaynağı izlenebilsin.
+
 ### Kalıplar
 
 | Kalıp | Ne zaman |
