@@ -1150,6 +1150,23 @@ satır daha ekledi — üyelik etiketinin kapsamı 52 üniversiteden 71'e çıkt
 listeden düşüyor ve kaynak "aile yok" görünüyor. Terim başına yeniden tarama
 bunun tek pratik panzehiri.
 
+### `pdf-ocr/` HAZIR METNİ VAR: `pdftotext` ONLARI BOŞ ÇIKARIR
+
+Korpusun on kaynağı TARANMIŞ GÖRÜNTÜ PDF'i; `pdftotext` onlardan birkaç
+bayt üretiyor. Bu kaynakların OCR metni `pdf-ocr/<ad>.txt` olarak zaten
+depoda duruyor ama önbelleği `pdftotext` ile üreten betik onları kullanmıyor
+ve dosyayı "var ama neredeyse boş" bırakıyor — `-s` sınaması (boyut > 0)
+bunu yakalamıyor.
+
+07.09.2026'da fark edildi: Biruni 6 satır, SBÜ 11, Karamanoğlu 15, Mersin
+30 bayt. **Bu on kaynak, önbelleğin bozulduğu andan sonraki bütün
+taramalarda sessizce atlandı.** Onarımdan sonra kademe taraması yeniden
+koşturuldu; yalnız bir işaret çıktı (SBÜ) ve o da yanlış pozitifti.
+
+Kural: önbelleği kurarken önce `pdf-ocr/<ad>.txt` varsa ONU kopyala,
+yoksa `pdftotext -layout` çalıştır. Ve **satır sayısını da sına**: elli
+satırın altındaki metin, PDF kaç sayfa olursa olsun, şüphelidir.
+
 ### TARAMADAN ÖNCE METİN ÖNBELLEĞİNİ SAY
 
 Kaynak metinleri geçici dizinde tutuluyor ve oturum sırasında **temizlenebiliyor**.
@@ -1878,9 +1895,15 @@ Yöntem basit — atfın numarasını kaynak metinde `MADDE n` diye ara.
   kaynak metninde madde başlıkları pdftotext çıktısında yok (tablo ağırlıklı
   PDF). "Doğrulanamadı" ile "yanlış" ayrı şeyler.
 
-**Kaynağında hiç `MADDE n` geçmeyen 18 üniversite taramanın dışında.**
-Onların PDF'i yönerge değil yalnız puan tablosu; atıfları başka bir
-yöntemle (bölüm başlığıyla) doğrulanabilir.
+**Kaynağında hiç `MADDE n` geçmeyen 18 üniversite BÖLÜM BAŞLIĞIYLA
+doğrulandı** (07.09.2026): 134 atıf kaynakta bulundu, **yanlış atıf
+çıkmadı**. Doğrulanamayan on yedi kalemin üçü OCR biçiminden geliyor
+(Mersin'in "Madde 1.3.8'deki" ifadesinde kesme işareti ayraç sanıldı),
+on dördü de kaynağa değil bizim kendi tanımlayıcı etiketimize işaret
+ediyor ("Ön Koşullar 1", "Dr. ilk atanma") — doğrulanacak karşılığı yok.
+
+Üçünün (Biruni, Karamanoğlu, SBÜ) atıfları ancak METİN ÖNBELLEĞİ
+ONARILDIKTAN sonra doğrulanabildi; kaynakları taranmış görüntü PDF'i.
 
 EK atıflarında iki uyuşmazlık çıktı, ikisi de biçimsel: İstanbul Zaim'in
 kaynağı `EK-I` (Roma) yazıyor, not `Ek-1` diyordu — nota uyarlandı. İzmir
