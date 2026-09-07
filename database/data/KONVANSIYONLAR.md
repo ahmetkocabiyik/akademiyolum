@@ -1167,6 +1167,20 @@ Kural: önbelleği kurarken önce `pdf-ocr/<ad>.txt` varsa ONU kopyala,
 yoksa `pdftotext -layout` çalıştır. Ve **satır sayısını da sına**: elli
 satırın altındaki metin, PDF kaç sayfa olursa olsun, şüphelidir.
 
+**ONARIMDAN SONRA BÜTÜN TARAMALAR TEKRARLANDI** ve on kaynakta yeni hata
+çıkmadı: ve/veya (0 iki-kol), kod kayması (1 işaret, bilinen yanlış
+pozitif), kademe (1 işaret, SBÜ — kaynak sayfası okununca yanlış pozitif),
+toplantı organizasyonu kapsamı (altısı zaten girili, ikisinin cetveli yok,
+ikisinin kaynağında aile satırı yok). Sebep de anlaşıldı: bu taramaların
+ÇOĞU önbellek bozulmadan önce koşmuştu.
+
+**OCR METNİNDE "PUAN SÜTUNU" KURALI ÇALIŞMIYOR.** Tarayıcılar sütunu "en az
+iki boşlukla ayrılmış sayı" diye tanıyor; OCR çıktısında hizalama kaybolduğu
+için o kural OCR'lı on kaynakta satırların TAMAMINI "nesir" sayıyor. Tek
+boşluğa izin veren gevşek kuralla yeniden bakıldı — ve/veya taramasında 12,
+kademe taramasında 2 işaret çıktı, hepsi elle okunup elendi. OCR'lı kaynak
+tararken sütun kuralını gevşetmek ZORUNLU; yoksa tarama sessizce boş döner.
+
 ### TARAMADAN ÖNCE METİN ÖNBELLEĞİNİ SAY
 
 Kaynak metinleri geçici dizinde tutuluyor ve oturum sırasında **temizlenebiliyor**.
