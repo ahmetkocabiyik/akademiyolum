@@ -48,11 +48,19 @@ return [
         'A3' => ['baslik' => 'Diğer yurt içi hakemli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 8],
 
         // ── B. BİLDİRİLER (en fazla 50 puan) ──
+        // SÖZLÜ/POSTER ekseni sözlükte YOK. Etiket çifti şöyle bölüşüyor:
+        // `Tam Metin` = SÖZLÜ sunulup tam metni basılan bildiri;
+        // `Özet/Poster` = özet basılanlar ile POSTER'lerin tamamı (poster
+        // adı ikinci etikette geçiyor). Bu yüzden `Özet/Poster` satırı,
+        // kaynağın özet ve poster hücrelerinin EN DÜŞÜĞÜNÜ alır.
+        // Artvin: uluslararası sözlü 13/7 · poster 5/3 → özet/poster 3;
+        // ulusal sözlü 8/5 · poster 4/2 → özet/poster 2. Önce B3 ve B8
+        // (sözlü ÖZET) yazılmıştı, poster satırları hiç sayılmıyordu.
         'B1' => ['baslik' => 'Kongrede çağrılı konuşmacı sunumu', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 12],
         'B2' => ['baslik' => 'Uluslararası kongrede sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 13],
-        'B3' => ['baslik' => 'Uluslararası kongrede sözlü sunulan ve özeti yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 7],
+        'B3' => ['baslik' => 'Uluslararası kongrede sözlü sunulan ve özeti yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
         'B7' => ['baslik' => 'Ulusal kongrede sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 8],
-        'B8' => ['baslik' => 'Ulusal kongrede sözlü sunulan ve özeti yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
+        'B8' => ['baslik' => 'Ulusal kongrede sözlü sunulan ve özeti yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
         // ── C. KİTAPLAR (en fazla 80 puan) ──
         'C2' => ['baslik' => 'Uluslararası yayınevi tarafından yabancı dilde yayımlanan özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],

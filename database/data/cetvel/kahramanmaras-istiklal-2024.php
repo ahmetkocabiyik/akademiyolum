@@ -108,10 +108,17 @@ return [
         'A2.2.4' => ['baslik' => 'Bilimsel kitapta bölüm ya da makale çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
 
         // ══ A3 — BİLDİRİLER ══
+        // SÖZLÜ/POSTER ekseni sözlükte YOK. Etiket çifti şöyle bölüşüyor:
+        // `Tam Metin` = SÖZLÜ sunulup tam metni basılan bildiri;
+        // `Özet/Poster` = özet basılanlar ile POSTER'lerin tamamı (poster
+        // adı ikinci etikette geçiyor). Bu yüzden `Özet/Poster` satırı,
+        // kaynağın özet ve poster hücrelerinin EN DÜŞÜĞÜNÜ alır.
+        // İstiklal: uluslararası sözlü 15/10 · poster 10/5 → özet/poster 5;
+        // ulusal sözlü 10/5 · poster 5/2 → özet/poster 2.
         'A3.1.1' => ['baslik' => 'Uluslararası toplantıda tam metni yayımlanmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 15],
-        'A3.1.2' => ['baslik' => 'Uluslararası toplantıda özet metni yayımlanmış bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 10],
+        'A3.1.2' => ['baslik' => 'Uluslararası toplantıda özet metni yayımlanmış bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 5],
         'A3.2.1' => ['baslik' => 'Ulusal toplantıda tam metni yayımlanmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 10],
-        'A3.2.2' => ['baslik' => 'Ulusal toplantıda özet metni yayımlanmış bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
+        'A3.2.2' => ['baslik' => 'Ulusal toplantıda özet metni yayımlanmış bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
         // ══ A4 — ATIFLAR ══
         'A4.1' => ['baslik' => 'Web of Science taranan dergide veya uluslararası kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 3],

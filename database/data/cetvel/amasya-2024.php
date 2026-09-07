@@ -106,10 +106,22 @@ return [
         'B11' => ['baslik' => 'Ulusal yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
 
         // ── C. KONGRE VE KONFERANSLAR ──
-        'C1' => ['baslik' => 'Uluslararası hakemli konferansta sözlü sunulan ve tam metin yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Davetli Konuşmacı'], 'puan' => 25],
-        'C3' => ['baslik' => 'Uluslararası hakemli konferansta özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 10],
-        'C5' => ['baslik' => 'Ulusal hakemli konferansta sözlü sunulan ve tam metin yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 15],
-        'C7' => ['baslik' => 'Ulusal hakemli konferansta özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
+        // SÖZLÜ/POSTER ekseni sözlükte YOK. Etiket çifti şöyle bölüşüyor:
+        // `Tam Metin` = SÖZLÜ sunulup tam metni basılan bildiri;
+        // `Özet/Poster` = özet basılanlar ile POSTER'lerin tamamı (poster
+        // adı ikinci etikette geçiyor). Bu yüzden `Özet/Poster` satırı,
+        // kaynağın özet ve poster hücrelerinin EN DÜŞÜĞÜNÜ alır.
+        // Amasya: uluslararası sözlü 25/15 · poster 10/5 → özet/poster 5;
+        // ulusal sözlü 15/9 · poster 5/3 → özet/poster 3. Önce özet
+        // etiketine POSTER TAM METİN satırı (C.3 10, C.7 5) bağlanmıştı.
+        'C1-C3' => ['baslik' => 'Uluslararası hakemli konferansta sunulan, tam metni yayımlanan sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 25],
+        'C2-C4' => ['baslik' => 'Uluslararası hakemli konferansta sunulan, özeti yayımlanan sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 5],
+        'C5-C7' => ['baslik' => 'Ulusal hakemli konferansta sunulan, tam metni yayımlanan sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 15],
+        'C6-C8' => ['baslik' => 'Ulusal hakemli konferansta sunulan, özeti yayımlanan sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 3],
+        // `Davetli Konuşmacı` C1'de duruyordu (25 puan); oysa kaynağın davetli
+        // konuşmacı satırları H bölümünde: H.2 uluslararası 10, H.7 ulusal 7.
+        // Etiket kapsam taşımadığı için §0 uyarınca 7.
+        'H2-H7' => ['baslik' => 'Hakemli konferansta oturum başkanı, davetli konuşmacı ya da panelist olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 7],
 
         // ── D. PROJELER ──
         // D bölümünün her satırı DÖRT ROLE ayrılıyor (yürütücü / araştırmacı /

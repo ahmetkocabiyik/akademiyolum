@@ -104,10 +104,15 @@ $govde = function (array $tavanlar): array {
             '6h' => ['baslik' => 'Diğer ulusal dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 3],
 
             // ══ B) BİLDİRİLER (7-8) ══
+            // SÖZLÜ/POSTER ekseni sözlükte YOK: `Özet/Poster` etiketi hem özet
+            // hem POSTER satırlarını taşıdığı için ikisinin en düşüğünü alır.
+            // Kaynak 7/c ve 8/c'de "poster bildiri veya yayımlanmamış sözlü
+            // sunum" için 10 ve 5 diyor; önce yalnız özet satırları (15 ve 10)
+            // yazılmıştı, yani posteri olan aday özet bildiri puanı alıyordu.
             '7a' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 30],
-            '7b' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan özet metin bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 15],
+            '7b' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan özet metin bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 10],
             '8a' => ['baslik' => 'Ulusal toplantıda sözlü sunulan tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 20],
-            '8b' => ['baslik' => 'Ulusal toplantıda sözlü sunulan özet metin bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 10],
+            '8b' => ['baslik' => 'Ulusal toplantıda sözlü sunulan özet metin bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
             // Davetli konuşmacılar için 7 ve 8'de belirtilen puanların 2 katı.
             '8d' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 40],
 

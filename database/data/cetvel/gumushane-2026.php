@@ -53,10 +53,15 @@ return [
 
         // B. BİLDİRİ
         'B2-B6' => ['baslik' => 'Bilimsel etkinlikte çağrılı konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
+        // SÖZLÜ/POSTER ekseni sözlükte YOK: `Özet/Poster` etiketi hem özet
+        // hem POSTER satırlarını taşıdığı için hepsinin en düşüğünü alır.
+        // B4: sözlü tam 6 · sözlü özet-veya-poster 4 · poster tam 3 · poster
+        // özet 2 → 2. B8: 5 · 3 · 2 · 1 → 1. Önce yalnız b bentleri (4 ve 3)
+        // yazılmıştı, yani posteri olan aday sözlü özet puanı alıyordu.
         'B4a' => ['baslik' => 'Uluslararası etkinlikte sözlü/tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 6],
-        'B4b' => ['baslik' => 'Uluslararası etkinlikte özet/poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 4],
+        'B4b' => ['baslik' => 'Uluslararası etkinlikte özet/poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 2],
         'B8a' => ['baslik' => 'Ulusal etkinlikte sözlü/tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 5],
-        'B8b' => ['baslik' => 'Ulusal etkinlikte özet/poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 3],
+        'B8b' => ['baslik' => 'Ulusal etkinlikte özet/poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 
         // C. KİTAP
         'C1' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],

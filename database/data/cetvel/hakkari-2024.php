@@ -78,11 +78,19 @@ return [
         'B3.2' => ['baslik' => 'Alanında kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 20],
 
         // ══ C — BİLİMSEL TOPLANTILAR ══
+        // SÖZLÜ/POSTER ekseni sözlükte YOK. Etiket çifti şöyle bölüşüyor:
+        // `Tam Metin` = SÖZLÜ sunulup tam metni basılan bildiri;
+        // `Özet/Poster` = özet basılanlar ile POSTER'lerin tamamı (poster
+        // adı ikinci etikette geçiyor). Bu yüzden `Özet/Poster` satırı,
+        // kaynağın özet ve poster hücrelerinin EN DÜŞÜĞÜNÜ alır.
+        // Hakkari: C1.4 (uluslararası poster 8) ile C2.4 (ulusal poster 4)
+        // sözlü özet satırlarından düşük; önce yalnız C1.3/C2.3 (10 ve 8)
+        // yazılmıştı.
         'C1.2' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 15],
-        'C1.3' => ['baslik' => 'Uluslararası toplantıda özeti yayımlanan bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 10],
+        'C1.3' => ['baslik' => 'Uluslararası toplantıda özeti yayımlanan bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
         'C2.1' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı veya panelist olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 15],
         'C2.2' => ['baslik' => 'Ulusal toplantıda sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 10],
-        'C2.3' => ['baslik' => 'Ulusal toplantıda özeti yayımlanan bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 8],
+        'C2.3' => ['baslik' => 'Ulusal toplantıda özeti yayımlanan bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 4],
 
         // ══ D — PROJELER VE PATENTLER ══
         'D1.1' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 70],

@@ -2758,14 +2758,22 @@ b) uluslararası SÖZLÜ  bildiri, tam metin / özet      8 / 4
 c) uluslararası POSTER bildiri, tam metin / özet      5 / 3
 ```
 
-Sözlükte yalnız tam metin/özet ekseni var. b ile c'yi "tam metin satırı" ve
-"özet satırı" sanmak (Ege'de tam olarak bu olmuştu) posterin TAM METİN
-değerini özet etiketine yazdırır. **Doğrusu her etikete kendi kolonunun
-POSTER (düşük) değerini yazmaktır**: tam metin 5, özet 3.
+**Etiket çifti şöyle bölüşür:** `… Tam Metin` = SÖZLÜ sunulup tam metni
+basılan bildiri; `… Özet/Poster` = özeti basılanlar İLE POSTER'lerin
+tamamı — poster adı ikinci etikette geçtiği için oraya aittir. Yukarıdaki
+örnekte tam metin **8**, özet/poster **3** (4, 5 ve 3'ün en düşüğü).
 
-Aynı sebeple `Özet/Poster` etiketi ÖZET değerini değil **POSTER** değerini
-alır (Trakya'nın üç kolonlu tablosunda uluslararası 3 değil 2, ulusal 2
-değil 1).
+İki tuzak var:
+
+1. b ile c'yi "tam metin satırı" ve "özet satırı" sanmak (Ege'de tam olarak
+   bu olmuştu) posterin TAM METİN değerini özet etiketine yazdırır.
+2. Yalnız SÖZLÜ satırlarını girmek (Artvin, Bingöl, Hakkari, K.Maraş
+   İstiklal, Amasya, Manisa CBÜ, Gümüşhane) posteri olan adaya sözlü
+   bildiri puanı verir.
+
+`Tam Metin` etiketini poster değerine ÇEKME. Poster kendi adıyla öteki
+etikette geçtiği için `Tam Metin` sözlü satırında kalır; aşağı çekmek
+korpusun tamamında gereksiz eksik sayma üretir.
 
 ### `Tam Metin (CPCI)` etiketine İKİ KOLONUN birden düşüğünü yazma
 

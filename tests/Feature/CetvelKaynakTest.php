@@ -495,6 +495,15 @@ test('cetvel içi etiket çakışmaları elden geçirilmiş', function () {
         // aynı esere iki farklı yönden bakıyor; CPCI'da basılan bir bildiri
         // ikisine de girer ve motorun yükseği alması doğrudur.
         'ankara-2023: 7b-7c-tam > 1Eç',
+        // Gazi'nin toplantı bölümü ("hakemli toplantıda sunulan sözlü/poster
+        // bildiri", 10/5 ve 5/3) ile 6/e-8/e ("dergide yayımlanmış kongre
+        // bildirisi tam metni/özeti", 5/3 ve 4/2) aynı esere iki farklı
+        // yönden bakıyor; dergide de basılan bir bildiri ikisine birden
+        // girer ve motorun yükseği alması doğrudur.
+        'gazi-2024: Tf-nat > 8e-tam',
+        'gazi-2024: Tf-ulus > 6e-tam',
+        'gazi-2024: Tg-nat > 8e-ozet',
+        'gazi-2024: Tg-ulus > 6e-ozet',
         'isparta-ubu-2022: A4-bolum > T1-K5',
         'isparta-ubu-2022: A4-kitap > T1-K3',
         'isparta-ubu-2022: A4-tez > T1-TEZ-B1',
@@ -1331,19 +1340,20 @@ test('bildiride tam metin ile özet ayrışıyor', function (string $cetvel, arr
         'Ulusal Tam Metin' => 6, 'Ulusal Özet/Poster' => 4,
     ]],
 
-    // GİBTÜ: uluslararası tam 15/10 · özet 10/8; ulusal tam 10/8 · özet 8/5.
-    // Hepsi tek satıra (uluslararası 15, ulusal 10) çökmüştü.
+    // GİBTÜ: uluslararası sözlü 15/10 · poster 10/8; ulusal sözlü 10/8 ·
+    // poster 8/5. Dört kolonun tamamı tek satıra (15 ve 10) çökmüştü.
     ['gibtu-2024', [
-        'Uluslararası Tam Metin' => 10, 'Uluslararası Özet/Poster' => 8,
-        'Ulusal Tam Metin' => 8, 'Ulusal Özet/Poster' => 5,
+        'Uluslararası Tam Metin' => 15, 'Uluslararası Özet/Poster' => 8,
+        'Ulusal Tam Metin' => 10, 'Ulusal Özet/Poster' => 5,
         'Davetli Konuşmacı' => 2,
     ]],
 
     // Ege: sözlü 8/4 · poster 5/3 (uluslararası), 6/3 · 4/2 (ulusal).
-    // Önce b ve c "tam metin satırı / özet satırı" sanılmıştı.
+    // Önce b ve c "tam metin satırı / özet satırı" sanılıp özet etiketine
+    // POSTER'in TAM METİN değeri (5) yazılmıştı.
     ['ege-2026', [
-        'Uluslararası Tam Metin' => 5, 'Uluslararası Özet/Poster' => 3,
-        'Ulusal Tam Metin' => 4, 'Ulusal Özet/Poster' => 2,
+        'Uluslararası Tam Metin' => 8, 'Uluslararası Özet/Poster' => 3,
+        'Ulusal Tam Metin' => 6, 'Ulusal Özet/Poster' => 2,
     ]],
 
     // Trakya: Tam Metin/Özet/Poster üç kolon — CPCI 8/5/3, diğer 6/3/2,
@@ -1365,5 +1375,119 @@ test('bildiride tam metin ile özet ayrışıyor', function (string $cetvel, arr
     // özeti için satır yok, etiket karşılıksız kalmalı.
     ['istanbul-aydin-2020', [
         'Ulusal Tam Metin' => 5, 'Ulusal Özet/Poster' => 0,
+    ]],
+]);
+
+/**
+ * SÖZLÜ / POSTER EKSENİ SÖZLÜKTE YOK. Etiket çifti şöyle bölüşüyor:
+ *
+ *   `… Tam Metin`     = SÖZLÜ sunulup tam metni basılan bildiri
+ *   `… Özet/Poster`   = özeti basılanlar İLE POSTER'lerin tamamı
+ *                       (poster adı ikinci etikette geçiyor)
+ *
+ * Bu yüzden `Özet/Poster` satırı, kaynağın ÖZET ve POSTER hücrelerinin EN
+ * DÜŞÜĞÜNÜ alır. Korpusta 47 yönerge posteri sözlüden ayırıyor; çoğu doğru
+ * girilmişti ama yedi üniversitede yalnız SÖZLÜ ÖZET satırı yazılmış, poster
+ * satırı hiç sayılmamıştı — posteri olan aday sözlü bildiri puanı alıyordu.
+ *
+ * Değerler 07.09.2026'da kaynak PDF'lerinden okundu.
+ */
+test('bildiride poster sözlüden ayrışıyor', function (string $cetvel, array $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $kodlar = $katalog->coz(['*']);
+    $gercek = [];
+    foreach (array_keys($beklenen) as $etiket) {
+        $gercek[$etiket] = $katalog->puan(
+            new Faaliyet([
+                'kategori' => Kategori::Bildiri, 'tur' => 'Test', 'baslik' => 'Test',
+                'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+            ]),
+            $kodlar,
+        );
+    }
+
+    expect($gercek)->toBe($beklenen);
+})->with([
+    // Amasya C: uluslararası sözlü 25/15 · poster 10/5; ulusal sözlü 15/9 ·
+    // poster 5/3. Özet etiketine POSTER TAM METİN satırı bağlanmıştı.
+    // `Davetli Konuşmacı` da C1'de 25 puanla duruyordu; kaynağın davetli
+    // satırları H bölümünde (uluslararası 10, ulusal 7).
+    ['amasya-2024', [
+        'Uluslararası Tam Metin' => 25, 'Uluslararası Özet/Poster' => 5,
+        'Ulusal Tam Metin' => 15, 'Ulusal Özet/Poster' => 3,
+        'Davetli Konuşmacı' => 7,
+    ]],
+
+    // Artvin B: uluslararası sözlü 13/7 · poster 5/3; ulusal sözlü 8/5 ·
+    // poster 4/2. Poster satırları hiç girilmemişti.
+    ['artvin-2024', [
+        'Uluslararası Tam Metin' => 13, 'Uluslararası Özet/Poster' => 3,
+        'Ulusal Tam Metin' => 8, 'Ulusal Özet/Poster' => 2,
+    ]],
+
+    // Bingöl 6: uluslararası sözlü 20/10 · poster 10/5; ulusal 10/5 · 5/2.
+    ['bingol-2024', [
+        'Uluslararası Tam Metin' => 20, 'Uluslararası Özet/Poster' => 5,
+        'Ulusal Tam Metin' => 10, 'Ulusal Özet/Poster' => 2,
+    ]],
+
+    // Hakkari C: poster satırı tam/özet ayrımı taşımıyor (uluslararası 8,
+    // ulusal 4) ve sözlü özet satırından düşük.
+    ['hakkari-2024', [
+        'Uluslararası Tam Metin' => 15, 'Uluslararası Özet/Poster' => 8,
+        'Ulusal Tam Metin' => 10, 'Ulusal Özet/Poster' => 4,
+    ]],
+
+    // K.Maraş İstiklal A3: uluslararası sözlü 15/10 · poster 10/5;
+    // ulusal sözlü 10/5 · poster 5/2.
+    ['kahramanmaras-istiklal-2024', [
+        'Uluslararası Tam Metin' => 15, 'Uluslararası Özet/Poster' => 5,
+        'Ulusal Tam Metin' => 10, 'Ulusal Özet/Poster' => 2,
+    ]],
+
+    // Manisa CBÜ 7/8: c bendi "poster bildiri veya yayımlanmamış sözlü
+    // sunum" (10 ve 5), özet bendinden düşük.
+    ['manisa-cbu-2024', [
+        'Uluslararası Tam Metin' => 30, 'Uluslararası Özet/Poster' => 10,
+        'Ulusal Tam Metin' => 20, 'Ulusal Özet/Poster' => 5,
+    ]],
+
+    // Gümüşhane B4/B8: sözlü tam 6 · sözlü özet-veya-poster 4 · poster tam 3
+    // · poster özet 2 (ulusal 5·3·2·1).
+    ['gumushane-2026', [
+        'Uluslararası Tam Metin' => 6, 'Uluslararası Özet/Poster' => 2,
+        'Ulusal Tam Metin' => 5, 'Ulusal Özet/Poster' => 1,
+    ]],
+
+    // Sakarya UBÜ: KODLAR BİR SATIR KAYMIŞTI — `Uluslararası Tam Metin`
+    // 2.2'nin (ULUSAL DAVETLİ) 50 puanını taşıyordu. Doğrusu 2.3 (40).
+    ['sakarya-ubu-2024', [
+        'Uluslararası Tam Metin' => 40, 'Uluslararası Özet/Poster' => 20,
+        'Ulusal Tam Metin' => 30, 'Ulusal Özet/Poster' => 10,
+        'Davetli Konuşmacı' => 50,
+    ]],
+
+    // Yıldız Teknik: 7. bölümün (Bilimsel Toplantı Faaliyetleri) TAMAMI
+    // girilmemişti; bildiri etiketlerinin hiçbirinin karşılığı yoktu.
+    ['yildiz-teknik-2022', [
+        'Uluslararası Tam Metin' => 3, 'Uluslararası Özet/Poster' => 2,
+        'Ulusal Tam Metin' => 2, 'Ulusal Özet/Poster' => 1,
+    ]],
+
+    // Cerrahpaşa: B bölümünün (ULUSAL FAALİYETLER) 8. maddesi girilmemişti.
+    ['cerrahpasa-2023', [
+        'Uluslararası Tam Metin' => 15, 'Uluslararası Özet/Poster' => 8,
+        'Ulusal Tam Metin' => 6, 'Ulusal Özet/Poster' => 4,
+        'Davetli Konuşmacı' => 3,
+    ]],
+
+    // Gazi: toplantı bölümünün f/g bentleri (sözlü 10/5, poster 5/3)
+    // girilmemişti; bildiri etiketleri yalnız dergide yayımlanmış kongre
+    // bildirisi satırlarından besleniyordu.
+    ['gazi-2024', [
+        'Uluslararası Tam Metin' => 10, 'Uluslararası Özet/Poster' => 5,
+        'Ulusal Tam Metin' => 5, 'Ulusal Özet/Poster' => 3,
     ]],
 ]);

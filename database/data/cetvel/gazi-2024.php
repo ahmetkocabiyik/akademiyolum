@@ -105,6 +105,19 @@ return [
 
         // ── BİLİMSEL/SANATSAL TOPLANTI ── (bölüm tavanı 40 puan)
         'Ta' => ['baslik' => 'Uluslararası bilimsel/sanatsal toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 12],
+        // TOPLANTI BÖLÜMÜNÜN f VE g BENTLERİ girilmemişti: "hakemli
+        // ulusal/uluslararası toplantılarda sunulan SÖZLÜ bildiri 5/10" ve
+        // "POSTER bildiri 3/5" (kaynak ulusal/uluslararası sırasıyla yazıyor).
+        // Bildiri etiketleri yalnız 6/e ve 8/e'den (dergide yayımlanmış
+        // kongre bildirisi tam metni/özeti) besleniyordu, yani dergide
+        // basılmamış bir bildirinin karşılığı yoktu.
+        //
+        // SÖZLÜ/POSTER ekseni sözlükte yok: `Tam Metin` sözlü satırı,
+        // `Özet/Poster` poster satırını temsil ediyor.
+        'Tf-ulus' => ['baslik' => 'Hakemli uluslararası bilimsel ya da sanatsal toplantıda sunulan sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 10],
+        'Tg-ulus' => ['baslik' => 'Hakemli uluslararası bilimsel ya da sanatsal toplantıda sunulan poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 5],
+        'Tf-nat' => ['baslik' => 'Hakemli ulusal bilimsel ya da sanatsal toplantıda sunulan sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 5],
+        'Tg-nat' => ['baslik' => 'Hakemli ulusal bilimsel ya da sanatsal toplantıda sunulan poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 3],
         'Kk' => ['baslik' => 'Kamu kurum ve kuruluşlarında uzmanlığınızla ilgili komisyonlarda görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 2],
         'Kb2' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 8],
         'Kd2' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],

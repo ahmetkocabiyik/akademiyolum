@@ -73,6 +73,21 @@ return [
         '6l' => ['baslik' => 'Üniversite dışı kamu kurumu projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu', 'Özel Sektör / STK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 10],
         '6m' => ['baslik' => 'Üniversite BAP projesi', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'puan' => 10],
 
+        // ── 7. BİLİMSEL TOPLANTI FAALİYETLERİ ──
+        // Bölümün TAMAMI girilmemişti; başlıktaki "girilmeyen bölümler"
+        // listesinde de anılmıyor, yani gözden kaçmış. Bildiri etiketlerinin
+        // hiçbirinin karşılığı yoktu.
+        //
+        // Kaynak üç kolonda kademelendiriyor (tam metin 3 · özet 2 · poster
+        // 2 uluslararası; 2 · 1 · 1 ulusal). `Özet/Poster` etiketi hem özet
+        // hem poster satırını taşıdığı için ikisinin en düşüğünü alır.
+        '7a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan, tam metni bildiri kitapçığında yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 3],
+        '7b-7c' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan, özeti yayımlanmış ya da poster olarak sunulmuş çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 2],
+        '7d' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan, tam metni bildiri kitapçığında yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 2],
+        '7e-7f' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan, özeti yayımlanmış ya da poster olarak sunulmuş çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
+        '7g' => ['baslik' => 'Uluslararası kongre, konferans ya da sempozyumun organizasyon veya yürütme komitesinde görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 2],
+        '7h' => ['baslik' => 'Ulusal kongre, konferans ya da sempozyumun organizasyon veya yürütme komitesinde görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
+
         // ── 8. EĞİTİM-ÖĞRETİM ──
         '8a' => ['baslik' => 'Lisansüstü ders (İngilizce)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders'], 'puan' => 6],
         '8b' => ['baslik' => 'Lisansüstü ders (Türkçe)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 3],

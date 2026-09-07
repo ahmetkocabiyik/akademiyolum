@@ -90,11 +90,18 @@ return [
         '3.f' => ['baslik' => 'Hakemli ulusal dergide atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 2],
 
         // ══ 6. TEBLİĞLER ══
+        // SÖZLÜ/POSTER ekseni sözlükte YOK. Etiket çifti şöyle bölüşüyor:
+        // `Tam Metin` = SÖZLÜ sunulup tam metni basılan bildiri;
+        // `Özet/Poster` = özet basılanlar ile POSTER'lerin tamamı (poster
+        // adı ikinci etikette geçiyor). Bu yüzden `Özet/Poster` satırı,
+        // kaynağın özet ve poster hücrelerinin EN DÜŞÜĞÜNÜ alır.
+        // Bingöl: uluslararası sözlü 20/10 · poster 10/5 → özet/poster 5;
+        // ulusal sözlü 10/5 · poster 5/2 → özet/poster 2.
         '6.b' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan ve tam metin yayımlanan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 20],
-        '6.c' => ['baslik' => 'Uluslararası toplantıda sunulan ve özet metin yayımlanan tebliğ veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 10],
+        '6.c' => ['baslik' => 'Uluslararası toplantıda sunulan ve özet metin yayımlanan tebliğ veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 5],
         '6.f' => ['baslik' => 'Kongre veya sempozyumda davetli tebliğ sunmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 15],
         '6.g' => ['baslik' => 'Ulusal toplantıda sözlü sunulan ve tam metin yayımlanan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 10],
-        '6.h' => ['baslik' => 'Ulusal toplantıda sunulan ve özet metin yayımlanan tebliğ veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
+        '6.h' => ['baslik' => 'Ulusal toplantıda sunulan ve özet metin yayımlanan tebliğ veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
         // ══ 8. HAKEMLİK ══
         '8.d' => ['baslik' => 'Dergi hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],

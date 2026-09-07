@@ -57,16 +57,19 @@ return [
         '5.b' => ['baslik' => 'Çeviri kitap veya kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 8],
 
         // ── 6. BİLDİRİLER ──
-        // Kaynak bildiriyi ÜÇ eksende birden kademelendiriyor: uluslararası/
-        // ulusal · tam metin/özet · sözlü/poster. Sözlükte yalnız ilk ikisi
-        // var, bu yüzden her satırda §0 uyarınca POSTER değeri yazıldı:
-        //   uluslararası tam metin 15/10 → 10 · özet 10/8 → 8
-        //   ulusal        tam metin 10/8 → 8  · özet  8/5 → 5
+        // SÖZLÜ/POSTER ekseni sözlükte YOK. Etiket çifti şöyle bölüşüyor:
+        // `Tam Metin` = SÖZLÜ sunulup tam metni basılan bildiri;
+        // `Özet/Poster` = özet basılanlar ile POSTER'lerin tamamı (poster
+        // adı ikinci etikette geçiyor). Bu yüzden `Özet/Poster` satırı,
+        // kaynağın özet ve poster hücrelerinin EN DÜŞÜĞÜNÜ alır.
+        // GİBTÜ: uluslararası sözlü 15/10 · poster 10/8 → özet/poster 8;
+        // ulusal sözlü 10/8 · poster 8/5 → özet/poster 5. Önce dört kolonun
+        // tamamı tek satıra (uluslararası 15, ulusal 10) çökmüştü.
         // Davetli konuşmacı etiketi kapsam taşımıyor; kaynak uluslararası 15,
         // ulusal 10, STK/bakanlık etkinliği 2 diyor → 2.
-        '6.a' => ['baslik' => 'Uluslararası bilim kurulu olan hakemli etkinlikte sunulmuş, tam metni basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 10],
+        '6.a' => ['baslik' => 'Uluslararası bilim kurulu olan hakemli etkinlikte sunulmuş, tam metni basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 15],
         '6.a2' => ['baslik' => 'Uluslararası bilim kurulu olan hakemli etkinlikte sunulmuş, özeti basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
-        '6.b' => ['baslik' => 'Ulusal bilim kurulu olan hakemli etkinlikte sunulmuş, tam metni basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 8],
+        '6.b' => ['baslik' => 'Ulusal bilim kurulu olan hakemli etkinlikte sunulmuş, tam metni basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 10],
         '6.b2' => ['baslik' => 'Ulusal bilim kurulu olan hakemli etkinlikte sunulmuş, özeti basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
         '6.davetli' => ['baslik' => 'Bilimsel ya da sanatsal etkinlikte belgelendirilmiş davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
 

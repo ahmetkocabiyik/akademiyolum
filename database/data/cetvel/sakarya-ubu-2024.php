@@ -38,11 +38,22 @@ return [
         '1.7' => ['baslik' => 'ESCI dergide teknik not, kısa makale, vaka takdimi veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 30],
 
         // ── 2. BİLDİRİLER ──
-        '2.1' => ['baslik' => 'Uluslararası kongrede davetli konuşmacı olarak sunulan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 60],
-        '2.2' => ['baslik' => 'Uluslararası kongrede sözlü sunulan ve tam metin yayımlanan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 50],
-        '2.4' => ['baslik' => 'Uluslararası kongrede sözlü sunulan ve özet yayımlanan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 30],
-        '2.5' => ['baslik' => 'Ulusal kongrede sözlü sunulan ve tam metin yayımlanan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 30],
-        '2.7' => ['baslik' => 'Ulusal kongrede sözlü sunulan ve özet yayımlanan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 20],
+        // KODLAR BİR SATIR KAYMIŞTI. Kaynağın gerçek sırası: 2.1 uluslararası
+        // davetli 60 · 2.2 ULUSAL DAVETLİ 50 · 2.3 uluslararası sözlü tam
+        // metin 40 · 2.4 ulusal sözlü tam metin 30 · 2.5 uluslararası sözlü
+        // özet 30 · 2.6 uluslararası poster 20 · 2.7 ulusal sözlü özet 20 ·
+        // 2.8 ulusal poster 10. Cetvelde `Uluslararası Tam Metin` 2.2'nin
+        // (ulusal davetli) 50 puanını taşıyordu.
+        //
+        // SÖZLÜ/POSTER ekseni sözlükte yok: `Özet/Poster` etiketi hem özet
+        // hem poster satırlarını taşıdığı için ikisinin en düşüğünü alır
+        // (uluslararası 20, ulusal 10). `Davetli Konuşmacı` kapsam
+        // taşımadığı için ulusal değeri (50) geçerli.
+        '2.1-2.2' => ['baslik' => 'Kongre ya da sempozyumda davetli konuşmacı olarak sunulan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 50],
+        '2.3' => ['baslik' => 'Uluslararası kongrede sözlü sunulan ve tam metin yayımlanan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 40],
+        '2.5-2.6' => ['baslik' => 'Uluslararası kongrede sözlü sunulup özeti yayımlanan ya da poster olarak sunulan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 20],
+        '2.4' => ['baslik' => 'Ulusal kongrede sözlü sunulan ve tam metin yayımlanan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 30],
+        '2.7-2.8' => ['baslik' => 'Ulusal kongrede sözlü sunulup özeti yayımlanan ya da poster olarak sunulan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 10],
 
         // ── 3. KİTAPLAR ──
         '3.1' => ['baslik' => 'Alanında uluslararası yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],

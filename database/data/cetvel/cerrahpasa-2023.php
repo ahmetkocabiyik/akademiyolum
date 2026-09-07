@@ -61,7 +61,13 @@ return [
         // ── A10 · BİLİMSEL TOPLANTI ──
         'A10a' => ['baslik' => 'Uluslararası toplantıda sözlü sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 15],
         'A10b' => ['baslik' => 'Uluslararası toplantıda poster sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
-        'A10c' => ['baslik' => 'Uluslararası toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
+        'A10c-B8c' => ['baslik' => 'Uluslararası toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 3],
+        // B bölümünün (ULUSAL FAALİYETLER) 8. maddesi hiç girilmemişti:
+        // sözlü sunum 6, poster sunum 4, davetli konuşmacı 3. Ulusal bildiri
+        // etiketlerinin karşılığı yoktu; `Davetli Konuşmacı` da kapsam
+        // taşımadığı için A/10-c'nin 5'i yerine B/8-c'nin 3'ünü alır.
+        'B8a' => ['baslik' => 'Ulusal bilimsel toplantıda sözlü sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 6],
+        'B8b' => ['baslik' => 'Ulusal bilimsel toplantıda poster sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 4],
 
         // ── A11 · ATIF ──
         'A11a' => ['baslik' => 'SCIE/SSCI/AHCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],

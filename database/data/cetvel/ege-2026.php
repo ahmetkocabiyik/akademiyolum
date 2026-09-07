@@ -76,17 +76,18 @@ return [
         // "8/4" = tam metin / özet. Sözlükte ikisi ayrı etiket olduğu için
         // yönergenin ikili değeri iki maddeye açıldı.
         '2a-2d' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
-        // İKİ EKSEN BİRDEN: kaynak hem SÖZLÜ/POSTER hem TAM METİN/ÖZET
-        // ayrımı yapıyor (uluslararası sözlü 8/4 · poster 5/3, ulusal sözlü
-        // 6/3 · poster 4/2). Sözlükte yalnız tam metin/özet ekseni var, bu
-        // yüzden her etiket kendi kolonunun POSTER değerini alıyor.
-        //
-        // Önce b ve c satırları "tam metin satırı" ile "özet satırı" sanılıp
-        // 8 ve 5 yazılmıştı; oysa c bir POSTER satırı ve 5 onun TAM METİN
-        // değeri. Sonuç: poster tam metni 8, poster özeti 5 puan alıyordu.
-        '2b-2c' => ['baslik' => 'Uluslararası toplantıda sunulan, tam metni yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 5],
+        // SÖZLÜ/POSTER ekseni sözlükte YOK. Etiket çifti şöyle bölüşüyor:
+        // `Tam Metin` = SÖZLÜ sunulup tam metni basılan bildiri;
+        // `Özet/Poster` = özet basılanlar ile POSTER'lerin tamamı (poster
+        // adı ikinci etikette geçiyor). Bu yüzden `Özet/Poster` satırı,
+        // kaynağın özet ve poster hücrelerinin EN DÜŞÜĞÜNÜ alır.
+        // Ege: uluslararası sözlü 8/4 · poster 5/3 → özet/poster 3; ulusal
+        // sözlü 6/3 · poster 4/2 → özet/poster 2. Önce b ve c satırları
+        // "tam metin satırı / özet satırı" sanılıp özet etiketine POSTER'in
+        // TAM METİN değeri (5) yazılmıştı.
+        '2b-2c' => ['baslik' => 'Uluslararası toplantıda sunulan, tam metni yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 8],
         '2b-2c-o' => ['baslik' => 'Uluslararası toplantıda sunulan, özeti yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
-        '2e-2f' => ['baslik' => 'Ulusal toplantıda sunulan, tam metni yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 4],
+        '2e-2f' => ['baslik' => 'Ulusal toplantıda sunulan, tam metni yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 6],
         '2e-2f-o' => ['baslik' => 'Ulusal toplantıda sunulan, özeti yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
         // ── 3. KİTAP ──
