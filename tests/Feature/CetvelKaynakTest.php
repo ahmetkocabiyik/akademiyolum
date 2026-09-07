@@ -958,12 +958,15 @@ test('toplantı organizasyonu etiketleri korpusta puan alıyor', function (strin
 ]);
 
 /**
- * ROL KADEMESİ KORUNUYOR MU: aile tek etikete toplansaydı §0 hepsini oturum
- * başkanlığının kademesine indirirdi. Bitlis'in F.4 bloğu üç rungu da tek
- * kaynakta taşıyor (başkanlık 10 · üyelik 5 · oturum 2); üçünün de kendi
- * değerini alması ayrımın çökmediğinin kanıtı.
+ * İKİ EKSEN BİRDEN: ROL ve KAPSAM. Bitlis'in F bölümü dört blok — F.1
+ * uluslararası kongre · F.2 uluslararası çalıştay · F.3 ulusal kongre ·
+ * F.4 ulusal çalıştay — ve her blokta üç rol ayrı puanlı. Altı etiketin
+ * her biri KENDİ KAPSAMININ iki bloğunun en düşüğünü alır.
+ *
+ * Önce altısı da F.4'e (ULUSAL ÇALIŞTAY, en düşük blok) yazılmıştı: rol
+ * kademesi korunuyordu ama KAPSAM kademesi çökmüştü.
  */
-test('toplantı organizasyonunda rol kademesi çökmüyor', function () {
+test('toplantı organizasyonunda rol ve kapsam kademeleri birlikte duruyor', function () {
     $katalog = app(SartDeposu::class)->cetveller()['bitlis-2024'] ?? null;
     expect($katalog)->not->toBeNull();
 
@@ -972,9 +975,12 @@ test('toplantı organizasyonunda rol kademesi çökmüyor', function () {
         $katalog->coz(['*']),
     );
 
-    expect($puan('Toplantı Düzenleme Başkanlığı (Uluslararası)'))->toBe(10)
-        ->and($puan('Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'))->toBe(5)
-        ->and($puan('Oturum Başkanlığı (Uluslararası)'))->toBe(2);
+    expect($puan('Toplantı Düzenleme Başkanlığı (Uluslararası)'))->toBe(15)
+        ->and($puan('Toplantı Düzenleme Başkanlığı (Ulusal)'))->toBe(10)
+        ->and($puan('Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'))->toBe(8)
+        ->and($puan('Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'))->toBe(5)
+        ->and($puan('Oturum Başkanlığı (Uluslararası)'))->toBe(3)
+        ->and($puan('Oturum Başkanlığı (Ulusal)'))->toBe(2);
 });
 
 /**
@@ -1574,4 +1580,80 @@ test('Mersin bildiri bölümü ve makale türü merdiveni', function () {
         ->and($makale('SCIE/SSCI (Q1)', 'ozgun_makale'))->toBe(50)
         ->and($makale('SCIE/SSCI (Q1)', 'vaka_teknik_not'))->toBe(15)
         ->and($makale('SCIE/SSCI (Q4)', 'vaka_teknik_not'))->toBe(6);
+});
+
+/**
+ * `Oturum Başkanlığı` ETİKET ÇİFTİ KAPSAM TAŞIYOR — davetli konuşmacının
+ * tersine uluslararası ile ulusal ayrı etiket. Yönergelerin çoğu da ayırıyor
+ * ama korpusta 37 cetvelin 28'inde iki etiket TEK SATIRDA duruyordu ve
+ * kapsam kademesi çökmüştü.
+ *
+ * Çökme iki yöne birden gidiyordu: satır bazen ULUSAL değerdeydi
+ * (uluslararası eksik sayılıyor: Bartın 3 yerine 10, ZBEÜ 1 yerine 10),
+ * bazen ULUSLARARASI değerdeydi (ulusal fazla sayılıyor: Ardahan 5 yerine 2,
+ * Sakarya 10 yerine 8, İstanbul Zaim 5 yerine... yani ulusal 10 alıyordu).
+ *
+ * Değerler 08.09.2026'da kaynak PDF'lerinden okundu.
+ */
+test('oturum başkanlığında kapsam kademesi ayrışıyor', function (string $cetvel, int $ulus, int $ulusal) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $puan = fn (string $etiket): int => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Diger, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => null, 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect([$puan('Oturum Başkanlığı (Uluslararası)'), $puan('Oturum Başkanlığı (Ulusal)')])
+        ->toBe([$ulus, $ulusal]);
+})->with([
+    // Ulusal kademe FAZLA sayıyordu:
+    ['ardahan-2026', 5, 2],
+    ['sakarya-2026', 10, 8],
+    ['istanbul-zaim-2019', 10, 5],
+    ['adu-2024', 15, 5],
+    ['karamanoglu-2024', 8, 5],
+    // Uluslararası kademe EKSİK sayıyordu:
+    ['bartin-2022', 10, 5],
+    ['bitlis-2024', 3, 2],
+    ['bolu-aibu-2024', 3, 2],
+    ['gazi-2024', 4, 3],
+    ['hakkari-2024', 5, 3],
+    ['osmaniye-2023', 5, 3],
+    ['msgsu-2023', 3, 2],
+    ['fsmvu-2024', 5, 3],
+    ['ufuk-2025', 3, 1],
+    ['siirt-2025', 5, 3],
+    ['zbeu-2026', 10, 2],
+    ['duzce-2024', 5, 2],
+    ['erzurum-teknik-2024-muhendislik-docentlik', 20, 10],
+    // Ulusal satır hiç yoktu (SBTÜ B3.8), ya da 0,5 → 0 olduğu için
+    // ulusal etiket karşılıksız kalmalıydı (Ankara Bilim 6.4.18).
+    ['sbtu-2021', 20, 10],
+    ['ankara-bilim-2023', 1, 0],
+]);
+
+/**
+ * Aynı satırda hem ROL hem KAPSAM kademesi varsa ikisi birden korunmalı.
+ * Erzurum Teknik'in B bölümü buna örnek: B1/B6 kongre başkanlığı 30/20,
+ * B2/B7 oturum başkanlığı ve düzenleme kurulu üyeliği 20/10. Altı etiketin
+ * tamamı önce tek satırda ULUSAL değerde (10) duruyordu.
+ */
+test('Erzurum Teknik toplantı ailesinde rol ve kapsam birlikte duruyor', function () {
+    $katalog = sartDepo()->katalog('erzurum-teknik-2024-muhendislik-docentlik');
+    $kodlar = $katalog->coz(['*']);
+
+    $puan = fn (string $etiket): int => $katalog->puan(
+        new Faaliyet(['kategori' => Kategori::Diger, 'tur' => 'T', 'baslik' => 'T',
+            'kaynak' => $etiket, 'rol' => null, 'durum' => 'onaylandi']),
+        $kodlar,
+    );
+
+    expect($puan('Toplantı Düzenleme Başkanlığı (Uluslararası)'))->toBe(30)
+        ->and($puan('Toplantı Düzenleme Başkanlığı (Ulusal)'))->toBe(20)
+        ->and($puan('Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'))->toBe(20)
+        ->and($puan('Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'))->toBe(10);
 });

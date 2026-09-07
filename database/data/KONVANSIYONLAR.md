@@ -2821,3 +2821,33 @@ sergi/yarışma daveti ("davetli/yarışmalı sergi") aynı kelimeleri kullanıy
 ve en düşük değeri onlar veriyor. Filtre: davet sözcüğü ile KONUŞMA bağlamı
 (`konuşmac|bildiri|sunum|tebliğ|oturum`) aynı satırda olmalı; `derleme|
 editör|proje|hakem|jüri|sergi|yarışmalı|konser|festival` geçen satır elenir.
+
+## KAPSAM TAŞIYAN ETİKET ÇİFTİ TEK SATIRDA BİRLEŞMİŞSE ÇÖKMÜŞTÜR
+
+`Oturum Başkanlığı (Uluslararası)` / `(Ulusal)` gibi kapsam taşıyan etiket
+çiftleri, `Davetli Konuşmacı`nın tersine, ayrımı TAŞIYABİLİR. Buna rağmen
+korpusun 37 cetvelinin 28'inde ikisi de TEK SATIRDAYDI; kaynak ayırdığı
+hâlde kapsam kademesi çökmüştü.
+
+**Çökme iki yöne birden gider ve ikisi de zararlı:**
+
+* satır ULUSAL değerdeyse uluslararası eksik sayılır (Bartın 3 yerine 10,
+  ZBEÜ 1 yerine 10, Erzurum Teknik 10 yerine 20);
+* satır ULUSLARARASI değerdeyse ulusal FAZLA sayılır (Ardahan 5 yerine 2,
+  Sakarya 10 yerine 8, İstanbul Zaim 10 yerine 5) — bu §0 ihlalidir.
+
+**Detektör kaynağa bakmadan çalışır:** iki kapsam etiketi aynı puanı
+alıyorsa işaret ver. 37 cetvelde 28 işaret çıktı, 20'si gerçek hataydı.
+Kalan dokuzda kaynak gerçekten tek satır yazıyor ("uluslararası **ya da**
+ulusal … oturum başkanlığı"), yani eşitlik doğru.
+
+**İKİ EKSEN BİRDEN: ROL ve KAPSAM.** Bitlis, Bolu AİBÜ ve Erzurum Teknik'te
+kaynak hem rolü (başkanlık · kurul üyeliği · oturum başkanlığı) hem kapsamı
+(uluslararası kongre · uluslararası çalıştay · ulusal kongre · ulusal
+çalıştay) kademelendiriyor. Altı etiketin her biri KENDİ KAPSAMININ
+bloklarının en düşüğünü alır. Bu üç cetvelde altısı da en düşük bloğa
+(ulusal çalıştay) yazılmıştı: rol kademesi duruyordu ama kapsam çökmüştü.
+
+**KAPSAM KADEMESİ ROLDEN ÖNCE KONTROL EDİLİR.** Rol ayrımını koruyan bir
+test (eski "rol kademesi çökmüyor") kapsam çökmesini görmüyordu; iki eksen
+ayrı ayrı donduruldu.

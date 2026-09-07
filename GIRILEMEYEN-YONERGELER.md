@@ -1038,3 +1038,17 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
 - **Üsküdar'ın bildiri tablosu** metin çıkarımında puan sütununu tamamen
   kaybediyor; mevcut değerler (davetli 20) kod adlarından okunmuş, sayfa
   görüntüsüyle doğrulanmadı.
+
+## Oturum başkanlığı taraması (08.09.2026) — girilemeyen kalemler
+
+- **Biruni B4.1/B4.2**: uluslararası oturum başkanlığı 2, ulusal ise
+  "oturum başkanlığı / düzenleme kurulu üyeliği / bilim-danışma kurulu
+  üyeliği ve/veya hakemlik" ortak satırında 5. Ulusalın uluslararasından
+  yüksek görünmesi metin çıkarımının satır kaydırmasından da olabilir;
+  sayfa görüntüsüyle doğrulanmadığı için ikisi de 2'de bırakıldı (eksik
+  sayma yönünde, güvenli).
+- **Üniversite İÇİ etkinliklerde oturum başkanlığı** (Bartın I.12, 3 puan)
+  sözlükte karşılıksız: etiket çifti yalnız uluslararası/ulusal ayırıyor.
+- **Moderatörlük** (Sakarya 14.2d/14.3d oturum başkanlığıyla aynı satırda,
+  Atatürk 02.12.04/02.13.02 ayrı satırda 2/1) ayrı etiket değil; Sakarya'da
+  ortak satır olduğu için sayılıyor, Atatürk'te sayılmıyor.

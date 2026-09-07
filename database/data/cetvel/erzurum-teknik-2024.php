@@ -138,7 +138,14 @@ $maddeler = [
     'A8' => ['baslik' => 'Ulusal hakemli dergide yayın', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 6],
 
     // ══ B. KONGRE ÇALIŞMALARI ══
-    'B1-B7' => ['baslik' => 'Hakemli konferansta kongre başkanlığı, oturum başkanlığı ya da düzenleme kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 10],
+    // B BÖLÜMÜ İKİ KAPSAM: B1-B5 uluslararası, B6-B10 ulusal. Üç rol de
+    // ayrı puanlı — B1 kongre başkanı 30 · B2 oturum başkanı/düzenleme
+    // kurulu üyesi 20; ulusalda B6 20 · B7 10. Önce altı etiketin tamamı
+    // tek satırda ULUSAL değerde (10) duruyordu.
+    'B1' => ['baslik' => 'Uluslararası hakemli konferansta kongre başkanı olmak', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 30],
+    'B6' => ['baslik' => 'Ulusal hakemli konferansta kongre başkanı olmak', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 20],
+    'B2' => ['baslik' => 'Uluslararası hakemli konferansta oturum başkanı ya da düzenleme kurulu üyesi olmak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Oturum Başkanlığı (Uluslararası)'], 'puan' => 20],
+    'B7' => ['baslik' => 'Ulusal hakemli konferansta oturum başkanı ya da düzenleme kurulu üyesi olmak', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 10],
     'B3' => ['baslik' => 'Uluslararası hakemli konferansta sunulan ve tam metin yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 10],
     'B4-B5' => ['baslik' => 'Uluslararası hakemli konferansta özet olarak yayımlanan ya da poster olarak sunulan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
     'B8' => ['baslik' => 'Ulusal hakemli konferansta sunulan ve tam metin yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 5],

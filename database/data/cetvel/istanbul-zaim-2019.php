@@ -278,7 +278,10 @@ $govde = function (bool $guzelSanatlar): array {
             'Y.3' => ['baslik' => 'Üniversitede komisyon ya da kurul üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı'], 'puan' => 5],
             'U.1' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 80],
             'U.2' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 40],
-            'U.8' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 5],
+            // Kaynak U.7 (ULUSLARARASI toplantıda oturum başkanlığı) 10,
+            // U.8 (ULUSAL) 5 diyor; iki kapsam tek satırda birleşmişti.
+            'U.7' => ['baslik' => 'Uluslararası bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 10],
+            'U.8' => ['baslik' => 'Ulusal bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 5],
         ],
 
         'gruplar' => [

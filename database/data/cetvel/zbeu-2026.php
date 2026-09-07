@@ -152,7 +152,10 @@ $maddeler = [
     '14.a' => ['baslik' => 'Hakemli dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
 
     // ══ 15. ETKİNLİK ══
-    '15.a' => ['baslik' => 'Bilimsel ve sanatsal kongre, sergi, konser ve etkinliklerin düzenleme ya da bilim kurullarında görev almak; oturum başkanlığı, seminer, değişim ve iş birliği faaliyetleri', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
+    '15.a' => ['baslik' => 'Bilimsel ve sanatsal kongre, sergi, konser ve etkinliklerin düzenleme ya da bilim kurullarında görev almak; oturum başkanlığı, seminer, değişim ve iş birliği faaliyetleri', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
+    // Kaynak 15/c uluslararası kongrede bilim kurulu üyeliği veya oturum başkanlığı 10, 15/f ULUSAL kongrede 2 diyor.
+    '15.a-otr' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 10],
+    '15.a-otr-ulusal' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
     '15.u' => ['baslik' => 'Topluma yönelik akademik ve sosyal sorumluluk çalışmalarında yer almak; bakanlık ve kamu kurumlarının bilim komisyonlarında görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın', 'Kamu/STK Danışmanlığı'], 'puan' => 1],
 
     // ══ 17. BİRİM YÖNETİCİLİĞİ ══

@@ -233,7 +233,10 @@ $maddeler = [
     '6.3.3' => ['baslik' => 'Faydalı model belgesi ya da endüstriyel tasarım tescili', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım'], 'puan' => 30],
 
     // ══ 6.4 BİLİMSEL VE SANATSAL TOPLANTI DÜZENLEME ══
-    '6.4.18' => ['baslik' => 'Bilimsel ya da sanatsal toplantı düzenleme, küratörlük, oturum başkanlığı ve benzeri görevler', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
+    '6.4.18' => ['baslik' => 'Bilimsel ya da sanatsal toplantı düzenleme, küratörlük, oturum başkanlığı ve benzeri görevler', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    // Kaynak 6.4.17 uluslararası panel/seminer oturum başkanlığı 3, 6.4.18 ULUSAL 2 diyor.
+    '6.4.18-otr' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 3],
+    '6.4.18-otr-ulusal' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
 
     // ══ 6.5 İDARİ GÖREVLER ══
     '6.5.1' => ['baslik' => 'Akademik teşkilat yönetmeliğinde tanımlanan idari görevleri üstlenmek (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 10],

@@ -188,7 +188,9 @@ $maddeler += [
 
     // ══ 3.11 BİLİMSEL TANINIRLIK ══
     '3.11.6' => ['baslik' => 'Ulusal ya da uluslararası bilimsel toplantıda davetli konuşmacı, moderatör veya oturum başkanı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
-    '3.11.6k' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı ya da moderatörlük', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 5],
+    // Kaynak 3.11.4 uluslararası 5, 3.11.8 ULUSAL 2 diyor; iki kapsam tek satırda birleşmişti.
+    '3.11.6k' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 5],
+    '3.11.6k-ulusal' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
 
     // ══ 3.12 SANAT / TASARIM, MİMARİ PROJE VE PLANLAR ══
     '3.12.1' => ['baslik' => 'Uluslararası mimari proje, kentsel tasarım projesi ya da imar planı çalışmalarında proje müellifi olmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif'], 'puan' => 20],

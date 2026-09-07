@@ -177,7 +177,11 @@ return [
         '14.44' => ['baslik' => 'Bölüm başkan yardımcılığı *', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 10],
         '14.45' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 20],
         '14.46' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 10],
-        '14.47' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 10],
+        // Kaynak 14.2d (ULUSLARARASI akademik organizasyonda moderatörlük /
+        // oturum başkanlığı) 10, 14.3d (ULUSAL) 8 diyor; iki kapsam tek
+        // satırda uluslararası değerde birleşmişti.
+        '14.2d' => ['baslik' => 'Uluslararası akademik organizasyonda moderatörlük ya da oturum başkanlığı yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 10],
+        '14.3d' => ['baslik' => 'Ulusal akademik organizasyonda moderatörlük ya da oturum başkanlığı yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 8],
         '14.35' => ['baslik' => 'Üniversite kurul ya da komisyonlarında görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
     ],
 

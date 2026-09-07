@@ -142,8 +142,13 @@ $maddeler = [
     'B2.5' => ['baslik' => 'Faydalı model ya da patent müracaatı', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 10],
 
     // ══ B3. MESLEKİ VE DİĞER ARAŞTIRMA ETKİNLİKLERİ ══
-    'B3.2' => ['baslik' => 'Uluslararası hakemli bir konferansta oturum başkanı, davetli konuşmacı ya da panelist olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 20],
+    'B3.2' => ['baslik' => 'Hakemli bir konferansta davetli konuşmacı ya da panelist olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
+    // B3.8 (ULUSAL hakemli konferansta oturum başkanı/davetli konuşmacı/
+    // panelist, 10) girilmemişti; ulusal oturum başkanlığı etiketinin
+    // karşılığı yoktu. `Davetli Konuşmacı` kapsam taşımadığı için B3.2'nin
+    // 20'si yerine B3.8'in 10'unu alır.
     'B3.2k' => ['baslik' => 'Uluslararası hakemli bir konferansta oturum başkanlığı yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 20],
+    'B3.8k' => ['baslik' => 'Ulusal hakemli bir konferansta oturum başkanlığı yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 10],
     'B3.12' => ['baslik' => 'Hakemli bir konferansın düzenleme ya da bilim kurulunda görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
     'B3.13' => ['baslik' => 'Uzmanlık alanınızla ilgili sanayiye danışmanlık hizmeti vermek ya da bilirkişi/teknik rapor hazırlamak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 3],
 

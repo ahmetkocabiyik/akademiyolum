@@ -178,7 +178,11 @@ return [
         '12.7.b' => ['baslik' => 'Ulusal alanda film, belgesel veya deneysel film', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Belgesel/Kısa Film (Ulusal)', 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)'], 'puan' => 20],
         '3.4.a' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 6],
         '3.4.b' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
-        '3.4.c' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
+        // Kaynak 3.3.c (uluslararası konferansta bilim kurulu üyeliği /
+        // oturum başkanlığı) 5, 3.4.c (ULUSAL) 2 diyor; kurs-yaz okulu
+        // kollarında ikisi de 5. Uluslararası min(5,5)=5, ulusal min(2,5)=2.
+        '3.3.c' => ['baslik' => 'Uluslararası bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 5],
+        '3.4.c' => ['baslik' => 'Ulusal bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
     ],
 
     'gruplar' => [

@@ -152,9 +152,21 @@ return [
         'E.1.1' => ['baslik' => 'Tamamlanmış yüksek lisans tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 10],
         'E.1.2' => ['baslik' => 'Tamamlanmış doktora, uzmanlık veya sanatta yeterlik tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 20],
         'G.1.1' => ['baslik' => 'Bilimsel ya da mesleki kurum ve kuruluşların yönetiminde, kurullarında veya komisyonlarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 8],
-        'F.4.1' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 10],
-        'F.4.3' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
-        'F.4.4' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
+        // F BÖLÜMÜ DÖRT BLOK: F.1 uluslararası kongre · F.2 uluslararası
+        // çalıştay · F.3 ulusal kongre · F.4 ulusal çalıştay. Üç rol de her
+        // blokta ayrı puanlı, bu yüzden her etiket KENDİ KAPSAMININ iki
+        // bloğunun en düşüğünü alır:
+        //   başkanlık   uluslararası min(20,15)=15 · ulusal min(15,10)=10
+        //   kurul üyesi uluslararası min(10, 8)= 8 · ulusal min( 8, 5)= 5
+        //   oturum      uluslararası min( 5, 3)= 3 · ulusal min( 3, 2)= 2
+        // Önce altı etiketin tamamı F.4 (ULUSAL ÇALIŞTAY) bloğuna yazılmıştı.
+        'F.1.1' => ['baslik' => 'Uluslararası bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+        'F.4.1' => ['baslik' => 'Ulusal bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 10],
+        'F.1.3' => ['baslik' => 'Uluslararası bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 8],
+        'F.4.3' => ['baslik' => 'Ulusal bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
+        // Kaynak F.1.4 uluslararası kongre 5, F.2.4 uluslararası çalıştay 3, F.3.4 ulusal kongre 3, F.4.4 ulusal çalıştay 2.
+        'F.4.4' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 3],
+        'F.4.4-ulusal' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
     ],
 
     'gruplar' => [

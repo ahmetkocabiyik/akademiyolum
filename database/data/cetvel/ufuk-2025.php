@@ -121,7 +121,10 @@ $maddeler = [
 
     // ══ 10. BİLİMSEL ETKİNLİKLERDE GÖREV ALMA ══
     '10.g' => ['baslik' => 'Toplantılarda davetli konuşmacı olarak sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 3],
-    '10.a' => ['baslik' => 'Kongre, kurs ve çalıştaylarda bilimsel düzenleme kurulu başkanlığı, üyeliği ya da oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
+    '10.a' => ['baslik' => 'Kongre, kurs ve çalıştaylarda bilimsel düzenleme kurulu başkanlığı, üyeliği ya da oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
+    // Kaynak h) uluslararası katılımlı toplantıda oturum başkanlığı 3, j) ULUSAL toplantıda 1 diyor.
+    '10.a-otr' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 3],
+    '10.a-otr-ulusal' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
     '10.l' => ['baslik' => 'Jürili yarışmalarda danışmanlık ya da jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 4],
 
     // ══ 11. EĞİTİM-ÖĞRETİM FAALİYETLERİ ══
