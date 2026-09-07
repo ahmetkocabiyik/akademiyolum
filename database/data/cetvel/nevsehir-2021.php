@@ -151,10 +151,10 @@ $govde = fn (int $a11, int $a12): array => [
     'D.2.3' => ['baslik' => 'Tescil edilmiş faydalı model, endüstriyel tasarım ya da yazılım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Yazılım', 'Islahçı Hakkı / Çeşit Tescili', 'Ticarileştirme'], 'puan' => 5],
     'D.4.2' => ['baslik' => 'Bilimsel toplantıların düzenleyenler listesinde bulunmak (konferans başkanlığı, düzenleme kurulu, bilim kurulu, sekretarya)', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
     'D.6' => ['baslik' => 'Kurum ya da kuruluşlarca talep edilen bilimsel rapor ve toplumsal katkı çalışmaları', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 2],
-    'D.7.1' => ['baslik' => 'Enstitü ya da yüksekokul müdürlüğü görevleri (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
+    'D.7.1' => ['baslik' => 'Enstitü ya da yüksekokul müdürlüğü görevleri (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 5],
     'D.7.2' => ['baslik' => 'Dekan yardımcılığı, bölüm başkanlığı, merkez müdürlüğü ya da koordinatörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 4],
     'D.7.3' => ['baslik' => 'Bölüm başkan yardımcılığı, koordinatör yardımcılığı ya da anabilim dalı başkanlığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 3],
-    'D.7.4' => ['baslik' => 'Kurul ve komisyonlarda görev almak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
+    'D.7.4' => ['baslik' => 'Kurul ve komisyonlarda görev almak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 2],
 
     // ══ E. SANAT VE SPOR FAALİYETLERİ ══
     'E.1' => ['baslik' => 'Özgün sanat eserinizin, bestenizin ya da tasarımınızın yurt dışında satın alınması, yayın organlarında yer alması veya uygulanması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatSatinU, 'puan' => 30],

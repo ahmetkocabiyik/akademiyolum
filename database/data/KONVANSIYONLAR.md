@@ -1150,6 +1150,42 @@ satır daha ekledi — üyelik etiketinin kapsamı 52 üniversiteden 71'e çıkt
 listeden düşüyor ve kaynak "aile yok" görünüyor. Terim başına yeniden tarama
 bunun tek pratik panzehiri.
 
+### TARAMADAN ÖNCE METİN ÖNBELLEĞİNİ SAY
+
+Kaynak metinleri geçici dizinde tutuluyor ve oturum sırasında **temizlenebiliyor**.
+07.09.2026'da senato taraması "sıfır işaret" verdi; sebep etiketin temiz
+olması değil, `txt/` dizininde 179 dosyadan 19'unun kalmasıydı. Tarayıcı
+eksik dosyayı atlıyor ve sessizce boş sonuç veriyor.
+
+**Her taramanın ilk satırı dosya sayısı olmalı**; sayı beklenenden azsa
+`pdftotext -layout` ile yeniden üret. Boş sonuç ancak önbellek tamken
+"temiz" demektir.
+
+### SENATO ETİKETİ: KADEME DEĞİL YERLEŞTİRME SORUNU
+
+`Senato / Üniversite Yönetim Kurulu Üyesi` kademe taramasında **dokuz
+işaretin dokuzu da yanlış pozitif** çıktı. Sebep yapısal: yönergelerde
+"Senato" sözcüğü ezici çoğunlukla YÖNERGEYİ ONAYLAYAN organı anlatıyor
+(tanımlar maddesi, "Senato kararları uygulanır"), puanlanan bir kalemi
+değil. Senato üyeliğini ayrı satırda puanlayan kaynak bir avuç ve
+oradaki cetveller zaten en düşük kademedeydi (Üsküdar 5/5).
+
+Gerçek risk kademede değil **YERLEŞTİRMEDE**: etiketin, senato üyeliğiyle
+ilgisi olmayan bir satırda durması. Tarama bunun için ayrı: etiketi taşıyan
+satırların başlığında `senato|yönetim kurul|kurul üye` geçiyor mu diye bak.
+Yirmi cetvelde geçmiyordu; ikisi gerçek hataydı:
+
+- **Düzce** — etiket "Enstitü/YO müdürlüğü veya dekan yardımcılığı" (10)
+  satırındaydı; kaynağın d) bendi senato/yönetim kurulu üyeliğini ayrıca
+  puanlıyor (4). Kendi satırı açıldı.
+- **Nevşehir** — etiket "Enstitü ya da yüksekokul müdürlüğü" (5)
+  satırındaydı; kaynak senato üyeliğini HİÇ puanlamıyor, en yakın karşılık
+  "kurul ve komisyonlarda görev" (D.7.4, 2). Etiket oraya taşındı.
+
+Geri kalan on sekizde satır kaynağın kendi BİRLEŞİK idari görev satırı
+("Üniversite yönetim kurulu, senato ya da diğer kurul üyeliği") ve
+yerleştirme doğru.
+
 ### KAPSAMSIZ ETİKET TARAMASI BİTTİ: DÖRT ETİKET, YİRMİ SEKİZ DÜZELTME
 
 Sözlükte kademe taşımayan dört etiketin tamamı tarandı:

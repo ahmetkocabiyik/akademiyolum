@@ -987,6 +987,30 @@ test('davetli konuşmacı etiketi ulusal kademede', function (string $cetvel, in
 ]);
 
 /**
+ * SENATO ETİKETİ YANLIŞ SATIRDAYDI (06.09.2026).
+ *
+ * `Senato / Üniversite Yönetim Kurulu Üyesi` iki cetvelde MÜDÜRLÜK
+ * satırında duruyordu. Düzce'nin kaynağı senato/yönetim kurulu üyeliğini
+ * ayrı bir bentte (d, 4) puanlıyor; Nevşehir hiç puanlamıyor, en yakın
+ * karşılığı "kurul ve komisyonlarda görev" (D.7.4, 2).
+ */
+test('senato etiketi kendi satırında', function (string $cetvel, int $beklenen) {
+    $katalog = app(SartDeposu::class)->cetveller()[$cetvel] ?? null;
+    expect($katalog)->not->toBeNull("cetvel yok: {$cetvel}");
+
+    $faaliyet = sartFaaliyet('Senato / Üniversite Yönetim Kurulu Üyesi', Kategori::IdariGorev, null);
+
+    expect($katalog->puan($faaliyet, $katalog->coz(['*'])))->toBe($beklenen);
+})->with([
+    // Düzce d) 4 · 11.c'nin (müdürlük) 10'u yazılıydı.
+    ['duzce-2024', 4],
+    // Nevşehir D.7.4 kurul görevi 2 · D.7.1'in (müdürlük) 5'i yazılıydı.
+    ['nevsehir-2021', 2],
+    // Üsküdar: kaynak senato ve yönetim kurulunu 5'te eşitliyor — doğru.
+    ['uskudar-2024', 5],
+]);
+
+/**
  * KAPSAMSIZ ETİKETLERİN ÜÇÜNCÜ TURU: `Kurul / Komisyon Üyeliği`.
  *
  * Etiket kurulun HANGİSİ olduğunu taşımıyor (senato, fakülte kurulu, birim

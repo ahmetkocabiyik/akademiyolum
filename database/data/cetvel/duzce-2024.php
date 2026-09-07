@@ -156,7 +156,8 @@ return [
         // ══ 11. İDARİ VE AKADEMİK GÖREVLER (taban puanın %10'uyla sınırlı) ══
         '11.a' => ['baslik' => 'Rektörlük (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 20],
         '11.b' => ['baslik' => 'Rektör yardımcılığı, dekanlık veya başhekimlik (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 15],
-        '11.c' => ['baslik' => 'Enstitü, yüksekokul müdürlüğü veya dekan yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 10],
+        '11.c' => ['baslik' => 'Enstitü, yüksekokul müdürlüğü veya dekan yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 10],
+        '11.d' => ['baslik' => 'Senato ya da fakülte, enstitü, yüksekokul yönetim kurulu üyeliği (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
         '11.e' => ['baslik' => 'Merkez müdürlüğü veya bölüm başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 5],
         '11.g' => ['baslik' => 'Anabilim dalı başkanlığı veya akademik komisyon üyeliği (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 2],
 
