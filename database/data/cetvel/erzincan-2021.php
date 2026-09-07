@@ -234,7 +234,6 @@ $maddeler = [
     'YN2' => ['baslik' => 'Merkez müdürlükleri ve koordinatörlükler', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
     'YN3' => ['baslik' => 'Bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 5],
     'YN3.y' => ['baslik' => 'Bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 2],
-    'YN5' => ['baslik' => 'Senato ve yönetim kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 2],
 ];
 
 $kodlar = fn (string ...$onekler): array => array_values(array_filter(

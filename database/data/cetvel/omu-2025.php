@@ -453,7 +453,7 @@ $govde = function (int $bildiri, int $ulusalKitap, int $egitim, bool $gorselEtki
             // Bölümün bütün satırlarının puanı GÖREV ALINAN YIL İLE ÇARPILIYOR
             // (tablonun * dipnotu); kayıt görev süresini taşımadığı için hepsi
             // TEK YIL değeriyle girildi. Bu bölümün puanı olduğundan düşük çıkar.
-            '14.1' => ['baslik' => 'Senato üyeliği, dekan yardımcılığı, müdürlük ya da müdür yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 30],
+            '14.1' => ['baslik' => 'Dekan yardımcılığı, müdürlük ya da müdür yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 30],
             // Kaynak bölüm başkanlığını YALNIZCA Tıp/Eczacılık/Diş/Veteriner
             // DIŞINDAKİ birimlerde sayıyor, o fakültelerde ise anabilim dalı
             // başkanlığını. Kayıt fakülteyi taşımıyor; çoğunluğu yöneten okuma

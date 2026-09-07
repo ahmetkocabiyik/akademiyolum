@@ -1161,31 +1161,6 @@ eksik dosyayı atlıyor ve sessizce boş sonuç veriyor.
 `pdftotext -layout` ile yeniden üret. Boş sonuç ancak önbellek tamken
 "temiz" demektir.
 
-### SENATO ETİKETİ: KADEME DEĞİL YERLEŞTİRME SORUNU
-
-`Senato / Üniversite Yönetim Kurulu Üyesi` kademe taramasında **dokuz
-işaretin dokuzu da yanlış pozitif** çıktı. Sebep yapısal: yönergelerde
-"Senato" sözcüğü ezici çoğunlukla YÖNERGEYİ ONAYLAYAN organı anlatıyor
-(tanımlar maddesi, "Senato kararları uygulanır"), puanlanan bir kalemi
-değil. Senato üyeliğini ayrı satırda puanlayan kaynak bir avuç ve
-oradaki cetveller zaten en düşük kademedeydi (Üsküdar 5/5).
-
-Gerçek risk kademede değil **YERLEŞTİRMEDE**: etiketin, senato üyeliğiyle
-ilgisi olmayan bir satırda durması. Tarama bunun için ayrı: etiketi taşıyan
-satırların başlığında `senato|yönetim kurul|kurul üye` geçiyor mu diye bak.
-Yirmi cetvelde geçmiyordu; ikisi gerçek hataydı:
-
-- **Düzce** — etiket "Enstitü/YO müdürlüğü veya dekan yardımcılığı" (10)
-  satırındaydı; kaynağın d) bendi senato/yönetim kurulu üyeliğini ayrıca
-  puanlıyor (4). Kendi satırı açıldı.
-- **Nevşehir** — etiket "Enstitü ya da yüksekokul müdürlüğü" (5)
-  satırındaydı; kaynak senato üyeliğini HİÇ puanlamıyor, en yakın karşılık
-  "kurul ve komisyonlarda görev" (D.7.4, 2). Etiket oraya taşındı.
-
-Geri kalan on sekizde satır kaynağın kendi BİRLEŞİK idari görev satırı
-("Üniversite yönetim kurulu, senato ya da diğer kurul üyeliği") ve
-yerleştirme doğru.
-
 ### KAPSAMSIZ ETİKET TARAMASI BİTTİ: DÖRT ETİKET, YİRMİ SEKİZ DÜZELTME
 
 Sözlükte kademe taşımayan dört etiketin tamamı tarandı:
@@ -1196,6 +1171,12 @@ Sözlükte kademe taşımayan dört etiketin tamamı tarandı:
 | `Kitap Editörlüğü` | 8 | 10 |
 | `Hakemlik` | 3 | 4 |
 | `Kurul / Komisyon Üyeliği` | 6 | 10 |
+
+`Senato / Üniversite Yönetim Kurulu Üyesi` de tarandı ama **bu kadro kapsam
+dışı**: kullanıcı 07.09.2026'da "o kadro ile işimiz yok" dedi ve bu oturumda
+onun için açılan satırlar geri alındı (Düzce 11.d, Erzincan YN5, Nevşehir
+D.7.4 ve OMÜ 14.1'deki etiket). Etiket sözlükte ve eski cetvellerde duruyor;
+yeni satır AÇILMAZ.
 
 İşaret/gürültü oranı yüksek (28/38) — kapsamlı etiketlerdeki 96 işaretin
 tamamının yanlış pozitif çıkmasıyla tam zıt. **Sebep yapısal:** kapsamsız

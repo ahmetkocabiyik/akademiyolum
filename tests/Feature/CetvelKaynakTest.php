@@ -754,7 +754,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
 
         // Yalnız EG5 (yarıyıl başına 1 puanlık ders) dışarıda; `PUAN` grubu
         // ders satırlarını kapsamıyor.
-        'erzincan-2021: 1/113',
+        'erzincan-2021: 1/112',
 
         // Toplam baraj A-L; M (ödüller, idari görevler) ile N (patent)
         // kaynağın kendi ifadesiyle barajın dışında.
@@ -984,30 +984,6 @@ test('davetli konuşmacı etiketi ulusal kademede', function (string $cetvel, in
     ['bayburt-2024', 15],
     // Ağrı 2.2.1 15 · 2.1.1'in 20'si yazılıydı.
     ['agri-2024', 15],
-]);
-
-/**
- * SENATO ETİKETİ YANLIŞ SATIRDAYDI (06.09.2026).
- *
- * `Senato / Üniversite Yönetim Kurulu Üyesi` iki cetvelde MÜDÜRLÜK
- * satırında duruyordu. Düzce'nin kaynağı senato/yönetim kurulu üyeliğini
- * ayrı bir bentte (d, 4) puanlıyor; Nevşehir hiç puanlamıyor, en yakın
- * karşılığı "kurul ve komisyonlarda görev" (D.7.4, 2).
- */
-test('senato etiketi kendi satırında', function (string $cetvel, int $beklenen) {
-    $katalog = app(SartDeposu::class)->cetveller()[$cetvel] ?? null;
-    expect($katalog)->not->toBeNull("cetvel yok: {$cetvel}");
-
-    $faaliyet = sartFaaliyet('Senato / Üniversite Yönetim Kurulu Üyesi', Kategori::IdariGorev, null);
-
-    expect($katalog->puan($faaliyet, $katalog->coz(['*'])))->toBe($beklenen);
-})->with([
-    // Düzce d) 4 · 11.c'nin (müdürlük) 10'u yazılıydı.
-    ['duzce-2024', 4],
-    // Nevşehir D.7.4 kurul görevi 2 · D.7.1'in (müdürlük) 5'i yazılıydı.
-    ['nevsehir-2021', 2],
-    // Üsküdar: kaynak senato ve yönetim kurulunu 5'te eşitliyor — doğru.
-    ['uskudar-2024', 5],
 ]);
 
 /**
