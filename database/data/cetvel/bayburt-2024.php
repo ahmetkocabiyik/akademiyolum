@@ -165,7 +165,7 @@ return [
 
         // ══ 10. KURUMSAL KATKI (en az 1 yıl görev şartıyla) ══
         '10.c' => ['baslik' => 'Dekanlık, yüksekokul veya enstitü müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Rektör', 'Rektör Yardımcısı'], 'puan' => 10],
-        '10.ç' => ['baslik' => 'Dekan yardımcılığı veya müdür yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
+        '10.ç' => ['baslik' => 'Dekan yardımcılığı veya müdür yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
         '10.d' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 10],
 
         // ══ 11.2. SANAT VE TASARIM ETKİNLİKLERİ ══
@@ -223,6 +223,7 @@ return [
         '3.2.g' => ['baslik' => 'Ulusal bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 8],
         '3.1.h' => ['baslik' => 'Uluslararası bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 10],
         '3.2.h' => ['baslik' => 'Ulusal bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 5],
+        '10.l' => ['baslik' => 'BAP bilimsel komisyonu ya da benzeri kurul üyeliği (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
     ],
 
     'gruplar' => [

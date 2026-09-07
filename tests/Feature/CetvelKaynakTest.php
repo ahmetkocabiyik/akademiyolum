@@ -594,6 +594,10 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
         '1.6 · ESCI dergide makale',
         // Siirt 13.c (10) ile 13.d (4) aynı etiketlere düşüyor; etiketler en
         // düşük kademeye taşındı, bu satır belgelemek için duruyor.
+        // Selçuk 11e/12e: koordinatörlük etiketi bir alt kademeye (koordinatör
+        // yardımcılığı, 10) indi; üst satır belgelemek için duruyor.
+        '11e · Rektörlüğe bağlı ofis/koordinatörlükte koordinatör',
+        '12e · Rektörlüğe bağlı ofis/koordinatörlükte koordinatör',
         '13.c · Meslek odaları ya da bilimsel amaçlı vakıflar tarafından verilen ödül',
         // Trakya'nın altı eki bu kodu şart ağacında anıyor; satır belgelemek
         // için duruyor ama etiketsiz: senato/yönetim kurulu üyeliği 07.09.2026'da
@@ -1064,4 +1068,31 @@ test('kapsamsız editörlük etiketleri en düşük kademede', function (string 
     ['gaziantep-2026', 'Hakemlik', 1],
     // Fırat B5.6 diğer ulusal hakemlik 2 · A6.6'nın 3'ü yazılıydı.
     ['firat-2026', 'Hakemlik', 2],
+]);
+
+/**
+ * `Kurul / Komisyon Üyeliği` YERLEŞTİRME TARAMASI (07.09.2026).
+ *
+ * Etiketi taşıyan 220 satırın başlığı tarandı: yedisinde başlık kurul ya da
+ * komisyondan hiç söz etmiyordu. Dördü gerçek hataydı — etiket dekan
+ * yardımcılığı ya da koordinatör yardımcılığı satırında duruyordu ve
+ * kaynağın kendi komisyon satırı daha düşük kademedeydi.
+ */
+test('kurul komisyon etiketi kendi satırında', function (string $cetvel, int $beklenen) {
+    $katalog = app(SartDeposu::class)->cetveller()[$cetvel] ?? null;
+    expect($katalog)->not->toBeNull("cetvel yok: {$cetvel}");
+
+    $faaliyet = sartFaaliyet('Kurul / Komisyon Üyeliği', Kategori::IdariGorev, null);
+
+    expect($katalog->puan($faaliyet, $katalog->coz(['*'])))->toBe($beklenen);
+})->with([
+    // Bayburt 10.l BAP bilimsel komisyonu 2 · etiket 10.ç'de (dekan yrd, 5) idi.
+    ['bayburt-2024', 2],
+    // ESOGÜ 18b fakülte komisyonu 2 · etiket 15b'de (dekan yrd, 4) idi.
+    ['esogu-2023', 2],
+    // Sakarya 14.35 kurul görevi 10 · etiket 14.40'ta (koordinatör yrd) idi.
+    ['sakarya-2026', 10],
+    // Selçuk h) Rektörlüğe bağlı komisyon üyesi 5 · etiket f'de (koordinatör
+    // yardımcılığı, 10) idi; on bir varyantın hepsinde düzeltildi.
+    ['selcuk-2024-egitim', 5],
 ]);

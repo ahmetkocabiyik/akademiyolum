@@ -218,7 +218,7 @@ return [
 
         // ══ 15. İDARİ GÖREVLER (grup tavanı 50, yıl çarpanı uygulanamadı) ══
         '15a' => ['baslik' => 'Senato veya üniversite yönetim kurulu üyeliği, enstitü, yüksekokul ya da merkez müdürlüğü, başhekimlik, bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı'], 'puan' => 6],
-        '15b' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı ya da bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkan Yardımcısı', 'Kurul / Komisyon Üyeliği'], 'puan' => 4],
+        '15b' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı ya da bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkan Yardımcısı'], 'puan' => 4],
         '15c' => ['baslik' => 'Anabilim veya bilim dalı başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 2],
 
         // ══ 16. SANAT VE TASARIM ETKİNLİKLERİ ══
@@ -230,6 +230,7 @@ return [
         // ══ 17. JÜRİ ÜYELİKLERİ (grup tavanı 20) ══
         '17a-17b' => ['baslik' => 'Lisansüstü tez savunma, tez izleme veya yeterlik jürisi üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 2],
         '17c' => ['baslik' => 'TÜBİTAK, AB ve benzeri projelerde panelist ya da uzman olarak görev yapmak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 2],
+        '18b' => ['baslik' => 'Rektörlük ya da fakülte komisyon veya kurullarında görev almak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
     ],
 
     'gruplar' => [

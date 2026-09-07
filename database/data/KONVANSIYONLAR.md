@@ -1161,6 +1161,31 @@ eksik dosyayı atlıyor ve sessizce boş sonuç veriyor.
 `pdftotext -layout` ile yeniden üret. Boş sonuç ancak önbellek tamken
 "temiz" demektir.
 
+### YERLEŞTİRME TARAMASI: BAŞLIK ETİKETTEN SÖZ ETMİYORSA BAK
+
+Kademe taramasının ucuz tamamlayıcısı: etiketi taşıyan satırın BAŞLIĞINDA
+etiketin kavramı geçiyor mu? Geçmiyorsa satır büyük olasılıkla etiketin işi
+değil. `Kurul / Komisyon Üyeliği` için 220 satırdan yedisi süzüldü, dördü
+gerçek hata çıktı — hepsinde etiket **bir yönetici yardımcılığı satırında**
+duruyordu:
+
+| | etiket nerede duruyordu | doğrusu |
+|---|---|---|
+| Bayburt | dekan yardımcılığı (5) | 10.l BAP komisyonu (2) |
+| ESOGÜ | dekan yardımcılığı (4) | 18b fakülte komisyonu (2) |
+| Sakarya | koordinatör yardımcılığı | 14.35 kurul görevi (10) |
+| Selçuk | koordinatör yardımcılığı (10) | h) komisyon üyesi (5) |
+
+**Desen tek: yönetici YARDIMCILIĞI satırı, komisyon üyeliğinin çöp kutusu
+oluyor.** İkisi de "ikincil idari görev" gibi durduğu için cetveli yazan
+aynı satıra koyuyor; oysa kaynak ikisini ayrı puanlıyor ve komisyon
+üyeliği her seferinde daha düşük.
+
+Yerleştirme düzeltilirken **eski satır etiketsiz kalıyorsa ne olacağına da
+bak.** Selçuk'ta koordinatör yardımcılığı satırı boşaldı; oraya
+koordinatörlük etiketini koymak hem ölü satırı kapattı hem de §0'ı düzeltti
+(etiket 15'lik koordinatör satırındaydı, alt kademesi 10'du).
+
 ### KAPSAMSIZ ETİKET TARAMASI BİTTİ: DÖRT ETİKET, YİRMİ SEKİZ DÜZELTME
 
 Sözlükte kademe taşımayan dört etiketin tamamı tarandı:
