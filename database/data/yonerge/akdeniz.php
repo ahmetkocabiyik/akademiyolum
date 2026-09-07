@@ -373,11 +373,11 @@ $konservatuvar = function (string $kadro, int $asgari, array $ek): array {
 
     return [
         'anahtar' => "akdeniz-{$ekKadro}-grup4",
-        'aday_notu' => 'DİKKAT — KAYNAKTA ÇELİŞKİ VAR. GRUP 4 tablosu "bu puanın en az yarısı 11.4 '
-            .'Disipline Özgü Etkinlik ve Faaliyetler\'den karşılanmalıdır" derken 11. bölümün '
+        'aday_notu' => 'DİKKAT — KAYNAKTA ÇELİŞKİ VAR. Konservatuvar tablosu "bu puanın en az yarısı '
+            .'disipline özgü etkinlik ve faaliyetlerden karşılanmalıdır" derken aynı bölümün '
             .'başlığı "bu bölümden alınan puan diğer bölümlerden alınan puanın %40\'ını geçemez" '
-            .'diyor; ikisi aynı anda sağlanamaz. Burada GRUP 4\'ün kendi dipnotu esas alındı ve '
-            .'11. bölüme tavan uygulanmadı, yani puanınız %40 kuralıyla hesaplansaydı '
+            .'diyor; ikisi aynı anda sağlanamaz. Burada tablonun kendi dipnotu esas alındı ve '
+            .'disipline özgü etkinliklere tavan uygulanmadı, yani puanınız %40 kuralıyla hesaplansaydı '
             .'göreceğinizden DÜŞÜK olurdu. Başvurmadan önce üniversiteye teyit ettirin.',
         'universite' => 'Akdeniz Üniversitesi',
         'kadro' => $kadro,
@@ -386,12 +386,12 @@ $konservatuvar = function (string $kadro, int $asgari, array $ek): array {
         'cetvel' => "akdeniz-2026-konservatuvar-{$ekKadro}",
         'notlar' => 'GRUP 4 (Devlet Konservatuvarı Alanları — Klasik Batı Müziği/Türk Müziği '
             .'Yorumculuk, Bestecilik, Orkestra Şefliği, Tiyatro, Bale ve Dans): toplamda en az '
-            ."{$asgari} puan. Tablo dipnot 3: \"Bu puanın en az yarısı 11.4 Disipline Özgü "
+            ."{$asgari} puan. Tablo dipnotu: \"Bu puanın en az yarısı disipline özgü "
             ."Etkinlik ve Faaliyetler'den karşılanmış olmalıdır.\" Son beş yılda üretilen "
             .'yayınlar ve faaliyetler geçerlidir. YDS en az 70.',
         'sart' => ['tip' => 've', 'aciklama' => "GRUP 4 (Devlet Konservatuvarı) — {$ekKadro}", 'cocuklar' => [
             Kalip::toplam($asgari),
-            Kalip::puanDan('11.4 disipline özgü etkinliklerinizden en az '.intdiv($asgari, 2).' puan', ['BOLUM_11_4'], intdiv($asgari, 2), madde: 'Tablo dipnot 3'),
+            Kalip::puanDan('Disipline özgü etkinliklerinizden en az '.intdiv($asgari, 2).' puan', ['BOLUM_11_4'], intdiv($asgari, 2), madde: 'Tablo dipnot 3'),
             ...$ek,
             Kalip::yds(70),
         ]],
@@ -444,19 +444,19 @@ $D4 = Kalip::DOCENTLIK_SONRASI;
 return [...$esikler,
     $konservatuvar('dr_ogr_uyesi', 100, [
         Kalip::adet('En az 1 bilimsel makalede başlıca yazar', ['BOLUM_1_MAKALE'], 1, 'baslica'),
-        Kalip::adet('1.1-1.8 kategorilerinden en az 1 yayın', ['BOLUM_1_MAKALE'], 1),
-        Kalip::beyan('Doktora/sanatta yeterlik sonrası 11.4 Disipline Özgü Etkinlik ve '
+        Kalip::adet('Makale kalemlerinden en az 1 yayın', ['BOLUM_1_MAKALE'], 1),
+        Kalip::beyan('Doktora/sanatta yeterlik sonrası disipline özgü etkinlik ve '
             .'Faaliyetler\'den en az 2 tanesini başlıca eser olarak sunmak'),
     ]),
     $konservatuvar('docentlik', 300, [
         Kalip::adet('Doktora/sanatta yeterlik sonrası en az 2 makalede başlıca yazar',
             ['BOLUM_1_MAKALE'], 2, 'baslica', $P4),
-        Kalip::beyan('Doktora/sanatta yeterlik sonrası 11.4\'ten en az 2 tanesini başlıca eser '
+        Kalip::beyan('Doktora/sanatta yeterlik sonrası disipline özgü etkinliklerinizden en az 2 tanesini başlıca eser '
             .'olarak sunmak'),
     ]),
     $konservatuvar('profesorluk', 500, [
         Kalip::adet('Doçentlik sonrası en az 2 makalede başlıca yazar',
             ['BOLUM_1_MAKALE'], 2, 'baslica', $D4),
-        Kalip::beyan('Doçentlik sonrası 11.4\'ten en az 2 tanesini başlıca eser olarak sunmak'),
+        Kalip::beyan('Doçentlik sonrası disipline özgü etkinliklerinizden en az 2 tanesini başlıca eser olarak sunmak'),
     ]),
 ];

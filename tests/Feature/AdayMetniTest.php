@@ -41,6 +41,11 @@ $KOD_DESENI = '/('
     // tablonun bölüm numarasını bilmiyor; eser TÜRÜ yazılmalı.
     .'|\b\d{1,2}\s*\((?:[a-zçğıöşü]\s*,\s*)*[a-zçğıöşü]\)'
     .'|\b\d{1,2}\.?\s*bölüm(?:ü|den|ünü|lerden|lerine|leri)\b'
+    // Noktalı madde/satır kodları: "1.1.3", "8.1/d", "md. 10.7",
+    // "Bölüm 4.1.-4.6.". TARİHLER bunun dışında; aşağıda ayıklanıyor.
+    .'|\b\d{1,2}\.\d{1,2}(?:\.\d{1,2})?\b'
+    // "14(3) maddesi" biçimi.
+    .'|\b\d{1,2}\(\d{1,2}\)'
     // Roma rakamlı ve harfli ekler (Ek-I, EK-II, EK-A, EK-Ç), sıra sayılı
     // madde atıfları ("20. maddesi", "5.2 maddesi") ve harfle anılan kümeler
     // ("A grubu", "B tablosu"). Sıra noktası ZORUNLU: "3 madde belgelemek"
@@ -90,6 +95,18 @@ test('aday metinlerinde yönerge kodu yok', function () use ($KOD_DESENI) {
                 // Kanunu'nun 26. maddesi ya da 657'nin 48. maddesi adayın
                 // zaten tanıdığı atıflar. "... sayılı" ibaresi bunları ayırıyor.
                 if (preg_match('/sayılı[^.]{0,60}'.preg_quote($eslesme, '/').'/u', $metin)) {
+                    continue;
+                }
+
+                // ÖLÇÜT DEĞERİ KOD DEĞİL: "SNIP ≥ 1.0", "IF > 2.5" gibi
+                // eşik sayıları ondalık ayraçla yazılıyor.
+                if (preg_match('/(?:SNIP|IF|h-?index|etki faktörü)[^.]{0,12}'.preg_quote($eslesme, '/').'/iu', $metin)) {
+                    continue;
+                }
+
+                // TARİH KOD DEĞİL: "01.01.2027", "31.12.2026". Desen gün.ay
+                // kısmını yakalıyor; dört haneli yıl geliyorsa atla.
+                if (preg_match('/'.preg_quote($eslesme, '/').'\.?\d{4}/u', $metin)) {
                     continue;
                 }
 

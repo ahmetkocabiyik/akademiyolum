@@ -135,7 +135,7 @@ return [
     // ══════════ PROFESÖR (Madde 8.1) ══════════
     [
         'anahtar' => 'bitlis-profesor-fen',
-        'aday_notu' => 'Atıf koşulu (8.1/d) burada beyan olarak duruyor: en az 2 eserinize '
+        'aday_notu' => 'Atıf koşulu burada beyan olarak duruyor: en az 2 eserinize '
             .'SCI-E/AHCI/ESCI/SSCI dergilerinde toplam 30 atıf, bu yoksa tüm eserlerinize '
             .'(tezler hariç) en az 40 atıf gerekiyor. Hiçbirini sağlamıyorsanız dizinli '
             .'dergilerden 2 yayın daha yapmanız zorunlu.',
@@ -164,8 +164,8 @@ return [
     ],
     [
         'anahtar' => 'bitlis-profesor-sosyal',
-        'aday_notu' => 'Yayın koşulunun (8.1/c) üç alternatifi var; herhangi birini sağlamanız '
-            .'yeterli. Atıf koşulu (8.1/d) beyan olarak duruyor: en az 2 eserinize '
+        'aday_notu' => 'Yayın koşulunun üç alternatifi var; herhangi birini sağlamanız '
+            .'yeterli. Atıf koşulu beyan olarak duruyor: en az 2 eserinize '
             .'SCI-E/AHCI/ESCI/SSCI dergilerinde 30 atıf, bu yoksa tüm eserlerinize en az 40 atıf. '
             .'Hiçbirini sağlamıyorsanız dizinli dergilerden 2 yayın daha yapmanız zorunlu.',
         'universite' => 'Bitlis Eren Üniversitesi',
@@ -173,7 +173,7 @@ return [
         'alan' => $sosyalGrubu,
         'cetvel' => 'bitlis-2024',
         'notlar' => 'Madde 8.1: toplam 400, doçentlik sonrası en az 200; toplamın %50\'si (200) '
-            .'ve doçentlik sonrası puanın %50\'si (100) A.1-A.8\'den; ayrıca 8.1/c\'deki üç '
+            .'ve doçentlik sonrası puanın %50\'si (100) yayın kalemlerinden; ayrıca yayın koşulunun üç '
             .'yayın alternatifinden biri.',
         'sart' => Kalip::ve('Profesör — Sosyal Bilimler ve Eğitim Bilimleri', [
             Kalip::toplam(400),

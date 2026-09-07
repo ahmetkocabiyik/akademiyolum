@@ -309,7 +309,7 @@ return [
     ],
     [
         'anahtar' => 'ege-profesor-ilahiyat-hukuk',
-        'aday_notu' => 'İlahiyat ve Hukukta ek proje koşulu (md. 10.7) aranmıyor.',
+        'aday_notu' => 'İlahiyat ve Hukukta ek proje koşulu aranmıyor.',
         'universite' => 'Ege Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => $ilahiyatHukuk,
@@ -349,7 +349,7 @@ return [
     ],
     [
         'anahtar' => 'ege-profesor-sanat-mimarlik',
-        'aday_notu' => 'Bu alanlarda ek proje koşulu (md. 10.7) aranmıyor.',
+        'aday_notu' => 'Bu alanlarda ek proje koşulu aranmıyor.',
         'universite' => 'Ege Üniversitesi',
         'kadro' => 'profesorluk',
         'alan' => $sanatMimarlik,

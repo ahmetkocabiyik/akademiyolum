@@ -95,7 +95,7 @@ $tumAlanlar = array_column(TemelAlan::cases(), 'value');
 $toplamListesi = 'Yayın, araştırma, sanat, ödül, eğitim ve yönetim';
 
 $kapsamNotu = 'Hakemlik, editörlük ve atıf puanınız hesaplanıp gösterilir ama bu baraja '
-    .'GİRMEZ: yönergenin değerlendirme tablosu bölüm toplamını "1.1; 1.2; 1.3; 1.4; 1.6" '
+    .'GİRMEZ: yönergenin değerlendirme tablosu bölüm toplamını makale, kitap ve bildiri '
     .'diye sınırlıyor ve atıf ile hakemlik puanını genel toplamın altında ayrı raporluyor.';
 
 $sanayiNotu = 'Mimarlık ve mühendislik proje etkinlikleri bölümünün on dokuz satırı '

@@ -62,7 +62,7 @@ $alanlar = ['fen', 'muhendislik', 'mimarlik', 'saglik', 'spor', 'hukuk', 'ilahiy
     'filoloji', 'sosyal', 'egitim', 'ziraat'];
 
 $gsNotu = 'GÜZEL SANATLAR ALANINDA ALT BARAJ AYNI SAYILARI İSTİYOR ama sanat ve tasarım '
-    .'etkinliklerini (11(2) bölümü) de sayıyor; o alandaysanız aşağıdaki Güzel Sanatlar '
+    .'etkinliklerini de sayıyor; o alandaysanız aşağıdaki Güzel Sanatlar '
     .'eşiğine bakın.';
 
 return [

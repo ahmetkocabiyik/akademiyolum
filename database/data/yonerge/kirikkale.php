@@ -59,7 +59,7 @@ $G2 = ['egitim', 'sosyal', 'hukuk', 'filoloji', 'ilahiyat', 'spor'];
 $G3 = ['guzel_sanatlar'];
 
 $B4146 = ['B41-46'];
-$LISTE46 = 'Bölüm 4.1.-4.6.';
+$LISTE46 = 'Yayın, atıf ve proje kalemleri';
 
 $genelSartlar = Kalip::beyan('657 sayılı Devlet Memurları Kanunu\'nun 48. maddesindeki genel şartlara sahip olmak', '2.x-a');
 
@@ -79,7 +79,7 @@ $besYil = Kalip::beyan(
 
 /** "4.14'den (BAP hariç) tamamlanan 1 projede yer almak 1 özgün makale yerine geçebilir." */
 $projeTelafisi = fn (?array $donem): array => Kalip::adet(
-    'Ya da 4.14 kapsamında (BAP hariç) tamamlanmış bir projede yer almak',
+    'Ya da BAP dışı tamamlanmış bir araştırma projesinde yer almak',
     ['PROJE-BAP-HARIC'], 1, donem: $donem, madde: '2.3-c',
 );
 
@@ -87,9 +87,9 @@ $projeTelafisi = fn (?array $donem): array => Kalip::adet(
 $tezKosulu = fn (?array $donem, string $md): array => Kalip::veya(
     'Tez yönetimi koşulu', [
         Kalip::adet('Başvurduğunuz alanda en az 1 doktora, uzmanlık, sanatta yeterlik ya da yüksek lisans tezi yönetmiş olmak', ['TEZ'], 1, donem: $donem, madde: $md),
-        Kalip::adet('Ya da 4.14 kapsamında (BAP hariç) bir araştırma projesini yürütücü olarak tamamlamış olmak', ['PROJE-BAP-HARIC-Y'], 1, donem: $donem, madde: $md),
-        Kalip::adet('Ya da 4.1.1 kapsamında 1 yayın yapmış olmak', ['M411'], 1, donem: $donem, madde: $md),
-        Kalip::adet('Ya da 4.1.2 kapsamında 2 yayın yapmış olmak', ['M412'], 2, donem: $donem, madde: $md),
+        Kalip::adet('Ya da BAP dışı bir araştırma projesini yürütücü olarak tamamlamış olmak', ['PROJE-BAP-HARIC-Y'], 1, donem: $donem, madde: $md),
+        Kalip::adet('Ya da SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde 1 yayın yapmış olmak', ['M411'], 1, donem: $donem, madde: $md),
+        Kalip::adet('Ya da uluslararası alan indekslerindeki dergilerde 2 yayın yapmış olmak', ['M412'], 2, donem: $donem, madde: $md),
     ],
 );
 
@@ -100,40 +100,40 @@ $esikler = [];
 // ══════════════════════════════════════════════════════════════════════════
 
 $profesorYayin = [
-    'G1' => [Kalip::adet('Doçentlik sonrası 4.1.1 kapsamında en az 3 yayın', ['M411'], 3, donem: $DOCENTLIK, madde: '2.1-c-i')],
+    'G1' => [Kalip::adet('Doçentlik sonrası SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde en az 3 yayın', ['M411'], 3, donem: $DOCENTLIK, madde: '2.1-c-i')],
     'G2' => [
         Kalip::adet(
-            'Doçentlik sonrası 4.1.1 kapsamında en az 1 yayın', ['M411'], 1, donem: $DOCENTLIK,
+            'Doçentlik sonrası SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde en az 1 yayın', ['M411'], 1, donem: $DOCENTLIK,
             telafi: Kalip::adet('Ya da 1 adet bilimsel özgün kitap yayımlamış olmak', ['OZGUN-KITAP'], 1, donem: $DOCENTLIK),
             madde: '2.1-c-ii',
         ),
-        Kalip::adet('Doçentlik sonrası 4.1.2 kapsamında en az 2 yayın', ['M412'], 2, donem: $DOCENTLIK, madde: '2.1-c-ii'),
+        Kalip::adet('Doçentlik sonrası uluslararası alan indekslerindeki dergilerde en az 2 yayın', ['M412'], 2, donem: $DOCENTLIK, madde: '2.1-c-ii'),
     ],
     'G3' => [
-        Kalip::adet('Doçentlik sonrası 4.1.1-4.1.4 kapsamında en az 1 yayın', ['M411-414'], 1, donem: $DOCENTLIK, madde: '2.1-c-iii'),
-        Kalip::adet('Doçentlik sonrası Bölüm 4.1.-4.6. kapsamında en az 5 çalışma', ['B41-46'], 5, donem: $DOCENTLIK, madde: '2.1-c-iii'),
+        Kalip::adet('Doçentlik sonrası uluslararası indeksli dergilerde en az 1 yayın', ['M411-414'], 1, donem: $DOCENTLIK, madde: '2.1-c-iii'),
+        Kalip::adet('Doçentlik sonrası yayın, atıf ve proje kalemlerinden en az 5 çalışma', ['B41-46'], 5, donem: $DOCENTLIK, madde: '2.1-c-iii'),
     ],
 ];
 
 $docentYayin = [
     'G1' => [Kalip::veya('Yayın koşulu', [
-        Kalip::adet('4.1.1 kapsamında en az 2 yayın', ['M411'], 2, donem: $DOCENTLIK, madde: '2.2-c-i'),
-        Kalip::adet('Ya da 4.1.2 kapsamında en az 2 yayın', ['M412'], 2, donem: $DOCENTLIK, madde: '2.2-c-i'),
+        Kalip::adet('SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde en az 2 yayın', ['M411'], 2, donem: $DOCENTLIK, madde: '2.2-c-i'),
+        Kalip::adet('Ya da uluslararası alan indekslerindeki dergilerde en az 2 yayın', ['M412'], 2, donem: $DOCENTLIK, madde: '2.2-c-i'),
     ])],
-    'G2' => [Kalip::adet('4.1.1 veya 4.1.2 kapsamında en az 2 yayın', ['M411-412'], 2, donem: $DOCENTLIK, madde: '2.2-c-ii')],
+    'G2' => [Kalip::adet('Uluslararası indeksli ya da alan indeksli dergilerde en az 2 yayın', ['M411-412'], 2, donem: $DOCENTLIK, madde: '2.2-c-ii')],
     'G3' => [
-        Kalip::adet('4.1.1-4.1.4 kapsamında en az 1 yayın', ['M411-414'], 1, donem: $DOCENTLIK, madde: '2.2-c-iii'),
-        Kalip::adet('Bölüm 4.1.-4.6. kapsamında en az 2 çalışma', ['B41-46'], 2, donem: $DOCENTLIK, madde: '2.2-c-iii'),
+        Kalip::adet('uluslararası indeksli dergilerde en az 1 yayın', ['M411-414'], 1, donem: $DOCENTLIK, madde: '2.2-c-iii'),
+        Kalip::adet('Yayın, atıf ve proje kalemlerinden en az 2 çalışma', ['B41-46'], 2, donem: $DOCENTLIK, madde: '2.2-c-iii'),
     ],
 ];
 
 $drYayin = fn (string $grup, ?array $donem, int $sayi): array => Kalip::adet(
     $grup === 'G3'
-        ? "4.1.1-4.1.4 kapsamında en az {$sayi} yayın"
-        : "4.1.1 veya 4.1.2 kapsamında en az {$sayi} yayın",
+        ? "uluslararası indeksli dergilerde en az {$sayi} yayın"
+        : "Uluslararası indeksli ya da alan indeksli dergilerde en az {$sayi} yayın",
     $grup === 'G3' ? ['M411-414'] : ['M411-412'], $sayi, donem: $donem,
     telafi: Kalip::adet(
-        'Ya da 4.14 kapsamında (BAP hariç) tamamlanmış bir projede yer almak bir özgün makale yerine geçer',
+        'Ya da BAP dışı tamamlanmış bir araştırma projesinde yer almak bir özgün makale yerine geçer',
         ['PROJE-BAP-HARIC'], 1, donem: $donem,
     ),
     madde: '2.3-c',
@@ -146,23 +146,24 @@ foreach ([['g1', $G1, 'G1', 'Mühendislik, fen, sağlık, mimarlık ve ziraat te
     $esikler[] = [
         'anahtar' => "kirikkale-{$anahtar}-profesorluk",
         'aday_notu' => 'Doçent unvanınızı aldığınız tarihten sonraki çalışmalarınız sayılıyor. '
-            ."{$grupAdi} için doçentlik sonrası Bölüm 4.1.-4.6.'dan en az 500 puan, 4.14'ten en az "
+            ."{$grupAdi} için doçentlik sonrası yayın, atıf ve proje kalemlerinden en az 500 puan, "
             .'50 puan ve toplam 1000 puan; ayrıca bütün dönemler için toplam 1500 puan isteniyor. '
-            .'4.14 puan şartı, 4.1.1\'den bir ya da 4.1.2\'den iki yayınınız varsa aranmıyor.',
+            .'Proje puanı şartı, uluslararası indeksli dergilerde bir ya da alan indeksli '
+            .'dergilerde iki yayınınız varsa aranmıyor.',
         'universite' => $UNIVERSITE,
         'kadro' => 'profesorluk',
         'alan' => $alanlar,
         'cetvel' => $CETVEL,
         'notlar' => "2.1 ({$grupAdi}): doçentlikten sonra beş yıl çalışma; alan grubuna göre yayın "
-            .'şartı; Bölüm 4.1.-4.6.\'dan 500 ve 4.14\'ten 50 puan olmak üzere doçentlik sonrası '
+            .'şartı; yayın, atıf ve proje kalemlerinden 500, araştırma projelerinden 50 puan olmak üzere doçentlik sonrası '
             .'1000 puan; toplam 1500 puan; tez yönetimi ya da alternatifi.',
         'sart' => Kalip::ve("Profesör kadrosuna atanma — {$grupAdi}", array_merge(
             [$genelSartlar, $besYil],
             $profesorYayin[$grup],
             [
-                Kalip::puanDan('Doçentlik sonrası Bölüm 4.1.-4.6. kalemlerinizden en az 500 puan', $B4146, 500, $DOCENTLIK, madde: '2.1-d'),
+                Kalip::puanDan('Doçentlik sonrası yayın, atıf ve proje kalemlerinizden en az 500 puan', $B4146, 500, $DOCENTLIK, madde: '2.1-d'),
                 Kalip::puanDan(
-                    'Doçentlik sonrası 4.14 (araştırma projeleri) kalemlerinizden en az 50 puan',
+                    'Doçentlik sonrası araştırma projelerinizden en az 50 puan',
                     ['B414'], 50, $DOCENTLIK, madde: '2.1-d',
                 ),
                 $tezKosulu($DOCENTLIK, '2.1-f'),
@@ -175,21 +176,21 @@ foreach ([['g1', $G1, 'G1', 'Mühendislik, fen, sağlık, mimarlık ve ziraat te
     $esikler[] = [
         'anahtar' => "kirikkale-{$anahtar}-docentlik",
         'aday_notu' => 'Doçentlik başvurunuzu yaptığınız tarihten sonraki çalışmalarınız '
-            ."sayılıyor. {$grupAdi} için Bölüm 4.1.-4.6.'dan en az 300 puan, 4.14'ten en az 50 "
+            ."sayılıyor. {$grupAdi} için yayın, atıf ve proje kalemlerinden en az 300 puan, araştırma projelerinden en az 50 "
             .'puan ve Bölüm 4\'ten toplam 1000 puan isteniyor.',
         'universite' => $UNIVERSITE,
         'kadro' => 'docentlik',
         'alan' => $alanlar,
         'cetvel' => $CETVEL,
         'notlar' => "2.2 ({$grupAdi}): doçentlik unvanı; alan grubuna göre yayın şartı; Bölüm "
-            .'4.1.-4.6.\'dan 300 ve 4.14\'ten 50 puan; toplam 1000 puan; tez yönetimi ya da '
+            .'yayın, atıf ve proje kalemlerinden 300, araştırma projelerinden 50 puan; toplam 1000 puan; tez yönetimi ya da '
             .'alternatifi.',
         'sart' => Kalip::ve("Doçent kadrosuna atanma — {$grupAdi}", array_merge(
             [$genelSartlar, $docentUnvani],
             $docentYayin[$grup],
             [
-                Kalip::puanDan('Bölüm 4.1.-4.6. kalemlerinizden en az 300 puan', $B4146, 300, madde: '2.2-d'),
-                Kalip::puanDan('4.14 (araştırma projeleri) kalemlerinizden en az 50 puan', ['B414'], 50, madde: '2.2-d'),
+                Kalip::puanDan('Yayın, atıf ve proje kalemlerinizden en az 300 puan', $B4146, 300, madde: '2.2-d'),
+                Kalip::puanDan('araştırma projelerinizden en az 50 puan', ['B414'], 50, madde: '2.2-d'),
                 $tezKosulu(null, '2.2-f'),
                 Kalip::toplam(1000),
             ],
@@ -198,20 +199,20 @@ foreach ([['g1', $G1, 'G1', 'Mühendislik, fen, sağlık, mimarlık ve ziraat te
 
     $esikler[] = [
         'anahtar' => "kirikkale-{$anahtar}-dr",
-        'aday_notu' => "{$grupAdi} için Dr. Öğretim Üyeliğinde Bölüm 4.1.-4.6.'dan en az 150 puan "
-            .'ve Bölüm 4\'ten toplam 300 puan isteniyor. 4.14 kapsamında (BAP hariç) tamamlanmış '
+        'aday_notu' => "{$grupAdi} için Dr. Öğretim Üyeliğinde yayın, atıf ve proje kalemlerinden en az 150 puan "
+            .'ve yayın kalemlerinden toplam 300 puan isteniyor. BAP dışı tamamlanmış '
             .'bir projede yer almak bir özgün makale yerine geçebiliyor.',
         'universite' => $UNIVERSITE,
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $alanlar,
         'cetvel' => $CETVEL,
         'notlar' => "2.3.1 ({$grupAdi}): doktora ya da sanatta yeterlik; alan grubuna göre yayın "
-            .'şartı; Bölüm 4.1.-4.6.\'dan 150 puan; toplam 300 puan.',
+            .'şartı; yayın, atıf ve proje kalemleri\'dan 150 puan; toplam 300 puan.',
         'sart' => Kalip::ve("Doktor Öğretim Üyesi kadrosuna atanma — {$grupAdi}", [
             $genelSartlar,
             $doktora,
             $drYayin($grup, null, $grup === 'G3' ? 1 : 2),
-            Kalip::puanDan('Bölüm 4.1.-4.6. kalemlerinizden en az 150 puan', $B4146, 150, madde: '2.3.1-d'),
+            Kalip::puanDan('Yayın, atıf ve proje kalemlerinizden en az 150 puan', $B4146, 150, madde: '2.3.1-d'),
             Kalip::toplam(300),
         ]),
     ];
@@ -219,7 +220,7 @@ foreach ([['g1', $G1, 'G1', 'Mühendislik, fen, sağlık, mimarlık ve ziraat te
     $esikler[] = [
         'anahtar' => "kirikkale-{$anahtar}-dr-yeniden",
         'aday_notu' => 'Bir önceki atama tarihinizden itibaren yaptığınız çalışmalar sayılıyor. '
-            ."{$grupAdi} için her yeniden atanma döneminde Bölüm 4.1.-4.6.'dan en az 150 puan ve "
+            ."{$grupAdi} için her yeniden atanma döneminde yayın, atıf ve proje kalemlerinden en az 150 puan ve "
             .'Bölüm 4\'ten toplam 300 puan isteniyor. Şartları sağlayamayanlara bir yıl ek süre '
             .'veriliyor.',
         'universite' => $UNIVERSITE,
@@ -227,10 +228,10 @@ foreach ([['g1', $G1, 'G1', 'Mühendislik, fen, sağlık, mimarlık ve ziraat te
         'alan' => $alanlar,
         'cetvel' => $CETVEL,
         'notlar' => "2.3.2 ({$grupAdi}): her yeniden atanma döneminde alan grubuna göre yayın "
-            .'şartı; Bölüm 4.1.-4.6.\'dan 150 puan; toplam 300 puan.',
+            .'şartı; yayın, atıf ve proje kalemleri\'dan 150 puan; toplam 300 puan.',
         'sart' => Kalip::ve("Doktor Öğretim Üyeliğine yeniden atanma — {$grupAdi}", [
             $drYayin($grup, $SON_ATAMA, 2),
-            Kalip::puanDan('Son atamanızdan sonra Bölüm 4.1.-4.6. kalemlerinizden en az 150 puan', $B4146, 150, $SON_ATAMA, madde: '2.3.2-d'),
+            Kalip::puanDan('Son atamanızdan sonra yayın, atıf ve proje kalemlerinizden en az 150 puan', $B4146, 150, $SON_ATAMA, madde: '2.3.2-d'),
             Kalip::toplam(300, $SON_ATAMA),
         ]),
     ];

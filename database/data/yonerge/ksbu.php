@@ -70,7 +70,7 @@ $SON_3_YIL = Kalip::sonYil(3);
 
 $ALANLAR = ['saglik', 'fen', 'muhendislik', 'sosyal'];
 
-$ESKI_YONERGE_UYARISI = ' DİKKAT: yönergenin 14(3) maddesi bu kadro için 01.01.2027 tarihine '
+$ESKI_YONERGE_UYARISI = ' DİKKAT: yönergenin geçiş hükmü bu kadro için 01.01.2027 tarihine '
     .'kadar 22.11.2018 tarihli ESKİ yönergenin uygulanmasını söylüyor. Aşağıdaki koşullar '
     .'01.01.2027\'den sonraki başvurular için geçerli; bugün başvuruyorsanız eski yönergenin '
     .'koşullarına bakmanız gerekir (eski yönerge bu belgede yok).';

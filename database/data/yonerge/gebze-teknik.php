@@ -224,7 +224,7 @@ $esikler[] = [
 $esikler[] = [
     'anahtar' => 'gebze-teknik-muh-fen-profesorluk',
     'aday_notu' => 'Mühendislik, Havacılık ve Uzay Bilimleri ve Temel Bilimler fakültelerinde profesör '
-        .'kadrosu için toplamda en az 400 puan, bunun en az 200 puanı 1, 2, 3, 4 ve 7.1-7.6 kodlu '
+        .'kadrosu için toplamda en az 400 puan, bunun en az 200 puanı makale, tez yayını, kitap, '
         .'faaliyetlerden isteniyor; tez yayınlarından (2 kodlu başlık) bu 200 puanın en fazla 80\'i '
         .'sayılabiliyor. Beş başlıca eserin en az üçü doçentlik unvanınızı aldıktan sonra olmalı.'.$UYARI,
     'universite' => $UNIVERSITE,
@@ -249,7 +249,7 @@ $esikler[] = [
             ['BASLICA-MF'], 3, yazar: 'baslica', donem: $DOCENTLIK, madde: 'MADDE 6.a',
         ),
         Kalip::puanDan(
-            'Makale, tez yayını, kitap, ödül-patent ve 7.1-7.6 kodlu proje kalemlerinizden en az 200 puan',
+            'Makale, tez yayını, kitap, ödül-patent ve proje kalemlerinizden en az 200 puan',
             ['1-2-3-4-7.1-7.6'], 200, madde: 'MADDE 6.c',
         ),
         $atifProfesor,
@@ -408,7 +408,7 @@ $esikler[] = [
         $seminer,
         Kalip::adet(
             'Makale, tez yayını ya da kitap türünden, tek yazar, ilk yazar ya '
-            .'da sorumlu yazar olduğunuz en az 1 eseriniz ya da 4.1, 4.2, 4.3, 4.7, 4.8 kodlu '
+            .'da sorumlu yazar olduğunuz en az 1 eseriniz ya da indeksli dergi makalesi, tez '
             .'kalemlerden birine sahip olmanız gerekiyor (başlıca eser)',
             ['BASLICA-MPT'], 1, yazar: 'baslica', madde: 'MADDE 11.ç',
         ),

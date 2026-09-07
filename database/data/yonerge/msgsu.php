@@ -148,95 +148,94 @@ $esikleriUret = function (
 
 /** Yeniden atanmanın yaygın ek koşulu: 1. veya 6.1 kısmından 20 puan. */
 $yeniden1ve61 = [Kalip::puanDan(
-    'Son atanmanızdan sonra 1. kısım (bilimsel ve sanatsal yayınlar) ya da 6.1 kısmından '
-    .'(araştırma projeleri) en az 20 puan',
+    'Son atanmanızdan sonra bilimsel ve sanatsal yayınlarınızdan ya da araştırma projelerinizden en az 20 puan',
     ['1', '6.1'], 20, $SON_ATAMA, madde: 'EK 3',
 )];
 
 /** Mimarlık ve tekstil alanlarının yeniden atanma koşulu: 1., 6.1 veya 5. kısım. */
 $yeniden1615 = [Kalip::puanDan(
-    'Son atanmanızdan sonra 1. kısım (bilimsel ve sanatsal yayınlar), 6.1 kısmı (araştırma '
-    .'projeleri) ya da 5. kısımdan (ödüller) en az 20 puan',
+    'Son atanmanızdan sonra bilimsel ve sanatsal yayınlarınız, araştırma projeleriniz '
+    .'ya da aldığınız ödüllerden en az 20 puan',
     ['1', '6.1', '5'], 20, $SON_ATAMA, madde: 'EK 3',
 )];
 
 $setler = [
     'A' => [
-        'dr' => [Kalip::puanDan('1.2.1 kısmından (SCI, SCI-Expanded, SSCI, AHCI dergileri) en az 30 puan', ['1.2.1'], 30, madde: 'EK 3')],
+        'dr' => [Kalip::puanDan('SCI, SCI-Expanded, SSCI ya da AHCI dergilerindeki makalelerinizden en az 30 puan', ['1.2.1'], 30, madde: 'EK 3')],
         'yeniden' => $yeniden1ve61,
         'docent' => [
-            Kalip::puanDan('Doktora unvanınızı aldıktan sonra 1.2.1 kısmından en az 60 puan', ['1.2.1'], 60, $DOKTORA, madde: 'EK 3'),
-            Kalip::puanDan('1.2.1 kısmından toplam en az 100 puan', ['1.2.1'], 100, madde: 'EK 3'),
+            Kalip::puanDan('Doktora unvanınızı aldıktan sonra SCI, SCI-Expanded, SSCI ya da AHCI dergilerindeki makalelerinizden en az 60 puan', ['1.2.1'], 60, $DOKTORA, madde: 'EK 3'),
+            Kalip::puanDan('SCI, SCI-Expanded, SSCI ya da AHCI makalelerinizden toplam en az 100 puan', ['1.2.1'], 100, madde: 'EK 3'),
         ],
         'profesor' => [
-            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra 1.2.1 kısmından en az 60 puan', ['1.2.1'], 60, $DOCENTLIK, madde: 'EK 3'),
-            Kalip::puanDan('1. kısımdan toplam en az 200 puan', ['1'], 200, madde: 'EK 3'),
+            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra SCI, SCI-Expanded, SSCI ya da AHCI makalelerinizden en az 60 puan', ['1.2.1'], 60, $DOCENTLIK, madde: 'EK 3'),
+            Kalip::puanDan('Bilimsel ve sanatsal yayınlarınızdan toplam en az 200 puan', ['1'], 200, madde: 'EK 3'),
         ],
         'notlar' => [
-            'dr' => 'Ek koşul: 1.2.1 kısmından (SCI, SCI-Expanded, SSCI, AHCI dergileri) en az 30 puan.',
-            'yeniden' => 'Ek koşul: son atanmanızdan sonra 1. veya 6.1 kısmından en az 20 puan.',
-            'docent' => 'Ek koşul: 1.2.1 kısmından en az 60 puanı doktora sonrası olmak üzere toplam en az 100 puan.',
-            'profesor' => 'Ek koşul: 1.2.1 kısmından en az 60 puanı doçentlik sonrası olmak üzere 1. kısımdan toplam en az 200 puan.',
+            'dr' => 'Ek koşul: SCI, SCI-Expanded, SSCI ya da AHCI dergilerindeki makalelerinizden en az 30 puan.',
+            'yeniden' => 'Ek koşul: son atanmanızdan sonra yayınlarınızdan ya da araştırma projelerinizden en az 20 puan.',
+            'docent' => 'Ek koşul: SCI, SCI-Expanded, SSCI ya da AHCI makalelerinizden, en az 60 puanı doktora sonrası olmak üzere, toplam en az 100 puan.',
+            'profesor' => 'Ek koşul: SCI, SCI-Expanded, SSCI ya da AHCI makalelerinizden en az 60 puanı doçentlik sonrası olmak üzere, yayınlarınızdan toplam en az 200 puan.',
         ],
     ],
     'B' => [
-        'dr' => [Kalip::puanDan('1.1 ve/veya 1.2 kısımlarından en az 20 puan', ['1.1', '1.2'], 20, madde: 'EK 3')],
+        'dr' => [Kalip::puanDan('Kitap ve makale kalemlerinizden en az 20 puan', ['1.1', '1.2'], 20, madde: 'EK 3')],
         'yeniden' => $yeniden1ve61,
         'docent' => [
-            Kalip::puanDan('Doktora unvanınızı aldıktan sonra 1.1 ve/veya 1.2 kısımlarından en az 30 puan', ['1.1', '1.2'], 30, $DOKTORA, madde: 'EK 3'),
-            Kalip::puanDan('1.1 ve/veya 1.2 kısımlarından toplam en az 50 puan', ['1.1', '1.2'], 50, madde: 'EK 3'),
+            Kalip::puanDan('Doktora unvanınızı aldıktan sonra kitap ve makale kalemlerinizden en az 30 puan', ['1.1', '1.2'], 30, $DOKTORA, madde: 'EK 3'),
+            Kalip::puanDan('Kitap ve makale kalemlerinizden toplam en az 50 puan', ['1.1', '1.2'], 50, madde: 'EK 3'),
         ],
         'profesor' => [
-            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra 1.1 ve/veya 1.2 kısımlarından en az 50 puan', ['1.1', '1.2'], 50, $DOCENTLIK, madde: 'EK 3'),
-            Kalip::puanDan('1. kısımdan toplam en az 100 puan', ['1'], 100, madde: 'EK 3'),
+            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra kitap ve makale kalemlerinizden en az 50 puan', ['1.1', '1.2'], 50, $DOCENTLIK, madde: 'EK 3'),
+            Kalip::puanDan('yayınlarınızdan toplam en az 100 puan', ['1'], 100, madde: 'EK 3'),
         ],
         'notlar' => [
-            'dr' => 'Ek koşul: 1.1 (kitap) ve/veya 1.2 (makale) kısımlarından en az 20 puan.',
-            'yeniden' => 'Ek koşul: son atanmanızdan sonra 1. veya 6.1 kısmından en az 20 puan.',
-            'docent' => 'Ek koşul: 1.1/1.2 kısımlarından en az 30 puanı doktora sonrası olmak üzere toplam en az 50 puan.',
-            'profesor' => 'Ek koşul: 1.1/1.2 kısımlarından en az 50 puanı doçentlik sonrası olmak üzere 1. kısımdan toplam en az 100 puan.',
+            'dr' => 'Ek koşul: kitap ve makale kalemlerinizden en az 20 puan.',
+            'yeniden' => 'Ek koşul: son atanmanızdan sonra yayınlarınızdan ya da araştırma projelerinizden en az 20 puan.',
+            'docent' => 'Ek koşul: kitap ve makale kalemlerinizden, en az 30 puanı doktora sonrası olmak üzere, toplam en az 50 puan.',
+            'profesor' => 'Ek koşul: kitap ve makale kalemlerinizden en az 50 puanı doçentlik sonrası olmak üzere yayınlarınızdan toplam en az 100 puan.',
         ],
     ],
     'C' => [
-        'dr' => [Kalip::puanDan('1.2 kısmından (makaleler) en az 20 puan', ['1.2'], 20, madde: 'EK 3')],
+        'dr' => [Kalip::puanDan('makale kalemlerinizden en az 20 puan', ['1.2'], 20, madde: 'EK 3')],
         'yeniden' => $yeniden1ve61,
         'docent' => [
-            Kalip::puanDan('Doktora unvanınızı aldıktan sonra 1.2 kısmından en az 50 puan', ['1.2'], 50, $DOKTORA, madde: 'EK 3'),
-            Kalip::puanDan('1.2 kısmından toplam en az 70 puan', ['1.2'], 70, madde: 'EK 3'),
+            Kalip::puanDan('Doktora unvanınızı aldıktan sonra makale kalemlerinizden en az 50 puan', ['1.2'], 50, $DOKTORA, madde: 'EK 3'),
+            Kalip::puanDan('makale kalemlerinizden toplam en az 70 puan', ['1.2'], 70, madde: 'EK 3'),
             Kalip::adet('Bu bölümlerdeki yayınlardan en az birinin başlıca yazarı olmak', ['1.2'], 1, yazar: 'baslica', madde: 'EK 3'),
         ],
         'profesor' => [
-            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra 1.2 kısmından en az 50 puan', ['1.2'], 50, $DOCENTLIK, madde: 'EK 3'),
-            Kalip::puanDan('1. kısımdan toplam en az 120 puan', ['1'], 120, madde: 'EK 3'),
+            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra makale kalemlerinizden en az 50 puan', ['1.2'], 50, $DOCENTLIK, madde: 'EK 3'),
+            Kalip::puanDan('yayınlarınızdan toplam en az 120 puan', ['1'], 120, madde: 'EK 3'),
         ],
         'notlar' => [
-            'dr' => 'Ek koşul: 1.2 kısmından (makaleler) en az 20 puan.',
-            'yeniden' => 'Ek koşul: son atanmanızdan sonra 1. veya 6.1 kısmından en az 20 puan.',
-            'docent' => 'Ek koşul: 1.2 kısmından en az 50 puanı doktora sonrası olmak üzere toplam en az 70 puan ve bu yayınlardan en az birinin başlıca yazarı olmak.',
-            'profesor' => 'Ek koşul: 1.2 kısmından en az 50 puanı doçentlik sonrası olmak üzere 1. kısımdan toplam en az 120 puan.',
+            'dr' => 'Ek koşul: makale kalemlerinizden en az 20 puan.',
+            'yeniden' => 'Ek koşul: son atanmanızdan sonra yayınlarınızdan ya da araştırma projelerinizden en az 20 puan.',
+            'docent' => 'Ek koşul: makale kalemlerinizden en az 50 puanı doktora sonrası olmak üzere toplam en az 70 puan ve bu yayınlardan en az birinin başlıca yazarı olmak.',
+            'profesor' => 'Ek koşul: makale kalemlerinizden en az 50 puanı doçentlik sonrası olmak üzere yayınlarınızdan toplam en az 120 puan.',
         ],
     ],
     'D' => [
         'dr' => [
-            Kalip::puanDan('1.1 ve/veya 1.2 kısımlarından en az 30 puan', ['1.1', '1.2'], 30, madde: 'EK 3'),
+            Kalip::puanDan('Kitap ve makale kalemlerinizden en az 30 puan', ['1.1', '1.2'], 30, madde: 'EK 3'),
             Kalip::adet('Bu bölümlerdeki yayınlardan en az birinin tek başına yapılmış olması', ['1.1', '1.2'], 1, yazar: 'tek', madde: 'EK 3'),
         ],
         'yeniden' => $yeniden1ve61,
         'docent' => [
-            Kalip::puanDan('Doktora unvanınızı aldıktan sonra 1.1 ve/veya 1.2 kısımlarından en az 40 puan', ['1.1', '1.2'], 40, $DOKTORA, madde: 'EK 3'),
-            Kalip::puanDan('1.1 ve/veya 1.2 kısımlarından toplam en az 50 puan', ['1.1', '1.2'], 50, madde: 'EK 3'),
+            Kalip::puanDan('Doktora unvanınızı aldıktan sonra kitap ve makale kalemlerinizden en az 40 puan', ['1.1', '1.2'], 40, $DOKTORA, madde: 'EK 3'),
+            Kalip::puanDan('Kitap ve makale kalemlerinizden toplam en az 50 puan', ['1.1', '1.2'], 50, madde: 'EK 3'),
             Kalip::adet('Bu bölümlerdeki yayınlardan en az birinin tek başına yapılmış olması', ['1.1', '1.2'], 1, yazar: 'tek', madde: 'EK 3'),
         ],
         'profesor' => [
-            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra 1.1 ve/veya 1.2 kısımlarından en az 60 puan', ['1.1', '1.2'], 60, $DOCENTLIK, madde: 'EK 3'),
-            Kalip::puanDan('1.1 ve/veya 1.2 kısımlarından toplam en az 100 puan', ['1.1', '1.2'], 100, madde: 'EK 3'),
+            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra kitap ve makale kalemlerinizden en az 60 puan', ['1.1', '1.2'], 60, $DOCENTLIK, madde: 'EK 3'),
+            Kalip::puanDan('kitap ve makale kalemlerinizden toplam en az 100 puan', ['1.1', '1.2'], 100, madde: 'EK 3'),
             Kalip::adet('Bu bölümlerdeki yayınlardan en az birinin tek başına yapılmış olması', ['1.1', '1.2'], 1, yazar: 'tek', madde: 'EK 3'),
         ],
         'notlar' => [
-            'dr' => 'Ek koşul: 1.1/1.2 kısımlarından en az 30 puan ve bu yayınlardan en az birinin TEK BAŞINA yapılmış olması.',
-            'yeniden' => 'Ek koşul: son atanmanızdan sonra 1. veya 6.1 kısmından en az 20 puan.',
-            'docent' => 'Ek koşul: 1.1/1.2 kısımlarından en az 40 puanı doktora sonrası olmak üzere toplam en az 50 puan ve en az bir tek yazarlı yayın.',
-            'profesor' => 'Ek koşul: 1.1/1.2 kısımlarından en az 60 puanı doçentlik sonrası olmak üzere toplam en az 100 puan ve en az bir tek yazarlı yayın.',
+            'dr' => 'Ek koşul: kitap ve makale kalemlerinizden en az 30 puan ve bu yayınlardan en az birinin TEK BAŞINA yapılmış olması.',
+            'yeniden' => 'Ek koşul: son atanmanızdan sonra yayınlarınızdan ya da araştırma projelerinizden en az 20 puan.',
+            'docent' => 'Ek koşul: kitap ve makale kalemlerinizden en az 40 puanı doktora sonrası olmak üzere toplam en az 50 puan ve en az bir tek yazarlı yayın.',
+            'profesor' => 'Ek koşul: kitap ve makale kalemlerinizden en az 60 puanı doçentlik sonrası olmak üzere toplam en az 100 puan ve en az bir tek yazarlı yayın.',
         ],
     ],
     'E' => [
@@ -282,40 +281,40 @@ $setler = [
         ],
     ],
     'F' => [
-        'dr' => [Kalip::puanDan('1.2 kısmından en az 30 puan', ['1.2'], 30, madde: 'EK 3')],
+        'dr' => [Kalip::puanDan('makale kalemlerinizden en az 30 puan', ['1.2'], 30, madde: 'EK 3')],
         'yeniden' => $yeniden1615,
         'docent' => [
-            Kalip::puanDan('Doktora unvanınızı aldıktan sonra 1.2 kısmından en az 30 puan', ['1.2'], 30, $DOKTORA, madde: 'EK 3'),
-            Kalip::puanDan('1.2 kısmından toplam en az 60 puan', ['1.2'], 60, madde: 'EK 3'),
+            Kalip::puanDan('Doktora unvanınızı aldıktan sonra makale kalemlerinizden en az 30 puan', ['1.2'], 30, $DOKTORA, madde: 'EK 3'),
+            Kalip::puanDan('makale kalemlerinizden toplam en az 60 puan', ['1.2'], 60, madde: 'EK 3'),
         ],
         'profesor' => [
-            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra 1.2 kısmından en az 30 puan', ['1.2'], 30, $DOCENTLIK, madde: 'EK 3'),
-            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra 1.1 ve/veya 1.2 kısmından en az 60 puan', ['1.1', '1.2'], 60, $DOCENTLIK, madde: 'EK 3'),
-            Kalip::puanDan('1.1 ve/veya 1.2 kısmından toplam en az 100 puan', ['1.1', '1.2'], 100, madde: 'EK 3'),
+            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra makale kalemlerinizden en az 30 puan', ['1.2'], 30, $DOCENTLIK, madde: 'EK 3'),
+            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra kitap ve makale kalemlerinizden en az 60 puan', ['1.1', '1.2'], 60, $DOCENTLIK, madde: 'EK 3'),
+            Kalip::puanDan('kitap ve makale kalemlerinizden toplam en az 100 puan', ['1.1', '1.2'], 100, madde: 'EK 3'),
         ],
         'notlar' => [
-            'dr' => 'Ek koşul: 1.2 kısmından en az 30 puan.',
-            'yeniden' => 'Ek koşul: son atanmanızdan sonra 1., 6.1 veya 5. kısımdan en az 20 puan.',
-            'docent' => 'Ek koşul: 1.2 kısmından en az 30 puanı doktora sonrası olmak üzere toplam en az 60 puan.',
-            'profesor' => 'Ek koşul: 1.2 kısmından en az 30 puanı ve 1.1/1.2 kısmından en az 60 puanı doçentlik sonrası olmak üzere toplam en az 100 puan.',
+            'dr' => 'Ek koşul: makale kalemlerinizden en az 30 puan.',
+            'yeniden' => 'Ek koşul: son atanmanızdan sonra yayınlarınız, araştırma projeleriniz ya da ödüllerinizden en az 20 puan.',
+            'docent' => 'Ek koşul: makale kalemlerinizden en az 30 puanı doktora sonrası olmak üzere toplam en az 60 puan.',
+            'profesor' => 'Ek koşul: kitap ve makale kalemlerinizden en az 60 puanı doçentlik sonrası olmak üzere toplam en az 100 puan.',
         ],
     ],
     'G' => [
-        'dr' => [Kalip::puanDan('1.1 ve/veya 1.2 kısmından en az 30 puan', ['1.1', '1.2'], 30, madde: 'EK 3')],
+        'dr' => [Kalip::puanDan('kitap ve makale kalemlerinizden en az 30 puan', ['1.1', '1.2'], 30, madde: 'EK 3')],
         'yeniden' => $yeniden1615,
         'docent' => [
-            Kalip::puanDan('Doktora unvanınızı aldıktan sonra 1.1 ve/veya 1.2 kısmından en az 30 puan', ['1.1', '1.2'], 30, $DOKTORA, madde: 'EK 3'),
-            Kalip::puanDan('1.1 ve/veya 1.2 kısmından toplam en az 60 puan', ['1.1', '1.2'], 60, madde: 'EK 3'),
+            Kalip::puanDan('Doktora unvanınızı aldıktan sonra kitap ve makale kalemlerinizden en az 30 puan', ['1.1', '1.2'], 30, $DOKTORA, madde: 'EK 3'),
+            Kalip::puanDan('kitap ve makale kalemlerinizden toplam en az 60 puan', ['1.1', '1.2'], 60, madde: 'EK 3'),
         ],
         'profesor' => [
-            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra 1.1 ve/veya 1.2 kısmından en az 60 puan', ['1.1', '1.2'], 60, $DOCENTLIK, madde: 'EK 3'),
-            Kalip::puanDan('1.1 ve/veya 1.2 kısmından toplam en az 100 puan', ['1.1', '1.2'], 100, madde: 'EK 3'),
+            Kalip::puanDan('Doçentlik unvanınızı aldıktan sonra kitap ve makale kalemlerinizden en az 60 puan', ['1.1', '1.2'], 60, $DOCENTLIK, madde: 'EK 3'),
+            Kalip::puanDan('kitap ve makale kalemlerinizden toplam en az 100 puan', ['1.1', '1.2'], 100, madde: 'EK 3'),
         ],
         'notlar' => [
-            'dr' => 'Ek koşul: 1.1 ve/veya 1.2 kısmından en az 30 puan.',
-            'yeniden' => 'Ek koşul: son atanmanızdan sonra 1., 6.1 veya 5. kısımdan en az 20 puan.',
-            'docent' => 'Ek koşul: 1.1/1.2 kısmından en az 30 puanı doktora sonrası olmak üzere toplam en az 60 puan.',
-            'profesor' => 'Ek koşul: 1.1/1.2 kısmından en az 60 puanı doçentlik sonrası olmak üzere toplam en az 100 puan.',
+            'dr' => 'Ek koşul: kitap ve makale kalemlerinizden en az 30 puan.',
+            'yeniden' => 'Ek koşul: son atanmanızdan sonra yayınlarınız, araştırma projeleriniz ya da ödüllerinizden en az 20 puan.',
+            'docent' => 'Ek koşul: kitap ve makale kalemlerinizden en az 30 puanı doktora sonrası olmak üzere toplam en az 60 puan.',
+            'profesor' => 'Ek koşul: kitap ve makale kalemlerinizden en az 60 puanı doçentlik sonrası olmak üzere toplam en az 100 puan.',
         ],
     ],
     'H' => [
@@ -324,8 +323,8 @@ $setler = [
             Kalip::hesaplanamiyor(
                 'Müzik bilim/sanat alanında İDK Ek Açıklama tablosunun program bazlı koşulları '
                 .'(Piyano, yaylı, üflemeli ve vurmalı çalgılarda doktora sonrası farklı '
-                .'programlarla 2.8.1 ve 2.8.4 maddelerinden 40 puan; arp ve gitarda 20 puan; '
-                .'operada iki başrol ya da iki solist konser; tiyatroda 2.8 tablosundan 120 '
+                .'programlarla solo resital ve konser kalemlerinden 40 puan; arp ve gitarda 20 puan; '
+                .'operada iki başrol ya da iki solist konser; tiyatroda sahne etkinliklerinden 120 '
                 .'puan) — çalgı programı profilde tutulmadığı için hesaplanamıyor',
                 'EK 3 İDK',
             ),

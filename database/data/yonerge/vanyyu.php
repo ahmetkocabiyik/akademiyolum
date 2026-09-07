@@ -291,7 +291,7 @@ $EK3_TAM = [...$EK3, ...$ortakKriterler('3')];
 
 $NOT_SECMELI = ' Seçmeli kriterlerin bir bölümü kayıt alanlarıyla eşleşmediği için "beyan" '
     .'olarak soruluyor; bunları belgeleyip başvuru dosyanızda hangi kriteri sağladığınızı '
-    .'belirtmeniz gerekiyor. Yönergenin "1.1., 2.1. ve 3.1. dışındaki her kriterden en fazla üç '
+    .'belirtmeniz gerekiyor. Yönergenin "makale, atıf ve kitap dışındaki her kriterden en fazla üç '
     .'etkinlik sayılır" ve "bir eser aynı kategoride yalnız bir kez kullanılır" kuralları motorda '
     .'yok; sağladığınız kriter sayısı burada olduğundan fazla görünebilir.';
 

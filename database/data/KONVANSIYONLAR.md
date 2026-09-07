@@ -1952,6 +1952,23 @@ Yerine yazılacak metin satırın kendi başlığından çıkar: `1 (a, b)` yeri
 `notlar` alanı bu kuralın DIŞINDA: iç belgeleme oraya yazılır ve madde/bölüm
 atfı orada kalmalı ki satırın kaynağı izlenebilsin.
 
+**NOKTALI KODLAR DA EKLENDİ (07.09.2026).** İlk tur "1 (a, b)" biçimini
+kapattı, ikinci tur `4.1`, `1.2.1`, `8.1/d`, `md. 10.7`, `14(3)` biçimlerini.
+On dört üniversitede daha sızıntı çıktı — Akdeniz, Altınbaş, Bayburt, Bitlis,
+Ege, Gebze Teknik, Kırıkkale, KSBÜ, MSGSÜ, Rumeli, Tokat GOP, Van YYÜ,
+Çukurova, Yıldız Teknik — ve hepsi kalem adıyla yeniden yazıldı
+("Bölüm 4.1.-4.6.'dan" → "yayın, atıf ve proje kalemlerinden").
+
+İki AYIKLAMA gerekti, yoksa desen doğru metni de yakalıyor:
+
+- **TARİH**: "01.01.2027", "31.12.2026" — gün.ay kısmı koda benziyor.
+  Eşleşmenin ardından dört haneli yıl geliyorsa atlanıyor.
+- **ÖLÇÜT DEĞERİ**: "SNIP ≥ 1.0", "IF > 2.5" — ondalık eşik sayısı.
+
+**Metni değiştirince testin ARADIĞI düğüm adı da değişir.** Akdeniz'in
+"11.4 disipline özgü…" düğümü sadeleşince `SartAgaciTest` onu bulamadı;
+düğüm adını metinle arayan testler bu turda birlikte güncellenmeli.
+
 ### Kalıplar
 
 | Kalıp | Ne zaman |

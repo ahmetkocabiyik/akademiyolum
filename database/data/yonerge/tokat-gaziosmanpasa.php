@@ -66,13 +66,13 @@ $esikler = [];
 foreach ([
     ['ad' => 'Fen Bilimleri, Mühendislik, Ziraat ve Sağlık Bilimleri', 'anahtar' => 'fen', 'alan' => $FEN,
         'drGrup' => '1.1.A-D', 'drAdet' => 1, 'dortGrup' => '1.1.A-B',
-        'drAd' => 'SCIE, SSCI, AHCI (Q1-Q4) ya da ESCI-Scopus kademelerinden (1.1.a-1.1.d)',
-        'dortAd' => 'SCIE, SSCI ya da AHCI\'nin Q1 veya Q2 kademesinden (1.1.a, 1.1.b)'],
+        'drAd' => 'SCIE, SSCI, AHCI (Q1-Q4) ya da ESCI-Scopus dergilerinden',
+        'dortAd' => 'SCIE, SSCI ya da AHCI\'nin Q1 veya Q2 kademesinden'],
     ['ad' => 'Eğitim, Spor, Filoloji, Güzel Sanatlar, Hukuk, İlahiyat, Mimarlık ve Sosyal Bilimler',
         'anahtar' => 'sosyal', 'alan' => $SOSYAL,
         'drGrup' => '1.1.A-E', 'drAdet' => 2, 'dortGrup' => '1.1.A-C',
-        'drAd' => 'SCIE, SSCI, AHCI, ESCI-Scopus ya da TR Dizin kademelerinden (1.1.a-1.1.e)',
-        'dortAd' => 'SCIE, SSCI ya da AHCI\'nin Q1, Q2 veya Q3 kademesinden (1.1.a-1.1.c)'],
+        'drAd' => 'SCIE, SSCI, AHCI, ESCI-Scopus ya da TR Dizin dergilerinden',
+        'dortAd' => 'SCIE, SSCI ya da AHCI\'nin Q1, Q2 veya Q3 kademesinden'],
 ] as $g) {
     $ortak = ['universite' => 'Tokat Gaziosmanpaşa Üniversitesi', 'alan' => $g['alan'],
         'cetvel' => 'tokat-gaziosmanpasa-2026'];

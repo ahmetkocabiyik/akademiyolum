@@ -5593,7 +5593,7 @@ test('Akdeniz GRUP 4 barajı 11.4 etkinlikleriyle sağlanabiliyor', function () 
         sartFaaliyet('TR Dizin', Kategori::Makale, 'baslica'),
     ], new Profil(yds: 70));
 
-    $onbirDort = sartDugum($sonuc, '11.4 disipline özgü etkinliklerinizden en az 50 puan');
+    $onbirDort = sartDugum($sonuc, 'Disipline özgü etkinliklerinizden en az 50 puan');
 
     expect($onbirDort->gerekli)->toBe(50)
         ->and($onbirDort->mevcut)->toBe(150)

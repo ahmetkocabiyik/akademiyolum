@@ -135,7 +135,7 @@ foreach ($tablolar as $t) {
     $esikler[] = [
         'anahtar' => "cukurova-dr-{$t['alan']}",
         'aday_notu' => 'Dr. Öğretim Üyeliğinde asgari puan barajı yok; yalnızca makale ve bildiri sayısı aranıyor. '
-            .'Yeniden atanmada (madde 5.3) aynı ölçütlerin bir önceki atanmadan sonraki çalışmalarla yeniden sağlanması gerekir.',
+            .'Yeniden atanmada aynı ölçütlerin bir önceki atanmadan sonraki çalışmalarla yeniden sağlanması gerekir.',
         'universite' => 'Çukurova Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => [$t['alan']],

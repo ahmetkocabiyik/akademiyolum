@@ -254,7 +254,7 @@ $esikler[] = [
     'aday_notu' => 'Hukuk alanında doçent kadrosuna atanma. Hukukun eşikleri öbür alanlardan '
         .'belirgin biçimde düşük (yayınlarda 60 yerine 15, toplamda 200 yerine 120 puan) ama '
         .'kitap koşulu var: kitaplardan en az 25 puan ve ulusal makale ile kitap '
-        .'kalemlerinden 50 puan gerekiyor. Yönergenin "Kitaplar (1.1.3)" satırı uluslararası '
+        .'kalemlerinden 50 puan gerekiyor. Yönergenin kitap satırı uluslararası '
         .'kitapları gösteriyor; tanınmış ile diğer yayınevi ayrımı kayıtta taşınmadığı için '
         .'ulusal kitaplarınız da bu koşula sayılıyor.'.$NOT_ATIF_DERS,
     'sart' => Kalip::ve('Doçent kadrosuna atanma — Hukuk', [
