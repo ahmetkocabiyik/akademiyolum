@@ -45,11 +45,38 @@ $tabloA = [
     '1.f' => ['baslik' => 'Tahkik/neşir/araştırma notu/kitap kritiği', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 3],
 
     // ── 2. MAKALE ──
-    '2.a' => ['baslik' => 'WoS (SCI-E/SSCI) Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 50],
-    '2.b' => ['baslik' => 'WoS (SCI-E/SSCI) Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'puan' => 40],
-    '2.c' => ['baslik' => 'WoS (SCI-E/SSCI) Q3 ve AHCI kapsamında makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'AHCI'], 'puan' => 30],
-    '2.ç' => ['baslik' => 'WoS (SCI-E/SSCI) Q4 dergide tam metinli araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'puan' => 20],
-    '2.h' => ['baslik' => 'ESCI veya SCOPUS dergide tam metinli araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
+    // TABLO A'nın 2/d-g bentleri (Q1-Q4 dergilerde "TAM METİNLİ ARAŞTIRMA
+    // MAKALESİ DIŞINDAKİ yayınlar: vaka raporu, özet, teknik not, editöre
+    // mektup, kitap kritiği" 15/10/8/6) girilmemişti ve a-ç satırlarında tür
+    // kısıtı yoktu; editöre mektup kaydeden aday Q1'de 15 yerine 50 puan
+    // alıyordu (§0 ihlali). 2/h ESCI satırı "derleme dahildir" diyor.
+    //
+    // TR Dizin (2/ı) ve diğer hakemli (2/i) satırları kaynakta düz "makale"
+    // diyor, dışlama yok → tür kısıtı da yok.
+    '2.d' => ['baslik' => 'WoS (SCI-E/SSCI) Q1 dergide vaka raporu, özet, teknik not, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 15],
+    '2.e' => ['baslik' => 'WoS (SCI-E/SSCI) Q2 dergide vaka raporu, özet, teknik not, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 10],
+    '2.f' => ['baslik' => 'WoS (SCI-E/SSCI) Q3 ya da AHCI dergide vaka raporu, özet, teknik not, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'AHCI'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 8],
+    '2.g' => ['baslik' => 'WoS (SCI-E/SSCI) Q4 dergide vaka raporu, özet, teknik not, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 6],
+
+    // ── 3. BİLDİRİLER ── BÖLÜMÜN TAMAMI girilmemişti; bildiri etiketlerinin
+    // hiçbirinin karşılığı yoktu. Kaynak taranmış belge olduğu için sayfanın
+    // GÖRÜNTÜSÜNDEN okundu (s. 19).
+    //
+    // `Özet/Poster` etiketi özet ve poster hücrelerinin en düşüğünü alır:
+    // uluslararası min(b 5, ç 3, d 2) = 2 · ulusal min(f 2, g 1) = 1.
+    // `Davetli Konuşmacı` kapsam taşımıyor: min(uluslararası 5, ulusal 3) = 3.
+    '3.a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulmuş ve tam metni CPCI\'da yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 7],
+    '3.c' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulmuş ve tam metni basılmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin'], 'puan' => 5],
+    '3.d' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulmuş, özeti basılmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 2],
+    '3.e' => ['baslik' => 'Ulusal bilimsel toplantıda sunulmuş ve tam metni basılmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 3],
+    '3.g' => ['baslik' => 'Ulusal bilimsel toplantıda sunulmuş, özeti basılmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
+    '3.h' => ['baslik' => 'Bilimsel toplantıda başvuru alanıyla ilgili davetli konuşmacı olarak sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 3],
+
+    '2.a' => ['baslik' => 'WoS (SCI-E/SSCI) Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 50],
+    '2.b' => ['baslik' => 'WoS (SCI-E/SSCI) Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
+    '2.c' => ['baslik' => 'WoS (SCI-E/SSCI) Q3 ve AHCI kapsamında makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
+    '2.ç' => ['baslik' => 'WoS (SCI-E/SSCI) Q4 dergide tam metinli araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
+    '2.h' => ['baslik' => 'ESCI veya SCOPUS dergide tam metinli araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
     '2.ı' => ['baslik' => 'TR Dizin kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
     '2.i' => ['baslik' => 'Diğer uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'puan' => 5],
 

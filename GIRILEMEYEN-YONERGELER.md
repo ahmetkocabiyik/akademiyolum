@@ -1024,3 +1024,17 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
   Kırıkkale 3, Necmettin Erbakan C3) basılmış poster satırından ayrı ve
   daha düşük; sözlükte "yayımlanmamış" ayrımı yok, `Özet/Poster` etiketi
   ikisinin en düşüğünü alıyor.
+
+## Davetli konuşmacı taraması (07.09.2026) — girilemeyen kalemler
+
+- **Davetin KAPSAMI** (uluslararası / ulusal) sözlükte yok; her cetvelde en
+  düşük davetli satırı geçerli. Uluslararası davetli konuşmacılığı olan aday
+  bu yüzden eksik sayılıyor — ayrı bir etiket çifti açılmadıkça kaçınılmaz.
+- **Moderatörlük ve panelistlik** (Atatürk 02.12.04/02.13.02, 2/1) ayrı tür
+  değil; `Davetli Konuşmacı` etiketine bağlamak fazla saydırırdı, girilmedi.
+- **Erciyes'in 5. bölümü** (bilimsel toplantı) yönergede yalnızca azami sınır
+  taşıdığı için baştan girilmemiş; davetli satırı (uluslararası 10, ulusal 5)
+  o kararın kapsamında.
+- **Üsküdar'ın bildiri tablosu** metin çıkarımında puan sütununu tamamen
+  kaybediyor; mevcut değerler (davetli 20) kod adlarından okunmuş, sayfa
+  görüntüsüyle doğrulanmadı.

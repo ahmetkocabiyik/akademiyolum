@@ -2797,3 +2797,27 @@ yazılır; iki kolonun birden en düşüğü (3) yazmak gereksiz eksik saymadır
 İstanbul Aydın B/12 açıkça "ulusal **TAM** bildiriler" diyor ve ulusal bildiri
 ÖZETİ için satır yok. Etiketi o satırda bırakmak karşılıksız puan verir ve
 `adet` koşullarını da besler.
+
+## `Davetli Konuşmacı` KAPSAM TAŞIMIYOR
+
+Sözlükte tek etiket var; yönergelerin hemen hepsi uluslararası ile ulusal
+daveti ayırıyor (Ankara 25/12, Gazi 12/6, Bandırma 8/5/5/4). Satır §0
+uyarınca **en düşük davetli değerine** yazılır.
+
+**Etiketi bildiri satırına iliştirme.** İki cetvelde `Davetli Konuşmacı`
+kaynağın davetli satırıyla hiç ilgisi olmayan bir bildiri satırında
+duruyordu: Bandırma'da "uluslararası özet/poster bildiri" (8), DPÜ'de
+"uluslararası poster bildiri" (2). Kaynağın davetli satırları başka bir
+bölümdeydi ve daha düşüktü.
+
+**Ucuz yerleştirme detektörü:** satırın `baslik`'inde `davetli|çağrılı|
+keynote|konuşmac|panelist` geçmiyorsa işaret ver. Korpusta 159 davetli
+satırının 43'ü işaret veriyor; çoğu meşru (kaynakta ayrı davetli satırı yok,
+etiket genel bildiri satırına bağlanmış) ama iki gerçek hatayı da bu buldu.
+
+**Kaynak taraması yaparken "panelist" kelimesini ELE.** Proje
+değerlendirme panelistliği (TÜBİTAK hakem/panelist/moderatör) ile
+sergi/yarışma daveti ("davetli/yarışmalı sergi") aynı kelimeleri kullanıyor
+ve en düşük değeri onlar veriyor. Filtre: davet sözcüğü ile KONUŞMA bağlamı
+(`konuşmac|bildiri|sunum|tebliğ|oturum`) aynı satırda olmalı; `derleme|
+editör|proje|hakem|jüri|sergi|yarışmalı|konser|festival` geçen satır elenir.

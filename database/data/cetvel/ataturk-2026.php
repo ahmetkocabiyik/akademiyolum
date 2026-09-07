@@ -123,6 +123,24 @@ return [
             'turler' => ['kisa_makale', 'vaka_teknik_not'],
             'puan' => 2,
         ],
+        // 02.12 (ULUSLARARASI TANINIRLIK) ve 02.13 (ULUSAL TANINIRLIK)
+        // bölümlerinin davetli konuşmacı satırları girilmemişti: 02.12.03
+        // uluslararası 5, 02.13.01 ulusal 3. Etiket kapsam taşımadığı için
+        // §0 uyarınca 3. Aynı bölümlerin moderatör (2/1) ve oturum başkanı
+        // (1/0,5) satırları da eklendi; ulusal oturum başkanlığı aşağı
+        // yuvarlanınca 0 ettiği için o etiket karşılıksız kalıyor.
+        '02.13.01' => [
+            'baslik' => 'Bilimsel toplantıda (kongre, konferans, sempozyum, panel, çalıştay) davetli konuşmacı olmak',
+            'kategori' => 'bildiri',
+            'kaynaklar' => ['Davetli Konuşmacı'],
+            'puan' => 3,
+        ],
+        '02.13.03' => [
+            'baslik' => 'Bilimsel toplantıda (kongre, konferans, sempozyum, panel, çalıştay) oturum başkanı olmak',
+            'kategori' => 'diger',
+            'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'],
+            'puan' => 1,
+        ],
         // Kitap kalemleri yönergede 01.03 (Özgün Bilimsel Araştırma veya Ders
         // Kitabı) altında; daha önce sehven 02.04 (Ulusal AR-GE Projesi)
         // kodlarıyla girilmişti.

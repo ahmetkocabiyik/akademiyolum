@@ -104,7 +104,10 @@ return [
         'Pe-a' => ['baslik' => 'BAP destekli projede araştırmacı veya bursiyer', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 2],
 
         // ── BİLİMSEL/SANATSAL TOPLANTI ── (bölüm tavanı 40 puan)
-        'Ta' => ['baslik' => 'Uluslararası bilimsel/sanatsal toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 12],
+        // `Davetli Konuşmacı` etiketi KAPSAM taşımıyor; kaynak uluslararası
+        // davetli konuşmacıya 12, ULUSALA 6 veriyor (toplantı bölümü a ve c
+        // bentleri). §0 uyarınca ulusal değer geçerli.
+        'Ta' => ['baslik' => 'Bilimsel ya da sanatsal toplantıda davetli konuşmacı olarak sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 6],
         // TOPLANTI BÖLÜMÜNÜN f VE g BENTLERİ girilmemişti: "hakemli
         // ulusal/uluslararası toplantılarda sunulan SÖZLÜ bildiri 5/10" ve
         // "POSTER bildiri 3/5" (kaynak ulusal/uluslararası sırasıyla yazıyor).

@@ -125,7 +125,9 @@ return [
         // ── B. BİLİMSEL TOPLANTILAR ──
         'B.1.1' => ['baslik' => 'Uluslararası bilimsel etkinlik kitabında sözlü tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 10],
         'B.1.3' => ['baslik' => 'Uluslararası bilimsel etkinlik kitabında bildiri özeti veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 6],
-        'B.1.5' => ['baslik' => 'Uluslararası bilimsel etkinliğe çağrılı bildiri sunmak üzere davet edilmek', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
+        // `Davetli Konuşmacı` etiketi KAPSAM taşımıyor; kaynak B.1.5'te
+        // uluslararası çağrılı bildiriye 10, B.2.5'te ULUSALA 9 veriyor.
+        'B.1.5' => ['baslik' => 'Bilimsel etkinliğe çağrılı bildiri sunmak üzere davet edilmek', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 9],
         'B.2.1' => ['baslik' => 'Ulusal bilimsel etkinlik kitabında sözlü tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 7],
         'B.2.3' => ['baslik' => 'Ulusal bilimsel etkinlik kitabında bildiri özeti veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 4],
 

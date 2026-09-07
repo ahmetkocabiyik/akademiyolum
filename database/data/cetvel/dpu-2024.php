@@ -177,7 +177,12 @@ $govde = function (array $s) use ($SCI, $MAKALE, $KISA, $sanatJuri): array {
 
         // ══ C. KONFERANS ══
         'C111' => ['baslik' => 'Uluslararası bilimsel toplantıda sözlü sunulan ve organizasyon kitabında yayımlanan tam metin', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 3],
-        'C121' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 2],
+        // `Davetli Konuşmacı` C121'de (uluslararası poster bildiri) duruyordu.
+        // Kaynağın davetli satırları dört yerde: C114 uluslararası sözlü 3 ·
+        // C124 uluslararası poster 2 · C213/C216 ulusal sözlü 2 · C223/C226
+        // ulusal poster 1. Etiket kapsam taşımadığı için §0 uyarınca 1.
+        'C226' => ['baslik' => 'Bilimsel ya da sanatsal toplantıda davetli konuşmacı olarak sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 1],
+        'C121' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 2],
         'C211' => ['baslik' => 'Ulusal bilimsel toplantıda sözlü sunulan ve organizasyon kitabında yayımlanan tam metin', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 2],
         'C221' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 

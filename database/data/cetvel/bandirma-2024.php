@@ -86,7 +86,7 @@ return [
         'A8.b' => ['baslik' => 'Uluslararası alan indeksli hakemli dergide yayın', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
         'A11.a' => ['baslik' => 'Diğer uluslararası hakemli dergide sorumlu editör ya da baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 15],
         'A12.a' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 15],
-        'A12.b' => ['baslik' => 'Uluslararası toplantıda özet metni yayımlanan bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 8],
+        'A12.b' => ['baslik' => 'Uluslararası toplantıda özet metni yayımlanan bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
         'A13.a' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],
         'A13.ç' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
 
@@ -135,6 +135,12 @@ return [
         'D1' => ['baslik' => 'Verilen ders (dönem ve ders başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
         'E4.a' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 8],
         'E4.c' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 4],
+        // `Davetli Konuşmacı` A12.b'de (uluslararası özet/poster bildiri, 8)
+        // duruyordu; oysa kaynağın davetli satırları E bölümünde ve düzenleme
+        // kurulu üyeliğiyle AYNI bende bağlı: E1.c uluslararası kongre 8 ·
+        // E2.c uluslararası çalıştay 5 · E3.c ulusal kongre 5 · E4.c ulusal
+        // çalıştay 4. Etiket kapsam taşımadığı için §0 uyarınca 4.
+        'E4.c-davetli' => ['baslik' => 'Bilimsel ya da sanatsal etkinlikte davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 4],
         'E2.ç' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
     ],
 

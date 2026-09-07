@@ -1491,3 +1491,87 @@ test('bildiride poster sözlüden ayrışıyor', function (string $cetvel, array
         'Ulusal Tam Metin' => 5, 'Ulusal Özet/Poster' => 3,
     ]],
 ]);
+
+/**
+ * `Davetli Konuşmacı` ETİKETİ KAPSAM TAŞIMIYOR: uluslararası ile ulusal
+ * daveti ayırmıyor. Yönergelerin hemen hepsi ayırıyor (uluslararası 25 ·
+ * ulusal 12 gibi), bu yüzden satır §0 uyarınca ULUSAL değere yazılır.
+ *
+ * İki ek hata biçimi çıktı:
+ *
+ *   1. Etiket, davetli satırı OLMAYAN bir bildiri satırına iliştirilmiş
+ *      (Bandırma'da uluslararası özet/poster bildirisine, DPÜ'de poster
+ *      satırına) — kaynağın kendi davetli satırları başka bir bölümde.
+ *   2. Kaynakta davetli satırı var ama cetvelde hiç karşılığı yok
+ *      (Atatürk, Mersin).
+ *
+ * Değerler 07.09.2026'da kaynak PDF'lerinden okundu.
+ */
+test('davetli konuşmacı etiketi ulusal davet değerinde', function (string $cetvel, int $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $puan = $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Bildiri, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => 'Davetli Konuşmacı', 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan)->toBe($beklenen);
+})->with([
+    // Gazi toplantı bölümü: a) uluslararası 12, c) ulusal 6.
+    ['gazi-2024', 6],
+    // Bitlis B.1.5 uluslararası 10, B.2.5 ulusal 9.
+    ['bitlis-2024', 9],
+    // Bandırma E bölümü: E1.c 8 · E2.c 5 · E3.c 5 · E4.c 4. Etiket önce
+    // A12.b'de (uluslararası özet/poster bildiri, 8) duruyordu.
+    ['bandirma-2024', 4],
+    // DPÜ: C114 3 · C124 2 · C213/C216 2 · C223/C226 1. Etiket önce C121'de
+    // (uluslararası poster bildiri, 2) duruyordu.
+    ['dpu-2024', 1],
+    // Atatürk 02.12.03 uluslararası 5, 02.13.01 ulusal 3 — satır hiç yoktu.
+    ['ataturk-2026', 3],
+    // Mersin 3/h: uluslararası 5, ulusal 3 — 3. bölümün TAMAMI hiç yoktu.
+    ['mersin-2024', 3],
+    // Amasya: etiket C1'de (uluslararası sözlü tam metin, 25) duruyordu;
+    // kaynağın davetli satırları H bölümünde (H.2 10, H.7 7).
+    ['amasya-2024', 7],
+    // Cerrahpaşa: A/10-c uluslararası 5, B/8-c ulusal 3.
+    ['cerrahpasa-2023', 3],
+    // Sakarya UBÜ: 2.1 uluslararası 60, 2.2 ulusal 50.
+    ['sakarya-ubu-2024', 50],
+    // GİBTÜ: uluslararası 15, ulusal 10, STK/bakanlık etkinliği 2.
+    ['gibtu-2024', 2],
+]);
+
+/**
+ * Mersin'in 3. bölümü (BİLDİRİLER) ile 2/d-g bentleri hiç girilmemişti.
+ * Kaynak TARANMIŞ belge; metin çıkarımı puan sütununu tamamen düşürdüğü için
+ * bölüm gözden kaçmış, sayfanın GÖRÜNTÜSÜNDEN (s. 19) okundu.
+ */
+test('Mersin bildiri bölümü ve makale türü merdiveni', function () {
+    $katalog = sartDepo()->katalog('mersin-2024');
+    $kodlar = $katalog->coz(['*']);
+
+    $bildiri = fn (string $etiket): int => $katalog->puan(
+        new Faaliyet(['kategori' => Kategori::Bildiri, 'tur' => 'T', 'baslik' => 'T',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi']),
+        $kodlar,
+    );
+    $makale = fn (string $etiket, string $tur): int => $katalog->puan(
+        new Faaliyet(['kategori' => Kategori::Makale, 'tur' => 'T', 'baslik' => 'T',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi', 'yayin_turu' => $tur]),
+        $kodlar,
+    );
+
+    expect($bildiri('Uluslararası Tam Metin (CPCI)'))->toBe(7)
+        ->and($bildiri('Uluslararası Tam Metin'))->toBe(5)
+        ->and($bildiri('Uluslararası Özet/Poster'))->toBe(2)
+        ->and($bildiri('Ulusal Tam Metin'))->toBe(3)
+        ->and($bildiri('Ulusal Özet/Poster'))->toBe(1)
+        ->and($makale('SCIE/SSCI (Q1)', 'ozgun_makale'))->toBe(50)
+        ->and($makale('SCIE/SSCI (Q1)', 'vaka_teknik_not'))->toBe(15)
+        ->and($makale('SCIE/SSCI (Q4)', 'vaka_teknik_not'))->toBe(6);
+});
