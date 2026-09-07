@@ -1,323 +1,226 @@
 <?php
 
 /**
- * KARADENİZ TEKNİK ÜNİVERSİTESİ — EK-15 Değerlendirmede Kullanılacak Puanlar
- * Tablosu
- * Kaynak: pdf/17536999312.karadenizteknikuniverstesi.pdf (48 sayfa;
- *         17.10.2023 tarih ve 342 sayılı Senato değişiklikleriyle)
+ * KARADENİZ TEKNİK ÜNİVERSİTESİ — EK-15 "Değerlendirmede Kullanılacak
+ * Puanlar Tablosu" ve EK-2…EK-14 fakülte tavanları
+ * Kaynak: pdf/17536999312.karadenizteknikuniverstesi.pdf (48 sayfa,
+ *         Senato 09.02.2023/336-5, değişiklik 17.10.2023/342)
  *
- * KAYNAK PDF TARANMIŞ; 150-250 dpi görüntüden `tesseract -l tur` ile okundu ve
- * BÜTÜN PUAN SÜTUNU sayfa görüntülerinden gözle doğrulandı. OCR'ın yanlış
- * okuduğu satırlar: 10/A-f ve 10/A-g yapımcılık ve koordinatörlük 15 değil
- * 1,5; EK-1'in yurt dışı alternatifi "430"/"930" değil %30; kongre bildirisi
- * satırlarındaki çeyrek harfleri (Q1-Q4) tamamen çöp çıkmıştı.
+ * KAYNAK TARANMIŞ GÖRÜNTÜ PDF'İ: `pdftotext` 48 bayt üretiyor, hazır OCR
+ * metni `pdf-ocr/` altında. OCR puan sütununu düzenli bozduğu için
+ * ("Q1" → "Ol", "100 P" → "1000 P", "15 P" → "I5 P") hem EK-15 hem
+ * EK-2…EK-14 tablolarının TAMAMI sayfa GÖRÜNTÜSÜNDEN okundu.
  *
- * DOKUZ CETVEL VARYANTI ÜRETİYOR. Bölüm tavanları hem KADROYA hem FAKÜLTEYE
- * göre değiştiği için (tavan profili × kadro) çarpımı gerekti:
+ * TEK PUAN TABLOSU, DOKUZ VARYANT. EK-15 bütün fakülteler için ortak;
+ * fakülteye göre değişen şey her bölümün "En Fazla" tavanı (EK-2…EK-14).
+ * On üç fakülte üç tavan ailesine iniyor:
  *
- *                       Kitap        Atıf         Bildiri
- *   fen profili         60/60/60     160/120/15   50/50/40
- *   sosyal profili     120/90/60     160/160/15   50/50/40
- *   mimarlık profili    80/80/60     160/160/15   70/70/50
- *   (üçünde de: tez 30/30/—, editörlük 20/20/10, diğer 30/30/15;
- *    makale, proje, ödül ve patent bölümlerinde tavan yok)
+ *   fen     → Mühendislik, Of Teknoloji, Fen, Eczacılık, Orman,
+ *             Sağlık Bilimleri, Diş Hekimliği, Tıp, Sürmene Deniz Bilimleri
+ *   sosyal  → Edebiyat, İktisadi ve İdari Bilimler
+ *   mimarlik→ Mimarlık (Orman'ın Peyzaj Mimarlığı Bölümü de buraya tabi)
  *
- * Fakülte → profil eşlemesi yönerge dosyasında; sosyal profili yalnız
- * Edebiyat ve İİBF'de, mimarlık profili yalnız Mimarlık Fakültesinde (ve
- * Orman Fakültesinin Peyzaj Mimarlığı Bölümünde) geçerli.
+ * Fakülteler arasındaki geri kalan fark (dr. öğr. üyesinin makale barajı
+ * 50/70/80, Tıp'ın toplantı barajı) tavan değil BARAJ farkı; yönergede.
  *
- * ── ÇEYREK DİLİMİ SATIRA GÖMÜLÜ, "TAM/DİĞER MAKALE" AYRIMI `turler` İLE ──
- * Tablo her çeyrek için iki değer veriyor: tam makale / diğer makale. "Diğer
- * makale" tanımı teknik not, kısa makale, yorum, vaka takdimi, editöre mektup,
- * özet, kitap kritiği, araştırma notu VE DERLEME MAKALE. Derleme bu yüzden
- * `turler`de düşük satıra bağlandı.
- * AHCI dergilerinin WoS çeyreği olmadığı için tablo Scimago'ya bakmayı
- * söylüyor; kayıt çeyrek taşımadığından AHCI §0 gereği Q4 satırından (25/20)
- * sayılıyor.
+ * EK-14 (enstitü, yüksekokul, MYO) kendi sayısını vermiyor: "adayın
+ * bulunduğu bilim alanı ile ilgili fakülte koşulları geçerlidir".
  *
- * ── AYNI KAYNAK ETİKETİNE DÜŞÜP DÜŞÜĞÜ GİRİLEN SATIRLAR (§0) ──
- *   1d (SCOPUS 30/25) ile 1e (ESCI 20/15) tek "ESCI / Scopus" etiketine
- *       düşüyor → 20/15.
- *   PROJE BÖLÜMÜNÜN TAMAMI "DEVAM EDEN" DEĞERLERİNDEN sayılıyor: tablo her
- *       proje türü için tamamlanmış ve devam eden diye iki değer veriyor
- *       (AB 60 ↔ 30, TÜBİTAK 40 ↔ 20, kamu 45-20 ↔ 25-10), kayıt projenin
- *       bitip bitmediğini tutmuyor. Eşiklerin kendisi de "tamamlanmış veya
- *       devam eden projeler için puanlama yapılabilir" diyor.
- *   Kamu ve özel sektör projelerinde bütçe basamakları (45/40/30/25/20) kayıtta
- *       yok; en düşük basamaktan sayılıyor.
- *   3a (SCI atfı 3) ile 3b'nin Scopus kolu (2) tek "WoS / Scopus" etiketi → 2.
- *   6a (uluslararası davetli konuşmacı 16) ile 6ç (ulusal 8) tek "Davetli
- *       Konuşmacı" etiketi → 8; bu yüzden davetli konuşmacılık eşiklerin
- *       "(6a),(6b),(6c) kapsamında en az 10 puan" koşuluna GİRMİYOR.
- *   6b'nin özeti (8) ile 6c posteri (4) → 4; 6d'nin özeti (4) ile 6e posteri
- *       (2) → 2.
- *   2a (uluslararası kitap 80/60) ile 2f-2g (ulusal 40/30): BKCI etiketi
- *       uluslararası satırdan, genel kitap etiketi ulusal satırdan.
- *   7a (SCI/Scopus dergi editörlüğü 20), 7b (ESCI 10) ve 7c (Scopus Q 8) —
- *       ESCI ile Scopus tek etiket olduğu için 8'den.
- *   7d-7g makale editörlüğü ve hakemlik (5/3/2/1,5/1) tek "Hakemlik" etiketi
- *       → 1.
- *   9b (uluslararası faydalı model ve tasarım 30) ile 9c (ulusal 20) → 20.
- *   9g (uluslararası kişisel sergi 40, ulusal 20) → 20; 9h karma sergi
- *       (10/5) → 5.
- *   10/A-a (uluslararası kurul üyeliği 3) ile 10/A-b (ulusal 1,5) → 1.
+ * "TAM MAKALE / DİĞER MAKALE" AYRIMI SÖZLÜKTE YOK. Kaynak her dergi
+ * kademesini ikiye ayırıyor (Q1 45/35, Q2 35/30 …); "diğer makale" derleme,
+ * teknik not, vaka takdimi, editöre mektup gibi kalemleri kapsıyor. Etiket
+ * bu ayrımı taşımadığı için §0 uyarınca DÜŞÜK değer yazıldı.
  *
- * ── GİRİLMEYEN SATIRLAR ──
- *   1g-1i KONGRE BİLDİRİSİNİN DERGİDE YAYIMLANMASI (Q1-Q4 için 20/10, 15/8,
- *       10/5, 5/3): kayıt bir bildirinin hangi dergide yayımlandığını
- *       tutmuyor.
- *   1f'nin "diğer hakemli uluslararası veya TR Dizin" tanımı TR Dizin dışı
- *       ulusal hakemli dergileri KAPSAMIYOR; o dergilerdeki makaleler tabloda
- *       hiç puanlanmıyor.
- *   2b, 2ç, 2d, 2e çeviri editörlüğü kademeleri; 3d-3f kitap ve patent
- *       atıflarının ondalıklı satırları (2,5 ve 1,5); 4a TÜBİTAK 2244 ve YÖK
- *       100/2000 tez danışmanlığı (25); 5'in COST asıl/ikincil öneren ve
- *       kamu-üniversite-sanayi satırları; 8'in burs ve teşekkür belgeleri
- *       (yönerge zaten hariç tutuyor).
- *   10/A-d laboratuvar kurma (3), 10/A-e teknokent şirketi (20), 10/A-h radyo
- *       ve televizyon söyleşisi (2), 10/B-ı ve 10/B-i kazı başkanlığı ve
- *       katılımı (3 ve 2), 10/B-k resmi görevlendirmeler (1,5), 10/C-n
- *       üniversite ve eğitim projeleri koordinatörlüğü (10).
- *   REKTÖRLÜK, DEKANLIK VE MÜDÜRLÜĞÜN SATIRI YOK: 10/B-l yalnız bölüm ve
- *       anabilim dalı başkanlığı ile rektör tarafından görevlendirilen
- *       koordinatörlükleri sayıyor. Dekan ya da rektör olan adayın bu
- *       görevlerden puanı SIFIR.
+ * KESİRLİ PUANLAR AŞAĞI YUVARLANDI (§0): atıf 2,5 → 2 · 1,5 → 1;
+ * hakemlik 1,5 → 1; kurul üyeliği 1,5 → 1.
  *
- * ── YAZAR ÇARPANI (Çizelge 1) ──
- * Yazar sayısı × isim sırası matrisi. AMA 1. bölümün dipnotu "yayındaki
- * BAŞLICA YAZAR, SIRASINA BAKILMAKSIZIN TAM PUANI ALIR" diyor ve başlıca
- * yazar tanımına "makalenin yazarlarından ilk sırada yer alan yazar" da
- * dâhil; bu yüzden `tek`, `ilk` ve `baslica` rolleri 1,00 alıyor, matris
- * yalnız ikinci ve sonraki isimlerde işliyor.
- * Çizelge KİTAPLARI DIŞARIDA BIRAKIYOR (2. bölüm "puanlar eşit olarak
- * bölünür" diyor); motor cetvel başına tek matris tanımladığı için §1'in
- * Acıbadem istisnası uygulandı ve MAKALE kuralı seçildi — bütün alt barajlar
- * makale bölümü üzerine kurulu. Çok yazarlı kitapta başlıca yazarın puanı bu
- * yüzden olduğundan yüksek görünür.
- * Atıf ("atıf puanları yazar sayısına bölünmez"), proje (rol satırları),
- * patent ("buluşçu katkısı oranında"), tez, ders, editörlük ve idari görev
- * matrisin dışında.
- *
- * Yönerge: yonerge/ktu.php
+ * GİRİLEMEYEN:
+ *   · "En fazla iki kitap", "aynı kitapta en fazla iki bölüm", "aynı
+ *     toplantıda sunulan bildirilerden yalnızca ikisi" gibi KALEME ÖZGÜ
+ *     sayı sınırları — motor tavanı gruba uyguluyor, esere değil.
+ *   · Proje puanlarının bütçe kademeleri (kamu projesinde 45/40/30/25/20).
+ *     Faaliyet kaydı proje bütçesini taşımıyor; her fon etiketi kendi
+ *     kademelerinin EN DÜŞÜĞÜNE yazıldı.
+ *   · "Ar-Ge niteliğinde olmayan projelerde puanın 3/5'i" indirimi.
+ *   · Doktor Öğretim Üyesi'nin "KTÜ 50/d doktora mezunu" ve "yeniden
+ *     atanma" sütunları (motor bu iki kadroyu ayırt etmiyor).
  */
-$TAM = ['ozgun_makale'];
-$DIGER = ['derleme', 'kisa_makale', 'vaka_teknik_not'];
-$WOSQ = ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'];
-
-$maddeler = [
-    // ══ 1. MAKALE ══
-    '1a' => ['baslik' => 'Q1 dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $TAM, 'puan' => 45],
-    '1a.2' => ['baslik' => 'Q1 dergide derleme, teknik not, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $DIGER, 'puan' => 35],
-    '1b' => ['baslik' => 'Q2 dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $TAM, 'puan' => 35],
-    '1b.2' => ['baslik' => 'Q2 dergide derleme, teknik not, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $DIGER, 'puan' => 30],
-    '1c' => ['baslik' => 'Q3 dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $TAM, 'puan' => 30],
-    '1c.2' => ['baslik' => 'Q3 dergide derleme, teknik not, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $DIGER, 'puan' => 25],
-    '1ç' => ['baslik' => 'Q4 dergide ya da AHCI kapsamındaki dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => $TAM, 'puan' => 25],
-    '1ç.2' => ['baslik' => 'Q4 ya da AHCI dergisinde derleme, teknik not, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => $DIGER, 'puan' => 20],
-    '1e' => ['baslik' => 'ESCI ya da Scopus dergisinde tam makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $TAM, 'puan' => 20],
-    '1e.2' => ['baslik' => 'ESCI ya da Scopus dergisinde derleme, teknik not, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $DIGER, 'puan' => 15],
-    '1f' => ['baslik' => 'Diğer hakemli uluslararası ya da TR Dizin kapsamındaki dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'TR Dizin'], 'turler' => $TAM, 'puan' => 15],
-    '1f.2' => ['baslik' => 'Diğer hakemli uluslararası ya da TR Dizin dergisinde derleme, teknik not, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'TR Dizin'], 'turler' => $DIGER, 'puan' => 5],
-
-    // ══ 2. KİTAP ══
-    '2a' => ['baslik' => 'Web of Science Book Citation Index kapsamındaki kitapta yazarlık', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 80],
-    '2a.e' => ['baslik' => 'Web of Science Book Citation Index kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 60],
-    '2c' => ['baslik' => 'Web of Science Book Citation Index kapsamındaki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 50],
-    '2f' => ['baslik' => 'Tanınmış yayınevince yayımlanmış kitapta yazarlık', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
-    '2g' => ['baslik' => 'Tanınmış yayınevince yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 30],
-    '2h' => ['baslik' => 'Tanınmış yayınevince yayımlanmış kitapta bölüm ya da ansiklopedi maddesi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
-    '2i' => ['baslik' => 'Bilimsel kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
-    '2k' => ['baslik' => 'Bilimsel kitap bölümü çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
-    '2l' => ['baslik' => 'Tahkik, neşir, araştırma notu ya da detaylı kitap kritiği', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 5],
-
-    // ══ 3. ATIF ══
-    '3b' => ['baslik' => 'Web of Science ya da Scopus dergilerinde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
-    '3ç' => ['baslik' => 'Web of Science Book Citation Index kapsamındaki kitapta eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
-    '3c' => ['baslik' => 'TR Dizin ile diğer ulusal ve uluslararası yayınlarda eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 1],
-
-    // ══ 4. LİSANSÜSTÜ TEZ DANIŞMANLIĞI ══
-    '4b' => ['baslik' => 'Danışman olarak yönetilmiş doktora, uzmanlık ya da sanatta yeterlik tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 20],
-    '4b.e' => ['baslik' => 'Eş danışman olarak yönetilmiş doktora, uzmanlık ya da sanatta yeterlik tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['es_danisman'], 'puan' => 10],
-    '4c' => ['baslik' => 'Danışman olarak yönetilmiş tezli yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman'], 'puan' => 10],
-    '4c.e' => ['baslik' => 'Eş danışman olarak yönetilmiş tezli yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['es_danisman'], 'puan' => 5],
-
-    // ══ 5. BİLİMSEL ARAŞTIRMA PROJESİ (devam eden değerlerinden) ══
-    '5a.y' => ['baslik' => 'Avrupa Birliği Çerçeve Programı projesinde koordinatör ya da yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['yurutucu'], 'puan' => 30],
-    '5a.a' => ['baslik' => 'Avrupa Birliği Çerçeve Programı projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['arastirmaci'], 'puan' => 15],
-    '5a.b' => ['baslik' => 'Avrupa Birliği Çerçeve Programı projesinde bursiyer ya da danışman', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['bursiyer', 'danisman'], 'puan' => 7],
-    '5c.y' => ['baslik' => 'Diğer uluslararası kuruluşlarca desteklenen projede koordinatör ya da yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 20],
-    '5c.a' => ['baslik' => 'Diğer uluslararası kuruluşlarca desteklenen projede araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['arastirmaci'], 'puan' => 10],
-    '5c.b' => ['baslik' => 'Diğer uluslararası kuruluşlarca desteklenen projede bursiyer ya da danışman', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'roller' => ['bursiyer', 'danisman'], 'puan' => 5],
-    '5d.y' => ['baslik' => 'TÜBİTAK ya da TÜBA destekli Ar-Ge projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['yurutucu'], 'puan' => 20],
-    '5d.a' => ['baslik' => 'TÜBİTAK ya da TÜBA destekli Ar-Ge projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['arastirmaci'], 'puan' => 10],
-    '5d.b' => ['baslik' => 'TÜBİTAK ya da TÜBA destekli Ar-Ge projesinde bursiyer ya da danışman', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK', 'TÜSEB'], 'roller' => ['bursiyer', 'danisman'], 'puan' => 5],
-    '5d.o' => ['baslik' => 'TÜBİTAK 2209 gibi öğrenci projesinde danışman', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 3],
-    '5f.y' => ['baslik' => 'Kamu kuruluşlarınca desteklenen Ar-Ge projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'roller' => ['yurutucu'], 'puan' => 10],
-    '5f.a' => ['baslik' => 'Kamu kuruluşlarınca desteklenen Ar-Ge projesinde araştırmacı', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'roller' => ['arastirmaci'], 'puan' => 5],
-    '5f.b' => ['baslik' => 'Kamu kuruluşlarınca desteklenen Ar-Ge projesinde bursiyer ya da danışman', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu'], 'roller' => ['bursiyer', 'danisman'], 'puan' => 2],
-    '5h' => ['baslik' => 'Yükseköğretim kurumunca desteklenen Ar-Ge projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['yurutucu'], 'puan' => 5],
-    '5i' => ['baslik' => 'Özel kuruluşlarca desteklenen Ar-Ge, yenilik ya da özgün tasarım projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['yurutucu'], 'puan' => 5],
-
-    // ══ 6. BİLİMSEL TOPLANTI ══
-    '6b' => ['baslik' => 'Uluslararası bilimsel toplantıda sözlü sunulmuş ve tam metni basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 12],
-    '6c' => ['baslik' => 'Uluslararası bilimsel toplantıda özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 4],
-    '6ç' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı olarak sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 8],
-    '6d' => ['baslik' => 'Ulusal bilimsel toplantıda sözlü sunulmuş ve tam metni basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 6],
-    '6e' => ['baslik' => 'Ulusal bilimsel toplantıda özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
-
-    // ══ 7. EDİTÖRLÜK VE HAKEMLİK ══
-    '7a' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da Scopus kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => $WOSQ, 'puan' => 20],
-    '7c' => ['baslik' => 'ESCI ya da Scopus dergisinde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 8],
-    '7ç' => ['baslik' => 'Diğer hakemli ulusal ya da uluslararası dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 5],
-    '7g' => ['baslik' => 'Dergide makale editörlüğü ya da hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
-
-    // ══ 8. ÖDÜL ══
-    '8a' => ['baslik' => 'TÜBA ya da TÜBİTAK bilim, teşvik, sanat veya araştırma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 60],
-    '8b' => ['baslik' => 'Alanınızda yurt dışı kurum ya da kuruluşlardan alınan bilim, teşvik, sanat, tasarım veya araştırma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 50],
-    '8c' => ['baslik' => 'Alanınızda yurt içi kamu kurum ve kuruluşlarından alınan ödül ile YÖK ödülleri', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'YÖK Ödülü'], 'puan' => 25],
-    '8ç' => ['baslik' => 'Meslek alanına yönelik uluslararası ya da ulusal yarışma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 10],
-
-    // ══ 9. PATENT, FAYDALI MODEL, TASARIM VE SERGİ ══
-    '9a' => ['baslik' => 'Kendiniz buluş sahibi olmak şartıyla ticarileştirilmiş patent sahipliği', 'kategori' => 'patent', 'kaynaklar' => ['Ticarileştirme'], 'puan' => 70],
-    '9b' => ['baslik' => 'Uluslararası tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 60],
-    '9c' => ['baslik' => 'Ulusal tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 40],
-    '9c.2' => ['baslik' => 'Tescillenmiş faydalı model ya da tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 20],
-    '9c.3' => ['baslik' => 'Tescillenmiş telif hakkı', 'kategori' => 'patent', 'kaynaklar' => ['Yazılım'], 'puan' => 5],
-    '9d' => ['baslik' => 'Uygulanmış ve belgelenmiş sanatsal ya da bilimsel tasarım müellifi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif', 'Özgün Eser / Beste / Tasarım'], 'puan' => 10],
-    '9d.d' => ['baslik' => 'Uygulanmış tasarımda danışman ya da koordinatör', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Danışman'], 'puan' => 7],
-    '9d.e' => ['baslik' => 'Uygulanmış tasarımda ekip üyesi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Ekip'], 'puan' => 5],
-    '9d.y' => ['baslik' => 'Uygulanmış tasarımda ekip yardımcısı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Ekip Yardımcısı'], 'puan' => 3],
-    '9g' => ['baslik' => 'Özgün kişisel sergi ya da proje pazarı katılımı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Ulusal)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Kişisel Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Kişisel Etkinlik (Yurt İçi, Jürisiz)', 'Elektronik Kişisel Sergi (Uluslararası)', 'Elektronik Kişisel Sergi (Ulusal)', 'Eserin Müzeye Kabulü (Yurt Dışı)', 'Eserin Müzeye Kabulü (Yurt İçi)'], 'puan' => 20],
-    '9h' => ['baslik' => 'Davetli ya da yarışmalı karma sergi, bienal, festival veya gösterim', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Karma/Jürili Etkinlik (Ulusal)', 'Karma Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Karma Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Karma Etkinlik (Yurt Dışı, Jürisiz)', 'Karma Etkinlik (Jürisiz, Ulusal)', 'Elektronik Karma Sergi (Uluslararası)', 'Elektronik Karma Sergi (Ulusal)', 'Sempozyum/Çalıştay/Bienal (Yurt Dışı)', 'Sempozyum/Çalıştay/Bienal (Yurt İçi)', 'Eserin Yayında Yer Alması / Satın Alınması', 'Eserin Satın Alınması (Yurt İçi)'], 'puan' => 5],
-
-    // ══ 10. DİĞER ETKİNLİKLER ══
-    '10Aa' => ['baslik' => 'Yayın, değerlendirme kurulu ya da ödül jürisi üyeliği; bakanlık, YÖK veya TÜBİTAK komisyon ve kurul üyelikleri', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 1],
-    '10Aa.2' => ['baslik' => 'Kurum kurul ve komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
-    '10Ac' => ['baslik' => 'Sergi küratörlüğü; sanat ve tasarım yarışmalarında jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 1],
-    '10Ag' => ['baslik' => 'Yapımcı, yönetmen, senarist, görüntü yönetmeni ya da sanat yönetmeni olarak görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Yönetmenlik (Sahne/Ekran)', 'Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)', 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)', 'Belgesel/Kısa Film (Uluslararası)', 'Belgesel/Kısa Film (Ulusal)'], 'puan' => 1],
-    '10Bj' => ['baslik' => 'Lisansüstü tez jürisi üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 1],
-    '10Bl' => ['baslik' => 'Bölüm ya da anabilim dalı başkanlığı, rektörlükçe görevlendirilen koordinatörlük (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 3],
-    '10Bl.y' => ['baslik' => 'Bölüm ya da anabilim dalı başkan yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 1],
-    '10Bm' => ['baslik' => 'Kredili ders vermek (dönem başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
-    '10Co' => ['baslik' => 'Sosyal sorumluluk projesinde görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Kamu/STK Danışmanlığı', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 5],
-];
-
-$M1AC = ['1a', '1a.2', '1b', '1b.2', '1c', '1c.2', '1ç', '1ç.2'];
-$M1AE = [...$M1AC, '1e', '1e.2'];
-$M1AI = [...$M1AE, '1f', '1f.2'];
-$M1AB = ['1a', '1a.2', '1b', '1b.2'];
-$KITAP = ['2a', '2a.e', '2c', '2f', '2g', '2h', '2i', '2k', '2l'];
-$ATIF = ['3b', '3ç', '3c'];
-$TEZ = ['4b', '4b.e', '4c', '4c.e'];
-$PROJE = ['5a.y', '5a.a', '5a.b', '5c.y', '5c.a', '5c.b', '5d.y', '5d.a', '5d.b', '5d.o',
-    '5f.y', '5f.a', '5f.b', '5h', '5i'];
-$BILDIRI = ['6b', '6c', '6ç', '6d', '6e'];
-$EDITORLUK = ['7a', '7c', '7ç', '7g'];
-$ODUL = ['8a', '8b', '8c', '8ç'];
-$PATENT = ['9a', '9b', '9c', '9c.2', '9c.3', '9d', '9d.d', '9d.e', '9d.y', '9g', '9h'];
-$DIGER_B = ['10Aa', '10Aa.2', '10Ac', '10Ag', '10Bj', '10Bl', '10Bl.y', '10Bm', '10Co'];
-
-$gruplar = [
-    'TUM' => array_keys($maddeler),
-    'MAKALE' => $M1AI,
-    '1a-1ç' => $M1AC,
-    '1a-1e' => $M1AE,
-    '1a-1i' => $M1AI,
-    '1a-1b' => $M1AB,
-    'KITAP' => $KITAP,
-    'ATIF' => $ATIF,
-    'TEZ' => $TEZ,
-    'TEZ-DOKTORA' => ['4b', '4b.e'],
-    'TEZ-YL' => ['4c', '4c.e'],
-    'PROJE' => $PROJE,
-    'BILDIRI' => $BILDIRI,
-    // Eşiklerin andığı "(6a), (6b), (6c)" kümesi: uluslararası bildiriler.
-    'BILDIRI-ULUS' => ['6b', '6c'],
-    'EDITORLUK' => $EDITORLUK,
-    'ODUL' => $ODUL,
-    'PATENT' => $PATENT,
-    'DIGER' => $DIGER_B,
-];
-
-/** Çizelge 1; başlıca yazar sırasına bakılmaksızın tam puan alır (1. bölüm dipnotu). */
 $yazarKatsayisi = [
-    'haric' => ['atif', 'proje', 'patent', 'tez_danismanligi', 'egitim_ogretim', 'editorluk',
-        'idari_gorev', 'sanatsal_etkinlik', 'toplumsal_katki', 'diger'],
+    // Çizelge 1 "Ortak Çalışmalar İçin Puan Dağılımı (Kitaplar hariç)".
+    // Başlıca yazar SIRAYA BAKILMAKSIZIN tam puan alıyor (1. maddenin
+    // birinci dipnotu), bu yüzden `baslica` kademesiz 1,0.
+    // Kitaplarda çizelge geçerli değil: "birden fazla yazar ve editörlük
+    // olması durumunda puanlar EŞİT olarak bölünür" → `kitap` kategorisi
+    // düz 1/n ile hesaplanıyor.
+    'haric' => ['atif', 'proje', 'patent', 'tez_danismanligi', 'egitim_ogretim',
+        'idari_gorev', 'odul', 'editorluk', 'toplumsal_katki', 'sanatsal_etkinlik', 'diger'],
+    'kategoriler' => [
+        'kitap' => ['sonrasi_pay' => 1.0],
+    ],
     'roller' => [
-        'tek' => ['kademeler' => [1 => 1.00]],
-        'ilk' => ['kademeler' => [1 => 1.00]],
-        'baslica' => ['kademeler' => [1 => 1.00]],
+        'tek' => ['kademeler' => [1 => 1.0]],
+        'baslica' => ['kademeler' => [1 => 1.0], 'sonrasi' => 1.0],
+        'ilk' => ['kademeler' => [1 => 1.0, 2 => 0.95, 3 => 0.90, 4 => 0.85, 5 => 0.80], 'sonrasi' => 0.75],
         'yazar_2' => ['kademeler' => [2 => 0.85, 3 => 0.80, 4 => 0.75, 5 => 0.70], 'sonrasi' => 0.65],
         'yazar_3' => ['kademeler' => [3 => 0.75, 4 => 0.70, 5 => 0.65], 'sonrasi' => 0.60],
         'yazar_4' => ['kademeler' => [4 => 0.60, 5 => 0.55], 'sonrasi' => 0.50],
         'yazar_5' => ['kademeler' => [5 => 0.50], 'sonrasi' => 0.45],
         'yazar_6' => ['sonrasi' => 0.35],
-        'ortak' => ['kademeler' => [1 => 1.00, 2 => 0.85, 3 => 0.75, 4 => 0.60, 5 => 0.50], 'sonrasi' => 0.25],
+        // Sırası belirtilmemiş ortak yazar: çizelgenin en düşük satırı
+        // ("9. ve daha sonraki isimler" 25).
+        'ortak' => ['kademeler' => [1 => 1.0, 2 => 0.85, 3 => 0.75, 4 => 0.60, 5 => 0.50], 'sonrasi' => 0.25],
     ],
 ];
 
-$kapsamNotu = 'Puanlar Karadeniz Teknik Üniversitesi Öğretim Üyeliğine Yükseltilme ve Atanma '
-    .'Yönergesinin EK-15 Puanlar Tablosundan (17.10.2023 tarih ve 342 sayılı Senato '
-    .'değişiklikleriyle). Kaynak PDF taranmış; OCR ile okundu, puan sütununun tamamı gözle '
-    .'doğrulandı. Makalelerde ÇEYREK DİLİMİ satıra gömülü ve her çeyrek için iki değer var: '
-    .'tam makale ile "diğer makale" (teknik not, kısa makale, vaka takdimi, editöre mektup, '
-    .'özet, kitap kritiği VE DERLEME). Derlemeleriniz bu yüzden düşük satırdan sayılıyor. '
-    .'BAŞLICA YAZAR SIRASINA BAKILMAKSIZIN TAM PUAN ALIYOR (1. bölüm dipnotu) ve "ilk sırada '
-    .'yer alan yazar" da başlıca yazar sayılıyor; matris yalnız ikinci ve sonraki isimlerde '
-    .'işliyor. '
-    .'PUANINIZ ŞU KALEMLERDE OLDUĞUNDAN DÜŞÜK GÖRÜNÜR: PROJE BÖLÜMÜNÜN TAMAMI "devam eden" '
-    .'değerlerinden sayılıyor (tablo tamamlanmış projeye iki katını veriyor ama kayıt projenin '
-    .'bitip bitmediğini tutmuyor); kamu ve özel sektör projelerinde bütçe basamakları '
-    .'bilinmediği için en düşük basamak uygulanıyor. Kongre bildirisinin dergide yayımlanması '
-    .'(1g-1i, 20 puana kadar), TR Dizin dışındaki ulusal hakemli dergilerdeki makaleler, çeviri '
-    .'editörlüğü kademeleri, TÜBİTAK 2244 ve YÖK 100/2000 tez danışmanlığı, laboratuvar kurma, '
-    .'teknokent şirketi, kazı başkanlığı ve üniversite eğitim projeleri koordinatörlüğü kayıtta '
-    .'karşılıksız kaldı. REKTÖRLÜK, DEKANLIK VE MÜDÜRLÜĞÜN TABLODA SATIRI YOK; bu görevlerden '
-    .'puan alınmıyor. Aynı etikete düşen satırlarda daima düşüğü sayılıyor: Scopus makalesi '
-    .'ESCI değerinden (20/15), uluslararası davetli konuşmacılık ulusal değerinden (8), '
-    .'uluslararası bildiri özeti poster değerinden (4), SCI atfı Scopus değerinden (2), '
-    .'hakemlik en düşük dergiden (1), uluslararası kişisel sergi ulusal değerinden (20). '
-    .'PUANINIZ ŞU KALEMDE OLDUĞUNDAN YÜKSEK GÖRÜNEBİLİR: Çizelge 1 kitapları dışarıda '
-    .'bırakıyor (kitapta puan eşit bölünüyor) ama motor cetvel başına tek matris tanımladığı '
-    .'için makale kuralı seçildi; çok yazarlı kitapta başlıca yazarın puanı yüksek çıkar. '
-    .'İdari görev ve ders puanları da görev süresiyle çarpılmıyor.';
+$maddeler = [
+    // ══ 1. MAKALE ══
+    '1.a' => ['baslik' => 'Q1 dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 35],
+    '1.b' => ['baslik' => 'Q2 dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'puan' => 30],
+    '1.c' => ['baslik' => 'Q3 dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'puan' => 25],
+    '1.ç' => ['baslik' => 'Q4 ya da AHCI kapsamındaki dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'puan' => 20],
+    '1.e' => ['baslik' => 'ESCI ya da Scopus indeksindeki dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
+    '1.f' => ['baslik' => 'Diğer hakemli uluslararası ya da TR Dizin kapsamındaki dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'puan' => 5],
+    '1.g' => ['baslik' => 'Dizinli dergide yayımlanmış kongre bildirisi', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 3],
 
-/** Tavan profilleri: [kitap, atıf, bildiri] — kadro sırası profesör, doçent, Dr. Öğr. Üyesi. */
-$profiller = [
-    'fen' => ['kitap' => [60, 60, 60], 'atif' => [160, 120, 15], 'bildiri' => [50, 50, 40]],
-    'sosyal' => ['kitap' => [120, 90, 60], 'atif' => [160, 160, 15], 'bildiri' => [50, 50, 40]],
-    'mimarlik' => ['kitap' => [80, 80, 60], 'atif' => [160, 160, 15], 'bildiri' => [70, 70, 50]],
+    // ══ 2. KİTAP ══
+    '2.a' => ['baslik' => 'WoS Book Citation Index kapsamındaki kitapta yazarlık ya da editörlük', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
+    '2.b' => ['baslik' => 'Tanınmış yayınevince yayımlanmış kitapta yazarlık', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
+    '2.c' => ['baslik' => 'WoS Book Citation Index kapsamındaki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
+    '2.ı' => ['baslik' => 'Tanınmış yayınevince yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
+    '2.g' => ['baslik' => 'Tanınmış yayınevince yayımlanmış kitapta editörlük ya da çeviri editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+    '2.j' => ['baslik' => 'Bilimsel kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
+    '2.k' => ['baslik' => 'Bilimsel kitap bölümü çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
+    '2.l' => ['baslik' => 'Tahkik, neşir, araştırma notu ya da detaylı kitap kritiği', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 5],
+
+    // ══ 3. ATIF ══
+    '3.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da Scopus dergilerinde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
+    '3.ç' => ['baslik' => 'WoS Book Citation Index kapsamındaki kitapta yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
+    '3.c' => ['baslik' => 'TR Dizin ya da diğer dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 1],
+    '3.f' => ['baslik' => 'İncelemeli patentte yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 1],
+
+    // ══ 4. TEZ DANIŞMANLIĞI ══
+    '4.b' => ['baslik' => 'Tamamlanmış doktora, uzmanlık ya da sanatta yeterlik tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'puan' => 20],
+    '4.c' => ['baslik' => 'Tamamlanmış tezli yüksek lisans tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 10],
+    '10.B.j' => ['baslik' => 'Lisansüstü tez jüri üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 1],
+
+    // ══ 5. BİLİMSEL ARAŞTIRMA PROJESİ ══
+    '5.b' => ['baslik' => 'AB Çerçeve Programı destekli projede koordinatörlük ya da yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'puan' => 20],
+    '5.ç' => ['baslik' => 'Diğer uluslararası kuruluş destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Uluslararası Fon'], 'puan' => 15],
+    '5.e' => ['baslik' => 'TÜBİTAK ya da TÜBA destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['TÜBİTAK'], 'puan' => 10],
+    '5.g' => ['baslik' => 'Kamu kuruluşu destekli Ar-Ge projesinde yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu', 'TÜSEB'], 'puan' => 10],
+    '5.h' => ['baslik' => 'Yükseköğretim kurumu destekli projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'puan' => 5],
+    '5.i' => ['baslik' => 'Özel kuruluş destekli Ar-Ge ya da tasarım projesinde yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'puan' => 5],
+    '5.d' => ['baslik' => 'TÜBİTAK 2209 gibi öğrenci projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 3],
+
+    // ══ 6. BİLİMSEL TOPLANTI ══
+    '6.ç' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı olarak sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 8],
+    '6.b' => ['baslik' => 'Uluslararası bilimsel toplantıda sözlü sunulmuş tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin'], 'puan' => 12],
+    '6.c' => ['baslik' => 'Uluslararası bilimsel toplantıda özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 4],
+    '6.d' => ['baslik' => 'Ulusal bilimsel toplantıda sözlü sunulmuş tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 6],
+    '6.e' => ['baslik' => 'Ulusal bilimsel toplantıda özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
+
+    // ══ 7. EDİTÖRLÜK ve HAKEMLİK ══
+    '7.a' => ['baslik' => 'SCI, SSCI, AHCI ya da Scopus dergisinde dergi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 20],
+    '7.c' => ['baslik' => 'ESCI ya da Scopus dergisinde dergi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 8],
+    '7.ç' => ['baslik' => 'Diğer hakemli dergide dergi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 5],
+    '7.g' => ['baslik' => 'Dergi hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
+
+    // ══ 8. ÖDÜL ══
+    '8.a' => ['baslik' => 'TÜBA ya da TÜBİTAK bilim, teşvik, sanat veya araştırma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü'], 'puan' => 60],
+    '8.b' => ['baslik' => 'Yurt dışı kurum ya da kuruluştan alınan bilim, sanat veya araştırma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 50],
+    '8.c' => ['baslik' => 'Yurt içi kamu kurumundan alınan ödül ya da YÖK ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'YÖK Ödülü'], 'puan' => 25],
+    '8.ç' => ['baslik' => 'Meslek alanına yönelik yarışma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 10],
+
+    // ══ 9. PATENT, FAYDALI MODEL, TASARIM ══
+    '9.a' => ['baslik' => 'Kendisi buluş sahibi olmak şartıyla ticarileştirilmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ticarileştirme'], 'puan' => 70],
+    '9.b' => ['baslik' => 'Uluslararası tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 60],
+    '9.c' => ['baslik' => 'Ulusal tescillenmiş patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 40],
+    '9.c2' => ['baslik' => 'Tescillenmiş faydalı model', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model'], 'puan' => 20],
+    '9.c3' => ['baslik' => 'Tescillenmiş tasarım ya da telif hakkı', 'kategori' => 'patent', 'kaynaklar' => ['Endüstriyel Tasarım', 'Yazılım'], 'puan' => 5],
+
+    // ══ 10. DİĞER ETKİNLİKLER ══
+    '10.A.a' => ['baslik' => 'Uluslararası yayın, değerlendirme kurulu ya da ödül jürisi üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 3],
+    '10.A.b' => ['baslik' => 'Ulusal yayın kurulu, kamu kurumu ya da meslek kuruluşu komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)', 'Spor Federasyonu Kurul Üyeliği (Uluslararası)', 'Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 1],
+    '10.A.b2' => ['baslik' => 'Dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 1],
+    '10.A.c' => ['baslik' => 'Sergi küratörlüğü ya da sanat ve tasarım yarışmalarında jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 1],
+    '10.A.ç' => ['baslik' => 'Bilimsel toplantı başkanlığı ya da düzenleme kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
+    '10.A.h' => ['baslik' => 'Alanıyla ilgili radyo ya da televizyon söyleşisi, panelde konuşmacılık', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın'], 'puan' => 2],
+    '10.B.k' => ['baslik' => 'Kamu ya da özel sektörde danışmanlık, etik kurul üyeliği, resmî görevlendirme (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
+    '10.B.k2' => ['baslik' => 'Kamu ya da sivil toplum kuruluşuna danışmanlık', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 1],
+    '10.B.l' => ['baslik' => 'Bölüm ya da anabilim dalı başkanlığı, rektörlükçe görevlendirilen koordinatörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 3],
+    '10.B.m' => ['baslik' => 'Kredili ders vermek (dönem başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
+    '10.C.o' => ['baslik' => 'Sosyal sorumluluk ya da eğitim projesinde yürütücülük veya görev', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 5],
 ];
 
-$kadrolar = ['prof' => 0, 'docentlik' => 1, 'dr' => 2];
+$gruplar = [
+    'MAKALE' => ['1.*'],
+    // EK'lerin "en az … (1a-1ç) maddesinden" koşulunun kümesi: Q1-Q4 ve AHCI.
+    '1a-1ç' => ['1.a', '1.b', '1.c', '1.ç'],
+    // Edebiyat, İİBF ve Sağlık Bilimleri'nin kullandığı geniş küme: + ESCI/Scopus.
+    '1a-1e' => ['1.a', '1.b', '1.c', '1.ç', '1.e'],
+    'KITAP' => ['2.*'],
+    'ATIF' => ['3.*'],
+    'TEZ' => ['4.*'],
+    'PROJE' => ['5.*'],
+    'TOPLANTI' => ['6.*'],
+    // "(6a), (6b), (6c) maddeleri kapsamında en az N puan" — kaynağın 6a/6b/6c'si
+    // ULUSLARARASI toplantı satırları. `Davetli Konuşmacı` etiketi ulusal/uluslararası
+    // ayrımı taşımadığı için 6.ç'de duruyor ve bu kümeye ALINMADI (§0).
+    '6a-6c' => ['6.b', '6.c'],
+    'EDITORLUK' => ['7.*'],
+    'ODUL' => ['8.*'],
+    'PATENT' => ['9.*'],
+    'DIGER' => ['10.*'],
+];
+
+/**
+ * EK-2…EK-13'ün "Zorunlu / En Fazla" sütunundaki En Fazla değerleri.
+ * "---" yazan bölümlerde (makale, proje, ödül, patent) tavan yok.
+ *
+ * @return array<string, int>
+ */
+$tavanlar = static function (string $aile, string $kadro): array {
+    $kitap = match ($aile) {
+        'sosyal' => ['profesor' => 120, 'docent' => 90, 'dr' => 60],
+        'mimarlik' => ['profesor' => 80, 'docent' => 80, 'dr' => 60],
+        default => ['profesor' => 60, 'docent' => 60, 'dr' => 60],
+    };
+    $atif = match ($aile) {
+        'sosyal', 'mimarlik' => ['profesor' => 160, 'docent' => 160, 'dr' => 15],
+        default => ['profesor' => 160, 'docent' => 120, 'dr' => 15],
+    };
+    $toplanti = match ($aile) {
+        'sosyal' => ['profesor' => 50, 'docent' => 50, 'dr' => 40],
+        'mimarlik' => ['profesor' => 70, 'docent' => 70, 'dr' => 50],
+        default => ['profesor' => 50, 'docent' => 50, 'dr' => 40],
+    };
+
+    $tavan = [
+        'KITAP' => $kitap[$kadro],
+        'ATIF' => $atif[$kadro],
+        'TOPLANTI' => $toplanti[$kadro],
+        'EDITORLUK' => $kadro === 'dr' ? 10 : 20,
+        'DIGER' => $kadro === 'dr' ? 15 : 30,
+    ];
+
+    // Tez danışmanlığı tavanı yalnız profesör ve doçentte var; dr. öğr.
+    // üyesi sütunu "0 P / ---" diyor.
+    if ($kadro !== 'dr') {
+        $tavan['TEZ'] = 30;
+    }
+
+    return $tavan;
+};
 
 $cetveller = [];
 
-foreach ($profiller as $profilAd => $p) {
-    foreach ($kadrolar as $kadroAd => $i) {
-        $tavanlar = [
-            'KITAP' => $p['kitap'][$i],
-            'ATIF' => $p['atif'][$i],
-            'BILDIRI' => $p['bildiri'][$i],
-            'EDITORLUK' => $i === 2 ? 10 : 20,
-            'DIGER' => $i === 2 ? 15 : 30,
-        ];
-
-        // Tez bölümünün tavanı yalnız profesörlük ve doçentlikte var.
-        if ($i !== 2) {
-            $tavanlar['TEZ'] = 30;
-        }
-
-        $cetveller["ktu-2023-{$profilAd}-{$kadroAd}"] = [
-            'kapsam_notu' => $kapsamNotu.' Bu varyantın bölüm tavanları: kitap '
-                .$p['kitap'][$i].', atıf '.$p['atif'][$i].', bildiri '.$p['bildiri'][$i]
-                .', editörlük '.$tavanlar['EDITORLUK'].', diğer etkinlikler '
-                .$tavanlar['DIGER'].($i === 2 ? '' : ', tez yönetimi 30')
-                .'. Makale, proje, ödül ve patent bölümlerinde tavan yok.',
+foreach (['fen', 'sosyal', 'mimarlik'] as $aile) {
+    foreach (['dr', 'docent', 'profesor'] as $kadro) {
+        $cetveller["ktu-2023-{$aile}-{$kadro}"] = [
             'yazar_katsayisi' => $yazarKatsayisi,
             'maddeler' => $maddeler,
             'gruplar' => $gruplar,
-            'grup_tavanlari' => $tavanlar,
+            'grup_tavanlari' => $tavanlar($aile, $kadro),
         ];
     }
 }

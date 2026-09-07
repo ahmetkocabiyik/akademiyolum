@@ -939,3 +939,40 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
   sözlükte "ulusal kitap" ayrı etiket değil, `Uluslararası/Ulusal Kitap`
   ikisini birden taşıyor ve puanlar E.2.a/E.2.b ile birebir aynı.
 - **Bilimsel seminer koşulu (MADDE 6)** beyana bağlı.
+
+## Karadeniz Teknik Üniversitesi (07.09.2026) — girilemeyen kalemler
+
+- **"Tam makale / diğer makale" ayrımı** — EK-15'in birinci bölümü her dergi
+  kademesini ikiye bölüyor (Q1 45/35, Q2 35/30, Q3 30/25, Q4 25/20, Scopus
+  30/25, ESCI 20/15). "Diğer makale" derleme, teknik not, vaka takdimi,
+  editöre mektup demek; sözlükte bu ayrımı taşıyan etiket yok, §0 uyarınca
+  hepsi DÜŞÜK değere yazıldı.
+- **"(1a-1ç) makalelerinden en az birinde BİRİNCİ VEYA İKİNCİ İSİM olmak"**
+  (bütün fakültelerin dr. öğr. üyesi sütunu) — motor yazar sırasını yalnız
+  `tek`/`ilk`/`baslica` olarak süzüyor. Koşul `ilk` ile, yani kaynaktan SIKI
+  girildi; aday notunda ikinci isimle de sağlanabileceği yazılı.
+- **Proje bütçe kademeleri** — kamu kuruluşu projesinde puan TÜBİTAK 1001
+  üst limitine oranla 45/40/30/25/20'ye ayrılıyor. Faaliyet kaydı proje
+  bütçesini taşımıyor; her fon etiketi kendi kademelerinin en düşüğüne
+  yazıldı. Aynı sebeple "Ar-Ge niteliğinde olmayan projelerde puanın 3/5'i"
+  indirimi de girilemedi.
+- **Kaleme özgü sayı sınırları** — "en fazla iki kitap", "aynı kitapta en
+  fazla iki bölüm", "aynı toplantıda sunulan bildirilerden yalnızca ikisi".
+  Motorun tavanı GRUBA uygulanıyor, tek esere değil.
+- **"Yüksekokul ve Meslek Yüksekokulu bünyesinde çalışan kişilerde bu koşul
+  aranmaz"** (profesörlükte tez danışmanlığı barajı) — aday kaydı biriminin
+  yüksekokul olup olmadığını taşımıyor; koşul herkese uygulanıyor.
+- **Fen Fakültesi'nin Matematik ve Bilgisayar Bilimleri bölümlerine özgü
+  genişletilmiş küme** ((1a-1i) makaleleri) ve **Matematik Bölümü'nün proje
+  telafisi** (75/50 puan) — BÖLÜM bazlı, fakülte eşiğine yazılamaz.
+- **"Doktor Öğretim Üyesi (KTÜ 50/d Doktora Mezunu)" ve "(Yeniden Atanma)"
+  sütunları** — motor bu iki kadroyu ayırt etmiyor; yalnız ilk atama sütunu
+  girildi. Yeniden atanmanın barajı zaten uzatma yılı sayısına bağlı
+  (`uzatma yıl sayısı × 10 P`), sabit değil.
+- **Dr. öğr. üyesinin 89 gün yurt dışı esnekliği** — fakülte eklerinde
+  "89 gün yurt dışında bulunulmuş ise bu bölümden 40 puan alınması
+  yeterlidir" deniyor ama alt baraj zaten 40; Sağlık Bilimleri ve
+  Sürmene'de 50'ye çıkıyor. Beyana bağlı olduğu için düğüm açılmadı, aday
+  notunda anlatıldı.
+- **Sözlü sınav ve WoS H-indeksi muafiyeti** (profesörde 25, doçentte 20)
+  beyana bağlı.

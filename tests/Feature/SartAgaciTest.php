@@ -6288,3 +6288,124 @@ test('Piri Reis tavanları kadroya ve alana göre', function () {
         ->and($prof->topla($proje, $prof->coz(['PROJE'])))->toBe(60)
         ->and($sosyalProf->topla($proje, $sosyalProf->coz(['PROJE'])))->toBe(40);
 });
+
+/**
+ * KTÜ'nün EK-15 tablosu bütün fakültelerde ortak; fakülteye göre değişen şey
+ * bölüm TAVANLARI (EK-2…EK-13). Üç tavan ailesi var ve varyantı karıştırmak
+ * sessizce yanlış puan verir: Edebiyat/İİBF adayının kitap tavanı 120 iken
+ * Mühendislik adayınınki 60, Mimarlık'ınki 80.
+ *
+ * "Tam makale / diğer makale" ayrımı sözlükte olmadığı için makale satırları
+ * §0 uyarınca DÜŞÜK değerde (Q1 45/35 → 35).
+ */
+test('KTÜ puan tablosu ve fakülte tavan aileleri', function () {
+    $depo = sartDepo();
+    $fen = $depo->katalog('ktu-2023-fen-profesor');
+    $sosyal = $depo->katalog('ktu-2023-sosyal-profesor');
+    $mimarlik = $depo->katalog('ktu-2023-mimarlik-profesor');
+    expect($fen)->not->toBeNull()->and($sosyal)->not->toBeNull()->and($mimarlik)->not->toBeNull();
+
+    $puan = fn ($katalog, string $kaynak, Kategori $kat) => $katalog->puan(
+        sartFaaliyet($kaynak, $kat, null),
+        $katalog->coz(['*']),
+    );
+
+    // Puan tablosu üç ailede de aynı.
+    expect($puan($fen, 'SCIE/SSCI (Q1)', Kategori::Makale))->toBe(35)
+        ->and($puan($fen, 'SCIE/SSCI (Q4)', Kategori::Makale))->toBe(20)
+        ->and($puan($fen, 'ESCI / Scopus', Kategori::Makale))->toBe(15)
+        ->and($puan($fen, 'TR Dizin', Kategori::Makale))->toBe(5)
+        ->and($puan($sosyal, 'SCIE/SSCI (Q1)', Kategori::Makale))->toBe(35)
+        ->and($puan($mimarlik, 'BKCI / Scopus Kitap', Kategori::Kitap))->toBe(60)
+        ->and($puan($fen, 'Uluslararası Tam Metin', Kategori::Bildiri))->toBe(12)
+        ->and($puan($fen, 'Davetli Konuşmacı', Kategori::Bildiri))->toBe(8)
+        ->and($puan($fen, 'Ticarileştirme', Kategori::Patent))->toBe(70);
+
+    // Tavanlar aileye göre ayrışıyor.
+    $kitaplar = array_fill(0, 10, sartFaaliyet('BKCI / Scopus Kitap', Kategori::Kitap, null));
+    $atiflar = array_fill(0, 200, sartFaaliyet('BKCI Kitap', Kategori::Atif, null));
+
+    expect($fen->topla($kitaplar, $fen->coz(['KITAP'])))->toBe(60)
+        ->and($sosyal->topla($kitaplar, $sosyal->coz(['KITAP'])))->toBe(120)
+        ->and($mimarlik->topla($kitaplar, $mimarlik->coz(['KITAP'])))->toBe(80)
+        ->and($fen->topla($atiflar, $fen->coz(['ATIF'])))->toBe(160);
+
+    // Doçentte fen ailesinin atıf tavanı 120'ye iniyor, sosyalde 160 kalıyor.
+    $fenDoc = $depo->katalog('ktu-2023-fen-docent');
+    $sosyalDoc = $depo->katalog('ktu-2023-sosyal-docent');
+    expect($fenDoc->topla($atiflar, $fenDoc->coz(['ATIF'])))->toBe(120)
+        ->and($sosyalDoc->topla($atiflar, $sosyalDoc->coz(['ATIF'])))->toBe(160);
+});
+
+/**
+ * KTÜ'nün koşulları FAKÜLTE başına yazılmış ve aynı temel alanda birden çok
+ * fakülte var (sağlıkta dört, fende iki), o yüzden eşikler `birim` ile
+ * ayrıldı. Dr. öğr. üyeliğinin makale barajı fakülteye göre 50/70/80 —
+ * birimi karıştırmak adaya yanlış barajı gösterir.
+ */
+test('KTÜ dr. öğr. üyesi makale barajı fakülteye göre ayrışıyor', function () {
+    $depo = sartDepo();
+
+    $baraj = function (string $birim, string $alan) use ($depo): int {
+        $esik = $depo->bul('Karadeniz Teknik Üniversitesi', 'dr_ogr_uyesi', $alan, $birim);
+        expect($esik)->not->toBeNull();
+
+        foreach ($esik['sart']['cocuklar'] as $dugum) {
+            if (($dugum['maddeler'] ?? null) === ['MAKALE']) {
+                return $dugum['min_puan'];
+            }
+        }
+
+        return 0;
+    };
+
+    expect($baraj('Tıp Fakültesi', 'saglik'))->toBe(50)
+        ->and($baraj('Diş Hekimliği Fakültesi', 'saglik'))->toBe(50)
+        ->and($baraj('Eczacılık Fakültesi', 'saglik'))->toBe(70)
+        ->and($baraj('Fen Fakültesi', 'fen'))->toBe(70)
+        ->and($baraj('Sürmene Deniz Bilimleri Fakültesi', 'fen'))->toBe(80)
+        ->and($baraj('Mühendislik Fakültesi', 'muhendislik'))->toBe(70);
+
+    // Birim verilmezse sağlık alanında dört aday var, seçim yapılamaz.
+    expect($depo->bul('Karadeniz Teknik Üniversitesi', 'dr_ogr_uyesi', 'saglik'))->toBeNull()
+        ->and($depo->adaylar('Karadeniz Teknik Üniversitesi', 'dr_ogr_uyesi', 'saglik'))->toHaveCount(4);
+});
+
+/**
+ * "Başlıca yazar olduğu en az üç yayın; sağlanamıyorsa EKSİK YAYIN BAŞINA
+ * ilave 40 puan." Telafi eksik SAYIYA bağlı, tek düğümle kurulamıyor: üç
+ * başlıcası olana 120, ikisi olana 160, birine 200, hiçbirine 240 puan.
+ * Tek kolla yazılsaydı ya üç başlıcası olan adayı reddederdi ya da hiç
+ * başlıcası olmayana 120 puanı yeterli sayardı.
+ */
+test('KTÜ başlıca yazar telafisi eksik sayıya göre kademeli', function () {
+    $depo = sartDepo();
+    $esik = $depo->bul('Karadeniz Teknik Üniversitesi', 'profesor', 'muhendislik', 'Mühendislik Fakültesi');
+    expect($esik)->not->toBeNull();
+
+    $kollar = null;
+    foreach ($esik['sart']['cocuklar'] as $dugum) {
+        if (($dugum['tip'] ?? null) === 'veya' && str_contains($dugum['aciklama'], 'Başlıca yazar')) {
+            $kollar = $dugum['cocuklar'];
+        }
+    }
+
+    expect($kollar)->toHaveCount(4);
+
+    $ozet = array_map(function (array $kol): array {
+        $cocuklar = $kol['cocuklar'] ?? [$kol];
+        $adet = 0;
+        $puan = 0;
+        foreach ($cocuklar as $c) {
+            if ($c['tip'] === 'adet') {
+                $adet = $c['min_adet'];
+            } else {
+                $puan = $c['min_puan'];
+            }
+        }
+
+        return [$adet, $puan];
+    }, $kollar);
+
+    expect($ozet)->toBe([[3, 120], [2, 160], [1, 200], [0, 240]]);
+});
