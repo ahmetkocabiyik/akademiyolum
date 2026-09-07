@@ -45,7 +45,7 @@ $tumAlanlar = ['fen', 'muhendislik', 'mimarlik', 'saglik', 'spor', 'hukuk', 'ila
     'filoloji', 'sosyal', 'egitim', 'guzel_sanatlar', 'ziraat'];
 
 return [
-    // ══════════ DR. ÖĞRETİM ÜYESİ (Madde 12/3) ══════════
+    // ══════════ DR. ÖĞRETİM ÜYESİ (Madde 8/3) ══════════
     [
         'anahtar' => 'giresun-dr',
         'aday_notu' => 'Giresun Dr. Öğr. Üyeliğinde temel alan ayrımı yapmıyor ve toplam puan '
@@ -55,17 +55,17 @@ return [
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $tumAlanlar,
         'cetvel' => 'giresun-2019',
-        'notlar' => 'Madde 12/3-b: EK-1\'in A, B, C, D, E, F, G, H, I ve K bölümlerinden en az '
-            .'80 puan; Madde 12/3-a: en az 1 makale veya kitap olarak yayımlanmış tez.',
+        'notlar' => 'Madde 8/3-b: EK-1\'in A, B, C, D, E, F, G, H, I ve K bölümlerinden en az '
+            .'80 puan; Madde 8/3-a: en az 1 makale veya kitap olarak yayımlanmış tez.',
         'sart' => Kalip::ve('Dr. Öğr. Üyesi — Giresun Üniversitesi', [
             Kalip::puanDan('Makale, bildiri, kitap, atıf, editörlük ve proje kalemlerinizden en az 80 puan',
-                ['A-K (doçent)'], 80, madde: 'Madde 12/3-b'),
+                ['A-K (doçent)'], 80, madde: 'Madde 8/3-b'),
             Kalip::adet('Ulusal veya uluslararası hakemli dergide en az 1 makale ya da kitap '
-                .'olarak yayımlanmış tez', ['MAKALE', 'C.1', 'F.1'], 1, madde: 'Madde 12/3-a'),
+                .'olarak yayımlanmış tez', ['MAKALE', 'C.1', 'F.1'], 1, madde: 'Madde 8/3-a'),
         ]),
     ],
 
-    // ══════════ DOÇENT (Madde 12/2) ══════════
+    // ══════════ DOÇENT (Madde 8/2) ══════════
     [
         'anahtar' => 'giresun-docent',
         'aday_notu' => 'Toplam 250 puanın en az 150\'si DOKTORA veya tıpta uzmanlık unvanınızı '
@@ -76,20 +76,20 @@ return [
         'kadro' => 'docentlik',
         'alan' => $tumAlanlar,
         'cetvel' => 'giresun-2019',
-        'notlar' => 'Madde 12/2-b: bilimsel araştırma, yayın ve eğitim-öğretimden toplam 250 '
-            .'puan; bunun en az 150\'si doktora sonrası A-H, I ve K bölümlerinden. Madde 12/2-c: '
+        'notlar' => 'Madde 8/2-b: bilimsel araştırma, yayın ve eğitim-öğretimden toplam 250 '
+            .'puan; bunun en az 150\'si doktora sonrası A-H, I ve K bölümlerinden. Madde 8/2-c: '
             .'merkezî yabancı dil sınavından en az 55.',
         'sart' => Kalip::ve('Doçent — Giresun Üniversitesi', [
             Kalip::yds(55),
             Kalip::toplam(250, maddeler: ['A-L'], liste: 'Bilimsel araştırma, yayın ve eğitim-öğretim'),
             Kalip::puanDan('Doktoranızdan sonraki makale, bildiri, kitap, atıf, editörlük ve '
-                .'proje kalemlerinizden en az 150 puan', ['A-K (doçent)'], 150, $DR, madde: 'Madde 12/2-b'),
+                .'proje kalemlerinizden en az 150 puan', ['A-K (doçent)'], 150, $DR, madde: 'Madde 8/2-b'),
             Kalip::beyan('Üniversitelerarası Kurul Başkanlığı tarafından verilen, başvurduğunuz '
-                .'alanla ilgili doçentlik unvanını almış olmak', 'Madde 12/2-a'),
+                .'alanla ilgili doçentlik unvanını almış olmak', 'Madde 8/2-a'),
         ]),
     ],
 
-    // ══════════ PROFESÖR (Madde 12/1) ══════════
+    // ══════════ PROFESÖR (Madde 8/1) ══════════
     [
         'anahtar' => 'giresun-profesor',
         'aday_notu' => 'Üç katmanlı bir puan yapısı var: genel toplam 350, bunun 250\'si '
@@ -103,20 +103,20 @@ return [
         'kadro' => 'profesorluk',
         'alan' => $tumAlanlar,
         'cetvel' => 'giresun-2019',
-        'notlar' => 'Madde 12/1-c: bilimsel araştırma, yayın ve eğitim-öğretimden toplam 350 '
+        'notlar' => 'Madde 8/1-c: bilimsel araştırma, yayın ve eğitim-öğretimden toplam 350 '
             .'puan; en az 250\'si A, B, C, D, E, F, G, H ve K bölümlerinden; doçentlik sonrası '
             .'aynı bölümlerden en az 200.',
         'sart' => Kalip::ve('Profesör — Giresun Üniversitesi', [
             Kalip::toplam(350, maddeler: ['A-L'], liste: 'Bilimsel araştırma, yayın ve eğitim-öğretim'),
             Kalip::puanDan('Makale, bildiri, kitap, atıf ve proje kalemlerinizden en az 250 puan',
-                ['A-K (profesör)'], 250, madde: 'Madde 12/1-c'),
+                ['A-K (profesör)'], 250, madde: 'Madde 8/1-c'),
             Kalip::puanDan('Doçentliğinizden sonraki makale, bildiri, kitap, atıf ve proje '
-                .'kalemlerinizden en az 200 puan', ['A-K (profesör)'], 200, $DOC, madde: 'Madde 12/1-c'),
+                .'kalemlerinizden en az 200 puan', ['A-K (profesör)'], 200, $DOC, madde: 'Madde 8/1-c'),
             Kalip::adet('Doçentliğinizden sonra birinci veya sorumlu yazar olduğunuz, başlıca '
                 .'araştırma eseri olarak sunacağınız en az 1 makale ya da kitap',
                 ['BASLICA_ESER'], 1, 'baslica', $DOC, madde: 'Madde 4/ç'),
             Kalip::beyan('Doçentlik unvanını aldıktan sonra açık bulunan profesörlük kadrosuyla '
-                .'ilgili bilim alanında çalışmış olmak', 'Madde 12/1-a'),
+                .'ilgili bilim alanında çalışmış olmak', 'Madde 8/1-a'),
         ]),
     ],
 ];

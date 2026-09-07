@@ -226,7 +226,7 @@ $esikler = [
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $tumAlanlar,
         'cetvel' => 'istanbul-zaim-2019',
-        'notlar' => 'Madde 1: "Doktor Öğretim Üyesi kadrosuna ilk atamada, Ek-1\'de belirtilen '
+        'notlar' => 'Madde 1: "Doktor Öğretim Üyesi kadrosuna ilk atamada, EK-I\'de belirtilen '
             .'A-J kategorileri arasından en az 100 puan karşılığı bilimsel etkinlikte '
             .'bulunmak." Alan ayrımı ve dönem kısıtı yok.',
         'sart' => $ajKapisi(100, 'Madde 1'),
@@ -243,7 +243,7 @@ $esikler = [
         'kadro' => 'dr_ogr_uyesi_yeniden',
         'alan' => $tumAlanlar,
         'cetvel' => 'istanbul-zaim-2019',
-        'notlar' => 'Madde 1: "Yeniden atanacaklarda atanma öncesindeki dört yıl için; Ek-1\'de '
+        'notlar' => 'Madde 1: "Yeniden atanacaklarda atanma öncesindeki dört yıl için; EK-I\'de '
             .'belirtilen A-J kategorilerinden en az 100 puan, A-U kategorileri arasından en az '
             .'150 puan, toplamda en az 200 puan." Dönem sabit dört yıllık pencere, son atama '
             .'tarihi değil.',
@@ -263,7 +263,7 @@ $esikler = [
         'kadro' => 'docentlik',
         'alan' => $tumAlanlar,
         'cetvel' => 'istanbul-zaim-2019',
-        'notlar' => 'Madde 2/c: "Ek-1\'de belirtilen A-C kategorileri arasından en az 100 olmak '
+        'notlar' => 'Madde 2/c: "EK-I\'de belirtilen A-C kategorileri arasından en az 100 olmak '
             .'üzere A-U kategorileri arasından en az 500 puan, toplamda 600 puan." Madde 2/a '
             .'ÜAK doçentlik sınavını ve Doçentlik Sınav Yönetmeliği\'nin temel alan asgari '
             .'başvuru koşullarını şart koşuyor. Alan ayrımı ve dönem kısıtı yok.',

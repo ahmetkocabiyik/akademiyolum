@@ -1860,6 +1860,32 @@ Docblock, dosyanın en değerli parçası. Şunları içermeli:
 - Yorum gerektiren her karar ("yüzde sabit puana çevrildi", "kesirli değer aşağı
   yuvarlandı", "yüksek olan yazıldı çünkü…").
 
+### `notlar` VE `madde` ATIFLARI KAYNAKLA DOĞRULANIR
+
+Aday metninde kod YASAK, `notlar` ve düğümlerin `madde` alanında ise
+ZORUNLU — ama doğru olmak şartıyla. Yanlış atıf sessizdir: test kırılmaz,
+puan değişmez, yalnız satırın kaynağı izlenemez hâle gelir.
+
+07.09.2026'da korpusun tamamı tarandı: **4.848 madde atfı, 331 EK atfı**.
+Yöntem basit — atfın numarasını kaynak metinde `MADDE n` diye ara.
+
+- **4.739 atıf doğrulandı.** Kalan 109'un tamamı dört üniversitede.
+- **Tek gerçek hata Giresun'du:** on beş atıf "Madde 12/x" diyordu, oysa
+  yönerge MADDE 11'de (yürütme) bitiyor. Kadro ölçütlerinin tamamı
+  MADDE 8'in üç fıkrasında (profesör / doçent / dr. öğr. üyesi). Atıflar
+  `Madde 8/x` olarak düzeltildi.
+- **Üçü doğrulanamadı, hata değil:** Bezmiâlem, Çukurova ve İTÜ'nün
+  kaynak metninde madde başlıkları pdftotext çıktısında yok (tablo ağırlıklı
+  PDF). "Doğrulanamadı" ile "yanlış" ayrı şeyler.
+
+**Kaynağında hiç `MADDE n` geçmeyen 18 üniversite taramanın dışında.**
+Onların PDF'i yönerge değil yalnız puan tablosu; atıfları başka bir
+yöntemle (bölüm başlığıyla) doğrulanabilir.
+
+EK atıflarında iki uyuşmazlık çıktı, ikisi de biçimsel: İstanbul Zaim'in
+kaynağı `EK-I` (Roma) yazıyor, not `Ek-1` diyordu — nota uyarlandı. İzmir
+Kavram'ın `Ek-2`si kaynakta satır sonunda kesilmiş ("Ek-1 ve EK-").
+
 ### Aday metinleri: KOD YASAK
 
 `aciklama` alanları adaya gösteriliyor. Yönergenin kodlarını oraya yazma.
