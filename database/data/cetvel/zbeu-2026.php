@@ -162,7 +162,7 @@ $maddeler = [
     '17.ı' => ['baslik' => 'Dekanlık, enstitü, yüksekokul ya da meslek yüksekokulu müdürlüğü, başhekimlik (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 7],
     '17.i' => ['baslik' => 'Dekan yardımcılığı, enstitü ve yüksekokul müdür yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 3],
     '17.j' => ['baslik' => 'Rektörlük ya da rektör yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 20],
-    '17.l' => ['baslik' => 'Senato ve üniversite yönetim kurulu üyeliği ile komisyon ve kurul görevleri (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 1],
+    '17.l' => ['baslik' => 'Senato ve üniversite yönetim kurulu üyeliği ile komisyon ve kurul görevleri (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
     '17.m' => ['baslik' => 'Merkez müdürlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 4],
 
     // ══ 20. BİLİMSEL AMAÇLI BURSLAR ══

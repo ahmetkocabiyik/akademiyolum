@@ -132,7 +132,7 @@ $IDARI = [
     'yardimci' => ['Dekan Yrd. / Müdür Yrd.'],
     'bolum' => ['Bölüm Başkanı'],
     'abd' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'],
-    'kurul' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'],
+    'kurul' => ['Kurul / Komisyon Üyeliği'],
 ];
 
 /**

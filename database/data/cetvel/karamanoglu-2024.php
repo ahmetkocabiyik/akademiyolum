@@ -124,7 +124,7 @@ $maddeler = [
 
     // ══ J. DİĞER ETKİNLİKLER ══
     'J-5' => ['baslik' => 'Alanıyla ilgili panel, konferans, seminer ya da söyleşide konuşmacı veya panelist olarak görev almak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
-    'J-7' => ['baslik' => 'Üniversitenin kalite, BAP ve benzeri komisyonlarında bir yıl süreyle görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Rektör', 'Rektör Yardımcısı'], 'puan' => 5],
+    'J-7' => ['baslik' => 'Üniversitenin kalite, BAP ve benzeri komisyonlarında bir yıl süreyle görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Rektör', 'Rektör Yardımcısı'], 'puan' => 5],
     'J-6' => ['baslik' => 'Toplumsal katkı çalışması, kamu ya da sivil toplum kuruluşu danışmanlığı', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Kamu/STK Danışmanlığı', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 5],
 
     // ══ K. ÖĞRETİM FAALİYETLERİ (en çok 30 puan) ══

@@ -202,7 +202,7 @@ $maddeler = array_merge([
     // ══ 4.15 DİĞER BİLİMSEL/SANATSAL ETKİNLİKLER ══
     '415-9' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı olmak ya da çağrılı bildiri sunmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 20],
     '415-13' => ['baslik' => 'Bilimsel ya da sanatsal toplantı düzenleme kurulunda başkanlık, üyelik veya oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 15],
-    '415-idari' => ['baslik' => 'Üniversitenin akademik ve idari birimlerinde görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 15],
+    '415-idari' => ['baslik' => 'Üniversitenin akademik ve idari birimlerinde görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 15],
 ],
     $proje('414-1', 'AB Çerçeve Programı gibi uluslararası kuruluşlarca desteklenen Ar-Ge projesi', ['AB Çerçeve / Ufuk'], 100),
     $proje('414-2', 'Erasmus gibi uluslararası eğitim ve sosyal içerikli proje', ['Diğer Uluslararası Fon'], 80),

@@ -139,7 +139,6 @@ return [
         // taşıyamadığı için sözlük görev başına bölündü.
         '00.01.01' => ['baslik' => 'Rektör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 50],
         '00.01.02' => ['baslik' => 'Rektör Yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı'], 'puan' => 40],
-        '00.01.03' => ['baslik' => 'Senato veya Üniversite Yönetim Kurulu üyesi', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
         '00.01.05/07' => ['baslik' => 'Dekan, enstitü/konservatuvar/yüksekokul/MYO müdürü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 25],
         '00.01.06/08' => ['baslik' => 'Dekan yardımcısı veya müdür yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 15],
         '00.01.09' => ['baslik' => 'Uygulama ve Araştırma Merkezi müdürü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 10],

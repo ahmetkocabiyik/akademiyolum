@@ -210,7 +210,6 @@ $maddeler = [
     'P2' => ['baslik' => 'Dekanlık, başhekimlik, enstitü, yüksekokul ya da konservatuvar müdürlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 30],
     'P3' => ['baslik' => 'Dekan yardımcılığı ya da müdür yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 10],
     'P6' => ['baslik' => 'Rektörlüğe bağlı araştırma merkezi müdürlüğü ya da koordinatörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 10],
-    'P7' => ['baslik' => 'Üniversite yönetim kurulu ya da senato seçilmiş üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 10],
     'P8' => ['baslik' => 'Bölüm başkanlığı ya da bölüm başkan yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 10],
     'P9' => ['baslik' => 'Rektörlükçe görevlendirilen üniversite düzeyindeki kurul ya da komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 5],
     'H16' => ['baslik' => 'Meslek odalarında, bakanlık komisyon ve kurullarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 5],

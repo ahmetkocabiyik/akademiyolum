@@ -229,7 +229,7 @@ $maddeler = [
     '11b' => ['baslik' => 'Lisansüstü tez jüri üyeliği yapmak', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 5],
     '11e' => ['baslik' => 'Akademik birim yöneticiliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı'], 'puan' => 16],
     '11f' => ['baslik' => 'Akademik birim yönetici yardımcılığı yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkan Yardımcısı'], 'puan' => 12],
-    '11g' => ['baslik' => 'Akademik komisyon, koordinatörlük, kurul ya da etik kurul üyeliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 8],
+    '11g' => ['baslik' => 'Akademik komisyon, koordinatörlük, kurul ya da etik kurul üyeliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 8],
     '11h' => ['baslik' => 'Kurumsal akreditasyon çalışmalarında görev almak', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Akreditasyon Faaliyeti'], 'puan' => 4],
 
     // ══ 12. ARAŞTIRMA BURSLARI VE ÖDÜLLER ══

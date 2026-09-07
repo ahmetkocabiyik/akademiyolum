@@ -255,7 +255,7 @@ return [
 
         // ══ H. İDARİ GÖREVLER (yalnızca tek görev / tek yıl değeri) ══
         'H.1' => ['baslik' => 'Rektörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 100],
-        'H.2' => ['baslik' => 'Rektör yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 60],
+        'H.2' => ['baslik' => 'Rektör yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı'], 'puan' => 60],
         'H.3-H.4' => ['baslik' => 'Dekanlık, enstitü, yüksekokul veya meslek yüksekokulu müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 30],
         'H.5' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı, bölüm veya anabilim dalı başkanlığı, komisyon başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 10],
         'H.6' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 20],

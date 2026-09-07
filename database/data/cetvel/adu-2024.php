@@ -131,7 +131,7 @@ $maddeler = [
     'C1.4.b' => ['baslik' => 'Yüksek lisans tezinde ikinci danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['es_danisman'], 'puan' => 5],
 
     // ══ C2. DERS VERME (yalnız yıllık görevler) ══
-    'C2.3' => ['baslik' => 'Staj kurulu, ders kurulu başkanlığı ya da koordinatörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
+    'C2.3' => ['baslik' => 'Staj kurulu, ders kurulu başkanlığı ya da koordinatörlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Rektör', 'Rektör Yardımcısı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
 
     // ══ D. DİĞER BİLİMSEL VE SANATSAL ETKİNLİKLER ══
     'D1.2.3' => ['baslik' => 'Sempozyum, kongre, panel, çalıştay ya da yaz okulu gibi etkinliklerde düzenleme kurulu, bilim kurulu, oturum başkanlığı veya katılım', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 5],

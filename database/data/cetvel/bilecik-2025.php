@@ -174,7 +174,7 @@ $maddeler = [
     'N.1' => ['baslik' => 'Rektörlük, rektör yardımcılığı, dekanlık, enstitü, yüksekokul ya da meslek yüksekokulu müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 15],
     'N.2' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı, bölüm başkanlığı ya da merkez müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 10],
     'N.3' => ['baslik' => 'Anabilim dalı başkanlığı, bölüm başkan yardımcılığı ya da koordinatörlük (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkan Yardımcısı'], 'puan' => 5],
-    'N.5' => ['baslik' => 'Kurul, komisyon, heyet, konsey görevlendirmesi ya da bilirkişilik (her görev yılı için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 2],
+    'N.5' => ['baslik' => 'Kurul, komisyon, heyet, konsey görevlendirmesi ya da bilirkişilik (her görev yılı için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
 ];
 
 /**

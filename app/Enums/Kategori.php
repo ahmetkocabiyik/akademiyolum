@@ -296,7 +296,6 @@ enum Kategori: string
             // federasyonu yöneticiliğine 100 veriyor.
             self::IdariGorev => [
                 'Rektör', 'Rektör Yardımcısı',
-                'Senato / Üniversite Yönetim Kurulu Üyesi',
                 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.',
                 'Uygulama ve Araştırma Merkezi Müdürü',
                 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı',

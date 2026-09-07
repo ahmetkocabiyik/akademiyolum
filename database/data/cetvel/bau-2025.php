@@ -140,7 +140,7 @@ $maddeler = [
     'H-2.2' => ['baslik' => 'Yurt içinde ya da yurt dışında yerleşik kurumlar için yapılan sözleşmeli danışmanlık', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 8],
     'H-3.1' => ['baslik' => 'Dekan yardımcılığı, üst düzey idari görev ya da enstitü, yüksekokul veya meslek yüksekokulu müdürlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
     'H-3.5' => ['baslik' => 'Bölüm başkanlığı ya da enstitü, yüksekokul veya meslek yüksekokulu müdür yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 4],
-    'H-3.7' => ['baslik' => 'Program koordinatörlüğü, komisyon başkanlığı veya üyeliği, etik kurul ya da yönetim kurulu üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 1],
+    'H-3.7' => ['baslik' => 'Program koordinatörlüğü, komisyon başkanlığı veya üyeliği, etik kurul ya da yönetim kurulu üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 1],
     'H-4.2' => ['baslik' => 'Sosyal sorumluluk projesinde yer almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 3],
 ];
 

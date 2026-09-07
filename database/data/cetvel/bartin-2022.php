@@ -278,7 +278,6 @@ return [
         'L.1' => ['baslik' => 'Dekanlık, enstitü, yüksekokul, meslek yüksekokulu veya uygulama ve araştırma merkezi müdürlüğü ya da üniversite genel koordinatörlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 100],
         'L.2' => ['baslik' => 'Dekan yardımcılığı, enstitü veya yüksekokul müdür yardımcılığı ya da bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 80],
         'L.3' => ['baslik' => 'Öğrencisi olan anabilim dalı başkanlığı, bölüm başkan yardımcılığı veya merkez müdür yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 60],
-        'L.4' => ['baslik' => 'Senato üyeliği veya fakülte, enstitü, yüksekokul ya da meslek yüksekokulu kurul üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 40],
         'L.5-L.6' => ['baslik' => 'Rektörlük veya dekanlık tarafından yapılan kurul, komisyon ve koordinatörlük görevlendirmeleri', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 15],
         'L.8' => ['baslik' => 'Hizmet içi eğitim veya sertifika programında konuşmacı olarak görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın', 'Topluma Hizmet Projesi'], 'puan' => 10],
 

@@ -182,7 +182,7 @@ return [
         'T2-idari-25' => ['baslik' => 'Rektör, rektör yardımcısı ya da dekan olarak görev yapmak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 25],
         'T2-idari-20' => ['baslik' => 'Yüksekokul, meslek yüksekokulu, enstitü ya da merkez müdürlüğü, başhekimlik (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 20],
         'T2-idari-15' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı ya da bölüm başkanlığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 15],
-        'T2-idari-5' => ['baslik' => 'Üniversite yönetim kurulu, senato ve diğer kurul üyelikleri, bölüm başkan yardımcılığı, koordinatörlük, komisyon üyeliği, anabilim dalı başkanlığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 5],
+        'T2-idari-5' => ['baslik' => 'Üniversite yönetim kurulu, senato ve diğer kurul üyelikleri, bölüm başkan yardımcılığı, koordinatörlük, komisyon üyeliği, anabilim dalı başkanlığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 5],
 
         // ══ TABLO 2 — EĞİTİM-ÖĞRETİM ══
         'T2-ders-yabanci' => ['baslik' => 'Yabancı dilde verilen lisans ya da lisansüstü dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Yabancı Dilde Ders'], 'puan' => 10],

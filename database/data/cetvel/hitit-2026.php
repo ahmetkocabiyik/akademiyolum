@@ -176,7 +176,7 @@ $maddeler = [
     // ══ N. ÜNİVERSİTENİN KAPASİTESİNE KATKI ══
     'N01' => ['baslik' => 'Dekan, dekan yardımcılığı, müdürlük ya da müdür yardımcılığı görevi (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 1],
     'N02' => ['baslik' => 'Bölüm başkanlığı ya da yardımcılığı, anabilim dalı başkanlığı, dönem koordinatörlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 1],
-    'N03' => ['baslik' => 'Rektörlük bünyesindeki kurul ve komisyon üyeliği, araştırma uygulama merkezi müdürlüğü, birim koordinatörlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Uygulama ve Araştırma Merkezi Müdürü', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 1],
+    'N03' => ['baslik' => 'Rektörlük bünyesindeki kurul ve komisyon üyeliği, araştırma uygulama merkezi müdürlüğü, birim koordinatörlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 1],
     '23' => ['baslik' => 'Spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 2],
     '23-ulusal' => ['baslik' => 'Spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 2],
 ];

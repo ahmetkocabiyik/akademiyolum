@@ -217,7 +217,7 @@ return [
         '13d-13e' => ['baslik' => 'Bilimsel etkinlikte davetli konuşmacı ya da panelist olarak görev almak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
 
         // ══ 15. İDARİ GÖREVLER (grup tavanı 50, yıl çarpanı uygulanamadı) ══
-        '15a' => ['baslik' => 'Senato veya üniversite yönetim kurulu üyeliği, enstitü, yüksekokul ya da merkez müdürlüğü, başhekimlik, bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı'], 'puan' => 6],
+        '15a' => ['baslik' => 'Senato veya üniversite yönetim kurulu üyeliği, enstitü, yüksekokul ya da merkez müdürlüğü, başhekimlik, bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı'], 'puan' => 6],
         '15b' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı ya da bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkan Yardımcısı', 'Kurul / Komisyon Üyeliği'], 'puan' => 4],
         '15c' => ['baslik' => 'Anabilim veya bilim dalı başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 2],
 

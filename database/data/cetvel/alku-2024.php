@@ -175,7 +175,7 @@ $maddeler = [
     '2.21' => ['baslik' => 'Dekan yardımcılığı, enstitü ya da yüksekokul müdür yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 10],
     '2.22' => ['baslik' => 'Bölüm başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 10],
     '2.23' => ['baslik' => 'Anabilim ya da bilim dalı başkanlığı, merkez müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkan Yardımcısı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
-    '2.24' => ['baslik' => 'İdari ve sosyal aktiviteler için resmî görevlendirme (her eğitim-öğretim yılı için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 2],
+    '2.24' => ['baslik' => 'İdari ve sosyal aktiviteler için resmî görevlendirme (her eğitim-öğretim yılı için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
 ];
 
 $kodlar = fn (string $onek): array => array_values(array_filter(

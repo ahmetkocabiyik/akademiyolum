@@ -105,7 +105,7 @@
  *       8.2 / 8.4 panelistlik, 8.5-8.8 kongre düzenleme — sözlükte ayrı
  *       karşılığı olmayan satırlar.
  *   'Ansiklopedi Maddesi', 'Akreditasyon Faaliyeti', 'Tez İzleme / Jüri
- *       Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul /
+ *       Üyeliği', 'Kurul /
  *       Komisyon Üyeliği', 'Özgün Eser / Beste / Tasarım', 'Topluma Hizmet
  *       Projesi', 'Bilim İletişimi / Popüler Yayın', 'Uygulama Projesi'
  *       kalemleri ve konservatuvara özgü icra kaynakları (opera, bale,

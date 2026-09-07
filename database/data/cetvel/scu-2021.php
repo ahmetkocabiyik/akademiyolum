@@ -224,7 +224,7 @@ $maddeler = [
     'L1' => ['baslik' => 'Rektör ya da rektör yardımcısı olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 30],
     'L2' => ['baslik' => 'Dekan, enstitü, yüksekokul, meslek yüksekokulu ya da merkez müdürü olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 25],
     'L3' => ['baslik' => 'Dekan yardımcısı, müdür yardımcısı ya da başhekim yardımcısı olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 20],
-    'L4' => ['baslik' => 'Üniversite yönetim kurulu, senato veya diğer kurul üyeliği ya da bölüm başkanlığı yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Bölüm Başkanı'], 'puan' => 10],
+    'L4' => ['baslik' => 'Üniversite yönetim kurulu, senato veya diğer kurul üyeliği ya da bölüm başkanlığı yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 10],
     'L5' => ['baslik' => 'Koordinatörlük, komisyon üyeliği, bölüm başkan yardımcılığı ya da anabilim dalı başkanlığı yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 5],
 ];
 

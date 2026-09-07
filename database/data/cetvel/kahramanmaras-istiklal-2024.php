@@ -180,7 +180,6 @@ return [
         'B11.1' => ['baslik' => 'Rektörlük veya rektör yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 20],
         'B11.2' => ['baslik' => 'Dekanlık, başhekimlik veya müdürlük (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 15],
         'B11.3' => ['baslik' => 'Dekan, başhekim veya müdür yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 10],
-        'B11.4' => ['baslik' => 'Komisyon, kurul veya koordinatörlük görevi (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 8],
         'B11.6' => ['baslik' => 'Bölüm başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 7],
         'B11.8' => ['baslik' => 'Bölüm başkan yardımcılığı veya anabilim dalı başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
 

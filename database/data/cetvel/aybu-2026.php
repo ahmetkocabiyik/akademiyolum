@@ -174,7 +174,7 @@ $maddeler = [
     // ══ DİĞER ETKİNLİKLER ══
     'DG.f' => ['baslik' => 'Topluma yönelik akademik ve sosyal sorumluluk çalışmaları, eğitimler ve projelerde yer almak; üniversite-toplum ya da üniversite-endüstri iş birliğinde görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Kamu/STK Danışmanlığı'], 'puan' => 2],
     'DG.g' => ['baslik' => 'Ulusal ya da uluslararası bir bilimsel etkinliğin düzenleme veya bilimsel değerlendirme komitesinde yer almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
-    'DG.i' => ['baslik' => 'Üniversite birimlerinde yöneticilik, yönetici yardımcılığı ya da kurul, komisyon ve koordinatörlüklerde görev yapmak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
+    'DG.i' => ['baslik' => 'Üniversite birimlerinde yöneticilik, yönetici yardımcılığı ya da kurul, komisyon ve koordinatörlüklerde görev yapmak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
     // Kaynağın u) bendi: "Yükseköğretim Kurulu, ÜAK, TÜBİTAK, TÜBA vb. kamu
     // kurum ve kuruluşlarında … komisyon ve üyeliklerinde ya da MESLEK ODALARI
     // YÖNETİM KURULLARINDA görev almak" (1/yıl, en fazla 3 puan). Dosya

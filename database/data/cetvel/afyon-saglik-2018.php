@@ -254,7 +254,6 @@ return [
         'L.2-L.3' => ['baslik' => 'Dekanlık, enstitü müdürlüğü, yüksekokul müdürlüğü veya başhekimlik yapmak/vekâlet etmek', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 12],
         'L.4' => ['baslik' => 'Dekan/müdür/başhekim yardımcılığı veya bölüm başkanlığı yapmak/vekâlet etmek', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 10],
         'L.7' => ['baslik' => 'Rektörlüğe bağlı birim veya araştırma merkezi müdürlüğü yapmak/vekâlet etmek', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
-        'L.8' => ['baslik' => 'Üniversite/fakülte yönetim kurulu üyesi veya fakülte kurulu/senato seçilmiş üyesi olmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
         'L.10' => ['baslik' => 'Anabilim dalı başkanlığı veya bölüm başkan yardımcılığı yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkan Yardımcısı'], 'puan' => 5],
         'L.13' => ['baslik' => 'Uluslararası akademik ya da mesleki kuruluşta yönetim kurulu görevi veya üyelik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 10],
         'L.14' => ['baslik' => 'Ulusal akademik ya da mesleki kuruluşta üyelik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 5],

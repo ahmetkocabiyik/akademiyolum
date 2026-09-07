@@ -71,7 +71,7 @@ $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'];
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
 $WOS_DERGI = ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'];
-$IDARI = ['Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi',
+$IDARI = ['Rektör', 'Rektör Yardımcısı',
     'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü',
     'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'];
 $PROJE_KAMU = ['Diğer Kamu Kurumu', 'Özel Sektör / STK'];

@@ -182,9 +182,7 @@ return [
         '12.1' => ['baslik' => 'Rektörlük (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 20],
         '12.2' => ['baslik' => 'Rektör yardımcılığı, dekanlık, enstitü, yüksekokul ya da merkez müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 15],
         '12.3' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı veya bölüm başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 10],
-        // 'Senato / Üniversite Yönetim Kurulu Üyesi' iki kurulu birleştiriyor: ÜYK üyeliği
-        // 12.3'te 10, senato üyeliği 12.4'te 5 puan; §0 uyarınca 5'ten sayılıyor.
-        '12.4' => ['baslik' => 'Bölüm başkan yardımcılığı veya senatonun seçilmiş üyeliği (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
+        '12.4' => ['baslik' => 'Bölüm başkan yardımcılığı veya senatonun seçilmiş üyeliği (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 5],
         // Etiket anabilim dalı başkanlığı (12.4, 5) ile bölüm koordinatörlüğünü (12.5.c, 1)
         // birleştiriyor; §0 uyarınca 1'den sayılıyor.
         '12.5' => ['baslik' => 'Anabilim dalı başkanlığı veya ERASMUS, Mevlana ya da Farabi koordinatörlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 1],

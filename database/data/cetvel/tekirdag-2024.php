@@ -226,7 +226,7 @@ $maddeler = [
     // ══ 18. İDARİ GÖREVLER ══
     '18.1' => ['baslik' => 'Rektörlük ya da rektör yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 15],
     '18.2' => ['baslik' => 'Dekanlık, başhekimlik, enstitü, yüksekokul, konservatuvar ya da meslek yüksekokulu müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 10],
-    '18.3' => ['baslik' => 'Senato üyeliği, dekan yardımcılığı, müdür yardımcılığı ya da merkez müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
+    '18.3' => ['baslik' => 'Senato üyeliği, dekan yardımcılığı, müdür yardımcılığı ya da merkez müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],
     '18.4' => ['baslik' => 'Bölüm başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 4],
     '18.5' => ['baslik' => 'Bölüm başkan yardımcılığı, anabilim dalı başkanlığı, komisyon ya da kurul üyeliği, koordinatörlük (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 3],
     '10.7' => ['baslik' => 'Uluslararası spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 15],

@@ -107,7 +107,6 @@ return [
         'D.6' => ['baslik' => 'Bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 1],
 
         // ══ E. KURULLAR ══
-        'E.1' => ['baslik' => 'Üniversite senatosu veya yönetim kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 2],
         'E.2' => ['baslik' => 'Fakülte, enstitü veya komisyon kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
         'E.4' => ['baslik' => 'Yönergesi bulunan merkez müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 3],
 

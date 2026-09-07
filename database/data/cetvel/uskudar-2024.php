@@ -219,7 +219,6 @@ return [
 
         // ══ MADDE 6: AKADEMİK YÖNETİM GÖREVLERİ ══
         'M6.1' => ['baslik' => 'Rektörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 20],
-        'M6.2' => ['baslik' => 'Üniversite senatosu ya da yönetim kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
         'M6.4' => ['baslik' => 'Dekanlık ya da müdürlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 10],
         'M6.5' => ['baslik' => 'Dekan ya da müdür yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 5],
         'M6.6' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 5],

@@ -104,7 +104,7 @@ $maddeler = [
     'E2-02' => ['baslik' => 'Danışmanlığında tamamlanan yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi', 'Tez İzleme / Jüri Üyeliği'], 'puan' => 3],
     'E2-03' => ['baslik' => 'Rektörlük, dekanlık, enstitü, yüksekokul ya da konservatuvar müdürlüğü (her dönem için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 10],
     'E2-04' => ['baslik' => 'Bölüm başkanlığı, dekan yardımcılığı, müdür yardımcılığı ya da araştırma merkezi müdürlüğü (her dönem için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı', 'Bölüm Başkanı', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 4],
-    'E2-05' => ['baslik' => 'Senato, üniversite ve fakülte yönetim kurulu ile fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 2],
+    'E2-05' => ['baslik' => 'Senato, üniversite ve fakülte yönetim kurulu ile fakülte kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 2],
 
     // ══ EK-3. GÜZEL SANATLAR ALANI ══
     'E3-01' => ['baslik' => 'Özgün sanat eserinin yurt dışında sanat, eğitim ve kültür kurumlarınca satın alınması ya da gösterime girmesi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt Dışı)', 'Eserin Yayında Yer Alması / Satın Alınması', 'Eserin Haber Olması (Uluslararası)'], 'puan' => 60],

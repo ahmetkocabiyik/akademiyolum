@@ -143,7 +143,7 @@ $maddeler = [
     // ══ 14. İDARİ GÖREV VE KOMİSYONLAR ══
     '14.a' => ['baslik' => 'Rektörlük, dekanlık, meslek yüksekokulu, yüksekokul ya da enstitü müdürlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 8],
     '14.c' => ['baslik' => 'Dekan yardımcılığı, bölüm başkanlığı, uygulama ve araştırma merkezi müdürlüğü ya da müdür yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 7],
-    '14.d' => ['baslik' => 'Anabilim dalı başkanlığı, komisyon ve koordinatörlüklerde görev almak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkan Yardımcısı', 'Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
+    '14.d' => ['baslik' => 'Anabilim dalı başkanlığı, komisyon ve koordinatörlüklerde görev almak (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkan Yardımcısı', 'Kurul / Komisyon Üyeliği'], 'puan' => 5],
 ];
 
 $MAKALE = ['1.a', '1.b', '1.c', '1.ç', '1.d', '1.f', '1.g', '1.ğ', '3.g'];

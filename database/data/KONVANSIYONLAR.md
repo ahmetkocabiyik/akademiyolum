@@ -1173,10 +1173,17 @@ Sözlükte kademe taşımayan dört etiketin tamamı tarandı:
 | `Kurul / Komisyon Üyeliği` | 6 | 10 |
 
 `Senato / Üniversite Yönetim Kurulu Üyesi` de tarandı ama **bu kadro kapsam
-dışı**: kullanıcı 07.09.2026'da "o kadro ile işimiz yok" dedi ve bu oturumda
-onun için açılan satırlar geri alındı (Düzce 11.d, Erzincan YN5, Nevşehir
-D.7.4 ve OMÜ 14.1'deki etiket). Etiket sözlükte ve eski cetvellerde duruyor;
-yeni satır AÇILMAZ.
+dışı bırakıldı** (07.09.2026): etiket SÖZLÜKTEN ÇIKARILDI ve korpustaki
+kullanımı temizlendi — 83 cetvel dosyası, 32 satır silindi, 59 satırdan
+etiket çıkarıldı. Silinen satırın tek etiketi buysa satır gitti; başka
+kadroları da taşıyorsa satır kaldı.
+
+**Kod başka yerden anılıyorsa satırı silme, ETİKETSİZ BIRAK.** Trakya'nın
+altı eki `$IDARI_4` listesinde `…d-yk` kodunu anıyor; satır silinince
+"şart ağacındaki her madde referansı karşılık buluyor" testi kırıldı.
+Doğrusu `'kaynaklar' => []` ile bırakmak ve ölü satır listesine eklemek.
+Kodun yönergede aranması da yeterli değil: Trakya kodu `$s.'d-yk'` diye
+ÜRETİYOR, düz metin araması bulamıyor.
 
 İşaret/gürültü oranı yüksek (28/38) — kapsamlı etiketlerdeki 96 işaretin
 tamamının yanlış pozitif çıkmasıyla tam zıt. **Sebep yapısal:** kapsamsız

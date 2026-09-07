@@ -107,6 +107,7 @@ $atifBlok = function (string $s): array {
         $s.'b' => ['baslik' => 'BKCI ya da Scopus kapsamındaki kitapta eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 2],
         $s.'c' => ['baslik' => 'TR Dizin kapsamındaki dergide eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
         $s.'d' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap veya dergide eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 1],
+        $s.'d-yk' => ['baslik' => 'Yönetim kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => [], 'puan' => 1],
     ];
 };
 
@@ -157,7 +158,7 @@ $idariBlok = function (string $s): array {
         $s.'c' => ['baslik' => 'Bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 5],
         $s.'c-y' => ['baslik' => 'Bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 3],
         $s.'d' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 3],
-        $s.'d-yk' => ['baslik' => 'Yönetim kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 1],
+        $s.'d-yk' => ['baslik' => 'Yönetim kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => [], 'puan' => 1],
         $s.'e' => ['baslik' => 'Anabilim, bilim dalı ya da program başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 2],
         $s.'f' => ['baslik' => 'Komisyon, kurul ya da etik kurul görevi', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
     ];

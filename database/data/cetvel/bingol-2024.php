@@ -141,7 +141,7 @@ return [
 
         // ══ 23. İDARİ VE AKADEMİK GÖREVLER ══
         '23.c' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü veya koordinatörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkanı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Rektör', 'Rektör Yardımcısı'], 'puan' => 10],
-        '23.g' => ['baslik' => 'Üniversite veya bağlı birimlerinde kurul ya da komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Bölüm Başkan Yardımcısı'], 'puan' => 4],
+        '23.g' => ['baslik' => 'Üniversite veya bağlı birimlerinde kurul ya da komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı'], 'puan' => 4],
 
         // ══ 25. SERGİ ══
         '25.a' => ['baslik' => 'Uluslararası özgün kişisel sanat etkinliği veya sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Elektronik Kişisel Sergi (Uluslararası)'], 'puan' => 60],

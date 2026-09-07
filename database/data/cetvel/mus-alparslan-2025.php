@@ -201,7 +201,7 @@ $maddeler = array_merge([
         // ══ C8. İDARİ GÖREVLER ══
         'C8.1' => ['baslik' => 'Enstitü, yüksekokul, meslek yüksekokulu, konservatuvar ya da merkez müdürlüğü, başhekimlik (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 15],
         'C8.2' => ['baslik' => 'Dekan yardımcılığı ya da müdür yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 10],
-        'C8.3' => ['baslik' => 'Komisyon ya da kurul başkanlığı, koordinatörlük görevi, senato üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Rektör', 'Rektör Yardımcısı'], 'puan' => 10],
+        'C8.3' => ['baslik' => 'Komisyon ya da kurul başkanlığı, koordinatörlük görevi, senato üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 10],
         'C8.4' => ['baslik' => 'Diğer kurul görevleri ile bölüm komisyon üyelikleri (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
         'C8.5' => ['baslik' => 'Bölüm başkanlığı ya da bölüm başkan yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 10],
 

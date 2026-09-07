@@ -221,7 +221,7 @@ $maddeler = [
     'T2-ID1' => ['baslik' => 'Rektör ya da rektör yardımcısı olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 10],
     'T2-ID2' => ['baslik' => 'Dekan, yüksekokul, meslek yüksekokulu, enstitü ya da merkez müdürü olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 8],
     'T2-ID3' => ['baslik' => 'Dekan yardımcısı, müdür yardımcısı ya da bölüm başkanı olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 6],
-    'T2-ID4' => ['baslik' => 'Üniversite yönetim kurulu, senato ya da diğer kurul üyeliği; bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Bölüm Başkan Yardımcısı'], 'puan' => 4],
+    'T2-ID4' => ['baslik' => 'Üniversite yönetim kurulu, senato ya da diğer kurul üyeliği; bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 4],
     'T2-ID5' => ['baslik' => 'Koordinatörlük, koordinatör yardımcılığı ya da anabilim/bilim dalı başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 3],
     'T2-ID6' => ['baslik' => 'Komisyon, çalışma grubu ve benzeri üyelikler', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
 

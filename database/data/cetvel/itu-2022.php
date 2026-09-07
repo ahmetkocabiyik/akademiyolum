@@ -163,7 +163,7 @@ $maddeler = [
     'O.1.b' => ['baslik' => 'Bölüm başkanlığı veya anabilim dalı başkanlığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 8],
     'O.1.c' => ['baslik' => 'Merkez müdürlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 8],
     'O.1.d' => ['baslik' => 'Dekan, müdür veya bölüm başkanı yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkan Yardımcısı'], 'puan' => 5],
-    'O.3' => ['baslik' => 'Kurul, komisyon veya ofis üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 2],
+    'O.3' => ['baslik' => 'Kurul, komisyon veya ofis üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
 ];
 
 $gruplar = [

@@ -203,7 +203,7 @@ $maddeler = array_merge([
     'L1.1' => ['baslik' => 'Dekan ya da müdür olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 50],
     'L1.2' => ['baslik' => 'Bölüm, anabilim dalı ya da ana sanat dalı başkanlığı, dekan veya müdür yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 40],
     'L1.5' => ['baslik' => 'Bölüm başkan yardımcılığı ya da koordinatör yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 15],
-    'L2' => ['baslik' => 'Senato, kurul ya da komisyon üyeliği (doğal üyelikler puanlanmaz)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 10],
+    'L2' => ['baslik' => 'Senato, kurul ya da komisyon üyeliği (doğal üyelikler puanlanmaz)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
     'L4.2' => ['baslik' => 'Bilirkişilik, kayyımlık, eğiticilik ve öğrenci topluluğu danışmanlığı', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 5],
 ],
     $proje('G1.1', 'Avrupa Birliği destekli proje (HORIZON, COST ve benzeri)', ['AB Çerçeve / Ufuk'], 250),

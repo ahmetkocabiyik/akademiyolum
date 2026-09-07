@@ -143,7 +143,7 @@ $maddeler = [
     'C1.b' => ['baslik' => 'Bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 50],
     'C1.a' => ['baslik' => 'Anabilim dalı başkanlığı ya da koordinatörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkan Yardımcısı'], 'puan' => 40],
     'C1.m' => ['baslik' => 'Rektörlüğe bağlı merkezlerde müdürlük ya da birimlerde yöneticilik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 40],
-    'C1.2' => ['baslik' => 'Senato, üniversite ya da fakülte yönetim kurulu üyeliği; kurul ve komisyon üyelikleri', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 20],
+    'C1.2' => ['baslik' => 'Senato, üniversite ya da fakülte yönetim kurulu üyeliği; kurul ve komisyon üyelikleri', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 20],
 
     // ══ C2. DİĞER GÖREVLER ══
     'C2.a' => ['baslik' => 'Sosyal sorumluluk projesi yönetmek', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi'], 'puan' => 15],

@@ -126,7 +126,6 @@ $maddeler = [
     'EK2.5' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı ya da merkez müdürlüğü (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 2],
     'EK2.6' => ['baslik' => 'Dekanlık ya da müdürlük (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 3],
     'EK2.7' => ['baslik' => 'Rektörlük ya da rektör yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 4],
-    'EK2.8' => ['baslik' => 'Senato ya da üniversite yönetim kurulu üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 1],
 
     // ══ EK-3 SANAT VE MİMARLIK DALLARI ══
     'EK3.A2' => ['baslik' => 'Özgün sanat eseri, tasarım ya da yorum çalışmalarıyla karma-ortak etkinliğe (sergi, bienal, gösteri, dinleti, festival, gösterim) katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Karma/Jürili Etkinlik (Ulusal)', 'Karma Etkinlik (Jürisiz, Ulusal)', 'Karma Etkinlik (Yurt Dışı, Jürisiz)', 'Karma Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Karma Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Elektronik Karma Sergi (Uluslararası)', 'Elektronik Karma Sergi (Ulusal)'], 'puan' => 16],

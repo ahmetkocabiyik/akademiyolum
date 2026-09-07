@@ -296,7 +296,6 @@ return [
         // ══ P. KURUMSAL KATKI (idari görev; yalnızca 1 yıllık taban değeri) ══
         'P1' => ['baslik' => 'Dekan, Enstitü Müdürü, Yüksekokul Müdürü veya Meslek Yüksekokulu Müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 15],
         'P2' => ['baslik' => 'Merkez müdürlüğü veya kurum düzeyinde koordinatörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 10],
-        'P3' => ['baslik' => 'Senato üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
         'P4' => ['baslik' => 'Kurul üyeliği veya birim/bölüm düzeyinde komisyon, koordinatörlük ya da lisans danışmanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 3],
         'P6' => ['baslik' => 'Bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 10],
         'P8' => ['baslik' => 'Anabilim dalı başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 3],

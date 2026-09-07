@@ -286,7 +286,7 @@ return [
         // ══ 6.5 YÖNETİME KATKI ══
         '6.5.1' => ['baslik' => 'Yöneticilik (rektörlük, dekanlık, müdürlük, bölüm başkanlığı)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı'], 'puan' => 3],
         '6.5.2' => ['baslik' => 'Yönetimde yardımcılık', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 2],
-        '6.5.3' => ['baslik' => 'Akademik kurul veya komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 1],
+        '6.5.3' => ['baslik' => 'Akademik kurul veya komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
 
         // ══ 6.6 DANIŞMANLIK ══
         '6.6.2' => ['baslik' => 'Bir kuruluşta danışmanlık hizmeti', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 3],

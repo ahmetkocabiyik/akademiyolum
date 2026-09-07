@@ -183,7 +183,6 @@ $maddeler = [
     // ══ II.5. İDARİ GÖREVLER ══
     'II.5.1' => ['baslik' => 'Rektör, rektör yardımcısı, dekan, enstitü ya da yüksekokul müdürü veya başhekim olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 10],
     'II.5.2' => ['baslik' => 'Bölüm başkanı, dekan yardımcısı ya da müdür yardımcısı olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 5],
-    'II.5.4' => ['baslik' => 'Seçilmiş senato ya da üniversite yönetim kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
     'II.5.5' => ['baslik' => 'Anabilim dalı başkanlığı, uygulama ve araştırma merkezi müdürlüğü, koordinatörlük ya da bölüm başkan yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkan Yardımcısı'], 'puan' => 3],
     'II.5.6' => ['baslik' => 'Kurul ya da komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
 ];

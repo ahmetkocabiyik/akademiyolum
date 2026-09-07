@@ -236,7 +236,7 @@ $maddeler = [
     '6.4.18' => ['baslik' => 'Bilimsel ya da sanatsal toplantı düzenleme, küratörlük, oturum başkanlığı ve benzeri görevler', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Oturum Başkanlığı (Uluslararası)', 'Oturum Başkanlığı (Ulusal)'], 'puan' => 2],
 
     // ══ 6.5 İDARİ GÖREVLER ══
-    '6.5.1' => ['baslik' => 'Akademik teşkilat yönetmeliğinde tanımlanan idari görevleri üstlenmek (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 10],
+    '6.5.1' => ['baslik' => 'Akademik teşkilat yönetmeliğinde tanımlanan idari görevleri üstlenmek (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı'], 'puan' => 10],
 
     // 'Anabilim Dalı Başkanı / Koordinatörlük' etiketi anabilim dalı
     // başkanlığını (6.5.1, 10 puan) koordinatörlükle birleştiriyor;

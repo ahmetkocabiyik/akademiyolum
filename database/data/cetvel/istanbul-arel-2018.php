@@ -159,7 +159,6 @@ $maddeler = [
     // ══ P. YÖNETİM FAALİYETLERİ ══
     'P.1' => ['baslik' => 'Rektörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 50],
     'P.2' => ['baslik' => 'Rektör yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı'], 'puan' => 40],
-    'P.4' => ['baslik' => 'Rektörlüğe bağlı komisyon ya da kurullarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 30],
     'P.5' => ['baslik' => 'Dekanlık, yüksekokul, meslek yüksekokulu ya da enstitü müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 30],
     'P.6' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı, bölüm başkanlığı ya da araştırma merkezi müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 25],
     'P.7' => ['baslik' => 'Bölüm başkan yardımcılığı ya da anabilim dalı başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 20],

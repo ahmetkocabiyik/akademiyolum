@@ -77,7 +77,7 @@
  *   Konservatuvara özgü icra kaynakları (opera, bale, şeflik, koreografi,
  *       kompozisyon, rejisörlük) — C bölümü sergi, festival ve şahsi
  *       faaliyet üzerine kurulu, icra satırı yok.
- *   'Senato / Üniversite Yönetim Kurulu Üyesi' ve 'Kurul / Komisyon Üyeliği'
+ *   'Kurul / Komisyon Üyeliği'
  *       — D.9 yalnızca akademik birim yöneticiliği ve yardımcılığını sayıyor.
  *
  * ── ATIFTA KENDİ ATFI AYIKLANAMIYOR ──

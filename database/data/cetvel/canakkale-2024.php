@@ -235,7 +235,7 @@ return [
         // 13.k: yıl başına 30 puan, en fazla 100; kurul üyeliği yıl başına 10,
         // en fazla 50. Yıl biriktirmesi motorda yok, tek yıl değeri girildi.
         '13.k1' => ['baslik' => 'Üniversite birimlerinde yöneticilik veya yönetici yardımcılığı yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 30],
-        '13.k2' => ['baslik' => 'Üniversite birimlerinde kurul, koordinatörlük veya komisyon üyeliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 10],
+        '13.k2' => ['baslik' => 'Üniversite birimlerinde kurul, koordinatörlük veya komisyon üyeliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 10],
     ],
 
     'gruplar' => [

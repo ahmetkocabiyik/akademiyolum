@@ -164,7 +164,6 @@ return [
         '9.f' => ['baslik' => 'Ulusal bilimsel yarışmada derece veya ulusal kurumlarca verilen ödül', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs'], 'puan' => 20],
 
         // ══ 10. KURUMSAL KATKI (en az 1 yıl görev şartıyla) ══
-        '10.a' => ['baslik' => 'Senato veya üniversite yönetim kurulu üyeliği (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 10],
         '10.c' => ['baslik' => 'Dekanlık, yüksekokul veya enstitü müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Rektör', 'Rektör Yardımcısı'], 'puan' => 10],
         '10.ç' => ['baslik' => 'Dekan yardımcılığı veya müdür yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
         '10.d' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 10],

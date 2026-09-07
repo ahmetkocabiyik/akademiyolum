@@ -595,7 +595,16 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
         // Siirt 13.c (10) ile 13.d (4) aynı etiketlere düşüyor; etiketler en
         // düşük kademeye taşındı, bu satır belgelemek için duruyor.
         '13.c · Meslek odaları ya da bilimsel amaçlı vakıflar tarafından verilen ödül',
+        // Trakya'nın altı eki bu kodu şart ağacında anıyor; satır belgelemek
+        // için duruyor ama etiketsiz: senato/yönetim kurulu üyeliği 07.09.2026'da
+        // kapsam dışına alındı.
+        '13d-yk · Yönetim kurulu üyeliği',
+        '14d-yk · Yönetim kurulu üyeliği',
+        '15d-yk · Yönetim kurulu üyeliği',
+        '19d-yk · Yönetim kurulu üyeliği',
         '1c · Diğer uluslararası alan indekslerinde taranan dergide makale',
+        '4d-yk · Yönetim kurulu üyeliği',
+        '5d-yk · Yönetim kurulu üyeliği',
         'A.16a · Millî takımlarda görev almak ya da antrenör ve hakem eğitim kurslarında eğitici olarak görev almak',
         // Muş Alparslan E bölümü: "Sadece Devlet Konservatuarı için
         // geçerlidir" — o üniversitede güzel sanatlar eşiği hiç yok.

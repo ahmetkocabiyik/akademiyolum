@@ -156,7 +156,7 @@ $maddeler = [
     // ══ 7. DİĞER ETKİNLİKLER ══
     '7.0.1.1.1' => ['baslik' => 'Rektör yardımcılığı, dekanlık, enstitü ya da yüksekokul müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 20],
     '7.0.1.1.2' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı, bölüm başkanlığı, uygulama ve araştırma merkezi müdürlüğü ya da bilimsel dergilerde editörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 10],
-    '7.0.1.1.3' => ['baslik' => 'Anabilim dalı başkanlığı, koordinatörlük, senato, yönetim kurulu ya da komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı'], 'puan' => 5],
+    '7.0.1.1.3' => ['baslik' => 'Anabilim dalı başkanlığı, koordinatörlük, senato, yönetim kurulu ya da komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı'], 'puan' => 5],
     '7.0.1.1.4' => ['baslik' => 'Bilimsel dergilerde editörlük ya da yazı işleri müdürlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 10],
     '7.2.2.0.1' => ['baslik' => 'Konferans düzenleyiciliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 6],
 ];

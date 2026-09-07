@@ -199,7 +199,6 @@ $ortakMaddeler = [
     // ══ C8. İDARİ GÖREVLER ══
     'C8.1' => ['baslik' => 'Rektörlük, rektör yardımcılığı, dekanlık, enstitü, yüksekokul, meslek yüksekokulu ya da merkez müdürlüğü (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 15],
     'C8.2' => ['baslik' => 'Dekan yardımcılığı ya da müdür yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 10],
-    'C8.3' => ['baslik' => 'Rektörlük ya da Senato tarafından görevlendirilen danışmanlık, komisyon, kurul ve koordinatörlükler (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 10],
     'C8.4' => ['baslik' => 'Diğer kurul görevleri (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 5],
     'C8.5' => ['baslik' => 'Bölüm başkanlığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 10],
     'C8.6' => ['baslik' => 'Bölüm başkan yardımcılığı (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 10],

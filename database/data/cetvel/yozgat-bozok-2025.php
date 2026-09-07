@@ -199,7 +199,7 @@ $maddeler = [
     'B5.1.6' => ['baslik' => 'Dekan yardımcısı, müdür yardımcısı, bölüm başkanı ya da Rektörlüğe bağlı koordinatör olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 8],
     'B5.1.7' => ['baslik' => 'Bölüm başkan yardımcılığı ya da Rektörlüğe bağlı komisyonlarda üyelik yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 6],
     'B5.2.1' => ['baslik' => 'Koordinatörlük, kurul veya komisyon başkanlığı ya da anabilim dalı başkanlığı yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
-    'B5.2.2' => ['baslik' => 'Kurul ya da komisyon üyeliği, birim temsilciliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
+    'B5.2.2' => ['baslik' => 'Kurul ya da komisyon üyeliği, birim temsilciliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 4],
     'B5.4.1' => ['baslik' => 'Bakanlık, YÖK, TÜBİTAK gibi kamu kurumları ile meslek kuruluşlarının komisyon, danışmanlık, panel ve kurul üyeliklerinde görev almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı'], 'puan' => 4],
 
     // Kaynağın B5.4 bölümünün 2. satırı. Akreditasyon kurulu görevi DERS

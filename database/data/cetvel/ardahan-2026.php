@@ -98,7 +98,6 @@ $maddeler = [
     // ══ 1. KURUMSAL KATKI — 1.1 YÖNETİMSEL FAALİYETLER ══
     '1.1.1' => ['baslik' => 'Rektör', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör'], 'puan' => 10],
     '1.1.2' => ['baslik' => 'Rektör yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı'], 'puan' => 8],
-    '1.1.3' => ['baslik' => 'Senato ya da Üniversite Yönetim Kurulu üyesi', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 5],
     '1.1.5' => ['baslik' => 'Dekan ya da enstitü, konservatuvar, yüksekokul veya MYO müdürü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 5],
     '1.1.6' => ['baslik' => 'Dekan yardımcısı ya da enstitü, konservatuvar, yüksekokul veya MYO müdür yardımcısı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 3],
     '1.1.9' => ['baslik' => 'Uygulama ve araştırma merkezi müdürü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 4],

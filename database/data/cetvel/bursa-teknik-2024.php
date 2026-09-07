@@ -224,7 +224,7 @@ return [
         // ══ K. İDARİ GÖREV (ay biriktirmesi uygulanamadı, görev başına 1) ══
         'K.1' => ['baslik' => 'Rektörlük, rektör yardımcılığı, enstitü, yüksekokul, merkezi araştırma laboratuvarı müdürlüğü, BAP koordinatörlüğü, TTO veya teknokent müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 1],
         'K.2' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü, bölüm başkanlığı, dekan yardımcılığı veya müdür yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 1],
-        'K.4' => ['baslik' => 'Senato üyeliği veya rektörlük bünyesinde koordinatörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 1],
+        'K.4' => ['baslik' => 'Senato üyeliği veya rektörlük bünyesinde koordinatörlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 1],
         'K.6' => ['baslik' => 'Komisyon üyeliği, bölüm başkan yardımcılığı, fakülte kurulu üyeliği veya öğrenci topluluk danışmanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Bölüm Başkan Yardımcısı'], 'puan' => 1],
 
         // ══ TOPLUMSAL KATKI (Tablo 2'de karşılığı olmayan kayıt türleri) ══

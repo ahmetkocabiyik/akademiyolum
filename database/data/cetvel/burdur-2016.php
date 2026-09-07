@@ -170,7 +170,7 @@ $maddeler = [
     'M51' => ['baslik' => 'Rektör yardımcılığı, dekanlık, enstitü, yüksekokul ya da meslek yüksekokulu müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 15],
     'M52' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı, merkez müdürlüğü ya da bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı'], 'puan' => 10],
     'M53' => ['baslik' => 'Merkez müdür yardımcılığı, bölüm başkan yardımcılığı ya da anabilim dalı başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
-    'M54' => ['baslik' => 'Üniversite organlarında ya da rektörlükçe kurulan komisyonlarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 5],
+    'M54' => ['baslik' => 'Üniversite organlarında ya da rektörlükçe kurulan komisyonlarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 5],
 
     // ══ TOPLUMSAL KATKILAR (57-64) ══
     'M61' => ['baslik' => 'Kamu ya da özel kurum ve kuruluşlarda görev almak, katkıda bulunmak; basında yayın faaliyetinde bulunmak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Kamu/STK Danışmanlığı', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 5],

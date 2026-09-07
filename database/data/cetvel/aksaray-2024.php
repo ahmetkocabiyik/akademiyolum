@@ -241,7 +241,7 @@ return [
         'N.3' => ['baslik' => 'Dekanlık, başhekimlik, enstitü, yüksekokul veya meslek yüksekokulu müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü'], 'puan' => 2],
         'N.4' => ['baslik' => 'Rektör danışmanlığı veya bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 1],
         'N.5' => ['baslik' => 'Dekan, enstitü, yüksekokul veya meslek yüksekokulu müdür yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 1],
-        'N.6' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü veya senato üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 1],
+        'N.6' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü veya senato üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 1],
         'N.7-N.8-N.9' => ['baslik' => 'Kalite kurulu, etik kurul veya BAP bilimsel komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
         'N.11' => ['baslik' => 'Anabilim dalı başkanlığı, bölüm başkan yardımcılığı veya fakülte yönetim kurulu üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük', 'Bölüm Başkan Yardımcısı'], 'puan' => 1],
     ],

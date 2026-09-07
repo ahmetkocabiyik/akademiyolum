@@ -115,7 +115,7 @@ $maddeler = [
     // ══ 11. İDARİ GÖREVLER ══
     '11.a.1' => ['baslik' => 'Rektörlük, rektör yardımcılığı, dekanlık ya da müdürlük', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 25],
     '11.a.2' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı, bölüm başkanlığı, anabilim dalı başkanlığı ya da merkez müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 15],
-    '11.a.3' => ['baslik' => 'Yükseköğretim üst kurullarında, üniversite organlarında ya da rektörlükçe kurulan komisyon ve kurullarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 10],
+    '11.a.3' => ['baslik' => 'Yükseköğretim üst kurullarında, üniversite organlarında ya da rektörlükçe kurulan komisyon ve kurullarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 10],
 ];
 
 return [

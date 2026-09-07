@@ -189,7 +189,7 @@ $maddeler = [
     'D.4a' => ['baslik' => 'Ön lisans, lisans ya da lisansüstü düzeyde ders vermek (dönem başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 5],
     'D.5' => ['baslik' => 'Bir kurum ya da kuruluş tarafından talep edilen bilimsel rapor', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 3],
     'D.6b' => ['baslik' => 'Sempozyum, kongre ya da çalıştay gibi etkinliklerde başkanlık veya organizasyonda görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 5],
-    'D.6c' => ['baslik' => 'Üniversite yönetiminde idari görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 5],
+    'D.6c' => ['baslik' => 'Üniversite yönetiminde idari görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 5],
 
     // ══ E. ÖDÜLLER VE PATENTLER ══
     'E.1a' => ['baslik' => 'Uluslararası ödül', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 30],

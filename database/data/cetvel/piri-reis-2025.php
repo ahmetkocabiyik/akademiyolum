@@ -152,7 +152,7 @@ $ortak = [
 
     // ══ O. İDARİ GÖREVLER VE KOMİSYON ÇALIŞMALARI ══
     'O.1' => ['baslik' => 'İdari görev (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 3],
-    'O.2' => ['baslik' => 'Komisyon, yönetim kurulu ya da program yürütme kurulu çalışması (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 1],
+    'O.2' => ['baslik' => 'Komisyon, yönetim kurulu ya da program yürütme kurulu çalışması (her yıl için)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 1],
 
     // ══ P. ARAŞTIRMA PROJESİ ══
     'P.1.a' => ['baslik' => 'AB Çerçeve Programı ya da TÜBİTAK projesinde koordinatör veya yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'TÜBİTAK', 'TÜSEB'], 'roller' => ['yurutucu'], 'puan' => 20],

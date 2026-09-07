@@ -175,7 +175,6 @@ $ham = [
     // ══ H ÜNİVERSİTEYE HİZMET ══ (profesörlük tavanı 20)
     'H.1.a' => [6.0, 'Enstitü müdürlüğü, dekan yardımcılığı, yüksekokul müdürlüğü veya bölüm başkanlığı (yıl başına)', 'idari_gorev', ['Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı', 'Uygulama ve Araştırma Merkezi Müdürü'], null],
     'H.1.b' => [5.0, 'Müdür veya bölüm başkan yardımcılığı (yıl başına)', 'idari_gorev', ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], null],
-    'H.2.a' => [4.0, 'Fakülte, enstitü veya yüksekokul yönetim kurulu üyeliği', 'idari_gorev', ['Senato / Üniversite Yönetim Kurulu Üyesi'], null],
     'H.2.g' => [1.0, 'Diğer aktif kurul, komisyon veya merkez üyelikleri', 'idari_gorev', ['Kurul / Komisyon Üyeliği'], null],
     // H.3.c — bölüm görevleri arasında. Akreditasyon koordinatörlüğü DERS
     // DEĞİL; etiket bir tur G.2.a ders satırında duruyordu.

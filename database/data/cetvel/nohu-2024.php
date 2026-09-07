@@ -199,7 +199,6 @@ return [
         // ══ 13. İDARİ GÖREVLER ══
         '13a' => ['baslik' => 'Enstitü, konservatuvar, yüksekokul ya da meslek yüksekokulu müdürlüğü, başhekimlik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 6],
         '13b' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı ya da başhekim yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 5],
-        '13c' => ['baslik' => 'Senato ya da üniversite yönetim kurulu üyeliği, teknopark ve teknoloji transfer ofisi temsilciliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 4],
         '13d' => ['baslik' => 'Bölüm başkanlığı, araştırma ve uygulama merkezi müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 3],
         '13e' => ['baslik' => 'Bölüm başkan yardımcılığı, anabilim dalı başkanlığı, koordinatörlük ya da kurul ve komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği'], 'puan' => 2],
         '13f' => ['baslik' => 'Toplumsal katkı ve kamu kurumlarıyla iş birliği faaliyetleri', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 2],

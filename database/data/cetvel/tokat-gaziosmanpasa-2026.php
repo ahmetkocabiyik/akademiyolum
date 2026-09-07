@@ -143,7 +143,7 @@ $maddeler = [
     '5.4' => ['baslik' => 'Dekan yardımcılığı, müdür yardımcılığı ve koordinatör yardımcılığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 25],
     '5.5' => ['baslik' => 'Bölüm başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı'], 'puan' => 25],
     '5.6' => ['baslik' => 'Bölüm başkan yardımcılığı ya da anabilim, ana sanat dalı başkanlığı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 20],
-    '5.7' => ['baslik' => 'Senato, üniversite yönetim kurulu üyeliği ve rektörlükçe oluşturulan sürekli komisyon ve kurullarda görev alma', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi', 'Kurul / Komisyon Üyeliği'], 'puan' => 20],
+    '5.7' => ['baslik' => 'Senato, üniversite yönetim kurulu üyeliği ve rektörlükçe oluşturulan sürekli komisyon ve kurullarda görev alma', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 20],
 
     // ══ 7. TOPLUMSAL KATKI ══
     '7.2' => ['baslik' => 'Uzmanlık alanı ile ilgili toplumsal katkı faaliyetlerinde görev almak; radyo ve televizyon programlarında yer almak ya da köşe yazarlığı', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın', 'Kamu/STK Danışmanlığı'], 'puan' => 5],

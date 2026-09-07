@@ -25,7 +25,7 @@
  *       almak 5 / 3) → tek 'Diğer' etiketi; 3 girildi.
  *   14c-14ç (davetli konuşmacı 10 / 5) → 5; 14ğ-14h (yarışma jürisi
  *       10 / 7) → 7; 14ı-14i (burs 10 / 5) → 5.
- *   15. bölümde 'Senato / Üniversite Yönetim Kurulu Üyesi' etiketi
+ *   15. bölümde 'Kurul / Komisyon Üyeliği' etiketi
  *       tabloda sayılmadığı için en düşük idari görev satırıyla (2)
  *       eşleştirildi.
  *
@@ -207,7 +207,7 @@ return [
         '15b' => ['baslik' => 'Dekan yardımcısı, müdür yardımcısı ya da başhekim yardımcısı olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.'], 'puan' => 15],
         '15ç' => ['baslik' => 'Bölüm başkanlığı ya da uygulama ve araştırma merkezi müdürlüğü yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 8],
         '15e' => ['baslik' => 'Bölüm başkan yardımcılığı, anabilim dalı başkanlığı ya da koordinatörlük yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 6],
-        '15g' => ['baslik' => 'Kurul ya da komisyon üyeliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 2],
+        '15g' => ['baslik' => 'Kurul ya da komisyon üyeliği yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 2],
         '15f2' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 2],
         '15g2' => ['baslik' => 'Bilimsel toplantıda oturum başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 1],
     ],

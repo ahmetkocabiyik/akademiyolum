@@ -133,7 +133,7 @@ $maddeler = [
     'D.4' => ['baslik' => 'Dekan yardımcılığı, enstitü ya da yüksekokul müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan Yrd. / Müdür Yrd.', 'Bölüm Başkanı'], 'puan' => 20],
     'D.6' => ['baslik' => 'Enstitü ya da yüksekokul müdür yardımcılığı, başhekimlik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkan Yardımcısı'], 'puan' => 10],
     'D.9' => ['baslik' => 'Uygulama ve araştırma merkezi müdürlüğü', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
-    'D.11' => ['baslik' => 'Eğitim kurullarında ya da etik komisyonlarında üyelik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 1],
+    'D.11' => ['baslik' => 'Eğitim kurullarında ya da etik komisyonlarında üyelik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
 
     // ══ TEZ DANIŞMANLIĞI (MADDE 13/6'nın aradığı koşul) ══
     'T.1' => ['baslik' => 'Yönettiğiniz yüksek lisans, doktora ya da uzmanlık tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi', 'Yüksek Lisans Tezi'], 'roller' => ['danisman', 'es_danisman'], 'puan' => 5],

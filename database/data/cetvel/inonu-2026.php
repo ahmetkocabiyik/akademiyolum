@@ -257,7 +257,6 @@ return [
         // ══ R. İDARİ GÖREV, DANIŞMANLIK, KOMİSYON VE KURUL ÜYELİĞİ ══
         'R.1' => ['baslik' => 'Rektörlük veya rektör yardımcılığı (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı'], 'puan' => 50],
         'R.2' => ['baslik' => 'Dekanlık, yüksekokul/enstitü müdürlüğü, yardımcılıkları ve başhekimlik (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 40],
-        'R.3' => ['baslik' => 'Rektörlükçe oluşturulan birim, koordinatörlük, komisyon ve kurullarda görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 30],
         // R.4 BAŞKANLIK satırı; bölüm başkan YARDIMCILIĞI için kaynakta karşılık
         // yok, satırdan çıkarıldı. 'Anabilim Dalı Başkanı / Koordinatörlük'
         // etiketi anabilim dalı başkanlığını (R.4, 30) koordinatörlükle (R.5,

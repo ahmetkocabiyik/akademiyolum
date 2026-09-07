@@ -141,7 +141,7 @@ return [
 
         // ── Toplumsal katkı, idari görev, diğer ──
         'TK' => ['baslik' => 'Topluma yönelik sosyal sorumluluk çalışması ya da projesinde yer almak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın', 'Kamu/STK Danışmanlığı']],
-        'ID' => ['baslik' => 'Üniversite ya da birim yönetiminde, kurul veya komisyonlarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği']],
+        'ID' => ['baslik' => 'Üniversite ya da birim yönetiminde, kurul veya komisyonlarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.', 'Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği']],
         'D' => ['baslik' => 'Bilimsel etkinliğin düzenleme ya da bilimsel değerlendirme komitesinde yer almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer']],
     ],
 

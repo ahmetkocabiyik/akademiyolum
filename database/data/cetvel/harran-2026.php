@@ -245,7 +245,7 @@ $maddeler = [
 
     // ══ C. İDARİ FAALİYETLER (ham puan × 0,3) ══
     'C1' => ['baslik' => 'Rektör, rektör yardımcısı, dekan, enstitü müdürü, yüksekokul ya da meslek yüksekokulu müdürü, başhekim (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü'], 'puan' => 3],
-    'C2' => ['baslik' => 'Bölüm başkanı, dekan yardımcısı, anabilim dalı başkanı, merkez müdürü, senato ve yönetim kurulu üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Dekan Yrd. / Müdür Yrd.', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Uygulama ve Araştırma Merkezi Müdürü', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 1],
+    'C2' => ['baslik' => 'Bölüm başkanı, dekan yardımcısı, anabilim dalı başkanı, merkez müdürü, senato ve yönetim kurulu üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Dekan Yrd. / Müdür Yrd.', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 1],
     'C9' => ['baslik' => 'Üniversite birimlerinde komisyon ve kurul başkanlığı ile üyeliği (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
     'C10' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 10],
     'C11' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 6],

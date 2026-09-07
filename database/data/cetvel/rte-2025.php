@@ -180,7 +180,7 @@ $maddeler = [
     '10b-es' => ['baslik' => 'Eş danışmanlığınızda tamamlanan yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['es_danisman'], 'puan' => 1],
 
     // ══ 12. İDARİ GÖREVLER ══ (en az bir yıl; en fazla üç yıl için puan)
-    '12a' => ['baslik' => 'Dekanlık, enstitü, yüksekokul ya da meslek yüksekokulu müdürlüğü, üniversite yönetim kurulu üyeliği, senato üyeliği, dekan yardımcılığı ya da müdür yardımcılığı yapmış olmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 10],
+    '12a' => ['baslik' => 'Dekanlık, enstitü, yüksekokul ya da meslek yüksekokulu müdürlüğü, üniversite yönetim kurulu üyeliği, senato üyeliği, dekan yardımcılığı ya da müdür yardımcılığı yapmış olmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 10],
     '12b' => ['baslik' => 'Araştırma merkezi müdürlüğü, koordinatörlük, bölüm başkanlığı, bölüm başkan yardımcılığı ya da anabilim dalı başkanlığı yapmış olmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Uygulama ve Araştırma Merkezi Müdürü', 'Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
 
     // ══ 13. DİĞER FAALİYETLER ══

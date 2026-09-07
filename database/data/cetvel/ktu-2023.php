@@ -192,7 +192,7 @@ $maddeler = [
 
     // ══ 10. DİĞER ETKİNLİKLER ══
     '10Aa' => ['baslik' => 'Yayın, değerlendirme kurulu ya da ödül jürisi üyeliği; bakanlık, YÖK veya TÜBİTAK komisyon ve kurul üyelikleri', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 1],
-    '10Aa.2' => ['baslik' => 'Kurum kurul ve komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi'], 'puan' => 1],
+    '10Aa.2' => ['baslik' => 'Kurum kurul ve komisyon üyeliği', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 1],
     '10Ac' => ['baslik' => 'Sergi küratörlüğü; sanat ve tasarım yarışmalarında jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 1],
     '10Ag' => ['baslik' => 'Yapımcı, yönetmen, senarist, görüntü yönetmeni ya da sanat yönetmeni olarak görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Yönetmenlik (Sahne/Ekran)', 'Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)', 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)', 'Belgesel/Kısa Film (Uluslararası)', 'Belgesel/Kısa Film (Ulusal)'], 'puan' => 1],
     '10Bj' => ['baslik' => 'Lisansüstü tez jürisi üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 1],

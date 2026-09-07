@@ -145,7 +145,7 @@ return [
         'G.4' => ['baslik' => 'Sonuçlandırılmış yüksek lisans tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi', 'Tez İzleme / Jüri Üyeliği'], 'puan' => 2],
         'G.5' => ['baslik' => 'Sonuçlandırılmış doktora tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'puan' => 4],
         'G.6' => ['baslik' => 'Rektör, dekan, dekan yardımcısı, enstitü müdürü ya da yüksekokul müdürü olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Rektör', 'Rektör Yardımcısı', 'Dekan / Enstitü-YO Müdürü', 'Dekan Yrd. / Müdür Yrd.'], 'puan' => 4],
-        'G.7' => ['baslik' => 'Bölüm başkanı, anabilim dalı başkanı, komisyon üyesi, koordinatör ya da merkez müdürü olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Senato / Üniversite Yönetim Kurulu Üyesi', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 3],
+        'G.7' => ['baslik' => 'Bölüm başkanı, anabilim dalı başkanı, komisyon üyesi, koordinatör ya da merkez müdürü olarak görev yapmak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Bölüm Başkanı', 'Bölüm Başkan Yardımcısı', 'Anabilim Dalı Başkanı / Koordinatörlük', 'Kurul / Komisyon Üyeliği', 'Uygulama ve Araştırma Merkezi Müdürü'], 'puan' => 3],
 
         // ══ H. ÇEVİRİ ══
         'H.2' => ['baslik' => 'Kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
