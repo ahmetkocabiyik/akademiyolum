@@ -5134,7 +5134,7 @@ test('YÖK 30.01.2025 jürili yarışma maddeleri beş cetvelde de sayılıyor',
         'giresun-2019' => [7, 15],     // M.18 7,5 → §0 aşağı yuvarlandı
         'kocaeli-2023' => [null, 25],  // yarışma ödülleri J bölümünde, girilmedi
         'acibadem-2025-atif18' => [10, 10],
-        'piri-reis-2025-fen' => [2, 2],
+        'piri-reis-2025-muhfen-dr' => [2, 2],
     ];
 
     foreach ($beklenen as $anahtar => [$y, $j]) {
@@ -6234,4 +6234,57 @@ test('Bayburt kitap editörlüğü doğru maddeden geliyor', function () {
 
     expect($katalog->maddeler)->toHaveKey('2.1.e')->not->toHaveKey('8.1.g')
         ->and($katalog->puan(sartFaaliyet('BKCI Kitap', Kategori::Editorluk, null), $katalog->coz(['*'])))->toBe(30);
+});
+
+/**
+ * PİRİ REİS ÜNİVERSİTESİ — ilk giriş (07.09.2026).
+ *
+ * Kaynak taranmış görüntü PDF'i; puan sütunları sayfa görüntüsünden
+ * okundu. Tablo dört temel alan sütunu taşıyor ama yalnız HUKUK sütunu
+ * ayrışıyor: diğer uluslararası kitap 20 (ötekilerde 5), bölüm 10 (3).
+ */
+test('Piri Reis puan tablosu ve Hukuk sütunu', function () {
+    $depo = sartDepo();
+    $muhfen = $depo->katalog('piri-reis-2025-muhfen-dr');
+    $hukuk = $depo->katalog('piri-reis-2025-hukuk-dr');
+    expect($muhfen)->not->toBeNull()->and($hukuk)->not->toBeNull();
+
+    $puan = fn ($katalog, string $kaynak, Kategori $kat) => $katalog->puan(
+        sartFaaliyet($kaynak, $kat, null),
+        $katalog->coz(['*']),
+    );
+
+    // Ortak sütunlar: dört alanda da aynı.
+    expect($puan($muhfen, 'SCIE/SSCI (Q1)', Kategori::Makale))->toBe(30)
+        ->and($puan($muhfen, 'SCIE/SSCI (Q4)', Kategori::Makale))->toBe(10)
+        ->and($puan($muhfen, 'TR Dizin', Kategori::Makale))->toBe(10)
+        ->and($puan($muhfen, 'Ulusal Tam Metin', Kategori::Bildiri))->toBe(3)
+        ->and($puan($muhfen, 'Uluslararası Patent', Kategori::Patent))->toBe(20);
+
+    // Hukuk sütunu yalnız kitap kalemlerinde ayrışıyor.
+    expect($puan($muhfen, 'Uluslararası/Ulusal Kitap', Kategori::Kitap))->toBe(5)
+        ->and($puan($hukuk, 'Uluslararası/Ulusal Kitap', Kategori::Kitap))->toBe(20)
+        ->and($puan($muhfen, 'Kitap Bölümü', Kategori::Kitap))->toBe(3)
+        ->and($puan($hukuk, 'Kitap Bölümü', Kategori::Kitap))->toBe(10);
+});
+
+/**
+ * Piri Reis'te TAVANLAR KADROYA GÖRE DEĞİŞİYOR: bildiri Dr. ve doçentlikte
+ * 10, profesörlükte 20; proje Mühendislik/Fen'de 30/60, Sosyal ve Hukukta
+ * 20/40. Tavan cetvel varyantına gömülü olduğu için varyantı karıştırmak
+ * sessizce yanlış puan verir.
+ */
+test('Piri Reis tavanları kadroya ve alana göre', function () {
+    $depo = sartDepo();
+    $bildiri = array_fill(0, 12, sartFaaliyet('Uluslararası Tam Metin', Kategori::Bildiri, null));
+    $proje = array_fill(0, 30, sartFaaliyet('TÜBİTAK', Kategori::Proje, null));
+
+    $dr = $depo->katalog('piri-reis-2025-muhfen-dr');
+    $prof = $depo->katalog('piri-reis-2025-muhfen-profesor');
+    $sosyalProf = $depo->katalog('piri-reis-2025-sosyal-profesor');
+
+    expect($dr->topla($bildiri, $dr->coz(['BILDIRI'])))->toBe(10)
+        ->and($prof->topla($bildiri, $prof->coz(['BILDIRI'])))->toBe(20)
+        ->and($prof->topla($proje, $prof->coz(['PROJE'])))->toBe(60)
+        ->and($sosyalProf->topla($proje, $sosyalProf->coz(['PROJE'])))->toBe(40);
 });

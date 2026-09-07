@@ -923,3 +923,19 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
   seçilir"); yanlarındaki sayı puan değil.
 - **Ankara MGÜ** — kaynağın tek komisyon satırı H.7 (10) ve cetvel onu
   yazıyor; daha düşük bir kurul kademesi yok.
+
+## Piri Reis Üniversitesi (07.09.2026) — girilemeyen kalemler
+
+- **H.1.a "h-indeksi kadar puan"** — değer faaliyet başına değil PROFİLE
+  bağlı; aday kaydı h-indeksi taşımıyor, satır açılmadı.
+- **"Lisansüstü tezlerden üretilmiş / üretilmemiş olmak"** — doçentlik ve
+  profesörlükte birkaç bent bunu istiyor; faaliyet kaydı yayının tezden
+  üretilip üretilmediğini taşımıyor.
+- **"En az üçü tek yazarlı, üç farklı dergide"** (doçentlik: Sosyal ve
+  Hukuk) — motor tek bir satırda yazar rolünü sınayabiliyor ama "kaçının
+  tek yazarlı olduğunu" ve "kaç farklı dergi" olduğunu kuramıyor; koşul
+  yalnız yayın SAYISI olarak girildi.
+- **F.1.a / F.1.c (ulusal kitap ve bölümü)** ayrı satır olarak açılmadı:
+  sözlükte "ulusal kitap" ayrı etiket değil, `Uluslararası/Ulusal Kitap`
+  ikisini birden taşıyor ve puanlar E.2.a/E.2.b ile birebir aynı.
+- **Bilimsel seminer koşulu (MADDE 6)** beyana bağlı.
