@@ -2738,3 +2738,54 @@ mektubu (her ikisinde 3) ayrı satırlarda tutuyor; sözlükte ikisi de
 `vaka_teknik_not`. Hangi satıra bağlansa bir kademede fazla sayıyordu, bu
 yüzden kova YÜKSEK satırlardan çıkarılıp düşük satır indeks kademesine göre
 ikiye bölündü (3 ve 2).
+
+## BİLDİRİDE TAM METİN / ÖZET: AYRIM ETİKETTE, `turler`DE DEĞİL
+
+`Kategori::Bildiri`nin yayın türü sözlüğü BOŞ. Makaledeki `turler` ekseninin
+karşılığı bildiride yok; ayrımı etiketin kendisi taşıyor:
+
+`Uluslararası Tam Metin (CPCI)` · `Uluslararası Tam Metin` ·
+`Uluslararası Özet/Poster` · `Ulusal Tam Metin` · `Ulusal Özet/Poster` ·
+`Davetli Konuşmacı`
+
+### İKİ EKSEN BİRDEN: SÖZLÜ/POSTER ile TAM METİN/ÖZET
+
+En sinsi hata bu. Kaynaklar bildiriyi çoğu zaman İKİ eksende birden
+kademelendiriyor:
+
+```
+b) uluslararası SÖZLÜ  bildiri, tam metin / özet      8 / 4
+c) uluslararası POSTER bildiri, tam metin / özet      5 / 3
+```
+
+Sözlükte yalnız tam metin/özet ekseni var. b ile c'yi "tam metin satırı" ve
+"özet satırı" sanmak (Ege'de tam olarak bu olmuştu) posterin TAM METİN
+değerini özet etiketine yazdırır. **Doğrusu her etikete kendi kolonunun
+POSTER (düşük) değerini yazmaktır**: tam metin 5, özet 3.
+
+Aynı sebeple `Özet/Poster` etiketi ÖZET değerini değil **POSTER** değerini
+alır (Trakya'nın üç kolonlu tablosunda uluslararası 3 değil 2, ulusal 2
+değil 1).
+
+### `Tam Metin (CPCI)` etiketine İKİ KOLONUN birden düşüğünü yazma
+
+KTÜ'nün 1.g-ı satırı "kongre bildirisinin tam metni/özeti 20/10 … 5/3"
+diyor. Etiket açıkça TAM METİN olduğu için tam metin kolonunun en düşüğü (5)
+yazılır; iki kolonun birden en düşüğü (3) yazmak gereksiz eksik saymadır.
+
+### Ucuz detektörler
+
+1. **`özet ≥ tam metin`** — korpusta 19 işaret verdi, 1'i gerçek hataydı
+   (Ankara'da özet 10, tam metin 5). Eşitlik çoğu zaman MEŞRU: ÜAK'ın
+   standart tablosu ("tam metni/özeti … yayımlanmış çalışma" tek satır, tek
+   puan) korpusta onlarca üniversiteye kopyalanmış.
+2. **`uluslararası < ulusal`** — tek işaret verdi ve o da meşru çıktı
+   (İKÇÜ'nün uluslararası POSTER satırı 1 puan, ulusal ÖZET satırı 4).
+3. **Kaynakta `N/M` çift değerli bildiri satırı** — yedi üniversitede var;
+   ayrımı gerçekten yapan yönergeleri bulmanın en kesin yolu.
+
+### Kaynakta satır YOKSA etiketi taşıma
+
+İstanbul Aydın B/12 açıkça "ulusal **TAM** bildiriler" diyor ve ulusal bildiri
+ÖZETİ için satır yok. Etiketi o satırda bırakmak karşılıksız puan verir ve
+`adet` koşullarını da besler.

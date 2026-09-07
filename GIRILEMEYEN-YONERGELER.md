@@ -999,3 +999,18 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
   Ankara Ç, Trakya) `Kategori::Bildiri` altında ve o kategorinin yayın türü
   sözlüğü yok; yalnız etiket kademesiyle (tam metin ↔ özet/poster)
   ayrılabiliyor.
+
+## Bildiri tam metin/özet taraması (07.09.2026) — girilemeyen kalemler
+
+- **SÖZLÜ / POSTER ekseni sözlükte yok.** `Özet/Poster` tek etiket; kaynak
+  posteri sözlüden ayırıp daha düşük puanlıyorsa (korpusta 47 üniversite)
+  her etikete o kolonun POSTER değeri yazılıyor, yani sözlü bildirisi olan
+  aday eksik sayılıyor. Ayrı bir etiket ailesi açılmadıkça kaçınılmaz.
+- **Kongre bildirisinin ÇEYREKLİĞİ** (Ankara 1Ç, Gazi 5, KTÜ 1.g-ı: Q1 20,
+  Q2 15, Q3 10, Q4 5) — `Uluslararası Tam Metin (CPCI)` etiketi dergi
+  çeyrekliği taşımıyor; her yerde Q4 değeri yazıldı.
+- **Ankara 7/a ve 7/ç davetli konuşmacı** (uluslararası 25, ulusal 12) tek
+  `Davetli Konuşmacı` etiketinde; ulusal değer geçerli.
+- **GİBTÜ 6/a-4 ve 6/b-4** ("olgu sunumu, video sunumu, e-poster" 5 ve 4)
+  girilemedi: bildiri sözlüğünde bu türlerin karşılığı yok, `Özet/Poster`e
+  bağlamak posterin kendi satırıyla çakışırdı.

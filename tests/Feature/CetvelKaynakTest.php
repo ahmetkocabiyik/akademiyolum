@@ -490,6 +490,11 @@ test('cetvel içi etiket çakışmaları elden geçirilmiş', function () {
         'akdeniz-2026-mimarlik-profesor: 9.3 > 11.2.3',
 
         // Üç tablo, üç ayrı aday grubu; barajlar tablo gruplarına bağlı.
+        // Ankara 7. bölüm ("bilimsel/sanatsal toplantıda sunulmuş bildiri",
+        // 15) ile 1E/ç ("SCOPUS dergide yayımlanmış kongre bildirisi", 5)
+        // aynı esere iki farklı yönden bakıyor; CPCI'da basılan bir bildiri
+        // ikisine de girer ve motorun yükseği alması doğrudur.
+        'ankara-2023: 7b-7c-tam > 1Eç',
         'isparta-ubu-2022: A4-bolum > T1-K5',
         'isparta-ubu-2022: A4-kitap > T1-K3',
         'isparta-ubu-2022: A4-tez > T1-TEZ-B1',
@@ -764,7 +769,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
     expect($disarida)->toBe([
         // "1. maddeden" barajları; 4-7. bölümler (ödül, idari görev, hizmet)
         // hiçbir koşulun kümesinde değil.
-        'ankara-2023: 21/73',
+        'ankara-2023: 24/76',
 
         // Yalnız EG5 (yarıyıl başına 1 puanlık ders) dışarıda; `PUAN` grubu
         // ders satırlarını kapsamıyor.
@@ -1279,3 +1284,86 @@ test('özgün-dışı tür satırları yüksek satırın gölgesinde kalmıyor',
         'isparta-ubu: T1-D4',
     ]);
 });
+
+/**
+ * BİLDİRİDE TAM METİN / ÖZET AYRIMI. Makalenin `turler` ekseninin karşılığı
+ * bildiride YOK; ayrımı ETİKETİN KENDİSİ taşıyor:
+ *   `Uluslararası Tam Metin (CPCI)` · `Uluslararası Tam Metin` ·
+ *   `Uluslararası Özet/Poster` · `Ulusal Tam Metin` · `Ulusal Özet/Poster`
+ *
+ * Üç hata biçimi çıktı ve üçü de burada donduruldu:
+ *
+ *   1. Kaynak ayırıyor, cetvel tek satıra çöküyor (GİBTÜ) ya da satırın bir
+ *      kolu hiç girilmemiş (Ankara'nın uluslararası tam metin ve bütün
+ *      ulusal bildiri satırları).
+ *   2. İKİ EKSEN KARIŞIYOR: kaynak hem sözlü/poster hem tam metin/özet
+ *      ayrımı yapınca "poster satırı" ile "özet satırı" birbirine
+ *      karışıyor (Ege'de poster satırının TAM METİN değeri özet etiketine
+ *      yazılmıştı).
+ *   3. `Özet/Poster` etiketi ÖZET değerini alıyor, oysa poster daha düşük
+ *      (Trakya: uluslararası 3 yerine 2, ulusal 2 yerine 1).
+ *
+ * Değerler 07.09.2026'da kaynak PDF'lerinden okundu.
+ */
+test('bildiride tam metin ile özet ayrışıyor', function (string $cetvel, array $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $kodlar = $katalog->coz(['*']);
+    $gercek = [];
+    foreach (array_keys($beklenen) as $etiket) {
+        $gercek[$etiket] = $katalog->puan(
+            new Faaliyet([
+                'kategori' => Kategori::Bildiri, 'tur' => 'Test', 'baslik' => 'Test',
+                'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+            ]),
+            $kodlar,
+        );
+    }
+
+    expect($gercek)->toBe($beklenen);
+})->with([
+    // Ankara 7/b-c: uluslararası sözlü 20/15, poster 15/10 → tam metin 15,
+    // özet 10. 7/d-e: ulusal sözlü 12/8, poster 6/4 → 6 ve 4. Tam metin kolu
+    // ile ulusal satırların TAMAMI hiç girilmemişti.
+    ['ankara-2023', [
+        'Uluslararası Tam Metin' => 15, 'Uluslararası Özet/Poster' => 10,
+        'Ulusal Tam Metin' => 6, 'Ulusal Özet/Poster' => 4,
+    ]],
+
+    // GİBTÜ: uluslararası tam 15/10 · özet 10/8; ulusal tam 10/8 · özet 8/5.
+    // Hepsi tek satıra (uluslararası 15, ulusal 10) çökmüştü.
+    ['gibtu-2024', [
+        'Uluslararası Tam Metin' => 10, 'Uluslararası Özet/Poster' => 8,
+        'Ulusal Tam Metin' => 8, 'Ulusal Özet/Poster' => 5,
+        'Davetli Konuşmacı' => 2,
+    ]],
+
+    // Ege: sözlü 8/4 · poster 5/3 (uluslararası), 6/3 · 4/2 (ulusal).
+    // Önce b ve c "tam metin satırı / özet satırı" sanılmıştı.
+    ['ege-2026', [
+        'Uluslararası Tam Metin' => 5, 'Uluslararası Özet/Poster' => 3,
+        'Ulusal Tam Metin' => 4, 'Ulusal Özet/Poster' => 2,
+    ]],
+
+    // Trakya: Tam Metin/Özet/Poster üç kolon — CPCI 8/5/3, diğer 6/3/2,
+    // ulusal 4/2/1. `Özet/Poster` etiketi POSTER değerini alır.
+    ['trakya-2025-ek2', [
+        'Uluslararası Tam Metin (CPCI)' => 8, 'Uluslararası Tam Metin' => 6,
+        'Uluslararası Özet/Poster' => 2, 'Ulusal Tam Metin' => 4, 'Ulusal Özet/Poster' => 1,
+    ]],
+
+    // KTÜ 1.g-ı: dizinli dergide kongre bildirisi tam metni/özeti 20/10 …
+    // 5/3. Etiket "Tam Metin (CPCI)" olduğu için tam metin kolonunun en
+    // düşüğü (5); önce iki kolonun birden en düşüğü (3) yazılmıştı.
+    ['ktu-2023-fen-profesor', [
+        'Uluslararası Tam Metin (CPCI)' => 5, 'Uluslararası Tam Metin' => 12,
+        'Uluslararası Özet/Poster' => 4, 'Ulusal Tam Metin' => 6, 'Ulusal Özet/Poster' => 2,
+    ]],
+
+    // İstanbul Aydın B/12 açıkça "ulusal TAM bildiriler"; ulusal bildiri
+    // özeti için satır yok, etiket karşılıksız kalmalı.
+    ['istanbul-aydin-2020', [
+        'Ulusal Tam Metin' => 5, 'Ulusal Özet/Poster' => 0,
+    ]],
+]);

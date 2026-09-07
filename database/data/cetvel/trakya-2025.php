@@ -46,9 +46,11 @@
  *       10/5 puan) girilmedi — kayıtta belge kategorisi yok.
  *
  * ── AYNI ETİKETE DÜŞÜP DÜŞÜĞÜ GİRİLEN SATIRLAR ──
- *   CPCI'da yayımlanmış ÖZET ve POSTER (5 ve 3) tam metinden ayrılamıyor;
- *       "Uluslararası Özet/Poster" etiketi diğer uluslararası toplantı
- *       satırından (3) sayılıyor.
+ *   Kaynak bildiriyi ÜÇ kolona ayırıyor (Tam Metin / Özet / Poster:
+ *       CPCI'da 8/5/3, diğer uluslararasında 6/3/2, ulusalda 4/2/1) ama
+ *       sözlükte özet ile poster TEK etikette. Bu yüzden "Özet/Poster"
+ *       etiketleri her kademede POSTER değerini alıyor: uluslararası 2
+ *       (CPCI 3 ve diğer 2'nin düşüğü), ulusal 1.
  *   Kongre sunum/poster ödülleri (EK-1'de 15/10/5) ile jürili yarışma
  *       dereceleri tek "Yarışma Derecesi / Mansiyon" etiketine düşüyor;
  *       her ekte o ekin EN DÜŞÜK ödül satırından sayılıyor. EK-1'in
@@ -126,9 +128,9 @@ $bildiriBlok = function (string $s): array {
     return [
         $s.'a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan, tam metni CPCI\'da yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 8],
         $s.'b1-t' => ['baslik' => 'Diğer uluslararası bilimsel toplantıda sunulan, tam metni yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin'], 'puan' => 6],
-        $s.'b1-o' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan, özeti ya da posteri yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
+        $s.'b1-o' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan, özeti ya da posteri yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 2],
         $s.'b2-t' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan, tam metni yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 4],
-        $s.'b2-o' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan, özeti ya da posteri yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
+        $s.'b2-o' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan, özeti ya da posteri yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
         $s.'dav' => ['baslik' => 'Bilimsel kongrede davetli konuşmacı ya da açılış konuşmacısı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 4],
     ];
 };
@@ -882,8 +884,8 @@ $ORTAK_NOT = 'Yönergenin "atama için gerekli toplam puanın %25\'ini geçemez"
     .'fazla görünür. '
     .'Puanınız şu kalemlerde OLDUĞUNDAN DÜŞÜK görünür: "diğer uluslararası/ulusal kitap" ve '
     .'"kitapta bölüm" satırlarının çift değerinden (15/10, 10/5) kayıt ayrımı taşımadığı için '
-    .'düşüğü alındı; CPCI\'da yayımlanmış özet ve poster (5 ve 3) tam metinden ayrılamadığı için '
-    .'diğer uluslararası toplantı satırından (3) sayılıyor; kongre sunum ve poster ödülleri ile '
+    .'düşüğü alındı; özet ile poster tek etikette olduğu için her kademede poster '
+    .'değeri (uluslararası 2, ulusal 1) sayılıyor; kongre sunum ve poster ödülleri ile '
     .'jürili yarışma dereceleri tek etikete düştüğü için en düşük ödül satırından sayılıyor; '
     .'editörlükte alan editörlüğü ile yayın kurulu üyeliği, hakemlikte dergi/kitap/kongre ayrımı '
     .'tek etikete düşüyor ve en düşüğü alınıyor; atama jürisi üyeliği doktor öğretim üyesi '

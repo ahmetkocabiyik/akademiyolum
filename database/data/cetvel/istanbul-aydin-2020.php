@@ -75,7 +75,11 @@ $maddeler = [
     'B08' => ['baslik' => 'Ulusal hakemli dergilerde hakemlik ya da editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 15],
     'B09' => ['baslik' => 'Tanınmış ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitap tercümesi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
     'B10' => ['baslik' => 'Ulusal hakemli dergide yayımlanmış tam makale tercümesi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
-    'B12' => ['baslik' => 'Yayımlanmış ulusal tam bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin', 'Ulusal Özet/Poster'], 'puan' => 5],
+    // Kaynak B/12'yi açıkça "ulusal TAM bildiriler" diye yazıyor ve ulusal
+    // bildiri ÖZETİ için satır yok (uluslararası tarafta A/9 var, ulusalda
+    // yok). Etiket satırda kalsaydı karşılıksız 5 puan verirdi ve DR-30
+    // adet koşulunu da beslerdi.
+    'B12' => ['baslik' => 'Yayımlanmış ulusal tam bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 5],
     'B13' => ['baslik' => 'Yurt içinde yayımlanan kitap ve makalelerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 3],
     'B14' => ['baslik' => 'Ulusal dergilerde yayımlanan eleştiri yazısı', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 5],
 

@@ -76,10 +76,18 @@ return [
         // "8/4" = tam metin / özet. Sözlükte ikisi ayrı etiket olduğu için
         // yönergenin ikili değeri iki maddeye açıldı.
         '2a-2d' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
-        '2b' => ['baslik' => 'Uluslararası toplantıda sözlü bildiri (tam metin)', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 8],
-        '2c' => ['baslik' => 'Uluslararası toplantıda poster bildiri (özet)', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 5],
-        '2e' => ['baslik' => 'Ulusal toplantıda sözlü bildiri (tam metin)', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 6],
-        '2f' => ['baslik' => 'Ulusal toplantıda poster bildiri (özet)', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 4],
+        // İKİ EKSEN BİRDEN: kaynak hem SÖZLÜ/POSTER hem TAM METİN/ÖZET
+        // ayrımı yapıyor (uluslararası sözlü 8/4 · poster 5/3, ulusal sözlü
+        // 6/3 · poster 4/2). Sözlükte yalnız tam metin/özet ekseni var, bu
+        // yüzden her etiket kendi kolonunun POSTER değerini alıyor.
+        //
+        // Önce b ve c satırları "tam metin satırı" ile "özet satırı" sanılıp
+        // 8 ve 5 yazılmıştı; oysa c bir POSTER satırı ve 5 onun TAM METİN
+        // değeri. Sonuç: poster tam metni 8, poster özeti 5 puan alıyordu.
+        '2b-2c' => ['baslik' => 'Uluslararası toplantıda sunulan, tam metni yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 5],
+        '2b-2c-o' => ['baslik' => 'Uluslararası toplantıda sunulan, özeti yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
+        '2e-2f' => ['baslik' => 'Ulusal toplantıda sunulan, tam metni yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 4],
+        '2e-2f-o' => ['baslik' => 'Ulusal toplantıda sunulan, özeti yayımlanmış sözlü ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
         // ── 3. KİTAP ──
         '3a1' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden yabancı dilde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 75],

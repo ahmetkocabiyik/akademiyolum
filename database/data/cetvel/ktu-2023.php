@@ -98,7 +98,11 @@ $maddeler = [
     '1.ç-d' => ['baslik' => 'Q4 ya da AHCI kapsamındaki dergide yayımlanmış derleme, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => $DIGER, 'puan' => 20],
     '1.e-d' => ['baslik' => 'ESCI ya da Scopus indeksindeki dergide yayımlanmış derleme, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $DIGER, 'puan' => 15],
     '1.f-d' => ['baslik' => 'Diğer hakemli uluslararası ya da TR Dizin kapsamındaki dergide derleme, kısa makale, vaka takdimi, editöre mektup ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'turler' => $DIGER, 'puan' => 5],
-    '1.g' => ['baslik' => 'Dizinli dergide yayımlanmış kongre bildirisi', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 3],
+    // 1.g-ı: dizinli dergide yayımlanmış kongre bildirisinin TAM METNİ/ÖZETİ
+    // (Q1 20/10 · Q2 15/8 · Q3 10/5 · Q4 5/3). Etiket "Tam Metin (CPCI)"
+    // olduğu için tam metin kolonunun en düşüğü (Q4, 5) yazıldı; önce iki
+    // kolonun birden en düşüğü (özet Q4, 3) alınmıştı.
+    '1.g' => ['baslik' => 'Dizinli dergide yayımlanmış kongre bildirisi tam metni', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 5],
 
     // ══ 2. KİTAP ══
     '2.a' => ['baslik' => 'WoS Book Citation Index kapsamındaki kitapta yazarlık ya da editörlük', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],

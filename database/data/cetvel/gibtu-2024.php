@@ -57,8 +57,18 @@ return [
         '5.b' => ['baslik' => 'Çeviri kitap veya kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 8],
 
         // ── 6. BİLDİRİLER ──
-        '6.a' => ['baslik' => 'Uluslararası bilim kurulu olan hakemli etkinlikte bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Uluslararası Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 15],
-        '6.b' => ['baslik' => 'Ulusal bilim kurulu olan hakemli etkinlikte bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin', 'Ulusal Özet/Poster'], 'puan' => 10],
+        // Kaynak bildiriyi ÜÇ eksende birden kademelendiriyor: uluslararası/
+        // ulusal · tam metin/özet · sözlü/poster. Sözlükte yalnız ilk ikisi
+        // var, bu yüzden her satırda §0 uyarınca POSTER değeri yazıldı:
+        //   uluslararası tam metin 15/10 → 10 · özet 10/8 → 8
+        //   ulusal        tam metin 10/8 → 8  · özet  8/5 → 5
+        // Davetli konuşmacı etiketi kapsam taşımıyor; kaynak uluslararası 15,
+        // ulusal 10, STK/bakanlık etkinliği 2 diyor → 2.
+        '6.a' => ['baslik' => 'Uluslararası bilim kurulu olan hakemli etkinlikte sunulmuş, tam metni basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 10],
+        '6.a2' => ['baslik' => 'Uluslararası bilim kurulu olan hakemli etkinlikte sunulmuş, özeti basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
+        '6.b' => ['baslik' => 'Ulusal bilim kurulu olan hakemli etkinlikte sunulmuş, tam metni basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 8],
+        '6.b2' => ['baslik' => 'Ulusal bilim kurulu olan hakemli etkinlikte sunulmuş, özeti basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
+        '6.davetli' => ['baslik' => 'Bilimsel ya da sanatsal etkinlikte belgelendirilmiş davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
 
         // ── 7. BİLİMSEL PROJELER ──
         // 7. maddenin altı fon kademesi ve her kademede iki rol var; cetvelde

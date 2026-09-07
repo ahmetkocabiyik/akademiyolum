@@ -151,7 +151,18 @@ return [
 
         // ── 7 · Bilimsel/sanatsal toplantı ──
         '7a-7ç' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 12],
+        // 7b/7c'nin TAM METİN kolu ile 7d/7e'nin tamamı (ulusal bildiriler)
+        // hiç girilmemişti: `Uluslararası Tam Metin` yalnız 1Eç'den (SCOPUS
+        // dergide yayımlanmış kongre bildirisi, 5 puan) besleniyordu, ulusal
+        // bildiri etiketlerinin ise hiç karşılığı yoktu.
+        //
+        // Etiket SÖZLÜ ile POSTER'i ayırmıyor, bu yüzden her kolda §0 uyarınca
+        // düşük olan poster değeri yazıldı: uluslararası tam 20/15 → 15,
+        // özet 15/10 → 10; ulusal tam 12/6 → 6, özet 8/4 → 4.
+        '7b-7c-tam' => ['baslik' => 'Uluslararası toplantıda sunulmuş, tam metni basılmış sözlü bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 15],
         '7b-7c' => ['baslik' => 'Uluslararası toplantıda sunulmuş özet bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 10],
+        '7d-7e-tam' => ['baslik' => 'Ulusal toplantıda sunulmuş, tam metni basılmış sözlü bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 6],
+        '7d-7e' => ['baslik' => 'Ulusal toplantıda sunulmuş özet bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 4],
         '7k' => ['baslik' => 'Kamu kurum ve kuruluşlarında uzmanlığınızla ilgili komisyonlarda görev (yıl başına)', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 2],
         '6g' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
         '6f' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
