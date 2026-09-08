@@ -669,3 +669,69 @@ test('bütün üniversiteler kapsandığında uyarı çıkmaz', function () {
         ->toBe(count($depo->universiteler()))
         ->and(array_intersect($kapsamDisi['birim'], $kapsamDisi['alan_yok']))->toBe([]);
 });
+
+test('birim seçicileri boş başlar ve ilk seçenek seçilince güncellenir', function () {
+    // HATA: seçicide boş seçenek yoksa tarayıcı İLK seçeneği görünür biçimde
+    // seçili gösteriyor ama bağlı değer hâlâ boş. Aday o ilk seçeneği tıkladığında
+    // `change` olayı tetiklenmiyor (değer zaten "seçili" görünüyordu) ve ekran
+    // güncellenmiyordu. Boş seçenek hem başlangıç durumunu doğru gösteriyor
+    // hem de ilk seçeneğe geçişi gerçek bir değişiklik yapıyor.
+    $birimli = fn (string $birim): array => [
+        ...testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        'anahtar' => 'ankara-dr-sosyal-'.Str::slug($birim),
+        'birim' => $birim,
+    ];
+
+    // Alfabetik olarak ilk seçenek: 'Diş Hekimliği Fakültesi'.
+    depoBagla([$birimli('Diş Hekimliği Fakültesi'), $birimli('Hukuk Fakültesi')]);
+
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal,
+        'unvan' => 'Arş. Gör.',
+        'birim' => null,
+    ]);
+
+    $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)->assertOk();
+
+    // Başlangıç: her bekleyen üniversite için BOŞ bir değer bağlı olmalı.
+    // Anahtar hiç yoksa seçici bağlanacak bir şey bulamıyor ve ilk seçeneği
+    // seçili gösteriyor.
+    expect($bilesen->get('birimSecimleri'))->toBe(['Ankara Üniversitesi' => '']);
+
+    // Boş seçenek görünüyor; aksi hâlde ilk seçenek sahte biçimde seçili gelir.
+    $bilesen->assertSee('Birim seçilmedi');
+
+    // İLK seçeneği seçmek gerçekten çalışıyor.
+    $bilesen->set('birimSecimleri.Ankara Üniversitesi', 'Diş Hekimliği Fakültesi');
+
+    expect($bilesen->instance()->sonuclar())->toHaveCount(1)
+        ->and($bilesen->instance()->kapsamDisi()['birim'])->toBe([]);
+});
+
+test('birim seçimi geri boşaltılınca üniversite yeniden bekleyene düşer', function () {
+    // Seçim geri alınabilmeli: aday yanlış birimi seçtiyse "Birim seçilmedi"ye
+    // dönebilmeli ve üniversite yine seçici kutusunda görünmeli.
+    $birimli = fn (string $birim): array => [
+        ...testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        'anahtar' => 'ankara-dr-sosyal-'.Str::slug($birim),
+        'birim' => $birim,
+    ];
+
+    depoBagla([$birimli('Hukuk Fakültesi'), $birimli('Siyasal Bilgiler Fakültesi')]);
+
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal,
+        'unvan' => 'Arş. Gör.',
+        'birim' => null,
+    ]);
+
+    $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)
+        ->set('birimSecimleri.Ankara Üniversitesi', 'Hukuk Fakültesi');
+
+    expect($bilesen->instance()->sonuclar())->toHaveCount(1);
+
+    $bilesen->set('birimSecimleri.Ankara Üniversitesi', '');
+
+    expect($bilesen->instance()->sonuclar())->toBe([])
+        ->and($bilesen->instance()->kapsamDisi()['birim'])->toBe(['Ankara Üniversitesi']);
+});

@@ -217,6 +217,14 @@ class YonergeAnalizi extends Component
 
             if ($birimler !== []) {
                 $secenekler[$ad] = array_keys($birimler);
+
+                // BAĞLANACAK ANAHTAR ÖNCEDEN AÇILIR. Anahtar yoksa
+                // `wire:model` bağlanacak bir değer bulamıyor ve tarayıcı İLK
+                // seçeneği görünür biçimde seçili gösteriyor; aday o seçeneği
+                // tıklayınca `change` olayı tetiklenmediği için ekran hiç
+                // güncellenmiyordu. Boş dize, görünümdeki boş seçenekle
+                // eşleşerek başlangıç durumunu doğru gösterir.
+                $this->birimSecimleri[$ad] ??= '';
             }
         }
 

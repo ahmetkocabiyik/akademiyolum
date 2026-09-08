@@ -159,6 +159,11 @@
                                 placeholder="Birim seçin..."
                                 size="sm"
                             >
+                                {{-- Boş seçenek ŞART: yoksa tarayıcı ilk
+                                     seçeneği seçili gösteriyor, aday onu
+                                     tıklayınca değer değişmediği için ekran
+                                     güncellenmiyor. --}}
+                                <flux:select.option value="">Birim seçilmedi</flux:select.option>
                                 @foreach ($birimler as $b)
                                     <flux:select.option value="{{ $b }}">{{ $b }}</flux:select.option>
                                 @endforeach
