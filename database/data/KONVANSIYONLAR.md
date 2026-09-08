@@ -2866,3 +2866,33 @@ bloklarının en düşüğünü alır. Bu üç cetvelde altısı da en düşük 
 **KAPSAM KADEMESİ ROLDEN ÖNCE KONTROL EDİLİR.** Rol ayrımını koruyan bir
 test (eski "rol kademesi çökmüyor") kapsam çökmesini görmüyordu; iki eksen
 ayrı ayrı donduruldu.
+
+## KAPSAM SATIRDA DEĞİL, BÖLÜM BAŞLIĞINDA OLABİLİR
+
+Toplantı organizasyonu taramasının ikinci geçişinde altı hata daha çıktı ve
+hepsi tek sebepten: **kaynak satırı çıplak yazıyor**, kapsamı bölüm başlığına
+bırakıyor.
+
+```
+11.9. Bildiri kitaplı bilimsel toplantı düzenlemek
+a) Uluslararası
+   Düzenleme kurulu başkanı            20      ← satırda "uluslararası" YOK
+   Düzenleme kurulu üyeliği            10
+b) Ulusal
+   Düzenleme kurulu başkanı            15
+   Düzenleme kurulu üyeliği             5
+```
+
+Birinci geçişte süzgeç "düzenleme kurulu" ile BİRLİKTE bir etkinlik sözcüğü
+(kongre/sempozyum/toplantı) arıyordu; bu satırlarda ikisi de yok, dolayısıyla
+altı yönerge sessizce elendi. **Kalibrasyon ölçütü buydu ve tutmadı:**
+tarayıcı Osmaniye'yi, Işık'ı, Siirt'i bulmuyordu.
+
+**Doğru tarif:** satır deseninden etkinlik sözcüğünü ÇIKAR, kapsamı satırda
+bulamazsan YUKARI doğru en yakın (en çok 12 satır) başlıktan oku. Gürültüyü
+etkinlik sözcüğü değil, dışlama listesi (`dergi|editör|rektör|dekan|jüri|
+proje|komisyon başkan`) kontrol eder.
+
+`ulusal` sözcüğü `uluslararası`nın İÇİNDE geçtiği için kapsam testinde sınır
+gerekir: `(?<!uluslar)\bulusal\b`. Yoksa her uluslararası satır ulusal da
+sayılır ve tarama boş çıkar.

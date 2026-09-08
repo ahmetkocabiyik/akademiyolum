@@ -1739,3 +1739,66 @@ test('toplantı düzenleme ailesinde kapsam kademesi ayrışıyor', function (st
         'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 5, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 2,
     ]],
 ]);
+
+/**
+ * TOPLANTI DÜZENLEME BAŞKANLIĞI — ikinci geçiş. Bir önceki tur kaynak
+ * süzgecini "düzenleme kurulu" sözcüğüyle BİRLİKTE bir etkinlik sözcüğü
+ * (kongre/sempozyum/toplantı) arayacak biçimde kurmuştu; oysa bu altı
+ * yönergede satır çıplak yazılıyor ("Düzenleme kurulu başkanlığı   10") ve
+ * KAPSAM BÖLÜM BAŞLIĞINDA duruyor. Süzgeç gevşetilip kapsam en yakın
+ * başlıktan okununca altı hata daha çıktı.
+ *
+ * Değerler 08.09.2026'da kaynak PDF'lerinden okundu.
+ */
+test('toplantı düzenleme başkanlığında kapsam kademesi ayrışıyor', function (string $cetvel, array $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $kodlar = $katalog->coz(['*']);
+    $gercek = [];
+    foreach (array_keys($beklenen) as $etiket) {
+        $gercek[$etiket] = $katalog->puan(
+            new Faaliyet([
+                'kategori' => Kategori::Diger, 'tur' => 'Test', 'baslik' => 'Test',
+                'kaynak' => $etiket, 'rol' => null, 'durum' => 'onaylandi',
+            ]),
+            $kodlar,
+        );
+    }
+
+    expect($gercek)->toBe($beklenen);
+})->with([
+    // Osmaniye 11.9: a) uluslararası başkan 20 · üyelik 10, b) ULUSAL 15 · 5.
+    ['osmaniye-2023', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 20, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 15,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 10, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 5,
+    ]],
+    // Bandırma E1-E4: başkanlık 15/10/10/8 → 10 ve 8. Kurul üyeliği kaynakta
+    // iki bende dağılmış (E*.c düzenleme 8/5/5/4, E*.ç bilim 3/2/2/2) → 2/2.
+    ['bandirma-2024', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 10, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 8,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 2, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 2,
+    ]],
+    // Siirt 10 (uluslararası) ve 11 (ulusal): başkanlık 10/8, kurul 3/1.
+    // Dördü de tek satırda 1 puanla duruyordu.
+    ['siirt-2025', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 10, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 8,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 3, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 1,
+    ]],
+    // Erciyes 5/d: kaynak "Uluslararası: 10, Ulusal: 5" diye SATIR İÇİNDE
+    // yazıyor; iki kapsam 5'te birleşmişti.
+    ['erciyes-2024', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 10, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 5,
+    ]],
+    // Düzce 3.3/a uluslararası 20, 3.4/a ULUSAL 15; ikisi 6'da birleşmişti.
+    ['duzce-2024', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 20, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 15,
+    ]],
+    // Işık F.1.1 (uluslararası) / F.1.2 (ulusal): başkanlık 10/6. Kurul
+    // üyeliği etiketi hem düzenleme (5/3) hem bilim-danışma (1/1) kurulunu
+    // taşıdığı için her kapsamda 1 — önce 3/3 ile fazla sayıyordu.
+    ['isik-2019', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 10, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 6,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 1, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 1,
+    ]],
+]);

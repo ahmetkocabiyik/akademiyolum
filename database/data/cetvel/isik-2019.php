@@ -160,8 +160,16 @@ $ham = [
     'F.2.1.a' => [18.0, 'Uluslararası yayınevince yayımlanan kitabın editörlüğü', 'editorluk', ['BKCI Kitap'], null],
     'F.3.a' => [1.0, 'Dergi yayın kurulu üyeliği veya editörlüğü', 'editorluk', ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Kitap Editörlüğü'], null],
     'F.3.b' => [1.0, 'Makale veya proje hakemliği', 'editorluk', ['Hakemlik'], null],
-    'F.4.c' => [6.0, 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'diger', ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], null],
-    'F.4.d' => [3.0, 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'diger', ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], null],
+    // Kaynak F.1.1 (ULUSLARARASI kongre) ile F.1.2 (ULUSAL) bloklarını ayrı
+    // puanlıyor: başkanlık 10/6 · düzenleme kurulu üyeliği 5/3 · bilim-danışma
+    // kurulu üyeliği 1/1. `Düzenleme/Bilim Kurulu Üyeliği` etiketi ikisini
+    // birden taşıdığı için her kapsamda 1. Önce başkanlık 6/6, üyelik 3/3
+    // yazılmıştı: hem kapsam çökmüştü hem de üyelik bilim kurulu satırını
+    // atlayıp fazla sayıyordu.
+    'F.4.c' => [10.0, 'Uluslararası bilimsel toplantı düzenleme kurulu başkanlığı', 'diger', ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], null],
+    'F.4.c.2' => [6.0, 'Ulusal bilimsel toplantı düzenleme kurulu başkanlığı', 'diger', ['Toplantı Düzenleme Başkanlığı (Ulusal)'], null],
+    'F.4.d' => [1.0, 'Uluslararası bilimsel toplantı düzenleme, bilim ya da danışma kurulu üyeliği', 'diger', ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], null],
+    'F.4.d.2' => [1.0, 'Ulusal bilimsel toplantı düzenleme, bilim ya da danışma kurulu üyeliği', 'diger', ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], null],
 
     // ══ G EĞİTİM-ÖĞRETİM ══ (profesörlük tavanı 20)
     'G.1.1.a' => [5.0, 'Doktora veya sanatta yeterlik tezi danışmanlığı (yıl başına)', 'tez_danismanligi', ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], null, ['danisman']],

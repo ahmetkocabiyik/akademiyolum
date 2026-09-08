@@ -176,7 +176,11 @@ return [
         '12.6.o' => ['baslik' => 'Eser aranje etmek, derlemek veya notaya almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Orkestrasyon/Transkripsiyon', 'Eğitim Müziği Düzenlemesi'], 'puan' => 15],
         '12.7.a' => ['baslik' => 'Uluslararası alanda film, belgesel veya deneysel film', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Belgesel/Kısa Film (Uluslararası)', 'Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)', 'Yönetmenlik (Sahne/Ekran)'], 'puan' => 40],
         '12.7.b' => ['baslik' => 'Ulusal alanda film, belgesel veya deneysel film', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Belgesel/Kısa Film (Ulusal)', 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)'], 'puan' => 20],
-        '3.4.a' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 6],
+        // Kaynak 3.3/a (ULUSLARARASI konferans/sempozyum düzenleme kurulu
+        // başkanlığı / genel koordinatörlük) 20, 3.4/a (ULUSAL) 15 diyor;
+        // iki kapsam tek satırda 6 puanla birleşmişti.
+        '3.3.a' => ['baslik' => 'Uluslararası bilimsel toplantı düzenleme kurulu başkanlığı ya da genel koordinatörlük', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 20],
+        '3.4.a' => ['baslik' => 'Ulusal bilimsel toplantı düzenleme kurulu başkanlığı ya da genel koordinatörlük', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 15],
         '3.4.b' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
         // Kaynak 3.3.c (uluslararası konferansta bilim kurulu üyeliği /
         // oturum başkanlığı) 5, 3.4.c (ULUSAL) 2 diyor; kurs-yaz okulu

@@ -133,8 +133,13 @@ return [
 
         // ══ D — EĞİTİM-ÖĞRETİM (ders kalemleri) ══
         'D1' => ['baslik' => 'Verilen ders (dönem ve ders başına)', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders', 'Lisans/Önlisans Ders', 'Yabancı Dilde Ders', 'Değişim Programı Dersi'], 'puan' => 2],
-        'E4.a' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 8],
-        'E4.c' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 4],
+        'E4.a' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 8],
+        // Kaynak E1.a uluslararası kongre 15 · E2.a uluslararası çalıştay 10 · E3.a ulusal kongre 10 · E4.a ULUSAL çalıştay 8 diyor; her etiket kendi kapsamının en düşüğünü alır.
+        'E4.a-bsk-u' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 10],
+        'E4.a-bsk-n' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 8],
+        // Kurul üyeliği kaynakta iki bende dağılmış: E*.c düzenleme kurulu (8/5/5/4) ve E*.ç bilim kurulu (3/2/2/2). Etiket ikisini birden taşıdığı için uluslararası min(8,5,3,2)=2, ulusal min(5,4,2,2)=2.
+        'E4.c-kur-u' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 2],
+        'E4.c-kur-n' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
         // `Davetli Konuşmacı` A12.b'de (uluslararası özet/poster bildiri, 8)
         // duruyordu; oysa kaynağın davetli satırları E bölümünde ve düzenleme
         // kurulu üyeliğiyle AYNI bende bağlı: E1.c uluslararası kongre 8 ·
