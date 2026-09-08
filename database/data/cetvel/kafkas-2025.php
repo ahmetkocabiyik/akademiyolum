@@ -402,6 +402,12 @@ $tezAynalari = fn (array $p, int $ulusalDiger): array => [
     'K-d-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, ulusal yayınevi kitabında bölüm', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => $p['K-d']],
     'KONGRE-BSK' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
     'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
+    // Kaynağın 13. maddesi yalnız ULUSLARARASI organizasyonu yazıyor ama
+    // altındaki not "Ulusal organizasyonlarda ilgili puanın YARISI alınır"
+    // diyor; ulusal etiketlerin karşılığı hiç yoktu. 15/2 → 7, 5/2 → 2
+    // (§0 aşağı yuvarlama).
+    'KONGRE-BSK-ULUSAL' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 7],
+    'KONGRE-UYE-ULUSAL' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
 ];
 
 $TAVANLAR = ['K' => 30, 'AT' => 30, 'TD' => 10, 'BAP' => 20, 'BT' => 20, 'ED' => 4,

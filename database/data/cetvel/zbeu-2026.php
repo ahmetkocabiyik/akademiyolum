@@ -152,7 +152,12 @@ $maddeler = [
     '14.a' => ['baslik' => 'Hakemli dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
 
     // ══ 15. ETKİNLİK ══
-    '15.a' => ['baslik' => 'Bilimsel ve sanatsal kongre, sergi, konser ve etkinliklerin düzenleme ya da bilim kurullarında görev almak; oturum başkanlığı, seminer, değişim ve iş birliği faaliyetleri', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
+    '15.a' => ['baslik' => 'Bilimsel ve sanatsal kongre, sergi, konser ve etkinliklerin düzenleme ya da bilim kurullarında görev almak; oturum başkanlığı, seminer, değişim ve iş birliği faaliyetleri', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 1],
+    // Kaynak 15/a uluslararası düzenleme kurulu başkanlığı 50 · 15/d ULUSAL 20 · 15/b-c uluslararası kurul üyeliği 15/10 → 10 · 15/e-f ULUSAL 5/2 → 2 diyor.
+    '15.a-bsk-u' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 50],
+    '15.a-bsk-n' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 20],
+    '15.a-kur-u' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 10],
+    '15.a-kur-n' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
     // Kaynak 15/c uluslararası kongrede bilim kurulu üyeliği veya oturum başkanlığı 10, 15/f ULUSAL kongrede 2 diyor.
     '15.a-otr' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 10],
     '15.a-otr-ulusal' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantıda oturum başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 2],

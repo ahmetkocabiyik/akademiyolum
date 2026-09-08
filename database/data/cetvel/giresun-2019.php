@@ -146,7 +146,14 @@ return [
         'N.2.b' => ['baslik' => 'Faydalı model veya ürün tescili', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 50],
         'M.10' => ['baslik' => 'Uluslararası bilimsel ya da mesleki kuruluşun yönetiminde, kurullarında veya komisyonlarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 25],
         'M.11' => ['baslik' => 'Bu kuruluşların Türkiye şubelerinin yönetiminde, kurullarında veya komisyonlarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Ulusal)'], 'puan' => 20],
-        'M.4.b' => ['baslik' => 'Uluslararası akademik organizasyonda düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 10],
+        // M.4 uluslararası akademik organizasyon (a yönetici 40 · b düzenleme/
+        // bilim kurulu üyeliği 30), M.5 ULUSAL (a 20 · b 10). Cetvelde yalnız
+        // M.4.b vardı ve M.5.b'nin 10'unu taşıyordu; başkanlık etiketlerinin
+        // ve ulusal kurul etiketinin karşılığı hiç yoktu.
+        'M.4.a' => ['baslik' => 'Uluslararası akademik organizasyonda yöneticilik', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 40],
+        'M.4.b' => ['baslik' => 'Uluslararası akademik organizasyonda düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 30],
+        'M.5.a' => ['baslik' => 'Ulusal akademik organizasyonda yöneticilik', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 20],
+        'M.5.b' => ['baslik' => 'Ulusal akademik organizasyonda düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 10],
     ],
 
     'gruplar' => [

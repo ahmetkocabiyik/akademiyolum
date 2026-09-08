@@ -445,6 +445,10 @@ $govde = function (int $bildiri, int $ulusalKitap, int $egitim, bool $gorselEtki
             '13.11' => ['baslik' => 'Uluslararası sanat etkinliği düzenleme kurulu başkanlığı', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Festival Koordinatörlüğü (Uluslararası)'], 'puan' => 20],
             '13.11k' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 20],
             '13.13' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme kurulu görevi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Festival Koordinatörlüğü (Ulusal)'], 'puan' => 10],
+            // 13.12 (ULUSLARARASI bildiri kitaplı bilimsel toplantı düzenleme
+            // kurulu üyeliği, 15) girilmemişti; uluslararası kurul üyeliği
+            // etiketinin karşılığı yoktu, yalnız 13.13'ün ulusal 10'u vardı.
+            '13.12k' => ['baslik' => 'Uluslararası bildiri kitaplı bilimsel toplantı düzenleme kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 15],
             '13.13k' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme kurulu görevi (kurul görevi)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 10],
             '13.16' => ['baslik' => 'Bilimsel faaliyette alanıyla ilgili açılış konuşması', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
             '13.21' => ['baslik' => 'TÜBİTAK 2209, 2241, 2242, BAP ya da öğrenci topluluğu projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 8],

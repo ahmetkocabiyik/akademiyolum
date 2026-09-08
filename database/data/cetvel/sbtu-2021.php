@@ -149,7 +149,10 @@ $maddeler = [
     // 20'si yerine B3.8'in 10'unu alır.
     'B3.2k' => ['baslik' => 'Uluslararası hakemli bir konferansta oturum başkanlığı yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Uluslararası)'], 'puan' => 20],
     'B3.8k' => ['baslik' => 'Ulusal hakemli bir konferansta oturum başkanlığı yapmak', 'kategori' => 'diger', 'kaynaklar' => ['Oturum Başkanlığı (Ulusal)'], 'puan' => 10],
-    'B3.12' => ['baslik' => 'Hakemli bir konferansın düzenleme ya da bilim kurulunda görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
+    'B3.12' => ['baslik' => 'Hakemli bir konferansın düzenleme ya da bilim kurulunda görev almak', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+    // Kaynak B3.3/B3.6 uluslararası düzenleme-bilim kurulu 15/5 → 5, B3.11/B3.12 ULUSAL 5/3 → 3 diyor.
+    'B3.12-kur-u' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
+    'B3.12-kur-n' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
     'B3.13' => ['baslik' => 'Uzmanlık alanınızla ilgili sanayiye danışmanlık hizmeti vermek ya da bilirkişi/teknik rapor hazırlamak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Kamu/STK Danışmanlığı', 'Topluma Hizmet Projesi', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 3],
 
     // ══ C1. ÜYELİK VE HAKEMLİK ══

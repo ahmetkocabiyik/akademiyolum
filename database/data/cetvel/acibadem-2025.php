@@ -168,7 +168,12 @@ $maddeler = [
     // ══ 8. KONGRE FAALİYETLERİ ══
     '8.A.5' => ['baslik' => 'Uluslararası kongrede indekslenmemiş sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin'], 'puan' => 5],
     '8.A.8' => ['baslik' => 'Ulusal ya da uluslararası kongrede davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
-    '8.A.10' => ['baslik' => 'Kongre başkanlığı, düzenleme kurulu ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
+    '8.A.10' => ['baslik' => 'Kongre başkanlığı, düzenleme kurulu ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+    // Kaynak dört rungu ayrı yazıyor: 8.A.1 uluslararası kongre başkanlığı 10 · 8.A.7 ULUSAL 8 · 8.A.3/8.A.4 uluslararası düzenleme-bilim kurulu 7/5 → 5 · 8.A.9/8.A.10 ULUSAL 4/3 → 3. Dördü de tek satırda 3 puanla duruyordu.
+    '8.A.10-bsk-u' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 10],
+    '8.A.10-bsk-n' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 8],
+    '8.A.10-kur-u' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
+    '8.A.10-kur-n' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 3],
 ];
 
 $gruplar = [

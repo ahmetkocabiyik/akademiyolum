@@ -213,7 +213,12 @@ return [
         '12d-12e' => ['baslik' => 'Bilim, sanat ve estetik (BSE) ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon', 'Burs'], 'puan' => 10],
 
         // ══ 13. BİLİMSEL, SANATSAL VE TASARIMA YÖNELİK ETKİNLİK (tavan 40) ══
-        '13a-13ç' => ['baslik' => 'Bilimsel etkinlikte başkanlık, yarışma jürisi üyeliği ya da düzenleme, yürütme veya bilim kurulunda görev', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
+        '13a-13ç' => ['baslik' => 'Bilimsel etkinlikte başkanlık, yarışma jürisi üyeliği ya da düzenleme, yürütme veya bilim kurulunda görev', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+        // Kaynak 13a uluslararası başkanlık 6 · 13c ULUSAL 3 · 13b uluslararası kurul 4 · 13ç ULUSAL 2 diyor; dördü de tek satırda 2 puanla duruyordu.
+        '13a-13ç-bsk-u' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 6],
+        '13a-13ç-bsk-n' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 3],
+        '13a-13ç-kur-u' => ['baslik' => 'Uluslararası bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 4],
+        '13a-13ç-kur-n' => ['baslik' => 'Ulusal bilimsel ya da sanatsal toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
         '13d-13e' => ['baslik' => 'Bilimsel etkinlikte davetli konuşmacı ya da panelist olarak görev almak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
 
         // ══ 15. İDARİ GÖREVLER (grup tavanı 50, yıl çarpanı uygulanamadı) ══

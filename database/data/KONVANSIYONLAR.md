@@ -2837,9 +2837,24 @@ hâlde kapsam kademesi çökmüştü.
   Sakarya 10 yerine 8, İstanbul Zaim 10 yerine 5) — bu §0 ihlalidir.
 
 **Detektör kaynağa bakmadan çalışır:** iki kapsam etiketi aynı puanı
-alıyorsa işaret ver. 37 cetvelde 28 işaret çıktı, 20'si gerçek hataydı.
-Kalan dokuzda kaynak gerçekten tek satır yazıyor ("uluslararası **ya da**
-ulusal … oturum başkanlığı"), yani eşitlik doğru.
+alıyorsa işaret ver. Oturum başkanlığında 37 cetvelde 28 işaret çıktı,
+20'si gerçek hataydı; kardeş çiftlerde (düzenleme başkanlığı ve kurul
+üyeliği) 96 cetvelde 83 işaret çıktı, 11'i gerçek hataydı. Kalanlarda
+kaynak gerçekten tek satır yazıyor ("uluslararası **ya da** ulusal …"),
+yani eşitlik doğru.
+
+**İşaret oranı düşük ama tarama yine de en verimlisi**, çünkü sıfır maliyetli
+(kaynak okumadan çalışıyor) ve elediği 83 adayın hangilerine kaynaktan
+bakılacağını ikinci bir taramayla süzebiliyorsun: kaynakta hem `uluslararası`
+hem `ulusal` kapsam sözcüğü taşıyan düzenleme/bilim kurulu satırlarının EN
+DÜŞÜKLERİ birbirinden farklıysa aday gerçektir. İkinci süzgeç 83'ü 10'a
+indirdi ve onunun tamamı gerçek çıktı.
+
+**Üç TEK yönlü biçim daha var** ve ikisi bu turda bulundu: etiketin bir
+kapsamı hiç girilmemiş (OMÜ'nün uluslararası kurul üyeliği, Giresun'un
+başkanlık ve ulusal kurul etiketleri), ya da kaynak yalnız uluslararası
+satırı yazıp "ulusal organizasyonlarda ilgili puanın YARISI alınır" diyor ve
+o kural hiç uygulanmamış (Kafkas).
 
 **İKİ EKSEN BİRDEN: ROL ve KAPSAM.** Bitlis, Bolu AİBÜ ve Erzurum Teknik'te
 kaynak hem rolü (başkanlık · kurul üyeliği · oturum başkanlığı) hem kapsamı

@@ -1052,3 +1052,20 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
 - **Moderatörlük** (Sakarya 14.2d/14.3d oturum başkanlığıyla aynı satırda,
   Atatürk 02.12.04/02.13.02 ayrı satırda 2/1) ayrı etiket değil; Sakarya'da
   ortak satır olduğu için sayılıyor, Atatürk'te sayılmıyor.
+
+## Düzenleme kurulu üyeliği taraması (08.09.2026) — girilemeyen kalemler
+
+- **Sekreterlik / genel sekreterlik** (Kafkas ve Selçuk d bendi 10, Bitlis
+  F.x.2 15/10/10/8, Atatürk 07.04-07.07 x.03) sözlükte ayrı etiket değil;
+  `Düzenleme/Bilim Kurulu Üyeliği`ne bağlanmadı çünkü kaynak onu üyelikten
+  AYIRIP daha yüksek puanlıyor — bağlansaydı fazla saydırırdı.
+- **Başkan yardımcılığı / eş başkanlık** (Selçuk b 8, Atatürk x.02 8/3)
+  aynı sebeple girilmedi.
+- **Bartın I.11** ("ÜNİVERSİTE İÇİ düzenlenen etkinliklerde düzenleme
+  kurulunda yer almak", 5) kaynağın tek kurul üyeliği satırı; uluslararası
+  ve ulusal kurul üyeliği için ayrı satır yok, ikisi de bu satırdan sayılıyor.
+- **Gümüşhane B9** ("Ulusal/Uluslararası etkinliklerde düzenleme kurulunda
+  yer almak", 1) kapsamı kaynağın kendisi birleştiriyor; iki etiket de 1.
+- **Selçuk'un 13. maddesi** yalnız ULUSLARARASI organizasyonu yazıyor ve
+  Kafkas'taki gibi bir "ulusalda yarısı" notu YOK; ulusal etiketler o
+  cetvelde karşılıksız kalıyor ve doğrusu budur.

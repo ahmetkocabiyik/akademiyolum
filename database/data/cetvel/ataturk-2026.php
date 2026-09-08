@@ -214,8 +214,15 @@ return [
         '00.01.13' => ['baslik' => 'Anabilim/bilim dalı başkanı', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Anabilim Dalı Başkanı / Koordinatörlük'], 'puan' => 5],
         '03.10.03' => ['baslik' => 'Uluslararası spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 15],
         '03.14.05' => ['baslik' => 'Ulusal spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 4],
-        '07.05.01' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)', 'Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 15],
-        '07.05.02' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
+        // Kaynak dört blok yazıyor: 07.04 uluslararası kongre (başkan 15 ·
+        // düzenleme kurulu üyeliği 5 · bilim/danışma kurulu üyeliği 2), 07.05
+        // uluslararası çalıştay (15 · 5), 07.06 ULUSAL kongre (6 · 2 · 2),
+        // 07.07 ULUSAL çalıştay (6 · 2). Her etiket kendi kapsamının en
+        // düşüğünü alır; önce başkanlık 15/15, üyelik 5/5 yazılmıştı.
+        '07.05.01' => ['baslik' => 'Uluslararası bilimsel toplantı ya da çalıştay düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 15],
+        '07.06.01' => ['baslik' => 'Ulusal bilimsel toplantı ya da çalıştay düzenleme kurulu başkanlığı', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 6],
+        '07.04.04' => ['baslik' => 'Uluslararası bilimsel toplantı düzenleme, bilim ya da danışma kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 2],
+        '07.06.04' => ['baslik' => 'Ulusal bilimsel toplantı düzenleme, bilim ya da danışma kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 2],
 
         // 00.01.05/07 (dekan 30 ↔ enstitü müdürü 25) ile 00.01.06/08 (dekan yrd.
         // 20 ↔ müdür yrd. 15) sözlükte tek etiket. DÜŞÜK değer alındı: yüksek

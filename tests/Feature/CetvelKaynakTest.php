@@ -786,7 +786,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
 
         // Toplam baraj A-L; M (ödüller, idari görevler) ile N (patent)
         // kaynağın kendi ifadesiyle barajın dışında.
-        'giresun-2019: 8/59',
+        'giresun-2019: 11/62',
 
         // EK-A/3: "1., 2., 3., 4. ve 7. maddelerden en az 50 puan." Proje,
         // tez danışmanlığı ve ders bölümleri barajın dışında; 40/80/120/160
@@ -812,15 +812,15 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
         // İletişim Fakültesine özgü olduğu için yalnız `b` (sosyal)
         // varyantında var; `a`, `bx` ve `c` varyantlarında satırları hiç
         // yazılmıyor, o yüzden onların toplamı 101 değil 97.
-        'omu-2025-a-doc: 17/99',
-        'omu-2025-a-dr: 17/99',
-        'omu-2025-a-prof: 17/99',
-        'omu-2025-b-doc: 17/103',
-        'omu-2025-b-dr: 17/103',
-        'omu-2025-b-prof: 17/103',
-        'omu-2025-bx-doc: 17/99',
-        'omu-2025-bx-dr: 17/99',
-        'omu-2025-bx-prof: 17/99',
+        'omu-2025-a-doc: 17/100',
+        'omu-2025-a-dr: 17/100',
+        'omu-2025-a-prof: 17/100',
+        'omu-2025-b-doc: 17/104',
+        'omu-2025-b-dr: 17/104',
+        'omu-2025-b-prof: 17/104',
+        'omu-2025-bx-doc: 17/100',
+        'omu-2025-bx-dr: 17/100',
+        'omu-2025-bx-prof: 17/100',
 
         // Bölüm toplamı "1.1; 1.2; 1.3; 1.4; 1.6" diye sınırlı; 1.5
         // (hakemlik) ve 1.7 (atıf) ayrı raporlanıyor.
@@ -1657,3 +1657,85 @@ test('Erzurum Teknik toplantı ailesinde rol ve kapsam birlikte duruyor', functi
         ->and($puan('Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'))->toBe(20)
         ->and($puan('Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'))->toBe(10);
 });
+
+/**
+ * TOPLANTI ORGANİZASYONU AİLESİNİN ÜÇ RUNGU ile İKİ KAPSAMI — altı etiket.
+ * Oturum başkanlığı turunun (08.09.2026) devamı: aynı çökme başkanlık ve
+ * kurul üyeliği etiketlerinde de vardı. 96 cetvelin 83'ünde iki kapsam
+ * etiketi tek satırdaydı; kaynağa karşı okununca on birinde gerçek hata
+ * çıktı.
+ *
+ * Değerler 08.09.2026'da kaynak PDF'lerinden okundu.
+ */
+test('toplantı düzenleme ailesinde kapsam kademesi ayrışıyor', function (string $cetvel, array $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $kodlar = $katalog->coz(['*']);
+    $gercek = [];
+    foreach (array_keys($beklenen) as $etiket) {
+        $gercek[$etiket] = $katalog->puan(
+            new Faaliyet([
+                'kategori' => Kategori::Diger, 'tur' => 'Test', 'baslik' => 'Test',
+                'kaynak' => $etiket, 'rol' => null, 'durum' => 'onaylandi',
+            ]),
+            $kodlar,
+        );
+    }
+
+    expect($gercek)->toBe($beklenen);
+})->with([
+    // Dört rung da tek satırda birleşmişti:
+    ['acibadem-2025-atif6', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 10, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 8,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 5, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 3,
+    ]],
+    ['esogu-2023', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 6, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 3,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 4, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 2,
+    ]],
+    ['konya-gida-tarim-2024', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 20, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 10,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 10, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 5,
+    ]],
+    ['ufuk-2025', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 5, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 3,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 4, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 2,
+    ]],
+    ['ksu-2023', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 12, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 3,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 3, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 1,
+    ]],
+    // Atatürk: dört blok (uluslararası/ulusal × kongre/çalıştay); başkanlık
+    // 15/6, kurul üyeliği 2/2. Önce 15/15 ve 5/5 yazılmıştı.
+    ['ataturk-2026', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 15, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 6,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 2, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 2,
+    ]],
+    // Yalnız kurul üyeliği çifti birleşmişti:
+    ['sbtu-2021', [
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 5, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 3,
+    ]],
+    ['zbeu-2026', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 50, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 20,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 10, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 2,
+    ]],
+    // Giresun: tek satır vardı ve ULUSAL değeri (10) uluslararası etikete
+    // yazılmıştı; başkanlık ile ulusal kurul etiketinin karşılığı yoktu.
+    ['giresun-2019', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 40, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 20,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 30, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 10,
+    ]],
+    // OMÜ 13.12 (uluslararası kurul üyeliği 15) hiç girilmemişti; yalnız
+    // 13.13'ün ulusal 10'u vardı.
+    ['omu-2025-a-doc', [
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 15, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 10,
+    ]],
+    // Kafkas: kaynak yalnız uluslararası satırları yazıp "ulusal
+    // organizasyonlarda ilgili puanın YARISI alınır" diyor (15→7, 5→2);
+    // ulusal etiketlerin karşılığı hiç yoktu.
+    ['kafkas-2025-fen', [
+        'Toplantı Düzenleme Başkanlığı (Uluslararası)' => 15, 'Toplantı Düzenleme Başkanlığı (Ulusal)' => 7,
+        'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 5, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 2,
+    ]],
+]);
