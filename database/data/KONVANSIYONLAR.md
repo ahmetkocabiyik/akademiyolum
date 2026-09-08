@@ -1891,6 +1891,23 @@ Docblock, dosyanın en değerli parçası. Şunları içermeli:
 - Yorum gerektiren her karar ("yüzde sabit puana çevrildi", "kesirli değer aşağı
   yuvarlandı", "yüksek olan yazıldı çünkü…").
 
+#### `Kaynak: pdf/…` satırı ARTIK ÜRÜN VERİSİ
+
+Docblock'un ilk satırlarındaki `Kaynak: pdf/<dosya adı>.pdf` yalnız bizim
+denetim izimiz değil: `SartDeposu::kaynakPdf()` onu ayrıştırıyor ve aday
+analiz panelinde **analizin dayandığı belgeye** o adla ulaşıyor
+(`yonerge-analizi.kaynak` rotası, `pdf/` klasörü public/ dışında).
+
+Bu yüzden:
+
+- Her yönerge dosyasında **tam olarak bir** `Kaynak: pdf/…` satırı olmalı ve
+  adı `pdf/` altındaki gerçek dosyayla birebir eşleşmeli. `YonergeKaynakTest`
+  ikisini de dondurdu.
+- Ad 80 sütuna sığmıyorsa alt satıra sarabilirsin — ayrıştırıcı satır
+  başlarındaki ` * ` süsünü atıp metni düzleştiriyor. Ama araya `(15 sayfa,
+  Senato …)` gibi bir not KOYMA: dosya adı `.pdf` ile bitip orada durmalı.
+- Dosyayı yeniden adlandırırsan docblock'u da güncelle; testler kırılır.
+
 ### `notlar` VE `madde` ATIFLARI KAYNAKLA DOĞRULANIR
 
 Aday metninde kod YASAK, `notlar` ve düğümlerin `madde` alanında ise

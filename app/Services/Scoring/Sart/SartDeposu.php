@@ -50,15 +50,25 @@ class SartDeposu
     private ?array $cetveller = null;
 
     /**
+     * Üniversite adı → yönergenin okunduğu PDF'in `pdf/` altındaki adı.
+     * {@see esikler()} dosyaları okurken doldurur.
+     *
+     * @var array<string, string>|null
+     */
+    private ?array $kaynakPdfleri = null;
+
+    /**
      * Veri doğrudan dizi olarak da verilebilir; testler üretim verisine bağlı
      * kalmadan kendi yönergesini tanımlayabilsin diye.
      *
      * @param  list<Esik>|null  $esikVerisi
      * @param  array<string, Cetvel>|null  $cetvelVerisi
+     * @param  array<string, string>|null  $kaynakPdfVerisi  üniversite adı → PDF dosya adı
      */
     public function __construct(
         private readonly ?array $esikVerisi = null,
         private readonly ?array $cetvelVerisi = null,
+        private readonly ?array $kaynakPdfVerisi = null,
     ) {}
 
     /**
@@ -87,12 +97,18 @@ class SartDeposu
         }
 
         $esikler = [];
+        $this->kaynakPdfleri = [];
 
         foreach ($this->dosyalar(database_path('data/yonerge')) as $dosya) {
             /** @var list<array<string, mixed>> $satirlar */
             $satirlar = self::dosyayiOku($dosya);
+            $kaynakPdf = self::kaynakPdfAdi($dosya);
 
             foreach ($satirlar as $satir) {
+                if ($kaynakPdf !== null) {
+                    $this->kaynakPdfleri[(string) $satir['universite']] = $kaynakPdf;
+                }
+
                 foreach ((array) $satir['alan'] as $alan) {
                     /** @var Esik $kayit */
                     $kayit = array_merge(
@@ -166,6 +182,48 @@ class SartDeposu
     public function katalog(string $anahtar): ?MaddeKatalogu
     {
         return $this->cetveller()[$anahtar] ?? null;
+    }
+
+    /**
+     * Yönergenin çıkarıldığı kaynak belge (`pdf/` altındaki dosya adı).
+     *
+     * Kaynağın adı veri satırlarında değil, dosyanın başlık docblock'unda
+     * duruyor ve tek doğru kopya orası: her yönerge dosyası TEK üniversiteyi
+     * anlatıyor ve `Kaynak:` satırı yönerge girilirken elle yazılıyor. Ayrı
+     * bir eşleme dosyası tutmak ikinci bir doğru üretir, sessizce kayar.
+     */
+    public function kaynakPdf(string $universite): ?string
+    {
+        if ($this->kaynakPdfVerisi !== null) {
+            return $this->kaynakPdfVerisi[$universite] ?? null;
+        }
+
+        // Eşleme dosyalar okunurken doluyor; henüz okunmadıysa tetikler.
+        $this->esikler();
+
+        return $this->kaynakPdfleri[$universite] ?? null;
+    }
+
+    /**
+     * Dosyanın başlık docblock'undaki `Kaynak: pdf/…` satırı.
+     *
+     * Uzun dosya adları docblock'ta bir alt satıra sarılıyor ("… Bilim ve
+     * Teknoloji\n * Üniversitesi Kriter Değişikliği.pdf"), o yüzden satır
+     * başlarındaki ` * ` süsü kaldırılıp metin düzleştirilerek aranır.
+     */
+    private static function kaynakPdfAdi(string $dosya): ?string
+    {
+        // Docblock dosyanın ilk satırlarında; tamamını okumaya gerek yok.
+        // Kesme çok baytlı bir karakterin ortasına düşebildiği için desenler
+        // `u` bayrağı ALMAZ: geçersiz UTF-8'de `preg_*` null döner ve eşleşme
+        // sessizce kaybolur. Aranan yapı zaten saf ASCII, yakalanan ad ise
+        // olduğu gibi geri veriliyor.
+        $baslik = (string) file_get_contents($dosya, length: 4096);
+        $duz = (string) preg_replace('/\R\s*\*\s?/', ' ', $baslik);
+
+        return preg_match('#Kaynak: pdf/(.+?\.pdf)#', $duz, $eslesme) === 1
+            ? $eslesme[1]
+            : null;
     }
 
     /**

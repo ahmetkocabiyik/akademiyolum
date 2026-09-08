@@ -564,8 +564,31 @@
                 </div>
 
                 {{-- Kaynak belge: analiz bu yönergeden çıkarıldı, ayrıntı için
-                     adayın orijinaline bakabilmesi gerekir. Bağlantı YÖK'ün
-                     resmi kopyasına gider (personel.yok.gov.tr). --}}
+                     adayın orijinaline bakabilmesi gerekir.
+
+                     Bağlantı bizim okuduğumuz KOPYAYA gider ($d['kaynak_pdf'],
+                     `pdf/` altında). YÖK'ün sayfasındaki dosya güncellenmiş
+                     olabilir; aday cetveldeki bir satırı sorgularken tam olarak
+                     hangi metinden çıkarıldığını görmeli. Üniversitenin ayrıca
+                     resmi bir bağlantısı varsa o da altına eklenir. --}}
+                @if ($d['kaynak_pdf'])
+                    {{-- Rota anahtarı EŞİĞİN üniversite adı, kartınki değil:
+                         eşleme de o adla kuruluyor ({@see SartDeposu::kaynakPdf}). --}}
+                    <a href="{{ route('yonerge-analizi.kaynak', $esik['universite']) }}" target="_blank" rel="noopener"
+                        class="flex items-center gap-3 rounded-xl border border-line bg-canvas p-3 transition hover:border-brand hover:bg-brand-light">
+                        <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-cat-red-light text-cat-red">
+                            <flux:icon name="document-text" variant="solid" class="size-5" />
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <div class="text-xs font-semibold text-ink">Analizin dayandığı yönerge (PDF)</div>
+                            <div class="truncate text-[11px] text-ink-subtle" title="{{ $d['kaynak_pdf'] }}">
+                                {{ $d['kaynak_pdf'] }}
+                            </div>
+                        </div>
+                        <flux:icon name="arrow-top-right-on-square" class="size-4 shrink-0 text-ink-subtle" />
+                    </a>
+                @endif
+
                 @if ($uni->yonerge_url)
                     <a href="{{ $uni->yonerge_url }}" target="_blank" rel="noopener"
                         class="flex items-center gap-3 rounded-xl border border-line bg-canvas p-3 transition hover:border-brand hover:bg-brand-light">
@@ -573,7 +596,7 @@
                             <flux:icon name="document-text" variant="solid" class="size-5" />
                         </div>
                         <div class="min-w-0 flex-1">
-                            <div class="text-xs font-semibold text-ink">Resmi yönerge (PDF)</div>
+                            <div class="text-xs font-semibold text-ink">Resmi yönerge sayfası</div>
                             <div class="truncate text-[11px] text-ink-subtle">
                                 {{ $uni->ad }} · atama ve yükseltme kriterleri
                             </div>

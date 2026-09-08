@@ -360,7 +360,8 @@ class YonergeAnalizi extends Component
 
     /**
      * Seçili üniversitenin detayı: sonuç satırının üzerine o yönergenin KENDİ
-     * cetveline göre kategori bazlı puan dağılımı eklenir.
+     * cetveline göre kategori bazlı puan dağılımı ve analizin çıkarıldığı
+     * kaynak belgenin adı eklenir.
      *
      * @return array<string, mixed>|null
      */
@@ -382,6 +383,7 @@ class YonergeAnalizi extends Component
 
         return $sonuc + [
             'dagilim' => $katalog?->kategoriDagilimi($this->faaliyetler()) ?? [],
+            'kaynak_pdf' => $this->depo()->kaynakPdf($sonuc['esik']['universite']),
         ];
     }
 

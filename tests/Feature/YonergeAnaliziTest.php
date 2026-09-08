@@ -70,10 +70,11 @@ function testEsik(string $universite, int $baraj, string $kadro = 'dr_ogr_uyesi'
  * Verilen eşiklerle depo bağlar (üretim veri dosyalarını devre dışı bırakır).
  *
  * @param  list<array<string, mixed>>  $esikler
+ * @param  array<string, string>|null  $kaynakPdfleri  üniversite adı → PDF dosya adı
  */
-function depoBagla(array $esikler): void
+function depoBagla(array $esikler, ?array $kaynakPdfleri = null): void
 {
-    app()->instance(SartDeposu::class, new SartDeposu($esikler, testCetvelleri()));
+    app()->instance(SartDeposu::class, new SartDeposu($esikler, testCetvelleri(), $kaynakPdfleri));
 }
 
 beforeEach(function () {
@@ -310,6 +311,28 @@ test('karta tıklayınca detay modalı açılır ve dağılımı gösterir', fun
         ->and($detay['dagilim']['kitap'])->toBe(['puan' => 20, 'adet' => 1]);
 });
 
+test('detay paneli analizin dayandığı kaynak PDF\'e bağlantı verir', function () {
+    $dosya = '17536987652.ornek yonerge.pdf';
+    depoBagla($this->esikler, ['Ankara Üniversitesi' => $dosya]);
+
+    $uniId = Universite::query()->where('ad', 'Ankara Üniversitesi')->value('id');
+
+    Livewire::test(YonergeAnalizi::class)
+        ->call('detayAc', $uniId)
+        ->assertSee($dosya)
+        ->assertSee(route('yonerge-analizi.kaynak', 'Ankara Üniversitesi'), escape: false);
+});
+
+test('kaynak PDF eşlemesi olmayan üniversitede bağlantı hiç çıkmaz', function () {
+    // Üretim dışı/enjekte edilmiş veride eşleme boş; panel bozulmadan çalışmalı.
+    $uniId = Universite::query()->where('ad', 'Ankara Üniversitesi')->value('id');
+
+    $bilesen = Livewire::test(YonergeAnalizi::class)->call('detayAc', $uniId);
+
+    expect($bilesen->instance()->detay()['kaynak_pdf'])->toBeNull();
+    $bilesen->assertDontSee('Analizin dayandığı yönerge');
+});
+
 test('detay paneli kapanınca içerik korunur (kapanış animasyonu titremesin)', function () {
     $uniId = collect(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())[0]['universite']->id;
 
@@ -456,7 +479,7 @@ test('detay panelinde resmi yönerge PDF bağlantısı gösterilir', function ()
 
     Livewire::test(YonergeAnalizi::class)
         ->call('detayAc', $uni->id)
-        ->assertSee('Resmi yönerge (PDF)')
+        ->assertSee('Resmi yönerge sayfası')
         ->assertSeeHtml('href="https://personel.yok.gov.tr/documentFiles/ornek.pdf"')
         // Yeni sekmede açılmalı: aday analizi kaybetmemeli.
         ->assertSeeHtml('target="_blank"');
@@ -468,7 +491,7 @@ test('yönerge bağlantısı olmayan üniversitede PDF kutusu çıkmaz', functio
 
     Livewire::test(YonergeAnalizi::class)
         ->call('detayAc', $uni->id)
-        ->assertDontSee('Resmi yönerge (PDF)');
+        ->assertDontSee('Resmi yönerge sayfası');
 });
 
 test('detay panelinde ham yönerge notu değil aday notu gösterilir', function () {

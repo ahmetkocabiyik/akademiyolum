@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\YonergeKaynakController;
 use App\Livewire\Dashboard;
 use App\Livewire\FaaliyetEkle;
 use App\Livewire\Faaliyetler;
@@ -26,6 +27,11 @@ Route::middleware(['auth', 'verified', 'onboarded'])->group(function () {
     Route::redirect('toplumsal-katki', 'faaliyetler');
 
     Route::livewire('yonerge-analizi', YonergeAnalizi::class)->name('yonerge-analizi');
+
+    // Analizin dayandığı kaynak belge. Yönerge PDF'leri public/ dışında
+    // duruyor; kimliği doğrulanmış adaya bu rota üzerinden akıtılır.
+    Route::get('yonerge-analizi/kaynak/{universite}', YonergeKaynakController::class)
+        ->name('yonerge-analizi.kaynak');
 
     Route::livewire('yz-danisman', YzDanisman::class)->name('yz-danisman');
 
