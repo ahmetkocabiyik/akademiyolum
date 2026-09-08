@@ -1,5 +1,5 @@
 <div>
-    <x-topbar title="Yönerge Analizi" :pill="count($this->sonuclar) . ' üniversite'">
+    <x-topbar title="Yönerge Analizi" :pill="count($this->listelenen) . ' üniversite'">
         <flux:button wire:click="$toggle('karsilastirma')" size="sm" :variant="$karsilastirma ? 'filled' : 'primary'" icon="table-cells">
             {{ $karsilastirma ? 'Kartlara Dön' : 'Üniversite Karşılaştır' }}
         </flux:button>
@@ -82,13 +82,31 @@
 
                 {{-- Özet bar: durum sayaçları + sıralama + görünüm --}}
                 <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 py-2.5">
+                    {{-- Sayaçlar aynı zamanda filtre: bir duruma tıklamak listeyi
+                         o duruma daraltır, aynı sayaca yeniden tıklamak geri alır.
+                         Sayıların KENDİSİ daralmaz — hep tüm dağılımı gösterir,
+                         yoksa "Yetersiz"e tıklayan aday diğerlerini sıfır görürdü.
+                         "Toplam" filtreyi temizleyen sayaç. --}}
                     <div class="flex items-center gap-3">
-                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)'], ['Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)'], ['Yakın', $this->ozet['yakin'], 'var(--color-cat-amber)'], ['Eksik Bilgi', $this->ozet['eksik_bilgi'], 'var(--color-cat-amber)'], ['Yapılabilir', $this->ozet['uygun'], 'var(--color-cat-green)']] as $stat)
+                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)', ''], ['Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)', 'yetersiz'], ['Yakın', $this->ozet['yakin'], 'var(--color-cat-amber)', 'yakin'], ['Eksik Bilgi', $this->ozet['eksik_bilgi'], 'var(--color-cat-amber)', 'eksik_bilgi'], ['Yapılabilir', $this->ozet['uygun'], 'var(--color-cat-green)', 'uygun']] as [$etiket, $sayi, $renk, $durum])
                             @if (! $loop->first)<div class="h-8 w-px bg-line"></div>@endif
-                            <div class="text-center">
-                                <div class="font-serif text-lg font-bold leading-none" style="color: {{ $stat[2] }}">{{ $stat[1] }}</div>
-                                <div class="mt-1 text-[10px] leading-tight text-ink-subtle">{{ $stat[0] }}</div>
-                            </div>
+                            @php $secili = $durumFiltre === $durum; @endphp
+                            <button type="button"
+                                wire:click="{{ $durum === '' ? "\$set('durumFiltre', '')" : "durumSec('{$durum}')" }}"
+                                aria-pressed="{{ $secili ? 'true' : 'false' }}"
+                                aria-label="{{ $durum === '' ? 'Durum filtresini temizle' : $etiket.' olanları göster' }}"
+                                @class([
+                                    'rounded-lg px-2 py-1 text-center transition',
+                                    'bg-canvas ring-1 ring-inset ring-line' => $secili,
+                                    'hover:bg-canvas' => ! $secili,
+                                ])>
+                                <div class="font-serif text-lg font-bold leading-none" style="color: {{ $renk }}">{{ $sayi }}</div>
+                                <div @class([
+                                    'mt-1 text-[10px] leading-tight',
+                                    'font-semibold text-ink' => $secili,
+                                    'text-ink-subtle' => ! $secili,
+                                ])>{{ $etiket }}</div>
+                            </button>
                         @endforeach
                     </div>
 
@@ -173,9 +191,17 @@
                 </flux:callout>
             @endif
 
-            @if (empty($this->sonuclar))
+            @if (empty($this->listelenen))
                     <flux:card class="py-12 text-center">
                         <flux:text>Seçili filtrelere uygun yönerge bulunamadı.</flux:text>
+                        {{-- Durum filtresi sayaçtan tek tıkla açılıyor; kapatma
+                             yolu da elin altında olmalı, yoksa boş ekranda
+                             kalan aday nereye tıklayacağını bilmiyor. --}}
+                        @if ($durumFiltre !== '')
+                            <flux:button wire:click="$set('durumFiltre', '')" size="sm" variant="ghost" class="mt-3">
+                                Durum filtresini kaldır
+                            </flux:button>
+                        @endif
                     </flux:card>
                 @elseif ($karsilastirma)
                     {{-- Karşılaştırma tablosu --}}
@@ -193,7 +219,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($this->sonuclar as $s)
+                                @foreach ($this->listelenen as $s)
                                     @php
                                         $renk = $renkler[$s['durum']];
                                     @endphp
@@ -221,7 +247,7 @@
                     </flux:card>
                 @else
                     <div @class(['grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4' => $gorunum === 'grid', 'flex flex-col gap-2' => $gorunum === 'list'])>
-                        @foreach ($this->sonuclar as $s)
+                        @foreach ($this->listelenen as $s)
                             @php
                                 $uni = $s['universite'];
                                 $renk = $renkler[$s['durum']];

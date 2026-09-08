@@ -50,6 +50,7 @@ use Livewire\Component;
  * @property-read Collection<int, Faaliyet> $faaliyetler
  * @property-read int $profilDoluluk
  * @property-read list<SonucSatiri> $sonuclar
+ * @property-read list<SonucSatiri> $listelenen
  * @property-read array{birim: list<string>, alan_yok: list<string>} $kapsamDisi
  * @property-read array<string, list<string>> $birimSecenekleri
  * @property-read array<string, mixed>|null $detay
@@ -62,6 +63,16 @@ class YonergeAnalizi extends Component
     public string $arama = '';
 
     public string $turFiltre = '';
+
+    /**
+     * Özet bardaki sayaçtan seçilen durum: `uygun` · `yakin` · `eksik_bilgi` ·
+     * `yetersiz`, boşsa filtre yok.
+     *
+     * Diğer filtrelerden farklı olarak {@see sonuclar()} içine GİRMEZ, sonuna
+     * eklenir: sayaçların kendisi tüm dağılımı göstermeye devam etmeli, yoksa
+     * "Yetersiz"e tıklayan aday diğer sayaçları sıfırlanmış görürdü.
+     */
+    public string $durumFiltre = '';
 
     public string $hedefKadro = 'dr_ogr_uyesi';
 
@@ -312,6 +323,34 @@ class YonergeAnalizi extends Component
         };
 
         return array_values($sonuclar->all());
+    }
+
+    /**
+     * Ekranda LİSTELENEN sonuçlar: {@see sonuclar()} üzerine özet bardan
+     * seçilen durum filtresi.
+     *
+     * @return list<array<string, mixed>>
+     */
+    #[Computed]
+    public function listelenen(): array
+    {
+        if ($this->durumFiltre === '') {
+            return $this->sonuclar();
+        }
+
+        return array_values(array_filter(
+            $this->sonuclar(),
+            fn (array $s) => $s['durum'] === $this->durumFiltre,
+        ));
+    }
+
+    /**
+     * Özet bardaki sayaca tıklanınca o duruma filtreler; aynı sayaca yeniden
+     * tıklamak filtreyi kaldırır (tek tıkla geri dönüş).
+     */
+    public function durumSec(string $durum): void
+    {
+        $this->durumFiltre = $this->durumFiltre === $durum ? '' : $durum;
     }
 
     /**

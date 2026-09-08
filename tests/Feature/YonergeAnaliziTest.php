@@ -121,6 +121,50 @@ test('durum sayaçları (özet) doğru hesaplanır', function () {
         ->and($ozet['eksik_bilgi'])->toBe(0);
 });
 
+test('özet sayacına tıklayınca liste o duruma daralır', function () {
+    // 70 puan / barajlar: 55,60 uygun · 80 yakın · 90,100,120 yetersiz.
+    $bilesen = Livewire::test(YonergeAnalizi::class)
+        ->call('durumSec', 'yetersiz')
+        ->assertSet('durumFiltre', 'yetersiz');
+
+    expect(array_column($bilesen->instance()->listelenen(), 'durum'))
+        ->toBe(['yetersiz', 'yetersiz', 'yetersiz']);
+
+    // Sayaçlar daralmaz: aday diğer durumların kaç tane olduğunu görmeye
+    // devam etmeli, yoksa filtre kendi ölçüsünü yok eder.
+    expect($bilesen->instance()->ozet())
+        ->toBe(['toplam' => 6, 'uygun' => 2, 'eksik_bilgi' => 0, 'yakin' => 1, 'yetersiz' => 3]);
+});
+
+test('aynı sayaca yeniden tıklamak filtreyi kaldırır', function () {
+    $bilesen = Livewire::test(YonergeAnalizi::class)
+        ->call('durumSec', 'uygun')
+        ->assertSet('durumFiltre', 'uygun')
+        ->call('durumSec', 'uygun')
+        ->assertSet('durumFiltre', '');
+
+    expect($bilesen->instance()->listelenen())->toHaveCount(6);
+});
+
+test('durum filtresi arama ve tür filtresiyle birlikte çalışır', function () {
+    // Arama sonuçları 90 (yetersiz) ve 100 (yetersiz) barajlı ikisi; durum
+    // filtresi bunların üstüne biniyor, yerlerine geçmiyor.
+    $bilesen = Livewire::test(YonergeAnalizi::class)
+        ->set('arama', 'Üniversitesi')
+        ->call('durumSec', 'uygun');
+
+    $adlar = array_map(fn (array $s) => $s['universite']->ad, $bilesen->instance()->listelenen());
+
+    expect($adlar)->toBe(['İstanbul 29 Mayıs Üniversitesi', 'Necmettin Erbakan Üniversitesi']);
+});
+
+test('sonuç vermeyen durum filtresi temizleme düğmesi gösterir', function () {
+    Livewire::test(YonergeAnalizi::class)
+        ->call('durumSec', 'eksik_bilgi')
+        ->assertSee('Seçili filtrelere uygun yönerge bulunamadı.')
+        ->assertSee('Durum filtresini kaldır');
+});
+
 test('görünüm grid ve list arasında değişir', function () {
     Livewire::test(YonergeAnalizi::class)
         ->assertSet('gorunum', 'grid')
