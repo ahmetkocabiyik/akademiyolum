@@ -588,9 +588,17 @@ test('eksik bilgi kartta gerekçesiyle gösterilir', function () {
         ['tip' => 'metrik', 'aciklama' => 'WoS h-indeksi en az 5', 'metrik' => 'h_indeksi', 'min' => 5],
     ])]);
 
+    $uniId = Universite::query()->where('ad', 'Belirsiz Üni')->value('id');
+
     Livewire::test(YonergeAnalizi::class)
-        ->assertSee('Eksik Bilgi')
-        ->assertSee('koşul eksik bilgi yüzünden değerlendirilemedi.');
+        ->assertSee('Onay Gerek')
+        ->assertSee('koşul eksik bilgi yüzünden değerlendirilemedi.')
+        // Durumun ADI ekranın her yerinde aynı olmalı: özet bardaki sayaç,
+        // kart rozeti ve detay panelindeki rozet aynı sözcüğü kullanır.
+        // Eski ad hiçbir yerde kalmamalı.
+        ->call('detayAc', $uniId)
+        ->assertSee('Onay Gerek')
+        ->assertDontSee('Eksik Bilgi');
 });
 
 test('dönem koşulu faaliyet tarihi girilince kesinleşir', function () {

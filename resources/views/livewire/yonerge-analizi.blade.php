@@ -97,7 +97,7 @@
                          yoksa "Yetersiz"e tıklayan aday diğerlerini sıfır görürdü.
                          "Toplam" filtreyi temizleyen sayaç. --}}
                     <div class="flex items-center gap-3">
-                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)', ''], ['Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)', 'yetersiz'], ['Yakın', $this->ozet['yakin'], 'var(--color-cat-amber)', 'yakin'], ['Eksik Bilgi', $this->ozet['eksik_bilgi'], 'var(--color-cat-amber)', 'eksik_bilgi'], ['Yapılabilir', $this->ozet['uygun'], 'var(--color-cat-green)', 'uygun'], ['Ölçüt Yok', $this->ozet['alan_yok'], 'var(--color-ink-subtle)', 'alan_yok']] as [$etiket, $sayi, $renk, $durum])
+                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)', ''], ['Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)', 'yetersiz'], ['Yakın', $this->ozet['yakin'], 'var(--color-cat-amber)', 'yakin'], ['Onay Gerek', $this->ozet['eksik_bilgi'], 'var(--color-cat-amber)', 'eksik_bilgi'], ['Yapılabilir', $this->ozet['uygun'], 'var(--color-cat-green)', 'uygun'], ['Ölçüt Yok', $this->ozet['alan_yok'], 'var(--color-ink-subtle)', 'alan_yok']] as [$etiket, $sayi, $renk, $durum])
                             @if (! $loop->first)<div class="h-8 w-px bg-line"></div>@endif
                             @php $secili = $durumFiltre === $durum; @endphp
                             <button type="button"
@@ -151,11 +151,12 @@
                 {{-- Sonuç kartları --}}
                 @php
                     // Motor üç değerli sonuç ürettiği için dört ekran durumu var.
-                    // "Eksik Bilgi" olumsuz bir sonuç DEĞİL: kesin olumsuz yaprak
-                    // yok, ama profil/tarih eksikliği yüzünden karara bağlanamıyor.
+                    // "Onay Gerek" olumsuz bir sonuç DEĞİL: kesin olumsuz yaprak yok,
+                    // ama bir şey adayın onayını bekliyor — ya belge kutusu
+                    // işaretlenmemiş ya da profil/tarih eksik.
                     $renkler = ['uygun' => 'var(--color-cat-green)', 'yakin' => 'var(--color-cat-amber)', 'eksik_bilgi' => 'var(--color-cat-amber)', 'yetersiz' => 'var(--color-cat-red)'];
                     $badgeRenkler = ['uygun' => 'green', 'yakin' => 'amber', 'eksik_bilgi' => 'amber', 'yetersiz' => 'red'];
-                    $badgeMetinleri = ['uygun' => 'Uygun', 'yakin' => 'Yakın', 'eksik_bilgi' => 'Eksik Bilgi', 'yetersiz' => 'Yetersiz'];
+                    $badgeMetinleri = ['uygun' => 'Uygun', 'yakin' => 'Yakın', 'eksik_bilgi' => 'Onay Gerek', 'yetersiz' => 'Yetersiz'];
                 @endphp
 
                 @if ($this->birimSecenekleri !== [])
@@ -460,7 +461,7 @@
                 $esik = $d['esik'];
                 $renk = ['uygun' => 'var(--color-cat-green)', 'yakin' => 'var(--color-cat-amber)', 'eksik_bilgi' => 'var(--color-cat-amber)', 'yetersiz' => 'var(--color-cat-red)'][$d['durum']];
                 $badgeRenk = ['uygun' => 'green', 'yakin' => 'amber', 'eksik_bilgi' => 'amber', 'yetersiz' => 'red'][$d['durum']];
-                $badgeMetin = ['uygun' => 'Başvuru Yapılabilir', 'yakin' => 'Yakın Sınırda', 'eksik_bilgi' => 'Eksik Bilgi', 'yetersiz' => 'Puan Yetersiz'][$d['durum']];
+                $badgeMetin = ['uygun' => 'Başvuru Yapılabilir', 'yakin' => 'Yakın Sınırda', 'eksik_bilgi' => 'Onay Gerek', 'yetersiz' => 'Puan Yetersiz'][$d['durum']];
                 $bashkler = \Illuminate\Support\Str::of($uni->ad)->explode(' ')
                     ->map(fn ($w) => mb_strtoupper(mb_substr($w, 0, 1)))->take(3)->implode('');
                 $eksikler = $d['sonuc']->eksikler();

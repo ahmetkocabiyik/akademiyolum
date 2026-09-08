@@ -177,3 +177,32 @@ test('Yönerge Analizi\'nde işaretlenen beyan dashboard\'da da geçerli', funct
 
     expect(Livewire::test(Dashboard::class)->instance()->sonuc()->durum)->toBe(Durum::Saglandi);
 });
+
+test('dashboard onay bekleyen durumu Yönerge Analizi ile aynı adla anıyor', function () {
+    // Durumun adı iki ekranda farklı olursa aday aynı sonucu iki şey sanır.
+    Universite::factory()->create(['ad' => 'Test Üniversitesi']);
+
+    app()->instance(SartDeposu::class, new SartDeposu(
+        esikVerisi: [[
+            'anahtar' => 'test-dr-ilahiyat',
+            'universite' => 'Test Üniversitesi',
+            'kadro' => 'dr_ogr_uyesi',
+            'alan' => 'ilahiyat',
+            'birim' => null,
+            'cetvel' => 'test-cetvel',
+            'notlar' => '',
+            'sart' => ['tip' => 've', 'aciklama' => 'Asgari şartlar', 'cocuklar' => [
+                ['tip' => 'beyan', 'aciklama' => 'Belge ile teyit edilecek koşul'],
+            ]],
+        ]],
+        cetvelVerisi: ['test-cetvel' => ['maddeler' => []]],
+    ));
+
+    actingAs(User::factory()->onboarded()->create([
+        'universite' => 'Test Üniversitesi', 'unvan' => 'Arş. Gör.',
+    ]));
+
+    Livewire::test(Dashboard::class)
+        ->assertSee('Onay Gerek')
+        ->assertDontSee('Eksik Bilgi');
+});
