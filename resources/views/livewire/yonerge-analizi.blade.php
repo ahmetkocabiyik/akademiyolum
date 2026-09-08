@@ -131,20 +131,40 @@
                     $badgeMetinleri = ['uygun' => 'Uygun', 'yakin' => 'Yakın', 'eksik_bilgi' => 'Eksik Bilgi', 'yetersiz' => 'Yetersiz'];
                 @endphp
 
-                @if ($this->kapsamDisi['birim'] !== [])
+                @if ($this->birimSecenekleri !== [])
                 {{-- Kart sayısı tek başına yanıltıcı: aday, listede olmayan bir
                      üniversitenin yönergesinin hiç girilmediğini mi yoksa kendi
                      alanının kapsanmadığını mı bilemiyor. Bu kutu YALNIZCA
                      adayın düzeltebileceği durumu anlatır: alan kapsanıyor ama
                      yönerge birime göre ölçüt koyuyor. Kapsanmayan alanlar
-                     sonuçların altında kart olarak duruyor. --}}
+                     sonuçların altında kart olarak duruyor.
+
+                     Seçim ÜNİVERSİTE BAŞINA yapılır. Profildeki tek birim alanı
+                     yalnız adayın kendi üniversitesinin birimlerini listeliyor;
+                     korpustaki 181 birim adının yalnız 25'i birden çok
+                     üniversitede ortak olduğu için o alan başka üniversitelerde
+                     çoğunlukla tutmuyor. --}}
                 <flux:callout icon="information-circle" variant="secondary" class="mb-4">
-                    <flux:callout.heading>{{ count($this->kapsamDisi['birim']) }} üniversite birim seçilmesini bekliyor</flux:callout.heading>
-                    <flux:callout.text>
-                        {{ implode(', ', $this->kapsamDisi['birim']) }} — temel alanınıza ölçüt
-                        koyuyorlar ama ölçüt BİRİME göre değişiyor. Profilinizde biriminizi
-                        seçerseniz bu üniversiteler de listeye girer.
+                    <flux:callout.heading>{{ count($this->birimSecenekleri) }} üniversite birim seçilmesini bekliyor</flux:callout.heading>
+                    <flux:callout.text class="mb-3">
+                        Bu üniversiteler temel alanınıza ölçüt koyuyor ama ölçüt BİRİME göre
+                        değişiyor. Biriminizi seçin, karşılaştırmaya katılsınlar.
                     </flux:callout.text>
+
+                    <div class="grid gap-3 sm:grid-cols-2">
+                        @foreach ($this->birimSecenekleri as $universiteAdi => $birimler)
+                            <flux:select
+                                wire:model.live="birimSecimleri.{{ $universiteAdi }}"
+                                :label="$universiteAdi"
+                                placeholder="Birim seçin..."
+                                size="sm"
+                            >
+                                @foreach ($birimler as $b)
+                                    <flux:select.option value="{{ $b }}">{{ $b }}</flux:select.option>
+                                @endforeach
+                            </flux:select>
+                        @endforeach
+                    </div>
                 </flux:callout>
             @endif
 

@@ -78,7 +78,7 @@
                  programa göre yazılmış yönergesi olan üniversitelerde çıkar. --}}
             @if ($birimler)
                 <flux:select wire:model="birim" label="Program" placeholder="Program seçin..."
-                    description="{{ auth()->user()->universite }} yönergesi kriterleri programa göre belirliyor.">
+                    description="{{ auth()->user()->universite }} yönergesi kriterleri programa göre belirliyor. Başka üniversitelerin programı Yönerge Analizi ekranında ayrıca sorulur; birim adları üniversiteden üniversiteye değiştiği için buradaki seçim onlara taşınmaz.">
                     <flux:select.option value="">Belirtilmemiş</flux:select.option>
                     @foreach ($birimler as $b)
                         <flux:select.option :value="$b">{{ $b }}</flux:select.option>

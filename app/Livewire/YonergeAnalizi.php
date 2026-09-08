@@ -50,6 +50,8 @@ use Livewire\Component;
  * @property-read Collection<int, Faaliyet> $faaliyetler
  * @property-read int $profilDoluluk
  * @property-read list<SonucSatiri> $sonuclar
+ * @property-read array{birim: list<string>, alan_yok: list<string>} $kapsamDisi
+ * @property-read array<string, list<string>> $birimSecenekleri
  * @property-read array<string, mixed>|null $detay
  * @property-read array{toplam: int, uygun: int, eksik_bilgi: int, yakin: int, yetersiz: int} $ozet
  */
@@ -78,6 +80,19 @@ class YonergeAnalizi extends Component
     public bool $detayAcik = false;
 
     /**
+     * Üniversite başına seçilen birim: `['Karadeniz Teknik Üniversitesi' => 'Tıp Fakültesi']`.
+     *
+     * Profildeki tek `birim` alanı bu iş için yetmiyor. Korpusta 181 farklı
+     * birim adı var ve yalnız 25'i birden çok üniversitede ortak; adayın kendi
+     * üniversitesinde seçtiği "Edebiyat Fakültesi" Yeditepe'nin on üç
+     * biriminden hiçbiriyle eşleşmez. Bu yüzden seçim üniversite BAŞINA
+     * tutuluyor ve profil alanı yalnız varsayılan olarak kullanılıyor.
+     *
+     * @var array<string, string>
+     */
+    public array $birimSecimleri = [];
+
+    /**
      * Hedef kadro etiketleri (seçici + başlık için).
      *
      * @var array<string, string>
@@ -103,6 +118,19 @@ class YonergeAnalizi extends Component
     protected function depo(): SartDeposu
     {
         return app(SartDeposu::class);
+    }
+
+    /**
+     * Bir üniversite için geçerli birim: ekrandan seçilen varsa o, yoksa
+     * profildeki değer. Profil alanı adayın KENDİ üniversitesinin birimlerini
+     * listeliyor; başka üniversitelerde ancak birim adı tesadüfen aynıysa
+     * tutar, o yüzden ekran seçimi profili EZER.
+     */
+    protected function birimIcin(string $universiteAdi): ?string
+    {
+        $secim = $this->birimSecimleri[$universiteAdi] ?? '';
+
+        return $secim !== '' ? $secim : (Auth::user()->birim ?: null);
     }
 
     /**
@@ -151,7 +179,7 @@ class YonergeAnalizi extends Component
         $ayrim = ['birim' => [], 'alan_yok' => []];
 
         foreach ($depo->universiteler() as $ad) {
-            if ($depo->bul($ad, $this->hedefKadro, $temelAlan, $kullanici->birim) !== null) {
+            if ($depo->bul($ad, $this->hedefKadro, $temelAlan, $this->birimIcin($ad)) !== null) {
                 continue;
             }
 
@@ -160,6 +188,39 @@ class YonergeAnalizi extends Component
         }
 
         return $ayrim;
+    }
+
+    /**
+     * Birim bekleyen üniversiteler için seçenek listesi:
+     * `['Karadeniz Teknik Üniversitesi' => ['Diş Hekimliği Fakültesi', ...]]`.
+     *
+     * `SartDeposu::adaylar()` tam bu iş için var: birim ayrımı yapmadan aday
+     * eşikleri döndürüyor ki arayüz aralarından seçtirebilsin. Ekran bunu
+     * kullanmayıp kartı listeden düşürüyordu.
+     *
+     * @return array<string, list<string>>
+     */
+    #[Computed]
+    public function birimSecenekleri(): array
+    {
+        $depo = $this->depo();
+        $temelAlan = (Auth::user()->temel_alan ?? TemelAlan::Sosyal)->value;
+        $secenekler = [];
+
+        foreach ($this->kapsamDisi['birim'] as $ad) {
+            $birimler = [];
+            foreach ($depo->adaylar($ad, $this->hedefKadro, $temelAlan) as $esik) {
+                if ($esik['birim'] !== null) {
+                    $birimler[$esik['birim']] = true;
+                }
+            }
+
+            if ($birimler !== []) {
+                $secenekler[$ad] = array_keys($birimler);
+            }
+        }
+
+        return $secenekler;
     }
 
     /**
@@ -190,11 +251,14 @@ class YonergeAnalizi extends Component
             ))
             ->get();
 
-        $birim = Auth::user()->birim;
-
         $sonuclar = $universiteler
-            ->map(function (Universite $universite) use ($depo, $temelAlan, $faaliyetler, $profil, $birim): ?array {
-                $esik = $depo->bul($universite->ad, $this->hedefKadro, $temelAlan, $birim);
+            ->map(function (Universite $universite) use ($depo, $temelAlan, $faaliyetler, $profil): ?array {
+                $esik = $depo->bul(
+                    $universite->ad,
+                    $this->hedefKadro,
+                    $temelAlan,
+                    $this->birimIcin($universite->ad),
+                );
 
                 if ($esik === null) {
                     return null;

@@ -584,6 +584,75 @@ test('birim seçilince kapsam dışı uyarısı kalkar', function () {
         ->and($bilesen->instance()->sonuclar())->toHaveCount(1);
 });
 
+test('ekrandan seçilen birim profildekini ezer ve üniversiteyi listeye sokar', function () {
+    // ASIL SORUN: profildeki tek `birim` alanı adayın KENDİ üniversitesinin
+    // birimlerini listeliyor (Profile::birimSecenekleri). Korpustaki 181 birim
+    // adının yalnız 25'i birden çok üniversitede ortak, yani o alan başka
+    // üniversitelerde çoğunlukla tutmuyor. Seçim bu yüzden üniversite BAŞINA
+    // yapılıyor ve profili eziyor.
+    $birimli = fn (string $universite, string $birim): array => [
+        ...testEsik($universite, 100, 'dr_ogr_uyesi', 'sosyal'),
+        'anahtar' => Str::slug($universite).'-dr-sosyal-'.Str::slug($birim),
+        'birim' => $birim,
+    ];
+
+    depoBagla([
+        $birimli('Ankara Üniversitesi', 'Hukuk Fakültesi'),
+        $birimli('Ankara Üniversitesi', 'Siyasal Bilgiler Fakültesi'),
+        $birimli('Mersin Üniversitesi', 'İletişim Fakültesi'),
+        $birimli('Mersin Üniversitesi', 'Mimarlık Fakültesi'),
+    ]);
+
+    // Profilde Ankara'nın birimi seçili; Mersin'in birimleriyle hiç örtüşmüyor.
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal,
+        'unvan' => 'Arş. Gör.',
+        'birim' => 'Hukuk Fakültesi',
+    ]);
+
+    $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)->assertOk();
+
+    // Ankara profil alanından çözülüyor, Mersin hâlâ birim bekliyor.
+    expect($bilesen->instance()->kapsamDisi()['birim'])->toBe(['Mersin Üniversitesi'])
+        ->and($bilesen->instance()->sonuclar())->toHaveCount(1);
+
+    // Seçenekler Mersin'in KENDİ birimleri; profildeki değer aralarında yok.
+    expect($bilesen->instance()->birimSecenekleri())
+        ->toBe(['Mersin Üniversitesi' => ['İletişim Fakültesi', 'Mimarlık Fakültesi']]);
+
+    // Ekrandan seçilince Mersin de karşılaştırmaya giriyor.
+    $bilesen->set('birimSecimleri.Mersin Üniversitesi', 'Mimarlık Fakültesi');
+
+    expect($bilesen->instance()->kapsamDisi())->toBe(['birim' => [], 'alan_yok' => []])
+        ->and($bilesen->instance()->sonuclar())->toHaveCount(2)
+        ->and($bilesen->instance()->birimSecenekleri())->toBe([]);
+});
+
+test('ekran seçimi aynı üniversitede profildeki birimi ezer', function () {
+    // Seçim profilin ÜSTÜNE yazar: aday kendi üniversitesinde başka bir
+    // fakültenin ölçütünü de görmek isteyebilir.
+    $birimli = fn (string $birim): array => [
+        ...testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        'anahtar' => 'ankara-dr-sosyal-'.Str::slug($birim),
+        'birim' => $birim,
+        'notlar' => $birim.' ölçütü',
+    ];
+
+    depoBagla([$birimli('Hukuk Fakültesi'), $birimli('Siyasal Bilgiler Fakültesi')]);
+
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal,
+        'unvan' => 'Arş. Gör.',
+        'birim' => 'Hukuk Fakültesi',
+    ]);
+
+    $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)->assertOk();
+    expect($bilesen->instance()->sonuclar()[0]['esik']['notlar'])->toBe('Hukuk Fakültesi ölçütü');
+
+    $bilesen->set('birimSecimleri.Ankara Üniversitesi', 'Siyasal Bilgiler Fakültesi');
+    expect($bilesen->instance()->sonuclar()[0]['esik']['notlar'])->toBe('Siyasal Bilgiler Fakültesi ölçütü');
+});
+
 test('bütün üniversiteler kapsandığında uyarı çıkmaz', function () {
     $kullanici = User::factory()->onboarded()->create(['temel_alan' => TemelAlan::Sosyal]);
 
