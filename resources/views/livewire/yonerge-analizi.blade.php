@@ -342,7 +342,7 @@
                                         @foreach ($gosterilen as $kosul)
                                             <div class="flex items-center justify-between gap-2 text-xs">
                                                 <span class="flex min-w-0 items-center gap-1.5 text-ink-muted">
-                                                    @if ($kosul->beyan)
+                                                    @if ($kosul->beyan && ! $kosul->beyanOnaylandi)
                                                         <flux:icon name="information-circle" class="size-3.5 shrink-0 text-ink-subtle" />
                                                     @else
                                                         <flux:icon :name="$kosul->durum->ikon()" variant="solid" class="size-3.5 shrink-0" style="color: {{ $kosul->durum->renk() }}" />
@@ -350,11 +350,13 @@
                                                     <span class="truncate" title="{{ $kosul->aciklama }}">{{ $kosul->aciklama }}</span>
                                                 </span>
                                                 {{-- Telafi ile geçilen koşulda sayaç ana yolu anlatır, sonucun rengiyle boyanmaz. --}}
-                                                <span class="shrink-0 font-semibold" style="color: {{ $kosul->beyan || $kosul->telafiIleSaglandi() ? 'var(--color-ink-subtle)' : $kosul->durum->renk() }}">
+                                                <span class="shrink-0 font-semibold" style="color: {{ ($kosul->beyan && ! $kosul->beyanOnaylandi) || $kosul->telafiIleSaglandi() ? 'var(--color-ink-subtle)' : $kosul->durum->renk() }}">
                                                     @if ($kosul->kaynakEksik)
                                                         hesaplanamıyor
+                                                    @elseif ($kosul->beyanOnaylandi)
+                                                        beyan edildi
                                                     @elseif ($kosul->beyan)
-                                                        belge ile
+                                                        onay gerek
                                                     @elseif ($kosul->telafiIleSaglandi())
                                                         telafi ile
                                                     @elseif ($kosul->gerekli !== null)
@@ -385,7 +387,7 @@
                                     @if ($s['beyan_sayisi'] > 0)
                                         <div class="mt-2 flex items-start gap-1 text-[11px] text-ink-subtle">
                                             <flux:icon name="information-circle" class="mt-px size-3 shrink-0" />
-                                            <span>{{ $s['beyan_sayisi'] }} koşul belge ile teyit edilecek.</span>
+                                            <span>{{ $s['beyan_sayisi'] }} koşul onayınızı bekliyor.</span>
                                         </div>
                                     @endif
 
@@ -525,7 +527,7 @@
                             @endif
                             @if ($d['beyan_sayisi'] > 0)
                                 <strong class="text-ink">{{ $d['beyan_sayisi'] }} koşul</strong>
-                                belge ile teyit edilecek.
+                                onayınızı bekliyor; belgeniz varsa aşağıdan işaretleyin.
                             @endif
                         @else
                             @if ($d['kalan'] > 0)

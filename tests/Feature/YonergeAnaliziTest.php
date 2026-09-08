@@ -446,6 +446,26 @@ test('"belge ile" koşulu işaretlenince üniversite yapılabilire döner', func
     expect($bul(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())['durum'])->toBe('uygun');
 });
 
+test('kartta beyan koşulu işaretlenmeden "onay gerek", işaretlenince "beyan edildi"', function () {
+    // Kart ile detay paneli aynı koşul için aynı sözcüğü kullanmalı; eskiden
+    // kart "belge ile" diyor ve işaretlendikten SONRA da öyle kalıyordu.
+    Universite::factory()->create(['ad' => 'Beyan Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
+    depoBagla([beyanliEsik('Beyan Üni')]);
+
+    $esikAnahtari = Livewire::test(YonergeAnalizi::class)->instance()->sonuclar()[0]['esik']['anahtar'];
+    $uniId = Universite::query()->where('ad', 'Beyan Üni')->value('id');
+
+    $bilesen = Livewire::test(YonergeAnalizi::class)
+        ->assertSee('onay gerek')
+        ->assertDontSee('belge ile')
+        ->call('detayAc', $uniId)
+        ->assertSee('onay gerek');
+
+    $bilesen->call('beyanDegistir', $esikAnahtari, beyanAnahtari())
+        ->assertSee('beyan edildi')
+        ->assertDontSee('onay gerek');
+});
+
 test('aynı kutuya yeniden tıklamak beyanı geri alır', function () {
     Universite::factory()->create(['ad' => 'Beyan Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
     depoBagla([beyanliEsik('Beyan Üni')]);

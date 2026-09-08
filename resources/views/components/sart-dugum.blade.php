@@ -3,7 +3,7 @@
 
     @param \App\Services\Scoring\Sart\SartSonucu $dugum
     @param int $derinlik  İç içe geçme seviyesi (girinti için)
-    @param ?string $esikAnahtari  Verilirse "belge ile" koşulları işaretlenebilir
+    @param ?string $esikAnahtari  Verilirse beyan koşulları işaretlenebilir
                                   kutuya döner. Dashboard gibi salt okunur
                                   yerlerde null geçilir.
 --}}
@@ -61,7 +61,7 @@
             @elseif ($dugum->beyanOnaylandi)
                 beyan edildi
             @elseif ($dugum->beyan)
-                belge ile
+                onay gerek
             @elseif ($telafiIle)
                 {{ $mevcut }} / {{ $dugum->gerekli }} <span class="font-normal">· telafi ile</span>
             @elseif ($olculur)
@@ -118,7 +118,7 @@
     @elseif ($beyanKutusu)
         <div class="text-[11px] text-ink-subtle">Bu koşul otomatik doğrulanamaz. Belgeniz varsa kutuyu işaretleyin.</div>
     @elseif ($dugum->beyan)
-        <div class="text-[11px] text-ink-subtle">Bu koşul otomatik doğrulanamaz, belge ile teyit edilir.</div>
+        <div class="text-[11px] text-ink-subtle">Bu koşul otomatik doğrulanamaz, belgeyle teyit edilir.</div>
     @endif
 
     @foreach ($dugum->cocuklar as $i => $cocuk)
