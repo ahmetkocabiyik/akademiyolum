@@ -133,7 +133,7 @@ test('özet sayacına tıklayınca liste o duruma daralır', function () {
     // Sayaçlar daralmaz: aday diğer durumların kaç tane olduğunu görmeye
     // devam etmeli, yoksa filtre kendi ölçüsünü yok eder.
     expect($bilesen->instance()->ozet())
-        ->toBe(['toplam' => 6, 'uygun' => 2, 'eksik_bilgi' => 0, 'yakin' => 1, 'yetersiz' => 3]);
+        ->toBe(['toplam' => 6, 'uygun' => 2, 'eksik_bilgi' => 0, 'yakin' => 1, 'yetersiz' => 3, 'alan_yok' => 0]);
 });
 
 test('aynı sayaca yeniden tıklamak filtreyi kaldırır', function () {
@@ -163,6 +163,29 @@ test('sonuç vermeyen durum filtresi temizleme düğmesi gösterir', function ()
         ->call('durumSec', 'eksik_bilgi')
         ->assertSee('Seçili filtrelere uygun yönerge bulunamadı.')
         ->assertSee('Durum filtresini kaldır');
+});
+
+test('şehir filtresi listeyi o şehirle sınırlar', function () {
+    $bilesen = Livewire::test(YonergeAnalizi::class)
+        ->set('sehirFiltre', 'İstanbul');
+
+    $adlar = array_map(fn (array $s) => $s['universite']->ad, $bilesen->instance()->listelenen());
+
+    expect($adlar)->toBe(['İstanbul 29 Mayıs Üniversitesi', 'Marmara Üniversitesi']);
+});
+
+test('şehir seçenekleri Türkçe alfabe sırasında', function () {
+    // PHP'nin düz `sort()`u 'İstanbul'u listenin DİBİNE atar (İ çok baytlı,
+    // z'den büyük görünür). Sıra bozulursa bu test kırılır.
+    expect(Livewire::test(YonergeAnalizi::class)->instance()->sehirler())
+        ->toBe(['Ankara', 'İstanbul', 'Konya', 'Mersin', 'Sakarya']);
+});
+
+test('şehir seçenekleri yalnız yönergesi girili üniversitelerden gelir', function () {
+    Universite::factory()->create(['ad' => 'Yönergesiz Üni', 'sehir' => 'Van', 'tur' => 'devlet']);
+
+    expect(Livewire::test(YonergeAnalizi::class)->instance()->sehirler())
+        ->not->toContain('Van');
 });
 
 test('görünüm grid ve list arasında değişir', function () {
@@ -626,6 +649,69 @@ test('kadro veya alanı kapsamayan üniversiteler gerekçesiyle bildirilir', fun
 
     expect($kapsamDisi['birim'])->toBe(['Ankara Üniversitesi'])
         ->and($kapsamDisi['alan_yok'])->toBe(['Mersin Üniversitesi']);
+});
+
+test('"Ölçüt Yok" sayacı kapsam dışı üniversiteleri filtreler', function () {
+    depoBagla([
+        testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        testEsik('Mersin Üniversitesi', 90, 'dr_ogr_uyesi', 'ilahiyat'),
+    ]);
+
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal, 'unvan' => 'Arş. Gör.', 'birim' => null,
+    ]);
+
+    $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class);
+
+    // Sayaç 'toplam'a dâhil değil: sonuç satırı olmayanları sayıyor.
+    expect($bilesen->instance()->ozet())
+        ->toBe(['toplam' => 1, 'uygun' => 0, 'eksik_bilgi' => 0, 'yakin' => 0, 'yetersiz' => 1, 'alan_yok' => 1]);
+
+    $bilesen->call('durumSec', 'alan_yok')->assertSet('durumFiltre', 'alan_yok');
+
+    // Sonuç listesi tamamen atlanıyor — "yönerge bulunamadı" kartı ÇIKMAMALI.
+    expect($bilesen->instance()->listelenen())->toBe([]);
+    $bilesen->assertDontSee('Seçili filtrelere uygun yönerge bulunamadı.')
+        ->assertSee('Temel alanınıza ölçüt tanımlamayan üniversiteler')
+        ->assertSee('Mersin Üniversitesi')
+        ->assertDontSee('Ankara Üniversitesi');
+});
+
+test('başka bir durum seçiliyken kapsam dışı bölümü gizlenir', function () {
+    depoBagla([
+        testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        testEsik('Mersin Üniversitesi', 90, 'dr_ogr_uyesi', 'ilahiyat'),
+    ]);
+
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal, 'unvan' => 'Arş. Gör.', 'birim' => null,
+    ]);
+
+    Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)
+        ->assertSee('Temel alanınıza ölçüt tanımlamayan üniversiteler')
+        ->call('durumSec', 'yetersiz')
+        ->assertDontSee('Temel alanınıza ölçüt tanımlamayan üniversiteler');
+});
+
+test('şehir filtresi kapsam dışı listesini de daraltır', function () {
+    // Aksi hâlde "Ankara" seçen aday Mersin'i kapsam dışı kartları arasında
+    // görmeye devam ederdi; filtre ekranın yarısına işlemez olurdu.
+    depoBagla([
+        testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        testEsik('Mersin Üniversitesi', 90, 'dr_ogr_uyesi', 'ilahiyat'),
+    ]);
+
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal, 'unvan' => 'Arş. Gör.', 'birim' => null,
+    ]);
+
+    $bilesen = Livewire::actingAs($kullanici)->test(YonergeAnalizi::class);
+
+    expect($bilesen->instance()->kapsamDisi()['alan_yok'])->toBe(['Mersin Üniversitesi']);
+
+    $bilesen->set('sehirFiltre', 'Ankara');
+
+    expect($bilesen->instance()->kapsamDisi()['alan_yok'])->toBe([]);
 });
 
 test('birim seçilince kapsam dışı uyarısı kalkar', function () {

@@ -73,6 +73,15 @@
                         <flux:select.option value="vakif">Vakıf</flux:select.option>
                     </flux:select>
 
+                    {{-- Yalnız yönergesi girili üniversitelerin şehirleri;
+                         sonuç vermeyecek bir şehir listede görünmemeli. --}}
+                    <flux:select wire:model.live="sehirFiltre" label="Şehir" size="sm">
+                        <flux:select.option value="">Tüm şehirler</flux:select.option>
+                        @foreach ($this->sehirler as $sehir)
+                            <flux:select.option :value="$sehir">{{ $sehir }}</flux:select.option>
+                        @endforeach
+                    </flux:select>
+
                     <flux:text class="text-[11px] text-ink-subtle">Analiz <strong>{{ $kadrolar[$hedefKadro] }}</strong> kadrosuna atama kriterlerine göredir.</flux:text>
                 </flux:card>
             </div>
@@ -88,7 +97,7 @@
                          yoksa "Yetersiz"e tıklayan aday diğerlerini sıfır görürdü.
                          "Toplam" filtreyi temizleyen sayaç. --}}
                     <div class="flex items-center gap-3">
-                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)', ''], ['Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)', 'yetersiz'], ['Yakın', $this->ozet['yakin'], 'var(--color-cat-amber)', 'yakin'], ['Eksik Bilgi', $this->ozet['eksik_bilgi'], 'var(--color-cat-amber)', 'eksik_bilgi'], ['Yapılabilir', $this->ozet['uygun'], 'var(--color-cat-green)', 'uygun']] as [$etiket, $sayi, $renk, $durum])
+                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)', ''], ['Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)', 'yetersiz'], ['Yakın', $this->ozet['yakin'], 'var(--color-cat-amber)', 'yakin'], ['Eksik Bilgi', $this->ozet['eksik_bilgi'], 'var(--color-cat-amber)', 'eksik_bilgi'], ['Yapılabilir', $this->ozet['uygun'], 'var(--color-cat-green)', 'uygun'], ['Ölçüt Yok', $this->ozet['alan_yok'], 'var(--color-ink-subtle)', 'alan_yok']] as [$etiket, $sayi, $renk, $durum])
                             @if (! $loop->first)<div class="h-8 w-px bg-line"></div>@endif
                             @php $secili = $durumFiltre === $durum; @endphp
                             <button type="button"
@@ -191,7 +200,13 @@
                 </flux:callout>
             @endif
 
-            @if (empty($this->listelenen))
+            {{-- "Ölçüt Yok" bir sonuç durumu değil, sonucu HİÇ OLMAYANLARIN adı:
+                 o üniversitelerin kartı aşağıdaki kapsam dışı bölümünde. Sayaç
+                 seçiliyken sonuç listesi tamamen atlanır, yoksa aday "yönerge
+                 bulunamadı" kartıyla karşılaşırdı. --}}
+            @if ($durumFiltre === 'alan_yok')
+                {{-- Kapsam dışı bölümü aşağıda; burada gösterilecek sonuç yok. --}}
+            @elseif (empty($this->listelenen))
                     <flux:card class="py-12 text-center">
                         <flux:text>Seçili filtrelere uygun yönerge bulunamadı.</flux:text>
                         {{-- Durum filtresi sayaçtan tek tıkla açılıyor; kapatma
@@ -390,7 +405,7 @@
                      SONUÇLARIN ALTINDA ve ayrı başlık altında: dar temel
                      alanlarda bu liste 50'yi aşıyor (ziraatte 59, ilahiyatta 53)
                      ve gerçek sonuçların arasına karışsa listeyi boğardı. --}}
-                @if ($this->kapsamDisi['alan_yok'] !== [])
+                @if ($this->kapsamDisi['alan_yok'] !== [] && in_array($durumFiltre, ['', 'alan_yok'], true))
                     <div class="mt-8">
                         <div class="mb-3 flex items-baseline gap-2">
                             <flux:heading size="sm">Temel alanınıza ölçüt tanımlamayan üniversiteler</flux:heading>

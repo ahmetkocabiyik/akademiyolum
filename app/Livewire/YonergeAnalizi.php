@@ -9,6 +9,7 @@ use App\Services\Scoring\Sart\Durum;
 use App\Services\Scoring\Sart\SartDegerlendirici;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Scoring\Sart\SartSonucu;
+use Collator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -54,7 +55,7 @@ use Livewire\Component;
  * @property-read array{birim: list<string>, alan_yok: list<string>} $kapsamDisi
  * @property-read array<string, list<string>> $birimSecenekleri
  * @property-read array<string, mixed>|null $detay
- * @property-read array{toplam: int, uygun: int, eksik_bilgi: int, yakin: int, yetersiz: int} $ozet
+ * @property-read array{toplam: int, uygun: int, eksik_bilgi: int, yakin: int, yetersiz: int, alan_yok: int} $ozet
  */
 #[Layout('layouts.app')]
 #[Title('Yönerge Analizi')]
@@ -64,9 +65,11 @@ class YonergeAnalizi extends Component
 
     public string $turFiltre = '';
 
+    public string $sehirFiltre = '';
+
     /**
      * Özet bardaki sayaçtan seçilen durum: `uygun` · `yakin` · `eksik_bilgi` ·
-     * `yetersiz`, boşsa filtre yok.
+     * `yetersiz` · `alan_yok`, boşsa filtre yok.
      *
      * Diğer filtrelerden farklı olarak {@see sonuclar()} içine GİRMEZ, sonuna
      * eklenir: sayaçların kendisi tüm dağılımı göstermeye devam etmeli, yoksa
@@ -188,8 +191,13 @@ class YonergeAnalizi extends Component
         $kullanici = Auth::user();
         $temelAlan = ($kullanici->temel_alan ?? TemelAlan::Sosyal)->value;
         $ayrim = ['birim' => [], 'alan_yok' => []];
+        $suzgec = $this->modelSuzgeci();
 
         foreach ($depo->universiteler() as $ad) {
+            if ($suzgec !== null && ! in_array($ad, $suzgec, true)) {
+                continue;
+            }
+
             if ($depo->bul($ad, $this->hedefKadro, $temelAlan, $this->birimIcin($ad)) !== null) {
                 continue;
             }
@@ -243,6 +251,75 @@ class YonergeAnalizi extends Component
     }
 
     /**
+     * Model tarafındaki filtrelerden (arama · tür · şehir) geçen üniversiteler.
+     *
+     * @return Collection<int, Universite>
+     */
+    #[Computed]
+    public function suzulmusUniversiteler(): Collection
+    {
+        return Universite::query()
+            ->whereIn('ad', $this->depo()->universiteler())
+            ->when($this->turFiltre !== '', fn ($q) => $q->where('tur', $this->turFiltre))
+            ->when($this->sehirFiltre !== '', fn ($q) => $q->where('sehir', $this->sehirFiltre))
+            ->when($this->arama !== '', fn ($q) => $q->where(
+                fn ($w) => $w->where('ad', 'like', "%{$this->arama}%")
+                    ->orWhere('sehir', 'like', "%{$this->arama}%")
+            ))
+            ->get();
+    }
+
+    /**
+     * Arama · tür · şehir filtrelerinden geçen üniversite adları; hiçbiri
+     * seçili değilse `null` — "daraltma yok".
+     *
+     * `null` ayrımı gerekli, çünkü {@see kapsamDisi()} yönerge DEPOSUNU
+     * geziyor, `universiteler` tablosunu değil. Depoda adı geçtiği hâlde
+     * tabloda karşılığı olmayan kayıtlar var; filtre yokken listeyi tablodan
+     * geçirmek onları sessizce düşürürdü.
+     *
+     * @return list<string>|null
+     */
+    protected function modelSuzgeci(): ?array
+    {
+        if ($this->arama === '' && $this->turFiltre === '' && $this->sehirFiltre === '') {
+            return null;
+        }
+
+        /** @var list<string> */
+        return $this->suzulmusUniversiteler()->pluck('ad')->all();
+    }
+
+    /**
+     * Filtre seçeneği olarak şehirler: yalnız yönergesi girili üniversitelerin
+     * şehirleri, Türkçe alfabe sırasında.
+     *
+     * @return list<string>
+     */
+    #[Computed]
+    public function sehirler(): array
+    {
+        /** @var list<string> $sehirler */
+        $sehirler = Universite::query()
+            ->whereIn('ad', $this->depo()->universiteler())
+            ->whereNotNull('sehir')
+            ->distinct()
+            ->pluck('sehir')
+            ->all();
+
+        // PHP'nin bayt sıralaması Ç/Ğ/İ/Ö/Ş/Ü ile başlayan şehirleri z'den
+        // sonraya atıyor (Çanakkale, İzmir, Şanlıurfa listenin dibinde kalır).
+        // `intl` composer.json'da zorunlu değil; yoksa düz sıralamaya düşer.
+        if (class_exists(Collator::class)) {
+            (new Collator('tr_TR'))->sort($sehirler);
+        } else {
+            sort($sehirler);
+        }
+
+        return $sehirler;
+    }
+
+    /**
      * Filtrelenmiş ve sıralanmış üniversite karşılaştırma sonuçları.
      *
      * Yalnızca doğrulanmış şart ağacı olan üniversiteler listelenir; eşiği
@@ -261,16 +338,7 @@ class YonergeAnalizi extends Component
         // birlikte çözülür.
         $profil = $kullanici->sartProfili($faaliyetler);
 
-        $universiteler = Universite::query()
-            ->whereIn('ad', $depo->universiteler())
-            ->when($this->turFiltre !== '', fn ($q) => $q->where('tur', $this->turFiltre))
-            ->when($this->arama !== '', fn ($q) => $q->where(
-                fn ($w) => $w->where('ad', 'like', "%{$this->arama}%")
-                    ->orWhere('sehir', 'like', "%{$this->arama}%")
-            ))
-            ->get();
-
-        $sonuclar = $universiteler
+        $sonuclar = $this->suzulmusUniversiteler()
             ->map(function (Universite $universite) use ($depo, $temelAlan, $faaliyetler, $profil): ?array {
                 $esik = $depo->bul(
                     $universite->ad,
@@ -329,7 +397,7 @@ class YonergeAnalizi extends Component
      * Ekranda LİSTELENEN sonuçlar: {@see sonuclar()} üzerine özet bardan
      * seçilen durum filtresi.
      *
-     * @return list<array<string, mixed>>
+     * @return list<SonucSatiri>
      */
     #[Computed]
     public function listelenen(): array
@@ -338,6 +406,9 @@ class YonergeAnalizi extends Component
             return $this->sonuclar();
         }
 
+        // `alan_yok` bir SONUÇ durumu değil, sonucu hiç olmayanların adı:
+        // hiçbir satır o değeri taşımadığı için liste kendiliğinden boşalır ve
+        // ekran onları kapsam dışı bölümünden gösterir.
         return array_values(array_filter(
             $this->sonuclar(),
             fn (array $s) => $s['durum'] === $this->durumFiltre,
@@ -437,7 +508,7 @@ class YonergeAnalizi extends Component
     /**
      * Sonuçların durum dağılımı (summary bar için).
      *
-     * @return array{toplam: int, uygun: int, eksik_bilgi: int, yakin: int, yetersiz: int}
+     * @return array{toplam: int, uygun: int, eksik_bilgi: int, yakin: int, yetersiz: int, alan_yok: int}
      */
     #[Computed]
     public function ozet(): array
@@ -450,6 +521,8 @@ class YonergeAnalizi extends Component
             'eksik_bilgi' => $sonuclar->where('durum', 'eksik_bilgi')->count(),
             'yakin' => $sonuclar->where('durum', 'yakin')->count(),
             'yetersiz' => $sonuclar->where('durum', 'yetersiz')->count(),
+            // Sonuç satırı olmayanlar; 'toplam'a dâhil DEĞİL.
+            'alan_yok' => count($this->kapsamDisi()['alan_yok']),
         ];
     }
 
