@@ -38,7 +38,29 @@ readonly class SartSonucu
         /** Veri dosyasından taşınan serbest etiket (ör. 'toplam') — arayüz belirli
          * bir düğümü açıklama metnine bakmadan bulabilsin diye. */
         public ?string $rol = null,
+        /** Adayın "bu belgem var" kutusunu işaretlediği beyan düğümü. Durumu
+         * zaten Sağlandı'dır; bayrak arayüzün kutuyu işaretli çizmesi ve
+         * sonucun motordan değil BEYANDAN geldiğini söylemesi için. */
+        public bool $beyanOnaylandi = false,
     ) {}
+
+    /**
+     * Beyan düğümünün kalıcı kimliği — adayın işaretini bu anahtara yazıyoruz.
+     *
+     * Ağaçtaki KONUM kullanılamaz: yönerge dosyası düzenlenince düğümler yer
+     * değiştirir ve eski işaret sessizce BAŞKA bir koşula yapışırdı. Anahtar
+     * koşulun kendi metninden türetiliyor; cümle değişirse işaret düşer ve
+     * kutu işaretsize döner — yanlış tarafa düşmeyen tek davranış bu.
+     */
+    public static function beyanAnahtariUret(string $aciklama, ?string $madde): string
+    {
+        return substr(sha1($aciklama.'|'.($madde ?? '')), 0, 16);
+    }
+
+    public function beyanAnahtari(): string
+    {
+        return self::beyanAnahtariUret($this->aciklama, $this->madde);
+    }
 
     /**
      * Arayüzde listelenecek asgari koşullar.
@@ -168,13 +190,16 @@ readonly class SartSonucu
     }
 
     /**
-     * Kullanıcı beyanı bekleyen maddeler.
+     * Kullanıcı beyanı BEKLEYEN maddeler.
+     *
+     * Aday kutusunu işaretlemişse beyan alınmıştır; adaya "şu kadar koşul
+     * belge bekliyor" derken onları saymak, yaptığı işi görmezden gelirdi.
      *
      * @return list<self>
      */
     public function beyanlar(): array
     {
-        return $this->topla(fn (self $d) => $d->beyan);
+        return $this->topla(fn (self $d) => $d->beyan && ! $d->beyanOnaylandi);
     }
 
     /**

@@ -2,10 +2,13 @@
 
 use App\Enums\Kategori;
 use App\Livewire\Dashboard;
+use App\Models\BeyanOnayi;
 use App\Models\Faaliyet;
 use App\Models\Universite;
 use App\Models\User;
+use App\Services\Scoring\Sart\Durum;
 use App\Services\Scoring\Sart\SartDeposu;
+use App\Services\Scoring\Sart\SartSonucu;
 use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
@@ -134,4 +137,43 @@ test('boş dashboard faaliyet uyarısı gösterir', function () {
     Livewire::test(Dashboard::class)
         ->assertOk()
         ->assertSee('Henüz faaliyet eklenmemiş.');
+});
+
+test('Yönerge Analizi\'nde işaretlenen beyan dashboard\'da da geçerli', function () {
+    // İki ekran aynı eşiği değerlendiriyor; biri "Eksik Bilgi", öteki "uygun"
+    // deseydi aday hangisine inanacağını bilemezdi.
+    Universite::factory()->create(['ad' => 'Test Üniversitesi']);
+
+    $depo = new SartDeposu(
+        esikVerisi: [[
+            'anahtar' => 'test-dr-ilahiyat',
+            'universite' => 'Test Üniversitesi',
+            'kadro' => 'dr_ogr_uyesi',
+            'alan' => 'ilahiyat',
+            'birim' => null,
+            'cetvel' => 'test-cetvel',
+            'notlar' => '',
+            'sart' => ['tip' => 've', 'aciklama' => 'Asgari şartlar', 'cocuklar' => [
+                ['tip' => 'beyan', 'aciklama' => 'Doktora sonrası altı ay yurt dışında bulunmak', 'madde' => 'md. 5'],
+            ]],
+        ]],
+        cetvelVerisi: ['test-cetvel' => ['maddeler' => []]],
+    );
+
+    app()->instance(SartDeposu::class, $depo);
+
+    $user = User::factory()->onboarded()->create(['universite' => 'Test Üniversitesi', 'unvan' => 'Arş. Gör.']);
+    actingAs($user);
+
+    expect(Livewire::test(Dashboard::class)->instance()->sonuc()->durum)->toBe(Durum::Belirsiz);
+
+    BeyanOnayi::query()->create([
+        'user_id' => $user->id,
+        // Enjekte edilen eşik verisinde anahtara alan EKLENMEZ; üretim yolunda
+        // `esikler()` `-{alan}` ekliyor, burada olduğu gibi kalıyor.
+        'esik_anahtari' => 'test-dr-ilahiyat',
+        'kosul_anahtari' => SartSonucu::beyanAnahtariUret('Doktora sonrası altı ay yurt dışında bulunmak', 'md. 5'),
+    ]);
+
+    expect(Livewire::test(Dashboard::class)->instance()->sonuc()->durum)->toBe(Durum::Saglandi);
 });

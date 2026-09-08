@@ -697,6 +697,60 @@ test('telafi ilişkisi VE değil VEYA: ana koşul düşse de telafi belirsizse k
         ->and($sonuc->eksikler())->toBe([]);
 });
 
+test('işaretlenen beyan koşulu sağlanmış sayılır ve kökü belirsizlikten çıkarır', function () {
+    $depo = new SartDeposu(
+        esikVerisi: [[
+            'anahtar' => 'x-dr-fen', 'universite' => 'X Üni', 'kadro' => 'dr_ogr_uyesi',
+            'alan' => 'fen', 'birim' => null, 'cetvel' => 'x', 'notlar' => '',
+            'sart' => Kalip::ve('Şartlar', [Kalip::beyan('Doktora sonrası altı ay yurt dışında bulunmak', 'md. 5')]),
+        ]],
+        cetvelVerisi: ['x' => ['maddeler' => []]],
+    );
+
+    $esik = $depo->esik('x-dr-fen');
+    $anahtar = SartSonucu::beyanAnahtariUret('Doktora sonrası altı ay yurt dışında bulunmak', 'md. 5');
+
+    // İşaretsiz: motor belgeyi göremez, kök belirsiz.
+    expect($depo->degerlendir($esik, [], new Profil)->durum)->toBe(Durum::Belirsiz);
+
+    // İşaretli: beyan alınmıştır, koşul sağlanmış sayılır.
+    $onayli = $depo->degerlendir($esik, [], new Profil, [$anahtar]);
+
+    expect($onayli->durum)->toBe(Durum::Saglandi)
+        // "Belge bekliyor" sayacı da düşmeli, yoksa aday yaptığı işi görmez.
+        ->and($onayli->beyanlar())->toBe([])
+        ->and(sartDugum($onayli, 'yurt dışında')->beyanOnaylandi)->toBeTrue();
+});
+
+test('cetveli girilmemiş beyan işaretlenemez', function () {
+    // `hesaplanamiyor` bizim veri açığımız, adayın belgesi değil. İşareti
+    // kabul etmek, adayın bizim boşluğumuzu kendi lehine kapatması olurdu.
+    $depo = new SartDeposu(
+        esikVerisi: [[
+            'anahtar' => 'x-dr-fen', 'universite' => 'X Üni', 'kadro' => 'dr_ogr_uyesi',
+            'alan' => 'fen', 'birim' => null, 'cetvel' => 'x', 'notlar' => '',
+            'sart' => Kalip::ve('Şartlar', [Kalip::hesaplanamiyor('Dış ölçeğe göre en az 100 puan', 'md. 3')]),
+        ]],
+        cetvelVerisi: ['x' => ['maddeler' => []]],
+    );
+
+    $anahtar = SartSonucu::beyanAnahtariUret('Dış ölçeğe göre en az 100 puan', 'md. 3');
+    $sonuc = $depo->degerlendir($depo->esik('x-dr-fen'), [], new Profil, [$anahtar]);
+
+    expect($sonuc->durum)->toBe(Durum::Belirsiz)
+        ->and($sonuc->hesaplanamayanlar()[0]->beyanOnaylandi)->toBeFalse();
+});
+
+test('beyan anahtarı koşul METNİNDEN türer, ağaçtaki konumdan değil', function () {
+    // Yönerge dosyası düzenlenince düğümler yer değiştiriyor; konuma bağlı bir
+    // işaret sessizce BAŞKA bir koşula yapışırdı. Metin değişirse işaret düşer.
+    $anahtar = fn (string $aciklama, ?string $madde) => SartSonucu::beyanAnahtariUret($aciklama, $madde);
+
+    expect($anahtar('Aynı koşul', 'md. 1'))->toBe($anahtar('Aynı koşul', 'md. 1'))
+        ->and($anahtar('Aynı koşul', 'md. 1'))->not->toBe($anahtar('Aynı koşul', 'md. 2'))
+        ->and($anahtar('Aynı koşul', 'md. 1'))->not->toBe($anahtar('Başka koşul', 'md. 1'));
+});
+
 test('cetveli girilmemiş koşul, belge ile beyan edilecek koşuldan ayrılır', function () {
     // Sentetik veri: üretimdeki "cetvel eksik" düğümleri kapatıldıkça bu test
     // veriye bağlı kalırsa kendiliğinden anlamsızlaşır. Sınanan şey mekanizma.

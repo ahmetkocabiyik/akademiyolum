@@ -3,8 +3,11 @@
 
     @param \App\Services\Scoring\Sart\SartSonucu $dugum
     @param int $derinlik  İç içe geçme seviyesi (girinti için)
+    @param ?string $esikAnahtari  Verilirse "belge ile" koşulları işaretlenebilir
+                                  kutuya döner. Dashboard gibi salt okunur
+                                  yerlerde null geçilir.
 --}}
-@props(['dugum', 'derinlik' => 0])
+@props(['dugum', 'derinlik' => 0, 'esikAnahtari' => null])
 
 @php
     $renk = $dugum->durum->renk();
@@ -22,6 +25,11 @@
     // Sayaç zaten açığı gösteriyorsa gerekçe satırı tekrar olur. Yalnızca
     // sayacın anlatamadığı belirsizlikler yazılır (dönem kapsamı, öğretim dili,
     // eksik yazarlık rolü gibi).
+    // `kaynak_eksik` beyanları işaretlenebilir DEĞİL: onlar adayın belgesiyle
+    // değil bizim eksiğimizle ilgili (cetvel henüz girilmedi). İşaretlenseydi
+    // aday kendi lehine bizim boşluğumuzu kapatmış olurdu.
+    $beyanKutusu = $dugum->beyan && ! $dugum->kaynakEksik && $esikAnahtari !== null;
+
     $gerekceGoster = $dugum->belirsizlikNedeni
         && ! $dugum->beyan
         && ! ($olculur && $dugum->mevcut === null);
@@ -30,7 +38,16 @@
 <div @class(['flex flex-col gap-1.5', 'border-l border-line pl-3' => $derinlik > 0])>
     <div class="flex items-start justify-between gap-2 text-xs">
         <span class="flex min-w-0 items-start gap-1.5 text-ink-muted">
-            @if ($dugum->beyan)
+            @if ($beyanKutusu)
+                {{-- Motor bu koşulu göremez; belge adayın elinde. İşaret koşulu
+                     SAĞLANMIŞ saydırıyor, o yüzden gerçek bir onay kutusu. --}}
+                <input type="checkbox"
+                    @checked($dugum->beyanOnaylandi)
+                    wire:click="beyanDegistir('{{ $esikAnahtari }}', '{{ $dugum->beyanAnahtari() }}')"
+                    wire:loading.attr="disabled"
+                    aria-label="{{ $dugum->aciklama }} — belgem var"
+                    class="mt-px size-4 shrink-0 cursor-pointer rounded border-line text-brand focus:ring-brand" />
+            @elseif ($dugum->beyan)
                 <flux:icon name="information-circle" class="mt-px size-4 shrink-0 text-ink-subtle" />
             @else
                 <flux:icon :name="$dugum->durum->ikon()" variant="solid" class="mt-px size-4 shrink-0" style="color: {{ $renk }}" />
@@ -38,9 +55,11 @@
             <span @class(['min-w-0', 'font-semibold text-ink' => $birlestirici])>{{ $dugum->aciklama }}</span>
         </span>
 
-        <span class="shrink-0 font-semibold" style="color: {{ $dugum->beyan || $telafiIle ? 'var(--color-ink-subtle)' : $renk }}">
+        <span class="shrink-0 font-semibold" style="color: {{ ($dugum->beyan && ! $dugum->beyanOnaylandi) || $telafiIle ? 'var(--color-ink-subtle)' : $renk }}">
             @if ($dugum->kaynakEksik)
                 hesaplanamıyor
+            @elseif ($dugum->beyanOnaylandi)
+                beyan edildi
             @elseif ($dugum->beyan)
                 belge ile
             @elseif ($telafiIle)
@@ -94,12 +113,16 @@
             Bu üniversite puanlamayı kendi cetveline değil harici bir ölçeğe dayandırıyor; o ölçek
             henüz sisteme eklenmediği için koşulu sizin değerlendirmeniz gerekiyor.
         </div>
+    @elseif ($dugum->beyanOnaylandi)
+        <div class="text-[11px] text-ink-subtle">Belgeniz olduğunu beyan ettiniz; koşul sağlanmış sayılıyor.</div>
+    @elseif ($beyanKutusu)
+        <div class="text-[11px] text-ink-subtle">Bu koşul otomatik doğrulanamaz. Belgeniz varsa kutuyu işaretleyin.</div>
     @elseif ($dugum->beyan)
         <div class="text-[11px] text-ink-subtle">Bu koşul otomatik doğrulanamaz, belge ile teyit edilir.</div>
     @endif
 
     @foreach ($dugum->cocuklar as $i => $cocuk)
-        <x-sart-dugum :dugum="$cocuk" :derinlik="$derinlik + 1" :wire:key="'dugum-'.$derinlik.'-'.$i" />
+        <x-sart-dugum :dugum="$cocuk" :derinlik="$derinlik + 1" :esik-anahtari="$esikAnahtari" :wire:key="'dugum-'.$derinlik.'-'.$i" />
     @endforeach
 
     {{-- Telafi dalı: ana koşul sağlanmadığında yönergenin sunduğu alternatif. --}}
@@ -109,7 +132,7 @@
                 <flux:icon name="arrow-path-rounded-square" class="size-3" />
                 {{ $dugum->telafiIleSaglandi() ? 'Telafi ile sağlandı' : 'Yönergenin sunduğu telafi' }}
             </div>
-            <x-sart-dugum :dugum="$dugum->telafi" :derinlik="0" />
+            <x-sart-dugum :dugum="$dugum->telafi" :derinlik="0" :esik-anahtari="$esikAnahtari" />
         </div>
     @endif
 </div>

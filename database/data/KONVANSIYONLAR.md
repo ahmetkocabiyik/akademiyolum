@@ -2999,3 +2999,28 @@ etiket hakemlik satırındaydı (puanların 1/4'ü, 25). Kaynağın 4.7/4 bendi
 "yardımcı editörlük (ilgili puanların YARISI)" diyor ve en düşük editörlük
 satırı 50 olduğu için o da 25 ediyor — sayı aynı ama dayanak doğru satır ve
 `Hakemlik` etiketiyle çakışma kalkıyor.
+
+## `Kalip::beyan` CÜMLESİ ARTIK KALICI BİR ANAHTAR
+
+Beyan koşulları adaya **işaretlenebilir kutu** olarak gösteriliyor: "belgem
+var" diyen aday o koşulu SAĞLANMIŞ saydırıyor ve üniversite "Eksik Bilgi"den
+gerçek cevabına geçiyor. İşaret, koşulun `aciklama` + `madde` metninden
+türeyen bir anahtarla saklanıyor
+(`SartSonucu::beyanAnahtariUret()`, tablo: `beyan_onaylari`).
+
+Sonuçları:
+
+- **Bir beyanın cümlesini düzeltirsen o koşulun işaretleri DÜŞER** (kutu
+  işaretsize döner). Kasıtlı: konuma bağlı bir anahtar, düzenlenen dosyada
+  işareti sessizce BAŞKA bir koşula yapıştırırdı. Yine de gereksiz yere
+  yeniden yazma — adayın verdiği beyan kaybolur.
+- İşaret **eşik başına** tutuluyor. Aynı cümle iki yönergede geçse bile
+  ayrı ayrı işaretlenir; yönergeler aynı şeyi farklı kapsamla isteyebiliyor
+  ("doktora sonrası altı ay" kimi yerde yurt dışı, kimi yerde yurt içi de
+  sayıyor) ve tek işareti hepsine yaymak adayın vermediği beyanı üretirdi.
+- **`Kalip::hesaplanamiyor` işaretlenemez.** O düğüm adayın belgesiyle değil
+  BİZİM eksiğimizle ilgili (cetvel henüz girilmemiş); kutu konsaydı aday
+  kendi lehine bizim boşluğumuzu kapatırdı — §0'ın yasakladığı fazla sayma.
+  İkisini ayırt etmek bu yüzden artık puanı değil, adayın ne yapabildiğini de
+  belirliyor: gerçekten belgeyle teyit edilen koşula `beyan`, girilmemiş
+  cetvele `hesaplanamiyor` yaz.

@@ -3,14 +3,18 @@
 use App\Enums\Kategori;
 use App\Enums\TemelAlan;
 use App\Livewire\YonergeAnalizi;
+use App\Models\BeyanOnayi;
 use App\Models\Faaliyet;
 use App\Models\Universite;
 use App\Models\User;
 use App\Services\Scoring\Sart\SartDeposu;
+use App\Services\Scoring\Sart\SartSonucu;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
+
+const BEYAN_METNI = 'Doktora sonrası altı ay yurt dışında bulunmak';
 
 /**
  * Test cetveli: kullanıcının 4 faaliyeti tam 70 puan eder.
@@ -398,6 +402,114 @@ test('kaynak PDF eşlemesi olmayan üniversitede bağlantı hiç çıkmaz', func
 
     expect($bilesen->instance()->detay()['kaynak_pdf'])->toBeNull();
     $bilesen->assertDontSee('Analizin dayandığı yönerge');
+});
+
+/**
+ * Beyan koşulu taşıyan eşik: 55 puan barajı SAĞLANIYOR (aday 70 puan), tek
+ * belirsizlik "belge ile" satırı — böylece kutunun etkisi tek başına okunur.
+ *
+ * @return array<string, mixed>
+ */
+function beyanliEsik(string $universite): array
+{
+    return testEsik($universite, 55, ekKosullar: [
+        ['tip' => 'beyan', 'aciklama' => BEYAN_METNI, 'madde' => 'md. 5'],
+    ]);
+}
+
+function beyanAnahtari(): string
+{
+    return SartSonucu::beyanAnahtariUret(BEYAN_METNI, 'md. 5');
+}
+
+test('"belge ile" koşulu işaretlenince üniversite yapılabilire döner', function () {
+    Universite::factory()->create(['ad' => 'Beyan Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
+    depoBagla([beyanliEsik('Beyan Üni')]);
+
+    $bul = fn (array $sonuclar) => collect($sonuclar)
+        ->first(fn (array $s) => $s['universite']->ad === 'Beyan Üni');
+
+    $bilesen = Livewire::test(YonergeAnalizi::class);
+    $once = $bul($bilesen->instance()->sonuclar());
+
+    // Tek "belge ile" satırı bütün üniversiteyi Eksik Bilgi'de tutuyor.
+    expect($once['durum'])->toBe('eksik_bilgi')
+        ->and($once['beyan_sayisi'])->toBe(1);
+
+    $bilesen->call('beyanDegistir', $once['esik']['anahtar'], beyanAnahtari());
+    $sonra = $bul($bilesen->instance()->sonuclar());
+
+    expect($sonra['durum'])->toBe('uygun')
+        ->and($sonra['beyan_sayisi'])->toBe(0);
+
+    // İşaret kalıcı: bileşen yeniden kurulunca da duruyor.
+    expect($bul(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())['durum'])->toBe('uygun');
+});
+
+test('aynı kutuya yeniden tıklamak beyanı geri alır', function () {
+    Universite::factory()->create(['ad' => 'Beyan Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
+    depoBagla([beyanliEsik('Beyan Üni')]);
+
+    $esikAnahtari = Livewire::test(YonergeAnalizi::class)->instance()->sonuclar()[0]['esik']['anahtar'];
+
+    $bilesen = Livewire::test(YonergeAnalizi::class)
+        ->call('beyanDegistir', $esikAnahtari, beyanAnahtari());
+
+    expect(BeyanOnayi::count())->toBe(1)
+        ->and($bilesen->instance()->sonuclar()[0]['durum'])->toBe('uygun');
+
+    $bilesen->call('beyanDegistir', $esikAnahtari, beyanAnahtari());
+
+    expect(BeyanOnayi::count())->toBe(0)
+        ->and($bilesen->instance()->sonuclar()[0]['durum'])->toBe('eksik_bilgi');
+});
+
+test('işaret yalnız işaretlendiği üniversiteye işler', function () {
+    // Aynı cümle iki yönergede geçiyor; biri işaretlenince öteki değişmemeli.
+    Universite::factory()->create(['ad' => 'Beyan Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
+    Universite::factory()->create(['ad' => 'Öteki Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
+    depoBagla([beyanliEsik('Beyan Üni'), beyanliEsik('Öteki Üni')]);
+
+    $bilesen = Livewire::test(YonergeAnalizi::class);
+    $esikAnahtari = collect($bilesen->instance()->sonuclar())
+        ->first(fn (array $s) => $s['universite']->ad === 'Beyan Üni')['esik']['anahtar'];
+
+    $bilesen->call('beyanDegistir', $esikAnahtari, beyanAnahtari());
+
+    $durumlar = collect($bilesen->instance()->sonuclar())
+        ->mapWithKeys(fn (array $s) => [$s['universite']->ad => $s['durum']]);
+
+    expect($durumlar['Beyan Üni'])->toBe('uygun')
+        ->and($durumlar['Öteki Üni'])->toBe('eksik_bilgi');
+});
+
+test('detay panelinde "belge ile" koşulu işaretlenebilir kutu olarak çıkar', function () {
+    Universite::factory()->create(['ad' => 'Beyan Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
+    depoBagla([beyanliEsik('Beyan Üni')]);
+
+    $uniId = Universite::query()->where('ad', 'Beyan Üni')->value('id');
+    $esikAnahtari = Livewire::test(YonergeAnalizi::class)->instance()->sonuclar()[0]['esik']['anahtar'];
+
+    Livewire::test(YonergeAnalizi::class)
+        ->call('detayAc', $uniId)
+        ->assertSee('Belgeniz varsa kutuyu işaretleyin')
+        ->assertSeeHtml('type="checkbox"')
+        ->assertSeeHtml("beyanDegistir('{$esikAnahtari}', '".beyanAnahtari()."')");
+});
+
+test('cetveli girilmemiş koşula kutu konmaz', function () {
+    // Bizim veri açığımız; aday işaretleyebilseydi kendi lehine kapatırdı.
+    Universite::factory()->create(['ad' => 'Beyan Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
+    depoBagla([testEsik('Beyan Üni', 55, ekKosullar: [
+        ['tip' => 'beyan', 'aciklama' => 'Dış ölçeğe göre en az 100 puan', 'kaynak_eksik' => true],
+    ])]);
+
+    $uniId = Universite::query()->where('ad', 'Beyan Üni')->value('id');
+
+    Livewire::test(YonergeAnalizi::class)
+        ->call('detayAc', $uniId)
+        ->assertSee('Dış ölçeğe göre en az 100 puan')
+        ->assertDontSeeHtml('type="checkbox"');
 });
 
 test('detay paneli kapanınca içerik korunur (kapanış animasyonu titremesin)', function () {

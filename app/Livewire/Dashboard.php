@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Enums\Kategori;
 use App\Enums\TemelAlan;
+use App\Models\BeyanOnayi;
 use App\Models\Faaliyet;
 use App\Services\Scoring\Sart\Durum;
 use App\Services\Scoring\Sart\SartDegerlendirici;
@@ -117,7 +118,31 @@ class Dashboard extends Component
             $esik,
             $this->onayli,
             $user->sartProfili($this->onayli),
+            // Yönerge Analizi'nde işaretlenen "belgem var" beyanları burada da
+            // geçerli; iki ekran aynı eşik için farklı durum gösteremez.
+            $this->beyanOnaylari($esik['anahtar']),
         );
+    }
+
+    /**
+     * Adayın Yönerge Analizi'nde işaretlediği "belgem var" beyanları.
+     *
+     * @return list<string>
+     */
+    private function beyanOnaylari(string $esikAnahtari): array
+    {
+        $anahtarlar = [];
+
+        $onaylar = BeyanOnayi::query()
+            ->where('user_id', Auth::id())
+            ->where('esik_anahtari', $esikAnahtari)
+            ->get();
+
+        foreach ($onaylar as $onay) {
+            $anahtarlar[] = $onay->kosul_anahtari;
+        }
+
+        return $anahtarlar;
     }
 
     /**

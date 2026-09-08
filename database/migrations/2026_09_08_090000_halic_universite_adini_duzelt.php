@@ -64,11 +64,14 @@ return new class extends Migration
      */
     private function idleri(string $tablo, string $sutun, string $deger): array
     {
-        return DB::table($tablo)
-            ->select('id', $sutun)
-            ->get()
-            ->filter(fn (object $satir) => $satir->{$sutun} === $deger)
-            ->pluck('id')
-            ->all();
+        $idler = [];
+
+        foreach (DB::table($tablo)->select('id', $sutun)->get() as $satir) {
+            if ($satir->{$sutun} === $deger) {
+                $idler[] = (int) $satir->id;
+            }
+        }
+
+        return $idler;
     }
 };

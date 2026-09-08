@@ -385,9 +385,15 @@ class SartDeposu
      *
      * @param  Esik  $esik
      * @param  iterable<Faaliyet>  $faaliyetler
+     * @param  list<string>  $beyanOnaylari  Adayın belgesiyle teyit ettiği beyan
+     *                                       düğümlerinin anahtarları
      */
-    public function degerlendir(array $esik, iterable $faaliyetler, Profil $profil): SartSonucu
-    {
+    public function degerlendir(
+        array $esik,
+        iterable $faaliyetler,
+        Profil $profil,
+        array $beyanOnaylari = [],
+    ): SartSonucu {
         $katalog = $this->katalog($esik['cetvel']);
 
         if ($katalog === null) {
@@ -401,6 +407,7 @@ class SartDeposu
             fn (string $anahtar): ?array => $this->esik(
                 str_replace('{alan}', $esik['alan'], $anahtar),
             ),
+            $beyanOnaylari,
         );
 
         return $degerlendirici->degerlendir($esik['sart'], $faaliyetler, $profil);

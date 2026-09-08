@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Enums\TemelAlan;
+use App\Models\BeyanOnayi;
 use App\Models\Faaliyet;
 use App\Models\Universite;
 use App\Services\Scoring\Sart\Durum;
@@ -351,7 +352,7 @@ class YonergeAnalizi extends Component
                     return null;
                 }
 
-                $sonuc = $depo->degerlendir($esik, $faaliyetler, $profil);
+                $sonuc = $depo->degerlendir($esik, $faaliyetler, $profil, $this->beyanOnaylari()[$esik['anahtar']] ?? []);
                 $toplamDugum = $sonuc->rolile('toplam');
 
                 // Puansız yönergeler (Sabancı, Samsun) şartlarını adetle yazıyor;
@@ -462,6 +463,50 @@ class YonergeAnalizi extends Component
     /**
      * Kart tıklamasıyla detay modalını açar.
      */
+    /**
+     * Adayın işaretlediği beyan koşulları: `['esik-anahtari' => ['a1b2…']]`.
+     *
+     * @return array<string, list<string>>
+     */
+    #[Computed]
+    public function beyanOnaylari(): array
+    {
+        $gruplu = [];
+
+        foreach (BeyanOnayi::query()->where('user_id', Auth::id())->get() as $onay) {
+            $gruplu[$onay->esik_anahtari][] = $onay->kosul_anahtari;
+        }
+
+        return $gruplu;
+    }
+
+    /**
+     * "Bu belgem var" kutusunu açıp kapatır.
+     *
+     * İşaret koşulu SAĞLANMIŞ saydırdığı için sonucu değiştirir; bu yüzden
+     * sonuçlara dayanan bütün computed'ler tazelenmeli.
+     */
+    public function beyanDegistir(string $esikAnahtari, string $kosulAnahtari): void
+    {
+        $kayit = BeyanOnayi::query()->where([
+            'user_id' => Auth::id(),
+            'esik_anahtari' => $esikAnahtari,
+            'kosul_anahtari' => $kosulAnahtari,
+        ])->first();
+
+        if ($kayit !== null) {
+            $kayit->delete();
+        } else {
+            BeyanOnayi::query()->create([
+                'user_id' => Auth::id(),
+                'esik_anahtari' => $esikAnahtari,
+                'kosul_anahtari' => $kosulAnahtari,
+            ]);
+        }
+
+        unset($this->beyanOnaylari, $this->sonuclar, $this->listelenen, $this->ozet, $this->detay);
+    }
+
     public function detayAc(int $universiteId): void
     {
         $this->secilenUniversiteId = $universiteId;

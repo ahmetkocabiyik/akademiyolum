@@ -25,6 +25,9 @@ class SartDegerlendirici
     public function __construct(
         private readonly MaddeKatalogu $katalog,
         private $esikCozucu = null,
+        /** Adayın "belgem var" diye işaretlediği beyan düğümlerinin anahtarları.
+         * @var list<string> */
+        private readonly array $beyanOnaylari = [],
     ) {}
 
     /**
@@ -49,18 +52,7 @@ class SartDegerlendirici
             'adet' => $this->adet($dugum, $faaliyetler, $profil),
             'metrik' => $this->metrik($dugum, $faaliyetler, $profil),
             'referans' => $this->referans($dugum, $faaliyetler, $profil),
-            'beyan' => new SartSonucu(
-                tip: 'beyan',
-                aciklama: $dugum['aciklama'],
-                durum: Durum::Belirsiz,
-                beyan: true,
-                belirsizlikNedeni: ($dugum['kaynak_eksik'] ?? false)
-                    ? 'Bu koşulun dayandığı puan cetveli henüz sisteme eklenmedi'
-                    : 'Belge ile beyan edilmeli',
-                madde: $dugum['madde'] ?? null,
-                kaynakEksik: $dugum['kaynak_eksik'] ?? false,
-                rol: $dugum['rol'] ?? null,
-            ),
+            'beyan' => $this->beyan($dugum),
             default => throw new InvalidArgumentException("Bilinmeyen düğüm tipi: {$dugum['tip']}"),
         };
 
@@ -107,6 +99,7 @@ class SartDegerlendirici
             kapsam: $sonuc->kapsam,
             donusumler: $sonuc->donusumler,
             rol: $sonuc->rol,
+            beyanOnaylandi: $sonuc->beyanOnaylandi,
         );
     }
 
@@ -294,6 +287,48 @@ class SartDegerlendirici
             madde: $dugum['madde'] ?? null,
             donusumler: $uygulananDonusumler,
             rol: $dugum['rol'] ?? null,
+        );
+    }
+
+    /**
+     * Otomatik doğrulanamayan koşul.
+     *
+     * Normalde BELİRSİZ döner — motor adayın belgesini göremez. Aday panelden
+     * "bu belgem var" kutusunu işaretlemişse koşul SAĞLANDI sayılır: beyan
+     * zaten adayın kendi belgesi hakkındaki ifadesidir, motorun tahmini değil.
+     *
+     * `kaynak_eksik` beyanları BUNUN DIŞINDA: onlar adayın belgesiyle değil
+     * bizim eksiğimizle ilgili (cetvel henüz girilmemiş). İşaretlenebilir
+     * olsalardı aday kendi lehine bizim boşluğumuzu kapatmış olurdu — §0'ın
+     * yasakladığı fazla sayma.
+     *
+     * @param  Dugum  $dugum
+     */
+    private function beyan(array $dugum): SartSonucu
+    {
+        $kaynakEksik = (bool) ($dugum['kaynak_eksik'] ?? false);
+        $madde = $dugum['madde'] ?? null;
+
+        $onaylandi = ! $kaynakEksik && in_array(
+            SartSonucu::beyanAnahtariUret($dugum['aciklama'], $madde),
+            $this->beyanOnaylari,
+            true,
+        );
+
+        return new SartSonucu(
+            tip: 'beyan',
+            aciklama: $dugum['aciklama'],
+            durum: $onaylandi ? Durum::Saglandi : Durum::Belirsiz,
+            beyan: true,
+            belirsizlikNedeni: match (true) {
+                $onaylandi => null,
+                $kaynakEksik => 'Bu koşulun dayandığı puan cetveli henüz sisteme eklenmedi',
+                default => 'Belge ile beyan edilmeli',
+            },
+            madde: $madde,
+            kaynakEksik: $kaynakEksik,
+            rol: $dugum['rol'] ?? null,
+            beyanOnaylandi: $onaylandi,
         );
     }
 

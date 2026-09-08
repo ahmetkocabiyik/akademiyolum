@@ -562,7 +562,7 @@
                     <div class="mt-3 flex flex-col gap-3">
                         @foreach ($d['sonuc']->kosullar() as $i => $kosul)
                             <div wire:key="kosul-{{ $i }}">
-                                <x-sart-dugum :dugum="$kosul" />
+                                <x-sart-dugum :dugum="$kosul" :esik-anahtari="$esik['anahtar']" />
                             </div>
                         @endforeach
                     </div>
