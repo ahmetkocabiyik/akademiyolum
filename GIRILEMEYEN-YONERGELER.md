@@ -1097,3 +1097,17 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
 - **`Kurul / Komisyon Üyeliği`** üniversite İÇİ kurulları temsil ediyor ve
   kapsam taşımıyor; 167 cetvelin 81'inde karşılıksız — çoğu yönerge üniversite
   içi komisyon görevine puan vermiyor.
+
+## Yayın kurulu üyeliği taraması (08.09.2026) — girilemeyen kalemler
+
+- **Kaynakta yayın kurulu satırı olmayan yönergelerde etiket karşılıksız**
+  (DPÜ, Erzurum Teknik, İstanbul 29 Mayıs, Süleyman Demirel). Yayın kurulu
+  üyeliği olan aday bu dört cetvelde puan almıyor; doğrusu budur, kaynak
+  o görevi puanlamıyor.
+- **BAŞ EDİTÖRLÜK / YARDIMCI EDİTÖRLÜK / ALAN EDİTÖRLÜĞÜ ayrımı** sözlükte
+  yok: dergi kademesi etiketleri (`WoS Dergi (Q1…)`, `ESCI / Scopus Dergi`
+  vb.) yalnız derginin indeksini taşıyor, editörlük rolünü değil. Kaynak
+  baş editörlüğü yardımcı editörlükten ayırıyorsa (Kırıkkale 150 vs yarısı,
+  Biruni 20/15/8/5) satır en düşük role yazılıyor.
+- **"Editör listesinde yer almak"** (İTÜ H.3) ile "yayın kurulu üyeliği"
+  aynı etiketten sayılıyor; kaynaklar ikisini ayırmıyor.

@@ -2956,3 +2956,29 @@ Bunu yakalayan şey etiket-değer taraması değil, **etiketin adı ile bulundu�
 varyantın adının çelişmesi**: `Spor Federasyonu Kurul Üyeliği` yalnız spor
 varyantında bulunmalı. Alan adını taşıyan etiketler (`Spor Federasyonu…`)
 için bu kontrol bir satırlık ve kesin.
+
+## HAKEMLİK SATIRI YAYIN KURULU ÜYELİĞİ DEĞİLDİR
+
+`Yayın Kurulu Üyeliği` kapsamsız VE kademesiz tek etiket: ne uluslararası/
+ulusal ne de dergi indeksi ayrımı taşıyor. Kaynak birden çok kademede yayın
+kurulu üyeliği yazıyorsa satır en düşüğünde durur (Ataşehir Adıgüzel
+50/40/30/25 → 25, Iğdır 40/25 → 25).
+
+Turun asıl bulgusu başka bir biçimdi: **kaynakta yayın kurulu satırı hiç
+yokken etiketin HAKEMLİK satırına iliştirilmesi.** Beş yönergede böyleydi.
+İki rol ayrı — hakemlik makale başına verilen bir iş, yayın kurulu üyeliği
+süreklilik taşıyan bir görev — ve kaynaklar bunları ayrı satırlarda yazıyor.
+Etiket hakemlik satırında kalınca kaynağın vermediği puanı veriyor, üstelik
+"en az N hakemlik" tipi ADET koşullarını da besliyor.
+
+**Ucuz detektör (kaynak okumadan):** etiketin bulunduğu satırın `baslik`'i
+`yayın kurul|danışma kurul|editör(ler) kurul|editoryal kurul|editör listesi`
+desenlerinden hiçbirini içermiyorsa işaret ver. 137 satırın 28'i işaret
+verdi; çoğu meşru eşanlamlıydı ("editör listesinde yer almak", "yardımcı
+editörlük"), beşi gerçek hataydı.
+
+**Kaynağın en yakın satırını ara, en kolay satırı değil.** Kırıkkale'de
+etiket hakemlik satırındaydı (puanların 1/4'ü, 25). Kaynağın 4.7/4 bendi
+"yardımcı editörlük (ilgili puanların YARISI)" diyor ve en düşük editörlük
+satırı 50 olduğu için o da 25 ediyor — sayı aynı ama dayanak doğru satır ve
+`Hakemlik` etiketiyle çakışma kalkıyor.

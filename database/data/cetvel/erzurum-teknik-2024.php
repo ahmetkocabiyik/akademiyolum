@@ -215,7 +215,12 @@ $maddeler = [
     // ══ N. ÜYELİK VE HAKEMLİK ══
     'N1' => ['baslik' => 'Q1, Q2 veya Q3 kategorisindeki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)'], 'puan' => 30],
     'N2' => ['baslik' => 'Q4 kategorisindeki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q4)'], 'puan' => 10],
-    'N3-N6' => ['baslik' => 'Dergi hakemliği, proje hakemliği ya da panel üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 1],
+    // Kaynakta YAYIN KURULU ÜYELİĞİ satırı YOK; etiket hakemlik satırında
+    // duruyordu. İki rol ayrı: hakemlik makale başına, yayın kurulu
+    // üyeliği süreklilik taşıyan bir görev. Etiket burada kalsaydı
+    // kaynağın vermediği puanı verir ve hakemlik SAYISI koşullarını
+    // da beslerdi.
+    'N3-N6' => ['baslik' => 'Dergi hakemliği, proje hakemliği ya da panel üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
     'N4' => ['baslik' => 'Uluslararası mimarlık, planlama, sanat ve tasarım etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)'], 'puan' => 10],
     'N5' => ['baslik' => 'Üniversitelerarası Kurulun tanımladığı dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 15],
     'N7' => ['baslik' => 'Ulusal mimarlık, planlama, sanat ve tasarım etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 5],

@@ -221,7 +221,12 @@ $govde = function (array $s) use ($SCI, $MAKALE, $KISA, $sanatJuriU): array {
         'H311' => ['baslik' => 'Erasmus, Mevlana gibi uluslararası değişim programlarından yararlanmak ya da misafir öğretim üyeliği', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Değişim Programı Dersi', 'Yabancı Dilde Ders'], 'puan' => 5],
 
         // ══ I. ÜYELİK VE HAKEMLİKLER ══
-        'I208' => ['baslik' => 'Bilimsel dergilerde yayın hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 1],
+        // Kaynakta YAYIN KURULU ÜYELİĞİ satırı YOK; etiket hakemlik satırında
+        // duruyordu. İki rol ayrı: hakemlik makale başına, yayın kurulu
+        // üyeliği süreklilik taşıyan bir görev. Etiket burada kalsaydı
+        // kaynağın vermediği puanı verir ve hakemlik SAYISI koşullarını
+        // da beslerdi.
+        'I208' => ['baslik' => 'Bilimsel dergilerde yayın hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
         // Kaynak I16 (ULUSLARARASI sanat/tasarım etkinliklerinde jüri üyeliği) 1, I202 (ULUSAL) 0,5 diyor. 0,5 aşağı yuvarlanınca 0 ettiği için ulusal etiket karşılıksız kalıyor; satırda kalsaydı 1 puan verirdi.
         'I16' => ['baslik' => 'Uluslararası sanat ya da tasarım etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuriU, 'puan' => 1],
     ];

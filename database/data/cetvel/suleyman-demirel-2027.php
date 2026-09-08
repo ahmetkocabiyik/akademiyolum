@@ -122,7 +122,12 @@ $maddeler = [
     '12.a' => ['baslik' => 'SCIE, SSCI, AHCI, ESCI veya SCOPUS kapsamındaki dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 2],
     '12.b' => ['baslik' => 'BKCI veya SCOPUS kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Kitap Editörlüğü'], 'puan' => 1],
     '12.c' => ['baslik' => 'TR Dizin kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 1],
-    '12.d' => ['baslik' => 'Akademik yayınlarda hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 1],
+    // Kaynakta YAYIN KURULU ÜYELİĞİ satırı YOK; etiket hakemlik satırında
+    // duruyordu. İki rol ayrı: hakemlik makale başına, yayın kurulu
+    // üyeliği süreklilik taşıyan bir görev. Etiket burada kalsaydı
+    // kaynağın vermediği puanı verir ve hakemlik SAYISI koşullarını
+    // da beslerdi.
+    '12.d' => ['baslik' => 'Akademik yayınlarda hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
 
     // ══ 13. YARIŞMA, PROJE VE YAZILIM ══
     '13.a' => ['baslik' => 'Mimarlık, planlama, kentsel tasarım, peyzaj, iç mimari ya da endüstri ürünleri tasarımı yarışmalarında ödül veya mansiyon almak', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon', 'Uluslararası Bilim/Sanat Ödülü', 'Ulusal Bilim/Sanat Ödülü'], 'puan' => 15],

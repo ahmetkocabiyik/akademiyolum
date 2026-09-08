@@ -90,7 +90,12 @@ $maddeler = [
     'D30' => ['baslik' => 'Ulusal hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 7],
     'D33' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitap ya da kitap dizisi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
     'D34' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitap ya da kitap dizisi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 7],
-    'D35' => ['baslik' => 'Hakemli dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 2],
+    // Kaynakta YAYIN KURULU ÜYELİĞİ satırı YOK; etiket hakemlik satırında
+    // duruyordu. İki rol ayrı: hakemlik makale başına, yayın kurulu
+    // üyeliği süreklilik taşıyan bir görev. Etiket burada kalsaydı
+    // kaynağın vermediği puanı verir ve hakemlik SAYISI koşullarını
+    // da beslerdi.
+    'D35' => ['baslik' => 'Hakemli dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
     'D38' => ['baslik' => 'Tamamlanan doktora tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'puan' => 10],
     'D39' => ['baslik' => 'Tamamlanan yüksek lisans tezi danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 5],
     'D43' => ['baslik' => 'Lisansüstü tez savunma ya da tez izleme jürisi üyeliği', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 1],

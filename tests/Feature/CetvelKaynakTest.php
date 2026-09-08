@@ -1931,3 +1931,48 @@ test('kurul üyeliğinde kapsam kademesi ayrışıyor', function (string $cetvel
         'Dış Kuruluş Kurul Üyeliği (Ulusal)' => 0,
     ]],
 ]);
+
+/**
+ * `Yayın Kurulu Üyeliği` KAPSAMSIZ VE KADEMESİZ tek etiket: ne uluslararası/
+ * ulusal ne de dergi indeksi ayrımı taşıyor. Kaynak birden çok kademede
+ * yayın kurulu üyeliği yazıyorsa satır EN DÜŞÜĞÜNDE durmalı (Ataşehir
+ * Adıgüzel 50/40/30/25 → 25, Iğdır 40/25 → 25).
+ *
+ * Bu turun asıl bulgusu farklı bir biçimdi: **kaynakta yayın kurulu satırı
+ * hiç yokken etiketin HAKEMLİK satırına iliştirilmesi.** Hakemlik makale
+ * başına verilen bir görev, yayın kurulu üyeliği ise süreklilik taşıyan bir
+ * görev; ikisi ayrı satır. Etiket hakemlik satırında kalınca kaynağın
+ * vermediği puanı veriyor ve hakemlik SAYISI koşullarını da besliyordu.
+ *
+ * Değerler 08.09.2026'da kaynak PDF'lerinden okundu.
+ */
+test('yayın kurulu üyeliği kaynağın kendi satırından sayılıyor', function (string $cetvel, int $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $puan = $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Editorluk, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => 'Yayın Kurulu Üyeliği', 'rol' => null, 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan)->toBe($beklenen);
+})->with([
+    // Kaynakta yayın kurulu satırı YOK → etiket karşılıksız kalmalı.
+    // Dördünde de hakemlik satırına iliştirilmişti.
+    ['dpu-2024', 0],
+    ['erzurum-teknik-2024-muhendislik-docentlik', 0],
+    ['istanbul-29-mayis-2017', 0],
+    ['suleyman-demirel-2027', 0],
+    // Kırıkkale'de de yayın kurulu satırı yok ama kaynağın 4.7/4 bendi
+    // "yardımcı editörlük (ilgili puanların YARISI)" diyor; en düşük
+    // editörlük satırı ulusal hakemli dergide 50 → 25. Etiket önce
+    // hakemlik satırında (puanların 1/4'ü) duruyordu; sayı aynı, dayanak
+    // doğru satır.
+    ['kirikkale-2022', 25],
+    // Kademeli kaynaklarda EN DÜŞÜK değer: Ataşehir 50/40/30/25, Iğdır 40/25.
+    ['atasehir-adiguzel-2018', 25],
+    ['igdir-2023', 25],
+]);

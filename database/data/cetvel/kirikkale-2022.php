@@ -164,7 +164,14 @@ $maddeler = array_merge([
     // ══ 4.7 EDİTÖR VE HAKEMLİKLER ══
     '47-1' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergilerinde editörlük ya da yardımcı editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 75],
     '47-2' => ['baslik' => 'Diğer uluslararası indeksli ya da ULAKBİM taranan dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi'], 'puan' => 50],
-    '47-3' => ['baslik' => 'Bilimsel dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 25],
+    // Kaynakta YAYIN KURULU ÜYELİĞİ satırı YOK. Etiket 47-3'te (hakemlik,
+    // "ilgili puanların 1/4'ü") duruyordu; hakemlik ile yayın kurulu üyeliği
+    // ayrı roller. Kaynağın en yakın satırı 4.7/4 "yardımcı editörlük
+    // (ilgili maddelerde belirtilen puanların YARISI)"; en düşük editörlük
+    // satırı ulusal hakemli dergide 50 olduğu için yarısı 25 — sayı aynı
+    // kalıyor ama dayanağı doğru satır.
+    '47-3' => ['baslik' => 'Bilimsel dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 25],
+    '47-4' => ['baslik' => 'Bilimsel dergilerde yardımcı editörlük ya da yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 25],
     '47-5' => ['baslik' => 'Uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 75],
     '47-6' => ['baslik' => 'Ulusal kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 50],
     '47-7' => ['baslik' => 'Ulusal hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 50],
