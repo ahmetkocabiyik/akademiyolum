@@ -1855,3 +1855,79 @@ test('jüri hizmetinde kapsam kademesi ayrışıyor', function (string $cetvel, 
         'Jüri Üyeliği (Uluslararası)' => 7, 'Jüri Üyeliği (Ulusal)' => 3,
     ]],
 ]);
+
+/**
+ * DIŞ KURULUŞ ve SPOR FEDERASYONU KURUL ÜYELİĞİ — iki kapsam çifti.
+ *
+ * Bu ailede baskın hata biçimi ötekilerden FARKLI çıktı: kapsam çökmesi değil,
+ * KAPSAMSIZ KAYNAK SATIRINA TEK ETİKET bağlanması. Üç yönergede satır açıkça
+ * kapsamsız ("Olimpik spor federasyonlarının kurullarında görev") ama yalnız
+ * uluslararası etiket bağlıydı; ulusal federasyon kurulunda görev alan aday
+ * hiç puan almıyordu.
+ *
+ * Değerler 08.09.2026'da kaynak PDF'lerinden okundu.
+ */
+test('kurul üyeliğinde kapsam kademesi ayrışıyor', function (string $cetvel, array $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $kodlar = $katalog->coz(['*']);
+    $gercek = [];
+    foreach (array_keys($beklenen) as $etiket) {
+        $gercek[$etiket] = $katalog->puan(
+            new Faaliyet([
+                'kategori' => Kategori::IdariGorev, 'tur' => 'Test', 'baslik' => 'Test',
+                'kaynak' => $etiket, 'rol' => null, 'durum' => 'onaylandi',
+            ]),
+            $kodlar,
+        );
+    }
+
+    expect($gercek)->toBe($beklenen);
+})->with([
+    // Ege 10.3/d satırı "(Uluslararası/Ulusal)" diyor ve değeri "40 / 20"
+    // biçiminde veriyor; iki kapsam da 20'de duruyordu.
+    ['ege-2026', [
+        'Spor Federasyonu Kurul Üyeliği (Uluslararası)' => 40,
+        'Spor Federasyonu Kurul Üyeliği (Ulusal)' => 20,
+    ]],
+    // Kaynak satırı kapsamsız → iki etiket de aynı satırdan sayılır.
+    // Önce yalnız uluslararası etiket bağlıydı.
+    ['bartin-2022', [
+        'Spor Federasyonu Kurul Üyeliği (Uluslararası)' => 60,
+        'Spor Federasyonu Kurul Üyeliği (Ulusal)' => 60,
+    ]],
+    // Sinop'ta satır ayrıca YANLIŞ TABLODAYDI: B ailesinde (sosyal, filoloji,
+    // hukuk, ilahiyat, mimarlık) duruyordu, oysa kaynakta TABLO 11 (SPOR
+    // BİLİMLERİ) satırı. Spor adayı hiç puan almazken sosyal adayı almaması
+    // gereken puanı alıyordu.
+    ['sinop-2025-spor', [
+        'Spor Federasyonu Kurul Üyeliği (Uluslararası)' => 2,
+        'Spor Federasyonu Kurul Üyeliği (Ulusal)' => 2,
+    ]],
+    ['sinop-2025-sosyal', [
+        'Spor Federasyonu Kurul Üyeliği (Uluslararası)' => 0,
+        'Spor Federasyonu Kurul Üyeliği (Ulusal)' => 0,
+    ]],
+    ['suleyman-demirel-2027', [
+        'Spor Federasyonu Kurul Üyeliği (Uluslararası)' => 4,
+        'Spor Federasyonu Kurul Üyeliği (Ulusal)' => 4,
+    ]],
+    // ULUSLARARASI ETİKETİN BOŞ KALMASI DOĞRU olabilir: bu yönergelerin dış
+    // kuruluş satırları yalnız YURT İÇİ organları anıyor (kamu kurumu
+    // komisyonu, meslek odası, bakanlık kurulu), uluslararası karşılığı yok.
+    ['gazi-2024', [
+        'Dış Kuruluş Kurul Üyeliği (Uluslararası)' => 0,
+        'Dış Kuruluş Kurul Üyeliği (Ulusal)' => 2,
+    ]],
+    ['bitlis-2024', [
+        'Dış Kuruluş Kurul Üyeliği (Uluslararası)' => 0,
+        'Dış Kuruluş Kurul Üyeliği (Ulusal)' => 8,
+    ]],
+    // Tersi de doğru olabilir: Alanya'nın satırı yalnız "uluslararası
+    // nitelikli bilimsel/mesleki kuruluş" diyor, ulusal karşılığı yok.
+    ['alanya-2024', [
+        'Dış Kuruluş Kurul Üyeliği (Uluslararası)' => 10,
+        'Dış Kuruluş Kurul Üyeliği (Ulusal)' => 0,
+    ]],
+]);

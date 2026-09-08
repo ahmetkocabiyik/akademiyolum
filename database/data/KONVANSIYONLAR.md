@@ -2925,3 +2925,34 @@ satırı bölmek ilk bakışta doğru göründü — ama H.29 aynı katalogda 25
 için motor zaten onu seçiyor; bölmek sonucu değiştirmediği gibi kaynağın
 kapsamsız satırını da yanlış temsil ediyordu. **İki satır aynı etikete
 düşüyorsa hangisinin kazandığına bak, körlemesine bölme.**
+
+## KAPSAMSIZ KAYNAK SATIRINA İKİ ETİKETİ DE BAĞLA
+
+Kurul üyeliği taramasında baskın hata biçimi ötekilerden farklı çıktı: kapsam
+çökmesi değil, **kapsamsız kaynak satırına tek etiket** bağlanması. Üç
+yönergede satır açıkça kapsamsız ("Olimpik spor federasyonlarının
+kurullarında görev almak") ama yalnız uluslararası etiket bağlıydı; ulusal
+federasyon kurulunda görev alan aday hiç puan almıyordu.
+
+Kural iki yönlü:
+
+* Kaynak satırı kapsam SÖYLEMİYORSA iki etiketi de bağla, tek değerle.
+* Kaynak satırı kapsam SÖYLÜYORSA ve karşı kapsamın satırı YOKSA öteki etiket
+  karşılıksız kalır — o da doğrudur. Bu ailede altı yönergenin dış kuruluş
+  satırları yalnız yurt içi organları anıyor (kamu kurumu komisyonu, meslek
+  odası, bakanlık kurulu); uluslararası etiketin boş kalması hata değil.
+
+Detektörün `0/N` işaretini "ters" sanma: çoğu zaman "karşı kapsamın satırı
+yok" demektir, kaynağa bakmadan ayırt edilemez.
+
+## SATIR DOĞRU AMA TABLO YANLIŞ
+
+Sinop'un "Olimpik spor federasyonlarının kurullarında görev" satırı kaynakta
+TABLO 11'de (Spor Bilimleri) ama cetvelde B ailesine (sosyal, filoloji,
+hukuk, ilahiyat, mimarlık) konmuştu: **spor adayı hiç puan almazken sosyal
+adayı almaması gerekeni alıyordu.** Değer doğru, etiket doğru, tablo yanlış.
+
+Bunu yakalayan şey etiket-değer taraması değil, **etiketin adı ile bulunduğu
+varyantın adının çelişmesi**: `Spor Federasyonu Kurul Üyeliği` yalnız spor
+varyantında bulunmalı. Alan adını taşıyan etiketler (`Spor Federasyonu…`)
+için bu kontrol bir satırlık ve kesin.

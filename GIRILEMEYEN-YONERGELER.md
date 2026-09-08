@@ -1083,3 +1083,17 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
   yarışma jürisiyle karıştırılmadı.
 - **Tez jürisi** (`Tez İzleme / Jüri Üyeliği`) ayrı kategoride
   (`tez_danismanligi`) ve bu taramanın dışında.
+
+## Kurul / komisyon üyeliği taraması (08.09.2026) — girilemeyen kalemler
+
+- **Akdeniz 11.1.9** ("Beden Eğitimi ve Spor politikalarının oluşturulma
+  sürecinde ilgili bakanlık düzeyinde oluşturulan ULUSAL kurullarda görev
+  almak", 30) bir bakanlık politika kurulu; `Spor Federasyonu Kurul Üyeliği
+  (Ulusal)` etiketine bağlanmadı çünkü federasyon kurulu değil. Etiket o
+  cetvelde karşılıksız kalıyor.
+- **Federasyon kurullarında YÖNETİCİ / ÜYE ayrımı** (Bartın N.1 100 · N.6 60,
+  Sinop b 3 · d 2, ZBEÜ ğ 20 · l 15) sözlükte yok; her cetvelde düşük olan
+  (üyelik) satırı geçerli.
+- **`Kurul / Komisyon Üyeliği`** üniversite İÇİ kurulları temsil ediyor ve
+  kapsam taşımıyor; 167 cetvelin 81'inde karşılıksız — çoğu yönerge üniversite
+  içi komisyon görevine puan vermiyor.

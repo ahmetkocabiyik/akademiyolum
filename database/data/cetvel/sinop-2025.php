@@ -150,6 +150,15 @@ $aileA = function (array $p, array $tavan, string $dp) use ($SCI, $TAM, $KISA, $
         '11b' => ['baslik' => 'BKCI ya da Scopus kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
         '11c' => ['baslik' => 'TR Dizin kapsamındaki dergide editörlük veya alan editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 5],
 
+        // TABLO 11 (SPOR BİLİMLERİ) satırı — $dp === '13' yalnız spor tablosunda.
+        // Kaynak satırı KAPSAMSIZ ("Olimpik spor federasyonlarının kurullarında
+        // görev almak", 2): uluslararası/ulusal ayrımı yapmıyor, bu yüzden iki
+        // etiket de aynı satırdan sayılır.
+        //
+        // Satır önce B AİLESİNDE (sosyal/filoloji/hukuk/ilahiyat/mimarlık)
+        // duruyordu ve yalnız uluslararası etiketi taşıyordu: spor adayı hiç
+        // puan almazken sosyal adayı almaması gereken puanı alıyordu.
+        ...($dp === '13' ? ['SPOR-FED' => ['baslik' => 'Olimpik spor federasyonunun kurullarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)', 'Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 2]] : []),
         // ══ DİĞER FAALİYETLER ══
         "{$dp}c" => ['baslik' => 'Uluslararası bilimsel toplantıya davetli konuşmacı olarak katılmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
         "{$dp}e" => ['baslik' => 'Üniversitede faaliyet gösteren komisyonlarda görev almak', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Kurul / Komisyon Üyeliği'], 'puan' => 3],
@@ -255,7 +264,6 @@ $aileB = function (array $p, array $tavan, string $dp, bool $tasarim) use ($SCI,
         '10a' => ['baslik' => 'SCIE, SSCI, AHCI, ESCI ya da Scopus kapsamındaki dergide editörlük veya alan editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => $WOS_DERGI, 'puan' => 10],
         '10b' => ['baslik' => 'BKCI ya da Scopus kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
         '10c' => ['baslik' => 'TR Dizin kapsamındaki dergide editörlük veya alan editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 5],
-        'SPOR-FED' => ['baslik' => 'Olimpik spor federasyonunun kurullarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 2],
 
         // ══ DİĞER FAALİYETLER ══
         "{$dp}c" => ['baslik' => 'Uluslararası bilimsel toplantıya davetli konuşmacı olarak katılmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],

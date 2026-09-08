@@ -303,7 +303,11 @@ return [
 
         // ══ R. PLANLAMA, MİMARLIK, KENTSEL VE PEYZAJ TASARIM ══
         'R.1-R.6' => ['baslik' => 'Mimarlık, planlama ve tasarım alanında ürettiğiniz bir uygulama projesi hakkında hakemli dergide makale ya da tanınmış yayınevinde kitap veya kitap bölümü yayımlanmış olması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif', 'Uygulama Projesi — Ekip', 'Uygulama Projesi — Ekip Yardımcısı', 'Uygulama Projesi — Danışman', 'Koruma-Onarım Uygulaması (Uluslararası)', 'Koruma-Onarım Uygulaması (Ulusal)'], 'puan' => 40],
-        'N.6' => ['baslik' => 'Olimpik spor federasyonunun kurullarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)'], 'puan' => 60],
+        // Kaynak satırı KAPSAMSIZ ("Olimpik spor federasyonlarının kurullarında
+        // görev") — uluslararası/ulusal ayrımı yapmıyor, bu yüzden iki etiket
+        // de aynı satırdan sayılır. Önce yalnız uluslararası etiket bağlıydı,
+        // ulusal federasyon kurulu görevi olan aday hiç puan almıyordu.
+        'N.6' => ['baslik' => 'Olimpik spor federasyonunun kurullarında görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Uluslararası)', 'Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 60],
         'I.8' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (ulusal)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Ulusal)'], 'puan' => 20],
         'I.3' => ['baslik' => 'Bilimsel toplantı düzenleme kurulu başkanlığı (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Toplantı Düzenleme Başkanlığı (Uluslararası)'], 'puan' => 40],
         'I.11' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 5],
