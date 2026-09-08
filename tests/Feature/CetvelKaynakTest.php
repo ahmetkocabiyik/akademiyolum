@@ -1802,3 +1802,56 @@ test('toplantı düzenleme başkanlığında kapsam kademesi ayrışıyor', func
         'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)' => 1, 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)' => 1,
     ]],
 ]);
+
+/**
+ * JÜRİ HİZMETİ ETİKETLERİ — dört etiket, iki eksen: rol (başkanlık/üyelik)
+ * ve kapsam (uluslararası/ulusal).
+ *
+ * ROL EKSENİ KORPUSTA NEREDEYSE HİÇ AYRIŞMIYOR ve bu DOĞRU: 91 cetvelin
+ * 89'unda başkanlık ile üyelik aynı puanda, çünkü yönergelerin yalnız BİRİ
+ * (Mersin) jüri başkanı ile üyesini ayırıyor (10/7). Geri kalanı tek satır
+ * yazıyor ("yarışmalarda jüri üyeliği"), etiket çifti o satırı paylaşıyor.
+ *
+ * KAPSAM EKSENİ ayrışıyor ve beş cetvelde çökmüştü.
+ *
+ * Değerler 08.09.2026'da kaynak PDF'lerinden okundu.
+ */
+test('jüri hizmetinde kapsam kademesi ayrışıyor', function (string $cetvel, array $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $kodlar = $katalog->coz(['*']);
+    $gercek = [];
+    foreach (array_keys($beklenen) as $etiket) {
+        $gercek[$etiket] = $katalog->puan(
+            new Faaliyet([
+                'kategori' => Kategori::SanatselEtkinlik, 'tur' => 'Test', 'baslik' => 'Test',
+                'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+            ]),
+            $kodlar,
+        );
+    }
+
+    expect($gercek)->toBe($beklenen);
+})->with([
+    // MSGSÜ 3.4.1 uluslararası 15 · 3.4.2 ULUSAL 10.
+    ['msgsu-2023', ['Jüri Üyeliği (Uluslararası)' => 15, 'Jüri Üyeliği (Ulusal)' => 10]],
+    // Muş Alparslan F3.3 uluslararası 30 · F3.4 ULUSAL 15.
+    ['mus-alparslan-2025', ['Jüri Üyeliği (Uluslararası)' => 30, 'Jüri Üyeliği (Ulusal)' => 15]],
+    // KTÜN O-1.3 uluslararası 5 · O-7.2 ULUSAL 2.
+    ['ktun-2024', ['Jüri Üyeliği (Uluslararası)' => 5, 'Jüri Üyeliği (Ulusal)' => 2]],
+    // İstanbul e) uluslararası 15 · i) ULUSAL 10.
+    ['istanbul-2026-mimarlik', ['Jüri Üyeliği (Uluslararası)' => 15, 'Jüri Üyeliği (Ulusal)' => 10]],
+    // DPÜ I16 uluslararası 1 · I202 ULUSAL 0,5 → aşağı yuvarlanınca 0,
+    // yani ulusal etiket karşılıksız kalmalı.
+    ['dpu-2024', ['Jüri Üyeliği (Uluslararası)' => 1, 'Jüri Üyeliği (Ulusal)' => 0]],
+    // KOCAELİ EŞİTLİĞİ DOĞRU: H.29 kaynağın kendi ifadesiyle kapsamsız
+    // ("Ulusal VEYA uluslararası düzeyde gerçekleştirilen jürili
+    // yarışmalarda … jüri üyesi olarak görev yapmak", 25).
+    ['kocaeli-2023', ['Jüri Üyeliği (Uluslararası)' => 25, 'Jüri Üyeliği (Ulusal)' => 25]],
+    // MERSİN korpusta rol ekseni ayrışan TEK cetvel: başkan 10/5, üye 7/3.
+    ['mersin-2024', [
+        'Jüri Başkanlığı (Uluslararası)' => 10, 'Jüri Başkanlığı (Ulusal)' => 5,
+        'Jüri Üyeliği (Uluslararası)' => 7, 'Jüri Üyeliği (Ulusal)' => 3,
+    ]],
+]);

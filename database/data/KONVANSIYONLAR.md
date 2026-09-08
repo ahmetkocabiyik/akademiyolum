@@ -2896,3 +2896,32 @@ proje|komisyon başkan`) kontrol eder.
 `ulusal` sözcüğü `uluslararası`nın İÇİNDE geçtiği için kapsam testinde sınır
 gerekir: `(?<!uluslar)\bulusal\b`. Yoksa her uluslararası satır ulusal da
 sayılır ve tarama boş çıkar.
+
+## AYRIM SÖZLÜKTE VAR DİYE KAYNAKTA DA VARDIR SANMA
+
+`Jüri Başkanlığı` / `Jüri Üyeliği` çifti sözlükte duruyor ama korpusun 91
+cetvelinin **89'unda ikisi aynı puanda** — ve bu DOĞRU. Yönergelerin yalnız
+biri (Mersin) jüri başkanı ile üyesini ayırıyor (uluslararası 10/7, ulusal
+5/3); geri kalanı tek satır yazıyor ("yarışmalarda jüri üyeliği") ve etiket
+çifti o satırı paylaşıyor.
+
+Bunu ölçmek ucuz ve turu daha başlamadan doğru yere odaklar: **rol ekseninin
+kaç cetvelde ayrıştığını say.** 89'a 2 çıkıyorsa aranacak yer rol değil
+KAPSAM eksenidir. Kapsam ekseninde beş gerçek hata çıktı.
+
+Ters yönü de doğrudur: bir etiketin ayrımı taşıyor olması, kaynağın o ayrımı
+yapması demek değil. `Davetli Konuşmacı`da tersi geçerliydi — sözlük ayrımı
+taşımıyordu ama kaynakların hemen hepsi yapıyordu.
+
+## KAPSAMSIZ YAZILMIŞ SATIRI BÖLME
+
+Kocaeli H.29 kaynağın kendi cümlesiyle kapsamsız: *"**Ulusal veya
+uluslararası** düzeyde gerçekleştirilen jürili yarışmalarda … jüri üyesi
+olarak görev yapmak — 25"*. Dört etiketin de 25 alması doğrudur.
+
+Aynı katalogda L bölümünün (Güzel Sanatlar) 13/14 satırları jüri üyeliğini
+6/4 diye AYIRIYOR. Tarayıcı bunu görüp "kapsam çökmüş" diye işaret verdi ve
+satırı bölmek ilk bakışta doğru göründü — ama H.29 aynı katalogda 25 verdiği
+için motor zaten onu seçiyor; bölmek sonucu değiştirmediği gibi kaynağın
+kapsamsız satırını da yanlış temsil ediyordu. **İki satır aynı etikete
+düşüyorsa hangisinin kazandığına bak, körlemesine bölme.**

@@ -88,6 +88,8 @@ $sanatKarmaN = ['Karma/Jürili Etkinlik (Ulusal)', 'Elektronik Karma Sergi (Ulus
     'Karma Etkinlik (Yurt Dışı, Jürisiz)', 'Sempozyum/Çalıştay/Bienal (Yurt İçi)'];
 $sanatJuri = ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)',
     'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'];
+$sanatJuriU = ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)'];
+$sanatJuriN = ['Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'];
 $sanatRestU = ['Koruma-Onarım Uygulaması (Uluslararası)'];
 $sanatRestN = ['Koruma-Onarım Uygulaması (Ulusal)'];
 $sanatFilm = ['Yönetmenlik (Sahne/Ekran)', 'Belgesel/Kısa Film (Uluslararası)',
@@ -232,7 +234,9 @@ $maddeler = array_merge([
         'F2.5' => ['baslik' => 'Mimari proje, planlama ya da tasarım çalışmalarında yardımcılık', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatTasarimE, 'puan' => 25],
         'F3.1' => ['baslik' => 'Uluslararası sergi, bienal, trienal, festival ya da gösteride çağrılı sanatsal gösteri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatKarmaU, 'puan' => 50],
         'F3.2' => ['baslik' => 'Ulusal sergi, bienal, trienal, festival ya da gösteride çağrılı sanatsal gösteri', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatKarmaN, 'puan' => 30],
-        'F3.4' => ['baslik' => 'Sergi, bienal, trienal, festival ve gösterilerde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuri, 'puan' => 15],
+        // Kaynak F3.3 (ULUSLARARASI sergi, bienal, trienal, festival ve gösterilerde jüri üyeliği) 30, F3.4 (ULUSAL) 15 diyor; iki kapsam tek satırda 15 puanla birleşmişti.
+        'F3.3' => ['baslik' => 'Uluslararası sergi, bienal, trienal, festival ve gösterilerde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuriU, 'puan' => 30],
+        'F3.4' => ['baslik' => 'Ulusal sergi, bienal, trienal, festival ve gösterilerde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuriN, 'puan' => 15],
         'F5.1' => ['baslik' => 'Yurt dışında müze, kazı buluntusu, koleksiyon ve film arşivi restorasyon ve konservasyon çalışmasını yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatRestU, 'puan' => 100],
         'F5.4' => ['baslik' => 'Ulusal müze, kazı buluntusu, koleksiyon ve film arşivi restorasyon ve konservasyon çalışmasını yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatRestN, 'puan' => 50],
 

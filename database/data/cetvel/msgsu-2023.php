@@ -124,6 +124,8 @@ $sanatRestU = ['Koruma-Onarım Uygulaması (Uluslararası)'];
 $sanatRestN = ['Koruma-Onarım Uygulaması (Ulusal)'];
 $sanatJuri = ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)',
     'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'];
+$sanatJuriU = ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)'];
+$sanatJuriN = ['Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'];
 $sanatAlbum = ['Albüm / Konser Kaydı', 'Bandrollü Kayıt (CD/DVD)', 'Karma Albüm / CD-DVD Katkısı',
     'Masterclass (Uluslararası)', 'Masterclass (Ulusal)', 'Müzikoloji Atölyesi',
     'Eğitici Konser Programı (Uluslararası)', 'Eğitici Konser Programı (Ulusal)',
@@ -203,7 +205,9 @@ $maddeler = [
     '3.1.8' => ['baslik' => 'Ulusal diğer dergi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 5],
     '3.2.2' => ['baslik' => 'Yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 5],
     '3.3.8' => ['baslik' => 'Dergi, kitap ya da sanat etkinliği hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 3],
-    '3.4.2' => ['baslik' => 'Sanat ve tasarım etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuri, 'puan' => 10],
+    // Kaynak 3.4.1 (ULUSLARARASI sanat ve tasarım etkinliklerinde jüri üyeliği) 15, 3.4.2 (ULUSAL) 10 diyor; iki kapsam tek satırda 10 puanla birleşmişti.
+    '3.4.1' => ['baslik' => 'Uluslararası sanat ve tasarım etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuriU, 'puan' => 15],
+    '3.4.2' => ['baslik' => 'Ulusal sanat ve tasarım etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuriN, 'puan' => 10],
 
     // ══ 4. ÖĞRETİM ETKİNLİKLERİ ══
     '4.1.2' => ['baslik' => 'Jüri tarafından kabul edilmiş doktora ya da sanatta yeterlik tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 10],

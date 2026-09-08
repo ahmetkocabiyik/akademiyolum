@@ -1069,3 +1069,17 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
 - **Selçuk'un 13. maddesi** yalnız ULUSLARARASI organizasyonu yazıyor ve
   Kafkas'taki gibi bir "ulusalda yarısı" notu YOK; ulusal etiketler o
   cetvelde karşılıksız kalıyor ve doğrusu budur.
+
+## Jüri üyeliği taraması (08.09.2026) — girilemeyen kalemler
+
+- **Jüri BAŞKANLIĞI ile ÜYELİĞİ ayrımı** korpusta yalnız Mersin'de var
+  (uluslararası 10/7, ulusal 5/3). Kalan 90 cetvelde iki etiket aynı satırı
+  paylaşıyor; kaynak ayırmadığı için bu doğru, ama ileride ayıran bir
+  yönerge girilirse etiket çiftinin hazır olduğu unutulmamalı.
+- **DPÜ I202** (ulusal sanat/tasarım etkinliklerinde jüri üyeliği, 0,5)
+  aşağı yuvarlanınca 0 ediyor; ulusal jüri etiketi o cetvelde karşılıksız.
+- **Ödül jürisi üyeliği** (DPÜ I15 uluslararası 5 · I207 ulusal 3, Acıbadem
+  8.A "ödül jürisi") `Dış Kuruluş Kurul Üyeliği` etiketine ait; sanat/tasarım
+  yarışma jürisiyle karıştırılmadı.
+- **Tez jürisi** (`Tez İzleme / Jüri Üyeliği`) ayrı kategoride
+  (`tez_danismanligi`) ve bu taramanın dışında.

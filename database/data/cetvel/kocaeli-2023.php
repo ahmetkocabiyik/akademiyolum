@@ -130,6 +130,14 @@ $govde = [
         'H28' => ['baslik' => 'TÜBİTAK 2209-A, 2209-B veya 2242 projesinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 10],
         // Kaynağın H bölümünün 29. maddesi; hiç girilmemişti ve jüri
         // etiketleri Kocaeli'de hiçbir satıra düşmüyordu.
+        // H.29 kaynağın kendi ifadesiyle KAPSAMSIZ: "Ulusal VEYA uluslararası
+        // düzeyde gerçekleştirilen jürili yarışmalarda danışmanlık yapmak veya
+        // bu yarışmalarda jüri üyesi olarak görev yapmak — 25". Dört etiketin
+        // de aynı puanı alması bu yüzden doğru.
+        //
+        // L bölümünün (Güzel Sanatlar) 13/14 satırları jüri üyeliğini 6/4 diye
+        // ayırıyor ama H.29 aynı katalogda 25 verdiği için motor onu seçer;
+        // düşük satırları açmak sonucu değiştirmez.
         'H29' => ['baslik' => 'Ulusal ya da uluslararası jürili yarışmada danışmanlık yapmak veya jüri üyesi olarak görev almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 25],
 
         // ── SANATSAL ETKİNLİK ── (Güzel Sanatlar koşullarının saydığı kalemler)

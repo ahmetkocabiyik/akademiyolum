@@ -242,7 +242,10 @@ $tablo4 = [
     'T4.1.a' => ['baslik' => 'Uluslararası meslek başarı ödülü', 'kategori' => 'odul', 'kaynaklar' => [], 'puan' => 100],
     'T4.1.b' => ['baslik' => 'Ulusal meslek başarı ödülü', 'kategori' => 'odul', 'kaynaklar' => [], 'puan' => 50],
     'T4.1.h' => ['baslik' => 'Yarışmada derece, mansiyon veya satın alma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 15],
-    'T4.1.i' => ['baslik' => 'Yarışmada jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)', 'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 10],
+    // Kaynak e) ULUSLARARASI yarışmalarda jüri üyeliği 15, i) ULUSAL 10
+    // diyor; iki kapsam tek satırda 10 puanla birleşmişti.
+    'T4.1.e' => ['baslik' => 'Uluslararası yarışmada jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)'], 'puan' => 15],
+    'T4.1.i' => ['baslik' => 'Ulusal yarışmada jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 10],
     'T4.2.c' => ['baslik' => 'Ulusal düzeyde proje, planlama veya tasarım sürecini yürütmek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif'], 'puan' => 20],
     'T4.2.d' => ['baslik' => 'Ulusal düzeyde proje, planlama veya tasarım sürecinde ekip üyesi olmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Ekip', 'Uygulama Projesi — Ekip Yardımcısı', 'Uygulama Projesi — Danışman'], 'puan' => 10],
     'T4.3.f' => ['baslik' => 'Eğitime yönelik atölye veya yaz okulu düzenlemek', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Akreditasyon Faaliyeti'], 'puan' => 5],

@@ -112,6 +112,8 @@ $sanatSahne = ['Yönetmenlik (Sahne/Ekran)', 'Koreografi', 'Rejisörlük (Ulusla
     'Dansçı / Performans İcracısı (Ulusal)'];
 $sanatJuri = ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)',
     'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'];
+$sanatJuriU = ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)'];
+$sanatJuriN = ['Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'];
 
 $sanatKullanilan = array_merge($sanatUlusKisisel, $sanatUlusalKisisel, $sanatUlusKarma,
     $sanatUlusalKarma, $sanatUlusSatin, $sanatUlusalSatin, $sanatFilmU, $sanatFilmN,
@@ -155,7 +157,7 @@ $ortak = [
 ];
 
 /** Bir puan sütununun madde listesi; `$s` sütunun farklı olan satırlarını taşır. */
-$govde = function (array $s) use ($SCI, $MAKALE, $KISA, $sanatJuri): array {
+$govde = function (array $s) use ($SCI, $MAKALE, $KISA, $sanatJuriU): array {
     return [
         // ══ A. MAKALE ══
         'A112' => ['baslik' => 'SCI, SCI-EXP, SSCI ve AHCI indekslerince taranan dergide yayımlanmış özgün ya da derleme makale', 'kategori' => 'makale', 'kaynaklar' => $SCI, 'turler' => $MAKALE, 'puan' => 20],
@@ -220,7 +222,8 @@ $govde = function (array $s) use ($SCI, $MAKALE, $KISA, $sanatJuri): array {
 
         // ══ I. ÜYELİK VE HAKEMLİKLER ══
         'I208' => ['baslik' => 'Bilimsel dergilerde yayın hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 1],
-        'I202' => ['baslik' => 'Sanat ya da tasarım etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuri, 'puan' => 1],
+        // Kaynak I16 (ULUSLARARASI sanat/tasarım etkinliklerinde jüri üyeliği) 1, I202 (ULUSAL) 0,5 diyor. 0,5 aşağı yuvarlanınca 0 ettiği için ulusal etiket karşılıksız kalıyor; satırda kalsaydı 1 puan verirdi.
+        'I16' => ['baslik' => 'Uluslararası sanat ya da tasarım etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuriU, 'puan' => 1],
     ];
 };
 

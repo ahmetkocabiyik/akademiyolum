@@ -88,6 +88,8 @@ $sanatKarmaU = ['Karma/Jürili Etkinlik (Uluslararası)', 'Elektronik Karma Serg
     'Uygulama Projesi — Müellif', 'Koruma-Onarım Uygulaması (Uluslararası)'];
 $sanatJuri = ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)',
     'Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'];
+$sanatJuriU = ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)'];
+$sanatJuriN = ['Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'];
 $sanatSatin = ['Eserin Yayında Yer Alması / Satın Alınması', 'Eserin Satın Alınması (Yurt İçi)',
     'Eserin Müzeye Kabulü (Yurt Dışı)', 'Eserin Müzeye Kabulü (Yurt İçi)'];
 $sanatKullanilan = array_merge($sanatUlus, $sanatUlusal, $sanatKarmaU, $sanatJuri, $sanatSatin);
@@ -97,7 +99,7 @@ $sanatKalan = array_values(array_diff(Kategori::SanatselEtkinlik->kaynaklar(), $
  * @return array<string, array<string, mixed>>
  */
 $govde = function (bool $mps) use ($OZGUN, $DERLEME, $KISA, $VAKA, $TUM_KISA, $Q4,
-    $sanatUlus, $sanatUlusal, $sanatKarmaU, $sanatJuri, $sanatSatin, $sanatKalan): array {
+    $sanatUlus, $sanatUlusal, $sanatKarmaU, $sanatJuriU, $sanatJuriN, $sanatSatin, $sanatKalan): array {
     return [
         // ══ A. ULUSLARARASI ÇALIŞMALAR ══
         'A-1a' => ['baslik' => 'Q1 kategorisindeki dergide yayımlanmış özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $OZGUN, 'puan' => 50],
@@ -197,7 +199,9 @@ $govde = function (bool $mps) use ($OZGUN, $DERLEME, $KISA, $VAKA, $TUM_KISA, $Q
 
         // ══ M. YARIŞMALAR, SERGİLEME ══
         'M-3' => ['baslik' => 'Yarışmada derece ya da mansiyon almak', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 20],
-        'M-6' => ['baslik' => 'Başvurduğunuz bilim alanıyla ilgili yarışmalarda jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuri, 'puan' => 2],
+        // Kaynak O-1.3 (ULUSLARARASI sanat ve tasarım etkinliklerinde hakemlik veya jüri üyeliği) 5, O-7.2 (ULUSAL) 2 diyor; iki kapsam tek satırda 2 puanla birleşmişti.
+        'O-1.3' => ['baslik' => 'Uluslararası başvurduğunuz bilim alanıyla ilgili yarışmalarda jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuriU, 'puan' => 5],
+        'M-6' => ['baslik' => 'Ulusal başvurduğunuz bilim alanıyla ilgili yarışmalarda jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuriN, 'puan' => 2],
         'M-8-u' => ['baslik' => 'Uluslararası kişisel tasarım ya da sanat etkinliğinde bulunmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatUlus, 'puan' => 20],
         'M-8-n' => ['baslik' => 'Ulusal kişisel tasarım ya da sanat etkinliğinde bulunmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatUlusal, 'puan' => 10],
 
