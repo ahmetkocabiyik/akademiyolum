@@ -57,7 +57,7 @@
 
         <span class="shrink-0 font-semibold" style="color: {{ ($dugum->beyan && ! $dugum->beyanOnaylandi) || $telafiIle ? 'var(--color-ink-subtle)' : $renk }}">
             @if ($dugum->kaynakEksik)
-                hesaplanamıyor
+                siz değerlendirin
             @elseif ($dugum->beyanOnaylandi)
                 beyan edildi
             @elseif ($dugum->beyan)

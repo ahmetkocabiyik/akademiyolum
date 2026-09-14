@@ -44,6 +44,7 @@ use Livewire\Component;
  *     eksik_sayisi: int,
  *     belirsiz_sayisi: int,
  *     beyan_sayisi: int,
+ *     cetvel_eksigi_sayisi: int,
  * }
  *
  * Livewire #[Computed] metotları özellik gibi okunur; @property-read satırları
@@ -379,7 +380,16 @@ class YonergeAnalizi extends Component
                     'durum' => $this->durum($sonuc, $oran),
                     'eksik_sayisi' => count($sonuc->eksikler()),
                     'belirsiz_sayisi' => count($sonuc->belirsizler()),
-                    'beyan_sayisi' => count($sonuc->beyanlar()),
+                    // Adayın YAPABİLECEĞİ iş: kutusunu işaretleyeceği koşullar.
+                    // Cetveli girilmemiş düğümler buraya girmez — onlar bizim
+                    // eksiğimiz, aday onaylayarak kapatamaz. Karıştırılınca kart
+                    // "N koşul onayınızı bekliyor" diyor ama ekranda
+                    // işaretlenecek kutu çıkmıyordu.
+                    'beyan_sayisi' => count(array_filter(
+                        $sonuc->beyanlar(),
+                        fn (SartSonucu $b) => ! $b->kaynakEksik,
+                    )),
+                    'cetvel_eksigi_sayisi' => count($sonuc->hesaplanamayanlar()),
                 ];
             })
             ->filter();

@@ -352,7 +352,7 @@
                                                 {{-- Telafi ile geçilen koşulda sayaç ana yolu anlatır, sonucun rengiyle boyanmaz. --}}
                                                 <span class="shrink-0 font-semibold" style="color: {{ ($kosul->beyan && ! $kosul->beyanOnaylandi) || $kosul->telafiIleSaglandi() ? 'var(--color-ink-subtle)' : $kosul->durum->renk() }}">
                                                     @if ($kosul->kaynakEksik)
-                                                        hesaplanamıyor
+                                                        siz değerlendirin
                                                     @elseif ($kosul->beyanOnaylandi)
                                                         beyan edildi
                                                     @elseif ($kosul->beyan)
@@ -388,6 +388,15 @@
                                         <div class="mt-2 flex items-start gap-1 text-[11px] text-ink-subtle">
                                             <flux:icon name="information-circle" class="mt-px size-3 shrink-0" />
                                             <span>{{ $s['beyan_sayisi'] }} koşul onayınızı bekliyor.</span>
+                                        </div>
+                                    @endif
+
+                                    {{-- Cetvel eksikliği adayın yapabileceği bir şey DEĞİL; üstteki
+                                         satırla karıştırılırsa aday olmayan bir kutuyu arar. --}}
+                                    @if ($s['cetvel_eksigi_sayisi'] > 0)
+                                        <div class="mt-2 flex items-start gap-1 text-[11px] text-ink-subtle">
+                                            <flux:icon name="exclamation-circle" class="mt-px size-3 shrink-0 text-cat-amber-text" />
+                                            <span>{{ $s['cetvel_eksigi_sayisi'] }} koşulu kendiniz değerlendirmelisiniz.</span>
                                         </div>
                                     @endif
 
@@ -528,6 +537,10 @@
                             @if ($d['beyan_sayisi'] > 0)
                                 <strong class="text-ink">{{ $d['beyan_sayisi'] }} koşul</strong>
                                 onayınızı bekliyor; belgeniz varsa aşağıdan işaretleyin.
+                            @endif
+                            @if ($d['cetvel_eksigi_sayisi'] > 0)
+                                <strong class="text-ink">{{ $d['cetvel_eksigi_sayisi'] }} koşulu</strong>
+                                kendiniz değerlendirmelisiniz.
                             @endif
                         @else
                             @if ($d['kalan'] > 0)

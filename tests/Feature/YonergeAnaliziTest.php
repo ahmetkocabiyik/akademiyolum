@@ -466,6 +466,30 @@ test('kartta beyan koşulu işaretlenmeden "onay gerek", işaretlenince "beyan e
         ->assertDontSee('onay gerek');
 });
 
+test('cetvel eksikliği adayın onay bekleyen koşullarından ayrı sayılır', function () {
+    // İkisi de beyan düğümü ama adaya anlamları zıt: birinde kutu var, ötekinde
+    // yok. Tek sayaçta toplanınca kart "2 koşul onayınızı bekliyor" diyor, aday
+    // olmayan ikinci kutuyu arıyordu.
+    Universite::factory()->create(['ad' => 'Karışık Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
+    depoBagla([testEsik('Karışık Üni', 55, ekKosullar: [
+        ['tip' => 'beyan', 'aciklama' => BEYAN_METNI, 'madde' => 'md. 5'],
+        ['tip' => 'beyan', 'aciklama' => 'Dış ölçeğe göre en az 100 puan', 'kaynak_eksik' => true],
+    ])]);
+
+    $sonuc = Livewire::test(YonergeAnalizi::class)->instance()->sonuclar()[0];
+
+    expect($sonuc['beyan_sayisi'])->toBe(1)
+        ->and($sonuc['cetvel_eksigi_sayisi'])->toBe(1);
+
+    Livewire::test(YonergeAnalizi::class)
+        ->assertSee('1 koşul onayınızı bekliyor.')
+        ->assertSee('1 koşulu kendiniz değerlendirmelisiniz.')
+        // Etiket de ayrışıyor: biri işaretlenebilir, öteki bizim eksiğimiz.
+        ->assertSee('onay gerek')
+        ->assertSee('siz değerlendirin')
+        ->assertDontSee('hesaplanamıyor');
+});
+
 test('aynı kutuya yeniden tıklamak beyanı geri alır', function () {
     Universite::factory()->create(['ad' => 'Beyan Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
     depoBagla([beyanliEsik('Beyan Üni')]);
