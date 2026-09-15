@@ -1150,7 +1150,8 @@ satırlarına ulaşıyor, yani makale barajı idari görevle dolabiliyor.
 ihlal ediyordu. Acıbadem (53 düğüm, 34 farklı metin) ve Ankara'nın bir notu
 düzeltildi, kural `CetvelKaynakTest`'e değişmez olarak girdi.
 
-**Bursa Teknik KALDI.** 607 düğüm ama yalnız dokuz farklı metin: "Ölçüt 1A",
-"Ölçüt 1B", "Ölçüt 3C" … Bunlar koşul açıklaması değil, kaynağın ölçüt
-adlarını taşıyan GRUP BAŞLIKLARI. Düzeltmek her başlığın ne istediğini
-kaynaktan okuyup yazmayı gerektiriyor; testin allowlist'inde duruyor.
+Bursa Teknik'in dokuz "Ölçüt 1A" başlığı da düzeltildi: başlık artık
+bloğun istediği yayın kümesini söylüyor ("AHCI ya da WoS Q1-Q2-Q3
+dergilerinde istenen yayınlar", iki kümeli hücrelerde "İki ayrı yayın
+kümesinin ikisi de gerekli"). Allowlist tamamen kalktı; kural korpusun
+tamamında geçerli.

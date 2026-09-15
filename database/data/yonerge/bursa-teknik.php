@@ -151,7 +151,7 @@ $KUME = [
  * @param  array<string, mixed>|null  $donem  MADDE 6/n-o'nun %50 dönemi
  * @return array<string, mixed>
  */
-$kodDugumu = function (string $kod, array $parcalar, ?array $donem, string $madde) use ($KUME): array {
+$kodDugumu = function (array $parcalar, ?array $donem, string $madde) use ($KUME): array {
     $cocuklar = [];
 
     foreach ($parcalar as [$kumeAdi, $sayi]) {
@@ -175,7 +175,22 @@ $kodDugumu = function (string $kod, array $parcalar, ?array $donem, string $madd
         }
     }
 
-    return count($cocuklar) === 1 ? $cocuklar[0] : Kalip::ve("Ölçüt {$kod}", $cocuklar);
+    if (count($cocuklar) === 1) {
+        return $cocuklar[0];
+    }
+
+    // Başlık kaynağın ölçüt KODUNU taşımaz (§2: aday metninde kod yasak);
+    // kod izlenebilirlik için çocukların `madde` alanında duruyor. Adayın
+    // görmesi gereken, bu bloğun hangi yayın kümesini istediği — aynı `veya`
+    // altında birkaç blok yan yana durduğunda ayırt edici olan da bu.
+    if (count($parcalar) > 1) {
+        $baslik = 'İki ayrı yayın kümesinin ikisi de gerekli';
+    } else {
+        $metin = $KUME[$parcalar[0][0]][1];
+        $baslik = mb_strtoupper(mb_substr($metin, 0, 1), 'UTF-8').mb_substr($metin, 1).' istenen yayınlar';
+    }
+
+    return Kalip::ve($baslik, $cocuklar);
 };
 
 /**
@@ -632,7 +647,7 @@ foreach ($FAKULTELER as $fakulte) {
                 if (! is_array($hucre)) {
                     continue;
                 }
-                $akt1[] = $kodDugumu((string) $kod, $hucre, $yariDonem, "Tablo 1 Aktivite 1/{$kod}");
+                $akt1[] = $kodDugumu($hucre, $yariDonem, "Tablo 1 Aktivite 1/{$kod}");
             }
 
             $cocuklar[] = count($akt1) === 1
@@ -653,7 +668,7 @@ foreach ($FAKULTELER as $fakulte) {
                 if (! is_array($hucre)) {
                     continue;
                 }
-                $akt3[] = $kodDugumu((string) $kod, $hucre, $yariDonem, "Tablo 1 Aktivite 3/{$kod}");
+                $akt3[] = $kodDugumu($hucre, $yariDonem, "Tablo 1 Aktivite 3/{$kod}");
             }
 
             if ($akt2Deger !== null) {

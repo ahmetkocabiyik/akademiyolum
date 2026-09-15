@@ -2146,19 +2146,9 @@ test('aday metninde madde kodu yok', function () {
     // `madde` alanında ZORUNLU." Aday 1A'nın SCI-Expanded, 3A-B'nin TR Dizin
     // demek olduğunu bilmek zorunda değil; kod izlenebilirlik kanalıdır,
     // arayüz metni değil.
-    $izinli = [
-        // Kaynağın ölçüt adlarını başlık olarak kullanıyor ("Ölçüt 1A");
-        // düğüm bir grup başlığı, koşul metni değil. Henüz düzeltilmedi.
-        'Bursa Teknik Üniversitesi',
-    ];
-
     $kodlu = [];
 
     foreach (sartDepo()->dogrulanmisEsikler() as $esik) {
-        if (in_array($esik['universite'], $izinli, true)) {
-            continue;
-        }
-
         $bak = function (string $metin, string $nereden) use ($esik, &$kodlu) {
             // '1A', '3A-B', '4.A.1' gibi kodlar. 'Q1', 'EK-1' ve yıl sayıları
             // kod değil; desen RAKAM + BÜYÜK HARF sırasını arıyor.
