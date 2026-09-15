@@ -106,7 +106,18 @@ $maddeler = [
     '7d' => ['baslik' => 'BAP projesinde yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['yurutucu'], 'puan' => 3],
 
     '8a' => ['baslik' => 'Uluslararası toplantıda CPCI bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 5],
-    '8b' => ['baslik' => 'Diğer uluslararası/ulusal toplantıda bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Özet/Poster', 'Ulusal Tam Metin', 'Ulusal Özet/Poster'], 'puan' => 3],
+    // ÜAK 8b'yi TEK satır olarak yazıyor ("Diğer uluslararası/ulusal bilimsel
+    // toplantıda sunulan…", 3 puan) ve puan bakımından doğrusu da bu. Ama bu
+    // cetvele bağlanan yönergeler bildiriyi KAPSAMA ve BİÇİME göre
+    // kısıtlayabiliyor: Çankaya "Uluslararası Konferans/Kongre/Sempozyumda 2
+    // bildiri", Topkapı "Uluslararası bilimsel toplantılarda … POSTER HARİÇ".
+    // Tek satır o koşullara bağlanırsa ulusal bir bildiri ya da bir poster
+    // şartı doldurur. Satır dörde bölündü; puanlar aynı, '8' grubu hepsini
+    // topluyor, tavan da o grupta olduğu için değişmiyor.
+    '8b-u-tam' => ['baslik' => 'Diğer uluslararası toplantıda tam metni yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin'], 'puan' => 3],
+    '8b-u-ozet' => ['baslik' => 'Diğer uluslararası toplantıda özeti yayımlanmış bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
+    '8b-n-tam' => ['baslik' => 'Ulusal toplantıda tam metni yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 3],
+    '8b-n-ozet' => ['baslik' => 'Ulusal toplantıda özeti yayımlanmış bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 3],
 ];
 
 /** Ortak grup tanımları — eşikler bu adlarla atıf yapıyor. */
@@ -125,7 +136,14 @@ $gruplar = [
     '6' => ['6a', '6b'],
     '7' => ['7a-y', '7a-a', '7a-d', '7b', '7c', '7d'],
     '7a' => ['7a-y', '7a-a', '7a-d'],
-    '8' => ['8a', '8b'],
+    '8' => ['8a', '8b-u-tam', '8b-u-ozet', '8b-n-tam', '8b-n-ozet'],
+    // Yalnız uluslararası bildiri isteyen koşullar için.
+    '8-ULUSLARARASI' => ['8a', '8b-u-tam', '8b-u-ozet'],
+    // Üstüne POSTER HARİÇ diyenler için: 'Uluslararası Özet/Poster' etiketi
+    // özeti ve posteri ayırmıyor, §0 uyarınca o satır dışarıda kalıyor —
+    // özeti yayımlanmış bildirisi olan aday eksik sayılır, posteri olan
+    // fazladan sayılmaz.
+    '8-ULUSLARARASI-TAM' => ['8a', '8b-u-tam'],
     'AQ1-Q3' => ['1a-Q1', '1a-Q2', '1a-Q3', '1b'],
     'Q1-Q2' => ['1a-Q1', '1a-Q2'],
     'Q1-Q3' => ['1a-Q1', '1a-Q2', '1a-Q3'],

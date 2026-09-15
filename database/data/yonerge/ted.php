@@ -58,7 +58,11 @@ $q1q2 = ['1a-Q1', '1a-Q2'];
 $qHepsi = ['1a-*', '1b'];
 /** Scopus veya WOS taranan yayınevi kitap bölümü. */
 $kitapBolum = ['4a', '4b'];
-$bildiri = ['8a', '8b'];
+$bildiri = ['8'];
+// Kaynak bildiri koşullarını "en az 2'si uluslararası …" diye kuruyor
+// (MADDE 8/1-e, 9/1-e). ÜAK'ın 8b satırı ulusal ile uluslararasıyı birden
+// topladığı için uluslararası alt koşulu ayrı grup istiyor.
+$bildiriUluslararasi = ['8-ULUSLARARASI'];
 $atif = ['5a', '5b'];
 $proje = ['7a-y', '7a-a', '7b', '7d'];
 
@@ -142,8 +146,13 @@ return [
                 [...$qHepsi, '1c'], 4, madde: 'Madde 8/1-d'),
             Kalip::adet('Bunlardan en az 2\'si SSCI, SCI-E veya AHCI Q1-Q2 dergilerde',
                 $q1q2, 2, madde: 'Madde 8/1-d'),
-            Kalip::adet('Bilimsel kongrelerde sunulmuş en az 3 bildiri (en az 2\'si uluslararası)',
+            // Kaynak "En az 2'si ULUSLARARASI bilimsel kongrelerde 3 bildiri"
+            // diyor; uluslararası alt koşulu ayrı düğüm olmadan sağlanmış
+            // sayılıyordu, yani üç ulusal bildiri koşulu dolduruyordu.
+            Kalip::adet('Bilimsel kongrelerde sunulmuş en az 3 bildiri',
                 $bildiri, 3, madde: 'Madde 8/1-e'),
+            Kalip::adet('Bu bildirilerden en az 2\'si uluslararası kongrelerde sunulmuş olmalı',
+                $bildiriUluslararasi, 2, madde: 'Madde 8/1-e'),
             Kalip::adet('Yayınlarınıza en az 5 atıf', $atif, 5, madde: 'Madde 8/1-f'),
             Kalip::adet('Bir ulusal ya da uluslararası araştırma projesinde araştırmacı veya '
                 .'yürütücü olmak', $proje, 1, madde: 'Madde 8/1-g-h'),
@@ -203,8 +212,10 @@ return [
                 [...$qHepsi, '1c'], 5, donem: $DOC, madde: 'Madde 9/1-d'),
             Kalip::adet('Bunlardan en az 3\'ü SSCI, SCI-E veya AHCI Q1-Q2 dergilerde',
                 $q1q2, 3, donem: $DOC, madde: 'Madde 9/1-d'),
-            Kalip::adet('Doçentliğinizden sonra en az 3 bildiri (en az 2\'si uluslararası)',
+            Kalip::adet('Doçentliğinizden sonra en az 3 bildiri',
                 $bildiri, 3, donem: $DOC, madde: 'Madde 9/1-e'),
+            Kalip::adet('Bu bildirilerden en az 2\'si uluslararası kongrelerde sunulmuş olmalı',
+                $bildiriUluslararasi, 2, donem: $DOC, madde: 'Madde 9/1-e'),
             Kalip::adet('Yayınlarınıza doçentlik sonrası en az 10 ek atıf', $atif, 10,
                 donem: $DOC, madde: 'Madde 9/1-f'),
             Kalip::adet('Bir TÜBİTAK, ulusal ya da uluslararası araştırma projesinde yürütücü '

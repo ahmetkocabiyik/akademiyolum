@@ -45,7 +45,14 @@ $genisMakale = ['1a-*', '1b', '1c', '2a'];
 /** Yalnızca SCI-Expanded ve Scopus. */
 $sciScopus = ['1a-*', '1b', '1c'];
 /** Bildiriler. */
-$bildiri = ['8a', '8b'];
+$bildiri = ['8'];
+// Doçentlik/profesörlük ölçütleri bildiriyi "ULUSLARARASI bilimsel
+// toplantılarda sunulan (POSTER HARİÇ)" diye istiyor. ÜAK'ın 8b satırı hem
+// ulusalı hem posteri topladığı için o koşullara bağlanamaz. Tam metni
+// yayımlanmış uluslararası bildiriler kalıyor; özeti yayımlanmış bildiri
+// sözlükte poster ile aynı etikette olduğu için §0 uyarınca dışarıda
+// (aday eksik sayılır, poster fazladan sayılmaz).
+$bildiriUluslararasi = ['8-ULUSLARARASI-TAM'];
 
 $birimSosyal = 'İktisadi, İdari ve Sosyal Bilimler Fakültesi; İnsan ve Toplum Bilimleri Fakültesi';
 $birimMuhendislik = 'Mühendislik Fakültesi';
@@ -265,7 +272,7 @@ return [
             Kalip::adet('İndeksli veya ULAKBİM TR Dizin dergilerde en az 2 makale',
                 $genisMakale, 2, madde: 'EK.5'),
             Kalip::adet('Uluslararası bilimsel toplantılarda sunulmuş ve yayımlanmış en az '
-                .'2 bildiri (poster hariç)', $bildiri, 2, madde: 'EK.5'),
+                .'2 bildiri (poster hariç)', $bildiriUluslararasi, 2, madde: 'EK.5'),
         ]),
     ],
     [
@@ -283,7 +290,7 @@ return [
             Kalip::adet('İndeksli veya ULAKBİM TR Dizin dergilerde en az 4 makale',
                 $genisMakale, 4, madde: 'EK.5'),
             Kalip::adet('Uluslararası bilimsel toplantılarda sunulmuş ve yayımlanmış en az '
-                .'6 bildiri (poster hariç)', $bildiri, 6, madde: 'EK.5'),
+                .'6 bildiri (poster hariç)', $bildiriUluslararasi, 6, madde: 'EK.5'),
             $dersBeyani,
         ]),
     ],
@@ -303,7 +310,7 @@ return [
             Kalip::adet('Bunlardan en az 2\'si doçentlik atamanızdan sonra', $sciScopus, 2,
                 donem: $DOC, madde: 'EK.5'),
             Kalip::adet('Uluslararası bilimsel toplantılarda sunulmuş ve yayımlanmış en az '
-                .'10 bildiri (poster hariç)', $bildiri, 10, madde: 'EK.5'),
+                .'10 bildiri (poster hariç)', $bildiriUluslararasi, 10, madde: 'EK.5'),
             $dersBeyani,
         ]),
     ],

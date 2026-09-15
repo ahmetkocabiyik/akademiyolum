@@ -2042,9 +2042,7 @@ test('yalnız uluslararası isteyen koşulların kümesinde ulusal satır yok', 
         'aybu-2026', 'aybu-2026-sanat',
         'itu-2022', 'itu-2022-hs', 'itu-2022-mf', 'itu-2022-moda', 'itu-2022-tmdk',
         'kafkas-2025-egitim', 'ktun-2024-mps', 'tokat-gaziosmanpasa-2026',
-        'uak-2024-mart-egitim', 'uak-2024-mart-fen', 'uak-2024-mart-filoloji',
-        'uak-2024-mart-mimarlik', 'uak-2024-mart-muhendislik',
-        'uak-2024-mart-saglik', 'uak-2024-mart-sosyal', 'vanyyu-2019',
+        'vanyyu-2019',
     ];
 
     $depo = sartDepo();

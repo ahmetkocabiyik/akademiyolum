@@ -1122,10 +1122,9 @@ dergiyi/bildiriyi niteliyordu ya da satırın kendisi zaten uluslararasıydı.
 Detektör keskinleştirilince (ulusal indeks ADIYLA anılan koşullar elendi)
 **ikinci parti** çıktı ve bunlar HENÜZ KAYNAĞA KARŞI OKUNMADI:
 
-- `uak-2024-mart-*` (yedi alan tablosu) — "Uluslararası konferans, kongre ya
-  da sempozyumda sunulmuş en az N bildiri" koşulunun kümesinde `8b: Diğer
-  uluslararası/ulusal toplantıda bildiri` var. ÜAK tablosu on altı
-  üniversiteyi beslediği için ÖNCELİKLİ.
+- ~~`uak-2024-mart-*`~~ — 15.09.2026'da okundu ve düzeltildi (Çankaya,
+  İstanbul Topkapı, TED). ÜAK'ın 8b satırı kaynağın kendisinde de tek satır;
+  bölme puanı değil yalnız koşul kümelerini etkiliyor.
 - `aybu-2026`, `aybu-2026-sanat` — aynı şekil bildiride ve sanat
   etkinliğinde ("Uluslararası nitelikte en az üç karma sergi" ↔ "Ulusal ya da
   uluslararası sergi…").
@@ -1155,3 +1154,13 @@ bloğun istediği yayın kümesini söylüyor ("AHCI ya da WoS Q1-Q2-Q3
 dergilerinde istenen yayınlar", iki kümeli hücrelerde "İki ayrı yayın
 kümesinin ikisi de gerekli"). Allowlist tamamen kalktı; kural korpusun
 tamamında geçerli.
+
+### ÜAK 8b turunda kalan eksik sayma
+
+İstanbul Topkapı "uluslararası bilimsel toplantılarda sunulan (POSTER HARİÇ)"
+diyor. Sözlükte `Uluslararası Özet/Poster` tek etiket: özeti yayımlanmış
+bildiriyi posterden ayıramıyoruz. §0 uyarınca o satır koşulun dışında
+bırakıldı, yani yalnız TAM METNİ yayımlanmış uluslararası bildiriler
+sayılıyor. Özeti yayımlanmış bildirisi olan aday koşulu sağladığı hâlde
+sağlamamış görünür. Sözlüğe `Uluslararası Özet` / `Uluslararası Poster`
+ayrımı eklenirse düzelir.

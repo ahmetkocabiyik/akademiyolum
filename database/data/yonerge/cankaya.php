@@ -92,7 +92,12 @@ $SCI_EDITORLUK = ['12a'];
 $PROJE = ['7a-y', '7a-a', '7a-d', '7b', '7c', '7d'];
 $PROJE_YURUTUCU = ['7a-y'];
 $PATENT = ['10a', '10b', '10c'];
-$BILDIRI = ['8a', '8b'];
+$BILDIRI = ['8'];
+// Kaynak bildiriyi kimi ölçütte "Ulusal ya da uluslararası", kimisinde
+// yalnız "Uluslararası Konferans/Kongre/Sempozyumda" diye istiyor (MADDE
+// 28/17, 30/15). ÜAK'ın 8b satırı ikisini birden topladığı için ayrı grup
+// gerekti; aksi hâlde ulusal bir bildiri uluslararası şartı dolduruyordu.
+$BILDIRI_ULUSLARARASI = ['8-ULUSLARARASI'];
 $TEZ_DOKTORA = ['6a'];
 $TEZ_YL = ['6b'];
 $TEZ = ['6a', '6b'];
@@ -221,7 +226,7 @@ $fsbibDocentOzel = [
         ['7a-a', '7a-d', '7b', '7c', '7d'], 2, madde: 'Madde 30/13'),
     $ok['hindeks'](3),
     Kalip::adet('Uluslararası konferans, kongre ya da sempozyumda kabul edilmiş ve sunulmuş en '
-        .'az 2 bildiri', $BILDIRI, 2, donem: $DOKTORA, madde: 'Madde 30/15'),
+        .'az 2 bildiri', $BILDIRI_ULUSLARARASI, 2, donem: $DOKTORA, madde: 'Madde 30/15'),
 ];
 
 /**
@@ -257,7 +262,7 @@ $fsbibProfOzel = [
         ['7a-a', '7a-d', '7b', '7c', '7d'], 2, madde: 'Madde 28/15'),
     $ok['hindeks'](4),
     Kalip::adet('Uluslararası konferans, kongre ya da sempozyumda kabul edilmiş ve sunulmuş en '
-        .'az 2 bildiri', $BILDIRI, 2, donem: $DOCENTLIK, madde: 'Madde 28/17'),
+        .'az 2 bildiri', $BILDIRI_ULUSLARARASI, 2, donem: $DOCENTLIK, madde: 'Madde 28/17'),
 ];
 
 /**
@@ -326,7 +331,7 @@ return [
         $ok['hakemlik'](1),
         $tezKriteriTek(null),
         Kalip::adet('Uluslararası konferans, kongre ya da sempozyumda kabul edilmiş ve sunulmuş '
-            .'en az 1 bildiri', $BILDIRI, 1, madde: 'Madde 18/15'),
+            .'en az 1 bildiri', $BILDIRI_ULUSLARARASI, 1, madde: 'Madde 18/15'),
     ],
         'MADDE 17-18: temel kriterlerin tümü (doktor unvanı + ilk yazar olduğu 1 SCI makalesi) '
         .'ve on beş özel kriterin en az dördü.',
@@ -367,7 +372,7 @@ return [
             madde: 'Madde 16/13'),
         $ok['hakemlik'](2),
         Kalip::adet('Uluslararası konferans, kongre ya da sempozyumda kabul edilmiş ve sunulmuş '
-            .'en az 2 bildiri', $BILDIRI, 2, donem: $DOKTORA, madde: 'Madde 16/15'),
+            .'en az 2 bildiri', $BILDIRI_ULUSLARARASI, 2, donem: $DOKTORA, madde: 'Madde 16/15'),
     ],
         'MADDE 15-16: temel kriterler (doçent unvanı, 1 yıl ders, doktora sonrası 4 SCI '
         .'makalesi, en az birinde ilk yazar) ve on beş özel kriterin en az dördü.',
@@ -409,7 +414,7 @@ return [
             madde: 'Madde 14/13'),
         $ok['hakemlik'](3),
         Kalip::adet('Uluslararası konferans, kongre ya da sempozyumda kabul edilmiş ve sunulmuş '
-            .'en az 2 bildiri', $BILDIRI, 2, donem: $DOCENTLIK, madde: 'Madde 14/15'),
+            .'en az 2 bildiri', $BILDIRI_ULUSLARARASI, 2, donem: $DOCENTLIK, madde: 'Madde 14/15'),
     ],
         'MADDE 13-14: temel kriterler (5 yıl kıdem, 8 SCI makalesi — en az 4\'ü doçentlik '
         .'sonrası, birinde başlıca yazar) ve on beş özel kriterin en az dördü.',
@@ -560,7 +565,7 @@ return [
         $tezKriteriTek(null),
         $ok['hindeks'](2),
         Kalip::adet('Uluslararası konferans, kongre ya da sempozyumda kabul edilmiş ve sunulmuş '
-            .'en az 1 bildiri', $BILDIRI, 1, madde: 'Madde 32/15'),
+            .'en az 1 bildiri', $BILDIRI_ULUSLARARASI, 1, madde: 'Madde 32/15'),
     ],
         'MADDE 31-32: temel kriterler (doktor unvanı + 1 SCI/A&HCI makalesi ya da ilk yazar '
         .'olunan 2 Scopus makalesi) ve on beş özel kriterin en az dördü.',
@@ -714,7 +719,7 @@ return [
         $ok['atolyeYayini'],
         $ok['atolyeDuzenleme'],
         Kalip::adet('Uluslararası konferans, kongre ya da sempozyumda kabul edilmiş ve sunulmuş '
-            .'en az 1 bildiri', $BILDIRI, 1, madde: 'Madde 39/17'),
+            .'en az 1 bildiri', $BILDIRI_ULUSLARARASI, 1, madde: 'Madde 39/17'),
     ],
         'MADDE 38-39: temel kriterler (doktor unvanı + ilk yazar olunan 1 SCI/A&HCI makalesi ya '
         .'da alan indekslerinde 2 makale) ve on yedi özel kriterin en az dördü.',
@@ -752,7 +757,7 @@ return [
         $ok['atolyeYayini'],
         $ok['atolyeDuzenleme'],
         Kalip::adet('Uluslararası konferans, kongre ya da sempozyumda kabul edilmiş ve sunulmuş '
-            .'en az 2 bildiri', $BILDIRI, 2, donem: $DOKTORA, madde: 'Madde 37/16'),
+            .'en az 2 bildiri', $BILDIRI_ULUSLARARASI, 2, donem: $DOKTORA, madde: 'Madde 37/16'),
     ],
         'MADDE 36-37: temel kriterler (doçent unvanı, 1 yıl ders, doktora sonrası 3 SCI/A&HCI '
         .'makalesi — birinde ilk yazar) ve on altı özel kriterin en az dördü.',
@@ -796,7 +801,7 @@ return [
         $ok['atolyeYayini'],
         $ok['atolyeDuzenleme'],
         Kalip::adet('Uluslararası konferans, kongre ya da sempozyumda kabul edilmiş ve sunulmuş '
-            .'en az 2 bildiri', $BILDIRI, 2, donem: $DOCENTLIK, madde: 'Madde 35/19'),
+            .'en az 2 bildiri', $BILDIRI_ULUSLARARASI, 2, donem: $DOCENTLIK, madde: 'Madde 35/19'),
     ],
         'MADDE 34-35: temel kriterler (5 yıl kıdem, doçentlik sonrası 4 SCI/A&HCI makalesi — '
         .'birinde ilk yazar) ve on dokuz özel kriterin en az beşi.',
