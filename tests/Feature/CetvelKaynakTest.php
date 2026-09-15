@@ -1996,3 +1996,147 @@ test('Acıbadem: uluslararası kitap isteyen koşullara ULUSAL kitap satırı ba
             ->toContain('4.A.3');
     }
 });
+
+/**
+ * Yalnız ULUSLARARASI çalışma isteyen koşulların kümesinde ulusal ya da
+ * kapsam taşımayan satır olmamalı.
+ *
+ * Kaynaklar uluslararası ile ulusalı ayrı bölüm olarak yazıyor ve ikisini
+ * birden kastettiği yerde bunu söylüyor ("uluslararası ya da ulusal"). Yalnız
+ * uluslararası isteyen bir barajın kümesine ulusal bir satır girerse aday o
+ * barajı ulusal çalışmayla doldurur — §0'ın yasakladığı fazla sayma.
+ *
+ * Detektör koşul METNİNDEN çalışıyor: 'uluslararas' geçiyor ama alternatif
+ * olarak 'ulusal' geçmiyorsa koşul uluslararası-özeldir. Türkçe tuzağı:
+ * 'ulusal' 'uluslararası'nın içinde de var, negatif lookbehind şart.
+ *
+ * ALLOWLIST: koşul metninde 'uluslararası' KİTABI değil dergiyi/bildiriyi
+ * nitelediği hâller (Bursa Teknik "uluslararası konferans tam metin
+ * bildirisi ya da kitap/kitap bölümü", İzmir Demokrasi "kitap ya da
+ * uluslararası indeksli dergide makale"). Orada kitap kapsamsızdır ve
+ * kapsamsız satır DOĞRUDUR.
+ */
+test('yalnız uluslararası isteyen koşulların kümesinde ulusal satır yok', function () {
+    $izinli = [
+        // "uluslararası" dergiyi/bildiriyi niteliyor, kitabı değil.
+        'bursa-teknik-2024', 'izmir-demokrasi-turler', 'izmir-bakircay-2026',
+        'karamanoglu-2024', 'duzce-2024', 'tau-2021-fen',
+        // Tersi: "uluslararası" KİTABI niteliyor, dergileri değil. Kaynağın
+        // kuralı "1A, 2A, 3A … ya da 4B.1/4B.3" — 3A TR Dizin'dir ve kümede
+        // olması doğru. Kitap tarafı ayrıca daraltıldı.
+        'acibadem-2025-atif6', 'acibadem-2025-atif12', 'acibadem-2025-atif20',
+        // Satırın KENDİSİ uluslararası; sözlük etiketi kapsam taşımıyor.
+        // Ayrı bir sorun (etiket kapsamsız), bu testin konusu değil.
+        'cerrahpasa-2023', 'isik-2019-carpanli', 'ibn-haldun-2024',
+        'ibn-haldun-2024-sanat', 'selcuk-2024-egitim', 'selcuk-2024-hukuk',
+        // Sıfat KİTABI/ATFI değil BİLDİRİYİ niteliyor ("… ve uluslararası
+        // bildiri kalemlerinizden"); kitap ve atıf kapsamsızdır, doğrudur.
+        'trakya-2025-ek1',
+
+        // ── HENÜZ KAYNAĞA KARŞI OKUNMADI ───────────────────────────────
+        // 15.09.2026 turunda detektör keskinleştirilince çıkan ikinci parti.
+        // Şekil aynı: çökmüş "uluslararası/ulusal" satır (çoğu BİLDİRİ, kitap
+        // değil) yalnız uluslararası isteyen bir koşulun kümesinde. Kaynakları
+        // okunmadan düzeltilemez; ÜAK tabloları on altı üniversiteyi
+        // beslediği için önceliklidir.
+        'aybu-2026', 'aybu-2026-sanat',
+        'itu-2022', 'itu-2022-hs', 'itu-2022-mf', 'itu-2022-moda', 'itu-2022-tmdk',
+        'kafkas-2025-egitim', 'ktun-2024-mps', 'tokat-gaziosmanpasa-2026',
+        'uak-2024-mart-egitim', 'uak-2024-mart-fen', 'uak-2024-mart-filoloji',
+        'uak-2024-mart-mimarlik', 'uak-2024-mart-muhendislik',
+        'uak-2024-mart-saglik', 'uak-2024-mart-sosyal', 'vanyyu-2019',
+    ];
+
+    $depo = sartDepo();
+    $bulgular = [];
+
+    foreach ($depo->dogrulanmisEsikler() as $esik) {
+        if (in_array($esik['cetvel'], $izinli, true)) {
+            continue;
+        }
+
+        $katalog = $depo->katalog($esik['cetvel']);
+
+        if ($katalog === null) {
+            continue;
+        }
+
+        $gez = function (array $dugum) use (&$gez, $katalog, $esik, &$bulgular) {
+            $aciklama = (string) ($dugum['aciklama'] ?? '');
+
+            // Koşul ulusal bir indeksi ADIYLA anıyorsa (TR Dizin, ULAKBİM)
+            // kapsamı zaten karışıktır; 'ulusal' sözcüğünü aramak yetmiyor.
+            $yalnizUluslararasi = preg_match('/uluslararas/iu', $aciklama) === 1
+                && preg_match('/(?<!uluslar)\bulusal\b|TR Dizin|ULAKB/iu', $aciklama) !== 1;
+
+            if (isset($dugum['maddeler']) && $yalnizUluslararasi) {
+                foreach ($katalog->coz($dugum['maddeler']) as $kod) {
+                    $baslik = $katalog->maddeler[$kod]['baslik'] ?? '';
+
+                    if (preg_match('/(?<!uluslar)\bulusal\b|TR Dizin/iu', $baslik) === 1) {
+                        $bulgular[] = "{$esik['cetvel']} · {$kod}: {$baslik} ← {$aciklama}";
+                    }
+                }
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+
+            if (isset($dugum['telafi'])) {
+                $gez($dugum['telafi']);
+            }
+        };
+
+        $gez($esik['sart']);
+    }
+
+    expect(array_values(array_unique($bulgular)))->toBe([]);
+});
+
+test('"uluslararası" barajlarına ulusal satır sayılmıyor', function (string $cetvel, string $grup) {
+    // Kaynaklar uluslararası ile ulusalı AYRI bölüm olarak yazıyor ve ikisini
+    // birden kastettiği yerde bunu söylüyor ("uluslararası ya da ulusal").
+    // Yalnız uluslararası isteyen bir barajın kümesinde ulusal ya da kapsam
+    // taşımayan bir satır varsa aday o barajı ulusal çalışmayla doldurur.
+    $katalog = sartDepo()->katalog($cetvel);
+
+    $ulusal = [];
+
+    foreach ($katalog->coz([$grup]) as $kod) {
+        $baslik = $katalog->maddeler[$kod]['baslik'];
+
+        // Türkçe tuzağı: 'ulusal' 'uluslararası'nın İÇİNDE de geçiyor.
+        if (preg_match('/(?<!uluslar)\bulusal\b|TR Dizin|diğer yayın/iu', $baslik) === 1) {
+            $ulusal[] = "{$kod}: {$baslik}";
+        }
+    }
+
+    expect($ulusal)->toBe([]);
+})->with([
+    // Beykent MADDE 6/2-b: "toplam 2 adet ULUSLARARASI yayın". Ulusal
+    // bölümleri (D, E, F) kapsayan grup 6/2-ç'nindi, buraya da bağlanmıştı.
+    ['beykent-2025', 'A-B-C'],
+    // Trakya: "en az yarısı uluslararası faaliyetlerden". Tez yayını bölümü
+    // TR Dizin makalesini ve çökmüş "uluslararası ya da ulusal kitap"
+    // satırlarını da taşıdığı için toptan alınamaz.
+    ['trakya-2025-ek1', 'ULUS'],
+    ['trakya-2025-ek2', 'ULUS'],
+    ['trakya-2025-ek3', 'ULUS'],
+    ['trakya-2025-ek4', 'ULUS'],
+    ['trakya-2025-ek5', 'ULUS'],
+    ['trakya-2025-ek6', 'ULUS'],
+    ['trakya-2025-ek7', 'ULUS'],
+]);
+
+test('Selçuk bölüm joker\'i üst bölümlere sızmıyor', function (string $cetvel) {
+    // `coz()` joker'i ÖNEK eşleştiriyor: '1*' 10, 11, 12 ve 13. bölümleri de
+    // topluyordu. "Uluslararası dergilerdeki makalelerinizden en az 40 puan"
+    // koşulu dekanlık ya da komisyon üyeliğiyle sağlanır hâle gelmişti.
+    $kodlar = sartDepo()->katalog($cetvel)->coz(['1']);
+
+    $sizan = array_values(array_filter($kodlar, fn (string $k) => preg_match('/^1[0-9]/', $k) === 1));
+
+    expect($sizan)->toBe([])
+        ->and($kodlar)->not->toBe([]);
+})->with(['selcuk-2024-egitim', 'selcuk-2024-fen', 'selcuk-2024-hukuk', 'selcuk-2024-saglik']);

@@ -774,9 +774,13 @@ $gruplar13 = [
         ['6a-y', '6a-a', '6a-d', '6b-y', '6b-a', '6b-d'],
         ['7a', '7b1-t', '7b1-o'],
     ),
+    // Tez yayınlarının TAMAMI değil: `ty-c` kaynağın "2. Ulusal Makale"
+    // bölümünü, `ty-f`/`ty-g` ise "diğer uluslararası/ulusal kitap" çiftinin
+    // çökmüş hâlini karşılıyor, `ty-i` ise kapsamsız. Uluslararası faaliyet
+    // barajına sayılırlarsa ulusal bir yayın uluslararası şartı doldurur.
     'ULUS' => array_merge(
         $bolum($ek1, '1'),
-        $onek($ek1, 'ty-'),
+        ['ty-a', 'ty-b', 'ty-d', 'ty-e', 'ty-h'],
         ['3a', '3b', '3e', '3f', '7a', '7b1-t', '7b1-o'],
         ['6a-y', '6a-a', '6a-d', '6b-y', '6b-a', '6b-d'],
     ),
@@ -792,7 +796,7 @@ $gruplar2 = [
     'DERS' => ['8a'],
     'ULUS' => array_merge(
         $bolum($ek2, '1'),
-        $onek($ek2, 'ty-'),
+        ['ty-a', 'ty-b', 'ty-d', 'ty-e', 'ty-h'],
         ['3a-1', '3a-1c', '3a-2', '3a-2c', '7a', '7b1-t', '7b1-o'],
         ['6a-y', '6a-a', '6a-d'],
     ),
@@ -820,7 +824,9 @@ $gruplar4 = [
     ),
     'ULUS' => array_merge(
         $bolum($ek4, '1'),
-        $bolum($ek4, '3'),
+        // Bölüm 3 tez yayınları: 3d (TR Dizin) ulusal, 3g/3h çökmüş kitap
+        // satırları, 3j kapsamsız — uluslararası barajına girmezler.
+        array_values(array_diff($bolum($ek4, '3'), ['3d', '3g', '3h', '3j'])),
         ['4a', '4b', '4g', '4h', '8a', '8b1-t', '8b1-o'],
     ),
 ];
@@ -833,7 +839,9 @@ $gruplar5 = [
     'DERS' => ['9a'],
     'ULUS' => array_merge(
         $bolum($ek5, '1'),
-        $bolum($ek5, '3'),
+        // Bölüm 3 tez yayınları: 3d (TR Dizin) ulusal, 3g/3h çökmüş kitap
+        // satırları, 3j kapsamsız — uluslararası barajına girmezler.
+        array_values(array_diff($bolum($ek5, '3'), ['3d', '3g', '3h', '3j'])),
         ['4a', '4b', '4e', '4f', '8a', '8b1-t', '8b1-o'],
     ),
 ];
@@ -843,7 +851,9 @@ $gruplar6 = [
     'M1' => $bolum($ek6, '1'),
     'ULUS' => array_merge(
         $bolum($ek6, '1'),
-        $bolum($ek6, '3'),
+        // Bölüm 3 tez yayınları: 3d (TR Dizin) ulusal, 3g/3h çökmüş kitap
+        // satırları, 3j kapsamsız — uluslararası barajına girmezler.
+        array_values(array_diff($bolum($ek6, '3'), ['3d', '3g', '3h', '3j'])),
         ['4a', '4b', '4e', '4f', '8a', '8b1-t', '8b1-o'],
     ),
     'K12' => $bolum($ek6, '1', '2'),
@@ -865,7 +875,9 @@ $gruplar7 = [
     'DERS' => ['9a'],
     'ULUS' => array_merge(
         $bolum($ek7, '1'),
-        $bolum($ek7, '3'),
+        // Bölüm 3 tez yayınları: 3d (TR Dizin) ulusal, 3g/3h çökmüş kitap
+        // satırları, 3j kapsamsız — uluslararası barajına girmezler.
+        array_values(array_diff($bolum($ek7, '3'), ['3d', '3g', '3h', '3j'])),
         ['4a', '4b', '4c', '8a', '8b1-t', '8b1-o'],
     ),
 ];

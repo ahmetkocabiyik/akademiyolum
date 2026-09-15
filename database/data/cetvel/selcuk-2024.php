@@ -107,7 +107,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],
@@ -202,7 +208,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],
@@ -296,7 +308,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],
@@ -395,7 +413,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '4' => ['4*'],
                 '5' => ['5*'],
@@ -487,7 +511,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],
@@ -582,7 +612,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],
@@ -668,7 +704,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '4' => ['4*'],
                 '5' => ['5*'],
@@ -760,7 +802,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],
@@ -854,7 +902,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],
@@ -947,7 +1001,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],
@@ -1045,7 +1105,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],
@@ -1139,7 +1205,13 @@ return [
                 'KONGRE-UYE' => ['baslik' => 'Bilimsel toplantı düzenleme ya da bilim kurulu üyeliği (uluslararası)', 'kategori' => 'diger', 'kaynaklar' => ['Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)'], 'puan' => 5],
             ],
             'gruplar' => [
-                '1' => ['1*'],
+                // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor, yani '1*'
+                // 10, 11, 12 ve 13. bölümleri de topluyordu (ödül, editörlük,
+                // idari görev). "Uluslararası dergilerdeki makalelerinizden en
+                // az 40 puan" koşulu dekanlıkla sağlanır hâle gelmişti.
+                // Olmayan kodlar sessizce düşer; liste bütün varyantları
+                // karşılasın diye 1a-1f yazıldı.
+                '1' => ['1a', '1b', '1c', '1d', '1e', '1f'],
                 '2' => ['2*'],
                 '3' => ['3*'],
                 '4' => ['4*'],

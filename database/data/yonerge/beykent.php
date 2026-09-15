@@ -174,7 +174,7 @@ $profKosullari = [
     ]],
     ['sosyal', ['sosyal', 'egitim', 'filoloji', 'spor'], 'Sosyal Bilimler', [
         Kalip::adet('Doçentlik sonrası A ya da C maddelerinde tanımlı en az bir uluslararası yayın yapmış olmak', ['A-C'], 1, donem: $DOCENTLIK, madde: 'MADDE 6/2-b'),
-        Kalip::adet('Doçentlik sonrası toplam en az iki uluslararası yayın yapmış olmak', ['A-B-C-D-E-F'], 2, donem: $DOCENTLIK, madde: 'MADDE 6/2-b'),
+        Kalip::adet('Doçentlik sonrası toplam en az iki uluslararası yayın yapmış olmak', ['A-B-C'], 2, donem: $DOCENTLIK, madde: 'MADDE 6/2-b'),
     ]],
     ['hukuk', ['hukuk'], 'Hukuk', [
         Kalip::adet('Doçentlik sonrası A, B, C, D ya da F maddelerinde tanımlı en az iki uluslararası veya ulusal yayın yapmış olmak', ['A-B-C-D-F'], 2, donem: $DOCENTLIK, madde: 'MADDE 6/2-c'),

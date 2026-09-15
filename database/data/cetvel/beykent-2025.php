@@ -207,6 +207,13 @@ return [
         'C' => ['C-1', 'C-2', 'C-3'],
         // MADDE 5/b ve 5/c: "A veya C maddesinde tanımlı uluslararası yayın".
         'A-C' => ['A-1', 'A-1.k', 'A-2', 'A-2.k', 'A-3', 'A-3.k', 'C-1', 'C-2', 'C-3'],
+        // MADDE 6/2-b: "toplam 2 adet ULUSLARARASI yayın". Kaynak uluslararası
+        // bölümleri (A: uluslararası makale, B: uluslararası bildiri,
+        // C: uluslararası kitap) ulusal bölümlerden (D, E, F) ayrı yazıyor ve
+        // her ikisini birden kastettiği yerde "uluslararası ya da ulusal"
+        // diyor (6/2-c hukuk, 6/2-ç sağlık). Bu koşul öyle demiyor.
+        'A-B-C' => ['A-1', 'A-1.k', 'A-2', 'A-2.k', 'A-3', 'A-3.k', 'B-1', 'B-3', 'B-4',
+            'C-1', 'C-2', 'C-3'],
         // MADDE 5/ç: "A, B, C, D veya F maddelerinde tanımlı yayın".
         'A-B-C-D-F' => ['A-1', 'A-1.k', 'A-2', 'A-2.k', 'A-3', 'A-3.k', 'B-1', 'B-3', 'B-4',
             'C-1', 'C-2', 'C-3', 'D-1', 'D-2', 'F-1', 'F-2', 'F-3', 'F-4', 'F-5'],

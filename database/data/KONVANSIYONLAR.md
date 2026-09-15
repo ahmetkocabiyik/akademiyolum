@@ -3053,7 +3053,23 @@ Bu, puan kademesindeki "en düşüğünü yaz" kuralının koşul tarafındaki
 karşılığı; [[kademe-mi-uygunluk-mu]] ayrımının aynısı. Puanda birleştirmek
 güvenli, SAYI koşulunda birleştirmek fazla saydırır.
 
-**Tarayıcı:** koşul açıklaması `uluslararas` içerip `(?<!uluslar)\bulusal\b`
-İÇERMİYORSA (yani yalnız uluslararası istiyorsa) ve kümesindeki bir satır
-kapsamsız kitap etiketi taşıyorsa işaret. 15.09.2026'da korpusta **19 cetvel,
-97 işaret** verdi; Acıbadem dışındakiler henüz kaynağa karşı okunmadı.
+**Tarayıcı** artık `CetvelKaynakTest`'te değişmez olarak duruyor: koşulun
+açıklaması yalnız uluslararası istiyorsa (`uluslararas` var, `(?<!uluslar)
+\bulusal\b` · `TR Dizin` · `ULAKB` yok) kümesinde ulusal satır olamaz.
+
+**Tek başına karar verdirmez.** Türkçede sıfat hangi ada bağlandığı yazıdan
+okunmuyor: "uluslararası konferans tam metin bildirisi ya da kitap/kitap
+bölümü" cümlesinde `uluslararası` BİLDİRİYİ niteliyor, kitap kapsamsızdır ve
+kapsamsız satır doğrudur (Bursa Teknik, Trakya EK-1, İzmir Demokrasi…).
+Her işaret kaynaktan okunmalı; test allowlist'i bu yüzden iki bölümlü —
+"okundu, doğru" ve "henüz okunmadı".
+
+**JOKER TUZAĞI — `1*` ÜST BÖLÜMLERİ DE TOPLAR.** `MaddeKatalogu::coz()`
+joker'i ÖNEK eşleştiriyor. Kodları `1a…1f` VE `10a`, `11b`, `12c` olan bir
+cetvelde `'1*'` on, on bir ve on ikinci bölümü de içine alır. Selçuk'ta
+"Uluslararası dergilerdeki makalelerinizden en az 40 puan" koşulu ödül,
+editörlük ve İDARİ GÖREV satırlarını topluyordu; dekanlık makale barajını
+dolduruyordu. Bölüm grubu yazarken joker yerine kodları SAY (`['1a', '1b',
+…]`); olmayan kod sessizce düşer, liste bütün varyantlara yazılabilir.
+Korpusta dört dosya daha aynı tuzakta: ege, eskişehir-teknik, esogu ve
+(düzeltilen) selcuk.

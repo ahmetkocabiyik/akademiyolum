@@ -1111,3 +1111,35 @@ On işaretin altısı düzeltildi. Yanlış pozitif çıkan dördü:
   Biruni 20/15/8/5) satır en düşük role yazılıyor.
 - **"Editör listesinde yer almak"** (İTÜ H.3) ile "yayın kurulu üyeliği"
   aynı etiketten sayılıyor; kaynaklar ikisini ayırmıyor.
+
+## Kapsam taşımayan satır, uluslararası barajında (15.09.2026 turu)
+
+Acıbadem'de bulunan hata ("çökmüş satır, kapsam şartı olan koşulda")
+korpusa tarandı. İlk parti 19 cetveldi; ikisi gerçek çıktı (Beykent,
+Trakya'nın yedi eki), geri kalanı yanlış pozitif — sıfat kitabı değil
+dergiyi/bildiriyi niteliyordu ya da satırın kendisi zaten uluslararasıydı.
+
+Detektör keskinleştirilince (ulusal indeks ADIYLA anılan koşullar elendi)
+**ikinci parti** çıktı ve bunlar HENÜZ KAYNAĞA KARŞI OKUNMADI:
+
+- `uak-2024-mart-*` (yedi alan tablosu) — "Uluslararası konferans, kongre ya
+  da sempozyumda sunulmuş en az N bildiri" koşulunun kümesinde `8b: Diğer
+  uluslararası/ulusal toplantıda bildiri` var. ÜAK tablosu on altı
+  üniversiteyi beslediği için ÖNCELİKLİ.
+- `aybu-2026`, `aybu-2026-sanat` — aynı şekil bildiride ve sanat
+  etkinliğinde ("Uluslararası nitelikte en az üç karma sergi" ↔ "Ulusal ya da
+  uluslararası sergi…").
+- `itu-2022` ve dört varyantı, `kafkas-2025-egitim`, `ktun-2024-mps`,
+  `tokat-gaziosmanpasa-2026`, `vanyyu-2019`.
+
+Hepsi `CetvelKaynakTest`'in allowlist'inde "henüz okunmadı" başlığı altında;
+okundukça oradan düşecekler.
+
+## Bölüm joker'i üst bölümlere sızıyor (15.09.2026)
+
+`MaddeKatalogu::coz()` joker'i önek eşleştirdiği için `'1*'` 10, 11, 12 ve
+13. bölümleri de topluyor. Selçuk düzeltildi. Aynı tuzaktaki üç dosya
+KALDI: `ege-2026` (MAKALE grubu → 10.4k), `eskisehir-teknik-2026` (dört
+varyant, 1/1-2/1-2-7-8 grupları → 10, 11, 12), `esogu-2023` (1-2-3-9-16 ve
+1-2-9-16 grupları → 10-13). Üçünde de sızıntı ödül, editörlük ve idari görev
+satırlarına ulaşıyor, yani makale barajı idari görevle dolabiliyor.
