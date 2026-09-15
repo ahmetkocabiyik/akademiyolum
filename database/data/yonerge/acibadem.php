@@ -109,7 +109,7 @@ $yenidenProjeYaDaYayin = Kalip::veya('Proje ya da ek yayın koşulunu sağlamak'
         ['PROJE-ARASTIRMACI'], 2, donem: $SON3, madde: 'Yeniden atanma/b'
     ),
     Kalip::adet(
-        '1A-B, 2A-B ya da 3A-B kategorilerinde başlıca yazar olarak bir yayın daha yapmış olmak',
+        'SCI-Expanded, SSCI ya da AHCI dergilerinde, WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde veya TR Dizin dergilerinde başlıca yazar olarak bir makale ya da derleme daha yayımlamış olmak',
         ['1A-B-2A-B-3A-B'], 2, yazar: 'baslica', donem: $SON3, madde: 'Yeniden atanma/c'
     ),
 ]);
@@ -128,13 +128,13 @@ $esikler[] = [
     'aday_notu' => 'Sağlık Bilimleri alanında doktor öğretim üyesi kadrosuna İLK ATANMA. '
         .'İlk yazar olarak istenen yayın doktora, tıpta uzmanlık ya da eczacılıkta uzmanlık '
         .'tezinizden üretilmiş olabilir. "Ek olarak iki yayın" koşulu, (a) maddesindeki yayınla '
-        .'birlikte 1A-D kategorilerinde toplam üç yayın olarak hesaplanıyor.'.$NOT_DIL.$NOT_ATIF,
+        .'birlikte SCI-Expanded, SSCI ya da AHCI dergilerinde toplam üç yayın olarak hesaplanıyor.'.$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna ilk atanma — Sağlık Bilimleri', [
         $DIL,
         $SUNUM,
         Kalip::adet('SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A'], 1, yazar: 'ilk', madde: 'a'),
-        Kalip::adet('1A-D kategorilerinde (özgün makale, derleme, kısa makale, vaka raporu) toplam en az üç yayın yapmış olmak', ['1A-D'], 3, madde: 'b'),
-        Kalip::puanDan('1A-D ve 2A-B kategorilerindeki faaliyetlerden en az 15 puan almak', ['1A-D-2A-B'], 15, madde: 'c'),
+        Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde toplam en az üç yayın (özgün makale, derleme, kısa makale ya da vaka raporu) yapmış olmak', ['1A-D'], 3, madde: 'b'),
+        Kalip::puanDan('SCI-Expanded, SSCI ya da AHCI dergilerinde ve WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde yayımlanmış makale ve derlemelerinizden en az 15 puan almak', ['1A-D-2A-B'], 15, madde: 'c'),
         Kalip::toplam(30),
     ]),
 ];
@@ -153,18 +153,19 @@ $esikler[] = [
     'aday_notu' => 'Sosyal, Beşeri ve İdari Bilimler alanında doktor öğretim üyesi kadrosuna '
         .'İLK ATANMA. İlk yazar olarak istenen yayın doktora tezinizden üretilmiş olabilir. '
         .'İkinci koşulu ya TR Dizin dergilerinde iki yayınla (en az birinde tek ya da başlıca '
-        .'yazar olarak) ya da 1A-2A kategorilerinde ek bir yayınla karşılayabilirsiniz.'
+        .'yazar olarak) ya da SCI-Expanded, SSCI, AHCI, WoS All Databases veya SCOPUS Q1-Q2 '
+        .'dergilerinde ek bir makaleyle karşılayabilirsiniz.'
         .$NOT_KITAP.$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna ilk atanma — Sosyal Bilimler', [
         $DIL,
         $SUNUM,
-        Kalip::adet('1A, 2A, 3A kategorilerinde ya da uluslararası yayınevinde kitap veya kitap bölümü yazarlığında ilk yazar olarak en az bir yayın yapmış olmak', ['SOSYAL-A'], 1, yazar: 'ilk', madde: 'a'),
+        Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde, WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde ya da TR Dizin dergilerinde yayımlanmış bir özgün araştırma makalesinde veya uluslararası yayınevinden çıkmış bir kitap ya da kitap bölümünde ilk yazar olmak', ['SOSYAL-A'], 1, yazar: 'ilk', madde: 'a'),
         Kalip::veya('İkinci yayın koşulunu sağlamak', [
             Kalip::ve('TR Dizin dergilerinde iki yayın (en az birinde tek ya da başlıca yazar)', [
-                Kalip::adet('3A-B ve 3D-G kategorilerinde en az iki yayın yapmış olmak', ['3A-B-3D-G'], 2, madde: 'b'),
-                Kalip::adet('3A-B ve 3D-G kategorilerindeki yayınlarınızın en az birinde tek ya da başlıca yazar olmak', ['3A-B-3D-G'], 1, yazar: 'baslica', madde: 'b'),
+                Kalip::adet('TR Dizin dergilerinde ya da ulusal kongrelerde en az iki yayın (makale, derleme, vaka raporu, bildiri ya da editörlük) yapmış olmak', ['3A-B-3D-G'], 2, madde: 'b'),
+                Kalip::adet('TR Dizin dergilerinde ya da ulusal kongrelerdeki bu yayınlarınızın en az birinde tek ya da başlıca yazar olmak', ['3A-B-3D-G'], 1, yazar: 'baslica', madde: 'b'),
             ]),
-            Kalip::adet('1A ve 2A kategorilerinde toplam en az iki yayın yapmış olmak', ['1A-2A'], 2, madde: 'b'),
+            Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde ya da WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde toplam en az iki özgün araştırma makalesi yayımlamış olmak', ['1A-2A'], 2, madde: 'b'),
         ]),
         Kalip::toplam(30),
     ]),
@@ -181,15 +182,16 @@ $esikler[] = [
         .'toplam 65 puan.',
     'aday_notu' => 'Mühendislik ile Fen Bilimleri ve Matematik alanlarında doktor öğretim üyesi '
         .'kadrosuna İLK ATANMA. İlk yazar olarak istenen yayın doktora tezinizden üretilmiş '
-        .'olabilir. Bu alanda puan barajı diğer alanlardan yüksek: yalnız 1A-C kategorilerinden '
-        .'45 puan gerekiyor, yani Q1 dergide tek bir makale (60 puan) bu koşulu tek başına '
+        .'olabilir. Bu alanda puan barajı diğer alanlardan yüksek: yalnız SCI-Expanded, SSCI '
+        .'ya da AHCI dergilerindeki yayınlarınızdan 45 puan gerekiyor, yani Q1 dergide tek bir '
+        .'makale (60 puan) bu koşulu tek başına '
         .'karşılıyor.'.$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna ilk atanma — Mühendislik, Fen ve Matematik', [
         $DIL,
         $SUNUM,
         Kalip::adet('SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A'], 1, yazar: 'ilk', madde: 'a'),
-        Kalip::adet('1A-C kategorilerinde toplam en az iki yayın yapmış olmak', ['1A-C'], 2, madde: 'b'),
-        Kalip::puanDan('1A-C kategorilerindeki faaliyetlerden en az 45 puan almak', ['1A-C'], 45, madde: 'c'),
+        Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde toplam en az iki yayın (özgün makale, derleme ya da kısa makale) yapmış olmak', ['1A-C'], 2, madde: 'b'),
+        Kalip::puanDan('SCI-Expanded, SSCI ya da AHCI dergilerinde yayımlanmış makale, derleme ve kısa makalelerinizden en az 45 puan almak', ['1A-C'], 45, madde: 'c'),
         Kalip::toplam(65),
     ]),
 ];
@@ -210,8 +212,8 @@ $esikler[] = [
     'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna ilk atanma — Eğitim ve Spor Bilimleri', [
         $DIL,
         $SUNUM,
-        Kalip::adet('1A, 2A ya da 3A kategorilerinde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A-2A-3A'], 1, yazar: 'ilk', madde: 'a'),
-        Kalip::adet('1A-E, 2A-G ve 3A-G kategorilerinde toplam en az üç yayın yapmış olmak', ['YAYIN-HEPSI'], 3, madde: 'b'),
+        Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde, WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde ya da TR Dizin dergilerinde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A-2A-3A'], 1, yazar: 'ilk', madde: 'a'),
+        Kalip::adet('Makale, kongre bildirisi ve dergi editörlüğü kalemlerinizden toplam en az üç yayın yapmış olmak', ['YAYIN-HEPSI'], 3, madde: 'b'),
         Kalip::toplam(30),
     ]),
 ];
@@ -219,9 +221,9 @@ $esikler[] = [
 // ═══════════════ DOKTOR ÖĞRETİM ÜYESİ — YENİDEN ATANMA ═══════════════
 $yenidenA = [
     'saglik' => Kalip::adet('SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
-    'sosyal' => Kalip::adet('1A, 2A, 3A kategorilerinde ya da uluslararası yayınevinde kitap veya kitap bölümü yazarlığında ilk yazar olarak en az bir yayın yapmış olmak', ['SOSYAL-A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
+    'sosyal' => Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde, WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde ya da TR Dizin dergilerinde yayımlanmış bir özgün araştırma makalesinde veya uluslararası yayınevinden çıkmış bir kitap ya da kitap bölümünde ilk yazar olmak', ['SOSYAL-A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
     'muhfen' => Kalip::adet('SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
-    'egitim' => Kalip::adet('1A, 2A ya da 3A kategorilerinde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A-2A-3A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
+    'egitim' => Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde, WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde ya da TR Dizin dergilerinde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A-2A-3A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
 ];
 
 $yenidenAlanlar = [
@@ -271,7 +273,7 @@ $esikler[] = [
     'aday_notu' => 'Sağlık Bilimleri alanında doçent kadrosuna yükseltilme ve atanma. Puanlar '
         .'doktora, tıpta uzmanlık ya da eczacılıkta uzmanlık derecenizi aldıktan SONRAKİ '
         .'çalışmalarınızdan hesaplanıyor. "Ek olarak iki yayın" koşulu, (a) maddesindeki üç '
-        .'yayınla birlikte 1A-D kategorilerinde toplam beş yayın olarak hesaplanıyor.'
+        .'yayınla birlikte SCI-Expanded, SSCI ya da AHCI dergilerinde toplam beş yayın olarak hesaplanıyor.'
         .$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Doçent kadrosuna yükseltilme ve atanma — Sağlık Bilimleri', [
         $UNVAN,
@@ -279,8 +281,8 @@ $esikler[] = [
         $SUNUM,
         Kalip::adet('SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde başlıca yazar olarak en az üç özgün araştırma makalesi yayımlamış olmak', ['1A'], 3, yazar: 'baslica', madde: 'a'),
         Kalip::adet('Bu makalelerin en az ikisini doktora, tıpta uzmanlık ya da eczacılıkta uzmanlık derecenizi aldıktan sonra yayımlamış olmak', ['1A'], 2, yazar: 'baslica', donem: $DOKTORA, madde: 'a'),
-        Kalip::adet('1A-D kategorilerinde toplam en az beş yayın yapmış olmak', ['1A-D'], 5, madde: 'b'),
-        Kalip::puanDan('Doktora ya da uzmanlık derecenizden sonra 1A-D ve 2A-B kategorilerindeki faaliyetlerden en az 40 puan almak', ['1A-D-2A-B'], 40, $DOKTORA, madde: 'c'),
+        Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde toplam en az beş yayın (özgün makale, derleme, kısa makale ya da vaka raporu) yapmış olmak', ['1A-D'], 5, madde: 'b'),
+        Kalip::puanDan('Doktora ya da uzmanlık derecenizden sonra SCI-Expanded, SSCI ya da AHCI dergilerinde ve WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde yayımlanmış makale ve derlemelerinizden en az 40 puan almak', ['1A-D-2A-B'], 40, $DOKTORA, madde: 'c'),
         Kalip::toplam(80, $DOKTORA),
     ]),
 ];
@@ -298,22 +300,23 @@ $esikler[] = [
     'aday_notu' => 'Sosyal, Beşeri ve İdari Bilimler alanında doçent kadrosuna yükseltilme ve '
         .'atanma. Yayın koşulları doktora derecenizi aldıktan SONRAKİ çalışmalarınızdan '
         .'hesaplanıyor; puan barajlarında dönem sınırı yok. Kitap ve kitap bölümü '
-        .'kategorilerinden (4A-B) en az 20 puan gerekiyor, yani bu alanda kitap yazmadan '
+        .'yazarlığı, editörlüğü ya da çevirmenliğinden en az 20 puan gerekiyor, yani bu '
+        .'alanda kitap yazmadan '
         .'doçent olmak zor. Ayrıca doktora sonrası en az dört yarıyıl ders vermiş olmanız '
         .'gerekiyor.'.$NOT_KITAP.$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Doçent kadrosuna yükseltilme ve atanma — Sosyal Bilimler', [
         $UNVAN,
         $DIL,
         $SUNUM,
-        Kalip::adet('Doktora derecenizi aldıktan sonra 1A-B ve 2A-B kategorilerinde ilk yazar olarak en az bir yayın yapmış olmak', ['1A-B-2A-B-3A-B'], 1, yazar: 'ilk', donem: $DOKTORA, madde: 'a'),
+        Kalip::adet('Doktora derecenizi aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde ya da WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde ilk yazar olarak en az bir özgün makale veya derleme yayımlamış olmak', ['1A-B-2A-B-3A-B'], 1, yazar: 'ilk', donem: $DOKTORA, madde: 'a'),
         Kalip::veya('Ek yayın koşulunu sağlamak', [
             Kalip::ve('TR Dizin dergileri ve kitap kategorilerinde üç yayın (en az birinde tek ya da başlıca yazar)', [
-                Kalip::adet('Doktora derecenizi aldıktan sonra 3A-B kategorilerinde ya da uluslararası yayınevinde kitap/bölüm yazarlığında toplam en az üç yayın yapmış olmak', ['SOSYAL-DOC-B'], 3, donem: $DOKTORA, madde: 'b'),
+                Kalip::adet('Doktora derecenizi aldıktan sonra TR Dizin dergilerinde ya da uluslararası yayınevinden çıkmış kitap/kitap bölümünde toplam en az üç yayın yapmış olmak', ['SOSYAL-DOC-B'], 3, donem: $DOKTORA, madde: 'b'),
                 Kalip::adet('Bu yayınlarınızın en az birinde tek ya da başlıca yazar olmak', ['SOSYAL-DOC-B'], 1, yazar: 'baslica', donem: $DOKTORA, madde: 'b'),
             ]),
-            Kalip::adet('Doktora derecenizi aldıktan sonra 1A ve 2A kategorilerinde toplam en az iki yayın yapmış olmak', ['1A-2A'], 2, donem: $DOKTORA, madde: 'b'),
+            Kalip::adet('Doktora derecenizi aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde ya da WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde toplam en az iki özgün araştırma makalesi yayımlamış olmak', ['1A-2A'], 2, donem: $DOKTORA, madde: 'b'),
         ]),
-        Kalip::puanDan('Kitap ve kitap bölümü kategorilerinden (4A-B) en az 20 puan almak', ['4A-B'], 20, madde: 'c'),
+        Kalip::puanDan('Kitap ve kitap bölümü yazarlığı, editörlüğü ya da çevirmenliğinden en az 20 puan almak', ['4A-B'], 20, madde: 'c'),
         Kalip::toplam(60),
         Kalip::metrik('Doktora derecenizi aldıktan sonra alanınızda en az dört yarıyıl ders vermiş olmak', 'ders_yariyil', 4, $DOKTORA),
     ]),
@@ -330,16 +333,17 @@ $esikler[] = [
         .'1A-E\'den 60 puan, doktora sonrası toplam 90 puan.',
     'aday_notu' => 'Mühendislik ile Fen Bilimleri ve Matematik alanlarında doçent kadrosuna '
         .'yükseltilme ve atanma. Bu alanın puan barajları yönergenin en yükseği: doktora '
-        .'sonrası yalnız 1A-E kategorilerinden 60, toplamda 90 puan gerekiyor. "Ek olarak üç '
-        .'yayın" koşulu, (a) maddesindeki iki yayınla birlikte 1A-C kategorilerinde toplam beş '
+        .'sonrası yalnız SCI-Expanded, SSCI ya da AHCI dergilerinde 60, toplamda 90 puan '
+        .'gerekiyor. "Ek olarak üç yayın" koşulu, (a) maddesindeki iki yayınla birlikte aynı '
+        .'dergilerde toplam beş '
         .'yayın olarak hesaplanıyor.'.$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Doçent kadrosuna yükseltilme ve atanma — Mühendislik, Fen ve Matematik', [
         $UNVAN,
         $DIL,
         $SUNUM,
-        Kalip::adet('Doktora derecenizi aldıktan sonra 1A-B kategorilerinde başlıca yazar olarak en az iki yayın yapmış olmak', ['1A-B'], 2, yazar: 'baslica', donem: $DOKTORA, madde: 'a'),
-        Kalip::adet('1A-C kategorilerinde toplam en az beş yayın yapmış olmak', ['1A-C'], 5, madde: 'b'),
-        Kalip::puanDan('Doktora ya da tıpta uzmanlık derecenizden sonra 1A-E kategorilerindeki faaliyetlerden en az 60 puan almak', ['1A-D'], 60, $DOKTORA, madde: 'c'),
+        Kalip::adet('Doktora derecenizi aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde başlıca yazar olarak en az iki özgün makale veya derleme yayımlamış olmak', ['1A-B'], 2, yazar: 'baslica', donem: $DOKTORA, madde: 'a'),
+        Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde toplam en az beş yayın (özgün makale, derleme ya da kısa makale) yapmış olmak', ['1A-C'], 5, madde: 'b'),
+        Kalip::puanDan('Doktora ya da tıpta uzmanlık derecenizden sonra SCI-Expanded, SSCI ya da AHCI dergilerinde yayımlanmış çalışmalarınızdan en az 60 puan almak', ['1A-D'], 60, $DOKTORA, madde: 'c'),
         Kalip::toplam(90, $DOKTORA),
     ]),
 ];
@@ -362,8 +366,8 @@ $esikler[] = [
         $UNVAN,
         $DIL,
         $SUNUM,
-        Kalip::adet('Doktora derecenizi aldıktan sonra 1A, 2A ya da 3A kategorilerinde başlıca yazar olarak en az iki yayın yapmış olmak', ['1A-2A-3A'], 2, yazar: 'baslica', donem: $DOKTORA, madde: 'a'),
-        Kalip::adet('1A-E, 2A-G ve 3A-G kategorilerinde toplam en az beş yayın yapmış olmak', ['YAYIN-HEPSI'], 5, madde: 'b'),
+        Kalip::adet('Doktora derecenizi aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde, WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde ya da TR Dizin dergilerinde başlıca yazar olarak en az iki özgün araştırma makalesi yayımlamış olmak', ['1A-2A-3A'], 2, yazar: 'baslica', donem: $DOKTORA, madde: 'a'),
+        Kalip::adet('Makale, kongre bildirisi ve dergi editörlüğü kalemlerinizden toplam en az beş yayın yapmış olmak', ['YAYIN-HEPSI'], 5, madde: 'b'),
         Kalip::toplam(60),
     ]),
 ];
@@ -380,22 +384,23 @@ $esikler[] = [
         .'bunların en az biri Q1 ya da en az ikisi Q2, doçentlik sonrası 1A-D + 2A-B\'den 60 '
         .'puan, doçentlik sonrası toplam 120 puan.',
     'aday_notu' => 'Sağlık Bilimleri alanında profesör kadrosuna yükseltilme ve atanma. '
-        .'Yönergenin en ağır eşikleri burada: doçentlik sonrası yalnız 1A-D + 2A-B\'den 60, '
+        .'Yönergenin en ağır eşikleri burada: doçentlik sonrası yalnız SCI-Expanded, SSCI, '
+        .'AHCI, WoS All Databases ve SCOPUS Q1-Q2 dergilerinden 60, '
         .'toplamda 120 puan. Doçentlik sonrası yayınlarınızın en az birinin Q1 ya da en az '
         .'ikisinin Q2 dergilerde olması ayrıca aranıyor. "Ek olarak iki yayın" koşulu, (a) '
-        .'maddesinin doçentlik sonrası iki yayınıyla birlikte doçentlik sonrası 1A-D\'de toplam '
+        .'maddesinin doçentlik sonrası iki yayınıyla birlikte doçentlik sonrası SCI-Expanded, SSCI ya da AHCI dergilerinde toplam '
         .'dört yayın olarak hesaplanıyor.'.$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Profesör kadrosuna yükseltilme ve atanma — Sağlık Bilimleri', [
         $DIL,
         $SUNUM,
-        Kalip::adet('1A-B kategorilerinde başlıca yazar olarak en az beş yayın yapmış olmak', ['1A-B'], 5, yazar: 'baslica', madde: 'a'),
+        Kalip::adet('SCI-Expanded, SSCI ya da AHCI dergilerinde başlıca yazar olarak en az beş özgün makale veya derleme yayımlamış olmak', ['1A-B'], 5, yazar: 'baslica', madde: 'a'),
         Kalip::adet('Bu yayınların en az ikisini doçent unvanını aldıktan sonra yapmış olmak', ['1A-B'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: 'a'),
-        Kalip::adet('Doçent unvanını aldıktan sonra 1A-D kategorilerinde toplam en az dört yayın yapmış olmak', ['1A-D'], 4, donem: $DOCENTLIK, madde: 'b'),
+        Kalip::adet('Doçent unvanını aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde toplam en az dört yayın (özgün makale, derleme, kısa makale ya da vaka raporu) yapmış olmak', ['1A-D'], 4, donem: $DOCENTLIK, madde: 'b'),
         Kalip::veya('Doçentlik sonrası yayınların çeyreklik koşulunu sağlamak', [
             Kalip::adet('Doçent unvanını aldıktan sonra Q1 kategorisindeki bir dergide yayın yapmış olmak', ['1A-D-Q1'], 1, donem: $DOCENTLIK, madde: 'b'),
             Kalip::adet('Doçent unvanını aldıktan sonra Q2 kategorisindeki dergilerde en az iki yayın yapmış olmak', ['1A-D-Q2'], 2, donem: $DOCENTLIK, madde: 'b'),
         ]),
-        Kalip::puanDan('Doçent unvanını aldıktan sonra 1A-D ve 2A-B kategorilerindeki faaliyetlerden en az 60 puan almak', ['1A-D-2A-B'], 60, $DOCENTLIK, madde: 'c'),
+        Kalip::puanDan('Doçent unvanını aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde ve WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde yayımlanmış makale ve derlemelerinizden en az 60 puan almak', ['1A-D-2A-B'], 60, $DOCENTLIK, madde: 'c'),
         Kalip::toplam(120, $DOCENTLIK),
     ]),
 ];
@@ -419,10 +424,10 @@ $esikler[] = [
     'sart' => Kalip::ve('Profesör kadrosuna yükseltilme ve atanma — Sosyal Bilimler', [
         $DIL,
         $SUNUM,
-        Kalip::adet('Doçent unvanını aldıktan sonra 1A ya da 2A kategorilerinde ilk yazar olarak en az bir yayın yapmış olmak', ['1A-2A'], 1, yazar: 'ilk', donem: $DOCENTLIK, madde: 'a'),
-        Kalip::adet('Doçent unvanını aldıktan sonra 1A-B, 2A-B, 3A-B kategorilerinde ya da uluslararası yayınevinde kitap/bölüm yazarlığında toplam en az üç yayın yapmış olmak', ['SOSYAL-PROF-B'], 3, donem: $DOCENTLIK, madde: 'b'),
+        Kalip::adet('Doçent unvanını aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde ya da WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A-2A'], 1, yazar: 'ilk', donem: $DOCENTLIK, madde: 'a'),
+        Kalip::adet('Doçent unvanını aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde, WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde, TR Dizin dergilerinde ya da uluslararası yayınevinden çıkmış kitap/kitap bölümünde toplam en az üç yayın yapmış olmak', ['SOSYAL-PROF-B'], 3, donem: $DOCENTLIK, madde: 'b'),
         Kalip::adet('Bu yayınlarınızın en az birinde tek ya da başlıca yazar olmak', ['SOSYAL-PROF-B'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'b'),
-        Kalip::puanDan('Kitap ve kitap bölümü kategorilerinden (4A-B) en az 30 puan almak', ['4A-B'], 30, madde: 'c'),
+        Kalip::puanDan('Kitap ve kitap bölümü yazarlığı, editörlüğü ya da çevirmenliğinden en az 30 puan almak', ['4A-B'], 30, madde: 'c'),
         Kalip::toplam(60, $DOCENTLIK),
         Kalip::metrik('Doçent unvanını aldıktan sonra alanınızda en az on yarıyıl ders vermiş olmak', 'ders_yariyil', 10, $DOCENTLIK),
     ]),
@@ -443,9 +448,9 @@ $esikler[] = [
     'sart' => Kalip::ve('Profesör kadrosuna yükseltilme ve atanma — Mühendislik, Fen ve Matematik', [
         $DIL,
         $SUNUM,
-        Kalip::adet('Doçent unvanını aldıktan sonra 1A-B kategorilerinde en az üç yayın yapmış olmak', ['1A-B'], 3, donem: $DOCENTLIK, madde: 'a'),
+        Kalip::adet('Doçent unvanını aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde en az üç özgün makale veya derleme yayımlamış olmak', ['1A-B'], 3, donem: $DOCENTLIK, madde: 'a'),
         Kalip::adet('Bu yayınlarınızın en az birinde başlıca yazar olmak', ['1A-B'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'a'),
-        Kalip::puanDan('Doçent unvanını aldıktan sonra 1A-C kategorilerindeki faaliyetlerden en az 40 puan almak', ['1A-C'], 40, $DOCENTLIK, madde: 'b'),
+        Kalip::puanDan('Doçent unvanını aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde yayımlanmış makale, derleme ve kısa makalelerinizden en az 40 puan almak', ['1A-C'], 40, $DOCENTLIK, madde: 'b'),
         Kalip::toplam(80, $DOCENTLIK),
     ]),
 ];
@@ -466,8 +471,8 @@ $esikler[] = [
     'sart' => Kalip::ve('Profesör kadrosuna yükseltilme ve atanma — Eğitim ve Spor Bilimleri', [
         $DIL,
         $SUNUM,
-        Kalip::adet('Doçent unvanını aldıktan sonra 1A, 2A ya da 3A kategorilerinde başlıca yazar olarak en az iki yayın yapmış olmak', ['1A-2A-3A'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: 'a'),
-        Kalip::adet('1A-E, 2A-G ve 3A-G kategorilerinde toplam en az beş yayın yapmış olmak', ['YAYIN-HEPSI'], 5, madde: 'b'),
+        Kalip::adet('Doçent unvanını aldıktan sonra SCI-Expanded, SSCI ya da AHCI dergilerinde, WoS All Databases ya da SCOPUS Q1-Q2 dergilerinde ya da TR Dizin dergilerinde başlıca yazar olarak en az iki özgün araştırma makalesi yayımlamış olmak', ['1A-2A-3A'], 2, yazar: 'baslica', donem: $DOCENTLIK, madde: 'a'),
+        Kalip::adet('Makale, kongre bildirisi ve dergi editörlüğü kalemlerinizden toplam en az beş yayın yapmış olmak', ['YAYIN-HEPSI'], 5, madde: 'b'),
         Kalip::adet('Bu yayınların en az üçünü doçent unvanını aldıktan sonra yapmış olmak', ['YAYIN-HEPSI'], 3, donem: $DOCENTLIK, madde: 'b'),
         Kalip::toplam(60, $DOCENTLIK),
     ]),

@@ -2140,3 +2140,48 @@ test('Selçuk bölüm joker\'i üst bölümlere sızmıyor', function (string $c
     expect($sizan)->toBe([])
         ->and($kodlar)->not->toBe([]);
 })->with(['selcuk-2024-egitim', 'selcuk-2024-fen', 'selcuk-2024-hukuk', 'selcuk-2024-saglik']);
+
+test('aday metninde madde kodu yok', function () {
+    // KONVANSIYONLAR §2: "Aday metninde kod YASAK, `notlar` ve düğümlerin
+    // `madde` alanında ZORUNLU." Aday 1A'nın SCI-Expanded, 3A-B'nin TR Dizin
+    // demek olduğunu bilmek zorunda değil; kod izlenebilirlik kanalıdır,
+    // arayüz metni değil.
+    $izinli = [
+        // Kaynağın ölçüt adlarını başlık olarak kullanıyor ("Ölçüt 1A");
+        // düğüm bir grup başlığı, koşul metni değil. Henüz düzeltilmedi.
+        'Bursa Teknik Üniversitesi',
+    ];
+
+    $kodlu = [];
+
+    foreach (sartDepo()->dogrulanmisEsikler() as $esik) {
+        if (in_array($esik['universite'], $izinli, true)) {
+            continue;
+        }
+
+        $bak = function (string $metin, string $nereden) use ($esik, &$kodlu) {
+            // '1A', '3A-B', '4.A.1' gibi kodlar. 'Q1', 'EK-1' ve yıl sayıları
+            // kod değil; desen RAKAM + BÜYÜK HARF sırasını arıyor.
+            if (preg_match('/\b\d+\.?[A-Z]\b/u', $metin) === 1) {
+                $kodlu[] = "{$esik['anahtar']} · {$nereden}: ".mb_substr($metin, 0, 90);
+            }
+        };
+
+        $gez = function (array $dugum) use (&$gez, $bak) {
+            $bak((string) ($dugum['aciklama'] ?? ''), 'koşul');
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+
+            if (isset($dugum['telafi'])) {
+                $gez($dugum['telafi']);
+            }
+        };
+
+        $gez($esik['sart']);
+        $bak((string) ($esik['aday_notu'] ?? ''), 'aday_notu');
+    }
+
+    expect(array_values(array_unique($kodlu)))->toBe([]);
+});

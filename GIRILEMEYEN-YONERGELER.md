@@ -1143,3 +1143,14 @@ KALDI: `ege-2026` (MAKALE grubu → 10.4k), `eskisehir-teknik-2026` (dört
 varyant, 1/1-2/1-2-7-8 grupları → 10, 11, 12), `esogu-2023` (1-2-3-9-16 ve
 1-2-9-16 grupları → 10-13). Üçünde de sızıntı ödül, editörlük ve idari görev
 satırlarına ulaşıyor, yani makale barajı idari görevle dolabiliyor.
+
+## Aday metnindeki madde kodları (15.09.2026)
+
+"Aday metninde kod YASAK" kuralı korpusa tarandı: yalnız iki üniversite
+ihlal ediyordu. Acıbadem (53 düğüm, 34 farklı metin) ve Ankara'nın bir notu
+düzeltildi, kural `CetvelKaynakTest`'e değişmez olarak girdi.
+
+**Bursa Teknik KALDI.** 607 düğüm ama yalnız dokuz farklı metin: "Ölçüt 1A",
+"Ölçüt 1B", "Ölçüt 3C" … Bunlar koşul açıklaması değil, kaynağın ölçüt
+adlarını taşıyan GRUP BAŞLIKLARI. Düzeltmek her başlığın ne istediğini
+kaynaktan okuyup yazmayı gerektiriyor; testin allowlist'inde duruyor.

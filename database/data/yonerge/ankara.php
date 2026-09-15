@@ -109,7 +109,8 @@ return [
     // ══════════════ FEN, MÜHENDİSLİK ve SAĞLIK BİLİMLERİ ══════════════
     [
         'anahtar' => 'ankara-dr-fen-muh-saglik',
-        'aday_notu' => 'İki katmanlı baraj var: dar makale kümesinden (1A-1E) en az 50, tüm makale kalemlerinden (1A-1G) en az 90 puan.',
+        'aday_notu' => 'İki katmanlı baraj var: WoS ve Scopus dergilerindeki makalelerinizden en '
+            .'az 50, tüm makale kalemlerinizden en az 90 puan.',
         'universite' => 'Ankara Üniversitesi',
         'kadro' => 'dr_ogr_uyesi',
         'alan' => $FEN,
