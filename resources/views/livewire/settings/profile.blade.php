@@ -127,9 +127,9 @@
             <div>
                 <flux:heading size="sm">Akademik Profil</flux:heading>
                 <flux:text class="!mt-1 !text-xs">
-                    Yönerge analizi bu değerleri kullanır. Boş bıraktığınız her alan, ona bağlı koşulun
-                    <strong>“eksik bilgi”</strong> olarak işaretlenmesine yol açar — koşul sağlanmamış sayılmaz,
-                    değerlendirilemez.
+                    Yönerge analizi bu değerleri kullanır. Boş bıraktığınız her alan, ona bağlı koşulu
+                    <strong>belirsiz</strong> bırakır ve üniversite <strong>“Onay Gerek”</strong> olarak
+                    işaretlenir — koşul sağlanmamış sayılmaz, değerlendirilemez.
                 </flux:text>
                 <div class="mt-3 flex items-start gap-2 rounded-xl border border-line bg-canvas p-3">
                     <flux:icon name="information-circle" class="mt-px size-4 shrink-0 text-ink-subtle" />

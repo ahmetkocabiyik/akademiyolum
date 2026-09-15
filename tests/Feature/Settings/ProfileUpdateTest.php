@@ -269,3 +269,14 @@ test('aynı alanda birden çok program varsa eşik ancak program seçilince bulu
 
     expect($tek->bul('Çok Programlı Üni', 'docentlik', 'muhendislik')['anahtar'])->toBe('bilgisayar');
 });
+
+test('profil sayfası durumu Yönerge Analizi ile aynı adla anıyor', function () {
+    // Boş profil alanının sonucunu anlatan cümle, durumun ekrandaki adını
+    // kullanıyor. Ad üç ekranda geçiyor; biri eskide kalırsa aday aynı şeyi
+    // iki ayrı durum sanır.
+    $this->actingAs(User::factory()->create());
+
+    Livewire::test(Profile::class)
+        ->assertSee('Onay Gerek')
+        ->assertDontSee('eksik bilgi');
+});

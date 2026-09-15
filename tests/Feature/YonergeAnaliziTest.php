@@ -636,7 +636,7 @@ test('eksik bilgi kartta gerekçesiyle gösterilir', function () {
 
     Livewire::test(YonergeAnalizi::class)
         ->assertSee('Onay Gerek')
-        ->assertSee('koşul eksik bilgi yüzünden değerlendirilemedi.')
+        ->assertSee('koşul için eksik bilgilerinizi tamamlamalısınız.')
         // Durumun ADI ekranın her yerinde aynı olmalı: özet bardaki sayaç,
         // kart rozeti ve detay panelindeki rozet aynı sözcüğü kullanır.
         // Eski ad hiçbir yerde kalmamalı.

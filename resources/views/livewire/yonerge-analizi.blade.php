@@ -375,12 +375,13 @@
                                         @endif
                                     </div>
 
-                                    {{-- Eksik bilgi ile belge beyanı ayrı şeyler: birincisinde
-                                         aday veri girecek, ikincisinde girilecek bir şey yok. --}}
+                                    {{-- Üç satır, adayın yapacağı üç ayrı iş: veri girmek ·
+                                         kutu işaretlemek · kendi değerlendirmesini yapmak.
+                                         Tek satırda toplanırsa aday nereye gideceğini bilmiyor. --}}
                                     @if ($s['belirsiz_sayisi'] > 0)
                                         <div class="mt-2 flex items-start gap-1 text-[11px] text-cat-amber-text">
                                             <flux:icon name="question-mark-circle" class="mt-px size-3 shrink-0" />
-                                            <span>{{ $s['belirsiz_sayisi'] }} koşul eksik bilgi yüzünden değerlendirilemedi.</span>
+                                            <span>{{ $s['belirsiz_sayisi'] }} koşul için eksik bilgilerinizi tamamlamalısınız.</span>
                                         </div>
                                     @endif
 
@@ -532,7 +533,8 @@
                             Kesin olarak karşılanmayan bir koşul yok.
                             @if (count($belirsizler) > 0)
                                 <strong class="text-ink">{{ count($belirsizler) }} koşul</strong>
-                                eksik bilgi yüzünden değerlendirilemedi.
+                                için eksik bilgilerinizi tamamlamalısınız; gerekçeleri aşağıda koşul
+                                başına yazılı.
                             @endif
                             @if ($d['beyan_sayisi'] > 0)
                                 <strong class="text-ink">{{ $d['beyan_sayisi'] }} koşul</strong>
