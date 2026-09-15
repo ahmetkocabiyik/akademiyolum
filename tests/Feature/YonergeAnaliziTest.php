@@ -1016,8 +1016,7 @@ test('birim seçicileri boş başlar ve ilk seçenek seçilince güncellenir', f
     expect($bilesen->get('birimSecimleri'))->toBe(['Ankara Üniversitesi' => '']);
 
     // Boş seçenek görünüyor; aksi hâlde ilk seçenek sahte biçimde seçili gelir.
-    // Kutu kapalı başladığı için önce açılır — seçiciler kapalıyken çizilmiyor.
-    $bilesen->set('birimPaneliAcik', true)->assertSee('Birim seçilmedi');
+    $bilesen->assertSee('Birim seçilmedi');
 
     // İLK seçeneği seçmek gerçekten çalışıyor.
     $bilesen->set('birimSecimleri.Ankara Üniversitesi', 'Diş Hekimliği Fakültesi');
@@ -1044,12 +1043,22 @@ test('birim kutusu kapalı başlar, başlığı tıklayınca açılır', functio
     Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)
         ->assertSet('birimPaneliAcik', false)
         ->assertSee('birim seçilmesini bekliyor')
-        ->assertDontSee('Hukuk Fakültesi')
-        ->toggle('birimPaneliAcik')
+        // Panel kapalıyken de ÇİZİLİYOR (x-collapse kapanışı canlandırabilsin
+        // diye), gizlemeyi `display:none` yapıyor. Kapalı olduğunun sunucudan
+        // okunabilen işareti bu ikisi.
+        ->assertSeeHtml('style="display: none"')
+        ->assertSeeHtml('aria-expanded="false"')
         ->assertSee('Hukuk Fakültesi')
-        ->assertSee('Siyasal Bilgiler Fakültesi')
+        // Animasyonun kendisi istemcide; testin doğrulayabileceği, kancaların
+        // Flux'un kök elemanına GEÇTİĞİ. Bileşen bunları yutsaydı kutu hiç
+        // açılmazdı ve hiçbir PHP testi bunu görmezdi.
+        ->assertSeeHtml('x-collapse')
+        ->assertSeeHtml("\$wire.entangle('birimPaneliAcik')")
         ->toggle('birimPaneliAcik')
-        ->assertDontSee('Hukuk Fakültesi');
+        ->assertSeeHtml('aria-expanded="true"')
+        ->assertDontSeeHtml('style="display: none"')
+        ->toggle('birimPaneliAcik')
+        ->assertSeeHtml('style="display: none"');
 });
 
 test('kutu açıkken birim seçilince açık kalır', function () {
