@@ -3024,3 +3024,36 @@ Sonuçları:
   İkisini ayırt etmek bu yüzden artık puanı değil, adayın ne yapabildiğini de
   belirliyor: gerçekten belgeyle teyit edilen koşula `beyan`, girilmemiş
   cetvele `hesaplanamiyor` yaz.
+
+
+## ÇÖKMÜŞ SATIRI, KAPSAM ŞARTI OLAN KOŞULA BAĞLAMA
+
+Sözlük bir ayrımı taşımadığı için iki kademeyi tek satırda birleştirdiğinde
+(§0 uyarınca düşük değerle) o satır artık **iki kademeyi birden topluyor**.
+Satır olarak doğru — ama **koşul kümesine** girince yanlış: kaynak koşulda
+yalnız yüksek kademeyi istiyorsa, düşük kademedeki bir kayıt koşulu sahte
+biçimde sağlar.
+
+Acıbadem'de böyle oldu. Kaynağın 4.B bloğu uluslararası (4.B.1-6) ve ulusal
+(4.B.7-12) diye ikiye ayrılıyor; sözlükte kitapta bu ayrım yok (`kitap`
+kategorisinin etiketi zaten `Uluslararası/Ulusal Kitap`), o yüzden satırlar
+ulusal değerlerle girilmiş. Sosyal alanın üç kuralı ("1A, 2A, 3A, **4A.1,
+4A.3, 4B.1 ve 4B.3**") ise ULUSLARARASI kitap istiyor. Gruplar çökmüş
+satırları (4.B.7/4.B.9) taşıdığı için ulusal bir kitap bölümü, uluslararası
+şartı sağlıyor görünüyordu.
+
+**Kural:** çökmüş bir satırı koşula bağlamadan önce sor — *kaynak bu koşulda
+satırın topladığı kademelerin HEPSİNİ kabul ediyor mu?* Etmiyorsa satır o
+koşulun kümesine GİRMEZ. Kümede tanımı gereği kapsamı dar olan başka satırlar
+varsa (Acıbadem'de 4.A.1/4.A.3 — WoS/SCOPUS/SENSE yayınevi) yalnız onlar
+kalır; sonuç eksik sayar, §0'ın kabul ettiği yön budur. Kaybedilen yolu
+`aday_notu`'nda **söyle**: aday koşulu gerçekte sağlıyor olabilir.
+
+Bu, puan kademesindeki "en düşüğünü yaz" kuralının koşul tarafındaki
+karşılığı; [[kademe-mi-uygunluk-mu]] ayrımının aynısı. Puanda birleştirmek
+güvenli, SAYI koşulunda birleştirmek fazla saydırır.
+
+**Tarayıcı:** koşul açıklaması `uluslararas` içerip `(?<!uluslar)\bulusal\b`
+İÇERMİYORSA (yani yalnız uluslararası istiyorsa) ve kümesindeki bir satır
+kapsamsız kitap etiketi taşıyorsa işaret. 15.09.2026'da korpusta **19 cetvel,
+97 işaret** verdi; Acıbadem dışındakiler henüz kaynağa karşı okunmadı.

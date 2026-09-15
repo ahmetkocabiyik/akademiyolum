@@ -21,6 +21,21 @@
  * uygulandı, yani AHCI yayınları 0 puan alıyor ama sayı koşullarında
  * sayılıyor.
  *
+ * ── 4.B BLOĞU ULUSAL KADEMEYE ÇÖKTÜ ──
+ * Kaynak 4.B'yi uluslararası (4.B.1-6) ve ulusal (4.B.7-12) diye ikiye
+ * ayırıyor: kitap yazarlığı 40/20, bölüm yazarlığı 20/10. Sözlükte bu ayrım
+ * YOK — `kitap` kategorisinin etiketi zaten 'Uluslararası/Ulusal Kitap',
+ * tek kova. §0 uyarınca satırlar ULUSAL değerlerle ve ulusal kodlarla
+ * (4.B.7-11) girildi; başlıkları iki kademeyi birden anlatıyor.
+ *
+ * Bunun koşullara yansıması var: kaynağın "4B.1 ve 4B.3" diyen üç kuralı
+ * (sosyal alanda dr. öğr. üyesi/doçent/profesör) ULUSLARARASI kitap istiyor.
+ * Çökmüş satırı o koşullara bağlamak ulusal bir kitabı uluslararası şartın
+ * yerine saydırırdı, o yüzden SOSYAL-* grupları kitap tarafında yalnız
+ * 4.A.1/4.A.3'ü taşıyor. Sonuç: uluslararası ama WoS/SCOPUS/SENSE dışı bir
+ * yayınevinden kitabı olan aday bu koşulu sağladığı hâlde sağlamamış
+ * görünür — §0'ın kabul ettiği yönde bir eksik sayma.
+ *
  * ── KESİRLİ PUANLAR AŞAĞI YUVARLANDI (§0) ──
  *   1.C.2 22,5 → 22 · 2.C 7,5 → 7 · 4.B.6 ve 4.B.11 7,5 → 7 ·
  *   6.B.14 2,5 → 2 · 2.E özet 2,5 → 2 · 5.B, 5.C ve 5.E 0,5 → 0.
@@ -129,6 +144,8 @@ $maddeler = [
     '3.G' => ['baslik' => 'TR Dizin kapsamındaki dergide editörlük ya da yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 2],
 
     // ══ 4. KİTAP / KİTAP BÖLÜMÜ ══
+    // 4.B'nin uluslararası kademesi (4.B.1-6) ayrı satır DEĞİL: sözlük ayrımı
+    // taşımadığı için ulusal kodlarda birleşti (dosya başlığına bakın).
     '4.A.1' => ['baslik' => 'WoS Book Citation Index, SCOPUS ya da SENSE kapsamındaki uluslararası yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
     '4.A.3' => ['baslik' => 'WoS Book Citation Index, SCOPUS ya da SENSE kapsamındaki uluslararası yayınevinde kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
     '4.A.5' => ['baslik' => 'WoS Book Citation Index, SCOPUS ya da SENSE kapsamındaki uluslararası yayınevinde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
@@ -192,8 +209,6 @@ $gruplar = [
     '3D-G' => ['3.D', '3.E.1', '3.E.2', '3.G'],
     '3A-G' => ['3.A', '3.B', '3.C', '3.D', '3.E.1', '3.E.2', '3.G'],
     '4A-B' => ['4.A.1', '4.A.3', '4.A.5', '4.B.7', '4.B.8', '4.B.9', '4.B.10', '4.B.11'],
-    // 4A.1, 4A.3, 4B.1 ve 4B.3: kitap ve kitap bölümü yazarlığı satırları.
-    '4-YAZARLIK' => ['4.A.1', '4.A.3', '4.B.7', '4.B.9'],
     '1A-2A' => ['1.A.*', '2.A'],
     '1A-2A-3A' => ['1.A.*', '2.A', '3.A'],
     '1A-D-2A-B' => ['1.A.*', '1.B.*', '1.C.*', '1.D.*', '2.A', '2.B'],
@@ -201,13 +216,17 @@ $gruplar = [
     '3A-B-3D-G' => ['3.A', '3.B', '3.D', '3.E.1', '3.E.2', '3.G'],
     'YAYIN-HEPSI' => ['1.A.*', '1.B.*', '1.C.*', '1.D.*', '2.A', '2.B', '2.C', '2.D',
         '2.E.1', '2.E.2', '2.G', '3.A', '3.B', '3.C', '3.D', '3.E.1', '3.E.2', '3.G'],
-    // Doktor öğretim üyeliğine ilk atanmada sosyal alanın (a) maddesi.
-    'SOSYAL-A' => ['1.A.*', '2.A', '3.A', '4.A.1', '4.A.3', '4.B.7', '4.B.9'],
-    // Profesörlükte sosyal alanın (b) maddesi.
-    'SOSYAL-PROF-B' => ['1.A.*', '1.B.*', '2.A', '2.B', '3.A', '3.B',
-        '4.A.1', '4.A.3', '4.B.7', '4.B.9'],
-    // Doçentlikte sosyal alanın (b) maddesi.
-    'SOSYAL-DOC-B' => ['3.A', '3.B', '4.A.1', '4.A.3', '4.B.7', '4.B.9'],
+    // Sosyal alanın koşul grupları. Kaynak üçünde de kitap tarafını "4A.1,
+    // 4A.3, 4B.1 ve 4B.3" diye yazıyor; DÖRDÜ DE ULUSLARARASI kitap/bölüm
+    // yazarlığı. 4B.1-4B.3 burada YOK, çünkü 4.B bloğu ulusal kademeye
+    // çökmüş durumda (aşağıdaki nota bakın): 4.B.7/4.B.9 satırları hem
+    // uluslararası hem ulusal kitabı topluyor. Onları koşula bağlamak ULUSAL
+    // bir kitabı ULUSLARARASI şartın yerine saydırırdı — §0'ın yasakladığı
+    // fazla sayma. Geriye kalan 4.A.1/4.A.3 zaten tanımı gereği uluslararası
+    // (WoS/SCOPUS/SENSE yayınevi), o yüzden onlar duruyor.
+    'SOSYAL-A' => ['1.A.*', '2.A', '3.A', '4.A.1', '4.A.3'],
+    'SOSYAL-PROF-B' => ['1.A.*', '1.B.*', '2.A', '2.B', '3.A', '3.B', '4.A.1', '4.A.3'],
+    'SOSYAL-DOC-B' => ['3.A', '3.B', '4.A.1', '4.A.3'],
     'PROJE-YURUTUCU' => ['6.B.2', '6.B.6', '6.B.10', '6.B.13'],
     'PROJE-ARASTIRMACI' => ['6.B.3', '6.B.7', '6.B.11', '6.B.14'],
     'ATIF' => ['5.A', '5.D'],

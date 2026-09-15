@@ -1976,3 +1976,23 @@ test('yayın kurulu üyeliği kaynağın kendi satırından sayılıyor', functi
     ['atasehir-adiguzel-2018', 25],
     ['igdir-2023', 25],
 ]);
+
+test('Acıbadem: uluslararası kitap isteyen koşullara ULUSAL kitap satırı bağlı değil', function () {
+    // Kaynağın üç sosyal alan kuralı da kitap tarafını "4A.1, 4A.3, 4B.1 ve
+    // 4B.3" diye yazıyor; dördü de ULUSLARARASI kitap/bölüm yazarlığı.
+    // 4.B bloğu sözlükte uluslararası/ulusal ayrımı olmadığı için ulusal
+    // kademeye çökmüş (4.B.7 = kitap, 4.B.9 = bölüm) ve o satırlar İKİSİNİ
+    // BİRDEN topluyor. Koşula bağlanırlarsa ulusal bir kitap uluslararası
+    // şartın yerine geçer — §0'ın yasakladığı fazla sayma.
+    $cetvel = require database_path('data/cetvel/acibadem-2025.php');
+    $gruplar = $cetvel['cetveller']['acibadem-2025-atif6']['gruplar'];
+
+    foreach (['SOSYAL-A', 'SOSYAL-DOC-B', 'SOSYAL-PROF-B'] as $grup) {
+        expect($gruplar[$grup])
+            ->not->toContain('4.B.7')
+            ->not->toContain('4.B.9')
+            // 4.A.1/4.A.3 tanımı gereği uluslararası (WoS/SCOPUS/SENSE); onlar kalmalı.
+            ->toContain('4.A.1')
+            ->toContain('4.A.3');
+    }
+});

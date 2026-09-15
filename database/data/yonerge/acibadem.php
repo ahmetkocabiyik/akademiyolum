@@ -70,6 +70,19 @@ $NOT_DIL = ' Yabancı dil koşulu Türkçe eğitim yapan programlar için geçer
     .'olduğu ülkede tamamlamanız veya orada en az bir yıl öğretim elemanı olarak ders '
     .'vermeniz de dil koşulunun yerine geçiyor.';
 
+// Sosyal alanın üç kuralı kitap tarafını "4B.1 ve 4B.3" diye yazıyor, yani
+// ULUSLARARASI yayınevi şart. Sözlük kitapta uluslararası/ulusal ayrımı
+// taşımadığı için (tek etiket: 'Uluslararası/Ulusal Kitap') koşula yalnız
+// tanımı gereği uluslararası olan 4.A.1/4.A.3 bağlandı; 4B.1-4B.3'ü karşılayan
+// kitap sayılamıyor. Aday bunu bilmeli, yoksa sağladığı koşulu sağlamamış
+// görüp boşuna çalışır.
+$NOT_KITAP = ' Yönerge bu koşulda ULUSLARARASI yayınevinden çıkmış kitap ya da '
+    .'kitap bölümü istiyor. Sistem kitap kayıtlarında uluslararası/ulusal ayrımı '
+    .'tutmadığı için yalnız WoS Book Citation Index, SCOPUS veya SENSE '
+    .'kapsamındaki yayınevlerinden çıkan kitaplarınız bu koşula sayılıyor. '
+    .'Bu kapsamlar dışında kalan uluslararası bir yayınevinden kitabınız varsa '
+    .'koşulu aslında sağlıyorsunuz; sistem bunu göremiyor.';
+
 $NOT_ATIF = ' Atıflardan alabileceğiniz puan, bu kadro için gereken toplam puanın %20\'siyle '
     .'sınırlı. Atıf satırlarının yarım puanlıları aşağı yuvarlanınca sıfırlandığı için '
     .'pratikte yalnız BKCI, SCOPUS ya da SENSE kapsamındaki kitaplarda yapılan atıflar puan '
@@ -133,17 +146,19 @@ $esikler[] = [
     'alan' => $SOSYAL,
     'cetvel' => 'acibadem-2025-atif6',
     'notlar' => 'Sosyal, Beşeri ve İdari Bilimler Temel Alanı, doktor öğretim üyesi ilk atanma: '
-        .'1A, 2A, 3A, 4A.1, 4A.3, 4B.1, 4B.3\'te ilk yazar bir yayın; 3A-B ve 3D-G\'de iki '
+        .'1A, 2A, 3A, 4A.1, 4A.3, 4B.1, 4B.3\'te ilk yazar bir yayın (4B.1/4B.3 uluslararası '
+        .'yayınevi istediği ve sözlük bu ayrımı taşımadığı için koşula yalnız 4A.1/4A.3 '
+        .'bağlandı); 3A-B ve 3D-G\'de iki '
         .'yayın (biri tek ya da başlıca yazar) ya da 1A-2A\'da ek bir yayın; toplam 30 puan.',
     'aday_notu' => 'Sosyal, Beşeri ve İdari Bilimler alanında doktor öğretim üyesi kadrosuna '
         .'İLK ATANMA. İlk yazar olarak istenen yayın doktora tezinizden üretilmiş olabilir. '
         .'İkinci koşulu ya TR Dizin dergilerinde iki yayınla (en az birinde tek ya da başlıca '
         .'yazar olarak) ya da 1A-2A kategorilerinde ek bir yayınla karşılayabilirsiniz.'
-        .$NOT_DIL.$NOT_ATIF,
+        .$NOT_KITAP.$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna ilk atanma — Sosyal Bilimler', [
         $DIL,
         $SUNUM,
-        Kalip::adet('1A, 2A, 3A kategorilerinde ya da kitap veya kitap bölümü yazarlığında ilk yazar olarak en az bir yayın yapmış olmak', ['SOSYAL-A'], 1, yazar: 'ilk', madde: 'a'),
+        Kalip::adet('1A, 2A, 3A kategorilerinde ya da uluslararası yayınevinde kitap veya kitap bölümü yazarlığında ilk yazar olarak en az bir yayın yapmış olmak', ['SOSYAL-A'], 1, yazar: 'ilk', madde: 'a'),
         Kalip::veya('İkinci yayın koşulunu sağlamak', [
             Kalip::ve('TR Dizin dergilerinde iki yayın (en az birinde tek ya da başlıca yazar)', [
                 Kalip::adet('3A-B ve 3D-G kategorilerinde en az iki yayın yapmış olmak', ['3A-B-3D-G'], 2, madde: 'b'),
@@ -204,7 +219,7 @@ $esikler[] = [
 // ═══════════════ DOKTOR ÖĞRETİM ÜYESİ — YENİDEN ATANMA ═══════════════
 $yenidenA = [
     'saglik' => Kalip::adet('SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
-    'sosyal' => Kalip::adet('1A, 2A, 3A kategorilerinde ya da kitap veya kitap bölümü yazarlığında ilk yazar olarak en az bir yayın yapmış olmak', ['SOSYAL-A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
+    'sosyal' => Kalip::adet('1A, 2A, 3A kategorilerinde ya da uluslararası yayınevinde kitap veya kitap bölümü yazarlığında ilk yazar olarak en az bir yayın yapmış olmak', ['SOSYAL-A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
     'muhfen' => Kalip::adet('SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
     'egitim' => Kalip::adet('1A, 2A ya da 3A kategorilerinde ilk yazar olarak en az bir özgün araştırma makalesi yayımlamış olmak', ['1A-2A-3A'], 1, yazar: 'ilk', donem: $SON3, madde: 'a'),
 ];
@@ -232,7 +247,9 @@ foreach ($yenidenAlanlar as $kod => [$alanlar, $alanAdi]) {
             .'Akademisyen Performans Değerlendirme sürecinden olumlu değerlendirme almanızı ve '
             .'Mütevelli Heyeti onayını arıyor; bunlar burada değerlendirilmiyor. "(c) bir yayın '
             .'daha" koşulu, (a) maddesindeki yayınla birlikte toplam iki yayın olarak '
-            .'hesaplanıyor.'.$NOT_DIL,
+            // Kitap uyarısı yalnız sosyal alanda anlamlı: (a) maddesi yalnız
+            // orada kitap/bölüm yazarlığını da sayıyor.
+            .'hesaplanıyor.'.($kod === 'sosyal' ? $NOT_KITAP : '').$NOT_DIL,
         'sart' => Kalip::ve('Doktor öğretim üyesi kadrosuna yeniden atanma — '.$alanAdi, [
             $DIL,
             $yenidenA[$kod],
@@ -283,7 +300,7 @@ $esikler[] = [
         .'hesaplanıyor; puan barajlarında dönem sınırı yok. Kitap ve kitap bölümü '
         .'kategorilerinden (4A-B) en az 20 puan gerekiyor, yani bu alanda kitap yazmadan '
         .'doçent olmak zor. Ayrıca doktora sonrası en az dört yarıyıl ders vermiş olmanız '
-        .'gerekiyor.'.$NOT_DIL.$NOT_ATIF,
+        .'gerekiyor.'.$NOT_KITAP.$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Doçent kadrosuna yükseltilme ve atanma — Sosyal Bilimler', [
         $UNVAN,
         $DIL,
@@ -291,7 +308,7 @@ $esikler[] = [
         Kalip::adet('Doktora derecenizi aldıktan sonra 1A-B ve 2A-B kategorilerinde ilk yazar olarak en az bir yayın yapmış olmak', ['1A-B-2A-B-3A-B'], 1, yazar: 'ilk', donem: $DOKTORA, madde: 'a'),
         Kalip::veya('Ek yayın koşulunu sağlamak', [
             Kalip::ve('TR Dizin dergileri ve kitap kategorilerinde üç yayın (en az birinde tek ya da başlıca yazar)', [
-                Kalip::adet('Doktora derecenizi aldıktan sonra 3A-B ve kitap kategorilerinde toplam en az üç yayın yapmış olmak', ['SOSYAL-DOC-B'], 3, donem: $DOKTORA, madde: 'b'),
+                Kalip::adet('Doktora derecenizi aldıktan sonra 3A-B kategorilerinde ya da uluslararası yayınevinde kitap/bölüm yazarlığında toplam en az üç yayın yapmış olmak', ['SOSYAL-DOC-B'], 3, donem: $DOKTORA, madde: 'b'),
                 Kalip::adet('Bu yayınlarınızın en az birinde tek ya da başlıca yazar olmak', ['SOSYAL-DOC-B'], 1, yazar: 'baslica', donem: $DOKTORA, madde: 'b'),
             ]),
             Kalip::adet('Doktora derecenizi aldıktan sonra 1A ve 2A kategorilerinde toplam en az iki yayın yapmış olmak', ['1A-2A'], 2, donem: $DOKTORA, madde: 'b'),
@@ -398,12 +415,12 @@ $esikler[] = [
         .'seçenekleri arasında bu ikili seçenek olmadığı için yalnız İLK yazarlık arandı, '
         .'koşul burada olduğundan sıkı görünüyor — ikinci yazar olduğunuz bir yayınla da '
         .'karşılanabilir. Kitap ve kitap bölümü kategorilerinden 30 puan ve doçentlik sonrası '
-        .'en az on yarıyıl ders vermiş olmak ayrıca aranıyor.'.$NOT_DIL.$NOT_ATIF,
+        .'en az on yarıyıl ders vermiş olmak ayrıca aranıyor.'.$NOT_KITAP.$NOT_DIL.$NOT_ATIF,
     'sart' => Kalip::ve('Profesör kadrosuna yükseltilme ve atanma — Sosyal Bilimler', [
         $DIL,
         $SUNUM,
         Kalip::adet('Doçent unvanını aldıktan sonra 1A ya da 2A kategorilerinde ilk yazar olarak en az bir yayın yapmış olmak', ['1A-2A'], 1, yazar: 'ilk', donem: $DOCENTLIK, madde: 'a'),
-        Kalip::adet('Doçent unvanını aldıktan sonra 1A-B, 2A-B, 3A-B ve kitap kategorilerinde toplam en az üç yayın yapmış olmak', ['SOSYAL-PROF-B'], 3, donem: $DOCENTLIK, madde: 'b'),
+        Kalip::adet('Doçent unvanını aldıktan sonra 1A-B, 2A-B, 3A-B kategorilerinde ya da uluslararası yayınevinde kitap/bölüm yazarlığında toplam en az üç yayın yapmış olmak', ['SOSYAL-PROF-B'], 3, donem: $DOCENTLIK, madde: 'b'),
         Kalip::adet('Bu yayınlarınızın en az birinde tek ya da başlıca yazar olmak', ['SOSYAL-PROF-B'], 1, yazar: 'baslica', donem: $DOCENTLIK, madde: 'b'),
         Kalip::puanDan('Kitap ve kitap bölümü kategorilerinden (4A-B) en az 30 puan almak', ['4A-B'], 30, madde: 'c'),
         Kalip::toplam(60, $DOCENTLIK),
