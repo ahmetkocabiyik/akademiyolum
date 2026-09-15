@@ -97,7 +97,7 @@
                          yoksa "Yetersiz"e tıklayan aday diğerlerini sıfır görürdü.
                          "Toplam" filtreyi temizleyen sayaç. --}}
                     <div class="flex items-center gap-3">
-                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)', ''], ['Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)', 'yetersiz'], ['Yakın', $this->ozet['yakin'], 'var(--color-cat-amber)', 'yakin'], ['Onay Gerek', $this->ozet['eksik_bilgi'], 'var(--color-cat-amber)', 'eksik_bilgi'], ['Yapılabilir', $this->ozet['uygun'], 'var(--color-cat-green)', 'uygun'], ['Ölçüt Yok', $this->ozet['alan_yok'], 'var(--color-ink-subtle)', 'alan_yok']] as [$etiket, $sayi, $renk, $durum])
+                        @foreach ([['Toplam', $this->ozet['toplam'], 'var(--color-ink)', ''], ['Yetersiz', $this->ozet['yetersiz'], 'var(--color-cat-red)', 'yetersiz'], ['Yakın', $this->ozet['yakin'], 'var(--color-cat-amber)', 'yakin'], ['Onay Gerek', $this->ozet['eksik_bilgi'], 'var(--color-cat-amber)', 'eksik_bilgi'], ['Uygun', $this->ozet['uygun'], 'var(--color-cat-green)', 'uygun'], ['Ölçüt Yok', $this->ozet['alan_yok'], 'var(--color-ink-subtle)', 'alan_yok']] as [$etiket, $sayi, $renk, $durum])
                             @if (! $loop->first)<div class="h-8 w-px bg-line"></div>@endif
                             @php $secili = $durumFiltre === $durum; @endphp
                             <button type="button"
@@ -500,7 +500,7 @@
                 $esik = $d['esik'];
                 $renk = ['uygun' => 'var(--color-cat-green)', 'yakin' => 'var(--color-cat-amber)', 'eksik_bilgi' => 'var(--color-cat-amber)', 'yetersiz' => 'var(--color-cat-red)'][$d['durum']];
                 $badgeRenk = ['uygun' => 'green', 'yakin' => 'amber', 'eksik_bilgi' => 'amber', 'yetersiz' => 'red'][$d['durum']];
-                $badgeMetin = ['uygun' => 'Başvuru Yapılabilir', 'yakin' => 'Yakın Sınırda', 'eksik_bilgi' => 'Onay Gerek', 'yetersiz' => 'Puan Yetersiz'][$d['durum']];
+                $badgeMetin = ['uygun' => 'Uygun', 'yakin' => 'Yakın Sınırda', 'eksik_bilgi' => 'Onay Gerek', 'yetersiz' => 'Puan Yetersiz'][$d['durum']];
                 $bashkler = \Illuminate\Support\Str::of($uni->ad)->explode(' ')
                     ->map(fn ($w) => mb_strtoupper(mb_substr($w, 0, 1)))->take(3)->implode('');
                 $eksikler = $d['sonuc']->eksikler();

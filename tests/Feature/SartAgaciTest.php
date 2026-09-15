@@ -1015,7 +1015,7 @@ test('eşleşme oranı ağacın mantığına uyar: VEYA dalında sağlanmayan al
 
     // Samsun Doçent beş alternatifli bir VEYA: 1. yol (A1 türü 4 çalışma) tam
     // sağlanıyor, diğer dördü sağlanmıyor. Oran yaprakların minimumu alınırsa
-    // %0 çıkar ve "Başvuru Yapılabilir" rozetli üniversite sıralamada sona düşer.
+    // %0 çıkar ve "Uygun" rozetli üniversite sıralamada sona düşer.
     $sonuc = $depo->degerlendir(
         $depo->bul('Samsun Üniversitesi', 'docentlik', 'sosyal'),
         [$makale(), $makale(), $makale(), $makale()],

@@ -206,3 +206,22 @@ test('dashboard onay bekleyen durumu Yönerge Analizi ile aynı adla anıyor', f
         ->assertSee('Onay Gerek')
         ->assertDontSee('Eksik Bilgi');
 });
+
+test('dashboard koşulları sağlanan durumu "Uygun" diye anıyor', function () {
+    // Yönerge Analizi ile aynı sözcük; eskiden burada "Karşılandı" yazıyordu.
+    Universite::factory()->create(['ad' => 'Test Üniversitesi']);
+    app()->instance(SartDeposu::class, dashboardDeposu(baraj: 5));
+
+    $user = User::factory()->onboarded()->create([
+        'universite' => 'Test Üniversitesi', 'unvan' => 'Arş. Gör.',
+    ]);
+    Faaliyet::factory()->for($user)->create([
+        'kategori' => Kategori::Makale, 'kaynak' => 'TR Dizin', 'durum' => 'onaylandi',
+    ]);
+
+    actingAs($user);
+
+    Livewire::test(Dashboard::class)
+        ->assertSee('Uygun')
+        ->assertDontSee('Karşılandı');
+});

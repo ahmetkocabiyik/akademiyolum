@@ -8,7 +8,7 @@
         $gaugeUzunluk = 232.5;
         $gaugeOffset = $gaugeUzunluk * (1 - $this->yuzde / 100);
         $durumRenk = ['uygun' => 'green', 'yakin' => 'amber', 'eksik_bilgi' => 'amber', 'yetersiz' => 'red'];
-        $durumMetin = ['uygun' => 'Karşılandı', 'yakin' => 'Yakın', 'eksik_bilgi' => 'Onay Gerek', 'yetersiz' => 'Yetersiz'];
+        $durumMetin = ['uygun' => 'Uygun', 'yakin' => 'Yakın', 'eksik_bilgi' => 'Onay Gerek', 'yetersiz' => 'Yetersiz'];
     @endphp
 
     <x-topbar title="Dashboard"

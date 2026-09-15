@@ -169,6 +169,19 @@ test('sonuç vermeyen durum filtresi temizleme düğmesi gösterir', function ()
         ->assertSee('Durum filtresini kaldır');
 });
 
+test('koşulları sağlayan üniversite her yerde "Uygun" diye anılıyor', function () {
+    // Aynı durumun ekranda üç adı vardı: sayaçta "Yapılabilir", kart rozetinde
+    // "Uygun", detay rozetinde "Başvuru Yapılabilir". Aday üçünü ayrı şey
+    // sanıyordu. Tek ad, üç yüzey.
+    $uniId = Universite::query()->where('ad', 'İstanbul 29 Mayıs Üniversitesi')->value('id');
+
+    Livewire::test(YonergeAnalizi::class)
+        ->assertSee('Uygun')
+        ->call('detayAc', $uniId)
+        ->assertSee('Uygun')
+        ->assertDontSee('Yapılabilir');
+});
+
 test('şehir filtresi listeyi o şehirle sınırlar', function () {
     $bilesen = Livewire::test(YonergeAnalizi::class)
         ->set('sehirFiltre', 'İstanbul');
