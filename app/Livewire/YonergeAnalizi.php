@@ -79,6 +79,19 @@ class YonergeAnalizi extends Component
      */
     public string $durumFiltre = '';
 
+    /**
+     * Birim seçim kutusu açık mı.
+     *
+     * Kapalı başlıyor: kutu en fazla on dört seçici taşıyor ve ekranın tepesini
+     * kaplıyordu. Başlık kapalıyken de görünür, yani aday bekleyen iş olduğunu
+     * kutuyu açmadan biliyor.
+     *
+     * Alpine yerine sunucu tarafında tutuluyor: içindeki seçiciler
+     * `wire:model.live`, yani her seçim yeni bir render tetikliyor; istemci
+     * durumu o sırada kaybolursa kutu adayın yüzüne kapanırdı.
+     */
+    public bool $birimPaneliAcik = false;
+
     public string $hedefKadro = 'dr_ogr_uyesi';
 
     public string $siralama = 'baraj_artan';

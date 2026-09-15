@@ -173,31 +173,45 @@
                      üniversitede ortak olduğu için o alan başka üniversitelerde
                      çoğunlukla tutmuyor. --}}
                 <flux:callout icon="information-circle" variant="secondary" class="mb-4">
-                    <flux:callout.heading>{{ count($this->birimSecenekleri) }} üniversite birim seçilmesini bekliyor</flux:callout.heading>
-                    <flux:callout.text class="mb-3">
-                        Bu üniversiteler temel alanınıza ölçüt koyuyor ama ölçüt BİRİME göre
-                        değişiyor. Biriminizi seçin, karşılaştırmaya katılsınlar.
-                    </flux:callout.text>
+                    {{-- Başlık kapalıyken de duruyor: aday bekleyen iş olduğunu
+                         kutuyu açmadan görüyor, açmak onun kararı. --}}
+                    <flux:callout.heading>
+                        <button type="button" wire:click="$toggle('birimPaneliAcik')"
+                            aria-expanded="{{ $birimPaneliAcik ? 'true' : 'false' }}"
+                            class="flex w-full items-center justify-between gap-2 text-left">
+                            <span>{{ count($this->birimSecenekleri) }} üniversite birim seçilmesini bekliyor</span>
+                            <flux:icon :name="$birimPaneliAcik ? 'chevron-up' : 'chevron-down'" class="size-4 shrink-0" />
+                        </button>
+                    </flux:callout.heading>
 
-                    <div class="grid gap-3 sm:grid-cols-2">
-                        @foreach ($this->birimSecenekleri as $universiteAdi => $birimler)
-                            <flux:select
-                                wire:model.live="birimSecimleri.{{ $universiteAdi }}"
-                                :label="$universiteAdi"
-                                placeholder="Birim seçin..."
-                                size="sm"
-                            >
-                                {{-- Boş seçenek ŞART: yoksa tarayıcı ilk
-                                     seçeneği seçili gösteriyor, aday onu
-                                     tıklayınca değer değişmediği için ekran
-                                     güncellenmiyor. --}}
-                                <flux:select.option value="">Birim seçilmedi</flux:select.option>
-                                @foreach ($birimler as $b)
-                                    <flux:select.option value="{{ $b }}">{{ $b }}</flux:select.option>
-                                @endforeach
-                            </flux:select>
-                        @endforeach
-                    </div>
+                    {{-- Gizlemek yerine HİÇ çizilmiyor: on dört `wire:model.live`
+                         seçicisi kapalıyken de her render'da kuruluyordu. --}}
+                    @if ($birimPaneliAcik)
+                        <flux:callout.text class="mb-3">
+                            Bu üniversiteler temel alanınıza ölçüt koyuyor ama ölçüt BİRİME göre
+                            değişiyor. Biriminizi seçin, karşılaştırmaya katılsınlar.
+                        </flux:callout.text>
+
+                        <div class="grid gap-3 sm:grid-cols-2">
+                            @foreach ($this->birimSecenekleri as $universiteAdi => $birimler)
+                                <flux:select
+                                    wire:model.live="birimSecimleri.{{ $universiteAdi }}"
+                                    :label="$universiteAdi"
+                                    placeholder="Birim seçin..."
+                                    size="sm"
+                                >
+                                    {{-- Boş seçenek ŞART: yoksa tarayıcı ilk
+                                         seçeneği seçili gösteriyor, aday onu
+                                         tıklayınca değer değişmediği için ekran
+                                         güncellenmiyor. --}}
+                                    <flux:select.option value="">Birim seçilmedi</flux:select.option>
+                                    @foreach ($birimler as $b)
+                                        <flux:select.option value="{{ $b }}">{{ $b }}</flux:select.option>
+                                    @endforeach
+                                </flux:select>
+                            @endforeach
+                        </div>
+                    @endif
                 </flux:callout>
             @endif
 

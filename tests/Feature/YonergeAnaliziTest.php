@@ -1016,13 +1016,69 @@ test('birim seçicileri boş başlar ve ilk seçenek seçilince güncellenir', f
     expect($bilesen->get('birimSecimleri'))->toBe(['Ankara Üniversitesi' => '']);
 
     // Boş seçenek görünüyor; aksi hâlde ilk seçenek sahte biçimde seçili gelir.
-    $bilesen->assertSee('Birim seçilmedi');
+    // Kutu kapalı başladığı için önce açılır — seçiciler kapalıyken çizilmiyor.
+    $bilesen->set('birimPaneliAcik', true)->assertSee('Birim seçilmedi');
 
     // İLK seçeneği seçmek gerçekten çalışıyor.
     $bilesen->set('birimSecimleri.Ankara Üniversitesi', 'Diş Hekimliği Fakültesi');
 
     expect($bilesen->instance()->sonuclar())->toHaveCount(1)
         ->and($bilesen->instance()->kapsamDisi()['birim'])->toBe([]);
+});
+
+test('birim kutusu kapalı başlar, başlığı tıklayınca açılır', function () {
+    // On dört seçici ekranın tepesini kaplıyordu. Başlık kapalıyken de duruyor:
+    // aday bekleyen iş olduğunu kutuyu açmadan görüyor.
+    $birimli = fn (string $birim): array => [
+        ...testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        'anahtar' => 'ankara-dr-sosyal-'.Str::slug($birim),
+        'birim' => $birim,
+    ];
+
+    depoBagla([$birimli('Hukuk Fakültesi'), $birimli('Siyasal Bilgiler Fakültesi')]);
+
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal, 'unvan' => 'Arş. Gör.', 'birim' => null,
+    ]);
+
+    Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)
+        ->assertSet('birimPaneliAcik', false)
+        ->assertSee('birim seçilmesini bekliyor')
+        ->assertDontSee('Hukuk Fakültesi')
+        ->toggle('birimPaneliAcik')
+        ->assertSee('Hukuk Fakültesi')
+        ->assertSee('Siyasal Bilgiler Fakültesi')
+        ->toggle('birimPaneliAcik')
+        ->assertDontSee('Hukuk Fakültesi');
+});
+
+test('kutu açıkken birim seçilince açık kalır', function () {
+    // Seçiciler `wire:model.live`; her seçim yeni render tetikliyor. Durum
+    // istemcide tutulsaydı kutu adayın yüzüne kapanırdı.
+    $birimli = fn (string $birim): array => [
+        ...testEsik('Ankara Üniversitesi', 100, 'dr_ogr_uyesi', 'sosyal'),
+        'anahtar' => 'ankara-dr-sosyal-'.Str::slug($birim),
+        'birim' => $birim,
+    ];
+
+    Universite::factory()->create(['ad' => 'Boş Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
+    depoBagla([
+        $birimli('Hukuk Fakültesi'),
+        $birimli('Siyasal Bilgiler Fakültesi'),
+        [...testEsik('Boş Üni', 100, 'dr_ogr_uyesi', 'sosyal'), 'anahtar' => 'bos-dr-sosyal-2', 'birim' => 'Tıp Fakültesi'],
+        [...testEsik('Boş Üni', 100, 'dr_ogr_uyesi', 'sosyal'), 'anahtar' => 'bos-dr-sosyal-3', 'birim' => 'Diş Hekimliği Fakültesi'],
+    ]);
+
+    $kullanici = User::factory()->onboarded()->create([
+        'temel_alan' => TemelAlan::Sosyal, 'unvan' => 'Arş. Gör.', 'birim' => null,
+    ]);
+
+    Livewire::actingAs($kullanici)->test(YonergeAnalizi::class)
+        ->set('birimPaneliAcik', true)
+        ->set('birimSecimleri.Ankara Üniversitesi', 'Hukuk Fakültesi')
+        ->assertSet('birimPaneliAcik', true)
+        // Ankara listeden düştü ama kutu duruyor: Boş Üni hâlâ bekliyor.
+        ->assertSee('Tıp Fakültesi');
 });
 
 test('birim seçimi geri boşaltılınca üniversite yeniden bekleyene düşer', function () {
