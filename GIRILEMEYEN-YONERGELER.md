@@ -1207,10 +1207,11 @@ uluslararası bir satıra bağlanırsa test kırılıyor.
 
 ## Kapsam ekseni turunda çıkan yan bulgular (16.09.2026)
 
-- **Cerrahpaşa'nın atıf bloğu eksik.** Kaynağın B9'u ("9. Atıflar: a) TR
-  Dizin yurt içi 2, b) Diğer 1") hiç girilmemiş. Dahası A11b ESCI satırı
-  (7 puan) `TR Dizin` etiketini taşıyor — TR Dizin ULUSAL indeks, oraya
-  düşmemeli. Bir TR Dizin atfı 2 yerine 7 puan alıyor. Ayrı tur konusu.
+- ~~**Cerrahpaşa'nın atıf bloğu eksik.**~~ 16.09.2026'da düzeltildi: B9
+  bölümü girildi, `TR Dizin` A11/b'den oraya taşındı. Geriye tek eksik
+  sayma kaldı — sözlük atıfta ESCI ile SCIE/SSCI/AHCI'yi ayırmıyor, §0
+  uyarınca düşük satır (7) yazıldı, 10'luk A11/a hiç açılmadı. WoS
+  kapsamında atfı olan aday 10 yerine 7 görüyor.
 - **Cerrahpaşa A11c'den `Patent` çıkarıldı.** Patentte alınan atıf
   "uluslararası hakemli DERGİDE atıf" değil; kaynağın A11'inde patent satırı
   yok. B9/b girilmediği için patent atfı şimdilik hiç saymıyor (§0).

@@ -2401,3 +2401,30 @@ test('genel etiketler adaya sorulmuyor, cetvelde yaşıyor', function () {
         ->and(Kategori::Kitap->adayKaynaklari())->toContain('Uluslararası Kitap Bölümü')
         ->and(Kategori::Kitap->adayKaynaklari())->toContain('Ulusal Kitap Bölümü');
 });
+
+test('Cerrahpaşa atıf bloğu kaynağın iki bölümünü de taşıyor', function () {
+    // Kaynak atıfı İKİ bölüme ayırıyor: A/11 uluslararası (SCIE-SSCI-AHCI 10 ·
+    // ESCI 7 · diğer uluslararası hakemli 5 · yurt dışı kitap 4) ve B/9 ulusal
+    // (TR Dizin yurt içi 2 · diğer 1). B/9 hiç girilmemişti; `TR Dizin`
+    // etiketi bu yüzden A/11-b'nin (ESCI, 7) üstünde duruyor ve bir TR Dizin
+    // atfı 2 yerine 7 puan alıyordu.
+    $katalog = sartDepo()->katalog('cerrahpasa-2023');
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Atif, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('TR Dizin'))->toBe(2)
+        ->and($puan('Diğer (Uluslararası)'))->toBe(5)
+        ->and($puan('Diğer (Ulusal)'))->toBe(1)
+        ->and($puan('BKCI Kitap'))->toBe(4)
+        // Sözlük atıfta ESCI ile SCIE/SSCI/AHCI'yi ayırmıyor; §0 uyarınca
+        // DÜŞÜK satır (ESCI, 7) yazıldı, 10'luk satır hiç açılmadı.
+        ->and($puan('WoS / Scopus'))->toBe(7)
+        // Patent atfı kaynakta anılmıyor; en düşük toplayıcıya bağlı.
+        ->and($puan('Patent (Ulusal)'))->toBe(1);
+});

@@ -69,14 +69,27 @@ return [
         'B8a' => ['baslik' => 'Ulusal bilimsel toplantıda sözlü sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 6],
         'B8b' => ['baslik' => 'Ulusal bilimsel toplantıda poster sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 4],
 
-        // ── A11 · ATIF ──
-        'A11a' => ['baslik' => 'SCIE/SSCI/AHCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],
-        'A11b' => ['baslik' => 'ESCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 7],
+        // ── A11 · ULUSLARARASI ATIF ──
+        // A11/a (SCIE/SSCI/AHCI, 10) SATIR OLARAK YOK. Sözlükte atıf tarafında
+        // ESCI'yi SCIE/SSCI/AHCI'den ayıran etiket yok — ikisi de
+        // `WoS / Scopus`. §0 uyarınca etiket DÜŞÜK satıra, yani A11/b'ye (7)
+        // bağlandı; yüksek satırı da yazmak MAX yüzünden her atfa 10 verirdi.
+        // WoS kapsamında atfı olan aday 10 yerine 7 puan görür.
+        'A11b' => ['baslik' => 'ESCI ya da üstü uluslararası indekste yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 7],
         // `Patent` BURADAN ÇIKARILDI: patentte alınan atıf "uluslararası hakemli
-        // DERGİDE atıf" değil. Kaynağın A11'inde patent satırı yok; B9/b ("Diğer",
-        // 1 puan) girilmediği için patent atfı şimdilik hiç saymıyor (§0).
+        // DERGİDE atıf" değil. Kaynağın A11'inde patent satırı yok; aşağıdaki
+        // B9/b ("Diğer", 1 puan) kaynağın kendi toplayıcısı, oraya bağlandı.
         'A11c' => ['baslik' => 'Diğer uluslararası hakemli dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 5],
         'A11ç' => ['baslik' => 'Yurt dışı kitap, monografi veya tezlerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
+
+        // ── B9 · ULUSAL ATIF ──
+        // Bölüm tamamen girilmemişti; `TR Dizin` etiketi bu yüzden A11/b'nin
+        // (ESCI, 7 puan) üstünde duruyordu ve bir TR Dizin atfı 2 yerine 7
+        // puan alıyordu.
+        'B9a' => ['baslik' => 'TÜBİTAK-ULAKBİM tarafından taranan yurt içi hakemli dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
+        // Kaynağın kendi toplayıcı satırı. Patentte alınan atıf kaynakta hiç
+        // anılmıyor; §0 uyarınca EN DÜŞÜK toplayıcıya bağlandı.
+        'B9b' => ['baslik' => 'Diğer kaynaklarda yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Ulusal)', 'Patent (Uluslararası)', 'Patent (Ulusal)'], 'puan' => 1],
     ],
 
     'gruplar' => [
