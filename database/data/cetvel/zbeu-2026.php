@@ -101,7 +101,9 @@ $maddeler = [
     '5.e' => ['baslik' => 'Diğer uluslararası ya da ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi', 'Çeviri Kitap Bölümü'], 'puan' => 10],
 
     // ══ 6. ATIFLAR ══
-    '6.a' => ['baslik' => 'SCIE, SSCI veya AHCI kapsamında eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
+    // Sözlük 16.09.2026'da atıfta ESCI'yi çekirdek indeksten ayırdı.
+    '6.a' => ['baslik' => 'SCIE, SSCI veya AHCI kapsamında eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
+    '6.b' => ['baslik' => 'ESCI veya Scopus kapsamında eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 2],
     '6.c' => ['baslik' => 'BKCI kapsamındaki kitapta eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 2],
     '6.ç' => ['baslik' => 'TR Dizin kapsamındaki dergide eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 1],
     '6.d' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap veya dergide eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 1],

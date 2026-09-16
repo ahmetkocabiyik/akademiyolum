@@ -411,9 +411,10 @@ $govde = function (int $bildiri, int $ulusalKitap, int $egitim, bool $gorselEtki
             '10.2' => ['baslik' => 'Tamamlanmış tezli yüksek lisans danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 10],
 
             // ── 11. ATIFLAR ──
-            // 'WoS / Scopus' etiketi ikisini birleştiriyor: WoS atfı 6, Scopus
-            // atfı 4 — §0 uyarınca 4.
-            '11.3' => ['baslik' => 'SCI, SCIE, SSCI, AHCI, ESCI veya Scopus kapsamındaki dergide yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 4],
+            // Sözlük 16.09.2026'da atıfta ESCI'yi çekirdek indeksten ayırdı;
+            // 11.1 (6) ile 11.3 (4) kendi değerlerinde duruyor.
+            '11.1' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI kapsamındaki dergide yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 6],
+            '11.3' => ['baslik' => 'ESCI veya SCOPUS kapsamındaki dergide yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 4],
             '11.2' => ['baslik' => 'Uluslararası yayınevi kitabında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
             '11.5' => ['baslik' => 'TR Dizin kapsamındaki dergide yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
             '11.6' => ['baslik' => 'Diğer ulusal veya uluslararası dergide yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 1],

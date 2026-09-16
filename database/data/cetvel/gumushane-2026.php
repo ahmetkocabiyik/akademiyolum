@@ -73,7 +73,9 @@ return [
         'C11' => ['baslik' => 'Ansiklopedi bölüm/maddesi', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 1],
 
         // D. ATIF
-        'D1' => ['baslik' => 'SCI/SCIE/SSCI/AHCI kapsamında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
+        // Sözlük 16.09.2026'da atıfta ESCI'yi çekirdek indeksten ayırdı.
+        'D1' => ['baslik' => 'SCI/SCIE/SSCI/AHCI kapsamında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 5],
+        'D4' => ['baslik' => 'ESCI, Scopus veya SPORTDiscus kapsamında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 3],
         'D2' => ['baslik' => 'BKCI kapsamındaki kitapta yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
         'D6' => ['baslik' => 'TR Dizin kapsamında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
         'D7' => ['baslik' => 'Patentlerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 2],

@@ -154,7 +154,9 @@ $maddeler = [
     '2.i.tz' => ['baslik' => 'Doktora tezinden üretilmiş, TR Dizinde taranan dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin'], 'puan' => 25],
 
     // ══ 3. ATIFLAR (bölüm tavanı 75 puan) ══
-    '3.b' => ['baslik' => 'WoS veya Scopus kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
+    // Sözlük 16.09.2026'da atıfta ESCI'yi çekirdek indeksten ayırdı.
+    '3.a' => ['baslik' => 'SCIE, SSCI ya da AHCI kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 4],
+    '3.b' => ['baslik' => 'WoS-ESCI ya da SCOPUS kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 3],
     '3.d' => ['baslik' => 'TR Dizin kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 1],
     '3.e' => ['baslik' => 'BKCI kapsamındaki kitapta yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
     '3.g' => ['baslik' => 'Ulusal kitap veya tezlerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 1],

@@ -349,7 +349,12 @@ return [
         'K.1' => ['baslik' => 'Kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 100],
         'K.2' => ['baslik' => 'Makale veya kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 50],
         'K.3' => ['baslik' => 'Uluslararası veya ulusal yayınevince yayımlanmış bilimsel kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
-        'K.4-K.6' => ['baslik' => 'SCI, SCIE, SSCI, AHCI, ESCI, Scopus veya TR Dizin kapsamındaki makalede atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'TR Dizin'], 'puan' => 10],
+        // Sözlük 16.09.2026'da atıfta ESCI'yi çekirdek indeksten ayırdı; üç
+        // satır da kendi değerinde. K.6 kapsamına göre ikiye bölünüyor
+        // (kaynak: "Uluslararası: 20, Ulusal: 10"), TR Dizin ulusal kademede.
+        'K.4' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI kapsamındaki dergilerde yayımlanmış makalelerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 30],
+        'K.6-u' => ['baslik' => 'ESCI ya da Scopus kapsamındaki makalelerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 20],
+        'K.6-n' => ['baslik' => 'TR Dizin kapsamındaki makalelerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
         'K.5' => ['baslik' => 'Diğer indeksler kapsamındaki dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 10],
 
         // ══ L. HAKEMLİK (bütün satırlar tek kayıt türüne düşüyor) ══
@@ -408,8 +413,8 @@ return [
         'J12' => ['J12.*'],
         'K' => ['K.*'],
         'K-ÇEVİRİ' => ['K.1', 'K.2'],
-        'K-ATIF' => ['K.3', 'K.4-K.6', 'K.5'],
-        'K3-K6' => ['K.3', 'K.4-K.6', 'K.5'],
+        'K-ATIF' => ['K.3', 'K.4', 'K.6-u', 'K.6-n', 'K.5'],
+        'K3-K6' => ['K.3', 'K.4', 'K.6-u', 'K.6-n', 'K.5'],
         'L' => ['L'],
         'M' => ['M.*'],
         'N' => ['N.*'],

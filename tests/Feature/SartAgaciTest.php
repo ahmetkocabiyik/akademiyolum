@@ -3375,7 +3375,8 @@ test('İstanbul Üniversitesi yazar katsayısı sorumlu yazarı ayırıyor', fun
         ->and($puan('baslica', 25))->toBe(24);
 
     // Atıf ve bildiri puanı yazarlar arasında bölüşülmez (Tablo 1, 3 ve 4).
-    $atif = sartFaaliyet('WoS / Scopus', Kategori::Atif, null);
+    // 16.09.2026: sözlük atıfta ESCI'yi ayırdı, etiket kapsamlı olana geçti.
+    $atif = sartFaaliyet('ESCI / Scopus', Kategori::Atif, null);
     $atif->yazarlar = 'A, B, C, D, E';
     expect($katalog->puan($atif, $kodlar))->toBe(3);
 });

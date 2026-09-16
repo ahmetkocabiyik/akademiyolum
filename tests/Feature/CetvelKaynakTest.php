@@ -813,15 +813,15 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
         // İletişim Fakültesine özgü olduğu için yalnız `b` (sosyal)
         // varyantında var; `a`, `bx` ve `c` varyantlarında satırları hiç
         // yazılmıyor, o yüzden onların toplamı 101 değil 97.
-        'omu-2025-a-doc: 17/100',
-        'omu-2025-a-dr: 17/100',
-        'omu-2025-a-prof: 17/100',
-        'omu-2025-b-doc: 17/104',
-        'omu-2025-b-dr: 17/104',
-        'omu-2025-b-prof: 17/104',
-        'omu-2025-bx-doc: 17/100',
-        'omu-2025-bx-dr: 17/100',
-        'omu-2025-bx-prof: 17/100',
+        'omu-2025-a-doc: 17/101',
+        'omu-2025-a-dr: 17/101',
+        'omu-2025-a-prof: 17/101',
+        'omu-2025-b-doc: 17/105',
+        'omu-2025-b-dr: 17/105',
+        'omu-2025-b-prof: 17/105',
+        'omu-2025-bx-doc: 17/101',
+        'omu-2025-bx-dr: 17/101',
+        'omu-2025-bx-prof: 17/101',
 
         // Bölüm toplamı "1.1; 1.2; 1.3; 1.4; 1.6" diye sınırlı; 1.5
         // (hakemlik) ve 1.7 (atıf) ayrı raporlanıyor.
@@ -2445,3 +2445,36 @@ test('Cerrahpaşa atıf bloğu kaynağın iki bölümünü de taşıyor', functi
         // Patent atfı kaynakta anılmıyor; en düşük toplayıcıya bağlı.
         ->and($puan('Patent (Ulusal)'))->toBe(1);
 });
+
+/**
+ * ATIFTA ESCI AYRIMI: kaynak çekirdek indeksi (SCI/SCIE/SSCI/AHCI) ESCI ile
+ * Scopus'tan AYRI puanlıyorsa iki satır da kendi değerinde olmalı.
+ *
+ * 16.09.2026'da 175 kaynağın atıf bölümü tarandı; dokuzunda ayrım bulundu.
+ * Değerler kaynak PDF'lerinden okundu.
+ */
+test('atıfta çekirdek indeks ile ESCI ayrı puanlanıyor', function (string $cetvel, int $cekirdek, int $esci) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Atif, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('SCIE/SSCI/AHCI'))->toBe($cekirdek)
+        ->and($puan('ESCI / Scopus'))->toBe($esci);
+})->with([
+    ['ankara-mgu-2026', 30, 20],       // K.4 30 · K.6 uluslararası 20
+    ['asbu-2024', 3, 2],               // I.1 3 · I.3 2
+    ['cerrahpasa-2023', 10, 7],        // A/11-a 10 · A/11-b 7
+    ['gumushane-2026', 5, 3],          // D1 5 · D4 3
+    ['hitit-2026', 3, 2],              // 1 → 3 · 2 → 2
+    ['istanbul-2026', 4, 3],           // 3.a 4 · 3.b 3
+    ['omu-2025-c-doc', 6, 4],          // 11.1 6 · 11.3 4
+    ['rte-2025', 4, 3],                // 4b 4 · 4c 3
+    ['zbeu-2026', 3, 2],               // 6.a 3 · 6.b 2
+]);

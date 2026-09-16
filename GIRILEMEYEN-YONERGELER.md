@@ -1225,7 +1225,16 @@ Sözlük artık atıfta `SCIE/SSCI/AHCI` ile `ESCI / Scopus`'u ayırıyor; genel
 tek satıra inmiş** ve hepsi genel etiketi taşıyor — yani ayrım yapan başka
 kaynaklar varsa onların yüksek kademesi hâlâ yazılı değil.
 
-Cerrahpaşa kaynağından okunarak ikiye ayrıldı (A/11-a 10 · A/11-b 7).
-Geri kalan 425 cetvelin atıf bölümü kaynağa karşı OKUNMADI. Ayrım yapan
-her kaynakta bugün DÜŞÜK kademe yazılı demektir — §0 yönünde eksik sayma,
-ama aday hak ettiğinden az görüyor.
+**16.09.2026'da 175 kaynağın tamamı tarandı.** Atıf bölümünde çekirdek
+indeksi ESCI/Scopus'tan ayrı puanlayan **dokuz** üniversite bulundu ve
+dokuzu da düzeltildi: Ankara MGÜ (30/20), ASBÜ (3/2), Cerrahpaşa (10/7),
+Gümüşhane (5/3), Hitit (3/2), İstanbul (4/3), OMÜ (6/4), RTE (4/3),
+ZBEÜ (3/2). Değerler kaynak PDF'lerinden okundu, `CetvelKaynakTest`'te
+dondurdu.
+
+Geri kalan 166 kaynak atıfı tek kademede puanlıyor; onlarda genel
+`WoS / Scopus` etiketi DOĞRU.
+
+Taramanın sınırı: metni bozuk çıkan PDF'ler (ör. Çankaya'nın yazı tipi
+cid-eşlemeli) satır düzeyinde okunamıyor, oradaki bir ayrım gözden kaçmış
+olabilir.

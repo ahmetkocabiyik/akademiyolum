@@ -153,7 +153,9 @@ return [
 
         // ══ I. ATIF ══
         'I.2' => ['baslik' => 'Book Citation Index kapsamındaki uluslararası bilimsel kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
-        'I.3' => ['baslik' => 'SSCI, SCI, SCI-Expanded, AHCI, ESCI, Scopus ya da MLA kapsamındaki dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
+        // Sözlük 16.09.2026'da atıfta ESCI'yi çekirdek indeksten ayırdı.
+        'I.1' => ['baslik' => 'SSCI, SCI, SCI-Expanded ya da AHCI kategorisindeki dergilerde veya kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
+        'I.3' => ['baslik' => 'ESCI, Scopus ya da MLA kapsamındaki dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 2],
         'I.5' => ['baslik' => 'Ulusal bilimsel kitapta ya da TR Dizinli ulusal hakemli dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 1],
     ],
 

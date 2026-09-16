@@ -136,7 +136,9 @@ $maddeler = [
 
     // ══ 4. ATIF ══ (4b sözlükte 4c ile aynı etikete düşüyor)
     '4a' => ['baslik' => 'BKCI kapsamındaki kitapta yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
-    '4c' => ['baslik' => 'Web of Science ya da SCOPUS kapsamında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
+    // Sözlük 16.09.2026'da atıfta ESCI'yi çekirdek indeksten ayırdı.
+    '4b' => ['baslik' => 'SCIE, SSCI veya AHCI kapsamında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 4],
+    '4c' => ['baslik' => 'ESCI, SCOPUS veya SPORTDiscus kapsamında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 3],
     '4d' => ['baslik' => 'TR Dizin kapsamındaki dergide yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
     '4e' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap veya dergide yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 1],
 

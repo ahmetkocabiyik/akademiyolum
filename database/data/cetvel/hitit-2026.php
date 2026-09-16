@@ -109,7 +109,9 @@ $maddeler = [
     'C03' => ['baslik' => 'Uluslararası ya da ulusal bilimsel toplantıda poster olarak sergilenen ve tam metni veya özeti yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Ulusal Özet/Poster'], 'puan' => 2],
 
     // ══ D. ATIF ══
-    'D01' => ['baslik' => 'SCIE, SSCI, AHCI, Scopus ya da ESCI dergisindeki yayında eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
+    // Sözlük 16.09.2026'da atıfta ESCI'yi çekirdek indeksten ayırdı.
+    'D01' => ['baslik' => 'SCIE, SSCI ya da AHCI dergisindeki yayında eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
+    'D02' => ['baslik' => 'Scopus ya da ESCI dergisindeki yayında eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 2],
     'D03' => ['baslik' => 'TR Dizin dergisindeki yayında eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
     'D04' => ['baslik' => 'Diğer indekslerdeki dergilerde ve bildirilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 1],
     'D06' => ['baslik' => 'Yazar ya da editör olarak yer almadığınız kitapta eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 2],
