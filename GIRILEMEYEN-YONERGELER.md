@@ -1164,3 +1164,43 @@ bırakıldı, yani yalnız TAM METNİ yayımlanmış uluslararası bildiriler
 sayılıyor. Özeti yayımlanmış bildirisi olan aday koşulu sağladığı hâlde
 sağlamamış görünür. Sözlüğe `Uluslararası Özet` / `Uluslararası Poster`
 ayrımı eklenirse düzelir.
+
+## Kapsamsız etiket, kapsamı dar satır (16.09.2026) — KARAR BEKLİYOR
+
+Kapsam turunun son taraması: satır BAŞLIĞIYLA uluslararası olduğu hâlde
+bağlandığı sözlük etiketi kapsam taşımıyorsa, ULUSAL bir kayıt o satıra
+düşer — hem satırın puanını alır hem de "uluslararası faaliyetlerden N puan"
+barajını doldurur.
+
+Tarama yalnız uluslararası isteyen KOŞULLARIN kümesindeki satırlara bakıyor
+(korpus geneli kapsamsız etiket 1.494 satır; barajı etkileyen kısım bu):
+**65 satır, 15 etiket.**
+
+Yanlış pozitifler (dördü fon, ikisi ders): `AB Çerçeve / Ufuk`, `TÜBİTAK`,
+`TÜSEB`, `Diğer Kamu Kurumu` — satırın kapsamını FONUN kendisi belirliyor;
+`Yabancı Dilde Ders`, `Değişim Programı Dersi` — satır zaten "uluslararası
+programda verilen ders" diyor.
+
+Gerçek olanların KÖKÜ TEK: sözlükte bu kalemlerin uluslararası/ulusal ekseni
+YOK.
+
+| Etiket | Satır | En görünür örnek |
+|---|---|---|
+| `Davetli Konuşmacı` | 22 | 22 cetvelde uluslararası davet satırı |
+| `Çeviri Kitap` / `Çeviri Kitap Bölümü` | 8 | Trakya EK-1/3/4 "Uluslararası kitap çevirisi" |
+| `Ders / Metot Kitabı` | 3 | İbn Haldun 1.1.2.3, Işık A.1.6.a |
+| `Diğer Hakemli Dergi` | 2 | Cerrahpaşa A9a, Bandırma A11.a |
+| `Kitap Bölümü` · `Kitap Editörlüğü` · `Patent` · `Diğer` | 5 | Cerrahpaşa A2b/A3b/A11c |
+
+**Veri tarafında çözülemez.** Etiketi satırdan atmak ulusal kaydı eler ama
+ULUSLARARASI kaydı da sıfırlar — o kalemin başka satırı yok (Cerrahpaşa'nın
+cetvelinde ulusal kitap satırı hiç bulunmuyor). İki gerçek seçenek var:
+
+1. **Sözlüğe kapsam ekle** (`Uluslararası Kitap Bölümü` / `Ulusal Kitap
+   Bölümü` gibi). Doğru çözüm ama faaliyet giriş ekranını ve KAYITLI
+   faaliyetleri etkiliyor; göç gerekir.
+2. **Kabul et ve yaz.** Fazla sayma sürüyor ama bilinir ve sınırlı.
+
+Karar kullanıcının. `CetvelKaynakTest` şimdilik BÜYÜMEYİ engelliyor: bilinen
+on beş etiket listede, listeye girmemiş yeni bir kapsamsız etiket
+uluslararası bir satıra bağlanırsa test kırılıyor.

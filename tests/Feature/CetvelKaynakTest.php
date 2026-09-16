@@ -2229,3 +2229,94 @@ test('aday metninde madde kodu yok', function () {
 
     expect(array_values(array_unique($kodlu)))->toBe([]);
 });
+
+test('uluslararası koşullarda kapsamsız etiket LİSTELİ kalıyor', function () {
+    // Bir satır başlığıyla uluslararası olabilir ("Diğer uluslararası kitapta
+    // bölüm yazarlığı") ama bağlandığı sözlük etiketi kapsam taşımıyorsa
+    // (`Kitap Bölümü`) ULUSAL bir kayıt da o satıra düşer: hem satırın
+    // puanını alır hem de "uluslararası faaliyetlerden N puan" barajını
+    // doldurur.
+    //
+    // Kökü tek: sözlükte bu kalemlerin uluslararası/ulusal ekseni YOK. Veri
+    // tarafında çözülemez — etiketi satırdan atmak uluslararası kaydı da
+    // sıfırlar. Bu yüzden test düzeltme değil BÜYÜME koruması: bilinen
+    // etiketler listede, listeye girmemiş yeni bir etiket çıkarsa kırılır.
+    $kapsamsizEtiketler = [
+        // Sözlükte kapsam ekseni olmayan kalemler.
+        'Kitap Bölümü', 'Kitap Editörlüğü', 'Ders / Metot Kitabı',
+        'Çeviri Kitap', 'Çeviri Kitap Bölümü', 'Davetli Konuşmacı',
+        'Diğer Hakemli Dergi', 'Diğer', 'Patent',
+        // Fon kaynağı etiketleri: satırın kapsamını FONUN kendisi belirliyor
+        // (AB uluslararası, TÜBİTAK ulusal), etiketin ayrıca söylemesi gerekmiyor.
+        'AB Çerçeve / Ufuk', 'TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu',
+        // Ders kalemleri: satır "uluslararası programda verilen ders" diyor,
+        // etiket dersin türünü taşıyor.
+        'Yabancı Dilde Ders', 'Değişim Programı Dersi',
+    ];
+
+    $depo = sartDepo();
+    $ilgili = [];
+
+    foreach ($depo->dogrulanmisEsikler() as $esik) {
+        $katalog = $depo->katalog($esik['cetvel']);
+
+        if ($katalog === null) {
+            continue;
+        }
+
+        $gez = function (array $dugum) use (&$gez, $katalog, $esik, &$ilgili) {
+            $aciklama = (string) ($dugum['aciklama'] ?? '');
+
+            $yalnizUluslararasi = preg_match('/uluslararas/iu', $aciklama) === 1
+                && preg_match('/(?<!uluslar)\bulusal\b|TR Dizin|ULAKB/iu', $aciklama) !== 1;
+
+            if (isset($dugum['maddeler']) && $yalnizUluslararasi) {
+                foreach ($katalog->coz($dugum['maddeler']) as $kod) {
+                    $ilgili[$esik['cetvel']][$kod] = true;
+                }
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+
+            if (isset($dugum['telafi'])) {
+                $gez($dugum['telafi']);
+            }
+        };
+
+        $gez($esik['sart']);
+    }
+
+    $yeni = [];
+
+    foreach ($depo->cetveller() as $ad => $katalog) {
+        foreach ($katalog->maddeler as $kod => $madde) {
+            if (! isset($ilgili[$ad][$kod])) {
+                continue;
+            }
+
+            $baslik = (string) ($madde['baslik'] ?? '');
+
+            $satirUluslararasi = preg_match('/uluslararas/iu', $baslik) === 1
+                && preg_match('/(?<!uluslar)\bulusal\b|TR Dizin|yurt ?içi/iu', $baslik) !== 1;
+
+            if (! $satirUluslararasi) {
+                continue;
+            }
+
+            foreach ($madde['kaynaklar'] ?? [] as $etiket) {
+                $kapsamli = preg_match(
+                    '/uluslararas|(?<!uluslar)\bulusal\b|yurt ?(dışı|içi)|SCIE|SSCI|AHCI|ESCI|Scopus|BKCI|CPCI|WoS|TR Dizin|ULAKB|SENSE|SRAP|PubMed|ERIC/iu',
+                    $etiket,
+                ) === 1;
+
+                if (! $kapsamli && ! in_array($etiket, $kapsamsizEtiketler, true)) {
+                    $yeni[] = "{$ad} · {$kod}: {$etiket}";
+                }
+            }
+        }
+    }
+
+    expect(array_values(array_unique($yeni)))->toBe([]);
+});
