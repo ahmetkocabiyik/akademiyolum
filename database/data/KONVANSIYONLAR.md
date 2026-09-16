@@ -3120,8 +3120,13 @@ kapsam çiftine sahip olup ötekinde olmayabiliyor. `Diğer` bunun örneği —
 `atif` ve `tez_yayini`'nde çifti var, `diger` kategorisinde ("Diğer
 Etkinlik") kapsam ayrımı anlamsız ve orada adayın seçebileceği tek etiket o.
 
-Eksene kavuşan dokuz kalem: kitap · kitap bölümü · çeviri kitap · çeviri
+Eksene kavuşan on kalem: kitap · kitap bölümü · çeviri kitap · çeviri
 kitap bölümü · kitap editörlüğü · ders/metot kitabı · davetli konuşmacı ·
-diğer hakemli dergi (editörlük) · atıfta diğer ve patent. Eksen GEREKMEYENLER
+diğer hakemli dergi (editörlük) · atıfta diğer ve patent · atıfta ESCI
+(`SCIE/SSCI/AHCI` ↔ `ESCI / Scopus`, geneli `WoS / Scopus`).
+
+Eksen yalnız KAPSAM için değil: atıfta ayrım indeks KADEMESİ. Aynı makinede
+iki tür ayrım da taşınabiliyor — ölçüt, kaynağın iki kalemi farklı puanlayıp
+puanlamadığı. Eksen GEREKMEYENLER
 fon etiketleri (AB uluslararası, TÜBİTAK ulusal — kapsamı fonun kendisi
 söylüyor) ve ders etiketleri (etiket dersin TÜRÜNÜ taşıyor).

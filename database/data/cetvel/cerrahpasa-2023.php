@@ -70,12 +70,10 @@ return [
         'B8b' => ['baslik' => 'Ulusal bilimsel toplantıda poster sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 4],
 
         // ── A11 · ULUSLARARASI ATIF ──
-        // A11/a (SCIE/SSCI/AHCI, 10) SATIR OLARAK YOK. Sözlükte atıf tarafında
-        // ESCI'yi SCIE/SSCI/AHCI'den ayıran etiket yok — ikisi de
-        // `WoS / Scopus`. §0 uyarınca etiket DÜŞÜK satıra, yani A11/b'ye (7)
-        // bağlandı; yüksek satırı da yazmak MAX yüzünden her atfa 10 verirdi.
-        // WoS kapsamında atfı olan aday 10 yerine 7 puan görür.
-        'A11b' => ['baslik' => 'ESCI ya da üstü uluslararası indekste yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 7],
+        // Sözlük 16.09.2026'da atıfta çekirdek indeksle ESCI'yi ayırdı; iki
+        // satır da kendi değerinde duruyor.
+        'A11a' => ['baslik' => 'SCIE, SSCI ya da AHCI kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 10],
+        'A11b' => ['baslik' => 'ESCI kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 7],
         // `Patent` BURADAN ÇIKARILDI: patentte alınan atıf "uluslararası hakemli
         // DERGİDE atıf" değil. Kaynağın A11'inde patent satırı yok; aşağıdaki
         // B9/b ("Diğer", 1 puan) kaynağın kendi toplayıcısı, oraya bağlandı.

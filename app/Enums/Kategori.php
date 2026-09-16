@@ -127,7 +127,7 @@ enum Kategori: string
         ],
         'bildiri' => ['Davetli Konuşmacı'],
         'editorluk' => ['Kitap Editörlüğü', 'Diğer Hakemli Dergi'],
-        'atif' => ['Patent', 'Diğer'],
+        'atif' => ['WoS / Scopus', 'Patent', 'Diğer'],
         'tez_yayini' => ['Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Diğer'],
     ];
 
@@ -189,7 +189,11 @@ enum Kategori: string
                 'Diğer (Uluslararası)', 'Diğer (Ulusal)', 'Diğer',
             ],
             self::Atif => [
-                'WoS / Scopus', 'BKCI Kitap', 'TR Dizin',
+                // Kaynakların bir kısmı atıfta çekirdek indeksle ESCI'yi ayrı
+                // puanlıyor (Cerrahpaşa A/11: SCIE-SSCI-AHCI 10, ESCI 7);
+                // `WoS / Scopus` ikisini birden karşılayan GENEL etiket.
+                'SCIE/SSCI/AHCI', 'ESCI / Scopus', 'WoS / Scopus',
+                'BKCI Kitap', 'TR Dizin',
                 'Patent (Uluslararası)', 'Patent (Ulusal)', 'Patent',
                 'Diğer (Uluslararası)', 'Diğer (Ulusal)', 'Diğer',
             ],

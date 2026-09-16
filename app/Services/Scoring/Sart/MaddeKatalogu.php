@@ -399,6 +399,8 @@ readonly class MaddeKatalogu
         'Patent (Ulusal)' => 'Patent',
         'Diğer (Uluslararası)' => 'Diğer',
         'Diğer (Ulusal)' => 'Diğer',
+        'SCIE/SSCI/AHCI' => 'WoS / Scopus',
+        'ESCI / Scopus' => 'WoS / Scopus',
     ];
 
     /**

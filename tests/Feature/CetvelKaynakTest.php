@@ -2385,6 +2385,20 @@ test('her genel etiketin kapsamlı çifti ve geri eşlemesi var', function () {
             }
         }
     }
+
+    // TERS YÖN: bir kategoride hem genel etiket hem kapsamlı çocuğu varsa,
+    // genel MUTLAKA gizlenenler listesinde olmalı. Yoksa aday genel etiketi
+    // seçebilir ve kaydı ayrım yapan satırlara hiç düşmez.
+    foreach (Kategori::cases() as $kategori) {
+        $sozluk = $kategori->kaynaklar();
+        $gizli = Kategori::GENEL_KAYNAKLAR[$kategori->value] ?? [];
+
+        foreach ($geri as $cocuk => $genel) {
+            if (in_array($cocuk, $sozluk, true) && in_array($genel, $sozluk, true)) {
+                expect($gizli)->toContain($genel);
+            }
+        }
+    }
 });
 
 test('genel etiketler adaya sorulmuyor, cetvelde yaşıyor', function () {
@@ -2422,9 +2436,12 @@ test('Cerrahpaşa atıf bloğu kaynağın iki bölümünü de taşıyor', functi
         ->and($puan('Diğer (Uluslararası)'))->toBe(5)
         ->and($puan('Diğer (Ulusal)'))->toBe(1)
         ->and($puan('BKCI Kitap'))->toBe(4)
-        // Sözlük atıfta ESCI ile SCIE/SSCI/AHCI'yi ayırmıyor; §0 uyarınca
-        // DÜŞÜK satır (ESCI, 7) yazıldı, 10'luk satır hiç açılmadı.
-        ->and($puan('WoS / Scopus'))->toBe(7)
+        // Sözlük 16.09.2026'da atıfta ESCI'yi ayırdı; iki satır da kendi
+        // değerinde. Genel etiketle girilmiş eski bir kayıt ise DÜŞÜK satıra
+        // düşer — genel, kapsamlıyı karşılamaz.
+        ->and($puan('SCIE/SSCI/AHCI'))->toBe(10)
+        ->and($puan('ESCI / Scopus'))->toBe(7)
+        ->and($puan('WoS / Scopus'))->toBe(0)
         // Patent atfı kaynakta anılmıyor; en düşük toplayıcıya bağlı.
         ->and($puan('Patent (Ulusal)'))->toBe(1);
 });

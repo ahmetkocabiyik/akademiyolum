@@ -1208,13 +1208,24 @@ uluslararası bir satıra bağlanırsa test kırılıyor.
 ## Kapsam ekseni turunda çıkan yan bulgular (16.09.2026)
 
 - ~~**Cerrahpaşa'nın atıf bloğu eksik.**~~ 16.09.2026'da düzeltildi: B9
-  bölümü girildi, `TR Dizin` A11/b'den oraya taşındı. Geriye tek eksik
-  sayma kaldı — sözlük atıfta ESCI ile SCIE/SSCI/AHCI'yi ayırmıyor, §0
-  uyarınca düşük satır (7) yazıldı, 10'luk A11/a hiç açılmadı. WoS
-  kapsamında atfı olan aday 10 yerine 7 görüyor.
+  bölümü girildi, `TR Dizin` A11/b'den oraya taşındı. Kalan eksik sayma da
+  aynı gün kapandı: sözlüğe atıfta ESCI ayrımı eklendi, A11/a (10) ile
+  A11/b (7) kendi değerlerinde duruyor.
 - **Cerrahpaşa A11c'den `Patent` çıkarıldı.** Patentte alınan atıf
   "uluslararası hakemli DERGİDE atıf" değil; kaynağın A11'inde patent satırı
   yok. B9/b girilmediği için patent atfı şimdilik hiç saymıyor (§0).
 - **Ege'nin 10.4(l) satırı girilmemiş.** Kaynak "10.4 (k, l)" diyor ama
   cetvelde yalnız k var (uluslararası). Kapsam ekseni gelince ulusal metot
   kitabı hiç saymaz oldu; l girilirse düzelir.
+
+## Atıfta ESCI ayrımı — korpus henüz taranmadı (16.09.2026)
+
+Sözlük artık atıfta `SCIE/SSCI/AHCI` ile `ESCI / Scopus`'u ayırıyor; genel
+`WoS / Scopus` cetvel tarafında kaldı. Korpusta **426 cetvelin atıf bloğu
+tek satıra inmiş** ve hepsi genel etiketi taşıyor — yani ayrım yapan başka
+kaynaklar varsa onların yüksek kademesi hâlâ yazılı değil.
+
+Cerrahpaşa kaynağından okunarak ikiye ayrıldı (A/11-a 10 · A/11-b 7).
+Geri kalan 425 cetvelin atıf bölümü kaynağa karşı OKUNMADI. Ayrım yapan
+her kaynakta bugün DÜŞÜK kademe yazılı demektir — §0 yönünde eksik sayma,
+ama aday hak ettiğinden az görüyor.
