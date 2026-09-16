@@ -3080,3 +3080,35 @@ Selçuk'ta tuzak İKİ YERDEYDİ: cetveldeki `'1' => ['1*']` grubu ve yönergeni
 doğrudan `['1*']` yazan otuz sekiz koşulu. Grubu düzeltmek yetmedi; koşullar
 da gruba yönlendirildi. Bölüm kümesini TEK YERDE tanımla, koşullar ona atıf
 yapsın.
+
+## SÖZLÜKTE KAPSAM EKSENİ: GENEL ETİKET ↔ KAPSAMLI ETİKET
+
+16.09.2026'da kitap, kitap bölümü, çeviri, kitap editörlüğü ve davetli
+konuşmacı kalemleri uluslararası/ulusal eksenine kavuştu. Eksen İKİ KATLI:
+
+- **Kapsamlı etiket** (`Uluslararası Kitap Bölümü`, `Ulusal Kitap Bölümü`,
+  `Davetli Konuşmacı (Uluslararası)` …) — ADAY her zaman bunu seçiyor.
+- **Genel etiket** (`Kitap Bölümü`, `Davetli Konuşmacı` …) — yalnız CETVEL
+  tarafında yaşıyor, `Kategori::adayKaynaklari()` onu adaya göstermiyor.
+
+`MaddeKatalogu::kaynakEsler()` ikisini bağlıyor: kapsamlı bir kayıt, satır
+genel etiketi listeliyorsa da sayılır. **Tersi geçerli değil** — satır
+kapsamlı etiketi listeliyorsa öteki kapsamdaki kayıt düşmez.
+
+**Satır yazarken hangisini seçeceğin kaynağa bakar:**
+
+- Kaynak ayrım YAPMIYORSA ("diğer uluslararası ya da ulusal kitapta bölüm")
+  → **genel** etiket. Korpustaki üç bin küsur satırın neredeyse tamamı böyle
+  ve DOKUNULMADI.
+- Kaynak ayrım YAPIYORSA ("Diğer uluslararası kitapta bölüm yazarlığı",
+  "Uluslararası kitap çevirisi") → **kapsamlı** etiket. 16.09.2026'da otuz
+  satır bu yüzden daraltıldı.
+
+Bu tasarım mass-rewrite'ı gereksiz kıldı: genel etiketi kapsamlı çiftiyle
+değiştirmek 3.148 satırı elden geçirmek demekti ve her satırda "kaynak
+gerçekten ikisini de kabul ediyor mu?" sorusu cevapsız kalırdı — veri
+KESİN görünüp belirsiz kalırdı.
+
+**Aday kaydı hep kapsamlı.** Yeni bir kapsam çifti eklerken üç yeri birlikte
+güncelle: `Kategori::kaynaklar()` (üçü de: iki kapsamlı + genel),
+`Kategori::GENEL_KAYNAKLAR` ve `MaddeKatalogu::GENEL_ETIKET`.

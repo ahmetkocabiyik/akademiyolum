@@ -126,7 +126,7 @@ $maddeler = [
     // (poster hariç)" diye istiyor (MADDE 16-18 öncülleri). Tek satır ulusal
     // bildiriyi de topladığı için o koşula bağlanamaz; satır kapsamına göre
     // ikiye ayrıldı, puanlar aynı ve 'B' grubu ikisini de topluyor.
-    'B.b-u' => ['baslik' => 'Diğer uluslararası bilimsel toplantıda sunulup tam metni yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Davetli Konuşmacı'], 'puan' => 3],
+    'B.b-u' => ['baslik' => 'Diğer uluslararası bilimsel toplantıda sunulup tam metni yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Davetli Konuşmacı (Uluslararası)'], 'puan' => 3],
     'B.b-n' => ['baslik' => 'Ulusal bilimsel toplantıda sunulup tam metni yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 3],
     'B.c' => ['baslik' => 'Uluslararası ya da ulusal bilimsel toplantıda sunulan poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Ulusal Özet/Poster'], 'puan' => 1],
 

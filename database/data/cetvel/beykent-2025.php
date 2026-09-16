@@ -67,7 +67,7 @@ $maddeler = [
     // ══ B: ULUSLARARASI BİLDİRİLER ══
     'B-1' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulmuş ve tam metni basılmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 8],
     'B-3' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulmuş özet bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
-    'B-4' => ['baslik' => 'Uluslararası bilimsel toplantıda keynote speaker ya da davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
+    'B-4' => ['baslik' => 'Uluslararası bilimsel toplantıda keynote speaker ya da davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı (Uluslararası)'], 'puan' => 2],
 
     // ══ C: ULUSLARARASI KİTAP ══
     'C-1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],

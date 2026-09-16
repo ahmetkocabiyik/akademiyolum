@@ -230,8 +230,8 @@ $ek1 = [
     '3b' => ['baslik' => 'BKCI kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
     '3c' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
     '3d' => ['baslik' => 'Diğer uluslararası ya da ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
-    '3e' => ['baslik' => 'Uluslararası kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
-    '3f' => ['baslik' => 'Uluslararası kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
+    '3e' => ['baslik' => 'Uluslararası kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 15],
+    '3f' => ['baslik' => 'Uluslararası kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 10],
 
     // ══ LİSANSÜSTÜ TEZDEN ÜRETİLMİŞ YAYIN ══
     // EK-1 ve EK-3'te ayrı bir bölüm yok; tez kaynaklı yayınlar makale ve
@@ -324,9 +324,9 @@ $ek2 = [
 
     // ══ 3. KİTAP ══
     '3a-1' => ['baslik' => 'BKCI ya da Scopus Book Series kapsamındaki kitapta yazarlık', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 40],
-    '3a-1c' => ['baslik' => 'BKCI ya da Scopus Book Series kapsamındaki kitapta çeviri yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
+    '3a-1c' => ['baslik' => 'BKCI ya da Scopus Book Series kapsamındaki kitapta çeviri yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 20],
     '3a-2' => ['baslik' => 'BKCI ya da Scopus Book Series kapsamındaki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
-    '3a-2c' => ['baslik' => 'BKCI ya da Scopus Book Series kapsamındaki kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
+    '3a-2c' => ['baslik' => 'BKCI ya da Scopus Book Series kapsamındaki kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 10],
     '3b-1' => ['baslik' => 'Diğer uluslararası ya da ulusal kitapta yazarlık', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 5],
     '3b-2' => ['baslik' => 'Diğer uluslararası ya da ulusal kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 3],
 
@@ -431,8 +431,8 @@ $ek4 = [
     '4b' => ['baslik' => 'BKCI ya da Scopus kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
     '4cd' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 10],
     '4ef' => ['baslik' => 'Diğer uluslararası ya da ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 5],
-    '4g' => ['baslik' => 'Uluslararası kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
-    '4h' => ['baslik' => 'Uluslararası kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
+    '4g' => ['baslik' => 'Uluslararası kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 15],
+    '4h' => ['baslik' => 'Uluslararası kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 10],
     '4i' => ['baslik' => 'Ansiklopedilerde madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
     '4j' => ['baslik' => 'Tahkik (tenkitli metin neşri) türünde uluslararası ya da ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 2],
 
@@ -523,8 +523,8 @@ $gs = [
     '4b' => ['baslik' => 'BKCI kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
     '4c' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
     '4d' => ['baslik' => 'Diğer uluslararası ya da ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
-    '4e' => ['baslik' => 'Uluslararası kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
-    '4f' => ['baslik' => 'Uluslararası kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
+    '4e' => ['baslik' => 'Uluslararası kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 15],
+    '4f' => ['baslik' => 'Uluslararası kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 10],
 
     // ══ 11. ÖDÜL ══
     '11a-f' => ['baslik' => 'YÖK Yılın Doktora Tezi, YÖK Üstün Başarı, TÜBİTAK Bilim, TÜBİTAK Teşvik, TÜBA GEBİP ya da TÜBA TESEP ödülü', 'kategori' => 'odul', 'kaynaklar' => ['YÖK Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'Ufuk Avrupa / ERC Ödülü', 'Uluslararası Bilim/Sanat Ödülü'], 'puan' => 30],

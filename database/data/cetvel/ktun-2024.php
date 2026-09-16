@@ -132,7 +132,7 @@ $govde = function (bool $mps) use ($OZGUN, $DERLEME, $KISA, $VAKA, $TUM_KISA, $Q
 
         // ══ B. ULUSLARARASI BİLDİRİLER ══
         'B-1' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 13],
-        'B-1-davetli' => ['baslik' => 'Uluslararası toplantıda davetli konuşmacı bildirisi', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 15],
+        'B-1-davetli' => ['baslik' => 'Uluslararası toplantıda davetli konuşmacı bildirisi', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı (Uluslararası)'], 'puan' => 15],
         'B-2.1' => ['baslik' => 'Uluslararası toplantıda yabancı dilde sunulan ve özeti ya da posteri yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
 
         // ══ C. ULUSLARARASI KİTAP ══

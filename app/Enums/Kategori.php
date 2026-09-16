@@ -106,6 +106,35 @@ enum Kategori: string
     }
 
     /**
+     * Cetvel satırlarında yaşayan ama ADAYA SORULMAYAN etiketler.
+     *
+     * Kaynakların bir kısmı kitabı, çeviriyi, editörlüğü ve daveti
+     * uluslararası/ulusal diye ayırıyor, bir kısmı ayırmıyor. Ayırmayan
+     * kaynağın satırı GENEL etiketi listeler ve iki kaydı da karşılar
+     * ({@see MaddeKatalogu::kaynakEsler()}). Aday ise her zaman kapsamlı
+     * olanı seçer — "Kitap Bölümü" diye sorulsa ayrım hiç toplanmazdı.
+     *
+     * @var list<string>
+     */
+    public const GENEL_KAYNAKLAR = [
+        'Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Çeviri Kitap',
+        'Çeviri Kitap Bölümü', 'Kitap Editörlüğü', 'Davetli Konuşmacı',
+    ];
+
+    /**
+     * Adayın faaliyet girerken seçebileceği kaynaklar.
+     *
+     * @return list<string>
+     */
+    public function adayKaynaklari(): array
+    {
+        return array_values(array_filter(
+            $this->kaynaklar(),
+            fn (string $kaynak) => ! in_array($kaynak, self::GENEL_KAYNAKLAR, true),
+        ));
+    }
+
+    /**
      * Bu kategorinin alt türleri — puan cetvellerinin anahtarı ve formdaki
      * seçenek listesi. Yönergeler puanı daima bu ayrıma göre veriyor
      * (ör. proje: fon kaynağına göre; tez danışmanlığı: tez düzeyine göre).
@@ -123,12 +152,19 @@ enum Kategori: string
             self::Bildiri => [
                 'Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin',
                 'Uluslararası Özet/Poster', 'Ulusal Tam Metin', 'Ulusal Özet/Poster',
+                'Davetli Konuşmacı (Uluslararası)', 'Davetli Konuşmacı (Ulusal)',
                 'Davetli Konuşmacı',
             ],
             self::Kitap => [
-                'BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)',
-                'BKCI / Scopus Kitap Bölümü', 'Kitap Bölümü',
-                'Ansiklopedi Maddesi', 'Çeviri Kitap', 'Çeviri Kitap Bölümü',
+                'BKCI / Scopus Kitap',
+                'Uluslararası Kitap', 'Ulusal Kitap', 'Uluslararası/Ulusal Kitap',
+                'Tahkik (Tenkitli Metin)',
+                'BKCI / Scopus Kitap Bölümü',
+                'Uluslararası Kitap Bölümü', 'Ulusal Kitap Bölümü', 'Kitap Bölümü',
+                'Ansiklopedi Maddesi',
+                'Uluslararası Çeviri Kitap', 'Ulusal Çeviri Kitap', 'Çeviri Kitap',
+                'Uluslararası Çeviri Kitap Bölümü', 'Ulusal Çeviri Kitap Bölümü',
+                'Çeviri Kitap Bölümü',
                 // Ege 3(ı)/3(i) ve 10.4(k,l), Gazi K1c: ders ve metot kitapları
                 // ayrı puanlı ve güzel sanatlar koşullarında ADIYLA anılıyor.
                 'Ders / Metot Kitabı',
@@ -172,7 +208,8 @@ enum Kategori: string
             self::Editorluk => [
                 'WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)',
                 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi',
-                'BKCI Kitap', 'Kitap Editörlüğü',
+                'BKCI Kitap',
+                'Uluslararası Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü',
                 'Yayın Kurulu Üyeliği', 'Hakemlik',
             ],
             self::SanatselEtkinlik => [

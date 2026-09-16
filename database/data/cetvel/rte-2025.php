@@ -122,7 +122,7 @@ $maddeler = [
 
     // ══ 2. BİLİMSEL TOPLANTI ══
     '2a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan, tam metni ya da özeti CPCI\'da yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 6],
-    '2b-tam' => ['baslik' => 'Diğer uluslararası bilimsel toplantıda sunulan, tam metin olarak yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Davetli Konuşmacı'], 'puan' => 4],
+    '2b-tam' => ['baslik' => 'Diğer uluslararası bilimsel toplantıda sunulan, tam metin olarak yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Davetli Konuşmacı (Uluslararası)'], 'puan' => 4],
     '2b-ozet' => ['baslik' => 'Diğer uluslararası bilimsel toplantıda özet metin ya da poster olarak yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
     '2c-tam' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan, tam metin olarak yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 3],
     '2c-ozet' => ['baslik' => 'Ulusal bilimsel toplantıda özet metin ya da poster olarak yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],

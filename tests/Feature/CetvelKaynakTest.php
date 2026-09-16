@@ -1487,7 +1487,10 @@ test('bildiride poster sözlüden ayrışıyor', function (string $cetvel, array
     ['cerrahpasa-2023', [
         'Uluslararası Tam Metin' => 15, 'Uluslararası Özet/Poster' => 8,
         'Ulusal Tam Metin' => 6, 'Ulusal Özet/Poster' => 4,
-        'Davetli Konuşmacı' => 3,
+        // Cerrahpaşa'nın tek davetli satırı ULUSLARARASI; 16.09.2026'da
+        // kapsamlı etikete geçti, genel etiket artık oraya düşmüyor.
+        'Davetli Konuşmacı' => 0,
+        'Davetli Konuşmacı (Uluslararası)' => 3,
     ]],
 
     // Gazi: toplantı bölümünün f/g bentleri (sözlü 10/5, poster 5/3)
@@ -1513,6 +1516,11 @@ test('bildiride poster sözlüden ayrışıyor', function (string $cetvel, array
  *      (Atatürk, Mersin).
  *
  * Değerler 07.09.2026'da kaynak PDF'lerinden okundu.
+ *
+ * 16.09.2026: sözlüğe kapsam ekseni girdi. Satırı YALNIZ uluslararası olan
+ * on dokuz cetvel `Davetli Konuşmacı (Uluslararası)` etiketine geçti; orada
+ * ulusal davet artık hiç saymıyor ve bu doğrudur. Geri kalanlar hâlâ genel
+ * etiketi taşıyor (kaynak ayırmıyor) ve §0 uyarınca ulusal değerde.
  */
 test('davetli konuşmacı etiketi ulusal davet değerinde', function (string $cetvel, int $beklenen) {
     $katalog = sartDepo()->katalog($cetvel);
@@ -1546,7 +1554,9 @@ test('davetli konuşmacı etiketi ulusal davet değerinde', function (string $ce
     // kaynağın davetli satırları H bölümünde (H.2 10, H.7 7).
     ['amasya-2024', 7],
     // Cerrahpaşa: A/10-c uluslararası 5, B/8-c ulusal 3.
-    ['cerrahpasa-2023', 3],
+    // Cerrahpaşa'nın tek davetli satırı ULUSLARARASI; kapsam ekseni
+    // gelince ulusal davet hiç saymaz oldu (kaynak da saymıyor).
+    ['cerrahpasa-2023', 0],
     // Sakarya UBÜ: 2.1 uluslararası 60, 2.2 ulusal 50.
     ['sakarya-ubu-2024', 50],
     // GİBTÜ: uluslararası 15, ulusal 10, STK/bakanlık etkinliği 2.
@@ -2242,10 +2252,10 @@ test('uluslararası koşullarda kapsamsız etiket LİSTELİ kalıyor', function 
     // sıfırlar. Bu yüzden test düzeltme değil BÜYÜME koruması: bilinen
     // etiketler listede, listeye girmemiş yeni bir etiket çıkarsa kırılır.
     $kapsamsizEtiketler = [
-        // Sözlükte kapsam ekseni olmayan kalemler.
-        'Kitap Bölümü', 'Kitap Editörlüğü', 'Ders / Metot Kitabı',
-        'Çeviri Kitap', 'Çeviri Kitap Bölümü', 'Davetli Konuşmacı',
-        'Diğer Hakemli Dergi', 'Diğer', 'Patent',
+        // Sözlükte kapsam ekseni HÂLÂ olmayan kalemler. (Kitap, kitap
+        // bölümü, çeviri, kitap editörlüğü ve davetli konuşmacı 16.09.2026'da
+        // eksene kavuştu; burada kalanlar `makale`/`atif` ailesinden.)
+        'Ders / Metot Kitabı', 'Diğer Hakemli Dergi', 'Diğer', 'Patent',
         // Fon kaynağı etiketleri: satırın kapsamını FONUN kendisi belirliyor
         // (AB uluslararası, TÜBİTAK ulusal), etiketin ayrıca söylemesi gerekmiyor.
         'AB Çerçeve / Ufuk', 'TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu',
@@ -2319,4 +2329,44 @@ test('uluslararası koşullarda kapsamsız etiket LİSTELİ kalıyor', function 
     }
 
     expect(array_values(array_unique($yeni)))->toBe([]);
+});
+
+test('genel etiket kapsamlı kaydı karşılar, tersi olmaz', function () {
+    // Ayrım YAPMAYAN kaynağın satırı genel etiketi listeler; aday ister
+    // uluslararası ister ulusal kitabını girsin o satıra düşer. Ayrım YAPAN
+    // kaynağın satırı kapsamlı etiketi listeler; öteki kapsam düşmez.
+    $katalog = new MaddeKatalogu(
+        anahtar: 'test',
+        maddeler: [
+            'GENEL' => ['baslik' => 'Kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
+            'DAR' => ['baslik' => 'Uluslararası kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 20],
+        ],
+    );
+
+    $kayit = fn (string $kaynak) => new Faaliyet([
+        'kategori' => Kategori::Kitap, 'tur' => 'Test', 'baslik' => 'Test',
+        'kaynak' => $kaynak, 'rol' => 'tek', 'durum' => 'onaylandi',
+    ]);
+
+    // Uluslararası kayıt HER İKİ satıra da düşer; `puan()` yükseğini alır.
+    expect($katalog->puan($kayit('Uluslararası Kitap Bölümü'), ['GENEL', 'DAR']))->toBe(20)
+        ->and($katalog->puan($kayit('Uluslararası Kitap Bölümü'), ['GENEL']))->toBe(10)
+        // Ulusal kayıt yalnız genel satıra düşer — dar satır uluslararası istiyor.
+        ->and($katalog->puan($kayit('Ulusal Kitap Bölümü'), ['GENEL', 'DAR']))->toBe(10)
+        ->and($katalog->puan($kayit('Ulusal Kitap Bölümü'), ['DAR']))->toBe(0);
+});
+
+test('genel etiketler adaya sorulmuyor, cetvelde yaşıyor', function () {
+    // Aday "Kitap Bölümü" diye bir seçenek görürse ayrım hiç toplanmaz;
+    // cetvel tarafında ise genel etiket 3.000'den fazla satırda duruyor ve
+    // orada kalması gerekiyor (kaynak ayrım yapmıyorsa doğrusu o).
+    foreach (Kategori::cases() as $kategori) {
+        foreach (Kategori::GENEL_KAYNAKLAR as $genel) {
+            expect($kategori->adayKaynaklari())->not->toContain($genel);
+        }
+    }
+
+    expect(Kategori::Kitap->kaynaklar())->toContain('Kitap Bölümü')
+        ->and(Kategori::Kitap->adayKaynaklari())->toContain('Uluslararası Kitap Bölümü')
+        ->and(Kategori::Kitap->adayKaynaklari())->toContain('Ulusal Kitap Bölümü');
 });

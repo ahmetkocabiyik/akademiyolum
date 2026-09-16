@@ -81,7 +81,7 @@ $maddeler = [
     // 1.1.5-1.1.6 Konferans
     '1.1.5.1' => ['baslik' => 'Uluslararası hakemli konferansta tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 6],
     '1.1.5.2' => ['baslik' => 'Uluslararası hakemli konferansta bildiri özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 3],
-    '1.1.6.1' => ['baslik' => 'Uluslararası konferansta sunulmuş basılmamış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
+    '1.1.6.1' => ['baslik' => 'Uluslararası konferansta sunulmuş basılmamış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı (Uluslararası)'], 'puan' => 2],
 
     // 1.1.8 Kitap çevirisi
     '1.1.8.2' => ['baslik' => 'Tercüme edilip yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],

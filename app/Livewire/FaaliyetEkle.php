@@ -252,7 +252,7 @@ class FaaliyetEkle extends Component
      */
     public function kaynakSecenekleri(): array
     {
-        return Kategori::from($this->kategori)->kaynaklar();
+        return Kategori::from($this->kategori)->adayKaynaklari();
     }
 
     /**

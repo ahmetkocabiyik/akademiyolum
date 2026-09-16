@@ -51,7 +51,7 @@ return [
         'K-KITAP' => ['baslik' => 'Ulusal ya da uluslararası yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı']],
 
         'B-SOZLU' => ['baslik' => 'Ulusal ya da uluslararası bir kongrede sözlü sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Ulusal Tam Metin', 'Davetli Konuşmacı']],
-        'B-ULUSLARARASI' => ['baslik' => 'Uluslararası bir kongrede sözlü sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Davetli Konuşmacı']],
+        'B-ULUSLARARASI' => ['baslik' => 'Uluslararası bir kongrede sözlü sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Davetli Konuşmacı (Uluslararası)']],
 
         'P-YUR' => ['baslik' => 'Ulusal ya da uluslararası kurumlarca desteklenen projede yürütücü olarak görev yapmak', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon', 'TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK', 'BAP (Üniversite)'], 'roller' => ['yurutucu']],
         'P-ARS' => ['baslik' => 'Ulusal ya da uluslararası kurumlarca desteklenen projede araştırmacı olarak görev yapmak', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon', 'TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu', 'Özel Sektör / STK', 'BAP (Üniversite)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer']],

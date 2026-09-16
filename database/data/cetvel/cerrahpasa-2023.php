@@ -32,9 +32,9 @@ return [
         'A1a' => ['baslik' => 'WoS/SCOPUS indeksli uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
         'A1b' => ['baslik' => 'Diğer uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 60],
         'A2a' => ['baslik' => 'WoS/SCOPUS indeksli kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
-        'A2b' => ['baslik' => 'Diğer uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 25],
+        'A2b' => ['baslik' => 'Diğer uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 25],
         'A3a' => ['baslik' => 'WoS/SCOPUS indeksli kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 50],
-        'A3b' => ['baslik' => 'Diğer uluslararası kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 25],
+        'A3b' => ['baslik' => 'Diğer uluslararası kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Uluslararası Kitap Editörlüğü'], 'puan' => 25],
 
         // ── A4 · SCIE/SSCI/AHCI MAKALE ── (koşulların çekirdeği)
         'A4a-Q1' => ['baslik' => 'SCIE/SSCI/AHCI Q1 dergide özgün makale veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 50],
@@ -61,7 +61,7 @@ return [
         // ── A10 · BİLİMSEL TOPLANTI ──
         'A10a' => ['baslik' => 'Uluslararası toplantıda sözlü sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 15],
         'A10b' => ['baslik' => 'Uluslararası toplantıda poster sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
-        'A10c-B8c' => ['baslik' => 'Uluslararası toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 3],
+        'A10c-B8c' => ['baslik' => 'Uluslararası toplantıda davetli konuşmacı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı (Uluslararası)'], 'puan' => 3],
         // B bölümünün (ULUSAL FAALİYETLER) 8. maddesi hiç girilmemişti:
         // sözlü sunum 6, poster sunum 4, davetli konuşmacı 3. Ulusal bildiri
         // etiketlerinin karşılığı yoktu; `Davetli Konuşmacı` da kapsam

@@ -364,6 +364,57 @@ readonly class MaddeKatalogu
     }
 
     /**
+     * Sözlükte KAPSAM TAŞIMAYAN etiketlerin kapsamlı karşılıkları.
+     *
+     * Kaynaklar kitabı, çeviriyi, editörlüğü ve daveti kimi yerde uluslararası
+     * ile ulusal diye ayırıyor, kimi yerde ayırmıyor. Sözlük ikisini de
+     * taşısın diye kapsamlı etiketler EKLENDİ, genel olanlar KALDI: ayrım
+     * yapmayan kaynağın satırı genel etiketi listeler ve her iki kaydı da
+     * karşılar; ayıran kaynağın satırı yalnız kapsamlı olanı listeler.
+     *
+     * Aday kaydını kapsamlı etiketle giriyor; genel etiket cetvel tarafında
+     * yaşamayı sürdürüyor. Bu tablo ikisini birbirine bağlıyor — böylece
+     * korpustaki üç bin küsur satırı yeniden yazmak gerekmedi.
+     *
+     * @var array<string, string>
+     */
+    private const GENEL_ETIKET = [
+        'Uluslararası Kitap' => 'Uluslararası/Ulusal Kitap',
+        'Ulusal Kitap' => 'Uluslararası/Ulusal Kitap',
+        'Uluslararası Kitap Bölümü' => 'Kitap Bölümü',
+        'Ulusal Kitap Bölümü' => 'Kitap Bölümü',
+        'Uluslararası Çeviri Kitap' => 'Çeviri Kitap',
+        'Ulusal Çeviri Kitap' => 'Çeviri Kitap',
+        'Uluslararası Çeviri Kitap Bölümü' => 'Çeviri Kitap Bölümü',
+        'Ulusal Çeviri Kitap Bölümü' => 'Çeviri Kitap Bölümü',
+        'Uluslararası Kitap Editörlüğü' => 'Kitap Editörlüğü',
+        'Ulusal Kitap Editörlüğü' => 'Kitap Editörlüğü',
+        'Davetli Konuşmacı (Uluslararası)' => 'Davetli Konuşmacı',
+        'Davetli Konuşmacı (Ulusal)' => 'Davetli Konuşmacı',
+    ];
+
+    /**
+     * Faaliyetin etiketi satırın listesini karşılıyor mu?
+     *
+     * Kapsamlı bir kayıt, satır GENEL etiketi listeliyorsa da sayılır — ayrım
+     * yapmayan kaynak iki kaydı da kabul ediyor demektir. Tersi geçerli
+     * DEĞİL: satır kapsamlı etiketi listeliyorsa öteki kapsamdaki kayıt
+     * sayılmaz; ayrımı isteyen kaynak zaten odur.
+     *
+     * @param  list<string>  $kaynaklar
+     */
+    private static function kaynakEsler(?string $kaynak, array $kaynaklar): bool
+    {
+        if (in_array($kaynak, $kaynaklar, true)) {
+            return true;
+        }
+
+        $genel = self::GENEL_ETIKET[$kaynak] ?? null;
+
+        return $genel !== null && in_array($genel, $kaynaklar, true);
+    }
+
+    /**
      * Faaliyet verilen kodlardan herhangi birine giriyor mu?
      *
      * @param  list<string>  $kodlar
@@ -631,7 +682,7 @@ readonly class MaddeKatalogu
             return false;
         }
 
-        if (isset($madde['kaynaklar']) && ! in_array($faaliyet->kaynak, $madde['kaynaklar'], true)) {
+        if (isset($madde['kaynaklar']) && ! self::kaynakEsler($faaliyet->kaynak, $madde['kaynaklar'])) {
             return false;
         }
 
