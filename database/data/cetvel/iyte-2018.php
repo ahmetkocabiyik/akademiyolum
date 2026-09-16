@@ -120,7 +120,7 @@ $ekGovdesi = function (array $birATarama, array $birBTarama, array $ikiATarama, 
         ...$dortuncuMadde,
 
         "{$on}-5a" => ['baslik' => 'Uluslararası endeksli dergilerde ya da tanınmış uluslararası yayınevi kitaplarında eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 3],
-        "{$on}-5b" => ['baslik' => 'Bu endeksler dışındaki uluslararası hakemli dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+        "{$on}-5b" => ['baslik' => 'Bu endeksler dışındaki uluslararası hakemli dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 2],
         "{$on}-5c" => ['baslik' => 'Ulusal hakemli dergilerde ya da tanınmış ulusal yayınevi kitaplarında eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent'], 'puan' => 1],
 
         "{$on}-6a" => ['baslik' => 'Tamamlanmış doktora tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 4],
@@ -185,7 +185,7 @@ $E3 = [
     'E3-3e-ed' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 8],
 
     'E3-4a' => ['baslik' => 'Uluslararası endeksli dergilerde ya da tanınmış uluslararası yayınevi kitaplarında eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 3],
-    'E3-4b' => ['baslik' => 'Bu endeksler dışındaki uluslararası hakemli dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    'E3-4b' => ['baslik' => 'Bu endeksler dışındaki uluslararası hakemli dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 2],
     'E3-4c' => ['baslik' => 'Ulusal hakemli dergilerde ya da tanınmış ulusal yayınevi kitaplarında eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent'], 'puan' => 1],
 
     'E3-5a' => ['baslik' => 'Tamamlanmış doktora tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 4],

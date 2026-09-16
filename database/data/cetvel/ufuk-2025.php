@@ -138,7 +138,7 @@ $maddeler = [
 
     // ══ 12. DERGİ GÖREVLERİ ══
     '12.a' => ['baslik' => 'WoS, Scopus ya da Sobiad dergilerinde editörlük veya editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 10],
-    '12.c' => ['baslik' => 'Diğer uluslararası dergilerde ya da ULAKBİM tarafından taranan dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 3],
+    '12.c' => ['baslik' => 'Diğer uluslararası dergilerde ya da ULAKBİM tarafından taranan dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 3],
     '12.d' => ['baslik' => 'Dergilerde yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 2],
     '12.g' => ['baslik' => 'Hakemli dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
 

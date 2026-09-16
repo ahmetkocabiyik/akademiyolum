@@ -1204,3 +1204,16 @@ cetvelinde ulusal kitap satırı hiç bulunmuyor). İki gerçek seçenek var:
 Karar kullanıcının. `CetvelKaynakTest` şimdilik BÜYÜMEYİ engelliyor: bilinen
 on beş etiket listede, listeye girmemiş yeni bir kapsamsız etiket
 uluslararası bir satıra bağlanırsa test kırılıyor.
+
+## Kapsam ekseni turunda çıkan yan bulgular (16.09.2026)
+
+- **Cerrahpaşa'nın atıf bloğu eksik.** Kaynağın B9'u ("9. Atıflar: a) TR
+  Dizin yurt içi 2, b) Diğer 1") hiç girilmemiş. Dahası A11b ESCI satırı
+  (7 puan) `TR Dizin` etiketini taşıyor — TR Dizin ULUSAL indeks, oraya
+  düşmemeli. Bir TR Dizin atfı 2 yerine 7 puan alıyor. Ayrı tur konusu.
+- **Cerrahpaşa A11c'den `Patent` çıkarıldı.** Patentte alınan atıf
+  "uluslararası hakemli DERGİDE atıf" değil; kaynağın A11'inde patent satırı
+  yok. B9/b girilmediği için patent atfı şimdilik hiç saymıyor (§0).
+- **Ege'nin 10.4(l) satırı girilmemiş.** Kaynak "10.4 (k, l)" diyor ama
+  cetvelde yalnız k var (uluslararası). Kapsam ekseni gelince ulusal metot
+  kitabı hiç saymaz oldu; l girilirse düzelir.

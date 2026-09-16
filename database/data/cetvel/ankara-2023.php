@@ -130,7 +130,7 @@ return [
         // ── 4 · Atıf ──
         '4a' => ['baslik' => 'WoS/Scopus dergilerde adayın yazar olmadığı yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
         '4b' => ['baslik' => 'Uluslararası yayınevi kitaplarında atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
-        '4ç' => ['baslik' => 'Diğer uluslararası indeksli dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+        '4ç' => ['baslik' => 'Diğer uluslararası indeksli dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 3],
         '4d' => ['baslik' => 'TR-Dizin dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 3],
         '4j' => ['baslik' => 'Yargı kararlarında bilimsel çalışmalara yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 2],
 

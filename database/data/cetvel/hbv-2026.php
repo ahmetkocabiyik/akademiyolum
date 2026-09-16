@@ -104,7 +104,7 @@ $maddeler = [
     // ══ 3. LİSANSÜSTÜ TEZLERDEN ÜRETİLMİŞ YAYIN ══
     '3.a' => ['baslik' => 'Lisansüstü tezden üretilmiş, SCIE, SSCI veya AHCI kapsamındaki dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 20],
     '3.b' => ['baslik' => 'Lisansüstü tezden üretilmiş, ESCI veya Scopus kapsamındaki dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 10],
-    '3.c' => ['baslik' => 'Lisansüstü tezden üretilmiş, diğer uluslararası indekslerde taranan dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+    '3.c' => ['baslik' => 'Lisansüstü tezden üretilmiş, diğer uluslararası indekslerde taranan dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 5],
     '3.d' => ['baslik' => 'Lisansüstü tezden üretilmiş, TR Dizin kapsamındaki dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
     '3.e' => ['baslik' => 'Lisansüstü tezden üretilmiş, BKCI kapsamındaki kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
     '3.f' => ['baslik' => 'Lisansüstü tezden üretilmiş, BKCI kapsamındaki kitapta bölüm', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],

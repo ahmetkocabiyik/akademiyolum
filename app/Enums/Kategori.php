@@ -114,11 +114,21 @@ enum Kategori: string
      * ({@see MaddeKatalogu::kaynakEsler()}). Aday ise her zaman kapsamlı
      * olanı seçer — "Kitap Bölümü" diye sorulsa ayrım hiç toplanmazdı.
      *
-     * @var list<string>
+     * Liste KATEGORİ BAŞINA: `Diğer` etiketi `atif` ve `tez_yayini`'nde
+     * kapsam çiftine kavuştu ama `diger` kategorisinde ("Diğer Etkinlik")
+     * kapsam ayrımı anlamsız ve orada adayın seçebileceği TEK etiket o.
+     *
+     * @var array<string, list<string>>
      */
     public const GENEL_KAYNAKLAR = [
-        'Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Çeviri Kitap',
-        'Çeviri Kitap Bölümü', 'Kitap Editörlüğü', 'Davetli Konuşmacı',
+        'kitap' => [
+            'Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Çeviri Kitap',
+            'Çeviri Kitap Bölümü', 'Ders / Metot Kitabı',
+        ],
+        'bildiri' => ['Davetli Konuşmacı'],
+        'editorluk' => ['Kitap Editörlüğü', 'Diğer Hakemli Dergi'],
+        'atif' => ['Patent', 'Diğer'],
+        'tez_yayini' => ['Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Diğer'],
     ];
 
     /**
@@ -130,7 +140,7 @@ enum Kategori: string
     {
         return array_values(array_filter(
             $this->kaynaklar(),
-            fn (string $kaynak) => ! in_array($kaynak, self::GENEL_KAYNAKLAR, true),
+            fn (string $kaynak) => ! in_array($kaynak, self::GENEL_KAYNAKLAR[$this->value] ?? [], true),
         ));
     }
 
@@ -167,15 +177,22 @@ enum Kategori: string
                 'Çeviri Kitap Bölümü',
                 // Ege 3(ı)/3(i) ve 10.4(k,l), Gazi K1c: ders ve metot kitapları
                 // ayrı puanlı ve güzel sanatlar koşullarında ADIYLA anılıyor.
+                'Uluslararası Ders / Metot Kitabı', 'Ulusal Ders / Metot Kitabı',
                 'Ders / Metot Kitabı',
             ],
             self::TezYayini => [
                 'SCIE/SSCI/AHCI', 'ESCI / Scopus', 'TR Dizin',
                 'BKCI / Scopus Kitap', 'BKCI / Scopus Kitap Bölümü',
-                'Uluslararası/Ulusal Kitap', 'Kitap Bölümü',
-                'CPCI Bildiri', 'Diğer',
+                'Uluslararası Kitap', 'Ulusal Kitap', 'Uluslararası/Ulusal Kitap',
+                'Uluslararası Kitap Bölümü', 'Ulusal Kitap Bölümü', 'Kitap Bölümü',
+                'CPCI Bildiri',
+                'Diğer (Uluslararası)', 'Diğer (Ulusal)', 'Diğer',
             ],
-            self::Atif => ['WoS / Scopus', 'BKCI Kitap', 'TR Dizin', 'Patent', 'Diğer'],
+            self::Atif => [
+                'WoS / Scopus', 'BKCI Kitap', 'TR Dizin',
+                'Patent (Uluslararası)', 'Patent (Ulusal)', 'Patent',
+                'Diğer (Uluslararası)', 'Diğer (Ulusal)', 'Diğer',
+            ],
             self::Proje => [
                 'AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon', 'TÜBİTAK', 'TÜSEB',
                 'Diğer Kamu Kurumu', 'Özel Sektör / STK', 'BAP (Üniversite)',
@@ -210,6 +227,7 @@ enum Kategori: string
                 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi',
                 'BKCI Kitap',
                 'Uluslararası Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü',
+                'Diğer Hakemli Dergi (Uluslararası)', 'Diğer Hakemli Dergi (Ulusal)',
                 'Yayın Kurulu Üyeliği', 'Hakemlik',
             ],
             self::SanatselEtkinlik => [

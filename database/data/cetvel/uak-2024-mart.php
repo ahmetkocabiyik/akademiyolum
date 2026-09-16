@@ -77,7 +77,7 @@ $maddeler = [
 
     '3a' => ['baslik' => 'Tezden üretilmiş SCIE/SSCI/AHCI makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 20],
     '3b' => ['baslik' => 'Tezden üretilmiş ESCI/Scopus makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 10],
-    '3c' => ['baslik' => 'Tezden üretilmiş diğer uluslararası indeksli makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+    '3c' => ['baslik' => 'Tezden üretilmiş diğer uluslararası indeksli makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 5],
     '3d' => ['baslik' => 'Tezden üretilmiş TR Dizin makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin'], 'puan' => 8],
     '3e' => ['baslik' => 'Tezden üretilmiş BKCI kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
     '3f' => ['baslik' => 'Tezden üretilmiş BKCI kitap bölümü', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],

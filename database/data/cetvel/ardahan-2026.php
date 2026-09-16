@@ -182,7 +182,7 @@ $maddeler += [
 
     // ══ 3.10 ATIFLAR ══
     '3.10.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerdeki yayınlarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 4],
-    '3.10.3' => ['baslik' => 'Uluslararası alan indeksleri kapsamındaki dergilerdeki yayınlarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 2],
+    '3.10.3' => ['baslik' => 'Uluslararası alan indeksleri kapsamındaki dergilerdeki yayınlarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)', 'Patent'], 'puan' => 2],
     '3.10.4' => ['baslik' => 'TR Dizin tarafından indekslenen hakemli dergilerdeki yayınlarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
     '3.10.6' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanan kitaplarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 2],
 
@@ -202,7 +202,7 @@ $maddeler += [
     '3.13.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki uluslararası hakemli dergide baş editör', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 100],
     '3.13.4' => ['baslik' => 'SCOPUS ya da ESCI kapsamındaki uluslararası hakemli dergide baş editör', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 30],
     '3.13.11' => ['baslik' => 'Dergide editör kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 3],
-    '3.13.12' => ['baslik' => 'Diğer uluslararası hakemli dergide baş editör ya da özel sayı editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 2],
+    '3.13.12' => ['baslik' => 'Diğer uluslararası hakemli dergide baş editör ya da özel sayı editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 2],
     '3.13.13' => ['baslik' => 'TR Dizin kapsamındaki ulusal hakemli dergide baş editör', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 20],
 
     // ══ 3.14 BİLİMSEL HAKEMLİKLER ══

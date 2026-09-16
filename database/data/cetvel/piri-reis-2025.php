@@ -74,7 +74,7 @@ $maddeler = static function (bool $hukuk): array {
         // ── E. ULUSLARARASI KİTAP ──
         'E.1.a' => ['baslik' => 'Scopus ya da BKCI kapsamındaki yayınevinden kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
         'E.1.b' => ['baslik' => 'Scopus ya da BKCI kapsamındaki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-        'E.2.a' => ['baslik' => 'Diğer uluslararası kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => $hukuk ? 20 : 5],
+        'E.2.a' => ['baslik' => 'Diğer uluslararası kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Uluslararası Ders / Metot Kitabı'], 'puan' => $hukuk ? 20 : 5],
         'E.2.b' => ['baslik' => 'Diğer uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => $hukuk ? 10 : 3],
 
         // ── F. ULUSAL KİTAP ──

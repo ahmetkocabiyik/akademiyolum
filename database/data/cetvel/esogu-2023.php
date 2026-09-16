@@ -142,7 +142,7 @@ return [
         // ══ 3. TEZLERDEN ÜRETİLMİŞ YAYINLAR ══
         '3a' => ['baslik' => 'Tezinizden üretilmiş, Web of Science Q1 dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 35],
         '3e' => ['baslik' => 'Tezinizden üretilmiş, ESCI veya Scopus kapsamındaki dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale'], 'puan' => 20],
-        '3f-3g' => ['baslik' => 'Tezinizden üretilmiş, uluslararası alan indeksli ya da diğer uluslararası hakemli dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer'], 'turler' => ['ozgun_makale'], 'puan' => 12],
+        '3f-3g' => ['baslik' => 'Tezinizden üretilmiş, uluslararası alan indeksli ya da diğer uluslararası hakemli dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer (Uluslararası)'], 'turler' => ['ozgun_makale'], 'puan' => 12],
         '3ğ' => ['baslik' => 'Tezinizden üretilmiş, ulusal hakemli dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale'], 'puan' => 8],
         '3h-3j' => ['baslik' => 'Tezinizden üretilmiş bildiri', 'kategori' => 'tez_yayini', 'kaynaklar' => ['CPCI Bildiri'], 'puan' => 2],
         '3k' => ['baslik' => 'Tezinizden üretilmiş, tanınmış uluslararası yayınevince yayımlanmış kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 12],
@@ -167,7 +167,7 @@ return [
 
         // ══ 6. ATIF (grup tavanı 100) ══
         '6a' => ['baslik' => 'SSCI, SCI, SCI-Expanded veya AHCI dergilerinde ya da tanınmış uluslararası yayınevi kitaplarında atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 4],
-        '6b' => ['baslik' => 'Uluslararası diğer hakemli dergilerdeki atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 2],
+        '6b' => ['baslik' => 'Uluslararası diğer hakemli dergilerdeki atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)', 'Patent'], 'puan' => 2],
         '6c' => ['baslik' => 'Ulusal hakemli dergilerde veya tanınmış ulusal yayınevi kitaplarında atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 1],
 
         // ══ 7. TAMAMLANMIŞ LİSANSÜSTÜ TEZLERDE DANIŞMANLIK ══
@@ -200,7 +200,7 @@ return [
 
         // ══ 11. EDİTÖRLÜK VE HAKEMLİK (grup tavanı 30) ══
         '11a' => ['baslik' => 'SSCI, SCI, SCI-Expanded veya AHCI dergisinde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 14],
-        '11c' => ['baslik' => 'Uluslararası indeksli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'Diğer Hakemli Dergi'], 'puan' => 10],
+        '11c' => ['baslik' => 'Uluslararası indeksli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 10],
         '11d' => ['baslik' => 'Ulusal hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 6],
         '11b-11ç' => ['baslik' => 'Dergi editöryal kurulu veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 8],
         '11e-11g' => ['baslik' => 'Dergi hakemliği ya da makale editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],

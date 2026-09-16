@@ -192,7 +192,7 @@ $maddeler = array_merge([
     // ══ 4.11 ATIFLAR ══
     '411-1' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 20],
     '411-2' => ['baslik' => 'Diğer uluslararası indeksli ya da ULAKBİM taranan dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 15],
-    '411-3' => ['baslik' => 'Diğer hakemli dergilerde ya da uluslararası kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'BKCI Kitap'], 'puan' => 10],
+    '411-3' => ['baslik' => 'Diğer hakemli dergilerde ya da uluslararası kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)', 'BKCI Kitap'], 'puan' => 10],
     '411-5' => ['baslik' => 'Ulusal kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 5],
 
     // ══ 4.12 TEZ YÖNETİMİ ══

@@ -234,7 +234,7 @@ return [
         // ══ C. EĞİTİME KATKI (19-22) ══
         '19.a' => ['baslik' => 'Danışmanlığında tamamlanmış doktora, tıpta uzmanlık veya sanatta yeterlik tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman', 'es_danisman'], 'puan' => 10],
         '19.d' => ['baslik' => 'Danışmanlığında tamamlanmış yüksek lisans tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'roller' => ['danisman', 'es_danisman'], 'puan' => 5],
-        '22.a' => ['baslik' => 'Uluslararası yayınevinde ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],
+        '22.a' => ['baslik' => 'Uluslararası yayınevinde ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 20],
 
         // ══ D. GÜZEL SANATLAR - KONSERVATUVAR (24-41) ══
         // 24 SERGİLER — yurt dışı / yurt içi ayrımı yönergenin kendi ayrımı.

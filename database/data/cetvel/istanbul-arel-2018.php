@@ -84,7 +84,7 @@ $maddeler = [
     // ══ B. KİTAPLAR ══
     'B.1' => ['baslik' => 'Book Citation Index kapsamında taranan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
     'B.2' => ['baslik' => 'Book Citation Index kapsamında taranan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
-    'B.3' => ['baslik' => 'Uluslararası yayınevlerince yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 60],
+    'B.3' => ['baslik' => 'Uluslararası yayınevlerince yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Uluslararası Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 60],
     'B.4' => ['baslik' => 'Uluslararası yayınevlerince yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
     'B.5.b' => ['baslik' => 'ISBN numaralı bilimsel ya da sanatsal kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
     'B.5.c' => ['baslik' => 'Kitap bölümü ya da makale çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],

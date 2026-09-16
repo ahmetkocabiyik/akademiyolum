@@ -143,7 +143,7 @@ return [
         // Güzel Sanatlar ve Mimarlık koşulları bu iki kalemi ADIYLA anıyor
         // ("… 10.4 (k, l) maddelerinden en az üçünde başlıca yazar olmak").
         // Ders kitabı niteliğinde oldukları için kitap kategorisinde.
-        '10.4k' => ['baslik' => 'Uluslararası yayınevinden yabancı dilde müzik/dans eğitimi metodu veya etüt kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 50],
+        '10.4k' => ['baslik' => 'Uluslararası yayınevinden yabancı dilde müzik/dans eğitimi metodu veya etüt kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 50],
         // 10.4(l) aynı kalemin ulusal karşılığı (40 puan) ve sözlükte ayrı
         // etiketi yok; 10.4(k) ile aynı etikete düşerdi. Girilmedi — girilseydi
         // `puan()` en yükseği aldığı için her metot kitabı 50 sayılırdı.

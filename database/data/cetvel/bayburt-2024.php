@@ -151,7 +151,7 @@ return [
         // ══ 8. EDİTÖRLÜK VE HAKEMLİK ══
         '8.1.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 200],
         '8.1.ç' => ['baslik' => 'ESCI veya alan indeksli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 50],
-        '8.1.f' => ['baslik' => 'Diğer uluslararası dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 20],
+        '8.1.f' => ['baslik' => 'Diğer uluslararası dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 20],
         '2.1.e' => ['baslik' => 'Yabancı dilde uluslararası bilimsel ders kitabı editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
         '8.2.a' => ['baslik' => 'ULAKBİM TR Dizin dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 50],
         '8.2.b' => ['baslik' => 'Dergide editör kurulu üyeliği veya dil editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],

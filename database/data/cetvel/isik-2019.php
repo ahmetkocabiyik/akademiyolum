@@ -96,7 +96,7 @@ $ham = [
     'A.1.3.b' => [1.8, 'Alan indeksli uluslararası dergide editöre mektup, teknik not veya vaka incelemesi', 'makale', ['Diğer Uluslararası İndeks'], ['kisa_makale', 'vaka_teknik_not']],
     'A.1.5.a' => [30.0, 'Uluslararası yayınevince basılan bilimsel kitap yazarlığı', 'kitap', ['BKCI / Scopus Kitap'], null],
     'A.1.5.b' => [12.0, 'Uluslararası yayınevince basılan bilimsel kitapta bölüm yazarlığı', 'kitap', ['BKCI / Scopus Kitap Bölümü'], null],
-    'A.1.6.a' => [21.0, 'Uluslararası yayınevince basılan ders kitabı yazarlığı', 'kitap', ['Ders / Metot Kitabı'], null],
+    'A.1.6.a' => [21.0, 'Uluslararası yayınevince basılan ders kitabı yazarlığı', 'kitap', ['Uluslararası Ders / Metot Kitabı'], null],
 
     // ══ A.2 ULUSAL YAYINLAR ══
     'A.2.1.a' => [6.0, 'Hakemli ulusal dergide yayımlanmış tam makale', 'makale', ['TR Dizin', 'Diğer Ulusal Hakemli'], ['ozgun_makale', 'derleme']],

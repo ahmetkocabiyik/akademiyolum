@@ -69,7 +69,7 @@ $maddeler = [
     // 1.1.2 Kitaplar
     '1.1.2.1' => ['baslik' => 'Tanınmış uluslararası yayınevinde bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 40],
     '1.1.2.2' => ['baslik' => 'Tanınmış yayınevinde tarihi yazma eserin tahkikli neşri', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 35],
-    '1.1.2.3' => ['baslik' => 'Tanınmış uluslararası yayınevinde mesleki kitap veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 30],
+    '1.1.2.3' => ['baslik' => 'Tanınmış uluslararası yayınevinde mesleki kitap veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 30],
 
     // 1.1.3 Kitap bölümleri
     '1.1.3.1' => ['baslik' => 'Uluslararası bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],

@@ -159,7 +159,7 @@ return [
 
         // ══ 4. ATIF ══
         '4.a-4.b' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI, ESCI veya Scopus dergilerinde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 6],
-        '4.c' => ['baslik' => 'Diğer uluslararası dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+        '4.c' => ['baslik' => 'Diğer uluslararası dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 5],
         '4.ç' => ['baslik' => 'ULAKBİM tarafından taranan ulusal dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 4],
         '4.d' => ['baslik' => 'Kitaplarda yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 7],
         '4.e' => ['baslik' => 'İncelemeli patent atıfları', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 5],
@@ -190,7 +190,7 @@ return [
         '7.a-Q3' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI Q3 dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q3)'], 'puan' => 110],
         '7.a-Q4' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI Q4 dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q4)'], 'puan' => 100],
         '7.c' => ['baslik' => 'ESCI, Scopus veya ULAKBİM tarafından taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi'], 'puan' => 90],
-        '7.ç' => ['baslik' => 'Diğer uluslararası dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 50],
+        '7.ç' => ['baslik' => 'Diğer uluslararası dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 50],
         '7.b-7.g' => ['baslik' => 'Dergi veya proje hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 10],
         '7.h-7.i' => ['baslik' => 'Uluslararası sanat ve tasarım etkinliklerinde hakemlik veya jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)'], 'puan' => 15],
         '7.ı-7.j' => ['baslik' => 'Ulusal sanat ve tasarım etkinliklerinde hakemlik veya jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Ulusal)', 'Jüri Üyeliği (Ulusal)'], 'puan' => 10],

@@ -144,7 +144,7 @@ return [
         // ══ 4. LİSANSÜSTÜ TEZLERDEN ÜRETİLMİŞ YAYIN ══ (en fazla 10 puan)
         '4a' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 10],
         '4c' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, ESCI ya da SCOPUS kapsamındaki dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 6],
-        '4ç' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, diğer uluslararası hakemli dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+        '4ç' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, diğer uluslararası hakemli dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 5],
         '4d' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, TR Dizin kapsamındaki dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin'], 'puan' => 4],
         '4e' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, tanınmış uluslararası yayınevi tarafından yayımlanmış kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 10],
         '4f' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 5],

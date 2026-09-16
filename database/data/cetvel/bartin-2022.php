@@ -244,7 +244,7 @@ return [
         // ══ G. ATIFLAR ══
         'G.1-G.2' => ['baslik' => 'Yazar olarak yer almadığınız kitapta eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 2],
         'G.3' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI veya ESCI kapsamındaki dergide, yazar olarak yer almadığınız makalede eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
-        'G.4' => ['baslik' => 'Diğer uluslararası dergide, yazar olarak yer almadığınız makalede eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+        'G.4' => ['baslik' => 'Diğer uluslararası dergide, yazar olarak yer almadığınız makalede eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 3],
         'G.5' => ['baslik' => 'Hakemli ulusal dergide, yazar olarak yer almadığınız makalede eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent'], 'puan' => 2],
 
         // ══ I. BİLİMSEL ETKİNLİK ÇALIŞMALARI ══
@@ -264,7 +264,7 @@ return [
         // ══ J. EDİTÖRLÜK VE HAKEMLİK ══
         'J.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI veya ESCI kapsamındaki dergide en az iki yıl süreyle editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 60],
         'J.2' => ['baslik' => 'ESCI veya Scopus kapsamındaki dergide alan editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 40],
-        'J.3' => ['baslik' => 'SCI, SSCI, AHCI ve ESCI kapsamı dışındaki uluslararası dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 20],
+        'J.3' => ['baslik' => 'SCI, SSCI, AHCI ve ESCI kapsamı dışındaki uluslararası dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 20],
         'J.4' => ['baslik' => 'ULAKBİM tarafından taranan ulusal dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 20],
         'J.5-J.7' => ['baslik' => 'Dergi hakemliği veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 5],
 

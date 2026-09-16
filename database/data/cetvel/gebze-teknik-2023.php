@@ -159,7 +159,7 @@ $satirlar = [
 
     // ══ 5. ATIFLAR ══
     '5.1' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI dergilerinde ya da uluslararası yayınevi kitaplarında atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap']],
-    '5.2' => ['baslik' => 'Diğer uluslararası indeksli dergilerde ya da uluslararası yayınevi kitap bölümlerinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer']],
+    '5.2' => ['baslik' => 'Diğer uluslararası indeksli dergilerde ya da uluslararası yayınevi kitap bölümlerinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)']],
     '5.3' => ['baslik' => 'Ulusal hakemli dergilerde ya da ulusal yayınevi kitaplarında atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent']],
 
     // ══ 6. LİSANSÜSTÜ TEZ DANIŞMANLIĞI ══

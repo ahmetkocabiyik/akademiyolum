@@ -391,6 +391,14 @@ readonly class MaddeKatalogu
         'Ulusal Kitap Editörlüğü' => 'Kitap Editörlüğü',
         'Davetli Konuşmacı (Uluslararası)' => 'Davetli Konuşmacı',
         'Davetli Konuşmacı (Ulusal)' => 'Davetli Konuşmacı',
+        'Uluslararası Ders / Metot Kitabı' => 'Ders / Metot Kitabı',
+        'Ulusal Ders / Metot Kitabı' => 'Ders / Metot Kitabı',
+        'Diğer Hakemli Dergi (Uluslararası)' => 'Diğer Hakemli Dergi',
+        'Diğer Hakemli Dergi (Ulusal)' => 'Diğer Hakemli Dergi',
+        'Patent (Uluslararası)' => 'Patent',
+        'Patent (Ulusal)' => 'Patent',
+        'Diğer (Uluslararası)' => 'Diğer',
+        'Diğer (Ulusal)' => 'Diğer',
     ];
 
     /**

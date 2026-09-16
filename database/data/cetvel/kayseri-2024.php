@@ -181,7 +181,7 @@ $maddeler = [
     // ══════════ TABLO 2 — EĞİTİM-ÖĞRETİM, İDARİ VE DİĞER ══════════
     'T2-1' => ['baslik' => 'Kongre, konferans, sempozyum, çalıştay ya da mesleki kursta davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
     'T2-2a' => ['baslik' => 'SCI, AHCI, SSCI ve SCI-Expanded dergilerinde ya da uluslararası kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 5],
-    'T2-2b' => ['baslik' => 'Diğer indekslere giren dergilerde ya da uluslararası kongre bildirilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 3],
+    'T2-2b' => ['baslik' => 'Diğer indekslere giren dergilerde ya da uluslararası kongre bildirilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 3],
     'T2-2c' => ['baslik' => 'Hakemli dergiler, tezler, kongre özetleri, bildiri kitapları ve kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent'], 'puan' => 2],
     'T2-3a' => ['baslik' => 'Uluslararası bilim ve araştırma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 50],
     'T2-3b' => ['baslik' => 'Ulusal bilim ve araştırma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü'], 'puan' => 25],

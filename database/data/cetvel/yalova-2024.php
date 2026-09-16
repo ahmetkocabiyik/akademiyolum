@@ -135,7 +135,7 @@ $maddeler = [
     '3a' => ['baslik' => 'Tezden üretilmiş, SCIE, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 20],
     '3b' => ['baslik' => 'Tezden üretilmiş, ESCI veya Scopus kapsamındaki dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 10],
     '3c' => ['baslik' => 'Tezden üretilmiş, TR Dizin kapsamındaki dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin'], 'puan' => 8],
-    '3ç' => ['baslik' => 'Tezden üretilmiş, diğer uluslararası indeksli dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer'], 'puan' => 5],
+    '3ç' => ['baslik' => 'Tezden üretilmiş, diğer uluslararası indeksli dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 5],
     '3d' => ['baslik' => 'Tezden üretilmiş, uluslararası yayınevinde kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 10],
     '3e' => ['baslik' => 'Tezden üretilmiş, uluslararası yayınevinde kitap bölümü', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 5],
     '3f' => ['baslik' => 'Tezden üretilmiş, ulusal yayınevinde kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 3],

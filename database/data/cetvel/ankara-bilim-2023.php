@@ -216,7 +216,7 @@ return [
 
         // ══ 1.7 ATIFLAR ══
         '1.7.1' => ['baslik' => 'Doçentlik indekslerindeki dergilerde veya yurt dışında basılmış kitaplarda yayınlarınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 2],
-        '1.7.2' => ['baslik' => 'Diğer uluslararası dergilerde veya yurt içinde basılmış kitaplarda yayınlarınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent', 'Diğer'], 'puan' => 1],
+        '1.7.2' => ['baslik' => 'Diğer uluslararası dergilerde veya yurt içinde basılmış kitaplarda yayınlarınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent', 'Diğer (Uluslararası)'], 'puan' => 1],
 
         // ══ 2. SANAT VE TASARIM ETKİNLİKLERİ ══
         '2.1.1' => ['baslik' => 'Yurt dışında tanınmış mekânda açılan özgün kişisel sergi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)'], 'puan' => 20],

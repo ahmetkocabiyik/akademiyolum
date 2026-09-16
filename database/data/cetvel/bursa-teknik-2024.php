@@ -212,7 +212,7 @@ return [
         // ══ J. AKADEMİK GÖREV ══
         'J.1-J.3-a' => ['baslik' => 'WoS, Scopus, AHCI veya ESCI kapsamındaki dergide baş editörlük, özel sayı editörlüğü ya da yardımcı editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 5],
         'J.1-J.3-b' => ['baslik' => 'ULAKBİM TR Dizin ya da diğer uluslararası alan endeksli hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 3],
-        'J.1-J.3-c' => ['baslik' => 'Diğer uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 2],
+        'J.1-J.3-c' => ['baslik' => 'Diğer uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 2],
         'J.4' => ['baslik' => 'Dergi yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 1],
         'J.9-J.10' => ['baslik' => 'Kitap, makale veya proje hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
         'J.11-uluslararasi' => ['baslik' => 'Uluslararası proje yarışmasında jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)'], 'puan' => 4],

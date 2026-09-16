@@ -2252,10 +2252,12 @@ test('uluslararası koşullarda kapsamsız etiket LİSTELİ kalıyor', function 
     // sıfırlar. Bu yüzden test düzeltme değil BÜYÜME koruması: bilinen
     // etiketler listede, listeye girmemiş yeni bir etiket çıkarsa kırılır.
     $kapsamsizEtiketler = [
-        // Sözlükte kapsam ekseni HÂLÂ olmayan kalemler. (Kitap, kitap
-        // bölümü, çeviri, kitap editörlüğü ve davetli konuşmacı 16.09.2026'da
-        // eksene kavuştu; burada kalanlar `makale`/`atif` ailesinden.)
-        'Ders / Metot Kitabı', 'Diğer Hakemli Dergi', 'Diğer', 'Patent',
+        // Kapsam ekseni gerektirmeyen kalemler. Fon etiketleri satırın
+        // kapsamını zaten belirliyor (AB uluslararası, TÜBİTAK ulusal); ders
+        // etiketleri de dersin TÜRÜNÜ taşıyor, satır kapsamı söylüyor.
+        // Kitap, bölüm, çeviri, editörlük, davetli konuşmacı, ders/metot
+        // kitabı, diğer hakemli dergi, atıf-diğer ve patent 16.09.2026'da
+        // eksene kavuştu; artık burada yer almıyorlar.
         // Fon kaynağı etiketleri: satırın kapsamını FONUN kendisi belirliyor
         // (AB uluslararası, TÜBİTAK ulusal), etiketin ayrıca söylemesi gerekmiyor.
         'AB Çerçeve / Ufuk', 'TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu',
@@ -2354,6 +2356,35 @@ test('genel etiket kapsamlı kaydı karşılar, tersi olmaz', function () {
         // Ulusal kayıt yalnız genel satıra düşer — dar satır uluslararası istiyor.
         ->and($katalog->puan($kayit('Ulusal Kitap Bölümü'), ['GENEL', 'DAR']))->toBe(10)
         ->and($katalog->puan($kayit('Ulusal Kitap Bölümü'), ['DAR']))->toBe(0);
+});
+
+test('her genel etiketin kapsamlı çifti ve geri eşlemesi var', function () {
+    // Üç yer birlikte yaşamak zorunda: sözlükte kapsamlı etiketler
+    // (`kaynaklar()`), adaya gösterilmeyenler (`GENEL_KAYNAKLAR`) ve motorun
+    // geri eşlemesi (`MaddeKatalogu::GENEL_ETIKET`). Biri unutulursa hata
+    // SESSİZ olur: kapsamlı kayıt genel satıra düşmez, aday puanını kaybeder.
+    $geri = (new ReflectionClass(MaddeKatalogu::class))->getConstant('GENEL_ETIKET');
+
+    foreach (Kategori::GENEL_KAYNAKLAR as $kategoriDegeri => $genelEtiketler) {
+        $kategori = Kategori::from($kategoriDegeri);
+        $sozluk = $kategori->kaynaklar();
+
+        foreach ($genelEtiketler as $genel) {
+            // Genel etiket sözlükte DURUYOR (cetveller onu kullanıyor)…
+            expect($sozluk)->toContain($genel)
+                // …ama adaya sorulmuyor.
+                ->and($kategori->adayKaynaklari())->not->toContain($genel);
+
+            // En az bir kapsamlı çifti var ve geri eşlemesi bu genele çıkıyor.
+            $cocuklar = array_keys(array_filter($geri, fn (string $ust) => $ust === $genel));
+
+            expect($cocuklar)->not->toBe([]);
+
+            foreach ($cocuklar as $cocuk) {
+                expect($sozluk)->toContain($cocuk);
+            }
+        }
+    }
 });
 
 test('genel etiketler adaya sorulmuyor, cetvelde yaşıyor', function () {

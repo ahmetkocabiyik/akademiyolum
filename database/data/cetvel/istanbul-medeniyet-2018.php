@@ -151,7 +151,7 @@ $maddeler = [
 
     // ══ 7. ATIFLAR — en fazla 25 puan ══
     '7a' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI dergilerinde ya da tanınmış uluslararası yayınevi kitaplarında atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 3],
-    '7b' => ['baslik' => 'Bu indeksler dışındaki endeksli dergilerde ya da uluslararası yayınevi kitap bölümlerinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    '7b' => ['baslik' => 'Bu indeksler dışındaki endeksli dergilerde ya da uluslararası yayınevi kitap bölümlerinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 2],
     '7c' => ['baslik' => 'Ulusal hakemli dergilerde ya da tanınmış ulusal yayınevi kitaplarında atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent'], 'puan' => 1],
 
     // ══ 8. TEZ DANIŞMANLIĞI (tamamlanmış) — en fazla 10 puan ══

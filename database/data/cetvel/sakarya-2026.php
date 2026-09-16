@@ -157,7 +157,7 @@ return [
         '11.1' => ['baslik' => 'Öğretim elemanının yazar olarak yer almadığı Book Citation Index,', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
         '11.2' => ['baslik' => 'Öğretim elemanının yazar olarak yer almadığı ulusal kitaplarda ve', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
         '11.3' => ['baslik' => 'SSCI, SCI-Exp, AHCI, SCOPUS tarafından taranan dergilerde,', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
-        '11.4' => ['baslik' => 'SSCI, SCI-Exp, AHCI, SCOPUS, ESCI dışındaki uluslararası', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+        '11.4' => ['baslik' => 'SSCI, SCI-Exp, AHCI, SCOPUS, ESCI dışındaki uluslararası', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 2],
         '11.6' => ['baslik' => 'TR Dizin tarafından taranan dergilerdeki, öğretim elemanının yazar', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
         '12.1' => ['baslik' => 'Yönetiminde tamamlanan her DOKTORA/Sanatta Yeterlilik tezi', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'puan' => 30],
         '12.2' => ['baslik' => 'Yönetiminde tamamlanan her YÜKSEK LİSANS tezi için*', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Yüksek Lisans Tezi'], 'puan' => 20],

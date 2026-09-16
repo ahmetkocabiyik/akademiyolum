@@ -264,10 +264,10 @@ $B = [
     'B1.f' => ['baslik' => 'ULAKBİM TR Dizin taranan dergide derleme, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['derleme', 'kisa_makale', 'vaka_teknik_not'], 'puan' => 2],
 
     'B2.a' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, SCI, SCI-E, SSCI veya AHCI kapsamındaki dergide tam araştırma makalesi', 'kategori' => 'tez_yayini', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 10],
-    'B2.b' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, diğer uluslararası hakemli dergide tam araştırma makalesi', 'kategori' => 'tez_yayini', 'kaynaklar' => ['ESCI / Scopus', 'Diğer'], 'puan' => 5],
+    'B2.b' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, diğer uluslararası hakemli dergide tam araştırma makalesi', 'kategori' => 'tez_yayini', 'kaynaklar' => ['ESCI / Scopus', 'Diğer (Uluslararası)'], 'puan' => 5],
     'B2.c' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, ULAKBİM TR Dizin taranan dergide tam araştırma makalesi', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin'], 'puan' => 5],
 
-    'B3.a' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan özgün ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 40],
+    'B3.a' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan özgün ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 40],
     'B3.b' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan bilimsel referans kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
     'B3.c' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
     'B3.d' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 15],
@@ -301,7 +301,7 @@ $B = [
     'B8.e' => ['baslik' => 'Bilimsel toplantıda poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Ulusal Özet/Poster'], 'puan' => 1],
     'B8.f' => ['baslik' => 'Bilimsel toplantıda davetli ya da keynote konuşmacı olarak sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
     'B8.h' => ['baslik' => 'SCI, SCI-E, SSCI veya AHCI kapsamındaki dergide baş editörlük ya da editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 6],
-    'B8.i' => ['baslik' => 'Diğer uluslararası dergide baş editörlük, editör yardımcılığı ya da yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'BKCI Kitap', 'Kitap Editörlüğü'], 'puan' => 3],
+    'B8.i' => ['baslik' => 'Diğer uluslararası dergide baş editörlük, editör yardımcılığı ya da yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi (Uluslararası)', 'Yayın Kurulu Üyeliği', 'BKCI Kitap', 'Kitap Editörlüğü'], 'puan' => 3],
     'B8.j' => ['baslik' => 'SCI, SCI-E, SSCI veya AHCI kapsamındaki dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
 
     'B9.a' => ['baslik' => 'Bir yarıyıl yüksek lisans veya doktora dersi', 'kategori' => 'egitim_ogretim', 'kaynaklar' => ['Lisansüstü Ders'], 'puan' => 4],
@@ -496,7 +496,7 @@ $D = [
 
     'D-G3.a' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, SCI-E, SSCI veya AHCI kapsamındaki dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 25],
     'D-G3.b' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, ESCI, Scopus veya ERIC kapsamındaki dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 15],
-    'D-G3.c' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, diğer uluslararası indeksli dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer', 'CPCI Bildiri'], 'puan' => 10],
+    'D-G3.c' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, diğer uluslararası indeksli dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer (Uluslararası)', 'CPCI Bildiri'], 'puan' => 10],
     'D-G3.d' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, ULAKBİM TR Dizin kapsamındaki dergide makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin'], 'puan' => 5],
     'D-G3.e' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, uluslararası yayınevi kitabı', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 10],
     'D-G3.f' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, uluslararası yayınevi kitabında bölüm', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 8],

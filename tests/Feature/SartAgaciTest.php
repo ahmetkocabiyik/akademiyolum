@@ -1678,13 +1678,24 @@ test('müzik/dans metot kitabı Ege güzel sanatlar yayın sayısına giriyor', 
 
     // Yönerge md. 12.9 bu kalemi ADIYLA sayıyor: "… 10.4 (k, l) maddelerinden
     // birinde başlıca yazar olmak koşulu ile dört yayını olmak."
-    $metot = fn () => sartFaaliyet('Ders / Metot Kitabı', Kategori::Kitap,
+    // 16.09.2026: satır ULUSLARARASI ("Uluslararası yayınevinden yabancı
+    // dilde…"), sözlük kapsam eksenine kavuştu. Ulusal metot kitabı buraya
+    // artık düşmüyor — kaynağın 10.4(l) satırı hiç girilmediği için de
+    // başka yere düşmüyor; §0'ın kabul ettiği yönde eksik sayma.
+    $metot = fn () => sartFaaliyet('Uluslararası Ders / Metot Kitabı', Kategori::Kitap,
         yazarRolu: 'tek', tarih: '2020-01-01');
 
     $sayi = collect($depo->degerlendir($esik, [$metot(), $metot()], $profil)->kosullar())
         ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'en az 4'))->mevcut;
 
     expect($sayi)->toBe(2);
+
+    // Ulusal yayınevinden çıkan metot kitabı uluslararası satıra DÜŞMEZ.
+    $ulusal = sartFaaliyet('Ulusal Ders / Metot Kitabı', Kategori::Kitap,
+        yazarRolu: 'tek', tarih: '2020-01-01');
+
+    expect(collect($depo->degerlendir($esik, [$ulusal, $ulusal], $profil)->kosullar())
+        ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'en az 4'))->mevcut)->toBe(0);
 
     // Fen alanında aynı kalem sayılmaz: yönerge orada yalnızca 1(a) diyor.
     $fen = $depo->bul('Ege Üniversitesi', 'dr_ogr_uyesi', 'fen');

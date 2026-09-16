@@ -57,7 +57,7 @@ return [
 
         // ── 3. KİTAPLAR ──
         '3.1' => ['baslik' => 'Alanında uluslararası yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-        '3.2' => ['baslik' => 'Alanında uluslararası yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 80],
+        '3.2' => ['baslik' => 'Alanında uluslararası yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 80],
         '3.3' => ['baslik' => 'Alanında ulusal yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 80],
         '3.4' => ['baslik' => 'Alanında yayımlanmış tam kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 80],
         '3.5' => ['baslik' => 'Alanında uluslararası yayımlanan kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 60],

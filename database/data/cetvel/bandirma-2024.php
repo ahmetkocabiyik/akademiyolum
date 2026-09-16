@@ -84,7 +84,7 @@ return [
         'A6.a' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI dergide sorumlu editör ya da baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 40],
         'A7.a' => ['baslik' => 'ESCI dergide sorumlu editör ya da baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 20],
         'A8.b' => ['baslik' => 'Uluslararası alan indeksli hakemli dergide yayın', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
-        'A11.a' => ['baslik' => 'Diğer uluslararası hakemli dergide sorumlu editör ya da baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 15],
+        'A11.a' => ['baslik' => 'Diğer uluslararası hakemli dergide sorumlu editör ya da baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 15],
         'A12.a' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 15],
         'A12.b' => ['baslik' => 'Uluslararası toplantıda özet metni yayımlanan bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
         'A13.a' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],

@@ -101,7 +101,7 @@ $maddeler = [
 
     // ══ 6. ATIFLAR ══
     '6.1' => ['baslik' => 'SCIE, SSCI, AHCI, ESCI ya da SCOPUS kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
-    '6.3' => ['baslik' => 'Diğer uluslararası indeksler ya da TR Dizin kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 3],
+    '6.3' => ['baslik' => 'Diğer uluslararası indeksler ya da TR Dizin kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer (Uluslararası)', 'Patent'], 'puan' => 3],
     '6.4' => ['baslik' => 'WOS BKCI ya da SCOPUS kapsamındaki kitaplarda eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
 
     // ══ 7. EĞİTİM, ÖĞRETİM VE ARAŞTIRMA FAALİYETLERİ ══

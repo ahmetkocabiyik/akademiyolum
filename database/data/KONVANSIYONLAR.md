@@ -3111,4 +3111,17 @@ KESİN görünüp belirsiz kalırdı.
 
 **Aday kaydı hep kapsamlı.** Yeni bir kapsam çifti eklerken üç yeri birlikte
 güncelle: `Kategori::kaynaklar()` (üçü de: iki kapsamlı + genel),
-`Kategori::GENEL_KAYNAKLAR` ve `MaddeKatalogu::GENEL_ETIKET`.
+`Kategori::GENEL_KAYNAKLAR` ve `MaddeKatalogu::GENEL_ETIKET`. Üçünün birlikte
+tutarlı kalması `CetvelKaynakTest`'te değişmez — biri unutulursa hata SESSİZ
+olur, kapsamlı kayıt genel satıra düşmez ve aday puanını kaybeder.
+
+`GENEL_KAYNAKLAR` **kategori başına** tutuluyor: aynı etiket bir kategoride
+kapsam çiftine sahip olup ötekinde olmayabiliyor. `Diğer` bunun örneği —
+`atif` ve `tez_yayini`'nde çifti var, `diger` kategorisinde ("Diğer
+Etkinlik") kapsam ayrımı anlamsız ve orada adayın seçebileceği tek etiket o.
+
+Eksene kavuşan dokuz kalem: kitap · kitap bölümü · çeviri kitap · çeviri
+kitap bölümü · kitap editörlüğü · ders/metot kitabı · davetli konuşmacı ·
+diğer hakemli dergi (editörlük) · atıfta diğer ve patent. Eksen GEREKMEYENLER
+fon etiketleri (AB uluslararası, TÜBİTAK ulusal — kapsamı fonun kendisi
+söylüyor) ve ders etiketleri (etiket dersin TÜRÜNÜ taşıyor).

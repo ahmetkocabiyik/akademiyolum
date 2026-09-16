@@ -208,7 +208,7 @@ $maddeler = [
 
     // ══════════════ TABLO 2: EĞİTİM-ÖĞRETİM, İDARİ VE DİĞER ══════════════
     'T2-AT1' => ['baslik' => 'SCI, AHCI, SSCI, SCI-Expanded dergilerinde ya da uluslararası yayınevi kitaplarında adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 3],
-    'T2-AT2' => ['baslik' => 'Diğer indekslere giren dergilerde ya da uluslararası basılmış kongre bildirilerinde adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    'T2-AT2' => ['baslik' => 'Diğer indekslere giren dergilerde ya da uluslararası basılmış kongre bildirilerinde adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 2],
     'T2-AT3' => ['baslik' => 'Hakemli dergiler, tezler, kongre özetleri, bildiri kitapları ve kitaplarda adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent'], 'puan' => 1],
 
     'T2-ED1' => ['baslik' => 'Uluslararası indekslerde taranan süreli hakemli dergide editörlük, yardımcı editörlük ya da misafir editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 2],

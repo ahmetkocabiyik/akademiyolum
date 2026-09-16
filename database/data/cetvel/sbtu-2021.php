@@ -124,7 +124,7 @@ $maddeler = [
     'A4.11' => ['baslik' => 'TÜBİTAK öğrenci projelerinde danışmanlık', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'puan' => 10],
 
     // ══ A5. ATIFLAR ══ (en fazla 100 puan)
-    'A5.1' => ['baslik' => 'Uluslararası hakemli dergilerde başka yazarlarca yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'Diğer', 'Patent'], 'puan' => 1],
+    'A5.1' => ['baslik' => 'Uluslararası hakemli dergilerde başka yazarlarca yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'Diğer (Uluslararası)', 'Patent'], 'puan' => 1],
     'A5.2' => ['baslik' => 'Uluslararası yayınevi kitaplarında başka yazarlarca yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 1],
     'A5.3' => ['baslik' => 'Yayımlanan lisansüstü tezlerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 1],
 
@@ -158,7 +158,7 @@ $maddeler = [
     // ══ C1. ÜYELİK VE HAKEMLİK ══
     'C1.1' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 75],
     'C1.6' => ['baslik' => 'SCI-Expanded ya da ESCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => $WOS_DERGI, 'puan' => 25],
-    'C1.10' => ['baslik' => 'Diğer uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 15],
+    'C1.10' => ['baslik' => 'Diğer uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 15],
     'C1.11' => ['baslik' => 'Hakemli dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 15],
     'C1.16' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
     'C1.19' => ['baslik' => 'TR Dizin kapsamındaki ulusal hakemli dergide editörlük ya da editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 10],

@@ -56,7 +56,7 @@ return [
         'A5c' => ['baslik' => 'SCIE/SSCI/AHCI dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 25],
         'A5d' => ['baslik' => 'SCIE/SSCI/AHCI dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
         'A7a' => ['baslik' => 'ESCI dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 25],
-        'A9a' => ['baslik' => 'Diğer uluslararası hakemli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi', 'TR Dizin Dergi'], 'puan' => 15],
+        'A9a' => ['baslik' => 'Diğer uluslararası hakemli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)', 'TR Dizin Dergi'], 'puan' => 15],
 
         // ── A10 · BİLİMSEL TOPLANTI ──
         'A10a' => ['baslik' => 'Uluslararası toplantıda sözlü sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 15],
@@ -72,7 +72,10 @@ return [
         // ── A11 · ATIF ──
         'A11a' => ['baslik' => 'SCIE/SSCI/AHCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],
         'A11b' => ['baslik' => 'ESCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 7],
-        'A11c' => ['baslik' => 'Diğer uluslararası hakemli dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 5],
+        // `Patent` BURADAN ÇIKARILDI: patentte alınan atıf "uluslararası hakemli
+        // DERGİDE atıf" değil. Kaynağın A11'inde patent satırı yok; B9/b ("Diğer",
+        // 1 puan) girilmediği için patent atfı şimdilik hiç saymıyor (§0).
+        'A11c' => ['baslik' => 'Diğer uluslararası hakemli dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 5],
         'A11ç' => ['baslik' => 'Yurt dışı kitap, monografi veya tezlerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
     ],
 

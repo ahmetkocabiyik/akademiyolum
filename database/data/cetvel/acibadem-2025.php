@@ -156,7 +156,7 @@ $maddeler = [
     '4.B.11' => ['baslik' => 'Uluslararası ya da ulusal yayınevi tarafından yayınlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 7],
 
     // ══ 5. ATIFLAR ══
-    '5.A' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki uluslararası dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'TR Dizin', 'Diğer', 'Patent'], 'puan' => 0],
+    '5.A' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki uluslararası dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'TR Dizin', 'Diğer (Uluslararası)', 'Patent'], 'puan' => 0],
     '5.D' => ['baslik' => 'WoS Book Citation Index, SCOPUS ya da SENSE kapsamındaki kitaplarda yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 1],
 
     // ══ 6. TEZLER ve PROJELER ══
