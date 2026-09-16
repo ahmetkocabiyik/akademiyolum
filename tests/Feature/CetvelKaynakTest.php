@@ -2474,6 +2474,9 @@ test('atıfta çekirdek indeks ile ESCI ayrı puanlanıyor', function (string $c
     ['gumushane-2026', 5, 3],          // D1 5 · D4 3
     ['hitit-2026', 3, 2],              // 1 → 3 · 2 → 2
     ['istanbul-2026', 4, 3],           // 3.a 4 · 3.b 3
+    // KTÜ'nün tablosu taranmış PDF; sayfa görüntüsünden okundu. b) "3/2"
+    // diyor: WOS all databases 3, SCOPUS 2 — etiket ikisini taşıdığı için §0.
+    ['ktu-2023-fen-docent', 3, 2],
     ['omu-2025-c-doc', 6, 4],          // 11.1 6 · 11.3 4
     ['rte-2025', 4, 3],                // 4b 4 · 4c 3
     ['zbeu-2026', 3, 2],               // 6.a 3 · 6.b 2

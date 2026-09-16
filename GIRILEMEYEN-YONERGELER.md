@@ -1235,6 +1235,16 @@ dondurdu.
 Geri kalan 166 kaynak atıfı tek kademede puanlıyor; onlarda genel
 `WoS / Scopus` etiketi DOĞRU.
 
-Taramanın sınırı: metni bozuk çıkan PDF'ler (ör. Çankaya'nın yazı tipi
-cid-eşlemeli) satır düzeyinde okunamıyor, oradaki bir ayrım gözden kaçmış
-olabilir.
+Bozuk çıkarımlar da kapatıldı (16.09.2026): on bir kaynağın metni ya taranmış
+görüntüydü ya da yazı tipi cid-eşlemeliydi (Çankaya). Depodaki `pdf-ocr/`
+klasöründe on birinin de OCR metni hazırdı; tarama onlarla tekrarlandı ve
+**Karadeniz Teknik** çıktı.
+
+KTÜ'nün değerleri OCR'dan OKUNMADI, sayfa görüntüsünden okundu — OCR sütunları
+birleştiriyordu ("11", "15" gibi). Kaynağın 3. ATIF tablosu (sayfa 42):
+a) SCI/SCI-Exp/SSCI/AHCI **3**, b) (a) dışındaki WOS all databases / SCOPUS
+**3/2**. Yani ESCI 3, Scopus 2; sözlükteki `ESCI / Scopus` etiketi ikisini
+birden taşıdığı için §0 uyarınca 2 yazıldı — ESCI atfı olan aday 3 yerine 2
+görüyor.
+
+Artık 175 kaynağın hepsi satır düzeyinde okunabiliyor.
