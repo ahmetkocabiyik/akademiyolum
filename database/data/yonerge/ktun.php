@@ -198,8 +198,11 @@ foreach ([
                 ['DOC-10b'], 1, donem: $DOKTORA, madde: "{$mdDoc}-b",
             ),
             Kalip::puanDan(
-                'Seçili yayın türlerinden (Q dergilerde makale, ESCI makalesi, uluslararası '
-                .'kitap ve kitap bölümü) en az 80 puan',
+                // Küme kaynağın 11-c'sinden birebir alınıyor ve iki cetvelde
+                // FARKLI: mimarlık/planlama/tasarımda TR Dizin makalesi ile
+                // bildiriler de sayılıyor. Metin o yüzden tür saymıyor.
+                'Ön değerlendirmede sayılan yayın türlerinden en az 80 puan '
+                .'(yukarıdaki iki koşulda kullandıklarınız dışında)',
                 ['DOC-10c'], 80, madde: "{$mdDoc}-c",
             ),
             Kalip::puanDan(

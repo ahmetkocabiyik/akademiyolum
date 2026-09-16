@@ -1125,14 +1125,15 @@ Detektör keskinleştirilince (ulusal indeks ADIYLA anılan koşullar elendi)
 - ~~`uak-2024-mart-*`~~ — 15.09.2026'da okundu ve düzeltildi (Çankaya,
   İstanbul Topkapı, TED). ÜAK'ın 8b satırı kaynağın kendisinde de tek satır;
   bölme puanı değil yalnız koşul kümelerini etkiliyor.
-- `aybu-2026`, `aybu-2026-sanat` — aynı şekil bildiride ve sanat
-  etkinliğinde ("Uluslararası nitelikte en az üç karma sergi" ↔ "Ulusal ya da
-  uluslararası sergi…").
-- `itu-2022` ve dört varyantı, `kafkas-2025-egitim`, `ktun-2024-mps`,
-  `tokat-gaziosmanpasa-2026`, `vanyyu-2019`.
+- ~~`aybu-2026`, `aybu-2026-sanat`, `kafkas-2025-egitim`~~ — 16.09.2026'da
+  okundu ve düzeltildi.
+- `itu-2022` (+4 varyant), `ktun-2024-mps`, `tokat-gaziosmanpasa-2026` —
+  okundu, YANLIŞ POZİTİF; allowlist'te gerekçesiyle duruyor.
+- `vanyyu-2019` — okundu, küme doğruydu; yanlış olan koşul METNİYDİ
+  ("uluslararası alan indeksleri" diyordu, kaynak "ulusal ve uluslararası
+  alan indeksleri"). Metin düzeltildi.
 
-Hepsi `CetvelKaynakTest`'in allowlist'inde "henüz okunmadı" başlığı altında;
-okundukça oradan düşecekler.
+Bu parti kapandı; allowlist'te yalnız yanlış pozitifler kaldı.
 
 ## Bölüm joker'i üst bölümlere sızıyor (15.09.2026)
 

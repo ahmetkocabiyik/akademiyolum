@@ -122,7 +122,7 @@ $ortakKriterler = function (string $onek): array {
 // ══════════════════════════════════════════════════════════════════════════
 
 $EK1 = [
-    ['1.1', 'Uluslararası atıf indeksleri ya da alan indeksleri kapsamındaki dergilerde tam metinli araştırma makalesi yayımlamış olmak veya tanınmış sanat merkezlerinde özgün sanatsal etkinlik yapmış olmak', ['g' => ['INDEKSLI-MAKALE', 'SANAT-ETKINLIK'], 's' => 1]],
+    ['1.1', 'Uluslararası atıf indeksleri ya da ulusal/uluslararası alan indeksleri kapsamındaki dergilerde tam metinli araştırma makalesi yayımlamış olmak veya tanınmış sanat merkezlerinde özgün sanatsal etkinlik yapmış olmak', ['g' => ['INDEKSLI-MAKALE', 'SANAT-ETKINLIK'], 's' => 1]],
     ['1.2', 'Doktora, sanatta yeterlik ya da uzmanlık tezinizden üretilmiş bir makaleyi birinci isim veya sorumlu yazar olarak yayımlamış olmak', ['g' => ['TEZ-YAYINI'], 's' => 1, 'y' => 'baslica']],
     ['1.3', 'Bilimsel çalışmalarınıza, kendi atıflarınız dışında en az 5 atıf yapılmış olmak', ['g' => ['ATIF'], 's' => 5]],
     ['1.4', 'Merkezi yabancı dil sınavından en az 80 puan almış olmak', ['m' => 'yds', 's' => 80]],
@@ -168,7 +168,7 @@ $EK1 = [
 // ══════════════════════════════════════════════════════════════════════════
 
 $EK2 = [
-    ['2.1', 'Uluslararası atıf indeksleri ya da alan indeksleri kapsamındaki dergilerde tam metinli araştırma makalesi yayımlamış olmak veya tanınmış sanat merkezlerinde özgün sanatsal etkinlik yapmış olmak', ['g' => ['INDEKSLI-MAKALE', 'SANAT-ETKINLIK'], 's' => 1]],
+    ['2.1', 'Uluslararası atıf indeksleri ya da ulusal/uluslararası alan indeksleri kapsamındaki dergilerde tam metinli araştırma makalesi yayımlamış olmak veya tanınmış sanat merkezlerinde özgün sanatsal etkinlik yapmış olmak', ['g' => ['INDEKSLI-MAKALE', 'SANAT-ETKINLIK'], 's' => 1]],
     ['2.2', 'Ulusal ya da uluslararası süreli hakemli dergilerde özgün makaleye sahip olmak veya sanat alanında özgün sanat eseri üretmiş olmak', ['g' => ['HAKEMLI-MAKALE', 'SANAT-ESER'], 's' => 1]],
     ['2.3', 'Merkezi yabancı dil sınavından en az 80 puan almış olmak', ['m' => 'yds', 's' => 80]],
     ['2.4', 'Ulusal ya da uluslararası yayınevlerince yayımlanmış kitap veya kitap bölümü yazmış olmak', ['g' => ['KITAP'], 's' => 1]],
@@ -223,7 +223,7 @@ $EK2 = [
 // ══════════════════════════════════════════════════════════════════════════
 
 $EK3 = [
-    ['3.1', 'Uluslararası atıf indeksleri ya da alan indeksleri kapsamındaki dergilerde tam metinli araştırma makalesi yayımlamış olmak veya tanınmış sanat merkezlerinde özgün sanatsal etkinlik yapmış olmak', ['g' => ['INDEKSLI-MAKALE', 'SANAT-ETKINLIK'], 's' => 1]],
+    ['3.1', 'Uluslararası atıf indeksleri ya da ulusal/uluslararası alan indeksleri kapsamındaki dergilerde tam metinli araştırma makalesi yayımlamış olmak veya tanınmış sanat merkezlerinde özgün sanatsal etkinlik yapmış olmak', ['g' => ['INDEKSLI-MAKALE', 'SANAT-ETKINLIK'], 's' => 1]],
     ['3.2', 'Merkezi yabancı dil sınavından en az 85 puan almış olmak', ['m' => 'yds', 's' => 85]],
     ['3.3', 'Ulusal ya da uluslararası yayınevlerince yayımlanmış kitap veya kitap bölümü yazmış olmak', ['g' => ['KITAP'], 's' => 1]],
     ['3.4', 'Hakemli dergilerde en az iki olgu sunumu, teknik not, özet, mektup, eleştiri veya yorum türü yazı yayımlamış olmak', null],

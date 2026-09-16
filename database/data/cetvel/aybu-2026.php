@@ -122,7 +122,12 @@ $maddeler = [
 
     // ══ BİLİMSEL TOPLANTI ══
     'B.a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulup tam metni CPCI\'da yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 5],
-    'B.b' => ['baslik' => 'Diğer uluslararası ya da ulusal bilimsel toplantıda sunulup tam metni yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Ulusal Tam Metin', 'Davetli Konuşmacı'], 'puan' => 3],
+    // Kaynak bildiriyi kimi ölçütte "ULUSLARARASI bilimsel toplantıda sunulan
+    // (poster hariç)" diye istiyor (MADDE 16-18 öncülleri). Tek satır ulusal
+    // bildiriyi de topladığı için o koşula bağlanamaz; satır kapsamına göre
+    // ikiye ayrıldı, puanlar aynı ve 'B' grubu ikisini de topluyor.
+    'B.b-u' => ['baslik' => 'Diğer uluslararası bilimsel toplantıda sunulup tam metni yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Davetli Konuşmacı'], 'puan' => 3],
+    'B.b-n' => ['baslik' => 'Ulusal bilimsel toplantıda sunulup tam metni yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 3],
     'B.c' => ['baslik' => 'Uluslararası ya da ulusal bilimsel toplantıda sunulan poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Ulusal Özet/Poster'], 'puan' => 1],
 
     // ══ ATIFLAR ══
@@ -163,7 +168,10 @@ $maddeler = [
     'AO.d' => ['baslik' => 'Sanat sergisi ya da özgün eser, proje ve tasarım sergisi açmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Ulusal)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Kişisel Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Kişisel Etkinlik (Yurt İçi, Jürisiz)'], 'puan' => 10],
     'AO.d2' => ['baslik' => 'Elektronik ortamda kişisel sergi açmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Elektronik Kişisel Sergi (Uluslararası)', 'Elektronik Kişisel Sergi (Ulusal)'], 'puan' => 10],
     'AO.e' => ['baslik' => 'Ulusal ya da uluslararası tasarım', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Özgün Eser / Beste / Tasarım', 'Uygulama Projesi — Ekip', 'Uygulama Projesi — Ekip Yardımcısı', 'Uygulama Projesi — Danışman', 'Koruma-Onarım Uygulaması (Uluslararası)', 'Koruma-Onarım Uygulaması (Ulusal)'], 'puan' => 2],
-    'AO.f' => ['baslik' => 'Ulusal ya da uluslararası sergi, çalıştay, bienal, trienal, defile, gösteri, performans veya festival tarzındaki karma etkinlikte eseriyle yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Karma/Jürili Etkinlik (Ulusal)', 'Karma Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Karma Etkinlik (Yurt Dışı, Jürisiz)', 'Karma Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Karma Etkinlik (Jürisiz, Ulusal)', 'Elektronik Karma Sergi (Uluslararası)', 'Elektronik Karma Sergi (Ulusal)', 'Sempozyum/Çalıştay/Bienal (Yurt Dışı)', 'Sempozyum/Çalıştay/Bienal (Yurt İçi)'], 'puan' => 5],
+    // "ULUSLARARASI nitelikte karma sergi" koşulları (Zorunlu Şartlar, MADDE
+    // 17-18) için kapsam ayrımı gerekti; sözlük etiketleri zaten taşıyor.
+    'AO.f-u' => ['baslik' => 'Uluslararası sergi, çalıştay, bienal, trienal, defile, gösteri, performans veya festival tarzındaki karma etkinlikte eseriyle yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Uluslararası)', 'Karma Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Karma Etkinlik (Yurt Dışı, Jürisiz)', 'Karma Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Elektronik Karma Sergi (Uluslararası)', 'Sempozyum/Çalıştay/Bienal (Yurt Dışı)'], 'puan' => 5],
+    'AO.f-n' => ['baslik' => 'Ulusal sergi, çalıştay, bienal, trienal, defile, gösteri, performans veya festival tarzındaki karma etkinlikte eseriyle yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma/Jürili Etkinlik (Ulusal)', 'Karma Etkinlik (Jürisiz, Ulusal)', 'Elektronik Karma Sergi (Ulusal)', 'Sempozyum/Çalıştay/Bienal (Yurt İçi)'], 'puan' => 5],
     'AO.g' => ['baslik' => 'Alanıyla ilgili televizyon, radyo programı ya da podcast yayınlarına katılmak', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Bilim İletişimi / Popüler Yayın'], 'puan' => 4],
     'AO.h' => ['baslik' => 'Alanıyla ilgili albüm yapmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Albüm / Konser Kaydı', 'Bandrollü Kayıt (CD/DVD)', 'Karma Albüm / CD-DVD Katkısı', 'Eğitim Müziği Albümü'], 'puan' => 2],
     'AO.l' => ['baslik' => 'Ulusal ya da uluslararası sanatsal bireysel veya karma etkinliklerde şef, sanat yönetmeni, solist ya da çalgı icracısı olarak yer almak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Resital (Uluslararası)', 'Resital (Ulusal)', 'Solistlik (Uluslararası)', 'Solistlik (Ulusal)', 'Şan Resitali (Uluslararası)', 'Şan Resitali (Ulusal)', 'Oratoryo/Kantat Solistliği (Uluslararası)', 'Oratoryo/Kantat Solistliği (Ulusal)', 'Orkestra Şefliği (Uluslararası)', 'Orkestra Şefliği (Ulusal)', 'Opera Şefliği (Uluslararası)', 'Opera Şefliği (Ulusal)', 'Koro Şefliği (Uluslararası)', 'Koro Şefliği (Ulusal)', 'Bale Orkestra Şefliği (Uluslararası)', 'Bale Orkestra Şefliği (Ulusal)', 'Grup Şefliği (Uluslararası)', 'Grup Şefliği (Ulusal)', 'Oda Müziği Grup Üyeliği (Uluslararası)', 'Oda Müziği Grup Üyeliği (Ulusal)', 'Orkestra / Koro Üyeliği', 'Başkemancılık (Uluslararası)', 'Başkemancılık (Ulusal)', 'Opera Birinci Rol (Uluslararası)', 'Opera Birinci Rol (Ulusal)', 'Opera İkinci Rol (Uluslararası)', 'Opera İkinci Rol (Ulusal)', 'Bale Başrol (Uluslararası)', 'Bale Başrol (Ulusal)', 'Bale Solist Rol (Uluslararası)', 'Bale Solist Rol (Ulusal)', 'Corps de Ballet (Uluslararası)', 'Corps de Ballet (Ulusal)', 'Dansçı / Performans İcracısı (Uluslararası)', 'Dansçı / Performans İcracısı (Ulusal)'], 'puan' => 5],
@@ -200,7 +208,8 @@ $gruplar = [
     'WOS-Q1-Q3-SCOPUS' => ['M.a.q1', 'M.a.q2', 'M.a.q3', 'M.b'],
     'PROJE' => $kodlar('P.'),
     // "Uluslararası bilimsel toplantıda sunulan (poster hariç) bildiri".
-    'BILDIRI-TAM' => ['B.a', 'B.b'],
+    // Kaynak bu öncülde ULUSLARARASI bildiri istiyor.
+    'BILDIRI-TAM' => ['B.a', 'B.b-u'],
     'KITAP' => $kodlar('K.'),
     'MAKALE' => $kodlar('M.'),
     'ATIF' => $kodlar('A.'),

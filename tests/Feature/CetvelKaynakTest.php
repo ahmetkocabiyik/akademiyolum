@@ -2033,16 +2033,13 @@ test('yalnız uluslararası isteyen koşulların kümesinde ulusal satır yok', 
         // bildiri kalemlerinizden"); kitap ve atıf kapsamsızdır, doğrudur.
         'trakya-2025-ek1',
 
-        // ── HENÜZ KAYNAĞA KARŞI OKUNMADI ───────────────────────────────
-        // 15.09.2026 turunda detektör keskinleştirilince çıkan ikinci parti.
-        // Şekil aynı: çökmüş "uluslararası/ulusal" satır (çoğu BİLDİRİ, kitap
-        // değil) yalnız uluslararası isteyen bir koşulun kümesinde. Kaynakları
-        // okunmadan düzeltilemez; ÜAK tabloları on altı üniversiteyi
-        // beslediği için önceliklidir.
-        'aybu-2026', 'aybu-2026-sanat',
+        // Sıfat MAKALEYİ/PROJEYİ değil ikinci seçeneği niteliyor: İTÜ
+        // "araştırma projesinde yürütücülük ya da ULUSLARARASI projede
+        // araştırmacılık", Tokat GOP "Uluslararası kuruluşlar, COST, AB,
+        // TÜBİTAK, TÜBA … projelerinden" (TÜBİTAK ulusaldır), KTÜN'ün 11-c
+        // kümesi kaynağın kendisinde D-1'i (TR Dizin) sayıyor.
         'itu-2022', 'itu-2022-hs', 'itu-2022-mf', 'itu-2022-moda', 'itu-2022-tmdk',
-        'kafkas-2025-egitim', 'ktun-2024-mps', 'tokat-gaziosmanpasa-2026',
-        'vanyyu-2019',
+        'tokat-gaziosmanpasa-2026', 'ktun-2024-mps',
     ];
 
     $depo = sartDepo();

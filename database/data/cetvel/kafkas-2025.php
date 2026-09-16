@@ -447,8 +447,15 @@ foreach ($alanlar as $alan => $tanim) {
     // Eğitim Bilimleri'nde makale bölümü ikiye ayrıldığı için ayna satırlar da
     // "Uluslararası Makale" bölümüne bağlanır.
     if ($alan === 'egitim') {
-        $gruplar['UM'] = array_merge($ile('UM-'), ['M-a-tez', 'M-b-tez', 'M-c-tez', 'M-d-tez']);
-        $gruplar['NM'] = $ile('NM-');
+        // Ayna satırlar KAPSAMINA göre bölünür: `M-a-tez`/`M-b-tez` (SCI-Exp,
+        // SSCI, AHCI, ESCI, Scopus) uluslararası bölümün karşılığı,
+        // `M-c-tez` (TR Dizin) ve `M-d-tez` (diğer hakemli) ULUSAL bölümün.
+        // Dördü birden UM'ye konunca "Uluslararası makale kalemlerinizden en
+        // az N puan" koşulunu TR Dizin makalesi dolduruyordu. Kaynağın kendi
+        // tez kuralı zaten "Uluslararası Makale VE/VEYA Ulusal Makale bölümü
+        // kapsamında" diyor, yani ayna satırlar iki bölüme dağılır.
+        $gruplar['UM'] = array_merge($ile('UM-'), ['M-a-tez', 'M-b-tez']);
+        $gruplar['NM'] = array_merge($ile('NM-'), ['M-c-tez', 'M-d-tez']);
         $gruplar['M'] = array_merge($gruplar['UM'], $gruplar['NM']);
         $gruplar['UM-ab'] = array_merge($ile('UM-a'), ['UM-b', 'M-a-tez', 'M-b-tez']);
         $gruplar['NM-a'] = ['NM-a'];
