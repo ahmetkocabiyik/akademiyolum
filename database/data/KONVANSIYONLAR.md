@@ -3071,5 +3071,12 @@ cetvelde `'1*'` on, on bir ve on ikinci bölümü de içine alır. Selçuk'ta
 editörlük ve İDARİ GÖREV satırlarını topluyordu; dekanlık makale barajını
 dolduruyordu. Bölüm grubu yazarken joker yerine kodları SAY (`['1a', '1b',
 …]`); olmayan kod sessizce düşer, liste bütün varyantlara yazılabilir.
-Korpusta dört dosya daha aynı tuzakta: ege, eskişehir-teknik, esogu ve
-(düzeltilen) selcuk.
+Korpusun tamamı temizlendi (ege, eskişehir-teknik, esogu, selçuk) ve kural
+`CetvelKaynakTest`'te değişmez: RAKAMLA biten hiçbir joker öneği, ardından
+RAKAM gelen bir kodu toplayamaz. Nokta ile biten önekler (`1.A.*`) güvenli,
+onlar sınanmıyor.
+
+Selçuk'ta tuzak İKİ YERDEYDİ: cetveldeki `'1' => ['1*']` grubu ve yönergenin
+doğrudan `['1*']` yazan otuz sekiz koşulu. Grubu düzeltmek yetmedi; koşullar
+da gruba yönlendirildi. Bölüm kümesini TEK YERDE tanımla, koşullar ona atıf
+yapsın.

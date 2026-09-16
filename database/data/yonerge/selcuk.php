@@ -140,7 +140,7 @@ return [
         $bolumden('Bilimsel toplantı bildirilerinizden (tam metin ve sözlü sunum)', ['7*'], 3, null, 'Özel Kriterler I-d'),
     ], [
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 2, $D, 'Özel Kriterler B-a'),
-        $bolumden('Uluslararası dergilerdeki makalelerinizden', ['1*'], 40, $D, 'Özel Kriterler B-a'),
+        $bolumden('Uluslararası dergilerdeki makalelerinizden', ['1'], 40, $D, 'Özel Kriterler B-a'),
         $baslica('TR Dizin dergilerindeki makaleler', ['2a'], 2, $D, 'Özel Kriterler B-b'),
         $bolumden('Ulusal dergilerdeki makalelerinizden', ['2*'], 40, $D, 'Özel Kriterler B-b'),
         $baslica('Bilimsel toplantı bildirileriniz (tam metin ve sözlü sunum)', ['7*'], 2, $D, 'Özel Kriterler B-c'),
@@ -149,7 +149,7 @@ return [
         $bolumden('Araştırma projelerindeki görevlerinizden', ['6*'], 4, $D, 'Özel Kriterler B-e'),
     ], [
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 2, $P, 'Özel Kriterler C-a'),
-        $bolumden('Uluslararası dergilerdeki makalelerinizden', ['1*'], 40, $P, 'Özel Kriterler C-a'),
+        $bolumden('Uluslararası dergilerdeki makalelerinizden', ['1'], 40, $P, 'Özel Kriterler C-a'),
         $baslica('TR Dizin dergilerindeki makaleler', ['2a'], 2, $P, 'Özel Kriterler C-b'),
         $bolumden('Ulusal dergilerdeki makalelerinizden', ['2*'], 40, $P, 'Özel Kriterler C-b'),
         $baslica('Bilimsel toplantı bildirileriniz (tam metin ve sözlü sunum)', ['7*'], 2, $P, 'Özel Kriterler C-c'),
@@ -163,20 +163,20 @@ return [
     // 1 Makaleler · 2 Kitap · 3 Atıf · 4 Tez · 5 Proje · 6 Bilimsel Toplantı · 7 Eğitim-Öğretim
     ...$alan('fen', 'Fen Bilimleri ve Matematik', [
         $bolumden('SCI-Expanded, SSCI veya AHCI dergilerindeki makalelerinizden', ['1a'], 15, null, 'Özel Kriterler I-a'),
-        $bolumden('Makalelerinizden', ['1*'], 30, null, 'Özel Kriterler I-a'),
+        $bolumden('Makalelerinizden', ['1'], 30, null, 'Özel Kriterler I-a'),
         Kalip::beyan('Doktora tezinden üretilmiş olmak üzere SCI-Expanded, SSCI, AHCI, ESCI/Scopus veya TR Dizin dergilerinde '
             .'en az 5 puan almış olmak', 'Özel Kriterler I-b'),
         $bolumden('Bilimsel toplantı bildirilerinizden (doktora yeterliliği sonrası, tam metin ve sözlü sunum)', ['6a'], 3, null, 'Özel Kriterler I-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 4, null, 'Özel Kriterler I-d'),
     ], [
         $baslica('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler', ['1a'], 2, $D, 'Özel Kriterler B-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $D, 'Özel Kriterler B-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $D, 'Özel Kriterler B-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (başlıca yazar, tam metin ve sözlü sunum)', ['6a'], 5, $D, 'Özel Kriterler B-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 15, $D, 'Özel Kriterler B-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 8, $D, 'Özel Kriterler B-d'),
     ], [
         $baslica('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler', ['1a'], 2, $P, 'Özel Kriterler C-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $P, 'Özel Kriterler C-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $P, 'Özel Kriterler C-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (başlıca yazar, tam metin ve sözlü sunum)', ['6a'], 5, $P, 'Özel Kriterler C-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 20, $P, 'Özel Kriterler C-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 12, $P, 'Özel Kriterler C-d'),
@@ -186,20 +186,20 @@ return [
 
     // ══════════ FİLOLOJİ ══════════
     ...$alan('filoloji', 'Filoloji', [
-        $baslica('Makaleleriniz', ['1*'], 1, null, 'Özel Kriterler I-a'),
-        $bolumden('Makalelerinizden', ['1*'], 40, null, 'Özel Kriterler I-a'),
+        $baslica('Makaleleriniz', ['1'], 1, null, 'Özel Kriterler I-a'),
+        $bolumden('Makalelerinizden', ['1'], 40, null, 'Özel Kriterler I-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden', ['6*'], 5, null, 'Özel Kriterler I-b'),
     ], [
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 1, $D, 'Özel Kriterler B-a'),
         $bolumden('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makalelerinizden', ['1a', '1b'], 20, $D, 'Özel Kriterler B-a'),
-        $bolumden('Makalelerinizden', ['1*'], 40, $D, 'Özel Kriterler B-a'),
+        $bolumden('Makalelerinizden', ['1'], 40, $D, 'Özel Kriterler B-a'),
         $bolumden('Başlıca yazar olduğunuz bilimsel toplantı bildirilerinizden', ['6*'], 5, $D, 'Özel Kriterler B-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 15, $D, 'Özel Kriterler B-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 4, $D, 'Özel Kriterler B-d'),
     ], [
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 1, $P, 'Özel Kriterler C-a'),
         $bolumden('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makalelerinizden', ['1a', '1b'], 20, $P, 'Özel Kriterler C-a'),
-        $bolumden('Makalelerinizden', ['1*'], 40, $P, 'Özel Kriterler C-a'),
+        $bolumden('Makalelerinizden', ['1'], 40, $P, 'Özel Kriterler C-a'),
         Kalip::beyan('En az bir adet TEK YAZARLI kitap veya kitap bölümü yayımlamış olmak',
             'Özel Kriterler C-b'),
         $bolumden('Başlıca yazar olduğunuz bilimsel toplantı bildirilerinizden', ['6*'], 5, $P, 'Özel Kriterler C-c'),
@@ -222,13 +222,13 @@ return [
         $bolumden('Özgün sanat eserlerinizden', ['2*'], 30, null, 'Özel Kriterler I-e'),
     ], [
         $baslica('SCI-Expanded, SSCI, AHCI, ESCI/Scopus veya TR Dizin dergilerindeki makaleler', ['1a', '1b', '1c'], 2, $D, 'Özel Kriterler B-a'),
-        $bolumden('Makalelerinizden', ['1*'], 30, $D, 'Özel Kriterler B-a'),
+        $bolumden('Makalelerinizden', ['1'], 30, $D, 'Özel Kriterler B-a'),
         $bolumden('Başlıca yazar olduğunuz bilimsel toplantı bildirilerinizden', ['4*'], 10, $D, 'Özel Kriterler B-b'),
         $bolumden('Sanatsal etkinliklerinizden', ['2*'], 50, $D, 'Özel Kriterler B-c'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['5*'], 10, $D, 'Özel Kriterler B-d'),
     ], [
-        $baslica('Makaleleriniz', ['1*'], 2, $P, 'Özel Kriterler C-a'),
-        $bolumden('Makalelerinizden', ['1*'], 30, $P, 'Özel Kriterler C-a'),
+        $baslica('Makaleleriniz', ['1'], 2, $P, 'Özel Kriterler C-a'),
+        $bolumden('Makalelerinizden', ['1'], 30, $P, 'Özel Kriterler C-a'),
         Kalip::adet('Sanatsal Etkinlik bölümünde en az iki KİŞİSEL etkinlik',
             ['2a-kisisel', '2b-kisisel'], 2, donem: $P, madde: 'Özel Kriterler C-b'),
         $bolumden('Sanatsal etkinliklerinizden', ['2*'], 50, $P, 'Özel Kriterler C-b'),
@@ -244,26 +244,26 @@ return [
     ...$alan('hukuk', 'Hukuk', [
         Kalip::veya('Makale koşulu (iki seçenekten biri)', [
             Kalip::ve('Uluslararası makalede başlıca yazar', [
-                $baslica('Uluslararası indeksli dergilerdeki makaleler', ['1*'], 1, null, 'Özel Kriterler I-a'),
-                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1*', '2*'], 30, null, 'Özel Kriterler I-a'),
+                $baslica('Uluslararası indeksli dergilerdeki makaleler', ['1'], 1, null, 'Özel Kriterler I-a'),
+                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1', '2'], 30, null, 'Özel Kriterler I-a'),
             ]),
             Kalip::ve('Ulusal makalede tek yazar', [
                 Kalip::beyan('TR Dizin dergilerinde TEK YAZARLI olarak en az 30 puan '
                     .'almış olmak', 'Özel Kriterler I-a'),
-                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1*', '2*'], 40, null, 'Özel Kriterler I-a'),
+                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1', '2'], 40, null, 'Özel Kriterler I-a'),
             ]),
         ]),
         $bolumden('Bilimsel toplantı bildirilerinizden (tam metin ve sözlü sunum)', ['7*'], 3, null, 'Özel Kriterler I-b'),
     ], [
         Kalip::veya('Makale koşulu (iki seçenekten biri)', [
             Kalip::ve('Uluslararası makalede başlıca yazar', [
-                $baslica('Uluslararası indeksli dergilerdeki makaleler', ['1*'], 1, $D, 'Özel Kriterler B-a'),
-                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1*', '2*'], 60, $D, 'Özel Kriterler B-a'),
+                $baslica('Uluslararası indeksli dergilerdeki makaleler', ['1'], 1, $D, 'Özel Kriterler B-a'),
+                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1', '2'], 60, $D, 'Özel Kriterler B-a'),
             ]),
             Kalip::ve('Ulusal makalede tek yazar', [
                 Kalip::beyan('TR Dizin dergilerinde TEK YAZARLI olarak en az 40 puan '
                     .'almış olmak', 'Özel Kriterler B-a'),
-                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1*', '2*'], 80, $D, 'Özel Kriterler B-a'),
+                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1', '2'], 80, $D, 'Özel Kriterler B-a'),
             ]),
         ]),
         Kalip::beyan('Başvurduğunuz doçentlik bilim alanı ile ilgili olmak koşulu ile '
@@ -274,13 +274,13 @@ return [
     ], [
         Kalip::veya('Makale koşulu (iki seçenekten biri)', [
             Kalip::ve('Uluslararası makalede başlıca yazar', [
-                $baslica('Uluslararası indeksli dergilerdeki makaleler', ['1*'], 1, $P, 'Özel Kriterler C-a'),
-                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1*', '2*'], 60, $P, 'Özel Kriterler C-a'),
+                $baslica('Uluslararası indeksli dergilerdeki makaleler', ['1'], 1, $P, 'Özel Kriterler C-a'),
+                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1', '2'], 60, $P, 'Özel Kriterler C-a'),
             ]),
             Kalip::ve('Ulusal makalede tek yazar', [
                 Kalip::beyan('TR Dizin dergilerinde TEK YAZARLI olarak en az 60 puan '
                     .'almış olmak', 'Özel Kriterler C-a'),
-                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1*', '2*'], 80, $P, 'Özel Kriterler C-a'),
+                $bolumden('Uluslararası ve ulusal dergilerdeki makalelerinizden', ['1', '2'], 80, $P, 'Özel Kriterler C-a'),
             ]),
         ]),
         Kalip::beyan('TEK YAZARLI özgün kitap veya kitap bölümü olarak en az 25 puan '
@@ -321,12 +321,12 @@ return [
         Kalip::beyan('Doktora tezinden üretilmiş olmak koşulu ile SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerinde '
             .'en az 5 puan almış olmak', 'Özel Kriterler I-b'),
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 1, null, 'Özel Kriterler I-c'),
-        $bolumden('Makalelerinizden', ['1*'], 25, null, 'Özel Kriterler I-c'),
+        $bolumden('Makalelerinizden', ['1'], 25, null, 'Özel Kriterler I-c'),
         $bolumden('Bilimsel toplantı bildirilerinizden (tam metin ve sözlü sunum)', ['7a'], 3, null, 'Özel Kriterler I-d'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['6*'], 4, null, 'Özel Kriterler I-e'),
     ], [
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 2, $D, 'Özel Kriterler B-a'),
-        $bolumden('Makalelerinizden', ['1*'], 40, $D, 'Özel Kriterler B-a'),
+        $bolumden('Makalelerinizden', ['1'], 40, $D, 'Özel Kriterler B-a'),
         $baslica('Bilimsel toplantı bildirileriniz (tam metin ve sözlü sunum)', ['7*'], 2, $D, 'Özel Kriterler B-b'),
         $bolumden('Bilimsel toplantı bildirilerinizden', ['7*'], 6, $D, 'Özel Kriterler B-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['4*'], 15, $D, 'Özel Kriterler B-c'),
@@ -334,7 +334,7 @@ return [
         $bolumden('Verdiğiniz derslerden', ['8*'], 4, $D, 'Özel Kriterler B-e'),
     ], [
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 2, $P, 'Özel Kriterler C-a'),
-        $bolumden('Makalelerinizden', ['1*'], 40, $P, 'Özel Kriterler C-a'),
+        $bolumden('Makalelerinizden', ['1'], 40, $P, 'Özel Kriterler C-a'),
         $baslica('Bilimsel toplantı bildirileriniz (tam metin ve sözlü sunum)', ['7*'], 2, $P, 'Özel Kriterler C-b'),
         $bolumden('Bilimsel toplantı bildirilerinizden', ['7*'], 8, $P, 'Özel Kriterler C-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['4*'], 20, $P, 'Özel Kriterler C-c'),
@@ -349,7 +349,7 @@ return [
     // başlıca yazarlık düğümü patent telafisi taşıyor.
     ...$alan('muhendislik', 'Mühendislik', [
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 1, null, 'Özel Kriterler I-a'),
-        $bolumden('Makalelerinizden', ['1*'], 30, null, 'Özel Kriterler I-a'),
+        $bolumden('Makalelerinizden', ['1'], 30, null, 'Özel Kriterler I-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (tam metin ve sözlü sunum)', ['6a'], 3, null, 'Özel Kriterler I-b'),
     ], [
         Kalip::adet('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler arasında başlıca yazar olduğunuz en az 1 eser',
@@ -357,7 +357,7 @@ return [
             telafi: Kalip::adet('Tescillenmiş en az 1 patent veya faydalı model',
                 ['8a', '8b'], 1, donem: $D),
             madde: 'Özel Kriterler B-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $D, 'Özel Kriterler B-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $D, 'Özel Kriterler B-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (tam metin ve sözlü sunum)', ['6a'], 5, $D, 'Özel Kriterler B-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 15, $D, 'Özel Kriterler B-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 8, $D, 'Özel Kriterler B-d'),
@@ -367,7 +367,7 @@ return [
             telafi: Kalip::adet('Tescillenmiş en az 2 patent veya faydalı model',
                 ['8a', '8b'], 2, donem: $P),
             madde: 'Özel Kriterler C-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $P, 'Özel Kriterler C-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $P, 'Özel Kriterler C-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (tam metin ve sözlü sunum)', ['6a'], 5, $P, 'Özel Kriterler C-b'),
         $bolumden('WoS veya Scopus kapsamında yapılan atıflardan', ['3a'], 20, $P, 'Özel Kriterler C-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 12, $P, 'Özel Kriterler C-d'),
@@ -379,17 +379,17 @@ return [
         Kalip::beyan('Doktora veya uzmanlık tezinden üretilmiş olmak koşulu ile '
             .'SCI-Expanded, SSCI, AHCI, ESCI/Scopus veya TR Dizin dergilerinde en az 5 puan almış olmak', 'Özel Kriterler I-a'),
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 1, null, 'Özel Kriterler I-b'),
-        $bolumden('Makalelerinizden', ['1*'], 30, null, 'Özel Kriterler I-b'),
+        $bolumden('Makalelerinizden', ['1'], 30, null, 'Özel Kriterler I-b'),
         $bolumden('Bilimsel toplantı bildirilerinizden (doktora yeterliliği sonrası, özet veya tam metin, sözlü sunum)', ['6a'], 3, null, 'Özel Kriterler I-c'),
     ], [
         $baslica('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler', ['1a'], 3, $D, 'Özel Kriterler B-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $D, 'Özel Kriterler B-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $D, 'Özel Kriterler B-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (başlıca yazar, özet veya tam metin, sözlü sunum)', ['6a'], 5, $D, 'Özel Kriterler B-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 15, $D, 'Özel Kriterler B-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 4, $D, 'Özel Kriterler B-d'),
     ], [
         $baslica('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler', ['1a'], 3, $P, 'Özel Kriterler C-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $P, 'Özel Kriterler C-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $P, 'Özel Kriterler C-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (özet veya tam metin, sözlü sunum)', ['6a'], 5, $P, 'Özel Kriterler C-b'),
         $bolumden('WoS veya Scopus kapsamında yapılan atıflardan', ['3a'], 20, $P, 'Özel Kriterler C-c'),
         Kalip::adet('Bilimsel araştırma projelerinin birinde yürütücülük yapmak', ['5a'], 1, donem: $P, madde: 'Özel Kriterler C-d'),
@@ -401,20 +401,20 @@ return [
         Kalip::beyan('Yüksek lisans ve doktora tezlerinden üretilmiş olmak üzere Makaleler ve/veya '
             .'Bilimsel Toplantı Faaliyeti bölümü kapsamında en az 1 puan almış olmak', 'Özel Kriterler I-a'),
         $baslica('SCI-Expanded, SSCI, AHCI, ESCI/Scopus veya TR Dizin dergilerindeki makaleler', ['1a', '1b', '1c'], 1, null, 'Özel Kriterler I-b'),
-        $bolumden('Makalelerinizden', ['1*'], 30, null, 'Özel Kriterler I-b'),
+        $bolumden('Makalelerinizden', ['1'], 30, null, 'Özel Kriterler I-b'),
         $bolumden('Başlıca yazar olduğunuz bilimsel toplantı bildirilerinizden', ['6*'], 5, null, 'Özel Kriterler I-c'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 15, null, 'Özel Kriterler I-d'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 4, null, 'Özel Kriterler I-e'),
     ], [
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 1, $D, 'Özel Kriterler B-a'),
-        $bolumden('Makalelerinizden', ['1*'], 60, $D, 'Özel Kriterler B-a'),
+        $bolumden('Makalelerinizden', ['1'], 60, $D, 'Özel Kriterler B-a'),
         $bolumden('Başlıca yazar olduğunuz bilimsel toplantı bildirilerinizden', ['6*'], 6, $D, 'Özel Kriterler B-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 15, $D, 'Özel Kriterler B-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 8, $D, 'Özel Kriterler B-d'),
         $bolumden('Verdiğiniz derslerden', ['7*'], 4, $D, 'Özel Kriterler B-e'),
     ], [
         $baslica('SCI-Expanded, SSCI, AHCI veya ESCI/Scopus dergilerindeki makaleler', ['1a', '1b'], 1, $P, 'Özel Kriterler C-a'),
-        $bolumden('Makalelerinizden', ['1*'], 80, $P, 'Özel Kriterler C-a'),
+        $bolumden('Makalelerinizden', ['1'], 80, $P, 'Özel Kriterler C-a'),
         $bolumden('Başlıca yazar olduğunuz bilimsel toplantı bildirilerinizden', ['6*'], 8, $P, 'Özel Kriterler C-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 20, $P, 'Özel Kriterler C-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 8, $P, 'Özel Kriterler C-d'),
@@ -436,13 +436,13 @@ return [
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 4, null, 'Özel Kriterler I-e'),
     ], [
         $baslica('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler', ['1a'], 2, $D, 'Özel Kriterler B-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $D, 'Özel Kriterler B-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $D, 'Özel Kriterler B-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (başlıca yazar, tam metin ve sözlü sunum)', ['6a'], 6, $D, 'Özel Kriterler B-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 15, $D, 'Özel Kriterler B-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 4, $D, 'Özel Kriterler B-d'),
     ], [
         $baslica('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler', ['1a'], 2, $P, 'Özel Kriterler C-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $P, 'Özel Kriterler C-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $P, 'Özel Kriterler C-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (tam metin ve sözlü sunum)', ['6*'], 8, $P, 'Özel Kriterler C-b'),
         $bolumden('WoS veya Scopus kapsamında yapılan atıflardan', ['3a'], 20, $P, 'Özel Kriterler C-c'),
         Kalip::adet('Bilimsel araştırma projelerinin en az birinde yürütücülük yapmak', ['5a'], 1, donem: $P, madde: 'Özel Kriterler C-d'),
@@ -457,18 +457,18 @@ return [
         Kalip::beyan('Doktora tezinden üretilmiş olmak koşulu ile Makaleler bölümü "a, b, c ve/veya d" '
             .'en az 5 puan almış olmak', 'Özel Kriterler I-b'),
         $baslica('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler', ['1a'], 1, null, 'Özel Kriterler I-c'),
-        $bolumden('Makalelerinizden', ['1*'], 30, null, 'Özel Kriterler I-c'),
+        $bolumden('Makalelerinizden', ['1'], 30, null, 'Özel Kriterler I-c'),
         $bolumden('Bilimsel toplantı bildirilerinizden (doktora yeterliliği sonrası, tam metin ve sözlü sunum)', ['6a'], 3, null, 'Özel Kriterler I-d'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 4, null, 'Özel Kriterler I-e'),
     ], [
         $baslica('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler', ['1a'], 2, $D, 'Özel Kriterler B-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $D, 'Özel Kriterler B-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $D, 'Özel Kriterler B-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (başlıca yazar, tam metin ve sözlü sunum)', ['6a'], 5, $D, 'Özel Kriterler B-b'),
         $bolumden('Yayınlarınıza yapılan atıflardan', ['3*'], 15, $D, 'Özel Kriterler B-c'),
         $bolumden('Araştırma projelerindeki görevlerinizden', ['5*'], 8, $D, 'Özel Kriterler B-d'),
     ], [
         $baslica('SCI-Expanded, SSCI veya AHCI dergilerindeki makaleler', ['1a'], 2, $P, 'Özel Kriterler C-a'),
-        $bolumden('Makalelerinizden', ['1*'], 55, $P, 'Özel Kriterler C-a'),
+        $bolumden('Makalelerinizden', ['1'], 55, $P, 'Özel Kriterler C-a'),
         $bolumden('Bilimsel toplantı bildirilerinizden (tam metin ve sözlü sunum)', ['6a'], 5, $P, 'Özel Kriterler C-b'),
         $bolumden('WoS veya Scopus kapsamında yapılan atıflardan', ['3a'], 20, $P, 'Özel Kriterler C-c'),
         Kalip::adet('Bilimsel araştırma projelerinin en az birinde yürütücülük yapmak', ['5a'], 1, donem: $P, madde: 'Özel Kriterler C-d'),

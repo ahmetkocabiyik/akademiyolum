@@ -2,6 +2,7 @@
 
 use App\Enums\Kategori;
 use App\Models\Faaliyet;
+use App\Services\Scoring\Sart\MaddeKatalogu;
 use App\Services\Scoring\Sart\SartDeposu;
 
 /**
@@ -2124,17 +2125,75 @@ test('"uluslararası" barajlarına ulusal satır sayılmıyor', function (string
     ['trakya-2025-ek7', 'ULUS'],
 ]);
 
-test('Selçuk bölüm joker\'i üst bölümlere sızmıyor', function (string $cetvel) {
-    // `coz()` joker'i ÖNEK eşleştiriyor: '1*' 10, 11, 12 ve 13. bölümleri de
-    // topluyordu. "Uluslararası dergilerdeki makalelerinizden en az 40 puan"
-    // koşulu dekanlık ya da komisyon üyeliğiyle sağlanır hâle gelmişti.
-    $kodlar = sartDepo()->katalog($cetvel)->coz(['1']);
+test('bölüm joker\'i üst bölümlere sızmıyor', function () {
+    // `MaddeKatalogu::coz()` joker'i ÖNEK eşleştiriyor: '1*' deseni '10a',
+    // '11b', '12c' kodlarını da topluyor. Bölüm numarası RAKAMLA bittiğinde
+    // (1, 2, … ve ayrıca 10, 11, 12 bölümleri varsa) desen sessizce yayılıyor.
+    // Selçuk'ta "Uluslararası dergilerdeki makalelerinizden en az 40 puan"
+    // koşulu ödül, editörlük ve İDARİ GÖREV satırlarını sayıyordu; dekanlık
+    // makale barajını dolduruyordu.
+    //
+    // Çare joker'i yasaklamak değil: '1.A.*' gibi önekler nokta ile bittiği
+    // için güvenli. Yalnız RAKAMLA biten önekler sınanıyor.
+    $depo = sartDepo();
+    $bulgular = [];
 
-    $sizan = array_values(array_filter($kodlar, fn (string $k) => preg_match('/^1[0-9]/', $k) === 1));
+    $sinama = function (MaddeKatalogu $katalog, array $desenler, string $nereden) use (&$bulgular) {
+        foreach ($desenler as $desen) {
+            if (! is_string($desen) || ! str_ends_with($desen, '*')) {
+                continue;
+            }
 
-    expect($sizan)->toBe([])
-        ->and($kodlar)->not->toBe([]);
-})->with(['selcuk-2024-egitim', 'selcuk-2024-fen', 'selcuk-2024-hukuk', 'selcuk-2024-saglik']);
+            $onek = rtrim($desen, '*');
+
+            if ($onek === '' || ctype_digit(substr($onek, -1)) === false) {
+                continue;
+            }
+
+            foreach ($katalog->coz([$desen]) as $kod) {
+                $kalan = substr($kod, strlen($onek));
+
+                if ($kalan !== '' && ctype_digit($kalan[0])) {
+                    $bulgular[] = "{$katalog->anahtar} · {$desen} ({$nereden}) → {$kod}";
+                }
+            }
+        }
+    };
+
+    foreach ($depo->cetveller() as $katalog) {
+        foreach ($katalog->gruplar as $ad => $uyeler) {
+            $sinama($katalog, $uyeler, "grup {$ad}");
+        }
+    }
+
+    foreach ($depo->dogrulanmisEsikler() as $esik) {
+        $katalog = $depo->katalog($esik['cetvel']);
+
+        if ($katalog === null) {
+            continue;
+        }
+
+        $gez = function (array $dugum) use (&$gez, $katalog, $sinama) {
+            foreach (['maddeler', 'oran_payda'] as $alan) {
+                if (isset($dugum[$alan])) {
+                    $sinama($katalog, $dugum[$alan], 'koşul');
+                }
+            }
+
+            foreach ($dugum['cocuklar'] ?? [] as $cocuk) {
+                $gez($cocuk);
+            }
+
+            if (isset($dugum['telafi'])) {
+                $gez($dugum['telafi']);
+            }
+        };
+
+        $gez($esik['sart']);
+    }
+
+    expect(array_values(array_unique($bulgular)))->toBe([]);
+});
 
 test('aday metninde madde kodu yok', function () {
     // KONVANSIYONLAR §2: "Aday metninde kod YASAK, `notlar` ve düğümlerin

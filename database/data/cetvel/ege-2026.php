@@ -172,7 +172,10 @@ return [
         '3-ilahiyat' => ['3a1', '3a2', '3b1', '3b2'],
         // "1 (a, b, d, e, g1, g2), 3 (a1, b1, d, e), 10.4 (k, l)" — Güzel Sanatlar/Mimarlık.
         '10.4-kl' => ['10.4k'],
-        'MAKALE' => ['1*'],
+        // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştiriyor ve '10.4k' satırını
+        // da topluyordu — Güzel Sanatlar/Mimarlık'ın disipline özgü kalemi
+        // makale barajına giriyordu.
+        'MAKALE' => ['1a-Q1', '1a-Q2', '1a-Q3', '1a-Q4', '1b-Q1', '1b-Q2', '1b-Q3', '1b-Q4', '1c-Q1', '1c-Q2', '1c-Q3', '1c-Q4', '1d', '1e', '1f', '1g1', '1g2', '1g3'],
         'KITAP' => ['3*'],
         'PROJE' => ['5*'],
         'PROJE_YURUTUCU' => ['5a1', '5b1', '5e1', '5g1'],

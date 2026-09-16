@@ -93,7 +93,16 @@
  * '1a-e' kümesini kullanıyor — 1f zaten barajlarının dışında ve kaynak
  * onlara tavan koymuyor; o gruplar tavansız gövdeye bağlı kalıyor.
  */
-$govde = function (?int $birFTavani): array {
+/**
+ * 1. bölümün kodları. Joker YAZILAMAZ: `MaddeKatalogu::coz()` '1*' desenini
+ * ÖNEK olarak eşleştiriyor ve 10, 11, 12, 13. bölümleri de topluyor.
+ *
+ * @var list<string>
+ */
+$BOLUM1 = ['1a', '1b', '1c', '1ç', '1d', '1e', '1f', '1g', '1ğ',
+    '1a-ç-tez', '1e-tez', '1f-tez', '1g-tez'];
+
+$govde = function (?int $birFTavani) use ($BOLUM1): array {
     return [
         'kapsam_notu' => 'Puanlar Eskişehir Teknik Üniversitesi EK-3 ölçütler çizelgesinden. '
             .'EN ÖNEMLİ SINIRLAMA: yönerge proje puanlarını AY BAŞINA veriyor ("20 × ay"), ders '
@@ -255,10 +264,12 @@ $govde = function (?int $birFTavani): array {
             // EK-5'in "Lisansüstü Tezlerden Üretilmiş Yayın Sayısı" sütunu.
             'TEZ-YAYINI' => ['1a-ç-tez', '1e-tez', '1f-tez', '1g-tez'],
             '1f' => ['1f'],
-            '1' => ['1*'],
+            // '1*' DEĞİL: `coz()` joker'i ÖNEK eşleştirdiği için 10, 11, 12 ve
+            // 13. bölümleri de topluyordu (ödül, editörlük, idari görev).
+            '1' => $BOLUM1,
             '2' => ['2*'],
-            '1-2' => ['1*', '2*'],
-            '1-2-7-8' => ['1*', '2*', '7*', '8*'],
+            '1-2' => [...$BOLUM1, '2*'],
+            '1-2-7-8' => [...$BOLUM1, '2*', '7*', '8*'],
             '4' => ['4*'],
             '4-YURUTUCU' => ['4a1', '4b1', '4c1', '4ç1'],
             '5' => ['5*'],

@@ -1138,11 +1138,10 @@ Bu parti kapandı; allowlist'te yalnız yanlış pozitifler kaldı.
 ## Bölüm joker'i üst bölümlere sızıyor (15.09.2026)
 
 `MaddeKatalogu::coz()` joker'i önek eşleştirdiği için `'1*'` 10, 11, 12 ve
-13. bölümleri de topluyor. Selçuk düzeltildi. Aynı tuzaktaki üç dosya
-KALDI: `ege-2026` (MAKALE grubu → 10.4k), `eskisehir-teknik-2026` (dört
-varyant, 1/1-2/1-2-7-8 grupları → 10, 11, 12), `esogu-2023` (1-2-3-9-16 ve
-1-2-9-16 grupları → 10-13). Üçünde de sızıntı ödül, editörlük ve idari görev
-satırlarına ulaşıyor, yani makale barajı idari görevle dolabiliyor.
+13. bölümleri de topluyordu. 16.09.2026'da korpusun tamamı temizlendi:
+Selçuk (cetveldeki grup + yönergedeki otuz sekiz koşul), `ege-2026`,
+`eskisehir-teknik-2026` (dört varyant) ve `esogu-2023`. Kural artık
+`CetvelKaynakTest`'te değişmez; açık iş kalmadı.
 
 ## Aday metnindeki madde kodları (15.09.2026)
 
