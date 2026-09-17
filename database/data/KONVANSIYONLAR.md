@@ -3142,8 +3142,13 @@ başlığı doğru olsa bile puanı yanlış veriyor.
 **DİLİM ekseni çeyrekliğin ALT KÜMESİ.** Kaynakların bir kısmı Q1'in
 üstünde bir kademe daha tanıyor: "ilk %10'luk dilime giren dergi" (Haliç'in
 tanımıyla Scopus CiteScore Percentile ≥90), kimi yerde ayrıca "ilk %5".
-Zincir üç kademeli — `SCIE/SSCI (İlk %5)` → `SCIE/SSCI (İlk %10)` →
-`SCIE/SSCI (Q1)`, Scopus tarafında `Scopus (İlk %10)` → `Scopus (Q1)`.
+Zincir DÖRT kademeye kadar çıkıyor — `SCIE/SSCI (İlk %1)` → `(İlk %5)` →
+`(İlk %10)` → `(Q1)`, Scopus tarafında `Scopus (İlk %10)` → `Scopus (Q1)`.
+
+**Kaç kademe olduğunu metin çıkarımına sorma.** NEÜ'de `pdftotext` sütunları
+bölerek iki kademe gösteriyordu; sayfa görüntüsünde üç çıktı (%1 200, %5 175,
+%10 150). Dilim tablosu dar bir sütunda durduğu için satır eşlemesi kolayca
+kayıyor.
 
 Burada ebeveyn etiket GİZLENMEZ: Q1'de olup dilime girmeyen dergi de var ve
 adayın onu seçebilmesi gerekiyor. Bu yüzden `Kategori::DARALTILABILIR_KAYNAKLAR`

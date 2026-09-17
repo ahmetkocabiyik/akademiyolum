@@ -131,7 +131,7 @@ enum Kategori: string
      * @var list<string>
      */
     public const DARALTILABILIR_KAYNAKLAR = [
-        'SCIE/SSCI (Q1)', 'SCIE/SSCI (İlk %10)', 'Scopus (Q1)',
+        'SCIE/SSCI (Q1)', 'SCIE/SSCI (İlk %10)', 'SCIE/SSCI (İlk %5)', 'Scopus (Q1)',
     ];
 
     public const GENEL_KAYNAKLAR = [
@@ -172,7 +172,7 @@ enum Kategori: string
     {
         return match ($this) {
             self::Makale => [
-                'SCIE/SSCI (İlk %5)', 'SCIE/SSCI (İlk %10)',
+                'SCIE/SSCI (İlk %1)', 'SCIE/SSCI (İlk %5)', 'SCIE/SSCI (İlk %10)',
                 'SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)',
                 'AHCI', 'ESCI',
                 'Scopus (İlk %10)',

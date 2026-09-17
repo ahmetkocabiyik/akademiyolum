@@ -1321,9 +1321,11 @@ karşılığı olmadığı için girilememişti):
 Akdeniz'inki "bilerek ölü satır" olarak duruyordu (`'kaynaklar' => []`),
 şimdi dirildi.
 
-**Necmettin Erbakan AÇIK**: A1'in üstünde İKİ kademe var — "İlk %5 Dilimdeki
-Q1 Dergiler 175" ve "İlk %10 Dilimdeki Q1 Dergiler 150". `SCIE/SSCI (İlk %5)`
-sözlükte duruyor ama hiçbir satıra bağlı değil.
+**Necmettin Erbakan** aynı gün bağlandı ve kademe sayısı İKİ DEĞİL ÜÇ çıktı.
+Metin çıkarımı sütunları böldüğü için sayfa görüntüsünden okundu (sayfa 14,
+TABLO-1): ilk %1 → **200**, ilk %5 → **175**, ilk %10 → **150**. Q1'in 100'ü
+kaynağın kendi sözleriyle "%1-%10 dilimler DIŞINDAKİ" demek. Sözlüğe
+`SCIE/SSCI (İlk %1)` eklendi; zincir dört kademeli oldu (%1 ⊂ %5 ⊂ %10 ⊂ Q1).
 
 **İnönü** dilimi ÇARPAN olarak kullanıyor (%1 → ×3, %10 → ×1,5); motorun
 satır bazlı çarpanı yok, başka bir yapı.

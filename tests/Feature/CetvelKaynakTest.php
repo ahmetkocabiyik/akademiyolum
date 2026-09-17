@@ -2641,6 +2641,38 @@ test('WoS ilk %10 dilimi Q1\'den ayrı puanlanıyor', function (string $cetvel, 
     ['ahi-evran-2024', 50, 30],
 ]);
 
+test('Necmettin Erbakan üç dilim kademesini de ayırıyor', function () {
+    // Kaynağın TABLO-1'i (sayfa 14, görüntüden okundu) Q1'in üstünde ÜÇ
+    // kademe tanıyor. Q1'in 100'ü kaynağın kendi sözleriyle "%1-%10 dilimler
+    // DIŞINDAKİ" demek — yani dilim kademeleri Q1'in yerine geçmiyor, üstüne
+    // biniyor.
+    $katalog = sartDepo()->katalog('necmettin-erbakan-2026');
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('SCIE/SSCI (İlk %1)'))->toBe(200)
+        ->and($puan('SCIE/SSCI (İlk %5)'))->toBe(175)
+        ->and($puan('SCIE/SSCI (İlk %10)'))->toBe(150)
+        ->and($puan('SCIE/SSCI (Q1)'))->toBe(100)
+        ->and($puan('SCIE/SSCI (Q2)'))->toBe(85);
+
+    // Zincir üç kademeli: %1 ⊂ %5 ⊂ %10 ⊂ Q1. Yalnız Q1 satırı çözüldüğünde
+    // en dar kayıt da oraya düşer.
+    expect($katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => 'SCIE/SSCI (İlk %1)', 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        ['A1.q1'],
+    ))->toBe(100);
+});
+
 test('Acıbadem 2. bölüm Scopus\'un yalnız Q1-Q2\'sini sayıyor', function () {
     // Kaynağın başlığı: "WEB OF SCIENCE ALL DATABASES veya SCOPUS Q1 ve Q2
     // KATEGORİLERİ KAPSAMINDAKİ DİĞER DERGİLER". Genel `ESCI / Scopus`
