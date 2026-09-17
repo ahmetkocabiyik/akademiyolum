@@ -103,9 +103,14 @@ $maddeler = [
     ...$makale('A1.q1', 'SCI-Expanded veya SSCI kapsamındaki Q1 dergide makale', ['SCIE/SSCI (Q1)'], 100),
     ...$makale('A1.q2', 'SCI-Expanded veya SSCI kapsamındaki Q2 dergide makale', ['SCIE/SSCI (Q2)'], 85),
     ...$makale('A1.q3', 'SCI-Expanded veya SSCI kapsamındaki Q3 dergide makale', ['SCIE/SSCI (Q3)'], 70),
-    ...$makale('A1.q4', 'SCI-Expanded veya SSCI kapsamındaki Q4 dergide makale', ['SCIE/SSCI (Q4)'], 60),
+    // A1'in kümesi kaynağın kendi sözleriyle "SCI-Expanded, SSCI, AHCI VEYA
+    // SCOPUS"; Scopus makalesi ESCI'nin satırına (A2, 50) değil BU merdivene
+    // ait. Kayıt Scopus için çeyrek taşımadığından §0 uyarınca merdivenin en
+    // alt basamağına (Q4, 60) bağlandı.
+    ...$makale('A1.q4', 'SCI-Expanded, SSCI ya da SCOPUS kapsamındaki Q4 dergide makale', ['SCIE/SSCI (Q4)', 'Scopus'], 60),
     ...$makale('A1.ahci', 'AHCI kapsamındaki dergide makale (Q değeri yoksa Q3 sayılır)', ['AHCI'], 70),
-    ...$makale('A2', 'ESCI veya SCOPUS kapsamındaki dergide makale', ['ESCI / Scopus'], 50),
+    // A2 kaynakta yalnız "ESCI" diyor.
+    ...$makale('A2', 'ESCI kapsamındaki dergide makale', ['ESCI'], 50),
     ...$makale('A3', 'ULAKBİM TR Dizin tarafından taranan dergide makale', ['TR Dizin'], 30),
     ...$makale('A4', 'Senato tarafından belirlenen indekslerde taranan dergide makale', ['Diğer Uluslararası İndeks'], 25),
     ...$makale('A6', 'Diğer uluslararası ya da ulusal hakemli dergide makale', ['Diğer Ulusal Hakemli'], 5),

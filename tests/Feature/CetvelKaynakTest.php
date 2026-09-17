@@ -2509,6 +2509,10 @@ test('ESCI ile Scopus ayrı puanlanıyor', function (string $cetvel, Kategori $k
     ['hitit-2026', Kategori::Makale, 14, 10],                      // A.4 ↔ A.3 (Q4)
     ['kocaeli-2023', Kategori::Makale, 25, 20],                    // 5) ↔ 6)
     ['ktu-2023-fen-docent', Kategori::Atif, 2, 2],                 // b) 3/2 → §0 ikisi de 2
+    // NEÜ'de Scopus ESCI'den YÜKSEK: kaynak Scopus'u çekirdek merdiveniyle
+    // birlikte fiyatlıyor (A1: "…AHCI VEYA SCOPUS"), ESCI'yi ayrı (A2: 50).
+    // Kayıt Scopus için çeyrek taşımadığından merdivenin en altı (Q4, 60).
+    ['necmettin-erbakan-2026', Kategori::Makale, 50, 60],
 ]);
 
 test('ayrım yapmayan cetvelde ESCI ve Scopus aynı satıra düşer', function () {

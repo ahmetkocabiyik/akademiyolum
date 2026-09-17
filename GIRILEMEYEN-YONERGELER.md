@@ -1264,10 +1264,12 @@ bulundu ve beşi düzeltildi:
 
 - **AYBÜ** ayrım yapıyor ama iki kademe de aynı değere denk geliyor (ESCI
   çeyreklik merdiveninin Q4'üne, Scopus da 10'a); satır bölünmedi.
-- **Necmettin Erbakan AÇIK KALDI.** Kaynak Scopus'u ÇEKİRDEK kademeyle
-  birlikte fiyatlıyor (A1: "SCI-Expanded, SSCI, AHCI **veya SCOPUS**",
-  Q1-100…), ESCI'yi ayrı (A2: 50). Yani Scopus makalesi çeyrekliğine göre
-  puanlanmalı; bizim kayıtta Scopus için çeyrek yok. Kendi turunu istiyor.
+- **Necmettin Erbakan** aynı gün düzeltildi. Kaynak Scopus'u ÇEKİRDEK
+  merdiveniyle birlikte fiyatlıyor (A1: "SCI-Expanded, SSCI, AHCI **veya
+  SCOPUS**", Q1-100/Q2-85/Q3-70/Q4-60), ESCI'yi ayrı (A2: 50). Scopus
+  makalesi A2'ye düşüp 50 alıyordu; artık A1 merdiveninde. Kayıt Scopus
+  için çeyrek taşımadığından §0 uyarınca en alt basamak (Q4, 60) yazıldı —
+  Q1 Scopus dergisinde yayını olan aday 100 yerine 60 görüyor.
 - **KTÜ'de eksik sayma sürüyor**: kaynak b) satırını "3/2" yazıyor — WOS all
   databases 3, SCOPUS 2. Artık `ESCI` ve `Scopus` ayrı etiketler ama satır
   tek; ikisi de 2 alıyor. ESCI atfı olan aday 3 yerine 2 görüyor.
