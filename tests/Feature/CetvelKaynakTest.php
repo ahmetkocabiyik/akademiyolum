@@ -2571,4 +2571,28 @@ test('Scopus çeyrekliği ayrı puanlanıyor', function (string $cetvel, array $
     // Haliç'in merdiveni zaten Scopus çeyrekliği; WoS etiketine bağlıydı.
     ['halic-2026', ['Q1' => 50, 'Q2' => 40, 'Q3' => 30, 'Q4' => 20]],
     ['hitit-2026', ['Q1' => 20, 'Q2' => 18, 'Q3' => 16, 'Q4' => 10]],
+    // Gümüşhane ÇAPRAZ eşliyor: Scopus çeyrekliği WoS'unkinden bir basamak
+    // yukarı sayılıyor ("WOS Q2 VEYA SCOPUS Q1" 28). Scopus Q4 ise ESCI ile
+    // birlikte A2'de (15).
+    ['gumushane-2026', ['Q1' => 28, 'Q2' => 22, 'Q3' => 18, 'Q4' => 15]],
 ]);
+
+test('Gümüşhane çapraz eşlemesi WoS tarafını kaydırmıyor', function () {
+    // Çaprazın anlamı: aynı puana WoS'un BİR ALT çeyrekliği denk geliyor.
+    // WoS tarafı kaymamalı — Q1 35'te kalmalı, yoksa eşleme iki yana birden
+    // uygulanmış olur.
+    $katalog = sartDepo()->katalog('gumushane-2026');
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('SCIE/SSCI (Q1)'))->toBe(35)
+        ->and($puan('SCIE/SSCI (Q2)'))->toBe($puan('Scopus (Q1)'))
+        ->and($puan('SCIE/SSCI (Q3)'))->toBe($puan('Scopus (Q2)'))
+        ->and($puan('SCIE/SSCI (Q4)'))->toBe($puan('Scopus (Q3)'));
+});

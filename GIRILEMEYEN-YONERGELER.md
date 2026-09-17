@@ -1288,9 +1288,11 @@ Sözlüğe `Scopus (Q1..Q4)` eklendi, geneli `Scopus` cetvel tarafında kaldı.
 **Açık kalanlar** — kaynağı Scopus'u çeyrekliğe göre anıyor ama düzeni
 farklı, kendi turlarını istiyorlar:
 
-- **Gümüşhane** ÇAPRAZ eşleme yapıyor: "WOS Q2 **veya** SCOPUS Q1" 28,
-  "WOS Q3 veya SCOPUS Q2" 22, "WOS Q4 veya SCOPUS Q3" 18. Yani Scopus
-  çeyrekliği WoS'unkinden bir basamak yukarı sayılıyor.
+- **Gümüşhane** aynı gün düzeltildi. ÇAPRAZ eşleme yapıyor: "WOS Q2
+  **veya** SCOPUS Q1" 28, "WOS Q3 veya SCOPUS Q2" 22, "WOS Q4 veya SCOPUS
+  Q3" 18, Scopus Q4 ise ESCI ile birlikte A2'de (15). Satır başlıkları bunu
+  zaten yazıyordu ama Scopus tarafının ETİKETİ yoktu; Scopus makalesi
+  çeyrekliği ne olursa olsun A2'ye düşüp 15 alıyordu (Q1'de 28 yerine).
 - **Acıbadem** "WEB OF SCIENCE ALL DATABASES veya SCOPUS Q1 ve Q2" diye
   ikisini gruplayıp tek satırda topluyor.
 - **Haliç'in "En üst %10" satırı** (Scopus Q1'in ilk %10'u, 70 puan)

@@ -3139,6 +3139,12 @@ kastettiğini SÖYLÜYOR (Haliç 4/c: "Q1–Q4: … Scopus'ta ilgili alan için
 derginin CiteScore sıralaması") — merdiveni yanlış eksene bağlamak satır
 başlığı doğru olsa bile puanı yanlış veriyor.
 
+**İki eksen ÇAPRAZ da eşlenebiliyor.** Gümüşhane her basamağı bir kaydırıyor:
+"WOS Q2 **veya** SCOPUS Q1" aynı satır. Satır iki etiketi birden taşır ama
+çeyreklikleri FARKLIDIR — `['SCIE/SSCI (Q2)', 'Scopus (Q1)']`. Aynı
+çeyrekliği yan yana yazmak (`Q2` ile `Q2`) kaynağı bozar; testte WoS
+tarafının kaymadığı ayrıca sınanıyor.
+
 Eksen yalnız KAPSAM için değil: atıfta ayrım indeks KADEMESİ. Aynı makinede
 iki tür ayrım da taşınabiliyor — ölçüt, kaynağın iki kalemi farklı puanlayıp
 puanlamadığı. Eksen GEREKMEYENLER

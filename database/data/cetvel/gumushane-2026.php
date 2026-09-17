@@ -40,13 +40,20 @@ return [
         // dergilerde araştırma makalesi VEYA DERLEME 5" diyor, A7 aynı
         // dergilerdeki derlemeye 2 diyor. Kaynağın kendi çelişkisi;
         // A4/A5 daha açık olduğu için onlar esas alındı.
-        'A6' => ['baslik' => 'SCI, SCIE, SSCI, AHCI, ESCI ya da SCOPUS dergide teknik not, mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus'], 'turler' => ['vaka_teknik_not'], 'puan' => 3],
+        'A6' => ['baslik' => 'SCI, SCIE, SSCI, AHCI, ESCI ya da SCOPUS dergide teknik not, mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI', 'Scopus (Q1)', 'Scopus (Q2)', 'Scopus (Q3)', 'Scopus (Q4)'], 'turler' => ['vaka_teknik_not'], 'puan' => 3],
         'A7' => ['baslik' => 'Diğer ulusal ya da uluslararası hakemli dergide editöre mektup, araştırma notu, teknik not, vaka takdimi, özet ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not'], 'puan' => 2],
         'A1a' => ['baslik' => 'WOS Q1 dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $YUKSEK, 'puan' => 35],
-        'A1b' => ['baslik' => 'WOS Q2 veya SCOPUS Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)', 'AHCI'], 'turler' => $YUKSEK, 'puan' => 28],
-        'A1c' => ['baslik' => 'WOS Q3 veya SCOPUS Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $YUKSEK, 'puan' => 22],
-        'A1d' => ['baslik' => 'WOS Q4 veya SCOPUS Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => $YUKSEK, 'puan' => 18],
-        'A2' => ['baslik' => 'ESCI/SPORTDiscus/SCOPUS Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $YUKSEK, 'puan' => 15],
+        // ── ÇAPRAZ EŞLEME ──
+        // Kaynak her basamakta WoS ile Scopus çeyrekliğini BİR BASAMAK KAYDIRARAK
+        // eşliyor: "WOS Q2 VEYA SCOPUS Q1", "WOS Q3 veya SCOPUS Q2"… Satır
+        // başlıkları bunu zaten söylüyordu ama Scopus tarafının etiketi yoktu;
+        // Scopus makalesi A2'ye (15) düşüyordu. 17.09.2026'da bağlandı.
+        'A1b' => ['baslik' => 'WOS Q2 veya SCOPUS Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)', 'AHCI', 'Scopus (Q1)'], 'turler' => $YUKSEK, 'puan' => 28],
+        'A1c' => ['baslik' => 'WOS Q3 veya SCOPUS Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'Scopus (Q2)'], 'turler' => $YUKSEK, 'puan' => 22],
+        'A1d' => ['baslik' => 'WOS Q4 veya SCOPUS Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'Scopus (Q3)'], 'turler' => $YUKSEK, 'puan' => 18],
+        // Kaynak A2'de Scopus'un yalnız Q4'ünü sayıyor; genel etiket bütün
+        // çeyreklikleri buraya topluyordu.
+        'A2' => ['baslik' => 'ESCI/SPORTDiscus/SCOPUS Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI', 'Scopus (Q4)'], 'turler' => $YUKSEK, 'puan' => 15],
         'A3' => ['baslik' => 'TR Dizin dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $YUKSEK, 'puan' => 10],
         'A4' => ['baslik' => 'Diğer uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $YUKSEK, 'puan' => 5],
         'A5' => ['baslik' => 'TR Dizin dışı ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $YUKSEK, 'puan' => 4],
