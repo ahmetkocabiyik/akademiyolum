@@ -116,13 +116,14 @@ $maddeler = [
 
     // ══ 3. ATIF ══
     // Kaynağın 3. ATIF tablosu (sayfa 42, görüntüden okundu — PDF taranmış):
-    //   a) SCI, SCI-Exp, SSCI, AHCI          3
-    //   b) (a) dışındaki WOS all databases / SCOPUS   3/2
-    // Yani ESCI (WOS all databases içinde) 3, SCOPUS 2. Sözlükteki
-    // `ESCI / Scopus` etiketi ikisini birden taşıdığı için §0 uyarınca DÜŞÜK
-    // olan (2) yazıldı; ESCI atfı olan aday 3 yerine 2 görür.
+    //   a) SCI, SCI-Exp, SSCI, AHCI                    3
+    //   b) (a) dışındaki WOS all databases / SCOPUS    3/2
     '3.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI dergilerinde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
-    '3.b' => ['baslik' => 'WoS All Databases ya da Scopus kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 2],
+    // Kaynak b) satırını "3/2" diye yazıyor: WOS all databases 3, SCOPUS 2.
+    // Sözlük 17.09.2026'da ESCI ile Scopus'u ayırdı, satır da ikiye bölündü.
+    // 'ESCI' burada "çekirdek indeksler DIŞINDA kalan WoS kapsamı" demek.
+    '3.b' => ['baslik' => 'WoS All Databases kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI'], 'puan' => 3],
+    '3.b2' => ['baslik' => 'Scopus indeksindeki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Scopus'], 'puan' => 2],
     '3.ç' => ['baslik' => 'WoS Book Citation Index kapsamındaki kitapta yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
     '3.c' => ['baslik' => 'TR Dizin ya da diğer dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 1],
     '3.f' => ['baslik' => 'İncelemeli patentte yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 1],

@@ -2464,8 +2464,11 @@ test('atıfta çekirdek indeks ile ESCI ayrı puanlanıyor', function (string $c
         $katalog->coz(['*']),
     );
 
+    // Aday kaydı 17.09.2026'dan beri KAPSAMLI etiketle giriliyor; genel
+    // `ESCI / Scopus` yalnız cetvel tarafında. Ayrım yapmayan satırlarda
+    // zincir üzerinden, yapanlarda doğrudan eşleşir.
     expect($puan('SCIE/SSCI/AHCI'))->toBe($cekirdek)
-        ->and($puan('ESCI / Scopus'))->toBe($esci);
+        ->and($puan('ESCI'))->toBe($esci);
 })->with([
     ['ankara-mgu-2026', 30, 20],       // K.4 30 · K.6 uluslararası 20
     ['asbu-2024', 3, 2],               // I.1 3 · I.3 2
@@ -2473,9 +2476,9 @@ test('atıfta çekirdek indeks ile ESCI ayrı puanlanıyor', function (string $c
     ['gumushane-2026', 5, 3],          // D1 5 · D4 3
     ['hitit-2026', 3, 2],              // 1 → 3 · 2 → 2
     ['istanbul-2026', 4, 3],           // 3.a 4 · 3.b 3
-    // KTÜ'nün tablosu taranmış PDF; sayfa görüntüsünden okundu. b) "3/2"
-    // diyor: WOS all databases 3, SCOPUS 2 — etiket ikisini taşıdığı için §0.
-    ['ktu-2023-fen-docent', 3, 2],
+    // KTÜ bu testte YOK: kaynağı çekirdek indeksi (a, 3) ile WoS all
+    // databases'i (b, 3) AYNI değerde tutuyor, ayrım ESCI ile Scopus
+    // arasında (3 ↔ 2). Onu "ESCI ile Scopus ayrı puanlanıyor" donduruyor.
     ['omu-2025-c-doc', 6, 4],          // 11.1 6 · 11.3 4
     ['rte-2025', 4, 3],                // 4b 4 · 4c 3
     ['zbeu-2026', 3, 2],               // 6.a 3 · 6.b 2
@@ -2508,7 +2511,7 @@ test('ESCI ile Scopus ayrı puanlanıyor', function (string $cetvel, Kategori $k
     ['aksaray-2024', Kategori::Makale, 18, 20],                    // A.3 ↔ A.2
     ['hitit-2026', Kategori::Makale, 14, 10],                      // A.4 ↔ A.3 (Q4)
     ['kocaeli-2023', Kategori::Makale, 25, 20],                    // 5) ↔ 6)
-    ['ktu-2023-fen-docent', Kategori::Atif, 2, 2],                 // b) 3/2 → §0 ikisi de 2
+    ['ktu-2023-fen-docent', Kategori::Atif, 3, 2],                 // b) "3/2" → WoS all databases 3, Scopus 2
     // NEÜ'de Scopus ESCI'den YÜKSEK: kaynak Scopus'u çekirdek merdiveniyle
     // birlikte fiyatlıyor (A1: "…AHCI VEYA SCOPUS"), ESCI'yi ayrı (A2: 50).
     // Kayıt Scopus için çeyrek taşımadığından merdivenin en altı (Q4, 60).

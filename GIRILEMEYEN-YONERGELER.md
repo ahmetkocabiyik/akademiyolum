@@ -1270,6 +1270,6 @@ bulundu ve beşi düzeltildi:
   makalesi A2'ye düşüp 50 alıyordu; artık A1 merdiveninde. Kayıt Scopus
   için çeyrek taşımadığından §0 uyarınca en alt basamak (Q4, 60) yazıldı —
   Q1 Scopus dergisinde yayını olan aday 100 yerine 60 görüyor.
-- **KTÜ'de eksik sayma sürüyor**: kaynak b) satırını "3/2" yazıyor — WOS all
-  databases 3, SCOPUS 2. Artık `ESCI` ve `Scopus` ayrı etiketler ama satır
-  tek; ikisi de 2 alıyor. ESCI atfı olan aday 3 yerine 2 görüyor.
+- **KTÜ** aynı gün düzeltildi: b) satırı "3/2" diyor, satır da ikiye
+  bölündü — WoS all databases (3.b) 3, Scopus (3.b2) 2. Eskiden ikisi de 2
+  alıyordu.
