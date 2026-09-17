@@ -76,6 +76,8 @@ return [
 
     'maddeler' => [
         // ── MAKALE ──
+        // Sözlük 17.09.2026'da dilim kademesini açtı.
+        'M-D10' => ['baslik' => 'WoS CC SCIE/SSCI/AHCI ilk %10\'luk dilime giren dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (İlk %10)'], 'puan' => 120],
         'M-Q1' => ['baslik' => 'WoS CC SCIE/SSCI/AHCI Q1 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'puan' => 90],
         'M-Q2' => ['baslik' => 'WoS CC SCIE/SSCI/AHCI Q2 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'puan' => 75],
         'M-Q3' => ['baslik' => 'WoS CC SCIE/SSCI/AHCI Q3 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'puan' => 45],

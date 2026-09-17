@@ -108,6 +108,8 @@ $WOS_SCOPUS = [...$WOS, 'ESCI / Scopus'];
 
 $maddeler = [
     // ══ A1. ARAŞTIRMA MAKALESİ (ham puan × 0,7) ══
+    // Sözlük 17.09.2026'da dilim kademesini açtı. Ham 90, ×0,7 ile 63.
+    'A1a.d10' => ['baslik' => 'WoS SCI-E, SSCI veya AHCI kapsamındaki Q1 ilk %10\'luk dilim dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (İlk %10)'], 'turler' => $TAM, 'puan' => 63],
     'A1a.q1' => ['baslik' => 'WoS SCI-E, SSCI veya AHCI kapsamındaki Q1 dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $TAM, 'puan' => 42],
     'A1a.q2' => ['baslik' => 'WoS SCI-E, SSCI veya AHCI kapsamındaki Q2 dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $TAM, 'puan' => 31],
     'A1a.q3' => ['baslik' => 'WoS SCI-E, SSCI veya AHCI kapsamındaki Q3 dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $TAM, 'puan' => 21],

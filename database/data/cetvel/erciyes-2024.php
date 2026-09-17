@@ -39,6 +39,8 @@ return [
 
     'maddeler' => [
         // ── 1. BİLİMSEL MAKALE (özgün araştırma ve derleme) ──
+        // Sözlük 17.09.2026'da dilim kademesini açtı.
+        '1a' => ['baslik' => 'WoS en üst %10\'luk dilimli dergide özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (İlk %10)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 80],
         '1b' => ['baslik' => 'WoS Q1 dergide özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 60],
         '1c' => ['baslik' => 'WoS Q2 dergide özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
         '1ç' => ['baslik' => 'WoS Q3 dergide özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],

@@ -78,6 +78,8 @@ $KISA = ['derleme', 'kisa_makale', 'vaka_teknik_not'];
 
 $ek1 = [
     // ══ 1. ULUSLARARASI MAKALE ══
+    // Sözlük 17.09.2026'da dilim kademesini açtı.
+    '1a-D10' => ['baslik' => 'En üst %10\'luk dilimli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (İlk %10)'], 'turler' => $OZGUN, 'puan' => 50],
     '1a-Q1' => ['baslik' => 'SCIE veya SSCI kapsamındaki Q1 dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $OZGUN, 'puan' => 30],
     '1a-Q2' => ['baslik' => 'SCIE veya SSCI kapsamındaki Q2 dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $OZGUN, 'puan' => 20],
     '1a-Q3' => ['baslik' => 'SCIE veya SSCI kapsamındaki Q3 dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $OZGUN, 'puan' => 15],

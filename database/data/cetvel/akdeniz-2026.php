@@ -45,15 +45,12 @@
  */
 
 $ortak = [
-    // BOŞ ETİKET LİSTESİ = BİLEREK ÖLÜ SATIR. Sözlükte "ilk %10" kademesi
-    // yok; en yakın etiket `SCIE/SSCI (Q1)` ve o 1.2'de duruyor. Etiket
-    // buraya da yazılsaydı `puan()` en yükseği aldığı için HER Q1 makalesi
-    // 300 yerine 450 sayılırdı (§0). Satır kaynağın kademesini belgelemek
-    // için duruyor.
+    // Sözlük 17.09.2026'da dilim kademesini açtı; satır ölü değil artık.
+    // `SCIE/SSCI (İlk %10)` yalnız BU satıra düşüyor, Q1 kaydı 1.2'de kalıyor.
     '1.1' => [
         'baslik' => 'SCI-Expanded/SSCI/AHCI ilk %10 dergide makale',
         'kategori' => 'makale',
-        'kaynaklar' => [],
+        'kaynaklar' => ['SCIE/SSCI (İlk %10)'],
         'puan' => 450,
     ],
     '1.2' => [

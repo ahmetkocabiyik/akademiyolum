@@ -1304,20 +1304,30 @@ farklı, kendi turlarını istiyorlar:
 - **Haliç'in "En üst %10" satırı** 17.09.2026'da girildi: sözlüğe dilim
   ekseni eklendi (`Scopus (İlk %10)` → `Scopus (Q1)`), satır 70 puanla açıldı.
 
-### Dilim ekseni — WoS tarafı henüz taranmadı
+### Dilim ekseni — WoS tarafı da bağlandı (17.09.2026)
 
-`SCIE/SSCI (İlk %5)` ve `SCIE/SSCI (İlk %10)` sözlüğe eklendi ama korpusta
-HİÇBİR satıra bağlanmadı. Tarama bu kademeyi kullanan **beş üniversite daha**
-gösteriyor; değerleri kaynaktan okunmadı:
+Beş üniversitenin dilim kademesi açıldı. Değerler dosyaların KENDİ
+notlarında zaten yazılıydı (önceki turlarda kaynaktan okunmuş, sözlükte
+karşılığı olmadığı için girilememişti):
 
-- **Çukurova** — "WoS CC SCIE, SSCI, AHCI - İlk %10'luk dilime giren dergi 120"
-- **Harran** — "Q1-İlk %10'luk dilime giren dergi 90"
-- **Akdeniz** — 1.1 "SCI-Expanded, SSCI ve AHCI kapsamındaki ilk %10'luk
-  kategorideki dergilerde yayımlanmış özgün..."
-- **Kırşehir Ahi Evran** — "En üst %10'luk dilimli dergilerde yayımlanmış makale 50"
-- **Erciyes** — "Web of Science tarafından taranan, en üst %10'luk dilimli dergilerde"
-- **Necmettin Erbakan** — A1'in üstünde iki kademe: "İlk %5 Dilimdeki Q1
-  Dergiler 175", "İlk %10 Dilimdeki Q1 Dergiler 150"
+| Cetvel | Dilim | Q1 |
+|---|---|---|
+| Çukurova | 120 | 90 |
+| Akdeniz | 450 | 300 |
+| Erciyes | 80 | 60 |
+| Harran | 63 | 42 (ham 90/60, ×0,7) |
+| Kırşehir Ahi Evran | 50 | 30 |
 
-Ayrıca **İnönü** dilimi ÇARPAN olarak kullanıyor (%1 → ×3, %10 → ×1,5);
-o başka bir yapı.
+Akdeniz'inki "bilerek ölü satır" olarak duruyordu (`'kaynaklar' => []`),
+şimdi dirildi.
+
+**Necmettin Erbakan AÇIK**: A1'in üstünde İKİ kademe var — "İlk %5 Dilimdeki
+Q1 Dergiler 175" ve "İlk %10 Dilimdeki Q1 Dergiler 150". `SCIE/SSCI (İlk %5)`
+sözlükte duruyor ama hiçbir satıra bağlı değil.
+
+**İnönü** dilimi ÇARPAN olarak kullanıyor (%1 → ×3, %10 → ×1,5); motorun
+satır bazlı çarpanı yok, başka bir yapı.
+
+**Harran'da ikinci bir çökme daha var**: A1b ESCI (10) ile Scopus Q1-Q4
+(50-10) tek `ESCI / Scopus` etiketine düşüyor → 10. Scopus çeyrekliği artık
+sözlükte, bölünebilir.

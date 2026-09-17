@@ -606,7 +606,6 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
 
     // Her birinin gerekçesi kendi cetvel dosyasında yazılı.
     expect($bosSatirlar)->toBe([
-        '1.1 · SCI-Expanded/SSCI/AHCI ilk %10 dergide makale',
         // Siirt 13.c (10) ile 13.d (4) aynı etiketlere düşüyor; etiketler en
         // düşük kademeye taşındı, bu satır belgelemek için duruyor.
         // Selçuk 11e/12e: koordinatörlük etiketi bir alt kademeye (koordinatör
@@ -2615,6 +2614,32 @@ test('dilim ekseni Q1\'in ALT KÜMESİ olarak çalışıyor', function () {
         ->toContain('Scopus (Q1)')
         ->toContain('Scopus (İlk %10)');
 });
+
+test('WoS ilk %10 dilimi Q1\'den ayrı puanlanıyor', function (string $cetvel, int $dilim, int $q1) {
+    // Beş kaynak Q1'in üstünde bir kademe daha tanıyor. Sözlükte karşılığı
+    // olmadığı için satırlar ya hiç girilmemiş ya da §0 uyarınca Q1 değerine
+    // düşürülmüştü; dilime giren makale Q1 puanı alıyordu.
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('SCIE/SSCI (İlk %10)'))->toBe($dilim)
+        ->and($puan('SCIE/SSCI (Q1)'))->toBe($q1)
+        ->and($dilim)->toBeGreaterThan($q1);
+})->with([
+    ['cukurova-2024', 120, 90],
+    ['harran-2026', 63, 42],                       // ham 90/60, ×0,7
+    ['akdeniz-2026-edebiyat-profesor', 450, 300],  // satır ölüydü, dirildi
+    ['erciyes-2024', 80, 60],
+    ['ahi-evran-2024', 50, 30],
+]);
 
 test('Acıbadem 2. bölüm Scopus\'un yalnız Q1-Q2\'sini sayıyor', function () {
     // Kaynağın başlığı: "WEB OF SCIENCE ALL DATABASES veya SCOPUS Q1 ve Q2
