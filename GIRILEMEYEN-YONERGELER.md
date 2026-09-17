@@ -1248,3 +1248,26 @@ birden taşıdığı için §0 uyarınca 2 yazıldı — ESCI atfı olan aday 3 
 görüyor.
 
 Artık 175 kaynağın hepsi satır düzeyinde okunabiliyor.
+
+## ESCI ↔ Scopus ayrımı (17.09.2026)
+
+Sözlük ESCI ile Scopus'u ayırdı. 175 kaynak tarandı, **altısında** ayrım
+bulundu ve beşi düzeltildi:
+
+| Üniversite | ESCI | Scopus |
+|---|---|---|
+| Akdeniz (1.6/1.7 makale) | 50 | 30 |
+| Aksaray (A.3/A.2 makale) | 18 | 20 |
+| Hitit (A.4/A.3 makale) | 14 | 10 (Q4) |
+| Kocaeli (5/6 makale) | 25 | 20 |
+| KTÜ (atıf b) | 3 | 2 |
+
+- **AYBÜ** ayrım yapıyor ama iki kademe de aynı değere denk geliyor (ESCI
+  çeyreklik merdiveninin Q4'üne, Scopus da 10'a); satır bölünmedi.
+- **Necmettin Erbakan AÇIK KALDI.** Kaynak Scopus'u ÇEKİRDEK kademeyle
+  birlikte fiyatlıyor (A1: "SCI-Expanded, SSCI, AHCI **veya SCOPUS**",
+  Q1-100…), ESCI'yi ayrı (A2: 50). Yani Scopus makalesi çeyrekliğine göre
+  puanlanmalı; bizim kayıtta Scopus için çeyrek yok. Kendi turunu istiyor.
+- **KTÜ'de eksik sayma sürüyor**: kaynak b) satırını "3/2" yazıyor — WOS all
+  databases 3, SCOPUS 2. Artık `ESCI` ve `Scopus` ayrı etiketler ama satır
+  tek; ikisi de 2 alıyor. ESCI atfı olan aday 3 yerine 2 görüyor.

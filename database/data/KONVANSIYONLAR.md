@@ -3120,10 +3120,18 @@ kapsam çiftine sahip olup ötekinde olmayabiliyor. `Diğer` bunun örneği —
 `atif` ve `tez_yayini`'nde çifti var, `diger` kategorisinde ("Diğer
 Etkinlik") kapsam ayrımı anlamsız ve orada adayın seçebileceği tek etiket o.
 
-Eksene kavuşan on kalem: kitap · kitap bölümü · çeviri kitap · çeviri
+**Zincir İKİ KADEMELİ olabiliyor** ve eşleştirici onu YÜRÜMEK zorunda:
+`ESCI` → `ESCI / Scopus` → `WoS / Scopus`. Tek adım atmak, ayrım yapmayan
+atıf satırlarını (korpusta dört yüzden fazla) kapsamlı kayda kapatıyor ve
+aday puanını SESSİZCE kaybediyor. `MaddeKatalogu::kaynakEsler()` döngü
+korumasıyla zinciri sonuna kadar izliyor; testi var.
+
+Eksene kavuşan on iki kalem: kitap · kitap bölümü · çeviri kitap · çeviri
 kitap bölümü · kitap editörlüğü · ders/metot kitabı · davetli konuşmacı ·
 diğer hakemli dergi (editörlük) · atıfta diğer ve patent · atıfta ESCI
-(`SCIE/SSCI/AHCI` ↔ `ESCI / Scopus`, geneli `WoS / Scopus`).
+(`SCIE/SSCI/AHCI` ↔ `ESCI / Scopus`, geneli `WoS / Scopus`) · ESCI ↔ Scopus
+(makale, tez yayını ve atıfta `ESCI`/`Scopus`, editörlükte `ESCI Dergi`/
+`Scopus Dergi`).
 
 Eksen yalnız KAPSAM için değil: atıfta ayrım indeks KADEMESİ. Aynı makinede
 iki tür ayrım da taşınabiliyor — ölçüt, kaynağın iki kalemi farklı puanlayıp

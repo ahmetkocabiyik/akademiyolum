@@ -86,7 +86,12 @@ $maddeler = [
     'A01.q3' => ['baslik' => 'SCIE veya SSCI tarafından dizinlenen Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $TAM, 'puan' => 18],
     'A01.q4' => ['baslik' => 'SCIE veya SSCI tarafından dizinlenen Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => $TAM, 'puan' => 10],
     'A02' => ['baslik' => 'AHCI tarafından dizinlenen dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['AHCI'], 'turler' => $TAM, 'puan' => 20],
-    'A03' => ['baslik' => 'SCOPUS ya da ESCI tarafından dizinlenen dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $TAM, 'puan' => 10],
+    // Sözlük 17.09.2026'da ESCI ile Scopus'u ayırdı. Kaynak A.3'ü (SCOPUS)
+    // çeyrekliğe göre 20/18/16/10 puanlıyor; kayıt Scopus için çeyrek
+    // taşımadığından §0 uyarınca en düşüğü (Q4, 10) yazılı. A.4 (ESCI) ise
+    // düz 14 — eskiden ESCI makalesi de 10 alıyordu.
+    'A03' => ['baslik' => 'SCOPUS tarafından dizinlenen dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus'], 'turler' => $TAM, 'puan' => 10],
+    'A04' => ['baslik' => 'ESCI tarafından dizinlenen dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $TAM, 'puan' => 14],
     'A05' => ['baslik' => 'TR Dizin tarafından dizinlenen dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $TAM, 'puan' => 12],
     'A08' => ['baslik' => 'SCIE, SSCI, AHCI, ESCI, Scopus ve TR Dizin dışındaki indekslerde dizinlenen hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $TAM, 'puan' => 5],
     'A11' => ['baslik' => 'Herhangi bir indekste dizinlenmeyen hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 2],
@@ -183,7 +188,7 @@ $maddeler = [
     '23-ulusal' => ['baslik' => 'Spor federasyonunun yönetim, teknik, eğitim ya da hakem kurulunda görev', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Spor Federasyonu Kurul Üyeliği (Ulusal)'], 'puan' => 2],
 ];
 
-$A_MAKALE = ['A01.q1', 'A01.q2', 'A01.q3', 'A01.q4', 'A02', 'A03'];
+$A_MAKALE = ['A01.q1', 'A01.q2', 'A01.q3', 'A01.q4', 'A02', 'A03', 'A04'];
 $CEKIRDEK = [...$A_MAKALE, 'A05', 'B01', 'B02', 'B04', 'B07', 'B08', 'N01', 'N02', 'N03'];
 $DERS = ['J01', 'J02'];
 

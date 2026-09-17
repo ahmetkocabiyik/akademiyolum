@@ -607,7 +607,6 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
     // Her birinin gerekçesi kendi cetvel dosyasında yazılı.
     expect($bosSatirlar)->toBe([
         '1.1 · SCI-Expanded/SSCI/AHCI ilk %10 dergide makale',
-        '1.6 · ESCI dergide makale',
         // Siirt 13.c (10) ile 13.d (4) aynı etiketlere düşüyor; etiketler en
         // düşük kademeye taşındı, bu satır belgelemek için duruyor.
         // Selçuk 11e/12e: koordinatörlük etiketi bir alt kademeye (koordinatör
@@ -2481,3 +2480,53 @@ test('atıfta çekirdek indeks ile ESCI ayrı puanlanıyor', function (string $c
     ['rte-2025', 4, 3],                // 4b 4 · 4c 3
     ['zbeu-2026', 3, 2],               // 6.a 3 · 6.b 2
 ]);
+
+/**
+ * ESCI ile SCOPUS'u AYRI puanlayan kaynaklar.
+ *
+ * 17.09.2026'da 175 kaynak tarandı; altısında ayrım bulundu. AYBÜ ayrımı
+ * yapıyor ama iki kademe de aynı değere denk geliyor (ESCI çeyreklik
+ * merdiveninin Q4'üne, Scopus da 10'a), o yüzden listede yok. NEÜ'de Scopus
+ * ÇEKİRDEK kademeyle birlikte fiyatlanıyor (A1), ayrı bir tur konusu.
+ */
+test('ESCI ile Scopus ayrı puanlanıyor', function (string $cetvel, Kategori $kategori, int $esci, int $scopus) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => $kategori, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('ESCI'))->toBe($esci)
+        ->and($puan('Scopus'))->toBe($scopus);
+})->with([
+    ['akdeniz-2026-edebiyat-profesor', Kategori::Makale, 50, 30],  // 1.6 ↔ 1.7
+    ['aksaray-2024', Kategori::Makale, 18, 20],                    // A.3 ↔ A.2
+    ['hitit-2026', Kategori::Makale, 14, 10],                      // A.4 ↔ A.3 (Q4)
+    ['kocaeli-2023', Kategori::Makale, 25, 20],                    // 5) ↔ 6)
+    ['ktu-2023-fen-docent', Kategori::Atif, 2, 2],                 // b) 3/2 → §0 ikisi de 2
+]);
+
+test('ayrım yapmayan cetvelde ESCI ve Scopus aynı satıra düşer', function () {
+    // Korpusun büyük çoğunluğu ayrım yapmıyor; o satırlar GENEL etiketi
+    // taşımayı sürdürüyor ve zincir iki kademe: 'ESCI' → 'ESCI / Scopus' →
+    // 'WoS / Scopus'. Tek adım atan bir eşleştirici bu satırları kapsamlı
+    // kayda kapatır, aday puanını SESSİZCE kaybederdi.
+    $katalog = sartDepo()->katalog('ankara-2023');
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Atif, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('ESCI'))->toBe($puan('Scopus'))
+        ->and($puan('ESCI'))->toBe($puan('SCIE/SSCI/AHCI'))
+        ->and($puan('ESCI'))->toBeGreaterThan(0);
+});

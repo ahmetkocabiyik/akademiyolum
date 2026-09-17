@@ -62,7 +62,10 @@ $govde = [
         'A2' => ['baslik' => 'SCI-E/SSCI/AHCI Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 55],
         'A3' => ['baslik' => 'SCI-E/SSCI/AHCI Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
         'A4' => ['baslik' => 'SCI-E/SSCI/AHCI Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
-        'A5' => ['baslik' => 'ESCI taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
+        // Sözlük 17.09.2026'da ESCI ile Scopus'u ayırdı. Kaynak 5) ESCI'yi 25,
+        // 6) Scopus'u 20 puanlıyor; eskiden Scopus makalesi de 25 alıyordu.
+        'A5' => ['baslik' => 'ESCI taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
+        'A6' => ['baslik' => 'Scopus taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
         'A7' => ['baslik' => 'Uluslararası diğer indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
         'A8' => ['baslik' => 'ULAKBİM TR Dizin taranan ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
         'A9' => ['baslik' => 'Diğer ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],

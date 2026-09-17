@@ -82,16 +82,19 @@ $ortak = [
     ],
     // Kaynak ESCI (50) ile SCOPUS'u (30) ayırıyor, sözlükte ise tek
     // `ESCI / Scopus` etiketi var. Etiket 1.7'de duruyor; 1.6 bilerek ölü.
+    // Sözlük 17.09.2026'da ESCI ile Scopus'u ayırdı; satır ölü değil artık.
+    // Kaynak 1.6'yı (ESCI, 50) ve 1.7'yi (SCOPUS, 30) ayrı puanlıyor —
+    // eskiden ESCI makalesi 1.7'ye düşüp 30 alıyordu.
     '1.6' => [
         'baslik' => 'ESCI dergide makale',
         'kategori' => 'makale',
-        'kaynaklar' => [],
+        'kaynaklar' => ['ESCI'],
         'puan' => 50,
     ],
     '1.7' => [
         'baslik' => 'SCOPUS dergide makale',
         'kategori' => 'makale',
-        'kaynaklar' => ['ESCI / Scopus'],
+        'kaynaklar' => ['Scopus'],
         'puan' => 30,
     ],
     '1.8' => [

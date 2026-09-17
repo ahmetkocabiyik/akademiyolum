@@ -125,10 +125,11 @@ enum Kategori: string
             'Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Çeviri Kitap',
             'Çeviri Kitap Bölümü', 'Ders / Metot Kitabı',
         ],
+        'makale' => ['ESCI / Scopus'],
         'bildiri' => ['Davetli Konuşmacı'],
-        'editorluk' => ['Kitap Editörlüğü', 'Diğer Hakemli Dergi'],
-        'atif' => ['WoS / Scopus', 'Patent', 'Diğer'],
-        'tez_yayini' => ['Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Diğer'],
+        'editorluk' => ['Kitap Editörlüğü', 'Diğer Hakemli Dergi', 'ESCI / Scopus Dergi'],
+        'atif' => ['WoS / Scopus', 'ESCI / Scopus', 'Patent', 'Diğer'],
+        'tez_yayini' => ['Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Diğer', 'ESCI / Scopus'],
     ];
 
     /**
@@ -156,7 +157,7 @@ enum Kategori: string
         return match ($this) {
             self::Makale => [
                 'SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)',
-                'AHCI', 'ESCI / Scopus', 'TR Dizin',
+                'AHCI', 'ESCI', 'Scopus', 'ESCI / Scopus', 'TR Dizin',
                 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli',
             ],
             self::Bildiri => [
@@ -181,7 +182,7 @@ enum Kategori: string
                 'Ders / Metot Kitabı',
             ],
             self::TezYayini => [
-                'SCIE/SSCI/AHCI', 'ESCI / Scopus', 'TR Dizin',
+                'SCIE/SSCI/AHCI', 'ESCI', 'Scopus', 'ESCI / Scopus', 'TR Dizin',
                 'BKCI / Scopus Kitap', 'BKCI / Scopus Kitap Bölümü',
                 'Uluslararası Kitap', 'Ulusal Kitap', 'Uluslararası/Ulusal Kitap',
                 'Uluslararası Kitap Bölümü', 'Ulusal Kitap Bölümü', 'Kitap Bölümü',
@@ -192,7 +193,7 @@ enum Kategori: string
                 // Kaynakların bir kısmı atıfta çekirdek indeksle ESCI'yi ayrı
                 // puanlıyor (Cerrahpaşa A/11: SCIE-SSCI-AHCI 10, ESCI 7);
                 // `WoS / Scopus` ikisini birden karşılayan GENEL etiket.
-                'SCIE/SSCI/AHCI', 'ESCI / Scopus', 'WoS / Scopus',
+                'SCIE/SSCI/AHCI', 'ESCI', 'Scopus', 'ESCI / Scopus', 'WoS / Scopus',
                 'BKCI Kitap', 'TR Dizin',
                 'Patent (Uluslararası)', 'Patent (Ulusal)', 'Patent',
                 'Diğer (Uluslararası)', 'Diğer (Ulusal)', 'Diğer',
@@ -228,7 +229,7 @@ enum Kategori: string
             // dördünü birden listeler (makale tarafındaki desenin aynısı).
             self::Editorluk => [
                 'WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)',
-                'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi',
+                'ESCI Dergi', 'Scopus Dergi', 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi',
                 'BKCI Kitap',
                 'Uluslararası Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü',
                 'Diğer Hakemli Dergi (Uluslararası)', 'Diğer Hakemli Dergi (Ulusal)',

@@ -148,7 +148,10 @@ return [
         'A.1-Q3' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI Q3 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale'], 'puan' => 40],
         'A.1-Q4' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI Q4 dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['ozgun_makale'], 'puan' => 30],
         'A.1' => ['baslik' => "SCI-Expanded, SSCI veya AHCI'de taranan dergide AHCI ile taranan özgün araştırma makalesi", 'kategori' => 'makale', 'kaynaklar' => ['AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 60],
-        'A.2-A.3' => ['baslik' => 'Scopus veya ESCI tarafından indekslenmiş dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale'], 'puan' => 18],
+        // Sözlük 17.09.2026'da ESCI ile Scopus'u ayırdı. A.2 (Scopus, 20) ile A.3 (ESCI, 18)
+        // ayrı satırlar; eskiden ikisi de 18 alıyordu.
+        'A.2' => ['baslik' => 'Scopus tarafından indekslenmiş dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Scopus'], 'turler' => ['ozgun_makale'], 'puan' => 20],
+        'A.3' => ['baslik' => 'ESCI tarafından indekslenmiş dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale'], 'puan' => 18],
         'A.4' => ['baslik' => 'ULAKBİM TR-Dizin tarafından indekslenmiş dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale'], 'puan' => 14],
         'A.5' => ['baslik' => 'A1-A3 dışındaki diğer uluslararası indekslerde taranan dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale'], 'puan' => 10],
         'A.6' => ['baslik' => 'Diğer ulusal hakemli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale'], 'puan' => 7],

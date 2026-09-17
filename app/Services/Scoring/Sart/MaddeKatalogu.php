@@ -401,6 +401,10 @@ readonly class MaddeKatalogu
         'Diğer (Ulusal)' => 'Diğer',
         'SCIE/SSCI/AHCI' => 'WoS / Scopus',
         'ESCI / Scopus' => 'WoS / Scopus',
+        'ESCI' => 'ESCI / Scopus',
+        'Scopus' => 'ESCI / Scopus',
+        'ESCI Dergi' => 'ESCI / Scopus Dergi',
+        'Scopus Dergi' => 'ESCI / Scopus Dergi',
     ];
 
     /**
@@ -415,13 +419,22 @@ readonly class MaddeKatalogu
      */
     private static function kaynakEsler(?string $kaynak, array $kaynaklar): bool
     {
-        if (in_array($kaynak, $kaynaklar, true)) {
-            return true;
+        // Zincir İKİ KADEMELİ olabiliyor: 'ESCI' → 'ESCI / Scopus' →
+        // 'WoS / Scopus'. Tek adım atmak, ayrım yapmayan atıf satırlarını
+        // (korpusta dört yüzden fazla) kapsamlı kayda kapatıyordu — aday
+        // puanını sessizce kaybediyordu.
+        $gorulen = [];
+
+        while ($kaynak !== null && ! isset($gorulen[$kaynak])) {
+            if (in_array($kaynak, $kaynaklar, true)) {
+                return true;
+            }
+
+            $gorulen[$kaynak] = true;
+            $kaynak = self::GENEL_ETIKET[$kaynak] ?? null;
         }
 
-        $genel = self::GENEL_ETIKET[$kaynak] ?? null;
-
-        return $genel !== null && in_array($genel, $kaynaklar, true);
+        return false;
     }
 
     /**
