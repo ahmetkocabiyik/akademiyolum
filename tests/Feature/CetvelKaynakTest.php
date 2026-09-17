@@ -2509,7 +2509,9 @@ test('ESCI ile Scopus ayrı puanlanıyor', function (string $cetvel, Kategori $k
 })->with([
     ['akdeniz-2026-edebiyat-profesor', Kategori::Makale, 50, 30],  // 1.6 ↔ 1.7
     ['aksaray-2024', Kategori::Makale, 18, 20],                    // A.3 ↔ A.2
-    ['hitit-2026', Kategori::Makale, 14, 10],                      // A.4 ↔ A.3 (Q4)
+    // Hitit bu testte YOK: Scopus tarafı 17.09.2026'da çeyreklik
+    // merdivenine geçti, genel `Scopus` etiketi orada artık hiçbir satırda
+    // durmuyor. Aşağıdaki "Scopus çeyrekliği" testi donduruyor.
     ['kocaeli-2023', Kategori::Makale, 25, 20],                    // 5) ↔ 6)
     ['ktu-2023-fen-docent', Kategori::Atif, 3, 2],                 // b) "3/2" → WoS all databases 3, Scopus 2
     // NEÜ'de Scopus ESCI'den YÜKSEK: kaynak Scopus'u çekirdek merdiveniyle
@@ -2537,3 +2539,36 @@ test('ayrım yapmayan cetvelde ESCI ve Scopus aynı satıra düşer', function (
         ->and($puan('ESCI'))->toBe($puan('SCIE/SSCI/AHCI'))
         ->and($puan('ESCI'))->toBeGreaterThan(0);
 });
+
+/**
+ * SCOPUS ÇEYREKLİĞİ: kaynak Scopus dergilerini çeyrekliğe göre puanlıyorsa
+ * dört basamak da kendi değerinde olmalı.
+ *
+ * 17.09.2026'da 175 kaynak tarandı. Değerler kaynaktan okundu.
+ */
+test('Scopus çeyrekliği ayrı puanlanıyor', function (string $cetvel, array $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    $gercek = [];
+
+    foreach ([1, 2, 3, 4] as $q) {
+        $gercek["Q{$q}"] = $puan("Scopus (Q{$q})");
+    }
+
+    expect($gercek)->toBe($beklenen);
+})->with([
+    // Çukurova'nın AYRI Scopus merdiveni hiç girilmemişti.
+    ['cukurova-2024', ['Q1' => 75, 'Q2' => 45, 'Q3' => 15, 'Q4' => 10]],
+    // Haliç'in merdiveni zaten Scopus çeyrekliği; WoS etiketine bağlıydı.
+    ['halic-2026', ['Q1' => 50, 'Q2' => 40, 'Q3' => 30, 'Q4' => 20]],
+    ['hitit-2026', ['Q1' => 20, 'Q2' => 18, 'Q3' => 16, 'Q4' => 10]],
+]);

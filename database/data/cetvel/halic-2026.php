@@ -74,9 +74,14 @@ $SCOPUS_DERGI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSC
 
 $maddeler = [
     // ══ EK-1/A MAKALE ══
-    'EK1.A2' => ['baslik' => 'Scopus Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $TAM, 'puan' => 50],
-    'EK1.A3' => ['baslik' => 'Scopus Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $TAM, 'puan' => 40],
-    'EK1.A4' => ['baslik' => 'Scopus Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $TAM, 'puan' => 30],
+    // Sözlük 17.09.2026'da Scopus çeyrekliğini ayırdı. Bu merdivenin çeyreklikleri
+    // kaynağın 4/c maddesine göre SCOPUS CiteScore'dan geliyor, WoS'tan
+    // değil; etiketler WoS çeyrekliğine bağlıydı. Scopus Q1 makalesi
+    // A5'e düşüp 20 alıyordu. WoS dergileri kaynağın kendi sözleriyle
+    // A5'te ("Scopus dışı WoS dergide makale").
+    'EK1.A2' => ['baslik' => 'Scopus Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q1)'], 'turler' => $TAM, 'puan' => 50],
+    'EK1.A3' => ['baslik' => 'Scopus Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q2)'], 'turler' => $TAM, 'puan' => 40],
+    'EK1.A4' => ['baslik' => 'Scopus Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q3)'], 'turler' => $TAM, 'puan' => 30],
     'EK1.A5' => ['baslik' => 'Scopus Q4 dergide ya da Scopus dışı WoS dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus'], 'turler' => $TAM, 'puan' => 20],
     'EK1.A6' => ['baslik' => 'Scopus veya WoS dergide yayımlanmış editöre mektup, teknik not, vaka analizi ya da tartışma', 'kategori' => 'makale', 'kaynaklar' => $SCOPUS_DERGI, 'turler' => $KISA, 'puan' => 6],
     'EK1.A8' => ['baslik' => 'TR Dizin dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $TAM, 'puan' => 16],

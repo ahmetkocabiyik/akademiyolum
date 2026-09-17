@@ -405,6 +405,10 @@ readonly class MaddeKatalogu
         'Scopus' => 'ESCI / Scopus',
         'ESCI Dergi' => 'ESCI / Scopus Dergi',
         'Scopus Dergi' => 'ESCI / Scopus Dergi',
+        'Scopus (Q1)' => 'Scopus',
+        'Scopus (Q2)' => 'Scopus',
+        'Scopus (Q3)' => 'Scopus',
+        'Scopus (Q4)' => 'Scopus',
     ];
 
     /**

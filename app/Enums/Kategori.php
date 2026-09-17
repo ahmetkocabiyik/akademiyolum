@@ -125,11 +125,11 @@ enum Kategori: string
             'Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Çeviri Kitap',
             'Çeviri Kitap Bölümü', 'Ders / Metot Kitabı',
         ],
-        'makale' => ['ESCI / Scopus'],
+        'makale' => ['ESCI / Scopus', 'Scopus'],
         'bildiri' => ['Davetli Konuşmacı'],
         'editorluk' => ['Kitap Editörlüğü', 'Diğer Hakemli Dergi', 'ESCI / Scopus Dergi'],
-        'atif' => ['WoS / Scopus', 'ESCI / Scopus', 'Patent', 'Diğer'],
-        'tez_yayini' => ['Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Diğer', 'ESCI / Scopus'],
+        'atif' => ['WoS / Scopus', 'ESCI / Scopus', 'Scopus', 'Patent', 'Diğer'],
+        'tez_yayini' => ['Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Diğer', 'ESCI / Scopus', 'Scopus'],
     ];
 
     /**
@@ -157,7 +157,9 @@ enum Kategori: string
         return match ($this) {
             self::Makale => [
                 'SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)',
-                'AHCI', 'ESCI', 'Scopus', 'ESCI / Scopus', 'TR Dizin',
+                'AHCI', 'ESCI',
+                'Scopus (Q1)', 'Scopus (Q2)', 'Scopus (Q3)', 'Scopus (Q4)', 'Scopus',
+                'ESCI / Scopus', 'TR Dizin',
                 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli',
             ],
             self::Bildiri => [
@@ -182,7 +184,9 @@ enum Kategori: string
                 'Ders / Metot Kitabı',
             ],
             self::TezYayini => [
-                'SCIE/SSCI/AHCI', 'ESCI', 'Scopus', 'ESCI / Scopus', 'TR Dizin',
+                'SCIE/SSCI/AHCI', 'ESCI',
+                'Scopus (Q1)', 'Scopus (Q2)', 'Scopus (Q3)', 'Scopus (Q4)', 'Scopus',
+                'ESCI / Scopus', 'TR Dizin',
                 'BKCI / Scopus Kitap', 'BKCI / Scopus Kitap Bölümü',
                 'Uluslararası Kitap', 'Ulusal Kitap', 'Uluslararası/Ulusal Kitap',
                 'Uluslararası Kitap Bölümü', 'Ulusal Kitap Bölümü', 'Kitap Bölümü',
@@ -193,7 +197,9 @@ enum Kategori: string
                 // Kaynakların bir kısmı atıfta çekirdek indeksle ESCI'yi ayrı
                 // puanlıyor (Cerrahpaşa A/11: SCIE-SSCI-AHCI 10, ESCI 7);
                 // `WoS / Scopus` ikisini birden karşılayan GENEL etiket.
-                'SCIE/SSCI/AHCI', 'ESCI', 'Scopus', 'ESCI / Scopus', 'WoS / Scopus',
+                'SCIE/SSCI/AHCI', 'ESCI',
+                'Scopus (Q1)', 'Scopus (Q2)', 'Scopus (Q3)', 'Scopus (Q4)', 'Scopus',
+                'ESCI / Scopus', 'WoS / Scopus',
                 'BKCI Kitap', 'TR Dizin',
                 'Patent (Uluslararası)', 'Patent (Ulusal)', 'Patent',
                 'Diğer (Uluslararası)', 'Diğer (Ulusal)', 'Diğer',

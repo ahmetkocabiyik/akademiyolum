@@ -1273,3 +1273,25 @@ bulundu ve beşi düzeltildi:
 - **KTÜ** aynı gün düzeltildi: b) satırı "3/2" diyor, satır da ikiye
   bölündü — WoS all databases (3.b) 3, Scopus (3.b2) 2. Eskiden ikisi de 2
   alıyordu.
+
+## Scopus çeyrekliği (17.09.2026)
+
+Sözlüğe `Scopus (Q1..Q4)` eklendi, geneli `Scopus` cetvel tarafında kaldı.
+Üç cetvel düzeltildi:
+
+| Cetvel | Q1 | Q2 | Q3 | Q4 | Neydi |
+|---|---|---|---|---|---|
+| Çukurova | 75 | 45 | 15 | 10 | Scopus merdiveni HİÇ girilmemişti; Scopus makalesi ESCI satırına düşüp 10 alıyordu |
+| Haliç | 50 | 40 | 30 | 20 | Merdiven Scopus çeyrekliğiydi ama WoS etiketine bağlıydı; Scopus Q1 makalesi 20 alıyordu |
+| Hitit | 20 | 18 | 16 | 10 | Tek satır, en düşük basamakta |
+
+**Açık kalanlar** — kaynağı Scopus'u çeyrekliğe göre anıyor ama düzeni
+farklı, kendi turlarını istiyorlar:
+
+- **Gümüşhane** ÇAPRAZ eşleme yapıyor: "WOS Q2 **veya** SCOPUS Q1" 28,
+  "WOS Q3 veya SCOPUS Q2" 22, "WOS Q4 veya SCOPUS Q3" 18. Yani Scopus
+  çeyrekliği WoS'unkinden bir basamak yukarı sayılıyor.
+- **Acıbadem** "WEB OF SCIENCE ALL DATABASES veya SCOPUS Q1 ve Q2" diye
+  ikisini gruplayıp tek satırda topluyor.
+- **Haliç'in "En üst %10" satırı** (Scopus Q1'in ilk %10'u, 70 puan)
+  girilemedi: sözlükte yüzdelik dilim ekseni yok, Q1 makalesi 50 alıyor.

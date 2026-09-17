@@ -80,7 +80,14 @@ return [
         'M-Q2' => ['baslik' => 'WoS CC SCIE/SSCI/AHCI Q2 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'puan' => 75],
         'M-Q3' => ['baslik' => 'WoS CC SCIE/SSCI/AHCI Q3 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'puan' => 45],
         'M-Q4' => ['baslik' => 'WoS CC SCIE/SSCI/AHCI Q4 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'puan' => 15],
-        'M-ESCI' => ['baslik' => 'WoS CC ESCI dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 10],
+        'M-ESCI' => ['baslik' => 'WoS CC ESCI dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'puan' => 10],
+        // Sözlük 17.09.2026'da Scopus çeyrekliğini ayırdı. Kaynağın AYRI bir Scopus
+        // merdiveni var (75/45/15/10) ve hiç girilmemişti; Scopus makalesi
+        // ESCI satırına düşüp 10 alıyordu.
+        'M-SQ1' => ['baslik' => 'Scopus Q1 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q1)'], 'puan' => 75],
+        'M-SQ2' => ['baslik' => 'Scopus Q2 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q2)'], 'puan' => 45],
+        'M-SQ3' => ['baslik' => 'Scopus Q3 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q3)'], 'puan' => 15],
+        'M-SQ4' => ['baslik' => 'Scopus Q4 sınıfı dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q4)'], 'puan' => 10],
         'M-TR' => ['baslik' => 'TR Dizin dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
         'M-DIGER' => ['baslik' => 'Diğer uluslararası endeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'puan' => 5],
 

@@ -90,7 +90,12 @@ $maddeler = [
     // çeyrekliğe göre 20/18/16/10 puanlıyor; kayıt Scopus için çeyrek
     // taşımadığından §0 uyarınca en düşüğü (Q4, 10) yazılı. A.4 (ESCI) ise
     // düz 14 — eskiden ESCI makalesi de 10 alıyordu.
-    'A03' => ['baslik' => 'SCOPUS tarafından dizinlenen dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus'], 'turler' => $TAM, 'puan' => 10],
+    // Sözlük 17.09.2026'da Scopus çeyrekliğini ayırdı. Kaynak A.3'ü çeyrekliğe göre
+    // puanlıyor (Q1 20 · Q2 18 · Q3 16 · Q4 10); tek satır en düşüğündeydi.
+    'A03.q1' => ['baslik' => 'SCOPUS Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q1)'], 'turler' => $TAM, 'puan' => 20],
+    'A03.q2' => ['baslik' => 'SCOPUS Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q2)'], 'turler' => $TAM, 'puan' => 18],
+    'A03.q3' => ['baslik' => 'SCOPUS Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q3)'], 'turler' => $TAM, 'puan' => 16],
+    'A03' => ['baslik' => 'SCOPUS Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q4)'], 'turler' => $TAM, 'puan' => 10],
     'A04' => ['baslik' => 'ESCI tarafından dizinlenen dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $TAM, 'puan' => 14],
     'A05' => ['baslik' => 'TR Dizin tarafından dizinlenen dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $TAM, 'puan' => 12],
     'A08' => ['baslik' => 'SCIE, SSCI, AHCI, ESCI, Scopus ve TR Dizin dışındaki indekslerde dizinlenen hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $TAM, 'puan' => 5],

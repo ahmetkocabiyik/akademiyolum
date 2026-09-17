@@ -3131,7 +3131,13 @@ kitap bölümü · kitap editörlüğü · ders/metot kitabı · davetli konuşm
 diğer hakemli dergi (editörlük) · atıfta diğer ve patent · atıfta ESCI
 (`SCIE/SSCI/AHCI` ↔ `ESCI / Scopus`, geneli `WoS / Scopus`) · ESCI ↔ Scopus
 (makale, tez yayını ve atıfta `ESCI`/`Scopus`, editörlükte `ESCI Dergi`/
-`Scopus Dergi`).
+`Scopus Dergi`) · Scopus çeyrekliği (`Scopus (Q1..Q4)`, geneli `Scopus`).
+
+**Çeyreklik iki ayrı eksen.** `SCIE/SSCI (Qn)` WoS'un JCR çeyrekliği,
+`Scopus (Qn)` Scopus'un CiteScore/SJR çeyrekliği. Kaynak hangisini
+kastettiğini SÖYLÜYOR (Haliç 4/c: "Q1–Q4: … Scopus'ta ilgili alan için
+derginin CiteScore sıralaması") — merdiveni yanlış eksene bağlamak satır
+başlığı doğru olsa bile puanı yanlış veriyor.
 
 Eksen yalnız KAPSAM için değil: atıfta ayrım indeks KADEMESİ. Aynı makinede
 iki tür ayrım da taşınabiliyor — ölçüt, kaynağın iki kalemi farklı puanlayıp
