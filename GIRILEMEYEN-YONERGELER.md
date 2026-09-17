@@ -1293,7 +1293,13 @@ farklı, kendi turlarını istiyorlar:
   Q3" 18, Scopus Q4 ise ESCI ile birlikte A2'de (15). Satır başlıkları bunu
   zaten yazıyordu ama Scopus tarafının ETİKETİ yoktu; Scopus makalesi
   çeyrekliği ne olursa olsun A2'ye düşüp 15 alıyordu (Q1'de 28 yerine).
-- **Acıbadem** "WEB OF SCIENCE ALL DATABASES veya SCOPUS Q1 ve Q2" diye
-  ikisini gruplayıp tek satırda topluyor.
+- **Acıbadem** aynı gün düzeltildi: 2. bölüm "WEB OF SCIENCE ALL DATABASES
+  veya SCOPUS **Q1 ve Q2**" diyor, genel etiket dört çeyrekliği birden
+  topluyordu. Q3-Q4 Scopus makalesinin kaynakta karşılığı YOK (3. bölüm TR
+  Dizin'e ait), artık hiç saymıyor — §0 yönünde eksik sayma.
+  2.G editörlükte yalnız `ESCI Dergi` kaldı: editörlük etiketleri çeyreklik
+  taşımıyor, `Scopus Dergi` bağlansaydı Q3-Q4 bir derginin editörlüğü de
+  sayardı. Q1-Q2 Scopus dergisinde editörlüğü olan aday o 5 puanı göremiyor.
+  Editörlüğe çeyreklik ekseni eklenirse düzelir.
 - **Haliç'in "En üst %10" satırı** (Scopus Q1'in ilk %10'u, 70 puan)
   girilemedi: sözlükte yüzdelik dilim ekseni yok, Q1 makalesi 50 alıyor.

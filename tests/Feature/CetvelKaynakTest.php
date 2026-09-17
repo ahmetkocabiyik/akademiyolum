@@ -2577,6 +2577,30 @@ test('Scopus çeyrekliği ayrı puanlanıyor', function (string $cetvel, array $
     ['gumushane-2026', ['Q1' => 28, 'Q2' => 22, 'Q3' => 18, 'Q4' => 15]],
 ]);
 
+test('Acıbadem 2. bölüm Scopus\'un yalnız Q1-Q2\'sini sayıyor', function () {
+    // Kaynağın başlığı: "WEB OF SCIENCE ALL DATABASES veya SCOPUS Q1 ve Q2
+    // KATEGORİLERİ KAPSAMINDAKİ DİĞER DERGİLER". Genel `ESCI / Scopus`
+    // etiketi dört çeyrekliği birden buraya topluyordu. Q3-Q4'ün kaynakta
+    // karşılığı yok (3. bölüm TR Dizin'e ait), o yüzden sıfır — §0 yönünde
+    // eksik sayma, dosyada yazılı.
+    $katalog = sartDepo()->katalog('acibadem-2025-atif6');
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('Scopus (Q1)'))->toBe(10)
+        ->and($puan('Scopus (Q2)'))->toBe(10)
+        ->and($puan('Scopus (Q3)'))->toBe(0)
+        ->and($puan('Scopus (Q4)'))->toBe(0)
+        // WoS All Databases tarafı (ESCI) çeyreklikten bağımsız sayılıyor.
+        ->and($puan('ESCI'))->toBe(10);
+});
+
 test('Gümüşhane çapraz eşlemesi WoS tarafını kaydırmıyor', function () {
     // Çaprazın anlamı: aynı puana WoS'un BİR ALT çeyrekliği denk geliyor.
     // WoS tarafı kaymamalı — Q1 35'te kalmalı, yoksa eşleme iki yana birden

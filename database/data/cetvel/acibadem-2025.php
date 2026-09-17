@@ -126,13 +126,23 @@ $maddeler = [
     '1.G.4' => ['baslik' => 'Q4 kategorisindeki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q4)'], 'puan' => 0],
 
     // ══ 2. WoS ALL DATABASES / SCOPUS Q1-Q2 KAPSAMINDAKİ DİĞER DERGİLER ══
-    '2.A' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide yayınlanmış özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $OZGUN, 'puan' => 10],
-    '2.B' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide yayınlanmış derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $DERLEME, 'puan' => 10],
-    '2.C' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide yayınlanmış kısa makale (short/brief communication)', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $KISA, 'puan' => 7],
-    '2.D' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide yayınlanmış vaka raporu, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $VAKA, 'puan' => 5],
+    // Kaynak bu bölümde Scopus'un YALNIZ Q1 ve Q2'sini sayıyor. Genel
+    // `ESCI / Scopus` etiketi dört çeyrekliği birden buraya topluyordu;
+    // 17.09.2026'da sözlüğün Scopus çeyrekliğiyle daraltıldı. Q3-Q4 Scopus
+    // makalesinin kaynakta karşılığı YOK — 3. bölüm TR Dizin'e ait — o yüzden
+    // hiç saymıyor (§0 yönünde eksik sayma).
+    //
+    // 2.G editörlükte yalnız `ESCI Dergi` kaldı: editörlük etiketleri
+    // çeyreklik taşımıyor, `Scopus Dergi` bağlansaydı Q3-Q4 bir derginin
+    // editörlüğü de sayardı. Q1-Q2 Scopus dergisinde editörlüğü olan aday
+    // bu 5 puanı göremiyor.
+    '2.A' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide yayınlanmış özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI', 'Scopus (Q1)', 'Scopus (Q2)'], 'turler' => $OZGUN, 'puan' => 10],
+    '2.B' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide yayınlanmış derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI', 'Scopus (Q1)', 'Scopus (Q2)'], 'turler' => $DERLEME, 'puan' => 10],
+    '2.C' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide yayınlanmış kısa makale (short/brief communication)', 'kategori' => 'makale', 'kaynaklar' => ['ESCI', 'Scopus (Q1)', 'Scopus (Q2)'], 'turler' => $KISA, 'puan' => 7],
+    '2.D' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide yayınlanmış vaka raporu, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI', 'Scopus (Q1)', 'Scopus (Q2)'], 'turler' => $VAKA, 'puan' => 5],
     '2.E.1' => ['baslik' => 'WoS All Databases ya da SCOPUS kapsamında taranan kongre tam metni', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 5],
     '2.E.2' => ['baslik' => 'WoS All Databases ya da SCOPUS kapsamında taranan kongre bildiri özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 2],
-    '2.G' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 5],
+    '2.G' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI Dergi'], 'puan' => 5],
 
     // ══ 3. ULAKBİM TR DİZİN KAPSAMINDAKİ ULUSAL DERGİLER ══
     '3.A' => ['baslik' => 'TR Dizin kapsamındaki dergide yayınlanmış özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $OZGUN, 'puan' => 7],
