@@ -3139,6 +3139,18 @@ kastettiğini SÖYLÜYOR (Haliç 4/c: "Q1–Q4: … Scopus'ta ilgili alan için
 derginin CiteScore sıralaması") — merdiveni yanlış eksene bağlamak satır
 başlığı doğru olsa bile puanı yanlış veriyor.
 
+**DİLİM ekseni çeyrekliğin ALT KÜMESİ.** Kaynakların bir kısmı Q1'in
+üstünde bir kademe daha tanıyor: "ilk %10'luk dilime giren dergi" (Haliç'in
+tanımıyla Scopus CiteScore Percentile ≥90), kimi yerde ayrıca "ilk %5".
+Zincir üç kademeli — `SCIE/SSCI (İlk %5)` → `SCIE/SSCI (İlk %10)` →
+`SCIE/SSCI (Q1)`, Scopus tarafında `Scopus (İlk %10)` → `Scopus (Q1)`.
+
+Burada ebeveyn etiket GİZLENMEZ: Q1'de olup dilime girmeyen dergi de var ve
+adayın onu seçebilmesi gerekiyor. Bu yüzden `Kategori::DARALTILABILIR_KAYNAKLAR`
+diye ikinci bir liste var — "kapsamlı çocuğu olduğu hâlde adaya sorulmaya
+devam eden" etiketler. Değişmez testi bu listeyi atlıyor; onun dışındaki her
+genel etiket gizlenmek ZORUNDA.
+
 **İki eksen ÇAPRAZ da eşlenebiliyor.** Gümüşhane her basamağı bir kaydırıyor:
 "WOS Q2 **veya** SCOPUS Q1" aynı satır. Satır iki etiketi birden taşır ama
 çeyreklikleri FARKLIDIR — `['SCIE/SSCI (Q2)', 'Scopus (Q1)']`. Aynı

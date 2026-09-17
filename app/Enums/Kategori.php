@@ -120,11 +120,27 @@ enum Kategori: string
      *
      * @var array<string, list<string>>
      */
+    /**
+     * Genel etiketin ADAYA SORULMAYA DEVAM ETTİĞİ hâller.
+     *
+     * Kapsamlı etiketlerin çoğu genel olanın YERİNE geçiyor: "Kitap Bölümü"
+     * artık sorulmaz, aday uluslararası ya da ulusal olanı seçer. Ama dilim
+     * ekseninde durum başka — "ilk %10'luk dilim" Q1'in ALT KÜMESİ. Q1'de
+     * olup ilk %10'a girmeyen dergi de var ve adayın onu seçebilmesi gerek.
+     *
+     * @var list<string>
+     */
+    public const DARALTILABILIR_KAYNAKLAR = [
+        'SCIE/SSCI (Q1)', 'SCIE/SSCI (İlk %10)', 'Scopus (Q1)',
+    ];
+
     public const GENEL_KAYNAKLAR = [
         'kitap' => [
             'Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Çeviri Kitap',
             'Çeviri Kitap Bölümü', 'Ders / Metot Kitabı',
         ],
+        // `SCIE/SSCI (Q1)` ile `Scopus (Q1)` HÂLÂ adaya sorulur: ilk %10'luk
+        // dilim Q1'in ALT KÜMESİ, Q1'in kendisi değil.
         'makale' => ['ESCI / Scopus', 'Scopus'],
         'bildiri' => ['Davetli Konuşmacı'],
         'editorluk' => ['Kitap Editörlüğü', 'Diğer Hakemli Dergi', 'ESCI / Scopus Dergi'],
@@ -156,8 +172,10 @@ enum Kategori: string
     {
         return match ($this) {
             self::Makale => [
+                'SCIE/SSCI (İlk %5)', 'SCIE/SSCI (İlk %10)',
                 'SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)',
                 'AHCI', 'ESCI',
+                'Scopus (İlk %10)',
                 'Scopus (Q1)', 'Scopus (Q2)', 'Scopus (Q3)', 'Scopus (Q4)', 'Scopus',
                 'ESCI / Scopus', 'TR Dizin',
                 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli',
@@ -185,6 +203,7 @@ enum Kategori: string
             ],
             self::TezYayini => [
                 'SCIE/SSCI/AHCI', 'ESCI',
+                'Scopus (İlk %10)',
                 'Scopus (Q1)', 'Scopus (Q2)', 'Scopus (Q3)', 'Scopus (Q4)', 'Scopus',
                 'ESCI / Scopus', 'TR Dizin',
                 'BKCI / Scopus Kitap', 'BKCI / Scopus Kitap Bölümü',

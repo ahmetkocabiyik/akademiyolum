@@ -409,6 +409,11 @@ readonly class MaddeKatalogu
         'Scopus (Q2)' => 'Scopus',
         'Scopus (Q3)' => 'Scopus',
         'Scopus (Q4)' => 'Scopus',
+        // Dilim ekseni: ilk %5 ⊂ ilk %10 ⊂ Q1. Zincir üç kademeli, eşleştirici
+        // sonuna kadar yürüyor.
+        'SCIE/SSCI (İlk %5)' => 'SCIE/SSCI (İlk %10)',
+        'SCIE/SSCI (İlk %10)' => 'SCIE/SSCI (Q1)',
+        'Scopus (İlk %10)' => 'Scopus (Q1)',
     ];
 
     /**

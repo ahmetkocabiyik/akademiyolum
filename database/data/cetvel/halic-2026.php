@@ -79,7 +79,13 @@ $maddeler = [
     // değil; etiketler WoS çeyrekliğine bağlıydı. Scopus Q1 makalesi
     // A5'e düşüp 20 alıyordu. WoS dergileri kaynağın kendi sözleriyle
     // A5'te ("Scopus dışı WoS dergide makale").
-    'EK1.A2' => ['baslik' => 'Scopus Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q1)'], 'turler' => $TAM, 'puan' => 50],
+    // Kaynağın 1. sırası: "Scopus Q1 makale (En üst %10'luk dilim) — 70",
+    // 2. sırası: "Scopus Q1 (Diğer) makale — 50". Üst dilim satırı sözlükte
+    // karşılığı olmadığı için girilememişti; 17.09.2026'da dilim ekseni
+    // eklendi. Kaynağın 4/b maddesi dilimi "Scopus CiteScore Percentile ≥90"
+    // diye tanımlıyor.
+    'EK1.A1' => ['baslik' => 'Scopus Q1 dergide, en üst %10\'luk dilimde makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (İlk %10)'], 'turler' => $TAM, 'puan' => 70],
+    'EK1.A2' => ['baslik' => 'Scopus Q1 dergide makale (üst %10 dışında)', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q1)'], 'turler' => $TAM, 'puan' => 50],
     'EK1.A3' => ['baslik' => 'Scopus Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q2)'], 'turler' => $TAM, 'puan' => 40],
     'EK1.A4' => ['baslik' => 'Scopus Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Scopus (Q3)'], 'turler' => $TAM, 'puan' => 30],
     'EK1.A5' => ['baslik' => 'Scopus Q4 dergide ya da Scopus dışı WoS dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus'], 'turler' => $TAM, 'puan' => 20],

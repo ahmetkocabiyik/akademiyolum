@@ -2393,6 +2393,12 @@ test('her genel etiketin kapsamlı çifti ve geri eşlemesi var', function () {
         $gizli = Kategori::GENEL_KAYNAKLAR[$kategori->value] ?? [];
 
         foreach ($geri as $cocuk => $genel) {
+            // Daraltılabilir ebeveyn KENDİSİ de geçerli bir kademe (Q1'de olup
+            // ilk %10'a girmeyen dergi); adaya sorulmaya devam eder.
+            if (in_array($genel, Kategori::DARALTILABILIR_KAYNAKLAR, true)) {
+                continue;
+            }
+
             if (in_array($cocuk, $sozluk, true) && in_array($genel, $sozluk, true)) {
                 expect($gizli)->toContain($genel);
             }
@@ -2576,6 +2582,39 @@ test('Scopus çeyrekliği ayrı puanlanıyor', function (string $cetvel, array $
     // birlikte A2'de (15).
     ['gumushane-2026', ['Q1' => 28, 'Q2' => 22, 'Q3' => 18, 'Q4' => 15]],
 ]);
+
+test('dilim ekseni Q1\'in ALT KÜMESİ olarak çalışıyor', function () {
+    // Haliç kaynağı iki satır ayırıyor: "Scopus Q1 makale (En üst %10'luk
+    // dilim) 70" ve "Scopus Q1 (Diğer) makale 50". Üst dilim Q1'in yerine
+    // GEÇMEZ, altına girer — Q1'de olup dilime girmeyen dergi 50'de kalır.
+    $katalog = sartDepo()->katalog('halic-2026');
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    expect($puan('Scopus (İlk %10)'))->toBe(70)
+        ->and($puan('Scopus (Q1)'))->toBe(50);
+
+    // Dilim etiketi hem KENDİ satırına hem Q1 satırına düşebilir; `puan()`
+    // yükseği aldığı için 70 kazanır. Yalnız Q1 satırı çözüldüğünde 50.
+    expect($katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => 'Scopus (İlk %10)', 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        ['EK1.A2'],
+    ))->toBe(50);
+
+    // Aday her iki kademeyi de seçebilmeli: Q1 genel etiket DEĞİL.
+    expect(Kategori::Makale->adayKaynaklari())
+        ->toContain('Scopus (Q1)')
+        ->toContain('Scopus (İlk %10)');
+});
 
 test('Acıbadem 2. bölüm Scopus\'un yalnız Q1-Q2\'sini sayıyor', function () {
     // Kaynağın başlığı: "WEB OF SCIENCE ALL DATABASES veya SCOPUS Q1 ve Q2

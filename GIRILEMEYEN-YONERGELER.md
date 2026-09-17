@@ -1301,5 +1301,23 @@ farklı, kendi turlarını istiyorlar:
   taşımıyor, `Scopus Dergi` bağlansaydı Q3-Q4 bir derginin editörlüğü de
   sayardı. Q1-Q2 Scopus dergisinde editörlüğü olan aday o 5 puanı göremiyor.
   Editörlüğe çeyreklik ekseni eklenirse düzelir.
-- **Haliç'in "En üst %10" satırı** (Scopus Q1'in ilk %10'u, 70 puan)
-  girilemedi: sözlükte yüzdelik dilim ekseni yok, Q1 makalesi 50 alıyor.
+- **Haliç'in "En üst %10" satırı** 17.09.2026'da girildi: sözlüğe dilim
+  ekseni eklendi (`Scopus (İlk %10)` → `Scopus (Q1)`), satır 70 puanla açıldı.
+
+### Dilim ekseni — WoS tarafı henüz taranmadı
+
+`SCIE/SSCI (İlk %5)` ve `SCIE/SSCI (İlk %10)` sözlüğe eklendi ama korpusta
+HİÇBİR satıra bağlanmadı. Tarama bu kademeyi kullanan **beş üniversite daha**
+gösteriyor; değerleri kaynaktan okunmadı:
+
+- **Çukurova** — "WoS CC SCIE, SSCI, AHCI - İlk %10'luk dilime giren dergi 120"
+- **Harran** — "Q1-İlk %10'luk dilime giren dergi 90"
+- **Akdeniz** — 1.1 "SCI-Expanded, SSCI ve AHCI kapsamındaki ilk %10'luk
+  kategorideki dergilerde yayımlanmış özgün..."
+- **Kırşehir Ahi Evran** — "En üst %10'luk dilimli dergilerde yayımlanmış makale 50"
+- **Erciyes** — "Web of Science tarafından taranan, en üst %10'luk dilimli dergilerde"
+- **Necmettin Erbakan** — A1'in üstünde iki kademe: "İlk %5 Dilimdeki Q1
+  Dergiler 175", "İlk %10 Dilimdeki Q1 Dergiler 150"
+
+Ayrıca **İnönü** dilimi ÇARPAN olarak kullanıyor (%1 → ×3, %10 → ×1,5);
+o başka bir yapı.
