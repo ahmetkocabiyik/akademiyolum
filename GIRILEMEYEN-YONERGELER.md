@@ -1348,6 +1348,29 @@ MİDİR"). Özet: soruyu korpus değil her kaynak cevaplar, çünkü metinler ik
 bölünmüş (Ankara Bilim/Bitlis/Gebze Scopus'u alan indeksine DAHİL ediyor,
 Trakya/KTÜN DIŞLIYOR). Kaynak susuyorsa cevap §0 gereği HAYIR.
 
+**Atıf ve editörlük (18.09.2026).** Aynı kural iki eksene daha uygulandı.
+Atıfta 44 kaynak dosyası işaretlendi, 6'sı kaldı (hepsi "uluslararası
+indeksli hakemli dergi" gibi AÇIK kademe, Scopus oraya kesin giriyor).
+Editörlükte 66'dan 54'e indi. Dokuz üniversitede kaynakta duran ama cetvele
+hiç girilmemiş ARA KADEME bulundu ve eklendi (Fırat A5.2, Ardahan 3.10.2,
+Bandırma A13.b, Bitlis A.9.2-3, Bolu A.9.2-3, Ege 4b, Düzce 1.5.b, Ataşehir
+M18.c, PAÜ A.5b). Necmettin Erbakan'da ters yön: I1 başlığı "SCOPUS taranan
+dergide editörlük" dediği hâlde satır Scopus taşımıyordu, eklendi.
+
+**Açık madde — atıfta ESCI.** On yedi cetvelin atıf çekirdek satırı yalnız
+"SCI, SCI-Expanded, SSCI veya AHCI" diyor ama ESCI oraya düşmeye devam
+ediyor; bu turda YALNIZ Scopus düşürüldü, ESCI bugünkü yerinde bırakıldı.
+Kaynağın o kademede ESCI'yi saymadığı doğruysa ESCI de sıfırlanmalı — ayrı
+bir tur, çünkü on beş üniversitede puanı düşürür ve kapsam notu gerektirir.
+Etkilenenler: Akdeniz, Bayburt, Bingöl, Biruni, Gaziantep, Giresun, Iğdır,
+İKÇÜ, Işık, İstanbul Ticaret, Karamanoğlu, Munzur, SBÜ, Tarsus, Kırklareli,
+Bolu AİBÜ, Hatay MKÜ.
+
+**Açık madde — okunamayan değerler.** Bayburt'un ve Iğdır'ın "diğer
+uluslararası dergilerdeki atıf" satırı metin katmanında değersiz çıkıyor
+(sütun bölünmesi), Tarsus'unki 0,40 (motor tam sayı taşıyor). Üçünde de
+Scopus çekirdek satırdan düşürüldü ama kendi kademesine bağlanamadı.
+
 Tarama 448 cetveli gezdi; 330'unda Scopus ESCI ile aynı kademeye düşüyordu,
 225'inde satır başlığı Scopus'u zaten anıyor (doğru). Kalan 105 cetvel 45
 kaynak dosyasında toplandı ve tek tek kaynağa bakıldı: **30 dosyada Scopus

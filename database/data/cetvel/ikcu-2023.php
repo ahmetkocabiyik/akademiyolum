@@ -183,9 +183,9 @@ $A = [
     'A3.j' => ['baslik' => 'Çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 8],
     'A3.n' => ['baslik' => 'Çeviri kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 3],
 
-    'A4.a' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI dergilerinde adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 4],
+    'A4.a' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI dergilerinde adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 4],
     'A4.b' => ['baslik' => 'Uluslararası yayınevi kitaplarında adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
-    'A4.c' => ['baslik' => 'Diğer endeksli dergilerde adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    'A4.c' => ['baslik' => 'Diğer endeksli dergilerde adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'ESCI', 'Scopus'], 'puan' => 2],
     'A4.d' => ['baslik' => 'Ulusal hakemli dergilerde ya da ulusal yayınevi kitaplarında adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent'], 'puan' => 1],
 
     'A5.a' => ['baslik' => 'Tamamlanmış doktora tezinde asıl danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 4],
@@ -510,7 +510,7 @@ $D = [
     'D-G4.e' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Çeviri Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
     'D-G4.f' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
 
-    'D-G5.a' => ['baslik' => 'SCI-E, SSCI, AHCI dergilerinde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
+    'D-G5.a' => ['baslik' => 'SCI-E, SSCI, AHCI dergilerinde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 5],
     'D-G5.b' => ['baslik' => 'ESCI, Scopus veya ERIC dergilerinde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 4],
     'D-G5.c' => ['baslik' => 'Uluslararası kitaplarda ya da TR Dizin dergilerinde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'TR Dizin'], 'puan' => 3],
     'D-G5.d' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap ve dergilerde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 1],

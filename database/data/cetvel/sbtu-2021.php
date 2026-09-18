@@ -68,7 +68,7 @@
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'];
 $ULUSAL_DERGI = ['TR Dizin', 'Diğer Ulusal Hakemli'];
-$WOS_DERGI = ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'];
+$WOS_DERGI = ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI Dergi'];
 
 $maddeler = [
     // ══ A1. MAKALELER ══
@@ -158,7 +158,7 @@ $maddeler = [
     // ══ C1. ÜYELİK VE HAKEMLİK ══
     'C1.1' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 75],
     'C1.6' => ['baslik' => 'SCI-Expanded ya da ESCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => $WOS_DERGI, 'puan' => 25],
-    'C1.10' => ['baslik' => 'Diğer uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 15],
+    'C1.10' => ['baslik' => 'Diğer uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)', 'Scopus Dergi'], 'puan' => 15],
     'C1.11' => ['baslik' => 'Hakemli dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 15],
     'C1.16' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
     'C1.19' => ['baslik' => 'TR Dizin kapsamındaki ulusal hakemli dergide editörlük ya da editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 10],

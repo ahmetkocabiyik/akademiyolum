@@ -109,7 +109,9 @@ return [
         'A.8.4' => ['baslik' => 'Kitap çevirmenliği (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
         'A.8.6' => ['baslik' => 'Kitap bölümü, kitapçık veya makale çevirmenliği (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
         'A.8.7' => ['baslik' => 'Ansiklopedi madde tanımlaması', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 4],
-        'A.9.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
+        'A.9.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
+        'A.9.2' => ['baslik' => 'ISI (Web of Science) taranan; SCI, SCI-Expanded, SSCI ve AHCI kapsamı dışındaki dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI'], 'puan' => 2],
+        'A.9.3' => ['baslik' => 'ISI (Web of Science) kapsamı dışındaki diğer uluslararası indeksli dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['Scopus', 'Diğer (Uluslararası)'], 'puan' => 1],
         'A.9.4' => ['baslik' => 'Uluslararası kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
         'A.10.1' => ['baslik' => 'TR Dizin dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 1],
         'A.10.3' => ['baslik' => 'Ulusal kitapta veya diğer hakemli dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 1],
@@ -123,7 +125,7 @@ return [
 
         // ══ C — DERGİ EDİTÖRLÜĞÜ, YAYIN KURULU ÜYELİĞİ VE HAKEMLİK ══
         'C.1.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 30],
-        'C.2.1' => ['baslik' => 'Web of Science taranan diğer (ESCI) dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 15],
+        'C.2.1' => ['baslik' => 'Web of Science taranan diğer (ESCI) dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI Dergi'], 'puan' => 15],
         'C.5.1' => ['baslik' => 'Ulusal hakemli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 10],
         'C.5.2' => ['baslik' => 'Dergide yayın kurulu üyeliği, editörlük veya özel sayı editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 7],
         'C.5.3' => ['baslik' => 'Dergi hakemliği (makale başına)', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],

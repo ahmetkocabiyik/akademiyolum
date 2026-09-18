@@ -181,7 +181,8 @@ $maddeler += [
     '3.9.4' => ['baslik' => 'Bilimsel ansiklopedide bölüm, konu ya da madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 4],
 
     // ══ 3.10 ATIFLAR ══
-    '3.10.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerdeki yayınlarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 4],
+    '3.10.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerdeki yayınlarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 4],
+    '3.10.2' => ['baslik' => 'SCOPUS ya da ESCI kapsamındaki dergilerdeki yayınlarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI', 'Scopus'], 'puan' => 4],
     '3.10.3' => ['baslik' => 'Uluslararası alan indeksleri kapsamındaki dergilerdeki yayınlarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)', 'Patent'], 'puan' => 2],
     '3.10.4' => ['baslik' => 'TR Dizin tarafından indekslenen hakemli dergilerdeki yayınlarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
     '3.10.6' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanan kitaplarda her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 2],

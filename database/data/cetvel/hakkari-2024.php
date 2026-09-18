@@ -104,17 +104,17 @@ return [
         'D2.6' => ['baslik' => 'Üniversite araştırma projesinde (BAP) araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 15],
 
         // ══ E — EDİTÖRLÜK, YAYIN KURULU, HAKEMLİK ══
-        'E1.2' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI veya AHCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 30],
-        'E1.3' => ['baslik' => 'Diğer indeksli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 20],
+        'E1.2' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI veya AHCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI Dergi'], 'puan' => 30],
+        'E1.3' => ['baslik' => 'Diğer indeksli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi', 'Scopus Dergi'], 'puan' => 20],
         'E2.1' => ['baslik' => 'Alanında bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'BKCI Kitap'], 'puan' => 20],
         'E2.2' => ['baslik' => 'Ulusal hakemli dergide editörlük veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 15],
         'E2.5' => ['baslik' => 'Dergi hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 3],
 
         // ══ F — BİLİMSEL ATIFLAR (kendine atıf hariç) ══
-        'F1.1' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
+        'F1.1' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 5],
         'F1.3' => ['baslik' => 'Bilimsel kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
         'F2.1' => ['baslik' => 'Ulusal hakemli dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 3],
-        'F2.3' => ['baslik' => 'Diğer bilimsel veya mesleki dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+        'F2.3' => ['baslik' => 'Diğer bilimsel veya mesleki dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Scopus'], 'puan' => 2],
 
         // ══ G — ÖDÜLLER ══
         'G1.1' => ['baslik' => 'Alanında uluslararası kuruluşlarca verilen bilim ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 30],

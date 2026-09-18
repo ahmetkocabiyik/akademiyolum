@@ -55,8 +55,8 @@ return [
         'A5a' => ['baslik' => 'SCIE/SSCI/AHCI dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 75],
         'A5c' => ['baslik' => 'SCIE/SSCI/AHCI dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 25],
         'A5d' => ['baslik' => 'SCIE/SSCI/AHCI dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
-        'A7a' => ['baslik' => 'ESCI dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 25],
-        'A9a' => ['baslik' => 'Diğer uluslararası hakemli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)', 'TR Dizin Dergi'], 'puan' => 15],
+        'A7a' => ['baslik' => 'ESCI dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI Dergi'], 'puan' => 25],
+        'A9a' => ['baslik' => 'Diğer uluslararası hakemli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)', 'TR Dizin Dergi', 'Scopus Dergi'], 'puan' => 15],
 
         // ── A10 · BİLİMSEL TOPLANTI ──
         'A10a' => ['baslik' => 'Uluslararası toplantıda sözlü sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 15],
@@ -73,11 +73,11 @@ return [
         // Sözlük 16.09.2026'da atıfta çekirdek indeksle ESCI'yi ayırdı; iki
         // satır da kendi değerinde duruyor.
         'A11a' => ['baslik' => 'SCIE, SSCI ya da AHCI kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 10],
-        'A11b' => ['baslik' => 'ESCI kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI / Scopus'], 'puan' => 7],
+        'A11b' => ['baslik' => 'ESCI kapsamındaki dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI'], 'puan' => 7],
         // `Patent` BURADAN ÇIKARILDI: patentte alınan atıf "uluslararası hakemli
         // DERGİDE atıf" değil. Kaynağın A11'inde patent satırı yok; aşağıdaki
         // B9/b ("Diğer", 1 puan) kaynağın kendi toplayıcısı, oraya bağlandı.
-        'A11c' => ['baslik' => 'Diğer uluslararası hakemli dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 5],
+        'A11c' => ['baslik' => 'Diğer uluslararası hakemli dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)', 'Scopus'], 'puan' => 5],
         'A11ç' => ['baslik' => 'Yurt dışı kitap, monografi veya tezlerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
 
         // ── B9 · ULUSAL ATIF ──

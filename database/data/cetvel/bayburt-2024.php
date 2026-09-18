@@ -135,7 +135,7 @@ return [
         '5.ç' => ['baslik' => 'Faydalı model veya endüstriyel tasarımın belgelendirilmesi', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 50],
 
         // ══ 6. ATIF ══
-        '6.a' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
+        '6.a' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 5],
         '6.c' => ['baslik' => 'ULAKBİM TR Dizin dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
         '6.ç' => ['baslik' => 'Diğer ulusal hakemli dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 1],
         '6.d' => ['baslik' => 'Uluslararası kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],

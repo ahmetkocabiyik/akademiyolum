@@ -94,7 +94,7 @@ $maddeler = [
     'E-11' => ['baslik' => 'Dergi, kitap ya da proje hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
 
     // ══ F. ATIFLAR ══
-    'F-1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki yayınlarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
+    'F-1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki yayınlarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 5],
     'F-4' => ['baslik' => 'Web of Science Book Citation Index kapsamındaki kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
     'F-3' => ['baslik' => 'Hakemli dergilerde ve yurt içinde yayımlanan kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 2],
 

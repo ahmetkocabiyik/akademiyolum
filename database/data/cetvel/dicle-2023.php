@@ -142,8 +142,8 @@ return [
 
         // ══ G. DERGİLERDE EDİTÖRLÜK / HAKEMLİK ══
         'G1-G2' => ['baslik' => 'Dergilerde hakemlik, yayın kurulu üyeliği veya proje hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 1],
-        'G3' => ['baslik' => 'SSCI, AHCI, SCI, SCI-Expanded ya da uluslararası alan endeksli dergide editörlük veya alan editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 10],
-        'G4' => ['baslik' => 'Diğer yurt dışı ya da yurt içi hakemli dergide en az iki yıl editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 7],
+        'G3' => ['baslik' => 'SSCI, AHCI, SCI, SCI-Expanded ya da uluslararası alan endeksli dergide editörlük veya alan editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI Dergi'], 'puan' => 10],
+        'G4' => ['baslik' => 'Diğer yurt dışı ya da yurt içi hakemli dergide en az iki yıl editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Scopus Dergi'], 'puan' => 7],
 
         // ══ H. KİTAPLARDA EDİTÖRLÜK ══
         'H1a' => ['baslik' => 'Yurt dışında yayımlanmış yabancı dilde kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],

@@ -125,8 +125,8 @@ return [
         'D3' => ['baslik' => 'Yurt dışında tanınmış yayınevlerince yayımlanmış kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
 
         // ══ E. ATIFLAR ══
-        'E1' => ['baslik' => 'SCI-Expanded, SSCI ya da AHCI tarafından taranan dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],
-        'E2' => ['baslik' => 'Diğer uluslararası alan indeksli dergiler ile kitap ve kitap bölümlerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
+        'E1' => ['baslik' => 'SCI-Expanded, SSCI ya da AHCI tarafından taranan dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 10],
+        'E2' => ['baslik' => 'Diğer uluslararası alan indeksli dergiler ile kitap ve kitap bölümlerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'ESCI', 'Scopus'], 'puan' => 5],
         'E3' => ['baslik' => 'Ulusal indekslerde taranan dergilerde ve bildirilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 3],
 
         // ══ F. ULUSAL MAKALELER ══

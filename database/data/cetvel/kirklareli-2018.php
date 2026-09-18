@@ -147,7 +147,7 @@ $maddeler = [
     'E-20' => ['baslik' => 'Sahne ya da görsel sanatlarda yönetmen, sanat yönetmeni, koreograf veya performans sanatçısı olarak etkinlikte bulunmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Yönetmenlik (Sahne/Ekran)', 'Koreografi', 'Tüm Perde Koreograflığı (Uluslararası)', 'Tüm Perde Koreograflığı (Ulusal)', 'Bölüm Koreograflığı (Uluslararası)', 'Bölüm Koreograflığı (Ulusal)', 'Bale/Dans Koreograflığı (Uluslararası)', 'Bale/Dans Koreograflığı (Ulusal)', 'Dansçı / Performans İcracısı (Uluslararası)', 'Dansçı / Performans İcracısı (Ulusal)', 'Sahneleme/Repetitörlük — Tüm Perde (Uluslararası)', 'Sahneleme/Repetitörlük — Tüm Perde (Ulusal)', 'Sahneleme/Repetitörlük — Bölüm (Uluslararası)', 'Sahneleme/Repetitörlük — Bölüm (Ulusal)'], 'puan' => 100],
 
     // ══ F. EDİTÖR VE HAKEMLİKLER ══
-    'F-1a' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI ya da AHCI kapsamındaki dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 150],
+    'F-1a' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI ya da AHCI kapsamındaki dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI Dergi'], 'puan' => 150],
     'F-4a' => ['baslik' => 'TÜBİTAK-ULAKBİM TR Dizin kapsamındaki dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 50],
     'F-5a' => ['baslik' => 'Ulusal hakemli dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 30],
     'F-5b' => ['baslik' => 'Dergide editör yardımcılığı, yayın kurulu ya da danışma kurulu üyeliği (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 20],
@@ -168,8 +168,8 @@ $maddeler = [
     'I-7' => ['baslik' => 'Bilimsel araştırma için kurum ve kuruluşlardan alınan üç ay ve üzeri süreli burs', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 25],
 
     // ══ İ. ATIFLAR ══
-    'AT-1' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI ya da AHCI kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
-    'AT-3' => ['baslik' => 'Diğer bilimsel ve sanatsal hakemli dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 2],
+    'AT-1' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI ya da AHCI kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 5],
+    'AT-3' => ['baslik' => 'Diğer bilimsel ve sanatsal hakemli dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent', 'Scopus'], 'puan' => 2],
     'AT-4' => ['baslik' => 'TÜBİTAK-ULAKBİM TR Dizin kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
     'AT-5' => ['baslik' => 'Kitaplarda eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
 

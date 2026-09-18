@@ -216,8 +216,8 @@ return [
         // ── 8. ATIFLAR ──
         // 8.1 (h faktörü × 10) bir metriktir, faaliyet satırı başına puan
         // değildir; cetvelde ifade edilemiyor ve girilmedi.
-        '8.2' => ['baslik' => 'SCI/SCIE/SSCI/AHCI dergilerde yayımlanan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 7],
-        '8.3' => ['baslik' => 'Diğer endeks ve özlerce taranan dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 4],
+        '8.2' => ['baslik' => 'SCI/SCIE/SSCI/AHCI dergilerde yayımlanan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 7],
+        '8.3' => ['baslik' => 'Diğer endeks ve özlerce taranan dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'ESCI', 'Scopus'], 'puan' => 4],
         '8.4' => ['baslik' => 'Hakemli dergi, tez veya bilimsel kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
         '8.5' => ['baslik' => 'Diğer yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 1],
         '14.13' => ['baslik' => 'Uluslararası akademik ya da mesleki kuruluşta yönetim kurulu görevi veya üyelik', 'kategori' => 'idari_gorev', 'kaynaklar' => ['Dış Kuruluş Kurul Üyeliği (Uluslararası)'], 'puan' => 10],

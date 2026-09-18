@@ -123,7 +123,8 @@ $maddeler = [
     'A.4a' => ['baslik' => 'SCI kapsamı dışındaki uluslararası indekslere giren dergilerde yayımlanan tam metin araştırma', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $TAM, 'puan' => 20],
 
     // ══ A.5-A.8 ATIFLAR VE ULUSAL YAYINLAR ══
-    'A.5a' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI dergilerinde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
+    'A.5a' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI dergilerinde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 2],
+    'A.5b' => ['baslik' => 'Alan indeksi (A.4) kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Scopus', 'Diğer (Uluslararası)'], 'puan' => 1],
     'A.6' => ['baslik' => 'Yabancı dilde ders kitabı ya da referans kitaplarda eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
     'A.8' => ['baslik' => 'Ulusal dergilerde, kitaplarda ve diğer yayınlarda eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 1],
     'A.7a' => ['baslik' => 'ULAKBİM tarafından taranan ulusal hakemli dergide yayımlanan makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $TAM, 'puan' => 15],

@@ -6,6 +6,33 @@ use App\Services\Scoring\Sart\MaddeKatalogu;
 use App\Services\Scoring\Sart\SartDeposu;
 
 /**
+ * Cetvel anahtarı → onu üreten dosyanın adı.
+ *
+ * Bir dosya normalde tek cetvel üretir ve adını dosyadan alır; ÜAK'ın temel
+ * alan tabloları gibi yerlerde bir dosya `cetveller` anahtarıyla onlarca
+ * cetvel döndürür. Korpus değişmezlerini dosya adıyla dondurmak listeyi
+ * okunur tutuyor: Erzurum Teknik'in 36 kadro cetveli tek satıra iniyor.
+ *
+ * @return array<string, string>
+ */
+function cetvelDosyaHaritasi(): array
+{
+    $harita = [];
+
+    foreach (glob(database_path('data/cetvel/*.php')) ?: [] as $dosya) {
+        /** @var array{cetveller?: array<string, mixed>} $icerik */
+        $icerik = require $dosya;
+        $temel = basename($dosya, '.php');
+
+        foreach (array_keys($icerik['cetveller'] ?? [$temel => null]) as $anahtar) {
+            $harita[(string) $anahtar] = $temel;
+        }
+    }
+
+    return $harita;
+}
+
+/**
  * CETVEL SATIRLARININ KAYNAK ETİKETLERİNİ SÖZLÜĞE KARŞI DOĞRULAR.
  *
  * Bir cetvel satırı `kategori` + `kaynaklar` çiftiyle faaliyet kaydına
@@ -2444,7 +2471,11 @@ test('Cerrahpaşa atıf bloğu kaynağın iki bölümünü de taşıyor', functi
         // değerinde. Genel etiketle girilmiş eski bir kayıt ise DÜŞÜK satıra
         // düşer — genel, kapsamlıyı karşılamaz.
         ->and($puan('SCIE/SSCI/AHCI'))->toBe(10)
-        ->and($puan('ESCI / Scopus'))->toBe(7)
+        ->and($puan('ESCI'))->toBe(7)
+        // Kaynak atıf bloğunda Scopus'u ANMIYOR; 18.09.2026'da ESCI satırından
+        // düşürülüp "diğer uluslararası hakemli dergi" satırına bağlandı.
+        ->and($puan('Scopus (Q1)'))->toBe(5)
+        ->and($puan('ESCI / Scopus'))->toBe(0)
         ->and($puan('WoS / Scopus'))->toBe(0)
         // Patent atfı kaynakta anılmıyor; en düşük toplayıcıya bağlı.
         ->and($puan('Patent (Ulusal)'))->toBe(1);
@@ -2691,6 +2722,193 @@ test('Necmettin Erbakan üç dilim kademesini de ayırıyor', function () {
  * kaynağında gerekçelidir; liste BÜYÜYORSA yeni bir cetvel Scopus'u ESCI
  * kademesinde sayıyor demektir, KÜÇÜLÜYORSA bir gerekçeli satır kaybolmuştur.
  */
+/**
+ * SCOPUS, ATIF VE EDİTÖRLÜK EKSENİNDE DE KAYNAĞIN ANDIĞI KADEMEDE KALIYOR.
+ *
+ * Makale ekseninde verilen karar (KONVANSIYONLAR, "SCOPUS ALAN İNDEKSİ
+ * MİDİR") atıf ve editörlüğe de uygulandı. Buradaki iki jenerik etiket aynı
+ * riski taşıyor: atıfta `WoS / Scopus` çekirdek indeks satırına konduğunda
+ * Scopus atfı çekirdek değerini alıyordu (Kırklareli 150, Ataşehir 10),
+ * editörlükte `ESCI / Scopus Dergi` ESCI satırına konduğunda aynısı oluyordu.
+ *
+ * Liste, Scopus'un alt kademeden YÜKSEK puan aldığı ve satır başlığının
+ * Scopus'u anmadığı yerleri donduruyor. Hepsi kaynağında gerekçeli: satır ya
+ * AÇIK yazılmış ("uluslararası indeksli hakemli dergi", "diğer endeks ve
+ * özlerce taranan dergi", "yurt dışı dergide editörlük") ve Scopus oraya
+ * kesin giriyor, ya da kaynak alan indeksini Scopus'u içerecek şekilde
+ * tanımlıyor (Bitlis, Gebze, MSGSÜ, Dokuz Eylül, Ankara Bilim).
+ *
+ * Liste BÜYÜRSE yeni bir cetvel Scopus'u hak etmediği kademede sayıyordur.
+ */
+test('Scopus atıf ve editörlük kademelerinde de kaynağın sınırında kalıyor', function () {
+    $harita = cetvelDosyaHaritasi();
+    $depo = sartDepo();
+
+    $eksenler = [
+        'atif' => [Kategori::Atif, 'Scopus (Q1)', ['Diğer (Uluslararası)'],
+            ['ESCI / Scopus', 'WoS / Scopus', 'Scopus', 'Scopus (Q1)']],
+        'editorluk' => [Kategori::Editorluk, 'Scopus Dergi',
+            ['Diğer Hakemli Dergi (Uluslararası)', 'Diğer Hakemli Dergi'],
+            ['ESCI / Scopus Dergi', 'Scopus Dergi']],
+    ];
+
+    $bulgular = [];
+
+    foreach ($eksenler as $eksen => [$kategori, $scopusEtiketi, $altEtiketler, $jenerikler]) {
+        foreach ($depo->cetveller() as $anahtar => $katalog) {
+            $kodlar = $katalog->coz(['*']);
+
+            $puan = fn (string $etiket): int => $katalog->puan(
+                sartFaaliyet($etiket, $kategori), $kodlar,
+            );
+
+            $scopus = $puan($scopusEtiketi);
+
+            if ($scopus === 0 || $scopus <= max(array_map($puan, $altEtiketler))) {
+                continue;
+            }
+
+            foreach ($katalog->maddeler as $kod => $madde) {
+                if (($madde['kategori'] ?? '') !== $eksen || ($madde['puan'] ?? null) !== $scopus) {
+                    continue;
+                }
+
+                if (! array_intersect($madde['kaynaklar'] ?? [], $jenerikler)) {
+                    continue;
+                }
+
+                if (! str_contains(mb_strtolower($madde['baslik']), 'scopus')) {
+                    $bulgular[$eksen][($harita[$anahtar] ?? $anahtar).':'.$kod] = true;
+                }
+
+                break;
+            }
+        }
+    }
+
+    $atif = array_keys($bulgular['atif'] ?? []);
+    $editorluk = array_keys($bulgular['editorluk'] ?? []);
+    sort($atif);
+    sort($editorluk);
+
+    expect($atif)->toBe([
+        'abdullah-gul-2026:AT-A',
+        'adana-alparslan-turkes-2026:K2',
+        'adu-2024:A5.2.2',
+        'afyon-2026:8.3',
+        'afyon-saglik-2018:G.2-G.3',
+        'alanya-2024:A.5',
+        'alku-2024:2.4',
+        'anadolu-2023:24',
+        'ankara-bilim-2023:1.7.1',
+        'burdur-2016:M20',
+        'cag-2023:H1',
+        'dogus-2022:H-1',
+        'dpu-2024:D11',
+        'esogu-2023:6a',
+        'gebze-teknik-2023:5.1',
+        'ikcu-2023:B5.a',
+        'ikcu-2023:C5.a',
+        'isparta-ubu-2022:T2-AT1',
+        'istanbul-29-mayis-2017:D19',
+        'istanbul-aydin-2020:A11',
+        'istanbul-gedik-2025:D1',
+        'istanbul-medeniyet-2018:7a',
+        'istanbul-zaim-2019:E',
+        'iyte-2018:E1-5a',
+        'iyte-2018:E2-5a',
+        'iyte-2018:E3-4a',
+        'kahramanmaras-istiklal-2024:A4.1',
+        'karabuk-2024:4.10.2',
+        'karatay-2024:A.6.b',
+        'kayseri-2024:T2-2a',
+        'kilis-2019:4.a',
+        'kirikkale-2022:411-2',
+        'kocaeli-2023:D1',
+        'kostu-2023:27',
+        'ksbu-2023:E2',
+        'ksu-2023:T1-10a',
+        'ktun-2024:G-1',
+        'lokman-hekim-2022:T2-atif-sci',
+        'marmara-egitim:47',
+        'marmara-fen-saglik:47',
+        'marmara-guzel-sanatlar:47',
+        'marmara-ilahiyat-hukuk-filoloji:47',
+        'marmara-muhendislik:47',
+        'marmara-sosyal:47',
+        'marmara-spor:47',
+        'msgsu-2023:1.8.1',
+        'mtu-2025:D4',
+        'mus-alparslan-2025:A5.2',
+        'musku-2013:E-1',
+        'nohu-2024:7a',
+        'osmaniye-2023:5.1',
+        'siirt-2025:5.a',
+        'sirnak-2024:4.1',
+        'toros-2024:D.1',
+        'trabzon-2025:3.2.1',
+        'usak-2020:6a',
+        'uskudar-2024:M1.9.1',
+        'yeni-yuzyil-2025:1.A.37',
+        'yildiz-teknik-2022:4a',
+    ])->and($editorluk)->toBe([
+        'adiyaman-2024:F.2.a',
+        'adu-2024:D7.2.3',
+        'alku-2024:2.10',
+        'ankara-bilim-2023:3.1.4',
+        'atasehir-adiguzel-2018:M14.a',
+        'bandirma-2024:A7.a',
+        'bayburt-2024:8.1.ç',
+        'bitlis-2024:C.2.1',
+        'burdur-2016:M13',
+        'cag-2023:M',
+        'dogus-2022:M',
+        'dokuz-eylul-2024:9.f',
+        'dpu-2024:E15',
+        'duzce-2024:2.2.a',
+        'gebze-teknik-2023:10.9',
+        'giresun-2019:I.3.a',
+        'igdir-2023:14.a',
+        'isparta-ubu-2022:T2-ED1',
+        'istanbul-29-mayis-2017:D29',
+        'istanbul-aydin-2020:A07',
+        'istanbul-ticaret-2019:I.D.5.b',
+        'istanbul-zaim-2019:N',
+        'izmir-kavram-2025:11b',
+        'kahramanmaras-istiklal-2024:A6.4.a',
+        'karabuk-2024:4.7.2',
+        'karamanoglu-2024:E-2',
+        'kayseri-2024:T2-5a',
+        'kilis-2019:8.a',
+        'ksbu-2023:K-a2',
+        'ksu-2023:T3-6a',
+        'lokman-hekim-2022:T2-editor-u',
+        'manisa-cbu-2024:25b',
+        'marmara-egitim:41',
+        'marmara-fen-saglik:41',
+        'marmara-guzel-sanatlar:41',
+        'marmara-ilahiyat-hukuk-filoloji:18b',
+        'marmara-muhendislik:41',
+        'marmara-sosyal:41',
+        'marmara-spor:41',
+        'mef-2024:12.a',
+        'msgsu-2023:3.1.4',
+        'mtu-2025:E1.2.1',
+        'musku-2013:D-2',
+        'osmaniye-2023:9.2',
+        'piri-reis-2025:J.1.a',
+        'sakarya-2026:9.2',
+        'sakarya-ubu-2024:9.1',
+        'sbu-2025:A.10.a',
+        'siirt-2025:8.ii.a',
+        'sirnak-2024:8.1',
+        'trabzon-2025:3.1.2.2',
+        'trakya-2025:12b',
+        'uskudar-2024:M1.7.A.4',
+        'yeni-yuzyil-2025:3.C.9',
+    ]);
+});
+
 test('Scopus yalnızca kaynağın andığı kademede ESCI ile aynı puanı alıyor', function () {
     $depo = sartDepo();
 

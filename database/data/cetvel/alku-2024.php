@@ -154,8 +154,8 @@ $maddeler = [
     // ══ TABLO 2 ══
     '2.1' => ['baslik' => 'Uzmanlık ya da çalışma alanıyla ilgili bilimsel etkinliklerde davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
     '2.2' => ['baslik' => 'Uluslararası yayınevlerince basılan kitaplarda ya da bölümlerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],
-    '2.3' => ['baslik' => 'SSCI, AHCI, SCI, SCI-Expanded ve ESCI kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
-    '2.4' => ['baslik' => 'Uluslararası alan indeksleri ya da TR Dizin kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
+    '2.3' => ['baslik' => 'SSCI, AHCI, SCI, SCI-Expanded ve ESCI kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 3],
+    '2.4' => ['baslik' => 'Uluslararası alan indeksleri ya da TR Dizin kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Scopus'], 'puan' => 2],
     '2.5' => ['baslik' => 'Yukarıdakiler dışında kalan atıflar', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 1],
     '2.6' => ['baslik' => 'Uluslararası bilim ve araştırma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 50],
     '2.7' => ['baslik' => 'Ulusal bilim ve araştırma ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Ulusal Bilim/Sanat Ödülü', 'TÜBİTAK / TÜBA Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü', 'YÖK Ödülü', 'Burs'], 'puan' => 25],

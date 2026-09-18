@@ -141,8 +141,8 @@ $maddeler = array_merge([
     'A3.4' => ['baslik' => 'Bilimsel toplantı düzenleme, organizasyon ya da bilim kurulu üyeliği', 'kategori' => 'diger', 'kaynaklar' => ['Diğer', 'Düzenleme/Bilim Kurulu Üyeliği (Uluslararası)', 'Düzenleme/Bilim Kurulu Üyeliği (Ulusal)'], 'puan' => 1],
 
     // ══ A5. ATIFLAR ══
-    'A5.1' => ['baslik' => 'SCI, SCIE, SSCI ya da AHCI dergilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
-    'A5.2' => ['baslik' => 'Diğer uluslararası hakemli dergilerde ve yurt dışında yayımlanan bilimsel kitap ile tezlerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 2],
+    'A5.1' => ['baslik' => 'SCI, SCIE, SSCI ya da AHCI dergilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 5],
+    'A5.2' => ['baslik' => 'Diğer uluslararası hakemli dergilerde ve yurt dışında yayımlanan bilimsel kitap ile tezlerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'ESCI', 'Scopus'], 'puan' => 2],
 
     // ══ A6. ULUSLARARASI EDİTÖRLÜK ══
     'A6.1' => ['baslik' => 'SCI, SSCI ya da AHCI kapsamındaki dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 30],

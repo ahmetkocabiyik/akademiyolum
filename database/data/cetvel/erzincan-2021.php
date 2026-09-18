@@ -142,7 +142,7 @@ $maddeler = [
     'BD.DAVET' => ['baslik' => 'Bilimsel kongre veya sempozyumda davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 10],
 
     // ══ B.2 ATIFLAR ══
-    'AT1' => ['baslik' => 'SSCI, SCI-Expanded, AHCI, ESCI ya da alan indeksleri kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
+    'AT1' => ['baslik' => 'SSCI, SCI-Expanded, AHCI, ESCI ya da alan indeksleri kapsamındaki dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 2],
     'AT6' => ['baslik' => 'Kitap ya da kitap bölümlerinde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 1],
 
     // ══ B.3 PROJELER ══
@@ -157,9 +157,9 @@ $maddeler = [
 
     // ══ B.4 EDİTÖRLÜK ══
     'ED1' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 40],
-    'ED2' => ['baslik' => 'ESCI veya alan indeksleri kapsamındaki uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 25],
+    'ED2' => ['baslik' => 'ESCI veya alan indeksleri kapsamındaki uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI Dergi'], 'puan' => 25],
     'ED4' => ['baslik' => 'TR-Dizin kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 15],
-    'ED5' => ['baslik' => 'Diğer hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 10],
+    'ED5' => ['baslik' => 'Diğer hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi', 'Scopus Dergi'], 'puan' => 10],
     'ED6' => ['baslik' => 'Yayın kurulundaki diğer görevler (haberleşme, dizgi, tashih vb.)', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 3],
     'ED7.1' => ['baslik' => 'Alanında uluslararası yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 25],
     'ED7.2' => ['baslik' => 'Alanında ulusal yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],

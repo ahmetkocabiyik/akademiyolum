@@ -187,8 +187,8 @@ $maddeler = [
     '8a' => ['baslik' => 'Uluslararası bilimsel toplantıda sunulan bildiri (poster hariç)', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 5],
     '8b' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan bildiri (poster hariç)', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 3],
     '8ç' => ['baslik' => 'Uluslararası bilimsel toplantıda davetli konuşmacı olarak sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 4],
-    '8d' => ['baslik' => 'SCIE, SSCI, AHCI veya ESCI kapsamındaki dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 6],
-    '8e' => ['baslik' => 'Alan indeksli diğer dergilerde baş editörlük veya editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 4],
+    '8d' => ['baslik' => 'SCIE, SSCI, AHCI veya ESCI kapsamındaki dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI Dergi'], 'puan' => 6],
+    '8e' => ['baslik' => 'Alan indeksli diğer dergilerde baş editörlük veya editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Scopus Dergi'], 'puan' => 4],
     '8f' => ['baslik' => 'SCIE, SSCI, AHCI veya ESCI kapsamındaki dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 3],
 
     // ══ 9. EĞİTİM-ÖĞRETİM FAALİYETİ ══

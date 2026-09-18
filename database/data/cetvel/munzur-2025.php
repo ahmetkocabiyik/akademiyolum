@@ -134,7 +134,7 @@ $ortakMaddeler = [
     'A3.8' => ['baslik' => 'Türkçe özeti yayımlanan bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
     // ══ A5-A6 / B4-B5. ATIF, EDİTÖRLÜK VE HAKEMLİK ══
-    'A5.1' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 4],
+    'A5.1' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 4],
     'B4.1' => ['baslik' => 'TR Dizin veri tabanlarında taranan dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
     'B4.3' => ['baslik' => 'Bilimsel kitap, monografi ya da tezlerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'Diğer', 'Patent'], 'puan' => 1],
     'A6.1' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 30],

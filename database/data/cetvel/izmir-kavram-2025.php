@@ -117,9 +117,9 @@ $genel = [
     '5d' => ['baslik' => 'Yurt içi kaynaklı projede (TÜBİTAK, TAGEM, TEYDEB, BAP vb.) çalışan olmak', 'kategori' => 'proje', 'kaynaklar' => $YURTICI_PROJE, 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 5],
 
     // ══ 6. ATIFLAR (en fazla 20 puan) ══
-    '6a' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki yayınlarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
+    '6a' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki yayınlarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
     '6b' => ['baslik' => 'TR Dizin kapsamındaki yayınlarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
-    '6c' => ['baslik' => 'Diğer uluslararası ya da ulusal atıf indekslerindeki yayınlarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'Diğer', 'Patent'], 'puan' => 1],
+    '6c' => ['baslik' => 'Diğer uluslararası ya da ulusal atıf indekslerindeki yayınlarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'Diğer', 'Patent', 'ESCI', 'Scopus'], 'puan' => 1],
 
     // ══ 7. ÖDÜLLER ══
     '7a' => ['baslik' => 'Uluslararası bilim ya da sanat ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 20],

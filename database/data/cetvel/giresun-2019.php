@@ -89,7 +89,7 @@ return [
 
         // ══ G — ULUSLARARASI ATIFLAR (kendine atıf hariç satırları) ══
         'G.1.a' => ['baslik' => 'Yurt dışında yayımlanan kitap, monografi veya tezde atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 8],
-        'G.2.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 8],
+        'G.2.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 8],
 
         // ══ H — ULUSAL ATIFLAR ══
         'H.1.a' => ['baslik' => 'TÜBİTAK-ULAKBİM taranan dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 4],

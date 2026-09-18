@@ -93,7 +93,7 @@ $maddeler = [
     'A.9.c' => ['baslik' => 'Dergi ya da proje hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
     'A.11.a' => ['baslik' => 'Uluslararası bilimsel toplantıda sözlü sunulan, özeti ya da tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Davetli Konuşmacı'], 'puan' => 15],
     'A.11.b' => ['baslik' => 'Uluslararası bilimsel toplantıda tam metni ya da özeti yayımlanan poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
-    'A.13.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
+    'A.13.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 3],
     'A.13.c' => ['baslik' => 'Yurt dışında yayımlanan bilimsel kitap, monografi ya da tezlerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'Patent'], 'puan' => 2],
 
     // ══ B. ULUSAL YAYIN VE ETKİNLİKLER (en fazla 50 puan) ══

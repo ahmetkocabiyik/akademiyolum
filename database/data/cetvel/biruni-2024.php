@@ -97,7 +97,7 @@ $maddeler = [
     'B2.4.c' => ['baslik' => 'Ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
 
     // ══ B3. ATIFLAR ══
-    'B3.1' => ['baslik' => 'SSCI, SCI-Expanded ya da AHCI kapsamındaki dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 1],
+    'B3.1' => ['baslik' => 'SSCI, SCI-Expanded ya da AHCI kapsamındaki dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 1],
 
     // ══ B4. KONGRE GÖREVLERİ VE SERGİLER ══
     'B4.1.e' => ['baslik' => 'Uluslararası hakemli kongre, konferans ya da sempozyumda bildiri kitabı editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 40],

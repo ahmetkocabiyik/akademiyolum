@@ -133,7 +133,7 @@ $ortak = [
     '3.1' => [
         'baslik' => 'SCI-Expanded/SSCI/AHCI dergilerde yapılan atıf',
         'kategori' => 'atif',
-        'kaynaklar' => ['WoS / Scopus'],
+        'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'],
         'puan' => 5,
     ],
     '3.2' => [

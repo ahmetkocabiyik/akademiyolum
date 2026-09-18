@@ -145,7 +145,8 @@ return [
         'M17.b' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 100],
 
         // ══ E. ATIFLAR ══
-        'M18.b' => ['baslik' => 'SCI, SSCI ya da AHCI tarafından taranan dergilerdeki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],
+        'M18.b' => ['baslik' => 'SCI, SSCI ya da AHCI tarafından taranan dergilerdeki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 10],
+        'M18.c' => ['baslik' => 'Diğer uluslararası dergilerde yayımlanan makalelerdeki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['ESCI', 'Scopus', 'Diğer (Uluslararası)'], 'puan' => 5],
         'M19.a' => ['baslik' => 'Ulusal ya da uluslararası referans kitaplarındaki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
         'M19.b' => ['baslik' => 'Ulusal hakemli bilimsel dergilerdeki ve diğer yayınlardaki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 3],
 

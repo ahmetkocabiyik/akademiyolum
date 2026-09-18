@@ -147,7 +147,7 @@ return [
         'I.D.5.f' => ['baslik' => 'Dergi hakemliği (her yıl en fazla 5 adet)', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 4],
         'I.D.5.g.i' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 50],
         'I.D.5.g.ii' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 30],
-        'I.D.6.a' => ['baslik' => 'SCI, SSCI veya AHCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],
+        'I.D.6.a' => ['baslik' => 'SCI, SSCI veya AHCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 10],
         'I.D.6.c' => ['baslik' => 'Hakemli dergide atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 3],
         'I.D.6.d' => ['baslik' => 'Kitap veya diğer yayınlarda atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'Diğer'], 'puan' => 2],
 

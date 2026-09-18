@@ -146,8 +146,8 @@ $maddeler = [
     '12.g' => ['baslik' => 'Uluslararası jürili sanat ve tasarım etkinliklerinde ya da yarışmalarda alınan derece ödülü', 'kategori' => 'odul', 'kaynaklar' => ['Uluslararası Bilim/Sanat Ödülü', 'Ulusal Bilim/Sanat Ödülü', 'Yarışma Derecesi / Mansiyon', 'Ufuk Avrupa / ERC Ödülü'], 'puan' => 10],
 
     // ══ 13. EDİTÖRLÜK ══
-    '13.a' => ['baslik' => 'SCIE, SSCI, AHCI veya ESCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 50],
-    '13.f' => ['baslik' => 'TR Dizin kapsamındaki ya da diğer uluslararası indekslerde taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 10],
+    '13.a' => ['baslik' => 'SCIE, SSCI, AHCI veya ESCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI Dergi'], 'puan' => 50],
+    '13.f' => ['baslik' => 'TR Dizin kapsamındaki ya da diğer uluslararası indekslerde taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi (Uluslararası)', 'Scopus Dergi'], 'puan' => 10],
     '13.ğ' => ['baslik' => 'Dergilerde yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 2],
     '13.j' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
     '13.l' => ['baslik' => 'Uluslararası ya da ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 3],

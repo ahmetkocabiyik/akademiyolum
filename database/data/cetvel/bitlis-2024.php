@@ -115,7 +115,9 @@ return [
         'A.8.7' => ['baslik' => 'Ansiklopedi madde tanımlaması', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 4],
 
         // ── A.9 Uluslararası atıflar (adayın kendi atıfları hariç, atıf başına) ──
-        'A.9.1' => ['baslik' => 'SCI-E, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
+        'A.9.1' => ['baslik' => 'SCI-E, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
+        'A.9.2' => ['baslik' => 'ISI Database ya da SCOPUS taranan; SCI-E, SSCI ve AHCI kapsamı dışındaki dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI', 'Scopus'], 'puan' => 2],
+        'A.9.3' => ['baslik' => 'ISI Database ya da SCOPUS kapsamı dışındaki diğer uluslararası indeksli dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 1],
         'A.9.4' => ['baslik' => 'Uluslararası kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
 
         // ── A.10 Ulusal atıflar ──

@@ -181,8 +181,8 @@ $maddeler = [
     'F' => ['baslik' => 'Sosyal sorumluluk kapsamındaki projede yürütücü, araştırmacı ya da danışman', 'kategori' => 'toplumsal_katki', 'kaynaklar' => ['Topluma Hizmet Projesi', 'Kamu/STK Danışmanlığı', 'Bilim İletişimi / Popüler Yayın'], 'puan' => 3],
 
     // ══ G. ATIFLAR ══
-    'G1' => ['baslik' => 'SSCI, SCI, SCI-Expanded veya AHCI tarafından taranan dergilerdeki yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
-    'G2-G4' => ['baslik' => 'Diğer uluslararası ya da bilimsel dergilerdeki yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)', 'Patent'], 'puan' => 1],
+    'G1' => ['baslik' => 'SSCI, SCI, SCI-Expanded veya AHCI tarafından taranan dergilerdeki yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 5],
+    'G2-G4' => ['baslik' => 'Diğer uluslararası ya da bilimsel dergilerdeki yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)', 'Patent', 'ESCI', 'Scopus'], 'puan' => 1],
     'G3' => ['baslik' => 'Ulusal dergilerdeki yayınlarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
     'G5-G6' => ['baslik' => 'Yayımlanan kitaplarda atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
 

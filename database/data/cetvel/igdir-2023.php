@@ -174,7 +174,7 @@ return [
 
         // ══ F. ATIFLAR ══
         '18.a' => ['baslik' => 'Uluslararası kaynak kitaplardaki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 20],
-        '18.b' => ['baslik' => 'SCI, SSCI ve AHCI tarafından taranan dergilerdeki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],
+        '18.b' => ['baslik' => 'SCI, SSCI ve AHCI tarafından taranan dergilerdeki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 10],
         '19.b' => ['baslik' => 'Ulusal hakemli bilimsel dergilerdeki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 3],
 
         // ══ II. EĞİTİM-ÖĞRETİM · G. ÖĞRETİM ETKİNLİKLERİ ══

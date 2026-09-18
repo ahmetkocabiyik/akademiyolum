@@ -116,7 +116,7 @@ $ham = [
 
     // ══ A.4 ATIFLAR ══ (yönergede 0,6-2,4; aşağı yuvarlanınca bir kısmı 0)
     'A.4.a' => [2.4, 'Uluslararası kitaplarda eserlerinize yapılan her bir atıf', 'atif', ['BKCI Kitap'], null],
-    'A.4.c' => [1.2, 'SSCI, SCI-Expanded veya AHCI dergilerinde eserlerinize yapılan her bir atıf', 'atif', ['WoS / Scopus'], null],
+    'A.4.c' => [1.2, 'SSCI, SCI-Expanded veya AHCI dergilerinde eserlerinize yapılan her bir atıf', 'atif', ['SCIE/SSCI/AHCI', 'ESCI'], null],
     'A.4.f' => [0.6, 'Hakemli ulusal dergilerde eserlerinize yapılan her bir atıf', 'atif', ['TR Dizin', 'Diğer', 'Patent'], null],
 
     // ══ A.5 PATENTLER ══

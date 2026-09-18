@@ -1667,6 +1667,47 @@ blok sanıp ATIF ve EDİTÖRLÜK satırlarındaki `ESCI / Scopus` etiketlerini d
 siler (Cerrahpaşa A11b böyle kayboldu, testten döndü). Yalnız
 `'kategori' => 'makale'` satırlarına dokun.
 
+### Aynı karar ATIF ve EDİTÖRLÜK eksenlerinde de geçerli
+
+Scopus kuralı üç eksende de aynı. Fark, jenerik etiketin NEREYE ulaştığında.
+
+- **Makale:** `ESCI / Scopus` en fazla ESCI kademesine çıkar.
+- **Editörlük:** `ESCI / Scopus Dergi` de ESCI kademesinde durur.
+- **Atıf:** `WoS / Scopus` zincirin TEPESİ. Çekirdek indeks satırına
+  konduğunda Scopus atfı **çekirdek değerini** alır — Kırklareli'nde 150,
+  Ataşehir'de 10. Atıfta kullanılacak kapsamlı etiket `SCIE/SSCI/AHCI`;
+  `WoS / Scopus` yalnız kaynağın kendisi ikisini birlikte andığında doğru.
+
+**Asıl bulgu: eksik kademe.** Atıf bloklarında Scopus'un çekirdek satırda
+oturmasının sebebi çoğu zaman yanlış etiket değil, cetvele HİÇ girilmemiş bir
+ara kademeydi. Kaynakta duruyordu:
+
+    Fırat A5.2      "E-SCI ve SCOPUS indeksli dergilerde yapılan atıf"        3
+    Ardahan 3.10.2  "SCOPUS, ESCI kapsamında yer alan dergilerdeki … atıf"    4
+    Bandırma A13.b  "ESCI, SCOPUS ve diğer uluslararası alan indeksleri…"     8
+    Bitlis A.9.2/3  "ISI Database ya da SCOPUS taranan; … kapsamı dışındaki"  2/1
+    Bolu A.9.2/3    "ISI taranan; SCI/SCIE/SSCI/AHCI kapsamı dışındaki"       2/1
+    Ege 4b          "… dışında, diğer uluslararası alan indekslerince…"       1
+    Düzce 1.5.b · Ataşehir M18.c · PAÜ A.5b
+
+Ders: **jenerik etiket, eksik satırı gizler.** Bir kademe jenerikle
+bağlandığında aday puan alır, hiçbir test kırılmaz ve arada olması gereken
+satırın yokluğu görünmez. Etiketi daraltmak onu ortaya çıkarır. Bu yüzden
+daraltmadan önce kaynağın o bölümünü BAŞTAN SONA oku, yalnız düzelttiğin
+satırı değil.
+
+**Kademe gerçekten yoksa Scopus SIFIR alır.** Kaynağın tek uluslararası atıf
+kademesi "SCI, SCI-Expanded, SSCI veya AHCI" ise ve altında yalnız ulusal
+kademe varsa, yönerge Scopus atfını bilerek saymıyordur. Çekirdek değerini
+vermek §0 ihlali; ulusal kademeye indirmek yanlış kategori. Sıfır, kaynağın
+söylediği şey — kapsam notuna yaz. (Bu, makale ekseninde yazılan "sıfır
+değil" kaydının sınırı: orada kaynakta bir uluslararası indeks kademesi VARDI.)
+
+**Ters yön de çıkıyor.** Necmettin Erbakan I1 "SSCI, SCI-Expanded, AHCI veya
+**SCOPUS** tarafından taranan dergide editörlük 60" diyor ama satır yalnız
+`WoS Dergi (Q1-Q4)` taşıyordu; Scopus editörlüğü 30'a düşüyordu. Kural
+simetrik: kaynak anıyorsa YUKARI da taşınır.
+
 ### Tetiği SÖZLÜKTE OLAN çarpanı önceden çarpılmış satıra çevir
 
 Çarpanın neye bağlı olduğuna bak. Ortağın kurumuna ya da tezin sanayi

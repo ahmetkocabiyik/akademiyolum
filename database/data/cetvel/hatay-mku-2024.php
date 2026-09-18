@@ -78,15 +78,15 @@ return [
         'A2d1' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
         'A2d2' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
         'A2e' => ['baslik' => 'Alanında yayımlanmış tam kitap tercümesi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 15],
-        'A2f1' => ['baslik' => 'SCI, SSCI, AHCI veya ESCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 30],
-        'A2f3' => ['baslik' => 'Ulusal veya diğer uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 5],
+        'A2f1' => ['baslik' => 'SCI, SSCI, AHCI veya ESCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI Dergi'], 'puan' => 30],
+        'A2f3' => ['baslik' => 'Ulusal veya diğer uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Scopus Dergi'], 'puan' => 5],
 
         // ══ A. 3. Hakemlikler ══
         'A3c' => ['baslik' => 'Dergi hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
 
         // ══ A. 4. Atıflar ══
         'A4a' => ['baslik' => 'Uluslararası yayınevi kitabında atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 8],
-        'A4c' => ['baslik' => 'SCI-Expanded, SSCI, AHCI veya ESCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 4],
+        'A4c' => ['baslik' => 'SCI-Expanded, SSCI, AHCI veya ESCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 4],
         'A4e' => ['baslik' => 'Ulusal hakemli dergide atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 2],
 
         // ══ B. TEBLİĞLER ══

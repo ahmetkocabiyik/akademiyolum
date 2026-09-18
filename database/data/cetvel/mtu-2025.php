@@ -166,8 +166,8 @@ $maddeler = array_merge([
     'C2.7' => ['baslik' => 'Bilimsel kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 40],
 
     // ══ D. ATIFLAR ══
-    'D3' => ['baslik' => 'Yabancı dilde basılmış kitaplarda ya da SCI, SCI-Exp, SSCI, AHCI dergilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 5],
-    'D4' => ['baslik' => 'Türkçe basılmış kitaplarda, TR Dizin ya da uluslararası indeksli dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 3],
+    'D3' => ['baslik' => 'Yabancı dilde basılmış kitaplarda ya da SCI, SCI-Exp, SSCI, AHCI dergilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'BKCI Kitap'], 'puan' => 5],
+    'D4' => ['baslik' => 'Türkçe basılmış kitaplarda, TR Dizin ya da uluslararası indeksli dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'ESCI', 'Scopus'], 'puan' => 3],
     'D5' => ['baslik' => 'Diğer yayınlarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'Patent'], 'puan' => 2],
 
     // ══ E. EDİTÖRLÜK VE HAKEMLİKLER ══

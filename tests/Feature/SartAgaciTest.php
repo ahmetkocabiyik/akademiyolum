@@ -506,7 +506,7 @@ test('atıf ve bildiri kayıtları toplam puana katkı verir', function () {
 
     $yalnizMakale = [sartFaaliyet('TR Dizin')]; // 1.8 → 15
     $atifli = array_merge($yalnizMakale, [
-        sartFaaliyet('WoS / Scopus', Kategori::Atif),                        // 3.1 → 5
+        sartFaaliyet('SCIE/SSCI/AHCI', Kategori::Atif),                        // 3.1 → 5
         sartFaaliyet('Uluslararası Tam Metin (CPCI)', Kategori::Bildiri),    // 7.1 → 8
     ]);
 
@@ -4340,7 +4340,7 @@ test('İstanbul Ticaret editörlük kademelerini dergi düzeyine göre ayırıyo
         ->and($ed('Hakemlik'))->toBe(4);
 
     // Atıf ve patent de kademeli.
-    expect($katalog->puan(sartFaaliyet('WoS / Scopus', Kategori::Atif), $katalog->coz(['I.D.6.*'])))->toBe(10)
+    expect($katalog->puan(sartFaaliyet('SCIE/SSCI/AHCI', Kategori::Atif), $katalog->coz(['I.D.6.*'])))->toBe(10)
         ->and($katalog->puan(sartFaaliyet('Diğer', Kategori::Atif), $katalog->coz(['I.D.6.*'])))->toBe(2)
         ->and($katalog->puan(sartFaaliyet('Uluslararası Patent', Kategori::Patent), $katalog->coz(['II.D.7.*'])))->toBe(50)
         ->and($katalog->puan(sartFaaliyet('Ulusal Patent', Kategori::Patent), $katalog->coz(['II.D.7.*'])))->toBe(20);
@@ -4665,7 +4665,7 @@ test('Akdeniz bölüm tavanları uygulanıyor', function () {
     expect($katalog->topla(array_fill(0, 40, sartFaaliyet('BKCI Kitap', Kategori::Atif)), $tumu))->toBe(120);
 
     // Alt tavan 3.1'i kapsamıyor: yüz WoS atfı 500 değil, bölüm tavanı 250.
-    expect($katalog->topla(array_fill(0, 100, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $tumu))->toBe(250);
+    expect($katalog->topla(array_fill(0, 100, sartFaaliyet('SCIE/SSCI/AHCI', Kategori::Atif)), $tumu))->toBe(250);
 
     // 4. bölüm 200: iki uluslararası patent tavansız 500 ederdi.
     expect($katalog->topla(array_fill(0, 2, sartFaaliyet('Uluslararası Patent', Kategori::Patent)), $tumu))->toBe(200);
@@ -4680,7 +4680,7 @@ test('Fırat çapraz tablo tavanları ve BAP tavanı uygulanıyor', function () 
     $tumu = $katalog->coz(['*']);
 
     // "A5+B4 toplamı en fazla 300": yüz WoS atfı (5) tavansız 500 ederdi.
-    expect($katalog->topla(array_fill(0, 100, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $tumu))->toBe(300);
+    expect($katalog->topla(array_fill(0, 100, sartFaaliyet('SCIE/SSCI/AHCI', Kategori::Atif)), $tumu))->toBe(300);
 
     // "A6+B5 toplamı en fazla 50": beş WoS editörlüğü (30) tavansız 150.
     expect($katalog->topla(array_fill(0, 5, sartFaaliyet('WoS Dergi (Q1)', Kategori::Editorluk)), $tumu))->toBe(50);
@@ -4701,7 +4701,7 @@ test('Sakarya madde ve bölüm tavanları uygulanıyor', function () {
 
     // 11. bölümün iki katmanlı tavanı: 11.3 (WoS atfı) 500'e kadar, öteki
     // atıflar TOPLAMDA 100'de kesiliyor.
-    $wos = array_fill(0, 300, sartFaaliyet('WoS / Scopus', Kategori::Atif));
+    $wos = array_fill(0, 300, sartFaaliyet('SCIE/SSCI/AHCI', Kategori::Atif));
     $ulusal = array_fill(0, 200, sartFaaliyet('TR Dizin', Kategori::Atif));
     expect($katalog->topla($wos, $tumu))->toBe(500)
         ->and($katalog->topla($ulusal, $tumu))->toBe(100);
@@ -4773,7 +4773,7 @@ test('Afyon atıf tavanı ve Bandırma diğer atıf tavanı uygulanıyor', funct
 
     // Afyon: "Atıflardan en fazla 500 puan alınabilir." SCI atfı 7 puan.
     $afyon = $depo->katalog('afyon-2026');
-    expect($afyon->topla(array_fill(0, 200, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $afyon->coz(['*'])))
+    expect($afyon->topla(array_fill(0, 200, sartFaaliyet('SCIE/SSCI/AHCI', Kategori::Atif)), $afyon->coz(['*'])))
         ->toBe(500);
 
     // Bandırma: "B11.b) Diğer atıflar (En fazla 20 puan dikkate alınır.)"
@@ -4814,7 +4814,7 @@ test('Gaziantep atıf, proje ve editörlük tavanları uygulanıyor', function (
     $tumu = $katalog->coz(['*']);
 
     // "Not 1: Atıflardan en fazla 200 puan hesaplamada kullanılabilir."
-    expect($katalog->topla(array_fill(0, 300, sartFaaliyet('WoS / Scopus', Kategori::Atif)), $tumu))->toBe(200);
+    expect($katalog->topla(array_fill(0, 300, sartFaaliyet('SCIE/SSCI/AHCI', Kategori::Atif)), $tumu))->toBe(200);
 
     // "j) BAP (en fazla 50 puan alınabilir)" — yürütücülük 10 puan.
     expect($katalog->topla(array_fill(0, 10, sartFaaliyet('BAP (Üniversite)', Kategori::Proje, 'yurutucu')), $tumu))

@@ -190,8 +190,8 @@ $maddeler = array_merge([
     '410-3' => ['baslik' => 'Üç aydan uzun süreli araştırma bursu', 'kategori' => 'odul', 'kaynaklar' => ['Burs'], 'puan' => 20],
 
     // ══ 4.11 ATIFLAR ══
-    '411-1' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 20],
-    '411-2' => ['baslik' => 'Diğer uluslararası indeksli ya da ULAKBİM taranan dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 15],
+    '411-1' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergilerinde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 20],
+    '411-2' => ['baslik' => 'Diğer uluslararası indeksli ya da ULAKBİM taranan dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'ESCI', 'Scopus'], 'puan' => 15],
     '411-3' => ['baslik' => 'Diğer hakemli dergilerde ya da uluslararası kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)', 'BKCI Kitap'], 'puan' => 10],
     '411-5' => ['baslik' => 'Ulusal kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 5],
 

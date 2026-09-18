@@ -87,7 +87,8 @@ return [
         'A11.a' => ['baslik' => 'Diğer uluslararası hakemli dergide sorumlu editör ya da baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi (Uluslararası)'], 'puan' => 15],
         'A12.a' => ['baslik' => 'Uluslararası toplantıda sözlü sunulan ve tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 15],
         'A12.b' => ['baslik' => 'Uluslararası toplantıda özet metni yayımlanan bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
-        'A13.a' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 10],
+        'A13.a' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 10],
+        'A13.b' => ['baslik' => 'ESCI, SCOPUS ya da diğer uluslararası alan indekslerince taranan dergilerde atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI', 'Scopus', 'Diğer (Uluslararası)'], 'puan' => 8],
         'A13.ç' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
 
         // ══ B — ULUSAL YAYIN VE ETKİNLİKLER ══

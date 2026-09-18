@@ -156,7 +156,7 @@ $maddeler = [
     'C8' => ['baslik' => 'Uluslararası yayınevi tarafından yabancı dilde yayımlanan bilimsel kitabın bölüm çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
 
     // ══ D. ATIFLAR ══
-    'D1' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI kapsamındaki dergide yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
+    'D1' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI kapsamındaki dergide yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 3],
     'D2' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitapta yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
     'D5' => ['baslik' => 'Ulusal hakemli dergide ya da ulusal yayınevi kitabında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 1],
 

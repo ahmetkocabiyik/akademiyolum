@@ -170,8 +170,8 @@ $maddeler = [
     'H14' => ['baslik' => 'Teknoloji geliştirme bölgesinde faal şirket kurmak ya da ortağı olmak', 'kategori' => 'patent', 'kaynaklar' => ['Ticarileştirme'], 'puan' => 40],
 
     // ══ I. EDİTÖRLÜK VE HAKEMLİKLER ══
-    'I1' => ['baslik' => 'SSCI, SCI-Expanded, AHCI veya SCOPUS tarafından taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 60],
-    'I2' => ['baslik' => 'ESCI ya da Senato tarafından belirlenen indekslerde taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 30],
+    'I1' => ['baslik' => 'SSCI, SCI-Expanded, AHCI veya SCOPUS tarafından taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'Scopus Dergi'], 'puan' => 60],
+    'I2' => ['baslik' => 'ESCI ya da Senato tarafından belirlenen indekslerde taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI Dergi'], 'puan' => 30],
     'I3' => ['baslik' => 'ULAKBİM TR Dizin tarafından taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 24],
     'I6' => ['baslik' => 'Diğer bilimsel ve sanatsal hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 6],
     'I9' => ['baslik' => 'Dergilerde yayın ya da danışma kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 2],

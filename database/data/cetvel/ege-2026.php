@@ -107,7 +107,8 @@ return [
         '3f' => ['baslik' => 'Ulusal yayınevinde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
 
         // ── 4. ATIF ──
-        '4a' => ['baslik' => 'SCIE/SSCI/AHCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
+        '4a' => ['baslik' => 'SCIE/SSCI/AHCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 2],
+        '4b' => ['baslik' => 'SCIE/SSCI/AHCI dışındaki uluslararası alan indekslerince taranan dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['ESCI', 'Scopus', 'Diğer (Uluslararası)'], 'puan' => 1],
         '4c' => ['baslik' => 'ULAKBİM taranan ulusal dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 1],
         '4d' => ['baslik' => 'Kitaplarda yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 1],
         '4e' => ['baslik' => 'İncelemeli patent atıfları', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 2],

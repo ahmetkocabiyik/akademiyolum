@@ -243,8 +243,8 @@ return [
 
         // ══ G. ATIFLAR ══
         'G.1-G.2' => ['baslik' => 'Yazar olarak yer almadığınız kitapta eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 2],
-        'G.3' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI veya ESCI kapsamındaki dergide, yazar olarak yer almadığınız makalede eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 5],
-        'G.4' => ['baslik' => 'Diğer uluslararası dergide, yazar olarak yer almadığınız makalede eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)'], 'puan' => 3],
+        'G.3' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI veya ESCI kapsamındaki dergide, yazar olarak yer almadığınız makalede eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 5],
+        'G.4' => ['baslik' => 'Diğer uluslararası dergide, yazar olarak yer almadığınız makalede eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer (Uluslararası)', 'Scopus'], 'puan' => 3],
         'G.5' => ['baslik' => 'Hakemli ulusal dergide, yazar olarak yer almadığınız makalede eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent'], 'puan' => 2],
 
         // ══ I. BİLİMSEL ETKİNLİK ÇALIŞMALARI ══

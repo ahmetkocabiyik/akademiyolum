@@ -100,7 +100,8 @@ return [
         '1.4.d' => ['baslik' => 'Türkçe kitapta bölüm yazarlığı, editörlük, kitapçık veya ansiklopedi maddesi', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
         '1.4.e' => ['baslik' => 'Türkçe kitap çevirmenliği (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
         '1.4.f' => ['baslik' => 'Kitap bölümü, kitapçık veya makale çevirmenliği (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
-        '1.5.a' => ['baslik' => 'SCI, SCI-E, SSCI veya AHCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
+        '1.5.a' => ['baslik' => 'SCI, SCI-E, SSCI veya AHCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
+        '1.5.b' => ['baslik' => 'Diğer uluslararası bilimsel dergi ve kitaplardaki yayınlarda atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['ESCI', 'Scopus', 'Diğer (Uluslararası)'], 'puan' => 1],
         '1.5.c' => ['baslik' => 'Uluslararası kitapta atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
         '1.5.d' => ['baslik' => 'Ulusal yayında atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 1],
 

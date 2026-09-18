@@ -225,8 +225,8 @@ $govde = function (?int $birFTavani) use ($BOLUM1): array {
             '8d-8e' => ['baslik' => 'Alanınızda tasarım tescili', 'kategori' => 'patent', 'kaynaklar' => ['Endüstriyel Tasarım', 'Yazılım', 'Ticarileştirme'], 'puan' => 50],
 
             // ══ 9. ATIF (b ve c bentleri için grup tavanı 200) ══
-            '9a' => ['baslik' => 'Patentte, SCIE, SSCI, AHCI dergilerinde ya da BKCI kitaplarında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap', 'Patent'], 'puan' => 5],
-            '9b' => ['baslik' => 'ESCI veya Scopus dergilerinde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 3],
+            '9a' => ['baslik' => 'Patentte, SCIE, SSCI, AHCI dergilerinde ya da BKCI kitaplarında yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'BKCI Kitap', 'Patent'], 'puan' => 5],
+            '9b' => ['baslik' => 'ESCI veya Scopus dergilerinde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'ESCI', 'Scopus'], 'puan' => 3],
             '9c' => ['baslik' => 'Diğer indekslerde taranan dergilerde ve kitaplarda yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
 
             // ══ 10. EDİTÖRLÜK VE HAKEMLİK (grup tavanı 600, yıl çarpanı yok) ══

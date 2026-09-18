@@ -86,7 +86,7 @@ return [
 
         // ══ 3. ATIFLAR (kişi sayısı dikkate alınmaz, tavan 30) ══
         '3.a' => ['baslik' => 'Uluslararası kitapta atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 8],
-        '3.c' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 4],
+        '3.c' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 4],
         '3.f' => ['baslik' => 'Hakemli ulusal dergide atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 2],
 
         // ══ 6. TEBLİĞLER ══
@@ -119,8 +119,8 @@ return [
         // ══ 15-16. EDİTÖRLÜK ══
         '15.a' => ['baslik' => 'Bilimsel veya ders kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
         '16.a' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 30],
-        '16.b' => ['baslik' => 'ESCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 15],
-        '16.d' => ['baslik' => 'Diğer hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 5],
+        '16.b' => ['baslik' => 'ESCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI Dergi'], 'puan' => 15],
+        '16.d' => ['baslik' => 'Diğer hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Scopus Dergi'], 'puan' => 5],
         '16.h' => ['baslik' => 'Dergide editörler kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 1],
 
         // ══ 17. ÖDÜLLER ══

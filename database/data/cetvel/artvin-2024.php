@@ -73,8 +73,8 @@ return [
 
         // ── D. ATIFLAR (en fazla 100 puan) ──
         'D1' => ['baslik' => 'Uluslararası kitaplarda yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
-        'D3' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 4],
-        'D4' => ['baslik' => 'Diğer uluslararası veya TR Dizin dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer (Uluslararası)', 'Patent'], 'puan' => 2],
+        'D3' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 4],
+        'D4' => ['baslik' => 'Diğer uluslararası veya TR Dizin dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer (Uluslararası)', 'Patent', 'ESCI', 'Scopus'], 'puan' => 2],
 
         // ── E. PROJELER ──
         // E grubunun puanları 01.09.2026'da kaynağa göre düzeltildi; cetvelde

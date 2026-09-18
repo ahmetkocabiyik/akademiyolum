@@ -136,7 +136,7 @@ return [
         '12.c' => ['baslik' => 'Faydalı model veya endüstriyel tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 20],
 
         // ══ 13. ATIF (yalnızca SCI satırı; diğerleri birden küçük) ══
-        '13.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisindeki makalede atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 3],
+        '13.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisindeki makalede atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 3],
 
         // ══ 14. TEBLİĞ (BİLDİRİ) ══
         '14.a' => ['baslik' => 'Uluslararası bilimsel etkinlikte tam metni yayımlanmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 6],

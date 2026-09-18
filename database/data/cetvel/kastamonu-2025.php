@@ -162,9 +162,9 @@ $maddeler = [
     '4ı' => ['baslik' => 'Bilimsel ansiklopedide konu ya da madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 6],
 
     // ══ 5. ATIFLAR ══
-    '5a' => ['baslik' => 'SCI-E, SSCI veya AHCI dergilerinde ya da BKCI kitaplarında eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 5],
+    '5a' => ['baslik' => 'SCI-E, SSCI veya AHCI dergilerinde ya da BKCI kitaplarında eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'BKCI Kitap'], 'puan' => 5],
     '5c' => ['baslik' => 'ULAKBİM TR Dizin tarafından taranan dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 3],
-    '5ç' => ['baslik' => 'Diğer indekslerde taranan dergilerde ya da kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    '5ç' => ['baslik' => 'Diğer indekslerde taranan dergilerde ya da kitaplarda eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'ESCI', 'Scopus'], 'puan' => 2],
     '5d' => ['baslik' => 'İncelemeli patentlerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 4],
 
     // ══ 6. LİSANSÜSTÜ TEZ DANIŞMANLIKLARI ══
