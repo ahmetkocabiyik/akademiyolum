@@ -71,7 +71,6 @@
  * ── UYGULANAMAYAN ÇARPANLAR (hepsi puanı DÜŞÜK gösterir) ──
  *   Madde 5(4)  QS ilk 100 ortaklı çalışma ×2, ilk 500 ×1,6, diğer
  *       uluslararası ortaklı ×1,4, ulusal ortaklı ×1,2.
- *   Madde 7(2)  Incites/SciVal %1'lik dilim ×3, %10'luk dilim ×1,5.
  *   J notu      Sanayi iş birliği projesi kapsamında tamamlanan tezler ×2.
  *   M notu      TTO/Teknokent belgeli iş dünyası iş birliği faaliyetleri ×1,5.
  *   S notu      İletişim etkinliklerinin uluslararası olması hâlinde ×2.
@@ -92,8 +91,9 @@ return [
         .'bilimleri etkinlikleri (S bölümü) ve kongre düzenleme (H bölümü) kaynakta '
         .'ayrılamadığı için hiç girilmedi; projelerde "devam ediyor" katsayısı (0,75) '
         .'kullanıldı, tamamlanmış projeniz varsa gerçek puanınız daha yüksek; yönergenin ortak '
-        .'çalışma çarpanları (QS ilk 100 ortağı ×2, %1\'lik dilim dergi ×3, sanayi iş birlikli '
-        .'tez ×2) uygulanmıyor. '
+        .'çalışma çarpanları (QS ilk 100 ortağı ×2, sanayi iş birlikli tez ×2) uygulanmıyor. '
+        .'Incites/SciVal dilim çarpanı (%1 ×3, %10 ×1,5) uygulanıyor: makalenizi ilgili dilim '
+        .'etiketiyle girin. '
         .'Spor Bilimleri adayları en çok etkilenir: sportif faaliyet bölümünün tamamı dışarıda '
         .'kaldı. Girişimcilik bölümü girilemediği için yönergenin "L1-L18 Puanı" barajı hiçbir '
         .'kadroda gösterilmiyor; gerçek başvuruda o baraj da aranacak.',
@@ -133,6 +133,14 @@ return [
         // Q değeri olmayan AHCI, en düşük çeyreklik satırına kondu.
         // DERLEME: A.1 "özgün makaleler" diyor, A.6 ise derlemeyi saymıyor.
         // Kaynak ayrımı olmadığı için derleme A.6 satırlarına (1/3) kondu.
+        // ── MADDE 7(2) ÇARPANI SATIRA ÇEVRİLDİ ──
+        // "Makalenin puan değeri … %1'lik dilimde yer alması hâlinde 3,
+        // %10'luk dilimde yer alması hâlinde 1,5 ile çarpılır." Motorun satır
+        // bazlı çarpanı yok ama sözlük 17.09.2026'da dilim eksenini açtı;
+        // çarpım ÖNCEDEN yapılıp ayrı satır olarak yazıldı. Dilim kademesi
+        // tanımı gereği Q1'in içinde, o yüzden yalnız Q1 satırları çarpılır.
+        'A.1.a.d1' => ['baslik' => 'Incites/SciVal ilk %1\'lik dilimdeki Q1 dergide özgün makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (İlk %1)'], 'turler' => ['ozgun_makale'], 'puan' => 600],
+        'A.1.a.d10' => ['baslik' => 'Incites/SciVal ilk %10\'luk dilimdeki Q1 dergide özgün makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (İlk %10)'], 'turler' => ['ozgun_makale'], 'puan' => 300],
         'A.1.a' => ['baslik' => 'SCI-E, SSCI veya AHCI kapsamındaki Q1 dergide özgün makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale'], 'puan' => 200],
         'A.1.b' => ['baslik' => 'SCI-E, SSCI veya AHCI kapsamındaki Q2 dergide özgün makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale'], 'puan' => 150],
         'A.1.c' => ['baslik' => 'SCI-E, SSCI veya AHCI kapsamındaki Q3 dergide özgün makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale'], 'puan' => 90],
@@ -143,6 +151,9 @@ return [
         'A.5' => ['baslik' => 'Ulusal hakemli dergide özgün makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale'], 'puan' => 20],
         // A.6 — aynı dergilerde derleme, teknik not, editöre mektup, tartışma,
         // vaka takdimi, özet ve kitap incelemesi: satır puanının 1/3'ü.
+        // Çarpan derleme/kısa makale satırına da işliyor (66 → 198 / 99).
+        'A.6.1.d1' => ['baslik' => 'Incites/SciVal ilk %1\'lik dilimdeki Q1 dergide derleme, teknik not, editöre mektup, vaka takdimi veya özet', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (İlk %1)'], 'turler' => ['derleme', 'kisa_makale', 'vaka_teknik_not'], 'puan' => 198],
+        'A.6.1.d10' => ['baslik' => 'Incites/SciVal ilk %10\'luk dilimdeki Q1 dergide derleme, teknik not, editöre mektup, vaka takdimi veya özet', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (İlk %10)'], 'turler' => ['derleme', 'kisa_makale', 'vaka_teknik_not'], 'puan' => 99],
         'A.6.1' => ['baslik' => 'Q1 dergide derleme, teknik not, editöre mektup, vaka takdimi veya özet', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['derleme', 'kisa_makale', 'vaka_teknik_not'], 'puan' => 66],
         'A.6.2' => ['baslik' => 'Q2 dergide derleme, teknik not, editöre mektup, vaka takdimi veya özet', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['derleme', 'kisa_makale', 'vaka_teknik_not'], 'puan' => 50],
         'A.6.3' => ['baslik' => 'Q3 dergide derleme, teknik not, editöre mektup, vaka takdimi veya özet', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['derleme', 'kisa_makale', 'vaka_teknik_not'], 'puan' => 30],
@@ -274,8 +285,8 @@ return [
         // 'A.10' olsaydı onu da yakalardı; 'K.1*' ise K.13 ve K.14'ü yakalar,
         // o yüzden proje grupları tek tek sayıldı.
         'A' => ['A.*'],
-        'Q1-Q3' => ['A.1.a', 'A.1.b', 'A.1.c'],
-        'SCI-E' => ['A.1.a', 'A.1.b', 'A.1.c', 'A.1.d'],
+        'Q1-Q3' => ['A.1.a', 'A.1.a.d1', 'A.1.a.d10', 'A.1.b', 'A.1.c'],
+        'SCI-E' => ['A.1.a', 'A.1.a.d1', 'A.1.a.d10', 'A.1.b', 'A.1.c', 'A.1.d'],
         'ESCI' => ['A.2'],
         'TR-DIZIN' => ['A.3'],
         'BKCI-KITAP' => ['C.1.a'],

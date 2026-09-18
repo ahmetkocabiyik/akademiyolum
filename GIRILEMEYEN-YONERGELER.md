@@ -718,9 +718,9 @@ Hepsi ilgili cetvelin `kapsam_notu` alanında adaya da söyleniyor.
   üretilmediğini tutmuyor. Üçü de beyan olarak girildi; blok `veya` olduğu için
   koşul kesin ret vermiyor, belirsiz kalıyor.
 - **Ortak çalışma çarpanları** — İnönü Madde 5(4) (QS ilk 100 ortağı ×2, ilk
-  500 ×1,6, uluslararası ortaklı ×1,4, ulusal ortaklı ×1,2) ve Madde 7(2)
-  (Incites/SciVal %1'lik dilim ×3, %10'luk ×1,5). Faaliyet kaydı ortağın
-  kurumunu ve derginin dilim bilgisini tutmuyor; puan DÜŞÜK görünür.
+  500 ×1,6, uluslararası ortaklı ×1,4, ulusal ortaklı ×1,2). Faaliyet kaydı
+  ortağın kurumunu tutmuyor; puan DÜŞÜK görünür. Madde 7(2)'nin dilim çarpanı
+  (%1 ×3, %10 ×1,5) 18.09.2026'da önceden çarpılmış satıra çevrildi, kapandı.
 - **Tam sayıya inince kaybolan satır** — motorun `puan` alanı tam sayı tutuyor.
   Nişantaşı'nın "orkestra konserinde üyelik (yurt içi) 0,5 puan" satırı aşağı
   yuvarlanınca 0 ettiği için hiç girilmedi; o kalemde puan DÜŞÜK görünür.
@@ -1327,8 +1327,13 @@ TABLO-1): ilk %1 → **200**, ilk %5 → **175**, ilk %10 → **150**. Q1'in 100
 kaynağın kendi sözleriyle "%1-%10 dilimler DIŞINDAKİ" demek. Sözlüğe
 `SCIE/SSCI (İlk %1)` eklendi; zincir dört kademeli oldu (%1 ⊂ %5 ⊂ %10 ⊂ Q1).
 
-**İnönü** dilimi ÇARPAN olarak kullanıyor (%1 → ×3, %10 → ×1,5); motorun
-satır bazlı çarpanı yok, başka bir yapı.
+**İnönü** dilimi ÇARPAN olarak kullanıyor (Madde 7(2): %1 → ×3, %10 → ×1,5).
+Motorun satır bazlı çarpanı yok; çarpım ÖNCEDEN yapılıp ayrı satır olarak
+yazıldı — `A.1.a` 200'ün yanına `A.1.a.d1` 600 ve `A.1.a.d10` 300, `A.6.1`
+66'nın yanına `A.6.1.d1` 198 ve `A.6.1.d10` 99. Dilim tanımı gereği Q1'in
+içinde olduğu için yalnız Q1 satırları çarpıldı. Yeni kodlar `Q1-Q3` ve
+`SCI-E` gruplarına da eklendi; yoksa adet barajı dilim makalesini hiç saymaz.
+Kaynak %5 kademesi tanımıyor, zincir onu %10'a (×1,5) düşürüyor. **Kapalı.**
 
 **Harran'da ikinci bir çökme daha var**: A1b ESCI (10) ile Scopus Q1-Q4
 (50-10) tek `ESCI / Scopus` etiketine düşüyor → 10. Scopus çeyrekliği artık

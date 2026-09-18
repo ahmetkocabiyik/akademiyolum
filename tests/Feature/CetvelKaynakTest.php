@@ -2673,6 +2673,48 @@ test('Necmettin Erbakan üç dilim kademesini de ayırıyor', function () {
     ))->toBe(100);
 });
 
+test('İnönü dilim çarpanını önceden çarpılmış satır olarak taşıyor', function () {
+    // MADDE 7(2): "Makalenin puan değeri, yayımlandığı derginin Incites veya
+    // SciVal veri tabanlarında %1'lik dilimde yer alması hâlinde 3, %10'luk
+    // dilimde yer alması hâlinde 1,5 ile çarpılır." Motorun satır bazlı
+    // çarpanı yok; çarpım ÖNCEDEN yapılıp ayrı satıra yazıldı.
+    $katalog = sartDepo()->katalog('inonu-2026');
+
+    $puan = fn (string $etiket, string $yayinTuru) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'yayin_turu' => $yayinTuru,
+            'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    // Özgün makale: 200 × 3 = 600, 200 × 1,5 = 300.
+    expect($puan('SCIE/SSCI (İlk %1)', 'ozgun_makale'))->toBe(600)
+        ->and($puan('SCIE/SSCI (İlk %10)', 'ozgun_makale'))->toBe(300)
+        ->and($puan('SCIE/SSCI (Q1)', 'ozgun_makale'))->toBe(200)
+        // Kaynak %5 kademesi tanımıyor; zincir onu %10'a düşürüyor.
+        ->and($puan('SCIE/SSCI (İlk %5)', 'ozgun_makale'))->toBe(300)
+        // Çarpan "makalenin puan değeri"ne bağlı, derlemeye de işliyor.
+        ->and($puan('SCIE/SSCI (İlk %1)', 'derleme'))->toBe(198)
+        ->and($puan('SCIE/SSCI (İlk %10)', 'derleme'))->toBe(99)
+        ->and($puan('SCIE/SSCI (Q1)', 'derleme'))->toBe(66);
+
+    // Dilim satırı Q1'in ALT KÜMESİ: adet barajları onu hâlâ bir Q1-Q3
+    // makalesi olarak saymalı. Gruba eklenmezse baraj sessizce eksik sayar.
+    expect($katalog->coz(['Q1-Q3']))->toContain('A.1.a.d1')
+        ->and($katalog->coz(['SCI-E']))->toContain('A.1.a.d10');
+
+    expect($katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => 'SCIE/SSCI (İlk %1)', 'yayin_turu' => 'ozgun_makale',
+            'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['Q1-Q3']),
+    ))->toBe(600);
+});
+
 test('Acıbadem 2. bölüm Scopus\'un yalnız Q1-Q2\'sini sayıyor', function () {
     // Kaynağın başlığı: "WEB OF SCIENCE ALL DATABASES veya SCOPUS Q1 ve Q2
     // KATEGORİLERİ KAPSAMINDAKİ DİĞER DERGİLER". Genel `ESCI / Scopus`

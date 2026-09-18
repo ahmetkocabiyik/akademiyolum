@@ -1618,6 +1618,29 @@ birimde bütün kadrolarda geçerliyse cetvelin İKİ VARYANTINI üret (çarpanl
 float tutup çarpımdan **sonra bir kez** aşağı yuvarla; önce yuvarlayıp sonra
 çarpmak farklı sonuç verir.
 
+### Tetiği SÖZLÜKTE OLAN çarpanı önceden çarpılmış satıra çevir
+
+Çarpanın neye bağlı olduğuna bak. Ortağın kurumuna ya da tezin sanayi
+desteğine bağlıysa faaliyet kaydında o bilgi yok — uygulanamaz, `notlar`a
+yaz ve geç. Ama tetik sözlüğün zaten taşıdığı bir EKSENSE (dilim, çeyreklik,
+yayın türü) çarpanı satıra çevirebilirsin: çarpımı ÖNCEDEN yap, sonucu o
+eksenin etiketine bağlı AYRI bir satır olarak yaz.
+
+İnönü Madde 7(2) "%1'lik dilim ×3, %10'luk dilim ×1,5" diyor. `A.1.a` (Q1
+özgün makale, 200) yanına `A.1.a.d1` 600 ve `A.1.a.d10` 300 eklendi; aynısı
+derleme satırı `A.6.1` 66 için 198/99 olarak yapıldı. `puan()` MAX aldığı
+için dilim kaydı doğru satıra, dilimsiz Q1 kaydı eski satıra düşüyor.
+
+İki tuzak:
+
+1. **Hangi satırlar çarpılır?** Dilim kademesi tanımı gereği Q1'in içinde
+   (%1 ⊂ %5 ⊂ %10 ⊂ Q1), o yüzden yalnız Q1 satırının çarpılmış ikizi
+   yazılır. Q2-Q4'e ikiz yazmak olmayan bir kaydı uydurmak olur.
+2. **Yeni kodu GRUPLARA da ekle.** `gruplar` altındaki kümeler kodu tek tek
+   sayıyorsa (`'Q1-Q3' => ['A.1.a', …]`) yeni kod oraya girmezse adet barajı
+   dilim makalesini HİÇ saymaz — puanı yükseltirken adedi düşürürsün. Testte
+   hem puanı hem `coz(['Q1-Q3'])`'ün yeni kodu içerdiğini dondur.
+
 ### Puan BLOĞA veriliyorsa satırı hiç yazma, KOŞULU metriğe çevir
 
 Bir bölümün birimi eser değil BLOK olabilir: Kafkas'ın eğitim-öğretim bölümü
