@@ -1708,6 +1708,36 @@ değil" kaydının sınırı: orada kaynakta bir uluslararası indeks kademesi V
 `WoS Dergi (Q1-Q4)` taşıyordu; Scopus editörlüğü 30'a düşüyordu. Kural
 simetrik: kaynak anıyorsa YUKARI da taşınır.
 
+### Kural ESCI için de aynı: kademe onu ANMIYORSA oraya düşmez
+
+Scopus turunda `WoS / Scopus` çekirdek satırdan alınırken ESCI o satırda
+bırakılmıştı — satır "SCI, SCI-Expanded, SSCI veya AHCI dergisinde atıf"
+dediği hâlde. Bu, kuralın yarım uygulanmasıydı; on dört cetvelde düzeltildi.
+
+ESCI'nin ineceği yer kaynağa göre değişiyor, üç sonuç var:
+
+1. **Altında AÇIK bir kademe varsa** oraya iner. Akdeniz'in 3.3'ü "Diğer
+   kitap/hakemli dergilerde yapılan atıf" diyor: ESCI atfı 5 değil 2.
+   İstanbul Ticaret 10 → 3, Karamanoğlu 5 → 2, Giresun 8 → 2.
+2. **Kaynak ESCI'yi kendi adıyla bir kademeye koymuşsa** oraya. İKÇÜ GSF'nin
+   D-G5.b satırı zaten "ESCI, Scopus veya ERIC dergilerinde…" diyordu ama
+   `Diğer` etiketiyle duruyordu; ESCI 5 yerine 4 aldı.
+3. **Altında yalnız ULUSAL kademe varsa SIFIR.** Bayburt, Biruni, Iğdır,
+   Işık, Munzur, SBÜ ve Tarsus'ta yönerge uluslararası atfı yalnız çekirdek
+   indeks için puanlıyor. Çekirdek değerini vermek §0 ihlali, ulusal kademeye
+   indirmek yanlış kategori. Sıfır kaynağın söylediği şey — ama **kapsam
+   notuna yaz**, aday neden puan almadığını görmeli.
+
+**İstisna: kaynağın kendi BARAJI ESCI'yi çekirdekle birlikte anıyorsa kalır.**
+Bingöl'ün atıf barajı "AHCI, SCI-Exp, **ESCI** ve SSCI kapsamında atıfı
+bulunmayanların…" diyor; satır başlığı ESCI demese de yönerge ESCI atfını
+çekirdekle eşit sayıyor. Başlığa değil, yönergenin tamamına bak.
+
+**Tuzak: cetvel anahtarı ≠ dosya.** Taramayı dosya başına tekilleştirirsen
+aynı dosyadaki DİĞER alan cetvelleri gizlenir. İKÇÜ'nün dört alanı ayrı satır
+kümeleri taşıyor; `A4.*` düzeltilince `B5.*`, `C5.*` ve `D-G5.*` olduğu gibi
+kaldı. Tekilleştirmeyi yalnız RAPOR için yap, taramayı cetvel başına yürüt.
+
 ### Tetiği SÖZLÜKTE OLAN çarpanı önceden çarpılmış satıra çevir
 
 Çarpanın neye bağlı olduğuna bak. Ortağın kurumuna ya da tezin sanayi

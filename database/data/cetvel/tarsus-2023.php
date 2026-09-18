@@ -46,7 +46,8 @@ return [
         .'uygulanıyor. ATIF PUANINIZ DÜŞÜK ÇIKAR: yönergenin atıf satırlarının çoğu birden '
         .'küçük (0,75 · 0,40 · 0,30 · 0,15) ve motor madde puanını tam sayı tuttuğu için '
         .'yalnızca SCI atfı girilebildi. Doktora sonrası araştırma (süreye bağlı) ve tasarım '
-        .'kalemleri girilemedi.',
+        .'kalemleri girilemedi.'
+    .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.',
 
     // Tablo 3 — k katsayısı; yalnızca kişi sayısına bağlı.
     'yazar_katsayisi' => [
@@ -136,7 +137,7 @@ return [
         '12.c' => ['baslik' => 'Faydalı model veya endüstriyel tasarım', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 20],
 
         // ══ 13. ATIF (yalnızca SCI satırı; diğerleri birden küçük) ══
-        '13.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisindeki makalede atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 3],
+        '13.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisindeki makalede atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
 
         // ══ 14. TEBLİĞ (BİLDİRİ) ══
         '14.a' => ['baslik' => 'Uluslararası bilimsel etkinlikte tam metni yayımlanmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 6],

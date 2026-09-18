@@ -1357,14 +1357,16 @@ Bandırma A13.b, Bitlis A.9.2-3, Bolu A.9.2-3, Ege 4b, Düzce 1.5.b, Ataşehir
 M18.c, PAÜ A.5b). Necmettin Erbakan'da ters yön: I1 başlığı "SCOPUS taranan
 dergide editörlük" dediği hâlde satır Scopus taşımıyordu, eklendi.
 
-**Açık madde — atıfta ESCI.** On yedi cetvelin atıf çekirdek satırı yalnız
-"SCI, SCI-Expanded, SSCI veya AHCI" diyor ama ESCI oraya düşmeye devam
-ediyor; bu turda YALNIZ Scopus düşürüldü, ESCI bugünkü yerinde bırakıldı.
-Kaynağın o kademede ESCI'yi saymadığı doğruysa ESCI de sıfırlanmalı — ayrı
-bir tur, çünkü on beş üniversitede puanı düşürür ve kapsam notu gerektirir.
-Etkilenenler: Akdeniz, Bayburt, Bingöl, Biruni, Gaziantep, Giresun, Iğdır,
-İKÇÜ, Işık, İstanbul Ticaret, Karamanoğlu, Munzur, SBÜ, Tarsus, Kırklareli,
-Bolu AİBÜ, Hatay MKÜ.
+**Atıfta ESCI kapandı (18.09.2026).** On dört cetvelde çekirdek satırdan
+düşürüldü. Altında açık bir kademe olan yedisinde oraya bağlandı (Akdeniz
+5→2, İstanbul Ticaret 10→3, Karamanoğlu 5→2, Giresun 8→2, Gaziantep 2→1,
+İKÇÜ GSF 5→4, İKÇÜ Fen 3→2); kaynağı uluslararası atfı yalnız çekirdek
+indeks için puanlayan yedisinde SIFIR oldu ve kapsam notuna yazıldı
+(Bayburt, Biruni, Iğdır, Işık, Munzur, SBÜ, Tarsus). Bingöl'de ESCI
+çekirdekte KALDI: yönergenin kendi atıf barajı "AHCI, SCI-Exp, ESCI ve SSCI
+kapsamında atıfı bulunmayanların…" diyerek ESCI'yi çekirdekle eşitliyor.
+İKÇÜ'nün Fen ve Sağlık cetvelleri bir önceki turda gözden kaçmıştı (tarama
+dosya başına tekilleştirilmişti); onlar da düzeltildi.
 
 **Açık madde — okunamayan değerler.** Bayburt'un ve Iğdır'ın "diğer
 uluslararası dergilerdeki atıf" satırı metin katmanında değersiz çıkıyor

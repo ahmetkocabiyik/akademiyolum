@@ -133,7 +133,7 @@ $ortak = [
     '3.1' => [
         'baslik' => 'SCI-Expanded/SSCI/AHCI dergilerde yapılan atıf',
         'kategori' => 'atif',
-        'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'],
+        'kaynaklar' => ['SCIE/SSCI/AHCI'],
         'puan' => 5,
     ],
     '3.2' => [
@@ -145,7 +145,7 @@ $ortak = [
     '3.3' => [
         'baslik' => 'Diğer kitap/hakemli dergilerde yapılan atıf',
         'kategori' => 'atif',
-        'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'],
+        'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent', 'ESCI', 'Scopus'],
         'puan' => 2,
     ],
     '4.2' => [

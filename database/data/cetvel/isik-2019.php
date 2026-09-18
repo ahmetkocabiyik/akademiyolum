@@ -116,7 +116,7 @@ $ham = [
 
     // ══ A.4 ATIFLAR ══ (yönergede 0,6-2,4; aşağı yuvarlanınca bir kısmı 0)
     'A.4.a' => [2.4, 'Uluslararası kitaplarda eserlerinize yapılan her bir atıf', 'atif', ['BKCI Kitap'], null],
-    'A.4.c' => [1.2, 'SSCI, SCI-Expanded veya AHCI dergilerinde eserlerinize yapılan her bir atıf', 'atif', ['SCIE/SSCI/AHCI', 'ESCI'], null],
+    'A.4.c' => [1.2, 'SSCI, SCI-Expanded veya AHCI dergilerinde eserlerinize yapılan her bir atıf', 'atif', ['SCIE/SSCI/AHCI'], null],
     'A.4.f' => [0.6, 'Hakemli ulusal dergilerde eserlerinize yapılan her bir atıf', 'atif', ['TR Dizin', 'Diğer', 'Patent'], null],
 
     // ══ A.5 PATENTLER ══
@@ -281,7 +281,9 @@ return ['cetveller' => [
     'isik-2019-carpanli' => [
         'kapsam_notu' => $kapsamNotu.' Biriminizde yönergenin "A.1 ve B grubu faaliyetler 1,3 '
             .'katsayısı ile çarpılarak değerlendirilir" kuralı geçerli; uluslararası yayın ve '
-            .'proje puanlarınız bu çarpanla hesaplandı.',
+            .'proje puanlarınız bu çarpanla hesaplandı.'
+        .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.'
+        .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.',
         'yazar_katsayisi' => $yazarKatsayisi,
         'maddeler' => $uret($ham, 1.3),
         'gruplar' => $gruplar,

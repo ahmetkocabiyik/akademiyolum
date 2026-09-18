@@ -86,7 +86,8 @@ return [
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: yönerge ders puanını "son beş '
         .'yılda, her yarıyıl en fazla dört ders" diye sınırlıyor, bu sınır uygulanmıyor; proje '
         .'kalemlerinde "tamamlanmış" ve "üniversitenin altyapısına destek veren" koşulları '
-        .'denetlenemiyor, devam eden projeniz de puan alır.',
+        .'denetlenemiyor, devam eden projeniz de puan alır.'
+        .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.',
 
     // Genel İlkeler: "(1-12) maddelerindeki ikiden çok yazarlı yayınlarda
     // adayların puanı (%) olarak aşağıdaki şekilde hesaplanır."
@@ -174,7 +175,7 @@ return [
 
         // ══ F. ATIFLAR ══
         '18.a' => ['baslik' => 'Uluslararası kaynak kitaplardaki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 20],
-        '18.b' => ['baslik' => 'SCI, SSCI ve AHCI tarafından taranan dergilerdeki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 10],
+        '18.b' => ['baslik' => 'SCI, SSCI ve AHCI tarafından taranan dergilerdeki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 10],
         '19.b' => ['baslik' => 'Ulusal hakemli bilimsel dergilerdeki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 3],
 
         // ══ II. EĞİTİM-ÖĞRETİM · G. ÖĞRETİM ETKİNLİKLERİ ══

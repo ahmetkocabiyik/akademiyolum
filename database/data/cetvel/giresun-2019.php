@@ -89,11 +89,11 @@ return [
 
         // ══ G — ULUSLARARASI ATIFLAR (kendine atıf hariç satırları) ══
         'G.1.a' => ['baslik' => 'Yurt dışında yayımlanan kitap, monografi veya tezde atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 8],
-        'G.2.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 8],
+        'G.2.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 8],
 
         // ══ H — ULUSAL ATIFLAR ══
         'H.1.a' => ['baslik' => 'TÜBİTAK-ULAKBİM taranan dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 4],
-        'H.2.a' => ['baslik' => 'Diğer hakemli dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+        'H.2.a' => ['baslik' => 'Diğer hakemli dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'ESCI', 'Scopus'], 'puan' => 2],
         // H.3 (yurt içi kitap, monografi ve tezlerdeki atıf, 4 puan) girilmedi:
         // kaynak sözlüğü kitap atfını yurt içi/dışı diye ayırmıyor, tek karşılık
         // olan 'BKCI Kitap' zaten G.1.a'ya (8 puan) bağlı.

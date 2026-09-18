@@ -134,7 +134,7 @@ $ortakMaddeler = [
     'A3.8' => ['baslik' => 'Türkçe özeti yayımlanan bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
     // ══ A5-A6 / B4-B5. ATIF, EDİTÖRLÜK VE HAKEMLİK ══
-    'A5.1' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 4],
+    'A5.1' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 4],
     'B4.1' => ['baslik' => 'TR Dizin veri tabanlarında taranan dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
     'B4.3' => ['baslik' => 'Bilimsel kitap, monografi ya da tezlerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'Diğer', 'Patent'], 'puan' => 1],
     'A6.1' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 30],
@@ -287,7 +287,8 @@ $kapsamNotu = 'Puanlar Munzur Üniversitesi Öğretim Üyeliğine Yükseltilme v
     .'daima EN DÜŞÜK bölümden sayılıyor (yabancı dilde tam metin 20 yerine 10). '
     .'PUANINIZ ŞU KALEMLERDE OLDUĞUNDAN YÜKSEK GÖRÜNEBİLİR: İDARİ GÖREVLER bölümünün '
     .'"diğer bölümlerin toplamının %20\'sini aşamaz" tavanı başka bir bölümün toplamına '
-    .'bağlı olduğu için uygulanamıyor; ders ve idari görev puanları da süreyle çarpılmıyor.';
+    .'bağlı olduğu için uygulanamıyor; ders ve idari görev puanları da süreyle çarpılmıyor.'
+    .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.';
 
 $cetveller = [];
 

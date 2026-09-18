@@ -66,7 +66,8 @@ return [
         .'kalemlerde puanı yazar sayısına eşit bölüyor, motor cetvel başına tek matris '
         .'tanımladığı için makale kuralı uygulandı. Spor bilimleri (11.1) bölümü girilemedi; '
         .'toplumsal katkı (12) bölümünden yalnızca danışmanlık, topluma yönelik etkinlik ve '
-        .'yayın satırları girildi.',
+        .'yayın satırları girildi.'
+        .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.',
 
     // Tanım 3 — Ortak Yazar Puan Dağılımı.
     'yazar_katsayisi' => [
@@ -135,7 +136,7 @@ return [
         '5.ç' => ['baslik' => 'Faydalı model veya endüstriyel tasarımın belgelendirilmesi', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım', 'Islahçı Hakkı / Çeşit Tescili'], 'puan' => 50],
 
         // ══ 6. ATIF ══
-        '6.a' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 5],
+        '6.a' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 5],
         '6.c' => ['baslik' => 'ULAKBİM TR Dizin dergisinde atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin'], 'puan' => 2],
         '6.ç' => ['baslik' => 'Diğer ulusal hakemli dergide atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 1],
         '6.d' => ['baslik' => 'Uluslararası kitapta atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 5],

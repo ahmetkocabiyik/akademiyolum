@@ -97,7 +97,7 @@ $maddeler = [
     'B2.4.c' => ['baslik' => 'Ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
 
     // ══ B3. ATIFLAR ══
-    'B3.1' => ['baslik' => 'SSCI, SCI-Expanded ya da AHCI kapsamındaki dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 1],
+    'B3.1' => ['baslik' => 'SSCI, SCI-Expanded ya da AHCI kapsamındaki dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 1],
 
     // ══ B4. KONGRE GÖREVLERİ VE SERGİLER ══
     'B4.1.e' => ['baslik' => 'Uluslararası hakemli kongre, konferans ya da sempozyumda bildiri kitabı editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 40],
@@ -171,7 +171,8 @@ return [
         .'Q1-Q3 satırı taşıyor; Q4 makaleleriniz "diğer uluslararası dergi" satırından (20), '
         .'AHCI makaleleriniz Q3 değerinden (40) sayılıyor. Uluslararası ödüller, kongre '
         .'görevleri, editörlük kademeleri ve faydalı model etiket ayrımı taşımadığı için en '
-        .'düşük satırlarından sayılıyor.',
+        .'düşük satırlarından sayılıyor.'
+        .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.',
 
     'yazar_katsayisi' => [
         'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev', 'odul',

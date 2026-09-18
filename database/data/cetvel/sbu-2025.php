@@ -93,7 +93,7 @@ $maddeler = [
     'A.9.c' => ['baslik' => 'Dergi ya da proje hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
     'A.11.a' => ['baslik' => 'Uluslararası bilimsel toplantıda sözlü sunulan, özeti ya da tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Davetli Konuşmacı'], 'puan' => 15],
     'A.11.b' => ['baslik' => 'Uluslararası bilimsel toplantıda tam metni ya da özeti yayımlanan poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 8],
-    'A.13.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 3],
+    'A.13.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergilerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
     'A.13.c' => ['baslik' => 'Yurt dışında yayımlanan bilimsel kitap, monografi ya da tezlerde eserlerinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'Patent'], 'puan' => 2],
 
     // ══ B. ULUSAL YAYIN VE ETKİNLİKLER (en fazla 50 puan) ══
@@ -169,7 +169,8 @@ $govde = function (int $idariTavan) use ($maddeler, $AB): array {
             .'B (50) ve C (100) bölümlerinin sabit tavanları uygulanıyor. D (idari görevler) '
             .'bölümü yönergenin 27/11/2025 değişikliğine göre YALNIZCA PROFESÖR VE DOÇENT '
             .'kadroları için geçerli: o iki kadroda 50 puan tavanıyla sayılıyor, Dr. Öğr. Üyesi '
-            .'kadrolarında ise hiç sayılmıyor.',
+            .'kadrolarında ise hiç sayılmıyor.'
+        .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.',
 
         'yazar_katsayisi' => [
             'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev', 'odul',

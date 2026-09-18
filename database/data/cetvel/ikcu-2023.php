@@ -276,8 +276,8 @@ $B = [
     'B4.b' => ['baslik' => 'Tescil edilmiş ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 30],
     'B4.c' => ['baslik' => 'Faydalı model', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model'], 'puan' => 5],
 
-    'B5.a' => ['baslik' => 'SCI, SCI-E, SSCI ve AHCI dergilerinde ya da uluslararası yayınevi kitaplarında adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 3],
-    'B5.b' => ['baslik' => 'Diğer indeksli dergilerde adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 2],
+    'B5.a' => ['baslik' => 'SCI, SCI-E, SSCI ve AHCI dergilerinde ya da uluslararası yayınevi kitaplarında adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'BKCI Kitap'], 'puan' => 3],
+    'B5.b' => ['baslik' => 'Diğer indeksli dergilerde adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'ESCI', 'Scopus'], 'puan' => 2],
     'B5.c' => ['baslik' => 'Ulusal hakemli dergilerde ya da bildiri kitaplarında adınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Patent'], 'puan' => 1],
 
     'B6.a' => ['baslik' => 'Tamamlanmış doktora tez danışmanlığı', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 4],
@@ -370,7 +370,7 @@ $C = [
     'C4.h' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 8],
     'C4.j' => ['baslik' => 'Çeviri kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 6],
 
-    'C5.a' => ['baslik' => 'SCI, SCI-E, SSCI ve AHCI dergilerinde ya da uluslararası yayınevi kitaplarında eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 1],
+    'C5.a' => ['baslik' => 'SCI, SCI-E, SSCI ve AHCI dergilerinde ya da uluslararası yayınevi kitaplarında eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'BKCI Kitap'], 'puan' => 1],
 
     'C6.a' => ['baslik' => 'Tamamlanmış doktora ya da tıpta uzmanlık tezinde asıl danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['danisman'], 'puan' => 8],
     'C6.a-es' => ['baslik' => 'Tamamlanmış doktora ya da tıpta uzmanlık tezinde ikinci/eş danışmanlık', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Doktora Tezi', 'Tıpta/Diş/Sanatta Yeterlik Tezi'], 'roller' => ['es_danisman'], 'puan' => 4],
@@ -510,8 +510,8 @@ $D = [
     'D-G4.e' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Çeviri Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
     'D-G4.f' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
 
-    'D-G5.a' => ['baslik' => 'SCI-E, SSCI, AHCI dergilerinde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI', 'ESCI'], 'puan' => 5],
-    'D-G5.b' => ['baslik' => 'ESCI, Scopus veya ERIC dergilerinde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer'], 'puan' => 4],
+    'D-G5.a' => ['baslik' => 'SCI-E, SSCI, AHCI dergilerinde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 5],
+    'D-G5.b' => ['baslik' => 'ESCI, Scopus veya ERIC dergilerinde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['Diğer', 'ESCI', 'Scopus'], 'puan' => 4],
     'D-G5.c' => ['baslik' => 'Uluslararası kitaplarda ya da TR Dizin dergilerinde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'TR Dizin'], 'puan' => 3],
     'D-G5.d' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap ve dergilerde eserlerinize yapılan her atıf', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 1],
 
@@ -611,7 +611,8 @@ $not = fn (string $ek, string $ozel): string => 'Puanlar İzmir Kâtip Çelebi �
     .$ozel
     .' Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: "aynı toplantıda en fazla bir bildiri '
     .'puanlanır" ve "aynı ISBN\'li eserde en fazla iki bölüm" gibi ESER BAZLI sınırlar '
-    .'uygulanmıyor; atıf puanı yönergede eser başına verilirken kayıt atıf başına tutuluyor.';
+    .'uygulanmıyor; atıf puanı yönergede eser başına verilirken kayıt atıf başına tutuluyor.'
+    .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.';
 
 $cetveller = [];
 

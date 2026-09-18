@@ -2723,6 +2723,74 @@ test('Necmettin Erbakan üç dilim kademesini de ayırıyor', function () {
  * kademesinde sayıyor demektir, KÜÇÜLÜYORSA bir gerekçeli satır kaybolmuştur.
  */
 /**
+ * ATIFTA ESCI DE KAYNAĞIN ANDIĞI KADEMEDE KALIYOR.
+ *
+ * Scopus turunda `WoS / Scopus` çekirdek satırdan alındığında ESCI de o
+ * satırda kalmıştı — satır "SCI, SCI-Expanded, SSCI veya AHCI dergisinde
+ * atıf" dediği hâlde. Aynı kural ESCI'ye de uygulandı: kademe kapalı bir
+ * liste sayıyor ve ESCI listede yoksa, ESCI atfı o değeri almaz.
+ *
+ * ESCI'nin indiği yer kaynağa göre değişiyor:
+ *   – Altında AÇIK bir kademe varsa ("diğer hakemli dergilerde atıf")
+ *     oraya iner (Akdeniz 5 → 2, İstanbul Ticaret 10 → 3).
+ *   – Kaynağın tek uluslararası atıf kademesi çekirdek indeksse ve altında
+ *     yalnız ULUSAL kademe varsa SIFIR alır: yönerge o atfı saymıyor.
+ *
+ * Listede kalan üç satır gerekçeli; büyürse yeni bir cetvel ESCI'yi hak
+ * etmediği kademede sayıyordur.
+ */
+test('atıfta ESCI de kaynağın saydığı kademede kalıyor', function () {
+    $harita = cetvelDosyaHaritasi();
+    $depo = sartDepo();
+
+    $bulgular = [];
+
+    foreach ($depo->cetveller() as $anahtar => $katalog) {
+        $kodlar = $katalog->coz(['*']);
+
+        $puan = fn (string $etiket): int => $katalog->puan(
+            sartFaaliyet($etiket, Kategori::Atif), $kodlar,
+        );
+
+        $esci = $puan('ESCI');
+
+        if ($esci === 0 || $esci <= max($puan('Diğer (Uluslararası)'), $puan('Scopus (Q1)'))) {
+            continue;
+        }
+
+        foreach ($katalog->maddeler as $kod => $madde) {
+            if (($madde['kategori'] ?? '') !== 'atif' || ($madde['puan'] ?? null) !== $esci) {
+                continue;
+            }
+
+            if (! array_intersect($madde['kaynaklar'] ?? [], ['ESCI', 'ESCI / Scopus', 'WoS / Scopus'])) {
+                continue;
+            }
+
+            if (preg_match('/e-?sci/u', mb_strtolower($madde['baslik'])) !== 1) {
+                $bulgular[($harita[$anahtar] ?? $anahtar).':'.$kod] = true;
+            }
+
+            break;
+        }
+    }
+
+    $bulunan = array_keys($bulgular);
+    sort($bulunan);
+
+    expect($bulunan)->toBe([
+        // Bingöl'ün kendi atıf barajı ESCI'yi çekirdekle birlikte anıyor:
+        // "AHCI, SCI-Exp, ESCI ve SSCI kapsamında atıfı bulunmayanların…".
+        'bingol-2024:3.c',
+        // Satır zaten ESCI kademesi: "ISI (WoS) taranan; SCI, SCI-Expanded,
+        // SSCI ve AHCI KAPSAMI DIŞINDAKİ dergilerdeki atıf".
+        'bolu-aibu-2024:A.9.2',
+        // "WoS All Databases" ESCI'yi kapsıyor; Scopus'un ayrı satırı var.
+        'ktu-2023:3.b',
+    ]);
+});
+
+/**
  * SCOPUS, ATIF VE EDİTÖRLÜK EKSENİNDE DE KAYNAĞIN ANDIĞI KADEMEDE KALIYOR.
  *
  * Makale ekseninde verilen karar (KONVANSIYONLAR, "SCOPUS ALAN İNDEKSİ
@@ -2807,13 +2875,12 @@ test('Scopus atıf ve editörlük kademelerinde de kaynağın sınırında kalı
         'dpu-2024:D11',
         'esogu-2023:6a',
         'gebze-teknik-2023:5.1',
-        'ikcu-2023:B5.a',
-        'ikcu-2023:C5.a',
         'isparta-ubu-2022:T2-AT1',
         'istanbul-29-mayis-2017:D19',
         'istanbul-aydin-2020:A11',
         'istanbul-gedik-2025:D1',
         'istanbul-medeniyet-2018:7a',
+        'istanbul-ticaret-2019:I.D.6.c',
         'istanbul-zaim-2019:E',
         'iyte-2018:E1-5a',
         'iyte-2018:E2-5a',
