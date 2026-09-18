@@ -1708,6 +1708,32 @@ değil" kaydının sınırı: orada kaynakta bir uluslararası indeks kademesi V
 `WoS Dergi (Q1-Q4)` taşıyordu; Scopus editörlüğü 30'a düşüyordu. Kural
 simetrik: kaynak anıyorsa YUKARI da taşınır.
 
+### Birleşik etiket her zaman hata değil: kaynak da birleştiriyorsa doğrudur
+
+Scopus turları `ESCI / Scopus`, `WoS / Scopus`, `ESCI / Scopus Dergi` gibi
+birleşik etiketlerde çok hata buldu; bu, her birleşik etiketin şüpheli
+olduğu anlamına GELMİYOR. Kitapta 404 satırın hepsi
+`BKCI / Scopus Kitap(+Bölümü)` taşıyor ve korpusta BKCI ile Scopus'u farklı
+puanlayan TEK bir kaynak yok — hepsi "BKCI veya Scopus" diyor. Etiketi
+bölmek burada olmayan bir ayrımı uydurmak olurdu.
+
+Ölçüt hep aynı: **kaynak ayırıyor mu?** Ayırmıyorsa birleşik etiket
+doğrudur, hatta gereklidir.
+
+### Toplu düzeltmeyi TESTLER durdurursa satır satır oku
+
+"Uluslararası yayınevi" başlıklı kitap satırlarının yalnız
+`BKCI / Scopus Kitap` taşıması 55 cetvelde adayın indekssiz uluslararası
+kitabını ULUSAL satıra düşürüyor. Düzeltme mekanik görünüyordu (satıra
+kapsamlı etiketi ekle, ulusal satırı daralt) ama uygulandığında beş donmuş
+test kırıldı: bir cetvelde etiket çakışması, ikisinde puan kayması, birinde
+kategori dışı etiket. Bunların her biri o cetvele özgü bir sebep demek.
+
+Kural: **korpus çapında bir düzeltme donmuş testleri kırıyorsa, testleri
+güncelleyerek devam etme.** Kırılan her test, deseni bozan bir istisnayı
+işaret ediyor; deseni zorlamak o istisnaları sessizce eziyor. Değişikliği
+geri al, bulguyu GIRILEMEYEN'e yaz, satır satır ilerlenecek bir tura bırak.
+
 ### Ekseni AÇMAK yetmiyor, eski satırları geri dönüp BAĞLAMAK gerekiyor
 
 Scopus çeyrekliği 17.09.2026'da makale sözlüğüne eklendi. Bir gün sonraki

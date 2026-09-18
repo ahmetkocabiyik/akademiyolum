@@ -1357,6 +1357,32 @@ Bandırma A13.b, Bitlis A.9.2-3, Bolu A.9.2-3, Ege 4b, Düzce 1.5.b, Ataşehir
 M18.c, PAÜ A.5b). Necmettin Erbakan'da ters yön: I1 başlığı "SCOPUS taranan
 dergide editörlük" dediği hâlde satır Scopus taşımıyordu, eklendi.
 
+**Bildiri ve kitapta Scopus: değişiklik gerekmedi (18.09.2026).** Kitapta
+404 satırın hepsi `BKCI / Scopus Kitap(+Bölümü)` birleşik etiketini
+kullanıyor ve hiçbir kaynak BKCI ile Scopus'u FARKLI puanlamıyor — birleşik
+etiket her yerde doğru. Bildiride Scopus etiketi yok; kaynakların "CPCI ya
+da Scopus" dediği 13 satır `Uluslararası Tam Metin (CPCI)` ile yazılmış,
+bu da doğru kademe. Kalan 163 CPCI satırı gerçekten CPCI diyor.
+
+**Açık madde — CPCI etiketinin ADI.** `Uluslararası Tam Metin (CPCI)`
+etiketi adayın gördüğü metin. Kaynağı "CPCI **veya Scopus**" diyen 13
+üniversitede Scopus'ta taranan ama CPCI'da taranmayan bildirisi olan aday
+bu etiketi seçmeyebilir ve puanını EKSİK görür. Etiket adını
+`Uluslararası Tam Metin (CPCI / Scopus)` yapmak 176 satırı ve bir migration'ı
+gerektiriyor; ayrı bir tur.
+
+**Açık madde — "uluslararası yayınevi" satırları BKCI'ya bağlı.** Scopus
+taraması sırasında çıktı, Scopus'la ilgisi yok: 55 cetvelde "Uluslararası
+yayınevi tarafından yayımlanmış kitap" başlıklı satır YALNIZ
+`BKCI / Scopus Kitap` taşıyor, ulusal satır ise GENEL
+`Uluslararası/Ulusal Kitap` etiketinde kalmış. Sonuç: adayın indekssiz
+uluslararası kitabı ULUSAL satıra düşüyor (Artvin 20 yerine 12, Ankara
+Bilim 20 yerine 10). Mekanik düzeltme denendi — satırlara kapsamlı etiket
+eklemek ve ulusal satırı daraltmak — ama beş donmuş test kırıldı: Gazi'de
+etiket çakışması, İstanbul Kültür ve Yalova'da puan kayması, Selçuk'ta
+kategori dışı etiket. Yani düzeltme satır satır okunmalı, toplu
+uygulanamıyor. Değişiklik GERİ ALINDI, iş burada duruyor.
+
 **Makale ve tez yayınında Scopus çeyrekliği denetlendi (18.09.2026).** Beş
 cetvelde satırlar ekseni açan turdan önceki eşlemede kalmıştı ve hepsi EKSİK
 sayıyordu: İTÜ A.1-A.4, BAÜ A-1.1-1.4, OSTİM 1.a.*, NEÜ A1 merdiveni
