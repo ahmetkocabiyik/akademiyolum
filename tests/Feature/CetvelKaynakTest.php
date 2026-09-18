@@ -2723,62 +2723,74 @@ test('Necmettin Erbakan üç dilim kademesini de ayırıyor', function () {
  * kademesinde sayıyor demektir, KÜÇÜLÜYORSA bir gerekçeli satır kaybolmuştur.
  */
 /**
- * ATIFTA ESCI DE KAYNAĞIN ANDIĞI KADEMEDE KALIYOR.
+ * ATIF VE EDİTÖRLÜKTE ESCI DE KAYNAĞIN ANDIĞI KADEMEDE KALIYOR.
  *
  * Scopus turunda `WoS / Scopus` çekirdek satırdan alındığında ESCI de o
  * satırda kalmıştı — satır "SCI, SCI-Expanded, SSCI veya AHCI dergisinde
  * atıf" dediği hâlde. Aynı kural ESCI'ye de uygulandı: kademe kapalı bir
- * liste sayıyor ve ESCI listede yoksa, ESCI atfı o değeri almaz.
+ * liste sayıyor ve ESCI listede yoksa, ESCI o değeri almaz.
  *
  * ESCI'nin indiği yer kaynağa göre değişiyor:
  *   – Altında AÇIK bir kademe varsa ("diğer hakemli dergilerde atıf")
  *     oraya iner (Akdeniz 5 → 2, İstanbul Ticaret 10 → 3).
- *   – Kaynağın tek uluslararası atıf kademesi çekirdek indeksse ve altında
- *     yalnız ULUSAL kademe varsa SIFIR alır: yönerge o atfı saymıyor.
+ *   – Kaynağın tek uluslararası kademesi çekirdek indeksse ve altında yalnız
+ *     ULUSAL kademe varsa SIFIR alır: yönerge o kalemi saymıyor.
  *
- * Listede kalan üç satır gerekçeli; büyürse yeni bir cetvel ESCI'yi hak
- * etmediği kademede sayıyordur.
+ * Listede kalanlar gerekçeli; büyürse yeni bir cetvel ESCI'yi hak etmediği
+ * kademede sayıyordur.
  */
-test('atıfta ESCI de kaynağın saydığı kademede kalıyor', function () {
+test('atıf ve editörlükte ESCI kaynağın saydığı kademede kalıyor', function () {
     $harita = cetvelDosyaHaritasi();
     $depo = sartDepo();
 
+    $eksenler = [
+        'atif' => [Kategori::Atif, 'ESCI', ['Diğer (Uluslararası)', 'Scopus (Q1)'],
+            ['ESCI', 'ESCI / Scopus', 'WoS / Scopus']],
+        'editorluk' => [Kategori::Editorluk, 'ESCI Dergi',
+            ['Diğer Hakemli Dergi (Uluslararası)', 'Diğer Hakemli Dergi', 'Scopus Dergi'],
+            ['ESCI Dergi', 'ESCI / Scopus Dergi']],
+    ];
+
     $bulgular = [];
 
-    foreach ($depo->cetveller() as $anahtar => $katalog) {
-        $kodlar = $katalog->coz(['*']);
+    foreach ($eksenler as $eksen => [$kategori, $esciEtiketi, $altEtiketler, $jenerikler]) {
+        foreach ($depo->cetveller() as $anahtar => $katalog) {
+            $kodlar = $katalog->coz(['*']);
 
-        $puan = fn (string $etiket): int => $katalog->puan(
-            sartFaaliyet($etiket, Kategori::Atif), $kodlar,
-        );
+            $puan = fn (string $etiket): int => $katalog->puan(
+                sartFaaliyet($etiket, $kategori), $kodlar,
+            );
 
-        $esci = $puan('ESCI');
+            $esci = $puan($esciEtiketi);
 
-        if ($esci === 0 || $esci <= max($puan('Diğer (Uluslararası)'), $puan('Scopus (Q1)'))) {
-            continue;
-        }
-
-        foreach ($katalog->maddeler as $kod => $madde) {
-            if (($madde['kategori'] ?? '') !== 'atif' || ($madde['puan'] ?? null) !== $esci) {
+            if ($esci === 0 || $esci <= max(array_map($puan, $altEtiketler))) {
                 continue;
             }
 
-            if (! array_intersect($madde['kaynaklar'] ?? [], ['ESCI', 'ESCI / Scopus', 'WoS / Scopus'])) {
-                continue;
-            }
+            foreach ($katalog->maddeler as $kod => $madde) {
+                if (($madde['kategori'] ?? '') !== $eksen || ($madde['puan'] ?? null) !== $esci) {
+                    continue;
+                }
 
-            if (preg_match('/e-?sci/u', mb_strtolower($madde['baslik'])) !== 1) {
-                $bulgular[($harita[$anahtar] ?? $anahtar).':'.$kod] = true;
-            }
+                if (! array_intersect($madde['kaynaklar'] ?? [], $jenerikler)) {
+                    continue;
+                }
 
-            break;
+                if (preg_match('/e-?sci/u', mb_strtolower($madde['baslik'])) !== 1) {
+                    $bulgular[$eksen][($harita[$anahtar] ?? $anahtar).':'.$kod] = true;
+                }
+
+                break;
+            }
         }
     }
 
-    $bulunan = array_keys($bulgular);
-    sort($bulunan);
+    $atif = array_keys($bulgular['atif'] ?? []);
+    $editorluk = array_keys($bulgular['editorluk'] ?? []);
+    sort($atif);
+    sort($editorluk);
 
-    expect($bulunan)->toBe([
+    expect($atif)->toBe([
         // Bingöl'ün kendi atıf barajı ESCI'yi çekirdekle birlikte anıyor:
         // "AHCI, SCI-Exp, ESCI ve SSCI kapsamında atıfı bulunmayanların…".
         'bingol-2024:3.c',
@@ -2787,6 +2799,16 @@ test('atıfta ESCI de kaynağın saydığı kademede kalıyor', function () {
         'bolu-aibu-2024:A.9.2',
         // "WoS All Databases" ESCI'yi kapsıyor; Scopus'un ayrı satırı var.
         'ktu-2023:3.b',
+    ])->and($editorluk)->toBe([
+        // "WoS All Databases ya da SCOPUS Q1-Q2" — All Databases ESCI'yi
+        // kapsıyor. Satırın Scopus tarafı hâlâ bağlanamıyor: editörlük
+        // ekseninde çeyreklik yok, `Scopus Dergi` bağlamak Q3-Q4'ü de
+        // sayardı. GIRILEMEYEN'de açık madde.
+        'acibadem-2025:2.G',
+        // Dicle ESCI'yi cetvelin HER YERİNDE "uluslararası alan endeksi"
+        // sayıyor: makale A3 de "Diğer uluslararası alan endekslerince
+        // taranan dergide araştırma makalesi" başlığıyla ESCI'ye bağlı.
+        'dicle-2023:G3',
     ]);
 });
 

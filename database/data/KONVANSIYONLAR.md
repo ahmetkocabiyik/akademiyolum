@@ -1733,6 +1733,12 @@ Bingöl'ün atıf barajı "AHCI, SCI-Exp, **ESCI** ve SSCI kapsamında atıfı
 bulunmayanların…" diyor; satır başlığı ESCI demese de yönerge ESCI atfını
 çekirdekle eşit sayıyor. Başlığa değil, yönergenin tamamına bak.
 
+**Editörlükte aynı tarama BOŞ çıktı** — ama bunu ancak detektörü bilerek
+kırılacak bir kayıtla sınadıktan sonra söyleyebilirsin. Bolu'nun "SCI,
+SCI-Expanded, SSCI veya AHCI dergide baş editörlük" satırına `ESCI Dergi`
+eklenince tarama onu yakaladı; demek ki boşluk kapsama değil veriye ait.
+Bir denetim turu bulgu vermediğinde raporlamadan önce HER ZAMAN bunu yap.
+
 **Tuzak: cetvel anahtarı ≠ dosya.** Taramayı dosya başına tekilleştirirsen
 aynı dosyadaki DİĞER alan cetvelleri gizlenir. İKÇÜ'nün dört alanı ayrı satır
 kümeleri taşıyor; `A4.*` düzeltilince `B5.*`, `C5.*` ve `D-G5.*` olduğu gibi

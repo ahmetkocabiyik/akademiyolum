@@ -1357,6 +1357,15 @@ Bandırma A13.b, Bitlis A.9.2-3, Bolu A.9.2-3, Ege 4b, Düzce 1.5.b, Ataşehir
 M18.c, PAÜ A.5b). Necmettin Erbakan'da ters yön: I1 başlığı "SCOPUS taranan
 dergide editörlük" dediği hâlde satır Scopus taşımıyordu, eklendi.
 
+**Editörlükte ESCI: değişiklik gerekmedi (18.09.2026).** Aynı detektör
+editörlük eksenine de kuruldu ve yedi bulgu verdi; hepsi gerekçeli çıktı.
+Acıbadem 2.G "WoS **All Databases** ya da SCOPUS Q1-Q2" diyor, All Databases
+ESCI'yi zaten kapsıyor. Dicle G3 "uluslararası alan endeksli dergide
+editörlük" diyor ve Dicle ESCI'yi cetvelin HER YERİNDE alan endeksi sayıyor
+— makale A3 de aynı başlıkla ESCI'ye bağlı. Detektör enjeksiyonla
+doğrulandı (Bolu'nun çekirdek editörlük satırına `ESCI Dergi` kondu →
+yakalandı), yani boş çıkması kapsama değil veriye ait.
+
 **Atıfta ESCI kapandı (18.09.2026).** On dört cetvelde çekirdek satırdan
 düşürüldü. Altında açık bir kademe olan yedisinde oraya bağlandı (Akdeniz
 5→2, İstanbul Ticaret 10→3, Karamanoğlu 5→2, Giresun 8→2, Gaziantep 2→1,
