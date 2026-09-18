@@ -143,7 +143,11 @@ enum Kategori: string
         // dilim Q1'in ALT KÜMESİ, Q1'in kendisi değil.
         'makale' => ['ESCI / Scopus', 'Scopus'],
         'bildiri' => ['Davetli Konuşmacı'],
-        'editorluk' => ['Kitap Editörlüğü', 'Diğer Hakemli Dergi', 'ESCI / Scopus Dergi'],
+        // Çeyreksiz `Scopus Dergi` artık yalnız cetvel tarafında: derginin
+        // çeyrekliği yayımlanıyor, adaydan sorulabilir.
+        'editorluk' => [
+            'Kitap Editörlüğü', 'Diğer Hakemli Dergi', 'ESCI / Scopus Dergi', 'Scopus Dergi',
+        ],
         'atif' => ['WoS / Scopus', 'ESCI / Scopus', 'Scopus', 'Patent', 'Diğer'],
         'tez_yayini' => ['Uluslararası/Ulusal Kitap', 'Kitap Bölümü', 'Diğer', 'ESCI / Scopus', 'Scopus'],
     ];
@@ -254,7 +258,9 @@ enum Kategori: string
             // dördünü birden listeler (makale tarafındaki desenin aynısı).
             self::Editorluk => [
                 'WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)',
-                'ESCI Dergi', 'Scopus Dergi', 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi',
+                'ESCI Dergi',
+                'Scopus Dergi (Q1)', 'Scopus Dergi (Q2)', 'Scopus Dergi (Q3)', 'Scopus Dergi (Q4)',
+                'Scopus Dergi', 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi',
                 'BKCI Kitap',
                 'Uluslararası Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü',
                 'Diğer Hakemli Dergi (Uluslararası)', 'Diğer Hakemli Dergi (Ulusal)',

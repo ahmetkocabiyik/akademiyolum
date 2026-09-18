@@ -1708,6 +1708,29 @@ değil" kaydının sınırı: orada kaynakta bir uluslararası indeks kademesi V
 `WoS Dergi (Q1-Q4)` taşıyordu; Scopus editörlüğü 30'a düşüyordu. Kural
 simetrik: kaynak anıyorsa YUKARI da taşınır.
 
+### Editörlükte de çeyreklik ekseni var (`Scopus Dergi (Q1..Q4)`)
+
+Makale ve atıfta açılan Scopus çeyrekliği 18.09.2026'da editörlüğe de
+eklendi. Tek etiketin (`Scopus Dergi`) yol açtığı iki ayrı hata vardı:
+
+- **Satır hiç bağlanamıyor.** Acıbadem 2.G "WoS All Databases ya da
+  **SCOPUS Q1-Q2** kapsamındaki dergide editörlük" diyor. `Scopus Dergi`
+  bağlamak kaynağın dışladığı Q3-Q4'ü de sayardı, o yüzden satırın Scopus
+  tarafı boş bırakılmıştı: Q1 editörlüğü olan aday hiç puan almıyordu.
+- **Bütün çeyrekler en düşüğe düşüyor.** BAÜ'nün A-5 bloğu "Scopus dergi
+  editörlüğü" başlığıyla Q1 50, Q2 40, Q3 20 veriyor. Üç satır `WoS Dergi
+  (Qn)` etiketleriyle yazılmış, `ESCI / Scopus Dergi` ise en alttakine
+  konmuştu; her Scopus kaydı 20 alıyordu.
+
+Çeyreksiz `Scopus Dergi` artık GENEL etiket — yalnız cetvel tarafında, adaya
+sorulmuyor. Kaynak çeyrek ayırmıyor ama Scopus'u bir kademede ANIYORSA o
+satıra çeyreksiz etiketi koy; zincir dört çeyreği de oraya taşır (Sakarya
+9.1 "SSCI, SCI-Exp, AHCI, **SCOPUS** kapsamındaki dergilerde baş editörlük"
+40 — Scopus önceden ESCI'nin 25'ine düşüyordu).
+
+Mevcut kayıtlar için migration şart: çeyreksiz `Scopus Dergi` editörlük
+kayıtları §0 uyarınca **Q4'e** taşındı, en düşük basamak.
+
 ### Kural ESCI için de aynı: kademe onu ANMIYORSA oraya düşmez
 
 Scopus turunda `WoS / Scopus` çekirdek satırdan alınırken ESCI o satırda

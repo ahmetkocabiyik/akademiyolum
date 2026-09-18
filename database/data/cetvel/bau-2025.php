@@ -82,9 +82,9 @@ $maddeler = [
     'A-4.6' => ['baslik' => 'Ulusal ve uluslararası patentlerde makalelere verilen atıflar', 'kategori' => 'atif', 'kaynaklar' => ['Patent'], 'puan' => 10],
 
     // ══ A-5 ve A-6: DERGİ EDİTÖRLÜĞÜ ══
-    'A-5.1' => ['baslik' => 'Scopus veri tabanında Q1 olarak taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)'], 'puan' => 50],
-    'A-5.4' => ['baslik' => 'Scopus veri tabanında Q2 olarak taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q2)'], 'puan' => 40],
-    'A-5.6' => ['baslik' => 'Scopus veri tabanında Q3 olarak taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q3)', 'ESCI / Scopus Dergi'], 'puan' => 20],
+    'A-5.1' => ['baslik' => 'Scopus veri tabanında Q1 olarak taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'Scopus Dergi (Q1)'], 'puan' => 50],
+    'A-5.4' => ['baslik' => 'Scopus veri tabanında Q2 olarak taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q2)', 'Scopus Dergi (Q2)'], 'puan' => 40],
+    'A-5.6' => ['baslik' => 'Scopus veri tabanında Q3 olarak taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q3)', 'Scopus Dergi (Q3)'], 'puan' => 20],
     'A-6.1' => ['baslik' => 'TR Dizin\'de taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 8],
     'A-6.2' => ['baslik' => 'Dergide editör yardımcılığı ya da editör listesinde olmak', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 6],
 
@@ -202,7 +202,8 @@ $kapsamNotu = 'Puanlar Bahçeşehir Üniversitesi Akademik Personel Yükseltme v
     .'toplam puana katkı vermiyor. '
     .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünür: "bir kitapta birden fazla bölüm" için '
     .'öngörülen (1 + k/c) çarpanı uygulanmıyor ve idari görevler yıl başına değil kayıt başına '
-    .'puanlanıyor.';
+    .'puanlanıyor.'
+    .'Dergi editörlüğü yalnız SCOPUS çeyrekliğine göre puanlanıyor (Q1 50, Q2 40, Q3 20); yönergede Q4 kademesi yok ve ESCI için ayrı bir kademe tanımlanmamış, o yüzden Scopus Q4 ya da yalnız ESCI kapsamındaki dergide editörlüğünüz SAYILMIYOR.';
 
 // ORTAK ÇALIŞMALARDA PUAN DAĞILIMI: tek kişi p, iki kişi 0,8p, ikiden
 // fazla kişi 1,8p/n. Yazar sırasına bakılmadığı için bütün roller aynı

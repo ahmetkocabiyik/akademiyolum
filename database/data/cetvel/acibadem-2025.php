@@ -142,7 +142,7 @@ $maddeler = [
     '2.D' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide yayınlanmış vaka raporu, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI', 'Scopus (Q1)', 'Scopus (Q2)'], 'turler' => $VAKA, 'puan' => 5],
     '2.E.1' => ['baslik' => 'WoS All Databases ya da SCOPUS kapsamında taranan kongre tam metni', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 5],
     '2.E.2' => ['baslik' => 'WoS All Databases ya da SCOPUS kapsamında taranan kongre bildiri özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 2],
-    '2.G' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI Dergi'], 'puan' => 5],
+    '2.G' => ['baslik' => 'WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI Dergi', 'Scopus Dergi (Q1)', 'Scopus Dergi (Q2)'], 'puan' => 5],
 
     // ══ 3. ULAKBİM TR DİZİN KAPSAMINDAKİ ULUSAL DERGİLER ══
     '3.A' => ['baslik' => 'TR Dizin kapsamındaki dergide yayınlanmış özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $OZGUN, 'puan' => 7],

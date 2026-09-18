@@ -1297,10 +1297,10 @@ farklı, kendi turlarını istiyorlar:
   veya SCOPUS **Q1 ve Q2**" diyor, genel etiket dört çeyrekliği birden
   topluyordu. Q3-Q4 Scopus makalesinin kaynakta karşılığı YOK (3. bölüm TR
   Dizin'e ait), artık hiç saymıyor — §0 yönünde eksik sayma.
-  2.G editörlükte yalnız `ESCI Dergi` kaldı: editörlük etiketleri çeyreklik
-  taşımıyor, `Scopus Dergi` bağlansaydı Q3-Q4 bir derginin editörlüğü de
-  sayardı. Q1-Q2 Scopus dergisinde editörlüğü olan aday o 5 puanı göremiyor.
-  Editörlüğe çeyreklik ekseni eklenirse düzelir.
+  2.G editörlükte bir süre yalnız `ESCI Dergi` taşıdı: `Scopus Dergi`
+  bağlansaydı Q3-Q4 bir derginin editörlüğü de sayardı. **18.09.2026'da
+  kapandı** — sözlüğe `Scopus Dergi (Q1..Q4)` eklendi, satır Q1 ve Q2'ye
+  bağlandı (5 puan), Q3-Q4 sıfır kaldı.
 - **Haliç'in "En üst %10" satırı** 17.09.2026'da girildi: sözlüğe dilim
   ekseni eklendi (`Scopus (İlk %10)` → `Scopus (Q1)`), satır 70 puanla açıldı.
 
@@ -1356,6 +1356,14 @@ hiç girilmemiş ARA KADEME bulundu ve eklendi (Fırat A5.2, Ardahan 3.10.2,
 Bandırma A13.b, Bitlis A.9.2-3, Bolu A.9.2-3, Ege 4b, Düzce 1.5.b, Ataşehir
 M18.c, PAÜ A.5b). Necmettin Erbakan'da ters yön: I1 başlığı "SCOPUS taranan
 dergide editörlük" dediği hâlde satır Scopus taşımıyordu, eklendi.
+
+**Editörlükte Scopus çeyrekliği eklendi (18.09.2026).** `Scopus Dergi
+(Q1..Q4)` sözlüğe girdi; çeyreksiz `Scopus Dergi` genel etikete döndü ve
+mevcut kayıtlar migration ile Q4'e taşındı. Üç cetvel düzeltildi: Acıbadem
+2.G'nin Scopus tarafı bağlandı (Q1-Q2 = 5, Q3-Q4 = 0), BAÜ'nün "Scopus dergi
+editörlüğü" bloğu çeyreğe göre ayrıldı (50/40/20, Q4 ve yalnız-ESCI sıfır —
+kapsam notunda), Sakarya 9.1 SCOPUS'u adıyla andığı için Scopus editörlüğü
+25'ten 40'a çıktı. **Bu maddenin Acıbadem kısmı kapandı.**
 
 **Editörlükte ESCI: değişiklik gerekmedi (18.09.2026).** Aynı detektör
 editörlük eksenine de kuruldu ve yedi bulgu verdi; hepsi gerekçeli çıktı.

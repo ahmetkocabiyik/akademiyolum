@@ -2723,6 +2723,56 @@ test('Necmettin Erbakan üç dilim kademesini de ayırıyor', function () {
  * kademesinde sayıyor demektir, KÜÇÜLÜYORSA bir gerekçeli satır kaybolmuştur.
  */
 /**
+ * EDİTÖRLÜKTE SCOPUS ÇEYREKLİĞİ.
+ *
+ * Sözlüğün editörlük tarafı Scopus dergilerini tek etiketle taşıyordu
+ * (`Scopus Dergi`). Üç kaynak çeyreğe göre AYRI puanlıyor; etiket tek olduğu
+ * için ya satır hiç bağlanamıyordu (Acıbadem) ya da bütün çeyrekler en düşük
+ * kademeye düşüyordu (BAÜ). 18.09.2026'da `Scopus Dergi (Q1..Q4)` eklendi;
+ * çeyreksiz `Scopus Dergi` artık yalnız cetvel tarafında.
+ */
+test('editörlükte Scopus çeyrekliği ayrı puanlanıyor', function () {
+    $puan = function (string $cetvel, string $etiket): int {
+        $katalog = sartDepo()->katalog($cetvel);
+
+        expect($katalog)->not->toBeNull();
+
+        return $katalog->puan(sartFaaliyet($etiket, Kategori::Editorluk), $katalog->coz(['*']));
+    };
+
+    // Acıbadem 2.G: "WoS All Databases ya da SCOPUS Q1-Q2 kapsamındaki
+    // dergide editörlük". Q3-Q4'ün kaynakta karşılığı yok — 3. bölüm TR
+    // Dizin'e ait. Satırın Scopus tarafı çeyreklik gelene kadar bağlanamıyordu.
+    expect($puan('acibadem-2025-atif6', 'Scopus Dergi (Q1)'))->toBe(5)
+        ->and($puan('acibadem-2025-atif6', 'Scopus Dergi (Q2)'))->toBe(5)
+        ->and($puan('acibadem-2025-atif6', 'Scopus Dergi (Q3)'))->toBe(0)
+        ->and($puan('acibadem-2025-atif6', 'Scopus Dergi (Q4)'))->toBe(0)
+        // WoS All Databases tarafı (ESCI) çeyrekten bağımsız.
+        ->and($puan('acibadem-2025-atif6', 'ESCI Dergi'))->toBe(5);
+
+    // BAÜ A-5 bloğunun başlığı "Scopus dergi editörlüğü": Q1 50, Q2 40,
+    // Q3 20. Q4 kademesi ve ayrı bir ESCI kademesi YOK, ikisi de sıfır —
+    // kapsam notunda yazılı.
+    expect($puan('bau-2025', 'Scopus Dergi (Q1)'))->toBe(50)
+        ->and($puan('bau-2025', 'Scopus Dergi (Q2)'))->toBe(40)
+        ->and($puan('bau-2025', 'Scopus Dergi (Q3)'))->toBe(20)
+        ->and($puan('bau-2025', 'Scopus Dergi (Q4)'))->toBe(0)
+        ->and($puan('bau-2025', 'ESCI Dergi'))->toBe(0);
+
+    // Sakarya çeyrek ayırmıyor ama SCOPUS'u ÜST kademede anıyor: "SSCI,
+    // SCI-Exp, AHCI, SCOPUS kapsamındaki dergilerde baş editörlük" 40.
+    // Scopus, ESCI'nin 25'ine düşüyordu; çeyreksiz etiket üst satıra bağlandı.
+    expect($puan('sakarya-2026', 'Scopus Dergi (Q1)'))->toBe(40)
+        ->and($puan('sakarya-2026', 'Scopus Dergi (Q4)'))->toBe(40)
+        ->and($puan('sakarya-2026', 'ESCI Dergi'))->toBe(25);
+
+    // Çeyreksiz kayıt adaya sorulmuyor ama cetvel tarafında zinciri kuruyor:
+    // her çeyreklik `Scopus Dergi`e çıkar, tersi olmaz.
+    expect(Kategori::Editorluk->adayKaynaklari())->not->toContain('Scopus Dergi')
+        ->and(Kategori::Editorluk->kaynaklar())->toContain('Scopus Dergi (Q1)');
+});
+
+/**
  * ATIF VE EDİTÖRLÜKTE ESCI DE KAYNAĞIN ANDIĞI KADEMEDE KALIYOR.
  *
  * Scopus turunda `WoS / Scopus` çekirdek satırdan alındığında ESCI de o
@@ -2801,9 +2851,8 @@ test('atıf ve editörlükte ESCI kaynağın saydığı kademede kalıyor', func
         'ktu-2023:3.b',
     ])->and($editorluk)->toBe([
         // "WoS All Databases ya da SCOPUS Q1-Q2" — All Databases ESCI'yi
-        // kapsıyor. Satırın Scopus tarafı hâlâ bağlanamıyor: editörlük
-        // ekseninde çeyreklik yok, `Scopus Dergi` bağlamak Q3-Q4'ü de
-        // sayardı. GIRILEMEYEN'de açık madde.
+        // kapsıyor, satırın Scopus tarafı da 18.09.2026'da çeyreklik
+        // eklenince bağlandı (Q1-Q2 var, Q3-Q4 yok).
         'acibadem-2025:2.G',
         // Dicle ESCI'yi cetvelin HER YERİNDE "uluslararası alan endeksi"
         // sayıyor: makale A3 de "Diğer uluslararası alan endekslerince
@@ -2986,7 +3035,6 @@ test('Scopus atıf ve editörlük kademelerinde de kaynağın sınırında kalı
         'musku-2013:D-2',
         'osmaniye-2023:9.2',
         'piri-reis-2025:J.1.a',
-        'sakarya-2026:9.2',
         'sakarya-ubu-2024:9.1',
         'sbu-2025:A.10.a',
         'siirt-2025:8.ii.a',
