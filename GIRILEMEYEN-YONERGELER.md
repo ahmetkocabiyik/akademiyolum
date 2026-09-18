@@ -1335,6 +1335,21 @@ içinde olduğu için yalnız Q1 satırları çarpıldı. Yeni kodlar `Q1-Q3` ve
 `SCI-E` gruplarına da eklendi; yoksa adet barajı dilim makalesini hiç saymaz.
 Kaynak %5 kademesi tanımıyor, zincir onu %10'a (×1,5) düşürüyor. **Kapalı.**
 
+**Erzincan'ın Q çarpanı kaynağa karşı doğrulandı** (18.09.2026). Yönerge
+"Yazar Puanı = YKK × YP × QÇ" diyor, QÇ = Q1 2,00 / Q2 1,70 / Q3 1,35 /
+Q4 1,00. Taban puanlar 40 (tam makale *veya derleme*) ve 20 (kısa makale);
+çarpım tam sayıya oturduğu için yuvarlama kaybı yok. Satırlar 80/68/54/40 ve
+40/34/27/20 ile doğru. Q tanımı yalnız SCI-Expanded/SSCI/AHCI'yi kapsadığı
+için 2-5. maddelere çarpan uygulanmamış — doğru. Test donduruldu.
+
+**Açık kalan:** Erzincan'ın 2. maddesi "ESCI veya Alan İndeksleri (ÜAK
+tarafından tanımlanan alanlar için)" diyor, Scopus'u ANMIYOR; cetvelde satır
+`ESCI / Scopus` etiketiyle duruyor. Zincir yüzünden Scopus-only bir dergi
+30 alıyor; kaynağın 3. maddesine ("diğer indeksli uluslararası hakemli
+dergi", 12) düşmesi de savunulabilir. Scopus'un ÜAK alan indeksi sayılıp
+sayılmadığı korpus çapında bir karar — tek üniversitede değiştirmek
+tutarsızlık yaratır, kampanya kararına bırakıldı.
+
 **Harran'da ikinci bir çökme daha var**: A1b ESCI (10) ile Scopus Q1-Q4
 (50-10) tek `ESCI / Scopus` etiketine düşüyor → 10. Scopus çeyrekliği artık
 sözlükte, bölünebilir.

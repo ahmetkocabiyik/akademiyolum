@@ -2673,6 +2673,57 @@ test('Necmettin Erbakan üç dilim kademesini de ayırıyor', function () {
     ))->toBe(100);
 });
 
+test('Erzincan Q çarpanını yalnızca çekirdek indekse uyguluyor', function () {
+    // Kaynak (s. 12): "Puanlamada makalenin yayımlandığı tarihteki derginin
+    // Q değerleri dikkate alınır ve aşağıdaki katsayılarla çarpılır:
+    // Q1 2,00 / Q2 1,70 / Q3 1,35 / Q4 1,00." Yazar Puanı = YKK × YP × QÇ.
+    // Motorun satır bazlı çarpanı yok; QÇ satır puanına gömüldü.
+    $katalog = sartDepo()->katalog('erzincan-2021');
+
+    $puan = fn (string $etiket, string $yayinTuru) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Makale, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'yayin_turu' => $yayinTuru,
+            'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    // 1.a "Tam araştırma makalesi veya derleme" 40 — tek satır, iki tür.
+    // Çarpım tam sayıya oturuyor, yuvarlama kaybı yok.
+    foreach (['ozgun_makale', 'derleme'] as $tur) {
+        expect($puan('SCIE/SSCI (Q1)', $tur))->toBe(80)
+            ->and($puan('SCIE/SSCI (Q2)', $tur))->toBe(68)
+            ->and($puan('SCIE/SSCI (Q3)', $tur))->toBe(54)
+            ->and($puan('SCIE/SSCI (Q4)', $tur))->toBe(40);
+    }
+
+    // 1.b "Kısa makale (editöre mektup, teknik not, vaka takdimi, tartışma,
+    // kitap incelemesi)" 20 — aynı çarpanlar.
+    foreach (['kisa_makale', 'vaka_teknik_not'] as $tur) {
+        expect($puan('SCIE/SSCI (Q1)', $tur))->toBe(40)
+            ->and($puan('SCIE/SSCI (Q2)', $tur))->toBe(34)
+            ->and($puan('SCIE/SSCI (Q3)', $tur))->toBe(27)
+            ->and($puan('SCIE/SSCI (Q4)', $tur))->toBe(20);
+    }
+
+    // AHCI dergilerinin çeyreği çoğu zaman yayımlanmıyor; §0 gereği en düşük
+    // çarpan (Q4, ×1,00) varsayıldı. Bu bir TABAN: kaynak "en yüksek Q değeri
+    // alınır" dediği için adayın Scopus/SJR çeyreği varsa Q etiketini seçmesi
+    // gerekir, kapsam notunda yazılı.
+    expect($puan('AHCI', 'ozgun_makale'))->toBe(40)
+        ->and($puan('AHCI', 'kisa_makale'))->toBe(20);
+
+    // Q TANIMI YALNIZCA SCI-Expanded/SSCI/AHCI'yi kapsıyor (kaynak s. 12).
+    // 2-5. maddelere çarpan uygulanmaz; Scopus çeyrekliği taşıyan bir kayıt
+    // 30'u 60'a çıkarmamalı.
+    expect($puan('ESCI', 'ozgun_makale'))->toBe(30)
+        ->and($puan('Scopus (Q1)', 'ozgun_makale'))->toBe(30)
+        ->and($puan('TR Dizin', 'ozgun_makale'))->toBe(20)
+        ->and($puan('Diğer Uluslararası İndeks', 'ozgun_makale'))->toBe(12)
+        ->and($puan('Diğer Ulusal Hakemli', 'ozgun_makale'))->toBe(10);
+});
+
 test('İnönü dilim çarpanını önceden çarpılmış satır olarak taşıyor', function () {
     // MADDE 7(2): "Makalenin puan değeri, yayımlandığı derginin Incites veya
     // SciVal veri tabanlarında %1'lik dilimde yer alması hâlinde 3, %10'luk
