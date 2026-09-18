@@ -86,15 +86,15 @@ $WOS = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 
 $maddeler = [
     // ══ A. MAKALELER ══
     'A-1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamında taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => $WOS, 'turler' => $TAM, 'puan' => 200],
-    'A-2' => ['baslik' => 'ESCI kapsamında taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $TAM, 'puan' => 150],
-    'A-4' => ['baslik' => 'Diğer indekslerce taranan uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $TAM, 'puan' => 70],
+    'A-2' => ['baslik' => 'ESCI kapsamında taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $TAM, 'puan' => 150],
+    'A-4' => ['baslik' => 'Diğer indekslerce taranan uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $TAM, 'puan' => 70],
     'A-5' => ['baslik' => 'TÜBİTAK-ULAKBİM TR Dizin kapsamındaki ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $TAM, 'puan' => 70],
     'A-6' => ['baslik' => 'Hakemli ulusal bilimsel dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 50],
     // A.8: yukarıdaki dergilerde derleme, teknik not, editöre mektup, tartışma,
     // vaka takdimi, özet ve kısa bildiri türü yayınlar için puanların YARISI.
     'A-8a' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergide derleme, teknik not, editöre mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => $WOS, 'turler' => $YARIM, 'puan' => 100],
-    'A-8b' => ['baslik' => 'ESCI kapsamındaki dergide derleme, teknik not, editöre mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $YARIM, 'puan' => 75],
-    'A-8d' => ['baslik' => 'Diğer indekslerce taranan uluslararası hakemli dergide derleme, teknik not, editöre mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $YARIM, 'puan' => 35],
+    'A-8b' => ['baslik' => 'ESCI kapsamındaki dergide derleme, teknik not, editöre mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $YARIM, 'puan' => 75],
+    'A-8d' => ['baslik' => 'Diğer indekslerce taranan uluslararası hakemli dergide derleme, teknik not, editöre mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $YARIM, 'puan' => 35],
     'A-8e' => ['baslik' => 'TR Dizin kapsamındaki dergide derleme, teknik not, editöre mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $YARIM, 'puan' => 35],
     'A-8f' => ['baslik' => 'Hakemli ulusal bilimsel dergide derleme, teknik not, editöre mektup, tartışma, vaka takdimi ya da özet', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $YARIM, 'puan' => 25],
 

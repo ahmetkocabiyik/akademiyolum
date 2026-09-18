@@ -145,14 +145,14 @@ $maddeler = [
     // ══ A- BİLİMSEL DERGİLERDE YAYINLAR ══
     '1' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI kapsamındaki dergide makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
     '2' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI kapsamındaki dergide vaka takdimi, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 15],
-    '3' => ['baslik' => 'ISI taranan, SCI kapsamı dışındaki uluslararası indeksli dergide makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
-    '5' => ['baslik' => 'ISI taranan, SCI kapsamı dışındaki uluslararası indeksli dergide vaka takdimi, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
+    '3' => ['baslik' => 'ISI taranan, SCI kapsamı dışındaki uluslararası indeksli dergide makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
+    '5' => ['baslik' => 'ISI taranan, SCI kapsamı dışındaki uluslararası indeksli dergide vaka takdimi, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
     '6' => ['baslik' => 'ULAKBİM TR Dizin ya da alan endeksli dergide makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
     '7' => ['baslik' => 'ULAKBİM TR Dizin ya da alan endeksli dergide vaka takdimi, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
     '8' => ['baslik' => 'Diğer hakemli ve süreli dergilerde makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 6],
     // Kaynak 9'u tek satırda iki puanla veriyor; alt kodlar (a-b) bize ait.
-    '9.a' => ['baslik' => 'ISI kapsamı dışındaki uluslararası indeksli dergide makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 7],
-    '9.b' => ['baslik' => 'ISI kapsamı dışındaki uluslararası indeksli dergide vaka raporu, özet ya da mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 3],
+    '9.a' => ['baslik' => 'ISI kapsamı dışındaki uluslararası indeksli dergide makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 7],
+    '9.b' => ['baslik' => 'ISI kapsamı dışındaki uluslararası indeksli dergide vaka raporu, özet ya da mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 3],
     '10' => ['baslik' => 'Diğer hakemli ve süreli dergilerde vaka takdimi, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 3],
 
     // ══ B- KONGRE, SEMPOZYUM VE BENZERİ TOPLANTI SUNUMLARI ══

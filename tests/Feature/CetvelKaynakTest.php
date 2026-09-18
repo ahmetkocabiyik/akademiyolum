@@ -2673,6 +2673,134 @@ test('Necmettin Erbakan üç dilim kademesini de ayırıyor', function () {
     ))->toBe(100);
 });
 
+/**
+ * SCOPUS, ESCI KADEMESİNE SIZMIYOR.
+ *
+ * `ESCI / Scopus` GENEL bir etiket: "ESCI ya da Scopus" demek. Bir kaynak bu
+ * ikisini birlikte anıyorsa doğru araç. Anmıyorsa Scopus kaydı ESCI'nin
+ * puanını alır — korpusta 27 üniversitede oluyordu (Kırklareli'nde 150'ye
+ * karşı 70).
+ *
+ * KARAR (KONVANSIYONLAR, "SCOPUS ALAN İNDEKSİ MİDİR"): soruyu korpus değil
+ * HER KAYNAK kendi cevaplar, çünkü korpusun metinleri ikiye bölünmüş — Ankara
+ * Bilim "Alan indeksi: WOS, SCOPUS ve ÜAK listesi" diye Scopus'u İÇERİYOR,
+ * Trakya "ESCI ve SCOPUS DIŞINDAKİ uluslararası alan indeksleri" diye
+ * DIŞLIYOR. Kaynak susuyorsa §0: cevap HAYIR, Scopus bir alt kademeye düşer.
+ *
+ * Bu test o kararın uygulanmış hâlini donduruyor. Listedeki her satır
+ * kaynağında gerekçelidir; liste BÜYÜYORSA yeni bir cetvel Scopus'u ESCI
+ * kademesinde sayıyor demektir, KÜÇÜLÜYORSA bir gerekçeli satır kaybolmuştur.
+ */
+test('Scopus yalnızca kaynağın andığı kademede ESCI ile aynı puanı alıyor', function () {
+    $depo = sartDepo();
+
+    $bulgular = [];
+
+    foreach ($depo->cetveller() as $anahtar => $katalog) {
+        $kodlar = $katalog->coz(['*']);
+
+        foreach (['ozgun_makale', 'derleme', 'kisa_makale', 'vaka_teknik_not'] as $tur) {
+            $puan = function (string $etiket) use ($katalog, $kodlar, $tur): int {
+                $faaliyet = sartFaaliyet($etiket);
+                $faaliyet->yayin_turu = $tur;
+
+                return $katalog->puan($faaliyet, $kodlar);
+            };
+
+            $esci = $puan('ESCI');
+            $scopus = $puan('Scopus (Q1)');
+
+            // Scopus ESCI ile AYNI kademeye düşüyor ve altında daha dar bir
+            // uluslararası indeks kademesi var: kaynak Scopus'u anmıyorsa
+            // fazla sayma.
+            if ($scopus === 0 || $scopus !== $esci || $scopus <= $puan('Diğer Uluslararası İndeks')) {
+                continue;
+            }
+
+            foreach ($katalog->maddeler as $kod => $madde) {
+                if (($madde['kategori'] ?? '') !== 'makale' || ($madde['puan'] ?? null) !== $scopus) {
+                    continue;
+                }
+
+                if (! array_intersect($madde['kaynaklar'] ?? [], ['ESCI / Scopus', 'Scopus', 'Scopus (Q1)'])) {
+                    continue;
+                }
+
+                if (isset($madde['turler']) && ! in_array($tur, $madde['turler'], true)) {
+                    continue;
+                }
+
+                if (! str_contains(mb_strtolower($madde['baslik']), 'scopus')) {
+                    $bulgular["{$anahtar}:{$kod}"] = true;
+                }
+
+                break;
+            }
+        }
+    }
+
+    $bulunan = array_keys($bulgular);
+    sort($bulunan);
+
+    // Başlığı Scopus demediği hâlde Scopus'u ESCI kademesinde sayan satırlar.
+    // Hepsi kaynağında gerekçeli: Ankara Bilim, Bitlis, Gebze ve Niğde
+    // "alan indeksi"ni Scopus'u İÇERECEK şekilde tanımlıyor; Ataşehir, Iğdır,
+    // İYTE, Kilis ve Marmara kademeyi AÇIK yazıyor ("uluslararası indeksli
+    // hakemli dergi", "ikincil indeksler") ve Scopus oraya kesin giriyor;
+    // Bandırma, Lokman Hekim ve Atatürk koşul metninde ESCI ile Scopus'u yan
+    // yana sayıyor; Aksaray ve Abdullah Gül'de satır Scopus'u adıyla anan
+    // başka bir satıra ATIF yapıyor.
+    expect($bulunan)->toBe([
+        'abdullah-gul-2026:M-Q3Q4-KISA',
+        'aksaray-2024:A.7',
+        'ankara-bilim-2023:1.2.1.c',
+        'ankara-bilim-2023:1.2.1.d',
+        'atasehir-adiguzel-2018:M2.a',
+        'atasehir-adiguzel-2018:M2.b',
+        'ataturk-2026:02.01.07',
+        'bandirma-2024:A4.a',
+        'bandirma-2024:A4.b',
+        'bitlis-2024:A.2.2',
+        'dokuz-eylul-2024:1.b',
+        'dokuz-eylul-2024:2.b',
+        'dokuz-eylul-2024:3.b',
+        'gebze-teknik-2023-mf-docent:1.2',
+        'gebze-teknik-2023-mf-dr:1.2',
+        'gebze-teknik-2023-mf-profesor:1.2',
+        'gebze-teknik-2023-mpt-docent:1.2',
+        'gebze-teknik-2023-mpt-dr:1.2',
+        'gebze-teknik-2023-mpt-profesor:1.2',
+        'gebze-teknik-2023-sbi-docent:1.2',
+        'gebze-teknik-2023-sbi-dr:1.2',
+        'gebze-teknik-2023-sbi-profesor:1.2',
+        'harran-2026:A1e',
+        'igdir-2023:2.a',
+        'igdir-2023:2.b',
+        'iyte-2018-e2-docent:E2-1a',
+        'iyte-2018-e2-dr:E2-1a',
+        'iyte-2018-e2-profesor:E2-1a',
+        'iyte-2018-e3:E3-1b',
+        'iyte-2018-e3:E3-1c',
+        'kafkas-2025-ilahiyat:M-e-esci',
+        'kilis-2019:1.a',
+        'kilis-2019:1.b',
+        'lokman-hekim-2022:T1-A-esci',
+        'lokman-hekim-2022:T1-C-esci',
+        'lokman-hekim-2022:T1-D-esci',
+        'marmara-egitim:3',
+        'marmara-fen-saglik:3',
+        'marmara-fen-saglik:5',
+        'marmara-guzel-sanatlar:3',
+        'marmara-guzel-sanatlar:5',
+        'marmara-muhendislik:3',
+        'marmara-muhendislik:5',
+        'marmara-sosyal:3',
+        'marmara-sosyal:5',
+        'marmara-spor:3',
+        'nohu-2024:1b',
+    ]);
+});
+
 test('Erzincan Q çarpanını yalnızca çekirdek indekse uyguluyor', function () {
     // Kaynak (s. 12): "Puanlamada makalenin yayımlandığı tarihteki derginin
     // Q değerleri dikkate alınır ve aşağıdaki katsayılarla çarpılır:
@@ -2715,10 +2843,12 @@ test('Erzincan Q çarpanını yalnızca çekirdek indekse uyguluyor', function (
         ->and($puan('AHCI', 'kisa_makale'))->toBe(20);
 
     // Q TANIMI YALNIZCA SCI-Expanded/SSCI/AHCI'yi kapsıyor (kaynak s. 12).
-    // 2-5. maddelere çarpan uygulanmaz; Scopus çeyrekliği taşıyan bir kayıt
-    // 30'u 60'a çıkarmamalı.
+    // 2-5. maddelere çarpan uygulanmaz; çeyreklik taşıyan bir kayıt 30'u 60'a
+    // çıkarmamalı. Scopus ise 2. maddede DEĞİL: kaynak 2. maddeyi "ESCI veya
+    // Alan İndeksleri" diye tanımlayıp Scopus'u hiç anmıyor, §0 gereği 3.
+    // maddeye (diğer indeksli uluslararası dergi) düşürüldü.
     expect($puan('ESCI', 'ozgun_makale'))->toBe(30)
-        ->and($puan('Scopus (Q1)', 'ozgun_makale'))->toBe(30)
+        ->and($puan('Scopus (Q1)', 'ozgun_makale'))->toBe(12)
         ->and($puan('TR Dizin', 'ozgun_makale'))->toBe(20)
         ->and($puan('Diğer Uluslararası İndeks', 'ozgun_makale'))->toBe(12)
         ->and($puan('Diğer Ulusal Hakemli', 'ozgun_makale'))->toBe(10);

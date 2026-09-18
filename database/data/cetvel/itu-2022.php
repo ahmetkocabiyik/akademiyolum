@@ -107,8 +107,8 @@ $maddeler = [
     'A.3' => ['baslik' => 'Scopus Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 4],
     'A.4' => ['baslik' => 'Scopus Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 3],
     'A.5' => ['baslik' => 'AHCI taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 0],
-    'A.6' => ['baslik' => 'SSCI, ESCI veya SCI-E taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 0],
-    'A.9' => ['baslik' => 'ÜAK alan indeksinde yer alan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 0],
+    'A.6' => ['baslik' => 'SSCI, ESCI veya SCI-E taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 0],
+    'A.9' => ['baslik' => 'ÜAK alan indeksinde yer alan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 0],
     'A.11' => ['baslik' => 'TR Dizin taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 3],
 
     // ══ B. BİLDİRİLER ══

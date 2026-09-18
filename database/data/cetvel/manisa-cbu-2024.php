@@ -88,9 +88,9 @@ $govde = function (array $tavanlar): array {
             '1c' => ['baslik' => 'SCI-E, SSCI veya AHCI Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale'], 'puan' => 90],
             // AHCI çeyreklik taşımadığı için en düşük satıra yazıldı.
             '1d' => ['baslik' => 'SCI-E, SSCI veya AHCI Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale'], 'puan' => 60],
-            '2' => ['baslik' => 'ÜAK alan endeksli veya ESCI dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale'], 'puan' => 50],
+            '2' => ['baslik' => 'ÜAK alan endeksli veya ESCI dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale'], 'puan' => 50],
             '3' => ['baslik' => 'ULAKBİM TR-Dizin dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale'], 'puan' => 40],
-            '4' => ['baslik' => 'Diğer uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale'], 'puan' => 20],
+            '4' => ['baslik' => 'Diğer uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale'], 'puan' => 20],
             '5' => ['baslik' => 'Diğer ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale'], 'puan' => 15],
             // Madde 6: teknik not, editöre mektup, tartışma, olgu sunusu, özet ve
             // derleme türü yayınlar için yukarıdaki puanların 1/4'ü. Aşağı yuvarlandı.
@@ -98,9 +98,9 @@ $govde = function (array $tavanlar): array {
             '6b' => ['baslik' => 'SCI-E, SSCI veya AHCI Q2 dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 30],
             '6c' => ['baslik' => 'SCI-E, SSCI veya AHCI Q3 dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 22],
             '6d' => ['baslik' => 'SCI-E, SSCI veya AHCI Q4 dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 15],
-            '6e' => ['baslik' => 'ÜAK alan endeksli veya ESCI dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 12],
+            '6e' => ['baslik' => 'ÜAK alan endeksli veya ESCI dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 12],
             '6f' => ['baslik' => 'TR-Dizin dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
-            '6g' => ['baslik' => 'Diğer uluslararası dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
+            '6g' => ['baslik' => 'Diğer uluslararası dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
             '6h' => ['baslik' => 'Diğer ulusal dergide derleme, olgu sunusu veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 3],
 
             // ══ B) BİLDİRİLER (7-8) ══

@@ -106,14 +106,14 @@ $maddeler = [
     'MK1b.ahci' => ['baslik' => 'AHCI kapsamındaki dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['AHCI'], 'turler' => $KISA, 'puan' => 20],
 
     // Madde 2: ESCI veya alan indeksleri.
-    'MK2a' => ['baslik' => 'ESCI veya alan indeksleri kapsamındaki dergide tam araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $OZGUN, 'puan' => 30],
-    'MK2d' => ['baslik' => 'ESCI veya alan indeksleri kapsamındaki dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $DERLEME, 'puan' => 30],
-    'MK2b' => ['baslik' => 'ESCI veya alan indeksleri kapsamındaki dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $KISA, 'puan' => 15],
+    'MK2a' => ['baslik' => 'ESCI veya alan indeksleri kapsamındaki dergide tam araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $OZGUN, 'puan' => 30],
+    'MK2d' => ['baslik' => 'ESCI veya alan indeksleri kapsamındaki dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $DERLEME, 'puan' => 30],
+    'MK2b' => ['baslik' => 'ESCI veya alan indeksleri kapsamındaki dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $KISA, 'puan' => 15],
 
     // Madde 3: diğer indeksli uluslararası hakemli dergiler.
-    'MK3a' => ['baslik' => 'Diğer indeksli uluslararası hakemli dergide tam araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $OZGUN, 'puan' => 12],
-    'MK3d' => ['baslik' => 'Diğer indeksli uluslararası hakemli dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $DERLEME, 'puan' => 12],
-    'MK3b' => ['baslik' => 'Diğer indeksli uluslararası hakemli dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $KISA, 'puan' => 6],
+    'MK3a' => ['baslik' => 'Diğer indeksli uluslararası hakemli dergide tam araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $OZGUN, 'puan' => 12],
+    'MK3d' => ['baslik' => 'Diğer indeksli uluslararası hakemli dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $DERLEME, 'puan' => 12],
+    'MK3b' => ['baslik' => 'Diğer indeksli uluslararası hakemli dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $KISA, 'puan' => 6],
 
     // Madde 4: TR-Dizin.
     'MK4a' => ['baslik' => 'TR-Dizin kapsamındaki dergide tam araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $OZGUN, 'puan' => 20],

@@ -1618,6 +1618,55 @@ birimde bütün kadrolarda geçerliyse cetvelin İKİ VARYANTINI üret (çarpanl
 float tutup çarpımdan **sonra bir kez** aşağı yuvarla; önce yuvarlayıp sonra
 çarpmak farklı sonuç verir.
 
+### SCOPUS ALAN İNDEKSİ MİDİR? Soruyu korpus değil, HER KAYNAK cevaplar
+
+`ESCI / Scopus` GENEL bir etiket; "ESCI ya da Scopus" demek. Bir yönerge
+kademesini "ESCI **veya alan indeksleri**" diye yazıp Scopus'u hiç anmadığında
+bu etiketi kullanmak, Scopus kaydına ESCI'nin puanını verir. Erzincan'da 30'a
+karşı 12, Kırklareli'nde **150'ye karşı 70** ediyordu.
+
+Soruyu korpus çapında tek bir cevaba bağlamak İMKÂNSIZ, çünkü kaynakların
+kendisi ikiye bölünmüş — ikisi de doğrudan alıntı:
+
+- **İÇERİYOR:** Ankara Bilim, "a) Alan indeksi: WOS, SCOPUS ve Üniversitelerarası
+  Kurul Başkanlığı'nın doçentlik…"; Bitlis, "Uluslararası Alan İndekslerinde
+  (ISI Database veya Scopus) taranan"; Gebze, "Sosyal… Alan İndeksleri: ISI
+  Database'e giren ilgili indeksler veya SCOPUS".
+- **DIŞLIYOR:** Trakya, "SCI, SSCI, SCI-Expanded, AHCI, ESCI ve SCOPUS
+  **dışındaki** uluslararası alan indeksleri"; KTÜN, Scopus'u kendi indeks
+  listesinde "diğer alan indeksleri" arasında sayıyor.
+
+Uygulama sırası:
+
+1. **Kaynak Scopus'u bir makale kademesinde ADIYLA anıyorsa** → o kademeye
+   bağla. Atatürk'ün satırı "SCIE/SSCI/AHCI Q2 **veya SCOPUS Q1**" diyor;
+   Scopus çeyreklikleri kendi kademelerine dağıtıldı (24/16/10/8).
+2. **Kademe KAPALI bir indeks listesi sayıyor ve Scopus listede yoksa**
+   ("ESCI dergide…", "SCI, SSCI, SCI-Expanded, ESCI veya AHCI…", "Web of
+   Science taranan diğer (ESCI)") → o kademe Scopus taşımaz.
+3. **Kademe AÇIK yazılmışsa** ("uluslararası indeksli hakemli dergi",
+   "SCI dışındaki uluslararası indeksler", "ikincil indeksler") → Scopus
+   oraya kesin girer, bırak. Belirsizlik yok.
+4. **Kaynak susuyorsa** — Scopus'u yalnızca Q, atıf ya da h-indeks kaynağı
+   olarak anıyorsa ya da hiç anmıyorsa — **cevap HAYIR.** §0 gereği Scopus,
+   o cetvelde KESİNLİKLE hak ettiği en düşük kademeye düşer (tipik olarak
+   "diğer uluslararası indeks").
+
+Dördüncü kuralın sınırı: **sıfır değil.** Scopus'ta taranmak uluslararası bir
+indekste taranmaktır; bunu bilmezden gelmek belirsizliğin düşük tarafını değil,
+BİLGİYİ seçmektir. §0 belirsizlikte düşüğü seçmeyi ister, bilineni atmayı
+değil. Kademeyi bulamıyorsan satırı olduğu yerde bırak ve `notlar`a yaz.
+
+Mekanik uygulama: üst satırda `'ESCI / Scopus'` → `'ESCI'`, alt satırın
+`kaynaklar`ına `'Scopus'` ekle. Zincir gerisini yapar — `Scopus (Q1..Q4)`
+hepsi `Scopus`'a çıkar, `ESCI` ise çıkmaz. Kapsam notunu da güncelle.
+
+**Tuzak:** düzeltmeyi dosya üzerinde toplu `replace` ile yapma. `'maddeler'
+=> [` satırı da "kod => dizi" desenine uyuyor; blok sayacı tüm cetveli tek
+blok sanıp ATIF ve EDİTÖRLÜK satırlarındaki `ESCI / Scopus` etiketlerini de
+siler (Cerrahpaşa A11b böyle kayboldu, testten döndü). Yalnız
+`'kategori' => 'makale'` satırlarına dokun.
+
 ### Tetiği SÖZLÜKTE OLAN çarpanı önceden çarpılmış satıra çevir
 
 Çarpanın neye bağlı olduğuna bak. Ortağın kurumuna ya da tezin sanayi

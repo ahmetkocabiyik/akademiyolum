@@ -132,8 +132,8 @@ return [
     'maddeler' => [
         // ══ 1.1. MAKALELER (en az yayına kabul yazısı bulunmalı) ══
         '1.1.1' => ['baslik' => 'AHCI kapsamındaki dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
-        '1.1.1.1' => ['baslik' => 'SCI-Expanded, SSCI veya alan indeksli dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],
-        '1.1.1.2' => ['baslik' => 'Diğer uluslararası hakemli dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 6],
+        '1.1.1.1' => ['baslik' => 'SCI-Expanded, SSCI veya alan indeksli dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],
+        '1.1.1.2' => ['baslik' => 'Diğer uluslararası hakemli dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 6],
         '1.1.1.3' => ['baslik' => 'Ulusal hakemli dergide yayımlanmış tam makale (hakemli armağanlar dâhil)', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 5],
 
         // ══ 1.2. BİLDİRİLER (makale düzeninde sunulmuş veya basılmış olmalı) ══

@@ -28,9 +28,9 @@ return [
         '1a-1' => ['baslik' => 'SCI/SCI-E/SSCI/AHCI Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 35],
         '1a-2' => ['baslik' => 'SCI/SCI-E/SSCI/AHCI Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
         '1a-3' => ['baslik' => 'SCI/SCI-E/SSCI/AHCI Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
-        '1b' => ['baslik' => 'ESCI veya Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 12],
+        '1b' => ['baslik' => 'ESCI veya Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 12],
         '1c' => ['baslik' => 'ÜAK ve YTÜ senatosunca belirlenen uluslararası alan indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
-        '1d' => ['baslik' => 'Diğer uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],
+        '1d' => ['baslik' => 'Diğer uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],
         '1e' => ['baslik' => 'ULAKBİM taranan ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],
         '1f' => ['baslik' => 'Diğer ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 4],
 

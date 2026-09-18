@@ -44,11 +44,11 @@ return [
         'A4c' => ['baslik' => 'SCIE/SSCI/AHCI dergide editöre mektup veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['vaka_teknik_not'], 'puan' => 15],
 
         // ── A6 · ESCI MAKALE ──
-        'A6a' => ['baslik' => 'ESCI dergide özgün makale veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
-        'A6c' => ['baslik' => 'ESCI dergide editöre mektup veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
+        'A6a' => ['baslik' => 'ESCI dergide özgün makale veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
+        'A6c' => ['baslik' => 'ESCI dergide editöre mektup veya teknik not', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
 
         // ── A8 · DİĞER ULUSLARARASI HAKEMLİ DERGİ ──
-        'A8a' => ['baslik' => 'Alan indeksli uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
+        'A8a' => ['baslik' => 'Alan indeksli uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
         'A8b' => ['baslik' => 'Alan indeksinde taranmayan uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
 
         // ── A5, A7, A9 · EDİTÖRLÜK ve HAKEMLİK ──

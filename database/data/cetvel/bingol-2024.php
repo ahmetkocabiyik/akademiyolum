@@ -75,14 +75,14 @@ return [
     'maddeler' => [
         // ══ 1. TAM ARAŞTIRMA MAKALESİ VEYA DERLEME ══
         '1.a' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergide tam araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
-        '1.b' => ['baslik' => 'ESCI dergide tam araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 35],
-        '1.c' => ['baslik' => 'Alan indeksli dergide tam araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
+        '1.b' => ['baslik' => 'ESCI dergide tam araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 35],
+        '1.c' => ['baslik' => 'Alan indeksli dergide tam araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
         '1.d' => ['baslik' => 'Diğer hakemli ulusal veya uluslararası dergide tam araştırma makalesi ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
 
         // ══ 2. TEKNİK NOT, KISA MAKALE, VAKA TAKDİMİ ══
         '2.a' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergide teknik not, vaka takdimi ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
-        '2.b' => ['baslik' => 'ESCI dergide teknik not, vaka takdimi ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 8],
-        '2.c' => ['baslik' => 'Diğer indeksli veya ulusal dergide teknik not, vaka takdimi ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 6],
+        '2.b' => ['baslik' => 'ESCI dergide teknik not, vaka takdimi ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 8],
+        '2.c' => ['baslik' => 'Diğer indeksli veya ulusal dergide teknik not, vaka takdimi ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus', 'TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 6],
 
         // ══ 3. ATIFLAR (kişi sayısı dikkate alınmaz, tavan 30) ══
         '3.a' => ['baslik' => 'Uluslararası kitapta atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 8],

@@ -334,7 +334,9 @@ test('Atatürk indeks alt sınırı artık hesaplanıyor (eski şemada "bilgi" i
 test('Atatürk Hukuk indeks alt sınırı 5, diğer B grubu alanlarında 12', function () {
     $depo = sartDepo();
 
-    $faaliyetler = [sartFaaliyet('ESCI / Scopus'), sartFaaliyet('TR Dizin')]; // indeks 8
+    // 'ESCI / Scopus' GENEL etiket; satırlar 18.09.2026'da kapsamlıya indi.
+    // Aday zaten indeksi adıyla seçiyor.
+    $faaliyetler = [sartFaaliyet('ESCI'), sartFaaliyet('TR Dizin')]; // indeks 8
 
     $hukuk = $depo->degerlendir(
         $depo->bul('Atatürk Üniversitesi', 'dr_ogr_uyesi', 'hukuk'), $faaliyetler, new Profil(yds: 70)
@@ -2141,7 +2143,7 @@ test('Erciyes yayın barajı alan grubuna göre farklı küme sayıyor', functio
 
     // Fen/Sağlıkta yayın barajı yalnızca WoS çeyrekli dergilerden (1a-d);
     // sosyal gruplarda ESCI ve TR Dizin de sayılıyor (1a-f + kitap).
-    $esci = fn () => sartFaaliyet('ESCI / Scopus', tarih: '2020-01-01');
+    $esci = fn () => sartFaaliyet('ESCI', tarih: '2020-01-01');
 
     $yayinPuani = function (string $alan) use ($depo, $esci, $profil): int {
         $esik = $depo->bul('Erciyes Üniversitesi', 'dr_ogr_uyesi', $alan);

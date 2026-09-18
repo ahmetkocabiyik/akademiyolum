@@ -118,16 +118,16 @@ $govde = function (bool $mps) use ($OZGUN, $DERLEME, $KISA, $VAKA, $TUM_KISA, $Q
         'A-2d-Q4' => ['baslik' => 'Q4 kategorisindeki dergide yayımlanmış kısa makale (short/brief communication)', 'kategori' => 'makale', 'kaynaklar' => $Q4, 'turler' => $KISA, 'puan' => 15],
         'A-2f-Q3' => ['baslik' => 'Q3 kategorisindeki dergide yayımlanmış vaka raporu, teknik not, editöre mektup, kitap ya da makale tahlili', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $VAKA, 'puan' => 15],
         'A-2f-Q4' => ['baslik' => 'Q4 kategorisindeki dergide yayımlanmış vaka raporu, teknik not, editöre mektup, kitap ya da makale tahlili', 'kategori' => 'makale', 'kaynaklar' => $Q4, 'turler' => $VAKA, 'puan' => 10],
-        'A-3a' => ['baslik' => 'ESCI kategorisindeki dergide yayımlanmış özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $OZGUN, 'puan' => 20],
-        'A-3b' => ['baslik' => 'ESCI kategorisindeki dergide yayımlanmış derleme, kısa makale, vaka raporu, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $TUM_KISA, 'puan' => 10],
+        'A-3a' => ['baslik' => 'ESCI kategorisindeki dergide yayımlanmış özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $OZGUN, 'puan' => 20],
+        'A-3b' => ['baslik' => 'ESCI kategorisindeki dergide yayımlanmış derleme, kısa makale, vaka raporu, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $TUM_KISA, 'puan' => 10],
         'A-4a' => [
             'baslik' => $mps
                 ? 'Alan indeksleri (Avery, DAAI, Art Index, ICONDA, Ergo-Abs, Scopus) kapsamındaki dergide yayımlanmış makale'
                 : 'Diğer uluslararası alan indeksleri kapsamındaki dergide yayımlanmış özgün araştırma makalesi',
-            'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $OZGUN,
+            'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $OZGUN,
             'puan' => $mps ? 50 : 15,
         ],
-        'A-4b' => ['baslik' => 'Diğer uluslararası alan indeksleri kapsamındaki dergide yayımlanmış derleme, kısa makale, vaka raporu ya da teknik not', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $TUM_KISA, 'puan' => 7],
+        'A-4b' => ['baslik' => 'Diğer uluslararası alan indeksleri kapsamındaki dergide yayımlanmış derleme, kısa makale, vaka raporu ya da teknik not', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $TUM_KISA, 'puan' => 7],
         'A-6' => ['baslik' => 'Uluslararası özgün tasarım çalışması ya da sanat eseriyle jürili fuar, festival, çalıştay, gösteri, bienal veya trienale katılmak', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatKarmaU, 'puan' => 15],
 
         // ══ B. ULUSLARARASI BİLDİRİLER ══

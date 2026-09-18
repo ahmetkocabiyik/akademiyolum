@@ -57,9 +57,9 @@ return [
         '1.1-Q1' => ['baslik' => 'SCI, SSCI, SCI-Expanded, ESCI veya AHCI Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 60],
         '1.1-Q2' => ['baslik' => 'SCI, SSCI, SCI-Expanded, ESCI veya AHCI Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 50],
         '1.1-Q3' => ['baslik' => 'SCI, SSCI, SCI-Expanded, ESCI veya AHCI Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 45],
-        '1.1-Q4' => ['baslik' => 'SCI, SSCI, SCI-Expanded, ESCI veya AHCI Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
-        '1.1.2' => ['baslik' => 'SCI, SSCI, SCI-Expanded, ESCI veya AHCI dergide teknik not, editöre mektup veya vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 18],
-        '1.2' => ['baslik' => 'Eğitimle ilgili uluslararası alan indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
+        '1.1-Q4' => ['baslik' => 'SCI, SSCI, SCI-Expanded, ESCI veya AHCI Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI', 'ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
+        '1.1.2' => ['baslik' => 'SCI, SSCI, SCI-Expanded, ESCI veya AHCI dergide teknik not, editöre mektup veya vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 18],
+        '1.2' => ['baslik' => 'Eğitimle ilgili uluslararası alan indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
         '1.3' => ['baslik' => 'Diğer yurt dışı hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 24],
         '1.4' => ['baslik' => 'Yurt içi hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
 

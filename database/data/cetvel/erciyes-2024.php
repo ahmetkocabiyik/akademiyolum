@@ -45,8 +45,8 @@ return [
         '1c' => ['baslik' => 'WoS Q2 dergide özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
         '1ç' => ['baslik' => 'WoS Q3 dergide özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
         '1d' => ['baslik' => 'WoS Q4 dergide özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
-        '1e' => ['baslik' => 'WoS diğer veya uluslararası alan indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
-        '1f' => ['baslik' => 'ULAKBİM TR Dizin veya diğer uluslararası indeksli yayın', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
+        '1e' => ['baslik' => 'WoS diğer veya uluslararası alan indeksli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
+        '1f' => ['baslik' => 'ULAKBİM TR Dizin veya diğer uluslararası indeksli yayın', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
         '1g' => ['baslik' => 'Diğer ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 6],
 
         // ── 2. BİLİMSEL MAKALE (short / brief communication) ──
@@ -54,8 +54,8 @@ return [
         '2c' => ['baslik' => 'WoS Q2 dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['kisa_makale'], 'puan' => 30],
         '2ç' => ['baslik' => 'WoS Q3 dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['kisa_makale'], 'puan' => 20],
         '2d' => ['baslik' => 'WoS Q4 dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['kisa_makale'], 'puan' => 15],
-        '2e' => ['baslik' => 'WoS diğer veya alan indeksli dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['kisa_makale'], 'puan' => 12],
-        '2f' => ['baslik' => 'TR Dizin veya diğer indeksli kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks'], 'turler' => ['kisa_makale'], 'puan' => 8],
+        '2e' => ['baslik' => 'WoS diğer veya alan indeksli dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['kisa_makale'], 'puan' => 12],
+        '2f' => ['baslik' => 'TR Dizin veya diğer indeksli kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['kisa_makale'], 'puan' => 8],
         '2g' => ['baslik' => 'Diğer ulusal hakemli dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['kisa_makale'], 'puan' => 4],
 
         // ── 3. BİLİMSEL MAKALE (vaka raporu, teknik not, editöre mektup) ──

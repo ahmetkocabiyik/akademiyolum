@@ -32,14 +32,14 @@ return [
     'maddeler' => [
         // ── 1. ARAŞTIRMA MAKALELERİ ──
         '1.a' => ['baslik' => 'SSCI, AHCI, SCI veya SCI-E endeksli hakemli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
-        '1.b' => ['baslik' => 'E-SCI endeksli hakemli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
-        '1.c' => ['baslik' => 'Alan endeksli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
+        '1.b' => ['baslik' => 'E-SCI endeksli hakemli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 30],
+        '1.c' => ['baslik' => 'Alan endeksli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
         '1.d' => ['baslik' => 'ULAKBİM TR Dizin ulusal hakemli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
         '1.f' => ['baslik' => 'Ulusal hakemli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 15],
 
         // ── 2. DİĞER MAKALELER (teknik not, olgu sunumu, editöre mektup…) ──
         '2.a' => ['baslik' => 'SSCI, AHCI, SCI veya SCI-E endeksli dergide teknik not, olgu sunumu veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 20],
-        '2.b' => ['baslik' => 'E-SCI endeksli dergide teknik not, olgu sunumu veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 15],
+        '2.b' => ['baslik' => 'E-SCI endeksli dergide teknik not, olgu sunumu veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 15],
         '2.d' => ['baslik' => 'TR Dizin dergide teknik not, olgu sunumu veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 10],
 
         // ── 3. ATIFLAR ──

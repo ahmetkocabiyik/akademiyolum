@@ -1342,13 +1342,20 @@ Q4 1,00. Taban puanlar 40 (tam makale *veya derleme*) ve 20 (kısa makale);
 40/34/27/20 ile doğru. Q tanımı yalnız SCI-Expanded/SSCI/AHCI'yi kapsadığı
 için 2-5. maddelere çarpan uygulanmamış — doğru. Test donduruldu.
 
-**Açık kalan:** Erzincan'ın 2. maddesi "ESCI veya Alan İndeksleri (ÜAK
-tarafından tanımlanan alanlar için)" diyor, Scopus'u ANMIYOR; cetvelde satır
-`ESCI / Scopus` etiketiyle duruyor. Zincir yüzünden Scopus-only bir dergi
-30 alıyor; kaynağın 3. maddesine ("diğer indeksli uluslararası hakemli
-dergi", 12) düşmesi de savunulabilir. Scopus'un ÜAK alan indeksi sayılıp
-sayılmadığı korpus çapında bir karar — tek üniversitede değiştirmek
-tutarsızlık yaratır, kampanya kararına bırakıldı.
+**Kapandı (18.09.2026).** Scopus'un alan indeksi sayılıp sayılmadığı korpus
+çapında karara bağlandı; kural KONVANSIYONLAR'da ("SCOPUS ALAN İNDEKSİ
+MİDİR"). Özet: soruyu korpus değil her kaynak cevaplar, çünkü metinler ikiye
+bölünmüş (Ankara Bilim/Bitlis/Gebze Scopus'u alan indeksine DAHİL ediyor,
+Trakya/KTÜN DIŞLIYOR). Kaynak susuyorsa cevap §0 gereği HAYIR.
+
+Tarama 448 cetveli gezdi; 330'unda Scopus ESCI ile aynı kademeye düşüyordu,
+225'inde satır başlığı Scopus'u zaten anıyor (doğru). Kalan 105 cetvel 45
+kaynak dosyasında toplandı ve tek tek kaynağa bakıldı: **30 dosyada Scopus
+bir alt kademeye indirildi**, 15 dosyada gerekçesiyle bırakıldı. En büyük
+düzeltme Kırklareli (150 → 70); ayrıca Atatürk ve Yeni Yüzyıl'da kaynağın
+Scopus çeyrekliklerini adıyla andığı görülüp Scopus Q1-Q4 kendi kademelerine
+bağlandı (Atatürk 24/16/10/8, Yeni Yüzyıl 50/40/30/20 — bunlar EKSİK
+sayıyordu). Korpus değişmezi `CetvelKaynakTest`'te donduruldu.
 
 **Harran'da ikinci bir çökme daha var**: A1b ESCI (10) ile Scopus Q1-Q4
 (50-10) tek `ESCI / Scopus` etiketine düşüyor → 10. Scopus çeyrekliği artık

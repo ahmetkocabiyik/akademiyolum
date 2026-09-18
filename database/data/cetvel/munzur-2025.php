@@ -121,11 +121,11 @@ $ortakMaddeler = [
     'A2.2-Q2' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI kapsamında Q2 dilimli dergide editöre mektup, teknik not ya da vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $KISA, 'puan' => 50],
     'A2.2-Q3' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI kapsamında Q3 dilimli dergide editöre mektup, teknik not ya da vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $KISA, 'puan' => 40],
     'A2.2-Q4' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI kapsamında Q4 dilimli dergide editöre mektup, teknik not ya da vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => $KISA, 'puan' => 30],
-    'A2.3' => ['baslik' => 'Uluslararası alan endekslerinde taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $OZGUN, 'puan' => 40],
+    'A2.3' => ['baslik' => 'Uluslararası alan endekslerinde taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $OZGUN, 'puan' => 40],
     'A2.4' => ['baslik' => 'TR Dizin veri tabanlarında taranan hakemli dergide özgün araştırma ve makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $OZGUN, 'puan' => 40],
-    'A2.5' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI kapsamı dışındaki indekslerde taranan uluslararası hakemli dergide yayın', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $OZGUN, 'puan' => 20],
+    'A2.5' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI kapsamı dışındaki indekslerde taranan uluslararası hakemli dergide yayın', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $OZGUN, 'puan' => 20],
     'A2.6' => ['baslik' => 'Bilimsel ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 8],
-    'A2.7' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI kapsamı dışındaki uluslararası hakemli dergide vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'ESCI / Scopus'], 'turler' => $KISA, 'puan' => 10],
+    'A2.7' => ['baslik' => 'SCI, SCI-E, SSCI ya da AHCI kapsamı dışındaki uluslararası hakemli dergide vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus', 'ESCI'], 'turler' => $KISA, 'puan' => 10],
 
     // ══ A3. BİLİMSEL TOPLANTILAR (A4'ün düşük puanlarıyla) ══
     'A3.1' => ['baslik' => 'Yabancı dilde sözlü sunulan, tam metni yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 10],

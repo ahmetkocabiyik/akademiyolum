@@ -121,11 +121,11 @@ $maddeler = [
     'A2-Q2' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki Q2 dergide yayımlanmış editöre mektup, olgu sunumu, teknik not ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $KISA, 'puan' => 25],
     'A2-Q3' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki Q3 dergide yayımlanmış editöre mektup, olgu sunumu, teknik not ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $KISA, 'puan' => 20],
     'A2-Q4' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki Q4 dergide yayımlanmış editöre mektup, olgu sunumu, teknik not ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'AHCI'], 'turler' => $KISA, 'puan' => 15],
-    'A3' => ['baslik' => 'ESCI kapsamındaki dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => $TAM, 'puan' => 25],
+    'A3' => ['baslik' => 'ESCI kapsamındaki dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => $TAM, 'puan' => 25],
     'A4' => ['baslik' => 'TR Dizin kapsamındaki dergide yayımlanmış özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $TAM, 'puan' => 15],
-    'A6' => ['baslik' => 'Diğer uluslararası hakemli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $TAM, 'puan' => 8],
+    'A6' => ['baslik' => 'Diğer uluslararası hakemli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $TAM, 'puan' => 8],
     'A7' => ['baslik' => 'Diğer ulusal hakemli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 6],
-    'A9' => ['baslik' => 'ESCI, TR Dizin ya da alan endeksi kapsamındaki dergide yayımlanmış editöre mektup, olgu sunumu, teknik not ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'TR Dizin', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 8],
+    'A9' => ['baslik' => 'ESCI, TR Dizin ya da alan endeksi kapsamındaki dergide yayımlanmış editöre mektup, olgu sunumu, teknik not ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['ESCI', 'TR Dizin', 'Diğer Uluslararası İndeks', 'Scopus', 'Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 8],
 
     // ══ Tez yayını ayna satırları (kodlar bize ait) ══
     'T1' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 30],

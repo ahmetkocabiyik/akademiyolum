@@ -64,7 +64,7 @@ use App\Enums\Kategori;
  * listede görünen toplam puan yüksek çıkar.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI',
-    'ESCI / Scopus'];
+    'ESCI'];
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
 
@@ -118,9 +118,9 @@ $maddeler = [
     'A.1b' => ['baslik' => 'Uluslararası yabancı dilde yayımlanmış uluslararası nitelikte kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 75],
     'A.1c' => ['baslik' => 'Uluslararası yabancı dilde yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
     'A.2a' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI dergisinde vaka takdimi, teknik not, editöre mektup ve benzeri yazı', 'kategori' => 'makale', 'kaynaklar' => $SCI, 'turler' => $KISA, 'puan' => 20],
-    'A.2b' => ['baslik' => 'Diğer uluslararası hakemli dergilerde yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $KISA, 'puan' => 10],
+    'A.2b' => ['baslik' => 'Diğer uluslararası hakemli dergilerde yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $KISA, 'puan' => 10],
     'A.3a' => ['baslik' => 'Uluslararası kongrede sunulan ve SCI kapsamındaki dergi özel sayısında ya da kongre kitabında yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 12],
-    'A.4a' => ['baslik' => 'SCI kapsamı dışındaki uluslararası indekslere giren dergilerde yayımlanan tam metin araştırma', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $TAM, 'puan' => 20],
+    'A.4a' => ['baslik' => 'SCI kapsamı dışındaki uluslararası indekslere giren dergilerde yayımlanan tam metin araştırma', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $TAM, 'puan' => 20],
 
     // ══ A.5-A.8 ATIFLAR VE ULUSAL YAYINLAR ══
     'A.5a' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI dergilerinde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],

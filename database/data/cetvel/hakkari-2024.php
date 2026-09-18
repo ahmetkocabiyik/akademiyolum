@@ -60,10 +60,10 @@ return [
 
     'maddeler' => [
         // ══ A — MAKALELER ══
-        'A1.1' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI veya AHCI dergide derleme ya da araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
-        'A1.2' => ['baslik' => 'Diğer uluslararası indeksli dergide derleme ya da özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
-        'A1.3' => ['baslik' => 'SCI, ESCI, SSCI veya AHCI dergide teknik not, vaka takdimi ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 15],
-        'A1.4' => ['baslik' => 'Diğer uluslararası dergide teknik not, vaka takdimi ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 8],
+        'A1.1' => ['baslik' => 'SCI, SCI-Expanded, ESCI, SSCI veya AHCI dergide derleme ya da araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
+        'A1.2' => ['baslik' => 'Diğer uluslararası indeksli dergide derleme ya da özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 25],
+        'A1.3' => ['baslik' => 'SCI, ESCI, SSCI veya AHCI dergide teknik not, vaka takdimi ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 15],
+        'A1.4' => ['baslik' => 'Diğer uluslararası dergide teknik not, vaka takdimi ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 8],
         'A2.1' => ['baslik' => 'Ulusal hakemli dergide yayımlanan araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale'], 'puan' => 20],
         'A2.2' => ['baslik' => 'Ulusal hakemli dergide yayımlanan vaka takdimi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 8],
         'A3' => ['baslik' => 'Diğer dergilerde yayımlanan makale, çeviri veya vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 5],

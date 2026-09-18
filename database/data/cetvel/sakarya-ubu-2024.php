@@ -31,11 +31,11 @@ return [
     'maddeler' => [
         // ── 1. MAKALELER ──
         '1.1' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI kapsamındaki dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 100],
-        '1.2' => ['baslik' => 'ESCI kapsamındaki dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 80],
-        '1.3' => ['baslik' => 'Uluslararası alan endeksli veya TR Dizin kapsamındaki dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 60],
+        '1.2' => ['baslik' => 'ESCI kapsamındaki dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 80],
+        '1.3' => ['baslik' => 'Uluslararası alan endeksli veya TR Dizin kapsamındaki dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'TR Dizin', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 60],
         '1.4' => ['baslik' => 'Diğer hakemli ulusal veya uluslararası dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 40],
         '1.6' => ['baslik' => 'SCI, SSCI, SCI-Expanded veya AHCI dergide teknik not, kısa makale, vaka takdimi veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 40],
-        '1.7' => ['baslik' => 'ESCI dergide teknik not, kısa makale, vaka takdimi veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 30],
+        '1.7' => ['baslik' => 'ESCI dergide teknik not, kısa makale, vaka takdimi veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 30],
 
         // ── 2. BİLDİRİLER ──
         // KODLAR BİR SATIR KAYMIŞTI. Kaynağın gerçek sırası: 2.1 uluslararası
