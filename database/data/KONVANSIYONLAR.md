@@ -1708,6 +1708,42 @@ değil" kaydının sınırı: orada kaynakta bir uluslararası indeks kademesi V
 `WoS Dergi (Q1-Q4)` taşıyordu; Scopus editörlüğü 30'a düşüyordu. Kural
 simetrik: kaynak anıyorsa YUKARI da taşınır.
 
+### Ekseni AÇMAK yetmiyor, eski satırları geri dönüp BAĞLAMAK gerekiyor
+
+Scopus çeyrekliği 17.09.2026'da makale sözlüğüne eklendi. Bir gün sonraki
+tarama beş cetvelde satırların ESKİ eşlemede kaldığını gösterdi: başlığı
+"Scopus Q1 dergide makale" diyen satır hâlâ `SCIE/SSCI (Q1)` taşıyordu,
+Scopus kaydı ise en alttaki genel `ESCI / Scopus` satırına düşüyordu.
+
+    İTÜ A.1-A.4    "Scopus Q1/Q2/Q3/Q4 dergide makale"        10 · 8 · 4 · 3
+    BAÜ A-1.1-1.4  "Scopus veri tabanında Qn olarak taranan"  24 · 18 · 12 · 8
+    OSTİM 1.a.*    "… ya da Scopus (Q1) kapsamındaki"         70 → 5'e düşüyordu
+    NEÜ A1         "SCI-Expanded, SSCI ya da SCOPUS"          Q1 60 → 100
+    Sakarya 1.1b-d ÇAPRAZ: Scopus Q1 ≈ WoS Q2 basamağı        Q1 25 → 80
+
+Hepsi EKSİK sayıyordu; §0 sessiz kaldığı için hiçbir test kırılmamıştı.
+**Ekseni açan tur, ekseni kullanan satırları da taramalı** — "başlığı Qn
+diyor ama etiketi taşımıyor" taraması ucuz ve kesin.
+
+### Sözlük bölününce KARŞILIK TABLOLARI da bölünmeli
+
+`TEZ_KARSILIKLARI`, tez yayınını normal kaleme çeviren tablo, sözlük
+bölünmelerinden önceki GENEL adlarda kalmıştı: `ESCI / Scopus`,
+`Uluslararası/Ulusal Kitap`, `Kitap Bölümü`, `Diğer`. Aday ise artık
+kapsamlı etiketi seçiyor (`ESCI`, `Scopus (Q1)`, `Uluslararası Kitap`,
+`Diğer (Ulusal)`). Arama DOĞRUDAN dizi anahtarı üzerinden yapıldığı için —
+satır eşleşmesinin aksine genel etiket zincirini YÜRÜMÜYOR — kayan her
+etiket hiçbir satıra düşmüyor ve kayıt SESSİZCE sıfır alıyordu.
+
+Karşılıklar kendi adlarına bağlandı. Satır eşleşmesi zaten zinciri yürüdüğü
+için tek girdi yetiyor: `'Scopus (Q1)' => [[Makale, 'Scopus (Q1)']]` hem
+`Scopus (Q1)` etiketli satıra hem `Scopus`, `ESCI / Scopus`, `WoS / Scopus`
+etiketli satıra düşer.
+
+**Koruma:** adaya sorulan her tez etiketinin tabloda anahtarı olduğunu
+doğrulayan bir korpus testi var (`tezKarsiligiVar`). Sözlüğe yeni bir tez
+etiketi eklendiğinde bu test kırılır — kırılmalı.
+
 ### Editörlükte de çeyreklik ekseni var (`Scopus Dergi (Q1..Q4)`)
 
 Makale ve atıfta açılan Scopus çeyrekliği 18.09.2026'da editörlüğe de

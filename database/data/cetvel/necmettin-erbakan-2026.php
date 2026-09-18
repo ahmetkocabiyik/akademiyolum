@@ -105,14 +105,15 @@ $maddeler = [
     // dilimler dışındaki" demek. Sözlük 17.09.2026'da bu ekseni açtı.
     ...$makale('A1.d1', 'SCI-Expanded, SSCI ya da SCOPUS kapsamındaki Q1 dergide, ilk %1\'lik dilimde makale', ['SCIE/SSCI (İlk %1)'], 200),
     ...$makale('A1.d5', 'SCI-Expanded, SSCI ya da SCOPUS kapsamındaki Q1 dergide, ilk %5\'lik dilimde makale', ['SCIE/SSCI (İlk %5)'], 175),
-    ...$makale('A1.d10', 'SCI-Expanded, SSCI ya da SCOPUS kapsamındaki Q1 dergide, ilk %10\'luk dilimde makale', ['SCIE/SSCI (İlk %10)'], 150),
-    ...$makale('A1.q1', 'SCI-Expanded veya SSCI kapsamındaki Q1 dergide makale (ilk %10 dışında)', ['SCIE/SSCI (Q1)'], 100),
-    ...$makale('A1.q2', 'SCI-Expanded veya SSCI kapsamındaki Q2 dergide makale', ['SCIE/SSCI (Q2)'], 85),
-    ...$makale('A1.q3', 'SCI-Expanded veya SSCI kapsamındaki Q3 dergide makale', ['SCIE/SSCI (Q3)'], 70),
+    ...$makale('A1.d10', 'SCI-Expanded, SSCI ya da SCOPUS kapsamındaki Q1 dergide, ilk %10\'luk dilimde makale', ['SCIE/SSCI (İlk %10)', 'Scopus (İlk %10)'], 150),
+    ...$makale('A1.q1', 'SCI-Expanded, SSCI ya da SCOPUS kapsamındaki Q1 dergide makale (ilk %10 dışında)', ['SCIE/SSCI (Q1)', 'Scopus (Q1)'], 100),
+    ...$makale('A1.q2', 'SCI-Expanded, SSCI ya da SCOPUS kapsamındaki Q2 dergide makale', ['SCIE/SSCI (Q2)', 'Scopus (Q2)'], 85),
+    ...$makale('A1.q3', 'SCI-Expanded, SSCI ya da SCOPUS kapsamındaki Q3 dergide makale', ['SCIE/SSCI (Q3)', 'Scopus (Q3)'], 70),
     // A1'in kümesi kaynağın kendi sözleriyle "SCI-Expanded, SSCI, AHCI VEYA
     // SCOPUS"; Scopus makalesi ESCI'nin satırına (A2, 50) değil BU merdivene
-    // ait. Kayıt Scopus için çeyrek taşımadığından §0 uyarınca merdivenin en
-    // alt basamağına (Q4, 60) bağlandı.
+    // ait. 17.09.2026'da sözlük Scopus çeyrekliğini açtı, basamaklar tek tek
+    // bağlandı (Q1 100 · Q2 85 · Q3 70 · Q4 60). Çeyreksiz `Scopus` kaydı
+    // §0 uyarınca en alt basamakta kalıyor.
     ...$makale('A1.q4', 'SCI-Expanded, SSCI ya da SCOPUS kapsamındaki Q4 dergide makale', ['SCIE/SSCI (Q4)', 'Scopus'], 60),
     ...$makale('A1.ahci', 'AHCI kapsamındaki dergide makale (Q değeri yoksa Q3 sayılır)', ['AHCI'], 70),
     // A2 kaynakta yalnız "ESCI" diyor.

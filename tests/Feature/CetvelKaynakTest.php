@@ -2723,6 +2723,80 @@ test('Necmettin Erbakan üç dilim kademesini de ayırıyor', function () {
  * kademesinde sayıyor demektir, KÜÇÜLÜYORSA bir gerekçeli satır kaybolmuştur.
  */
 /**
+ * MAKALE VE TEZ YAYININDA SCOPUS ÇEYREKLİĞİ.
+ *
+ * Sözlük 17.09.2026'da makale tarafına `Scopus (Q1..Q4)` ekledi ama beş
+ * cetvelde satırlar ESKİ eşlemeyle kaldı: başlığı "Scopus Q1 dergide makale"
+ * diyen satır `SCIE/SSCI (Q1)` taşıyordu, Scopus kaydı ise en alttaki genel
+ * `ESCI / Scopus` satırına düşüyordu. Hepsi EKSİK sayıyordu.
+ *
+ * Tez yayınında ayrı bir kırık vardı: karşılık tablosu (`TEZ_KARSILIKLARI`)
+ * sözlük bölünmeden önceki GENEL adlarda kalmıştı, adaya sorulan kapsamlı
+ * etiketler (ESCI, Scopus çeyrekleri, uluslararası/ulusal kitap, "diğer"in
+ * iki kolu) hiçbir anahtara düşmüyor ve SIFIR alıyordu.
+ */
+test('makale ve tez yayınında Scopus çeyrekliği kendi basamağına düşüyor', function () {
+    $puan = function (string $cetvel, string $etiket, Kategori $kategori = Kategori::Makale): int {
+        $katalog = sartDepo()->katalog($cetvel);
+
+        expect($katalog)->not->toBeNull();
+
+        $faaliyet = sartFaaliyet($etiket, $kategori);
+        $faaliyet->yayin_turu = 'ozgun_makale';
+
+        return $katalog->puan($faaliyet, $katalog->coz(['*']));
+    };
+
+    // BAÜ: satır başlıkları zaten "Scopus veri tabanında Qn olarak taranan".
+    expect($puan('bau-2025', 'Scopus (Q1)'))->toBe(24)
+        ->and($puan('bau-2025', 'Scopus (Q2)'))->toBe(18)
+        ->and($puan('bau-2025', 'Scopus (Q3)'))->toBe(12)
+        ->and($puan('bau-2025', 'Scopus (Q4)'))->toBe(8);
+
+    // Sakarya ÇAPRAZ eşliyor: Scopus Q1 ≈ WoS Q2 basamağı. Scopus Q4'ün
+    // kendi satırı var (1.2a) ve ESCI'ninki (1.2b) ondan ayrıldı.
+    expect($puan('sakarya-2026', 'Scopus (Q1)'))->toBe(80)
+        ->and($puan('sakarya-2026', 'Scopus (Q2)'))->toBe(55)
+        ->and($puan('sakarya-2026', 'Scopus (Q3)'))->toBe(45)
+        ->and($puan('sakarya-2026', 'Scopus (Q4)'))->toBe(25)
+        ->and($puan('sakarya-2026', 'SCIE/SSCI (Q1)'))->toBe(90);
+
+    // NEÜ'nün A1 merdiveni kaynağın sözleriyle "SCI-Expanded, SSCI, AHCI
+    // VEYA SCOPUS". Scopus çeyreksiz sayıldığı için hepsi Q4'e düşüyordu.
+    expect($puan('necmettin-erbakan-2026', 'Scopus (Q1)'))->toBe(100)
+        ->and($puan('necmettin-erbakan-2026', 'Scopus (Q4)'))->toBe(60)
+        // Çeyreksiz kayıt §0 uyarınca merdivenin en altında kalıyor.
+        ->and($puan('necmettin-erbakan-2026', 'Scopus'))->toBe(60)
+        // ESCI kaynakta AYRI bir satır (A2, 50); merdivene karışmıyor.
+        ->and($puan('necmettin-erbakan-2026', 'ESCI'))->toBe(50);
+
+    // OSTİM: başlık yalnız Scopus'un ÜST çeyreğini anıyor ("… ya da Scopus
+    // (Q1) kapsamındaki"); alt çeyrekler alan indeksi satırında kalıyor.
+    expect($puan('ostim-teknik-2024', 'Scopus (Q1)'))->toBe(70)
+        ->and($puan('ostim-teknik-2024', 'Scopus (Q2)'))->toBe(5);
+
+    // TEZ YAYINI: kapsamlı etiketler karşılık tablosunda yoktu, sıfır
+    // alıyorlardı. İYTE EK-1'de ESCI/Scopus makale tarafında da üst kademede
+    // değil, tez satırında da 2b'ye (5) ait; EK-2'de 2a (10) ikisini de sayıyor.
+    expect($puan('iyte-2018-e1-dr', 'SCIE/SSCI/AHCI', Kategori::TezYayini))->toBe(10)
+        ->and($puan('iyte-2018-e1-dr', 'ESCI', Kategori::TezYayini))->toBe(5)
+        ->and($puan('iyte-2018-e1-dr', 'Scopus (Q1)', Kategori::TezYayini))->toBe(5)
+        ->and($puan('iyte-2018-e2-dr', 'ESCI', Kategori::TezYayini))->toBe(10)
+        ->and($puan('iyte-2018-e2-dr', 'Scopus (Q1)', Kategori::TezYayini))->toBe(10)
+        // "Diğer"in iki kolu da karşılık buluyor.
+        ->and($puan('iyte-2018-e1-dr', 'Diğer (Uluslararası)', Kategori::TezYayini))->toBe(5);
+
+    // Adaya sorulan HER tez etiketinin karşılık tablosunda bir anahtarı var;
+    // yoksa kayıt sessizce sıfır alır.
+    $karsiliksiz = array_values(array_filter(
+        Kategori::TezYayini->adayKaynaklari(),
+        fn (string $etiket) => ! MaddeKatalogu::tezKarsiligiVar($etiket),
+    ));
+
+    expect($karsiliksiz)->toBe([]);
+});
+
+/**
  * EDİTÖRLÜKTE SCOPUS ÇEYREKLİĞİ.
  *
  * Sözlüğün editörlük tarafı Scopus dergilerini tek etiketle taşıyordu

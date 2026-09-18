@@ -102,10 +102,10 @@ $maddeler = [
     // Kısa makale, editöre mektup ve kitap değerlendirmeleri A.10'a girer;
     // o satır kaynakta karşılıksız olduğu için A.1-A.4 özgün makale ve
     // derlemeyle sınırlandı.
-    'A.1' => ['baslik' => 'Scopus Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
-    'A.2' => ['baslik' => 'Scopus Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],
-    'A.3' => ['baslik' => 'Scopus Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 4],
-    'A.4' => ['baslik' => 'Scopus Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 3],
+    'A.1' => ['baslik' => 'Scopus Q1 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'Scopus (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
+    'A.2' => ['baslik' => 'Scopus Q2 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)', 'Scopus (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 8],
+    'A.3' => ['baslik' => 'Scopus Q3 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'Scopus (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 4],
+    'A.4' => ['baslik' => 'Scopus Q4 dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'Scopus (Q4)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 3],
     'A.5' => ['baslik' => 'AHCI taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 0],
     'A.6' => ['baslik' => 'SSCI, ESCI veya SCI-E taranan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 0],
     'A.9' => ['baslik' => 'ÜAK alan indeksinde yer alan dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 0],

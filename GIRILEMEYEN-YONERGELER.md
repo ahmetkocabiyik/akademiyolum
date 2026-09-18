@@ -1357,6 +1357,19 @@ Bandırma A13.b, Bitlis A.9.2-3, Bolu A.9.2-3, Ege 4b, Düzce 1.5.b, Ataşehir
 M18.c, PAÜ A.5b). Necmettin Erbakan'da ters yön: I1 başlığı "SCOPUS taranan
 dergide editörlük" dediği hâlde satır Scopus taşımıyordu, eklendi.
 
+**Makale ve tez yayınında Scopus çeyrekliği denetlendi (18.09.2026).** Beş
+cetvelde satırlar ekseni açan turdan önceki eşlemede kalmıştı ve hepsi EKSİK
+sayıyordu: İTÜ A.1-A.4, BAÜ A-1.1-1.4, OSTİM 1.a.*, NEÜ A1 merdiveni
+(Scopus Q1 60 → 100), Sakarya 1.1b-d (çapraz eşleme, Scopus Q1 25 → 80).
+Kafkas ve Haliç'te başlık Scopus diyor ama ayrı bir ESCI/Scopus satırı zaten
+var — dokunulmadı.
+
+Tez yayınında ayrı bir kırık çıktı: `TEZ_KARSILIKLARI` sözlük bölünmelerinden
+önceki genel adlarda kalmıştı, adaya sorulan kapsamlı etiketler (ESCI, Scopus
+çeyrekleri, uluslararası/ulusal kitap, "diğer"in iki kolu) hiçbir anahtara
+düşmüyor ve SESSİZCE sıfır alıyordu. Karşılıklar kendi adlarına bağlandı;
+İYTE EK-1'in 2b satırına ESCI/Scopus eklendi (kaynakta üst kademede değil).
+
 **Editörlükte Scopus çeyrekliği eklendi (18.09.2026).** `Scopus Dergi
 (Q1..Q4)` sözlüğe girdi; çeyreksiz `Scopus Dergi` genel etikete döndü ve
 mevcut kayıtlar migration ile Q4'e taşındı. Üç cetvel düzeltildi: Acıbadem

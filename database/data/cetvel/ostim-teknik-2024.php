@@ -51,7 +51,10 @@
 $OZGUN = ['ozgun_makale'];
 $DERLEME = ['derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
-$WOS = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
+// 1.a satırlarının başlığı "… ya da Scopus (Q1) kapsamındaki" diyor;
+// Scopus'un ÜST çeyreği bu merdivene ait, alt çeyrekler 1.b.4'e.
+$WOS = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI',
+    'Scopus (Q1)'];
 
 $maddeler = [
     // ══ 1. YAYINLAR ══

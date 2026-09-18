@@ -57,11 +57,28 @@ readonly class MaddeKatalogu
             [Kategori::Makale, 'AHCI'],
         ],
         'ESCI / Scopus' => [[Kategori::Makale, 'ESCI / Scopus']],
+        // Sözlük bu etiketleri sonradan BÖLDÜ (ESCI ↔ Scopus, Scopus
+        // çeyrekliği, kitabın uluslararası/ulusal ayrımı, "diğer"in iki
+        // kolu). Aday artık kapsamlı etiketi seçiyor; karşılık tablosu eski
+        // GENEL adlarda kalınca kayıt hiçbir satıra düşmüyor ve SIFIR
+        // alıyordu. Karşılık kendi adına bağlanıyor: satır eşleşmesi zaten
+        // genel etiket zincirini yürüdüğü için gerekirse kendiliğinden
+        // genişliyor, ama cetvelde KAPSAMLI satır varsa ona da düşebiliyor.
+        'ESCI' => [[Kategori::Makale, 'ESCI']],
+        'Scopus (İlk %10)' => [[Kategori::Makale, 'Scopus (İlk %10)']],
+        'Scopus (Q1)' => [[Kategori::Makale, 'Scopus (Q1)']],
+        'Scopus (Q2)' => [[Kategori::Makale, 'Scopus (Q2)']],
+        'Scopus (Q3)' => [[Kategori::Makale, 'Scopus (Q3)']],
+        'Scopus (Q4)' => [[Kategori::Makale, 'Scopus (Q4)']],
         'TR Dizin' => [[Kategori::Makale, 'TR Dizin']],
         'BKCI / Scopus Kitap' => [[Kategori::Kitap, 'BKCI / Scopus Kitap']],
         'BKCI / Scopus Kitap Bölümü' => [[Kategori::Kitap, 'BKCI / Scopus Kitap Bölümü']],
         'Uluslararası/Ulusal Kitap' => [[Kategori::Kitap, 'Uluslararası/Ulusal Kitap']],
+        'Uluslararası Kitap' => [[Kategori::Kitap, 'Uluslararası Kitap']],
+        'Ulusal Kitap' => [[Kategori::Kitap, 'Ulusal Kitap']],
         'Kitap Bölümü' => [[Kategori::Kitap, 'Kitap Bölümü']],
+        'Uluslararası Kitap Bölümü' => [[Kategori::Kitap, 'Uluslararası Kitap Bölümü']],
+        'Ulusal Kitap Bölümü' => [[Kategori::Kitap, 'Ulusal Kitap Bölümü']],
         'CPCI Bildiri' => [
             [Kategori::Bildiri, 'Uluslararası Tam Metin (CPCI)'],
             [Kategori::Bildiri, 'Uluslararası Tam Metin'],
@@ -70,7 +87,22 @@ readonly class MaddeKatalogu
             [Kategori::Makale, 'Diğer Ulusal Hakemli'],
             [Kategori::Makale, 'Diğer Uluslararası İndeks'],
         ],
+        'Diğer (Uluslararası)' => [[Kategori::Makale, 'Diğer Uluslararası İndeks']],
+        'Diğer (Ulusal)' => [[Kategori::Makale, 'Diğer Ulusal Hakemli']],
     ];
+
+    /**
+     * Tez yayını etiketinin normal kalemlerde bir karşılığı var mı?
+     *
+     * Sözlük bölündükçe adaya sorulan etiketler ile karşılık tablosunun
+     * anahtarları birbirinden kayabiliyor; kayan etiket hiçbir satıra
+     * düşmediği için kayıt SESSİZCE sıfır alıyor. Korpus testi bu ikisini
+     * karşılaştırıyor.
+     */
+    public static function tezKarsiligiVar(string $kaynak): bool
+    {
+        return isset(self::TEZ_KARSILIKLARI[$kaynak]);
+    }
 
     /**
      * Sonradan eklenmiş DAR sanat etiketlerinin eski GENEL karşılıkları.

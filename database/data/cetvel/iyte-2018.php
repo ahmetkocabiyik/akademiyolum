@@ -107,7 +107,12 @@ $ekGovdesi = function (array $birATarama, array $birBTarama, array $ikiATarama, 
         "{$on}-1c" => ['baslik' => 'ULAKBİM tarafından taranan ulusal hakemli dergide yayımlanmış özgün tam araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale'], 'puan' => 8],
 
         "{$on}-2a" => ['baslik' => 'Lisansüstü tezinizle ilgili, uluslararası hakemli dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => $ikiATarama, 'puan' => 10],
-        "{$on}-2b" => ['baslik' => 'Lisansüstü tezinizle ilgili, diğer uluslararası ya da ulusal hakemli dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Diğer', 'TR Dizin'], 'puan' => 5],
+        // EK-1'de ESCI/Scopus makale tarafında ÜST kademede değil (1b, 8 puan);
+        // tez satırında da 2a'ya (10) değil BURAYA ait. Etiket eksikti, ESCI
+        // ya da Scopus çeyrekliği taşıyan tez yayını SIFIR alıyordu. EK-2'de
+        // ise 2a zaten ESCI/Scopus'u sayıyor; aynı etiketi buraya da koymak
+        // cetvel içi çakışma üretirdi.
+        "{$on}-2b" => ['baslik' => 'Lisansüstü tezinizle ilgili, diğer uluslararası ya da ulusal hakemli dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => in_array('ESCI / Scopus', $ikiATarama, true) ? ['Diğer', 'TR Dizin'] : ['Diğer', 'TR Dizin', 'ESCI / Scopus'], 'puan' => 5],
         "{$on}-2c-2d" => ['baslik' => 'Lisansüstü tezinizle ilgili, bilimsel toplantıda sunulmuş ve tam metni basılmış sözlü bildiri', 'kategori' => 'tez_yayini', 'kaynaklar' => ['CPCI Bildiri'], 'puan' => 3],
 
         "{$on}-3a" => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],

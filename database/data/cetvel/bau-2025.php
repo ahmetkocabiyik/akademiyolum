@@ -62,11 +62,11 @@ $B_PROJE = ['TÜSEB', 'Diğer Kamu Kurumu', 'BAP (Üniversite)', 'Özel Sektör 
 
 $maddeler = [
     // ══ A-1: SCOPUS VERİ TABANINDA ══
-    'A-1.1' => ['baslik' => 'Scopus veri tabanında Q1 olarak taranan dergide yayımlanan tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $TAM, 'puan' => 24],
-    'A-1.2' => ['baslik' => 'Scopus veri tabanında Q2 olarak taranan dergide yayımlanan tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => $TAM, 'puan' => 18],
-    'A-1.3' => ['baslik' => 'Scopus veri tabanında Q3 olarak taranan dergide yayımlanan tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => $TAM, 'puan' => 12],
-    'A-1.4' => ['baslik' => 'Scopus veri tabanında Q4 olarak taranan dergide yayımlanan tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)'], 'turler' => $TAM, 'puan' => 8],
-    'A-1.5' => ['baslik' => 'Scopus veri tabanındaki dergide yayımlanmış editöre mektup, teknik not, vaka analizi veya tartışma', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'], 'turler' => $KISA, 'puan' => 5],
+    'A-1.1' => ['baslik' => 'Scopus veri tabanında Q1 olarak taranan dergide yayımlanan tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'Scopus (Q1)'], 'turler' => $TAM, 'puan' => 24],
+    'A-1.2' => ['baslik' => 'Scopus veri tabanında Q2 olarak taranan dergide yayımlanan tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)', 'Scopus (Q2)'], 'turler' => $TAM, 'puan' => 18],
+    'A-1.3' => ['baslik' => 'Scopus veri tabanında Q3 olarak taranan dergide yayımlanan tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)', 'Scopus (Q3)'], 'turler' => $TAM, 'puan' => 12],
+    'A-1.4' => ['baslik' => 'Scopus veri tabanında Q4 olarak taranan dergide yayımlanan tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q4)', 'Scopus (Q4)'], 'turler' => $TAM, 'puan' => 8],
+    'A-1.5' => ['baslik' => 'Scopus veri tabanındaki dergide yayımlanmış editöre mektup, teknik not, vaka analizi veya tartışma', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'Scopus'], 'turler' => $KISA, 'puan' => 5],
 
     // ══ A-2: SCI, SCI-EXPANDED, SSCI, AHCI ══
     'A-2.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI veri tabanında taranan dergide yayımlanan tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['AHCI'], 'turler' => $TAM, 'puan' => 24],
