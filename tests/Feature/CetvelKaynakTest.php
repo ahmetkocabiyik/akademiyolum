@@ -3476,6 +3476,13 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Burdur 8/9/18: ayrım yalnız yayımın yeri (yurt dışı ↔ yurt içi).
+    ['burdur-2016', [
+        'Uluslararası Kitap' => 70,
+        'Ulusal Kitap' => 50,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 15,
+    ]],
     // Çağ C ↔ F: tanım ÜAK'ın "uluslararası/ulusal yayınevi" tarifine bağlı,
     // ders kitabı da kapsamda.
     ['cag-2023', [

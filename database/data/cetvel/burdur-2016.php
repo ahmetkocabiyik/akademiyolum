@@ -26,16 +26,20 @@
  * ── AYNI KAYNAK ETİKETİNE DÜŞÜP DÜŞÜĞÜ GİRİLEN SATIRLAR (§0) ──
  *   19 (SCI atfı 5) ile 20 (diğer indeks atfı 2) tek "WoS / Scopus" etiketine
  *       düşüyor → 2.
- *   8'in yurt dışı (70) ve yurt içi (50) kitabı: BKCI etiketi yurt dışı
- *       satırdan, genel kitap etiketi yurt içi satırdan. 9'da aynısı (25/15).
  *   16 yardımcı editörlük ve yayın kurulu üyeliği "ilgili maddelerin yarısı"
  *       → en düşük dergiden (10/2 = 5); 17 hakemlik "beşte biri" → 10/5 = 2.
- *   18'in yurt dışı kitap editörlüğü (35) ile yurt içi (25): BKCI etiketi
- *       35'ten, genel kitap editörlüğü 25'ten.
  *   37 uluslararası burs (20) ile 38 ulusal burs (10) → 10.
  *   39 uluslararası konuşmacılık (15) ile ulusal (8) → 8.
  *   Sanatsal etkinliklerde uluslararası/ulusal ayrımı taşımayan etiketler
  *       daima ULUSAL satırdan sayılıyor.
+ *
+ * ── KİTAPTA YURT DIŞI/YURT İÇİ AYRIMI (19.09.2026) ──
+ * 8, 9 ve 18. maddeler kitabı, kitap bölümünü ve kitap editörlüğünü yalnız
+ * YAYIMIN YERİNE göre ikiye ayırıyor ("alanınızda yurt dışında yayımlanan" ↔
+ * "yurt içinde yayımlanan"); indeks ya da yayınevi niteliği aranmıyor. Üst
+ * satırlarda yalnız BKCI/Scopus etiketi durduğu için adayın indekssiz yurt
+ * dışı kitabı 70 yerine 50, bölümü 25 yerine 15, editörlüğü 35 yerine 25
+ * puan alıyordu. Satırlar kapsamlı etiketlere bağlandı.
  *
  * ── GİRİLMEYEN SATIRLAR ──
  *   23 ULUSLARARASI BAŞVURU KİTAPLARINDAKİ ATIFLAR (atıf başına 10) — kayıt
@@ -97,10 +101,10 @@ $maddeler = [
     'M7b' => ['baslik' => 'Ulusal bilimsel toplantıda özet olarak yayımlanan ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 10],
 
     // ══ KİTAPLAR VE ÇEVİRİLER (8-11) ══
-    'M8a' => ['baslik' => 'Alanınızda yurt dışında yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 70],
-    'M8b' => ['baslik' => 'Alanınızda yurt içinde yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 50],
-    'M9a' => ['baslik' => 'Yurt dışında yayımlanan kitapta bölüm ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 25],
-    'M9b' => ['baslik' => 'Yurt içinde yayımlanan kitapta bölüm, ünite ya da ansiklopedi maddesi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 15],
+    'M8a' => ['baslik' => 'Alanınızda yurt dışında yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 70],
+    'M8b' => ['baslik' => 'Alanınızda yurt içinde yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 50],
+    'M9a' => ['baslik' => 'Yurt dışında yayımlanan kitapta bölüm ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 25],
+    'M9b' => ['baslik' => 'Yurt içinde yayımlanan kitapta bölüm, ünite ya da ansiklopedi maddesi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 15],
     'M10' => ['baslik' => 'Alanınızda kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
     'M11' => ['baslik' => 'Alanınızda kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
 
@@ -111,8 +115,8 @@ $maddeler = [
     'M15' => ['baslik' => 'Diğer bilimsel ya da mesleki dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 10],
     'M16' => ['baslik' => 'Dergide yardımcı editörlük, konuk editörlük ya da yayın kurulu üyeliği (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 5],
     'M17' => ['baslik' => 'Dergide hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
-    'M18a' => ['baslik' => 'Alanınızda yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 35],
-    'M18b' => ['baslik' => 'Alanınızda yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 25],
+    'M18a' => ['baslik' => 'Alanınızda yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 35],
+    'M18b' => ['baslik' => 'Alanınızda yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 25],
 
     // ══ ATIFLAR (19-22) ══
     'M20' => ['baslik' => 'İndeks ve özlerce taranan dergilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
