@@ -42,10 +42,8 @@
  * veriliyor, atıf ortak yazarlı bir eser değil.
  *
  * ── AYNI KAYNAĞA DÜŞEN SATIRLARDA DAİMA DÜŞÜĞÜ GİRİLDİ ──
- *   Kitap 1.3.1 yurt dışı (60) / 1.3.3 yurt içi (30): 'Uluslararası/Ulusal
- *       Kitap' ayıramıyor → 1.3.3. Bölümde 1.3.2 (25) / 1.3.4 (10) → 1.3.4.
- *       'BKCI / Scopus Kitap' da yayın yerini söylemediği için 1.3.3'e düştü;
- *       Rumeli kitapta indeks aramıyor, yalnızca yurt içi/dışı ayırıyor.
+ *   (19.09.2026: kitap satırları bu kuralın DIŞINA çıktı — aşağıdaki nota
+ *       bakın.)
  *   Bildiri 1.2.2 yayınlanmış özet (5) / 1.2.3 yayınlanmamış poster (3):
  *       'Uluslararası Özet/Poster' ikisini ayıramıyor → 1.2.3. Ulusalda aynı
  *       şekilde 1.2.5 (5) yerine 1.2.6 (3).
@@ -119,6 +117,14 @@
  * tutuyor; iki kısıt da uygulanmadı.
  *
  * Yönerge: yonerge/rumeli.php
+ *
+ * KİTAPTA YURT DIŞI/YURT İÇİ AYRIMI (19.09.2026): kaynak 1.3.1 (yurt dışında
+ * yayımlanmış kitap, 60) ve 1.3.2 (bölümü, 25) satırlarını ayrı veriyor ve
+ * indeks aramıyor; cetvelde bu iki satır HİÇ YOKTU, etiketlerin tamamı yurt
+ * içi satırlarında (1.3.3 ve 1.3.4) toplanmıştı. Sözlükte kapsamlı kitap
+ * etiketleri açıldıktan sonra ayrım kayıttan okunabiliyor: iki satır açıldı,
+ * yurt içi satırları ulusal etiketlere daraltıldı. Adayın yurt dışı kitabı 60
+ * yerine 30, bölümü 25 yerine 10 puan alıyordu.
  */
 
 return [
@@ -173,8 +179,10 @@ return [
         '1.2.6' => ['baslik' => 'Ulusal kongrede sunulan poster ya da sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 3],
 
         // ══ 1.3 KİTAPLAR ══
-        '1.3.3' => ['baslik' => 'Ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'BKCI / Scopus Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
-        '1.3.4' => ['baslik' => 'Ulusal yayınevi ya da üniversite tarafından yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
+        '1.3.1' => ['baslik' => 'Yurt dışında yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 60],
+        '1.3.2' => ['baslik' => 'Yurt dışında yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 25],
+        '1.3.3' => ['baslik' => 'Ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
+        '1.3.4' => ['baslik' => 'Ulusal yayınevi ya da üniversite tarafından yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
         // Kaynakta 5.1.4 olarak bir kez daha geçiyor; çifte sayım olmasın diye
         // yalnızca burada.
         '1.3.5' => ['baslik' => 'Basılmış ders notu ya da ulusal yayınevi tarafından yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],

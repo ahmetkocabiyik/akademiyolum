@@ -852,7 +852,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
 
         // Bölüm toplamı "1.1; 1.2; 1.3; 1.4; 1.6" diye sınırlı; 1.5
         // (hakemlik) ve 1.7 (atıf) ayrı raporlanıyor.
-        'rumeli-2024: 5/50',
+        'rumeli-2024: 5/52',
 
         // EK-3 YBF'nin tek puan koşulu danışmanlık ağırlıklarına bağlı.
         'sabanci-turler: 13/21',
@@ -3473,6 +3473,13 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Ulusal Kitap Bölümü' => 60,
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
+    ]],
+    // Rumeli 1.3.1/1.3.2 satırları cetvelde hiç yoktu.
+    ['rumeli-2024', [
+        'Uluslararası Kitap' => 60,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 10,
     ]],
     // Siirt 3, Şırnak 2.1/2.2, Trabzon 1.3, YTÜ 2a-2d.
     ['siirt-2025', [
