@@ -35,10 +35,11 @@
  *
  * Kaynağın kitap kademeleri iki eksende birden ayrılıyor: yayınevinin
  * TANINIRLIĞI (uluslararası ↔ ulusal) ve kitabın DİLİ (yabancı ↔ Türkçe).
- * Kayıt ikisini de taşımıyor; §0 uyarınca genel `Uluslararası/Ulusal Kitap`
- * ve `Kitap Bölümü` etiketleri EN DÜŞÜK kademede (3d ve 3e) duruyor. 3a2 ile
- * 3b2 kaynağı belgelemek için etiketsiz kaldı; BKCI/Scopus kaydı uluslararası
- * kademeyi kanıtladığı için 3a1/3b1'de.
+ * Kapsamlı etiketler yayınevi kapsamına göre yerleşiyor, DİL ekseninde §0
+ * uygulanıyor: `Uluslararası Kitap` ailesi uluslararası tarafın TÜRKÇE
+ * kademesinde (3a2 40, 3b2 10, 3c2 15), `Ulusal Kitap` ailesi ulusal
+ * satırlarda (3d 30, 3e 10, 3f 15). BKCI/Scopus kaydı yabancı dil kademesini
+ * kanıtladığı için 3a1/3b1/3c1'de kalıyor.
  */
 
 return [
@@ -104,11 +105,11 @@ return [
 
         // ── 3. KİTAP ──
         '3a1' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden yabancı dilde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 75],
-        '3a2' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden Türkçe kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => [], 'puan' => 40],
+        '3a2' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden Türkçe kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap'], 'puan' => 40],
         '3b1' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden yabancı dilde kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
-        '3b2' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden Türkçe kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => [], 'puan' => 10],
-        '3d' => ['baslik' => 'Ulusal tanınırlığı olan yayınevinden kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
-        '3e' => ['baslik' => 'Ulusal tanınırlığı olan yayınevinden kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
+        '3b2' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden Türkçe kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 10],
+        '3d' => ['baslik' => 'Ulusal tanınırlığı olan yayınevinden kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
+        '3e' => ['baslik' => 'Ulusal tanınırlığı olan yayınevinden kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
         '3i' => ['baslik' => 'Ulusal tanınırlığı olan yayınevinden Türkçe ders, metot ya da etüt kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],
         // 3d (ulusal yayınevi kitabı, 30) ve 3e (ulusal yayınevi kitap bölümü,
         // 10) GİRİLMEDİ: sözlükte uluslararası/ulusal yayınevi ayrımı için ayrı
@@ -119,7 +120,8 @@ return [
 
         // c1/c2/f (kitap editörlüğü) editörlük kategorisinde:
         '3c1' => ['baslik' => 'Uluslararası yayınevinde yabancı dilde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
-        '3f' => ['baslik' => 'Ulusal yayınevinde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
+        '3c2' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden Türkçe kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Uluslararası Kitap Editörlüğü'], 'puan' => 15],
+        '3f' => ['baslik' => 'Ulusal yayınevinde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 15],
 
         // ── 4. ATIF ──
         '4a' => ['baslik' => 'SCIE/SSCI/AHCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 2],

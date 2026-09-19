@@ -650,12 +650,6 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
         '15d-yk · Yönetim kurulu üyeliği',
         '19d-yk · Yönetim kurulu üyeliği',
         '1c · Diğer uluslararası alan indekslerinde taranan dergide makale',
-        // Ege'nin kitap kademeleri iki eksende birden ayrılıyor (yayınevinin
-        // tanınırlığı ve kitabın dili); kayıt ikisini de taşımadığı için genel
-        // etiketler en düşük kademede (3d/3e) duruyor, bu iki satır kaynağı
-        // belgelemek için etiketsiz kaldı.
-        '3a2 · Uluslararası tanınırlığı olan yayınevinden Türkçe kitap yazarlığı',
-        '3b2 · Uluslararası tanınırlığı olan yayınevinden Türkçe kitap bölümü',
         '4d-yk · Yönetim kurulu üyeliği',
         '5d-yk · Yönetim kurulu üyeliği',
         'A.16a · Millî takımlarda görev almak ya da antrenör ve hakem eğitim kurslarında eğitici olarak görev almak',
@@ -3686,6 +3680,20 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Ulusal Kitap' => 10,
         'Uluslararası Kitap Bölümü' => 10,
         'Ulusal Kitap Bölümü' => 5,
+    ]],
+    // Ege: kapsam kapsamlı etiketi yerleştiriyor, DİL ekseninde §0 (Türkçe
+    // kademesi). Cerrahpaşa'da ulusal kitabın satırı YOK, karşılığı sıfır.
+    ['ege-2026', [
+        'Uluslararası Kitap' => 40,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['cerrahpasa-2023', [
+        'Uluslararası Kitap' => 60,
+        'Ulusal Kitap' => 0,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 0,
     ]],
     // Dokuz Eylül iki kademede de "BİLİNEN yayınevleri" diyor; koşul ortak,
     // ayrımı yapan tek şey kapsam.

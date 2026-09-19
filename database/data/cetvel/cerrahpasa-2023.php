@@ -20,6 +20,12 @@
  * GİRİLMEYEN: B (ulusal faaliyetler), C (proje ve patent) ve D bölümleri.
  * Koşullar C3b, C4b, C5a gibi kodlara atıf yapıyor ama bunlar "en az birini
  * sağla" biçiminde alternatif koşullar; motor tarafında `beyan` olarak duruyor.
+ *
+ * KİTAPTA ULUSAL KADEME YOK (19.09.2026): A bölümünün kitap satırları
+ * "ISBN'li ve YURT DIŞINDA YABANCI DİLDE yayımlanmış olmalıdır" koşuluna bağlı;
+ * kaynakta ulusal yayınevi kitabının satırı yok. A1b GENEL etiketi taşıdığı
+ * için adayın ULUSAL kitabı da 60 puan alıyordu — A2b'de (bölüm) kapsamlı
+ * etiket zaten duruyordu. A1b de kapsamlı etikete daraltıldı.
  */
 
 return [
@@ -30,7 +36,7 @@ return [
     'maddeler' => [
         // ── A1-A3 · KİTAP ──
         'A1a' => ['baslik' => 'WoS/SCOPUS indeksli uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-        'A1b' => ['baslik' => 'Diğer uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 60],
+        'A1b' => ['baslik' => 'Diğer uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap'], 'puan' => 60],
         'A2a' => ['baslik' => 'WoS/SCOPUS indeksli kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
         'A2b' => ['baslik' => 'Diğer uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 25],
         'A3a' => ['baslik' => 'WoS/SCOPUS indeksli kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 50],
