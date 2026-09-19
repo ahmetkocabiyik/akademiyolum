@@ -532,8 +532,6 @@ test('cetvel içi etiket çakışmaları elden geçirilmiş', function () {
         'gazi-2024: Tf-ulus > 6e-tam',
         'gazi-2024: Tg-nat > 8e-ozet',
         'gazi-2024: Tg-ulus > 6e-ozet',
-        'isparta-ubu-2022: A4-bolum > T1-K5',
-        'isparta-ubu-2022: A4-kitap > T1-K3',
         'isparta-ubu-2022: A4-tez > T1-TEZ-B1',
         'isparta-ubu-2022: A5 > T1-B1',
         'isparta-ubu-2022: A5 > T1-B2',
@@ -3475,6 +3473,30 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Ulusal Kitap Bölümü' => 60,
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
+    ]],
+    // Isparta ÜBÜ'nün "Düzeyi" sütunu, Karabük 4.4, İstanbul Ticaret D.
+    // Isparta'nın üç tablosu ayrı aday gruplarına ait; A4 satırları (ikinci
+    // tablo, genel etiketli 12 ve 10) ulusal kademeleri yukarı çekiyor —
+    // motor daima en yüksek satırı alır. Uluslararası taraf T1'den.
+    ['isparta-ubu-2022', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 15,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 10,
+        'Uluslararası Ders / Metot Kitabı' => 15,
+        'Ulusal Ders / Metot Kitabı' => 12,
+    ]],
+    ['karabuk-2024', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 80,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
+    ['istanbul-ticaret-2019', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 80,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 20,
     ]],
     // Giresun C ↔ F, Hakkari B1 ↔ B2, Hatay MKÜ dört çift, Iğdır 10 ↔ 11.
     ['giresun-2019', [

@@ -107,6 +107,14 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA DÜZEY SÜTUNU (19.09.2026): Tablo 1'in kitap bloğu her kalemi
+ * "Düzeyi" sütunuyla uluslararası ↔ ulusal diye ikiye ayırıyor (bilimsel kitap
+ * 20/15, ders kitabı 15/10, bölüm katkısı 10/8, editörlük 10/8); tanımlar
+ * maddesi (c) ve (ç) ayrımı yayınevine bağlıyor, indeks aramıyor. Üst satırlar
+ * yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz uluslararası kitap 20
+ * yerine 15, bölümü 10 yerine 8, editörlüğü 10 yerine 8 puandaydı. Ders
+ * kitabının uluslararası kademesi (T1-K3u, 15) bu turda açıldı.
  */
 
 // MADDE 9: puan bölüşümü TEMEL ALANA göre değişiyor. Fen/Mühendislikte
@@ -185,13 +193,14 @@ $maddeler = [
     'T1-B5' => ['baslik' => 'Kongre, konferans, sempozyum, çalıştay ya da mesleki kursta davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 1],
 
     // Kitap
-    'T1-K1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
-    'T1-K2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 15],
-    'T1-K3' => ['baslik' => 'Ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 10],
-    'T1-K4' => ['baslik' => 'Uluslararası yayınevi kitabına bölüm düzeyinde katkı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-    'T1-K5' => ['baslik' => 'Ulusal yayınevi kitabına bölüm düzeyinde katkı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 8],
-    'T1-K6' => ['baslik' => 'Uluslararası kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
-    'T1-K7' => ['baslik' => 'Ulusal kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 8],
+    'T1-K1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 20],
+    'T1-K2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 15],
+    'T1-K3u' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 15],
+    'T1-K3' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 10],
+    'T1-K4' => ['baslik' => 'Uluslararası yayınevi kitabına bölüm düzeyinde katkı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+    'T1-K5' => ['baslik' => 'Ulusal yayınevi kitabına bölüm düzeyinde katkı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 8],
+    'T1-K6' => ['baslik' => 'Uluslararası kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
+    'T1-K7' => ['baslik' => 'Ulusal kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 8],
     'T1-K8' => ['baslik' => 'Yabancı dilde basılmış bilimsel ya da edebi eserin Türkçeye tam kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
     'T1-K9' => ['baslik' => 'Yabancı dilde basılmış bilimsel ya da edebi eserin Türkçeye bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 8],
 
@@ -283,7 +292,7 @@ $gruplar = [
         'T1-TEZ-A1', 'T1-TEZ-A2', 'T1-TEZ-A4', 'T1-TEZ-A5'],
 
     // MADDE 6/2-c-5, 7/2-b-6, 7/3-b-5, 8/2-b-4, 8/3-b-5: kitap ve kitap bölümü.
-    'KITAP' => ['T1-K1', 'T1-K2', 'T1-K3', 'T1-K4', 'T1-K5', 'T1-TEZ-K1', 'T1-TEZ-K2', 'T1-TEZ-K4', 'T1-TEZ-K5'],
+    'KITAP' => ['T1-K1', 'T1-K2', 'T1-K3', 'T1-K3u', 'T1-K4', 'T1-K5', 'T1-TEZ-K1', 'T1-TEZ-K2', 'T1-TEZ-K4', 'T1-TEZ-K5'],
     'KITAP-EDITOR' => ['T1-K6', 'T1-K7'],
 
     // Proje kümeleri.
