@@ -75,6 +75,14 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * İNDEKS KADEMESİ KAPSAM ETİKETİNE DE AÇILDI (19.09.2026, kullanıcı kararı):
+ * kaynağın uluslararası kitap satırı indeks kapsamına bağlı (BKCI/Scopus/WoS)
+ * ama kaynakta İNDEKSSİZ uluslararası kitabın ayrı bir satırı YOK; alternatif
+ * ULUSAL satır. Kapsam etiketi bu yüzden uluslararası satıra bağlandı, ulusal
+ * satırlar daraltıldı. Kaynağın indeksli/indekssiz ayrımı motorda artık
+ * uygulanmıyor: indekssiz uluslararası kitabınız indeksli kitapla aynı puanı
+ * alır, yani puanınız OLDUĞUNDAN YÜKSEK görünebilir.
  */
 $ARASTIRMA = ['ozgun_makale'];
 $DERLEME = ['derleme'];
@@ -132,14 +140,14 @@ $maddeler['3.2.4'] = ['baslik' => 'Diğer ulusal hakemli dergide yayımlanmış 
 
 $maddeler += [
     // ══ 3.3 ÖZGÜN BİLİMSEL KİTAP, KİTAP BÖLÜMÜ VE KİTAP ÇEVİRİSİ ══
-    '3.3.1' => ['baslik' => 'BKCI kapsamındaki uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-    '3.3.3' => ['baslik' => 'BKCI kapsamındaki uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap veya ders kitabı bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 60],
-    '3.3.7' => ['baslik' => 'BKCI kapsamındaki uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 60],
+    '3.3.1' => ['baslik' => 'BKCI kapsamındaki uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
+    '3.3.3' => ['baslik' => 'BKCI kapsamındaki uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap veya ders kitabı bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 60],
+    '3.3.7' => ['baslik' => 'BKCI kapsamındaki uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 60],
     '3.3.9' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitabın yayımlanmış çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
     '3.3.10' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap bölümünün yayımlanmış çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
-    '3.3.11' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 40],
-    '3.3.12' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],
-    '3.3.13' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
+    '3.3.11' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 40],
+    '3.3.12' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 20],
+    '3.3.13' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
     '3.3.15' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
 
     // ══ 3.4 TEZ DANIŞMANLIKLARI VE JÜRİ ÜYELİKLERİ ══

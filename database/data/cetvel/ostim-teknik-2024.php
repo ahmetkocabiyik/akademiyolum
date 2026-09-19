@@ -47,6 +47,14 @@
  *       çerçevesinde yalnız bir kez puanlanır" kuralı.
  *
  * Yönerge: yonerge/ostim-teknik.php
+ *
+ * İNDEKS KADEMESİ KAPSAM ETİKETİNE DE AÇILDI (19.09.2026, kullanıcı kararı):
+ * kaynağın uluslararası kitap satırı indeks kapsamına bağlı (BKCI/Scopus/WoS)
+ * ama kaynakta İNDEKSSİZ uluslararası kitabın ayrı bir satırı YOK; alternatif
+ * ULUSAL satır. Kapsam etiketi bu yüzden uluslararası satıra bağlandı, ulusal
+ * satırlar daraltıldı. Kaynağın indeksli/indekssiz ayrımı motorda artık
+ * uygulanmıyor: indekssiz uluslararası kitabınız indeksli kitapla aynı puanı
+ * alır, yani puanınız OLDUĞUNDAN YÜKSEK görünebilir.
  */
 $OZGUN = ['ozgun_makale'];
 $DERLEME = ['derleme'];
@@ -77,12 +85,12 @@ $maddeler = [
     '2.d.1' => ['baslik' => 'Bilimsel toplantılarda davetli konuşmacı ya da moderatör olmak; Erasmus kapsamında yurt dışında ders, seminer ve konferans vermek', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
 
     // ══ 3. KİTAPLAR ══
-    '3.1.a' => ['baslik' => 'WoS ya da Scopus veri tabanlarında yer alan uluslararası kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-    '3.1.b' => ['baslik' => 'WoS ya da Scopus veri tabanlarında yer alan uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
-    '3.1.c' => ['baslik' => 'WoS ya da Scopus veri tabanlarında yer alan uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 25],
-    '3.2.a' => ['baslik' => 'Ulusal alanda yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 15],
-    '3.2.b' => ['baslik' => 'Ulusal alanda yayımlanan kitabın derleyiciliği ya da editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
-    '3.2.c' => ['baslik' => 'Ulusal alanda yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
+    '3.1.a' => ['baslik' => 'WoS ya da Scopus veri tabanlarında yer alan uluslararası kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+    '3.1.b' => ['baslik' => 'WoS ya da Scopus veri tabanlarında yer alan uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
+    '3.1.c' => ['baslik' => 'WoS ya da Scopus veri tabanlarında yer alan uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 25],
+    '3.2.a' => ['baslik' => 'Ulusal alanda yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ulusal Ders / Metot Kitabı'], 'puan' => 15],
+    '3.2.b' => ['baslik' => 'Ulusal alanda yayımlanan kitabın derleyiciliği ya da editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 10],
+    '3.2.c' => ['baslik' => 'Ulusal alanda yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
 
     // ══ 4. ATIFLAR ══
     '4.a.1' => ['baslik' => 'WoS ya da Scopus\'ta taranan kitap, dergi ve bildirilerde eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 3],

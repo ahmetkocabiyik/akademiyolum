@@ -3681,6 +3681,38 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 10,
         'Ulusal Kitap Bölümü' => 5,
     ]],
+    // İndeks kademesine bağlı ama kaynakta indekssiz uluslararası kitabın
+    // satırı OLMAYAN beşli (19.09.2026 dördüncü tur, kullanıcı kararı).
+    ['alanya-2024', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 8,
+        'Uluslararası Kitap Bölümü' => 20,
+        'Ulusal Kitap Bölümü' => 6,
+    ]],
+    ['ardahan-2026', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 60,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['inonu-2026', [
+        'Uluslararası Kitap' => 200,
+        'Ulusal Kitap' => 50,
+        'Uluslararası Kitap Bölümü' => 66,
+        'Ulusal Kitap Bölümü' => 16,
+    ]],
+    ['ostim-teknik-2024', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 15,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['uskudar-2024', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 75,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 15,
+    ]],
     // Dil ekseninde ayrılan aile (19.09.2026 üçüncü tur): üst satırın dil
     // koşulu okunamıyor ama alt satır ULUSAL yayınevine ait.
     ['ankara-2023', [

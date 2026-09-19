@@ -76,6 +76,14 @@
  *   S notu      İletişim etkinliklerinin uluslararası olması hâlinde ×2.
  *
  * Yönerge: yonerge/inonu.php
+ *
+ * İNDEKS KADEMESİ KAPSAM ETİKETİNE DE AÇILDI (19.09.2026, kullanıcı kararı):
+ * kaynağın uluslararası kitap satırı indeks kapsamına bağlı (BKCI/Scopus/WoS)
+ * ama kaynakta İNDEKSSİZ uluslararası kitabın ayrı bir satırı YOK; alternatif
+ * ULUSAL satır. Kapsam etiketi bu yüzden uluslararası satıra bağlandı, ulusal
+ * satırlar daraltıldı. Kaynağın indeksli/indekssiz ayrımı motorda artık
+ * uygulanmıyor: indekssiz uluslararası kitabınız indeksli kitapla aynı puanı
+ * alır, yani puanınız OLDUĞUNDAN YÜKSEK görünebilir.
  */
 
 return [
@@ -172,12 +180,12 @@ return [
         'B.3.c' => ['baslik' => 'Ulusal toplantıda özet bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
 
         // ══ C. KİTAPLAR ══
-        'C.1.a' => ['baslik' => 'BKCI veya Scopus taranan uluslararası yayınevinde bilimsel/mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 200],
-        'C.1.a.1' => ['baslik' => 'BKCI veya Scopus taranan uluslararası yayınevinde kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 66],
-        'C.3.a' => ['baslik' => 'Ulusal yayınevinde bilimsel/mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 50],
-        'C.3.a.1' => ['baslik' => 'Ulusal yayınevinde kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 16],
+        'C.1.a' => ['baslik' => 'BKCI veya Scopus taranan uluslararası yayınevinde bilimsel/mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 200],
+        'C.1.a.1' => ['baslik' => 'BKCI veya Scopus taranan uluslararası yayınevinde kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 66],
+        'C.3.a' => ['baslik' => 'Ulusal yayınevinde bilimsel/mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 50],
+        'C.3.a.1' => ['baslik' => 'Ulusal yayınevinde kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 16],
         'C.3.a.2' => ['baslik' => 'Ansiklopedi maddesi', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 8],
-        'C.3.b' => ['baslik' => 'Ulusal yayınevinde ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 30],
+        'C.3.b' => ['baslik' => 'Ulusal yayınevinde ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 30],
 
         // ══ D. ÇEVİRİLER ══
         'D.3.a' => ['baslik' => 'Bilimsel veya mesleki kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],

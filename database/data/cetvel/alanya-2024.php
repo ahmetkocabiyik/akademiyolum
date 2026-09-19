@@ -38,6 +38,14 @@
  *        proje önerileri) — kayıt proje önerisini tutmuyor.
  *
  * Yönerge: yonerge/alanya.php
+ *
+ * İNDEKS KADEMESİ KAPSAM ETİKETİNE DE AÇILDI (19.09.2026, kullanıcı kararı):
+ * kaynağın uluslararası kitap satırı indeks kapsamına bağlı (BKCI/Scopus/WoS)
+ * ama kaynakta İNDEKSSİZ uluslararası kitabın ayrı bir satırı YOK; alternatif
+ * ULUSAL satır. Kapsam etiketi bu yüzden uluslararası satıra bağlandı, ulusal
+ * satırlar daraltıldı. Kaynağın indeksli/indekssiz ayrımı motorda artık
+ * uygulanmıyor: indekssiz uluslararası kitabınız indeksli kitapla aynı puanı
+ * alır, yani puanınız OLDUĞUNDAN YÜKSEK görünebilir.
  */
 
 return [
@@ -82,15 +90,15 @@ return [
     'maddeler' => [
         // ══ A. ULUSLARARASI YAYINLAR ══
         'A.1' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI kapsamındaki dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'puan' => 20],
-        'A.2' => ['baslik' => 'Scopus veya WoS taranan uluslararası yayınevinde kitap, kitap bölümü veya editörlük', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
+        'A.2' => ['baslik' => 'Scopus veya WoS taranan uluslararası yayınevinde kitap, kitap bölümü veya editörlük', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
         'A.4' => ['baslik' => 'Scopus veya WoS taranan uluslararası bilimsel toplantıda tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 10],
         'A.5' => ['baslik' => 'Uluslararası yayınlarınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap'], 'puan' => 2],
 
         // ══ B. ULUSAL YAYINLAR ══
         'B.1' => ['baslik' => 'ULAKBİM (TR Dizin) taranan ulusal hakemli dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 8],
         'B.2' => ['baslik' => 'Diğer endeksli veya ulusal hakemli dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'puan' => 6],
-        'B.3' => ['baslik' => 'Ulusal yayınevi veya üniversite tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Çeviri Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 8],
-        'B.4' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Çeviri Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 6],
+        'B.3' => ['baslik' => 'Ulusal yayınevi veya üniversite tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı', 'Çeviri Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 8],
+        'B.4' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Çeviri Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 6],
         'B.5' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Kitap Editörlüğü'], 'puan' => 6],
         'B.6' => ['baslik' => 'Ulusal yayınlarınıza yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer', 'Patent'], 'puan' => 1],
 

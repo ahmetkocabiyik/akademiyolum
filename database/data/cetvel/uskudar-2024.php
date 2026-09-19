@@ -85,6 +85,14 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * İNDEKS KADEMESİ KAPSAM ETİKETİNE DE AÇILDI (19.09.2026, kullanıcı kararı):
+ * kaynağın uluslararası kitap satırı indeks kapsamına bağlı (BKCI/Scopus/WoS)
+ * ama kaynakta İNDEKSSİZ uluslararası kitabın ayrı bir satırı YOK; alternatif
+ * ULUSAL satır. Kapsam etiketi bu yüzden uluslararası satıra bağlandı, ulusal
+ * satırlar daraltıldı. Kaynağın indeksli/indekssiz ayrımı motorda artık
+ * uygulanmıyor: indekssiz uluslararası kitabınız indeksli kitapla aynı puanı
+ * alır, yani puanınız OLDUĞUNDAN YÜKSEK görünebilir.
  */
 $makaleA = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI', 'ESCI / Scopus'];
 $tamMetin = ['ozgun_makale'];
@@ -144,14 +152,14 @@ return [
         'M1.4.2' => ['baslik' => 'Diğer ulusal hakemli dergide derleme makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $digerTur, 'puan' => 5],
 
         // ══ MADDE 1 · 5: KİTAPLAR ══
-        'M1.5.1' => ['baslik' => 'Uluslararası (Scopus, WoS) bilimsel telif kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-        'M1.5.2' => ['baslik' => 'Ulusal bilimsel telif kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 75],
-        'M1.5.3' => ['baslik' => 'Uluslararası (Scopus, WoS) bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-        'M1.5.4' => ['baslik' => 'Ulusal bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 15],
+        'M1.5.1' => ['baslik' => 'Uluslararası (Scopus, WoS) bilimsel telif kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
+        'M1.5.2' => ['baslik' => 'Ulusal bilimsel telif kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ulusal Ders / Metot Kitabı'], 'puan' => 75],
+        'M1.5.3' => ['baslik' => 'Uluslararası (Scopus, WoS) bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+        'M1.5.4' => ['baslik' => 'Ulusal bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 15],
         'M1.5.5' => ['baslik' => 'Çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
         'M1.5.6' => ['baslik' => 'Çeviri derleme kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
-        'M1.5.7' => ['baslik' => 'Uluslararası (Scopus, WoS) bilimsel derleme kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 25],
-        'M1.5.8' => ['baslik' => 'Ulusal bilimsel derleme kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
+        'M1.5.7' => ['baslik' => 'Uluslararası (Scopus, WoS) bilimsel derleme kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 25],
+        'M1.5.8' => ['baslik' => 'Ulusal bilimsel derleme kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 10],
 
         // ══ MADDE 1 · 6: YARATICI SANATSAL VE TASARIMSAL ESER ══
         'M1.6.1' => ['baslik' => 'Yaratıcı sanatsal ya da tasarımsal eser', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Özgün Eser / Beste / Tasarım', 'Koreografi', 'Yönetmenlik (Sahne/Ekran)', 'Sahne Tasarımı (Dekor, Kostüm, Işık)', 'Belgesel/Kısa Film (Uluslararası)', 'Belgesel/Kısa Film (Ulusal)', 'Sahne, TV, Radyo, Sinema Yapıtı (Uluslararası)', 'Sahne, TV, Radyo, Sinema Yapıtı (Ulusal)'], 'puan' => 20],
