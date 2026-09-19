@@ -7,6 +7,18 @@
  * Madde kodu → (kategori, kaynaklar, roller, puan). Bir faaliyet birden çok
  * maddeye giriyorsa puanı EN YÜKSEK maddeden alınır.
  * Şema ve projeksiyon notları: database/data/sart-agaci-taslak.php
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): yönergenin tanımlar maddesi ayrımı
+ * yayınevinin kendisine bağlıyor — "u) Uluslararası yayınevi: en az 5 yıldır
+ * uluslararası düzeyde faaliyet yürüten … en az 20 kitap yayımlamış yayınevi",
+ * "t) Ulusal yayınevi: …" — indeks aranmıyor. 3.1 satırı GENEL
+ * `Uluslararası/Ulusal Kitap` etiketini taşıdığı için ULUSAL yayınevi kitabı da
+ * 100 puan alıyordu (3.2'nin 80'i yerine); 3.2'de ise yalnız tahkik vardı.
+ * Etiketler kendi kapsamlarına çevrildi: 3.1/3.3 uluslararası, 3.2/3.4 ulusal.
+ *
+ * Kaynağın "ders kitabı olarak yayımlanan kitaplar ve kitap bölümleri için
+ * belirlenen puanların yarısı alınır" kuralının cetvelde satırı YOK; ders
+ * kitabı kaydı bu cetvelde puan almıyor (ayrı tur).
  */
 
 return [
@@ -137,25 +149,25 @@ return [
         '3.1' => [
             'baslik' => 'Uluslararası yayınevi kitabı',
             'kategori' => 'kitap',
-            'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap'],
+            'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'],
             'puan' => 100,
         ],
         '3.2' => [
             'baslik' => 'Ulusal yayınevi kitabı',
             'kategori' => 'kitap',
-            'kaynaklar' => ['Tahkik (Tenkitli Metin)'],
+            'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'],
             'puan' => 80,
         ],
         '3.3' => [
             'baslik' => 'Uluslararası yayınevi kitap bölümü',
             'kategori' => 'kitap',
-            'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'],
+            'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'],
             'puan' => 45,
         ],
         '3.4' => [
             'baslik' => 'Ulusal yayınevi kitap bölümü',
             'kategori' => 'kitap',
-            'kaynaklar' => ['Kitap Bölümü'],
+            'kaynaklar' => ['Ulusal Kitap Bölümü'],
             'puan' => 40,
         ],
         'T.1' => [

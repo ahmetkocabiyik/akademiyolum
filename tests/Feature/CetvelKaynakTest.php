@@ -3426,4 +3426,12 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 100,
         'Ulusal Kitap Bölümü' => 50,
     ]],
+    // Tanımlar maddesi (t) ve (u): ayrım yayınevinin kendisinde, indeks yok.
+    // 3.1 genel etiketi taşıdığı için ULUSAL kitap da 100 alıyordu.
+    ['afyon-2026', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 80,
+        'Uluslararası Kitap Bölümü' => 45,
+        'Ulusal Kitap Bölümü' => 40,
+    ]],
 ]);
