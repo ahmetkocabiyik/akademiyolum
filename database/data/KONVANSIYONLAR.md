@@ -1760,15 +1760,36 @@ uyarınca AŞAĞIDA kalır. Dört desen çıktı:
    uluslararası kitap ULUSAL satıra düşmüyor, kendi kademesinin yarısını
    alıyor. Kapsamlı etiket o YARIM satıra bağlanır (MTÜ C1.1-tr 125, Artvin
    C1-tr 40).
+   **İSTİSNA 2 — kaynak uluslararası tarafı İKİ DİLE ayırıyorsa bağla:** üst
+   kademe yabancı dil, alt kademe Türkçe ve ikisi de uluslararası yayınevine
+   ait. Kapsamlı etiket alt (Türkçe) kademeye bağlanır, BKCI yukarıda kalır
+   (Ege 3a2/3b2/3c2). Kaynağın kitap satırlarının TAMAMI uluslararası ve dil
+   koşulluysa etiket yine oraya bağlanır — alternatifi ulusal kitabın
+   uluslararası satırdan puan alması olurdu (Cerrahpaşa A1b).
 3. **İndeks ekseni — BAĞLAMA.** "BKCI/Scopus/ACQWEB/SENSE kapsamındaki
    yayınevi". Kayıtta indeks bilgisi yalnız BKCI etiketiyle var. (Anadolu,
    Ardahan, ASBÜ, Gaziantep, İnönü, OSTİM, Üsküdar, Yeni Yüzyıl, Ufuk…)
-4. **Nitelik ekseni — BAĞLAMA.** "TANINMIŞ / saygın / önde gelen /
-   tanınırlığı olan uluslararası yayınevi". Aynı sıfat ALT satırda da olsa
-   bağlama: sıfat iki kademede de sağlanması gereken bir koşul, sağlanmadığında
-   kaynak o kitabı HİÇ saymıyor; §0 iki satır arasından düşüğü seçtirir ve genel
-   etiket zaten alt satırda duruyor. (Ankara Bilim, Bandırma, Beykent, Gedik,
-   MSGSÜ, Tarsus, Toros, Uşak, Çanakkale, Doğuş, Ege, ESOGÜ, İstanbul Aydın…)
+4. **Nitelik ekseni — BAĞLA (19.09.2026, kullanıcı kararı).** "TANINMIŞ /
+   saygın / önde gelen / tanınırlığı olan / bilinen uluslararası yayınevi" ↔
+   aynı sıfatı taşıyan ulusal satır. Sıfat İKİ KADEMEDE DE aynı koşul olduğu
+   için kaydın kanıtlayamadığı şey satır SEÇİMİNİ değiştirmiyor; kapsam etiketi
+   kendi kapsamının satırına bağlanır. (Ankara Bilim, Altınbaş, Bandırma,
+   Beykent, Çanakkale, Doğuş, ESOGÜ, Gedik, İMÜ, İstanbul Aydın, 29 Mayıs,
+   KSBÜ, MSGSÜ, Samsun, Tarsus, Toros, Uşak, Dokuz Eylül.)
+
+   İlk tur bunun tersini yapmıştı: "aday yayınevinin tanınmışlığını
+   kanıtlayamıyor, §0 düşüğü seçtirir" denmişti. Karşı gerekçe daha güçlü
+   çıktı — koşul iki kademede de aynıysa §0'ın seçtiği "düşük satır" YANLIŞ
+   KATEGORİ oluyor, kaynağın o kitaba verdiği cevap değil.
+
+   **İSTİSNA — alt satır "…VEYA DİĞER ULUSLARARASI yayınevi" diyorsa bağlama.**
+   Kaynak o kitaba zaten bir yer göstermiştir; genel etiket orada kalır (Afyon
+   Sağlık C.1.b, Anadolu 7d, Cerrahpaşa'nın "diğer uluslararası" satırı).
+
+   **SENSE gibi yayınevi SINIFLANDIRMALARI da bu maddeye girer:** kapsam
+   etiketi EN DÜŞÜK uluslararası kademeye bağlanır (Ufuk 5.c, Yeni Yüzyıl
+   1.A.21). Kademeyi indeks KAPSAMI belirliyorsa (BKCI/Scopus'ta taranıyor mu)
+   3. madde geçerli — orada kayıt zaten BKCI etiketiyle konuşuyor.
 
 Yön ters de işliyor: kaynakta ULUSAL kitap satırı HİÇ YOKSA genel etiket
 uluslararası satırda durmamalı — aday hak etmediği puanı alır (İstanbul Arel'de
