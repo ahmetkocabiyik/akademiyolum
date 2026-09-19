@@ -806,7 +806,7 @@ test('hiçbir barajın saymadığı satırlar bilinçli', function () {
     expect($disarida)->toBe([
         // "1. maddeden" barajları; 4-7. bölümler (ödül, idari görev, hizmet)
         // hiçbir koşulun kümesinde değil.
-        'ankara-2023: 24/76',
+        'ankara-2023: 24/78',
 
         // Yalnız EG5 (yarıyıl başına 1 puanlık ders) dışarıda; `PUAN` grubu
         // ders satırlarını kapsamıyor.
@@ -3680,6 +3680,32 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Ulusal Kitap' => 10,
         'Uluslararası Kitap Bölümü' => 10,
         'Ulusal Kitap Bölümü' => 5,
+    ]],
+    // Dil ekseninde ayrılan aile (19.09.2026 üçüncü tur): üst satırın dil
+    // koşulu okunamıyor ama alt satır ULUSAL yayınevine ait.
+    ['ankara-2023', [
+        'Uluslararası Kitap' => 60,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 15,
+    ]],
+    ['antalya-bilim-2024', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 10,
+        'Uluslararası Kitap Bölümü' => 12,
+        'Ulusal Kitap Bölümü' => 8,
+    ]],
+    ['baskent-2024', [
+        'Uluslararası Kitap' => 300,
+        'Ulusal Kitap' => 150,
+        'Uluslararası Kitap Bölümü' => 150,
+        'Ulusal Kitap Bölümü' => 60,
+    ]],
+    ['biruni-2024', [
+        'Uluslararası Kitap' => 150,
+        'Ulusal Kitap' => 80,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 20,
     ]],
     // SENSE sınıflandırması kullanan ikili: kapsamlı etiket EN DÜŞÜK SENSE
     // kademesinde (Ufuk 5.c/5.i, Yeni Yüzyıl 1.A.21/1.A.27).

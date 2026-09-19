@@ -64,6 +64,16 @@
  * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
  * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
  * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
+ *
+ * DİL KOŞULU SATIR SEÇİMİNİ DEĞİŞTİRMİYOR (19.09.2026, kullanıcı kararı): üst
+ * satırın dil koşulu kayıttan okunamıyor ama alt satır ULUSAL yayınevine ait;
+ * kapsam etiketi kendi kapsamının satırına bağlandı, ulusal satırlar
+ * daraltıldı.
+ *
+ * Kaynağın dipnot [6]'sı "uluslararası kitap veya kitap bölümü WoS Core
+ * Collection ya da SCOPUS kapsamında taranıyorsa ham puandan %50 daha fazla"
+ * diyor; bu prim UYGULANMIYOR — BKCI/Scopus etiketi de aynı satırdan sayılıyor,
+ * yani indeksli kitabınız olduğundan düşük görünür.
  */
 $TAM = ['ozgun_makale', 'derleme', 'kisa_makale'];
 $WOS_Q13 = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)'];
@@ -83,12 +93,12 @@ $maddeler = [
     'M7' => ['baslik' => 'Diğer ulusal hakemli dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 50],
 
     // ══ EK-1 YAYIN / KİTAP ══
-    'M8' => ['baslik' => 'Yurt dışında uluslararası yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 300],
-    'M9' => ['baslik' => 'Yurt dışında uluslararası yayınevi tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 150],
-    'M10' => ['baslik' => 'Yurt dışında uluslararası yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 200],
-    'M11' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 150],
-    'M12' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 60],
-    'M13' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 100],
+    'M8' => ['baslik' => 'Yurt dışında uluslararası yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 300],
+    'M9' => ['baslik' => 'Yurt dışında uluslararası yayınevi tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 150],
+    'M10' => ['baslik' => 'Yurt dışında uluslararası yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 200],
+    'M11' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 150],
+    'M12' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 60],
+    'M13' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 100],
     // 13. madde "kitap editörlüğü VEYA KİTAP ÇEVİRİSİ" diyor; bölüm çevirisi
     // için satır yok, 'Çeviri Kitap Bölümü' 01.09.2026'da çıkarıldı. 'Burs' da
     // M36'dan çıkarıldı: kriter listesinde burs satırı hiç yok.

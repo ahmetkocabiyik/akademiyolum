@@ -1861,15 +1861,17 @@ test('Ankara hukuk barajı Sosyal ile aynı ama monografi koşulu ekliyor', func
     expect($hukuk)->not->toBeNull()
         ->and($hukuk['sart']['cocuklar'])->toHaveCount(count($sosyal['sart']['cocuklar']) + 1);
 
-    // Tek yazarlı kitap koşulu karşılıyor.
-    $kitap = sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap, 'tek', '2020-01-01');
+    // Tek yazarlı kitap koşulu karşılıyor. (19.09.2026: kitap satırları kapsam
+    // etiketlerine bağlandığı için kayıt `Ulusal Kitap` ile giriliyor; genel
+    // `Uluslararası/Ulusal Kitap` adaya zaten sorulmuyor.)
+    $kitap = sartFaaliyet('Ulusal Kitap', Kategori::Kitap, 'tek', '2020-01-01');
     $monografi = fn (array $esik, array $faaliyetler) => collect($depo->degerlendir($esik, $faaliyetler, $profil)->kosullar())
         ->first(fn (SartSonucu $k) => str_contains($k->aciklama, 'monografik'));
 
     expect($monografi($hukuk, [$kitap])->saglandi())->toBeTrue();
 
     // Ortak yazarlı kitap karşılamıyor; Q1 telafisi iki tek yazarlı makale istiyor.
-    $ortak = sartFaaliyet('Uluslararası/Ulusal Kitap', Kategori::Kitap, 'diger', '2020-01-01');
+    $ortak = sartFaaliyet('Ulusal Kitap', Kategori::Kitap, 'diger', '2020-01-01');
     expect($monografi($hukuk, [$ortak])->saglandi())->toBeFalse();
 
     $q1 = fn () => sartFaaliyet('SCIE/SSCI (Q1)', tarih: '2020-01-01', yazarRolu: 'tek');

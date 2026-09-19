@@ -49,6 +49,11 @@
  *       çizelgenin ayrı bir satırı da yok; §0 uyarınca puansız bırakıldı.
  *
  * Yönerge: yonerge/antalya-bilim.php
+ *
+ * DİL KOŞULU SATIR SEÇİMİNİ DEĞİŞTİRMİYOR (19.09.2026, kullanıcı kararı): üst
+ * satırın dil koşulu kayıttan okunamıyor ama alt satır ULUSAL yayınevine ait;
+ * kapsam etiketi kendi kapsamının satırına bağlandı, ulusal satırlar
+ * daraltıldı.
  */
 $TAM = ['ozgun_makale', 'derleme', 'kisa_makale'];
 $ULUSLARARASI_PROJE = ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'];
@@ -82,12 +87,12 @@ return [
         'M7' => ['baslik' => 'Diğer ulusal hakemli dergilerde yayımlanmış veya yayım için kabul edilmiş tam makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 5],
 
         // ══ 2. KİTAP ══
-        'M8' => ['baslik' => 'Doçentlik yabancı dil sınavları için kabul edilen dillerden biriyle yazılmış ve uluslararası yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
-        'M9' => ['baslik' => 'Doçentlik yabancı dil sınavları için kabul edilen dillerden biriyle yazılmış ve uluslararası yayınevleri tarafından yayımlanmış kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 12],
-        'M10' => ['baslik' => 'Doçentlik yabancı dil sınavları için kabul edilen dillerden biriyle yazılmış ve yurt dışında uluslararası yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 12],
-        'M11' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
-        'M12' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 8],
-        'M13' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 8],
+        'M8' => ['baslik' => 'Doçentlik yabancı dil sınavları için kabul edilen dillerden biriyle yazılmış ve uluslararası yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 20],
+        'M9' => ['baslik' => 'Doçentlik yabancı dil sınavları için kabul edilen dillerden biriyle yazılmış ve uluslararası yayınevleri tarafından yayımlanmış kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 12],
+        'M10' => ['baslik' => 'Doçentlik yabancı dil sınavları için kabul edilen dillerden biriyle yazılmış ve yurt dışında uluslararası yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 12],
+        'M11' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
+        'M12' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 8],
+        'M13' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 8],
         'M13.b' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 8],
 
         // ══ 3. ATIF ══

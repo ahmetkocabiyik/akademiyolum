@@ -36,6 +36,14 @@
  *     satırları cetvelde yok.
  *   12/c yurt dışı ay "en fazla 18 puan" — satırı girilmedi (süre profilde
  *     tutulmuyor).
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): 2. bölüm "A. ULUSLARARASI Yayınevleri
+ * Tarafından Yayımlanmış" ve "B. ULUSAL Yayınevleri Tarafından Yayımlanmış"
+ * diye ikiye ayrılıyor; A'nın kitap ve bölüm satırlarındaki "yabancı dilde
+ * yazılmış" koşulu kayıttan okunamıyor ama alt satır ULUSAL yayınevine ait,
+ * yani kayıt yine kendi kapsamının satırına bağlanıyor. Kitap (60 ↔ 40), bölüm
+ * (30 ↔ 15), editörlük (40 ↔ 20) ve çeviri (50 ↔ 25, 20 ↔ 10) kademeleri
+ * bağlandı; ulusal çeviri satırları (2Bb, 2Bç) bu turda açıldı.
  */
 
 return [
@@ -84,16 +92,18 @@ return [
         '1Gc' => ['baslik' => 'TR-Dizin dergide vaka, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['vaka_teknik_not'], 'puan' => 4],
 
         // ── 2A · Uluslararası yayınevi kitapları ──
-        '2Aa' => ['baslik' => 'Yabancı dilde kitap/monografi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
-        '2Ab' => ['baslik' => 'Uluslararası yayınevinden kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 50],
-        '2Ac' => ['baslik' => 'Yabancı dilde kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-        '2Aç' => ['baslik' => 'Kitabın Türkçe kitap bölüm çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 20],
-        '2Ad' => ['baslik' => 'Yabancı dilde yazılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
+        '2Aa' => ['baslik' => 'Yabancı dilde kitap/monografi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 60],
+        '2Ab' => ['baslik' => 'Uluslararası yayınevinden kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 50],
+        '2Ac' => ['baslik' => 'Yabancı dilde kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+        '2Aç' => ['baslik' => 'Kitabın Türkçe kitap bölüm çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 20],
+        '2Ad' => ['baslik' => 'Yabancı dilde yazılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
 
         // ── 2B · Ulusal yayınevi kitapları ──
-        '2Ba' => ['baslik' => 'Ulusal yayınevinden kitap/monografi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 40],
-        '2Bc' => ['baslik' => 'Ulusal yayınevinden kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 15],
-        '2Bd' => ['baslik' => 'Ulusal yayınevinden kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+        '2Bb' => ['baslik' => 'Ulusal yayınevinden kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Çeviri Kitap', 'Çeviri Kitap'], 'puan' => 25],
+        '2Bç' => ['baslik' => 'Ulusal yayınevinden kitap bölüm çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Çeviri Kitap Bölümü', 'Çeviri Kitap Bölümü'], 'puan' => 10],
+        '2Ba' => ['baslik' => 'Ulusal yayınevinden kitap/monografi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 40],
+        '2Bc' => ['baslik' => 'Ulusal yayınevinden kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 15],
+        '2Bd' => ['baslik' => 'Ulusal yayınevinden kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 20],
         '2Bf' => ['baslik' => 'Tahkik / neşir / araştırma notu / detaylı kitap kritiği', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 5],
 
         // ── 3 · SANATSAL ETKİNLİK ──

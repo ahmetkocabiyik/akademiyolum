@@ -52,6 +52,18 @@
  * yayında kurumdan yalnız siz varsanız puanınız OLDUĞUNDAN DÜŞÜK görünür.
  *
  * Yönerge: yonerge/biruni.php
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): B1.5 bloğu "ULUSLARARASI yayınevinde
+ * yayımlanmış bilimsel kitap" (yabancı dilde basılan eserler), B2.4 ise
+ * "ULUSAL yayınevinde yayımlanmış" (Türkçe eserler). Dil koşulu kayıttan
+ * okunamıyor ama alt blok ulusal yayınevine ait; kapsam etiketleri kendi
+ * bloklarına bağlandı (kitap 150 ↔ 80, bölüm 30 ↔ 20, çeviri 100 ↔ ulusal
+ * satırı yok).
+ *
+ * Kaynakta duran ama cetvelde olmayan kitap editörlüğü kademeleri açıldı:
+ * B1.5.c (uluslararası, 100) ve B2.4.d (ulusal, 60). Kapsamsız
+ * `Kitap Editörlüğü` etiketi B4.1.e'nin bildiri kitabı editörlüğünde (40)
+ * kalmayı sürdürüyor.
  */
 $OZGUN = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -80,10 +92,12 @@ $maddeler = [
     'B1.3.k' => ['baslik' => 'Diğer uluslararası hakemli dergide editöre mektup, teknik not, vaka incelemesi ya da tartışma', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'SCIE/SSCI (Q4)'], 'turler' => $KISA, 'puan' => 5],
     'B1.4.t' => ['baslik' => 'Uluslararası hakemli kongre, konferans, sempozyum ya da çalıştayda bildiri kitabında tam metin', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 15],
     'B1.4.o' => ['baslik' => 'Uluslararası hakemli kongre, konferans, sempozyum ya da çalıştayda özet veya poster sunumu', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 10],
-    'B1.5.a' => ['baslik' => 'Uluslararası yayınevinde yabancı dilde yayımlanmış bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
-    'B1.5.b' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-    'B1.6.a' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış tüm kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 100],
-    'B1.6.b' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 20],
+    'B1.5.a' => ['baslik' => 'Uluslararası yayınevinde yabancı dilde yayımlanmış bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 150],
+    'B1.5.b' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+    'B1.5.c' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta editörlük (en az 100 sayfa)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 100],
+    'B2.4.d' => ['baslik' => 'Ulusal yayınevinde yayımlanmış kitapta editörlük (en az 100 sayfa)', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü'], 'puan' => 60],
+    'B1.6.a' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış tüm kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 100],
+    'B1.6.b' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 20],
 
     // ══ B2. ULUSAL YAYINLAR ══
     'B2.1' => ['baslik' => 'ULAKBİM TR Dizininde yer alan dergide tam makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $OZGUN, 'puan' => 40],
@@ -92,8 +106,8 @@ $maddeler = [
     'B2.2.k' => ['baslik' => 'Diğer ulusal hakemli dergide editöre mektup, teknik not, vaka incelemesi, tartışma ya da kitap incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 5],
     'B2.3.t' => ['baslik' => 'Ulusal hakemli kongre, konferans, sempozyum ya da çalıştayda bildiri kitabında tam metin', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 10],
     'B2.3.o' => ['baslik' => 'Ulusal hakemli kongre, konferans, sempozyum ya da çalıştayda özet veya poster sunumu', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
-    'B2.4.a' => ['baslik' => 'Ulusal yayınevinde yayımlanmış bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 80],
-    'B2.4.b' => ['baslik' => 'Ulusal yayınevinde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
+    'B2.4.a' => ['baslik' => 'Ulusal yayınevinde yayımlanmış bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 80],
+    'B2.4.b' => ['baslik' => 'Ulusal yayınevinde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 20],
     'B2.4.c' => ['baslik' => 'Ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
 
     // ══ B3. ATIFLAR ══
