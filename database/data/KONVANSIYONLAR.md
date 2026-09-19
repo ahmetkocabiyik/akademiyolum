@@ -1773,9 +1773,22 @@ uyarınca AŞAĞIDA kalır. Dört desen çıktı:
    (Ege 3a2/3b2/3c2). Kaynağın kitap satırlarının TAMAMI uluslararası ve dil
    koşulluysa etiket yine oraya bağlanır — alternatifi ulusal kitabın
    uluslararası satırdan puan alması olurdu (Cerrahpaşa A1b).
-3. **İndeks ekseni — BAĞLAMA.** "BKCI/Scopus/ACQWEB/SENSE kapsamındaki
-   yayınevi". Kayıtta indeks bilgisi yalnız BKCI etiketiyle var. (Anadolu,
-   Ardahan, ASBÜ, Gaziantep, İnönü, OSTİM, Üsküdar, Yeni Yüzyıl, Ufuk…)
+3. **İndeks ekseni — KAYNAKTA ALT KADEME VAR MI DİYE BAK.** "BKCI/Scopus/
+   ACQWEB kapsamındaki yayınevi" satırı, kaydın yalnız BKCI etiketiyle
+   kanıtlayabildiği bir kapı. Karar alt kademeye bakar:
+
+   - **Kaynak indekssiz uluslararası kitaba KENDİ SATIRINI gösteriyorsa
+     BAĞLAMA** — "diğer uluslararası yayınevi", "BKCI'de taranmayan
+     uluslararası yayınevleri", "B grubu uluslararası yayınevi", "uluslararası
+     ya da ulusal" gibi. Kapsam etiketi zaten oraya düşüyor ve doğrusu budur.
+     (Anadolu 7d, Gaziantep 3c, ASBÜ B.3, Afyon Sağlık C.1.b, Cerrahpaşa A1b,
+     Gümüşhane C2, Fırat A1.2, Kastamonu 4c, İstanbul Arel B.3, Sabancı,
+     Ufuk, Yeni Yüzyıl…)
+   - **Kaynakta böyle bir satır yoksa, yani tek alternatif ULUSAL satırsa,
+     BAĞLA** (19.09.2026, kullanıcı kararı). Alanya, Ardahan, İnönü, OSTİM ve
+     Üsküdar böyle. Bedeli dosya başlığına yazılır: kaynağın indeksli/indekssiz
+     ayrımı artık uygulanmıyor, indekssiz kitap indekslinin puanını alıyor ve
+     bu cetvellerde puan OLDUĞUNDAN YÜKSEK görünebilir.
 4. **Nitelik ekseni — BAĞLA (19.09.2026, kullanıcı kararı).** "TANINMIŞ /
    saygın / önde gelen / tanınırlığı olan / bilinen uluslararası yayınevi" ↔
    aynı sıfatı taşıyan ulusal satır. Sıfat İKİ KADEMEDE DE aynı koşul olduğu

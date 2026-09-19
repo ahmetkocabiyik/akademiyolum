@@ -1425,11 +1425,24 @@ editörlüğü (50), Biruni'nin B1.5.c (100) ve B2.4.d (60) editörlük kademele
 Bolu'nun 'C.6' satırı ("kitap editörlüğü, 10") silindi — kaynağın C bölümü
 dergi kademelerinden ibaret, o kod kaynakta yok.
 
-Bağlanmayanlar ve gerekçeleri: indeks kapsamına bağlı satırlar
-(BKCI/Scopus/ACQWEB/CERES — kayıtta indeks bilgisi yalnız BKCI etiketiyle var)
-ve alt satırı "…veya DİĞER ULUSLARARASI yayınevince" diyen cetveller (Afyon
-Sağlık, Anadolu, Gaziantep, ASBÜ): kaynak indekssiz uluslararası kitaba zaten
-kendi yerini göstermiş, genel etiket orada doğru.
+**Dördüncü tur — indeks ekseni (19.09.2026, kullanıcı kararı).** İndeks
+kapsamına bağlı satırlarda karar ALT KADEMEYE bakıyor. Kaynak indekssiz
+uluslararası kitaba kendi satırını gösteriyorsa ("diğer uluslararası
+yayınevi", "BKCI'de taranmayan uluslararası yayınevleri", "B grubu
+uluslararası yayınevi") kapsam etiketi zaten oraya düşüyor ve doğrusu bu —
+Afyon Sağlık, Anadolu, ASBÜ, Cerrahpaşa, Fırat, Gaziantep, Gümüşhane,
+İstanbul Arel, Kastamonu, Mersin, Nişantaşı, Sakarya, Tekirdağ, Tokat,
+Sabancı, Yozgat, Çukurova ve benzerleri böyle; dokunulmadı.
+
+Tek alternatifi ULUSAL satır olan beş cetvelde (Alanya, Ardahan, İnönü, OSTİM,
+Üsküdar) kapsam etiketi uluslararası satıra bağlandı. Bedeli dosya
+başlıklarında: kaynağın indeksli/indekssiz ayrımı artık uygulanmıyor, indekssiz
+uluslararası kitap indekslinin puanını alıyor — bu beş cetvelde puan
+OLDUĞUNDAN YÜKSEK görünebilir.
+
+Gümüşhane bu turda ayrıca dört eksik satırla çıktı (C3 ulusal kitap 15, C7
+uluslararası kitap bölümü 7, C8 ulusal çeviri 6, C9 ders kitabı 5); genel
+etiket C2'de durduğu için ulusal kitap 20 puan alıyordu.
 
 Açık kalan iki küçük iş: (1) Sakarya ÜBÜ 9.1 ve Marmara'nın fen/mühendislik/
 güzel sanatlar varyantlarında kitap editörlüğü etiketleri DERGİ editörlüğü
