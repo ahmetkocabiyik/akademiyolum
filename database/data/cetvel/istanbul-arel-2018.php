@@ -63,6 +63,17 @@
  * bir rol yok; senior yazarsanız puanınız DÜŞÜK görünür.
  *
  * Yönerge: yonerge/istanbul-arel.php
+ *
+ * KİTAPTA YALNIZCA ULUSLARARASI YAYINEVİ VAR (19.09.2026): B bölümünün dört
+ * satırı da uluslararası yayınevlerine ait — B.1/B.2 Book Citation Index'te
+ * taranan kitap ve bölümü, B.3/B.4 "B.1/B.2 DIŞINDA uluslararası
+ * yayınevlerince yayımlanmış" kitap ve bölümü. Kaynakta ULUSAL yayınevi
+ * kitabının satırı YOK.
+ *
+ * B.3/B.4 genel `Uluslararası/Ulusal Kitap` ve `Kitap Bölümü` etiketlerini
+ * taşıdığı için adayın ULUSAL yayınevi kitabı da 60, bölümü 30 puan alıyordu;
+ * kaynak bu kalemleri hiç saymıyor. Etiketler kapsamlı uluslararası
+ * karşılıklarına daraltıldı, durum kapsam notuna yazıldı.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'];
 $OZGUN = ['ozgun_makale'];
@@ -84,8 +95,8 @@ $maddeler = [
     // ══ B. KİTAPLAR ══
     'B.1' => ['baslik' => 'Book Citation Index kapsamında taranan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
     'B.2' => ['baslik' => 'Book Citation Index kapsamında taranan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
-    'B.3' => ['baslik' => 'Uluslararası yayınevlerince yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Uluslararası Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 60],
-    'B.4' => ['baslik' => 'Uluslararası yayınevlerince yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
+    'B.3' => ['baslik' => 'Book Citation Index dışında uluslararası yayınevlerince yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 60],
+    'B.4' => ['baslik' => 'Book Citation Index dışında uluslararası yayınevlerince yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
     'B.5.b' => ['baslik' => 'ISBN numaralı bilimsel ya da sanatsal kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
     'B.5.c' => ['baslik' => 'Kitap bölümü ya da makale çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
 
@@ -198,6 +209,8 @@ return [
         .'değerinden sayılıyor. "Senior isim" (alanında en az on uluslararası yayını olan son '
         .'yazar) tam puan alıyor ama kayıtta böyle bir rol yok; senior yazarsanız puanınız düşük '
         .'görünür. '
+        .'ULUSAL YAYINEVİ KİTABI TABLODA HİÇ PUANLANMIYOR: B bölümünün dört satırı da '
+        .'uluslararası yayınevlerine ait, ulusal yayınevi kitabının karşılığı yok. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN DÜŞÜK görünür: patent BAŞVURULARI (yurt dışı 50, '
         .'yurt içi 25) tescilliden ayrılamadığı için girilmedi, faydalı model ve endüstriyel '
         .'tasarımın da tabloda satırı yok; O '
