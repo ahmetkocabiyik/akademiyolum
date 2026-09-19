@@ -49,6 +49,16 @@
  * tanımlanmadı, puanlar yazar sayısından bağımsız.
  *
  * Yönerge: yonerge/karamanoglu.php
+ *
+ * KİTAP BÖLÜMÜNDE KAPSAM AYRIMI (19.09.2026): C-3 "uluslararası yayınevleri
+ * tarafından yayımlanan kitap bölümü" (40), C-4 ulusal karşılığı (20); E-7 ile
+ * E-8 aynı ayrımı kitap editörlüğünde yapıyor (40/20). Üst satırlar yalnız
+ * BKCI/Scopus etiketiyle yazıldığı için indekssiz uluslararası kitap bölümü 40
+ * yerine 20, editörlüğü 40 yerine 20 puandaydı.
+ *
+ * C-1 (BKCI kapsamındaki yayınevi, 90) İNDEKSE bağlı olduğu için BKCI
+ * etiketinde kaldı; C-2 zaten "ulusal ya da uluslararası … Türkçe ya da
+ * yabancı dilde" diyen TORBA satır ve genel etiketi doğru taşıyor.
  */
 $OZGUN = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -77,8 +87,8 @@ $maddeler = [
     // ══ C. KİTAPLAR ══
     'C-1' => ['baslik' => 'Web of Science Book Citation Index kapsamındaki yayınevinde yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 90],
     'C-2' => ['baslik' => 'Alanında ulusal ya da uluslararası yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 70],
-    'C-3' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
-    'C-4' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
+    'C-3' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 40],
+    'C-4' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
 
     // ══ D. ÇEVİRİLER ══
     'D-1' => ['baslik' => 'Alanında yayımlanmış kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
@@ -89,8 +99,8 @@ $maddeler = [
     'E-2' => ['baslik' => 'Diğer uluslararası indekslerde taranan dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 30],
     'E-3' => ['baslik' => 'Diğer bilimsel, sanatsal ya da mesleki hakemli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 20],
     'E-6' => ['baslik' => 'Dergide yardımcı editörlük ya da yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],
-    'E-7' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
-    'E-8' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+    'E-7' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
+    'E-8' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 20],
     'E-11' => ['baslik' => 'Dergi, kitap ya da proje hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
 
     // ══ F. ATIFLAR ══
