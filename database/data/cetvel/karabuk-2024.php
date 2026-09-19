@@ -48,6 +48,13 @@
  * SPOR KALEMLERİ TAMAMEN GİRİLEMEDİ (4.6.14-4.6.21: antrenörlük, hakemlik,
  * milli takım). Spor Bilimleri adayının 4.1-4.6 alt barajı bu yüzden olduğundan
  * ZOR görünür.
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): 4.4 bloğunun dört satırı yalnız
+ * yayınevinin uluslararası ya da ulusal olmasına bakıyor; tanımlar maddesi (c)
+ * ve (ç) yayınevini süre, kütüphane kataloglaması ve kitap sayısıyla
+ * tanımlıyor, indeks aranmıyor. Uluslararası satırlar yalnız BKCI/Scopus
+ * etiketiyle yazıldığı için indekssiz uluslararası kitap 100 yerine 80,
+ * bölümü 30 yerine 20 puan alıyordu.
  */
 
 return [
@@ -107,10 +114,10 @@ return [
         '4.3.2' => ['baslik' => 'Ulusal bildiri kitabında özet metin poster veya sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 15],
 
         // ── 4.4 KİTAPLAR ──
-        '4.4.1' => ['baslik' => 'Uluslararası yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-        '4.4.2' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı (aynı kitapta en fazla 2 bölüm)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-        '4.4.3' => ['baslik' => 'Ulusal yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 80],
-        '4.4.4' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı (aynı kitapta en fazla 2 bölüm)', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
+        '4.4.1' => ['baslik' => 'Uluslararası yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 100],
+        '4.4.2' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı (aynı kitapta en fazla 2 bölüm)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+        '4.4.3' => ['baslik' => 'Ulusal yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 80],
+        '4.4.4' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı (aynı kitapta en fazla 2 bölüm)', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 20],
 
         // ── 4.5 ÇEVİRİLER ──
         '4.5.1' => ['baslik' => 'Alanında makale veya kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 50],
