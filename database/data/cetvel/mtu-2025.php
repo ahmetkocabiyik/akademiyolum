@@ -24,6 +24,14 @@ use App\Enums\Kategori;
  * değerlendirilir" diyor. Kayıt AHCI için çeyrek taşımadığından bu kural
  * uygulandı: AHCI → Q4 satırı.
  *
+ * ── C1'İN DİL KADEMESİ: TÜRKÇE BASILMIŞSA PUANIN YARISI ──
+ * C1 başlığı "Uluslararası (Yabancı dilde basılmış, TÜRKÇE BASILMIŞ OLANLAR
+ * PUANIN YARISINI ALIR)" diyor; yani uluslararası yayınevinin Türkçe kitabı
+ * ULUSAL satıra düşmüyor, C1'in yarısını alıyor. Kayıt kitabın dilini
+ * taşımadığı için `Uluslararası Kitap` ailesi YARIM kademeye bağlandı
+ * (C1.1-tr 125, C1.2-tr 75, C1.3-tr 50); BKCI/Scopus etiketi tam kademede
+ * kaldı. Önceden bu kayıtlar C2'nin ulusal satırından sayılıyordu (80/50/30).
+ *
  * ── AYNI ETİKETE DÜŞÜP DÜŞÜĞÜ GİRİLEN SATIRLAR ──
  *   B1.1 uluslararası çağrılı bildiri (80) ile B2.1 ulusal (40) → 40.
  *   B1.4 uluslararası düzenleme kurulu üyeliği (10) ile B2.4 ulusal (5)
@@ -155,11 +163,16 @@ $maddeler = array_merge([
 
     // ══ C. KİTAPLAR ══
     'C1.1' => ['baslik' => 'Uluslararası, yabancı dilde basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 250],
+    // C1 başlığı: "Türkçe basılmış olanlar puanın yarısını alır". Kayıt kitabın
+    // dilini taşımadığı için uluslararası yayınevi kaydı YARIM kademeden.
+    'C1.1-tr' => ['baslik' => 'Uluslararası yayınevince Türkçe basılmış bilimsel kitap (puanın yarısı)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap'], 'puan' => 125],
     'C1.2' => ['baslik' => 'Uluslararası bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 150],
+    'C1.2-tr' => ['baslik' => 'Uluslararası yayınevince Türkçe basılmış bilimsel kitabın editörlüğü (puanın yarısı)', 'kategori' => 'editorluk', 'kaynaklar' => ['Uluslararası Kitap Editörlüğü'], 'puan' => 75],
     'C1.3' => ['baslik' => 'Uluslararası bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 100],
-    'C2.1' => ['baslik' => 'Ulusal bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 80],
-    'C2.2' => ['baslik' => 'Ulusal bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 50],
-    'C2.3' => ['baslik' => 'Ulusal bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 30],
+    'C1.3-tr' => ['baslik' => 'Uluslararası yayınevince Türkçe basılmış kitapta bölüm yazarlığı (puanın yarısı)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 50],
+    'C2.1' => ['baslik' => 'Ulusal bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 80],
+    'C2.2' => ['baslik' => 'Ulusal bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 50],
+    'C2.3' => ['baslik' => 'Ulusal bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 30],
     'C2.4' => ['baslik' => 'Ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 20],
     'C2.5' => ['baslik' => 'Ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 30],
     'C2.6' => ['baslik' => 'Bilimsel kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 80],

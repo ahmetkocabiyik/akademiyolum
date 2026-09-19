@@ -3474,6 +3474,30 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // KSÜ 3. bölüm, Lokman Hekim'in "Düzey" sütunu.
+    ['ksu-2023', [
+        'Uluslararası Kitap' => 35,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 15,
+        'Ulusal Kitap Bölümü' => 10,
+        'Uluslararası Ders / Metot Kitabı' => 30,
+        'Ulusal Ders / Metot Kitabı' => 20,
+    ]],
+    ['lokman-hekim-2022', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 50,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 15,
+        'Uluslararası Ders / Metot Kitabı' => 50,
+        'Ulusal Ders / Metot Kitabı' => 30,
+    ]],
+    // MTÜ: C1'in Türkçe kademesi puanın yarısı; ulusal satıra düşmüyor.
+    ['mtu-2025', [
+        'Uluslararası Kitap' => 125,
+        'Ulusal Kitap' => 80,
+        'Uluslararası Kitap Bölümü' => 50,
+        'Ulusal Kitap Bölümü' => 30,
+    ]],
     // Kayseri'nin "Düzeyi" sütunu, Kırıkkale 44, Kırklareli C, Kilis 2,
     // Karamanoğlu C-3/C-4 (yalnız bölüm; C-1 indekse bağlı, C-2 torba).
     ['kayseri-2024', [
