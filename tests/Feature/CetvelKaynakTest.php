@@ -3733,6 +3733,30 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 15,
         'Ulusal Kitap Bölümü' => 10,
     ]],
+    ['istanbul-atlas-2026', [
+        'Uluslararası Kitap' => 120,
+        'Ulusal Kitap' => 60,
+        'Uluslararası Kitap Bölümü' => 15,
+        'Ulusal Kitap Bölümü' => 6,
+    ]],
+    ['kahramanmaras-istiklal-2024', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
+    ['konya-gida-tarim-2024', [
+        'Uluslararası Kitap' => 120,
+        'Ulusal Kitap' => 60,
+        'Uluslararası Kitap Bölümü' => 40,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
+    ['pau-2023', [
+        'Uluslararası Kitap' => 75,
+        'Ulusal Kitap' => 35,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 15,
+    ]],
     // SENSE sınıflandırması kullanan ikili: kapsamlı etiket EN DÜŞÜK SENSE
     // kademesinde (Ufuk 5.c/5.i, Yeni Yüzyıl 1.A.21/1.A.27).
     ['ufuk-2025', [

@@ -61,6 +61,11 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): üst kademe uluslararası yayınevine (ve
+ * dile) bağlı, alt kademe ulusal yayınevi ya da Türkçe yayın. Dil koşulu
+ * kayıttan okunamıyor ama kapsam etiketi kendi kapsamının satırına bağlandı;
+ * ulusal satırlar daraltıldı.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $OZGUN = ['ozgun_makale'];
@@ -118,10 +123,10 @@ return [
         'B6' => ['baslik' => 'Ulusal kongrede sunulan ve özeti yayımlanan sözlü veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
         // ══ C. KİTAP YAZARLIĞI VE ÇEVİRİSİ ══
-        'C1' => ['baslik' => 'Uluslararası, yabancı dilde yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 120],
-        'C2' => ['baslik' => 'Uluslararası, yabancı dilde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
-        'C3' => ['baslik' => 'Türkçe telif kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 60],
-        'C4' => ['baslik' => 'Türkçe telif kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
+        'C1' => ['baslik' => 'Uluslararası, yabancı dilde yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 120],
+        'C2' => ['baslik' => 'Uluslararası, yabancı dilde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 40],
+        'C3' => ['baslik' => 'Türkçe telif kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ulusal Ders / Metot Kitabı'], 'puan' => 60],
+        'C4' => ['baslik' => 'Türkçe telif kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
         'C5' => ['baslik' => 'Yabancı dilde ders kitabı çevirisi editörlüğü', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 60],
         'C6' => ['baslik' => 'Yabancı dilde ders kitabı bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 20],
 
@@ -130,8 +135,8 @@ return [
         'D2' => ['baslik' => 'Diğer uluslararası indeksler kapsamındaki dergilerde editörlük ya da editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 20],
         'D3' => ['baslik' => 'Ulusal dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 20],
         'D4' => ['baslik' => 'Ulusal dergilerde editör yardımcılığı ya da yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],
-        'D5' => ['baslik' => 'Yabancı dilde yazılmış kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
-        'D6' => ['baslik' => 'Türkçe yazılmış kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+        'D5' => ['baslik' => 'Yabancı dilde yazılmış kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
+        'D6' => ['baslik' => 'Türkçe yazılmış kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 20],
         'D8' => ['baslik' => 'Bilimsel dergilerde her bir hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
 
         // ══ E. TEZ DANIŞMANLIĞI VE PROJE YÜRÜTÜCÜLÜĞÜ ══

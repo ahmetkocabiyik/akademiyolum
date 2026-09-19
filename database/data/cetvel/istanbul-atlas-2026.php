@@ -61,6 +61,11 @@
  * ilk isimseniz puanınız OLDUĞUNDAN YÜKSEK görünür.
  *
  * Yönerge: yonerge/istanbul-atlas.php
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): üst kademe uluslararası yayınevine (ve
+ * dile) bağlı, alt kademe ulusal yayınevi ya da Türkçe yayın. Dil koşulu
+ * kayıttan okunamıyor ama kapsam etiketi kendi kapsamının satırına bağlandı;
+ * ulusal satırlar daraltıldı.
  */
 $OZGUN = ['ozgun_makale'];
 $KISA_HEPSI = ['derleme', 'kisa_makale', 'vaka_teknik_not'];
@@ -69,14 +74,14 @@ $TUBITAK = ['TÜBİTAK', 'TÜSEB', 'Diğer Kamu Kurumu'];
 
 $maddeler = [
     // ══ 1.1 KİTAPLAR ══
-    '1.1.a' => ['baslik' => 'Uluslararası yayımlanmış yabancı dilde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 120],
-    '1.1.b' => ['baslik' => 'Ulusal tanınmış yayınevince yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 60],
-    '1.1.c' => ['baslik' => 'Uluslararası yayımlanmış kitapta yabancı dilde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
+    '1.1.a' => ['baslik' => 'Uluslararası yayımlanmış yabancı dilde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 120],
+    '1.1.b' => ['baslik' => 'Ulusal tanınmış yayınevince yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 60],
+    '1.1.c' => ['baslik' => 'Uluslararası yayımlanmış kitapta yabancı dilde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
     '1.1.e' => ['baslik' => 'Yayımlanmış çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
-    '1.1.i' => ['baslik' => 'Ulusal tanınmış yayınevince yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 6],
+    '1.1.i' => ['baslik' => 'Ulusal tanınmış yayınevince yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 6],
     '1.1.j' => ['baslik' => 'Yayımlanmış çeviri kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
-    '1.1.g' => ['baslik' => 'Uluslararası yayımlanmış yabancı dilde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
-    '1.1.h' => ['baslik' => 'Ulusal tanınmış yayınevince yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
+    '1.1.g' => ['baslik' => 'Uluslararası yayımlanmış yabancı dilde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
+    '1.1.h' => ['baslik' => 'Ulusal tanınmış yayınevince yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 10],
 
     // ══ 1.2 MAKALELER ══
     '1.2.a' => ['baslik' => 'Q1 kategorisindeki dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => $OZGUN, 'puan' => 60],

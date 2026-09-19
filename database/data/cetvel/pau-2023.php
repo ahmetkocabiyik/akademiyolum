@@ -62,6 +62,11 @@ use App\Enums\Kategori;
  * tutuyor ("Asgari şartların sağlanması ile ilgili değerlendirmede ise bu
  * kısıtlama söz konusu değildir"), yani barajları etkilemiyor; yalnız
  * listede görünen toplam puan yüksek çıkar.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): üst kademe uluslararası yayınevine (ve
+ * dile) bağlı, alt kademe ulusal yayınevi ya da Türkçe yayın. Dil koşulu
+ * kayıttan okunamıyor ama kapsam etiketi kendi kapsamının satırına bağlandı;
+ * ulusal satırlar daraltıldı.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI',
     'ESCI'];
@@ -115,8 +120,8 @@ $sanatKalan = array_values(array_diff(Kategori::SanatselEtkinlik->kaynaklar(), $
 $maddeler = [
     // ══ A.1-A.4 ULUSLARARASI YAYINLAR ══
     'A.1a' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI kapsamındaki dergide yayımlanan makale (derleme dâhil)', 'kategori' => 'makale', 'kaynaklar' => $SCI, 'turler' => $TAM, 'puan' => 40],
-    'A.1b' => ['baslik' => 'Uluslararası yabancı dilde yayımlanmış uluslararası nitelikte kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 75],
-    'A.1c' => ['baslik' => 'Uluslararası yabancı dilde yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
+    'A.1b' => ['baslik' => 'Uluslararası yabancı dilde yayımlanmış uluslararası nitelikte kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 75],
+    'A.1c' => ['baslik' => 'Uluslararası yabancı dilde yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
     'A.2a' => ['baslik' => 'SCI, SCI-Expanded, SSCI, AHCI ya da ESCI dergisinde vaka takdimi, teknik not, editöre mektup ve benzeri yazı', 'kategori' => 'makale', 'kaynaklar' => $SCI, 'turler' => $KISA, 'puan' => 20],
     'A.2b' => ['baslik' => 'Diğer uluslararası hakemli dergilerde yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Scopus'], 'turler' => $KISA, 'puan' => 10],
     'A.3a' => ['baslik' => 'Uluslararası kongrede sunulan ve SCI kapsamındaki dergi özel sayısında ya da kongre kitabında yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 12],
@@ -138,8 +143,8 @@ $maddeler = [
     'A.9d' => ['baslik' => 'Ulusal kongrede sunulan özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
     // ══ A.10-A.11 ULUSAL KİTAP VE ÇEVİRİ ══
-    'A.10a' => ['baslik' => 'Türkçe kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 35],
-    'A.10b' => ['baslik' => 'Kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 15],
+    'A.10a' => ['baslik' => 'Türkçe kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 35],
+    'A.10b' => ['baslik' => 'Kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 15],
     'A.10c' => ['baslik' => 'Ansiklopedide bölüm ya da madde tanımlaması', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
     'A.10d' => ['baslik' => 'Kendi alanınızla ilgili yayımlanmış ders notu', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 10],
     'A.11a' => ['baslik' => 'Kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],

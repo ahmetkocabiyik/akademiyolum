@@ -57,6 +57,11 @@
  * atıflar almış olması" koşulu bu yüzden olduğundan KOLAY görünür.
  *
  * Yönerge: yonerge/kadir-has.php
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): üst kademe uluslararası yayınevine (ve
+ * dile) bağlı, alt kademe ulusal yayınevi ya da Türkçe yayın. Dil koşulu
+ * kayıttan okunamıyor ama kapsam etiketi kendi kapsamının satırına bağlandı;
+ * ulusal satırlar daraltıldı.
  */
 
 return [
@@ -85,14 +90,14 @@ return [
         'B' => ['baslik' => 'Yayınlarınıza yapılan atıflar', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap', 'TR Dizin', 'Patent', 'Diğer']],
 
         // D- Kitap Yazarlığı
-        'D-1' => ['baslik' => 'Yabancı dilde kitap yazarlığı (uluslararası saygın yayınevi)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap']],
-        'D-2' => ['baslik' => 'Türkçe kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı']],
-        'D-3' => ['baslik' => 'Yabancı dilde kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü']],
-        'D-4' => ['baslik' => 'Türkçe kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi']],
+        'D-1' => ['baslik' => 'Yabancı dilde kitap yazarlığı (uluslararası saygın yayınevi)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap']],
+        'D-2' => ['baslik' => 'Türkçe kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ulusal Ders / Metot Kitabı']],
+        'D-3' => ['baslik' => 'Yabancı dilde kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü']],
+        'D-4' => ['baslik' => 'Türkçe kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi']],
 
         // E- Kitaplarda Editörlük
-        'E-1' => ['baslik' => 'Yabancı dilde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap']],
-        'E-2' => ['baslik' => 'Türkçe kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü']],
+        'E-1' => ['baslik' => 'Yabancı dilde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü']],
+        'E-2' => ['baslik' => 'Türkçe kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü']],
 
         // F- Kitap Çevirmenliği
         'F' => ['baslik' => 'Kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü']],
