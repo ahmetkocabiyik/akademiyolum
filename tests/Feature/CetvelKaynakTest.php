@@ -645,6 +645,10 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
         // kapsam dışına alındı.
         '13d-yk · Yönetim kurulu üyeliği',
         '14d-yk · Yönetim kurulu üyeliği',
+        // Bingöl 15.a: ulusal kitap editörlüğü 14.b'ye (30) bağlandı, kapsamsız
+        // `Kitap Editörlüğü` etiketi en düşük kademede (15.b, 5) kalmalı; satır
+        // kaynağı belgelemek için duruyor.
+        '15.a · Türkçe yazılmış bilimsel veya ders kitabında editörlük',
         '15d-yk · Yönetim kurulu üyeliği',
         '19d-yk · Yönetim kurulu üyeliği',
         '1c · Diğer uluslararası alan indekslerinde taranan dergide makale',
@@ -3471,6 +3475,16 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Ulusal Kitap Bölümü' => 60,
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
+    ]],
+    // Bingöl 10 ↔ 11 (kitap), 12 ↔ 13 (bölüm), 14.a ↔ 14.b (editörlük);
+    // üçü de yalnız yayımın yerine bakıyor.
+    ['bingol-2024', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 60,
+        'Uluslararası Kitap Bölümü' => 35,
+        'Ulusal Kitap Bölümü' => 30,
+        'Uluslararası Ders / Metot Kitabı' => 75,
+        'Ulusal Ders / Metot Kitabı' => 45,
     ]],
     // Bayburt 2.1 "Uluslararası Kitap" ↔ 2.2 "Ulusal Kitap"; editörlük de
     // kaynakta iki kademeli (2.1.c 50 ↔ 2.2.c 25) ve girilmemişti.

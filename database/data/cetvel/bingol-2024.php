@@ -27,9 +27,25 @@
  * karşılıksız. Bu kalem fen ve sosyal alanların ZORUNLU kümesinde yer aldığı
  * için o baraj olduğundan zor görünür.
  *
+ * KİTAPTA ULUSLARARASI/ULUSAL AYRIMI (19.09.2026): kaynak 10 ile 11'i
+ * ("alanında ULUSAL / ULUSLARARASI yayımlanmış kitaplar"), 12 ile 13'ü
+ * (bölüm yazarlığı) ve 14.a ile 14.b'yi (kitap editörlüğü) yalnız yayımın
+ * yerine göre ayırıyor; indeks aramıyor. Uluslararası satırlar yalnız
+ * BKCI/Scopus etiketiyle yazıldığı için indekssiz uluslararası kitap 100
+ * yerine 60, bölümü 35 yerine 30 puan alıyordu.
+ *
+ * Kaynağın üç alt kalemi (çeviri · derleme/ders kitabı · özgün kitap)
+ * uluslararası tarafta hiç girilmemişti; 11.a (50) ve 11.b (75) açıldı,
+ * ulusal karşılıkları (10.a, 10.b) kapsamlı etiketlere daraltıldı. 13.b
+ * (uluslararası derleme bölümü, 25) AÇILMADI: "derleme bölüm" ayrımının
+ * sözlükte karşılığı yok, kayıt 13.c'den sayılıyor.
+ *
+ * EDİTÖRLÜK: 14.a (60) ve 14.b (30) satırları cetvelde YOKTU; BKCI kitap
+ * editörlüğü 15.a'nın 10 puanından sayılıyordu. İkisi de açıldı; 15.a
+ * kaynaktaki adına ("Türkçe yazılmış bilimsel veya ders kitaplarında
+ * editörlük") döndürülüp genel etikete bağlandı.
+ *
  * AYNI KAYNAĞA DÜŞEN KALEMLERDE DÜŞÜK OLAN GİRİLDİ:
- *   'Kitap Editörlüğü' uluslararası/ulusal ayırmıyor → 14.a (60) yerine
- *       15.a (10).
  *   'Hakemlik' dergi düzeyi taşımıyor → 8.d (2).
  *   'Yayın Kurulu Üyeliği' aynı şekilde → 16.h (1).
  *   'Davetli Konuşmacı' ulusal/uluslararası ayırmıyor → 6.f (15).
@@ -108,16 +124,23 @@ return [
         '8.g' => ['baslik' => 'Lisansüstü tez savunma jürisinde görev almak', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 2],
 
         // ══ 10-13. KİTAPLAR ══
-        '10.a' => ['baslik' => 'Alanında ulusal yayımlanmış çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
-        '10.b' => ['baslik' => 'Alanında ulusal yayımlanmış derleme veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 45],
-        '10.c' => ['baslik' => 'Alanında ulusal yayımlanmış özgün araştırma veya bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 60],
-        '11.c' => ['baslik' => 'Alanında uluslararası yayımlanmış özgün araştırma veya bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
+        '10.a' => ['baslik' => 'Alanında ulusal yayımlanmış çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Çeviri Kitap'], 'puan' => 30],
+        '10.b' => ['baslik' => 'Alanında ulusal yayımlanmış derleme veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 45],
+        '10.c' => ['baslik' => 'Alanında ulusal yayımlanmış özgün araştırma veya bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 60],
+        '11.a' => ['baslik' => 'Alanında uluslararası yayımlanmış çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 50],
+        '11.b' => ['baslik' => 'Alanında uluslararası yayımlanmış derleme veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 75],
+        '11.c' => ['baslik' => 'Alanında uluslararası yayımlanmış özgün araştırma veya bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
         '12.a' => ['baslik' => 'Ulusal yayımlanmış kitapta çeviri bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
-        '12.c' => ['baslik' => 'Ulusal yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
-        '13.c' => ['baslik' => 'Uluslararası yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
+        '12.c' => ['baslik' => 'Ulusal yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
+        '13.c' => ['baslik' => 'Uluslararası yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 35],
 
         // ══ 15-16. EDİTÖRLÜK ══
-        '15.a' => ['baslik' => 'Bilimsel veya ders kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
+        '14.a' => ['baslik' => 'Alanında uluslararası yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 60],
+        '14.b' => ['baslik' => 'Alanında ulusal yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü'], 'puan' => 30],
+        // Kapsamsız `Kitap Editörlüğü` etiketi kaynağın EN DÜŞÜK editörlük
+        // kademesinde (15.b, 5) duruyor; 15.a belgelemek için etiketsiz.
+        // Ulusal kitap editörlüğü 14.b'den (30) sayılıyor.
+        '15.a' => ['baslik' => 'Türkçe yazılmış bilimsel veya ders kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => [], 'puan' => 10],
         '16.a' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 30],
         '16.b' => ['baslik' => 'ESCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI Dergi'], 'puan' => 15],
         '16.d' => ['baslik' => 'Diğer hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Scopus Dergi'], 'puan' => 5],
