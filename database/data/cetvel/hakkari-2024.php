@@ -33,6 +33,12 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): B bölümü B1 "Uluslararası (ISBN'li
+ * olması zorunludur)" ve B2 "Ulusal (ISBN'li olması zorunludur)" diye
+ * ikiye ayrılıyor; indeks ya da yayınevi niteliği aranmıyor. Uluslararası
+ * satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz
+ * uluslararası kitap 60 yerine 40, bölümü 30 yerine 20 puan alıyordu.
  */
 
 return [
@@ -69,10 +75,10 @@ return [
         'A3' => ['baslik' => 'Diğer dergilerde yayımlanan makale, çeviri veya vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
 
         // ══ B — KİTAPLAR VE ÇEVİRİLER ══
-        'B1.1' => ['baslik' => 'Alanında uluslararası kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
-        'B1.2' => ['baslik' => 'Alanında uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-        'B2.1' => ['baslik' => 'Alanında ulusal kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
-        'B2.2' => ['baslik' => 'Alanında ulusal kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
+        'B1.1' => ['baslik' => 'Alanında uluslararası kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 60],
+        'B1.2' => ['baslik' => 'Alanında uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+        'B2.1' => ['baslik' => 'Alanında ulusal kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 40],
+        'B2.2' => ['baslik' => 'Alanında ulusal kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 20],
         'B2.3' => ['baslik' => 'Ansiklopedide madde yazarlığı (en fazla üç madde)', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
         'B3.1' => ['baslik' => 'Alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 40],
         'B3.2' => ['baslik' => 'Alanında kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 20],
