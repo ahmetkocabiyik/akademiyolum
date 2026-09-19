@@ -57,6 +57,14 @@
  * fazla biçimde sunulduysa yalnızca en yüksek puanlı sayılır" kuralı.
  *
  * Yönerge: yonerge/lokman-hekim.php
+ *
+ * KİTAPTA "DÜZEY" SÜTUNU (19.09.2026): kitap bloğunun her kalemi uluslararası
+ * ↔ ulusal diye ikiye ayrılıyor (bilimsel kitap 100/50, ders kitabı 50/30,
+ * bölüm katkısı 30/15, editörlük 40/20, ansiklopedi 15/10); indeks aranmıyor.
+ * Üst satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz
+ * uluslararası kitap 100 yerine 50, bölümü 30 yerine 15, editörlüğü 40 yerine
+ * 20 puandaydı. Ders kitabının uluslararası kademesi (T1-K-ders-u, 50) açıldı
+ * ve KITAP grubuna eklendi; ansiklopedi ulusal değerinde kaldı.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $OZGUN = ['ozgun_makale'];
@@ -143,16 +151,17 @@ return [
         'T1-B-ozet-n' => ['baslik' => 'Ulusal toplantıda sunulmuş ve özeti yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
         // ══ TABLO 1 — KİTAP ══
-        'T1-K-u' => ['baslik' => 'Uluslararası bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-        'T1-K-n' => ['baslik' => 'Ulusal bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 50],
-        'T1-K-ders' => ['baslik' => 'Ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 30],
-        'T1-K-bolum-u' => ['baslik' => 'Uluslararası kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-        'T1-K-bolum-n' => ['baslik' => 'Ulusal kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 15],
+        'T1-K-u' => ['baslik' => 'Uluslararası bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
+        'T1-K-ders-u' => ['baslik' => 'Uluslararası ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 50],
+        'T1-K-n' => ['baslik' => 'Ulusal bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 50],
+        'T1-K-ders' => ['baslik' => 'Ulusal ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 30],
+        'T1-K-bolum-u' => ['baslik' => 'Uluslararası kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+        'T1-K-bolum-n' => ['baslik' => 'Ulusal kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 15],
         'T1-K-ansiklopedi' => ['baslik' => 'Ansiklopedide konu ya da madde yazarı olmak', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
         'T1-K-ceviri' => ['baslik' => 'Uluslararası yayınevlerince yabancı dilde basılmış eserin Türkçeye tam çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 50],
         'T1-K-ceviri-b' => ['baslik' => 'Uluslararası yayınevlerince yabancı dilde basılmış eserin bir bölümünün Türkçeye çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 20],
-        'T1-K-editor-u' => ['baslik' => 'Uluslararası kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
-        'T1-K-editor-n' => ['baslik' => 'Ulusal kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+        'T1-K-editor-u' => ['baslik' => 'Uluslararası kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
+        'T1-K-editor-n' => ['baslik' => 'Ulusal kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 20],
 
         // ══ TABLO 2 — DAVETLİ KONUŞMACILIK ══
         'T2-davetli' => ['baslik' => 'Bilimsel toplantıda davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
@@ -220,7 +229,7 @@ return [
         'PROJE-A' => ['T1-PR-dis-a', 'T1-PR-ic-a', 'T1-PR-uni-a'],
         // Madde 16(1)-b-3 ve 21(1)-d-4: tek yazarlı ya da editör olarak
         // kitap, veya BKCI kapsamındaki kitapta bölüm yazarlığı.
-        'KITAP' => ['T1-K-u', 'T1-K-n', 'T1-K-editor-u', 'T1-K-editor-n', 'T1-K-bolum-u'],
+        'KITAP' => ['T1-K-u', 'T1-K-n', 'T1-K-ders-u', 'T1-K-editor-u', 'T1-K-editor-n', 'T1-K-bolum-u'],
         'TEZ' => ['T2-dan-doktora', 'T2-dan-yl', 'T2-dan-es'],
         'DANISMANLIK' => ['T2-dan-doktora', 'T2-dan-yl', 'T2-dan-es'],
     ],
