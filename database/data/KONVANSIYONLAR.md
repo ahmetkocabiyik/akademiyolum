@@ -1751,11 +1751,18 @@ uyarınca AŞAĞIDA kalır. Dört desen çıktı:
    bu tarif TERİMİN KENDİSİ, ek bir kapı değil. Üst satıra kapsamlı etiket
    eklenir, alt satır `Ulusal Kitap`a daraltılır. (Ağrı, ADÜ, Bartın, Bayburt,
    Bitlis, Karabük, Kırklareli, Marmara, Trabzon…)
-2. **Dil ekseni — BAĞLAMA.** "Uluslararası yayınevince YABANCI DİLDE basılmış"
-   ↔ "ulusal yayınevince Türkçe". Kayıt kitabın dilini taşımıyor; etiket alt
-   satırda kalır. (Bolu, Düzce, Dicle, Gazi, Konya Gıda, Başkent, Biruni, PAÜ,
-   İstanbul Atlas, Kahramanmaraş İstiklal.)
-   **İSTİSNA — dil ayrımı DÜŞÜREN değil ÇARPAN ise bağla:** MTÜ "Türkçe
+2. **Dil ekseni — BAĞLA (19.09.2026, kullanıcı kararı).** "Uluslararası
+   yayınevince YABANCI DİLDE basılmış" ↔ "ulusal yayınevince Türkçe". Kayıt
+   kitabın dilini taşımıyor ama ALT satırın ölçütü de kaydın karşılamadığı bir
+   şey (ulusal yayınevi ya da Türkçe metin); kanıtlanamayan koşul satır
+   SEÇİMİNİ değiştirmediği için kapsam etiketi yine kendi kapsamının satırına
+   bağlanır. (Ankara, Antalya Bilim, Başkent, Biruni, Bolu, Dicle, Düzce, Gazi,
+   İstanbul Atlas, Kadir Has, Kahramanmaraş İstiklal, Konya Gıda, PAÜ.)
+   **Kaynak uluslararası tarafı kendi içinde ikiye ayırıyorsa kapsam etiketi
+   ALT (Türkçe) kademeye gider** — üst kademe BKCI'nın kalır (Amasya B.5 125 ↔
+   B.1 150, Ege 3a2 40 ↔ 3a1 75).
+
+   **İSTİSNA — dil ayrımı DÜŞÜREN değil ÇARPAN ise:** MTÜ "Türkçe
    basılmış olanlar puanın yarısını alır", Artvin "%80'ini alır" diyor; orada
    uluslararası kitap ULUSAL satıra düşmüyor, kendi kademesinin yarısını
    alıyor. Kapsamlı etiket o YARIM satıra bağlanır (MTÜ C1.1-tr 125, Artvin

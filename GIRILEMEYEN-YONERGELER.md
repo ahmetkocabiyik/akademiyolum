@@ -1411,11 +1411,25 @@ Bu turda iki ters yön daha çıktı: Atatürk'te 01.03.01 ve Samsun'da B1 genel
 etiketi taşıdığı için ULUSAL yayınevi kitabı uluslararası satırdan sayılıyordu
 (Samsun adet sayan bir yönerge olduğu için yanlış KOŞULU sağlıyordu).
 
-Bağlanmayanlar ve gerekçeleri: Afyon Sağlık (alt satır "…veya DİĞER
-ULUSLARARASI yayınevince" diyor, kaynak o kitaba zaten yer göstermiş),
-Kadir Has (üst satır yabancı dil koşullu, alt satır zaten dil ekseninde),
-indeks kapsamına bağlı satırlar (BKCI/Scopus/ACQWEB) ve dil ekseninde ayrılan
-cetveller.
+**Üçüncü tur — dil ekseninde ayrılanlar da bağlandı (19.09.2026, kullanıcı
+kararı).** Üst satırın "yabancı dilde yazılmış" koşulu kayıttan okunamıyor ama
+ALT satırın ölçütü de (ulusal yayınevi ya da Türkçe metin) kaydın
+karşılamadığı bir şey; kanıtlanamayan koşul satır SEÇİMİNİ değiştirmediği için
+kapsam etiketi kendi kapsamının satırına bağlandı. On üç cetvel: Ankara,
+Antalya Bilim, Başkent, Biruni, Bolu AİBÜ, Dicle, Düzce, Gazi, İstanbul Atlas,
+Kadir Has, Kahramanmaraş İstiklal, Konya Gıda, PAÜ.
+
+Bu turda da kaynakta duran ama girilmemiş satırlar çıktı: Ankara'nın ulusal
+çeviri kademeleri (2Bb 25, 2Bç 10), Bolu'nun A.7.2 uluslararası kitap
+editörlüğü (50), Biruni'nin B1.5.c (100) ve B2.4.d (60) editörlük kademeleri.
+Bolu'nun 'C.6' satırı ("kitap editörlüğü, 10") silindi — kaynağın C bölümü
+dergi kademelerinden ibaret, o kod kaynakta yok.
+
+Bağlanmayanlar ve gerekçeleri: indeks kapsamına bağlı satırlar
+(BKCI/Scopus/ACQWEB/CERES — kayıtta indeks bilgisi yalnız BKCI etiketiyle var)
+ve alt satırı "…veya DİĞER ULUSLARARASI yayınevince" diyen cetveller (Afyon
+Sağlık, Anadolu, Gaziantep, ASBÜ): kaynak indekssiz uluslararası kitaba zaten
+kendi yerini göstermiş, genel etiket orada doğru.
 
 Açık kalan iki küçük iş: (1) Sakarya ÜBÜ 9.1 ve Marmara'nın fen/mühendislik/
 güzel sanatlar varyantlarında kitap editörlüğü etiketleri DERGİ editörlüğü
