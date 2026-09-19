@@ -3476,6 +3476,14 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Bitlis A.7 "uluslararası yayınevlerince Türkçe YA DA yabancı dilde" ↔
+    // A.8 ulusal; dil koşulu yok, ayrım yalnız yayınevinin yeri.
+    ['bitlis-2024', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
     // Bingöl 10 ↔ 11 (kitap), 12 ↔ 13 (bölüm), 14.a ↔ 14.b (editörlük);
     // üçü de yalnız yayımın yerine bakıyor.
     ['bingol-2024', [

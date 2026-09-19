@@ -19,14 +19,22 @@
  * editörlük ve ödül kalemlerinde uygulanmıyor — o kalemlerde puanınız
  * OLDUĞUNDAN YÜKSEK görünebilir.
  *
+ * KİTAPTA ULUSLARARASI/ULUSAL AYRIMI (19.09.2026): A.7 başlığı "Alanında
+ * ULUSLARARASI YAYINEVLERİ tarafından basılmış TÜRKÇE YA DA YABANCI DİLDE
+ * basılmış bilimsel yayınlar", A.8 ise "ulusal yayınevleri ya da kuruluşlarca
+ * Türkçe basılmış" diyor: ayrım yalnız yayınevinin yerinde, dil koşulu yok,
+ * indeks aranmıyor. A.7 satırları bu yüzden kapsamlı uluslararası etiketleri
+ * de taşıyor, A.8 ulusal etiketlere daraltıldı. Önceden indekssiz uluslararası
+ * kitap 50 yerine 40, bölümü 25 yerine 20, kitap editörlüğü 30 yerine 25
+ * puandaydı; kaynakta duran A.7.2 (30) satırı da bu turda açıldı.
+ *
  * GİRİLMEYEN KALEMLER (kaynak sözlüğünde karşılığı yok):
  *   A.4 (indeks kapsamı dışındaki uluslararası hakemli dergiler) — sözlükte
  *       "indekssiz uluslararası dergi" diye bir kaynak yok; A.3 ile aynı kaynağa
  *       düşerdi ve yüksek olanı seçilirdi. Girilmedi, yani puan eksik sayılır.
- *   A.7.2 (uluslararası yayınevi kitap editörlüğü, 30) ve A.7.4/A.7.5
- *       (ansiklopedi) — sözlükteki "Kitap Editörlüğü" ve "Ansiklopedi Maddesi"
- *       kaynakları ulusal/uluslararası ayrımı taşımıyor. Kural gereği DÜŞÜK
- *       olan ulusal karşılıkları (A.8.2, A.8.7) girildi.
+ *   A.7.4/A.7.5 (ansiklopedi bölümü ve madde tanımlaması) — `Ansiklopedi
+ *       Maddesi` etiketi ulusal/uluslararası ayrımı taşımıyor, kural gereği
+ *       DÜŞÜK olan ulusal karşılığı (A.8.7) girildi.
  *   C.3, C.4 (uluslararası dergi editörlükleri), G (toplumsal katkı), H (jüri),
  *       I (sanatsal etkinlikler), J (mimari tasarım) — sözlükte karşılıksız.
  *   D.2, D.3, D.4 (bilirkişilik, ödül, burs) ve E, F bölümlerinin bir kısmı.
@@ -103,13 +111,14 @@ return [
         'A.6.2' => ['baslik' => 'TR Dizin dışı ulusal hakemli dergide olgu sunumu, teknik not, editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
 
         // ── A.7 Uluslararası yayınevi kitapları ──
-        'A.7.1' => ['baslik' => 'Uluslararası yayınevince basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-        'A.7.3' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 25],
+        'A.7.1' => ['baslik' => 'Uluslararası yayınevince basılmış kitap veya ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 50],
+        'A.7.2' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
+        'A.7.3' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 25],
 
         // ── A.8 Ulusal yayınevi kitapları ──
-        'A.8.1' => ['baslik' => 'Ulusal yayınevince basılmış kitap veya ders kitabı yazarlığı (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
-        'A.8.2' => ['baslik' => 'Kitap editörlüğü (en az 50 sayfa)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 25],
-        'A.8.3' => ['baslik' => 'Kitap bölümü yazarlığı veya kitapçık (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
+        'A.8.1' => ['baslik' => 'Ulusal yayınevince basılmış kitap veya ders kitabı yazarlığı (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 40],
+        'A.8.2' => ['baslik' => 'Ulusal yayınevi kitabında editörlük (en az 50 sayfa)', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 25],
+        'A.8.3' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı veya kitapçık (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 20],
         'A.8.4' => ['baslik' => 'Kitap çevirmenliği (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
         'A.8.6' => ['baslik' => 'Kitap bölümü, kitapçık veya makale çevirmenliği (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
         'A.8.7' => ['baslik' => 'Ansiklopedi madde tanımlaması', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 4],
