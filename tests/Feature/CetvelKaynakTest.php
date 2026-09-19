@@ -3476,6 +3476,21 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Erzincan 1.1 ↔ 1.2, 2.1 ↔ 2.2: tanımlar maddesindeki ulusal/uluslararası
+    // yayınevi ayrımı.
+    ['erzincan-2021', [
+        'Uluslararası Kitap' => 60,
+        'Ulusal Kitap' => 50,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 15,
+    ]],
+    // GİBTÜ 4.a-4.d ve 8.a-8.b.
+    ['gibtu-2024', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 15,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
     // Burdur 8/9/18: ayrım yalnız yayımın yeri (yurt dışı ↔ yurt içi).
     ['burdur-2016', [
         'Uluslararası Kitap' => 70,

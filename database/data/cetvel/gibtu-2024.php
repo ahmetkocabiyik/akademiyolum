@@ -21,6 +21,13 @@
  * değerlendirme panelleri — kaynak sözlüğünde karşılıkları yok. Koşullar
  * yalnızca 1, 4, 5, 6 numaralı bölümlere ve genel toplama atıf yaptığı için
  * eksik bölümler yalnızca genel toplamı düşürüyor.
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): 4. bölümün a/b ile c/d satırları ve
+ * 8. bölümün a/b editörlük satırları yalnız yayınevinin uluslararası ya da
+ * ulusal olmasına bakıyor (madde 7: "bilimsel kitap/kitap bölümü, ulusal ve
+ * uluslararası yayınevleri tarafından basılmış, ISBN…"). Uluslararası satırlar
+ * yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz uluslararası kitap 50
+ * yerine 30, bölümü 15 yerine 10, editörlüğü 25 yerine 15 puan alıyordu.
  */
 
 return [
@@ -47,10 +54,10 @@ return [
         '3.b' => ['baslik' => 'Kitaplarda yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'TR Dizin', 'Diğer', 'Patent'], 'puan' => 2],
 
         // ── 4. KİTAPLAR ──
-        '4.a' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan ISBN\'li kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-        '4.b' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
-        '4.c' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan ISBN\'li kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 30],
-        '4.d' => ['baslik' => 'Ulusal yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
+        '4.a' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan ISBN\'li kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+        '4.b' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
+        '4.c' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan ISBN\'li kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 30],
+        '4.d' => ['baslik' => 'Ulusal yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
 
         // ── 5. DİĞER KİTAPLAR ──
         '5.a' => ['baslik' => 'Lisansüstü tezden üretilmiş kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı', 'Ansiklopedi Maddesi'], 'puan' => 25],
@@ -94,8 +101,8 @@ return [
         '7.f.ara' => ['baslik' => 'Diğer kamu ya da özel kurum destekli Ar-Ge projesinde araştırmacılık', 'kategori' => 'proje', 'kaynaklar' => ['Özel Sektör / STK'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 15],
 
         // ── 8. EDİTÖRLÜK ve YAYIN KURULU ──
-        '8.a' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 25],
-        '8.b' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
+        '8.a' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 25],
+        '8.b' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 15],
         '8.i' => ['baslik' => 'SSCI, AHCI, SCI veya SCI-E endeksli dergide editörlük veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 20],
         '8.j' => ['baslik' => 'Diğer dergilerde editörlük veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 15],
         '9.a' => ['baslik' => 'Hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
