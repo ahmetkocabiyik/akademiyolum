@@ -42,6 +42,13 @@
  * etkinlikler), P (sanatsal etkinlikler) ve R (sanatsal ödüller). M, O, P ve R
  * koşulların alt baraj kümesine girmiyor; yalnızca genel toplamı etkiliyorlar,
  * dolayısıyla GÜZEL SANATLAR ADAYLARININ TOPLAMI OLDUĞUNDAN DÜŞÜK çıkar.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): C.1/C.2 "uluslararası kitap … yurt
+ * dışında yayımlanmış", F.1/F.2 "Türkçe kitap … ulusal yayınevleri tarafından
+ * yayımlanmış" diyor; indeks ya da yayınevi niteliği aranmıyor. Uluslararası
+ * satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz uluslararası
+ * kitap 120 yerine 60, bölümü 40 yerine 20 puan alıyordu. Kaynak ders kitabını
+ * ayrı saymadığı için ders kitabı da kendi kapsamının satırından sayılıyor.
  */
 
 return [
@@ -66,8 +73,8 @@ return [
         'B.2.c' => ['baslik' => 'Uluslararası kongrede özeti yayımlanmış sözlü bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 6],
 
         // ══ C — ULUSLARARASI KİTAP VE KİTAP BÖLÜMÜ ══
-        'C.1' => ['baslik' => 'Uluslararası kitap yazarlığı (yurt dışında yayımlanmış, ISBN\'li)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 120],
-        'C.2' => ['baslik' => 'Uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
+        'C.1' => ['baslik' => 'Uluslararası kitap yazarlığı (yurt dışında yayımlanmış, ISBN\'li)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 120],
+        'C.2' => ['baslik' => 'Uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 40],
 
         // ══ D — ULUSAL MAKALELER ══
         'D.1.a' => ['baslik' => 'TÜBİTAK-ULAKBİM taranan yurt içi hakemli dergide özgün veya derleme makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 24],
@@ -81,8 +88,8 @@ return [
         'E.3' => ['baslik' => 'Panel, konferans veya açılış dersinde davetli sunum yapmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 2],
 
         // ══ F — TÜRKÇE KİTAP VE BÖLÜM YAZARLIĞI ══
-        'F.1' => ['baslik' => 'Türkçe kitap yazarlığı (ulusal yayınevi, ISBN\'li)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 60],
-        'F.2' => ['baslik' => 'Türkçe kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
+        'F.1' => ['baslik' => 'Türkçe kitap yazarlığı (ulusal yayınevi, ISBN\'li)', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 60],
+        'F.2' => ['baslik' => 'Türkçe kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 20],
         'F.3.b' => ['baslik' => 'Ulusal ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
         'F.4.a' => ['baslik' => 'Kitap çevirisi (ISBN\'li bilimsel kitap veya nadir eser)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
         'F.4.b' => ['baslik' => 'Kitap bölümü veya makale çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
