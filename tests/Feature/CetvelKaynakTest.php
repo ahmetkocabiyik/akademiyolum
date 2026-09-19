@@ -3368,3 +3368,54 @@ test('Gümüşhane çapraz eşlemesi WoS tarafını kaydırmıyor', function () 
         ->and($puan('SCIE/SSCI (Q3)'))->toBe($puan('Scopus (Q2)'))
         ->and($puan('SCIE/SSCI (Q4)'))->toBe($puan('Scopus (Q3)'));
 });
+
+/**
+ * KİTAPTA YAYINEVİ KAPSAMI: kaynak uluslararası ile ulusal yayınevini
+ * ayırıyorsa, ADAYIN İNDEKSSİZ uluslararası kitabı da uluslararası satırdan
+ * sayılmalı.
+ *
+ * Korpusta 55 cetvelde "uluslararası yayınevi" başlıklı satır YALNIZ
+ * `BKCI / Scopus Kitap` etiketini taşıyordu; ulusal satır ise genel
+ * `Uluslararası/Ulusal Kitap` etiketinde kalmıştı. Sonuç sessizdi: BKCI'da
+ * taranmayan uluslararası kitap zincirin sonunda ULUSAL satıra düşüyor ve
+ * adayın puanı eksik çıkıyordu (Ağrı'da 80 yerine 40).
+ *
+ * Düzeltme SATIR SATIR yapıldı, çünkü kaynakların üst satırı üç ayrı eksende
+ * kapı tutuyor ve yalnız birincisi bu etikete çevrilebiliyor:
+ *   1. YAYINEVİNİN YERİ (uluslararası ↔ ulusal) — etiketin tam karşılığı.
+ *   2. İNDEKS (BKCI/Scopus/ACQWEB kapsamındaki yayınevi) — kayıtta indeks
+ *      bilgisi ancak BKCI etiketiyle var; satır BKCI'da kalır.
+ *   3. YAYINEVİNİN NİTELİĞİ ("tanınmış", "saygın", "önde gelen") ya da
+ *      KİTABIN DİLİ ("yabancı dilde") — kayıt bu niteliği taşımıyor, §0
+ *      uyarınca satır yine BKCI'da kalır.
+ *
+ * Aşağıdaki değerler kaynak PDF'lerinden okundu; uluslararası satır ulusal
+ * satırdan yüksek olduğu için bir geri dönüş burada kırılır.
+ */
+test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (string $cetvel, array $beklenen) {
+    $katalog = sartDepo()->katalog($cetvel);
+    expect($katalog)->not->toBeNull();
+
+    $puan = fn (string $etiket) => $katalog->puan(
+        new Faaliyet([
+            'kategori' => Kategori::Kitap, 'tur' => 'Test', 'baslik' => 'Test',
+            'kaynak' => $etiket, 'rol' => 'tek', 'durum' => 'onaylandi',
+        ]),
+        $katalog->coz(['*']),
+    );
+
+    $gercek = [];
+
+    foreach (array_keys($beklenen) as $etiket) {
+        $gercek[$etiket] = $puan($etiket);
+    }
+
+    expect($gercek)->toBe($beklenen);
+})->with([
+    // Kaynak 4.1.1 ile 4.1.2'yi yayınevinin yurt içi/dışı olmasına göre
+    // ayırıyor, indeks aramıyor. Bölüm satırı tek ve ulusal değerinde (20).
+    ['agri-2024', [
+        'Uluslararası Kitap' => 80,
+        'Ulusal Kitap' => 40,
+    ]],
+]);

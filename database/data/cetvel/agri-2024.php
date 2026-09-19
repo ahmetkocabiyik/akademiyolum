@@ -23,6 +23,16 @@
  * alt maddeye bölünüp puanı önceden çarpıldı (40 → 60/50/45/40). Çeyrekliği
  * belli olmayan makale yönergeye göre Q4 sayılıyor.
  *
+ * KİTAPTA ULUSLARARASI/ULUSAL AYRIMI ARTIK SÖZLÜKTE: kaynak 4.1.1 ile 4.1.2'yi
+ * yayınevinin yurt içi/dışı olmasına göre ayırıyor ve indeks aramıyor. 4.1
+ * satırı bu yüzden `Uluslararası Kitap` etiketini de taşıyor; önceden yalnız
+ * BKCI/Scopus etiketi bağlıydı ve indekssiz uluslararası kitap 40 puanlık
+ * ulusal satıra düşüyordu. 4.2 buna karşılık `Ulusal Kitap`a daraltıldı.
+ * Kaynağın 4.2.1 uluslararası kitap bölümü (25) satırı AYRI AÇILMADI: koşullar
+ * madde kodlarını tek tek sayıyor (Madde 7.1.2 → '4.1', '4.2', '4.3'), yeni bir
+ * kod o listelerin dışında kalırdı. Bölüm kaydı 4.3'ten 20 puan alıyor —
+ * kaynaktan 5 puan eksik, §0 yönünde.
+ *
  * GİRİLMEYEN BÖLÜMLER: 8-29 arası sanatsal etkinlik, film, tiyatro, restorasyon
  * ve arkeolojik kazı kalemleri ile 30-37 arası müzik kalemleri — kaynak
  * sözlüğünde karşılıkları yok. Bu bölümlere atıf yapan koşullar (müzik
@@ -71,8 +81,8 @@ return [
         '2.2.4-2.2.5' => ['baslik' => 'Ulusal bilimsel toplantıda özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 4],
 
         // ── 4. KİTAPLAR ──
-        '4.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 80],
-        '4.2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
+        '4.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 80],
+        '4.2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
         '4.3' => ['baslik' => 'Kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
 
         // ── 5. ÇEVİRİLER ──
