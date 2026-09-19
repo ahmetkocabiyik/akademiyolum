@@ -1434,6 +1434,15 @@ Afyon Sağlık, Anadolu, ASBÜ, Cerrahpaşa, Fırat, Gaziantep, Gümüşhane,
 İstanbul Arel, Kastamonu, Mersin, Nişantaşı, Sakarya, Tekirdağ, Tokat,
 Sabancı, Yozgat, Çukurova ve benzerleri böyle; dokunulmadı.
 
+**Beşinci tur (aynı gün): indeks ekseni korpusun tamamında bağlandı.**
+Kullanıcı kararıyla kapsam etiketi, kaynak indekssiz uluslararası kitaba kendi
+satırını gösteriyor olsa bile BKCI/Scopus satırına da bağlandı; 32 cetvelde 76
+satır (kitap, bölüm, editörlük). Motor yükseği aldığı için indeks ayrımı bu
+cetvellerde artık uygulanmıyor — donmuş çakışma listesindeki
+`indeksli > diğer uluslararası` satırları bunun izidir ve geri almak isteyen
+tur oradan başlayabilir. Önceki turlardan artakalan on yedi kitap editörlüğü
+satırı da bu turda bağlandı.
+
 Tek alternatifi ULUSAL satır olan beş cetvelde (Alanya, Ardahan, İnönü, OSTİM,
 Üsküdar) kapsam etiketi uluslararası satıra bağlandı. Bedeli dosya
 başlıklarında: kaynağın indeksli/indekssiz ayrımı artık uygulanmıyor, indekssiz

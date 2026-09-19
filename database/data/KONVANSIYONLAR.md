@@ -1773,22 +1773,25 @@ uyarınca AŞAĞIDA kalır. Dört desen çıktı:
    (Ege 3a2/3b2/3c2). Kaynağın kitap satırlarının TAMAMI uluslararası ve dil
    koşulluysa etiket yine oraya bağlanır — alternatifi ulusal kitabın
    uluslararası satırdan puan alması olurdu (Cerrahpaşa A1b).
-3. **İndeks ekseni — KAYNAKTA ALT KADEME VAR MI DİYE BAK.** "BKCI/Scopus/
-   ACQWEB kapsamındaki yayınevi" satırı, kaydın yalnız BKCI etiketiyle
-   kanıtlayabildiği bir kapı. Karar alt kademeye bakar:
+3. **İndeks ekseni — BAĞLA (19.09.2026, kullanıcı kararı).** "BKCI/Scopus/
+   ACQWEB kapsamındaki yayınevi" satırı, kaydın BKCI etiketiyle
+   kanıtlayabildiği tek kapıydı; buna rağmen kapsam etiketi üst satıra
+   bağlandı. Kaynak indekssiz uluslararası kitaba KENDİ SATIRINI gösteriyor
+   olsa bile (Anadolu 7d, Gaziantep 3c, Fırat A1.2, Afyon Sağlık C.1.b,
+   Cerrahpaşa A1b, Gümüşhane C2, İstanbul Arel B.3) motor yükseği aldığı için
+   indeks ayrımı artık UYGULANMIYOR.
 
-   - **Kaynak indekssiz uluslararası kitaba KENDİ SATIRINI gösteriyorsa
-     BAĞLAMA** — "diğer uluslararası yayınevi", "BKCI'de taranmayan
-     uluslararası yayınevleri", "B grubu uluslararası yayınevi", "uluslararası
-     ya da ulusal" gibi. Kapsam etiketi zaten oraya düşüyor ve doğrusu budur.
-     (Anadolu 7d, Gaziantep 3c, ASBÜ B.3, Afyon Sağlık C.1.b, Cerrahpaşa A1b,
-     Gümüşhane C2, Fırat A1.2, Kastamonu 4c, İstanbul Arel B.3, Sabancı,
-     Ufuk, Yeni Yüzyıl…)
-   - **Kaynakta böyle bir satır yoksa, yani tek alternatif ULUSAL satırsa,
-     BAĞLA** (19.09.2026, kullanıcı kararı). Alanya, Ardahan, İnönü, OSTİM ve
-     Üsküdar böyle. Bedeli dosya başlığına yazılır: kaynağın indeksli/indekssiz
-     ayrımı artık uygulanmıyor, indekssiz kitap indekslinin puanını alıyor ve
-     bu cetvellerde puan OLDUĞUNDAN YÜKSEK görünebilir.
+   **Bu maddenin bedeli var ve her dosyada yazılı:** indekssiz uluslararası
+   kitap, BKCI'da taranan kitapla aynı puanı alıyor; bu cetvellerde puan
+   OLDUĞUNDAN YÜKSEK görünebilir. `kapsam_notu`'na "KİTAPTA İNDEKS KOŞULU
+   DENETLENMİYOR …" cümlesi eklendi ve donmuş çakışma listesine
+   `indeksli > diğer uluslararası` satırları girdi. Geri almak isteyen tur
+   bunları silip kapsam etiketini alt satırda bırakır.
+
+   SENSE gibi yayınevi SINIFLANDIRMALARINDA kapsam etiketi EN DÜŞÜK
+   uluslararası kademede duruyor (Ufuk 5.c, Yeni Yüzyıl 1.A.21): orada
+   kaynağın kendi kademeleri aynı kapsam içinde, üst kademeye taşımak için
+   sebep yok.
 4. **Nitelik ekseni — BAĞLA (19.09.2026, kullanıcı kararı).** "TANINMIŞ /
    saygın / önde gelen / tanınırlığı olan / bilinen uluslararası yayınevi" ↔
    aynı sıfatı taşıyan ulusal satır. Sıfat İKİ KADEMEDE DE aynı koşul olduğu
@@ -1810,6 +1813,13 @@ uyarınca AŞAĞIDA kalır. Dört desen çıktı:
    etiketi EN DÜŞÜK uluslararası kademeye bağlanır (Ufuk 5.c, Yeni Yüzyıl
    1.A.21). Kademeyi indeks KAPSAMI belirliyorsa (BKCI/Scopus'ta taranıyor mu)
    3. madde geçerli — orada kayıt zaten BKCI etiketiyle konuşuyor.
+
+**Dört eksenin dördü de artık BAĞLANIYOR.** 19.09.2026'daki dört turun sonunda
+kapsam etiketi, kaydın kanıtlayamadığı koşul ne olursa olsun (dil, nitelik,
+indeks) uluslararası satıra bağlandı; tek istisna kaynağın aynı kapsam içinde
+verdiği ALT kademelerdir (Türkçe kademesi, SENSE D-E, %80/yarım çarpan). Bunun
+bedeli `kapsam_notu`'nda adaya yazılıyor: "… koşulu denetlenmiyor, puanınız
+olduğundan YÜKSEK görünür."
 
 Yön ters de işliyor: kaynakta ULUSAL kitap satırı HİÇ YOKSA genel etiket
 uluslararası satırda durmamalı — aday hak etmediği puanı alır (İstanbul Arel'de
