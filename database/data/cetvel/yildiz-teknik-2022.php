@@ -15,6 +15,16 @@
  * GİRİLMEYEN BÖLÜMLER: 10 (editörlük/hakemlik), 13 ve 14 (sanat-tasarım
  * temel alanına özgü kalemler) — EK-2'de yalnızca azami sınırla anılıyorlar,
  * asgari koşul üretmiyorlar.
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): 2a/2b (uluslararası, 20/10) ile
+ * 2c/2d (ulusal, 15/8) yalnız yayınevinin kapsamına bakıyor; tanımlar
+ * bölümü ikisini de "YÖK tanımına giren yayınevi" diyor, indeks aranmıyor.
+ * İndekssiz uluslararası kitap 20 yerine 15 puan alıyordu.
+ *
+ * KİTAP BÖLÜMÜ KENDİ KADEMESİNE TAŞINDI: kaynağın 2b ve 2d satırları
+ * "editörlük, BÖLÜM YAZARLIĞI" diyor, yani bölüm yazarlığı 10 ↔ 8 puanlık
+ * kademede. Cetvelde bölüm etiketleri 2e'nin çeviri satırında (8) duruyordu;
+ * 2b-bolum (10) ve 2d-bolum (8) satırları açıldı, 2e yalnız çeviriye kaldı.
  */
 
 return [
@@ -35,11 +45,13 @@ return [
         '1f' => ['baslik' => 'Diğer ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 4],
 
         // ── 2. KİTAPLAR ──
-        '2a' => ['baslik' => 'Uluslararası yayınevinden özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
-        '2c' => ['baslik' => 'Ulusal yayınevinden özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 15],
-        '2e' => ['baslik' => 'Çeviri kitap, kitap bölümü çevirisi veya kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü', 'Kitap Bölümü', 'BKCI / Scopus Kitap Bölümü'], 'puan' => 8],
-        '2b' => ['baslik' => 'Uluslararası yayınevinden özgün kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
-        '2d' => ['baslik' => 'Ulusal yayınevinden özgün kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 8],
+        '2a' => ['baslik' => 'Uluslararası yayınevinden özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 20],
+        '2c' => ['baslik' => 'Ulusal yayınevinden özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 15],
+        '2e' => ['baslik' => 'Çeviri kitap veya kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 8],
+        '2b' => ['baslik' => 'Uluslararası yayınevinden özgün kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
+        '2b-bolum' => ['baslik' => 'Uluslararası yayınevinden özgün kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+        '2d' => ['baslik' => 'Ulusal yayınevinden özgün kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 8],
+        '2d-bolum' => ['baslik' => 'Ulusal yayınevinden özgün kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Kitap Bölümü'], 'puan' => 8],
 
         // ── 3. PATENT / TASARIM ──
         '3a' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 35],

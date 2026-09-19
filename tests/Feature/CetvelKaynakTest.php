@@ -3474,6 +3474,31 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Siirt 3, Şırnak 2.1/2.2, Trabzon 1.3, YTÜ 2a-2d.
+    ['siirt-2025', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 20,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['sirnak-2024', [
+        'Uluslararası Kitap' => 40,
+        'Ulusal Kitap' => 25,
+        'Uluslararası Kitap Bölümü' => 20,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['trabzon-2025', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 15,
+        'Uluslararası Kitap Bölümü' => 15,
+        'Ulusal Kitap Bölümü' => 5,
+    ]],
+    ['yildiz-teknik-2022', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 15,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 8,
+    ]],
     // Muş Alparslan A1 ↔ B1, NOHÜ 4a-4d, Sakarya ÜBÜ 3.1/3.3, Osmaniye 2.1/2.2.
     ['mus-alparslan-2025', [
         'Uluslararası Kitap' => 120,
