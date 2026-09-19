@@ -72,6 +72,14 @@ use App\Enums\Kategori;
  *       yayınlarda puanınız olduğundan DÜŞÜK görünür.
  *
  * Yönerge: yonerge/kayseri.php
+ *
+ * KİTAPTA "DÜZEYİ" SÜTUNU (19.09.2026): kitap bloğunun her kalemi
+ * uluslararası ↔ ulusal diye ikiye ayrılıyor (bilimsel kitap 100/50, ders
+ * kitabı 50/30, bölüm katkısı 30/15, editörlük 40/20, ansiklopedi 15/10);
+ * indeks aranmıyor. Üst satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için
+ * indekssiz uluslararası kitap 100 yerine 50, bölümü 30 yerine 15, editörlüğü
+ * 40 yerine 20 puandaydı. Ders kitabının uluslararası kademesi (T1A-K3u, 50)
+ * açıldı. Ansiklopedi ulusal değerinde kaldı — etiketin kapsam ayrımı yok.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $DIGER_INDEKS = ['ESCI / Scopus', 'Diğer Uluslararası İndeks'];
@@ -143,13 +151,14 @@ $maddeler = [
     'T1A-B3' => ['baslik' => 'Uluslararası toplantıda sunulmuş ve özeti yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 4],
     'T1A-B4' => ['baslik' => 'Ulusal toplantıda sunulmuş ve özeti yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
-    'T1A-K1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-    'T1A-K2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 50],
-    'T1A-K3' => ['baslik' => 'Ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 30],
-    'T1A-K4' => ['baslik' => 'Uluslararası yayınevi kitabına bölüm düzeyinde katkı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-    'T1A-K5' => ['baslik' => 'Ulusal yayınevi kitabına bölüm düzeyinde katkı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 15],
-    'T1A-K6' => ['baslik' => 'Uluslararası kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
-    'T1A-K7' => ['baslik' => 'Ulusal kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+    'T1A-K1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
+    'T1A-K2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 50],
+    'T1A-K3u' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 50],
+    'T1A-K3' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 30],
+    'T1A-K4' => ['baslik' => 'Uluslararası yayınevi kitabına bölüm düzeyinde katkı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+    'T1A-K5' => ['baslik' => 'Ulusal yayınevi kitabına bölüm düzeyinde katkı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 15],
+    'T1A-K6' => ['baslik' => 'Uluslararası kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
+    'T1A-K7' => ['baslik' => 'Ulusal kitapta editörlük (çeviri editörlüğü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 20],
     'T1A-K8' => ['baslik' => 'Ansiklopedide konu ya da madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
     'T1A-K9' => ['baslik' => 'Yabancı dilde basılmış bilimsel ya da edebi eserin Türkçeye tam kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 50],
     'T1A-K10' => ['baslik' => 'Yabancı dilde basılmış eserin Türkçeye bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 20],
