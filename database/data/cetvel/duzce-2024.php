@@ -46,6 +46,13 @@
  * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
  * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
  * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): 1.4.a/1.4.b "ULUSLARARASI yayınevince
+ * yabancı dilde basılmış", 1.4.c/1.4.d "ULUSAL yayınevince Türkçe basılmış"
+ * diyor. Dil koşulu kayıttan okunamıyor ama alt satır ulusal yayınevine ait;
+ * kapsam etiketleri kendi satırlarına bağlandı (kitap 80 ↔ 40, bölüm 50 ↔ 30).
+ * 1.4.d ayrıca Türkçe kitapta EDİTÖRLÜĞÜ de sayıyor; kapsamsız `Kitap
+ * Editörlüğü` etiketi orada değil, cetvelin kendi editörlük satırlarında.
  */
 
 return [
@@ -94,10 +101,10 @@ return [
         '1.2.b' => ['baslik' => 'Diğer indeksli dergide olgu sunumu, teknik not veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 15],
         '1.3.a' => ['baslik' => 'Ulusal hakemli dergide makale veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 20],
         '1.3.b' => ['baslik' => 'Ulusal hakemli dergide olgu sunumu, teknik not veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 7],
-        '1.4.a' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 80],
-        '1.4.b' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 50],
-        '1.4.c' => ['baslik' => 'Ulusal yayınevince Türkçe basılmış bilimsel veya ders kitabı (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
-        '1.4.d' => ['baslik' => 'Türkçe kitapta bölüm yazarlığı, editörlük, kitapçık veya ansiklopedi maddesi', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
+        '1.4.a' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 80],
+        '1.4.b' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 50],
+        '1.4.c' => ['baslik' => 'Ulusal yayınevince Türkçe basılmış bilimsel veya ders kitabı (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 40],
+        '1.4.d' => ['baslik' => 'Türkçe kitapta bölüm yazarlığı, editörlük, kitapçık veya ansiklopedi maddesi', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
         '1.4.e' => ['baslik' => 'Türkçe kitap çevirmenliği (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
         '1.4.f' => ['baslik' => 'Kitap bölümü, kitapçık veya makale çevirmenliği (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
         '1.5.a' => ['baslik' => 'SCI, SCI-E, SSCI veya AHCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 3],
@@ -111,7 +118,7 @@ return [
         '2.3.a' => ['baslik' => 'Ulusal hakemli alan dergisinde baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 10],
         '2.3.c' => ['baslik' => 'Dergide yayın kurulu üyeliği, editör yardımcılığı veya danışma kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 5],
         '2.3.d' => ['baslik' => 'Dergi hakemliği (makale başına)', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
-        '2.4' => ['baslik' => 'Uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
+        '2.4' => ['baslik' => 'Uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
 
         // ══ 3. KONFERANS / SEMPOZYUM / ÇALIŞTAY ══
         '3.1.a' => ['baslik' => 'Uluslararası etkinlik kitabında yayımlanan tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin', 'Uluslararası Tam Metin (CPCI)'], 'puan' => 15],

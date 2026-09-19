@@ -78,6 +78,11 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA YAYIM YERİ AYRIMI (19.09.2026): C2c/C4c "YURT DIŞINDA yabancı dilde
+ * yayımlanmış", C1c/C3c "YURT İÇİNDE yayımlanmış" diyor. Dil koşulu kayıttan
+ * okunamıyor ama alt satır yurt içine ait; kapsam etiketleri kendi satırlarına
+ * bağlandı (kitap 40 ↔ 30, bölüm 15 ↔ 10, editörlük H1a 15).
  */
 
 return [
@@ -116,11 +121,11 @@ return [
         // ══ C. KİTAPLAR VE ÇEVİRİLER ══
         'C1a-C2a' => ['baslik' => 'Çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
         'C1b-C2b' => ['baslik' => 'Derleme veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 15],
-        'C1c' => ['baslik' => 'Yurt içinde yayımlanmış özgün araştırma kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
-        'C2c' => ['baslik' => 'Yurt dışında yabancı dilde yayımlanmış özgün araştırma kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 40],
+        'C1c' => ['baslik' => 'Yurt içinde yayımlanmış özgün araştırma kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
+        'C2c' => ['baslik' => 'Yurt dışında yabancı dilde yayımlanmış özgün araştırma kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 40],
         'C3a-C4a' => ['baslik' => 'Kitapta çeviri bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
-        'C3c' => ['baslik' => 'Yurt içinde yayımlanmış özgün araştırma kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
-        'C4c' => ['baslik' => 'Yurt dışında yabancı dilde yayımlanmış özgün araştırma kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
+        'C3c' => ['baslik' => 'Yurt içinde yayımlanmış özgün araştırma kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
+        'C4c' => ['baslik' => 'Yurt dışında yabancı dilde yayımlanmış özgün araştırma kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
         'C5b' => ['baslik' => 'Ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 3],
 
         // ══ D. PROJELER (başvuru satırları girilmedi) ══
@@ -146,7 +151,7 @@ return [
         'G4' => ['baslik' => 'Diğer yurt dışı ya da yurt içi hakemli dergide en az iki yıl editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Scopus Dergi'], 'puan' => 7],
 
         // ══ H. KİTAPLARDA EDİTÖRLÜK ══
-        'H1a' => ['baslik' => 'Yurt dışında yayımlanmış yabancı dilde kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],
+        'H1a' => ['baslik' => 'Yurt dışında yayımlanmış yabancı dilde kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 15],
         'H1b-H3' => ['baslik' => 'Yurt içinde yayımlanmış bilimsel, ders ya da çeviri kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 8],
 
         // ══ I. BİLİMSEL RAPORLAR ══

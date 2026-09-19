@@ -3707,6 +3707,32 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 30,
         'Ulusal Kitap Bölümü' => 20,
     ]],
+    ['bolu-aibu-2024', [
+        'Uluslararası Kitap' => 70,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 40,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
+    ['dicle-2023', [
+        'Uluslararası Kitap' => 40,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 15,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['duzce-2024', [
+        'Uluslararası Kitap' => 80,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 50,
+        'Ulusal Kitap Bölümü' => 30,
+    ]],
+    // Gazi'de alt kademenin ölçütü DİL ("Türkçe yayımlanan"); uluslararası
+    // yayınevi kaydı yine kendi kapsamının satırından sayılıyor.
+    ['gazi-2024', [
+        'Uluslararası Kitap' => 60,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 15,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
     // SENSE sınıflandırması kullanan ikili: kapsamlı etiket EN DÜŞÜK SENSE
     // kademesinde (Ufuk 5.c/5.i, Yeni Yüzyıl 1.A.21/1.A.27).
     ['ufuk-2025', [

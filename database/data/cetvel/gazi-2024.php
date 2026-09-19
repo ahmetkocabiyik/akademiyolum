@@ -25,6 +25,12 @@
  * GİRİLMEYEN BÖLÜMLER: EĞİTİM/ÖĞRETİM (tavan 20 puan), idari görevler ve
  * ödüller — kaynak sözlüğünde karşılığı olmayan ya da metrik olan kalemler.
  * Hesaplanan toplam bu kadar EKSİK kalabilir, fazla değil.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): K1 bloğu "ULUSLARARASI yayınevinden
+ * yabancı dilde", K1g/K1h ise "TÜRKÇE yayımlanan" kitabı puanlıyor. Kaynak üst
+ * kademeyi hem yayınevine hem dile bağlıyor; kayıt dili taşımasa da ULUSLARARASI
+ * yayınevi kaydı kendi kapsamının satırına bağlandı (kitap 60 ↔ 30, bölüm
+ * 15 ↔ 10, editörlük 30 ↔ 15, çeviri 20 ↔ ulusal satırı yok).
  */
 
 return [
@@ -79,17 +85,17 @@ return [
         '9d' => ['baslik' => 'Üniversite Senatosunca kabul edilmiş uluslararası dergide vaka incelemesi, teknik not, editöre mektup ya da kitap incelemesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not'], 'puan' => 2],
 
         // ── KİTAP ── (bölüm tavanı 60 puan)
-        'K1a' => ['baslik' => 'Uluslararası yayınevinden yabancı dilde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
-        'K1b' => ['baslik' => 'Uluslararası yayınevinden yabancı dilde kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
-        'K1d' => ['baslik' => 'Yabancı dilde yayımlanan bilimsel kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
-        'K1e' => ['baslik' => 'Yabancı dilde yayımlanan bilimsel kitap bölümü çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
-        'K1g' => ['baslik' => 'Türkçe yayımlanan bilimsel/mesleki kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 30],
-        'K1h' => ['baslik' => 'Türkçe yayımlanan bilimsel/mesleki kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
+        'K1a' => ['baslik' => 'Uluslararası yayınevinden yabancı dilde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 60],
+        'K1b' => ['baslik' => 'Uluslararası yayınevinden yabancı dilde kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
+        'K1d' => ['baslik' => 'Yabancı dilde yayımlanan bilimsel kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 20],
+        'K1e' => ['baslik' => 'Yabancı dilde yayımlanan bilimsel kitap bölümü çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 5],
+        'K1g' => ['baslik' => 'Türkçe yayımlanan bilimsel/mesleki kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 30],
+        'K1h' => ['baslik' => 'Türkçe yayımlanan bilimsel/mesleki kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
         'K2h' => ['baslik' => 'Tahkikli neşir / araştırma notu / detaylı kitap kritiği', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 5],
 
         // Kitap editörlükleri editörlük kategorisinde:
-        'K1f' => ['baslik' => 'Yabancı dilde yayımlanan bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
-        'K2f' => ['baslik' => 'Ulusal yayınevinden bilimsel/mesleki kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
+        'K1f' => ['baslik' => 'Yabancı dilde yayımlanan bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
+        'K2f' => ['baslik' => 'Ulusal yayınevinden bilimsel/mesleki kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 15],
 
         // ── PROJELER ── (yönergede "30/15" = yürütücü/araştırmacı)
         'Pa-y' => ['baslik' => 'NATO/NSF/AB Çerçeve destekli projede koordinatör veya yürütücü', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk'], 'roller' => ['yurutucu'], 'puan' => 30],

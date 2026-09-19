@@ -43,6 +43,16 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): A.7 "alanında ULUSLARARASI yayınevleri ya
+ * da kuruluşlarca yabancı dilde basılmış", A.8 "ULUSAL yayınevleri ya da
+ * kuruluşlarca Türkçe basılmış" diyor. Dil koşulu kayıttan okunamıyor ama alt
+ * blok ulusal yayınevine ait; kapsam etiketleri kendi bloklarına bağlandı
+ * (kitap 70 ↔ 40, bölüm 40 ↔ 20). Kaynakta duran ama girilmemiş A.7.2
+ * (uluslararası kitap editörlüğü, 50) satırı açıldı. Cetveldeki 'C.6'
+ * "Kitap editörlüğü (uluslararası yayınevi), 10" satırı SİLİNDİ: kaynağın C
+ * bölümü dergi kademelerinden ibaret ve C.5'te bitiyor, o kod kaynakta yok.
+ * Kitap editörlüğünün gerçek kademeleri A.7.2 (50) ve A.8.2 (30).
  */
 
 return [
@@ -101,11 +111,12 @@ return [
         'A.5.2' => ['baslik' => 'TR Dizin dergide olgu sunumu, teknik not veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
         'A.6.1' => ['baslik' => 'TR Dizin dışı ulusal hakemli dergide makale (derleme dâhil)', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
         'A.6.2' => ['baslik' => 'TR Dizin dışı ulusal dergide olgu sunumu, teknik not veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
-        'A.7.1' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 70],
-        'A.7.3' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı veya kitapçık', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
-        'A.8.1' => ['baslik' => 'Ulusal yayınevince Türkçe basılmış kitap veya ders kitabı yazarlığı (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 40],
-        'A.8.2' => ['baslik' => 'Kitap editörlüğü (en az 50 sayfa)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 30],
-        'A.8.3' => ['baslik' => 'Kitapçık veya kitap bölümü yazarlığı (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
+        'A.7.1' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 70],
+        'A.7.2' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 50],
+        'A.7.3' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı veya kitapçık', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 40],
+        'A.8.1' => ['baslik' => 'Ulusal yayınevince Türkçe basılmış kitap veya ders kitabı yazarlığı (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 40],
+        'A.8.2' => ['baslik' => 'Kitap editörlüğü (en az 50 sayfa)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 30],
+        'A.8.3' => ['baslik' => 'Kitapçık veya kitap bölümü yazarlığı (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 20],
         'A.8.4' => ['baslik' => 'Kitap çevirmenliği (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
         'A.8.6' => ['baslik' => 'Kitap bölümü, kitapçık veya makale çevirmenliği (50 sayfadan az)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
         'A.8.7' => ['baslik' => 'Ansiklopedi madde tanımlaması', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 4],
@@ -129,7 +140,6 @@ return [
         'C.5.1' => ['baslik' => 'Ulusal hakemli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 10],
         'C.5.2' => ['baslik' => 'Dergide yayın kurulu üyeliği, editörlük veya özel sayı editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 7],
         'C.5.3' => ['baslik' => 'Dergi hakemliği (makale başına)', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
-        'C.6' => ['baslik' => 'Kitap editörlüğü (uluslararası yayınevi)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
 
         // ══ D — ARAŞTIRMA-GELİŞTİRMEYE DAYALI FAALİYETLER ══
         'D.1.1' => ['baslik' => 'Uluslararası kuruluşlarca desteklenen projede yürütücülük', 'kategori' => 'proje', 'kaynaklar' => ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'], 'roller' => ['yurutucu'], 'puan' => 40],
