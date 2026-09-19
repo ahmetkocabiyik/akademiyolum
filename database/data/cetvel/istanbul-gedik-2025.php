@@ -42,6 +42,14 @@
  * çarpan rol tablosuz tek kademe olarak yazıldı.
  *
  * Yönerge: yonerge/istanbul-gedik.php
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): sıfat iki
+ * kademede de aynı, ayrımı yapan tek şey yayınevinin kapsamı. Kapsamlı
+ * etiketler üst satırlara bağlandı, ulusal satırlar daraltıldı.
+ *
+ * B3 (uluslararası kitap editörlüğü) kapsamsız `Kitap Editörlüğü` etiketini de
+ * taşımayı sürdürüyor: kaynakta ULUSAL kitap editörlüğü satırı yok, kapsamsız
+ * kayıt başka bir satıra düşemiyor.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'];
 $ULUSLARARASI_PROJE = ['AB Çerçeve / Ufuk', 'Diğer Uluslararası Fon'];
@@ -55,11 +63,11 @@ $maddeler = [
     'A4' => ['baslik' => 'Ulusal hakemli dergilerde yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 5],
 
     // ══ B. KİTAPLAR ══
-    'B1' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
-    'B2' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanan özgün bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-    'B4' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)', 'Çeviri Kitap'], 'puan' => 10],
-    'B5' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanan özgün bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi', 'Çeviri Kitap Bölümü'], 'puan' => 5],
-    'B3' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanan özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Kitap Editörlüğü'], 'puan' => 10],
+    'B1' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 20],
+    'B2' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanan özgün bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+    'B4' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)', 'Çeviri Kitap'], 'puan' => 10],
+    'B5' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanan özgün bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi', 'Çeviri Kitap Bölümü'], 'puan' => 5],
+    'B3' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanan özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Kitap Editörlüğü', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
 
     // ══ C. PATENT, YARIŞMA ══
     'C1' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 20],

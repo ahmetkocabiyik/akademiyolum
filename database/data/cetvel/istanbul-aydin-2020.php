@@ -44,6 +44,10 @@
  *       hangi ekten geldiğini oransal olarak sınırlayamıyor.
  *
  * Yönerge: yonerge/istanbul-aydin.php
+ *
+ * "ÖNDE GELEN ULUSLARARASI" ↔ "TANINMIŞ ULUSAL" AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): sıfat iki
+ * kademede de aynı, ayrımı yapan tek şey yayınevinin kapsamı. Kapsamlı
+ * etiketler üst satırlara bağlandı, ulusal satırlar daraltıldı.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -56,9 +60,9 @@ $maddeler = [
     // ══ EK-1/A. ULUSLARARASI YAYIN VE ETKİNLİKLER ══
     'A01' => ['baslik' => 'SSCI, SCI-Expanded veya AHCI kapsamındaki dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => $WOS, 'turler' => $TAM, 'puan' => 40],
     'A02' => ['baslik' => 'Alan endeksleri kapsamındaki dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => $ENDEKS, 'turler' => $TAM, 'puan' => 30],
-    'A04' => ['baslik' => 'Önde gelen uluslararası yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-    'A05' => ['baslik' => 'Önde gelen uluslararası yayınevi tarafından yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-    'A06' => ['baslik' => 'Önde gelen uluslararası yayınevi tarafından yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
+    'A04' => ['baslik' => 'Önde gelen uluslararası yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+    'A05' => ['baslik' => 'Önde gelen uluslararası yayınevi tarafından yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+    'A06' => ['baslik' => 'Önde gelen uluslararası yayınevi tarafından yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
     'A07' => ['baslik' => 'Uluslararası hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 20],
     'A08' => ['baslik' => 'Uluslararası hakemli bilimsel toplantıda yabancı dilde sunulup tam metin yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 15],
     'A09' => ['baslik' => 'Uluslararası bilimsel toplantıda yabancı dilde sunulup yayımlanan bildiri özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 5],
@@ -68,10 +72,10 @@ $maddeler = [
 
     // ══ EK-1/B. ULUSAL YAYIN VE ETKİNLİKLER ══
     'B01' => ['baslik' => 'Ulusal hakemli dergide yayımlanmış tam makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 20],
-    'B02' => ['baslik' => 'Tanınmış ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 40],
-    'B03' => ['baslik' => 'Tanınmış ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
+    'B02' => ['baslik' => 'Tanınmış ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 40],
+    'B03' => ['baslik' => 'Tanınmış ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
     'B04' => ['baslik' => 'Tanınmış ulusal yayınevi ya da üniversite tarafından yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],
-    'B07' => ['baslik' => 'Tanınmış ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
+    'B07' => ['baslik' => 'Tanınmış ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 15],
     'B08' => ['baslik' => 'Ulusal hakemli dergilerde hakemlik ya da editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 15],
     'B09' => ['baslik' => 'Tanınmış ulusal yayınevi ya da üniversite tarafından yayımlanan bilimsel kitap tercümesi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
     'B10' => ['baslik' => 'Ulusal hakemli dergide yayımlanmış tam makale tercümesi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],

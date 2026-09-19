@@ -3637,6 +3637,38 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 25,
         'Ulusal Kitap Bölümü' => 20,
     ]],
+    ['istanbul-aydin-2020', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['istanbul-gedik-2025', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 10,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 5,
+    ]],
+    // İMÜ 4a yalnız TEK YAZARLI kitabı puanlıyor; test kaydı 'tek' rolünde.
+    ['istanbul-medeniyet-2018', [
+        'Uluslararası Kitap' => 30,
+        'Ulusal Kitap' => 20,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 7,
+    ]],
+    // KSBÜ'nün H bölümü kapsam ayırmıyor; ulusal değer oradan (30/10).
+    ['ksbu-2023', [
+        'Uluslararası Kitap' => 60,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 20,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['msgsu-2023', [
+        'Uluslararası Kitap' => 60,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 20,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
     // Kayseri'nin "Düzeyi" sütunu, Kırıkkale 44, Kırklareli C, Kilis 2,
     // Karamanoğlu C-3/C-4 (yalnız bölüm; C-1 indekse bağlı, C-2 torba).
     ['kayseri-2024', [

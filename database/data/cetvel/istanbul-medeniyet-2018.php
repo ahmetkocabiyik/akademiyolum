@@ -64,6 +64,13 @@ use App\Enums\Kategori;
  * düşük göstermekti. `kapsam_notu` adayı uyarıyor.
  *
  * Yönerge: yonerge/istanbul-medeniyet.php
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): sıfat iki
+ * kademede de aynı, ayrımı yapan tek şey yayınevinin kapsamı. Kapsamlı
+ * etiketler üst satırlara bağlandı, ulusal satırlar daraltıldı.
+ *
+ * 4a yalnız TEK YAZARLI kitabı puanlıyor (`roller`); çok yazarlı uluslararası
+ * kitabın kaynakta satırı yok, 4d'nin ulusal kademesinden sayılmayı sürdürüyor.
  */
 
 // 12. bölümün uluslararası/ulusal ve bireysel/karma ayrımını taşıyan
@@ -133,12 +140,12 @@ $maddeler = [
     '3g' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, ULAKBİM tarafından taranan dergide yayımlanmış makale', 'kategori' => 'tez_yayini', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 4],
 
     // ══ 4. KİTAP (tezden üretilmemiş) ══
-    '4a' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitap yazarlığı (tek yazar)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'roller' => ['tek'], 'puan' => 30],
-    '4b' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],
-    '4c' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-    '4d' => ['baslik' => 'Tanınmış ulusal yayınevi, İMÜ Yayınevi ya da resmi kurum tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 20],
-    '4e' => ['baslik' => 'Tanınmış ulusal yayınevi, İMÜ Yayınevi ya da resmi kurum tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
-    '4f' => ['baslik' => 'Tanınmış ulusal yayınevi, İMÜ Yayınevi ya da resmi kurum kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 7],
+    '4a' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitap yazarlığı (tek yazar)', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'roller' => ['tek'], 'puan' => 30],
+    '4b' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 15],
+    '4c' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+    '4d' => ['baslik' => 'Tanınmış ulusal yayınevi, İMÜ Yayınevi ya da resmi kurum tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 20],
+    '4e' => ['baslik' => 'Tanınmış ulusal yayınevi, İMÜ Yayınevi ya da resmi kurum tarafından yayımlanmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 10],
+    '4f' => ['baslik' => 'Tanınmış ulusal yayınevi, İMÜ Yayınevi ya da resmi kurum kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 7],
     '4g' => ['baslik' => 'Kitap çeviri yazarlığı (tek yazar)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'roller' => ['tek'], 'puan' => 5],
     '4h' => ['baslik' => 'Çeviri kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 3],
 

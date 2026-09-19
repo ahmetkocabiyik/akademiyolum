@@ -68,6 +68,10 @@ use App\Enums\Kategori;
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): sıfat iki
+ * kademede de aynı, ayrımı yapan tek şey yayınevinin kapsamı. Kapsamlı
+ * etiketler üst satırlara bağlandı, ulusal satırlar daraltıldı.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 
@@ -139,10 +143,10 @@ $sanatKalan = array_values(array_diff(Kategori::SanatselEtkinlik->kaynaklar(), $
 
 $maddeler = [
     // ══ 1.1 KİTAP ══
-    '1.1.1' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
-    '1.1.2' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanmış kitap içinde bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
-    '1.1.3' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
-    '1.1.4' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanmış kitap içinde bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
+    '1.1.1' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 60],
+    '1.1.2' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanmış kitap içinde bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
+    '1.1.3' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
+    '1.1.4' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanmış kitap içinde bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
 
     // ══ 1.2 MAKALE ══
     '1.2.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => $SCI, 'puan' => 35],

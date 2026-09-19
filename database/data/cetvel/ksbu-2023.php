@@ -49,6 +49,13 @@
  * ve doğru kurum adı kullanılmış olmak".
  *
  * Yönerge: yonerge/ksbu.php
+ *
+ * YURT DIŞI KİTAP SATIRLARI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): C bölümü
+ * "YURT DIŞINDA tanınmış yayınevlerince yayımlanan" diyor, H bölümü ise
+ * yalnızca "alanınızda tanınmış yayınevlerince" — yani H kapsam ayırmıyor ve
+ * genel etiketleri taşımayı sürdürüyor. C satırlarına kapsamlı uluslararası
+ * etiketler eklendi; adayın indekssiz yurt dışı kitabı 60 yerine 30, bölümü 20
+ * yerine 10, editörlüğü 30 yerine 15 puan alıyordu.
  */
 $KISA = ['derleme', 'kisa_makale', 'vaka_teknik_not'];
 $TAM = ['ozgun_makale'];
@@ -116,9 +123,9 @@ return [
         'B2' => ['baslik' => 'Uluslararası bilimsel toplantıda poster olarak sergilenen bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 20],
 
         // ══ C. ULUSLARARASI KİTAPLAR ══
-        'C1' => ['baslik' => 'Yurt dışında tanınmış yayınevlerince yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
-        'C2' => ['baslik' => 'Yurt dışında tanınmış yayınevlerince yayımlanan kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
-        'C3' => ['baslik' => 'Yurt dışında tanınmış yayınevlerince yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
+        'C1' => ['baslik' => 'Yurt dışında tanınmış yayınevlerince yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 60],
+        'C2' => ['baslik' => 'Yurt dışında tanınmış yayınevlerince yayımlanan kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
+        'C3' => ['baslik' => 'Yurt dışında tanınmış yayınevlerince yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
 
         // ══ D. ÇEVİRİLER ══
         'D1' => ['baslik' => 'Yurt dışında tanınmış yayınevlerince yayımlanmış kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 40],
