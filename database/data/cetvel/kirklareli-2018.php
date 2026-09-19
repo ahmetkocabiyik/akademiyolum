@@ -78,6 +78,13 @@
  * çok kişili patentte puanı FAZLA gösterirdi (§0).
  *
  * Yönerge: yonerge/kirklareli.php
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): C-1/C-2 "en az beş yıl faaliyet
+ * gösteren ULUSLARARASI yayınevleri tarafından yayımlanmış … ISBN numarası
+ * olan" diyor, C-5/C-6 aynı cümlenin ulusal hâli; koşullar (web adresi, ISBN,
+ * yayınevi adresi) iki kademede de aynı, ayrımı yapan tek şey yayınevinin
+ * yeri. Üst satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz
+ * uluslararası kitap 300 yerine 150, bölümü 100 yerine 50 puan alıyordu.
  */
 $TAM = ['ozgun_makale'];
 $YARIM = ['derleme', 'kisa_makale', 'vaka_teknik_not'];
@@ -105,10 +112,10 @@ $maddeler = [
     'B-7' => ['baslik' => 'Ulusal sempozyum, kongre ya da konferansta özet olarak ya da poster olarak sunulmuş bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 10],
 
     // ══ C. KİTAPLAR ══
-    'C-1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış bilimsel ya da mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 300],
-    'C-2' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 100],
-    'C-5' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış bilimsel ya da mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 150],
-    'C-6' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 50],
+    'C-1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış bilimsel ya da mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 300],
+    'C-2' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 100],
+    'C-5' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış bilimsel ya da mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 150],
+    'C-6' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 50],
     'C-7' => ['baslik' => 'Yayımlanmış ansiklopedi konu ya da madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 25],
     'C-9' => ['baslik' => 'Kitap formatında basılmış ders notu, yardımcı ders notu ya da laboratuvar föyü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 30],
 
