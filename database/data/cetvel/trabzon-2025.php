@@ -68,6 +68,14 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): 1.3.1 (uluslararası kitap, 50) ile
+ * 1.3.2.2 (ulusal hakemsiz, 15), 1.3.1.2 ile 1.3.2.3 (bölüm, 15 ↔ 5) ve
+ * 3.1.1.1 ile 3.1.2.1 (kitap editörlüğü, 15 ↔ 5) yalnız yayınevinin kapsamına
+ * bakıyor. İndekssiz uluslararası kitap 50 yerine 15, bölümü 15 yerine 5,
+ * editörlüğü 15 yerine 5 puan alıyordu. Kaynağın 1.3.2 (ulusal HAKEMLİ kitap,
+ * 25) satırı girilmedi: hakemlik bilgisi kayıtta yok, §0 gereği ulusal kitap
+ * hakemsiz kademesinden sayılıyor.
  */
 
 return [
@@ -143,10 +151,10 @@ return [
         '1.2.2.1' => ['baslik' => 'Periyodik hakemli toplantıda yurt içi özet veya poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 
         // ══ 1.3. KİTAP ══
-        '1.3.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan bilimsel veya mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-        '1.3.1.2' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
-        '1.3.2.2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan bilimsel veya mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 15],
-        '1.3.2.3' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 5],
+        '1.3.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan bilimsel veya mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+        '1.3.1.2' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
+        '1.3.2.2' => ['baslik' => 'Ulusal yayınevi tarafından hakemsiz yayımlanan bilimsel veya mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 15],
+        '1.3.2.3' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 5],
         '1.3.2.4' => ['baslik' => 'Üniversite tarafından hakem incelemesinden geçirilerek yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 8],
         '1.3.3' => ['baslik' => 'Alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 8],
         '1.3.4.1' => ['baslik' => 'Ansiklopedide madde (en fazla dört madde hesaba katılır)', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
@@ -179,8 +187,8 @@ return [
         '2.4.4' => ['baslik' => 'Faydalı model', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model'], 'puan' => 10],
 
         // ══ 3.1. EDİTÖRLÜK - HAKEMLİK ══
-        '3.1.1.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],
-        '3.1.2.1' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
+        '3.1.1.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 15],
+        '3.1.2.1' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 5],
         '3.1.2.2' => ['baslik' => 'Uluslararası bir derginin editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 5],
         '3.1.2.4' => ['baslik' => 'Ulusal bir derginin editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 3],
         '3.1.4' => ['baslik' => 'Makale, proje ve panel hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
