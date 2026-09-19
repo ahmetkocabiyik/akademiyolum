@@ -93,6 +93,18 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA İKİ EKSEN BİRBİRİNE KARIŞIYORDU (19.09.2026): B.1/B.2 puan satırları
+ * DİLE göre ayrılıyor ("yabancı dilde yayımlanan" ↔ "Türkçe yayımlanan") ve
+ * ikisi de ulusal VE uluslararası yayınevini kapsıyor; 4D/4E koşulları ise
+ * YAYINEVİNİN KAPSAMINA bakıyor ("uluslararası yayınevleri tarafından
+ * yayımlanan kitap/kitap bölümü yazarlığı" ↔ "ulusal yayınevleri…").
+ *
+ * Cetvel iki ekseni tek satır ailesinde topladığı için uluslararası yayınevinin
+ * TÜRKÇE kitabı 4E (ulusal) koşulunu sağlıyor, 4D'yi sağlamıyordu. Aynı puanlı
+ * ikinci satırlar açıldı (B.2-u, B.4-u, B.4-editorluk-u): puan B.2 ile aynı
+ * (20/10/10, §0 — kitabın dili kayıtta yok) ama koşul tarafında
+ * `ULUSLARARASI-KITAP` kümesine giriyorlar.
  */
 
 return [
@@ -155,11 +167,17 @@ return [
 
         // ══ B. KİTAP ══
         'B.1' => ['baslik' => 'BKCI kapsamında ya da ulusal/uluslararası yayınevince yabancı dilde yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
-        'B.2' => ['baslik' => 'Ulusal veya uluslararası yayınevince Türkçe yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 20],
+        'B.2' => ['baslik' => 'Ulusal yayınevince Türkçe yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 20],
+        // B.2 iki yayınevi kapsamını birden sayıyor; 4D/4E koşulları ise kapsamı
+        // ayırıyor. Aynı puanlı ikinci satır, uluslararası yayınevinin Türkçe
+        // kitabını doğru KOŞULA (4D) sokuyor.
+        'B.2-u' => ['baslik' => 'Uluslararası yayınevince Türkçe yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 20],
         'B.3' => ['baslik' => 'Yabancı dilde yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
         'B.3-editorluk' => ['baslik' => 'Yabancı dilde yayımlanan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],
-        'B.4' => ['baslik' => 'Türkçe yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
-        'B.4-editorluk' => ['baslik' => 'Türkçe yayımlanan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
+        'B.4' => ['baslik' => 'Ulusal yayınevinin Türkçe kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
+        'B.4-u' => ['baslik' => 'Uluslararası yayınevinin Türkçe kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 10],
+        'B.4-editorluk' => ['baslik' => 'Ulusal yayınevinin Türkçe kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 10],
+        'B.4-editorluk-u' => ['baslik' => 'Uluslararası yayınevinin Türkçe kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Uluslararası Kitap Editörlüğü'], 'puan' => 10],
         'B.5' => ['baslik' => 'Yabancı dilde yayımlanan bir kitabın yayımlanmış çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
         'B.6' => ['baslik' => 'Yabancı dilde yayımlanan bir kitabın yayımlanmış bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
         'B.9' => ['baslik' => 'Diğer uluslararası veya ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 3],
@@ -246,19 +264,19 @@ return [
         // "WoS Q4 veya ESCI veya Scopus veya TR Dizin yayınları veya
         // Ulusal/uluslararası kitap/kitap bölümü veya uluslararası hakemli
         // konferanslarda sözlü olarak sunulmuş tam metin bildiri" ek kümesi.
-        'EK-KUME' => ['A.4', 'A.6', 'A.7', 'B.1', 'B.2', 'B.3', 'B.4', 'B.9', 'C.2', 'C.7'],
+        'EK-KUME' => ['A.4', 'A.6', 'A.7', 'B.1', 'B.2', 'B.2-u', 'B.3', 'B.4', 'B.4-u', 'B.9', 'C.2', 'C.7'],
         // Mühendislik Fakültesi'nin tabloları AHCI'yi anmıyor, yalnızca
         // "WoS Q1-Q2-Q3 yayın" diyor.
         'Q1-Q3' => ['A.1', 'A.2', 'A.3'],
         // Mimarlık, Tasarım ve Peyzaj tablolarının ek kümesi, EK-KUME'ye
         // "A/B tipi (ACQ Web) uluslararası yayınevi kitabı" ile
         // "ulusal/uluslararası mesleki yarışmalarda ilk üç ödül"ü ekliyor.
-        'EK-KUME-TASARIM' => ['A.4', 'A.6', 'A.7', 'B.1', 'B.2', 'B.3', 'B.4', 'B.9', 'C.2', 'C.7', 'I.6-I.7-I.9'],
+        'EK-KUME-TASARIM' => ['A.4', 'A.6', 'A.7', 'B.1', 'B.2', 'B.2-u', 'B.3', 'B.4', 'B.4-u', 'B.9', 'C.2', 'C.7', 'I.6-I.7-I.9'],
         // "ESCI, Scopus, WoS Q1-Q2-Q3-Q4 yayın" (İnsan ve Toplum 1D).
         'ESCI-Q1-Q4' => ['A.1', 'A.2', 'A.3', 'A.4', 'A.6'],
         // "Uluslararası endekslerde yayımlanmış makale veya TR Dizin makale
         // veya ulusal/uluslararası kitap/kitap bölümü" (İnsan ve Toplum 1E).
-        'GENIS-YAYIN' => ['A.1', 'A.2', 'A.3', 'A.4', 'A.5', 'A.6', 'A.7', 'A.8', 'B.1', 'B.2', 'B.3', 'B.4', 'B.9'],
+        'GENIS-YAYIN' => ['A.1', 'A.2', 'A.3', 'A.4', 'A.5', 'A.6', 'A.7', 'A.8', 'B.1', 'B.2', 'B.2-u', 'B.3', 'B.4', 'B.4-u', 'B.9'],
         // Aktivite 2'nin puan topladığı proje ve tescil kümesi.
         'PROJE' => ['D.*'],
         'PROJE-ODUL' => ['D.*', 'H.1', 'H.2-H.3', 'H.4', 'H.5-H.7', 'I.1', 'I.2', 'I.4', 'I.3-I.5-L.2', 'I.6-I.7-I.9'],
@@ -266,7 +284,7 @@ return [
         'TEZ' => ['F.1-doktora', 'F.1-yukseklisans'],
         'DAVETLI' => ['C.1-C.4'],
         'TAM-METIN-BILDIRI' => ['C.2', 'C.7', 'C.5'],
-        'ULUSLARARASI-KITAP' => ['B.1', 'B.3', 'B.3-editorluk'],
+        'ULUSLARARASI-KITAP' => ['B.1', 'B.2-u', 'B.3', 'B.3-editorluk', 'B.4-u', 'B.4-editorluk-u'],
         'ULUSAL-KITAP' => ['B.2', 'B.4', 'B.4-editorluk', 'B.9'],
         'EDITORLUK' => ['J.1-J.3-a', 'J.1-J.3-b', 'J.1-J.3-c', 'J.4'],
         'ODUL' => ['I.1', 'I.2', 'I.4', 'I.6-I.7-I.9'],
