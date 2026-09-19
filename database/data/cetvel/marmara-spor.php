@@ -44,7 +44,8 @@ return [
         .'hakemlik ve antrenörlük satırları faaliyet kaydına çevrilemediği için girilmedi. Belge 2018 öncesi terminoloji kullanıyor; kadro adları güncel '
         .'karşılıklarına eşlendi. Akademik organizasyon yöneticiliği (27), sorumlu yazar çarpanı, yükseltme jürisi görevleri ve idari '
         .'faaliyetler (Tablo 8) girilmedi. Gerçek toplamınız burada görünenden yüksek '
-        .'olabilir, düşük olamaz.',
+        .'olabilir.'
+        .' Kitapta ters yön var: tanım maddesi kitabı "saygınlığı olan yayınevlerince basılmış" diye tarif ediyor ama bu koşul kayıtta olmadığı için denetlenmiyor; yayıneviniz tanıma girmiyorsa kitap puanınız olduğundan YÜKSEK görünür.',
 
     'maddeler' => [
         // ── MAKALE ve DERLEME ── (1-15) · Tablo 1 ikisini ayırmıyor

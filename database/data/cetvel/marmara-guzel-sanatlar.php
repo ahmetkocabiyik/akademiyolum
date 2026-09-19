@@ -53,7 +53,8 @@ return [
         .'yazar çarpanı, bireysel yarışma dereceleri, eğitim müziği dizini satırları, patent '
         .'BAŞVURUSU, jüri görevleri, bilirkişilik ve atölye yöneticiliği ile idari '
         .'faaliyetler (Tablo 8) girilmedi. Gerçek toplamınız burada görünenden yüksek '
-        .'olabilir, düşük olamaz.',
+        .'olabilir.'
+        .' Kitapta ters yön var: tanım maddesi kitabı "saygınlığı olan yayınevlerince basılmış" diye tarif ediyor ama bu koşul kayıtta olmadığı için denetlenmiyor; yayıneviniz tanıma girmiyorsa kitap puanınız olduğundan YÜKSEK görünür.',
 
     'maddeler' => [
         // ── MAKALE ── (1-15)

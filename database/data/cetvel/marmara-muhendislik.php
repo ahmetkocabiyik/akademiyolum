@@ -45,7 +45,8 @@ return [
         .'öncesi terminoloji kullanıyor; kadro adları güncel karşılıklarına eşlendi. Sorumlu '
         .'yazar çarpanı, patent BAŞVURUSU satırı, jüri görevleri, bilirkişilik, laboratuvar '
         .'yöneticiliği ve görev süresi ile idari faaliyetler (Tablo 8) girilmedi. Gerçek '
-        .'toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
+        .'toplamınız burada görünenden yüksek olabilir.'
+        .' Kitapta ters yön var: tanım maddesi kitabı "saygınlığı olan yayınevlerince basılmış" diye tarif ediyor ama bu koşul kayıtta olmadığı için denetlenmiyor; yayıneviniz tanıma girmiyorsa kitap puanınız olduğundan YÜKSEK görünür.',
 
     'maddeler' => [
         // ── MAKALE ── (1-15)

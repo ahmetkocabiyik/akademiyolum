@@ -34,7 +34,8 @@ return [
     'kapsam_notu' => 'Puanlar Marmara Üniversitesi Tablo 2\'den (Sağlık, Fen, Matematik, Mesleki '
         .'ve Teknik Eğitim). Belge 2018 öncesi terminoloji kullanıyor; kadro adları güncel '
         .'karşılıklarına eşlendi. Akademik organizasyon yöneticiliği (27. satır), İdari faaliyetler (Tablo 8) ve bazı ödül/burs kalemleri '
-        .'girilmedi. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
+        .'girilmedi. Gerçek toplamınız burada görünenden yüksek olabilir.'
+        .' Kitapta ters yön var: tanım maddesi kitabı "saygınlığı olan yayınevlerince basılmış" diye tarif ediyor ama bu koşul kayıtta olmadığı için denetlenmiyor; yayıneviniz tanıma girmiyorsa kitap puanınız olduğundan YÜKSEK görünür.',
 
     'maddeler' => [
         // ── MAKALE ── (1-15)

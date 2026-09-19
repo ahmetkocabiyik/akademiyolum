@@ -49,7 +49,10 @@ return [
         .'Belge 2018 öncesi terminoloji kullanıyor; kadro adları güncel karşılıklarına '
         .'eşlendi. Akademik organizasyon yöneticiliği (27), sorumlu yazar çarpanı, müzik kompozisyonu, jüri görevleri, bilirkişilik ve '
         .'görev süresi ile idari faaliyetler (Tablo 8) girilmedi. Gerçek toplamınız burada '
-        .'görünenden yüksek olabilir, düşük olamaz.',
+        .'görünenden yüksek olabilir. Kitapta ters yön de var: tanım maddesi kitabı '
+        .'"saygınlığı olan yayınevlerince basılmış" diye tarif ediyor ama bu koşul kayıtta '
+        .'olmadığı için denetlenmiyor; yayıneviniz tanıma girmiyorsa kitap puanınız olduğundan '
+        .'YÜKSEK görünür.',
 
     'maddeler' => [
         // ── MAKALE ── (3-15) · tabloda birincil indeks satırı yok

@@ -21,8 +21,10 @@
  * ama "makale sayısı x" çarpanı faaliyet olarak tutulmuyor), 22 ve 43
  * (jüri görevleri), 51 (bilirkişi, proje değerlendirme, danışmanlık) ve 52
  * (görev süresi) — hiçbirinin kayıt karşılığı yok. Tablo 8'in idari
- * faaliyetleri de girilmedi. Gerçek toplamınız burada görünenden yüksek
- * olabilir, düşük olamaz.
+ * faaliyetleri de girilmedi; girilmeyen bu kalemler yüzünden gerçek toplam
+ * burada görünenden yüksek olabilir. Kitapta ters yön var: tanım maddesi (n)
+ * kitabı "saygınlığı olan yayınevlerince basılmış" diye tarif ediyor, bu koşul
+ * kayıtta olmadığı için denetlenmiyor.
  *
  * 06.09.2026: bilimsel toplantı organizasyonu ailesi için altı etiket
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
@@ -43,7 +45,10 @@ return [
         .'Bilimler). Belge 2018 öncesi terminoloji kullanıyor; kadro adları güncel '
         .'karşılıklarına eşlendi. Akademik organizasyon yöneticiliği (27), sorumlu yazar çarpanı, jüri görevleri, bilirkişilik, '
         .'görev süresi ve idari faaliyetler (Tablo 8) girilmedi. Gerçek toplamınız burada '
-        .'görünenden yüksek olabilir, düşük olamaz.',
+        .'görünenden yüksek olabilir. Kitapta ters yön de var: tanım maddesi kitabı '
+        .'"saygınlığı olan yayınevlerince basılmış" diye tarif ediyor ama bu koşul kayıtta '
+        .'olmadığı için denetlenmiyor; yayıneviniz tanıma girmiyorsa kitap puanınız olduğundan '
+        .'YÜKSEK görünür.',
 
     'maddeler' => [
         // ── MAKALE ── (1-15)

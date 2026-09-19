@@ -45,8 +45,8 @@
 return [
     'kapsam_notu' => 'Puanlar Ege Üniversitesi 2026 çizelgesinden. Arkeoloji kazıları, sportif '
         .'hakemlik, hafızlık icazeti gibi alana özgü kalemler ile bazı ödül türleri kaynak '
-        .'sözlüğünde karşılığı olmadığı için hesaba katılmadı; gerçek toplamınız burada '
-        .'görünenden yüksek olabilir, düşük olamaz.'
+        .'sözlüğünde karşılığı olmadığı için hesaba katılmadı; girilmeyen bu kalemler yüzünden '
+        .'gerçek toplamınız burada görünenden yüksek olabilir.'
         .' KİTABIN DİLİ KAYITTA YOK: uluslararası tanınırlığı olan yayınevi kitabınız TÜRKÇE kademesinden sayılıyor (kitap 40, bölüm 10, editörlük 15); kitabınız yabancı dilde yayımlandıysa puanınız olduğundan DÜŞÜK görünür. Yayınevinin "tanınırlığı" ise denetlenmiyor, o da ters yönde çalışır.',
 
     'maddeler' => [
