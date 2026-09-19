@@ -24,6 +24,25 @@
  * GİRİLMEYENLER: C8 ders notu, C9 ansiklopedi madde tanımlaması ve E grubunun
  * proje dışı alt kalemleri ile güzel sanatlar/spor alanlarına özgü satırlar —
  * kaynak sözlüğünde karşılıkları yok.
+ *
+ * C BÖLÜMÜ KAYNAĞA GÖRE YENİDEN YAZILDI (19.09.2026). Cetvelin kitap satırları
+ * kaynağın değerleriyle BİR SATIR KAYMIŞTI: uluslararası kitap 50 yerine 20
+ * (C2'nin değeri), bölüm 20 yerine 12 (C3'ün değeri), ulusal kitap 30 yerine
+ * 12, ulusal bölüm 8 yerine 7 puanlıydı. Değerler sayfa görüntüsünden (s. 7)
+ * doğrulandı.
+ *
+ * C başlığındaki "uluslararası yayınevlerinin TÜRKÇE yayınları ilgili puanın
+ * %80'ini alır" kuralı kayıttan okunamıyor (kitabın dili yok): kapsamlı
+ * `Uluslararası Kitap` etiketi %80 kademesine (C1-tr 40, C2-tr 16), BKCI/Scopus
+ * etiketi tam kademeye bağlandı. Aynı kural editörlükte %70 (F7-tr 35).
+ *
+ * KİTAP EDİTÖRLÜĞÜ F BÖLÜMÜNDE: F7 (uluslararası, 50) ve F8 (ulusal, 20)
+ * satırları cetvelde yoktu; tek bir "kitap editörlüğü" satırı 10 puandaydı.
+ * F bölümünün 50 puanlık tavanı girilmedi (cetvelde F grubu yok).
+ *
+ * Ulusal yayınevi kitabının ÇEVİRİSİ kaynakta hiç puanlanmıyor; çeviri
+ * satırları yalnız uluslararası yayınevi kitapları için. `Ulusal Çeviri Kitap`
+ * bu cetvelde karşılıksız.
  */
 
 return [
@@ -63,13 +82,26 @@ return [
         'B8' => ['baslik' => 'Ulusal kongrede sözlü sunulan ve özeti yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
         // ── C. KİTAPLAR (en fazla 80 puan) ──
-        'C2' => ['baslik' => 'Uluslararası yayınevi tarafından yabancı dilde yayımlanan özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
-        'C3' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 12],
-        'C4' => ['baslik' => 'Uluslararası yayınevi kitabında çeviri veya editörlük', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 7],
-        'C5' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 12],
-        'C6' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 7],
+        'C1' => ['baslik' => 'Uluslararası yayınevi tarafından yabancı dilde yayımlanan özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
+        // C bölümünün başlığı: "Uluslararası yayınevleri tarafından alanında
+        // yayımlanan TÜRKÇE yayınlar ilgili alt puan grubundaki puanın %80'ini
+        // alır." Kayıt kitabın dilini taşımadığı için kapsamlı etiket %80
+        // kademesinde (§0); BKCI/Scopus etiketi tam kademede.
+        'C1-tr' => ['baslik' => 'Uluslararası yayınevi tarafından Türkçe yayımlanan özgün kitap (puanın %80\'i)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap'], 'puan' => 40],
+        'C2' => ['baslik' => 'Uluslararası yayınevi kitabında yabancı dilde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
+        'C2-tr' => ['baslik' => 'Uluslararası yayınevinin Türkçe kitabında bölüm yazarlığı (puanın %80\'i)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 16],
+        'C3' => ['baslik' => 'Uluslararası yayınevi kitabının yayımlanmış çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 12],
+        'C4' => ['baslik' => 'Uluslararası yayınevi kitabının yayımlanmış bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 7],
+        'C5' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 30],
+        'C6' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 8],
         'C7' => ['baslik' => 'Ansiklopedide bölüm veya derleme yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
-        'C10' => ['baslik' => 'Kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Kitap Editörlüğü'], 'puan' => 10],
+        'C8' => ['baslik' => 'Basılı ders notu, yardımcı ders notu ya da laboratuvar kılavuzu', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 4],
+        // Kitap editörlüğü kaynakta F bölümünde ve KİTABIN TÜRÜNE bağlı:
+        // F7 uluslararası yayınevinin yabancı dilde kitabı 50, F8 ulusal 20.
+        // F bölümünün başlığı Türkçe kitapta editörlüğe puanın %70'ini veriyor.
+        'F7' => ['baslik' => 'Uluslararası yayınevinin yabancı dilde kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 50],
+        'F7-tr' => ['baslik' => 'Uluslararası yayınevinin Türkçe kitabında editörlük (puanın %70\'i)', 'kategori' => 'editorluk', 'kaynaklar' => ['Uluslararası Kitap Editörlüğü'], 'puan' => 35],
+        'F8' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 20],
 
         // ── D. ATIFLAR (en fazla 100 puan) ──
         'D1' => ['baslik' => 'Uluslararası kitaplarda yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],

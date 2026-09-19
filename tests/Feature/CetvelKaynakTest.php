@@ -3474,6 +3474,13 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Artvin: Türkçe kitap kademesi puanın %80'i, ulusal satıra düşmüyor.
+    ['artvin-2024', [
+        'Uluslararası Kitap' => 40,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 16,
+        'Ulusal Kitap Bölümü' => 8,
+    ]],
     // Rumeli 1.3.1/1.3.2 satırları cetvelde hiç yoktu.
     ['rumeli-2024', [
         'Uluslararası Kitap' => 60,
