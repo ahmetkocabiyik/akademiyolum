@@ -79,6 +79,12 @@
  *       kuralı — dergi listesi kayıtta yok.
  *
  * Yönerge: yonerge/esogu.php
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): kaynak
+ * kitabı ve bölümü "tanınmış ULUSLARARASI yayınevi" ↔ "tanınmış ULUSAL
+ * yayınevi" diye ayırıyor; sıfat iki kademede de aynı, ayrımı yapan tek şey
+ * yayınevinin kapsamı. Kapsamlı etiketler üst satırlara bağlandı, ulusal
+ * satırlar daraltıldı.
  */
 
 return [
@@ -151,12 +157,12 @@ return [
         '3n' => ['baslik' => 'Tezinizden üretilmiş, tanınmış ulusal yayınevince yayımlanmış kitap bölümü', 'kategori' => 'tez_yayini', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 4],
 
         // ══ 4. KİTAP ══
-        '4a' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
-        '4b' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],
-        '4c' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanmış kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-        '4ç' => ['baslik' => 'Tanınmış ulusal yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 15],
-        '4d' => ['baslik' => 'Tanınmış ulusal yayınevince yayımlanmış kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 8],
-        '4e' => ['baslik' => 'Tanınmış ulusal yayınevince yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 3],
+        '4a' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 30],
+        '4b' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 15],
+        '4c' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanmış kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+        '4ç' => ['baslik' => 'Tanınmış ulusal yayınevince yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 15],
+        '4d' => ['baslik' => 'Tanınmış ulusal yayınevince yayımlanmış kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 8],
+        '4e' => ['baslik' => 'Tanınmış ulusal yayınevince yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 3],
         '4f' => ['baslik' => 'Tanınmış ulusal yayınevince yayımlanmış bir kitabın çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 5],
 
         // ══ 5. GİRİŞİMCİLİK VE YENİLİKÇİLİK ══

@@ -44,6 +44,11 @@
  *       değerlendirilebilir" takdir yetkisi.
  *
  * Yönerge: yonerge/dogus.php
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): kaynak
+ * kitabı ve bölümü "ULUSLARARASI SAYGINLIĞI OLAN yayınevi" ↔ "ULUSAL yayınevi" diye ayırıyor; sıfat iki kademede de aynı, ayrımı yapan tek şey
+ * yayınevinin kapsamı. Kapsamlı etiketler üst satırlara bağlandı, ulusal
+ * satırlar daraltıldı.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -66,9 +71,9 @@ $maddeler = [
     'B-4' => ['baslik' => 'Uluslararası bilimsel toplantıda keynote speaker ya da davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı (Uluslararası)'], 'puan' => 2],
 
     // ══ C. ULUSLARARASI KİTAP ══
-    'C-1' => ['baslik' => 'Uluslararası saygınlığı olan yayınevince basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
-    'C-2' => ['baslik' => 'Uluslararası saygınlığı olan yayınevince basılmış kitapta bölüm ya da ansiklopedi maddesi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-    'C-3' => ['baslik' => 'Uluslararası saygınlığı olan yayınevince basılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
+    'C-1' => ['baslik' => 'Uluslararası saygınlığı olan yayınevince basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 30],
+    'C-2' => ['baslik' => 'Uluslararası saygınlığı olan yayınevince basılmış kitapta bölüm ya da ansiklopedi maddesi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+    'C-3' => ['baslik' => 'Uluslararası saygınlığı olan yayınevince basılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
 
     // ══ D. ULUSAL ARAŞTIRMA YAYINLARI ══
     'D-1' => ['baslik' => 'Ulusal hakemli dergide yayımlanmış araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'puan' => 5],
@@ -78,9 +83,9 @@ $maddeler = [
     'E-2' => ['baslik' => 'Hakemli ulusal bilimsel toplantıda sunulan özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 
     // ══ F. ULUSAL KİTAP ══
-    'F-1' => ['baslik' => 'Ulusal yayınevince basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
-    'F-2' => ['baslik' => 'Ulusal yayınevince basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 3],
-    'F-3' => ['baslik' => 'Ulusal yayınevince basılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
+    'F-1' => ['baslik' => 'Ulusal yayınevince basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
+    'F-2' => ['baslik' => 'Ulusal yayınevince basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 3],
+    'F-3' => ['baslik' => 'Ulusal yayınevince basılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 5],
     'F-4' => ['baslik' => 'Çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 5],
 
     // ══ G. BASILMIŞ BİLİMSEL RAPOR ══

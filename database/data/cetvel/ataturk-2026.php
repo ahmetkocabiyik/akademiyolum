@@ -22,6 +22,16 @@
  * Ayrıca 07.04-07.08 tavanları KADRO SÜTUNUNA göre değişiyor (aynı satır
  * tabloda 60 ve 30 olarak iki kez geçiyor), yani girilecek olsalar cetvel
  * kadroya göre varyantlanmalı.
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): kaynak
+ * kitabı ve bölümü "tanınmış ULUSLARARASI yayınevi" ↔ "tanınmış ULUSAL
+ * yayınevi" diye ayırıyor; sıfat iki kademede de aynı, ayrımı yapan tek şey
+ * yayınevinin kapsamı. Kapsamlı etiketler üst satırlara bağlandı, ulusal
+ * satırlar daraltıldı.
+ *
+ * 01.03.01 GENEL etiketi taşıdığı için adayın ULUSAL yayınevi kitabı da 40
+ * puan alıyordu (01.03.05'in 20'si yerine); 01.03.05'te yalnız `Çeviri Kitap`
+ * vardı. Çeviri etiketi kaynakta başka satırı olmadığı için yerinde kaldı.
  */
 
 return [
@@ -147,25 +157,25 @@ return [
         '01.03.01' => [
             'baslik' => 'Uluslararası tanınmış yayınevinden özgün bilimsel kitap',
             'kategori' => 'kitap',
-            'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'],
+            'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Tahkik (Tenkitli Metin)'],
             'puan' => 40,
         ],
         '01.03.02' => [
             'baslik' => 'Uluslararası tanınmış yayınevinden kitap bölümü',
             'kategori' => 'kitap',
-            'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'],
+            'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'],
             'puan' => 6,
         ],
         '01.03.05' => [
             'baslik' => 'Ulusal tanınmış yayınevinden özgün bilimsel kitap',
             'kategori' => 'kitap',
-            'kaynaklar' => ['Çeviri Kitap'],
+            'kaynaklar' => ['Çeviri Kitap', 'Ulusal Kitap'],
             'puan' => 20,
         ],
         '01.03.06' => [
             'baslik' => 'Ulusal tanınmış yayınevinden kitap bölümü',
             'kategori' => 'kitap',
-            'kaynaklar' => ['Kitap Bölümü', 'Çeviri Kitap Bölümü'],
+            'kaynaklar' => ['Ulusal Kitap Bölümü', 'Çeviri Kitap Bölümü'],
             'puan' => 3,
         ],
         // ── 02.03 ULUSLARARASI AR-GE PROJE ÇALIŞMASI ──

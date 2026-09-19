@@ -49,6 +49,12 @@
  *       idari görev ve üyeliklerde puanınız DÜŞÜK görünür.
  *
  * Yönerge: yonerge/istanbul-29-mayis.php
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): kaynak
+ * kitabı ve bölümü "tanınmış ULUSLARARASI yayınevi" ↔ "tanınmış ULUSAL
+ * yayınevi" diye ayırıyor; sıfat iki kademede de aynı, ayrımı yapan tek şey
+ * yayınevinin kapsamı. Kapsamlı etiketler üst satırlara bağlandı, ulusal
+ * satırlar daraltıldı.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -59,12 +65,12 @@ $maddeler = [
     // ══ MADDE 8/1 — LİSANSÜSTÜ TEZLERDEN ÜRETİLMEMİŞ YAYIN ══
     'P1' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => $WOS, 'turler' => $TAM, 'puan' => 40],
     'P2' => ['baslik' => 'SCI-Expanded, SSCI ve AHCI dışındaki uluslararası alan endekslerinde taranan dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => $ENDEKS, 'turler' => $TAM, 'puan' => 30],
-    'P4' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-    'P5' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 25],
+    'P4' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+    'P5' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 25],
     'P6' => ['baslik' => 'ULAKBİM (TR Dizin) tarafından taranan ulusal hakemli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $TAM, 'puan' => 25],
     'P7' => ['baslik' => 'Diğer ulusal hakemli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 20],
-    'P8' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 40],
-    'P9' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
+    'P8' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 40],
+    'P9' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 20],
 
     // ══ MADDE 8/2 — DİĞER FAALİYETLER ══
     'D09' => ['baslik' => 'Uluslararası bilimsel toplantıda sözlü sunulan ve tam metin yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 15],

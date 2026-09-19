@@ -3613,6 +3613,30 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 100,
         'Ulusal Kitap Bölümü' => 40,
     ]],
+    ['ataturk-2026', [
+        'Uluslararası Kitap' => 40,
+        'Ulusal Kitap' => 20,
+        'Uluslararası Kitap Bölümü' => 6,
+        'Ulusal Kitap Bölümü' => 3,
+    ]],
+    ['dogus-2022', [
+        'Uluslararası Kitap' => 30,
+        'Ulusal Kitap' => 10,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 3,
+    ]],
+    ['esogu-2023', [
+        'Uluslararası Kitap' => 30,
+        'Ulusal Kitap' => 15,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 8,
+    ]],
+    ['istanbul-29-mayis-2017', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
     // Kayseri'nin "Düzeyi" sütunu, Kırıkkale 44, Kırklareli C, Kilis 2,
     // Karamanoğlu C-3/C-4 (yalnız bölüm; C-1 indekse bağlı, C-2 torba).
     ['kayseri-2024', [
