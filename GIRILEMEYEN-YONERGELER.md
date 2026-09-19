@@ -1371,17 +1371,35 @@ bu etiketi seçmeyebilir ve puanını EKSİK görür. Etiket adını
 `Uluslararası Tam Metin (CPCI / Scopus)` yapmak 176 satırı ve bir migration'ı
 gerektiriyor; ayrı bir tur.
 
-**Açık madde — "uluslararası yayınevi" satırları BKCI'ya bağlı.** Scopus
-taraması sırasında çıktı, Scopus'la ilgisi yok: 55 cetvelde "Uluslararası
-yayınevi tarafından yayımlanmış kitap" başlıklı satır YALNIZ
-`BKCI / Scopus Kitap` taşıyor, ulusal satır ise GENEL
-`Uluslararası/Ulusal Kitap` etiketinde kalmış. Sonuç: adayın indekssiz
-uluslararası kitabı ULUSAL satıra düşüyor (Artvin 20 yerine 12, Ankara
-Bilim 20 yerine 10). Mekanik düzeltme denendi — satırlara kapsamlı etiket
-eklemek ve ulusal satırı daraltmak — ama beş donmuş test kırıldı: Gazi'de
-etiket çakışması, İstanbul Kültür ve Yalova'da puan kayması, Selçuk'ta
-kategori dışı etiket. Yani düzeltme satır satır okunmalı, toplu
-uygulanamıyor. Değişiklik GERİ ALINDI, iş burada duruyor.
+**Kapandı — "uluslararası yayınevi" satırları satır satır okundu
+(19.09.2026).** Madde şöyle açılmıştı: 55 cetvelde "Uluslararası yayınevi
+tarafından yayımlanmış kitap" başlıklı satır YALNIZ `BKCI / Scopus Kitap`
+taşıyor, ulusal satır ise GENEL `Uluslararası/Ulusal Kitap` etiketinde kalmış;
+adayın indekssiz uluslararası kitabı ULUSAL satıra düşüyordu. Mekanik düzeltme
+denenmiş, beş donmuş test kırıldığı için geri alınmıştı.
+
+Tur satır satır yapıldı: kitap satırı BKCI/Scopus'a bağlı 93 cetvelin kitap
+bölümü kaynağına karşı okundu, **43 üniversite düzeltildi**, kalanı gerekçesiyle
+olduğu gibi bırakıldı. Karar kuralı KONVANSIYONLAR'da ("YAYINEVİ KAPSAMI:
+kapsamlı etiketi hangi satıra bağlarsın?"): satırın koşulu adayın etiketle
+söylediğinin AYNISI ise bağla (kapsam ekseni), FAZLASINI istiyorsa bağlama
+(dil, indeks ya da "tanınmışlık" ekseni). Dil ayrımı düşürmek yerine ÇARPAN
+uyguluyorsa (MTÜ yarısı, Artvin %80'i) kapsamlı etiket o çarpanlı satıra
+bağlandı.
+
+Beklenmeyen bulgular: Amasya'nın kitap bloğu kaynakla hizasını kaybetmişti
+(ulusal kitap 100 yerine 15, editörlük satırı 125 puandaydı), Artvin'in C
+bölümü bir satır kaymıştı (uluslararası kitap 50 yerine 20), Rumeli'nin yurt
+dışı kitap satırları hiç girilmemişti, Ege'nin ulusal kademesi yoktu ve ulusal
+kitap 40 puan alıyordu, İstanbul Arel'de ulusal kitap 60 puan alıyordu (kaynak
+ulusal kitabı hiç saymıyor). Bingöl, Bitlis, Hatay MKÜ, Kilis, Osmaniye ve
+Bayburt'ta kaynakta duran ama girilmemiş kitap editörlüğü satırları açıldı.
+
+Açık kalan iki küçük iş: (1) Sakarya ÜBÜ 9.1 ve Marmara'nın fen/mühendislik/
+güzel sanatlar varyantlarında kitap editörlüğü etiketleri DERGİ editörlüğü
+satırlarında duruyor — kaynakta ayrı kitap editörlüğü satırı olup olmadığı
+okunmadı. (2) Afyon Kocatepe'de "ders kitabı için puanların yarısı" kuralının
+satırı yok; ders kitabı kaydı o cetvelde puan almıyor.
 
 **Makale ve tez yayınında Scopus çeyrekliği denetlendi (18.09.2026).** Beş
 cetvelde satırlar ekseni açan turdan önceki eşlemede kalmıştı ve hepsi EKSİK

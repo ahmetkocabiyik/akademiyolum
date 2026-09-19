@@ -1734,6 +1734,56 @@ güncelleyerek devam etme.** Kırılan her test, deseni bozan bir istisnayı
 işaret ediyor; deseni zorlamak o istisnaları sessizce eziyor. Değişikliği
 geri al, bulguyu GIRILEMEYEN'e yaz, satır satır ilerlenecek bir tura bırak.
 
+### YAYINEVİ KAPSAMI: kapsamlı etiketi hangi satıra bağlarsın?
+
+Yukarıdaki satır satır tur 19.09.2026'da yapıldı: 93 cetvelin kitap bölümü
+kaynağına karşı okundu, 43'ü düzeltildi. Kararın tamamı TEK SORUYA indi:
+
+> **Satırın koşulu, adayın etiketle söylediği şeyin AYNISI mı?**
+
+`Uluslararası Kitap` etiketi tek şey söylüyor: yayınevi uluslararası. Satır
+bundan FAZLASINI istiyorsa kayıt o satırı hak ettiğini kanıtlayamaz ve §0
+uyarınca AŞAĞIDA kalır. Dört desen çıktı:
+
+1. **Kapsam ekseni — BAĞLA.** "Uluslararası yayınevi tarafından yayımlanan
+   kitap" ↔ "Ulusal yayınevi …". Yönergenin tanımlar maddesi terimi ÜAK
+   tarifiyle (beş yıl faaliyet, ilk 500 kütüphane, 20 kitap) açıklıyor olabilir;
+   bu tarif TERİMİN KENDİSİ, ek bir kapı değil. Üst satıra kapsamlı etiket
+   eklenir, alt satır `Ulusal Kitap`a daraltılır. (Ağrı, ADÜ, Bartın, Bayburt,
+   Bitlis, Karabük, Kırklareli, Marmara, Trabzon…)
+2. **Dil ekseni — BAĞLAMA.** "Uluslararası yayınevince YABANCI DİLDE basılmış"
+   ↔ "ulusal yayınevince Türkçe". Kayıt kitabın dilini taşımıyor; etiket alt
+   satırda kalır. (Bolu, Düzce, Dicle, Gazi, Konya Gıda, Başkent, Biruni, PAÜ,
+   İstanbul Atlas, Kahramanmaraş İstiklal.)
+   **İSTİSNA — dil ayrımı DÜŞÜREN değil ÇARPAN ise bağla:** MTÜ "Türkçe
+   basılmış olanlar puanın yarısını alır", Artvin "%80'ini alır" diyor; orada
+   uluslararası kitap ULUSAL satıra düşmüyor, kendi kademesinin yarısını
+   alıyor. Kapsamlı etiket o YARIM satıra bağlanır (MTÜ C1.1-tr 125, Artvin
+   C1-tr 40).
+3. **İndeks ekseni — BAĞLAMA.** "BKCI/Scopus/ACQWEB/SENSE kapsamındaki
+   yayınevi". Kayıtta indeks bilgisi yalnız BKCI etiketiyle var. (Anadolu,
+   Ardahan, ASBÜ, Gaziantep, İnönü, OSTİM, Üsküdar, Yeni Yüzyıl, Ufuk…)
+4. **Nitelik ekseni — BAĞLAMA.** "TANINMIŞ / saygın / önde gelen /
+   tanınırlığı olan uluslararası yayınevi". Aynı sıfat ALT satırda da olsa
+   bağlama: sıfat iki kademede de sağlanması gereken bir koşul, sağlanmadığında
+   kaynak o kitabı HİÇ saymıyor; §0 iki satır arasından düşüğü seçtirir ve genel
+   etiket zaten alt satırda duruyor. (Ankara Bilim, Bandırma, Beykent, Gedik,
+   MSGSÜ, Tarsus, Toros, Uşak, Çanakkale, Doğuş, Ege, ESOGÜ, İstanbul Aydın…)
+
+Yön ters de işliyor: kaynakta ULUSAL kitap satırı HİÇ YOKSA genel etiket
+uluslararası satırda durmamalı — aday hak etmediği puanı alır (İstanbul Arel'de
+ulusal kitap 60, Ege'de 40 puan alıyordu). Orada genel etiket ya kaynağın en
+düşük kademesine taşınır (Ege 3d) ya da kapsamlı etikete daraltılıp durum
+`kapsam_notu`'na yazılır (Arel).
+
+**Bu tur kitapla sınırlı değil:** aynı eksen kitap bölümü, ders kitabı, kitap
+editörlüğü ve çeviride de var. Bir cetvelde kitap satırı düzeltilip editörlük
+satırı unutulursa `Uluslararası Kitap Editörlüğü` kaydı ulusal kademede kalır;
+tur boyunca dört kalem birlikte okundu.
+
+**Koruma:** `kitapta uluslararası yayınevi satırı kendi kademesinde` testi
+(CetvelKaynakTest) düzeltilen her cetvelin iki kademesini donduruyor.
+
 ### Ekseni AÇMAK yetmiyor, eski satırları geri dönüp BAĞLAMAK gerekiyor
 
 Scopus çeyrekliği 17.09.2026'da makale sözlüğüne eklendi. Bir gün sonraki
