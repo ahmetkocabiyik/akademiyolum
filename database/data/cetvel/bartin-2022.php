@@ -25,6 +25,20 @@
  * (`A.8-A.10`) ve A.1'in araştırma/derleme ayrımı için açılan `-derleme`
  * ekleri.
  *
+ * ── KİTAPTA ULUSLARARASI/ULUSAL AYRIMI (19.09.2026) ──
+ * C bölümü kitabı, ders kitabını, editörlüğü ve bölümü İKİ KADEMEDE veriyor
+ * ("Alanında ULUSLARARASI yayımlanan …" ↔ "… ULUSAL yayımlanan …") ve indeks
+ * aramıyor; tanımlar maddesindeki "Tanınmış Uluslararası Yayınevi" tarifi
+ * tablo satırlarında geçmiyor. Üst satırlar bu yüzden yalnız BKCI/Scopus
+ * etiketiyle yazılmıştı ve adayın indekssiz uluslararası kitabı ULUSAL
+ * satırdan sayılıyordu: 200 yerine 180, bölümde 100 yerine 60. Daha ağırı
+ * ÖLÇÜT tarafındaydı — Bartın puan değil ölçüt sayıyor ve `ULUSLARARASI-KITAP`
+ * ile `ULUSAL-KITAP` ayrı koşullar; uluslararası kitap yanlış koşulu
+ * sağlıyordu.
+ *
+ * Ders kitabı da kaynağın iki satırına açıldı (C.3 uluslararası 100, C.4
+ * ulusal 80); daha önce tek 'C.3-C.4' satırında 80 puandaydı.
+ *
  * ── A.1 İKİ KEZ YAZILDI: ARAŞTIRMA VE DERLEME ──
  * A.1 "Q1-Q4 kategorisindeki dergilerde yayımlanmış MAKALE" diyor, tür
  * ayırmıyor; A.9 aynı dergilerdeki teknik not/mektup/özet türlerini ayrı
@@ -219,13 +233,14 @@ return [
         'B.23-B.24' => ['baslik' => 'Diğer kamu veya özel kuruluşça desteklenen projede yürütücü ve araştırmacı dışında görev', 'kategori' => 'proje', 'kaynaklar' => ['Diğer Kamu Kurumu', 'Özel Sektör / STK', 'Öğrenci Projesi (2209 vb.)'], 'roller' => ['danisman'], 'puan' => 20],
 
         // ══ C. KİTAPLAR VE ANSİKLOPEDİ MADDELERİ ══
-        'C.1' => ['baslik' => 'Alanında uluslararası yayımlanan bilimsel, eğitsel veya sanatsal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 200],
-        'C.2' => ['baslik' => 'Alanında ulusal yayımlanan bilimsel, eğitsel veya sanatsal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 180],
-        'C.3-C.4' => ['baslik' => 'Alanında yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 80],
-        'C.5-C.6' => ['baslik' => 'Alanında uluslararası yayımlanan kitapta editörlük veya yardımcı editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 120],
-        'C.7-C.8' => ['baslik' => 'Alanında ulusal yayımlanan kitapta editörlük veya yardımcı editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 100],
-        'C.9' => ['baslik' => 'Alanında uluslararası yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 100],
-        'C.10' => ['baslik' => 'Alanında ulusal yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 60],
+        'C.1' => ['baslik' => 'Alanında uluslararası yayımlanan bilimsel, eğitsel veya sanatsal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 200],
+        'C.2' => ['baslik' => 'Alanında ulusal yayımlanan bilimsel, eğitsel veya sanatsal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 180],
+        'C.3' => ['baslik' => 'Alanında uluslararası yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 100],
+        'C.4' => ['baslik' => 'Alanında ulusal yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 80],
+        'C.5-C.6' => ['baslik' => 'Alanında uluslararası yayımlanan kitapta editörlük veya yardımcı editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 120],
+        'C.7-C.8' => ['baslik' => 'Alanında ulusal yayımlanan kitapta editörlük veya yardımcı editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü'], 'puan' => 100],
+        'C.9' => ['baslik' => 'Alanında uluslararası yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 100],
+        'C.10' => ['baslik' => 'Alanında ulusal yayımlanan kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 60],
         'C.11' => ['baslik' => 'Alanında yayımlanmış tam kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 80],
         'C.12' => ['baslik' => 'Alanında kitap bölümü veya makale çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 40],
         'C.14' => ['baslik' => 'Ansiklopedi madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 20],

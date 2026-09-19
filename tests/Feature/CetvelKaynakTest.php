@@ -3454,4 +3454,22 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 25,
         'Ulusal Kitap Bölümü' => 20,
     ]],
+    // Ataşehir Adıgüzel 10 ("yurtdışında uluslararası yayınevlerinde basılı
+    // olması şartıyla") ↔ 11 ("ulusal nitelikte bir kitap").
+    ['atasehir-adiguzel-2018', [
+        'Uluslararası Kitap' => 150,
+        'Ulusal Kitap' => 100,
+        'Uluslararası Kitap Bölümü' => 100,
+        'Ulusal Kitap Bölümü' => 25,
+    ]],
+    // Bartın C bölümü dört kalemi de iki kademede veriyor; ölçüt sayan bir
+    // yönerge olduğu için yanlış kademe yanlış KOŞULU sağlıyordu.
+    ['bartin-2022', [
+        'Uluslararası Kitap' => 200,
+        'Ulusal Kitap' => 180,
+        'Uluslararası Kitap Bölümü' => 100,
+        'Ulusal Kitap Bölümü' => 60,
+        'Uluslararası Ders / Metot Kitabı' => 100,
+        'Ulusal Ders / Metot Kitabı' => 80,
+    ]],
 ]);
