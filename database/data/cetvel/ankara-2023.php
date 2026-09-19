@@ -48,8 +48,8 @@
 
 return [
     'kapsam_notu' => 'Puanlar Ankara Üniversitesi 2023 kalıcı çizelgesinden. Sanatsal etkinlik '
-        .'bölümü henüz girilmedi. Gerçek toplamınız burada görünenden yüksek olabilir, '
-        .'düşük olamaz.'
+        .'bölümü henüz girilmedi; girilmeyen bu bölüm yüzünden gerçek toplamınız burada '
+        .'görünenden yüksek olabilir.'
         .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     'maddeler' => [
