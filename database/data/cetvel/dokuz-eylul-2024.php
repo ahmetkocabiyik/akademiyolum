@@ -108,7 +108,8 @@ return [
         .'kullanıldı: uygulanmış tasarım, müzik teknolojisi, sahne tasarımı ve animasyon '
         .'kalemlerinde puanınız olduğundan düşük görünebilir. Festivale eserle katılım, sanat '
         .'atölyesi yöneticiliği, retrospektif katalog, etkinlikte eşlikçilik ve öğrencinizin '
-        .'aldığı ödüller girilmedi; şeflik kalemlerinin yönergede satırı yok.',
+        .'aldığı ödüller girilmedi; şeflik kalemlerinin yönergede satırı yok.'
+        .' KİTAPTA "BİLİNEN YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız 5.a satırından sayılıyor. Yönerge yayınevinin birimlerce Rektörlüğe bildirilen "bilinen yayınevleri" listesinde olmasını istiyor; listede değilse puanınız olduğundan YÜKSEK görünür.',
 
     // Madde 1.10.1/e — çok isimli yayınlarda puan dağılımı.
     //

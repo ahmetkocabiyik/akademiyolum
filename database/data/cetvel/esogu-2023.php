@@ -105,7 +105,8 @@ return [
         .'biriktirmesi uygulanmıyor. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: Madde 1.8\'in "bir koşulda '
         .'kullanılan çıktı başka koşulda kullanılamaz" kuralı uygulanamıyor, aynı yayınınız '
-        .'birden fazla koşulu birden karşılıyor görünebilir.',
+        .'birden fazla koşulu birden karşılıyor görünebilir.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // Madde 1.4: tek yazar tam puan, iki yazar 0,8; üç ve üzeri 1,8/n.
     'yazar_katsayisi' => [

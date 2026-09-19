@@ -51,7 +51,8 @@ return [
         .'küçük (0,75 · 0,40 · 0,30 · 0,15) ve motor madde puanını tam sayı tuttuğu için '
         .'yalnızca SCI atfı girilebildi. Doktora sonrası araştırma (süreye bağlı) ve tasarım '
         .'kalemleri girilemedi.'
-    .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.',
+    .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // Tablo 3 — k katsayısı; yalnızca kişi sayısına bağlı.
     'yazar_katsayisi' => [

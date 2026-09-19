@@ -75,7 +75,8 @@ return [
         .'hâle getirmenin 50 ve 30 puanlık satırları teknopark şirketi kurmaktan ayrılamadığı '
         .'için 20 puandan sayılıyor. '
         .'Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünür: "aynı kitaptaki bölümlerden en fazla '
-        .'ikisinden puan alınabilir" sınırı uygulanmıyor.',
+        .'ikisinden puan alınabilir" sınırı uygulanmıyor.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     'maddeler' => [
         // ══ 1. MAKALE ══

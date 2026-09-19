@@ -120,7 +120,8 @@ return [
         .'satırı kullanıldı. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK çıkabilir: patentlerde tescil tamamlanmış '
         .'sayıldı; yönetim görevlerinde de yönergenin aradığı asgari görev süreleri (3-4 yıl) '
-        .'uygulanamıyor.',
+        .'uygulanamıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür.',
 
     // Her yayın satırının altındaki aynı tablo: tek yazar 1,0 · 1. yazar 0,8 ·
     // 2. yazar 0,6 · 3. yazar 0,4 · 4. ve üstü 0,2. Yazar sayısına bakılmıyor.

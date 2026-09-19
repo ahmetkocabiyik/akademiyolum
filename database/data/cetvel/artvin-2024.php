@@ -50,7 +50,8 @@ return [
         .'Tablosundan. Yönergenin bildiri (50), kitap (80) ve atıf (100) üst sınırları '
         .'uygulanıyor. Ders notu, ansiklopedi madde tanımlaması ve güzel sanatlar/spor alanına '
         .'özgü kalemler kaynak sözlüğünde karşılıksız olduğu için girilmedi; gerçek toplamınız '
-        .'burada görünenden yüksek olabilir, düşük olamaz.',
+        .'burada görünenden yüksek olabilir, düşük olamaz.'
+        .' KİTABIN DİLİ KAYITTA YOK: uluslararası yayınevi kitabınız C bölümünün "Türkçe yayınlar ilgili puanın %80\'ini alır" kademesinden sayılıyor (kitap 40, bölüm 16); kitabınız yabancı dilde basıldıysa puanınız olduğundan DÜŞÜK görünür. Ulusal yayınevi kitabının ÇEVİRİSİ kaynakta hiç puanlanmıyor, çeviri satırları yalnız uluslararası yayınevi kitapları için.',
 
     'maddeler' => [
         // ── A. MAKALELER ── (çeyreklik ve yayın türü puana gömülü)

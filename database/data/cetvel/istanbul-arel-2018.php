@@ -46,15 +46,14 @@
  *   S.7 satın alınan/uygulanan tasarım uluslararası 100 / ulusal 50;
  *       kayıt ayrımı taşımadığı için 50'den sayılıyor.
  *
- * ── PUANI YÜKSEK GÖSTEREBİLEN TEK KARAR ──
+ * ── KİTAPTA ULUSAL KADEME YOK ──
  *   TABLODA ULUSAL KİTAP YAZARLIĞI SATIRI YOK. B bölümü yalnız
  *       uluslararası kitapları puanlıyor (BKCI 100/40, diğer uluslararası
  *       60/30); Türkçe yayımlanmış kitaplar yalnız G.2'de EDİTÖRLÜK
- *       olarak geçiyor. Kayıt uluslararası ile ulusal kitabı ayırmadığı
- *       için "Uluslararası/Ulusal Kitap" etiketi B.3'ten (60), bölümü
- *       B.4'ten (30) sayılıyor. Ulusal bir kitabınız varsa puanınız
- *       OLDUĞUNDAN YÜKSEK görünür. Satırı hiç girmemek bu kez daha
- *       yanıltıcı olurdu: uluslararası kitapların tamamı sıfırlanırdı.
+ *       olarak geçiyor. 19.09.2026'ya kadar genel `Uluslararası/Ulusal
+ *       Kitap` etiketi B.3'te durduğu için ULUSAL kitap da 60 puan
+ *       alıyordu; etiketler kapsamlı karşılıklarına daraltıldı ve ulusal
+ *       yayınevi kitabı artık puan almıyor — kaynağın söylediği budur.
  *
  * ── YAZAR ÇARPANI ──
  * Birinci isim %100, ikinci %80, üçüncü %60, dördüncü %40, diğer sıralar
@@ -221,9 +220,10 @@ return [
         .'atfı (10), yayın kurulu üyeliği (30\'a kadar), hakemlik (10\'a kadar), yarışma '
         .'dereceleri (45\'e kadar) ve sektör deneyimi (15\'e kadar) etiket ayrımı taşımadığı '
         .'için en düşük satırlarından sayılıyor. '
-        .'Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünebilir: tabloda ULUSAL KİTAP YAZARLIĞI '
-        .'satırı yok, yalnız uluslararası kitaplar puanlanıyor. Kayıt ikisini ayırmadığı için '
-        .'Türkçe yayımlanmış kitabınız da uluslararası kitap satırından (60) sayılıyor.',
+        .'Puanınız kitapta OLDUĞUNDAN DÜŞÜK görünebilir: tabloda ULUSAL KİTAP YAZARLIĞI satırı '
+        .'yok, yalnız uluslararası yayınevi kitapları puanlanıyor; ulusal yayınevi kitabınız puan '
+        .'almıyor. Buna karşılık kitabınızın DİLİ kayıtta olmadığı için uluslararası yayınevinin '
+        .'Türkçe kitabı da 60 puanlık satırdan sayılıyor.',
 
     'yazar_katsayisi' => [
         'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev', 'odul',

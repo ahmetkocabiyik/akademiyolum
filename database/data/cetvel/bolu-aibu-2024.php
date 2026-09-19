@@ -62,7 +62,8 @@ return [
         .'ve ödül kalemlerindeki "kişi sayısına eşit bölünür" kuralı faaliyet kaydından '
         .'türetilemediği için uygulanmıyor; o kalemlerde puanınız olduğundan yüksek görünebilir. '
         .'Etkinlik düzenleme kurulları (F), toplumsal katkı (G), jüri üyelikleri (H) ve mimari '
-        .'tasarım (J) bölümleri girilmedi.',
+        .'tasarım (J) bölümleri girilmedi.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     // Madde 10/1 — Eserdeki yazar sayısına ve sıraya göre tam puanın yüzdesi.
     'yazar_katsayisi' => [

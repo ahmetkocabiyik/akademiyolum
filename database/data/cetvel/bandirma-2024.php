@@ -59,7 +59,8 @@ return [
         .'çarpan tanımlamıyor; en düşük çarpan uygulandı. Tez danışmanlığı puanı yalnızca '
         .'tezden üretilmiş yayın varsa veriliyor, bu bilgi kayıtta tutulmadığı için en düşük '
         .'satırlar girildi. h-indeksi (C1), sertifika programları (C6) ve sosyal sorumluluk '
-        .'projeleri (C8) girilemedi.',
+        .'projeleri (C8) girilemedi.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // Tablo 1 — yazar sayısı × sıra; 5'ten sonrası tam puanın %35'i.
     'yazar_katsayisi' => [

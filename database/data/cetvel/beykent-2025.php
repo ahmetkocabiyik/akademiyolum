@@ -182,7 +182,8 @@ return [
         .'kitap eleştirisi ve yargısal karar tahlili satırları sözlükte karşılıksız. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünür: "her bir dergi için en fazla beş '
         .'hakemlik" sınırı ve editörlüklerin "en az bir yıl süreyle yürütülmüş olması" koşulu '
-        .'uygulanamıyor.',
+        .'uygulanamıyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // "Puanlamada Yazar Sayısının Etkisi": iki yazarlıda 1. yazar %60,
     // 2. yazar %40; üç ve daha fazla yazarlıda 1. yazar %40, kalan %60

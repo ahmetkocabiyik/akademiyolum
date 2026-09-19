@@ -144,7 +144,8 @@ return [
         .'başına verildiği için ders kayıtlarınız hiç sayılmıyor; TR Dizin dışındaki ulusal '
         .'hakemli dergiler, çeviriler, sanatsal etkinlikler ve toplumsal katkı kalemleri '
         .'ölçütlerde hiç yok; "üniversite-iş dünyası iş birliği" için verilen 5\'er puanlık '
-        .'ekler uygulanamıyor.',
+        .'ekler uygulanamıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür.',
 
     // Açıklamalar bölümü: tek yazarlı ×1, iki ×0,8, üç ×0,6, dört ×0,4,
     // beş ve üstü ×0,2. Yazar sırası dikkate alınmıyor.

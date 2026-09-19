@@ -138,7 +138,8 @@ return [
         .'için" verilen idari görev ve üyelik puanları görev süresiyle çarpılamıyor, her görev '
         .'bir kez sayılıyor. Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünür: lisansüstü '
         .'tezinizden ürettiğiniz kitap, bölüm ve makaleler için tablonun düşük satırları '
-        .'(MADDE 8/2\'nin 1-8. satırları) kayıtta ayrışmadığından tam değerlerden puanlanıyor.',
+        .'(MADDE 8/2\'nin 1-8. satırları) kayıtta ayrışmadığından tam değerlerden puanlanıyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // MADDE 4/2. Başlıca yazar dışındaki roller için iki okumanın düşüğü:
     // kalan yarının eşit paylaşımı, yani 0,5 / (yazar sayısı - 1).

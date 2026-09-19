@@ -22,6 +22,13 @@
  */
 
 return [
+    'kapsam_notu' => 'Puanlar Afyon Kocatepe Üniversitesi EK-1 Puanlama Tablosundan. Kitapta uluslararası ve '
+        .'ulusal yayınevi ayrımı yönergenin tanımlar maddesine göre yapılıyor (her ikisi de faaliyet '
+        .'süresi ve kitap sayısıyla tanımlı, indeks aranmıyor). DERS KİTABI SATIRI YOK: kaynak "ders '
+        .'kitabı olarak yayımlanan kitaplar ve kitap bölümleri için belirlenen puanların yarısı '
+        .'alınır" diyor ama ayrı bir satır vermiyor; ders kitabı kaydınız bu cetvelde puan almıyor, '
+        .'yani puanınız olduğundan DÜŞÜK görünür.',
+
     'maddeler' => [
         '1.1a' => [
             'baslik' => 'Q1 kategorisinde özgün makale',

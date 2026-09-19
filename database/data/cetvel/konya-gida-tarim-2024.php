@@ -87,7 +87,8 @@ return [
         .'1,5-3 kat artırma kuralı uygulanmıyor. Uluslararası ve ulusal bilim ödülleri teşvik '
         .'ödüllerinden, bir yıldan uzun burslar kısa burslardan, kongre başkanlığı düzenleme '
         .'kurulu üyeliğinden ayrılamadığı için hepsi en düşük değerden sayılıyor. SCI dergi '
-        .'hakemliği (10) diğer hakemliklerden (5) ayrılamıyor.',
+        .'hakemliği (10) diğer hakemliklerden (5) ayrılamıyor.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     // Dipnot [2]: "A, B ve C bölümlerinde verilen puanlar tek yazarı ve
     // toplam puanı ifade etmektedir." Diğer bölümlerde yazar bölüşümü yok.

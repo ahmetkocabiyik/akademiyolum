@@ -247,7 +247,7 @@ return [
         .'danışmanlıklar yönergede "her bir yıl için" verildiği hâlde yıl biriktirmesi '
         .'hesaplanamadığı için görev başına tek yıl sayılıyor; dergi görevlerinde editör, '
         .'yardımcı editör ve kurul üyesi ayrımı, patentte onay belgeli ile araştırma raporu '
-        .'ayrımı, ders kitabında ve ansiklopedi maddesinde uluslararası-ulusal ayrımı kayıttan '
+        .'ayrımı, ansiklopedi maddesinde uluslararası-ulusal ayrımı kayıttan '
         .'okunamadığı için hepsi en düşük değerden sayılıyor. Ulusal poster bildiri (0,5 puan) '
         .'aşağı yuvarlandığında sıfırlandığı için hiç sayılmıyor. Yurt dışı çalışma, h-indeksi, '
         .'spor branşlarında görev ve öğrenci danışmanlığı kalemleri sözlükte karşılıksız olduğu '

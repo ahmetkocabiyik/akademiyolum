@@ -80,7 +80,8 @@ return [
         .'tanımladığı için makale kuralı uygulandı. Spor bilimleri (11.1) bölümü girilemedi; '
         .'toplumsal katkı (12) bölümünden yalnızca danışmanlık, topluma yönelik etkinlik ve '
         .'yayın satırları girildi.'
-        .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.',
+        .'ESCI ya da Scopus dergilerinde aldığınız atıflar SAYILMIYOR: yönergenin atıf tablosu yalnız SCI-E/SSCI/AHCI dergilerini, kitapları ve ulusal dergileri anıyor, aradaki kademe için karşılık vermiyor.'
+        .' ULUSLARARASI DERS KİTABI ULUSAL KADEMEDEN: kaynağın 2.1.ç satırı "yabancı dilde yayımlanan" ders kitabı istiyor, kayıt kitabın dilini taşımıyor; ders kitabınız 2.2.ç\'nin 50 puanından sayılıyor (kaynakta 100), yani puanınız olduğundan DÜŞÜK görünür.',
 
     // Tanım 3 — Ortak Yazar Puan Dağılımı.
     'yazar_katsayisi' => [

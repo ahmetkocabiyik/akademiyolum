@@ -246,7 +246,8 @@ return [
         .'gruplarından alınabilecek puan, A grubundan alınan puanın %20\'sini geçemez" diyor; '
         .'bu, A grubuna bağlı DEĞİŞKEN bir tavan olduğu için uygulanamıyor. Aynı biçimde "bir '
         .'makale için en çok 50 atıf puanı" ve "mükerrer bildiride yalnız en yüksek puan" '
-        .'kuralları da uygulanmıyor.',
+        .'kuralları da uygulanmıyor.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     // Madde 6: ortak çalışmalarda puan dağılımı (yazar sayısı × isim sırası).
     // "Sorumlu yazar 1. isim ile aynı ölçütlerde değerlendirilir."

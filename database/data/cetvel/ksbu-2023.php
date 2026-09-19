@@ -79,7 +79,8 @@ return [
         .'yazar tablosu kategori ayrımı taşımadığı için bütün kitap kalemlerinde Tablo 1 '
         .'katsayıları kullanılıyor. Dört yazarlı bir kitapta bu 0,25 yerine 0,35-0,75 arasında '
         .'bir çarpan demek. Ayrıca "bir kitapta en fazla iki bölüm çevirisi" ve "aynı dergide '
-        .'hem editörlük hem hakemlik varsa biri sayılır" sınırları uygulanmıyor.',
+        .'hem editörlük hem hakemlik varsa biri sayılır" sınırları uygulanmıyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // EK-1 Genel İlke 4 ve Tablo 1: "A-J maddeleri arasındaki yayınların
     // puanı, yayındaki yazar sayısına ve yazarın yayındaki yazar sırasına

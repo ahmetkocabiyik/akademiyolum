@@ -31,7 +31,8 @@
 return [
     'kapsam_notu' => 'Puanlar İÜ-Cerrahpaşa EK-1 A bölümünden (uluslararası faaliyetler). Ulusal '
         .'faaliyetler, proje ve patent bölümleri girilmedi; atanma koşulları zaten makale '
-        .'sayısına dayanıyor, puan barajı yok.',
+        .'sayısına dayanıyor, puan barajı yok.'
+        .' ULUSAL YAYINEVİ KİTABI TABLODA HİÇ PUANLANMIYOR: A bölümünün kitap satırlarının tamamı "ISBN\'li ve yurt dışında yabancı dilde yayımlanmış" koşuluna bağlı; Türkçe ya da ulusal yayınevi kitabınız puan almıyor.',
 
     'maddeler' => [
         // ── A1-A3 · KİTAP ──

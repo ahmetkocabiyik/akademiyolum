@@ -169,7 +169,8 @@ return [
         .'kayıtlarınız toplam puana katkı vermiyor; A-3 (indekssiz uluslararası hakemli '
         .'dergiler), kitap eleştirisi ve yargısal karar tahlili satırları sözlükte karşılıksız; '
         .'hakemlik, yayın kurulu üyeliği, yarışma derecesi ve toplantı düzenleme kalemlerinin '
-        .'yüksek kademeleri düşük kademelerinden ayrılamadığı için en düşük değerden sayılıyor.',
+        .'yüksek kademeleri düşük kademelerinden ayrılamadığı için en düşük değerden sayılıyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // "A, B, C, D, E, F, G ve H maddelerinde, yazar sayısının 2'yi aştığı
     // durumlarda puan 2 ile çarpılıp yazar sayısına bölünür. 5 ve daha

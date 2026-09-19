@@ -62,7 +62,8 @@ return [
         .'UYGULANMIYOR (eğitim-öğretim %20, burs %10, idari görev %10) — bu kalemlerde puanınız '
         .'olduğundan yüksek görünebilir. Çağrılı makale satırı (50 puan) girilemedi; çağrılı '
         .'makaleniz varsa puanınız olduğundan düşük görünür. Sportif faaliyetler, mimari '
-        .'tasarım ve sahne sanatları bölümleri girilmedi.',
+        .'tasarım ve sahne sanatları bölümleri girilmedi.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     // EK-1 madde 13 — Çok Yazarlı Çalışmalar İçin Puanlama Oranları Tablosu.
     'yazar_katsayisi' => [

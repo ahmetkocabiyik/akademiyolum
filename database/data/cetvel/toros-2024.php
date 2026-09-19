@@ -51,10 +51,10 @@ return [
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: ders puanının "son iki yılda '
         .'verilen dersler" sınırı uygulanmıyor, bütün ders kayıtlarınız sayılıyor. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN DÜŞÜK görünür: tezsiz yüksek lisans danışmanlığı '
-        .'kaynakta ayrılamadığı için girilmedi; tanınmış uluslararası ile ulusal yayınevi '
-        .'ayrılamadığı için kitaplarda düşük satır kullanıldı. '
+        .'kaynakta ayrılamadığı için girilmedi. '
         .'Not: yönergenin proje bölümünde üniversite dışı kaynaklı projede araştırıcılık (8) '
-        .'yürütücülükten (6) yüksek puan alıyor; kaynakta böyle yazdığı için aynen girildi.',
+        .'yürütücülükten (6) yüksek puan alıyor; kaynakta böyle yazdığı için aynen girildi.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     'maddeler' => [
         // ══ A. MAKALELER ══

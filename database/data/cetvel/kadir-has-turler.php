@@ -70,15 +70,16 @@ return [
         .'kategoriden yayın" biçiminde ve fakülteye göre değişiyor (EK-3). Bu yüzden burada '
         .'toplam puan göremezsiniz; koşullar yayın sayısına bakar. '
         .'KİTAPLARDA DİL AYRIMI: koşullar yabancı dilde yayımlanmış kitap ve kitap bölümü '
-        .'istiyor, kaydınız kitabın dilini tutmuyor. Yalnızca BKCI ya da Scopus taranan '
-        .'kitaplarınız yabancı dil satırına yazıldı; başka bir yabancı dil kitabınız varsa '
-        .'koşul olduğundan zor görünür, başvurunuzda belgeleyin. '
+        .'istiyor, kaydınız kitabın dilini tutmuyor; uluslararası yayınevi kitabınız yabancı dil '
+        .'satırına yazılıyor. Kitabınız Türkçe ise koşulu olduğundan KOLAY sağlamış görünürsünüz, '
+        .'başvurunuzda belgeleyin. '
         .'Şu kalemler kategorilere hiç girmiyor: projede araştırmacı ya da danışman olmak '
         .'(yönerge yalnızca yürütücülüğü sayıyor), bilimsel toplantı düzenleme kurulunda '
         .'görev almak, adınızla anılan formül ve şekiller, faydalı model ve tasarım '
         .'tescilleri, tez izleme komitesi üyeliği. '
         .'Atıflarda kendi eserinize yaptığınız atıflar sayılmamalı ama kaydınız bunu '
-        .'ayırt etmiyor; atıf koşulu olduğundan kolay görünür.',
+        .'ayırt etmiyor; atıf koşulu olduğundan kolay görünür.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     'maddeler' => [
         // ══ GRUP-1: Bilimsel Faaliyetler ══

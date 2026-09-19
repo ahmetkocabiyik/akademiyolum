@@ -104,7 +104,8 @@ return [
         .'etiketiyle girin. '
         .'Spor Bilimleri adayları en çok etkilenir: sportif faaliyet bölümünün tamamı dışarıda '
         .'kaldı. Girişimcilik bölümü girilemediği için yönergenin "L1-L18 Puanı" barajı hiçbir '
-        .'kadroda gösterilmiyor; gerçek başvuruda o baraj da aranacak.',
+        .'kadroda gösterilmiyor; gerçek başvuruda o baraj da aranacak.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür.',
 
     // Madde 12 + Tablo 1. Çarpan YALNIZCA A-D bölümlerine (makale, bildiri,
     // kitap, çeviri) uygulanır; yönergenin kendi sınırı bu.

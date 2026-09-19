@@ -35,6 +35,11 @@
  */
 
 return [
+    'kapsam_notu' => 'Puanlar Atatürk Üniversitesi Akademik Yükseltilme ve Atanma Ölçütleri puan tablosundan. '
+        .'KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız 01.03.01 '
+        .'satırından (40) sayılıyor; yayıneviniz yönergenin tanımına girmiyorsa puanınız olduğundan '
+        .'YÜKSEK görünür, başvurunuzda yayınevini belgeleyin.',
+
     'maddeler' => [
         '02.01.01' => [
             'baslik' => 'SCIE/SSCI/AHCI Q1 dergide araştırma makalesi',

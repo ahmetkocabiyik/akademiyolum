@@ -67,7 +67,8 @@ return [
         .'puan sayılıyor. EDİTÖR KURULU ÜYELİĞİ, HAKEMLİK, DAVETLİ KONUŞMACILIK VE YARIŞMA '
         .'ÖDÜLÜ PUANINIZ DÜŞÜK GÖRÜNEBİLİR: yönerge bunları dergi düzeyine, toplantı düzeyine '
         .'ya da dereceye göre kademelendiriyor, faaliyet kaydı bu ayrımı taşımadığı için en '
-        .'düşük kademeden sayılıyor.',
+        .'düşük kademeden sayılıyor.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     // Madde 9 — Çok Yazarlı Kitap, Makale ve Bildirilerde Puanlama Tablosu.
     'yazar_katsayisi' => [

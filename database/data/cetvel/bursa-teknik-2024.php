@@ -126,7 +126,8 @@ return [
         .'yazar katkı oranıyla yaklaşıklandı. '
         .'Patent ve proje BAŞVURULARINIZI kaydetmeyin: yönerge onlara ayrı ve düşük puan '
         .'veriyor ama kayıt türü desteklenen/tescilli olandan ayrılamadığı için o satırlar hiç '
-        .'girilmedi.',
+        .'girilmedi.'
+        .' KİTABIN DİLİ KAYITTA YOK: uluslararası yayınevi kitabınız Türkçe kademesinden (20) sayılıyor, yabancı dilde yayımlandıysa B.1\'in 30 puanını göremezsiniz. Koşul tarafında ise doğru kümededir: 4D "uluslararası yayınevi" koşulunu sağlar.',
 
     // TABLO 3: isim sırası × yazar sayısı. Not: "Aday başlıca yazarı olduğu
     // tüm yayınlarda birinci isim olarak değerlendirilir."

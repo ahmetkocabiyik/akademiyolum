@@ -19,6 +19,12 @@
  */
 
 return [
+    'kapsam_notu' => 'Bu cetvel PUANSIZ: Samsun Üniversitesi yönergesi puan tablosu değil, "en az N adet şu türden '
+        .'çalışma" biçiminde koşullar veriyor; satırlar yalnızca hangi kaydın hangi türe girdiğini '
+        .'belirler. KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız '
+        .'B1 türünden sayılıyor, yayıneviniz yönergenin tanımına girmiyorsa koşulu olduğundan KOLAY '
+        .'sağlamış görünürsünüz; başvurunuzda yayınevini belgeleyin.',
+
     'maddeler' => [
         // A Türü — makale
         'A1' => ['baslik' => 'SCI/SCIE/SSCI/AHCI dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI']],

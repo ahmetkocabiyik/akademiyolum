@@ -159,9 +159,7 @@ return [
         .'ile lisansüstü tezden üretilmiş yayın kategorisinin de cetvelde karşılığı yok. '
         .'Uluslararası dergi hakemliği (3), uluslararası yayın kurulu üyeliği (15) ve yarışma '
         .'dereceleri (10\'a kadar) ulusal karşılıklarından ayrılamadığı için en düşükten '
-        .'(1, 5 ve 2) sayılıyor. "Uluslararası yayınevi" ile "ulusal yayınevi" ayrımı kayıtta '
-        .'olmadığından BKCI ve Scopus kitapları uluslararası (20/10), öteki kitaplar ulusal '
-        .'(15/5) satırından sayılıyor.',
+        .'(1, 5 ve 2) sayılıyor.',
 
     'yazar_katsayisi' => [
         'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev', 'odul',

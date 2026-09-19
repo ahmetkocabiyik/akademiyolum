@@ -99,7 +99,8 @@ return [
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: aynı kitaptan birden fazla '
         .'bölümünüz varsa hepsi sayılır. '
         .'Proje BAŞVURULARINIZI kaydetmeyin: yönerge onlara ayrı ve düşük puan veriyor ama '
-        .'kayıt türü desteklenen projeden ayrılamadığı için o satırlar girilmedi.',
+        .'kayıt türü desteklenen projeden ayrılamadığı için o satırlar girilmedi.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     'maddeler' => [
         // ══ A. MAKALELER ══

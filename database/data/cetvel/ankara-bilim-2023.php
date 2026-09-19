@@ -159,7 +159,8 @@ return [
         .'konu yazarlığı, tasarım koleksiyonları, film yaratıcı kadrosunun üst satırları, '
         .'arkeolojik kazı kalemleri, bilimsel toplantı düzenleme bölümünün tamamı ve 0,5 '
         .'puanlık satırlar (atıf 1.7.3, oturum başkanlığı 6.4.18) kaynakta karşılıksız '
-        .'kaldığı için girilmedi.',
+        .'kaldığı için girilmedi.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // EK1 dipnotu: "Tek yazarlı çalışmalarda yazar tam puan alır. İki veya
     // daha fazla yazarlı makalelerde her bir yazar için toplam puan yazar

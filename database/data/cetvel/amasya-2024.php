@@ -59,7 +59,8 @@ return [
         .'yok, yönerge her araştırmacıya sabit puan veriyor. Kitaptaki "her editörlük +1 '
         .'yazarlık" payı kayıttan türetilemediği için editörlü kitaplarda puanınız bir miktar '
         .'yüksek kalabilir. '
-        .'Organizasyon görevleri ve sanatsal etkinlik alt kırılımları girilmedi.',
+        .'Organizasyon görevleri ve sanatsal etkinlik alt kırılımları girilmedi.'
+        .' KİTABIN DİLİ KAYITTA YOK: uluslararası yayınevi kitabınız B.5\'in dil koşulu taşımayan 125 puanlık satırından sayılıyor; kitabınız yabancı dilde yayımlandıysa B.1\'in 150 puanını göremezsiniz, yani puanınız olduğundan DÜŞÜK görünür.',
 
     // Çizelge 2 — yalnızca makale, kongre ve atıf kalemlerinde geçerli.
     'yazar_katsayisi' => [

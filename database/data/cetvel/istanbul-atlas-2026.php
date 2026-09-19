@@ -190,7 +190,8 @@ return [
         .'sayılıyor; açıklamalardaki "son bir yıl" kısıtı da uygulanamıyor. '
         .'Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünebilir: tablo kitap, bildiri ve sanatsal '
         .'etkinlikte puanı daima eşit bölüyor, motor ise makale kuralını (başlıca yazara 0,8 ve '
-        .'yarı pay) bütün kategorilere uyguluyor.',
+        .'yarı pay) bütün kategorilere uyguluyor.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     'yazar_katsayisi' => [
         'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev', 'odul',

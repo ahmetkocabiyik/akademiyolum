@@ -178,16 +178,15 @@ return [
         .'atıf 0,5, ulusal atıf 0,3 puan olduğu ve motor tam sayı puan tuttuğu için satırlar '
         .'girilemedi; yönergenin "Atıflardan 15 puan" gibi koşulları bu yüzden hesaplanamıyor '
         .'olarak işaretli, kendiniz kontrol etmelisiniz. VERİLEN DERSLER de sayılmıyor: yönerge '
-        .'AKTS başına 0,5 puan veriyor, faaliyet kaydı ise AKTS taşımıyor. Kitap satırlarında '
-        .'"tanınmış yayınevi" ile "diğer yayınevi" ayrımı yalnız BKCI ve SCOPUS kapsamındaki '
-        .'kitaplarda yapılabildiği için öbür kitaplar en düşük satırdan sayılıyor (kitap 50 '
-        .'yerine 20, bölüm 20 yerine 10). Tez danışmanlığında "tek danışman" ile "esas danışman" '
+        .'AKTS başına 0,5 puan veriyor, faaliyet kaydı ise AKTS taşımıyor. '
+        .'Tez danışmanlığında "tek danışman" ile "esas danışman" '
         .'ayrılamadığı için düşük satır uygulanıyor (doktorada 10 yerine 6). Proje ÖNERİSİ '
         .'sunma, kritikler, bilirkişi raporları, kitap hakemliği, yüksek lisans projeleri, ders '
         .'ve program geliştirme ile sürekli eğitim seminerleri girilmedi. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünür: "bir kitapta birden fazla bölüm" '
         .'için öngörülen (1 + k/c) çarpanı uygulanmıyor ve idari görevler yıl başına değil kayıt '
-        .'başına puanlanıyor.',
+        .'başına puanlanıyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // ORTAK ÇALIŞMALARDA PUAN DAĞILIMI: tek kişi p, iki kişi 0,8p, ikiden
     // fazla kişi 1,8p/n. Yazar SIRASINA bakılmadığı için bütün roller aynı

@@ -107,7 +107,8 @@ return [
         .'10\'u SCI kapsamındaki yayınlardan olmalı" kuralı, bilimsel toplantı bölümünün "aynı '
         .'toplantıda en fazla bir bildiri" kuralı ve idari görevlerin "son üç yıl" ile "en az '
         .'bir yıl" koşulları uygulanmıyor. İdari görev puanının doçentlik kriterinde '
-        .'kullanılamaması kuralı da işletilmiyor.',
+        .'kullanılamaması kuralı da işletilmiyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // Ek-1 puanlama notu: ortak çalışmalarda puan dağılımı.
     'yazar_katsayisi' => [

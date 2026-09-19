@@ -36,7 +36,8 @@
 return [
     'kapsam_notu' => 'Puanlar Gazi Üniversitesi EK-1 tablosundan (01.01.2024 sürümü). '
         .'Eğitim-öğretim ve idari görev kalemleri hesaba katılmadı. Gerçek toplamınız burada '
-        .'görünenden yüksek olabilir, düşük olamaz.',
+        .'görünenden yüksek olabilir, düşük olamaz.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     'maddeler' => [
         // ── MAKALELER 1 · WoS özgün araştırma makalesi ──

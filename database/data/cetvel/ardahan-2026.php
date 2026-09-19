@@ -305,7 +305,8 @@ return [
         .'için girilmedi. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünür: bir kitapta en fazla iki bölümün '
         .'sayılması (MADDE 32), aynı toplantıda en fazla iki bildiri (MADDE 34) ve yönetimsel '
-        .'faaliyetlerin yıllık hesaplanması (MADDE 65) kuralları uygulanamıyor.',
+        .'faaliyetlerin yıllık hesaplanması (MADDE 65) kuralları uygulanamıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür.',
 
     // MADDE 67: yazar sayısı × sıra matrisi. MADDE 68: sorumlu yazar birinci
     // yazar sayılır, bu yüzden 'baslica' ile 'ilk' aynı satırı paylaşıyor.

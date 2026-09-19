@@ -288,7 +288,8 @@ return [
         .'girilemedi. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: "en çok bir/üç/beş adet", "her '
         .'aktif 5 öğrenci 1 puan × yıl", "kişi sayısına bölünecektir", "yıl ile çarpılacaktır" ve '
-        .'"son iki yılda verilen" sınırları uygulanmıyor.',
+        .'"son iki yılda verilen" sınırları uygulanmıyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     'maddeler' => $maddeler,
 

@@ -95,7 +95,8 @@ return [
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: TÜBİTAK projeleri 15 puanla '
         .'sayılır, oysa yönerge kısa süreli hareketlilik projelerine 3, hızlı destek '
         .'projelerine 5 puan veriyor; eğitim-uygulama projeleri araştırma projesi satırından '
-        .'puanlanır; disiplinler arası projelere yönergenin verdiği %25 artış uygulanmaz.',
+        .'puanlanır; disiplinler arası projelere yönergenin verdiği %25 artış uygulanmaz.'
+        .' ULUSAL KİTAPTA HAKEMLİK KAYITTA YOK: kaynak ulusal yayınevi kitabını hakemli (25) ve hakemsiz (15) diye ayırıyor; kaydınız bunu taşımadığı için hakemsiz kademeden sayılıyor, yani puanınız olduğundan DÜŞÜK görünür.',
 
     // Tablo 3: Ortak Çalışmalar İçin Puan Dağılımı. Çarpan hem yazar sayısına
     // hem adayın sırasına bağlı; yönergenin matrisi satır satır aktarıldı.

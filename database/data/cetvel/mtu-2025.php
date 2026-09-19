@@ -292,7 +292,8 @@ return [
         .'(sportif etkinlikler) sözlükte karşılıksız olduğu için girilemedi. Patent BAŞVURUNUZU '
         .'kaydetmeyin: yönerge ona ayrı ve düşük puan veriyor ama kayıt türü belgeden '
         .'ayrılamadığı için o satırlar girilmedi. Rektörlük ve rektör yardımcılığı EK-1\'in idari '
-        .'görevler listesinde yok; bu kayıtlarınız 0 puandır.',
+        .'görevler listesinde yok; bu kayıtlarınız 0 puandır.'
+        .' KİTABIN DİLİ KAYITTA YOK: uluslararası yayınevi kitabınız C1\'in "Türkçe basılmış olanlar puanın yarısını alır" kademesinden sayılıyor (kitap 125, editörlük 75, bölüm 50). Kitabınız yabancı dilde basıldıysa puanınız olduğundan DÜŞÜK görünür; başvurunuzda belgeleyin.',
 
     // Madde 7(1) ve Tablo 1: yazar sayısı ve sırasına göre katsayılar.
     // "Makalede sorumlu yazar olarak ismi geçen araştırmacılar için

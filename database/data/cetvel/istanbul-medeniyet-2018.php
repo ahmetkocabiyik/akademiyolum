@@ -247,7 +247,8 @@ return [
         .'Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünebilir: yönerge "patentlerde puan kişi '
         .'sayısına bölünür" diyor ama genel katkı oranı tablosu sıraya bağlı olduğu için çok '
         .'buluşçulu patentinizin puanı bölünmüyor (en çok 20 puanlık sapma). Atıf puanı da '
-        .'yönergede "adayın atıf yapılan her eseri için" veriliyor, kayıt ise atıf başına tutuluyor.',
+        .'yönergede "adayın atıf yapılan her eseri için" veriliyor, kayıt ise atıf başına tutuluyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // "Yayınlarda kullanılacak katkı oranları tablosu" SIRAYA ve yazar
     // sayısına bağlı. Kaynak kendi içinde çelişiyor: (a) bendi "başlıca

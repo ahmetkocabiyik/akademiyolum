@@ -101,7 +101,8 @@ return [
         .'uygulanmıyor. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: editörlük "en fazla iki adet", '
         .'hakemlik "en fazla on adet" gibi adet tavanları uygulanamıyor; aynı toplantıda '
-        .'sunulan bildirilerden yalnızca ikisinin sayılması kuralı da işlemiyor.',
+        .'sunulan bildirilerden yalnızca ikisinin sayılması kuralı da işlemiyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // Tablo-1: ortak çalışmalar için puan dağılımı.
     'yazar_katsayisi' => [

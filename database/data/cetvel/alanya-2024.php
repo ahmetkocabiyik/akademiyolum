@@ -58,9 +58,9 @@ return [
         .'görünür. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN DÜŞÜK görünür: adayın adıyla anılan denklem ve '
         .'şekiller, TÜBİTAK proje hakemliği, mesleki kuruluş üyelikleri ve merkez eğitimlerinde '
-        .'görev almak kaynakta ayrılamadığı için girilmedi; uluslararası ile ulusal yayınevi '
-        .'ayrılamadığı için kitaplarda düşük satır kullanıldı. Proje önerileri (yürütücü olarak '
-        .'başvuru) da girilmedi.',
+        .'görev almak kaynakta ayrılamadığı için girilmedi. Proje önerileri (yürütücü olarak '
+        .'başvuru) da girilmedi.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür.',
 
     // NOT satırı: "Birinci yazar tam puan alır; birden çok yazarlı
     // çalışmalarda birinci yazar tam puan alır ve tam puan diğer yazarlar

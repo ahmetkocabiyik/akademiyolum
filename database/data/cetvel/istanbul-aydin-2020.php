@@ -154,7 +154,8 @@ return [
         .'yardımcılığı, uzmanlık raporu ve burs kalemleri aynı etikete düştüğü için en düşük '
         .'değerden sayılıyor; "her dönem" ve "her yıl" çarpanları uygulanamadığı için idari '
         .'görevler bir kez sayılıyor. Güzel Sanatlar Fakültesi için yönergenin öngördüğü ek '
-        .'bazlı yüzde dağılımı (EK1 %30, EK2 %10-20, EK3 %50-60) motorda uygulanamıyor.',
+        .'bazlı yüzde dağılımı (EK1 %30, EK2 %10-20, EK3 %50-60) motorda uygulanamıyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     // Ek-1 dipnotu: iki yazarlı %60-%40; üç yazarlı %50-%30-%20; dört ve
     // üzeri birinci yazar %40, kalan %60 diğerleri arasında eşit.

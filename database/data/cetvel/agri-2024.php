@@ -44,7 +44,8 @@ return [
         .'Çok yazarlı çalışmalarda puan yazar sayısına ve sıranıza göre azaltılır (Madde 4.2) — '
         .'bu hesap uygulanıyor, ancak YAZAR LİSTESİNİ BOŞ BIRAKTIĞINIZ faaliyetlerde uygulanamaz. '
         .'Sanatsal etkinlik, film, tiyatro ve müzik bölümleri kaynak sözlüğünde karşılıksız '
-        .'olduğu için girilmedi; o bölümlere dayanan alanların eşiği de üretilmedi.',
+        .'olduğu için girilmedi; o bölümlere dayanan alanların eşiği de üretilmedi.'
+        .' ULUSLARARASI KİTAP BÖLÜMÜ ULUSAL DEĞERİNDEN: kaynak 4.2.1 (uluslararası, 25) ile 4.2.2 (ulusal, 20) satırlarını ayırıyor ama koşullar madde kodlarını tek tek saydığı için ayrı satır açılamadı; bölüm kaydınız 20 puandan sayılıyor.',
 
     // Madde 4.2: bölünmüş payın üstüne sıraya göre sabit ilave.
     'yazar_katsayisi' => [

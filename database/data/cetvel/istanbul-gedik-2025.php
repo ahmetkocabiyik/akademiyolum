@@ -115,13 +115,12 @@ return [
         .'Puanınız şu kalemlerde OLDUĞUNDAN DÜŞÜK görünür: üniversitenin kendi BAP projeleri '
         .'tabloda hiç geçmiyor; lisansüstü tezden üretilmiş yayın, idari görev, toplumsal katkı ve '
         .'yarışma dışındaki ödüller için satır yok; eş danışmanlık ile tezsiz yüksek lisans '
-        .'danışmanlığı girilmedi. "Tanınmış uluslararası yayınevi" ile "tanınmış ulusal yayınevi" '
-        .'ayrımı kayıtta olmadığı için BKCI ve Scopus kitapları uluslararası (20/10), öteki '
-        .'kitaplar ulusal (10/5) satırından sayılıyor; faydalı model, endüstriyel tasarım ve '
+        .'danışmanlığı girilmedi. Faydalı model, endüstriyel tasarım ve '
         .'yazılım ulusal patent satırından (10) sayılıyor. '
         .'Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünür: J bölümünün "son iki yılda alınan '
         .'dersler" kaydı motorda satır bazlı bir zaman penceresine çevrilemediği için daha eski '
-        .'dersleriniz de toplama giriyor.',
+        .'dersleriniz de toplama giriyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin tanınmış uluslararası yayınevi satırından sayılıyor. Yayıneviniz yönergenin tanımına (faaliyet süresi, kütüphane kataloglaması, kitap sayısı) girmiyorsa puanınız olduğundan YÜKSEK görünür; başvurunuzda yayınevini belgeleyin.',
 
     'yazar_katsayisi' => [
         'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev', 'odul',

@@ -172,7 +172,8 @@ return [
         .'ayrılamadığı için 300 puandan sayılıyor; yurt dışında en az üç ay görev almak '
         .'(39. madde, 100 puan) faaliyet olarak kaydedilemediği için girilmedi. '
         .'Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünür: "aynı kitaptaki bölümlerden en fazla '
-        .'ikisinden puan alınabilir" sınırı uygulanmıyor.',
+        .'ikisinden puan alınabilir" sınırı uygulanmıyor.'
+        .' KİTAPTA DİL KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin "yabancı dilde yayımlanmış" satırından sayılıyor. Kitabınız Türkçe ise puanınız olduğundan YÜKSEK görünür.',
 
     // [1] numaralı dipnot: tek yazarlıda tam puan, iki yazarlıda 0,80,
     // üçte 0,70, dörtte 0,60, beşte 0,50, altı ve daha fazlada 0,40.
