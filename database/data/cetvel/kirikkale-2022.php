@@ -61,6 +61,14 @@ use App\Enums\Kategori;
  *       `baslica` rolüne birinci isim satırı verilerek karşılandı.
  *
  * Yönerge: yonerge/kirikkale.php
+ *
+ * KİTAPTA YAYIM YERİ AYRIMI (19.09.2026): 44. madde kitabı ve bölüm
+ * yazarlığını "yurt dışında yayımlanmış" ↔ "yurt içinde yayımlanmış" diye,
+ * 47-5/47-6 ise kitap editörlüğünü aynı eksende ayırıyor; indeks aranmıyor.
+ * Üst satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz yurt
+ * dışı kitap 200 yerine 100, bölümü 75 yerine 50, editörlüğü 75 yerine 50
+ * puan alıyordu. Yurt dışı ders kitabının ayrı satırı yok; 44-1'den sayılıyor
+ * (yurt içi ders kitabı 44-4'te, 60).
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $OZGUN = ['ozgun_makale'];
@@ -138,11 +146,11 @@ $maddeler = array_merge([
     '43-2' => ['baslik' => 'Ulusal sempozyum, kongre ya da konferansta özet olarak yayımlanmış bildiri veya poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
 
     // ══ 4.4 KİTAPLAR ══
-    '44-1' => ['baslik' => 'Yurt dışında yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 200],
-    '44-2' => ['baslik' => 'Yurt dışında yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 75],
-    '44-3' => ['baslik' => 'Yurt içinde yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 100],
-    '44-4' => ['baslik' => 'Yurt içinde yayımlanmış ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 60],
-    '44-5' => ['baslik' => 'Yurt içinde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 50],
+    '44-1' => ['baslik' => 'Yurt dışında yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 200],
+    '44-2' => ['baslik' => 'Yurt dışında yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 75],
+    '44-3' => ['baslik' => 'Yurt içinde yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 100],
+    '44-4' => ['baslik' => 'Yurt içinde yayımlanmış ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 60],
+    '44-5' => ['baslik' => 'Yurt içinde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 50],
 
     // ══ 4.5 ÇEVİRİLER ══
     '45-1' => ['baslik' => 'Kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 60],
@@ -172,8 +180,8 @@ $maddeler = array_merge([
     // kalıyor ama dayanağı doğru satır.
     '47-3' => ['baslik' => 'Bilimsel dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 25],
     '47-4' => ['baslik' => 'Bilimsel dergilerde yardımcı editörlük ya da yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 25],
-    '47-5' => ['baslik' => 'Uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 75],
-    '47-6' => ['baslik' => 'Ulusal kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 50],
+    '47-5' => ['baslik' => 'Uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 75],
+    '47-6' => ['baslik' => 'Ulusal kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 50],
     '47-7' => ['baslik' => 'Ulusal hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 50],
     '47-9' => ['baslik' => 'Sanat ve tasarım etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatJuri, 'puan' => 30],
 
