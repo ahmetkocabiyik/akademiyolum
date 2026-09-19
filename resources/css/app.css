@@ -59,6 +59,18 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
 
+    /* ── HAREKET ──
+       Tek kaynak: süreler ve yumuşama eğrileri. Eğri değerleri detay
+       flyout'unda elle ayarlanmıştı; buradan tüm arayüze yayılıyor.
+       Kural: giriş (elemanın gelişi) YAVAŞ ve yumuşak, çıkış HIZLI. */
+    --ease-cikis: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-giris: cubic-bezier(0.4, 0, 0.7, 1);
+    --dur-hizli: 150ms;
+    --dur-normal: 260ms;
+    --dur-yavas: 380ms;
+    /* Ölçüm animasyonları (gauge, sayaç) daha uzun: sayı okunacak kadar. */
+    --dur-olcum: 700ms;
+
     /* Flux aksan rengi = marka mavisi */
     --color-accent: var(--color-brand);
     --color-accent-content: var(--color-brand);
@@ -100,6 +112,14 @@
     --color-cat-gray: #5f5e5a;
     --color-cat-gray-light: #f1efe8;
     --color-ink-subtle: #94a3b8;
+
+    /* Hareket tokenları — @theme aynası (yukarıdaki nota bakın). */
+    --ease-cikis: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-giris: cubic-bezier(0.4, 0, 0.7, 1);
+    --dur-hizli: 150ms;
+    --dur-normal: 260ms;
+    --dur-yavas: 380ms;
+    --dur-olcum: 700ms;
 }
 
 [x-cloak] { display: none !important; }
@@ -284,6 +304,34 @@ select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
 
+/* ── DASHBOARD ÖLÇÜMLERİ ──
+   Gauge yayı ve baraj çubukları ilk çizimde sıfırdan hedefe gidiyor; hareketin
+   işi "bu sayı bir hesabın sonucu" demek. @starting-style desteklenmeyen
+   tarayıcıda eleman doğrudan hedef değerinde çizilir, davranış bozulmaz.
+
+   Değer Livewire yeniden çizdiğinde (faaliyet eklendi) inline stil değişiyor
+   ve aynı geçiş tekrar çalışıyor — kullanıcı hangi sayının değiştiğini görür. */
+.olcek-yay {
+    transition: stroke-dashoffset var(--dur-olcum) var(--ease-cikis);
+}
+
+@starting-style {
+    .olcek-yay {
+        /* Yayın tamamı boş: --olcek-tam yay uzunluğu (blade'den geliyor). */
+        stroke-dashoffset: var(--olcek-tam);
+    }
+}
+
+.baraj-cubuk {
+    transition: width var(--dur-yavas) var(--ease-cikis) var(--cubuk-gecikme, 0ms);
+}
+
+@starting-style {
+    .baraj-cubuk {
+        width: 0;
+    }
+}
+
 /* Sağdan açılan detay paneli (data-detay-flyout).
    Flux varsayılanı yalnızca 50px'lik, kısa (açılış 0.15s / kapanış 0.075s) bir
    geçiş kullanıyor. Panel kendi genişliği kadar kaysın ve iki yönde de yumuşak
@@ -321,11 +369,30 @@ select:focus[data-flux-control] {
         overlay 0.38s allow-discrete;
 }
 
+/* Flyout'un kendi guard'ı: aşağıdaki GENEL kural süreleri sıfırlıyor ama
+   paneli kaydıran --flux-flyout-translate bir süre değil, onu burada kapatmak
+   gerekiyor. */
 @media (prefers-reduced-motion: reduce) {
     [data-flux-modal][data-detay-flyout] > dialog,
     [data-flux-modal][data-detay-flyout] > dialog[open] {
         --flux-flyout-translate: translateX(0);
-        transition-duration: 0.01ms;
+    }
+}
+
+/* ── HAREKET AZALTMA (genel) ──
+   İşletim sisteminde "hareketi azalt" açıksa bütün geçiş ve animasyonlar
+   pratikte anında biter. Süreyi sıfır yerine 0.01ms yapmak, animationend /
+   transitionend bekleyen kodun kilitlenmemesi için. Sayaç gibi JS tarafındaki
+   hareketler de aynı medya sorgusunu kendi içinde kontrol ediyor. */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
 

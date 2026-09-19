@@ -35,7 +35,7 @@
         {{-- İstatistik kartları --}}
         <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <x-dashboard.stat label="Toplam Puan" accent="brand">
-                <span class="font-serif text-3xl font-bold text-ink">{{ $esik ? $this->toplam : '—' }}</span>
+                <span class="font-serif text-3xl font-bold text-ink" x-data="sayac">{{ $esik ? $this->toplam : '—' }}</span>
                 <x-slot:meta>
                     @if ($this->baraj !== null)
                         <flux:badge color="blue" size="sm">{{ $this->toplam }} / {{ $this->baraj }}</flux:badge>
@@ -49,16 +49,14 @@
             </x-dashboard.stat>
 
             <x-dashboard.stat label="Faaliyet Sayısı" accent="gold">
-                <span class="font-serif text-3xl font-bold text-ink">{{ $this->faaliyetler->count() }}</span>
+                <span class="font-serif text-3xl font-bold text-ink" x-data="sayac">{{ $this->faaliyetler->count() }}</span>
                 <x-slot:meta>
                     <flux:badge color="green" size="sm">{{ $onayliAdet }} Onaylandı</flux:badge>
                 </x-slot:meta>
             </x-dashboard.stat>
 
             <x-dashboard.stat label="Karşılanmayan Koşul" accent="red">
-                <span class="font-serif text-3xl font-bold text-ink">
-                    {{ $sonuc ? count($sonuc->eksikler()) : '—' }}
-                </span>
+                <span class="font-serif text-3xl font-bold text-ink" x-data="sayac">{{ $sonuc ? count($sonuc->eksikler()) : '—' }}</span>
                 <x-slot:meta>
                     @if ($sonuc)
                         <flux:badge :color="count($sonuc->eksikler()) === 0 ? 'green' : 'red'" size="sm">
@@ -113,9 +111,11 @@
                             </linearGradient>
                         </defs>
                         <path d="M16 103 A74 74 0 0 1 164 103" fill="none" stroke="#e2e8f0" stroke-width="11" stroke-linecap="round" />
-                        <path d="M16 103 A74 74 0 0 1 164 103" fill="none" stroke="url(#gauge)" stroke-width="11" stroke-linecap="round"
-                            stroke-dasharray="{{ $gaugeUzunluk }}" stroke-dashoffset="{{ $gaugeOffset }}" />
-                        <text x="90" y="90" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#0a1628">{{ $esik ? $this->toplam : '—' }}</text>
+                        <path class="olcek-yay" d="M16 103 A74 74 0 0 1 164 103" fill="none" stroke="url(#gauge)" stroke-width="11" stroke-linecap="round"
+                            stroke-dasharray="{{ $gaugeUzunluk }}"
+                            style="stroke-dashoffset: {{ $gaugeOffset }}; --olcek-tam: {{ $gaugeUzunluk }}" />
+                        <text x="90" y="90" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#0a1628"
+                            x-data="sayac">{{ $esik ? $this->toplam : '—' }}</text>
                         <text x="90" y="104" text-anchor="middle" font-size="10" fill="#94a3b8">{{ $this->baraj !== null ? '/ '.$this->baraj.' baraj' : 'veri yok' }}</text>
                     </svg>
                 </div>
@@ -123,10 +123,10 @@
                 <div class="flex flex-col gap-2">
                     @if ($sonuc)
                         {{-- Her asgari koşul ayrı çubuk: motorun ürettiği ağacın kök çocukları --}}
-                        @foreach ($sonuc->kosullar() as $kosul)
+                        @foreach ($sonuc->kosullar() as $sira => $kosul)
                             @continue ($kosul->gerekli === null || $kosul->beyan)
                             <x-dashboard.bar :label="$kosul->aciklama" :yuzde="$kosul->oran()"
-                                :color="$kosul->durum->renk()" />
+                                :color="$kosul->durum->renk()" :sira="$sira" />
                         @endforeach
                     @else
                         <flux:text class="!text-xs text-ink-subtle">

@@ -225,3 +225,64 @@ test('dashboard koşulları sağlanan durumu "Uygun" diye anıyor', function () 
         ->assertSee('Uygun')
         ->assertDontSee('Karşılandı');
 });
+
+/**
+ * ÖLÇÜM ANİMASYONLARININ MARKUP SÖZLEŞMESİ.
+ *
+ * Gauge yayı ile baraj çubuklarının hareketi CSS'te (`.olcek-yay`,
+ * `.baraj-cubuk` + `@starting-style`), sayıların hareketi Alpine'daki `sayac`
+ * bileşeninde. İkisi de şablondaki KANCALARA bağlı: sınıf adı, `--olcek-tam`
+ * değişkeni ya da `x-data` düşerse animasyon sessizce kaybolur, hiçbir test
+ * kırılmaz ve kimse fark etmez. Bu test o kancaları donduruyor.
+ *
+ * `role="progressbar"` aynı satırda duruyor çünkü çubuk yalnız renkle
+ * konuşuyordu; ekran okuyucu için değer artık markup'ta.
+ */
+test('dashboard ölçümleri animasyon ve erişilebilirlik kancalarını taşıyor', function () {
+    Universite::factory()->create(['ad' => 'Test Üniversitesi']);
+    app()->instance(SartDeposu::class, dashboardDeposu(baraj: 50));
+
+    $user = User::factory()->onboarded()->create([
+        'universite' => 'Test Üniversitesi', 'unvan' => 'Arş. Gör.',
+    ]);
+    Faaliyet::factory()->for($user)->create([
+        'kategori' => Kategori::Makale, 'kaynak' => 'TR Dizin', 'durum' => 'onaylandi',
+    ]);
+
+    actingAs($user);
+
+    Livewire::test(Dashboard::class)
+        ->assertOk()
+        // Gauge: sınıf + yay uzunluğu değişkeni (@starting-style bunu okuyor).
+        ->assertSeeHtml('class="olcek-yay"')
+        ->assertSeeHtml('--olcek-tam: 232.5')
+        // Baraj çubuğu: sınıf, sıra gecikmesi ve progressbar rolü.
+        ->assertSeeHtml('class="baraj-cubuk h-full rounded-full"')
+        ->assertSeeHtml('--cubuk-gecikme: 0ms')
+        ->assertSeeHtml('role="progressbar"')
+        ->assertSeeHtml('aria-valuemax="100"')
+        // Sayaç: toplam puan, faaliyet sayısı, eksik koşul ve gauge metni.
+        ->assertSeeHtml('x-data="sayac"');
+});
+
+test('sayaç hedefi sunucudan gelen metinde duruyor, x-text ile değil', function () {
+    // JavaScript çalışmazsa doğru sayı yine ekranda olmalı; animasyon metni
+    // yalnızca geçici olarak değiştiriyor. Bu yüzden şablonda x-text YOK.
+    Universite::factory()->create(['ad' => 'Test Üniversitesi']);
+    app()->instance(SartDeposu::class, dashboardDeposu(baraj: 50));
+
+    $user = User::factory()->onboarded()->create([
+        'universite' => 'Test Üniversitesi', 'unvan' => 'Arş. Gör.',
+    ]);
+    Faaliyet::factory()->for($user)->create([
+        'kategori' => Kategori::Makale, 'kaynak' => 'TR Dizin', 'durum' => 'onaylandi',
+    ]);
+
+    actingAs($user);
+
+    Livewire::test(Dashboard::class)
+        ->assertSeeHtml('x-data="sayac">10</span>')
+        // Eşittirle arıyoruz: Flux'ın `data-flux-text` özniteliği çıplak
+        // "x-text" aramasına takılıyor.
+        ->assertDontSeeHtml('x-text=');
+});
