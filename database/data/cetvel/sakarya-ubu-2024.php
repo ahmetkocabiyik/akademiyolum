@@ -20,6 +20,12 @@
  * GİRİLMEYEN: 5 araştırma, 7 sanat etkinlikleri, 8 tasarım, 10 ödül,
  * 12, 14 idari görevler, 15 bilimsel/sanatsal/sportif etkinlikler — kaynak
  * sözlüğünde karşılıkları yok ve koşullar bu bölümlere atıf yapmıyor.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): 3.1 ile 3.3, 3.5 ile 3.7 "alanında
+ * ULUSLARARASI yayımlanan" ↔ "ULUSAL yayımlanan" diye ayrılıyor; indeks
+ * aranmıyor. İndekssiz uluslararası kitap 100 yerine 80, bölümü 60 yerine 40
+ * puan alıyordu. (Ders kitabının uluslararası kademesi 3.2'de zaten kapsamlı
+ * etiketle duruyordu.)
  */
 
 return [
@@ -56,12 +62,12 @@ return [
         '2.7-2.8' => ['baslik' => 'Ulusal kongrede sözlü sunulup özeti yayımlanan ya da poster olarak sunulan tebliğ', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 10],
 
         // ── 3. KİTAPLAR ──
-        '3.1' => ['baslik' => 'Alanında uluslararası yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
+        '3.1' => ['baslik' => 'Alanında uluslararası yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
         '3.2' => ['baslik' => 'Alanında uluslararası yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 80],
-        '3.3' => ['baslik' => 'Alanında ulusal yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 80],
+        '3.3' => ['baslik' => 'Alanında ulusal yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 80],
         '3.4' => ['baslik' => 'Alanında yayımlanmış tam kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 80],
-        '3.5' => ['baslik' => 'Alanında uluslararası yayımlanan kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 60],
-        '3.7' => ['baslik' => 'Alanında ulusal yayımlanan kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 40],
+        '3.5' => ['baslik' => 'Alanında uluslararası yayımlanan kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 60],
+        '3.7' => ['baslik' => 'Alanında ulusal yayımlanan kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 40],
         '3.8' => ['baslik' => 'Alanında yayımlanmış kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 40],
         '3.9' => ['baslik' => 'Alanında ulusal veya uluslararası yayımlanan ansiklopedi maddesi', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 20],
 
