@@ -3681,6 +3681,14 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 10,
         'Ulusal Kitap Bölümü' => 5,
     ]],
+    // Gümüşhane: kaynakta indekssiz uluslararası kitabın KENDİ satırı var
+    // (C2, 20) — indeks kademesi C1'de (30) kaldı, dört eksik satır açıldı.
+    ['gumushane-2026', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 15,
+        'Uluslararası Kitap Bölümü' => 7,
+        'Ulusal Kitap Bölümü' => 3,
+    ]],
     // İndeks kademesine bağlı ama kaynakta indekssiz uluslararası kitabın
     // satırı OLMAYAN beşli (19.09.2026 dördüncü tur, kullanıcı kararı).
     ['alanya-2024', [

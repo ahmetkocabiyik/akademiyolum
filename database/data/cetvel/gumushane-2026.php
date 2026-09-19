@@ -20,6 +20,13 @@
  * 20P) ile C3 (ulusal, 15P) ayrılamıyor; C2'ye bağlandı — ulusal yayınevi kitabı
  * 5 puan fazla sayılır. Kalıcı çözüm etiketi ikiye bölmek.
  * A6/A7 (teknik not, editöre mektup) karşılığı olan bir kaynak etiketi yok.
+ *
+ * KİTAPTA DÖRT SATIR EKSİKTİ (19.09.2026): kaynağın C3 (ulusal kitap, 15),
+ * C7 (uluslararası kitap bölümü, 7), C8 (ulusal kitap çevirisi, 6) ve C9
+ * (ders kitabı, 5) satırları cetvelde YOKTU. Genel `Uluslararası/Ulusal Kitap`
+ * etiketi C2'de (uluslararası kitap, 20) durduğu için ULUSAL yayınevi kitabı
+ * da 20 puan alıyordu; uluslararası kitap bölümü ise C10'un ulusal 3 puanından
+ * sayılıyordu. Dört satır açıldı, etiketler kendi kapsamlarına bağlandı.
  */
 $YUKSEK = ['ozgun_makale', 'derleme', 'kisa_makale'];
 
@@ -72,11 +79,15 @@ return [
 
         // C. KİTAP
         'C1' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
-        'C2' => ['baslik' => 'Uluslararası yayınevi kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 20],
+        'C2' => ['baslik' => 'Uluslararası yayınevi kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap'], 'puan' => 20],
+        'C3' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 15],
         'C4' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
         'C5' => ['baslik' => 'Tahkik (tenkitli metin neşri)', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 15],
-        'C6' => ['baslik' => 'Uluslararası yayınevinde kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 8],
-        'C10' => ['baslik' => 'Ulusal yayınevinde kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Çeviri Kitap Bölümü'], 'puan' => 3],
+        'C6' => ['baslik' => 'Uluslararası yayınevinde kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 8],
+        'C7' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 7],
+        'C8' => ['baslik' => 'Ulusal yayınevlerinde yayımlanmış kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Çeviri Kitap'], 'puan' => 6],
+        'C9' => ['baslik' => 'Ulusal ya da uluslararası yayınevinde yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 5],
+        'C10' => ['baslik' => 'Ulusal yayınevinde kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Çeviri Kitap Bölümü'], 'puan' => 3],
         'C11' => ['baslik' => 'Ansiklopedi bölüm/maddesi', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 1],
 
         // D. ATIF
