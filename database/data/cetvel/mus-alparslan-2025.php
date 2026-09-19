@@ -66,6 +66,13 @@ use App\Enums\Kategori;
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): A1 bloğu "uluslararası kitaplar veya
+ * yurtdışındaki yayınevlerinde yabancı dilde yayımlanmış kitaplar", B1 ise
+ * ulusal kitaplar; tanım 7 ve 8 ayrımı yayınevine bağlıyor, indeks aranmıyor.
+ * Uluslararası satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz
+ * uluslararası kitap 120 yerine 80, bölümü 40 yerine 25, editörlüğü 40 yerine
+ * 25 puan alıyordu.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $TAM = ['ozgun_makale', 'derleme'];
@@ -124,9 +131,9 @@ $proje = fn (string $kod, string $ad, array $kaynaklar, int $p): array => [
 
 $maddeler = array_merge([
     // ══ A1. ULUSLARARASI KİTAP ══
-    'A1.1' => ['baslik' => 'Uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 120],
-    'A1.2' => ['baslik' => 'Uluslararası bilimsel kitap içinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
-    'A1.3' => ['baslik' => 'Uluslararası bilimsel kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
+    'A1.1' => ['baslik' => 'Uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 120],
+    'A1.2' => ['baslik' => 'Uluslararası bilimsel kitap içinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 40],
+    'A1.3' => ['baslik' => 'Uluslararası bilimsel kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
 
     // ══ A2. ULUSLARARASI MAKALELER ══
     'A2.1' => ['baslik' => 'SCI, SCI-Expanded, SSCI ya da AHCI kapsamındaki dergide yayımlanmış özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => $SCI, 'turler' => $TAM, 'puan' => 30],
@@ -150,9 +157,9 @@ $maddeler = array_merge([
     'A6.6' => ['baslik' => 'Dergilerde yayın kurulu üyeliği ya da hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği', 'Hakemlik'], 'puan' => 2],
 
     // ══ B1. ULUSAL KİTAP ══
-    'B1.1' => ['baslik' => 'Ulusal bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 80],
-    'B1.2' => ['baslik' => 'Ulusal bilimsel kitap içinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 25],
-    'B1.3' => ['baslik' => 'Ulusal bilimsel kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 25],
+    'B1.1' => ['baslik' => 'Ulusal bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ulusal Ders / Metot Kitabı'], 'puan' => 80],
+    'B1.2' => ['baslik' => 'Ulusal bilimsel kitap içinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 25],
+    'B1.3' => ['baslik' => 'Ulusal bilimsel kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 25],
     'B1.4' => ['baslik' => 'Bilimsel kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 25],
     'B1.5' => ['baslik' => 'Bilimsel kitap içinde bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
 
