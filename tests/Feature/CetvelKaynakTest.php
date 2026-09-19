@@ -3474,6 +3474,19 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Marmara'nın yedi alan varyantı aynı tabloyu paylaşıyor (17-20).
+    ['marmara-sosyal', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 70,
+        'Uluslararası Kitap Bölümü' => 60,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
+    ['marmara-ilahiyat-hukuk-filoloji', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 50,
+        'Uluslararası Kitap Bölümü' => 50,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
     // KSÜ 3. bölüm, Lokman Hekim'in "Düzey" sütunu.
     ['ksu-2023', [
         'Uluslararası Kitap' => 35,

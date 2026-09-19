@@ -28,6 +28,14 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): tablo 17-20'yi "uzmanlık alanında
+ * ULUSLARARASI kitap / kitaba bölüm / kitap editörlüğü" ↔ "ULUSAL …" diye
+ * ayırıyor; indeks aranmıyor. Tanımlar maddesi (n) kitabı "saygınlığı olan
+ * yayınevlerince basılmış" diye tarif ediyor ama bu koşul iki kademede de
+ * aynı, ayrımı yapan tek şey yayınevinin kapsamı. Uluslararası satırlar yalnız
+ * BKCI/Scopus etiketiyle yazıldığı için indekssiz uluslararası kitap ULUSAL
+ * satırdan sayılıyordu (100 yerine 70, bölümde 60 yerine 20).
  */
 
 return [
@@ -64,12 +72,12 @@ return [
         '23-tez' => ['baslik' => 'Lisansüstü tezinizden üretilmiş uluslararası kongre bildirisi', 'kategori' => 'tez_yayini', 'kaynaklar' => ['CPCI Bildiri'], 'puan' => 12],
 
         // ── KİTAP ── (17-21)
-        '17' => ['baslik' => 'Uzmanlık alanında uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-        '18' => ['baslik' => 'Uzmanlık alanında uluslararası kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 60],
-        '18b' => ['baslik' => 'Uzmanlık alanında uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 60],
-        '19' => ['baslik' => 'Uzmanlık alanında ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 70],
-        '20' => ['baslik' => 'Uzmanlık alanında ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
-        '20b' => ['baslik' => 'Uzmanlık alanında ulusal kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+        '17' => ['baslik' => 'Uzmanlık alanında uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 100],
+        '18' => ['baslik' => 'Uzmanlık alanında uluslararası kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 60],
+        '18b' => ['baslik' => 'Uzmanlık alanında uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 60],
+        '19' => ['baslik' => 'Uzmanlık alanında ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 70],
+        '20' => ['baslik' => 'Uzmanlık alanında ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
+        '20b' => ['baslik' => 'Uzmanlık alanında ulusal kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 20],
         '21' => ['baslik' => 'Uzmanlık alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 50],
         '21b' => ['baslik' => 'Uzmanlık alanında makale veya bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
 

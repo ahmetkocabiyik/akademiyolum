@@ -37,6 +37,14 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): tablo 17-20'yi "uzmanlık alanında
+ * ULUSLARARASI kitap / kitaba bölüm / kitap editörlüğü" ↔ "ULUSAL …" diye
+ * ayırıyor; indeks aranmıyor. Tanımlar maddesi (n) kitabı "saygınlığı olan
+ * yayınevlerince basılmış" diye tarif ediyor ama bu koşul iki kademede de
+ * aynı, ayrımı yapan tek şey yayınevinin kapsamı. Uluslararası satırlar yalnız
+ * BKCI/Scopus etiketiyle yazıldığı için indekssiz uluslararası kitap ULUSAL
+ * satırdan sayılıyordu (100 yerine 70, bölümde 60 yerine 20).
  */
 
 return [
@@ -64,13 +72,13 @@ return [
         '15c' => ['baslik' => 'Ulusal karma sergi veya gösteriye katılım', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Karma Etkinlik (Jürisiz, Ulusal)', 'Sempozyum/Çalıştay/Bienal (Yurt İçi)'], 'puan' => 10],
 
         // ── KİTAP ve ÖZGÜN SANAT ÇALIŞMASI ── (17-21)
-        '17' => ['baslik' => 'Uzmanlık alanında uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
+        '17' => ['baslik' => 'Uzmanlık alanında uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 100],
         '17b' => ['baslik' => 'Uluslararası seçici kurullu müzede yer almış özgün sanat veya tasarım çalışması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt Dışı)'], 'puan' => 80],
-        '18' => ['baslik' => 'Uzmanlık alanında uluslararası kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 60],
+        '18' => ['baslik' => 'Uzmanlık alanında uluslararası kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 60],
         '18b' => ['baslik' => 'Özgün uluslararası bireysel sanat veya tasarım etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt Dışı, Ulusal Jürili)', 'Kişisel Etkinlik (Yurt İçi, Uluslararası Jürili)', 'Kamusal Alanda Uygulanmış Yapıt (Yurt Dışı)', 'Elektronik Kişisel Sergi (Uluslararası)'], 'puan' => 50],
-        '19' => ['baslik' => 'Uzmanlık alanında ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 70],
+        '19' => ['baslik' => 'Uzmanlık alanında ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 70],
         '19b' => ['baslik' => 'Ulusal seçici kurullu müzede yer almış özgün sanat veya tasarım çalışması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Eserin Müzeye Kabulü (Yurt İçi)', 'Eserin Satın Alınması (Yurt İçi)', 'Eserin Yayında Yer Alması / Satın Alınması'], 'puan' => 50],
-        '20' => ['baslik' => 'Uzmanlık alanında ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
+        '20' => ['baslik' => 'Uzmanlık alanında ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
         '20b' => ['baslik' => 'Özgün ulusal bireysel sanat veya tasarım etkinliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Ulusal)', 'Kişisel Etkinlik (Yurt Dışı, Jürisiz)', 'Kişisel Etkinlik (Yurt İçi, Jürisiz)', 'Kamusal Alanda Uygulanmış Yapıt (Yurt İçi)', 'Uygulanmış Tasarım / Koleksiyon', 'Elektronik Kişisel Sergi (Ulusal)'], 'puan' => 20],
         '21' => ['baslik' => 'Uzmanlık alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 25],
         '21b' => ['baslik' => 'Uzmanlık alanında makale veya bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
