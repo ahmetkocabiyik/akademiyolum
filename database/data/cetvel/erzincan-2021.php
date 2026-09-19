@@ -81,6 +81,14 @@
  * Kalan üç mülga madde koşul metnindeydi (Sağlık Bilimleri profesörlüğünün
  * 3. bendi ile iki genel not); yönergedeki koşullar zaten yalnız yürürlükte
  * kalan 1. ve 2. bentleri sayıyor.
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): tanımlar maddesi (a) ulusal, (b)
+ * uluslararası yayınevini süre, kütüphane kataloglaması ve kitap sayısıyla
+ * tanımlıyor; 1.1 ile 1.2, 2.1 ile 2.2 yalnız bu ayrımı kullanıyor, indeks
+ * aranmıyor. Üst satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için
+ * indekssiz uluslararası kitap 60 yerine 50, bölümü 25 yerine 15 puan
+ * alıyordu. 1.1 ders kitabı ayırmadığı için uluslararası ders kitabı da o
+ * satırdan sayılıyor (ulusal ders kitabı 1.2.2'den, 40).
  */
 $OZGUN = ['ozgun_makale'];
 $DERLEME = ['derleme'];
@@ -126,11 +134,11 @@ $maddeler = [
     'MK5b' => ['baslik' => 'Diğer hakemli dergide kısa makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 5],
 
     // ══ B.1.2 KİTAP VE KİTAP BÖLÜMLERİ ══
-    'KT1.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
-    'KT1.2.1' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış araştırma-inceleme niteliğinde özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 50],
-    'KT1.2.2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 40],
-    'KT2.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitap veya ansiklopedide bölüm, madde ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 25],
-    'KT2.2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitap veya ansiklopedide bölüm, madde ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 15],
+    'KT1.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 60],
+    'KT1.2.1' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış araştırma-inceleme niteliğinde özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 50],
+    'KT1.2.2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 40],
+    'KT2.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitap veya ansiklopedide bölüm, madde ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 25],
+    'KT2.2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitap veya ansiklopedide bölüm, madde ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 15],
     'KT3.1' => ['baslik' => 'Çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
     'KT3.2' => ['baslik' => 'Çeviri kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 8],
 
