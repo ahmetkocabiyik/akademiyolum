@@ -201,8 +201,8 @@ $maddeler = [
     '2.13.3' => ['baslik' => 'Ulusal müze eseri, kazı buluntusu, koleksiyon, film arşivi ve sinematografik malzemelerin restorasyon ve konservasyon çalışması', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => $sanatRestN, 'puan' => 50],
 
     // ══ 3. EDİTÖRLÜK, HAKEMLİK, JÜRİ ÜYELİĞİ ══
-    '3.1.1' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
-    '3.1.2' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+    '3.1.1' => ['baslik' => 'Tanınmış uluslararası yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
+    '3.1.2' => ['baslik' => 'Tanınmış ulusal yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 20],
     '3.1.3' => ['baslik' => 'SCI-E, SSCI, AHCI ya da ESCI indekslerinde yer alan dergi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 30],
     '3.1.4' => ['baslik' => 'Alan indekslerinde yer alan dergi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 20],
     '3.1.7' => ['baslik' => 'TÜBİTAK ULAKBİM TR Dizinde yer alan ulusal dergi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 15],

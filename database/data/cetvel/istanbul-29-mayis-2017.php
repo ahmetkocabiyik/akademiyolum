@@ -94,8 +94,8 @@ $maddeler = [
     'D28' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI kapsamındaki dergide editörlük ya da genel yönetmenlik', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 15],
     'D29' => ['baslik' => 'Diğer uluslararası alan endekslerinde taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 10],
     'D30' => ['baslik' => 'Ulusal hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 7],
-    'D33' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitap ya da kitap dizisi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
-    'D34' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitap ya da kitap dizisi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 7],
+    'D33' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanmış kitap ya da kitap dizisi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
+    'D34' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitap ya da kitap dizisi editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 7],
     // Kaynakta YAYIN KURULU ÜYELİĞİ satırı YOK; etiket hakemlik satırında
     // duruyordu. İki rol ayrı: hakemlik makale başına, yayın kurulu
     // üyeliği süreklilik taşıyan bir görev. Etiket burada kalsaydı
