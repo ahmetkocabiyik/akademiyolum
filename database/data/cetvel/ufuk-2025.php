@@ -61,6 +61,14 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA KAPSAM ETİKETİ EN DÜŞÜK SENSE KADEMESİNDE (19.09.2026): 5. bölüm
+ * uluslararası kitabı SENSE sınıflandırmasına göre üçe ayırıyor (A-B 60,
+ * C 55, D-E 50; bölümde 15/10/8, editörlükte 40/35/30) ve ulusal tarafta
+ * "tanınmış ulusal yayınevi" satırları var (25/8/15). Kayıt yayınevinin SENSE
+ * kademesini taşımadığı için kapsamlı etiketler EN DÜŞÜK uluslararası kademeye
+ * (5.c, 5.i, 5.f) bağlandı; ulusal satırlar daraltıldı. Önceden indekssiz
+ * uluslararası kitap ulusal satırdan 25 puan alıyordu.
  */
 $OZGUN = ['ozgun_makale'];
 $DIGER_TUR = ['derleme', 'kisa_makale', 'vaka_teknik_not'];
@@ -91,13 +99,13 @@ $maddeler = [
     '3.d' => ['baslik' => 'Ulusal kongrede sunulan poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 
     // ══ 5. KİTAP ══
-    '5.c' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-    '5.f' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap editörlüğü ya da editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
-    '5.i' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 8],
+    '5.c' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+    '5.f' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap editörlüğü ya da editör yardımcılığı', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
+    '5.i' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 8],
     '5.j' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
-    '5.k' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 25],
-    '5.l' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
-    '5.m' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 8],
+    '5.k' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 25],
+    '5.l' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 15],
+    '5.m' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 8],
     '5.n' => ['baslik' => 'Tanınmış yayınevi tarafından yayımlanmış bilimsel kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
     '5.p' => ['baslik' => 'Tanınmış yayınevi tarafından yayımlanmış bilimsel kitapta bölüm çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
 

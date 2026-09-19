@@ -3681,6 +3681,20 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 10,
         'Ulusal Kitap Bölümü' => 5,
     ]],
+    // SENSE sınıflandırması kullanan ikili: kapsamlı etiket EN DÜŞÜK SENSE
+    // kademesinde (Ufuk 5.c/5.i, Yeni Yüzyıl 1.A.21/1.A.27).
+    ['ufuk-2025', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 25,
+        'Uluslararası Kitap Bölümü' => 8,
+        'Ulusal Kitap Bölümü' => 8,
+    ]],
+    ['yeni-yuzyil-2025', [
+        'Uluslararası Kitap' => 30,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 20,
+        'Ulusal Kitap Bölümü' => 15,
+    ]],
     // Ege: kapsam kapsamlı etiketi yerleştiriyor, DİL ekseninde §0 (Türkçe
     // kademesi). Cerrahpaşa'da ulusal kitabın satırı YOK, karşılığı sıfır.
     ['ege-2026', [

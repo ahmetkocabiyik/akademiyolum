@@ -124,6 +124,14 @@
  * OLDUĞUNDAN YÜKSEK görünür.
  *
  * Yönerge: yonerge/yeni-yuzyil.php
+ *
+ * KİTAPTA SENSE KADEMELERİ (19.09.2026): kaynak uluslararası kitabı üç
+ * kademede veriyor — 19 (WoS veya SENSE A-B, 80), 20 (SCOPUS veya SENSE C, 60),
+ * 21 (SENSE D-E, 30); bölümde 25/26/27 aynı biçimde 40/30/20. Cetvelde yalnız
+ * 20 ve 26 vardı, yani adayın indekssiz uluslararası kitabı ULUSAL satırdan
+ * (1.A.41, 30) sayılıyordu. Kayıt yayınevinin SENSE kademesini taşımadığı için
+ * kapsamlı etiketler EN DÜŞÜK kademeye bağlandı: 1.A.21 (30) ve 1.A.27 (20)
+ * satırları açıldı, ulusal satırlar `Ulusal Kitap(+Bölümü)`ne daraltıldı.
  */
 
 return [
@@ -200,7 +208,9 @@ return [
         '1.A.17' => ['baslik' => 'Uluslararası alan indeksli dergide derleme', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => ['derleme'], 'puan' => 10],
         '1.A.20' => ['baslik' => 'Uluslararası yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
         '1.A.24' => ['baslik' => 'Uluslararası yayınevinde kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
+        '1.A.21' => ['baslik' => 'SENSE (D-E) kapsamındaki uluslararası yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap'], 'puan' => 30],
         '1.A.26' => ['baslik' => 'Uluslararası yayınevinde kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
+        '1.A.27' => ['baslik' => 'SENSE (D-E) kapsamındaki uluslararası yayınevinde kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 20],
         '1.A.30' => ['baslik' => 'Uluslararası yayınevinde kitap bölümü çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
         '1.A.31' => ['baslik' => 'TÜBİTAK ULAKBİM TR Dizin dergisinde tam makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 10],
         '1.A.32' => ['baslik' => 'Uluslararası indeksli bildiri kitabında yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 10],
@@ -208,8 +218,8 @@ return [
         '1.A.34' => ['baslik' => 'WoS taranan kitapta yayınlarınıza yapılan her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
         '1.A.37' => ['baslik' => 'Uluslararası indeksli dergide yayınlarınıza yapılan her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus'], 'puan' => 2],
         '1.A.40' => ['baslik' => 'ULAKBİM taranan dergide yayınlarınıza yapılan her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'Diğer'], 'puan' => 1],
-        '1.A.41' => ['baslik' => 'Ulusal yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 30],
-        '1.A.42' => ['baslik' => 'Ulusal yayınevinde kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 15],
+        '1.A.41' => ['baslik' => 'Ulusal yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 30],
+        '1.A.42' => ['baslik' => 'Ulusal yayınevinde kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 15],
 
         // ══ 2.B PATENT, PROJE, SANAT ESERLERİ ve TASARIM ══
         '2.B.1' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 40],
