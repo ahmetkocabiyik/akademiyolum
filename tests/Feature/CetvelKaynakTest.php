@@ -3434,4 +3434,14 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 45,
         'Ulusal Kitap Bölümü' => 40,
     ]],
+    // Açıklama iii "uluslararası"yı yayınevine bağlıyor; ders kitabının da
+    // iki kademesi var (50 ↔ 30).
+    ['alku-2024', [
+        'Uluslararası Kitap' => 120,
+        'Ulusal Kitap' => 70,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 15,
+        'Uluslararası Ders / Metot Kitabı' => 50,
+        'Ulusal Ders / Metot Kitabı' => 30,
+    ]],
 ]);

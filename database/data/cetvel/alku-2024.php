@@ -26,9 +26,15 @@
  *       puandan sayılıyor. Derlemede 40 yerine 15.
  *   Patentte incelemeli (120) ile incelemesiz (60) ayrımı kayıtta yok →
  *       60; BAŞVURU satırları (40, 20, 10) girilmedi.
- *   Kitapta uluslararası/ulusal ayrımı yalnız BKCI ve SCOPUS kapsamındaki
- *       kitaplarda güvenilir: bilimsel kitap 120 ↔ 70 → 70, ders kitabı
- *       50 ↔ 30 → 30, ansiklopedi maddesi 15 ↔ 10 → 10.
+ *   Kitapta ansiklopedi maddesi uluslararası 15 ↔ ulusal 10 → 10: etiketin
+ *       kapsam ayrımı yok. Bilimsel kitap, ders kitabı ve kitap bölümü ise
+ *       19.09.2026'da iki kademesine açıldı — Açıklama iii "uluslararası"yı
+ *       YAYINEVİNE bağlıyor ("yabancı dilde yazılmış veya … uluslararası
+ *       nitelikte faaliyet gösterdiği belgelenebilen yayınevleri tarafından
+ *       basılmış eserler"), indeks aramıyor; sözlükteki `Uluslararası Kitap`
+ *       ailesi bu ayrımın birebir karşılığı. Önceden üst satırlar yalnız
+ *       BKCI/Scopus etiketini taşıdığı için indekssiz uluslararası kitap
+ *       120 yerine 70, bölümü 30 yerine 15 puan alıyordu.
  *   Sanat yarışmalarında ödül (30/20) ile meslek odası yarışmalarında
  *       derece (50/40) tek 'Yarışma Derecesi / Mansiyon' etiketine
  *       düşüyor → 20.
@@ -124,11 +130,12 @@ $maddeler = [
     '1a.23' => ['baslik' => 'Ulusal toplantıda sunulmuş özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
     // ══ TABLO 1a — KİTAP ══
-    '1a.24' => ['baslik' => 'Uluslararası yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 120],
-    '1a.25' => ['baslik' => 'Bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 70],
-    '1a.26' => ['baslik' => 'Ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 30],
-    '1a.27' => ['baslik' => 'Uluslararası yayınevince basılmış kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-    '1a.28' => ['baslik' => 'Kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 15],
+    '1a.24' => ['baslik' => 'Uluslararası yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 120],
+    '1a.25' => ['baslik' => 'Ulusal yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 70],
+    '1a.26u' => ['baslik' => 'Uluslararası yayınevince basılmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 50],
+    '1a.26' => ['baslik' => 'Ulusal yayınevince basılmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 30],
+    '1a.27' => ['baslik' => 'Uluslararası yayınevince basılmış kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+    '1a.28' => ['baslik' => 'Ulusal yayınevince basılmış kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 15],
     '1a.29' => ['baslik' => 'Uluslararası yayınevince basılmış kitapta editör olmak (çeviri editörü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
     '1a.30' => ['baslik' => 'Kitapta editör olmak (çeviri editörü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
     '1a.31' => ['baslik' => 'Ansiklopedide konu ya da madde yazarı olmak', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
