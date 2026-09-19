@@ -56,6 +56,13 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * 19.09.2026: KİTAPTA YAYINEVİ KAPSAMI. 10. madde "Yurtdışında uluslararası
+ * yayınevlerinde basılı olması şartıyla", 11. madde "alanıyla ilgili ULUSAL
+ * nitelikte bir kitap" diyor; kaynak indeks ya da tanınmışlık aramıyor.
+ * Satırlar `Uluslararası Kitap(+Bölümü)` ve `Ulusal Kitap(+Bölümü)`
+ * etiketleriyle bağlandı; önceden indekssiz uluslararası kitap 150 yerine
+ * 100, bölümü 100 yerine 25 puan alıyordu.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -128,10 +135,10 @@ return [
         'M9.b' => ['baslik' => 'Ulusal bilimsel toplantıda sunulup özet metin olarak yayımlanan bildiri, poster ya da gösteri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 30],
 
         // ══ Ç. ALANINDA KİTAP YAZARLIĞI ══
-        'M10.a' => ['baslik' => 'Yurt dışında uluslararası yayınevinde basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
-        'M10.b' => ['baslik' => 'Yurt dışında uluslararası yayınevinde basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 100],
-        'M11.a' => ['baslik' => 'Alanıyla ilgili ulusal nitelikte kitap yazmak', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 100],
-        'M11.b' => ['baslik' => 'Alanıyla ilgili Türkçe yazılan bir kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 25],
+        'M10.a' => ['baslik' => 'Yurt dışında uluslararası yayınevinde basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 150],
+        'M10.b' => ['baslik' => 'Yurt dışında uluslararası yayınevinde basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 100],
+        'M11.a' => ['baslik' => 'Alanıyla ilgili ulusal nitelikte kitap yazmak', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 100],
+        'M11.b' => ['baslik' => 'Alanıyla ilgili Türkçe yazılan bir kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 25],
         'M12.a' => ['baslik' => 'Alanındaki referans kitaplarından birinin çevirisini yapmak', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 50],
         'M12.b' => ['baslik' => 'Çevirisi yapılan bir kitabın bölümlerinden birinin çevirisini yüklenmek', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
 
