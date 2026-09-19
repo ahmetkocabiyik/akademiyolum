@@ -69,6 +69,13 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): 10. madde "Yurtdışında uluslararası
+ * yayınevlerinde basılı olması şartıyla", 11. madde "alanıyla ilgili ULUSAL
+ * nitelikte kitap", 17.a/17.b ise kitap editörlüğünü aynı eksende ayırıyor;
+ * indeks aranmıyor. Uluslararası satırlar yalnız BKCI/Scopus etiketiyle
+ * yazıldığı için indekssiz yurt dışı kitap 150 yerine 100, bölümü 100 yerine
+ * 25, editörlüğü 150 yerine 100 puan alıyordu.
  */
 
 return [
@@ -157,10 +164,10 @@ return [
         '9.b' => ['baslik' => 'Ulusal bilimsel toplantıda özet bildiri, poster veya gösteri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 20],
 
         // ══ D. ALANINDA KİTAP YAZARLIĞI ══
-        '10.a' => ['baslik' => 'Yurt dışında uluslararası yayınevinde basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
-        '10.b' => ['baslik' => 'Yurt dışında uluslararası yayınevinde basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 100],
-        '11.a' => ['baslik' => 'Alanıyla ilgili ulusal nitelikte kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 100],
-        '11.b' => ['baslik' => 'Türkçe yazılan bir kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 25],
+        '10.a' => ['baslik' => 'Yurt dışında uluslararası yayınevinde basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 150],
+        '10.b' => ['baslik' => 'Yurt dışında uluslararası yayınevinde basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 100],
+        '11.a' => ['baslik' => 'Alanıyla ilgili ulusal nitelikte kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 100],
+        '11.b' => ['baslik' => 'Türkçe yazılan bir kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 25],
         '12.a' => ['baslik' => 'Referans kitaplarından birinin çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 50],
         '12.b' => ['baslik' => 'Çevirisi yapılan bir kitabın bir bölümünün çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
 
@@ -170,8 +177,8 @@ return [
         '16.a' => ['baslik' => 'Ulusal hakemli bilimsel dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 50],
         '16.c' => ['baslik' => 'Derginin yayın veya bilimsel kurulunda yer almak (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 25],
         '16.d' => ['baslik' => 'Dergide hakemlik yapmak (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 10],
-        '17.a' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 150],
-        '17.b' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 100],
+        '17.a' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 150],
+        '17.b' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 100],
 
         // ══ F. ATIFLAR ══
         '18.a' => ['baslik' => 'Uluslararası kaynak kitaplardaki atıflar', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 20],

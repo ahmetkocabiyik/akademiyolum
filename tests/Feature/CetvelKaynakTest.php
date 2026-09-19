@@ -3476,6 +3476,33 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Giresun C ↔ F, Hakkari B1 ↔ B2, Hatay MKÜ dört çift, Iğdır 10 ↔ 11.
+    ['giresun-2019', [
+        'Uluslararası Kitap' => 120,
+        'Ulusal Kitap' => 60,
+        'Uluslararası Kitap Bölümü' => 40,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
+    ['hakkari-2024', [
+        'Uluslararası Kitap' => 60,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
+    ['hatay-mku-2024', [
+        'Uluslararası Kitap' => 60,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 5,
+        'Uluslararası Ders / Metot Kitabı' => 40,
+        'Ulusal Ders / Metot Kitabı' => 20,
+    ]],
+    ['igdir-2023', [
+        'Uluslararası Kitap' => 150,
+        'Ulusal Kitap' => 100,
+        'Uluslararası Kitap Bölümü' => 100,
+        'Ulusal Kitap Bölümü' => 25,
+    ]],
     // Erzincan 1.1 ↔ 1.2, 2.1 ↔ 2.2: tanımlar maddesindeki ulusal/uluslararası
     // yayınevi ayrımı.
     ['erzincan-2021', [
