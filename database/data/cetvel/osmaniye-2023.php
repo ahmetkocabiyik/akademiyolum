@@ -68,6 +68,19 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): 2. bölüm "2.1. Uluslararası" ve
+ * "2.2. Ulusal" diye ikiye bölünmüş; her ikisinde de kitap, editörlük ve bölüm
+ * yazarlığı var (50/30/25 ↔ 30/20/10) ve indeks aranmıyor. Uluslararası
+ * satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz uluslararası
+ * kitap 50 yerine 30, bölümü 25 yerine 10 puandaydı.
+ *
+ * EDİTÖRLÜK ÜÇ SATIRA AYRILDI: kaynağın 2.1.2 (uluslararası, 30) satırı
+ * cetvelde yoktu; 2.2.2 ise kaynağın 20 puanı yerine çeviri editörlüğünün 15
+ * puanıyla yazılmıştı, çünkü kapsamsız `Kitap Editörlüğü` etiketi en düşük
+ * kademede durmak zorundaydı. Şimdi 2.1.2 (30), 2.2.2 (20) ve 3.2 (çeviri
+ * kitap editörlüğü, 15) ayrı satırlar; kapsamsız etiket 3.2'de. `BKCI Kitap`
+ * etiketi de 9.4'ün ulusal DERGİ satırından (2) alınıp 2.1.2'ye taşındı.
  */
 
 return [
@@ -111,11 +124,13 @@ return [
         '1.2.4' => ['baslik' => 'Bilimsel ansiklopedide madde yazarlığı (en çok 5 madde)', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
 
         // ══ 2. KİTAPLAR ══
-        '2.1.1' => ['baslik' => 'Uluslararası yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-        '2.1.3' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 25],
-        '2.2.1' => ['baslik' => 'Ulusal yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 30],
-        '2.2.2' => ['baslik' => 'Bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
-        '2.2.3' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
+        '2.1.1' => ['baslik' => 'Uluslararası yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+        '2.1.2' => ['baslik' => 'Uluslararası yayınevince basılmış bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
+        '2.1.3' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 25],
+        '2.2.1' => ['baslik' => 'Ulusal yayınevince basılmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 30],
+        '2.2.2' => ['baslik' => 'Ulusal yayınevince basılmış bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü'], 'puan' => 20],
+        '3.2' => ['baslik' => 'Çeviri kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
+        '2.2.3' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
         '2.2.4' => ['baslik' => 'Ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 15],
 
         // ══ 3. ÇEVİRİLER ══
@@ -152,7 +167,7 @@ return [
         '9.1' => ['baslik' => 'SCI, SSCI veya AHCI dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 10],
         '9.2' => ['baslik' => 'Diğer uluslararası indeksli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 3],
         '9.3' => ['baslik' => 'ULAKBİM TR Dizin dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 3],
-        '9.4' => ['baslik' => 'Diğer ulusal hakemli dergide editörlük, yayın kurulu üyeliği veya hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Hakemlik', 'BKCI Kitap'], 'puan' => 2],
+        '9.4' => ['baslik' => 'Diğer ulusal hakemli dergide editörlük, yayın kurulu üyeliği veya hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Hakemlik'], 'puan' => 2],
 
         // ══ 10. SANATSAL ETKİNLİKLER ══
         '10.1.1' => ['baslik' => 'Uluslararası jürili sergi, bienal, gösteri, dinleti veya festivalde kişisel etkinlik', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Kişisel Etkinlik (Uluslararası)', 'Kişisel Etkinlik (Yurt İçi, Uluslararası Jürili)'], 'puan' => 60],

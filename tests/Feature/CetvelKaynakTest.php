@@ -3474,6 +3474,31 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Muş Alparslan A1 ↔ B1, NOHÜ 4a-4d, Sakarya ÜBÜ 3.1/3.3, Osmaniye 2.1/2.2.
+    ['mus-alparslan-2025', [
+        'Uluslararası Kitap' => 120,
+        'Ulusal Kitap' => 80,
+        'Uluslararası Kitap Bölümü' => 40,
+        'Ulusal Kitap Bölümü' => 25,
+    ]],
+    ['nohu-2024', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 15,
+        'Uluslararası Kitap Bölümü' => 15,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['sakarya-ubu-2024', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 80,
+        'Uluslararası Kitap Bölümü' => 60,
+        'Ulusal Kitap Bölümü' => 40,
+    ]],
+    ['osmaniye-2023', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
     // Marmara'nın yedi alan varyantı aynı tabloyu paylaşıyor (17-20).
     ['marmara-sosyal', [
         'Uluslararası Kitap' => 100,
