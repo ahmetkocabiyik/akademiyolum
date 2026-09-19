@@ -69,6 +69,14 @@ use App\Enums\Kategori;
  * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
  * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
  * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): 3. bölüm kitabı (35 ↔ 30), kitap
+ * editörlüğünü (15 ↔ 10), bölüm yazarlığını (15 ↔ 10) ve DERS KİTABINI
+ * (30 ↔ 20) uluslararası/ulusal yayınevine göre ayırıyor; indeks aranmıyor.
+ * Üst satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için indekssiz
+ * uluslararası kitap 35 yerine 30, bölümü 15 yerine 10, editörlüğü 15 yerine
+ * 10 puandaydı. Ders kitabının iki kademesi tek satırda (T1-3ef, 20)
+ * toplanmıştı; T1-3e (30) ve T1-3f (20) olarak ayrıldı.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $OZGUN = ['ozgun_makale'];
@@ -122,13 +130,14 @@ $maddeler = [
     'T1-2e' => ['baslik' => 'SSCI, SCI, SCI-Expanded veya AHCI kapsamındaki dergide editöre mektup, teknik not, vaka takdimi ya da tartışma', 'kategori' => 'makale', 'kaynaklar' => $SCI, 'turler' => $KISA, 'puan' => 5],
     'T1-2f' => ['baslik' => 'Ulusal hakemli dergide editöre mektup, teknik not, vaka takdimi ya da tartışma', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'Diğer Uluslararası İndeks', 'TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 3],
 
-    'T1-3a' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 35],
-    'T1-3c' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 30],
-    'T1-3b' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
-    'T1-3b-ed' => ['baslik' => 'Uluslararası yayınevi kitabının editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],
-    'T1-3d' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
-    'T1-3d-ed' => ['baslik' => 'Ulusal yayınevi kitabının editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
-    'T1-3ef' => ['baslik' => 'Ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],
+    'T1-3a' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 35],
+    'T1-3e' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 30],
+    'T1-3c' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 30],
+    'T1-3b' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
+    'T1-3b-ed' => ['baslik' => 'Uluslararası yayınevi kitabının editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 15],
+    'T1-3d' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
+    'T1-3d-ed' => ['baslik' => 'Ulusal yayınevi kitabının editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 10],
+    'T1-3f' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 20],
     'T1-3gh' => ['baslik' => 'Ansiklopedide konu ya da madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 3],
     'T1-3i' => ['baslik' => 'Yabancı dilde basılmış bilimsel ya da edebi eserin Türkçeye tam kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 8],
     'T1-3j' => ['baslik' => 'Yabancı dilde basılmış bilimsel ya da edebi eserin Türkçeye bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 4],
