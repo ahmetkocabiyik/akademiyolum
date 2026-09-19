@@ -650,6 +650,12 @@ test('ölü satırlar ve sıfır tavanlar bilinçli', function () {
         '15d-yk · Yönetim kurulu üyeliği',
         '19d-yk · Yönetim kurulu üyeliği',
         '1c · Diğer uluslararası alan indekslerinde taranan dergide makale',
+        // Ege'nin kitap kademeleri iki eksende birden ayrılıyor (yayınevinin
+        // tanınırlığı ve kitabın dili); kayıt ikisini de taşımadığı için genel
+        // etiketler en düşük kademede (3d/3e) duruyor, bu iki satır kaynağı
+        // belgelemek için etiketsiz kaldı.
+        '3a2 · Uluslararası tanınırlığı olan yayınevinden Türkçe kitap yazarlığı',
+        '3b2 · Uluslararası tanınırlığı olan yayınevinden Türkçe kitap bölümü',
         '4d-yk · Yönetim kurulu üyeliği',
         '5d-yk · Yönetim kurulu üyeliği',
         'A.16a · Millî takımlarda görev almak ya da antrenör ve hakem eğitim kurslarında eğitici olarak görev almak',

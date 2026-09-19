@@ -27,6 +27,18 @@
  *     girildi, kalanı girilmedi.
  *   Bu bölümler yalnızca TOPLAM puana katkı sağlar, zorunlu koşulların
  *   sayısal kısmına girmez; hesaplanan toplam bu kadar EKSİK kalabilir.
+ *
+ * KİTAPTA ULUSAL KADEME EKLENDİ (19.09.2026): kaynağın 3(d) ulusal kitap (30),
+ * 3(e) ulusal kitap bölümü (10) ve 3(i) ulusal ders/metot kitabı (20)
+ * satırları cetvelde HİÇ YOKTU; ulusal yayınevi kitabı uluslararası
+ * tanınırlığı olan yayınevinin TÜRKÇE satırından (3a2, 40) sayılıyordu.
+ *
+ * Kaynağın kitap kademeleri iki eksende birden ayrılıyor: yayınevinin
+ * TANINIRLIĞI (uluslararası ↔ ulusal) ve kitabın DİLİ (yabancı ↔ Türkçe).
+ * Kayıt ikisini de taşımıyor; §0 uyarınca genel `Uluslararası/Ulusal Kitap`
+ * ve `Kitap Bölümü` etiketleri EN DÜŞÜK kademede (3d ve 3e) duruyor. 3a2 ile
+ * 3b2 kaynağı belgelemek için etiketsiz kaldı; BKCI/Scopus kaydı uluslararası
+ * kademeyi kanıtladığı için 3a1/3b1'de.
  */
 
 return [
@@ -92,9 +104,12 @@ return [
 
         // ── 3. KİTAP ──
         '3a1' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden yabancı dilde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 75],
-        '3a2' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden Türkçe kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 40],
+        '3a2' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden Türkçe kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => [], 'puan' => 40],
         '3b1' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden yabancı dilde kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
-        '3b2' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden Türkçe kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
+        '3b2' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevinden Türkçe kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => [], 'puan' => 10],
+        '3d' => ['baslik' => 'Ulusal tanınırlığı olan yayınevinden kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
+        '3e' => ['baslik' => 'Ulusal tanınırlığı olan yayınevinden kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
+        '3i' => ['baslik' => 'Ulusal tanınırlığı olan yayınevinden Türkçe ders, metot ya da etüt kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],
         // 3d (ulusal yayınevi kitabı, 30) ve 3e (ulusal yayınevi kitap bölümü,
         // 10) GİRİLMEDİ: sözlükte uluslararası/ulusal yayınevi ayrımı için ayrı
         // etiket kalmadı, 3a2 ile 3b2 zaten o etiketleri tutuyor. Uydurma bir
