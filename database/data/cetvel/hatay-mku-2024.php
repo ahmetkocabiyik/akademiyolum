@@ -46,6 +46,18 @@
  * G BÖLÜMÜNÜN GİRİLEMEMESİ SOSYAL/GÜZEL SANATLAR ADAYINI ETKİLER: o alanların
  * 80 puanlık barajı "A-B-C-D-E-F-G" kümesinden sayılıyor; G girilmediği için
  * baraj olduğundan ZOR görünür.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): kaynak kitabı, DERS KİTABINI, kitap
+ * editörlüğünü ve bölüm yazarlığını dört ayrı çiftte uluslararası ↔ ulusal
+ * yayınevine göre veriyor (60/30, 40/20, 40/20, 10/5). Tanımlar maddesi
+ * yayınevini SENSE A-B-C sınıflamasına bağlıyor ama kapsam dışındaki
+ * yayınevleri için üniversite yayın komisyonu onayı yolunu açık bırakıyor;
+ * yani koşul iki kademede de aynı, ayrımı yapan tek şey yayınevinin yeri.
+ *
+ * Cetvelde uluslararası ders kitabı (40) ve uluslararası kitap editörlüğü (40)
+ * satırları HİÇ YOKTU; ikisi de açıldı (A2b-u, A2c-u). Önceden ders kitabı 20,
+ * kitap editörlüğü 20, indekssiz uluslararası kitap 60 yerine 30, bölümü 10
+ * yerine 5 puan alıyordu.
  */
 
 return [
@@ -71,12 +83,14 @@ return [
         'A1f4' => ['baslik' => 'Ulusal hakemli dergide teknik not, vaka takdimi veya editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 8],
 
         // ══ A. 2. Kitaplar, kitap bölümleri ve dergi editörlüğü ══
-        'A2a1' => ['baslik' => 'Uluslararası yayınevince yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
-        'A2a2' => ['baslik' => 'Ulusal yayınevince yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 30],
-        'A2b' => ['baslik' => 'Ulusal yayınevince yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],
-        'A2c' => ['baslik' => 'Kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
-        'A2d1' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-        'A2d2' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
+        'A2a1' => ['baslik' => 'Uluslararası yayınevince yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 60],
+        'A2b-u' => ['baslik' => 'Uluslararası yayınevince yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Ders / Metot Kitabı'], 'puan' => 40],
+        'A2a2' => ['baslik' => 'Ulusal yayınevince yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 30],
+        'A2b' => ['baslik' => 'Ulusal yayınevince yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 20],
+        'A2c-u' => ['baslik' => 'Uluslararası yayınevince yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
+        'A2c' => ['baslik' => 'Ulusal yayınevince yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 20],
+        'A2d1' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+        'A2d2' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
         'A2e' => ['baslik' => 'Alanında yayımlanmış tam kitap tercümesi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 15],
         'A2f1' => ['baslik' => 'SCI, SSCI, AHCI veya ESCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI Dergi'], 'puan' => 30],
         'A2f3' => ['baslik' => 'Ulusal veya diğer uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'Scopus Dergi'], 'puan' => 5],
