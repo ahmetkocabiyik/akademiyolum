@@ -42,6 +42,13 @@
  * Faaliyet kaydı bir tezin yayına dönüşüp dönüşmediğini tutmadığı için EN
  * DÜŞÜK satırlar girildi (doktora 5, yüksek lisans 10 yerine ulusal hakemli
  * satırları).
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): kaynak
+ * kitabı, bölümü ve editörlüğü "TANINMIŞ ULUSLARARASI yayınevi" ↔ "TANINMIŞ
+ * ULUSAL yayınevi" diye ayırıyor; sıfat İKİ KADEMEDE DE aynı, ayrımı yapan tek
+ * şey yayınevinin kapsamı. Üst satırlar yalnız BKCI/Scopus etiketiyle
+ * yazıldığı için adayın indekssiz uluslararası kitabı ULUSAL satırdan
+ * sayılıyordu. Kapsamlı etiketler bağlandı, ulusal satırlar daraltıldı.
  */
 
 return [
@@ -74,8 +81,8 @@ return [
 
     'maddeler' => [
         // ══ A — ULUSLARARASI YAYIN VE ETKİNLİKLER ══
-        'A1' => ['baslik' => 'Tanınmış uluslararası yayınevinde bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 75],
-        'A2' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
+        'A1' => ['baslik' => 'Tanınmış uluslararası yayınevinde bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 75],
+        'A2' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 35],
         // Çeyreklik çarpanı uygulanamadığı için en düşük değer (Q4 × 1).
         'A3.a' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI dergide özgün araştırma, makale ya da derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 50],
         'A3.b' => ['baslik' => 'SCI, SCIE, SSCI veya AHCI dergide editöre mektup, teknik not ya da vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 20],
@@ -92,8 +99,8 @@ return [
         'A13.ç' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 4],
 
         // ══ B — ULUSAL YAYIN VE ETKİNLİKLER ══
-        'B1' => ['baslik' => 'Tanınmış ulusal yayınevinde bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 50],
-        'B2' => ['baslik' => 'Tanınmış ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
+        'B1' => ['baslik' => 'Tanınmış ulusal yayınevinde bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 50],
+        'B2' => ['baslik' => 'Tanınmış ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 20],
         'B3.a' => ['baslik' => 'TÜBİTAK-ULAKBİM TR Dizin dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['ozgun_makale'], 'puan' => 20],
         'B3.b' => ['baslik' => 'TR Dizin dergide derleme, editöre mektup, teknik not ya da vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => ['derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
         'B4.a' => ['baslik' => 'Diğer yurt içi hakemli dergide özgün araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale'], 'puan' => 10],

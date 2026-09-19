@@ -78,6 +78,13 @@
  *   Afiş, logo gibi tasarımların "en az üç çalışmadan oluşması" koşulu.
  *
  * Yönerge: yonerge/altinbas.php
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): kaynak
+ * kitabı, bölümü ve editörlüğü "TANINMIŞ ULUSLARARASI yayınevi" ↔ "TANINMIŞ
+ * ULUSAL yayınevi" diye ayırıyor; sıfat İKİ KADEMEDE DE aynı, ayrımı yapan tek
+ * şey yayınevinin kapsamı. Üst satırlar yalnız BKCI/Scopus etiketiyle
+ * yazıldığı için adayın indekssiz uluslararası kitabı ULUSAL satırdan
+ * sayılıyordu. Kapsamlı etiketler bağlandı, ulusal satırlar daraltıldı.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -99,18 +106,18 @@ $maddeler = [
     '1.1.1.0.1.e' => ['baslik' => 'AHCI kapsamındaki dergide yayımlanmış tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['AHCI'], 'turler' => $TAM, 'puan' => 30],
     '1.1.1.0.2' => ['baslik' => 'Uluslararası alan indekslerinde taranan dergide yayımlanmış tam metin makale', 'kategori' => 'makale', 'kaynaklar' => $B_TURU, 'turler' => $TAM, 'puan' => 25],
     '1.1.1.0.4' => ['baslik' => 'Uluslararası dergide yayımlanmış editöre mektup, teknik not, vaka analizi ya da tartışma', 'kategori' => 'makale', 'kaynaklar' => [...$A_TURU, ...$B_TURU], 'turler' => $KISA, 'puan' => 6],
-    '1.1.2.0.1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
-    '1.1.3.0.1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından basılmış bilimsel ya da mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-    '1.1.4.0.1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından basılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
+    '1.1.2.0.1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
+    '1.1.3.0.1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından basılmış bilimsel ya da mesleki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+    '1.1.4.0.1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından basılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
     '1.1.5.0.1' => ['baslik' => 'Uluslararası hakemli konferansta sunulmuş ve konferans kitabında basılmış tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin'], 'puan' => 10],
     '1.1.5.0.2' => ['baslik' => 'Uluslararası hakemli konferansta sunulmuş ve konferans kitabında basılmış bildiri özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Davetli Konuşmacı'], 'puan' => 5],
 
     // ══ 1.2. ULUSAL YAYINLAR ══
     '1.2.1.0.1' => ['baslik' => 'ULAKBİM TR Dizin tarafından taranan ulusal hakemli dergide yayımlanmış tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'turler' => $TAM, 'puan' => 20],
     '1.2.1.0.2' => ['baslik' => 'Diğer ulusal hakemli dergide yayımlanmış tam metin makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 15],
-    '1.2.2.0.2' => ['baslik' => 'Ulusal yayınevi tarafından basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
-    '1.2.3.0.2' => ['baslik' => 'Ulusal yayınevi tarafından basılmış bilimsel, mesleki ya da ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 20],
-    '1.2.4.0.2' => ['baslik' => 'Ulusal yayınevi tarafından basılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
+    '1.2.2.0.2' => ['baslik' => 'Ulusal yayınevi tarafından basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
+    '1.2.3.0.2' => ['baslik' => 'Ulusal yayınevi tarafından basılmış bilimsel, mesleki ya da ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 20],
+    '1.2.4.0.2' => ['baslik' => 'Ulusal yayınevi tarafından basılmış kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 15],
     '1.2.5.0.1' => ['baslik' => 'Ulusal hakemli konferansta sunulmuş ve konferans kitapçığında basılmış tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 7],
     '1.2.5.0.2' => ['baslik' => 'Ulusal hakemli konferansta sunulmuş ve konferans kitapçığında basılmış bildiri özeti', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
     '1.2.8.0.1' => ['baslik' => 'Tercüme edilip yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 6],

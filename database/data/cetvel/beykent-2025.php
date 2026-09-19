@@ -47,6 +47,13 @@
  *   O bölümünün "en fazla 2 tez" sınırı grup tavanıyla karşılandı.
  *
  * Yönerge: yonerge/beykent.php
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): kaynak
+ * kitabı, bölümü ve editörlüğü "TANINMIŞ ULUSLARARASI yayınevi" ↔ "TANINMIŞ
+ * ULUSAL yayınevi" diye ayırıyor; sıfat İKİ KADEMEDE DE aynı, ayrımı yapan tek
+ * şey yayınevinin kapsamı. Üst satırlar yalnız BKCI/Scopus etiketiyle
+ * yazıldığı için adayın indekssiz uluslararası kitabı ULUSAL satırdan
+ * sayılıyordu. Kapsamlı etiketler bağlandı, ulusal satırlar daraltıldı.
  */
 $TAM = ['ozgun_makale', 'derleme'];
 $KISA = ['kisa_makale', 'vaka_teknik_not'];
@@ -70,9 +77,9 @@ $maddeler = [
     'B-4' => ['baslik' => 'Uluslararası bilimsel toplantıda keynote speaker ya da davetli konuşmacı olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı (Uluslararası)'], 'puan' => 2],
 
     // ══ C: ULUSLARARASI KİTAP ══
-    'C-1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
-    'C-2' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-    'C-3' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
+    'C-1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 30],
+    'C-2' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+    'C-3' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
 
     // ══ D: ULUSAL ARAŞTIRMA YAYINLARI ══
     'D-1' => ['baslik' => 'ULAKBİM TR Dizin tarafından taranan ulusal hakemli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 8],
@@ -83,9 +90,9 @@ $maddeler = [
     'E-3' => ['baslik' => 'Ulusal bilimsel toplantıda sunulmuş özet bildiri ya da poster', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 
     // ══ F: ULUSAL KİTAP ══
-    'F-1' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
-    'F-2' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanan özgün bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
-    'F-3' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
+    'F-1' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
+    'F-2' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanan özgün bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
+    'F-3' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanan özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 5],
     'F-4' => ['baslik' => 'Bilimsel kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 5],
     'F-5' => ['baslik' => 'Bilimsel kitap içinde bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 3],
 

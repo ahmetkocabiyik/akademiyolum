@@ -131,6 +131,13 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): kaynak
+ * kitabı, bölümü ve editörlüğü "TANINMIŞ ULUSLARARASI yayınevi" ↔ "TANINMIŞ
+ * ULUSAL yayınevi" diye ayırıyor; sıfat İKİ KADEMEDE DE aynı, ayrımı yapan tek
+ * şey yayınevinin kapsamı. Üst satırlar yalnız BKCI/Scopus etiketiyle
+ * yazıldığı için adayın indekssiz uluslararası kitabı ULUSAL satırdan
+ * sayılıyordu. Kapsamlı etiketler bağlandı, ulusal satırlar daraltıldı.
  */
 
 return [
@@ -178,10 +185,10 @@ return [
 
     'maddeler' => [
         // ══ 1.1 KİTAP ══
-        '1.1.1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
-        '1.1.2' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-        '1.1.3' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
-        '1.1.4' => ['baslik' => 'Tanınmış ulusal yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 5],
+        '1.1.1' => ['baslik' => 'Tanınmış uluslararası yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 20],
+        '1.1.2' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+        '1.1.3' => ['baslik' => 'Tanınmış ulusal yayınevi tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 10],
+        '1.1.4' => ['baslik' => 'Tanınmış ulusal yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 5],
 
         // ══ 1.2 MAKALE ══
         // Alt kodlar (a-d) bize ait: kaynak tabloda tek satır var, ayrım
@@ -236,8 +243,8 @@ return [
         '2.8.4' => ['baslik' => 'Ulusal müze, kazı buluntusu veya koleksiyon restorasyon-konservasyon çalışmasını üstlenmek', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Koruma-Onarım Uygulaması (Ulusal)'], 'puan' => 12],
 
         // ══ 3. EDİTÖRLÜK, HAKEMLİK, JÜRİ ÜYELİĞİ ══
-        '3.1.1' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 8],
-        '3.1.2' => ['baslik' => 'Tanınmış ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
+        '3.1.1' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 8],
+        '3.1.2' => ['baslik' => 'Tanınmış ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 5],
         '3.1.3' => ['baslik' => 'Doçentlik indekslerindeki dergide fiilen yapılan editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 5],
         '3.1.4' => ['baslik' => 'Uluslararası diğer indekslerdeki hakemli dergide fiilen yapılan editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 4],
         '3.1.6' => ['baslik' => 'TR Dizin kapsamındaki ulusal dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 2],

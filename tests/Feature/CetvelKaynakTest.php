@@ -3581,6 +3581,38 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 50,
         'Ulusal Kitap Bölümü' => 30,
     ]],
+    // "Tanınmış uluslararası ↔ tanınmış ulusal" ailesi (19.09.2026 ikinci tur):
+    // sıfat iki kademede de aynı, ayrımı yapan tek şey yayınevinin kapsamı.
+    ['altinbas-2026', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 20,
+        'Uluslararası Kitap Bölümü' => 20,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['ankara-bilim-2023', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 10,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 5,
+    ]],
+    ['bandirma-2024', [
+        'Uluslararası Kitap' => 75,
+        'Ulusal Kitap' => 50,
+        'Uluslararası Kitap Bölümü' => 35,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
+    ['beykent-2025', [
+        'Uluslararası Kitap' => 30,
+        'Ulusal Kitap' => 10,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 5,
+    ]],
+    ['canakkale-2024', [
+        'Uluslararası Kitap' => 150,
+        'Ulusal Kitap' => 100,
+        'Uluslararası Kitap Bölümü' => 100,
+        'Ulusal Kitap Bölümü' => 40,
+    ]],
     // Kayseri'nin "Düzeyi" sütunu, Kırıkkale 44, Kırklareli C, Kilis 2,
     // Karamanoğlu C-3/C-4 (yalnız bölüm; C-1 indekse bağlı, C-2 torba).
     ['kayseri-2024', [

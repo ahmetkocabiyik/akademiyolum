@@ -78,6 +78,13 @@
  *       ikisi puanlanır" — eser bazlı tavan, motorda yok.
  *
  * Yönerge: yonerge/canakkale.php
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): kaynak
+ * kitabı, bölümü ve editörlüğü "ULUSLARARASI TANINIRLIĞI OLAN yayınevi" ↔ "ULUSAL
+ * TANINIRLIĞI OLAN yayınevi" diye ayırıyor; sıfat İKİ KADEMEDE DE aynı, ayrımı yapan tek
+ * şey yayınevinin kapsamı. Üst satırlar yalnız BKCI/Scopus etiketiyle
+ * yazıldığı için adayın indekssiz uluslararası kitabı ULUSAL satırdan
+ * sayılıyordu. Kapsamlı etiketler bağlandı, ulusal satırlar daraltıldı.
  */
 
 return [
@@ -147,12 +154,12 @@ return [
         '2.f' => ['baslik' => 'Ulusal bilimsel toplantıda özet olarak yayımlanan ya da poster olarak sunulan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 8],
 
         // ══ 3. KİTAP ══
-        '3.a' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevince yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
-        '3.b' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevince yayımlanan bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 100],
-        '3.c' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevince yayımlanan bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 100],
-        '3.d' => ['baslik' => 'Ulusal tanınırlığı olan yayınevince yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 100],
-        '3.e' => ['baslik' => 'Ulusal tanınırlığı olan yayınevince yayımlanan bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 40],
-        '3.f' => ['baslik' => 'Ulusal tanınırlığı olan yayınevince yayımlanan bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 60],
+        '3.a' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevince yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 150],
+        '3.b' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevince yayımlanan bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 100],
+        '3.c' => ['baslik' => 'Uluslararası tanınırlığı olan yayınevince yayımlanan bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 100],
+        '3.d' => ['baslik' => 'Ulusal tanınırlığı olan yayınevince yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 100],
+        '3.e' => ['baslik' => 'Ulusal tanınırlığı olan yayınevince yayımlanan bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 40],
+        '3.f' => ['baslik' => 'Ulusal tanınırlığı olan yayınevince yayımlanan bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 60],
         '3.g' => ['baslik' => 'Yabancı dilde yayımlanan bilimsel kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
         '3.h' => ['baslik' => 'Yabancı dilde yayımlanan bilimsel kitap bölümü çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 15],
         '3.i' => ['baslik' => 'Alanında yayımlanan ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 80],
