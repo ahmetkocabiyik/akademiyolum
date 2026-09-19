@@ -127,7 +127,8 @@ return [
         .'Patent ve proje BAŞVURULARINIZI kaydetmeyin: yönerge onlara ayrı ve düşük puan '
         .'veriyor ama kayıt türü desteklenen/tescilli olandan ayrılamadığı için o satırlar hiç '
         .'girilmedi.'
-        .' KİTABIN DİLİ KAYITTA YOK: uluslararası yayınevi kitabınız Türkçe kademesinden (20) sayılıyor, yabancı dilde yayımlandıysa B.1\'in 30 puanını göremezsiniz. Koşul tarafında ise doğru kümededir: 4D "uluslararası yayınevi" koşulunu sağlar.',
+        .' KİTABIN DİLİ KAYITTA YOK: uluslararası yayınevi kitabınız Türkçe kademesinden (20) sayılıyor, yabancı dilde yayımlandıysa B.1\'in 30 puanını göremezsiniz. Koşul tarafında ise doğru kümededir: 4D "uluslararası yayınevi" koşulunu sağlar.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // TABLO 3: isim sırası × yazar sayısı. Not: "Aday başlıca yazarı olduğu
     // tüm yayınlarda birinci isim olarak değerlendirilir."
@@ -167,7 +168,7 @@ return [
         'A.11' => ['baslik' => 'ESCI, Scopus, TR Dizin veya ulusal hakemli dergide editöre mektup, araştırma notu, özet veya kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['ESCI / Scopus', 'TR Dizin', 'Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli'], 'turler' => ['kisa_makale', 'vaka_teknik_not'], 'puan' => 2],
 
         // ══ B. KİTAP ══
-        'B.1' => ['baslik' => 'BKCI kapsamında ya da ulusal/uluslararası yayınevince yabancı dilde yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
+        'B.1' => ['baslik' => 'BKCI kapsamında ya da ulusal/uluslararası yayınevince yabancı dilde yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 30],
         'B.2' => ['baslik' => 'Ulusal yayınevince Türkçe yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 20],
         // B.2 iki yayınevi kapsamını birden sayıyor; 4D/4E koşulları ise kapsamı
         // ayırıyor. Aynı puanlı ikinci satır, uluslararası yayınevinin Türkçe

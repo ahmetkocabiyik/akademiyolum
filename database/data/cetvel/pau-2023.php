@@ -179,7 +179,7 @@ $maddeler = [
     'C.1b' => ['baslik' => 'SCI, SCI-Expanded, SSCI ve AHCI kapsamındaki dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 50],
     'C.2a' => ['baslik' => 'Diğer uluslararası ve ulusal hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 20],
     'C.2c' => ['baslik' => 'Dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
-    'C.3' => ['baslik' => 'Yabancı dilde yazılmış uluslararası kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
+    'C.3' => ['baslik' => 'Yabancı dilde yazılmış uluslararası kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
     'C.4' => ['baslik' => 'Türkiye\'de yayımlanmış kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
     'C.5a' => ['baslik' => 'Lisansüstü tez jürisinde bulunmak', 'kategori' => 'tez_danismanligi', 'kaynaklar' => ['Tez İzleme / Jüri Üyeliği'], 'puan' => 3],
 

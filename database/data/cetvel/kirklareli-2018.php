@@ -159,7 +159,7 @@ $maddeler = [
     'F-5a' => ['baslik' => 'Ulusal hakemli dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 30],
     'F-5b' => ['baslik' => 'Dergide editör yardımcılığı, yayın kurulu ya da danışma kurulu üyeliği (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 20],
     'F-5c' => ['baslik' => 'Dergide hakemlik (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
-    'F-6' => ['baslik' => 'Uluslararası yayımlanan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 100],
+    'F-6' => ['baslik' => 'Uluslararası yayımlanan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 100],
     'F-7' => ['baslik' => 'Ulusal yayımlanan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 50],
 
     // ══ H. PATENTLER ══

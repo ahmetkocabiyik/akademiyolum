@@ -70,7 +70,8 @@ return [
         .'(15) ile ulusal kitap (20) tek etikete düştüğü için düşük olan, SCI atıfları (3) ile '
         .'ESCI-Scopus atıfları (2) tek etikete düştüğü için yine düşük olan uygulanıyor; proje '
         .'BAŞVURUSU satırı, yurt dışında iki dönem bulunma satırı, konferans kitabı editörlüğü '
-        .'ve makale çevirisi girilemedi.',
+        .'ve makale çevirisi girilemedi.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // "Çok yazarlı yayınlarda puanlar yazar sayısına göre eşit olarak
     // dağıtılır." Sıra ayrımı yok; bütün roller 1/n alıyor. Kural
@@ -102,13 +103,13 @@ return [
         'A.6' => ['baslik' => 'ESCI, Scopus, MLA, TR Dizin ya da diğer indeksli dergide yayımlanmış teknik not, editöre mektup, vaka incelemesi, tartışma veya kitap incelemesi', 'kategori' => 'makale', 'kaynaklar' => [...$ALAN_INDEKS, 'TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 2],
 
         // ══ B. ULUSAL / ULUSLARARASI KİTAP ══
-        'B.1' => ['baslik' => 'Book Citation Index kapsamındaki yayınevinde yayımlanmış uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 35],
-        'B.2' => ['baslik' => 'Book Citation Index kapsamındaki yayınevinde yayımlanmış uluslararası bilimsel kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
+        'B.1' => ['baslik' => 'Book Citation Index kapsamındaki yayınevinde yayımlanmış uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 35],
+        'B.2' => ['baslik' => 'Book Citation Index kapsamındaki yayınevinde yayımlanmış uluslararası bilimsel kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
         'B.3' => ['baslik' => 'YÖK\'ün kabul ettiği şartları taşıyan uluslararası ya da ulusal bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 15],
         'B.4' => ['baslik' => 'YÖK\'ün kabul ettiği şartları taşıyan uluslararası ya da ulusal bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
 
         // ══ C. KİTAP VE DERGİ EDİTÖRLÜĞÜ ══
-        'C.1' => ['baslik' => 'Book Citation Index kapsamındaki yayınevinde yayımlanmış uluslararası bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 20],
+        'C.1' => ['baslik' => 'Book Citation Index kapsamındaki yayınevinde yayımlanmış uluslararası bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 20],
         'C.3' => ['baslik' => 'YÖK\'ün kabul ettiği şartları taşıyan uluslararası ya da ulusal bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
         'C.4' => ['baslik' => 'SSCI, SCI, SCI-Expanded ya da AHCI kategorisindeki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 15],
         'C.5' => ['baslik' => 'Scopus, MLA, ESCI ya da diğer alan indeksleri kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 10],

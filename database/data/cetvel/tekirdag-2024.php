@@ -115,9 +115,9 @@ $maddeler = [
     '1.11' => ['baslik' => 'TR Dizin kapsamı dışındaki dergide derleme, teknik not, editöre mektup, vaka takdimi, kitap eleştirisi ya da çeviri', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => [...$DERLEME, ...$KISA], 'puan' => 1],
 
     // ══ 2. KİTAP VE KİTAP BÖLÜMÜ ══
-    '2.1' => ['baslik' => 'BKCI kapsamında kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 45],
+    '2.1' => ['baslik' => 'BKCI kapsamında kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 45],
     '2.3' => ['baslik' => 'Tanınmış yayınevi ya da üniversite tarafından yayımlanmış özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 15],
-    '2.4' => ['baslik' => 'BKCI kapsamında kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 25],
+    '2.4' => ['baslik' => 'BKCI kapsamında kitap bölümü yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 25],
     '2.6' => ['baslik' => 'Tanınmış yayınevi ya da üniversite tarafından yayımlanmış özgün bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
     '2.8' => ['baslik' => 'Üniversite tarafından yayımlanmış ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 20],
     '2.11' => ['baslik' => 'Tanınmış yayınevi ya da üniversite tarafından yayımlanmış kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 8],
@@ -141,7 +141,7 @@ $maddeler = [
     '4.2' => ['baslik' => 'ESCI ya da Scopus kapsamındaki dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 10],
     '4.5' => ['baslik' => 'Ulusal ya da diğer uluslararası dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 2],
     '4.6' => ['baslik' => 'TR Dizin tarafından taranan ulusal hakemli dergide editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 5],
-    '4.8' => ['baslik' => 'BKCI kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 25],
+    '4.8' => ['baslik' => 'BKCI kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 25],
     '4.10' => ['baslik' => 'Tanınmış yayınevi ya da üniversite tarafından yayımlanmış özgün bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
     '4.12' => ['baslik' => 'Dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 3],
 
@@ -257,7 +257,8 @@ return [
         .'jüri üyeliği 20 puanlık tavanlarıyla uygulanıyor. '
         .'PUANINIZ ŞU KALEMDE OLDUĞUNDAN YÜKSEK GÖRÜNEBİLİR: yönergenin "son üç yılda her '
         .'dönem için" dediği ders puanı satır bazlı zaman penceresi olmadığı için eski '
-        .'dersleriniz de sayılıyor; idari görev puanları da görev süresiyle çarpılmıyor.',
+        .'dersleriniz de sayılıyor; idari görev puanları da görev süresiyle çarpılmıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     'yazar_katsayisi' => [
         'haric' => ['atif', 'proje', 'tez_danismanligi', 'egitim_ogretim', 'editorluk',

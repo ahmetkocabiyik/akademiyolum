@@ -136,7 +136,7 @@ $maddeler = [
     '1a.26' => ['baslik' => 'Ulusal yayınevince basılmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Ders / Metot Kitabı'], 'puan' => 30],
     '1a.27' => ['baslik' => 'Uluslararası yayınevince basılmış kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
     '1a.28' => ['baslik' => 'Ulusal yayınevince basılmış kitaba bölüm düzeyinde katkıda bulunmak', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 15],
-    '1a.29' => ['baslik' => 'Uluslararası yayınevince basılmış kitapta editör olmak (çeviri editörü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
+    '1a.29' => ['baslik' => 'Uluslararası yayınevince basılmış kitapta editör olmak (çeviri editörü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
     '1a.30' => ['baslik' => 'Kitapta editör olmak (çeviri editörü dâhil)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
     '1a.31' => ['baslik' => 'Ansiklopedide konu ya da madde yazarı olmak', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
     '1a.32' => ['baslik' => 'Uluslararası yayınevlerince yabancı dilde basılmış bilimsel ya da edebî eserin Türkçeye tercümesi (tam kitap)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 40],

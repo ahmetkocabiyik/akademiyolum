@@ -32,15 +32,16 @@ return [
     'kapsam_notu' => 'Puanlar İÜ-Cerrahpaşa EK-1 A bölümünden (uluslararası faaliyetler). Ulusal '
         .'faaliyetler, proje ve patent bölümleri girilmedi; atanma koşulları zaten makale '
         .'sayısına dayanıyor, puan barajı yok.'
-        .' ULUSAL YAYINEVİ KİTABI TABLODA HİÇ PUANLANMIYOR: A bölümünün kitap satırlarının tamamı "ISBN\'li ve yurt dışında yabancı dilde yayımlanmış" koşuluna bağlı; Türkçe ya da ulusal yayınevi kitabınız puan almıyor.',
+        .' ULUSAL YAYINEVİ KİTABI TABLODA HİÇ PUANLANMIYOR: A bölümünün kitap satırlarının tamamı "ISBN\'li ve yurt dışında yabancı dilde yayımlanmış" koşuluna bağlı; Türkçe ya da ulusal yayınevi kitabınız puan almıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     'maddeler' => [
         // ── A1-A3 · KİTAP ──
-        'A1a' => ['baslik' => 'WoS/SCOPUS indeksli uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
+        'A1a' => ['baslik' => 'WoS/SCOPUS indeksli uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
         'A1b' => ['baslik' => 'Diğer uluslararası bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap'], 'puan' => 60],
-        'A2a' => ['baslik' => 'WoS/SCOPUS indeksli kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
+        'A2a' => ['baslik' => 'WoS/SCOPUS indeksli kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 35],
         'A2b' => ['baslik' => 'Diğer uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 25],
-        'A3a' => ['baslik' => 'WoS/SCOPUS indeksli kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 50],
+        'A3a' => ['baslik' => 'WoS/SCOPUS indeksli kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 50],
         'A3b' => ['baslik' => 'Diğer uluslararası kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Uluslararası Kitap Editörlüğü'], 'puan' => 25],
 
         // ── A4 · SCIE/SSCI/AHCI MAKALE ── (koşulların çekirdeği)

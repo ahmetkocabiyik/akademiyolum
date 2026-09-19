@@ -37,7 +37,8 @@ return [
         .'eserlerde puan yazar sayısına göre azaltılır (iki yazarlıda 0,8; üç yazarlıda 0,6; dört ve '
         .'üzeri için 2,0×Puan/Yazar Sayısı) — bu hesap uygulanıyor, ancak YAZAR LİSTESİNİ BOŞ '
         .'BIRAKTIĞINIZ faaliyetlerde uygulanamaz ve o kalemler tam puanla görünür. Editörlük/hakemlik, '
-        .'jüri ve düzenleme kurulu kalemleri kaynak sözlüğünde karşılıksız olduğu için girilmedi.',
+        .'jüri ve düzenleme kurulu kalemleri kaynak sözlüğünde karşılıksız olduğu için girilmedi.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Ölçütler I/2: tek yazarlı eserde tam puan, iki yazarlıda 0,8; üç
     // yazarlıda 0,6; dört ve daha fazla yazarlıda 2,0 × Puan / Yazar Sayısı.
@@ -56,8 +57,8 @@ return [
         '6c' => ['baslik' => 'Uluslararası bilimsel toplantılarda sunulmuş ve özet metni basılmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 15],
         '6e' => ['baslik' => 'Ulusal bilimsel toplantılarda sunulmuş ve tam metni basılmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Tam Metin'], 'puan' => 20],
         '6f' => ['baslik' => 'Ulusal bilimsel toplantılarda sunulmuş ve özet metni basılmış sözlü bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 10],
-        '7a' => ['baslik' => 'Web of Science Book Citation Index’te taranan uluslararası yayınevleri tarafından yayımlanmış kitap yaza', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
-        '7c' => ['baslik' => 'Web of Science Book Citation Index’te taranan uluslararası yayınevleri tarafından yayımlanmış bölüm yaza', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 60],
+        '7a' => ['baslik' => 'Web of Science Book Citation Index’te taranan uluslararası yayınevleri tarafından yayımlanmış kitap yaza', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 150],
+        '7c' => ['baslik' => 'Web of Science Book Citation Index’te taranan uluslararası yayınevleri tarafından yayımlanmış bölüm yaza', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 60],
         '7d' => ['baslik' => 'Ulusal yayınevleri veya Web of Science Book Citation Index’te taranmayan diğer uluslararası yayınevleri ', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 90],
         '7f' => ['baslik' => 'Ulusal yayınevleri veya Web of Science Book Citation Index’te taranmayan diğer uluslararası yayınevleri ', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 30],
         '7g' => ['baslik' => 'Alanında bilimsel kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 60],

@@ -95,8 +95,8 @@ $maddeler = [
     '2.c' => ['baslik' => 'Diğer hakemli dergilerde editöre mektup, araştırma notu, özet, vaka takdimi, teknik not ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 2],
 
     // ══ 5. KİTAPLAR ══
-    '5.a' => ['baslik' => 'BKCI kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-    '5.c' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
+    '5.a' => ['baslik' => 'BKCI kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+    '5.c' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 35],
     '5.d' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı', 'Çeviri Kitap'], 'puan' => 25],
     '5.e' => ['baslik' => 'Diğer uluslararası ya da ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi', 'Çeviri Kitap Bölümü'], 'puan' => 10],
 
@@ -149,7 +149,7 @@ $maddeler = [
     '13.a' => ['baslik' => 'SCIE, SSCI, AHCI veya ESCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI Dergi'], 'puan' => 50],
     '13.f' => ['baslik' => 'TR Dizin kapsamındaki ya da diğer uluslararası indekslerde taranan dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi (Uluslararası)', 'Scopus Dergi'], 'puan' => 10],
     '13.ğ' => ['baslik' => 'Dergilerde yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 2],
-    '13.j' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
+    '13.j' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
     '13.l' => ['baslik' => 'Uluslararası ya da ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 3],
     '14.a' => ['baslik' => 'Hakemli dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 1],
 
@@ -221,7 +221,8 @@ return [
         .'özgün eser barındıran kişisel sergi" satırları puanı serginin tamamına verdiği için '
         .'yazılmadı. Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünür: lisansüstü tezinizden '
         .'ürettiğiniz yayınlar için Ek-2\'nin 3 ve 4. maddelerindeki ayrı tavanlar uygulanmıyor '
-        .'(puan değerleri zaten aynı).',
+        .'(puan değerleri zaten aynı).'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Ek-1: Yayınlarda birden fazla kişi bulunması durumunda puanlama
     // dağılımı tablosu.

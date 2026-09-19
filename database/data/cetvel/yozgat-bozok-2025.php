@@ -94,9 +94,9 @@ $maddeler = [
     'A3.3' => ['baslik' => 'Diğer ulusal hakemli dergide yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $TAM, 'puan' => 6],
 
     // ══ A4. KİTAP ══
-    'A4.1' => ['baslik' => 'BKCI kapsamındaki yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
-    'A4.2' => ['baslik' => 'BKCI kapsamındaki yayınevinde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],
-    'A4.3' => ['baslik' => 'BKCI kapsamındaki yayınevinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
+    'A4.1' => ['baslik' => 'BKCI kapsamındaki yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 30],
+    'A4.2' => ['baslik' => 'BKCI kapsamındaki yayınevinde kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 15],
+    'A4.3' => ['baslik' => 'BKCI kapsamındaki yayınevinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
     'A4.4' => ['baslik' => 'Alanında tanınırlığı olan bir yayınevi tarafından yayımlanan bilimsel ya da mesleki kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 20],
     'A4.5' => ['baslik' => 'Alanında tanınırlığı olan bir yayınevi tarafından yayımlanan bilimsel ya da mesleki kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
     'A4.6' => ['baslik' => 'Alanında tanınırlığı olan bir yayınevi tarafından yayımlanan bilimsel ya da mesleki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
@@ -247,7 +247,8 @@ return [
         .'ulusal karşılıklarının puanıyla sayılıyor. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünür: A8\'in "bir yarıyılda en fazla 5 '
         .'puan" sınırı ve A6\'nın "aynı toplantıda en fazla 2 bildiri" kuralı uygulanmıyor; '
-        .'idari görevler yıl başına değil kayıt başına puanlanıyor.',
+        .'idari görevler yıl başına değil kayıt başına puanlanıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Ek-2 Genel İlkeler 6: ortak çalışmalarda puan çarpanı (yalnız A1-A6).
     'yazar_katsayisi' => [

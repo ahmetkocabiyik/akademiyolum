@@ -119,7 +119,8 @@ return [
         .'kuruluşu üyelikleri ve idari görevlerin yıl biriktirmesi hiç uygulanamadı. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: aynı kitaptan ikiden fazla '
         .'bölümünüz varsa hepsi sayılır; yıl/dönem başına konan ders ve hakemlik tavanları '
-        .'(yarıyılda en fazla 5 ders, yılda en fazla 5 hakemlik) uygulanmıyor.',
+        .'(yarıyılda en fazla 5 ders, yılda en fazla 5 hakemlik) uygulanmıyor.'
+        .' KİTAPTA "TANINMIŞ YAYINEVİ" KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız C.1.a satırından (300) sayılıyor. Kaynak tanınmış olmayan uluslararası yayınevi kitabını C.1.b\'de (90) sayıyor; yayıneviniz tanıma girmiyorsa puanınız olduğundan YÜKSEK görünür.',
 
     // Tablo 1: 1 isimli 100; 2 isimli 100/90; 3 isimli 90/80/70; 4 isimli
     // 85/75/65/55; 5 isimli 80/70/60/50/40; 6 isimli 80/70/60/50/40/30;
@@ -192,10 +193,10 @@ return [
         'B.2.b' => ['baslik' => 'Ulusal bilimsel/sanatsal toplantıda özet metin veya program dışı poster/sözlü sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 20],
 
         // ══ C. KİTAPLAR ══
-        'C.1.a' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 300],
+        'C.1.a' => ['baslik' => 'Tanınmış uluslararası yayınevince yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 300],
         'C.1.b' => ['baslik' => 'Tanınmış ulusal kurum/yayınevi veya diğer uluslararası yayınevince yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 90],
         'C.1.c' => ['baslik' => 'Ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 90],
-        'C.2.a' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 150],
+        'C.2.a' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 150],
         'C.2.b' => ['baslik' => 'Tanınmış ulusal kurum/yayınevi veya diğer uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 45],
 
         // ══ D. PATENT / TESCİLLİ BULUŞ / FAYDALI MODEL ══
@@ -215,7 +216,7 @@ return [
         'F.4-F.5' => ['baslik' => 'Diğer bilimsel/sanatsal/mesleki dergide editörlük (yıllık)', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 45],
         'F.6' => ['baslik' => 'Yardımcı editörlük veya konuk editörlük (yıllık)', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 22],
         'F.7' => ['baslik' => 'Dergi hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 9],
-        'F.8.a' => ['baslik' => 'Uluslararası yayınevince yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 150],
+        'F.8.a' => ['baslik' => 'Uluslararası yayınevince yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 150],
         'F.8.b' => ['baslik' => 'Tanınmış ulusal kurum/yayınevi kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 90],
 
         // ══ G. ATIFLAR ══

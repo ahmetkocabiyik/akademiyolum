@@ -31,6 +31,11 @@
 $YUKSEK = ['ozgun_makale', 'derleme', 'kisa_makale'];
 
 return [
+    'kapsam_notu' => 'Puanlar Gümüşhane Üniversitesi atama ölçütleri puan tablosundan. KİTAPTA İNDEKS KOŞULU '
+        .'DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap '
+        .'satırından sayılıyor; kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür, '
+        .'yönerge o kitabı daha düşük bir satırda sayıyor.',
+
     'maddeler' => [
         // A. MAKALE
         // A6 ve A7 önce girilmemişti: kaynak indeksli dergilerdeki teknik
@@ -78,10 +83,10 @@ return [
         'B8b' => ['baslik' => 'Ulusal etkinlikte özet/poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 
         // C. KİTAP
-        'C1' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
+        'C1' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 30],
         'C2' => ['baslik' => 'Uluslararası yayınevi kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap'], 'puan' => 20],
         'C3' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 15],
-        'C4' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
+        'C4' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
         'C5' => ['baslik' => 'Tahkik (tenkitli metin neşri)', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 15],
         'C6' => ['baslik' => 'Uluslararası yayınevinde kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 8],
         'C7' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 7],

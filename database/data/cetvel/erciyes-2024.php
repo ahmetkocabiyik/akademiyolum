@@ -71,7 +71,7 @@ return [
         '4f' => ['baslik' => 'Çeviri kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
         '4ğ' => ['baslik' => 'Çeviri kitap bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 5],
         '4h' => ['baslik' => 'Ansiklopedide konu veya madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
-        '4b' => ['baslik' => 'Özgün kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
+        '4b' => ['baslik' => 'Özgün kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
         '4g' => ['baslik' => 'Çeviri kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
 
         // ── 8. FİKRÎ SINAİ MÜLKİYET HAKLARI ──

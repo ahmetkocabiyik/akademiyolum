@@ -151,9 +151,9 @@ $maddeler = [
     '3-bildiri' => ['baslik' => 'Lisansüstü tezinizden üretilmiş, bilimsel toplantıda sunulmuş ve tam metni yayımlanmış bildiri', 'kategori' => 'tez_yayini', 'kaynaklar' => ['CPCI Bildiri'], 'puan' => 8],
 
     // ══ 4. KİTAPLAR ══
-    '4a' => ['baslik' => 'BKCI\'da taranmış bilimsel kitap yayımlamak', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-    '4b' => ['baslik' => 'BKCI\'da taranmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-    '4b-ed' => ['baslik' => 'BKCI\'da taranmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
+    '4a' => ['baslik' => 'BKCI\'da taranmış bilimsel kitap yayımlamak', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+    '4b' => ['baslik' => 'BKCI\'da taranmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+    '4b-ed' => ['baslik' => 'BKCI\'da taranmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
     '4c' => ['baslik' => 'BKCI dışında bilimsel kitap yayımlamak', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 40],
     '4ç' => ['baslik' => 'BKCI dışında kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
     '4ç-ed' => ['baslik' => 'BKCI dışında kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
@@ -326,7 +326,8 @@ return [
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: "aynı kitapta en fazla iki bölüm", '
         .'"aynı yıl en fazla N faaliyet" ve "aynı proje bir defa" gibi eser ve yıl bazlı sınırlar '
         .'uygulanmıyor; yönerge "patentlerde puan kişi sayısına bölünür" derken yazar tablosu '
-        .'sıraya bağlı olduğu için çok buluşçulu patentin puanı bölünmüyor.',
+        .'sıraya bağlı olduğu için çok buluşçulu patentin puanı bölünmüyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     'yazar_katsayisi' => [
         'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev',

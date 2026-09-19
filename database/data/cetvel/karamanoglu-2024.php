@@ -85,7 +85,7 @@ $maddeler = [
     'B-4' => ['baslik' => 'Ulusal bilimsel toplantıda poster olarak sunulan ya da özet olarak yayımlanan bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
 
     // ══ C. KİTAPLAR ══
-    'C-1' => ['baslik' => 'Web of Science Book Citation Index kapsamındaki yayınevinde yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 90],
+    'C-1' => ['baslik' => 'Web of Science Book Citation Index kapsamındaki yayınevinde yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 90],
     'C-2' => ['baslik' => 'Alanında ulusal ya da uluslararası yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 70],
     'C-3' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 40],
     'C-4' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
@@ -190,7 +190,8 @@ return [
         .'(10/8/5) dergi türüne göre üç kademe; etiket ayrımı olmadığı için en düşükten '
         .'sayılıyor. L bölümünde uluslararası (60), yurt dışı (40) ve ulusal (30) üç kademe '
         .'var; kayıt yalnız uluslararası/ulusal ayrımı taşıdığı için yurt dışı kademesi ulusal '
-        .'değerden sayılıyor. K bölümünün 30 puanlık tavanı uygulanıyor.',
+        .'değerden sayılıyor. K bölümünün 30 puanlık tavanı uygulanıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     'yazar_katsayisi' => null,
 

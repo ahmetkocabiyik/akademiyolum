@@ -108,7 +108,8 @@ return [
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünebilir: uluslararası patent (I.1) '
         .'tavansız olduğu için I grubuna hiç tavan yazılmadı; aynı kitaptan birden fazla '
         .'bölümünüz varsa hepsi sayılır; "en çok 5 faaliyet" sınırlı davetli konuşmacılık/jüri '
-        .'kalemlerinde faaliyet sayısı tavanı uygulanmıyor.',
+        .'kalemlerinde faaliyet sayısı tavanı uygulanmıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Tablo-3: sorumlu yazar 1. isim sayılır. 1 kişi 100; 2 kişi 90/80;
     // 3 kişi 80/70/60; 4 kişi 70/60/50/40; 5 kişi 60/50/40/30/20; 6-9 kişi
@@ -166,8 +167,8 @@ return [
         'B.6' => ['baslik' => 'Ulusal bilimsel toplantıda özet metin yayımlanmış bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 
         // ══ C. KİTAPLAR ══
-        'C.1' => ['baslik' => 'BKCI kapsamında yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 30],
-        'C.2' => ['baslik' => 'BKCI kapsamında yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
+        'C.1' => ['baslik' => 'BKCI kapsamında yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 30],
+        'C.2' => ['baslik' => 'BKCI kapsamında yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
         'C.3' => ['baslik' => 'Diğer uluslararası veya ulusal yayınevi kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 20],
         'C.4' => ['baslik' => 'Diğer uluslararası veya ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
         'C.5' => ['baslik' => 'Tahkik (tenkitli metin neşri) türünde kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 12],
@@ -231,7 +232,7 @@ return [
         'M.1' => ['baslik' => 'SCI-Expanded, SSCI veya AHCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 4],
         'M.2' => ['baslik' => 'Scopus veya ESCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 3],
         'M.3-M.7' => ['baslik' => 'Diğer uluslararası indeksli veya diğer ulusal hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 1],
-        'M.4' => ['baslik' => 'BKCI kapsamında yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 3],
+        'M.4' => ['baslik' => 'BKCI kapsamında yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 3],
         'M.5' => ['baslik' => 'Diğer uluslararası veya ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 2],
         'M.6' => ['baslik' => "ULAKBİM TR-Dizin'de indekslenmiş dergide editörlük", 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 2],
         'M.10-M.11' => ['baslik' => 'Bilimsel toplantı veya kamu/STK programında davetli konuşmacı, panelist ya da oturum başkanı', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 1],

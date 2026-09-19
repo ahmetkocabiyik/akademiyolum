@@ -84,8 +84,8 @@ $maddeler = [
     '2.c' => ['baslik' => 'Ulusal hakemli dergide yayımlanmış editöre mektup, araştırma notu, özet ya da kitap kritiği', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => [...$KISA, ...$VAKA], 'puan' => 2],
 
     // ══ 4. KİTAP ══
-    '4.a' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
-    '4.b' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
+    '4.a' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 20],
+    '4.b' => ['baslik' => 'BKCI veya Scopus kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
     '4.c' => ['baslik' => 'Diğer uluslararası ya da ulusal özgün bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 5],
     '4.d' => ['baslik' => 'Diğer uluslararası ya da ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 3],
 
@@ -175,7 +175,8 @@ return [
         .'barındıran kişisel sergi) ve eğitim-öğretim satırları girilemedi; yurt dışı ortak '
         .'yazarlık için verilen 1,25 kat ek puan uygulanamıyor. Puanınız şu kalemde OLDUĞUNDAN '
         .'YÜKSEK görünür: lisansüstü tezinizden ürettiğiniz yayınlar için Ek-1\'in 3. '
-        .'maddesindeki düşük satırlar ve o maddenin 40 puanlık sınırı uygulanamıyor.',
+        .'maddesindeki düşük satırlar ve o maddenin 40 puanlık sınırı uygulanamıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Tablo 1: Eserlere katkıda bulunan kişilerin puan hesap tablosu.
     'yazar_katsayisi' => [

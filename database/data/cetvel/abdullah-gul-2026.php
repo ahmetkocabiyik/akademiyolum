@@ -174,7 +174,8 @@ return [
         .'düzenleme, jüri üyelikleri, sergi küratörlüğü) hiç girilmedi. İdari görevlerin yıl '
         .'biriktirme bonusu uygulanmıyor; yalnızca ilk yıl değeri sayılıyor. '
         .'Doktora/doçentlik sonrası dönem koşulu olan kalemlerde faaliyet tarihi girilmemişse '
-        .'o kalem BELİRSİZ görünür.',
+        .'o kalem BELİRSİZ görünür.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Dipnot 1: makale, bildiri, kitap/kitap bölümü ve patentte tek yazar P,
     // iki yazarlı her biri 0,8P, üç ve üzeri her biri 1,8P/n. Dipnot 2: tek
@@ -230,13 +231,13 @@ return [
         'B-ULUSALOZET' => ['baslik' => 'Hakemli ulusal kongre/çalıştay bildirisi (basılı özet, sözlü veya poster)', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 
         // ══ KİTAP (A grubu Scopus/BKCI indeksli; geri kalanı tek etikette en düşük kademe) ══
-        'K-A-YAZAR' => ['baslik' => 'A grubu (Scopus/BKCI indeksli) uluslararası yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 40],
+        'K-A-YAZAR' => ['baslik' => 'A grubu (Scopus/BKCI indeksli) uluslararası yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 40],
         'K-DIGER-YAZAR' => ['baslik' => 'B grubu uluslararası yayınevinde veya ulusal yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 10],
-        'K-A-BOLUM' => ['baslik' => 'A grubu (Scopus/BKCI indeksli) uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
+        'K-A-BOLUM' => ['baslik' => 'A grubu (Scopus/BKCI indeksli) uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
         'K-DIGER-BOLUM' => ['baslik' => 'B grubu uluslararası yayınevi veya ulusal yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 4],
         'K-CEVIRI' => ['baslik' => 'Kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 4],
         'K-BOLUM-CEVIRI' => ['baslik' => 'Kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 2],
-        'K-EDIT-A' => ['baslik' => 'A grubu (Scopus/BKCI indeksli) uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],
+        'K-EDIT-A' => ['baslik' => 'A grubu (Scopus/BKCI indeksli) uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 15],
         'K-EDIT-DIGER' => ['baslik' => 'B grubu uluslararası yayınevi veya ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 4],
 
         // ══ ATIF ══

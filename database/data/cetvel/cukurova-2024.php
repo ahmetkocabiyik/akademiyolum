@@ -58,7 +58,8 @@ return [
         .'SAYILMIYOR: EK 2\'nin tanım bölümü desteklenen projeyi TÜBİTAK ile bakanlık ve kamu '
         .'Ar-Ge programlarıyla sınırlıyor, ikisi de o listede yok. Proje YÖNETİCİLİĞİ (120 puan) '
         .'da girilemedi; faaliyet kaydı yöneticiliği yürütücülükten ayırmıyor, yürütücü puanı '
-        .'(90) uygulanıyor. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
+        .'(90) uygulanıyor. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Yönerge: iki yazarlı eserde ikinci yazar puanın 0,5'ini alır. Yazar
     // sayısı ikiden fazlaysa puanın yarısı başlıca yazara verilir; kalan yarı
@@ -97,7 +98,7 @@ return [
         // Bölüm tablosu YAYINEVİ KADEMESİ veriyor, eser türü değil: kitap
         // bölümü, çeviri ve ansiklopedi maddesi için satır YOK. O kalemler
         // girilmedi — kitap satırına yazılsalar bir bölüm tam kitap sayılırdı.
-        'K-BKCI' => ['baslik' => 'WoS CC BKCI veya Scopus kapsamında kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
+        'K-BKCI' => ['baslik' => 'WoS CC BKCI veya Scopus kapsamında kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 60],
         'K-DIGER' => ['baslik' => 'Ulusal/uluslararası yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 30],
 
         // ── 3) BİLDİRİ ──

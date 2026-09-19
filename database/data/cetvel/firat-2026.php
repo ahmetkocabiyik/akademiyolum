@@ -45,14 +45,15 @@ return [
         .'programları, sertifikalar, görsel ve sanatsal etkinlikler ile sportif etkinliklerin '
         .'ise kaynak sözlüğünde karşılığı olmadığı için girilmedi. TÜBİTAK programları tek '
         .'etikete düştüğü için en düşük program puanı kullanıldı. Gerçek toplamınız burada '
-        .'görünenden yüksek olabilir, düşük olamaz.',
+        .'görünenden yüksek olabilir, düşük olamaz.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     'maddeler' => [
-        'A1.1' => ['baslik' => 'Web of Science Book Citation Index (BKCI) kapsamında bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 300],
+        'A1.1' => ['baslik' => 'Web of Science Book Citation Index (BKCI) kapsamında bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 300],
         'A1.2' => ['baslik' => 'A1.1 dışındaki diğer bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 150],
-        'A1.3' => ['baslik' => 'Web of Science Book Citation Index (BKCI) kapsamındaki bilimsel kitap içinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 100],
+        'A1.3' => ['baslik' => 'Web of Science Book Citation Index (BKCI) kapsamındaki bilimsel kitap içinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 100],
         'A1.4' => ['baslik' => 'A1.3 dışındaki diğer bilimsel kitap içinde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 40],
-        'A1.6' => ['baslik' => 'A1.5 dışındaki diğer bilimsel kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
+        'A1.6' => ['baslik' => 'A1.5 dışındaki diğer bilimsel kitaplarda editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
         'A2.1-Q1' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamındaki dergilerde yayımlanmış özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 200],
         'A2.1-Q2' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamındaki dergilerde yayımlanmış özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q2)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 160],
         'A2.1-Q3' => ['baslik' => 'SCI, SCI-E, SSCI, AHCI kapsamındaki dergilerde yayımlanmış özgün araştırma makalesi veya derleme', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q3)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 120],

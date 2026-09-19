@@ -85,9 +85,9 @@ $maddeler = [
     '1.2.b' => ['baslik' => 'Uluslararası ya da ulusal toplantı, kongre ve sempozyumda poster bildiri sunumu', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster', 'Ulusal Özet/Poster'], 'puan' => 5],
 
     // ══ 1.3 KİTAPLAR ══
-    '1.3.a' => ['baslik' => 'Web of Science Book Citation Index\'te taranan yayınevinde yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 90],
-    '1.3.b' => ['baslik' => 'Web of Science Book Citation Index\'te taranan yayınevinde yayımlanan kitap bölümü ya da kitap editörlüğü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 60],
-    '1.3.b.e' => ['baslik' => 'Web of Science Book Citation Index\'te taranan kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 60],
+    '1.3.a' => ['baslik' => 'Web of Science Book Citation Index\'te taranan yayınevinde yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 90],
+    '1.3.b' => ['baslik' => 'Web of Science Book Citation Index\'te taranan yayınevinde yayımlanan kitap bölümü ya da kitap editörlüğü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 60],
+    '1.3.b.e' => ['baslik' => 'Web of Science Book Citation Index\'te taranan kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 60],
     '1.3.c' => ['baslik' => 'Diğer yayınevleri tarafından yayımlanan kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 40],
     '1.3.ç' => ['baslik' => 'Diğer yayınevleri tarafından yayımlanan kitaplarda bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 25],
     '1.3.d' => ['baslik' => 'Alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 30],
@@ -188,7 +188,8 @@ return [
         .'Depolama ihtisas alanı projeleri, bilimsel kazı etkinlikleri ve Teknoloji Transfer '
         .'Ofisi görevleri girilemedi. Yönergenin "en fazla 10 hakemlik", "en fazla 10 atıf" ve '
         .'"en fazla 10 ders" gibi ADET sınırları motorda karşılığı olmadığı için '
-        .'uygulanmıyor; bu kalemlerde puanınız olduğundan yüksek çıkabilir.',
+        .'uygulanmıyor; bu kalemlerde puanınız olduğundan yüksek çıkabilir.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // "Çok yazarlı yayımlar için puan hesaplama tablosu"; sorumlu yazar
     // birinci isimle aynı ağırlıkta. Yedi ve üzeri yazarlı eserlerde altı

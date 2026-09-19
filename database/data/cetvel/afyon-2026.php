@@ -225,7 +225,7 @@ return [
         '7.2' => ['baslik' => 'ESCI veya SCOPUS dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 50],
         '7.3' => ['baslik' => 'TR Dizin dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 50],
         '7.4' => ['baslik' => 'Diğer hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 20],
-        '7.8' => ['baslik' => 'Uluslararası yayınevi kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 70],
+        '7.8' => ['baslik' => 'Uluslararası yayınevi kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 70],
         '7.9' => ['baslik' => 'Ulusal kurum/yayınevi kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 40],
 
         // 7.6 (yardımcı/konuk editörlük, %50) ve 7.7 (hakemlik, %20) oransal

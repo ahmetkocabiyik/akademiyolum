@@ -74,8 +74,8 @@ $maddeler = [
     'A1.5.a' => ['baslik' => 'Uluslararası bilimsel toplantıda tam metni ya da özeti CPCI\'da yayımlanmış çalışma', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)'], 'puan' => 40],
     'A1.5.b' => ['baslik' => 'Uluslararası bilimsel toplantıda bildiriler kitabında tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin'], 'puan' => 25],
     'A1.5.d' => ['baslik' => 'Uluslararası bilimsel toplantıda poster sunumu ya da bildiriler kitabında özet', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 5],
-    'A1.6.a' => ['baslik' => 'BKCI veya SCOPUS kapsamındaki kitabın tüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
-    'A1.6.c' => ['baslik' => 'BKCI veya SCOPUS kapsamındaki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 80],
+    'A1.6.a' => ['baslik' => 'BKCI veya SCOPUS kapsamındaki kitabın tüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 150],
+    'A1.6.c' => ['baslik' => 'BKCI veya SCOPUS kapsamındaki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 80],
     'A1.7.a' => ['baslik' => 'Uluslararası ya da ulusal bir yayınevince yayımlanan özgün bilimsel kitabın tüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 40],
     'A1.7.c' => ['baslik' => 'Uluslararası ya da ulusal bir yayınevince yayımlanan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 15],
     'A1.7.d' => ['baslik' => 'Ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 7],
@@ -113,7 +113,7 @@ $maddeler = [
 
     // ══ A6. DİĞER MESLEKİ FAALİYETLER ══
     'A6.1.a' => ['baslik' => 'SCIE, SSCI, AHCI, ESCI veya Scopus kapsamındaki dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 30],
-    'A6.1.b' => ['baslik' => 'BKCI veya SCOPUS kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 20],
+    'A6.1.b' => ['baslik' => 'BKCI veya SCOPUS kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 20],
     'A6.1.c' => ['baslik' => 'TR Dizin kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 20],
     'A6.1.d' => ['baslik' => 'Üniversite bilimsel dergilerinde editörlük (TR Dizin hariç)', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 10],
     'A6.1.e' => ['baslik' => 'Uluslararası ya da ulusal bir yayınevince yayımlanan bilimsel, mesleki eser veya ders kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
@@ -172,7 +172,8 @@ return [
         .'lisans projesi ve proje BAŞVURUSU satırları girilemedi; kitap, bildiri, atıf, tez '
         .'danışmanlığı, ödül, hakemlik ve toplantı görevlerinin yüksek kademeleri düşük '
         .'kademelerinden ayrılamadığı için en düşük değerden sayılıyor; çok yıllı projeler '
-        .'yönergedeki gibi her yıl için ayrı puanlanamıyor.',
+        .'yönergedeki gibi her yıl için ayrı puanlanamıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Ek-1 dipnotu: "Katkıda bulunan bir kişi ise P; iki kişi ise 0,8 × P;
     // ikiden fazla ise 1,8 × P / n." Atıf, rapor, editörlük, proje ve tez

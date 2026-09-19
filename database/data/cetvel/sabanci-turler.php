@@ -58,7 +58,7 @@ $ssbf = [
     // CERES kategorili uluslararası kitaplar. Sözlükte CERES ayrımı olmadığı
     // için kategori başına ayrı kaynak etiketi kullanılıyor. Kitap
     // editörlükleri ve CERES'te endekslenmemiş kitaplar bu kapsamda sayılmaz.
-    'SU-CA' => ['baslik' => 'CERES A kategori uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap']],
+    'SU-CA' => ['baslik' => 'CERES A kategori uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap']],
     'SU-CB' => ['baslik' => 'CERES B kategori uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap']],
     'SU-CCDE' => ['baslik' => 'CERES C, D veya E kategori uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap']],
 
@@ -112,7 +112,8 @@ $egitim = [
 return [
     'kapsam_notu' => 'Sabancı kriterleri puanla değil çalışma sayısıyla tanımlı. Kabul edilen '
         .'dergi kümesi fakülteye göre değişir: SCOPUS bir makale SSBF ve eğitim ağırlıklı yolda '
-        .'sayılırken MDBF ve YBF\'de sayılmaz.',
+        .'sayılırken MDBF ve YBF\'de sayılmaz.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     'maddeler' => $mdbf + $ssbf + $ybf + $egitim,
 

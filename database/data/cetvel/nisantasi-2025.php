@@ -132,7 +132,8 @@ return [
         .'bölüyor, kayıt aşamayı tutmadığı için tescil tamamlanmış sayıldı. '
         .'Yönergede idari görev, verilen ders ve toplumsal katkı için puan satırı YOK; bu '
         .'faaliyetleriniz toplama girmez. Tez yayını olarak kaydettiğiniz çalışmalar da '
-        .'karşılıksız kalır, makale ya da kitap olarak kaydedin.',
+        .'karşılıksız kalır, makale ya da kitap olarak kaydedin.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // "Ortak Çalışmalar İçin Puan Dağılımı" tablosu: satır = isim sırası,
     // sütun = yazar sayısı. Her rol kendi satırını taşır.
@@ -161,8 +162,8 @@ return [
 
     'maddeler' => [
         // ══ A. BİLİMSEL YAYINLAR ══
-        'A.1.a' => ['baslik' => 'WoS Book Citation Index veya Scopus taranan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 60],
-        'A.1.b' => ['baslik' => 'WoS Book Citation Index veya Scopus taranan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
+        'A.1.a' => ['baslik' => 'WoS Book Citation Index veya Scopus taranan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 60],
+        'A.1.b' => ['baslik' => 'WoS Book Citation Index veya Scopus taranan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
         'A.3.a' => ['baslik' => 'ISBN\'li, indeksli yayınevinde kitap veya ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 20],
         'A.3.b' => ['baslik' => 'ISBN\'li, indeksli yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
         'A.3.c' => ['baslik' => 'ISBN\'li, indeksli yayınevi kitabının çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 10],
@@ -211,7 +212,7 @@ return [
         'E.12.b' => ['baslik' => 'Yurt içinde masterclass ya da atölye yönetimi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Masterclass (Ulusal)', 'Müzikoloji Atölyesi', 'Eğitim Amaçlı Sanat Etkinliği'], 'puan' => 4],
 
         // ══ F. HAKEMLİK, EDİTÖRLÜK VE DİĞER ETKİNLİKLER ══
-        'F.1' => ['baslik' => 'WoS Book Citation Index veya Scopus taranan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 30],
+        'F.1' => ['baslik' => 'WoS Book Citation Index veya Scopus taranan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 30],
         'F.3' => ['baslik' => 'ISBN\'li, indeksli yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
         'F.4.c' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI taranan dergide hakemlik, kurul üyeliği ya da editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 5],
         'F.5.c' => ['baslik' => 'TÜBİTAK ULAKBİM dergisinde hakemlik, kurul üyeliği ya da editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Hakemlik', 'Yayın Kurulu Üyeliği'], 'puan' => 2],

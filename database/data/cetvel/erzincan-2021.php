@@ -169,7 +169,7 @@ $maddeler = [
     'ED4' => ['baslik' => 'TR-Dizin kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 15],
     'ED5' => ['baslik' => 'Diğer hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi', 'Scopus Dergi'], 'puan' => 10],
     'ED6' => ['baslik' => 'Yayın kurulundaki diğer görevler (haberleşme, dizgi, tashih vb.)', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 3],
-    'ED7.1' => ['baslik' => 'Alanında uluslararası yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 25],
+    'ED7.1' => ['baslik' => 'Alanında uluslararası yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 25],
     'ED7.2' => ['baslik' => 'Alanında ulusal yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
 
     // ══ B.5 HAKEMLİK ══

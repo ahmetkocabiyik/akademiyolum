@@ -152,7 +152,7 @@ return [
         // en düşük editörlük satırından (20) hesaplandı: 20/2 = 10 ve 20/5 = 4.
         'I.D.5.e' => ['baslik' => 'Dergide yardımcı editörlük veya konuk editörlük (her yıl için)', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],
         'I.D.5.f' => ['baslik' => 'Dergi hakemliği (her yıl en fazla 5 adet)', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 4],
-        'I.D.5.g.i' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 50],
+        'I.D.5.g.i' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 50],
         'I.D.5.g.ii' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 30],
         'I.D.6.a' => ['baslik' => 'SCI, SSCI veya AHCI dergisinde atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 10],
         'I.D.6.c' => ['baslik' => 'Hakemli dergide atıf (atıf başına)', 'kategori' => 'atif', 'kaynaklar' => ['TR Dizin', 'ESCI', 'Scopus'], 'puan' => 3],

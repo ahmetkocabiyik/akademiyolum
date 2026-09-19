@@ -204,7 +204,7 @@ return [
         'G.3.a' => ['baslik' => 'Diğer hakemli dergide editörlük (yıl başına)', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 20],
         'G.3.b' => ['baslik' => 'Derginin yayın kurulunda veya editörler listesinde yer almak (yıl başına)', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],
         'G.3.d' => ['baslik' => 'Makale veya proje hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
-        'G.4.a' => ['baslik' => 'BKCI veya Scopus taranan uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
+        'G.4.a' => ['baslik' => 'BKCI veya Scopus taranan uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
         'G.4.f' => ['baslik' => 'Kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
 
         // ══ İ. EĞİTİM VE ÖĞRETİM FAALİYETİ ══

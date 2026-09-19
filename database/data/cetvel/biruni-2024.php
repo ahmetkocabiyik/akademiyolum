@@ -94,7 +94,6 @@ $maddeler = [
     'B1.4.o' => ['baslik' => 'Uluslararası hakemli kongre, konferans, sempozyum ya da çalıştayda özet veya poster sunumu', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Özet/Poster'], 'puan' => 10],
     'B1.5.a' => ['baslik' => 'Uluslararası yayınevinde yabancı dilde yayımlanmış bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 150],
     'B1.5.b' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
-    'B1.5.c' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta editörlük (en az 100 sayfa)', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 100],
     'B2.4.d' => ['baslik' => 'Ulusal yayınevinde yayımlanmış kitapta editörlük (en az 100 sayfa)', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü'], 'puan' => 60],
     'B1.6.a' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış tüm kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 100],
     'B1.6.b' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 20],
@@ -126,7 +125,7 @@ $maddeler = [
     'B5.5' => ['baslik' => 'Diğer ulusal hakemli dergide baş editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 5],
     'B5.k' => ['baslik' => 'Dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 1],
     'B5.h' => ['baslik' => 'Dergi ya da kitap hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
-    'B5.6' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 100],
+    'B5.6' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 100],
 
     // ══ B6. PATENT, MODEL VE TASARIM ══
     'B6.1.a' => ['baslik' => 'Uluslararası yetkili kuruluşlarca onaylanan patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 200],

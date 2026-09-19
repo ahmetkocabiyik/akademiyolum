@@ -28,7 +28,8 @@ return [
     'kapsam_notu' => 'Puanlar Sakarya Üniversitesi EK-1 Puanlama Tablosundan. EK-1\'in 231 ölçütünden '
         .'127\'si girildi; yurt dışı araştırma faaliyeti, tasarım, dernek üyeliği ve patent başvurusu '
         .'gibi kalemlerin kaynak sözlüğünde karşılığı yok. Ayrıca sözlüğün ayıramadığı ölçütler en '
-        .'düşük puanlarıyla girildi. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.',
+        .'düşük puanlarıyla girildi. Gerçek toplamınız burada görünenden yüksek olabilir, düşük olamaz.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     'maddeler' => [
         '1.1a' => ['baslik' => 'SCI, SCI-E veya SSCI kapsamındaki (Q1 olarak taranan)', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 90],
@@ -100,9 +101,9 @@ return [
         '2.13a' => ['baslik' => 'Başarıyla tamamlanan Yükseköğretim kurumları tarafından', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['yurutucu'], 'puan' => 10],
         '2.13b' => ['baslik' => 'Başarıyla tamamlanan Yükseköğretim kurumları tarafından', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)'], 'roller' => ['arastirmaci', 'danisman', 'bursiyer'], 'puan' => 5],
         '2.15' => ['baslik' => 'TÜBİTAK 2209-A, 2209-B, 2242 projelerinde danışman olmak.', 'kategori' => 'proje', 'kaynaklar' => ['Öğrenci Projesi (2209 vb.)'], 'roller' => ['yurutucu'], 'puan' => 20],
-        '3.1' => ['baslik' => 'Web of Science Book Citation Index/SCOPUS Veri Tabanında', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 70],
+        '3.1' => ['baslik' => 'Web of Science Book Citation Index/SCOPUS Veri Tabanında', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 70],
         '3.2' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 40],
-        '3.3' => ['baslik' => 'Web of Science Book Citation Index/SCOPUS Veri Tabanında', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 50],
+        '3.3' => ['baslik' => 'Web of Science Book Citation Index/SCOPUS Veri Tabanında', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 50],
         '3.4' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış özgün kitapta', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
         '3.5' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış özgün kitap (bilimsel', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 40],
         '3.6' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış özgün kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 20],
@@ -141,7 +142,7 @@ return [
         '9.4' => ['baslik' => 'SSCI, SCI-Exp, AHCI, SCOPUS kapsamındaki dergilerde baş', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],
         '9.5' => ['baslik' => 'ESCI kapsamındaki dergilerde baş editörlük dışındaki diğer', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],
         '9.6' => ['baslik' => 'SSCI, SCI-Exp, AHCI, SCOPUS, ESCI dışındaki endeksli', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],
-        '9.7' => ['baslik' => 'Alanında uluslararası yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 25],
+        '9.7' => ['baslik' => 'Alanında uluslararası yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 25],
         '9.8' => ['baslik' => 'Alanında ulusal yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
         '9.10' => ['baslik' => 'SSCI, SCI-Exp, AHCI, SCOPUS kapsamındaki dergilerde', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 3],
         '9.11' => ['baslik' => 'ESCI kapsamındaki dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 3],

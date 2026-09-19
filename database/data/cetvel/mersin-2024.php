@@ -36,8 +36,8 @@
 /** TABLO A — Akademik Etkinlikler ve Puanlar Listesi. */
 $tabloA = [
     // ── 1. KİTAPLAR ve KİTAP BÖLÜMLERİ ──
-    '1.a' => ['baslik' => 'BKCI yayınevince yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 40],
-    '1.b' => ['baslik' => 'BKCI yayınevince yayımlanmış kitapta editörlük/bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
+    '1.a' => ['baslik' => 'BKCI yayınevince yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 40],
+    '1.b' => ['baslik' => 'BKCI yayınevince yayımlanmış kitapta editörlük/bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
     '1.c' => ['baslik' => 'Tanınmış uluslararası/ulusal yayınevi kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 20],
     '1.ç' => ['baslik' => 'Tanınmış yayınevi kitapta editörlük/bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 8],
     '1.d' => ['baslik' => 'Bilimsel kitap çevirmenliği', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
@@ -248,6 +248,11 @@ $tabloC = [
 ];
 
 return [
+    'kapsam_notu' => 'Puanlar Mersin Üniversitesi puan tablosundan. KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: '
+        .'uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor; '
+        .'kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür, yönerge o kitabı daha '
+        .'düşük bir satırda sayıyor.',
+
     'maddeler' => $tabloA + $tabloB + $tabloC,
 
     'gruplar' => [

@@ -104,9 +104,9 @@ $maddeler = [
     'EK1.C6' => ['baslik' => 'Ulusal bildiri özeti ya da posteri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 2],
 
     // ══ EK-1/D KİTAP ══
-    'EK1.D1' => ['baslik' => 'Scopus veya WoS kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 40],
-    'EK1.D2' => ['baslik' => 'Scopus veya WoS kapsamındaki kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 24],
-    'EK1.D3' => ['baslik' => 'Scopus veya WoS kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 16],
+    'EK1.D1' => ['baslik' => 'Scopus veya WoS kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 40],
+    'EK1.D2' => ['baslik' => 'Scopus veya WoS kapsamındaki kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 24],
+    'EK1.D3' => ['baslik' => 'Scopus veya WoS kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 16],
     'EK1.D4' => ['baslik' => 'Diğer uluslararası ya da ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı'], 'puan' => 10],
     'EK1.D5' => ['baslik' => 'Diğer uluslararası ya da ulusal kitabın editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 6],
     'EK1.D6' => ['baslik' => 'Diğer uluslararası ya da ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 4],
@@ -184,7 +184,8 @@ return [
         .'Scopus Q1\'in en üst %10\'u, editörlük kademeleri ve uluslararası özet bildiri kendi '
         .'alt kademelerinden ayrılamadığı için en düşük değerden sayılıyor. Puanınız şu kalemde '
         .'OLDUĞUNDAN YÜKSEK görünür: yüksek lisans eş danışmanlığı (1,5) tek danışmanlıktan '
-        .'ayrılamadığı için 3 puandan sayılıyor.',
+        .'ayrılamadığı için 3 puandan sayılıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // EK-1 "Ortak Çalışmalarda Puanlama Esası": tek yazarlı tam puan, iki
     // yazarlı 0,8; üç ve daha fazla yazarlı 1,8 × puan / yazar sayısı.

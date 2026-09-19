@@ -105,11 +105,11 @@ $maddeler = [
     'A12' => ['baslik' => 'İndekssiz hakemli dergide teknik not, editöre mektup, olgu sunusu, araştırma notu ya da kitap değerlendirmesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 1],
 
     // ══ B. KİTAP ══
-    'B01' => ['baslik' => 'BkCI veya Scopus tarafından dizinlenen bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 24],
+    'B01' => ['baslik' => 'BkCI veya Scopus tarafından dizinlenen bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 24],
     'B02' => ['baslik' => 'Uluslararası ya da ulusal yayınevi tarafından yayımlanmış bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 20],
     'B04' => ['baslik' => 'Bilimsel tenkitli metin, edisyon kritik ya da tahkik yapılmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 8],
     'B06' => ['baslik' => 'Uluslararası ya da ulusal yayınevi tarafından yayımlanmış ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 4],
-    'B07' => ['baslik' => 'BkCI veya Scopus tarafından dizinlenen bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
+    'B07' => ['baslik' => 'BkCI veya Scopus tarafından dizinlenen bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
     'B08' => ['baslik' => 'Uluslararası ya da ulusal yayınevi tarafından yayımlanmış bilimsel kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 5],
     'B12' => ['baslik' => 'Uluslararası ya da ulusal yayınevi tarafından yayımlanmış ansiklopedide madde', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 2],
 
@@ -127,7 +127,7 @@ $maddeler = [
     'D06' => ['baslik' => 'Yazar ya da editör olarak yer almadığınız kitapta eserinize yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 2],
 
     // ══ E. EDİTÖRLÜK ══
-    'E01' => ['baslik' => 'BkCI veya Scopus tarafından dizinlenen bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 8],
+    'E01' => ['baslik' => 'BkCI veya Scopus tarafından dizinlenen bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 8],
     'E02' => ['baslik' => 'Uluslararası ya da ulusal yayınevi tarafından yayımlanmış bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 4],
     'E03' => ['baslik' => 'SCIE, SSCI veya AHCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 8],
     'E04' => ['baslik' => 'Scopus veya ESCI kapsamındaki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 4],
@@ -215,7 +215,8 @@ return [
         .'HÜBTUAM, TTO, Proje Ofisi) ve ondalıklı satırlar girilemedi; çeviri eserler zaten '
         .'yönergece kapsam dışı. Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünür: lisansüstü '
         .'tezinizden ürettiğiniz yayınlar için yönergenin öngördüğü yarım puan ve düşük '
-        .'satırlar uygulanamıyor.',
+        .'satırlar uygulanamıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Tablo-1: yazar sayısı × isim sırası.
     'yazar_katsayisi' => [

@@ -39,7 +39,8 @@ return [
         .'puanı görev türüne göre çarpılır (yürütücü tam, araştırmacı %60, danışman/bursiyer %20) '
         .'ve bu hesap uygulanıyor; ancak DEVAM EDEN projelerde yönergenin öngördüğü %50 indirimi '
         .'uygulanamıyor, o kalemler tam puanla görünür. Sanatsal etkinlik, burs, jüri ve sportif '
-        .'etkinlik bölümlerinin kaynak sözlüğünde karşılığı olmadığı için girilmedi.',
+        .'etkinlik bölümlerinin kaynak sözlüğünde karşılığı olmadığı için girilmedi.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     'maddeler' => [
         '1a-Q1' => ['baslik' => 'SCIE, SSCI veya AHCI dergide özgün araştırma veya derleme makalesi', 'kategori' => 'makale', 'kaynaklar' => ['SCIE/SSCI (Q1)'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 80],
@@ -57,8 +58,8 @@ return [
         '1h' => ['baslik' => 'Ulusal hakemli dergide araştırma makalesi', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme'], 'puan' => 4],
         '2a' => ['baslik' => 'SSCI, SCIE veya AHCI dergilerde yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['SCIE/SSCI/AHCI'], 'puan' => 2],
         '2b' => ['baslik' => 'Kitaplarda ve diğer yayınlarda yapılan atıf', 'kategori' => 'atif', 'kaynaklar' => ['BKCI Kitap', 'TR Dizin', 'Diğer', 'Patent', 'ESCI', 'Scopus'], 'puan' => 1],
-        '3a' => ['baslik' => 'ACQWEB veya Books Citation Index taranan uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-        '3b' => ['baslik' => 'ACQWEB veya BKCI taranan uluslararası kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
+        '3a' => ['baslik' => 'ACQWEB veya Books Citation Index taranan uluslararası kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
+        '3b' => ['baslik' => 'ACQWEB veya BKCI taranan uluslararası kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
         '3c' => ['baslik' => 'Diğer uluslararası yayınevi kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 40],
         '3d' => ['baslik' => 'Diğer uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
         '3g' => ['baslik' => 'Uluslararası kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 10],
@@ -89,7 +90,7 @@ return [
         '5n' => ['baslik' => 'Tescillenmiş uluslararası patent (incelemeli)', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent'], 'puan' => 140],
         '5o' => ['baslik' => 'Tescillenmiş ulusal patent', 'kategori' => 'patent', 'kaynaklar' => ['Ulusal Patent'], 'puan' => 60],
         '5r' => ['baslik' => 'Tescillenmiş faydalı model', 'kategori' => 'patent', 'kaynaklar' => ['Faydalı Model', 'Endüstriyel Tasarım'], 'puan' => 40],
-        '6a' => ['baslik' => 'ACQWEB veya BKCI taranan uluslararası kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 80],
+        '6a' => ['baslik' => 'ACQWEB veya BKCI taranan uluslararası kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 80],
         '6b' => ['baslik' => 'Diğer uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 30],
         '6d' => ['baslik' => 'Ders kitabı editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 30],
         '6i' => ['baslik' => 'Dergilerde baş editörlük veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi', 'TR Dizin Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 3],

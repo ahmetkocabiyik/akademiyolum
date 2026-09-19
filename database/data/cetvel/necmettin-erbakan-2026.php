@@ -133,8 +133,8 @@ $maddeler = [
     'O1' => ['baslik' => 'Sempozyum, çalıştay, kongre ve konferanslarda davetli konuşmacı ya da panelist olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 5],
 
     // ══ D. KİTAPLAR ══
-    'D1' => ['baslik' => 'BKCI, Scopus, Jstor, DOAB gibi dizinlerde yer alan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-    'D2' => ['baslik' => 'BKCI, Scopus, Jstor, DOAB gibi dizinlerde yer alan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 50],
+    'D1' => ['baslik' => 'BKCI, Scopus, Jstor, DOAB gibi dizinlerde yer alan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
+    'D2' => ['baslik' => 'BKCI, Scopus, Jstor, DOAB gibi dizinlerde yer alan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 50],
     'D5' => ['baslik' => 'Uluslararası ya da ulusal yayınevinde yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
     'D6' => ['baslik' => 'Uluslararası ya da ulusal yayınevinde yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 15],
     'D7' => ['baslik' => 'Ulusal yayınevinde yayımlanmış ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 10],
@@ -177,7 +177,7 @@ $maddeler = [
     'I6' => ['baslik' => 'Diğer bilimsel ve sanatsal hakemli dergilerde editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 6],
     'I9' => ['baslik' => 'Dergilerde yayın ya da danışma kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 2],
     'I10' => ['baslik' => 'Dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 6],
-    'I11' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 50],
+    'I11' => ['baslik' => 'Uluslararası yayınevinde yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 50],
     'I12' => ['baslik' => 'Ulusal yayınevinde yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 25],
 
     // ══ İ ve O. RAPORLAR VE DİĞER BİLİMSEL ETKİNLİKLER ══
@@ -257,7 +257,8 @@ return [
         .'kez sayılıyor. Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünür: yurt dışı ortak '
         .'yazarlık için verilen %25 ve yabancı dilde kitap için verilen %50 ek puanlar '
         .'uygulanamadığı gibi, tersine, ikinci danışmanlık ve çevrimiçi etkinlik indirimleri de '
-        .'uygulanamıyor.',
+        .'uygulanamıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Tablo-2 (Yazar/Oran Tablosu). Sorumlu yazar 1. isimle aynı.
     'yazar_katsayisi' => [

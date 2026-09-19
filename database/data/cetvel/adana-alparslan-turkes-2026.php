@@ -152,7 +152,8 @@ return [
         .'sayıldı, oysa kaynakta doçentlikte 150 ulusal, profesörlükte 250. '
         .'Puanınız şu kalemde OLDUĞUNDAN YÜKSEK görünebilir: aynı kitaptan/dergiden alınan '
         .'ikiden fazla bölüm/atıf, kaynağın "bir eserde en fazla 2" sınırına rağmen hepsi '
-        .'sayılır; tamamlanmamış (devam eden) bazı proje türleri de tamamlanmış gibi sayılır.',
+        .'sayılır; tamamlanmamış (devam eden) bazı proje türleri de tamamlanmış gibi sayılır.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // EK-I: 1 yazar 100; 2 yazarlı 1. 90 / 2. 80; 3 yazarlı 1. 80 / 2. 70 /
     // 3. 60; 4 yazarlı 1. 70 / 2. 60 / 3. 50 / 4. 40; 5+ yazarlıda sıraya
@@ -209,8 +210,8 @@ return [
         'C2' => ['baslik' => 'Ulusal sempozyum/kongre/konferansta sunulan poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 10],
 
         // ══ D. KİTAPLAR ══
-        'D1' => ['baslik' => 'BKCI kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-        'D2' => ['baslik' => 'BKCI kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 50],
+        'D1' => ['baslik' => 'BKCI kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
+        'D2' => ['baslik' => 'BKCI kapsamındaki kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 50],
         'D3' => ['baslik' => 'Diğer uluslararası veya ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 50],
         'D4' => ['baslik' => 'Diğer uluslararası veya ulusal kitapta bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 25],
         'D5' => ['baslik' => 'Ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
@@ -239,7 +240,7 @@ return [
         'G3' => ['baslik' => 'A1 kategorisindeki dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 20],
         'G6' => ['baslik' => 'A1 dışındaki uluslararası endeksli veya ULAKBİM taranan ulusal dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi', 'TR Dizin Dergi'], 'puan' => 10],
         'G7' => ['baslik' => 'Endekse girmeyen ulusal veya uluslararası hakemli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Diğer Hakemli Dergi'], 'puan' => 15],
-        'G8' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 75],
+        'G8' => ['baslik' => 'Uluslararası yayınevince yabancı dilde basılan kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 75],
         'G9' => ['baslik' => 'Ulusal yayınevince basılan bilimsel veya mesleki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 50],
         'G11' => ['baslik' => 'Ulusal veya uluslararası hakemli dergide hakemlik yapmak', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
         'G13' => ['baslik' => 'Uluslararası sanat etkinliklerinde jüri üyeliği', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Jüri Başkanlığı (Uluslararası)', 'Jüri Üyeliği (Uluslararası)'], 'puan' => 20],

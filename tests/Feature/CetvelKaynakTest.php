@@ -528,10 +528,20 @@ test('cetvel içi etiket çakışmaları elden geçirilmiş', function () {
         // bildirisi tam metni/özeti", 5/3 ve 4/2) aynı esere iki farklı
         // yönden bakıyor; dergide de basılan bir bildiri ikisine birden
         // girer ve motorun yükseği alması doğrudur.
+        // 19.09.2026 (kullanıcı kararı): kapsam etiketi indeks kademesine de
+        // bağlandı. Kaynak indekssiz uluslararası kitaba kendi satırını
+        // gösteriyor ama `Uluslararası Kitap` artık ÜST satırda da duruyor;
+        // motor yükseği alıyor, yani indeks ayrımı bu cetvellerde uygulanmıyor.
+        'bursa-teknik-2024: B.1 > B.2-u',
+        'cerrahpasa-2023: A1a > A1b',
+        'cerrahpasa-2023: A2a > A2b',
+        'cerrahpasa-2023: A3a > A3b',
         'gazi-2024: Tf-nat > 8e-tam',
         'gazi-2024: Tf-ulus > 6e-tam',
         'gazi-2024: Tg-nat > 8e-ozet',
         'gazi-2024: Tg-ulus > 6e-ozet',
+        'gumushane-2026: C1 > C2',
+        'gumushane-2026: C4 > C7',
         'isparta-ubu-2022: A4-tez > T1-TEZ-B1',
         'isparta-ubu-2022: A5 > T1-B1',
         'isparta-ubu-2022: A5 > T1-B2',
@@ -562,6 +572,8 @@ test('cetvel içi etiket çakışmaları elden geçirilmiş', function () {
         'istanbul-2026-mimarlik: T4.1.h > 9.i',
 
         // Mimarlık varyantında yarışma derecesi zaten mimarlık yarışmasıdır.
+        'istanbul-arel-2018: B.1 > B.3',
+        'istanbul-arel-2018: B.2 > B.4',
         'izmir-kavram-2025-mim: 16a > 7c',
 
         // Patent sahibi olan aday YU-c'yi de sağlıyor; kaynağın kendi kuralı
@@ -3684,13 +3696,47 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
     // Gümüşhane: kaynakta indekssiz uluslararası kitabın KENDİ satırı var
     // (C2, 20) — indeks kademesi C1'de (30) kaldı, dört eksik satır açıldı.
     ['gumushane-2026', [
-        'Uluslararası Kitap' => 20,
+        'Uluslararası Kitap' => 30,
         'Ulusal Kitap' => 15,
-        'Uluslararası Kitap Bölümü' => 7,
+        'Uluslararası Kitap Bölümü' => 15,
         'Ulusal Kitap Bölümü' => 3,
     ]],
-    // İndeks kademesine bağlı ama kaynakta indekssiz uluslararası kitabın
-    // satırı OLMAYAN beşli (19.09.2026 dördüncü tur, kullanıcı kararı).
+    // İndeks kademesi (19.09.2026 dördüncü/beşinci tur, kullanıcı kararı):
+    // kapsam etiketi BKCI/Scopus satırına da bağlandı. Kaynak indekssiz
+    // uluslararası kitaba kendi satırını gösterse bile (Anadolu 7d, Gaziantep
+    // 3c, Fırat A1.2, Afyon Sağlık C.1.b) motor artık üst satırı veriyor;
+    // indeks ayrımı bu cetvellerde UYGULANMIYOR ve kapsam notunda yazılı.
+    ['anadolu-2023', [
+        'Uluslararası Kitap' => 150,
+        'Ulusal Kitap' => 90,
+        'Uluslararası Kitap Bölümü' => 60,
+        'Ulusal Kitap Bölümü' => 30,
+    ]],
+    ['gaziantep-2026', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['firat-2026', [
+        'Uluslararası Kitap' => 300,
+        'Ulusal Kitap' => 150,
+        'Uluslararası Kitap Bölümü' => 100,
+        'Ulusal Kitap Bölümü' => 40,
+    ]],
+    ['afyon-saglik-2018', [
+        'Uluslararası Kitap' => 300,
+        'Ulusal Kitap' => 90,
+        'Uluslararası Kitap Bölümü' => 150,
+        'Ulusal Kitap Bölümü' => 45,
+    ]],
+    ['tekirdag-2024', [
+        'Uluslararası Kitap' => 45,
+        'Ulusal Kitap' => 15,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    // Alternatifi ULUSAL satır olan beşli (dördüncü tur).
     ['alanya-2024', [
         'Uluslararası Kitap' => 20,
         'Ulusal Kitap' => 8,
@@ -3820,9 +3866,9 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Ulusal Kitap Bölümü' => 10,
     ]],
     ['cerrahpasa-2023', [
-        'Uluslararası Kitap' => 60,
+        'Uluslararası Kitap' => 100,
         'Ulusal Kitap' => 0,
-        'Uluslararası Kitap Bölümü' => 25,
+        'Uluslararası Kitap Bölümü' => 35,
         'Ulusal Kitap Bölümü' => 0,
     ]],
     // Dokuz Eylül iki kademede de "BİLİNEN yayınevleri" diyor; koşul ortak,

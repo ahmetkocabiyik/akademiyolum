@@ -148,7 +148,7 @@ return [
         'M16.a' => ['baslik' => 'Ulusal ya da diğer uluslararası hakemli bilimsel dergide editörlük yapmak', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 50],
         'M16.b' => ['baslik' => 'Hakemli bir dergide yayın ya da bilim kurulu listesinde yer almak', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 25],
         'M16.c' => ['baslik' => 'Hakemli bir dergide hakemlik yapmak', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 10],
-        'M17.a' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 150],
+        'M17.a' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 150],
         'M17.b' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 100],
 
         // ══ E. ATIFLAR ══

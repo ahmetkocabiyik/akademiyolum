@@ -92,8 +92,8 @@ $maddeler = [
     'A.3.c' => ['baslik' => 'Diğer uluslararası dergide editöre mektup, vaka raporu, teknik not ya da yorum', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks'], 'turler' => $KISA, 'puan' => 5],
 
     // ══ B. KİTAPLAR ══
-    'B.1' => ['baslik' => 'Book Citation Index kapsamında taranan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-    'B.2' => ['baslik' => 'Book Citation Index kapsamında taranan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 40],
+    'B.1' => ['baslik' => 'Book Citation Index kapsamında taranan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 100],
+    'B.2' => ['baslik' => 'Book Citation Index kapsamında taranan kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 40],
     'B.3' => ['baslik' => 'Book Citation Index dışında uluslararası yayınevlerince yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 60],
     'B.4' => ['baslik' => 'Book Citation Index dışında uluslararası yayınevlerince yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 30],
     'B.5.b' => ['baslik' => 'ISBN numaralı bilimsel ya da sanatsal kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 20],
@@ -117,7 +117,7 @@ $maddeler = [
     // ══ F-G. EDİTÖRLÜK, YAYIN KURULU, HAKEMLİK ══
     'F.2.a' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI kapsamındaki dergide editörlük ya da yardımcı editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 80],
     'F.3.a' => ['baslik' => 'Scopus ya da ESCI kapsamındaki dergide editörlük ya da yardımcı editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 50],
-    'F.1' => ['baslik' => 'Yurt dışında yayımlanmış ISBN numaralı bilimsel ya da sanatsal kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 50],
+    'F.1' => ['baslik' => 'Yurt dışında yayımlanmış ISBN numaralı bilimsel ya da sanatsal kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 50],
     'G.2' => ['baslik' => 'Türkçe yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 30],
     'G.1.a' => ['baslik' => 'Ulusal veri tabanlarında taranan dergide editörlük ya da yardımcı editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi'], 'puan' => 30],
     'G.1.b' => ['baslik' => 'Dergide yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Yayın Kurulu Üyeliği'], 'puan' => 10],
@@ -223,7 +223,8 @@ return [
         .'Puanınız kitapta OLDUĞUNDAN DÜŞÜK görünebilir: tabloda ULUSAL KİTAP YAZARLIĞI satırı '
         .'yok, yalnız uluslararası yayınevi kitapları puanlanıyor; ulusal yayınevi kitabınız puan '
         .'almıyor. Buna karşılık kitabınızın DİLİ kayıtta olmadığı için uluslararası yayınevinin '
-        .'Türkçe kitabı da 60 puanlık satırdan sayılıyor.',
+        .'Türkçe kitabı da 60 puanlık satırdan sayılıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     'yazar_katsayisi' => [
         'haric' => ['atif', 'tez_danismanligi', 'egitim_ogretim', 'idari_gorev', 'odul',

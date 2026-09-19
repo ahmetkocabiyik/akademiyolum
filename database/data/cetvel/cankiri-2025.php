@@ -83,9 +83,9 @@ $maddeler = [
     '2.6' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan özet ya da poster bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
 
     // ══ 3. KİTAPLAR ══
-    '3.1' => ['baslik' => 'WOS BKCI ya da SCOPUS kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 200],
+    '3.1' => ['baslik' => 'WOS BKCI ya da SCOPUS kapsamındaki kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 200],
     '3.2' => ['baslik' => 'Alanında diğer uluslararası yayınevlerince yayımlanmış özgün kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 50],
-    '3.3' => ['baslik' => 'WOS BKCI ya da SCOPUS kapsamındaki kitapta özgün bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 80],
+    '3.3' => ['baslik' => 'WOS BKCI ya da SCOPUS kapsamındaki kitapta özgün bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 80],
     '3.6' => ['baslik' => 'Alanında yayımlanmış kitapta özgün bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 25],
 
     // ══ 4. ÇEVİRİLER ══
@@ -96,7 +96,7 @@ $maddeler = [
     '5.1' => ['baslik' => 'SCIE, SSCI, AHCI, ESCI ya da SCOPUS kapsamındaki dergide editörlük veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 40],
     '5.4' => ['baslik' => 'Diğer uluslararası ya da ulusal hakemli dergide editörlük veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 10],
     '5.8' => ['baslik' => 'Bilimsel dergilerde hakemlik', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 5],
-    '5.9' => ['baslik' => 'WOS BKCI ya da SCOPUS kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 40],
+    '5.9' => ['baslik' => 'WOS BKCI ya da SCOPUS kapsamındaki kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 40],
     '5.11' => ['baslik' => 'Alanında yayımlanmış kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
 
     // ══ 6. ATIFLAR ══
@@ -184,7 +184,8 @@ return [
         .'satırlarının çoğu girilemedi. '
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünür: derslerin "son beş yılda verilen" '
         .'penceresi, "yıllık dersler iki katı" kuralı ve idari görevlerin süre koşulları '
-        .'uygulanamıyor.',
+        .'uygulanamıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // Puanlama Sistemi tablosu: yazar sayısı × isim sırası.
     'yazar_katsayisi' => [

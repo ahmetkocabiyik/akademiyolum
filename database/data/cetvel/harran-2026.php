@@ -149,12 +149,12 @@ $maddeler = [
     'A5e' => ['baslik' => 'Üniversite BAP projesi', 'kategori' => 'proje', 'kaynaklar' => ['BAP (Üniversite)', 'Öğrenci Projesi (2209 vb.)'], 'puan' => 4],
 
     // ══ A6. KİTAPLAR ══
-    'A6a' => ['baslik' => 'BKCI ya da Scopus kitap endekslerinde dizinlenen kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 35],
-    'A6a.b' => ['baslik' => 'BKCI ya da Scopus kitap endekslerinde dizinlenen kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
+    'A6a' => ['baslik' => 'BKCI ya da Scopus kitap endekslerinde dizinlenen kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 35],
+    'A6a.b' => ['baslik' => 'BKCI ya da Scopus kitap endekslerinde dizinlenen kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 35],
     'A6e' => ['baslik' => 'Uluslararası ya da ulusal yayınevi tarafından yayımlanmış kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 7],
     'A6f' => ['baslik' => 'Uluslararası ya da ulusal yayınevi tarafından yayımlanmış kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 3],
     'A6g' => ['baslik' => 'Tahkik (tenkitli metin neşri) türünde uluslararası ya da ulusal kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)'], 'puan' => 7],
-    'A6h' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 7],
+    'A6h' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 7],
     'A6i' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanmış kitap editörlüğü (çeviri editörü dahil)', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 3],
     'A6j' => ['baslik' => 'Tam kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 5],
 
@@ -291,7 +291,8 @@ return [
         .'Puanınız şu kalemlerde OLDUĞUNDAN YÜKSEK görünür: lisansüstü tezden üretilmiş '
         .'yayınlar için yönergenin öngördüğü düşük satırlar ayrılamıyor; patent, ödül ve ekip '
         .'çalışmalarında yönergenin istediği EŞİT paylaşım yerine yazar sırası tablosu '
-        .'uygulanıyor.',
+        .'uygulanıyor.'
+        .' KİTAPTA İNDEKS KOŞULU DENETLENMİYOR: uluslararası yayınevi kitabınız yönergenin BKCI/Scopus taranan kitap satırından sayılıyor. Kitabınız bu kapsamda değilse puanınız olduğundan YÜKSEK görünür; yönerge o kitabı daha düşük bir satırda sayıyor olabilir.',
 
     // EK-1/A: Yazar/eser sahibi sıralamasına göre puanlama tablosu.
     'yazar_katsayisi' => [
