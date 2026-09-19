@@ -53,6 +53,12 @@
  *       tavanı 30 puan).
  *
  * Yönerge: yonerge/sirnak.php
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): 2.1 (uluslararası) ile 2.2 (ulusal)
+ * blokları kitabı, editörlüğü ve bölüm yazarlığını ayrı ayrı veriyor
+ * (40/20/20 ↔ 25/10/10); tanım 3.6 yayınevini YÖK doçentlik ölçütlerine
+ * bağlıyor, indeks aramıyor. İndekssiz uluslararası kitap 40 yerine 25,
+ * bölümü 20 yerine 10, editörlüğü 20 yerine 10 puan alıyordu.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'];
 $TAM = ['ozgun_makale', 'derleme'];
@@ -99,12 +105,12 @@ $maddeler = [
     '1.2.3' => ['baslik' => 'Ulusal hakemli dergide yayımlanan vaka takdimi, çağrılı derleme, teknik not ya da editöre mektup', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => $KISA, 'puan' => 7],
 
     // ══ I.2. KİTAPLAR ══
-    '2.1.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 40],
-    '2.1.2' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 20],
-    '2.1.3' => ['baslik' => 'Uluslararası bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 20],
-    '2.2.1' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 25],
-    '2.2.2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
-    '2.2.3' => ['baslik' => 'Ulusal yayımlanan bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 10],
+    '2.1.1' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 40],
+    '2.1.2' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 20],
+    '2.1.3' => ['baslik' => 'Uluslararası bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
+    '2.2.1' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 25],
+    '2.2.2' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 10],
+    '2.2.3' => ['baslik' => 'Ulusal yayımlanan bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
     '2.3.1' => ['baslik' => 'Yardımcı ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 10],
     '2.3.3' => ['baslik' => 'Çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 15],
     '2.3.4' => ['baslik' => 'Kitap bölümü çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
