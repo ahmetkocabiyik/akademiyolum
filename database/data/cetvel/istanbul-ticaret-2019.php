@@ -80,6 +80,13 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * KİTAPTA YAYIM YERİ AYRIMI (19.09.2026): D bölümü kitabı ve bölüm/ünite
+ * yazarlığını "yurt dışında yayımlanan" ↔ "YURT İÇİNDE TÜRKÇE VEYA YABANCI
+ * DİLDE yayımlanan" diye ayırıyor: ölçüt yalnız yayımın yeri, dil açıkça
+ * ölçüt dışı. Üst satırlar yalnız BKCI/Scopus etiketiyle yazıldığı için
+ * indekssiz yurt dışı kitap 100 yerine 80, bölümü 30 yerine 20 puan
+ * alıyordu.
  */
 
 return [
@@ -129,10 +136,10 @@ return [
         'I.C.2.c' => ['baslik' => 'Ulusal bilimsel toplantıda özet bildiri, poster ya da sözlü sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 5],
 
         // ══ I/D — KİTAPLAR, ÇEVİRİLER, EDİTÖRLÜK, ATIFLAR ══
-        'I.D.1.a' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 100],
-        'I.D.1.b' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 80],
-        'I.D.2.a' => ['baslik' => 'Alanında yurt dışında yayımlanan kitapta bölüm ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-        'I.D.2.b' => ['baslik' => 'Alanında yurt içinde yayımlanan kitapta bölüm ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
+        'I.D.1.a' => ['baslik' => 'Alanında yurt dışında yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 100],
+        'I.D.1.b' => ['baslik' => 'Alanında yurt içinde yayımlanan kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 80],
+        'I.D.2.a' => ['baslik' => 'Alanında yurt dışında yayımlanan kitapta bölüm ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+        'I.D.2.b' => ['baslik' => 'Alanında yurt içinde yayımlanan kitapta bölüm ya da ünite yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
         'I.D.4.a' => ['baslik' => 'Alanında kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 40],
         'I.D.4.b' => ['baslik' => 'Alanında makale, kitap bölümü ya da karar tahlili çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 10],
         // I/D-5 — editörlük dergi düzeyine göre dört kademeli.
