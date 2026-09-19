@@ -30,6 +30,22 @@
  * yazar listesinden ayıramıyor. Editörlü kitaplarda puan bir miktar YÜKSEK
  * kalıyor.
  *
+ * B BÖLÜMÜ KAYNAĞA GÖRE YENİDEN KURULDU (19.09.2026). Cetvel kaynağın kitap
+ * bloğuyla hizasını kaybetmişti: B.5 (uluslararası yayınevi kitabı, 125) ile
+ * B.6 (bölümü, 25) ve B.7-B.8 (ulusal kitap 100, bölümü 20) HİÇ girilmemiş;
+ * B.10 (ulusal bölüm çevirisi, 15) ile B.11 (ansiklopedi maddesi, 5) ulusal
+ * kitap ve bölüm satırı sanılmıştı. Sonuç: adayın ulusal yayınevi kitabı 100
+ * yerine 15, indekssiz uluslararası kitabı 125 yerine yine 15 puan alıyordu.
+ *
+ * B.5 kodu ayrıca EDİTÖRLÜK satırı olarak kullanılmış ve 125 puan yazılmıştı;
+ * kaynakta kitap editörlüğü I bölümünde ve kitabın türüne bağlı (I.1 = 75,
+ * I.14 = 30). Bir editörlük kaydı 125 puan ediyordu.
+ *
+ * B.1 ile B.5'in tek farkı DİL ("yabancı dilde"); kayıt kitabın dilini
+ * taşımıyor, o yüzden `Uluslararası Kitap` düşük olan B.5'e bağlandı (§0).
+ * BKCI/Scopus etiketi B.1'de bırakıldı: indeks fiilen yabancı dildeki
+ * yayınları tarıyor.
+ *
  * GİRİLMEYEN BÖLÜMLER: H (mesleki/bilimsel organizasyon görevleri), I ve
  * sonrası idari görev ve ödül kalemleri, K sanatsal etkinlik alt kırılımları.
  * Kaynak sözlüğünde karşılıkları yok.
@@ -94,16 +110,30 @@ return [
         'A15b' => ['baslik' => 'Ulusal hakemli dergide editöre mektup, teknik not, vaka incelemesi ya da tartışma', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not'], 'puan' => 5],
 
         // ── B. KİTAPLAR ──
-        'B1' => ['baslik' => 'Uluslararası yayınevi tarafından yabancı dilde yayımlanan bilimsel kitap', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
-        'B2' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
-        'B3' => ['baslik' => 'Bilimsel kitap veya nadir eser çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 75],
+        // B.1 ile B.5'in tek farkı DİL: ikisi de "uluslararası yayınevleri
+        // tarafından yayınlanan bilimsel, mesleki ve ders kitapları", B.1
+        // ayrıca "yabancı dilde" diyor. Kayıt kitabın dilini taşımadığı için
+        // `Uluslararası Kitap` B.5'te (125); B.1 indeksli kitapta kalıyor.
+        'B1' => ['baslik' => 'Uluslararası yayınevi tarafından yabancı dilde yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
+        'B2' => ['baslik' => 'Uluslararası yayınevi kitabında yabancı dilde bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 35],
+        'B3' => ['baslik' => 'Uluslararası yayınevi kitabının veya nadir eserin çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap'], 'puan' => 75],
         // B.4 bölüm çevirisi ayrı bir satır (20); 01.09.2026'ya kadar kitap
         // çevirisiyle birlikte 75 puandan sayılıyordu.
-        'B4' => ['baslik' => 'Bilimsel kitapta bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap Bölümü'], 'puan' => 20],
-        'B5' => ['baslik' => 'Uluslararası kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 125],
-        'B8' => ['baslik' => 'Ulusal kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
-        'B10' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan ISBN\'li kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı'], 'puan' => 15],
-        'B11' => ['baslik' => 'Ulusal yayınevi kitabında bölüm', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
+        'B4' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Çeviri Kitap Bölümü'], 'puan' => 20],
+        'B5' => ['baslik' => 'Uluslararası yayınevi tarafından yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 125],
+        'B6' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası Kitap Bölümü'], 'puan' => 25],
+        'B7' => ['baslik' => 'Ulusal yayınevi tarafından yayımlanan bilimsel, mesleki veya ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı'], 'puan' => 100],
+        'B8' => ['baslik' => 'Ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 20],
+        'B9' => ['baslik' => 'Ulusal yayınevi kitabının veya nadir eserin çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Çeviri Kitap'], 'puan' => 50],
+        'B10' => ['baslik' => 'Ulusal yayınevi kitabında bölüm veya makale çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Çeviri Kitap Bölümü'], 'puan' => 15],
+        'B11' => ['baslik' => 'Bilimsel ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 5],
+        // Kitap editörlüğü kaynakta I bölümünde ve KİTABIN TÜRÜNE bağlı:
+        // I.1 B.1 kitaplarında editörlük 75, I.14 B.5 kitaplarında 30.
+        // Ulusal yayınevi kitabının editörlüğü için satır YOK; en yakın ve en
+        // düşük kademe I.16 (ulusal konferans kitabı editörlüğü, 5).
+        'I1' => ['baslik' => 'Uluslararası yayınevinin yabancı dilde kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 75],
+        'I14' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Uluslararası Kitap Editörlüğü'], 'puan' => 30],
+        'I16' => ['baslik' => 'Ulusal konferans kitabı ya da derginin özel sayı editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü'], 'puan' => 5],
 
         // ── C. KONGRE VE KONFERANSLAR ──
         // SÖZLÜ/POSTER ekseni sözlükte YOK. Etiket çifti şöyle bölüşüyor:

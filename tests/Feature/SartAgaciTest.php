@@ -4543,9 +4543,15 @@ test('küçük kalemler kendi kaynak satırlarından sayılıyor — üçüncü 
     // Ataşehir Adıgüzel 26. madde de "(TÜBİTAK/TÜBA vb.)" sınıfına bağlı.
     expect($p('atasehir-adiguzel-2018', 'Yarışma Derecesi / Mansiyon', Kategori::Odul))->toBe(0);
 
-    // Amasya B.4 bölüm çevirisi ayrı satır (20), kitap çevirisi 75.
-    expect($p('amasya-2024', 'Çeviri Kitap', Kategori::Kitap))->toBe(75)
-        ->and($p('amasya-2024', 'Çeviri Kitap Bölümü', Kategori::Kitap))->toBe(20);
+    // Amasya B.4 bölüm çevirisi ayrı satır (20), kitap çevirisi 75. Çeviri
+    // 19.09.2026'da kaynağın kendi ayrımına açıldı: B.3 "B.1 TÜRÜ bir kitabın
+    // çevirisi" (uluslararası yayınevi, 75), B.9 ulusal yayınevi kitabının
+    // çevirisi (50). Genel `Çeviri Kitap` etiketi tek satırdayken ulusal
+    // çeviri de 75 alıyordu.
+    expect($p('amasya-2024', 'Uluslararası Çeviri Kitap', Kategori::Kitap))->toBe(75)
+        ->and($p('amasya-2024', 'Ulusal Çeviri Kitap', Kategori::Kitap))->toBe(50)
+        ->and($p('amasya-2024', 'Uluslararası Çeviri Kitap Bölümü', Kategori::Kitap))->toBe(20)
+        ->and($p('amasya-2024', 'Ulusal Çeviri Kitap Bölümü', Kategori::Kitap))->toBe(15);
 
     // Sakarya UBÜ: BAP 40, özel kuruluş 40, diğer kamu 80 — üçü 80'de toplanmıştı.
     expect($p('sakarya-ubu-2024', 'BAP (Üniversite)', Kategori::Proje, 'yurutucu'))->toBe(40)

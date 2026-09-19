@@ -3444,4 +3444,14 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 50,
         'Ulusal Ders / Metot Kitabı' => 30,
     ]],
+    // B.5 (uluslararası yayınevi kitabı) ile B.7 (ulusal) hiç girilmemişti;
+    // ikisi de kaynağa göre açıldı. B.1'in "yabancı dilde" kaydı okunamadığı
+    // için `Uluslararası Kitap` B.5'te (125), BKCI B.1'de (150).
+    ['amasya-2024', [
+        'Uluslararası Kitap' => 125,
+        'Ulusal Kitap' => 100,
+        'BKCI / Scopus Kitap' => 150,
+        'Uluslararası Kitap Bölümü' => 25,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
 ]);
