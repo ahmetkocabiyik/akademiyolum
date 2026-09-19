@@ -54,6 +54,12 @@ use App\Enums\Kategori;
  * uygulanmıyor.
  *
  * Yönerge: yonerge/nohu.php
+ *
+ * KİTAPTA YAYINEVİ KAPSAMI (19.09.2026): 4. bölümün a/b (uluslararası) ile
+ * c/d (ulusal) satırları yalnız yayınevinin kapsamına bakıyor; tanım 8 ve 10
+ * yayınevini ÜAK'ın kabul ettiği listeye bağlıyor, indeks aranmıyor.
+ * İndekssiz uluslararası kitap 20 yerine 15, bölümü 15 yerine 10, editörlüğü
+ * 15 yerine 10 puan alıyordu.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)', 'AHCI'];
 $TAM = ['ozgun_makale', 'derleme'];
@@ -139,12 +145,12 @@ return [
         '2b' => ['baslik' => 'Diğer ulusal hakemli dergilerde yayımlanmış makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 5],
 
         // ══ 4. KİTAP ══
-        '4a' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
-        '4b' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
-        '4b-ed' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 15],
-        '4c' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı', 'Çeviri Kitap'], 'puan' => 15],
-        '4d' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi', 'Çeviri Kitap Bölümü'], 'puan' => 10],
-        '4d-ed' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 10],
+        '4a' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 20],
+        '4b' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
+        '4b-ed' => ['baslik' => 'Uluslararası yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 15],
+        '4c' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)', 'Ders / Metot Kitabı', 'Çeviri Kitap'], 'puan' => 15],
+        '4d' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi', 'Çeviri Kitap Bölümü'], 'puan' => 10],
+        '4d-ed' => ['baslik' => 'Ulusal yayınevleri tarafından yayımlanmış kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 10],
 
         // ══ 5. YARIŞMA, UYGULAMA VE YAZILIM (Mimarlık) ══
         '5a' => ['baslik' => 'Mimarlık temel alanıyla ilgili yarışmalarda derece ya da mansiyon almak', 'kategori' => 'odul', 'kaynaklar' => ['Yarışma Derecesi / Mansiyon'], 'puan' => 15],
