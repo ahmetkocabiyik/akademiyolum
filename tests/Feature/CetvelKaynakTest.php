@@ -3474,6 +3474,38 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Kayseri'nin "Düzeyi" sütunu, Kırıkkale 44, Kırklareli C, Kilis 2,
+    // Karamanoğlu C-3/C-4 (yalnız bölüm; C-1 indekse bağlı, C-2 torba).
+    ['kayseri-2024', [
+        'Uluslararası Kitap' => 100,
+        'Ulusal Kitap' => 50,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 15,
+        'Uluslararası Ders / Metot Kitabı' => 50,
+        'Ulusal Ders / Metot Kitabı' => 30,
+    ]],
+    ['kirikkale-2022', [
+        'Uluslararası Kitap' => 200,
+        'Ulusal Kitap' => 100,
+        'Uluslararası Kitap Bölümü' => 75,
+        'Ulusal Kitap Bölümü' => 50,
+    ]],
+    ['kirklareli-2018', [
+        'Uluslararası Kitap' => 300,
+        'Ulusal Kitap' => 150,
+        'Uluslararası Kitap Bölümü' => 100,
+        'Ulusal Kitap Bölümü' => 50,
+    ]],
+    ['kilis-2019', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 40,
+        'Uluslararası Kitap Bölümü' => 20,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
+    ['karamanoglu-2024', [
+        'Uluslararası Kitap Bölümü' => 40,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
     // Isparta ÜBÜ'nün "Düzeyi" sütunu, Karabük 4.4, İstanbul Ticaret D.
     // Isparta'nın üç tablosu ayrı aday gruplarına ait; A4 satırları (ikinci
     // tablo, genel etiketli 12 ve 10) ulusal kademeleri yukarı çekiyor —

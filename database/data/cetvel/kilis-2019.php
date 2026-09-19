@@ -78,6 +78,19 @@
  * eki, sondaki harf şıkkı gösterir ve ikisi de bizim eklediğimiz parçadır.
  * Koşullar bu kodlara atıf yaptığı için değiştirilmemeli; kaynakla
  * karşılaştırırken kodun sayısal çekirdeğine bakılmalı.
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): 2. bölüm kitabı ("uluslararası
+ * yayınlanan" 50 ↔ "ulusal yayınlanan" 40) ve bölüm yazarlığını (20 ↔ 10)
+ * yayımın yerine göre ayırıyor; indeks aranmıyor. Uluslararası satır yalnız
+ * BKCI/Scopus etiketiyle yazıldığı için indekssiz uluslararası kitap 50 yerine
+ * 40 puan alıyordu; ulusal bölüm satırı (10) ise cetvelde HİÇ YOKTU ve ulusal
+ * kitap bölümü 20 puan alıyordu (fazla).
+ *
+ * KİTAP EDİTÖRLÜĞÜ AYRI SATIRA ÇIKTI: kaynak editörlüğü kitap yazarlığıyla
+ * aynı bentte sayıyor ("kitap yazarlığı VEYA EDİTÖRLÜĞÜ", 50 ↔ 40) ama
+ * editörlük kaydı kitap kategorisinde değil; 2.a-ed ve 2.b-ed açıldı.
+ * `BKCI Kitap` etiketi 8.b'nin ulusal DERGİ editörlüğü satırından (8) alınıp
+ * buraya taşındı.
  */
 
 return [
@@ -120,9 +133,12 @@ return [
         '1.f' => ['baslik' => 'Ulusal hakemsiz dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'turler' => ['ozgun_makale', 'derleme', 'vaka_teknik_not', 'kisa_makale'], 'puan' => 5],
 
         // ══ 2. KİTAPLAR ══
-        '2.a' => ['baslik' => 'Uluslararası yayımlanan mesleki kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-        '2.b' => ['baslik' => 'Ulusal yayımlanan mesleki kitap yazarlığı veya editörlüğü', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 40],
-        '2.c' => ['baslik' => 'Uluslararası mesleki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Kitap Bölümü'], 'puan' => 20],
+        '2.a' => ['baslik' => 'Uluslararası yayımlanan mesleki kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+        '2.a-ed' => ['baslik' => 'Uluslararası yayımlanan mesleki kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 50],
+        '2.b' => ['baslik' => 'Ulusal yayımlanan mesleki kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 40],
+        '2.b-ed' => ['baslik' => 'Ulusal yayımlanan mesleki kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 40],
+        '2.c' => ['baslik' => 'Uluslararası mesleki kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 20],
+        '2.c2' => ['baslik' => 'Ulusal yayımlanan mesleki kitapta bölüm yazarlığı (en çok üç bölüm)', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 10],
         '2.ç' => ['baslik' => 'Yardımcı ders kitabı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 15],
         '2.d' => ['baslik' => 'Çeviri kitap (en az 50 sayfa)', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 10],
         '2.e' => ['baslik' => 'Ansiklopedide madde yazarlığı (en çok üç madde)', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
@@ -149,7 +165,7 @@ return [
 
         // ══ 8. EDİTÖRLÜK VE HAKEMLİK ══
         '8.a' => ['baslik' => 'Uluslararası indeksli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)', 'ESCI / Scopus Dergi'], 'puan' => 15],
-        '8.b' => ['baslik' => 'Ulusal hakemli dergide editörlük veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği', 'BKCI Kitap'], 'puan' => 8],
+        '8.b' => ['baslik' => 'Ulusal hakemli dergide editörlük veya yayın kurulu üyeliği', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi', 'Diğer Hakemli Dergi', 'Yayın Kurulu Üyeliği'], 'puan' => 8],
         '8.c' => ['baslik' => 'Dergi hakemliği', 'kategori' => 'editorluk', 'kaynaklar' => ['Hakemlik'], 'puan' => 2],
 
         // ══ 34. ÖDÜLLER, PATENTLER ══
