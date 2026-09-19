@@ -1395,6 +1395,28 @@ kitap 40 puan alıyordu, İstanbul Arel'de ulusal kitap 60 puan alıyordu (kayna
 ulusal kitabı hiç saymıyor). Bingöl, Bitlis, Hatay MKÜ, Kilis, Osmaniye ve
 Bayburt'ta kaynakta duran ama girilmemiş kitap editörlüğü satırları açıldı.
 
+**İkinci tur — "tanınmış" ailesi de bağlandı (19.09.2026, kullanıcı kararı).**
+İlk turda "aday yayınevinin tanınmışlığını kanıtlayamıyor, §0 düşüğü seçtirir"
+denip dokunulmadan bırakılan aile de kapsam etiketine bağlandı: sıfat iki
+kademede de aynı koşul olduğu için kaydın kanıtlayamadığı şey satır SEÇİMİNİ
+değiştirmiyor, §0'ın seçtiği düşük satır ise yanlış kategori oluyor. Bağlanan
+on dokuz cetvel: Altınbaş, Ankara Bilim, Atatürk, Bandırma, Beykent, Çanakkale,
+Doğuş, ESOGÜ, İstanbul Aydın, İstanbul Gedik, İMÜ, 29 Mayıs, KSBÜ, MSGSÜ,
+Samsun, Tarsus, Toros, Uşak, Dokuz Eylül. Ayrıca SENSE sınıflandırması kullanan
+Ufuk ve Yeni Yüzyıl'da kapsam etiketi en düşük uluslararası kademeye bağlandı,
+Ege'nin uluslararası Türkçe kademesi ile Cerrahpaşa'nın "diğer uluslararası"
+satırı da kapsamına oturdu.
+
+Bu turda iki ters yön daha çıktı: Atatürk'te 01.03.01 ve Samsun'da B1 genel
+etiketi taşıdığı için ULUSAL yayınevi kitabı uluslararası satırdan sayılıyordu
+(Samsun adet sayan bir yönerge olduğu için yanlış KOŞULU sağlıyordu).
+
+Bağlanmayanlar ve gerekçeleri: Afyon Sağlık (alt satır "…veya DİĞER
+ULUSLARARASI yayınevince" diyor, kaynak o kitaba zaten yer göstermiş),
+Kadir Has (üst satır yabancı dil koşullu, alt satır zaten dil ekseninde),
+indeks kapsamına bağlı satırlar (BKCI/Scopus/ACQWEB) ve dil ekseninde ayrılan
+cetveller.
+
 Açık kalan iki küçük iş: (1) Sakarya ÜBÜ 9.1 ve Marmara'nın fen/mühendislik/
 güzel sanatlar varyantlarında kitap editörlüğü etiketleri DERGİ editörlüğü
 satırlarında duruyor — kaynakta ayrı kitap editörlüğü satırı olup olmadığı
