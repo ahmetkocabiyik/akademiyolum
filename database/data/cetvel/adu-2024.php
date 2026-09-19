@@ -17,6 +17,15 @@
  * yöneticiliğinde de "devam eden" değerleri girildi (doktora 40 yerine 20,
  * yüksek lisans 20 yerine 10); ikinci danışmanlık bunların yarısını alıyor.
  *
+ * ── KİTAPTA YAYINEVİ KAPSAMI SÖZLÜKTE (19.09.2026) ──
+ * A3.1 "Uluslararası yayınevleri ya da kuruluşlarca basılmış", A3.2 "Ulusal
+ * yayınevleri veya kuruluşlarca basılmış" diyor; kaynak indeks ya da
+ * "tanınmışlık" aramıyor, ayrımın tamamı yayınevinin yeri. Satırlar bu yüzden
+ * `Uluslararası Kitap(+Bölümü)` ve `Ulusal Kitap(+Bölümü)` etiketlerini
+ * taşıyor. Önceden uluslararası satırlarda yalnız BKCI/Scopus etiketi vardı ve
+ * adayın indekssiz uluslararası kitabı ulusal satıra düşüyordu (200 yerine
+ * 100, bölümde 100 yerine 50).
+ *
  * ── AYNI KAYNAK ETİKETİNE DÜŞEN SATIRLARDA DÜŞÜK OLAN GİRİLDİ (§0) ──
  *   Kitaplarda sayfa sayısı kayıtta yok: uluslararası kitap 250/200 → 200,
  *       ulusal kitap 125/100 → 100, ders kitabı 75/50 → 50.
@@ -98,10 +107,10 @@ $maddeler = [
     'A2.6.1' => ['baslik' => 'Bilimsel ya da sanatsal toplantıda davetli konuşmacı veya panelist olmak', 'kategori' => 'bildiri', 'kaynaklar' => ['Davetli Konuşmacı'], 'puan' => 25],
 
     // ══ A3. KİTAPLAR ══
-    'A3.1.1' => ['baslik' => 'Uluslararası yayınevi ya da kuruluşça basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 200],
-    'A3.1.2' => ['baslik' => 'Uluslararası yayınevi ya da kuruluşça basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 100],
-    'A3.2.1' => ['baslik' => 'Ulusal yayınevi ya da kuruluşça basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 100],
-    'A3.2.2' => ['baslik' => 'Ulusal yayınevi ya da kuruluşça basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü'], 'puan' => 50],
+    'A3.1.1' => ['baslik' => 'Uluslararası yayınevi ya da kuruluşça basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 200],
+    'A3.1.2' => ['baslik' => 'Uluslararası yayınevi ya da kuruluşça basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 100],
+    'A3.2.1' => ['baslik' => 'Ulusal yayınevi ya da kuruluşça basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 100],
+    'A3.2.2' => ['baslik' => 'Ulusal yayınevi ya da kuruluşça basılmış kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü'], 'puan' => 50],
     'A3.2.3' => ['baslik' => 'Ansiklopedide madde yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ansiklopedi Maddesi'], 'puan' => 10],
     'A3.3.1' => ['baslik' => 'Ders kitabı ya da ders notu', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 50],
 

@@ -3418,4 +3418,12 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap' => 80,
         'Ulusal Kitap' => 40,
     ]],
+    // A3.1 "uluslararası yayınevleri ya da kuruluşlarca basılmış", A3.2 aynı
+    // cümlenin ulusal hâli. Değerler 150 sayfa altı kademesinden (§0).
+    ['adu-2024', [
+        'Uluslararası Kitap' => 200,
+        'Ulusal Kitap' => 100,
+        'Uluslararası Kitap Bölümü' => 100,
+        'Ulusal Kitap Bölümü' => 50,
+    ]],
 ]);
