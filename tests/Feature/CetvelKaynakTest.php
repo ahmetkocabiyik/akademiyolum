@@ -3472,4 +3472,12 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Bayburt 2.1 "Uluslararası Kitap" ↔ 2.2 "Ulusal Kitap"; editörlük de
+    // kaynakta iki kademeli (2.1.c 50 ↔ 2.2.c 25) ve girilmemişti.
+    ['bayburt-2024', [
+        'Uluslararası Kitap' => 150,
+        'Ulusal Kitap' => 100,
+        'Uluslararası Kitap Bölümü' => 30,
+        'Ulusal Kitap Bölümü' => 20,
+    ]],
 ]);

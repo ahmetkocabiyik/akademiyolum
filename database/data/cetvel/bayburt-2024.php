@@ -36,9 +36,22 @@
  * duruyor. Sanat ve tasarım etkinlikleri (11.2) ve toplumsal katkı (12)
  * girildi; Güzel Sanatlar eşikleri açıldı, bkz. yonerge/bayburt.php.
  *
+ * KİTAPTA ULUSLARARASI/ULUSAL AYRIMI (19.09.2026): kaynak 2.1'i "Uluslararası
+ * Kitap", 2.2'yi "Ulusal Kitap" diye başlıklandırıyor ve indeks aramıyor
+ * (tanım: ilk 500'e giren üniversite kütüphanelerinde kataloglanan, en az 20
+ * kitap yayımlamış yayınevi). Kitap, bölüm ve editörlük kendi kademesine
+ * bağlandı: 2.1.a/2.1.b'ye kapsamlı uluslararası etiketler eklendi, 2.2.a ve
+ * 2.2.b ulusal etikete daraltıldı, kaynakta duran ama girilmemiş 2.1.c (50)
+ * ve 2.2.c (25) editörlük satırları açıldı. Önceden indekssiz uluslararası
+ * kitap 150 yerine 100, bölümü 30 yerine 20, kitap editörlüğü ise 50 yerine
+ * 15 puan alıyordu.
+ *
+ * DERS KİTABINDA KADEME BAĞLANAMADI: 2.1.ç/2.1.d/2.1.e'nin üçü de "YABANCI
+ * DİLDE yayımlanan" diyor; kayıt kitabın dilini taşımıyor. Uluslararası ders
+ * kitabı bu yüzden 2.2.ç'nin 50 puanından sayılıyor (kaynakta 100) — §0
+ * yönünde eksik.
+ *
  * AYNI KAYNAĞA DÜŞEN KALEMLERDE DÜŞÜK OLAN GİRİLDİ:
- *   'Kitap Editörlüğü' uluslararası/ulusal ayırmıyor → 2.1.c (50) yerine
- *       2.2.e (15).
  *   'Hakemlik' dergi düzeyi taşımıyor → 8.2.ç (2).
  *   'Yayın Kurulu Üyeliği' aynı şekilde → 8.2.b (10).
  *
@@ -101,10 +114,12 @@ return [
         '1.2.c' => ['baslik' => 'Ulusal hakemli dergide teknik not, editöre mektup ya da vaka takdimi', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin', 'Diğer Ulusal Hakemli'], 'turler' => ['vaka_teknik_not', 'kisa_makale'], 'puan' => 10],
 
         // ══ 2. KİTAP VE ÇEVİRİLER ══
-        '2.1.a' => ['baslik' => 'Uluslararası kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 150],
-        '2.1.b' => ['baslik' => 'Uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 30],
-        '2.2.a' => ['baslik' => 'Ulusal bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap'], 'puan' => 100],
-        '2.2.b' => ['baslik' => 'Ulusal bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
+        '2.1.a' => ['baslik' => 'Uluslararası kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 150],
+        '2.1.b' => ['baslik' => 'Uluslararası kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 30],
+        '2.1.c' => ['baslik' => 'Uluslararası kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Uluslararası Kitap Editörlüğü'], 'puan' => 50],
+        '2.2.a' => ['baslik' => 'Ulusal bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap'], 'puan' => 100],
+        '2.2.b' => ['baslik' => 'Ulusal bilimsel kitapta bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 20],
+        '2.2.c' => ['baslik' => 'Ulusal bilimsel kitapta editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü'], 'puan' => 25],
         '2.2.ç' => ['baslik' => 'Ulusal ders kitabı yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ders / Metot Kitabı'], 'puan' => 50],
         '2.2.e' => ['baslik' => 'Kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 15],
         '2.3.c' => ['baslik' => 'Türkçe yayımlanan bilimsel kitap çevirisi', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap'], 'puan' => 140],
