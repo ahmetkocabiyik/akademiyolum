@@ -8,6 +8,14 @@
  * "en az N adet şu türden çalışma" biçiminde. Bu dosya bir puan cetveli değil,
  * tür sözlüğü: madde kodları yönergenin kendi A1/B2/D3 etiketleri, `puan`
  * anahtarı bilinçli olarak yok (motor 0 sayar, zaten hiçbir koşul puana bakmıyor).
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): sıfat iki
+ * kademede de aynı, ayrımı yapan tek şey yayınevinin kapsamı. Kapsamlı
+ * etiketler üst satırlara bağlandı, ulusal satırlar daraltıldı.
+ *
+ * B1 GENEL etiketi taşıdığı için adayın ULUSAL yayınevi kitabı da uluslararası
+ * satırdan sayılıyordu; B3'te (tanınmış ulusal kitap) yalnız tahkik vardı.
+ * Samsun ADET sayan bir yönerge, yani yanlış kademe yanlış KOŞULU sağlıyordu.
  */
 
 return [
@@ -19,10 +27,10 @@ return [
         'A4' => ['baslik' => 'Diğer uluslararası hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Uluslararası İndeks', 'Diğer Ulusal Hakemli']],
 
         // B Türü — kitap
-        'B1' => ['baslik' => 'Tanınmış uluslararası yayınevi kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası/Ulusal Kitap']],
-        'B2' => ['baslik' => 'Tanınmış uluslararası yayınevi kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü']],
-        'B3' => ['baslik' => 'Tanınmış ulusal yayınevi kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)']],
-        'B4' => ['baslik' => 'Tanınmış ulusal yayınevi kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Çeviri Kitap', 'Çeviri Kitap Bölümü', 'Ansiklopedi Maddesi']],
+        'B1' => ['baslik' => 'Tanınmış uluslararası yayınevi kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap']],
+        'B2' => ['baslik' => 'Tanınmış uluslararası yayınevi kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü']],
+        'B3' => ['baslik' => 'Tanınmış ulusal yayınevi kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Tahkik (Tenkitli Metin)', 'Ulusal Kitap']],
+        'B4' => ['baslik' => 'Tanınmış ulusal yayınevi kitap bölümü', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Çeviri Kitap', 'Çeviri Kitap Bölümü', 'Ansiklopedi Maddesi']],
 
         // C Türü — bildiri
         'C1' => ['baslik' => 'Uluslararası kongrede tam metin bildiri', 'kategori' => 'bildiri', 'kaynaklar' => ['Uluslararası Tam Metin (CPCI)', 'Uluslararası Tam Metin', 'Davetli Konuşmacı']],

@@ -3669,6 +3669,32 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Kitap Bölümü' => 20,
         'Ulusal Kitap Bölümü' => 10,
     ]],
+    ['tarsus-2023', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 10,
+        'Uluslararası Kitap Bölümü' => 6,
+        'Ulusal Kitap Bölümü' => 3,
+    ]],
+    ['toros-2024', [
+        'Uluslararası Kitap' => 15,
+        'Ulusal Kitap' => 10,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 5,
+    ]],
+    ['usak-2020', [
+        'Uluslararası Kitap' => 15,
+        'Ulusal Kitap' => 10,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 5,
+    ]],
+    // Dokuz Eylül iki kademede de "BİLİNEN yayınevleri" diyor; koşul ortak,
+    // ayrımı yapan tek şey kapsam.
+    ['dokuz-eylul-2024', [
+        'Uluslararası Kitap' => 50,
+        'Ulusal Kitap' => 30,
+        'Uluslararası Kitap Bölümü' => 15,
+        'Ulusal Kitap Bölümü' => 10,
+    ]],
     // Kayseri'nin "Düzeyi" sütunu, Kırıkkale 44, Kırklareli C, Kilis 2,
     // Karamanoğlu C-3/C-4 (yalnız bölüm; C-1 indekse bağlı, C-2 torba).
     ['kayseri-2024', [

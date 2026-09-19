@@ -35,6 +35,13 @@
  *       pencere yok, bütün dersler sayılıyor; ders puanı YÜKSEK görünür.
  *
  * Yönerge: yonerge/toros.php
+ *
+ * TANINMIŞ YAYINEVİ AYRIMI KAPSAM ETİKETİNE BAĞLANDI (19.09.2026): sıfat iki
+ * kademede de aynı, ayrımı yapan tek şey yayınevinin kapsamı. Kapsamlı
+ * etiketler üst satırlara bağlandı, ulusal satırlar daraltıldı.
+ *
+ * B.3 kapsamsız `Kitap Editörlüğü` etiketini korudu: kaynakta ulusal kitap
+ * editörlüğü satırı yok.
  */
 
 return [
@@ -57,11 +64,11 @@ return [
         'A.4' => ['baslik' => 'Ulusal hakemli dergide makale', 'kategori' => 'makale', 'kaynaklar' => ['Diğer Ulusal Hakemli'], 'puan' => 5],
 
         // ══ B. KİTAPLAR ══
-        'B.1' => ['baslik' => 'Tanınmış uluslararası yayınevinde özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 15],
-        'B.2' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-        'B.3' => ['baslik' => 'Tanınmış uluslararası yayınevinde bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Kitap Editörlüğü'], 'puan' => 10],
-        'B.4' => ['baslik' => 'Tanınmış ulusal yayınevinde özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Çeviri Kitap'], 'puan' => 10],
-        'B.5' => ['baslik' => 'Tanınmış ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Çeviri Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
+        'B.1' => ['baslik' => 'Tanınmış uluslararası yayınevinde özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 15],
+        'B.2' => ['baslik' => 'Tanınmış uluslararası yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+        'B.3' => ['baslik' => 'Tanınmış uluslararası yayınevinde bilimsel kitap editörlüğü', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Kitap Editörlüğü', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
+        'B.4' => ['baslik' => 'Tanınmış ulusal yayınevinde özgün bilimsel kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ders / Metot Kitabı', 'Çeviri Kitap'], 'puan' => 10],
+        'B.5' => ['baslik' => 'Tanınmış ulusal yayınevi kitabında bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Çeviri Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
 
         // ══ C. PATENT, YARIŞMA ══
         'C.1' => ['baslik' => 'Uluslararası patent', 'kategori' => 'patent', 'kaynaklar' => ['Uluslararası Patent', 'Ticarileştirme'], 'puan' => 20],

@@ -82,6 +82,14 @@
  * çıkarıldı, 8.f eklendi (satırı bu düzeltmeyle açıldı).
  *
  * Yönerge: yonerge/dokuz-eylul.php
+ *
+ * KİTAPTA KAPSAM AYRIMI (19.09.2026): 5.a/5.b (uluslararası yayınevi) ile
+ * 5.c/5.d (ulusal), 9.a ile 9.b (kitap editörlüğü) yalnız yayınevinin
+ * kapsamına göre ayrılıyor. Kaynak iki kademede de "BİLİNEN yayınevleri"
+ * diyor (1.4: birimlerin her yıl Rektörlüğe bildirdiği liste); koşul iki
+ * kademede de aynı olduğu için ayrımı yapan tek şey kapsam. Kapsamlı
+ * etiketler bağlandı; indekssiz uluslararası kitap 50 yerine 30, bölümü 15
+ * yerine 10, editörlüğü 25 yerine 20 puan alıyordu.
  */
 
 return [
@@ -156,10 +164,10 @@ return [
         '4' => ['baslik' => 'Yayınlarınıza yapılan her bir atıf', 'kategori' => 'atif', 'kaynaklar' => ['WoS / Scopus', 'BKCI Kitap', 'TR Dizin', 'Diğer', 'Patent'], 'puan' => 5],
 
         // ══ A.5 KİTAPLAR (lisansüstü tezlerden üretilmemiş) ══
-        '5.a' => ['baslik' => 'Uluslararası yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 50],
-        '5.b' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm veya ansiklopedi maddesi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 15],
-        '5.c' => ['baslik' => 'Ulusal yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
-        '5.d' => ['baslik' => 'Ulusal yayınevi kitabında bölüm veya ansiklopedi maddesi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
+        '5.a' => ['baslik' => 'Uluslararası yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap'], 'puan' => 50],
+        '5.b' => ['baslik' => 'Uluslararası yayınevi kitabında bölüm veya ansiklopedi maddesi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 15],
+        '5.c' => ['baslik' => 'Ulusal yayınevinde kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Tahkik (Tenkitli Metin)'], 'puan' => 30],
+        '5.d' => ['baslik' => 'Ulusal yayınevi kitabında bölüm veya ansiklopedi maddesi yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 10],
 
         // ══ A.6 DİĞER KİTAPLAR ══
         '6.a.1' => ['baslik' => 'Lisansüstü tezden üretilmiş, uluslararası yayınevinde kitap', 'kategori' => 'tez_yayini', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 25],
@@ -197,8 +205,8 @@ return [
         '8.f' => ['baslik' => 'Mimarlık, sanat veya tasarım yarışma projesi ya da yayımlanmış uygulama projesi', 'kategori' => 'sanatsal_etkinlik', 'kaynaklar' => ['Uygulama Projesi — Müellif', 'Uygulama Projesi — Ekip', 'Uygulama Projesi — Ekip Yardımcısı', 'Uygulama Projesi — Danışman'], 'puan' => 10],
 
         // ══ A.9 EDİTÖRLÜK VE YAYIN KURULU ÜYELİĞİ ══
-        '9.a' => ['baslik' => 'Uluslararası yayınevi bilimsel kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 25],
-        '9.b' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 20],
+        '9.a' => ['baslik' => 'Uluslararası yayınevi bilimsel kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 25],
+        '9.b' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü', 'Ulusal Kitap Editörlüğü'], 'puan' => 20],
         '9.e' => ['baslik' => 'SCI, SCI-Expanded, SSCI veya AHCI dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['WoS Dergi (Q1)', 'WoS Dergi (Q2)', 'WoS Dergi (Q3)', 'WoS Dergi (Q4)'], 'puan' => 30],
         '9.f' => ['baslik' => 'Alan endeksli dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['ESCI / Scopus Dergi'], 'puan' => 25],
         '9.g' => ['baslik' => 'ULAKBİM listesindeki dergide editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['TR Dizin Dergi'], 'puan' => 25],
