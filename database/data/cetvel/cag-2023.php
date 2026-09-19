@@ -54,6 +54,12 @@
  * açıldı (başkanlık · düzenleme/bilim kurulu üyeliği · oturum başkanlığı,
  * her biri uluslararası/ulusal). Yukarıdaki "sözlükte karşılıksız" notları
  * bu satırlar için artık geçerli değil.
+ *
+ * 19.09.2026: KİTAPTA YAYINEVİ KAPSAMI. C ve F bölümlerinin tanımı ÜAK'ın
+ * "uluslararası yayınevi" / "ulusal yayınevi" tarifine bağlı ve her ikisi de
+ * ders kitabını açıkça kapsıyor; indeks aranmıyor. Kitap, bölüm ve editörlük
+ * satırları kendi kapsam etiketlerine bağlandı — indekssiz uluslararası kitap
+ * 20 yerine 15, bölümü 10 yerine 5, editörlüğü 10 yerine 5 puan alıyordu.
  */
 $SCI = ['SCIE/SSCI (Q1)', 'SCIE/SSCI (Q2)', 'SCIE/SSCI (Q3)', 'SCIE/SSCI (Q4)'];
 $OZGUN = ['ozgun_makale', 'derleme'];
@@ -82,13 +88,13 @@ $maddeler = [
     'E2' => ['baslik' => 'Ulusal bilimsel toplantıda sunulan poster ya da sözlü sunum', 'kategori' => 'bildiri', 'kaynaklar' => ['Ulusal Özet/Poster'], 'puan' => 1],
 
     // ══ C. ULUSLARARASI KİTAP — F. ULUSAL KİTAP ══
-    'C1' => ['baslik' => 'Uluslararası yayınevi tarafından basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap'], 'puan' => 20],
-    'C2' => ['baslik' => 'Uluslararası yayınevi kitabında makale ya da bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü'], 'puan' => 10],
-    'F1' => ['baslik' => 'Ulusal yayınevi tarafından basılmış kitap yazarlığı (ders notu hariç)', 'kategori' => 'kitap', 'kaynaklar' => ['Uluslararası/Ulusal Kitap', 'Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 15],
-    'F2' => ['baslik' => 'Ulusal yayınevi kitabında makale ya da bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
+    'C1' => ['baslik' => 'Uluslararası yayınevi tarafından basılmış kitap yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap', 'Uluslararası Kitap', 'Uluslararası Ders / Metot Kitabı'], 'puan' => 20],
+    'C2' => ['baslik' => 'Uluslararası yayınevi kitabında makale ya da bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['BKCI / Scopus Kitap Bölümü', 'Uluslararası Kitap Bölümü'], 'puan' => 10],
+    'F1' => ['baslik' => 'Ulusal yayınevi tarafından basılmış kitap yazarlığı (ders notu hariç)', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap', 'Ulusal Ders / Metot Kitabı', 'Tahkik (Tenkitli Metin)'], 'puan' => 15],
+    'F2' => ['baslik' => 'Ulusal yayınevi kitabında makale ya da bölüm yazarlığı', 'kategori' => 'kitap', 'kaynaklar' => ['Ulusal Kitap Bölümü', 'Ansiklopedi Maddesi'], 'puan' => 5],
     'F4' => ['baslik' => 'Çeviri kitap', 'kategori' => 'kitap', 'kaynaklar' => ['Çeviri Kitap', 'Çeviri Kitap Bölümü'], 'puan' => 4],
-    'C3' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap'], 'puan' => 10],
-    'F3' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Kitap Editörlüğü'], 'puan' => 5],
+    'C3' => ['baslik' => 'Uluslararası yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['BKCI Kitap', 'Uluslararası Kitap Editörlüğü'], 'puan' => 10],
+    'F3' => ['baslik' => 'Ulusal yayınevi kitabında editörlük', 'kategori' => 'editorluk', 'kaynaklar' => ['Ulusal Kitap Editörlüğü', 'Kitap Editörlüğü'], 'puan' => 5],
 
     // ══ G. BASILMIŞ BİLİMSEL RAPOR ══
     'G' => ['baslik' => 'Uluslararası ya da ulusal kuruluşlarca desteklenen araştırmanın bu kuruluşlarca basılmış bilimsel raporu (TÜBİTAK, NATO vb.)', 'kategori' => 'diger', 'kaynaklar' => ['Diğer'], 'puan' => 5],

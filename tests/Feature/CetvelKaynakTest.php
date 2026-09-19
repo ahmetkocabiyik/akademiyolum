@@ -3476,6 +3476,14 @@ test('kitapta uluslararası yayınevi satırı kendi kademesinde', function (str
         'Uluslararası Ders / Metot Kitabı' => 100,
         'Ulusal Ders / Metot Kitabı' => 80,
     ]],
+    // Çağ C ↔ F: tanım ÜAK'ın "uluslararası/ulusal yayınevi" tarifine bağlı,
+    // ders kitabı da kapsamda.
+    ['cag-2023', [
+        'Uluslararası Kitap' => 20,
+        'Ulusal Kitap' => 15,
+        'Uluslararası Kitap Bölümü' => 10,
+        'Ulusal Kitap Bölümü' => 5,
+    ]],
     // Bitlis A.7 "uluslararası yayınevlerince Türkçe YA DA yabancı dilde" ↔
     // A.8 ulusal; dil koşulu yok, ayrım yalnız yayınevinin yeri.
     ['bitlis-2024', [
