@@ -175,6 +175,9 @@ document.addEventListener('livewire:init', () => {
     const hayaletUcur = (kart, eski, sure, egri) => {
         const hayalet = kart.cloneNode(true);
         kopyayiSondur(hayalet);
+        // Kopya artık kart değil: `[data-kart]` arayan bir seçici (bizimki
+        // dâhil) onu canlı kart sanmasın.
+        hayalet.removeAttribute('data-kart');
         hayalet.inert = true;
 
         Object.assign(hayalet.style, {
