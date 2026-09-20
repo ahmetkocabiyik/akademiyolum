@@ -30,7 +30,7 @@
      yönerge düğmesi olan kartlarda liste payı azalır ve kendi içinde kayar —
      kart boyu değişmez, içerik de kırpılmaz. --}}
 <flux:card @class([
-    'flex cursor-pointer flex-col overflow-hidden !p-0 transition duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lg active:translate-y-0',
+    'flex cursor-pointer flex-col overflow-hidden !p-0 transition duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0',
     'h-[18rem]' => $gorunum === 'grid',
 ])
     wire:key="uni-{{ $uni->id }}"
