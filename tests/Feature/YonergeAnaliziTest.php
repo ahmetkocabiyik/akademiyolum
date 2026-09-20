@@ -1188,3 +1188,24 @@ test('analiz bileşenlerinin hepsi kullanılıyor', function () {
 
     expect($cagrilmayan)->toBe([]);
 });
+
+/**
+ * KART GEÇİŞLERİ (20.09.2026).
+ *
+ * Filtre, arama ya da sıralama değişince kartlar bir karede yer değiştiriyordu.
+ * Kayma `resources/js/app.js` içindeki FLIP kancasında ve kanca kartı
+ * `data-kart` özniteliğinden buluyor.
+ *
+ * İki uç da burada bağlı: şablondan öznitelik düşerse ya da JS'teki seçici
+ * başka bir ada geçerse hareket sessizce kaybolur — ekran doğru çalışmaya
+ * devam ettiği için başka hiçbir test kırılmaz.
+ */
+test('üniversite kartı geçiş kancasını taşıyor', function () {
+    $uniId = Universite::query()->where('ad', 'İstanbul 29 Mayıs Üniversitesi')->value('id');
+
+    Livewire::test(YonergeAnalizi::class)
+        ->assertSeeHtml('data-kart="'.$uniId.'"');
+
+    expect(file_get_contents(resource_path('js/app.js')))
+        ->toContain('[data-kart]');
+});

@@ -22,6 +22,9 @@
 @endphp
 
 {{-- $wire.detayAcik = true: panel sunucu yanıtını beklemeden kaymaya başlar. --}}
+{{-- data-kart: filtre/sıralama sonrası kartın yeni yerine KAYARAK gitmesini
+     sağlayan FLIP kancası (resources/js/app.js). Değeri kartın kimliği; morph
+     öncesi ölçülen konumlarla morph sonrasını bu anahtar eşliyor. --}}
 {{-- Sabit yükseklik: 6 koşullu bir kartın (Mersin) doğal boyu. Sabit kısımlar
      160px tutuyor, kalan ~128px tam 6 satırlık liste demek. Uyarı satırı ya da
      yönerge düğmesi olan kartlarda liste payı azalır ve kendi içinde kayar —
@@ -31,6 +34,7 @@
     'h-[18rem]' => $gorunum === 'grid',
 ])
     wire:key="uni-{{ $uni->id }}"
+    data-kart="{{ $uni->id }}"
     wire:click="detayAc({{ $uni->id }})"
     x-on:click="$wire.detayAcik = true"
     role="button" tabindex="0"
