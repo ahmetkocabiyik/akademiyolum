@@ -5,8 +5,13 @@
     parçanın ne zaman çizildiğini anlatır. Durumun ekran karşılıkları (renk,
     rozet, etiket) `App\Livewire\YonergeAnalizi` sınıfındaki sabitlerde — üç
     şablonda kopyalıydı.
+
+    data-kart-listesi: kart geçişlerinin (resources/js/app.js) bu bileşeni
+    tanıdığı işaret. Kökte duruyor, kartların kendisinde değil — filtre hiç
+    sonuç vermediğinde liste kabı da çizilmiyor, oysa filtre kalkınca gelen
+    kartların belirmesi gerekiyor.
 --}}
-<div>
+<div data-kart-listesi>
     <x-topbar title="Yönerge Analizi" :pill="count($this->listelenen) . ' üniversite'">
         <flux:button wire:click="$toggle('karsilastirma')" size="sm" :variant="$karsilastirma ? 'filled' : 'primary'" icon="table-cells">
             {{ $karsilastirma ? 'Kartlara Dön' : 'Üniversite Karşılaştır' }}

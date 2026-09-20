@@ -1193,19 +1193,33 @@ test('analiz bileşenlerinin hepsi kullanılıyor', function () {
  * KART GEÇİŞLERİ (20.09.2026).
  *
  * Filtre, arama ya da sıralama değişince kartlar bir karede yer değiştiriyordu.
- * Kayma `resources/js/app.js` içindeki FLIP kancasında ve kanca kartı
- * `data-kart` özniteliğinden buluyor.
+ * Hareket `resources/js/app.js` içindeki FLIP kancasında; kanca iki işarete
+ * bakıyor: bileşen kökündeki `data-kart-listesi` (ölçüm yapılacak mı) ve
+ * karttaki `data-kart` (hangi kart nereden nereye gitti).
  *
- * İki uç da burada bağlı: şablondan öznitelik düşerse ya da JS'teki seçici
+ * Kök işareti kartın kendisinden ayrı duruyor çünkü filtre hiç sonuç
+ * vermediğinde liste kabı çizilmiyor; kanca yalnızca karta baksaydı filtre
+ * kalkınca gelen kartların belirişi kaybolurdu.
+ *
+ * Her iki uç da burada bağlı: şablondan öznitelik düşerse ya da JS'teki seçici
  * başka bir ada geçerse hareket sessizce kaybolur — ekran doğru çalışmaya
  * devam ettiği için başka hiçbir test kırılmaz.
  */
-test('üniversite kartı geçiş kancasını taşıyor', function () {
+test('üniversite kartı geçiş kancalarını taşıyor', function () {
     $uniId = Universite::query()->where('ad', 'İstanbul 29 Mayıs Üniversitesi')->value('id');
 
     Livewire::test(YonergeAnalizi::class)
+        ->assertSeeHtml('data-kart-listesi')
         ->assertSeeHtml('data-kart="'.$uniId.'"');
 
+    // Sonuç yokken bile kök işaretli kalmalı: çıkan kartların hayaletleri ve
+    // filtre kalkınca gelen kartların belirişi buna bağlı.
+    Livewire::test(YonergeAnalizi::class)
+        ->call('durumSec', 'eksik_bilgi')
+        ->assertSee('Seçili filtrelere uygun yönerge bulunamadı.')
+        ->assertSeeHtml('data-kart-listesi');
+
     expect(file_get_contents(resource_path('js/app.js')))
+        ->toContain('[data-kart-listesi]')
         ->toContain('[data-kart]');
 });

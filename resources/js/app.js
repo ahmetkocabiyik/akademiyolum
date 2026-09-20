@@ -62,11 +62,13 @@ document.addEventListener('alpine:init', () => {
  * Neden kartın kendi kimliğiyle (data-kart) anahtarlanıyor: morph düğümü
  * taşımak yerine yeniden kurarsa bile eski konum doğru kartla eşleşsin.
  *
- * Kapsam bilinçli olarak "kalan + yeni gelen": listeden ÇIKAN kart morph
- * bittiğinde DOM'da yok, animasyonu ancak klonlayarak yapılırdı. Kalanların
- * kayması zaten hangi kartın gittiğini anlatıyor.
+ * Listeden ÇIKAN kart morph bittiğinde DOM'da olmuyor; onun için kartın
+ * kopyası eski yerinde, sayfanın üstündeki bir katmanda soluyor. Kopya
+ * yalnızca görüntü: reaktif öznitelikleri sökülüyor ki Alpine ona tekrar
+ * bağlanmasın.
  */
 document.addEventListener('livewire:init', () => {
+    const LISTE_SECICI = '[data-kart-listesi]';
     const KART_SECICI = '[data-kart]';
 
     /** Morph öncesi konumlar; anahtar bileşen kökü (aynı sayfada iki liste olabilir). */
@@ -112,26 +114,104 @@ document.addEventListener('livewire:init', () => {
      * listeyi kısaltıp sayfa kendiliğinden yukarı kaydığında ekran farkı
      * kaymayı da içerir ve kartlar olmadık yerden uçar; sayfa koordinatı
      * yalnızca yerleşim değişimini verir.
+     *
+     * Boyut ve görünürlük çıkan kartın kopyası için: kopya eski yerine tıpatıp
+     * oturmalı, ekran dışındaki kartın çıkışını ise kimse izlemiyor.
      */
-    const konumOlc = (kart) => {
+    const kutuOlc = (kart) => {
         const kutu = kart.getBoundingClientRect();
 
-        return { x: kutu.left + window.scrollX, y: kutu.top + window.scrollY };
+        return {
+            x: kutu.left + window.scrollX,
+            y: kutu.top + window.scrollY,
+            genislik: kutu.width,
+            yukseklik: kutu.height,
+            gorunur: kutu.bottom > 0 && kutu.top < window.innerHeight
+                && kutu.right > 0 && kutu.left < window.innerWidth,
+        };
+    };
+
+    /** Reaktif öznitelikler: kopyada kalırsa Alpine/Livewire ölü karta bağlanır. */
+    const REAKTIF = /^(x-|wire:|@|:)/;
+
+    const kopyayiSondur = (dugum) => {
+        dugum.removeAttribute('id');
+        [...dugum.attributes].forEach((oznitelik) => {
+            if (REAKTIF.test(oznitelik.name)) {
+                dugum.removeAttribute(oznitelik.name);
+            }
+        });
+        [...dugum.children].forEach(kopyayiSondur);
+    };
+
+    /**
+     * Hayalet katmanı: çıkan kartların kopyaları sayfanın akışına karışmadan
+     * burada solar. Sabit konumlu, tıklanamaz ve ekran okuyucuya görünmez.
+     *
+     * z-index 20: sayfa içeriğinin üstünde ama Flux'un <dialog>'unun altında
+     * (o zaten üst katmanda, z-index'e bakmıyor).
+     */
+    let katman = null;
+    const hayaletKatmani = () => {
+        if (katman?.isConnected) {
+            return katman;
+        }
+
+        katman = document.createElement('div');
+        katman.dataset.kartHayaletleri = '';
+        katman.setAttribute('aria-hidden', 'true');
+        Object.assign(katman.style, {
+            position: 'fixed',
+            inset: '0',
+            overflow: 'hidden',
+            pointerEvents: 'none',
+            zIndex: '20',
+        });
+        document.body.append(katman);
+
+        return katman;
+    };
+
+    const hayaletUcur = (kart, eski, sure, egri) => {
+        const hayalet = kart.cloneNode(true);
+        kopyayiSondur(hayalet);
+        hayalet.inert = true;
+
+        Object.assign(hayalet.style, {
+            position: 'absolute',
+            margin: '0',
+            left: `${eski.x - window.scrollX}px`,
+            top: `${eski.y - window.scrollY}px`,
+            width: `${eski.genislik}px`,
+            height: `${eski.yukseklik}px`,
+        });
+
+        hayaletKatmani().append(hayalet);
+
+        const kaldir = () => hayalet.remove();
+
+        hayalet.animate(
+            [
+                { opacity: 1, transform: 'none' },
+                { opacity: 0, transform: 'scale(0.96)' },
+            ],
+            { duration: sure, easing: egri },
+        ).finished.then(kaldir, kaldir);
     };
 
     Livewire.hook('morph', ({ el }) => {
-        if (hareketKapali()) {
+        // Kök işaretli değilse bu bileşenin kartı yok; ölçüm de yapılmıyor.
+        // Kabın kendisine değil KÖKE bakılıyor: liste boşken kap hiç
+        // çizilmiyor, oysa filtre kalkınca gelen kartların belirmesi gerek.
+        if (hareketKapali() || !el.matches(LISTE_SECICI)) {
             return;
         }
 
         const kartlar = el.querySelectorAll(KART_SECICI);
-
-        if (kartlar.length === 0) {
-            return;
-        }
-
         const konumlar = new Map();
-        kartlar.forEach((kart) => konumlar.set(kart.dataset.kart, konumOlc(kart)));
+        // Elemanın kendisi de saklanıyor: morph onu DOM'dan çıkarınca elimizde
+        // yalnızca bu referans kalıyor, hayalet ondan kopyalanıyor.
+        kartlar.forEach((kart) => konumlar.set(kart.dataset.kart, { kart, ...kutuOlc(kart) }));
         oncekiKonumlar.set(el, konumlar);
     });
 
@@ -150,7 +230,9 @@ document.addEventListener('livewire:init', () => {
         // her kart için ayrı bir yerleşim hesabı tetiklenir; yüzlerce kartlık
         // listede fark gözle görülür.
         const olcumler = [...el.querySelectorAll(KART_SECICI)]
-            .map((kart) => [kart, konumlar.get(kart.dataset.kart), konumOlc(kart)]);
+            .map((kart) => [kart, konumlar.get(kart.dataset.kart), kutuOlc(kart)]);
+
+        const kalanlar = new Set(olcumler.map(([kart]) => kart.dataset.kart));
 
         olcumler.forEach(([kart, eski, yeni]) => {
             // Listeye yeni giren kart: yerinde belirsin.
@@ -160,7 +242,7 @@ document.addEventListener('livewire:init', () => {
                         { opacity: 0, transform: 'scale(0.97)' },
                         { opacity: 1, transform: 'none' },
                     ],
-                    { duration: giris, easing: girisEgrisi },
+                    { duration: giris, easing: cikisEgrisi },
                 );
 
                 return;
@@ -181,6 +263,16 @@ document.addEventListener('livewire:init', () => {
                 ],
                 { duration: kayma, easing: cikisEgrisi },
             );
+        });
+
+        // Listeden düşenler: hâlâ DOM'daysa morph onu başka bir anahtar için
+        // yeniden kullanmış demektir, hayalet yanlış kartı gösterirdi.
+        konumlar.forEach((eski, anahtar) => {
+            if (kalanlar.has(anahtar) || !eski.gorunur || eski.kart.isConnected) {
+                return;
+            }
+
+            hayaletUcur(eski.kart, eski, giris, girisEgrisi);
         });
     });
 });
