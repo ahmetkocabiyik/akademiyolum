@@ -7,6 +7,7 @@ use App\Models\BeyanOnayi;
 use App\Models\Faaliyet;
 use App\Models\Universite;
 use App\Models\User;
+use App\Services\Scoring\Sart\Durum;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Scoring\Sart\SartSonucu;
 use Illuminate\Support\Str;
@@ -1129,4 +1130,61 @@ test('birim seçimi geri boşaltılınca üniversite yeniden bekleyene düşer',
 
     expect($bilesen->instance()->sonuclar())->toBe([])
         ->and($bilesen->instance()->kapsamDisi()['birim'])->toBe(['Ankara Üniversitesi']);
+});
+
+/**
+ * DURUM HARİTALARI TEK KAYNAK OLDU (20.09.2026).
+ *
+ * Kart, karşılaştırma tablosu ve detay paneli aynı dört durumu gösteriyor;
+ * renk/rozet/etiket haritaları üç ayrı şablonda kopyalıydı. Bileşenlere
+ * ayırırken haritalar `YonergeAnalizi` sınıfına taşındı.
+ *
+ * Bu test iki sessiz hatayı kapatıyor: bir duruma harita girdisi unutulursa
+ * şablon BOŞ renk/etiket basar (kimse fark etmez), ve motor tarafına yeni bir
+ * `Durum` eklenirse `durum()` eşlemesi yeni bir ekran durumu üretip aynı boş
+ * kutuya düşer.
+ */
+test('durum haritaları bütün ekran durumlarını kapsıyor', function () {
+    // durum() üç motor durumunu dört ekran durumuna çeviriyor: 'yakin' ile
+    // 'yetersiz' aynı Durum'dan orana göre ayrılıyor.
+    $ekranDurumlari = ['uygun', 'eksik_bilgi', 'yakin', 'yetersiz'];
+
+    expect(Durum::cases())->toHaveCount(3);
+
+    foreach ([
+        'RENK' => YonergeAnalizi::RENK,
+        'ROZET' => YonergeAnalizi::ROZET,
+        'ETIKET' => YonergeAnalizi::ETIKET,
+        'UZUN_ETIKET' => YonergeAnalizi::UZUN_ETIKET,
+    ] as $ad => $harita) {
+        expect(array_keys($harita))->toEqualCanonicalizing($ekranDurumlari, "{$ad} haritası eksik");
+        expect(array_filter($harita))->toHaveCount(4, "{$ad} haritasında boş değer var");
+    }
+});
+
+/**
+ * Ekran parçalara ayrıldı: `components/analiz/` altındaki her bileşen
+ * şablondan çağrılıyor mu? Bir bileşen kullanılmadan kalırsa (ör. düzenleme
+ * sırasında çağrısı düşerse) ekran sessizce eksilir.
+ */
+test('analiz bileşenlerinin hepsi kullanılıyor', function () {
+    $kullanim = collect(glob(resource_path('views/livewire/yonerge-analizi.blade.php')))
+        ->merge(glob(resource_path('views/components/analiz/*.blade.php')))
+        ->map(fn (string $yol) => file_get_contents($yol))
+        ->implode("\n");
+
+    $bilesenler = collect(glob(resource_path('views/components/analiz/*.blade.php')))
+        ->map(fn (string $yol) => basename($yol, '.blade.php'));
+
+    expect($bilesenler)->not->toBeEmpty();
+
+    // Eksikleri toplayıp tek seferde iddia ediyoruz: hata mesajı hangi
+    // bileşenin düştüğünü doğrudan söylesin. (`toContain` birden çok argümanı
+    // ayrı ayrı ARANAN dize sayıyor, mesaj olarak değil.)
+    $cagrilmayan = $bilesenler
+        ->reject(fn (string $ad) => str_contains($kullanim, "<x-analiz.{$ad}"))
+        ->values()
+        ->all();
+
+    expect($cagrilmayan)->toBe([]);
 });

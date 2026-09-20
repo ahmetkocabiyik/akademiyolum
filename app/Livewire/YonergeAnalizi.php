@@ -122,6 +122,49 @@ class YonergeAnalizi extends Component
     public array $birimSecimleri = [];
 
     /**
+     * DURUMUN EKRAN KARŞILIKLARI — tek kaynak.
+     *
+     * Kart, karşılaştırma tablosu ve detay paneli aynı dört durumu gösteriyor;
+     * haritalar üç ayrı şablonda kopyalıydı ve biri değişince öbürleri sessizce
+     * geride kalıyordu. Şablonlar artık `@use` ile buradan okuyor.
+     *
+     * "Onay Gerek" olumsuz bir sonuç DEĞİL: kesin olumsuz yaprak yok, ama bir
+     * şey adayın onayını bekliyor (belge kutusu, profil ya da tarih).
+     *
+     * @var array<string, string>
+     */
+    public const RENK = [
+        'uygun' => 'var(--color-cat-green)',
+        'yakin' => 'var(--color-cat-amber)',
+        'eksik_bilgi' => 'var(--color-cat-amber)',
+        'yetersiz' => 'var(--color-cat-red)',
+    ];
+
+    /** @var array<string, string> Flux rozet rengi. */
+    public const ROZET = [
+        'uygun' => 'green',
+        'yakin' => 'amber',
+        'eksik_bilgi' => 'amber',
+        'yetersiz' => 'red',
+    ];
+
+    /** @var array<string, string> Kart ve tabloda: dar alana sığan kısa ad. */
+    public const ETIKET = [
+        'uygun' => 'Uygun',
+        'yakin' => 'Yakın',
+        'eksik_bilgi' => 'Onay Gerek',
+        'yetersiz' => 'Yetersiz',
+    ];
+
+    /** @var array<string, string> Detay panelinde: yer var, sebebi de söyler. */
+    public const UZUN_ETIKET = [
+        'uygun' => 'Uygun',
+        'yakin' => 'Yakın Sınırda',
+        'eksik_bilgi' => 'Onay Gerek',
+        'yetersiz' => 'Puan Yetersiz',
+    ];
+
+    /**
      * Hedef kadro etiketleri (seçici + başlık için).
      *
      * @var array<string, string>
