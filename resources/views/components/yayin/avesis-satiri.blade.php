@@ -2,15 +2,17 @@
 
 @php
     $k = $kayit;
+    $sebep = $k['ekli_sebep'] ?? null;
+    $ekliEtiket = $sebep === 'baslik' ? 'Aynı başlık zaten var' : 'Zaten ekli';
     $rozet = ['makale' => 'Makale', 'bildiri' => 'Bildiri', 'kitap' => 'Kitap', 'proje' => 'Proje'][$k['kategori']] ?? $k['kategori'];
 @endphp
 
 <label @class([
     'flex items-start gap-3 px-4 py-3 transition',
-    'cursor-pointer hover:bg-canvas' => ! $k['ekli'],
-    'opacity-60' => $k['ekli'],
+    'cursor-pointer hover:bg-canvas' => ! $sebep,
+    'opacity-60' => (bool) $sebep,
 ])>
-    @if ($k['ekli'])
+    @if ($sebep)
         <flux:icon name="check-circle" variant="solid" class="mt-0.5 size-4 shrink-0 text-cat-green" />
     @else
         <input type="checkbox"
@@ -35,8 +37,8 @@
                 <span class="text-cat-amber-text">{{ $k['uyari'] }}</span>
             @endif
 
-            @if ($k['ekli'])
-                <flux:badge size="sm" color="zinc">Zaten ekli</flux:badge>
+            @if ($sebep)
+                <flux:badge size="sm" color="zinc">{{ $ekliEtiket }}</flux:badge>
             @endif
         </div>
 

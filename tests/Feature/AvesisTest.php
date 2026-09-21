@@ -286,7 +286,7 @@ test('zaten eklenmiş avesis kaydı işaretlenemiyor', function () {
         ->call('avesisGetir')
         ->assertSee('Zaten ekli');
 
-    expect($bilesen->get('avesisBulunanlar')[0]['ekli'])->toBeTrue();
+    expect($bilesen->get('avesisBulunanlar')[0]['ekli_sebep'])->toBe('kayit');
 
     $bilesen->set('avesisSecilenler', [uuid(1)])->call('avesistenEkle');
 

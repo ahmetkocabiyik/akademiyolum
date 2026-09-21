@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Http;
  *     yazarlar: string,
  *     kunye: string,
  *     yil: int|null,
+ *     doi: string|null,
  *     kaynak: string|null,
  *     uyari: string|null,
  * }
@@ -185,6 +186,7 @@ class AvesisProfili
             'yazarlar' => $yazarlar,
             'kunye' => $kunye,
             'yil' => $this->yil($kunye),
+            'doi' => $this->doi($oge),
             'kaynak' => $indeks['kaynak'],
             'uyari' => $indeks['uyari'],
         ];
@@ -224,6 +226,7 @@ class AvesisProfili
                     'baslik' => $baslik,
                     'yazarlar' => '',
                     'kunye' => $duz,
+                    'doi' => null,
                     // Bitiş yılı: yönergeler tamamlanmış projeyi sayıyor.
                     // Süren projede yıl boş kalıyor, aday kendisi girecek.
                     'yil' => $this->projeYili($oge),
@@ -281,6 +284,25 @@ class AvesisProfili
         }
 
         return ['kaynak' => null, 'uyari' => null];
+    }
+
+    /**
+     * DOI, listenin kendisinde duruyor.
+     *
+     * Yayın künyesinde ayrı bir alan yok ama PlumX rozetinin adresinde
+     * (`plu.mx/plum/a/?doi=10.…`) yazılı. Buradan alınması mükerrer
+     * denetimini Crossref'ten gelen kayıtlarla eşleştiriyor; yoksa aynı
+     * makale iki ayrı yoldan iki kez eklenebiliyordu.
+     */
+    private function doi(string $oge): ?string
+    {
+        foreach (['~[?&]doi=(10\.[^\s"&<>]+)~i', '~doi\.org/(10\.[^\s"<>]+)~i'] as $desen) {
+            if (preg_match($desen, $oge, $esles) === 1) {
+                return mb_strtolower(rtrim(urldecode($esles[1]), '.'));
+            }
+        }
+
+        return null;
     }
 
     private function fon(string $metin): ?string

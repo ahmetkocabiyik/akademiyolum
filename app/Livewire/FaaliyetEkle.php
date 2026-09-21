@@ -13,6 +13,7 @@ use App\Services\Yayin\AvesisProfili;
 use App\Services\Yayin\CrossrefArama;
 use App\Services\Yayin\DergiParkArsivi;
 use App\Services\Yayin\KaynakOnerici;
+use App\Services\Yayin\MukerrerDenetimi;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -388,12 +389,17 @@ class FaaliyetEkle extends Component
             return;
         }
 
-        $mevcut = $this->mevcutDoiler();
+        $harita = $this->mukerrerHaritasi();
 
-        $this->bulunanlar = array_map(
-            fn (array $yayin): array => [...$yayin, 'ekli' => in_array($yayin['doi'], $mevcut, true)],
-            $yayinlar,
-        );
+        $this->bulunanlar = array_map(function (array $yayin) use ($harita): array {
+            $meta = array_filter([
+                'doi' => $yayin['doi'],
+                'dergi' => $yayin['dergi'] ?: null,
+                'kaynak_sistem' => 'crossref',
+            ]);
+
+            return [...$yayin, 'meta' => $meta, 'ekli_sebep' => $this->mukerrer($harita, $yayin['kategori'], $yayin['baslik'], $meta)];
+        }, $yayinlar);
     }
 
     /**
@@ -403,7 +409,7 @@ class FaaliyetEkle extends Component
     {
         $this->secilenler = array_values(array_map(
             fn (array $yayin): string => $yayin['doi'],
-            array_filter($this->bulunanlar, fn (array $yayin): bool => ! $yayin['ekli']),
+            array_filter($this->bulunanlar, fn (array $yayin): bool => $yayin['ekli_sebep'] === null),
         ));
     }
 
@@ -419,7 +425,7 @@ class FaaliyetEkle extends Component
     {
         $secili = array_values(array_filter(
             $this->bulunanlar,
-            fn (array $yayin): bool => ! $yayin['ekli'] && in_array($yayin['doi'], $this->secilenler, true),
+            fn (array $yayin): bool => $yayin['ekli_sebep'] === null && in_array($yayin['doi'], $this->secilenler, true),
         ));
 
         if ($secili === []) {
@@ -428,33 +434,18 @@ class FaaliyetEkle extends Component
             return;
         }
 
-        $kullanici = Auth::user();
-
-        foreach ($secili as $yayin) {
-            $kategori = Kategori::from($yayin['kategori']);
-
-            $kullanici->faaliyetler()->create([
-                'kategori' => $kategori->value,
-                'tur' => $kategori->label(),
-                'baslik' => $yayin['baslik'],
-                'yazarlar' => $yayin['yazarlar'] ? implode(', ', $yayin['yazarlar']) : null,
-                'rol' => $this->rolSiradan($kategori, count($yayin['yazarlar']), $yayin['sira']),
-                // Özgün makale mi derleme mi: künyede yok, tahmin edilmiyor.
-                'yayin_turu' => null,
-                'tarih' => $yayin['tarih'],
-                'kaynak' => null,
-                'durum' => 'beklemede',
-                'meta' => array_filter([
-                    'doi' => $yayin['doi'],
-                    'dergi' => $yayin['dergi'] ?: null,
-                    'kaynak_sistem' => 'crossref',
-                ]),
-            ]);
-        }
+        $eklenen = $this->ekle($secili, fn (array $yayin, Kategori $kategori): array => [
+            'yazarlar' => $yayin['yazarlar'] ? implode(', ', $yayin['yazarlar']) : null,
+            'rol' => $this->rolSiradan($kategori, count($yayin['yazarlar']), $yayin['sira']),
+            // Özgün makale mi derleme mi: künyede yok, tahmin edilmiyor.
+            'yayin_turu' => null,
+            'tarih' => $yayin['tarih'],
+            'kaynak' => null,
+        ]);
 
         Flux::toast(
             variant: 'success',
-            text: count($secili).' yayın beklemede eklendi. Dergi indeksini seçip onaylayın.',
+            text: $eklenen.' yayın beklemede eklendi. Dergi indeksini seçip onaylayın.',
         );
 
         $this->redirectRoute('faaliyetler', navigate: true);
@@ -490,21 +481,6 @@ class FaaliyetEkle extends Component
         };
 
         return isset($gecerli[$kod]) ? $kod : null;
-    }
-
-    /**
-     * Adayın halihazırda kayıtlı DOI'leri — aynı yayını iki kez eklememek için.
-     *
-     * @return list<string>
-     */
-    private function mevcutDoiler(): array
-    {
-        return Auth::user()->faaliyetler()
-            ->pluck('meta')
-            ->map(fn ($meta): string => is_array($meta) ? mb_strtolower(trim((string) ($meta['doi'] ?? ''))) : '')
-            ->filter()
-            ->values()
-            ->all();
     }
 
     /**
@@ -578,7 +554,7 @@ class FaaliyetEkle extends Component
         $ad = (string) Auth::user()->name;
 
         $sayiTarihleri = collect($arsiv->sayilar($this->arsivKisaltma))->keyBy('id');
-        $mevcut = $this->mevcutArsivAnahtarlari();
+        $harita = $this->mukerrerHaritasi();
 
         $obek = array_splice($this->arsivKalan, 0, self::ARSIV_OBEK);
 
@@ -594,6 +570,13 @@ class FaaliyetEkle extends Component
 
                 $anahtar = "{$this->arsivKisaltma}:{$makale['id']}";
 
+                $meta = array_filter([
+                    'dergi' => $this->arsivAdi ?: null,
+                    'dergipark' => $this->arsivKisaltma,
+                    'dergipark_makale' => $makale['id'],
+                    'kaynak_sistem' => 'dergipark',
+                ]);
+
                 $this->arsivBulunanlar[] = [
                     'anahtar' => $anahtar,
                     'makale_id' => $makale['id'],
@@ -603,7 +586,8 @@ class FaaliyetEkle extends Component
                     'sayi' => (string) ($sayiTarihleri[$sayiId]['etiket'] ?? ''),
                     'tarih' => $sayiTarihleri[$sayiId]['tarih'] ?? null,
                     'yil' => $sayiTarihleri[$sayiId]['yil'] ?? null,
-                    'ekli' => in_array($anahtar, $mevcut, true),
+                    'meta' => $meta,
+                    'ekli_sebep' => $this->mukerrer($harita, 'makale', $makale['baslik'], $meta),
                 ];
             }
         }
@@ -620,7 +604,7 @@ class FaaliyetEkle extends Component
     {
         $secili = array_values(array_filter(
             $this->arsivBulunanlar,
-            fn (array $yayin): bool => ! $yayin['ekli'] && in_array($yayin['anahtar'], $this->arsivSecilenler, true),
+            fn (array $yayin): bool => $yayin['ekli_sebep'] === null && in_array($yayin['anahtar'], $this->arsivSecilenler, true),
         ));
 
         if ($secili === []) {
@@ -629,52 +613,20 @@ class FaaliyetEkle extends Component
             return;
         }
 
-        $kullanici = Auth::user();
-
-        foreach ($secili as $yayin) {
-            $kullanici->faaliyetler()->create([
-                'kategori' => Kategori::Makale->value,
-                'tur' => Kategori::Makale->label(),
-                'baslik' => $yayin['baslik'],
-                'yazarlar' => $yayin['yazarlar'] ? implode(', ', $yayin['yazarlar']) : null,
-                'rol' => $this->rolSiradan(Kategori::Makale, count($yayin['yazarlar']), $yayin['sira']),
-                'yayin_turu' => null,
-                'tarih' => $yayin['tarih'],
-                'kaynak' => null,
-                'durum' => 'beklemede',
-                'meta' => array_filter([
-                    'dergi' => $this->arsivAdi ?: null,
-                    'dergipark' => $this->arsivKisaltma,
-                    'dergipark_makale' => $yayin['makale_id'],
-                    'kaynak_sistem' => 'dergipark',
-                ]),
-            ]);
-        }
+        $eklenen = $this->ekle($secili, fn (array $yayin, Kategori $kategori): array => [
+            'yazarlar' => $yayin['yazarlar'] ? implode(', ', $yayin['yazarlar']) : null,
+            'rol' => $this->rolSiradan($kategori, count($yayin['yazarlar']), $yayin['sira']),
+            'yayin_turu' => null,
+            'tarih' => $yayin['tarih'],
+            'kaynak' => null,
+        ], 'makale');
 
         Flux::toast(
             variant: 'success',
-            text: count($secili).' yayın beklemede eklendi. Dergi indeksini seçip onaylayın.',
+            text: $eklenen.' yayın beklemede eklendi. Dergi indeksini seçip onaylayın.',
         );
 
         $this->redirectRoute('faaliyetler', navigate: true);
-    }
-
-    /**
-     * Arşivden eklenmiş kayıtların "kısaltma:makaleId" anahtarları.
-     *
-     * @return list<string>
-     */
-    private function mevcutArsivAnahtarlari(): array
-    {
-        return Auth::user()->faaliyetler()
-            ->whereNotNull('meta->dergipark_makale')
-            ->pluck('meta')
-            ->map(fn ($meta): string => is_array($meta)
-                ? trim((string) ($meta['dergipark'] ?? '')).':'.trim((string) ($meta['dergipark_makale'] ?? ''))
-                : '')
-            ->filter(fn (string $anahtar): bool => $anahtar !== ':')
-            ->values()
-            ->all();
     }
 
     /**
@@ -713,7 +665,7 @@ class FaaliyetEkle extends Component
             $kullanici->forceFill(['avesis_id' => $this->avesisAdres])->save();
         }
 
-        $mevcut = $this->mevcutAvesisKimlikleri();
+        $harita = $this->mukerrerHaritasi();
         $gecerli = [];
 
         foreach ($kayitlar as $kayit) {
@@ -730,7 +682,19 @@ class FaaliyetEkle extends Component
                 ? $kayit['kaynak']
                 : null;
 
-            $gecerli[] = [...$kayit, 'kaynak' => $kaynak, 'ekli' => in_array($kayit['id'], $mevcut, true)];
+            $meta = array_filter([
+                'avesis_id' => $kayit['id'],
+                'doi' => $kayit['doi'],
+                'kunye' => $kayit['kunye'] ?: null,
+                'kaynak_sistem' => 'avesis',
+            ]);
+
+            $gecerli[] = [
+                ...$kayit,
+                'kaynak' => $kaynak,
+                'meta' => $meta,
+                'ekli_sebep' => $this->mukerrer($harita, $kayit['kategori'], $kayit['baslik'], $meta),
+            ];
         }
 
         $this->avesisBulunanlar = $gecerli;
@@ -740,7 +704,7 @@ class FaaliyetEkle extends Component
     {
         $this->avesisSecilenler = array_values(array_map(
             fn (array $kayit): string => $kayit['id'],
-            array_filter($this->avesisBulunanlar, fn (array $kayit): bool => ! $kayit['ekli']),
+            array_filter($this->avesisBulunanlar, fn (array $kayit): bool => $kayit['ekli_sebep'] === null),
         ));
     }
 
@@ -759,7 +723,7 @@ class FaaliyetEkle extends Component
     {
         $secili = array_values(array_filter(
             $this->avesisBulunanlar,
-            fn (array $kayit): bool => ! $kayit['ekli'] && in_array($kayit['id'], $this->avesisSecilenler, true),
+            fn (array $kayit): bool => $kayit['ekli_sebep'] === null && in_array($kayit['id'], $this->avesisSecilenler, true),
         ));
 
         if ($secili === []) {
@@ -768,53 +732,90 @@ class FaaliyetEkle extends Component
             return;
         }
 
-        $kullanici = Auth::user();
-
-        foreach ($secili as $kayit) {
-            $kategori = Kategori::from($kayit['kategori']);
-
-            $kullanici->faaliyetler()->create([
-                'kategori' => $kategori->value,
-                'tur' => $kategori->label(),
-                'baslik' => mb_substr($kayit['baslik'], 0, 255),
-                'yazarlar' => $kayit['yazarlar'] ?: null,
-                // Rol künyede yazmıyor; uydurulmuyor.
-                'rol' => null,
-                'yayin_turu' => null,
-                // AVESİS yalnız YIL veriyor. 1 Ocak, dönem koşullarında
-                // ("doçentlikten sonra", "son beş yıl") en muhafazakâr
-                // tarih: aynı yıl içinde kayıt lehe değil aleyhe düşer.
-                'tarih' => $kayit['yil'] === null ? null : sprintf('%04d-01-01', $kayit['yil']),
-                'kaynak' => $kayit['kaynak'],
-                'durum' => 'beklemede',
-                'meta' => array_filter([
-                    'avesis_id' => $kayit['id'],
-                    'kunye' => $kayit['kunye'] ?: null,
-                    'kaynak_sistem' => 'avesis',
-                ]),
-            ]);
-        }
+        $eklenen = $this->ekle($secili, fn (array $kayit): array => [
+            'yazarlar' => $kayit['yazarlar'] ?: null,
+            // Rol künyede yazmıyor; uydurulmuyor.
+            'rol' => null,
+            'yayin_turu' => null,
+            // AVESİS yalnız YIL veriyor. 1 Ocak, dönem koşullarında
+            // ("doçentlikten sonra", "son beş yıl") en muhafazakâr tarih:
+            // aynı yıl içinde kayıt lehe değil aleyhe düşer.
+            'tarih' => $kayit['yil'] === null ? null : sprintf('%04d-01-01', $kayit['yil']),
+            'kaynak' => $kayit['kaynak'],
+        ]);
 
         Flux::toast(
             variant: 'success',
-            text: count($secili).' kayıt beklemede eklendi. Kademeleri kontrol edip onaylayın.',
+            text: $eklenen.' kayıt beklemede eklendi. Kademeleri kontrol edip onaylayın.',
         );
 
         $this->redirectRoute('faaliyetler', navigate: true);
     }
 
     /**
-     * @return list<string>
+     * Adayın listesindeki kayıtların izleri — mükerrer denetimi için.
+     *
+     * @return array<string, string>
      */
-    private function mevcutAvesisKimlikleri(): array
+    private function mukerrerHaritasi(): array
     {
-        return Auth::user()->faaliyetler()
-            ->whereNotNull('meta->avesis_id')
-            ->pluck('meta')
-            ->map(fn ($meta): string => is_array($meta) ? (string) ($meta['avesis_id'] ?? '') : '')
-            ->filter()
-            ->values()
-            ->all();
+        return app(MukerrerDenetimi::class)->harita(Auth::user());
+    }
+
+    /**
+     * @param  array<string, string>  $harita
+     * @param  array<string, mixed>  $meta
+     */
+    private function mukerrer(array $harita, string $kategori, string $baslik, array $meta): ?string
+    {
+        return app(MukerrerDenetimi::class)->eslesme($harita, $kategori, $baslik, $meta);
+    }
+
+    /**
+     * Seçilen kayıtları faaliyet olarak yazar; üç içe aktarma yolu da
+     * buradan geçiyor.
+     *
+     * Harita HER KAYITTAN SONRA tazeleniyor: tek bir partinin içinde de
+     * mükerrer olabiliyor (AVESİS'te aynı yayının hem düzgün hem künyesi
+     * başlığa yapışmış hâli listelenebiliyor).
+     *
+     * @param  list<array<string, mixed>>  $secili
+     * @param  callable(array<string, mixed>, Kategori): array<string, mixed>  $alanlar
+     */
+    private function ekle(array $secili, callable $alanlar, ?string $kategoriZorla = null): int
+    {
+        $denetim = app(MukerrerDenetimi::class);
+        $kullanici = Auth::user();
+        $harita = $denetim->harita($kullanici);
+        $eklenen = 0;
+
+        foreach ($secili as $kayit) {
+            $kategori = Kategori::from($kategoriZorla ?? $kayit['kategori']);
+            $baslik = mb_substr($kayit['baslik'], 0, 255);
+            $meta = $kayit['meta'];
+
+            if ($denetim->eslesme($harita, $kategori->value, $baslik, $meta) !== null) {
+                continue;
+            }
+
+            $kullanici->faaliyetler()->create([
+                'kategori' => $kategori->value,
+                'tur' => $kategori->label(),
+                'baslik' => $baslik,
+                'durum' => 'beklemede',
+                'meta' => $meta,
+                ...$alanlar($kayit, $kategori),
+            ]);
+
+            $eklenen++;
+
+            // Harita yeniden sorgulanmıyor, yazılan kaydın izleri üstüne
+            // ekleniyor: 400 kayıtlık bir partide her ekleme için listenin
+            // tamamını okumak boşuna.
+            $harita = [...$harita, ...$denetim->izler($kategori->value, $baslik, $meta)];
+        }
+
+        return $eklenen;
     }
 
     /**

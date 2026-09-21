@@ -277,7 +277,7 @@ test('zaten eklenmiş arşiv yayını işaretlenemiyor', function () {
         ->call('arsivTara')
         ->assertSee('Zaten ekli');
 
-    expect($bilesen->get('arsivBulunanlar')[0]['ekli'])->toBeTrue();
+    expect($bilesen->get('arsivBulunanlar')[0]['ekli_sebep'])->toBe('kayit');
 
     $bilesen->set('arsivSecilenler', ['deneme:366869'])->call('arsivdenEkle');
 

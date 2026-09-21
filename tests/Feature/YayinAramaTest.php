@@ -308,7 +308,7 @@ test('zaten ekli yayın işaretlenemiyor ve yeniden eklenmiyor', function () {
         ->call('yayinAra')
         ->assertSee('Zaten ekli');
 
-    expect($bilesen->get('bulunanlar')[0]['ekli'])->toBeTrue();
+    expect($bilesen->get('bulunanlar')[0]['ekli_sebep'])->toBe('doi');
 
     // Kutusu çizilmiyor ama istek elle de gönderilse yeni kayıt açılmamalı.
     $bilesen->set('secilenler', ['10.1234/ornek.1'])->call('yayinlariEkle');
