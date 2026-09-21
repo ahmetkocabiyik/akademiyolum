@@ -27,6 +27,11 @@ use App\Models\User;
  *
  * KISA BAŞLIKTA İZ ÜRETİLMİYOR: kitap bölümlerinde "Giriş", "Anhang" gibi
  * adlar var; farklı kitapların bölümleri aynı ada sahip olabiliyor.
+ *
+ * GÖREVLERDE BAŞLIK İZİNE YIL DA GİRİYOR: bir yayının adı onu tek başına
+ * tanımlar, bir görevin adı tanımlamaz — aynı kişi "Bölüm Başkanı"nı iki
+ * ayrı dönem yapmış olabilir ve ikisi ayrı ayrı sayılır. Yıl olmasaydı
+ * ikinci dönem mükerrer sanılıp elenirdi.
  */
 class MukerrerDenetimi
 {
@@ -34,6 +39,9 @@ class MukerrerDenetimi
     private const EN_AZ_HARF = 25;
 
     private const EN_AZ_KELIME = 3;
+
+    /** Başlığı tek başına ayırt edici sayılan kategoriler (yayınlar). */
+    private const YAYIN_KATEGORILERI = ['makale', 'bildiri', 'kitap', 'tez_yayini'];
 
     /**
      * Adayın listesindeki kayıtların izleri.
@@ -48,7 +56,9 @@ class MukerrerDenetimi
             ->select(['id', 'kategori', 'baslik', 'meta'])
             ->get()
             ->each(function (Faaliyet $faaliyet) use (&$harita): void {
-                foreach ($this->izler($faaliyet->kategori->value, $faaliyet->baslik, $faaliyet->meta ?? []) as $iz => $sebep) {
+                $yil = $faaliyet->tarih?->year;
+
+                foreach ($this->izler($faaliyet->kategori->value, $faaliyet->baslik, $faaliyet->meta ?? [], $yil) as $iz => $sebep) {
                     $harita[$iz] = $sebep;
                 }
             });
@@ -62,9 +72,9 @@ class MukerrerDenetimi
      * @param  array<string, string>  $harita
      * @param  array<string, mixed>  $meta
      */
-    public function eslesme(array $harita, string $kategori, string $baslik, array $meta): ?string
+    public function eslesme(array $harita, string $kategori, string $baslik, array $meta, ?int $yil = null): ?string
     {
-        foreach (array_keys($this->izler($kategori, $baslik, $meta)) as $iz) {
+        foreach (array_keys($this->izler($kategori, $baslik, $meta, $yil)) as $iz) {
             if (isset($harita[$iz])) {
                 return $harita[$iz];
             }
@@ -84,7 +94,7 @@ class MukerrerDenetimi
      * @param  array<string, mixed>  $meta
      * @return array<string, string> iz => sebep
      */
-    public function izler(string $kategori, string $baslik, array $meta): array
+    public function izler(string $kategori, string $baslik, array $meta, ?int $yil = null): array
     {
         $izler = [];
 
@@ -105,7 +115,8 @@ class MukerrerDenetimi
         $anahtar = $this->baslikAnahtari($baslik);
 
         if ($anahtar !== null) {
-            $izler['baslik:'.$kategori.':'.$anahtar] = 'baslik';
+            $donem = in_array($kategori, self::YAYIN_KATEGORILERI, true) ? '' : ':'.($yil ?? '-');
+            $izler['baslik:'.$kategori.':'.$anahtar.$donem] = 'baslik';
         }
 
         return $izler;

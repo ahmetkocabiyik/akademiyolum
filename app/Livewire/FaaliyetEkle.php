@@ -91,6 +91,9 @@ class FaaliyetEkle extends Component
 
     public string $avesisHatasi = '';
 
+    /** Sözlükte karşılığı olmadığı için listeye alınmayan kayıt adedi. */
+    public int $avesisAtlanan = 0;
+
     /**
      * Dergi indeksi önerisi (yalnız düzenleme ekranında, kaynak boşken).
      *
@@ -640,6 +643,7 @@ class FaaliyetEkle extends Component
         $this->avesisHatasi = '';
         $this->avesisBulunanlar = [];
         $this->avesisSecilenler = [];
+        $this->avesisAtlanan = 0;
         $this->avesisArandi = true;
 
         $servis = app(AvesisProfili::class);
@@ -671,7 +675,12 @@ class FaaliyetEkle extends Component
         foreach ($kayitlar as $kayit) {
             $kategori = Kategori::tryFrom($kayit['kategori']);
 
-            if ($kategori === null) {
+            // Sözlükte karşılığı olmayan kayıt (personel sınavı jürisi,
+            // akademik ünvan geçmişi…) listeye alınmıyor; sayısı ekranda
+            // yazıyor ki aday "eksik geldi" sanmasın.
+            if ($kayit['atlandi'] || $kategori === null) {
+                $this->avesisAtlanan++;
+
                 continue;
             }
 
@@ -693,7 +702,7 @@ class FaaliyetEkle extends Component
                 ...$kayit,
                 'kaynak' => $kaynak,
                 'meta' => $meta,
-                'ekli_sebep' => $this->mukerrer($harita, $kayit['kategori'], $kayit['baslik'], $meta),
+                'ekli_sebep' => $this->mukerrer($harita, $kayit['kategori'], $kayit['baslik'], $meta, $kayit['yil']),
             ];
         }
 
@@ -766,9 +775,9 @@ class FaaliyetEkle extends Component
      * @param  array<string, string>  $harita
      * @param  array<string, mixed>  $meta
      */
-    private function mukerrer(array $harita, string $kategori, string $baslik, array $meta): ?string
+    private function mukerrer(array $harita, string $kategori, string $baslik, array $meta, ?int $yil = null): ?string
     {
-        return app(MukerrerDenetimi::class)->eslesme($harita, $kategori, $baslik, $meta);
+        return app(MukerrerDenetimi::class)->eslesme($harita, $kategori, $baslik, $meta, $yil);
     }
 
     /**
@@ -794,7 +803,9 @@ class FaaliyetEkle extends Component
             $baslik = mb_substr($kayit['baslik'], 0, 255);
             $meta = $kayit['meta'];
 
-            if ($denetim->eslesme($harita, $kategori->value, $baslik, $meta) !== null) {
+            $yil = $kayit['yil'] ?? null;
+
+            if ($denetim->eslesme($harita, $kategori->value, $baslik, $meta, $yil) !== null) {
                 continue;
             }
 
@@ -812,7 +823,7 @@ class FaaliyetEkle extends Component
             // Harita yeniden sorgulanmıyor, yazılan kaydın izleri üstüne
             // ekleniyor: 400 kayıtlık bir partide her ekleme için listenin
             // tamamını okumak boşuna.
-            $harita = [...$harita, ...$denetim->izler($kategori->value, $baslik, $meta)];
+            $harita = [...$harita, ...$denetim->izler($kategori->value, $baslik, $meta, $yil)];
         }
 
         return $eklenen;

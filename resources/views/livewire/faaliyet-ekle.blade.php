@@ -440,6 +440,11 @@
                         <div class="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
                             <flux:text class="!text-xs">
                                 <strong class="text-ink">{{ count($avesisBulunanlar) }} kayıt</strong> okundu
+                                {{-- Atlananı söylemek şart: aday "eksik geldi"
+                                     sanıp elle aramaya kalkmasın. --}}
+                                @if ($avesisAtlanan)
+                                    · <span class="text-ink-subtle">{{ $avesisAtlanan }} kayıt eşlenemedi (sözlükte karşılığı yok)</span>
+                                @endif
                             </flux:text>
                             <flux:button wire:click="avesisTumunuSec" size="xs" variant="ghost">Tümünü seç</flux:button>
                         </div>
