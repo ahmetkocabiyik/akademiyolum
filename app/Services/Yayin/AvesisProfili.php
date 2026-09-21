@@ -118,6 +118,7 @@ class AvesisProfili
             ...$this->projeler($adres),
             ...$this->sayfa($adres, 'bilimselfaaliyetler'),
             ...$this->sayfa($adres, 'deneyim'),
+            ...$this->sayfa($adres, 'basarilar'),
         ]);
     }
 
@@ -250,9 +251,11 @@ class AvesisProfili
      * Eşlenemeyen bölümler bilerek listede yok:
      *   "Akademik Ünvanlar" ve "Akademi Dışı Deneyim" profil bilgisi,
      *   faaliyet değil. Jüri üyeliklerinin tez dışı olanları (personel
-     *   sınavı, doçentlik sınavı) ise sözlükte karşılığı olmadığı için
-     *   atlanıyor — uydurma bir kategoriye atmak adayın listesini
-     *   kirletirdi. Atlananların sayısı ekranda yazıyor.
+     *   sınavı, doçentlik sınavı) ve kongrelere yalnız KATILIMCI olarak
+     *   gidilenler sözlükte karşılığı olmadığı için atlanıyor — uydurma
+     *   bir kategoriye atmak adayın listesini kirletirdi, üstelik salt
+     *   katılımı puanlanan bir kademeye yazmak fazla saymak olurdu.
+     *   Atlananların sayısı ekranda yazıyor.
      *
      * @return array{kategori: string, kaynak: string|null}|null
      */
@@ -299,6 +302,53 @@ class AvesisProfili
                 ? ['kategori' => 'tez_danismanligi', 'kaynak' => 'Tez İzleme / Jüri Üyeliği']
                 : null,
 
+            // ── /basarilar
+            (bool) preg_match('/[öo]d[üu]l/iu', $bolum) => [
+                'kategori' => 'odul', 'kaynak' => $this->odul($baslik.' '.$aciklama),
+            ],
+            (bool) preg_match('/kongre ve sempozyum/iu', $bolum) => $this->toplanti($metin),
+
+            default => null,
+        };
+    }
+
+    /**
+     * Ödülün kademesi — yalnız veren kurum adından KESİN çıkanlar.
+     *
+     * "Sözel sunum 3. Ödülü" gibi serbest metinler boş bırakılıyor:
+     * yarışma derecesi mi ulusal bilim ödülü mü, künyeden anlaşılmıyor ve
+     * yanlış kademe adayın hak etmediği puanı verirdi.
+     */
+    private function odul(string $metin): ?string
+    {
+        return match (true) {
+            (bool) preg_match('/geb[İIıi]p|twas/iu', $metin) => 'TÜBA GEBİP / TWAS Teşvik Ödülü',
+            (bool) preg_match('/t[üu]b[İIıi]tak|t[üu]ba\b/iu', $metin) => 'TÜBİTAK / TÜBA Ödülü',
+            (bool) preg_match('/\by[öo]k\b/iu', $metin) => 'YÖK Ödülü',
+            (bool) preg_match('/\berc\b|ufuk avrupa|horizon/iu', $metin) => 'Ufuk Avrupa / ERC Ödülü',
+            (bool) preg_match('/burs|scholarship|fellowship/iu', $metin) => 'Burs',
+            default => null,
+        };
+    }
+
+    /**
+     * Kongre/sempozyum katılımı — rolüne göre.
+     *
+     * Salt KATILIMCI olunan toplantı atlanıyor: sözlükte puanlanan bir
+     * karşılığı yok ve bir adayın profilinde yüzlercesi olabiliyor.
+     *
+     * Ulusal/uluslararası ayrımı künyeden KESİN çıkmıyor (Türkiye'de
+     * yapılan uluslararası kongre de var), bu yüzden kademe boş; aday
+     * seçiyor.
+     *
+     * @return array{kategori: string, kaynak: string|null}|null
+     */
+    private function toplanti(string $metin): ?array
+    {
+        return match (true) {
+            (bool) preg_match('/davetli konu[şs]mac[ıi]/iu', $metin) => ['kategori' => 'bildiri', 'kaynak' => null],
+            (bool) preg_match('/oturum ba[şs]kan|panelist|moderat[öo]r/iu', $metin) => ['kategori' => 'diger', 'kaynak' => null],
+            (bool) preg_match('/d[üu]zenleme kurulu|bilim kurulu/iu', $metin) => ['kategori' => 'diger', 'kaynak' => null],
             default => null,
         };
     }

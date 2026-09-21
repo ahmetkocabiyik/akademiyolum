@@ -4,7 +4,9 @@
     $k = $kayit;
     $sebep = $k['ekli_sebep'] ?? null;
     $ekliEtiket = $sebep === 'baslik' ? 'Aynı başlık zaten var' : 'Zaten ekli';
-    $rozet = ['makale' => 'Makale', 'bildiri' => 'Bildiri', 'kitap' => 'Kitap', 'proje' => 'Proje'][$k['kategori']] ?? $k['kategori'];
+    // Rozet adı enum'dan: AVESİS artık dokuz kategoriye kayıt getiriyor,
+    // elle tutulan bir liste eksik kalıyordu ("odul" diye görünüyordu).
+    $rozet = \App\Enums\Kategori::from($k['kategori'])->label();
 @endphp
 
 <label @class([

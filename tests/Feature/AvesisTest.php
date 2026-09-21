@@ -523,3 +523,95 @@ test('aynı görev farklı dönemde mükerrer sayılmıyor', function () {
         ->and($faaliyetler->pluck('tarih')->map(fn ($t) => $t->year)->sort()->values()->all())->toBe([2004, 2013])
         ->and($faaliyetler->first()->kaynak)->toBe('Dekan Yrd. / Müdür Yrd.');
 });
+
+// ────────────────── ÖDÜLLER / KONGRE KATILIMI ──────────────────
+
+/**
+ * @param  list<array<string, string>>  $bolumler
+ */
+function avesisBasari(array $bolumler): void
+{
+    Http::fake([
+        '*/yayinlar' => Http::response(avesisYayinSayfasi([])),
+        '*/projeler' => Http::response(avesisProjeSayfasi([])),
+        '*/bilimselfaaliyetler' => Http::response(avesisBolumSayfasi([])),
+        '*/deneyim' => Http::response(avesisBolumSayfasi([])),
+        '*/basarilar' => Http::response(avesisBolumSayfasi($bolumler)),
+    ]);
+}
+
+/**
+ * Ödülün kademesi yalnız VEREN KURUM adından kesin çıkıyor. "Sözel sunum
+ * 3. Ödülü" gibi serbest metinler boş kalıyor: yarışma derecesi mi ulusal
+ * bilim ödülü mü künyeden anlaşılmıyor ve yanlış kademe adayın hak
+ * etmediği puanı verirdi.
+ */
+test('ödül kademesi yalnız kesin olanlarda yazılıyor', function (string $ad, ?string $kaynak) {
+    avesisBasari(['Ödüller' => [['id' => uuid(9), 'baslik' => $ad, 'etiket' => 'Nisan 2018']]]);
+
+    $kayit = avesisOku()[0];
+
+    expect($kayit['kategori'])->toBe('odul')
+        ->and($kayit['kaynak'])->toBe($kaynak)
+        ->and($kayit['yil'])->toBe(2018)
+        ->and($kayit['id'])->toBe(uuid(9));
+})->with([
+    ['TÜBİTAK Teşvik Ödülü', 'TÜBİTAK / TÜBA Ödülü'],
+    // GEBİP, TÜBA'dan ÖNCE denenmeli.
+    ['TÜBA GEBİP Ödülü', 'TÜBA GEBİP / TWAS Teşvik Ödülü'],
+    ['YÖK Üstün Başarı Ödülü', 'YÖK Ödülü'],
+    ['ERC Starting Grant', 'Ufuk Avrupa / ERC Ödülü'],
+    ['Doktora Bursu', 'Burs'],
+    ['Sözel sunum 3. Ödülü', null],
+    ['Poster birincilik ödülü', null],
+]);
+
+/**
+ * Salt KATILIMCI olunan toplantı atlanıyor: sözlükte puanlanan bir
+ * karşılığı yok ve bir profilde yüzlercesi olabiliyor (gerçek profilde 81
+ * katılımın 65'i buydu). Puanlanan bir kademeye yazmak fazla saymak olurdu.
+ */
+test('kongre katılımı role göre ayrışıyor', function () {
+    avesisBasari(['Kongre ve Sempozyum Katılımı Faaliyetleri' => [
+        ['baslik' => 'Bir Uluslararası Kongre', 'etiket' => '01 Nisan 2019', 'aciklama' => 'Davetli Konuşmacı İstanbul, Türkiye'],
+        ['baslik' => 'Başka Bir Sempozyum', 'etiket' => '01 Mayıs 2019', 'aciklama' => 'Oturum Başkanı Giresun, Türkiye'],
+        ['baslik' => 'Üçüncü Bir Kongre', 'etiket' => '01 Haziran 2019', 'aciklama' => 'Katılımcı Ankara, Türkiye'],
+    ]]);
+
+    $kayitlar = avesisOku();
+
+    expect($kayitlar)->toHaveCount(2)
+        ->and($kayitlar[0]['kategori'])->toBe('bildiri')
+        ->and($kayitlar[1]['kategori'])->toBe('diger')
+        // Ulusal/uluslararası ayrımı künyeden kesin çıkmıyor: kademe boş.
+        ->and($kayitlar[0]['kaynak'])->toBeNull()
+        ->and($kayitlar[1]['kaynak'])->toBeNull();
+});
+
+test('ödül ve kongre kayıtları ekranda listeleniyor', function () {
+    $kullanici = User::factory()->create();
+
+    avesisBasari([
+        'Ödüller' => [['id' => uuid(9), 'baslik' => 'TÜBİTAK Teşvik Ödülü', 'etiket' => 'Nisan 2018']],
+        'Kongre ve Sempozyum Katılımı Faaliyetleri' => [
+            ['baslik' => 'Bir Kongre Adı Burada', 'etiket' => 'Mayıs 2019', 'aciklama' => 'Katılımcı Ankara, Türkiye'],
+        ],
+    ]);
+
+    Livewire::actingAs($kullanici)->test(FaaliyetEkle::class)
+        ->set('sekme', 'avesis')
+        ->set('avesisAdres', 'avesis.ktu.edu.tr/kullanici')
+        ->call('avesisGetir')
+        ->assertSee('TÜBİTAK Teşvik Ödülü')
+        ->assertSee('Ödül / Burs')
+        ->assertSet('avesisAtlanan', 1)
+        ->assertDontSee('Bir Kongre Adı Burada')
+        ->call('avesisTumunuSec')
+        ->call('avesistenEkle');
+
+    $faaliyet = $kullanici->faaliyetler()->sole();
+
+    expect($faaliyet->kategori->value)->toBe('odul')
+        ->and($faaliyet->kaynak)->toBe('TÜBİTAK / TÜBA Ödülü')
+        ->and($faaliyet->durum)->toBe('beklemede');
+});
