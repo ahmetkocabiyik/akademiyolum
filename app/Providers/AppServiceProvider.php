@@ -7,6 +7,7 @@ use App\Services\AI\OpenAiSaglayici;
 use App\Services\AI\SohbetSaglayici;
 use App\Services\AI\StubSaglayici;
 use App\Services\Scoring\Sart\SartDeposu;
+use App\Services\Yayin\CrossrefArama;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
         // Testler kendi verisiyle bir örnek bağlayarak üretim verisinden
         // bağımsız senaryo kurabilir.
         $this->app->singleton(SartDeposu::class, fn (): SartDeposu => new SartDeposu);
+
+        $this->app->bind(CrossrefArama::class, fn (): CrossrefArama => new CrossrefArama(
+            taban: config('services.crossref.taban'),
+            posta: config('services.crossref.posta'),
+        ));
 
         $this->app->bind(SohbetSaglayici::class, function (): SohbetSaglayici {
             if (config('ai.saglayici') === 'claude') {

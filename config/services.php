@@ -14,6 +14,15 @@ return [
     |
     */
 
+    /*
+    | Crossref — yayın künyesi araması. Anahtar YOK; "mailto" yalnızca
+    | nezaket kuralı, verilen istemciye daha yüksek hız tanınıyor.
+    */
+    'crossref' => [
+        'taban' => env('CROSSREF_URL', 'https://api.crossref.org'),
+        'posta' => env('CROSSREF_MAILTO', env('MAIL_FROM_ADDRESS')),
+    ],
+
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],

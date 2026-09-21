@@ -7,6 +7,8 @@ use App\Enums\TemelAlan;
 use App\Models\Faaliyet;
 use App\Services\Scoring\Sart\MaddeKatalogu;
 use App\Services\Scoring\Sart\SartDeposu;
+use App\Services\Yayin\AramaException;
+use App\Services\Yayin\CrossrefArama;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -21,6 +23,26 @@ class FaaliyetEkle extends Component
     public ?Faaliyet $faaliyet = null;
 
     public string $sekme = 'manuel';
+
+    // Yayın arama sekmesi
+    public string $aramaAdi = '';
+
+    public string $aramaOrcid = '';
+
+    /**
+     * Arama sonuçları. Livewire durumunda taşındığı için dizi; her satıra
+     * "bu zaten ekli mi" bilgisi eklenmiş hâli.
+     *
+     * @var list<array<string, mixed>>
+     */
+    public array $bulunanlar = [];
+
+    /** @var list<string> işaretlenen DOI'ler */
+    public array $secilenler = [];
+
+    public bool $arandi = false;
+
+    public string $aramaHatasi = '';
 
     // Form alanları
     public string $kategori = 'makale';
@@ -77,6 +99,11 @@ class FaaliyetEkle extends Component
 
             return;
         }
+
+        // Arama sekmesi profilden doluyor: aday adını ve ORCID'ini zaten bir
+        // kez girdi, ikinci kez yazdırmak hem yorucu hem hata kaynağı.
+        $this->aramaAdi = (string) Auth::user()->name;
+        $this->aramaOrcid = (string) (Auth::user()->orcid ?? '');
 
         // Dashboard hızlı-ekle bağlantısından gelen kategori ön-seçimi.
         $kategori = request('kategori');
@@ -276,6 +303,154 @@ class FaaliyetEkle extends Component
         ]);
 
         return $katalog->puan($gecici, $katalog->coz(['*']));
+    }
+
+    /**
+     * Crossref'te adayın yayınlarını arar.
+     *
+     * Hata mesajı ekranda kalıyor, istisna atılmıyor: dış servisin erişilemez
+     * olması adayın formunu çökertmemeli.
+     */
+    public function yayinAra(): void
+    {
+        $this->validate([
+            'aramaAdi' => ['nullable', 'string', 'max:120', 'required_without:aramaOrcid'],
+            'aramaOrcid' => ['nullable', 'string', 'max:64'],
+        ], attributes: [
+            'aramaAdi' => 'ad soyad',
+            'aramaOrcid' => 'ORCID',
+        ]);
+
+        $this->aramaHatasi = '';
+        $this->secilenler = [];
+        $this->arandi = true;
+
+        try {
+            $yayinlar = app(CrossrefArama::class)->ara($this->aramaAdi, $this->aramaOrcid ?: null);
+        } catch (AramaException $hata) {
+            $this->bulunanlar = [];
+            $this->aramaHatasi = $hata->getMessage();
+
+            return;
+        }
+
+        $mevcut = $this->mevcutDoiler();
+
+        $this->bulunanlar = array_map(
+            fn (array $yayin): array => [...$yayin, 'ekli' => in_array($yayin['doi'], $mevcut, true)],
+            $yayinlar,
+        );
+    }
+
+    /**
+     * Henüz eklenmemiş bütün sonuçları işaretler.
+     */
+    public function tumunuSec(): void
+    {
+        $this->secilenler = array_values(array_map(
+            fn (array $yayin): string => $yayin['doi'],
+            array_filter($this->bulunanlar, fn (array $yayin): bool => ! $yayin['ekli']),
+        ));
+    }
+
+    /**
+     * Seçilen yayınları faaliyet olarak ekler.
+     *
+     * DURUM "beklemede", KAYNAK boş: künyede dergi indeksi yok (Crossref onu
+     * bilmiyor) ve indeks puanı belirleyen alan. Beklemedeki kayıt
+     * {@see YonergeAnalizi::faaliyetler()} tarafından sayılmıyor, yani aday
+     * kademeyi seçene kadar hiçbir yönergeye eksik veriyle girmiyor.
+     */
+    public function yayinlariEkle(): void
+    {
+        $secili = array_values(array_filter(
+            $this->bulunanlar,
+            fn (array $yayin): bool => ! $yayin['ekli'] && in_array($yayin['doi'], $this->secilenler, true),
+        ));
+
+        if ($secili === []) {
+            Flux::toast(variant: 'warning', text: 'Eklenecek yayın seçmediniz.');
+
+            return;
+        }
+
+        $kullanici = Auth::user();
+
+        foreach ($secili as $yayin) {
+            $kategori = Kategori::from($yayin['kategori']);
+
+            $kullanici->faaliyetler()->create([
+                'kategori' => $kategori->value,
+                'tur' => $kategori->label(),
+                'baslik' => $yayin['baslik'],
+                'yazarlar' => $yayin['yazarlar'] ? implode(', ', $yayin['yazarlar']) : null,
+                'rol' => $this->rolSiradan($kategori, count($yayin['yazarlar']), $yayin['sira']),
+                // Özgün makale mi derleme mi: künyede yok, tahmin edilmiyor.
+                'yayin_turu' => null,
+                'tarih' => $yayin['tarih'],
+                'kaynak' => null,
+                'durum' => 'beklemede',
+                'meta' => array_filter([
+                    'doi' => $yayin['doi'],
+                    'dergi' => $yayin['dergi'] ?: null,
+                    'kaynak_sistem' => 'crossref',
+                ]),
+            ]);
+        }
+
+        Flux::toast(
+            variant: 'success',
+            text: count($secili).' yayın beklemede eklendi. Dergi indeksini seçip onaylayın.',
+        );
+
+        $this->redirectRoute('faaliyetler', navigate: true);
+    }
+
+    /**
+     * Künyedeki yazar sırasından rol kodu.
+     *
+     * Sıra bulunamadıysa NULL dönüyor: aday adını künyedekinden farklı yazmış
+     * olabilir ve yanlış sıra bazı yönergelerde doğrudan yanlış puan demek.
+     * Boş rol, onay ekranında {@see rolBelirle} ile en kapsayıcı değere düşer.
+     */
+    private function rolSiradan(Kategori $kategori, int $yazarSayisi, ?int $sira): ?string
+    {
+        $gecerli = $kategori->roller();
+
+        if ($gecerli === []) {
+            return null;
+        }
+
+        if ($yazarSayisi <= 1) {
+            return isset($gecerli['tek']) ? 'tek' : null;
+        }
+
+        if ($sira === null) {
+            return null;
+        }
+
+        $kod = match (true) {
+            $sira === 1 => 'ilk',
+            $sira >= 6 => 'yazar_6',
+            default => "yazar_{$sira}",
+        };
+
+        return isset($gecerli[$kod]) ? $kod : null;
+    }
+
+    /**
+     * Adayın halihazırda kayıtlı DOI'leri — aynı yayını iki kez eklememek için.
+     *
+     * @return list<string>
+     */
+    private function mevcutDoiler(): array
+    {
+        return Auth::user()->faaliyetler()
+            ->pluck('meta')
+            ->map(fn ($meta): string => is_array($meta) ? mb_strtolower(trim((string) ($meta['doi'] ?? ''))) : '')
+            ->filter()
+            ->values()
+            ->all();
     }
 
     public function kaydet(): void

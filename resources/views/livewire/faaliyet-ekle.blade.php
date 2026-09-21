@@ -9,9 +9,11 @@
 
     <div class="mx-auto flex max-w-3xl flex-col gap-5">
 
-        {{-- Sekme navigasyonu --}}
+        {{-- Sekme navigasyonu — yalnız YENİ kayıtta. Düzenlerken sekme
+             değiştirmek formdaki değişikliği sessizce çöpe atıyordu. --}}
+        @unless ($faaliyet)
         <div class="mx-auto flex rounded-full border border-line bg-surface p-1">
-            @foreach (['manuel' => 'Manuel Ekle', 'avesis' => "AVESİS'ten Çek", 'scholar' => "Scholar'dan Ara"] as $anahtar => $etiket)
+            @foreach (['manuel' => 'Manuel Ekle', 'yayin' => 'Yayınlarımı Bul', 'avesis' => "AVESİS'ten Çek"] as $anahtar => $etiket)
                 <button type="button" wire:click="$set('sekme', '{{ $anahtar }}')" @class([
                     'rounded-full px-5 py-2 text-sm font-medium transition',
                     'bg-navy text-white' => $sekme === $anahtar,
@@ -19,6 +21,7 @@
                 ])>{{ $etiket }}</button>
             @endforeach
         </div>
+        @endunless
 
         {{-- MANUEL --}}
         @if ($sekme === 'manuel')
@@ -210,16 +213,101 @@
             </form>
         @endif
 
-        {{-- AVESİS / SCHOLAR — ertelendi --}}
-        @if ($sekme === 'avesis' || $sekme === 'scholar')
+        {{-- YAYINLARIMI BUL --}}
+        @if ($sekme === 'yayin' && ! $faaliyet)
+            <div class="flex flex-col gap-4">
+
+                <flux:card class="overflow-hidden !p-0">
+                    <div class="border-b border-line px-6 py-5">
+                        <flux:heading size="lg">Yayınlarımı Bul</flux:heading>
+                        <flux:text class="mt-1">
+                            DOI'si olan yayınlarınız künye veritabanından (Crossref) gelir —
+                            DergiPark dergileri dâhil. Bulunanları seçip listenize eklersiniz.
+                        </flux:text>
+                    </div>
+
+                    <form wire:submit="yayinAra" class="flex flex-col gap-4 px-6 py-5">
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <flux:input wire:model="aramaAdi" label="Ad Soyad"
+                                placeholder="Künyelerde geçtiği hâliyle" />
+                            <flux:input wire:model="aramaOrcid" label="ORCID (varsa)"
+                                placeholder="0000-0000-0000-0000" />
+                        </div>
+
+                        {{-- İki sorgunun iki ayrı zayıflığı var; aday hangisinin
+                             ne verdiğini bilirse sonucu doğru okur. --}}
+                        <flux:text class="!text-[11px] text-ink-subtle">
+                            ORCID girerseniz o yayınlar <strong>kesin</strong> sizindir ama yayıncı
+                            ORCID'inizi göndermediyse bazıları eksik kalır. Ad araması geniştir,
+                            aynı adı taşıyan başka yazarların yayınları da gelebilir — işaretlemeden
+                            önce kontrol edin.
+                        </flux:text>
+
+                        <div>
+                            <flux:button type="submit" variant="primary" icon="magnifying-glass">
+                                <span wire:loading.remove wire:target="yayinAra">Ara</span>
+                                <span wire:loading wire:target="yayinAra">Aranıyor…</span>
+                            </flux:button>
+                        </div>
+                    </form>
+                </flux:card>
+
+                @if ($aramaHatasi)
+                    <flux:callout variant="danger" icon="exclamation-triangle" heading="{{ $aramaHatasi }}" />
+                @elseif ($arandi && $bulunanlar === [])
+                    <flux:card class="flex flex-col items-center gap-2 py-12 text-center">
+                        <flux:icon name="magnifying-glass" class="size-8 text-ink-subtle" />
+                        <flux:heading size="lg">Yayın bulunamadı</flux:heading>
+                        <flux:text class="max-w-md">
+                            Adı künyelerde geçtiği gibi yazmayı deneyin. DOI'si olmayan yayınlar bu
+                            aramada görünmez; onları <strong>Manuel Ekle</strong> sekmesinden girebilirsiniz.
+                        </flux:text>
+                    </flux:card>
+                @elseif ($bulunanlar !== [])
+                    <flux:card class="overflow-hidden !p-0">
+                        <div class="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
+                            <flux:text class="!text-xs">
+                                <strong class="text-ink">{{ count($bulunanlar) }} yayın</strong> bulundu
+                            </flux:text>
+                            <flux:button wire:click="tumunuSec" size="xs" variant="ghost">Tümünü seç</flux:button>
+                        </div>
+
+                        <div class="flex max-h-[28rem] flex-col divide-y divide-line overflow-y-auto">
+                            @foreach ($bulunanlar as $y)
+                                <x-yayin.sonuc-satiri :yayin="$y" wire:key="doi-{{ $y['doi'] }}" />
+                            @endforeach
+                        </div>
+                    </flux:card>
+
+                    {{-- İndeks uyarısı EKLEME DÜĞMESİNİN YANINDA: künyede dergi
+                         indeksi yok, puanı belirleyen alan da o. Kayıtlar
+                         "beklemede" iniyor ve kademe seçilene kadar hiçbir
+                         yönergeye girmiyor. --}}
+                    <flux:card class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <flux:text class="!text-xs">
+                            Seçilenler <strong class="text-ink">beklemede</strong> eklenir. Dergi indeksi
+                            (SCIE, Q2, TR Dizin…) künyede gelmediği için <strong class="text-ink">puanı
+                            belirleyen kademeyi siz seçersiniz</strong>; o zamana kadar yönerge analizine girmezler.
+                        </flux:text>
+                        <flux:button wire:click="yayinlariEkle" variant="primary" icon="plus" class="shrink-0">
+                            {{ count($secilenler) }} yayını ekle
+                        </flux:button>
+                    </flux:card>
+                @endif
+            </div>
+        @endif
+
+        {{-- AVESİS — ertelendi --}}
+        @if ($sekme === 'avesis' && ! $faaliyet)
             <flux:card class="flex flex-col items-center gap-3 py-16 text-center">
                 <div class="flex size-12 items-center justify-center rounded-xl bg-brand-light text-brand">
-                    <flux:icon :name="$sekme === 'avesis' ? 'arrow-down-tray' : 'magnifying-glass'" class="size-6" />
+                    <flux:icon name="arrow-down-tray" class="size-6" />
                 </div>
-                <flux:heading size="lg">{{ $sekme === 'avesis' ? "AVESİS'ten İçe Aktar" : "Google Scholar'dan Ara" }}</flux:heading>
+                <flux:heading size="lg">AVESİS'ten İçe Aktar</flux:heading>
                 <flux:text class="max-w-md">
-                    Otomatik içe aktarma entegrasyonu <strong>Faz 4</strong> kapsamında gelecek.
-                    Şimdilik faaliyetlerinizi <strong>Manuel Ekle</strong> sekmesinden ekleyebilirsiniz.
+                    AVESİS her üniversitede ayrı kurulu olduğu için tek bir bağlantı yetmiyor;
+                    bu entegrasyon sonraki fazda gelecek. Yayınlarınızın çoğunu
+                    <strong>Yayınlarımı Bul</strong> sekmesinden ekleyebilirsiniz.
                 </flux:text>
                 <flux:badge color="amber" size="sm">Yakında</flux:badge>
             </flux:card>
