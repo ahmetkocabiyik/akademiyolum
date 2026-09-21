@@ -399,20 +399,70 @@
             </div>
         @endif
 
-        {{-- AVESİS — ertelendi --}}
+        {{-- AVESİS --}}
         @if ($sekme === 'avesis' && ! $faaliyet)
-            <flux:card class="flex flex-col items-center gap-3 py-16 text-center">
-                <div class="flex size-12 items-center justify-center rounded-xl bg-brand-light text-brand">
-                    <flux:icon name="arrow-down-tray" class="size-6" />
-                </div>
-                <flux:heading size="lg">AVESİS'ten İçe Aktar</flux:heading>
-                <flux:text class="max-w-md">
-                    AVESİS her üniversitede ayrı kurulu olduğu için tek bir bağlantı yetmiyor;
-                    bu entegrasyon sonraki fazda gelecek. Yayınlarınızın çoğunu
-                    <strong>Yayınlarımı Bul</strong> sekmesinden ekleyebilirsiniz.
-                </flux:text>
-                <flux:badge color="amber" size="sm">Yakında</flux:badge>
-            </flux:card>
+            <div class="flex flex-col gap-4">
+
+                <flux:card class="overflow-hidden !p-0">
+                    <div class="border-b border-line px-6 py-5">
+                        <flux:heading size="lg">AVESİS'ten Çek</flux:heading>
+                        {{-- AVESİS'in diğer iki yoldan farkı: yayın dışına
+                             çıkabiliyor ve dergi indeksini de taşıyor. --}}
+                        <flux:text class="mt-1">
+                            AVESİS sizin tuttuğunuz künye: yayınların yanında <strong>projeleri</strong> de
+                            veriyor ve derginin indeksini (ESCI, TR Dizin…) yazdığı için
+                            <strong>kademe çoğu kayıtta hazır gelir</strong>.
+                        </flux:text>
+                    </div>
+
+                    <form wire:submit="avesisGetir" class="flex flex-col gap-4 px-6 py-5">
+                        <flux:input wire:model="avesisAdres" label="AVESİS profil adresiniz"
+                            placeholder="https://avesis.ktu.edu.tr/kullaniciadi" />
+
+                        <flux:text class="!text-[11px] text-ink-subtle">
+                            AVESİS her üniversitede ayrı kurulu — kendi üniversitenizin adresini verin.
+                            Adres profilinize kaydedilir, bir daha yazmanız gerekmez.
+                        </flux:text>
+
+                        <div>
+                            <flux:button type="submit" variant="primary" icon="arrow-down-tray">
+                                <span wire:loading.remove wire:target="avesisGetir">Profili oku</span>
+                                <span wire:loading wire:target="avesisGetir">Okunuyor…</span>
+                            </flux:button>
+                        </div>
+                    </form>
+                </flux:card>
+
+                @if ($avesisHatasi)
+                    <flux:callout variant="danger" icon="exclamation-triangle" heading="{{ $avesisHatasi }}" />
+                @elseif ($avesisBulunanlar !== [])
+                    <flux:card class="overflow-hidden !p-0">
+                        <div class="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
+                            <flux:text class="!text-xs">
+                                <strong class="text-ink">{{ count($avesisBulunanlar) }} kayıt</strong> okundu
+                            </flux:text>
+                            <flux:button wire:click="avesisTumunuSec" size="xs" variant="ghost">Tümünü seç</flux:button>
+                        </div>
+
+                        <div class="flex max-h-[32rem] flex-col divide-y divide-line overflow-y-auto">
+                            @foreach ($avesisBulunanlar as $k)
+                                <x-yayin.avesis-satiri :kayit="$k" wire:key="av-{{ $k['id'] }}" />
+                            @endforeach
+                        </div>
+                    </flux:card>
+
+                    <flux:card class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <flux:text class="!text-xs">
+                            Kademesi okunabilen kayıtlar <strong class="text-ink">dolu</strong> gelir; SCIE/SSCI ve
+                            Scopus'ta çeyreklik (Q1–Q4) AVESİS'te de yazmadığı için onlar boş kalır.
+                            Hepsi <strong class="text-ink">beklemede</strong> iner, onay sizde.
+                        </flux:text>
+                        <flux:button wire:click="avesistenEkle" variant="primary" icon="plus" class="shrink-0">
+                            {{ count($avesisSecilenler) }} kaydı ekle
+                        </flux:button>
+                    </flux:card>
+                @endif
+            </div>
         @endif
     </div>
 </div>

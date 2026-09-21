@@ -9,6 +9,7 @@ use App\Services\Scoring\Sart\MaddeKatalogu;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Yayin\AdEslestirici;
 use App\Services\Yayin\AramaException;
+use App\Services\Yayin\AvesisProfili;
 use App\Services\Yayin\CrossrefArama;
 use App\Services\Yayin\DergiParkArsivi;
 use App\Services\Yayin\KaynakOnerici;
@@ -75,6 +76,19 @@ class FaaliyetEkle extends Component
     public bool $arsivArandi = false;
 
     public string $arsivHatasi = '';
+
+    // AVESİS profili
+    public string $avesisAdres = '';
+
+    /** @var list<array<string, mixed>> */
+    public array $avesisBulunanlar = [];
+
+    /** @var list<string> işaretlenen AVESİS kimlikleri */
+    public array $avesisSecilenler = [];
+
+    public bool $avesisArandi = false;
+
+    public string $avesisHatasi = '';
 
     /**
      * Dergi indeksi önerisi (yalnız düzenleme ekranında, kaynak boşken).
@@ -143,6 +157,7 @@ class FaaliyetEkle extends Component
         // kez girdi, ikinci kez yazdırmak hem yorucu hem hata kaynağı.
         $this->aramaAdi = (string) Auth::user()->name;
         $this->aramaOrcid = (string) (Auth::user()->orcid ?? '');
+        $this->avesisAdres = (string) (Auth::user()->avesis_id ?? '');
 
         // Dashboard hızlı-ekle bağlantısından gelen kategori ön-seçimi.
         $kategori = request('kategori');
@@ -658,6 +673,146 @@ class FaaliyetEkle extends Component
                 ? trim((string) ($meta['dergipark'] ?? '')).':'.trim((string) ($meta['dergipark_makale'] ?? ''))
                 : '')
             ->filter(fn (string $anahtar): bool => $anahtar !== ':')
+            ->values()
+            ->all();
+    }
+
+    /**
+     * AVESİS profilindeki yayın ve projeleri getirir.
+     *
+     * Adres profile kaydediliyor: aday bir daha yazmasın. `avesis_id`
+     * sütunu zaten bu iş için duruyordu.
+     */
+    public function avesisGetir(): void
+    {
+        $this->avesisHatasi = '';
+        $this->avesisBulunanlar = [];
+        $this->avesisSecilenler = [];
+        $this->avesisArandi = true;
+
+        $servis = app(AvesisProfili::class);
+        $adres = $servis->adres($this->avesisAdres);
+
+        if ($adres === null) {
+            $this->avesisHatasi = 'Adresi tanıyamadım. AVESİS profil adresinizi olduğu gibi yapıştırın, örnek: https://avesis.ktu.edu.tr/kullaniciadi';
+
+            return;
+        }
+
+        $kayitlar = $servis->kayitlar($adres);
+
+        if ($kayitlar === []) {
+            $this->avesisHatasi = 'Bu profilde okunabilir yayın ya da proje bulunamadı.';
+
+            return;
+        }
+
+        $kullanici = Auth::user();
+
+        if ($kullanici->avesis_id !== $this->avesisAdres) {
+            $kullanici->forceFill(['avesis_id' => $this->avesisAdres])->save();
+        }
+
+        $mevcut = $this->mevcutAvesisKimlikleri();
+        $gecerli = [];
+
+        foreach ($kayitlar as $kayit) {
+            $kategori = Kategori::tryFrom($kayit['kategori']);
+
+            if ($kategori === null) {
+                continue;
+            }
+
+            // Okunan kademe bu kategorinin sözlüğünde yoksa yazılmıyor:
+            // cetvelde karşılığı olmayan bir etiket faaliyeti sessizce
+            // puansız bırakır.
+            $kaynak = $kayit['kaynak'] !== null && in_array($kayit['kaynak'], $kategori->adayKaynaklari(), true)
+                ? $kayit['kaynak']
+                : null;
+
+            $gecerli[] = [...$kayit, 'kaynak' => $kaynak, 'ekli' => in_array($kayit['id'], $mevcut, true)];
+        }
+
+        $this->avesisBulunanlar = $gecerli;
+    }
+
+    public function avesisTumunuSec(): void
+    {
+        $this->avesisSecilenler = array_values(array_map(
+            fn (array $kayit): string => $kayit['id'],
+            array_filter($this->avesisBulunanlar, fn (array $kayit): bool => ! $kayit['ekli']),
+        ));
+    }
+
+    /**
+     * Seçilen AVESİS kayıtlarını faaliyet olarak ekler.
+     *
+     * Diğer iki yoldan FARKI: kademe boş inmiyor. AVESİS yayının dergi
+     * indeksini ("esci", "trdizin") ve projenin fon programını yazıyor;
+     * sözlükte karşılığı olan kademe doğrudan doldurulur. Çeyrekli
+     * kademeler (SCIE/SSCI, Scopus) yine boş kalıyor — çeyreklik burada da
+     * yazmıyor ve uydurulmuyor.
+     *
+     * Durum yine "beklemede": okunan kademe adayın onayından geçmeli.
+     */
+    public function avesistenEkle(): void
+    {
+        $secili = array_values(array_filter(
+            $this->avesisBulunanlar,
+            fn (array $kayit): bool => ! $kayit['ekli'] && in_array($kayit['id'], $this->avesisSecilenler, true),
+        ));
+
+        if ($secili === []) {
+            Flux::toast(variant: 'warning', text: 'Eklenecek kayıt seçmediniz.');
+
+            return;
+        }
+
+        $kullanici = Auth::user();
+
+        foreach ($secili as $kayit) {
+            $kategori = Kategori::from($kayit['kategori']);
+
+            $kullanici->faaliyetler()->create([
+                'kategori' => $kategori->value,
+                'tur' => $kategori->label(),
+                'baslik' => mb_substr($kayit['baslik'], 0, 255),
+                'yazarlar' => $kayit['yazarlar'] ?: null,
+                // Rol künyede yazmıyor; uydurulmuyor.
+                'rol' => null,
+                'yayin_turu' => null,
+                // AVESİS yalnız YIL veriyor. 1 Ocak, dönem koşullarında
+                // ("doçentlikten sonra", "son beş yıl") en muhafazakâr
+                // tarih: aynı yıl içinde kayıt lehe değil aleyhe düşer.
+                'tarih' => $kayit['yil'] === null ? null : sprintf('%04d-01-01', $kayit['yil']),
+                'kaynak' => $kayit['kaynak'],
+                'durum' => 'beklemede',
+                'meta' => array_filter([
+                    'avesis_id' => $kayit['id'],
+                    'kunye' => $kayit['kunye'] ?: null,
+                    'kaynak_sistem' => 'avesis',
+                ]),
+            ]);
+        }
+
+        Flux::toast(
+            variant: 'success',
+            text: count($secili).' kayıt beklemede eklendi. Kademeleri kontrol edip onaylayın.',
+        );
+
+        $this->redirectRoute('faaliyetler', navigate: true);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function mevcutAvesisKimlikleri(): array
+    {
+        return Auth::user()->faaliyetler()
+            ->whereNotNull('meta->avesis_id')
+            ->pluck('meta')
+            ->map(fn ($meta): string => is_array($meta) ? (string) ($meta['avesis_id'] ?? '') : '')
+            ->filter()
             ->values()
             ->all();
     }
