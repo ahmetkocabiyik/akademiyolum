@@ -43,7 +43,7 @@ function crossrefDonsun(array $kayitlar): void
 
 function arama(): CrossrefArama
 {
-    return new CrossrefArama('https://api.crossref.org', 'test@akademiyolum.test');
+    return new CrossrefArama(taban: 'https://api.crossref.org', posta: 'test@akademiyolum.test');
 }
 
 test('künye faaliyet alanlarına çevriliyor', function () {

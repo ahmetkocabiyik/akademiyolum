@@ -310,6 +310,92 @@
                         </flux:button>
                     </flux:card>
                 @endif
+
+                <flux:separator variant="subtle" text="ya da" />
+
+                {{-- DOI'Sİ OLMAYAN ESKİ YAYINLAR --}}
+                <flux:card class="overflow-hidden !p-0">
+                    <div class="border-b border-line px-6 py-5">
+                        <flux:heading size="lg">DOI'si olmayan eski yayınlar</flux:heading>
+                        {{-- Adayın "neden bazı yayınlarım çıkmadı" sorusunun
+                             cevabı burada yazılı; yoksa üstteki aramayı bozuk
+                             sanıyor. --}}
+                        <flux:text class="mt-1">
+                            Dergiler DOI'ye sonradan geçti ve geriye dönük vermediler — bu yüzden
+                            yukarıdaki arama <strong>2014–2019 öncesi</strong> yayınların çoğunu göremez.
+                            Derginizi verin, arşivini soyadınıza göre tarayalım.
+                        </flux:text>
+                    </div>
+
+                    <form wire:submit="arsivTara" class="flex flex-col gap-4 px-6 py-5">
+                        <flux:input wire:model="arsivDergi" label="DergiPark dergi adresi ya da kısaltması"
+                            placeholder="dergipark.org.tr/tr/pub/politeknik  ·  politeknik" />
+
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <flux:input wire:model="arsivYilBas" type="number" label="Yıl (başlangıç)" placeholder="2002" />
+                            <flux:input wire:model="arsivYilSon" type="number" label="Yıl (bitiş)" placeholder="2017" />
+                        </div>
+
+                        <flux:text class="!text-[11px] text-ink-subtle">
+                            Yıl aralığı boş bırakılırsa arşivin tamamı taranır; sayılar öbek öbek açılır.
+                        </flux:text>
+
+                        <div>
+                            <flux:button type="submit" variant="primary" icon="archive-box">
+                                <span wire:loading.remove wire:target="arsivTara">Arşivi tara</span>
+                                <span wire:loading wire:target="arsivTara">Taranıyor…</span>
+                            </flux:button>
+                        </div>
+                    </form>
+                </flux:card>
+
+                @if ($arsivHatasi)
+                    <flux:callout variant="danger" icon="exclamation-triangle" heading="{{ $arsivHatasi }}" />
+                @elseif ($arsivArandi && $arsivKisaltma)
+                    <flux:card class="overflow-hidden !p-0">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-line px-4 py-3">
+                            <flux:text class="!text-xs">
+                                <strong class="text-ink">{{ $arsivAdi }}</strong> ·
+                                {{ $arsivTaranan }} sayı tarandı ·
+                                <strong class="text-ink">{{ count($arsivBulunanlar) }} yayın</strong> soyadınızla eşleşti
+                            </flux:text>
+
+                            @if ($arsivKalan)
+                                <flux:button wire:click="arsivDevam" size="xs" variant="filled">
+                                    <span wire:loading.remove wire:target="arsivDevam">{{ count($arsivKalan) }} sayı daha var — devam et</span>
+                                    <span wire:loading wire:target="arsivDevam">Taranıyor…</span>
+                                </flux:button>
+                            @endif
+                        </div>
+
+                        @if ($arsivBulunanlar)
+                            <div class="flex max-h-[28rem] flex-col divide-y divide-line overflow-y-auto">
+                                @foreach ($arsivBulunanlar as $y)
+                                    <x-yayin.arsiv-satiri :yayin="$y" wire:key="ars-{{ $y['anahtar'] }}" />
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="px-4 py-8 text-center">
+                                <flux:text class="!text-xs">
+                                    Taranan sayılarda soyadınıza rastlanmadı.
+                                    @if ($arsivKalan) Kalan sayılar için “devam et” deyin. @endif
+                                </flux:text>
+                            </div>
+                        @endif
+                    </flux:card>
+
+                    @if ($arsivBulunanlar)
+                        <flux:card class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <flux:text class="!text-xs">
+                                Seçilenler <strong class="text-ink">beklemede</strong> eklenir; tarihleri sayının
+                                yayım tarihinden gelir. Kademeyi yine siz seçersiniz.
+                            </flux:text>
+                            <flux:button wire:click="arsivdenEkle" variant="primary" icon="plus" class="shrink-0">
+                                {{ count($arsivSecilenler) }} yayını ekle
+                            </flux:button>
+                        </flux:card>
+                    @endif
+                @endif
             </div>
         @endif
 

@@ -7,8 +7,10 @@ use App\Enums\TemelAlan;
 use App\Models\Faaliyet;
 use App\Services\Scoring\Sart\MaddeKatalogu;
 use App\Services\Scoring\Sart\SartDeposu;
+use App\Services\Yayin\AdEslestirici;
 use App\Services\Yayin\AramaException;
 use App\Services\Yayin\CrossrefArama;
+use App\Services\Yayin\DergiParkArsivi;
 use App\Services\Yayin\KaynakOnerici;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +23,9 @@ use Livewire\Component;
 #[Title('Faaliyet Ekle')]
 class FaaliyetEkle extends Component
 {
+    /** Bir "tara"/"devam" turunda açılacak en çok sayı adedi. */
+    private const ARSIV_OBEK = 12;
+
     public ?Faaliyet $faaliyet = null;
 
     public string $sekme = 'manuel';
@@ -44,6 +49,32 @@ class FaaliyetEkle extends Component
     public bool $arandi = false;
 
     public string $aramaHatasi = '';
+
+    // DOI'si olmayan eski yayınlar: dergi arşivi taraması
+    public string $arsivDergi = '';
+
+    public string $arsivYilBas = '';
+
+    public string $arsivYilSon = '';
+
+    /** @var list<array<string, mixed>> */
+    public array $arsivBulunanlar = [];
+
+    /** @var list<string> işaretlenen "kısaltma:makaleId" anahtarları */
+    public array $arsivSecilenler = [];
+
+    /** @var list<string> henüz açılmamış sayı kimlikleri (Devam et için) */
+    public array $arsivKalan = [];
+
+    public string $arsivKisaltma = '';
+
+    public string $arsivAdi = '';
+
+    public int $arsivTaranan = 0;
+
+    public bool $arsivArandi = false;
+
+    public string $arsivHatasi = '';
 
     /**
      * Dergi indeksi önerisi (yalnız düzenleme ekranında, kaynak boşken).
@@ -457,6 +488,176 @@ class FaaliyetEkle extends Component
             ->pluck('meta')
             ->map(fn ($meta): string => is_array($meta) ? mb_strtolower(trim((string) ($meta['doi'] ?? ''))) : '')
             ->filter()
+            ->values()
+            ->all();
+    }
+
+    /**
+     * Dergi arşivini adaya göre taramaya BAŞLAR.
+     *
+     * Crossref yalnız DOI'li yayınları görüyor; dergiler DOI'ye sonradan
+     * geçtiği için adayın 2014–2019 öncesi yayınları orada yok. Burada
+     * derginin kendi arşivi açılıyor.
+     */
+    public function arsivTara(): void
+    {
+        $this->arsivHatasi = '';
+        $this->arsivBulunanlar = [];
+        $this->arsivSecilenler = [];
+        $this->arsivKalan = [];
+        $this->arsivTaranan = 0;
+        $this->arsivArandi = true;
+
+        $arsiv = app(DergiParkArsivi::class);
+        $kisaltma = $arsiv->kisaltma($this->arsivDergi);
+
+        if ($kisaltma === null) {
+            $this->arsivHatasi = 'Dergi adresini ya da kısaltmasını tanıyamadım. Örnek: dergipark.org.tr/tr/pub/politeknik';
+
+            return;
+        }
+
+        $sayilar = $arsiv->sayilar($kisaltma);
+
+        if ($sayilar === []) {
+            $this->arsivHatasi = 'Bu dergi DergiPark\'ta bulunamadı ya da arşivi okunamadı.';
+
+            return;
+        }
+
+        $this->arsivKisaltma = $kisaltma;
+        $this->arsivAdi = (string) ($arsiv->ad($kisaltma) ?? $kisaltma);
+
+        $bas = $this->arsivYilBas === '' ? null : (int) $this->arsivYilBas;
+        $son = $this->arsivYilSon === '' ? null : (int) $this->arsivYilSon;
+
+        // Tarihsiz sayı (henüz yayımlanmamış) yıl süzgeci varken atlanıyor:
+        // yılını bilmediğimiz bir sayıyı aralığa dâhil saymak aralığı yalan
+        // yapar.
+        $this->arsivKalan = array_values(array_map(
+            fn (array $sayi): string => $sayi['id'],
+            array_filter($sayilar, function (array $sayi) use ($bas, $son): bool {
+                if ($bas === null && $son === null) {
+                    return true;
+                }
+
+                return $sayi['yil'] !== null
+                    && ($bas === null || $sayi['yil'] >= $bas)
+                    && ($son === null || $sayi['yil'] <= $son);
+            }),
+        ));
+
+        $this->arsivDevam();
+    }
+
+    /**
+     * Sıradaki sayı öbeğini açar.
+     *
+     * Öbek öbek gidiliyor: 105 sayılık bir arşiv tek istekte 105 sayfa
+     * indirmek demek — hem adayı bekletir hem DergiPark'a kabalık olur.
+     */
+    public function arsivDevam(): void
+    {
+        $arsiv = app(DergiParkArsivi::class);
+        $adlar = app(AdEslestirici::class);
+        $ad = (string) Auth::user()->name;
+
+        $sayiTarihleri = collect($arsiv->sayilar($this->arsivKisaltma))->keyBy('id');
+        $mevcut = $this->mevcutArsivAnahtarlari();
+
+        $obek = array_splice($this->arsivKalan, 0, self::ARSIV_OBEK);
+
+        foreach ($obek as $sayiId) {
+            $this->arsivTaranan++;
+
+            foreach ($arsiv->makaleler($this->arsivKisaltma, $sayiId) as $makale) {
+                $esleme = $adlar->esles($makale['yazarlar'], $ad);
+
+                if (! $esleme['yakin']) {
+                    continue;
+                }
+
+                $anahtar = "{$this->arsivKisaltma}:{$makale['id']}";
+
+                $this->arsivBulunanlar[] = [
+                    'anahtar' => $anahtar,
+                    'makale_id' => $makale['id'],
+                    'baslik' => $makale['baslik'],
+                    'yazarlar' => $makale['yazarlar'],
+                    'sira' => $esleme['sira'],
+                    'sayi' => (string) ($sayiTarihleri[$sayiId]['etiket'] ?? ''),
+                    'tarih' => $sayiTarihleri[$sayiId]['tarih'] ?? null,
+                    'yil' => $sayiTarihleri[$sayiId]['yil'] ?? null,
+                    'ekli' => in_array($anahtar, $mevcut, true),
+                ];
+            }
+        }
+    }
+
+    /**
+     * Arşivden seçilenleri faaliyet olarak ekler.
+     *
+     * Crossref'ten gelenlerle aynı kural: kaynak boş, durum beklemede.
+     * Künyeye dergi kısaltması da yazılıyor; {@see KaynakOnerici} DOI
+     * olmadan da derginin dizinlerini bulabilsin diye.
+     */
+    public function arsivdenEkle(): void
+    {
+        $secili = array_values(array_filter(
+            $this->arsivBulunanlar,
+            fn (array $yayin): bool => ! $yayin['ekli'] && in_array($yayin['anahtar'], $this->arsivSecilenler, true),
+        ));
+
+        if ($secili === []) {
+            Flux::toast(variant: 'warning', text: 'Eklenecek yayın seçmediniz.');
+
+            return;
+        }
+
+        $kullanici = Auth::user();
+
+        foreach ($secili as $yayin) {
+            $kullanici->faaliyetler()->create([
+                'kategori' => Kategori::Makale->value,
+                'tur' => Kategori::Makale->label(),
+                'baslik' => $yayin['baslik'],
+                'yazarlar' => $yayin['yazarlar'] ? implode(', ', $yayin['yazarlar']) : null,
+                'rol' => $this->rolSiradan(Kategori::Makale, count($yayin['yazarlar']), $yayin['sira']),
+                'yayin_turu' => null,
+                'tarih' => $yayin['tarih'],
+                'kaynak' => null,
+                'durum' => 'beklemede',
+                'meta' => array_filter([
+                    'dergi' => $this->arsivAdi ?: null,
+                    'dergipark' => $this->arsivKisaltma,
+                    'dergipark_makale' => $yayin['makale_id'],
+                    'kaynak_sistem' => 'dergipark',
+                ]),
+            ]);
+        }
+
+        Flux::toast(
+            variant: 'success',
+            text: count($secili).' yayın beklemede eklendi. Dergi indeksini seçip onaylayın.',
+        );
+
+        $this->redirectRoute('faaliyetler', navigate: true);
+    }
+
+    /**
+     * Arşivden eklenmiş kayıtların "kısaltma:makaleId" anahtarları.
+     *
+     * @return list<string>
+     */
+    private function mevcutArsivAnahtarlari(): array
+    {
+        return Auth::user()->faaliyetler()
+            ->whereNotNull('meta->dergipark_makale')
+            ->pluck('meta')
+            ->map(fn ($meta): string => is_array($meta)
+                ? trim((string) ($meta['dergipark'] ?? '')).':'.trim((string) ($meta['dergipark_makale'] ?? ''))
+                : '')
+            ->filter(fn (string $anahtar): bool => $anahtar !== ':')
             ->values()
             ->all();
     }
