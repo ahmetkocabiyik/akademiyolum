@@ -9,6 +9,7 @@ use App\Services\Scoring\Sart\MaddeKatalogu;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Yayin\AramaException;
 use App\Services\Yayin\CrossrefArama;
+use App\Services\Yayin\KaynakOnerici;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -43,6 +44,13 @@ class FaaliyetEkle extends Component
     public bool $arandi = false;
 
     public string $aramaHatasi = '';
+
+    /**
+     * Dergi indeksi önerisi (yalnız düzenleme ekranında, kaynak boşken).
+     *
+     * @var array<string, mixed>|null
+     */
+    public ?array $oneri = null;
 
     // Form alanları
     public string $kategori = 'makale';
@@ -451,6 +459,35 @@ class FaaliyetEkle extends Component
             ->filter()
             ->values()
             ->all();
+    }
+
+    /**
+     * Derginin indeks bilgisini getirir.
+     *
+     * `wire:init` ile çağrılıyor: form önce çiziliyor, dış servis sonra
+     * yoklanıyor. Aksi hâlde DergiPark yavaşsa düzenleme ekranı açılmıyordu.
+     */
+    public function kaynakOner(): void
+    {
+        if ($this->faaliyet === null) {
+            return;
+        }
+
+        $this->oneri = app(KaynakOnerici::class)->oner($this->faaliyet);
+    }
+
+    /**
+     * Öneriyi forma yazar. Seçeneklerde yoksa yazmıyor: kategori değişmiş
+     * olabilir ve sözlükte olmayan bir kademe cetvelde hiçbir satıra denk
+     * gelmez, faaliyet sessizce puansız kalırdı.
+     */
+    public function oneriyiUygula(): void
+    {
+        $kaynak = $this->oneri['kaynak'] ?? null;
+
+        if (is_string($kaynak) && in_array($kaynak, $this->kaynakSecenekleri(), true)) {
+            $this->kaynak = $kaynak;
+        }
     }
 
     public function kaydet(): void

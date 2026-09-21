@@ -148,6 +148,22 @@
                         </flux:select>
                     @endif
 
+                    {{-- İndeks önerisi: yalnız DÜZENLEMEDE ve kademe boşken.
+                         İçe aktarılan kayıt kaynaksız iniyor, adayın
+                         dolduracağı tek alan bu. --}}
+                    @if ($faaliyet && $kaynak === '' && count($this->kaynakSecenekleri()))
+                        <div wire:init="kaynakOner">
+                            <div wire:loading wire:target="kaynakOner" class="flex items-center gap-2 rounded-xl border border-line bg-canvas p-3">
+                                <flux:icon name="arrow-path" class="size-4 animate-spin text-ink-subtle" />
+                                <flux:text class="!text-xs">Derginin indeks bilgisi aranıyor…</flux:text>
+                            </div>
+
+                            @if ($oneri)
+                                <x-yayin.indeks-onerisi :oneri="$oneri" />
+                            @endif
+                        </div>
+                    @endif
+
                     {{-- Alt tür chip'leri --}}
                     @if (count($this->kaynakSecenekleri()))
                         <div>
