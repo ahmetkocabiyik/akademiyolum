@@ -304,6 +304,24 @@ class AvesisProfili
             (bool) preg_match('/j[üu]ri [üu]yelik/iu', $bolum) => preg_match('/tez|yeterlik/iu', $metin) === 1
                 ? ['kategori' => 'tez_danismanligi', 'kaynak' => 'Tez İzleme / Jüri Üyeliği']
                 : null,
+            // Sergi mi konser mi, ulusal mı uluslararası mı, jürili mi:
+            // sözlükte yüzden fazla kademe var ve AVESİS listesinde tür
+            // alanı YOK — başlığın içinde serbest metin olarak geçiyor
+            // ("Reji: …", "… Atölye, Oyunculuk"). Kademe boş, aday seçer.
+            (bool) preg_match('/sanatsal etkinlik/iu', $bolum) => [
+                'kategori' => 'sanatsal_etkinlik', 'kaynak' => null,
+            ],
+            (bool) preg_match('/burslar/iu', $bolum) => [
+                'kategori' => 'odul', 'kaynak' => 'Burs',
+            ],
+            // Davetli konuşma ile etkinlik organizasyonunda ulusal/
+            // uluslararası ayrımı künyeden çıkmıyor; kademe boş.
+            (bool) preg_match('/davetli konu[şs]ma/iu', $bolum) => [
+                'kategori' => 'bildiri', 'kaynak' => null,
+            ],
+            (bool) preg_match('/etkinlik organizasyon/iu', $bolum) => [
+                'kategori' => 'diger', 'kaynak' => null,
+            ],
 
             // ── /basarilar
             (bool) preg_match('/[öo]d[üu]l/iu', $bolum) => [

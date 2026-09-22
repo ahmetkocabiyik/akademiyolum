@@ -703,3 +703,58 @@ test('desteklenen projeler iki kez okunmuyor ve atlanan sayılmıyor', function 
 
     expect($kategoriler)->toBe(['proje', 'patent']);
 });
+
+// ────────────────── SANATSAL ETKİNLİK VE KOMŞULARI ──────────────────
+
+/**
+ * Sanatsal etkinlikte KADEME UYDURULMUYOR.
+ *
+ * Sözlükte yüzden fazla sanat kademesi var (kişisel/karma sergi, jürili
+ * mi, ulusal mı uluslararası mı, solistlik, rejisörlük…) ama AVESİS
+ * listesinde tür alanı YOK — başlığın içinde serbest metin olarak geçiyor
+ * ("Reji: …", "… Atölye, Oyunculuk"). Kademe boş, aday seçer.
+ */
+test('bölüm adı kategoriye çevriliyor, kademesi bilinmeyen boş kalıyor', function (string $bolum, string $baslik, string $kategori, ?string $kaynak) {
+    avesisSayfaTaklidi(bilimsel: [$bolum => [
+        ['id' => uuid(3), 'baslik' => $baslik, 'etiket' => 'Aralık 2024'],
+    ]]);
+
+    $kayit = avesisOku()[0];
+
+    expect($kayit['kategori'])->toBe($kategori)
+        ->and($kayit['kaynak'])->toBe($kaynak)
+        ->and($kayit['baslik'])->toBe($baslik)
+        ->and($kayit['yil'])->toBe(2024);
+})->with([
+    'sanatsal etkinlik' => ['Sanatsal Etkinlik', 'Reji: Toprak Su Altın', 'sanatsal_etkinlik', null],
+    'burs' => ['Burslar', 'Bir Araştırma Bursu Adı', 'odul', 'Burs'],
+    // Ulusal/uluslararası ayrımı künyeden çıkmıyor.
+    'davetli konuşma' => ['Davetli Konuşmalar', 'Bir Davetli Konuşma Başlığı', 'bildiri', null],
+    'etkinlik organizasyonu' => ['Etkinlik Organizasyonlarındaki Görevler', 'Geriatrik Bilimler Sempozyumu', 'diger', null],
+]);
+
+test('sanatsal etkinlik ekranda listeleniyor ve eklenebiliyor', function () {
+    $kullanici = User::factory()->create();
+
+    avesisSayfaTaklidi(bilimsel: ['Sanatsal Etkinlik' => [
+        ['id' => uuid(3), 'baslik' => 'Konsept Yazımı: Toprak Su Altın', 'etiket' => 'Mayıs 2024'],
+    ]]);
+
+    Livewire::actingAs($kullanici)->test(FaaliyetEkle::class)
+        ->set('sekme', 'avesis')
+        ->set('avesisAdres', 'avesis.anadolu.edu.tr/kullanici')
+        ->call('avesisGetir')
+        ->assertSee('Konsept Yazımı: Toprak Su Altın')
+        ->assertSee('Sanatsal Etkinlik')
+        ->assertSet('avesisAtlanan', 0)
+        ->call('avesisTumunuSec')
+        ->call('avesistenEkle');
+
+    $faaliyet = $kullanici->faaliyetler()->sole();
+
+    expect($faaliyet->kategori->value)->toBe('sanatsal_etkinlik')
+        ->and($faaliyet->kaynak)->toBeNull()
+        ->and($faaliyet->durum)->toBe('beklemede')
+        ->and($faaliyet->tarih->format('Y-m-d'))->toBe('2024-01-01')
+        ->and($faaliyet->meta['avesis_id'])->toBe(uuid(3));
+});
