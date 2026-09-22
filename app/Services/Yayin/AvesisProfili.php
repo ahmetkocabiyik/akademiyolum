@@ -119,6 +119,9 @@ class AvesisProfili
             ...$this->sayfa($adres, 'bilimselfaaliyetler'),
             ...$this->sayfa($adres, 'deneyim'),
             ...$this->sayfa($adres, 'basarilar'),
+            // /projeler'in "Patent" ve "Tasarım" bölümleri; "Desteklenen
+            // Projeler" yukarıdaki projeler() tarafından okunuyor.
+            ...$this->sayfa($adres, 'projeler'),
         ]);
     }
 
@@ -308,6 +311,36 @@ class AvesisProfili
             ],
             (bool) preg_match('/kongre ve sempozyum/iu', $bolum) => $this->toplanti($metin),
 
+            // ── /projeler (patent ve tasarım bölümleri)
+            (bool) preg_match('/patent|fikri m[üu]lkiyet|tasar[ıi]m/iu', $bolum) => [
+                'kategori' => 'patent', 'kaynak' => $this->fikriMulkiyet($aciklama),
+            ],
+
+            default => null,
+        };
+    }
+
+    /**
+     * Patent/tasarım kademesi — yalnız künyede AÇIKÇA yazanlar.
+     *
+     * Ulusal mı uluslararası mı: AVESİS listesinde yazmıyor ("Patent Tescil
+     * Edildi, Buluşun Tescil No: 2020 03384, Standart Tescil" hepsi bu
+     * kadar). Uluslararası demek adaya hak etmediği puanı verirdi, ulusal
+     * demek de bir tahmin olurdu; boş bırakılıyor.
+     *
+     * "Tasarım" bölümündeki grafik/arayüz tasarımları da boş geliyor:
+     * sözlükteki "Endüstriyel Tasarım" TESCİLLİ tasarımı anlatıyor, oysa
+     * oradaki kayıtlar tasarım İŞİ. Aday isterse Sanatsal Etkinlik'e
+     * taşıyabilir.
+     */
+    private function fikriMulkiyet(string $metin): ?string
+    {
+        return match (true) {
+            (bool) preg_match('/faydal[ıi] model/iu', $metin) => 'Faydalı Model',
+            (bool) preg_match('/end[üu]striyel tasar[ıi]m/iu', $metin) => 'Endüstriyel Tasarım',
+            (bool) preg_match('/[ıi]slah[çc][ıi]|[çc]e[şs]it tescil/iu', $metin) => 'Islahçı Hakkı / Çeşit Tescili',
+            (bool) preg_match('/yaz[ıi]l[ıi]m/iu', $metin) => 'Yazılım',
+            (bool) preg_match('/\bpct\b|\bepo\b|uspto|uluslararas[ıi] patent/iu', $metin) => 'Uluslararası Patent',
             default => null,
         };
     }
@@ -415,6 +448,11 @@ class AvesisProfili
         $kayitlar = [];
 
         foreach ($this->bolumler($html) as [$bolumAdi, $govde]) {
+            // Başka bir okuyucunun işi: atlanan sayılmamalı.
+            if (preg_match('/desteklenen proje/iu', $bolumAdi) === 1) {
+                continue;
+            }
+
             foreach (preg_split('~(?=<li[\s>])~', $govde) ?: [] as $oge) {
                 if (! str_contains($oge, 'class="title"')) {
                     continue;

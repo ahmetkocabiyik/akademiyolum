@@ -615,3 +615,91 @@ test('ödül ve kongre kayıtları ekranda listeleniyor', function () {
         ->and($faaliyet->kaynak)->toBe('TÜBİTAK / TÜBA Ödülü')
         ->and($faaliyet->durum)->toBe('beklemede');
 });
+
+// ────────────────── PATENT / TASARIM ──────────────────
+
+/**
+ * /projeler sayfası üç bölüm taşıyor: "Desteklenen Projeler" (projeler()
+ * okuyor), "Patent" ve "Tasarım" (sayfa() okuyor).
+ *
+ * @param  list<array{id: string, baslik: string, yil?: string, fon?: string}>  $projeler
+ * @param  array<string, list<array<string, string>>>  $fikri
+ */
+function avesisProjeSayfasiIle(array $projeler, array $fikri): void
+{
+    $proje = avesisProjeSayfasi($projeler);
+    $ek = avesisBolumSayfasi($fikri);
+
+    Http::fake([
+        '*/yayinlar' => Http::response(avesisYayinSayfasi([])),
+        '*/bilimselfaaliyetler' => Http::response(avesisBolumSayfasi([])),
+        '*/deneyim' => Http::response(avesisBolumSayfasi([])),
+        '*/basarilar' => Http::response(avesisBolumSayfasi([])),
+        '*/projeler' => Http::response(str_replace('</body>', '', $proje).$ek),
+    ]);
+}
+
+/**
+ * Ulusal mı uluslararası mı: AVESİS listesinde yazmıyor ("Patent Tescil
+ * Edildi, Buluşun Tescil No: …, Standart Tescil" hepsi bu kadar).
+ * Uluslararası demek adaya hak etmediği puanı verirdi.
+ */
+test('patent kademesi yalnız künyede açıkça yazanlarda', function (string $aciklama, ?string $kaynak) {
+    avesisProjeSayfasiIle([], ['Patent' => [
+        ['baslik' => 'Bir buluş başlığı burada', 'etiket' => '2022', 'aciklama' => $aciklama],
+    ]]);
+
+    $kayit = avesisOku()[0];
+
+    expect($kayit['kategori'])->toBe('patent')
+        ->and($kayit['kaynak'])->toBe($kaynak)
+        ->and($kayit['yil'])->toBe(2022);
+})->with([
+    ['Patent Tescil Edildi, Buluşun Tescil No: 2020 03384 , Standart Tescil', null],
+    ['Patent Başvuru Yapıldı, Standart Tescil', null],
+    ['Faydalı Model Tescil Edildi', 'Faydalı Model'],
+    ['Endüstriyel Tasarım Tescili', 'Endüstriyel Tasarım'],
+    ['PCT başvurusu yapılmıştır', 'Uluslararası Patent'],
+    ['Çeşit Tescili alınmıştır', 'Islahçı Hakkı / Çeşit Tescili'],
+]);
+
+/**
+ * "Tasarım" bölümündeki grafik/arayüz işleri sözlükteki "Endüstriyel
+ * Tasarım"a yazılmıyor: o kademe TESCİLLİ tasarımı anlatıyor, bunlar
+ * tasarım işi. Kategori doğru (Patent / Tasarım), kademe boş.
+ */
+test('tasarım işine endüstriyel tasarım kademesi yazılmıyor', function () {
+    avesisProjeSayfasiIle([], ['Tasarım' => [
+        ['baslik' => 'Alba Tabela Tasarımı', 'etiket' => 'Eylül 2025', 'aciklama' => 'Grafiksel Tasarım/Pazarlama ve Reklam Tasarımı'],
+    ]]);
+
+    $kayit = avesisOku()[0];
+
+    expect($kayit['kategori'])->toBe('patent')
+        ->and($kayit['kaynak'])->toBeNull()
+        ->and($kayit['baslik'])->toBe('Alba Tabela Tasarımı');
+});
+
+/**
+ * /projeler iki okuyucudan geçiyor. "Desteklenen Projeler" bölümü ikinci
+ * okuyucuda ATLANAN sayılmamalı — zaten okunuyor; sayılsaydı adaya yalan
+ * bir "eşlenemedi" rakamı gösterilirdi.
+ */
+test('desteklenen projeler iki kez okunmuyor ve atlanan sayılmıyor', function () {
+    $kullanici = User::factory()->create();
+
+    avesisProjeSayfasiIle(
+        [['id' => uuid(7), 'baslik' => 'Bir TÜBİTAK projesi', 'yil' => '2019 - 2021', 'fon' => 'TÜBİTAK 1001']],
+        ['Patent' => [['baslik' => 'Bir buluş başlığı burada', 'etiket' => '2022', 'aciklama' => 'Faydalı Model']]],
+    );
+
+    $bilesen = Livewire::actingAs($kullanici)->test(FaaliyetEkle::class)
+        ->set('sekme', 'avesis')
+        ->set('avesisAdres', 'avesis.ktu.edu.tr/kullanici')
+        ->call('avesisGetir')
+        ->assertSet('avesisAtlanan', 0);
+
+    $kategoriler = array_column($bilesen->get('avesisBulunanlar'), 'kategori');
+
+    expect($kategoriler)->toBe(['proje', 'patent']);
+});
