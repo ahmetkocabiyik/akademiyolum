@@ -15,6 +15,18 @@ class AramaException extends RuntimeException
         return new self('Yayın veritabanına şu an ulaşılamıyor. Biraz sonra tekrar deneyin.');
     }
 
+    /**
+     * Kurumsal profil sunucusu yanıt vermedi.
+     *
+     * "Kayıt bulunamadı"dan AYRI ileti: APBS zaman zaman dakikalarca 504
+     * veriyor ve o sırada "profilinizde okunabilir kayıt yok" demek adayı
+     * profilinin boş olduğuna inandırırdı.
+     */
+    public static function profileUlasilamadi(string $sistem): self
+    {
+        return new self("{$sistem} şu an yanıt vermiyor. Sunucusu yoğun olabilir; biraz sonra tekrar deneyin.");
+    }
+
     public static function httpDurumundan(int $durum): self
     {
         return new self(match (true) {

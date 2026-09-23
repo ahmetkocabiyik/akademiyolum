@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Http;
  *     atlandi: bool,
  * }
  */
-class AvesisProfili
+class AvesisProfili implements ProfilOkuyucu
 {
     private const TARAYICI = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
         .'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0 Safari/537.36';
@@ -75,6 +75,33 @@ class AvesisProfili
         ['desen' => '/[öo]zel sekt[öo]r|sanayi|stk/iu', 'kaynak' => 'Özel Sektör / STK'],
         ['desen' => '/kamu/iu', 'kaynak' => 'Diğer Kamu Kurumu'],
     ];
+
+    public function sistem(): string
+    {
+        return 'avesis';
+    }
+
+    public function ad(): string
+    {
+        return 'AVESİS';
+    }
+
+    public function ornekAdres(): string
+    {
+        return 'https://avesis.ktu.edu.tr/kullaniciadi';
+    }
+
+    /**
+     * AVESİS'te bölüm eksiği SAYILMIYOR.
+     *
+     * Ulaşılamayan sayfa ile profilde olmayan bölüm burada aynı şey: AVESİS
+     * adayın hiç kaydı olmayan bölümünü yayımlamıyor, o adres 404 dönüyor.
+     * Sayılsaydı eksiksiz okumalar da "eksik" görünürdü.
+     */
+    public function eksikBolum(): int
+    {
+        return 0;
+    }
 
     /**
      * Profil adresini ayrıştırır.

@@ -13,7 +13,7 @@
              değiştirmek formdaki değişikliği sessizce çöpe atıyordu. --}}
         @unless ($faaliyet)
         <div class="mx-auto flex rounded-full border border-line bg-surface p-1">
-            @foreach (['manuel' => 'Manuel Ekle', 'yayin' => 'Yayınlarımı Bul', 'avesis' => "AVESİS'ten Çek"] as $anahtar => $etiket)
+            @foreach (['manuel' => 'Manuel Ekle', 'yayin' => 'Yayınlarımı Bul', 'avesis' => 'Kurum Profilimden Çek'] as $anahtar => $etiket)
                 <button type="button" wire:click="$set('sekme', '{{ $anahtar }}')" @class([
                     'rounded-full px-5 py-2 text-sm font-medium transition',
                     'bg-navy text-white' => $sekme === $anahtar,
@@ -405,22 +405,26 @@
 
                 <flux:card class="overflow-hidden !p-0">
                     <div class="border-b border-line px-6 py-5">
-                        <flux:heading size="lg">AVESİS'ten Çek</flux:heading>
-                        {{-- AVESİS'in diğer iki yoldan farkı: yayın dışına
-                             çıkabiliyor ve dergi indeksini de taşıyor. --}}
+                        <flux:heading size="lg">Kurum Profilimden Çek</flux:heading>
+                        {{-- Kurumsal profilin diğer iki yoldan farkı: yayın
+                             dışına çıkabiliyor ve dergi indeksini de
+                             taşıyor. --}}
                         <flux:text class="mt-1">
-                            AVESİS sizin tuttuğunuz künye: yayınların yanında <strong>projeleri</strong> de
-                            veriyor ve derginin indeksini (ESCI, TR Dizin…) yazdığı için
-                            <strong>kademe çoğu kayıtta hazır gelir</strong>.
+                            Üniversitenizin akademik künye sistemi (<strong>AVESİS</strong> ya da Mersin'de
+                            <strong>APBS</strong>) sizin tuttuğunuz künye: yayınların yanında
+                            <strong>projeleri</strong> de veriyor ve derginin indeksini (ESCI, TR Dizin…)
+                            yazdığı için <strong>kademe çoğu kayıtta hazır gelir</strong>.
                         </flux:text>
                     </div>
 
                     <form wire:submit="avesisGetir" class="flex flex-col gap-4 px-6 py-5">
-                        <flux:input wire:model="avesisAdres" label="AVESİS profil adresiniz"
+                        <flux:input wire:model="avesisAdres" label="Kurumsal profil adresiniz"
                             placeholder="https://avesis.ktu.edu.tr/kullaniciadi" />
 
                         <flux:text class="!text-[11px] text-ink-subtle">
-                            AVESİS her üniversitede ayrı kurulu — kendi üniversitenizin adresini verin.
+                            Her üniversitede ayrı kurulu — kendi üniversitenizin adresini verin
+                            (<span class="font-mono">avesis.…edu.tr/kullaniciadi</span> ya da
+                            <span class="font-mono">apbs.mersin.edu.tr/profiles/000000</span>).
                             Adres profilinize kaydedilir, bir daha yazmanız gerekmez.
                         </flux:text>
 
@@ -445,6 +449,11 @@
                                 @if ($avesisAtlanan)
                                     · <span class="text-ink-subtle">{{ $avesisAtlanan }} kayıt eşlenemedi (sözlükte karşılığı yok)</span>
                                 @endif
+                                {{-- Liste eksikse aday bunu bilmeli: gördüğü
+                                     kadarını profilinin tamamı sanmasın. --}}
+                                @if ($avesisEksikBolum)
+                                    · <span class="text-cat-amber-text">{{ $avesisEksikBolum }} bölüm okunamadı, listeniz eksik olabilir — birazdan yeniden deneyin</span>
+                                @endif
                             </flux:text>
                             <flux:button wire:click="avesisTumunuSec" size="xs" variant="ghost">Tümünü seç</flux:button>
                         </div>
@@ -458,8 +467,8 @@
 
                     <flux:card class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <flux:text class="!text-xs">
-                            Kademesi okunabilen kayıtlar <strong class="text-ink">dolu</strong> gelir; SCIE/SSCI ve
-                            Scopus'ta çeyreklik (Q1–Q4) AVESİS'te de yazmadığı için onlar boş kalır.
+                            Kademesi okunabilen kayıtlar <strong class="text-ink">dolu</strong> gelir;
+                            çeyrekliği (Q1–Q4) {{ $avesisSistemAdi }} yazmıyorsa o kayıtlar boş kalır.
                             Hepsi <strong class="text-ink">beklemede</strong> iner, onay sizde.
                         </flux:text>
                         <flux:button wire:click="avesistenEkle" variant="primary" icon="plus" class="shrink-0">

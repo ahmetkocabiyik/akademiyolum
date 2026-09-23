@@ -41,7 +41,7 @@ test('ekleme sayfası ayrı bir sayfa olarak açılır', function () {
         ->assertOk()
         ->assertSee('Faaliyet Ekle')
         ->assertSee('Manuel Ekle')
-        ->assertSee("AVESİS'ten Çek");
+        ->assertSee('Kurum Profilimden Çek');
 });
 
 test('manuel faaliyet ekler; puan SAKLANMAZ, cetvelden türetilir', function () {

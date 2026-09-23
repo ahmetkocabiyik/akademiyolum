@@ -104,8 +104,14 @@ class MukerrerDenetimi
             $izler['doi:'.$doi] = 'doi';
         }
 
-        if (is_string($meta['avesis_id'] ?? null) && $meta['avesis_id'] !== '') {
-            $izler['kayit:avesis:'.$meta['avesis_id']] = 'kayit';
+        // Kurumsal profil sistemleri: AVESİS ve Mersin'in APBS'i. İkisinin
+        // kimlik uzayı ayrı, o yüzden iz de sistem adıyla kuruluyor.
+        foreach (['avesis', 'apbs'] as $sistem) {
+            $kimlik = $meta[$sistem.'_id'] ?? null;
+
+            if (is_string($kimlik) && $kimlik !== '') {
+                $izler['kayit:'.$sistem.':'.$kimlik] = 'kayit';
+            }
         }
 
         if (is_string($meta['dergipark_makale'] ?? null) && $meta['dergipark_makale'] !== '') {

@@ -9,11 +9,11 @@ use App\Services\Scoring\Sart\MaddeKatalogu;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Yayin\AdEslestirici;
 use App\Services\Yayin\AramaException;
-use App\Services\Yayin\AvesisProfili;
 use App\Services\Yayin\CrossrefArama;
 use App\Services\Yayin\DergiParkArsivi;
 use App\Services\Yayin\KaynakOnerici;
 use App\Services\Yayin\MukerrerDenetimi;
+use App\Services\Yayin\ProfilOkuyuculari;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -78,8 +78,15 @@ class FaaliyetEkle extends Component
 
     public string $arsivHatasi = '';
 
-    // AVESİS profili
+    // Kurumsal profil (AVESİS ya da Mersin'in APBS'i).
+    //
+    // Alan adları `avesis*` kalıyor: kullanıcı sütunu (`users.avesis_id`)
+    // ve bu ekranın sekmesi o adla doğdu, iki sistem de aynı yoldan
+    // geçiyor. Hangi sistemin okunduğu $avesisSistemAdi'nda.
     public string $avesisAdres = '';
+
+    /** Okunan sistemin adayın gördüğü adı ('AVESİS', 'APBS'). */
+    public string $avesisSistemAdi = 'AVESİS';
 
     /** @var list<array<string, mixed>> */
     public array $avesisBulunanlar = [];
@@ -93,6 +100,9 @@ class FaaliyetEkle extends Component
 
     /** Sözlükte karşılığı olmadığı için listeye alınmayan kayıt adedi. */
     public int $avesisAtlanan = 0;
+
+    /** Sunucu yanıt vermediği için hiç okunamayan bölüm adedi. */
+    public int $avesisEksikBolum = 0;
 
     /**
      * Dergi indeksi önerisi (yalnız düzenleme ekranında, kaynak boşken).
@@ -633,7 +643,12 @@ class FaaliyetEkle extends Component
     }
 
     /**
-     * AVESİS profilindeki yayın ve projeleri getirir.
+     * Kurumsal profildeki faaliyetleri getirir.
+     *
+     * HANGİ SİSTEM OLDUĞUNU ADRES SÖYLÜYOR: çoğu üniversitede AVESİS,
+     * Mersin'de APBS. Aday sistemin adını bilmek zorunda değil, adresini
+     * yapıştırıyor; {@see ProfilOkuyuculari} sunucu adından okuyucuyu
+     * seçiyor.
      *
      * Adres profile kaydediliyor: aday bir daha yazmasın. `avesis_id`
      * sütunu zaten bu iş için duruyordu.
@@ -644,24 +659,39 @@ class FaaliyetEkle extends Component
         $this->avesisBulunanlar = [];
         $this->avesisSecilenler = [];
         $this->avesisAtlanan = 0;
+        $this->avesisEksikBolum = 0;
         $this->avesisArandi = true;
 
-        $servis = app(AvesisProfili::class);
-        $adres = $servis->adres($this->avesisAdres);
+        $okuyucular = app(ProfilOkuyuculari::class);
+        $cozum = $okuyucular->coz($this->avesisAdres);
 
-        if ($adres === null) {
-            $this->avesisHatasi = 'Adresi tanıyamadım. AVESİS profil adresinizi olduğu gibi yapıştırın, örnek: https://avesis.ktu.edu.tr/kullaniciadi';
+        if ($cozum === null) {
+            $this->avesisHatasi = 'Adresi tanıyamadım. Kurumsal profil adresinizi olduğu gibi yapıştırın, örnek: '
+                .implode(' ya da ', $okuyucular->ornekAdresler());
 
             return;
         }
 
-        $kayitlar = $servis->kayitlar($adres);
+        $servis = $cozum['okuyucu'];
+        $this->avesisSistemAdi = $servis->ad();
+
+        try {
+            $kayitlar = $servis->kayitlar($cozum['adres']);
+        } catch (AramaException $hata) {
+            // Sunucu yanıt vermedi. "Kayıt bulunamadı" demek adayı
+            // profilinin boş olduğuna inandırırdı.
+            $this->avesisHatasi = $hata->getMessage();
+
+            return;
+        }
 
         if ($kayitlar === []) {
-            $this->avesisHatasi = 'Bu profilde okunabilir yayın ya da proje bulunamadı.';
+            $this->avesisHatasi = 'Bu profilde okunabilir kayıt bulunamadı.';
 
             return;
         }
+
+        $this->avesisEksikBolum = $servis->eksikBolum();
 
         $kullanici = Auth::user();
 
@@ -692,10 +722,13 @@ class FaaliyetEkle extends Component
                 : null;
 
             $meta = array_filter([
-                'avesis_id' => $kayit['id'],
+                // Kayıt izi sistemin kendi adıyla saklanıyor
+                // ({@see MukerrerDenetimi::izler}): iki sistemin kimlik
+                // uzayları ayrı.
+                $servis->sistem().'_id' => $kayit['id'],
                 'doi' => $kayit['doi'],
                 'kunye' => $kayit['kunye'] ?: null,
-                'kaynak_sistem' => 'avesis',
+                'kaynak_sistem' => $servis->sistem(),
             ]);
 
             $gecerli[] = [
@@ -743,8 +776,10 @@ class FaaliyetEkle extends Component
 
         $eklenen = $this->ekle($secili, fn (array $kayit): array => [
             'yazarlar' => $kayit['yazarlar'] ?: null,
-            // Rol künyede yazmıyor; uydurulmuyor.
-            'rol' => null,
+            // Rol yalnız künyede AÇIKÇA yazıyorsa iniyor: APBS projede
+            // görevi ("Yürütücü") ayrı bir rozette veriyor, AVESİS hiç
+            // vermiyor. Yazmadığı yerde uydurulmuyor.
+            'rol' => $kayit['rol'] ?? null,
             'yayin_turu' => null,
             // AVESİS yalnız YIL veriyor. 1 Ocak, dönem koşullarında
             // ("doçentlikten sonra", "son beş yıl") en muhafazakâr tarih:
