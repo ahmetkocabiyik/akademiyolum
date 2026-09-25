@@ -316,19 +316,29 @@
                 {{-- DOI'Sİ OLMAYAN ESKİ YAYINLAR --}}
                 <flux:card class="overflow-hidden !p-0">
                     <div class="border-b border-line px-6 py-5">
-                        <flux:heading size="lg">DOI'si olmayan eski yayınlar</flux:heading>
+                        <flux:heading size="lg">DOI'si olmayan eski makaleler</flux:heading>
                         {{-- Adayın "neden bazı yayınlarım çıkmadı" sorusunun
                              cevabı burada yazılı; yoksa üstteki aramayı bozuk
-                             sanıyor. --}}
+                             sanıyor.
+
+                             BAŞLIK "makaleler" DİYOR, "yayınlar" DEĞİL: DergiPark
+                             bir dergi platformu, kitap ve tez orada yok. Başlık
+                             geniş kalınca aday DOI'siz kitabını da burada arayıp
+                             yayınevinin adını yazıyordu. --}}
                         <flux:text class="mt-1">
                             Dergiler DOI'ye sonradan geçti ve geriye dönük vermediler — bu yüzden
-                            yukarıdaki arama <strong>2014–2019 öncesi</strong> yayınların çoğunu göremez.
+                            yukarıdaki arama <strong>2014–2019 öncesi</strong> makalelerin çoğunu göremez.
                             Derginizi verin, arşivini soyadınıza göre tarayalım.
+                        </flux:text>
+                        <flux:text class="mt-2 !text-[11px] text-ink-subtle">
+                            Yalnız <strong>dergi makaleleri</strong> için. Kitap, bildiri ve tezler DergiPark
+                            arşivinde yok; onları <strong>Manuel Ekle</strong> sekmesinden ya da
+                            <strong>Kurum Profilimden Çek</strong> ile girebilirsiniz.
                         </flux:text>
                     </div>
 
                     <form wire:submit="arsivTara" class="flex flex-col gap-4 px-6 py-5">
-                        <flux:input wire:model="arsivDergi" label="DergiPark dergi adresi ya da kısaltması"
+                        <flux:input wire:model="arsivDergi" label="Makalenizin yayımlandığı DergiPark dergisi"
                             placeholder="dergipark.org.tr/tr/pub/politeknik  ·  politeknik" />
 
                         <div class="grid gap-4 sm:grid-cols-2">

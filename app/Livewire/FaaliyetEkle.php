@@ -502,6 +502,12 @@ class FaaliyetEkle extends Component
      * Crossref yalnız DOI'li yayınları görüyor; dergiler DOI'ye sonradan
      * geçtiği için adayın 2014–2019 öncesi yayınları orada yok. Burada
      * derginin kendi arşivi açılıyor.
+     *
+     * YALNIZ DERGİ MAKALESİ. DergiPark bir dergi platformu; kitap, bildiri
+     * ve tez orada yok. Aday buraya yayınevi adı ("Akademisyen Yayınevi")
+     * yazıp gelen hatayı sistem arızası sanabiliyor, bu yüzden hata
+     * iletileri alanın ne beklediğini ve kitabın nereden girileceğini
+     * açıkça söylüyor.
      */
     public function arsivTara(): void
     {
@@ -516,7 +522,8 @@ class FaaliyetEkle extends Component
         $kisaltma = $arsiv->kisaltma($this->arsivDergi);
 
         if ($kisaltma === null) {
-            $this->arsivHatasi = 'Dergi adresini ya da kısaltmasını tanıyamadım. Örnek: dergipark.org.tr/tr/pub/politeknik';
+            $this->arsivHatasi = 'Buraya bir DERGİ adresi ya da kısaltması yazılır (örnek: dergipark.org.tr/tr/pub/politeknik). '
+                .'Kitap, bildiri ve tezler DergiPark arşivinde yok — onları Manuel Ekle sekmesinden girebilirsiniz.';
 
             return;
         }
@@ -524,7 +531,9 @@ class FaaliyetEkle extends Component
         $sayilar = $arsiv->sayilar($kisaltma);
 
         if ($sayilar === []) {
-            $this->arsivHatasi = 'Bu dergi DergiPark\'ta bulunamadı ya da arşivi okunamadı.';
+            $this->arsivHatasi = 'DergiPark\'ta “'.mb_substr($kisaltma, 0, 60).'” adında bir DERGİ yok. '
+                .'Buraya makalenizin yayımlandığı derginin adresi yazılır; yayınevi adı, kitap adı ya da yazar adı değil. '
+                .'Kitabınızı Manuel Ekle sekmesinden, kategori Kitap seçerek girebilirsiniz.';
 
             return;
         }

@@ -293,7 +293,7 @@ test('tanınmayan dergi adresi ekranı çökertmiyor', function () {
         ->set('arsivDergi', 'https://baska.site/dergi')
         ->call('arsivTara')
         ->assertOk()
-        ->assertSee('kısaltmasını tanıyamadım');
+        ->assertSee('DERGİ adresi ya da kısaltması', false);
 
     Http::assertNothingSent();
 });
@@ -322,4 +322,34 @@ test('arşivden gelen kayda doi olmadan indeks önerilebiliyor', function () {
 
     // DOI çözülmeye çalışılmadı.
     Http::assertSentCount(1);
+});
+
+/**
+ * DERGİ OLMAYAN GİRDİDE HATA YOL GÖSTERMELİ.
+ *
+ * Aday DOI'si olmayan KİTABINI da burada arayıp yayınevinin adını
+ * ("Akademisyen Yayınevi") yazıyor. Eski ileti "arşivi okunamadı" diyordu;
+ * aday bunu sistem arızası sanıp kitabını hiç eklemiyordu.
+ */
+test('dergi bulunamayınca hata kitabın nereden gireleceğini söylüyor', function () {
+    Http::fake(['*' => Http::response('', 404)]);
+
+    Livewire::actingAs(User::factory()->create())
+        ->test(FaaliyetEkle::class)
+        ->set('sekme', 'yayin')
+        ->set('arsivDergi', 'akademisyen')
+        ->call('arsivTara')
+        ->assertSee('adında bir DERGİ yok', false)
+        ->assertSee('Manuel Ekle', false)
+        ->assertSee('akademisyen', false);
+});
+
+test('tanınmayan girdide de aynı yol gösteriliyor', function () {
+    Livewire::actingAs(User::factory()->create())
+        ->test(FaaliyetEkle::class)
+        ->set('sekme', 'yayin')
+        ->set('arsivDergi', 'Akademisyen Yayınevi, ISBN: 9786052581568')
+        ->call('arsivTara')
+        ->assertSee('DERGİ adresi ya da kısaltması', false)
+        ->assertSee('Manuel Ekle', false);
 });
