@@ -165,6 +165,148 @@
     background: var(--color-canvas);
     border: 1px solid var(--color-line);
 }
+/* ===========================================================================
+   CV ÖNİZLEMESİ
+
+   Sayfa gerçek A4 ölçüsünde (210mm) çiziliyor; ekran kopyası ile yazdırılan
+   kopya aynı satır sonlarına sahip olsun diye. Küçük ekranda kapsayıcı kaydırır,
+   sayfa küçültülmez: küçültülen önizlemede aday taşan satırı göremiyordu.
+
+   Renk, yazı tipi ve şablon değişkenlerden geliyor (--cv-renk/--cv-font);
+   şablon sınıfları yalnızca bu değişkenleri ve başlık bandını değiştirir, içerik
+   dizilimi dört şablonda da aynıdır.
+   =========================================================================== */
+.cv-sayfa {
+    width: 210mm;
+    min-height: 297mm;
+    background: #fff;
+    color: #1f2937;
+    font-family: var(--cv-font, 'DM Sans', sans-serif);
+    font-size: 10.5pt;
+    line-height: 1.5;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.08), 0 8px 24px rgb(0 0 0 / 0.08);
+}
+
+.cv-ust {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18mm 16mm 8mm;
+}
+.cv-foto {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: color-mix(in srgb, var(--cv-renk) 12%, #fff);
+    color: var(--cv-renk);
+    border: 2px solid color-mix(in srgb, var(--cv-renk) 35%, #fff);
+}
+.cv-ad { font-size: 21pt; font-weight: 700; line-height: 1.15; color: var(--cv-renk); }
+.cv-unvan { margin-top: 2px; font-size: 11pt; color: #4b5563; }
+.cv-iletisim { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 8.5pt; color: #6b7280; }
+
+.cv-govde { display: grid; grid-template-columns: 58mm 1fr; gap: 10mm; padding: 0 16mm 16mm; }
+.cv-govde-tek { grid-template-columns: 1fr; }
+
+/* Önizleme kabı sayfayı sütun genişliğine ÖLÇEKLER (oran JS'ten gelir).
+   Sayfa gerçek A4 ölçüsünde çizilip küçültülüyor; doğrudan dar çizilseydi
+   ekrandaki satır sonları çıktıdakinden başka olurdu. */
+.cv-olcek { transform-origin: top left; }
+.cv-sutun > * + * { margin-top: 14px; }
+
+.cv-baslik {
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cv-renk);
+    padding-bottom: 3px;
+    margin-bottom: 7px;
+    border-bottom: 1px solid color-mix(in srgb, var(--cv-renk) 25%, #fff);
+}
+
+.cv-satir + .cv-satir { margin-top: 8px; }
+.cv-satir-baslik { font-size: 10pt; font-weight: 600; color: #111827; }
+.cv-satir-alt { font-size: 8.5pt; color: #6b7280; margin-top: 1px; }
+.cv-metin { font-size: 9.5pt; color: #374151; }
+
+.cv-rozet {
+    display: inline-block;
+    margin-inline-start: 6px;
+    padding: 1px 6px;
+    border-radius: 100px;
+    font-size: 7pt;
+    font-weight: 600;
+    vertical-align: middle;
+    background: color-mix(in srgb, var(--cv-renk) 10%, #fff);
+    color: var(--cv-renk);
+}
+
+.cv-cubuk-ad { display: flex; justify-content: space-between; font-size: 8.5pt; color: #374151; }
+.cv-cubuk-yol { height: 4px; border-radius: 4px; background: #e5e7eb; margin-top: 3px; overflow: hidden; }
+.cv-cubuk-dolu { height: 100%; border-radius: 4px; background: var(--cv-renk); }
+.cv-cubuk + .cv-cubuk { margin-top: 6px; }
+
+.cv-alt {
+    display: flex;
+    justify-content: space-between;
+    padding: 6mm 16mm 10mm;
+    font-size: 7.5pt;
+    color: #9ca3af;
+    border-top: 1px solid #e5e7eb;
+    margin: 0 16mm;
+    padding-inline: 0;
+}
+
+/* Şablonlar — yalnızca başlık bandı ve vurgu değişir. */
+.cv-resmi .cv-ust { border-bottom: 3px solid var(--cv-renk); }
+
+.cv-minimal .cv-ust { padding-bottom: 6mm; }
+.cv-minimal .cv-ad { color: #111827; }
+.cv-minimal .cv-baslik { border-bottom-color: #e5e7eb; color: #111827; }
+.cv-minimal .cv-foto { background: #f3f4f6; color: #6b7280; border-color: #e5e7eb; }
+
+.cv-prestijli .cv-ust { background: var(--cv-renk); color: #fff; padding-top: 14mm; padding-bottom: 12mm; }
+.cv-prestijli .cv-ad { color: #fff; }
+.cv-prestijli .cv-unvan, .cv-prestijli .cv-iletisim { color: rgb(255 255 255 / 0.72); }
+.cv-prestijli .cv-foto { background: rgb(255 255 255 / 0.12); color: #fff; border-color: var(--color-gold); }
+.cv-prestijli .cv-baslik { color: var(--cv-renk); border-bottom-color: var(--color-gold); }
+.cv-prestijli .cv-govde { padding-top: 10mm; }
+
+.cv-sade { --cv-renk: #374151 !important; }
+.cv-sade .cv-foto { display: none; }
+.cv-sade .cv-baslik { border-bottom-color: #d1d5db; }
+
+/* Yazdırma: ekranda ne varsa değil, YALNIZCA sayfa çıksın. Kenar boşluğu
+   sayfanın kendi iç dolgusundan geliyor, @page'den değil — ikisi birden
+   uygulanınca A4'e sığmıyordu. */
+@media print {
+    @page { size: A4; margin: 0; }
+
+    /* Gizleme GÖRÜNÜRLÜKLE değil AKIŞTAN ÇIKARARAK yapılıyor: visibility:hidden
+       düzeni koruduğu için sayfanın altına, kenar panellerinin yüksekliği kadar
+       bomboş ikinci bir A4 sayfası ekleniyordu. */
+    [data-flux-sidebar],
+    [data-flux-header],
+    .yazdirma-gizle { display: none !important; }
+
+    html, body { height: auto !important; background: #fff !important; }
+    [data-flux-main] { padding: 0 !important; display: block !important; }
+
+    #cv-sayfa { margin: 0; box-shadow: none; width: 210mm; }
+
+    /* Ekran ölçeği yazdırmada kalkmalı; ölçekli basılan sayfa A4'ün köşesine
+       sıkışıyordu. Kabın sabit yüksekliği de kalkar, yoksa uzun CV kırpılır. */
+    .cv-olcek { transform: none !important; }
+    .cv-olcek-kap { height: auto !important; overflow: visible !important; padding: 0 !important; background: none !important; }
+}
+
 /* Tablolar kutunun içinde yatay kayar; .juri-tablo sarmalayıcısı overflow verir. */
 .juri-tablo { margin: 0.8rem 0; overflow-x: auto; }
 .juri-icerik table { width: 100%; border-collapse: collapse; font-size: 12px; }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\YonergeKaynakController;
+use App\Livewire\CvOlusturucu;
 use App\Livewire\Dashboard;
 use App\Livewire\FaaliyetEkle;
 use App\Livewire\Faaliyetler;
@@ -38,11 +39,7 @@ Route::middleware(['auth', 'verified', 'onboarded'])->group(function () {
 
     Route::livewire('juri-analizi', JuriAnalizi::class)->name('juri-analizi');
 
-    Route::view('cv-olusturucu', 'modules.placeholder', [
-        'heading' => 'CV Oluşturucu',
-        'subheading' => 'Akademik CV üretimi ve dışa aktarım',
-        'phase' => 'Faz 5',
-    ])->name('cv-olusturucu');
+    Route::livewire('cv-olusturucu', CvOlusturucu::class)->name('cv-olusturucu');
 
     Route::view('cikti-yonetimi', 'modules.placeholder', [
         'heading' => 'Çıktı Yönetimi',
