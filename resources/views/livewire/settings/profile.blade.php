@@ -28,49 +28,9 @@
 
             <flux:heading size="sm">Akademik Bilgiler</flux:heading>
 
-            {{-- Üniversite: yazılabilir combobox (client-side filtre) --}}
-            <div
-                x-data="{
-                    sorgu: @entangle('universite'),
-                    acik: false,
-                    vurgu: -1,
-                    tumu: @js($universiteler),
-                    get sonuclar() {
-                        const q = (this.sorgu || '').toLocaleLowerCase('tr');
-                        const liste = q ? this.tumu.filter(u => u.toLocaleLowerCase('tr').includes(q)) : this.tumu;
-                        return liste.slice(0, 8);
-                    },
-                    sec(u) { this.sorgu = u; this.acik = false; this.vurgu = -1; },
-                    asagi() { this.acik = true; if (this.vurgu < this.sonuclar.length - 1) this.vurgu++; },
-                    yukari() { if (this.vurgu > 0) this.vurgu--; },
-                    enter() { if (this.acik && this.vurgu >= 0 && this.sonuclar[this.vurgu]) { this.sec(this.sonuclar[this.vurgu]); } else { this.acik = false; } },
-                }"
-                @click.outside="acik = false"
-                x-on:keydown.escape="acik = false"
-                class="relative"
-            >
-                <flux:input
-                    label="Üniversite"
-                    placeholder="Üniversite adı yazın..."
-                    x-model="sorgu"
-                    x-on:focus="acik = true"
-                    x-on:input="acik = true; vurgu = -1"
-                    x-on:keydown.arrow-down.prevent="asagi()"
-                    x-on:keydown.arrow-up.prevent="yukari()"
-                    x-on:keydown.enter.prevent="enter()"
-                    autocomplete="off"
-                />
-
-                <div x-show="acik && sonuclar.length" x-transition.opacity x-cloak
-                    class="absolute z-20 mt-1 max-h-64 w-full overflow-auto rounded-lg border border-line bg-surface py-1 shadow-lg">
-                    <template x-for="(u, idx) in sonuclar" :key="u">
-                        <button type="button" @click="sec(u)" @mouseenter="vurgu = idx"
-                            class="block w-full truncate px-3 py-2 text-start text-sm"
-                            :class="vurgu === idx ? 'bg-brand-light text-brand' : 'text-ink'"
-                            x-text="u"></button>
-                    </template>
-                </div>
-            </div>
+            {{-- Üniversite: yazılabilir seçim kutusu (bkz. components/combobox). --}}
+            <x-combobox model="universite" :secenekler="$universiteler"
+                label="Üniversite" placeholder="Üniversite adı yazın..." />
 
             {{-- Program bazlı yönergelerde (ör. Sabancı) aynı temel alanda birden
                  çok kriter bloğu var; doğru olanı ancak program seçilirse bulunur.

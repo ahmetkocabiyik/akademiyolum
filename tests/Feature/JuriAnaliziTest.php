@@ -151,6 +151,20 @@ test('kurum listesi yalnızca eşiği olan kurumları gösterir', function () {
     expect($kurumlar)->toBe(['Ankara Üniversitesi', 'Mersin Üniversitesi']);
 });
 
+test('kurum kutusu aranabilir: bütün seçenekler sayfaya iniyor', function () {
+    // Filtre istemcide çalışıyor; seçenekler sayfaya inmezse aday yazdığını
+    // bulamaz ve kutu boş bir metin alanına dönüşür.
+    Universite::factory()->create(['ad' => 'Yönergesiz Üniversite', 'sehir' => 'İzmir', 'tur' => 'devlet']);
+
+    $html = Livewire::test(JuriAnalizi::class)->html();
+
+    expect($html)->toContain('Ankara Üniversitesi')
+        ->and($html)->toContain('Mersin Üniversitesi')
+        // Eşiği olmayan kurum listeye de girmemeli: aday yazıp bulduğu kurumu
+        // seçince analiz hata verirdi.
+        ->and($html)->not->toContain('Yönergesiz Üniversite');
+});
+
 test('varsayılan kurum adayın kendi üniversitesi olur', function () {
     Livewire::test(JuriAnalizi::class)->assertSet('hedefKurum', 'Mersin Üniversitesi');
 });

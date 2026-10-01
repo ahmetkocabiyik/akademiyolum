@@ -46,11 +46,12 @@
             </flux:text>
         </div>
     @else
-        <flux:select wire:model="hedefKurum" label="Hedef Kurum" size="sm" placeholder="Kurum seçin">
-            @foreach ($kurumlar as $kurum)
-                <flux:select.option :value="$kurum">{{ $kurum }}</flux:select.option>
-            @endforeach
-        </flux:select>
+        {{-- Düz bir <select> değil: liste 100+ kuruma çıkıyor ve aday kendi
+             üniversitesini kaydırarak arıyordu. Odakta liste açılır, yazdıkça
+             süzülür. --}}
+        <x-combobox model="hedefKurum" :secenekler="$kurumlar"
+            label="Hedef Kurum" placeholder="Kurum adı yazın ya da listeden seçin..."
+            bos="Bu ada uyan, yönergesi girilmiş bir kurum yok." />
     @endif
 
     {{-- Jüri şapkası --}}
