@@ -24,6 +24,17 @@ class SaglayiciException extends RuntimeException
     }
 
     /**
+     * Yanıt geldi ama jüri raporu olarak okunamadı (bozuk JSON, boş adımlar).
+     *
+     * Yarım rapor kaydedilmiyor: ekranda başlıkları olup içeriği olmayan
+     * kutular, adaya raporun yazıldığını ama bir şey söylemediğini düşündürür.
+     */
+    public static function raporOkunamadi(): self
+    {
+        return new self('Jüri raporu okunamadı. Lütfen analizi tekrar başlatın.');
+    }
+
+    /**
      * Sağlayıcıya hiç ulaşılamadığında (ağ/timeout) kullanılır.
      */
     public static function ulasilamadi(): self

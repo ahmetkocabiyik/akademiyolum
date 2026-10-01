@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Services\AI\ClaudeSaglayici;
+use App\Services\AI\JuriRaporcu;
 use App\Services\AI\OpenAiSaglayici;
 use App\Services\AI\SohbetSaglayici;
+use App\Services\AI\StubJuriSaglayici;
 use App\Services\AI\StubSaglayici;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Yayin\CrossrefArama;
@@ -63,6 +65,51 @@ class AppServiceProvider extends ServiceProvider
 
             return new StubSaglayici;
         });
+
+        // Jüri raporu aynı sağlayıcıyı kullanır ama tek yanıtta on adım yazdığı
+        // için sohbetin token tavanı yetmiyor; sahte sağlayıcısı da ayrı, çünkü
+        // jüri katmanı metin değil JSON okuyor.
+        $this->app->when(JuriRaporcu::class)
+            ->needs(SohbetSaglayici::class)
+            ->give(fn (): SohbetSaglayici => $this->juriSaglayicisi());
+    }
+
+    /**
+     * Jüri raporu için sağlayıcı: sohbetle aynı seçim, yüksek token tavanı.
+     */
+    private function juriSaglayicisi(): SohbetSaglayici
+    {
+        $maxTokens = (int) config('ai.juri.max_tokens');
+
+        if (config('ai.saglayici') === 'claude') {
+            $anahtar = config('ai.claude.anahtar');
+
+            if (blank($anahtar)) {
+                throw new RuntimeException('ANTHROPIC_API_KEY tanımlı değil.');
+            }
+
+            return new ClaudeSaglayici(
+                anahtar: $anahtar,
+                model: config('ai.claude.model'),
+                maxTokens: $maxTokens,
+            );
+        }
+
+        if (config('ai.saglayici') === 'openai') {
+            $anahtar = config('ai.openai.anahtar');
+
+            if (blank($anahtar)) {
+                throw new RuntimeException('OPENAI_API_KEY tanımlı değil.');
+            }
+
+            return new OpenAiSaglayici(
+                anahtar: $anahtar,
+                model: config('ai.openai.model'),
+                maxTokens: $maxTokens,
+            );
+        }
+
+        return new StubJuriSaglayici;
     }
 
     /**

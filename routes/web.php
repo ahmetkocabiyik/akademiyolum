@@ -4,6 +4,7 @@ use App\Http\Controllers\YonergeKaynakController;
 use App\Livewire\Dashboard;
 use App\Livewire\FaaliyetEkle;
 use App\Livewire\Faaliyetler;
+use App\Livewire\JuriAnalizi;
 use App\Livewire\Onboarding;
 use App\Livewire\YonergeAnalizi;
 use App\Livewire\YzDanisman;
@@ -35,11 +36,7 @@ Route::middleware(['auth', 'verified', 'onboarded'])->group(function () {
 
     Route::livewire('yz-danisman', YzDanisman::class)->name('yz-danisman');
 
-    Route::view('juri-analizi', 'modules.placeholder', [
-        'heading' => 'YZ Jüri Analizi',
-        'subheading' => 'Jüri gözünden değerlendirme raporu',
-        'phase' => 'Faz 3',
-    ])->name('juri-analizi');
+    Route::livewire('juri-analizi', JuriAnalizi::class)->name('juri-analizi');
 
     Route::view('cv-olusturucu', 'modules.placeholder', [
         'heading' => 'CV Oluşturucu',

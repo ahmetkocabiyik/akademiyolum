@@ -157,6 +157,14 @@ class User extends Authenticatable implements PasskeyUser
     }
 
     /**
+     * @return HasMany<JuriRaporu, $this>
+     */
+    public function juriRaporlari(): HasMany
+    {
+        return $this->hasMany(JuriRaporu::class);
+    }
+
+    /**
      * Get the user's initials
      */
     public function initials(): string

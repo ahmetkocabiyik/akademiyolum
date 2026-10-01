@@ -16,6 +16,8 @@
 
     /* Akademiyolum marka paleti (prototip) */
     --color-navy: #0a1628;
+    /* Navy üzerinde ikinci kademe yüzey (jüri raporunun ölçüm şeridi). */
+    --color-navy-soft: #0f2044;
     --color-gold: #c9a84c;
     --color-gold-light: #faeeda;
     --color-brand: #1a56db;
@@ -139,6 +141,46 @@
 .mesaj-icerik ol { list-style: decimal; padding-inline-start: 1.25rem; margin: 0.4rem 0; }
 .mesaj-icerik ul { list-style: disc; padding-inline-start: 1.25rem; margin: 0.4rem 0; }
 .mesaj-icerik li { margin: 0.15rem 0; }
+
+/* Jüri raporu adım içeriği. Sohbet balonundan ayrı bir kural seti, çünkü rapor
+   Markdown TABLO basıyor (kriter-profil eşleştirmesi) ve tablo sığmadığında
+   sayfanın kendisi değil kutunun içi kaymalı. */
+.juri-icerik { font-size: 13px; line-height: 1.75; color: var(--color-ink-muted); }
+.juri-icerik > *:first-child { margin-top: 0; }
+.juri-icerik > *:last-child { margin-bottom: 0; }
+.juri-icerik p { margin: 0.6rem 0; }
+.juri-icerik strong { font-weight: 600; color: var(--color-ink); }
+.juri-icerik em { font-style: italic; }
+.juri-icerik ol { list-style: decimal; padding-inline-start: 1.25rem; margin: 0.6rem 0; }
+.juri-icerik ul { list-style: disc; padding-inline-start: 1.25rem; margin: 0.6rem 0; }
+.juri-icerik li { margin: 0.25rem 0; }
+.juri-icerik blockquote {
+    margin: 0.7rem 0;
+    padding: 0.1rem 0 0.1rem 0.85rem;
+    border-inline-start: 2px solid var(--color-line);
+    color: var(--color-ink-subtle);
+}
+.juri-icerik code {
+    font-size: 0.9em;
+    padding: 0.1em 0.35em;
+    border-radius: 5px;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-line);
+}
+/* Tablolar kutunun içinde yatay kayar; .juri-tablo sarmalayıcısı overflow verir. */
+.juri-tablo { margin: 0.8rem 0; overflow-x: auto; }
+.juri-icerik table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.juri-icerik th {
+    text-align: start;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-ink-subtle);
+    white-space: nowrap;
+}
+.juri-icerik td { padding: 8px; border-bottom: 1px solid var(--color-line); vertical-align: top; }
+.juri-icerik tr:last-child td { border-bottom: none; }
 
 /* Kategori ikon tint'leri kaldırıldı: her kategoriye sabit bir .kat-* kuralı
    yazmak, kategori eklendiğinde sessizce renksiz kutucuk bırakıyordu ve

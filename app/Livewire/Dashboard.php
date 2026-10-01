@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\Kadro;
 use App\Enums\Kategori;
 use App\Enums\TemelAlan;
 use App\Models\BeyanOnayi;
@@ -74,11 +75,7 @@ class Dashboard extends Component
     #[Computed]
     public function hedefKadro(): string
     {
-        return match (Auth::user()->unvan) {
-            'Doç. Dr.', 'Prof. Dr.' => 'profesorluk',
-            'Dr. Öğr. Üyesi' => 'docentlik',
-            default => 'dr_ogr_uyesi',
-        };
+        return Kadro::hedef(Auth::user()->unvan)->value;
     }
 
     /**
@@ -295,11 +292,7 @@ class Dashboard extends Component
 
     public function kadroEtiketi(): string
     {
-        return match ($this->hedefKadro) {
-            'docentlik' => 'Doçent',
-            'profesorluk' => 'Profesör',
-            default => 'Dr. Öğr. Üyesi',
-        };
+        return Kadro::etiketi($this->hedefKadro);
     }
 
     public function render(): View

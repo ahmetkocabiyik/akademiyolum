@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\Kadro;
 use App\Enums\TemelAlan;
 use App\Models\BeyanOnayi;
 use App\Models\Faaliyet;
@@ -165,26 +166,20 @@ class YonergeAnalizi extends Component
     ];
 
     /**
-     * Hedef kadro etiketleri (seçici + başlık için).
+     * Hedef kadro etiketleri (seçici + başlık için); mount() içinde
+     * {@see Kadro::etiketler()} ile dolar.
      *
      * @var array<string, string>
      */
-    public array $kadrolar = [
-        'dr_ogr_uyesi' => 'Dr. Öğr. Üyesi',
-        'docentlik' => 'Doçent',
-        'profesorluk' => 'Profesör',
-    ];
+    public array $kadrolar = [];
 
     /**
      * Varsayılan hedef kadro: kullanıcının bir üst kadrosu (yükselme hedefi).
      */
     public function mount(): void
     {
-        $this->hedefKadro = match (Auth::user()->unvan) {
-            'Doç. Dr.', 'Prof. Dr.' => 'profesorluk',
-            'Dr. Öğr. Üyesi' => 'docentlik',
-            default => 'dr_ogr_uyesi', // Arş. Gör. / Öğr. Gör.
-        };
+        $this->kadrolar = Kadro::etiketler();
+        $this->hedefKadro = Kadro::hedef(Auth::user()->unvan)->value;
     }
 
     protected function depo(): SartDeposu

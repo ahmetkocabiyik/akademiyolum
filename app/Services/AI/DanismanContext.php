@@ -2,6 +2,7 @@
 
 namespace App\Services\AI;
 
+use App\Enums\Kadro;
 use App\Enums\TemelAlan;
 use App\Models\User;
 use App\Services\Scoring\Sart\SartDeposu;
@@ -70,11 +71,7 @@ class DanismanContext
 
     private function hedefKadro(User $user): string
     {
-        return match ($user->unvan) {
-            'Doç. Dr.', 'Prof. Dr.' => 'profesorluk',
-            'Dr. Öğr. Üyesi' => 'docentlik',
-            default => 'dr_ogr_uyesi',
-        };
+        return Kadro::hedef($user->unvan)->value;
     }
 
     private function durumMetni(SartSonucu $sonuc): string

@@ -15,6 +15,21 @@ return [
 
     'saglayici' => env('AI_SAGLAYICI', 'stub'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Jüri Raporu
+    |--------------------------------------------------------------------------
+    |
+    | Jüri raporu on adımlık tek bir yanıtta üretiliyor; sohbet için yeterli olan
+    | 1024 token raporu ortasından keser. Sağlayıcı aynı, yalnızca token tavanı
+    | ve zaman aşımı ayrı.
+    |
+    */
+
+    'juri' => [
+        'max_tokens' => (int) env('AI_JURI_MAX_TOKENS', 8192),
+    ],
+
     'claude' => [
         'anahtar' => env('ANTHROPIC_API_KEY'),
         'model' => env('AI_MODEL', 'claude-sonnet-5'),
