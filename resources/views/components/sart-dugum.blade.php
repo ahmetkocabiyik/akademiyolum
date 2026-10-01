@@ -59,9 +59,9 @@
             @if ($dugum->kaynakEksik)
                 siz değerlendirin
             @elseif ($dugum->beyanOnaylandi)
-                beyan edildi
+                Kriter Onaylandı
             @elseif ($dugum->beyan)
-                onay gerek
+                Kriter Onaylanmalı
             @elseif ($telafiIle)
                 {{ $mevcut }} / {{ $dugum->gerekli }} <span class="font-normal">· telafi ile</span>
             @elseif ($olculur)
@@ -105,7 +105,7 @@
 
     {{-- Belirsizlik, koşulun sağlanmadığı anlamına gelmez: veri eksik. --}}
     @if ($gerekceGoster)
-        <div class="text-[11px] text-cat-amber-text">{{ $dugum->belirsizlikNedeni }}</div>
+        <div class="text-[11px] text-cat-purple">{{ $dugum->belirsizlikNedeni }}</div>
     @endif
 
     @if ($dugum->kaynakEksik)

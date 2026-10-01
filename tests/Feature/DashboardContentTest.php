@@ -203,7 +203,7 @@ test('dashboard onay bekleyen durumu Yönerge Analizi ile aynı adla anıyor', f
     ]));
 
     Livewire::test(Dashboard::class)
-        ->assertSee('Onay Gerek')
+        ->assertSee('Kriter Onaylanmalı')
         ->assertDontSee('Eksik Bilgi');
 });
 

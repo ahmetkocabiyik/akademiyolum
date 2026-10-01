@@ -33,7 +33,7 @@ enum Durum: string
         return match ($this) {
             self::Saglandi => 'var(--color-cat-green)',
             self::Saglanmadi => 'var(--color-cat-red)',
-            self::Belirsiz => 'var(--color-cat-amber)',
+            self::Belirsiz => 'var(--color-cat-purple)',
         };
     }
 

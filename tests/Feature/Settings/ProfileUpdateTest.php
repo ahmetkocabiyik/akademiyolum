@@ -277,6 +277,6 @@ test('profil sayfası durumu Yönerge Analizi ile aynı adla anıyor', function 
     $this->actingAs(User::factory()->create());
 
     Livewire::test(Profile::class)
-        ->assertSee('Onay Gerek')
+        ->assertSee('Kriter Onaylanmalı')
         ->assertDontSee('eksik bilgi');
 });

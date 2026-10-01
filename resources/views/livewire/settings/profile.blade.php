@@ -128,7 +128,7 @@
                 <flux:heading size="sm">Akademik Profil</flux:heading>
                 <flux:text class="!mt-1 !text-xs">
                     Yönerge analizi bu değerleri kullanır. Boş bıraktığınız her alan, ona bağlı koşulu
-                    <strong>belirsiz</strong> bırakır ve üniversite <strong>“Onay Gerek”</strong> olarak
+                    <strong>belirsiz</strong> bırakır ve üniversite <strong>“Kriter Onaylanmalı”</strong> olarak
                     işaretlenir — koşul sağlanmamış sayılmaz, değerlendirilemez.
                 </flux:text>
                 <div class="mt-3 flex items-start gap-2 rounded-xl border border-line bg-canvas p-3">

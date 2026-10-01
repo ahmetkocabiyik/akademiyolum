@@ -1,3 +1,5 @@
+@use('App\Livewire\YonergeAnalizi', 'Analiz')
+
 @props([
     'ozet',
     'durumFiltre',
@@ -12,7 +14,14 @@
          daralmaz — hep tüm dağılımı gösterir, yoksa "Yetersiz"e tıklayan aday
          diğerlerini sıfır görürdü. "Toplam" filtreyi temizleyen sayaç. --}}
     <div class="flex items-center gap-3">
-        @foreach ([['Toplam', $ozet['toplam'], 'var(--color-ink)', ''], ['Yetersiz', $ozet['yetersiz'], 'var(--color-cat-red)', 'yetersiz'], ['Yakın', $ozet['yakin'], 'var(--color-cat-amber)', 'yakin'], ['Onay Gerek', $ozet['eksik_bilgi'], 'var(--color-cat-amber)', 'eksik_bilgi'], ['Uygun', $ozet['uygun'], 'var(--color-cat-green)', 'uygun'], ['Ölçüt Yok', $ozet['alan_yok'], 'var(--color-ink-subtle)', 'alan_yok']] as [$etiket, $sayi, $renk, $durum])
+        @foreach ([
+            ['Toplam', $ozet['toplam'], 'var(--color-ink)', ''],
+            [Analiz::ETIKET['yetersiz'], $ozet['yetersiz'], Analiz::RENK['yetersiz'], 'yetersiz'],
+            [Analiz::ETIKET['yakin'], $ozet['yakin'], Analiz::RENK['yakin'], 'yakin'],
+            [Analiz::ETIKET['eksik_bilgi'], $ozet['eksik_bilgi'], Analiz::RENK['eksik_bilgi'], 'eksik_bilgi'],
+            [Analiz::ETIKET['uygun'], $ozet['uygun'], Analiz::RENK['uygun'], 'uygun'],
+            ['Ölçüt Yok', $ozet['alan_yok'], 'var(--color-ink-subtle)', 'alan_yok'],
+        ] as [$etiket, $sayi, $renk, $durum])
             @if (! $loop->first)<div class="h-8 w-px bg-line"></div>@endif
             @php $secili = $durumFiltre === $durum; @endphp
             <button type="button"

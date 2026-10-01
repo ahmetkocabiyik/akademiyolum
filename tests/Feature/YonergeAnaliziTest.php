@@ -11,11 +11,27 @@ use App\Services\Scoring\Sart\Durum;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Scoring\Sart\SartSonucu;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportTesting\Testable;
 use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
 
 const BEYAN_METNI = 'Doktora sonrası altı ay yurt dışında bulunmak';
+
+/** Beyan koşulu satırının etiketi; özet bar sayacı da aynı metni kullanıyor. */
+const BEYAN_ETIKETI = 'Kriter Onaylanmalı';
+
+/**
+ * Etiketi taşıyan KOŞUL SATIRI sayısı.
+ *
+ * Aynı metin özet barda durum sayacı olarak da geçiyor, o yüzden düz arama
+ * satırı ölçemez: sayaçta etiketi hemen bir etiket kapanışı ya da aria-label
+ * metni izler, koşul satırında ise satır sonu gelir.
+ */
+function etiketliSatirSayisi(Testable $bilesen): int
+{
+    return preg_match_all('/'.BEYAN_ETIKETI.'\s*\n/u', $bilesen->html());
+}
 
 /**
  * Test cetveli: kullanıcının 4 faaliyeti tam 70 puan eder.
@@ -460,7 +476,7 @@ test('"belge ile" koşulu işaretlenince üniversite yapılabilire döner', func
     expect($bul(Livewire::test(YonergeAnalizi::class)->instance()->sonuclar())['durum'])->toBe('uygun');
 });
 
-test('kartta beyan koşulu işaretlenmeden "onay gerek", işaretlenince "beyan edildi"', function () {
+test('kartta beyan koşulu işaretlenmeden "Kriter Onaylanmalı", işaretlenince "Kriter Onaylandı"', function () {
     // Kart ile detay paneli aynı koşul için aynı sözcüğü kullanmalı; eskiden
     // kart "belge ile" diyor ve işaretlendikten SONRA da öyle kalıyordu.
     Universite::factory()->create(['ad' => 'Beyan Üni', 'sehir' => 'Ankara', 'tur' => 'devlet']);
@@ -470,14 +486,16 @@ test('kartta beyan koşulu işaretlenmeden "onay gerek", işaretlenince "beyan e
     $uniId = Universite::query()->where('ad', 'Beyan Üni')->value('id');
 
     $bilesen = Livewire::test(YonergeAnalizi::class)
-        ->assertSee('onay gerek')
-        ->assertDontSee('belge ile')
-        ->call('detayAc', $uniId)
-        ->assertSee('onay gerek');
+        ->assertDontSee('belge ile');
+    $kartta = etiketliSatirSayisi($bilesen);
+    expect($kartta)->toBeGreaterThan(0);
+
+    $bilesen->call('detayAc', $uniId);
+    expect(etiketliSatirSayisi($bilesen))->toBeGreaterThanOrEqual($kartta);
 
     $bilesen->call('beyanDegistir', $esikAnahtari, beyanAnahtari())
-        ->assertSee('beyan edildi')
-        ->assertDontSee('onay gerek');
+        ->assertSee('Kriter Onaylandı');
+    expect(etiketliSatirSayisi($bilesen))->toBe(0);
 });
 
 test('cetvel eksikliği adayın onay bekleyen koşullarından ayrı sayılır', function () {
@@ -495,13 +513,14 @@ test('cetvel eksikliği adayın onay bekleyen koşullarından ayrı sayılır', 
     expect($sonuc['beyan_sayisi'])->toBe(1)
         ->and($sonuc['cetvel_eksigi_sayisi'])->toBe(1);
 
-    Livewire::test(YonergeAnalizi::class)
+    $bilesen = Livewire::test(YonergeAnalizi::class)
         ->assertSee('1 koşul onayınızı bekliyor.')
         ->assertSee('1 koşulu kendiniz değerlendirmelisiniz.')
-        // Etiket de ayrışıyor: biri işaretlenebilir, öteki bizim eksiğimiz.
-        ->assertSee('onay gerek')
         ->assertSee('siz değerlendirin')
         ->assertDontSee('hesaplanamıyor');
+
+    // Etiket de ayrışıyor: biri işaretlenebilir, öteki bizim eksiğimiz.
+    expect(etiketliSatirSayisi($bilesen))->toBeGreaterThan(0);
 });
 
 test('aynı kutuya yeniden tıklamak beyanı geri alır', function () {
@@ -649,13 +668,13 @@ test('eksik bilgi kartta gerekçesiyle gösterilir', function () {
     $uniId = Universite::query()->where('ad', 'Belirsiz Üni')->value('id');
 
     Livewire::test(YonergeAnalizi::class)
-        ->assertSee('Onay Gerek')
+        ->assertSee('Kriter Onaylanmalı')
         ->assertSee('koşul için eksik bilgilerinizi tamamlamalısınız.')
         // Durumun ADI ekranın her yerinde aynı olmalı: özet bardaki sayaç,
         // kart rozeti ve detay panelindeki rozet aynı sözcüğü kullanır.
         // Eski ad hiçbir yerde kalmamalı.
         ->call('detayAc', $uniId)
-        ->assertSee('Onay Gerek')
+        ->assertSee('Kriter Onaylanmalı')
         ->assertDontSee('Eksik Bilgi');
 });
 
@@ -1159,6 +1178,11 @@ test('durum haritaları bütün ekran durumlarını kapsıyor', function () {
     ] as $ad => $harita) {
         expect(array_keys($harita))->toEqualCanonicalizing($ekranDurumlari, "{$ad} haritası eksik");
         expect(array_filter($harita))->toHaveCount(4, "{$ad} haritasında boş değer var");
+
+        // Dört durumun dört ayrı karşılığı olmalı: "Kriter Onaylanmalı" ile
+        // "Yakın" aynı amber'i paylaşırken aday kartlara bakıp ikisini
+        // ayıramıyordu — sayfa hata vermeden yanlış şeyi anlatıyor.
+        expect(array_unique($harita))->toHaveCount(4, "{$ad} haritasında iki durum aynı değere düşüyor");
     }
 });
 

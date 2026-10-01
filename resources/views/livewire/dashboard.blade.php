@@ -1,14 +1,17 @@
 <div>
     @php
         use App\Enums\Kategori;
+        use App\Livewire\YonergeAnalizi as Analiz;
         $esik = $this->esik;
         $sonuc = $this->sonuc;
         $onayliAdet = $this->onayli->count();
         // Yarım daire gauge yay uzunluğu (r=74 → π·74 ≈ 232.5)
         $gaugeUzunluk = 232.5;
         $gaugeOffset = $gaugeUzunluk * (1 - $this->yuzde / 100);
-        $durumRenk = ['uygun' => 'green', 'yakin' => 'amber', 'eksik_bilgi' => 'amber', 'yetersiz' => 'red'];
-        $durumMetin = ['uygun' => 'Uygun', 'yakin' => 'Yakın', 'eksik_bilgi' => 'Onay Gerek', 'yetersiz' => 'Yetersiz'];
+        // Renk ve etiket tek kaynaktan: haritalar burada kopyalanınca yönerge
+        // ekranıyla panel sessizce ayrı sözcük/renk gösteriyordu.
+        $durumRenk = Analiz::ROZET;
+        $durumMetin = Analiz::ETIKET;
     @endphp
 
     <x-topbar title="Dashboard"

@@ -97,8 +97,8 @@
 
         {{-- Belirsizliğin gerekçesi: motor tahmin yürütmüyor. --}}
         @if (count($belirsizler) > 0)
-            <div class="mt-3 rounded-xl border border-cat-amber/30 bg-cat-amber/5 p-3">
-                <div class="mb-1.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-cat-amber-text">
+            <div class="mt-3 rounded-xl border border-cat-purple/30 bg-cat-purple/5 p-3">
+                <div class="mb-1.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-cat-purple">
                     <flux:icon name="question-mark-circle" class="size-3.5" />Değerlendirilemeyen Koşullar
                 </div>
                 <flux:text class="!text-[11px] leading-relaxed">

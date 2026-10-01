@@ -128,7 +128,7 @@ class YonergeAnalizi extends Component
      * haritalar üç ayrı şablonda kopyalıydı ve biri değişince öbürleri sessizce
      * geride kalıyordu. Şablonlar artık `@use` ile buradan okuyor.
      *
-     * "Onay Gerek" olumsuz bir sonuç DEĞİL: kesin olumsuz yaprak yok, ama bir
+     * "Kriter Onaylanmalı" olumsuz bir sonuç DEĞİL: kesin olumsuz yaprak yok, ama bir
      * şey adayın onayını bekliyor (belge kutusu, profil ya da tarih).
      *
      * @var array<string, string>
@@ -136,7 +136,7 @@ class YonergeAnalizi extends Component
     public const RENK = [
         'uygun' => 'var(--color-cat-green)',
         'yakin' => 'var(--color-cat-amber)',
-        'eksik_bilgi' => 'var(--color-cat-amber)',
+        'eksik_bilgi' => 'var(--color-cat-purple)',
         'yetersiz' => 'var(--color-cat-red)',
     ];
 
@@ -144,7 +144,7 @@ class YonergeAnalizi extends Component
     public const ROZET = [
         'uygun' => 'green',
         'yakin' => 'amber',
-        'eksik_bilgi' => 'amber',
+        'eksik_bilgi' => 'purple',
         'yetersiz' => 'red',
     ];
 
@@ -152,7 +152,7 @@ class YonergeAnalizi extends Component
     public const ETIKET = [
         'uygun' => 'Uygun',
         'yakin' => 'Yakın',
-        'eksik_bilgi' => 'Onay Gerek',
+        'eksik_bilgi' => 'Kriter Onaylanmalı',
         'yetersiz' => 'Yetersiz',
     ];
 
@@ -160,7 +160,7 @@ class YonergeAnalizi extends Component
     public const UZUN_ETIKET = [
         'uygun' => 'Uygun',
         'yakin' => 'Yakın Sınırda',
-        'eksik_bilgi' => 'Onay Gerek',
+        'eksik_bilgi' => 'Kriter Onaylanmalı',
         'yetersiz' => 'Puan Yetersiz',
     ];
 

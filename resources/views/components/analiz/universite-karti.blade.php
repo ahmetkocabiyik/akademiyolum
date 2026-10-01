@@ -96,9 +96,9 @@
                         @if ($kosul->kaynakEksik)
                             siz değerlendirin
                         @elseif ($kosul->beyanOnaylandi)
-                            beyan edildi
+                            Kriter Onaylandı
                         @elseif ($kosul->beyan)
-                            onay gerek
+                            Kriter Onaylanmalı
                         @elseif ($kosul->telafiIleSaglandi())
                             telafi ile
                         @elseif ($kosul->gerekli !== null)
@@ -121,7 +121,7 @@
              işaretlemek · kendi değerlendirmesini yapmak. Tek satırda
              toplanırsa aday nereye gideceğini bilmiyor. --}}
         @if ($s['belirsiz_sayisi'] > 0)
-            <div class="mt-2 flex items-start gap-1 text-[11px] text-cat-amber-text">
+            <div class="mt-2 flex items-start gap-1 text-[11px] text-cat-purple">
                 <flux:icon name="question-mark-circle" class="mt-px size-3 shrink-0" />
                 <span>{{ $s['belirsiz_sayisi'] }} koşul için eksik bilgilerinizi tamamlamalısınız.</span>
             </div>
