@@ -79,6 +79,19 @@ test('alanlar ayrı bir kaydet adımı olmadan saklanır', function () {
     Livewire::test(CvOlusturucu::class)->assertSet('ozet', 'Tasavvuf alanında çalışıyorum.');
 });
 
+test('kaydet düğmesi formdaki değerleri saklar ve teyit verir', function () {
+    Livewire::test(CvOlusturucu::class)
+        ->set('unvan', 'Doç. Dr.')
+        ->set('egitimler', [['derece' => 'Doktora', 'universite' => 'Ankara Üniversitesi', 'bolum' => 'Tasavvuf', 'baslangic' => '2013', 'bitis' => '2019']])
+        ->call('kaydetVeBildir')
+        ->assertDispatched('toast-show');
+
+    $profil = $this->user->cvProfili()->sole();
+
+    expect($profil->unvan)->toBe('Doç. Dr.')
+        ->and($profil->egitimler[0]['universite'])->toBe('Ankara Üniversitesi');
+});
+
 test('yalnızca onaylı faaliyetler cv listesine girer', function () {
     Faaliyet::factory()->for($this->user)->create([
         'baslik' => 'Beklemedeki yayın',

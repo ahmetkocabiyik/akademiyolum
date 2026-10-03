@@ -11,7 +11,7 @@
         </flux:button>
     </x-topbar>
 
-    <div class="grid gap-4 xl:grid-cols-[320px_1fr_280px]">
+    <div class="grid gap-4 xl:grid-cols-[320px_1fr_280px] 2xl:grid-cols-[360px_1fr_340px]">
 
         <x-cv.form-paneli
             :sekme="$sekme"
@@ -40,7 +40,7 @@
             }"
             x-init="$nextTick(() => { hesapla(); new ResizeObserver(() => hesapla()).observe($refs.kap); new ResizeObserver(() => hesapla()).observe($refs.sayfa); })">
             <div x-ref="kap" class="overflow-hidden" :style="`height: ${yukseklik}px`">
-                <div x-ref="sayfa" class="cv-olcek w-fit" :style="`transform: scale(${olcek})`">
+                <div x-ref="sayfa" class="cv-olcek mx-auto w-fit" :style="`transform: scale(${olcek})`">
                     <x-cv.onizleme :cv="$this->onizleme()" />
                 </div>
             </div>

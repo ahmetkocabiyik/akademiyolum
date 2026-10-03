@@ -14,7 +14,8 @@
     SOL PANEL — CV'nin içeriği.
 
     Künye alanları `.blur` ile bağlı, listeler ise eylemlerle değişiyor; her
-    ikisi de anında kaydediliyor (bkz. CvOlusturucu::updated). Panel dört
+    ikisi de anında kaydediliyor (bkz. CvOlusturucu::updated). Alttaki Kaydet
+    düğmesi bunu teyit ediyor. Panel dört
     sekmeye bölündü çünkü tek kolonda alt alta dizilince aday yayın listesine
     inmek için beş ekran kaydırıyordu.
 --}}
@@ -30,7 +31,7 @@
             <button type="button" wire:click="$set('sekme', '{{ $deger }}')"
                 aria-pressed="{{ $sekme === $deger ? 'true' : 'false' }}"
                 @class([
-                    'flex-1 border-b-2 px-2 py-2.5 text-xs font-medium transition',
+                    'flex-1 border-b-2 px-3 py-3.5 text-sm font-medium transition',
                     'border-brand text-brand' => $sekme === $deger,
                     'border-transparent text-ink-subtle hover:text-ink' => $sekme !== $deger,
                 ])>{{ $etiket }}</button>
@@ -231,5 +232,11 @@
                 </div>
             </div>
         @endif
+    </div>
+
+    {{-- Kayıt zaten otomatik; düğme bunu görünür kılıyor. Aday Kaydet
+         düğmesi aramış, bulamayınca değişikliklerinin saklanmadığını sanmıştı. --}}
+    <div class="flex shrink-0 justify-end border-t border-line px-4 py-3">
+        <flux:button wire:click="kaydetVeBildir" size="sm" variant="primary" icon="check">Kaydet</flux:button>
     </div>
 </flux:card>

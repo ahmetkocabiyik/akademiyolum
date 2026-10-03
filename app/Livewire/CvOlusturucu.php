@@ -7,6 +7,7 @@ use App\Enums\CvSablonu;
 use App\Enums\CvYaziTipi;
 use App\Models\CvProfili;
 use App\Models\Faaliyet;
+use Flux\Flux;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -28,9 +29,10 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  *     İlk açılışta akademik profilden doldurulur, sonra bağımsızdır: CV'de
  *     yazan unvanı değiştirmek yönerge analizinin kadro hesabını bozmamalı.
  *
- * Her değişiklik anında kaydediliyor ({@see updated()}); "Kaydet" düğmesi yok,
- * çünkü aday önizlemeye bakarken formu bırakıp sekme değiştiriyor ve
- * kaydedilmemiş alanları geri döndüğünde kaybediyordu.
+ * Her değişiklik anında kaydediliyor ({@see updated()}), çünkü aday önizlemeye
+ * bakarken formu bırakıp sekme değiştiriyor ve kaydedilmemiş alanları geri
+ * döndüğünde kaybediyordu. Paneldeki "Kaydet" düğmesi ({@see kaydetVeBildir()})
+ * bunun yerine geçmiyor: otomatik kaydı görünür kılıp adaya teyit veriyor.
  *
  * @property-read CvProfili $profil
  * @property-read Collection<int, Faaliyet> $faaliyetler
@@ -194,6 +196,17 @@ class CvOlusturucu extends Component
         }
 
         $this->kaydet();
+    }
+
+    /**
+     * Paneldeki "Kaydet" düğmesi. Odaktaki alan düğmeye basılırken `.blur`
+     * ile zaten gönderiliyor; burada yalnız son hâli yazıp teyit veriyoruz.
+     */
+    public function kaydetVeBildir(): void
+    {
+        $this->kaydet();
+
+        Flux::toast(variant: 'success', text: 'CV kaydedildi.');
     }
 
     public function egitimEkle(): void
