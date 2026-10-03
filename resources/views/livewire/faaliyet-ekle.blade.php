@@ -219,6 +219,17 @@
                     <flux:input wire:model="doi" label="DOI Numarası" placeholder="10.xxxx/xxxxx" />
 
                         <flux:textarea wire:model="aciklama" label="Kısa Açıklama" placeholder="Faaliyet hakkında kısa bir not ekleyin..." rows="3" />
+
+                    {{-- Yalnız düzenlemede: yeni kayıt onaylı başlıyor, içe
+                         aktarılan kayıt beklemede iniyor ve aday onu burada onaylıyor. --}}
+                    @if ($faaliyet)
+                        <flux:select wire:model="durum" label="Durum"
+                            description="Beklemedeki faaliyetler puanlamaya, yönerge analizine ve CV'ye katılmaz.">
+                            @foreach (\App\Models\Faaliyet::durumlar() as $deger => $etiket)
+                                <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
+                            @endforeach
+                        </flux:select>
+                    @endif
                     </div>
                 </flux:card>
 

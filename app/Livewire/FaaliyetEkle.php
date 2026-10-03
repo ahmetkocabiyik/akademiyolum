@@ -145,6 +145,12 @@ class FaaliyetEkle extends Component
 
     public string $aciklama = '';
 
+    /**
+     * Onay durumu. Yalnız beklemede olmayan kayıtlar puanlamaya, analize ve
+     * CV'ye giriyor; içe aktarılanlar beklemede iniyor ve aday buradan onaylıyor.
+     */
+    public string $durum = 'onaylandi';
+
     public function mount(?Faaliyet $faaliyet = null): void
     {
         if ($faaliyet !== null && $faaliyet->exists) {
@@ -163,6 +169,7 @@ class FaaliyetEkle extends Component
             $this->tarih = $faaliyet->tarih?->format('Y-m-d') ?? '';
             $this->doi = (string) ($faaliyet->meta['doi'] ?? '');
             $this->aciklama = (string) ($faaliyet->meta['aciklama'] ?? '');
+            $this->durum = $faaliyet->durum;
 
             return;
         }
@@ -918,6 +925,7 @@ class FaaliyetEkle extends Component
             'tarih' => ['nullable', 'date', 'before_or_equal:today'],
             'doi' => ['nullable', 'string', 'max:255'],
             'aciklama' => ['nullable', 'string', 'max:1000'],
+            'durum' => ['required', Rule::in(array_keys(Faaliyet::durumlar()))],
         ]);
 
         $kategori = Kategori::from($veri['kategori']);
@@ -929,9 +937,10 @@ class FaaliyetEkle extends Component
 
         $rol = $this->rolBelirle($kategori, $yazarlar);
 
-        $faaliyet = $this->faaliyet ?? new Faaliyet(['durum' => 'onaylandi']);
+        $faaliyet = $this->faaliyet ?? new Faaliyet;
 
         $faaliyet->fill([
+            'durum' => $veri['durum'],
             'kategori' => $kategori->value,
             'tur' => $kategori->label(),
             'baslik' => $veri['baslik'],

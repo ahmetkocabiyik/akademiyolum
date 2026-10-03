@@ -110,6 +110,19 @@ class Faaliyet extends Model
     }
 
     /**
+     * Onay durumları ve etiketleri.
+     *
+     * @return array<string, string>
+     */
+    public static function durumlar(): array
+    {
+        return [
+            'onaylandi' => 'Onaylandı',
+            'beklemede' => 'Beklemede',
+        ];
+    }
+
+    /**
      * @param  Builder<Faaliyet>  $query
      */
     public function scopeOnaylanmis(Builder $query): void

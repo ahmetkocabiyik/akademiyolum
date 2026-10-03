@@ -155,6 +155,79 @@ test('mevcut faaliyet düzenlenir', function () {
     expect($faaliyet->refresh()->kaynak)->toBe('SCIE/SSCI (Q2)');
 });
 
+test('beklemedeki faaliyet durum seçilerek onaylanır ve motora girer', function () {
+    $faaliyet = Faaliyet::factory()->for($this->user)->beklemede()->create([
+        'kategori' => Kategori::Makale,
+        'kaynak' => null,
+    ]);
+
+    expect(Faaliyet::query()->onaylanmis()->count())->toBe(0);
+
+    Livewire::test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
+        ->assertSet('durum', 'beklemede')
+        ->set('kaynak', 'TR Dizin')
+        ->set('durum', 'onaylandi')
+        ->call('kaydet')
+        ->assertHasNoErrors();
+
+    expect($faaliyet->refresh()->durum)->toBe('onaylandi')
+        ->and(Faaliyet::query()->onaylanmis()->pluck('id')->all())->toBe([$faaliyet->id]);
+});
+
+test('durum seçilmeden kaydedilen beklemedeki faaliyet beklemede kalır', function () {
+    $faaliyet = Faaliyet::factory()->for($this->user)->beklemede()->create([
+        'kategori' => Kategori::Makale,
+    ]);
+
+    Livewire::test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
+        ->set('kaynak', 'TR Dizin')
+        ->call('kaydet')
+        ->assertHasNoErrors();
+
+    expect($faaliyet->refresh()->durum)->toBe('beklemede');
+});
+
+test('onaylı faaliyet beklemeye alınabilir', function () {
+    $faaliyet = Faaliyet::factory()->for($this->user)->create([
+        'kategori' => Kategori::Makale,
+        'kaynak' => 'TR Dizin',
+    ]);
+
+    Livewire::test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
+        ->assertSet('durum', 'onaylandi')
+        ->set('durum', 'beklemede')
+        ->call('kaydet')
+        ->assertHasNoErrors();
+
+    expect($faaliyet->refresh()->durum)->toBe('beklemede');
+});
+
+test('geçersiz durum reddedilir', function () {
+    $faaliyet = Faaliyet::factory()->for($this->user)->create(['kategori' => Kategori::Makale]);
+
+    Livewire::test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
+        ->set('durum', 'reddedildi')
+        ->call('kaydet')
+        ->assertHasErrors(['durum']);
+
+    expect($faaliyet->refresh()->durum)->toBe('onaylandi');
+});
+
+test('durum seçeneği yalnız düzenleme ekranında görünür; yeni kayıt onaylı başlar', function () {
+    $this->get(route('faaliyetler.ekle'))->assertDontSee('Beklemedeki faaliyetler puanlamaya');
+
+    $faaliyet = Faaliyet::factory()->for($this->user)->beklemede()->create();
+    $this->get(route('faaliyetler.duzenle', $faaliyet))->assertSee('Beklemedeki faaliyetler puanlamaya');
+
+    Livewire::test(FaaliyetEkle::class)
+        ->set('kategori', Kategori::Makale->value)
+        ->set('baslik', 'Yeni makale')
+        ->call('kaydet')
+        ->assertHasNoErrors();
+
+    expect(Faaliyet::query()->where('baslik', 'Yeni makale')->value('durum'))->toBe('onaylandi');
+});
+
 test('başka kullanıcının faaliyeti düzenlenemez', function () {
     $baskasi = Faaliyet::factory()->for(User::factory())->create();
 
