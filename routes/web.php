@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CvFotoController;
 use App\Http\Controllers\YonergeKaynakController;
 use App\Livewire\CvOlusturucu;
 use App\Livewire\Dashboard;
@@ -40,6 +41,9 @@ Route::middleware(['auth', 'verified', 'onboarded'])->group(function () {
     Route::livewire('juri-analizi', JuriAnalizi::class)->name('juri-analizi');
 
     Route::livewire('cv-olusturucu', CvOlusturucu::class)->name('cv-olusturucu');
+
+    // CV fotoğrafı public/ dışında; yalnızca sahibine bu rotadan akıtılır.
+    Route::get('cv-olusturucu/foto', CvFotoController::class)->name('cv-olusturucu.foto');
 
     Route::view('cikti-yonetimi', 'modules.placeholder', [
         'heading' => 'Çıktı Yönetimi',

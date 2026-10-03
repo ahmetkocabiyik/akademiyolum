@@ -10,12 +10,15 @@ use App\Models\Faaliyet;
 use Flux\Flux;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Livewire\WithFileUploads;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -43,6 +46,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 #[Title('CV Oluşturucu')]
 class CvOlusturucu extends Component
 {
+    use WithFileUploads;
+
     /** Yeni eklenen satırların iskeleti; anahtar kümesi şablonun beklediğiyle aynı. */
     private const BOS_EGITIM = ['derece' => '', 'universite' => '', 'bolum' => '', 'baslangic' => '', 'bitis' => ''];
 
@@ -78,6 +83,14 @@ class CvOlusturucu extends Component
     #[Validate('nullable|string|max:1500')]
     public string $ozet = '';
 
+    /**
+     * Seçilen fotoğrafın geçici yüklemesi. Seçildiği an kalıcı diske
+     * yazılıp boşaltılıyor ({@see updatedYeniFoto()}); CV'nin fotoğrafı
+     * profildeki `foto` sütunu.
+     */
+    #[Validate('nullable|image|mimes:jpg,jpeg,png,webp|max:10240')]
+    public ?TemporaryUploadedFile $yeniFoto = null;
+
     /** @var list<array{derece: string, universite: string, bolum: string, baslangic: string, bitis: string}> */
     public array $egitimler = [];
 
@@ -93,9 +106,11 @@ class CvOlusturucu extends Component
     /** @var list<int> */
     public array $haricFaaliyetler = [];
 
-    public string $sablon = 'resmi';
+    public string $sablon = 'minimal';
 
     public string $renk = '#0a1628';
+
+    public string $cizgiRenk = CvProfili::VARSAYILAN_CIZGI_RENGI;
 
     public string $yaziTipi = 'sans';
 
@@ -130,6 +145,7 @@ class CvOlusturucu extends Component
         $this->haricFaaliyetler = $this->sayiListesi($profil->haric_faaliyetler);
         $this->sablon = $profil->sablon->value;
         $this->renk = $profil->renk;
+        $this->cizgiRenk = $profil->cizgi_renk ?? CvProfili::VARSAYILAN_CIZGI_RENGI;
         $this->yaziTipi = $profil->yazi_tipi->value;
         $this->bolumler = $profil->bolumler + CvBolumu::varsayilan();
     }
@@ -191,7 +207,7 @@ class CvOlusturucu extends Component
      */
     public function updated(string $alan): void
     {
-        if (in_array($alan, ['sekme', 'yeniBeceri', 'yeniDil'], true)) {
+        if (in_array($alan, ['sekme', 'yeniBeceri', 'yeniDil', 'yeniFoto'], true)) {
             return;
         }
 
@@ -207,6 +223,49 @@ class CvOlusturucu extends Component
         $this->kaydet();
 
         Flux::toast(variant: 'success', text: 'CV kaydedildi.');
+    }
+
+    /**
+     * Fotoğraf seçilir seçilmez saklanıyor; ayrı bir "yükle" adımı yok,
+     * formun geri kalanı gibi. Eski dosya silinir, diskte artık kalmaz.
+     */
+    public function updatedYeniFoto(): void
+    {
+        $this->validateOnly('yeniFoto');
+
+        if ($this->yeniFoto === null) {
+            return;
+        }
+
+        $eski = $this->profil->foto;
+        $yol = $this->yeniFoto->store('cv-fotolar', 'local');
+
+        $this->profil->update(['foto' => $yol]);
+        $this->yeniFoto = null;
+
+        if ($eski !== null) {
+            Storage::disk('local')->delete($eski);
+        }
+    }
+
+    public function fotoKaldir(): void
+    {
+        if ($this->profil->foto !== null) {
+            Storage::disk('local')->delete($this->profil->foto);
+        }
+
+        $this->profil->update(['foto' => null]);
+    }
+
+    /**
+     * Fotoğrafın adresi. Dosya adı her yüklemede değiştiği için sorgu
+     * parametresi önbelleği kırıyor; rota yanıtı uzun süre önbelleklenebiliyor.
+     */
+    public function fotoAdresi(): ?string
+    {
+        $yol = $this->profil->foto;
+
+        return $yol === null ? null : route('cv-olusturucu.foto', ['v' => basename($yol)]);
     }
 
     public function egitimEkle(): void
@@ -317,6 +376,14 @@ class CvOlusturucu extends Component
     {
         if (in_array($renk, CvProfili::RENKLER, true)) {
             $this->renk = $renk;
+            $this->kaydet();
+        }
+    }
+
+    public function cizgiRenkSec(string $renk): void
+    {
+        if (in_array($renk, CvProfili::CIZGI_RENKLERI, true)) {
+            $this->cizgiRenk = $renk;
             $this->kaydet();
         }
     }
@@ -533,6 +600,7 @@ class CvOlusturucu extends Component
             'haric_faaliyetler' => $this->haricFaaliyetler,
             'sablon' => $this->sablon,
             'renk' => $this->renk,
+            'cizgi_renk' => $this->cizgiRenk,
             'yazi_tipi' => $this->yaziTipi,
             'bolumler' => $this->bolumler,
         ]);
@@ -563,9 +631,11 @@ class CvOlusturucu extends Component
             'gruplu' => $this->gruplu,
             'sablon' => CvSablonu::from($this->sablon),
             'renk' => $this->renk,
+            'cizgiRenk' => $this->cizgiRenk,
             'yaziTipi' => CvYaziTipi::from($this->yaziTipi),
             'bolumler' => $this->bolumler,
             'basHarfler' => Auth::user()->initials(),
+            'foto' => $this->fotoAdresi(),
         ];
     }
 

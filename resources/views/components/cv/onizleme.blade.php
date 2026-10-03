@@ -13,7 +13,15 @@
 --}}
 @php
     $acik = fn (CvBolumu $bolum) => (bool) ($cv['bolumler'][$bolum->value] ?? true);
-    $iletisim = collect([$cv['eposta'], $cv['telefon'], $cv['sehir'], $cv['web']])->filter()->all();
+    // Her parça kendi ikonuyla. "ORCID / Web" alanı ikisini de taşıyabiliyor:
+    // ORCID numarasıysa kimlik, adresse küre ikonu.
+    $orcidMi = (bool) preg_match('/^(https?:\/\/orcid\.org\/)?\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i', (string) $cv['web']);
+    $iletisim = collect([
+        ['ikon' => 'envelope', 'metin' => $cv['eposta']],
+        ['ikon' => 'phone', 'metin' => $cv['telefon']],
+        ['ikon' => 'map-pin', 'metin' => $cv['sehir']],
+        ['ikon' => $orcidMi ? 'identification' : 'globe-alt', 'metin' => $cv['web']],
+    ])->filter(fn (array $parca) => filled($parca['metin']))->all();
 
     // Sol sütunun İÇERİĞİ varsa iki sütun. Beceri ve dil girilmemişken (ya da
     // ikisi de kapatılmışken) iki sütun basmak sayfanın solunda avuç içi
@@ -22,12 +30,21 @@
         || ($acik(CvBolumu::Diller) && $cv['diller'] !== []);
 @endphp
 
+{{-- Çizgi rengi yalnızca kapalı listedeyse yazılıyor: değer doğrudan style'a gidiyor. --}}
+@php
+    $cizgi = in_array($cv['cizgiRenk'], CvProfili::CIZGI_RENKLERI, true) ? $cv['cizgiRenk'] : CvProfili::VARSAYILAN_CIZGI_RENGI;
+@endphp
+
 <div id="cv-sayfa" class="cv-sayfa cv-{{ $cv['sablon']->value }}"
-    style="--cv-renk: {{ $cv['renk'] }}; --cv-font: {{ $cv['yaziTipi']->yigin() }}">
+    style="--cv-renk: {{ $cv['renk'] }}; --cv-font: {{ $cv['yaziTipi']->yigin() }}; --cv-baslik-cizgi: {{ $cizgi }};">
 
     <div class="cv-ust">
         @if ($acik(CvBolumu::Foto))
-            <div class="cv-foto">{{ $cv['basHarfler'] }}</div>
+            @if ($cv['foto'])
+                <img src="{{ $cv['foto'] }}" alt="" class="cv-foto cv-foto-gorsel">
+            @else
+                <div class="cv-foto">{{ $cv['basHarfler'] }}</div>
+            @endif
         @endif
         <div class="min-w-0 flex-1">
             <div class="cv-ad">{{ $cv['ad'] ?: 'Adınız' }}</div>
@@ -37,7 +54,10 @@
             @if ($iletisim !== [])
                 <div class="cv-iletisim">
                     @foreach ($iletisim as $parca)
-                        <span>{{ $parca }}</span>
+                        <span class="cv-iletisim-parca">
+                            <flux:icon :name="$parca['ikon']" variant="micro" class="cv-iletisim-ikon" />
+                            {{ $parca['metin'] }}
+                        </span>
                     @endforeach
                 </div>
             @endif
@@ -149,10 +169,5 @@
                 @endforeach
             @endif
         </div>
-    </div>
-
-    <div class="cv-alt">
-        <span>Akademiyolum ile oluşturuldu</span>
-        <span>{{ now()->translatedFormat('F Y') }}</span>
     </div>
 </div>

@@ -184,6 +184,9 @@
     font-family: var(--cv-font, 'DM Sans', sans-serif);
     font-size: 10.5pt;
     line-height: 1.5;
+    /* Bölüm çizgisinin rengi satır içi stilden gelir (bkz. cv/onizleme): aday
+       seçer, seçmemişse gri. Buradaki değer yalnızca o stil yoksa devreye girer. */
+    --cv-baslik-cizgi: #9ca3af;
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.08), 0 8px 24px rgb(0 0 0 / 0.08);
 }
 
@@ -207,9 +210,13 @@
     color: var(--cv-renk);
     border: 2px solid color-mix(in srgb, var(--cv-renk) 35%, #fff);
 }
+/* Yüklenen fotoğraf baş harf dairesinin yerini alıyor; kırpma yüzü ortalar. */
+.cv-foto-gorsel { object-fit: cover; object-position: center 30%; }
 .cv-ad { font-size: 21pt; font-weight: 700; line-height: 1.15; color: var(--cv-renk); }
 .cv-unvan { margin-top: 2px; font-size: 11pt; color: #4b5563; }
-.cv-iletisim { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 8.5pt; color: #6b7280; }
+.cv-iletisim { margin-top: 3px; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 8.5pt; color: #6b7280; }
+.cv-iletisim-parca { display: inline-flex; align-items: center; gap: 4px; }
+.cv-iletisim-ikon { width: 1.15em; height: 1.15em; flex-shrink: 0; opacity: 0.8; }
 
 .cv-govde { display: grid; grid-template-columns: 58mm 1fr; gap: 10mm; padding: 0 16mm 16mm; }
 .cv-govde-tek { grid-template-columns: 1fr; }
@@ -218,17 +225,20 @@
    Sayfa gerçek A4 ölçüsünde çizilip küçültülüyor; doğrudan dar çizilseydi
    ekrandaki satır sonları çıktıdakinden başka olurdu. */
 .cv-olcek { transform-origin: top left; }
+/* Köşe yuvarlaklığı ölçeğe bölünüyor: sayfa küçültülünce yarıçap da küçülür,
+   böyle ekranda yandaki kartlarla (rounded-xl) aynı görünür. Yazdırırken düz. */
+.cv-olcek .cv-sayfa { border-radius: calc(0.75rem / var(--cv-olcek, 1)); overflow: hidden; }
 .cv-sutun > * + * { margin-top: 14px; }
 
 .cv-baslik {
-    font-size: 9pt;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-size: 12pt;
+    font-weight: 800;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--cv-renk);
-    padding-bottom: 3px;
-    margin-bottom: 7px;
-    border-bottom: 1px solid color-mix(in srgb, var(--cv-renk) 25%, #fff);
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--cv-baslik-cizgi);
 }
 
 .cv-satir + .cv-satir { margin-top: 8px; }
@@ -253,35 +263,17 @@
 .cv-cubuk-dolu { height: 100%; border-radius: 4px; background: var(--cv-renk); }
 .cv-cubuk + .cv-cubuk { margin-top: 6px; }
 
-.cv-alt {
-    display: flex;
-    justify-content: space-between;
-    padding: 6mm 16mm 10mm;
-    font-size: 7.5pt;
-    color: #9ca3af;
-    border-top: 1px solid #e5e7eb;
-    margin: 0 16mm;
-    padding-inline: 0;
-}
-
 /* Şablonlar — yalnızca başlık bandı ve vurgu değişir. */
-.cv-resmi .cv-ust { border-bottom: 3px solid var(--cv-renk); }
-
 .cv-minimal .cv-ust { padding-bottom: 6mm; }
 .cv-minimal .cv-ad { color: #111827; }
-.cv-minimal .cv-baslik { border-bottom-color: #e5e7eb; color: #111827; }
+.cv-minimal .cv-baslik { color: #111827; }
 .cv-minimal .cv-foto { background: #f3f4f6; color: #6b7280; border-color: #e5e7eb; }
 
 .cv-prestijli .cv-ust { background: var(--cv-renk); color: #fff; padding-top: 14mm; padding-bottom: 12mm; }
 .cv-prestijli .cv-ad { color: #fff; }
 .cv-prestijli .cv-unvan, .cv-prestijli .cv-iletisim { color: rgb(255 255 255 / 0.72); }
 .cv-prestijli .cv-foto { background: rgb(255 255 255 / 0.12); color: #fff; border-color: var(--color-gold); }
-.cv-prestijli .cv-baslik { color: var(--cv-renk); border-bottom-color: var(--color-gold); }
 .cv-prestijli .cv-govde { padding-top: 10mm; }
-
-.cv-sade { --cv-renk: #374151 !important; }
-.cv-sade .cv-foto { display: none; }
-.cv-sade .cv-baslik { border-bottom-color: #d1d5db; }
 
 /* Yazdırma: ekranda ne varsa değil, YALNIZCA sayfa çıksın. Kenar boşluğu
    sayfanın kendi iç dolgusundan geliyor, @page'den değil — ikisi birden
@@ -299,7 +291,12 @@
     html, body { height: auto !important; background: #fff !important; }
     [data-flux-main] { padding: 0 !important; display: block !important; }
 
-    #cv-sayfa { margin: 0; box-shadow: none; width: 210mm; }
+    #cv-sayfa { margin: 0; box-shadow: none; width: 210mm; border-radius: 0; overflow: visible; }
+
+    /* Tarayıcılar yazdırırken arka plan rengini varsayılan olarak atıyor;
+       Prestijli'nin koyu başlık bandı, rozetler ve dil çubukları beyaz
+       çıkıyordu. Miras alınan bir özellik: sayfanın tamamını kapsar. */
+    #cv-sayfa { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
     /* Ekran ölçeği yazdırmada kalkmalı; ölçekli basılan sayfa A4'ün köşesine
        sıkışıyordu. Kabın sabit yüksekliği de kalkar, yoksa uzun CV kırpılır. */

@@ -6,6 +6,7 @@
     'diller',
     'faaliyetler',
     'haricFaaliyetler',
+    'foto',
 ])
 
 @use('App\Models\CvProfili')
@@ -43,6 +44,35 @@
         {{-- KİŞİSEL --}}
         @if ($sekme === 'kisisel')
             <div class="flex flex-col gap-3">
+                {{-- Fotoğraf seçilir seçilmez saklanıyor (CvOlusturucu::updatedYeniFoto);
+                     yoksa CV'de baş harfler duruyor. --}}
+                <div class="flex items-center gap-3">
+                    @if ($foto)
+                        <img src="{{ $foto }}" alt="CV fotoğrafı" class="size-14 shrink-0 rounded-full object-cover">
+                    @else
+                        <div class="flex size-14 shrink-0 items-center justify-center rounded-full bg-canvas text-ink-subtle">
+                            <flux:icon.user class="size-6" />
+                        </div>
+                    @endif
+
+                    <div class="flex min-w-0 flex-col gap-1">
+                        <div class="flex items-center gap-2">
+                            <label class="cursor-pointer">
+                                <input type="file" wire:model="yeniFoto" accept="image/jpeg,image/png,image/webp" class="sr-only">
+                                <span class="inline-flex items-center rounded-md border border-line px-2.5 py-1 text-xs font-medium text-ink transition hover:bg-canvas">
+                                    {{ $foto ? 'Fotoğrafı değiştir' : 'Fotoğraf yükle' }}
+                                </span>
+                            </label>
+                            @if ($foto)
+                                <flux:button wire:click="fotoKaldir" size="xs" variant="ghost">Kaldır</flux:button>
+                            @endif
+                        </div>
+                        <span wire:loading wire:target="yeniFoto" class="text-xs text-ink-subtle">Yükleniyor…</span>
+                        <span wire:loading.remove wire:target="yeniFoto" class="text-xs text-ink-subtle">JPG, PNG veya WebP · en fazla 10 MB</span>
+                        @error('yeniFoto') <span class="text-xs text-cat-red">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+
                 <flux:input wire:model.blur="ad" label="Ad Soyad" size="sm" />
                 <flux:input wire:model.blur="unvan" label="Unvan" size="sm" />
                 <flux:input wire:model.blur="kurum" label="Kurum" size="sm" />

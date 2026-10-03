@@ -1,4 +1,4 @@
-@props(['sablon', 'renk', 'yaziTipi', 'bolumler'])
+@props(['sablon', 'renk', 'cizgiRenk', 'yaziTipi', 'bolumler'])
 
 @use('App\Enums\CvBolumu')
 @use('App\Enums\CvSablonu')
@@ -51,31 +51,35 @@
                     ])></button>
             @endforeach
         </div>
-        {{-- Sade şablon rengi yok sayar; aday renge basıp hiçbir şey olmayınca
-             arızalı sanıyordu. --}}
-        @if ($sablon === CvSablonu::Sade->value)
-            <flux:text class="!mt-1.5 !text-[11px]">Sade şablon tek renkle basar; renk seçimi diğer şablonlarda geçerli.</flux:text>
-        @endif
     </div>
 
-    {{-- Yazı tipi --}}
+    {{-- Çizgi rengi: bölüm başlıklarının alt çizgisi. --}}
     <div>
-        <flux:label class="!mb-1.5 block">Yazı Tipi</flux:label>
-        <div class="flex flex-col gap-1.5">
-            @foreach (CvYaziTipi::cases() as $secenek)
-                @php $secili = $yaziTipi === $secenek->value; @endphp
-                <button type="button" wire:click="yaziTipiSec('{{ $secenek->value }}')"
-                    aria-pressed="{{ $secili ? 'true' : 'false' }}"
-                    @class([
-                        'flex items-baseline justify-between rounded-xl border px-3 py-2 transition',
-                        'border-brand bg-brand-light' => $secili,
-                        'border-line hover:border-line-strong' => ! $secili,
-                    ])>
-                    <span class="text-xs" style="font-family: {{ $secenek->yigin() }}">{{ $secenek->etiket() }}</span>
-                    <span class="text-[10px] text-ink-subtle">{{ $secenek->aciklama() }}</span>
-                </button>
+        <flux:label class="!mb-1.5 block">Çizgi Rengi</flux:label>
+        <div class="flex flex-wrap gap-2">
+            @foreach (CvProfili::CIZGI_RENKLERI as $secenek)
+                <button type="button" wire:click="cizgiRenkSec('{{ $secenek }}')"
+                    aria-pressed="{{ $cizgiRenk === $secenek ? 'true' : 'false' }}"
+                    aria-label="Çizgi rengi {{ $secenek }}"
+                    class="size-7 rounded-full border border-line transition"
+                    @style([
+                        'background: '.$secenek,
+                        'box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px '.$secenek => $cizgiRenk === $secenek,
+                    ])></button>
             @endforeach
         </div>
+    </div>
+
+    {{-- Yazı tipi. Seçim wire:model'e değil yaziTipiSec'e gidiyor: değer
+         enum'dan geçmeden yazılsaydı uydurma bir değer önizlemeyi çökertirdi. --}}
+    <div>
+        <flux:select wire:change="yaziTipiSec($event.target.value)" label="Yazı Tipi" size="sm"
+            :description:trailing="CvYaziTipi::from($yaziTipi)->aciklama()">
+            @foreach (CvYaziTipi::cases() as $secenek)
+                <flux:select.option :value="$secenek->value" :selected="$yaziTipi === $secenek->value"
+                    style="font-family: {{ $secenek->yigin() }}">{{ $secenek->etiket() }}</flux:select.option>
+            @endforeach
+        </flux:select>
     </div>
 
     {{-- Bölümler --}}

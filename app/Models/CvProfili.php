@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $sehir
  * @property string|null $web
  * @property string|null $ozet
+ * @property string|null $foto
  * @property array<int, mixed> $egitimler
  * @property array<int, mixed> $deneyimler
  * @property array<int, mixed> $beceriler
@@ -30,13 +31,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array<int, mixed> $haric_faaliyetler
  * @property CvSablonu $sablon
  * @property string $renk
+ * @property string|null $cizgi_renk
  * @property CvYaziTipi $yazi_tipi
  * @property array<string, mixed> $bolumler
  */
 #[Fillable([
-    'ad', 'unvan', 'kurum', 'bolum', 'eposta', 'telefon', 'sehir', 'web', 'ozet',
+    'ad', 'unvan', 'kurum', 'bolum', 'eposta', 'telefon', 'sehir', 'web', 'ozet', 'foto',
     'egitimler', 'deneyimler', 'beceriler', 'diller', 'haric_faaliyetler',
-    'sablon', 'renk', 'yazi_tipi', 'bolumler',
+    'sablon', 'renk', 'cizgi_renk', 'yazi_tipi', 'bolumler',
 ])]
 class CvProfili extends Model
 {
@@ -62,6 +64,21 @@ class CvProfili extends Model
         '#dc2626', // red
         '#374151', // gri
     ];
+
+    /**
+     * Çizgi renkleri: ana paletin üstüne iki açık gri. İnce çizgide koyu
+     * tonlar ağır kaçabiliyor, aday sayfayı sakinleştirmek isteyebilir.
+     * Serbest hex yine kabul edilmiyor; değer `style`a yazılıyor.
+     *
+     * @var list<string>
+     */
+    public const CIZGI_RENKLERI = [...self::RENKLER, '#9ca3af', '#e5e7eb'];
+
+    /**
+     * Seçim yapılmamışsa (sütun boş) çizgiler bu griyle basılıyor: ana rengi
+     * izleyen çizgi koyu paletlerde sayfayı ağırlaştırıyordu.
+     */
+    public const VARSAYILAN_CIZGI_RENGI = '#9ca3af';
 
     /** Dil seviyesi etiketleri (1-5). */
     public const DIL_SEVIYELERI = [
@@ -124,7 +141,7 @@ class CvProfili extends Model
             'beceriler' => [],
             'diller' => [],
             'haric_faaliyetler' => [],
-            'sablon' => CvSablonu::Resmi,
+            'sablon' => CvSablonu::Minimal,
             'renk' => self::RENKLER[0],
             'yazi_tipi' => CvYaziTipi::Sans,
             'bolumler' => CvBolumu::varsayilan(),

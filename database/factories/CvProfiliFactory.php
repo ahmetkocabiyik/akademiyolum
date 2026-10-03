@@ -35,7 +35,7 @@ class CvProfiliFactory extends Factory
             'beceriler' => [],
             'diller' => [],
             'haric_faaliyetler' => [],
-            'sablon' => CvSablonu::Resmi,
+            'sablon' => CvSablonu::Minimal,
             'renk' => CvProfili::RENKLER[0],
             'yazi_tipi' => CvYaziTipi::Sans,
             'bolumler' => CvBolumu::varsayilan(),

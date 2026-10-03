@@ -5,6 +5,9 @@
     PDF ayrı bir şablondan değil bu düğümden üretiliyor.
 --}}
 <div>
+    {{-- CV'ye özel web fontları; uygulamanın geri kalanı bunlara ihtiyaç duymuyor. --}}
+    <link rel="stylesheet" href="{{ \App\Enums\CvYaziTipi::webFontlari() }}">
+
     <x-topbar class="yazdirma-gizle" title="CV Oluşturucu" :pill="$this->secilenler->count().' faaliyet CV\'de'">
         <flux:button x-on:click="window.print()" size="sm" variant="primary" icon="arrow-down-tray">
             PDF İndir
@@ -21,6 +24,7 @@
             :diller="$diller"
             :faaliyetler="$this->faaliyetler"
             :haric-faaliyetler="$haricFaaliyetler"
+            :foto="$this->fotoAdresi()"
             class="yazdirma-gizle xl:max-h-[calc(100dvh-9rem)] xl:sticky xl:top-4" />
 
         {{-- Önizleme sütuna SIĞDIRILIYOR: sayfa gerçek A4 genişliğinde (210mm)
@@ -40,7 +44,7 @@
             }"
             x-init="$nextTick(() => { hesapla(); new ResizeObserver(() => hesapla()).observe($refs.kap); new ResizeObserver(() => hesapla()).observe($refs.sayfa); })">
             <div x-ref="kap" class="overflow-hidden" :style="`height: ${yukseklik}px`">
-                <div x-ref="sayfa" class="cv-olcek mx-auto w-fit" :style="`transform: scale(${olcek})`">
+                <div x-ref="sayfa" class="cv-olcek mx-auto w-fit" :style="`transform: scale(${olcek}); --cv-olcek: ${olcek}`">
                     <x-cv.onizleme :cv="$this->onizleme()" />
                 </div>
             </div>
@@ -49,6 +53,7 @@
         <x-cv.tasarim-paneli
             :sablon="$sablon"
             :renk="$renk"
+            :cizgi-renk="$cizgiRenk"
             :yazi-tipi="$yaziTipi"
             :bolumler="$bolumler"
             class="yazdirma-gizle xl:max-h-[calc(100dvh-9rem)] xl:sticky xl:top-4" />
