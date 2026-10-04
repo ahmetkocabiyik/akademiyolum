@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CvFotoController;
 use App\Http\Controllers\YonergeKaynakController;
+use App\Livewire\CiktiYonetimi;
 use App\Livewire\CvOlusturucu;
 use App\Livewire\Dashboard;
 use App\Livewire\FaaliyetEkle;
@@ -45,11 +46,7 @@ Route::middleware(['auth', 'verified', 'onboarded'])->group(function () {
     // CV fotoğrafı public/ dışında; yalnızca sahibine bu rotadan akıtılır.
     Route::get('cv-olusturucu/foto', CvFotoController::class)->name('cv-olusturucu.foto');
 
-    Route::view('cikti-yonetimi', 'modules.placeholder', [
-        'heading' => 'Çıktı Yönetimi',
-        'subheading' => 'Rapor şablonları ve PDF çıktıları',
-        'phase' => 'Faz 5',
-    ])->name('cikti-yonetimi');
+    Route::livewire('cikti-yonetimi', CiktiYonetimi::class)->name('cikti-yonetimi');
 });
 
 require __DIR__.'/settings.php';

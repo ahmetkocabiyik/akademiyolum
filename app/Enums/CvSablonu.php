@@ -18,7 +18,8 @@ enum CvSablonu: string
     {
         return match ($this) {
             self::Minimal => 'Minimal',
-            self::Prestijli => 'Prestijli',
+            // Değer `prestijli` kalıyor (kayıtlı CV'ler onu taşıyor); yalnızca ad değişti.
+            self::Prestijli => 'Kurumsal',
         };
     }
 

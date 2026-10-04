@@ -275,6 +275,99 @@
 .cv-prestijli .cv-foto { background: rgb(255 255 255 / 0.12); color: #fff; border-color: var(--color-gold); }
 .cv-prestijli .cv-govde { padding-top: 10mm; }
 
+/* ── Akademik faaliyet raporu (Çıktı Yönetimi) ─────────────────────────────
+   CV sayfasıyla aynı ilke: gerçek A4 genişliğinde çizilir, önizlemede
+   ölçeklenir, PDF bu düğümün yazdırılmasıdır. Uzun rapor birden çok sayfaya
+   bölündüğü için satırlar ve başlıklar sayfa sonunda kesilmesin diye
+   break-* kuralları taşıyor. */
+.rapor-sayfa {
+    width: 210mm;
+    min-height: 297mm;
+    background: #fff;
+    color: #1f2937;
+    font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.08), 0 8px 24px rgb(0 0 0 / 0.08);
+}
+.cv-olcek .rapor-sayfa { border-radius: calc(0.75rem / var(--cv-olcek, 1)); overflow: hidden; }
+
+.rapor-ust { padding: 16mm 16mm 9mm; border-bottom: 1px solid #e5e7eb; }
+.rapor-ust-satir { display: flex; justify-content: space-between; font-size: 7.5pt; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #9ca3af; }
+.rapor-baslik { margin-top: 6px; font-size: 20pt; font-weight: 800; line-height: 1.2; color: var(--color-navy); }
+.rapor-kimlik { margin-top: 4px; font-size: 10pt; color: #4b5563; }
+.rapor-kimlik span { margin: 0 4px; color: #9ca3af; }
+.rapor-hedef { display: inline-block; margin-top: 10px; padding: 2px 10px; border-radius: 100px; font-size: 8pt; font-weight: 600; background: #f3f4f6; color: #374151; }
+
+.rapor-govde { padding: 9mm 16mm 16mm; }
+.rapor-bolum + .rapor-bolum { margin-top: 9mm; }
+.rapor-bolum-baslik {
+    font-size: 12pt;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #9ca3af;
+    break-after: avoid;
+}
+.rapor-alt-baslik { margin: 12px 0 6px; font-size: 9.5pt; font-weight: 700; color: #111827; break-after: avoid; }
+.rapor-alt-baslik small { margin-inline-start: 4px; font-size: 8pt; font-weight: 500; color: #9ca3af; }
+
+.rapor-istatistikler { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; break-inside: avoid; }
+.rapor-istatistik { padding: 10px 12px; border: 1px solid #e5e7eb; border-radius: 8px; }
+.rapor-sayi { font-size: 18pt; font-weight: 800; line-height: 1.1; color: var(--color-navy); }
+.rapor-sayi small { font-size: 10pt; font-weight: 600; color: #9ca3af; }
+.rapor-etiket { margin-top: 3px; font-size: 7.5pt; color: #6b7280; }
+
+.rapor-cubuk { break-inside: avoid; }
+.rapor-cubuk + .rapor-cubuk { margin-top: 7px; }
+.rapor-cubuk-ust { display: flex; justify-content: space-between; gap: 12px; font-size: 8.5pt; color: #374151; }
+.rapor-cubuk-ust > span:first-child { min-width: 0; flex: 1; }
+.rapor-cubuk-ust > span:last-child { white-space: nowrap; color: #6b7280; }
+.rapor-cubuk-yol { height: 5px; margin-top: 3px; overflow: hidden; border-radius: 5px; background: #eef0f3; }
+.rapor-cubuk-dolu { height: 100%; border-radius: 5px; background: var(--color-navy); }
+.rapor-cubuk-dolu.rapor-yesil { background: #16a34a; }
+.rapor-cubuk-dolu.rapor-mor { background: #7c3aed; }
+.rapor-cubuk-dolu.rapor-kirmizi { background: #dc2626; }
+
+.rapor-etiket-rozet { display: inline-block; padding: 1px 8px; border-radius: 100px; font-size: 7pt; font-weight: 700; white-space: nowrap; }
+.rapor-etiket-rozet.rapor-yesil { background: #eaf3de; color: #3b6d11; }
+.rapor-etiket-rozet.rapor-mor { background: #ede9fe; color: #5b21b6; }
+.rapor-etiket-rozet.rapor-kirmizi { background: #fcebeb; color: #a32d2d; }
+.rapor-yesil-yazi { font-weight: 600; color: #15803d; }
+.rapor-mor-yazi { font-weight: 600; color: #6d28d9; }
+.rapor-kirmizi-yazi { font-weight: 600; color: #b91c1c; }
+
+.rapor-hedef-satir { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; font-size: 10pt; font-weight: 600; color: #111827; }
+
+/* Tablo başlığı her sayfada yinelenir, satır iki sayfaya bölünmez. */
+.rapor-tablo { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+.rapor-tablo thead { display: table-header-group; }
+.rapor-tablo tr { break-inside: avoid; }
+.rapor-tablo th { padding: 4px 8px 4px 0; text-align: start; font-size: 7pt; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #6b7280; border-bottom: 1px solid #d1d5db; }
+.rapor-tablo td { padding: 5px 8px 5px 0; vertical-align: top; border-bottom: 1px solid #f0f1f3; }
+.rapor-tablo .sag { padding-inline-end: 0; padding-inline-start: 8px; text-align: end; white-space: nowrap; }
+.rapor-tablo-baslik { font-weight: 600; color: #111827; }
+.rapor-tablo-alt { margin-top: 1px; font-size: 7.5pt; color: #6b7280; }
+
+.rapor-metin { margin-top: 4px; font-size: 9.5pt; line-height: 1.6; color: #374151; }
+.rapor-sayfa .juri-icerik { font-size: 9.5pt; line-height: 1.6; color: #374151; }
+.rapor-dipnot { margin-top: 8px; font-size: 7.5pt; color: #9ca3af; }
+.rapor-dipnot-satir { margin: 0; font-weight: 400; }
+.rapor-bos { font-size: 9pt; font-style: italic; color: #6b7280; }
+
+/* Prestijli: koyu başlık bandı, altın vurgu. */
+.rapor-prestijli .rapor-ust { padding-top: 18mm; background: var(--color-navy); border-bottom: 3px solid var(--color-gold); }
+.rapor-prestijli .rapor-ust-satir { color: rgb(201 168 76 / 0.85); }
+.rapor-prestijli .rapor-baslik { color: #fff; }
+.rapor-prestijli .rapor-kimlik { color: rgb(255 255 255 / 0.75); }
+.rapor-prestijli .rapor-kimlik span { color: rgb(255 255 255 / 0.4); }
+.rapor-prestijli .rapor-hedef { background: rgb(255 255 255 / 0.1); color: var(--color-gold); }
+.rapor-prestijli .rapor-bolum-baslik { border-bottom-color: var(--color-gold); }
+.rapor-prestijli .rapor-istatistik { border-top: 3px solid var(--color-gold); }
+
 /* Yazdırma: ekranda ne varsa değil, YALNIZCA sayfa çıksın. Kenar boşluğu
    sayfanın kendi iç dolgusundan geliyor, @page'den değil — ikisi birden
    uygulanınca A4'e sığmıyordu. */
@@ -298,10 +391,38 @@
        çıkıyordu. Miras alınan bir özellik: sayfanın tamamını kapsar. */
     #cv-sayfa { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
+    /* Rapor çok sayfalı: CV'nin "sayfa kendi dolgusunu taşır" yaklaşımı
+       yalnız ilk sayfayı korur, sonrakiler kâğıdın kenarına yapışırdı. Rapor
+       kendi adlı sayfasında basılıyor; kenar boşluğunu @page veriyor, ilk
+       sayfanın üstü sıfır kalıyor ki Prestijli bandı kâğıdın tepesine otursun. */
+    /* Adlandırılmış sayfa BELGEYE veriliyor, rapor düğümüne değil: yalnız
+       rapora verilince ardından gelen boş bir kutu bile yeni (varsayılan)
+       bir sayfa açıyor, PDF'in sonuna boş bir A4 ekleniyordu. */
+    body:has(#rapor-sayfa) { page: rapor; }
+    #rapor-sayfa {
+        width: 210mm;
+        min-height: 0;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+        overflow: visible;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    #rapor-sayfa .rapor-govde { padding-bottom: 0; }
+    @page rapor { margin: 14mm 0; }
+    @page rapor:first { margin-top: 0; }
+
     /* Ekran ölçeği yazdırmada kalkmalı; ölçekli basılan sayfa A4'ün köşesine
-       sıkışıyordu. Kabın sabit yüksekliği de kalkar, yoksa uzun CV kırpılır. */
+       sıkışıyordu. Sabit yükseklik dış kapta değil İÇ kapta (x-ref="kap",
+       Alpine'in ölçekli yüksekliği yazdığı yer); o da kalkmazsa uzun CV ve
+       çok sayfalı rapor ölçekli yükseklikte kırpılıyordu. */
     .cv-olcek { transform: none !important; }
-    .cv-olcek-kap { height: auto !important; overflow: visible !important; padding: 0 !important; background: none !important; }
+    .cv-olcek-kap,
+    .cv-olcek-kap > div { height: auto !important; overflow: visible !important; padding: 0 !important; background: none !important; }
+
+    /* Açık bir modal (ör. indirme penceresi) sayfanın üstüne basılmasın. */
+    dialog { display: none !important; }
 }
 
 /* Tablolar kutunun içinde yatay kayar; .juri-tablo sarmalayıcısı overflow verir. */

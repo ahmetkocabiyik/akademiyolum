@@ -288,7 +288,8 @@ test('yalnızca minimal ve prestijli şablonlar sunulur; yeni cv minimal başlar
 
     Livewire::test(CvOlusturucu::class)
         ->assertSet('sablon', 'minimal')
-        ->assertSee('Prestijli')
+        ->assertSee('Kurumsal')
+        ->assertDontSee('Prestijli')
         ->assertDontSee('Resmî')
         ->call('sablonSec', 'resmi')
         ->call('sablonSec', 'sade')
