@@ -13,14 +13,12 @@
 --}}
 @php
     $acik = fn (CvBolumu $bolum) => (bool) ($cv['bolumler'][$bolum->value] ?? true);
-    // Her parça kendi ikonuyla. "ORCID / Web" alanı ikisini de taşıyabiliyor:
-    // ORCID numarasıysa kimlik, adresse küre ikonu.
-    $orcidMi = (bool) preg_match('/^(https?:\/\/orcid\.org\/)?\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i', (string) $cv['web']);
+    // Her parça kendi ikonuyla.
     $iletisim = collect([
         ['ikon' => 'envelope', 'metin' => $cv['eposta']],
         ['ikon' => 'phone', 'metin' => $cv['telefon']],
         ['ikon' => 'map-pin', 'metin' => $cv['sehir']],
-        ['ikon' => $orcidMi ? 'identification' : 'globe-alt', 'metin' => $cv['web']],
+        ['ikon' => 'identification', 'metin' => $cv['orcid']],
     ])->filter(fn (array $parca) => filled($parca['metin']))->all();
 
     // Sol sütunun İÇERİĞİ varsa iki sütun. Beceri ve dil girilmemişken (ya da

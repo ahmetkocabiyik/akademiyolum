@@ -28,7 +28,7 @@ class CvProfiliFactory extends Factory
             'eposta' => fake()->safeEmail(),
             'telefon' => null,
             'sehir' => 'Mersin',
-            'web' => null,
+            'orcid' => null,
             'ozet' => null,
             'egitimler' => [],
             'deneyimler' => [],

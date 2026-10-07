@@ -45,11 +45,11 @@ test('cv sayfasında uygulama imzası ve tarih yok', function () {
         ->assertDontSee(now()->translatedFormat('F Y'));
 });
 
-test('iletişim bilgileri ikonlarıyla basılır; orcid numarası kimlik, adres küre ikonu alır', function () {
+test('iletişim bilgileri ikonlarıyla basılır; orcid kimlik ikonu alır', function () {
     $bilesen = Livewire::test(CvOlusturucu::class)
         ->set('telefon', '0532 000 00 00')
         ->set('sehir', 'Ankara')
-        ->set('web', '0000-0002-1825-0097');
+        ->set('orcid', '0000-0002-1825-0097');
 
     $html = $bilesen->html();
 
@@ -59,23 +59,16 @@ test('iletişim bilgileri ikonlarıyla basılır; orcid numarası kimlik, adres 
 
     $bilesen->assertSeeHtmlInOrder(['cv-iletisim-ikon', '0000-0002-1825-0097']);
 
-    // ORCID numarası ile web adresi farklı ikon alıyor.
     $orcidIkonu = Blade::render('<flux:icon name="identification" variant="micro" />');
-    $kureIkonu = Blade::render('<flux:icon name="globe-alt" variant="micro" />');
 
     expect($html)->toContain(pathIzi($orcidIkonu));
-
-    $bilesen->set('web', 'https://ahmet.example.edu');
-
-    expect($bilesen->html())->toContain(pathIzi($kureIkonu))
-        ->not->toContain(pathIzi($orcidIkonu));
 });
 
 test('boş iletişim alanı ikonsuz da basılmaz', function () {
     $html = Livewire::test(CvOlusturucu::class)
         ->set('telefon', '')
         ->set('sehir', '')
-        ->set('web', '')
+        ->set('orcid', '')
         ->html();
 
     expect(substr_count($html, 'cv-iletisim-ikon'))->toBe(1);
@@ -102,7 +95,7 @@ test('ilk açılışta cv akademik profilden doldurulur', function () {
         ->assertSet('ad', 'Ahmet Yılmaz')
         ->assertSet('kurum', 'Mersin Üniversitesi')
         ->assertSet('eposta', $this->user->email)
-        ->assertSet('web', '0000-0002-1825-0097');
+        ->assertSet('orcid', '0000-0002-1825-0097');
 
     $profil = $this->user->cvProfili()->sole();
 
@@ -113,13 +106,13 @@ test('ilk açılışta cv akademik profilden doldurulur', function () {
 });
 
 test('cv künyesi akademik profilden BAĞIMSIZ: cv düzenlemek profili değiştirmez', function () {
-    // Aday CV'sinde "Dr." yazdırmak isteyebilir; bu, yönerge analizinin
-    // kadro hesabını değiştirmemeli.
+    // CV'de başka bir unvan seçmek (ör. kadrosu çıkmış ama profili henüz
+    // güncellenmemiş aday) yönerge analizinin kadro hesabını değiştirmemeli.
     Livewire::test(CvOlusturucu::class)
-        ->set('unvan', 'Dr.')
+        ->set('unvan', 'Doç. Dr.')
         ->set('kurum', 'Başka Üniversite');
 
-    expect($this->user->cvProfili()->sole()->unvan)->toBe('Dr.')
+    expect($this->user->cvProfili()->sole()->unvan)->toBe('Doç. Dr.')
         ->and($this->user->fresh()->unvan)->toBe('Dr. Öğr. Üyesi')
         ->and($this->user->fresh()->universite)->toBe('Mersin Üniversitesi');
 });
@@ -370,6 +363,167 @@ test('json dışa aktarımı cvdeki faaliyetleri taşır, çıkarılanları taş
     expect($veri['kunye']['ad'])->toBe('Ahmet Yılmaz')
         ->and($veri['kunye']['ozet'])->toBe('Özet metni')
         ->and(collect($veri['faaliyetler'])->pluck('baslik')->all())->toBe(['Anadolu Tasavvuf Geleneği']);
+});
+
+test('şehir yerine adres soruluyor; uzun adres kabul edilir, cvye ve jsona yazılır', function () {
+    $adres = 'Mersin Üniversitesi Çiftlikköy Kampüsü İlahiyat Fakültesi, Yenişehir / Mersin';
+
+    $this->get(route('cv-olusturucu'))->assertSee('Adres')->assertDontSee('>Şehir<', escape: false);
+
+    $bilesen = Livewire::test(CvOlusturucu::class)
+        ->set('sehir', $adres)
+        ->assertHasNoErrors()
+        ->assertSee($adres);
+
+    expect($this->user->cvProfili()->sole()->sehir)->toBe($adres);
+
+    ob_start();
+    $bilesen->instance()->jsonIndir()->sendContent();
+    $veri = json_decode((string) ob_get_clean(), true);
+
+    expect($veri['kunye']['adres'])->toBe($adres)
+        ->and($veri['kunye'])->not->toHaveKey('sehir');
+
+    $bilesen->set('sehir', str_repeat('a', 201))->assertHasErrors(['sehir' => 'max']);
+});
+
+test('künye alanları odaktan çıkınca sunucuya gider: blur, live olmadan kullanılmaz', function () {
+    // Livewire 4.1+'da `wire:model.blur` yalnız tarayıcıdaki değeri günceller;
+    // istek gitmez, "otomatik kayıt" sessizce bir sonraki eyleme kalır.
+    $html = file_get_contents(resource_path('views/components/cv/form-paneli.blade.php'));
+
+    expect($html)->not->toMatch('/wire:model\.blur/')
+        ->and(substr_count($html, 'wire:model.live.blur='))->toBeGreaterThanOrEqual(9);
+});
+
+test('telefon alanı 05xx xxx xx xx maskesiyle çizilir', function () {
+    $this->get(route('cv-olusturucu'))
+        ->assertSee('x-mask="0999 999 99 99"', escape: false)
+        ->assertSee('placeholder="05xx xxx xx xx"', escape: false);
+});
+
+test('maskeye uyan telefon saklanır, uymayan reddedilir ve saklanmaz', function (string $telefon, bool $gecerli) {
+    $bilesen = Livewire::test(CvOlusturucu::class)->set('telefon', $telefon);
+
+    if ($gecerli) {
+        $bilesen->assertHasNoErrors();
+        expect($this->user->cvProfili()->sole()->telefon)->toBe($telefon);
+    } else {
+        $bilesen->assertHasErrors(['telefon' => 'regex']);
+        expect($this->user->cvProfili()->sole()->telefon)->toBeNull();
+    }
+})->with([
+    'cep' => ['0532 123 45 67', true],
+    'ofis' => ['0324 361 00 01', true],
+    'boşluksuz' => ['05321234567', false],
+    'eksik' => ['0532 123 45', false],
+    'ülke kodlu' => ['+90 532 123 45 67', false],
+]);
+
+test('geçersiz alan kayıtlı değeri ezmez; başka bir alan kaydedilirken de korunur', function () {
+    Livewire::test(CvOlusturucu::class)
+        ->set('telefon', '0532 123 45 67')
+        ->set('telefon', '0532 12')
+        ->assertHasErrors(['telefon'])
+        ->set('unvan', 'Doç. Dr.')
+        ->set('sehir', str_repeat('a', 201))
+        ->assertHasErrors(['sehir']);
+
+    $profil = $this->user->cvProfili()->sole();
+
+    expect($profil->telefon)->toBe('0532 123 45 67')
+        ->and($profil->unvan)->toBe('Doç. Dr.')
+        ->and($profil->sehir)->toBeNull();
+});
+
+test('telefon boş bırakılabilir', function () {
+    Livewire::test(CvOlusturucu::class)
+        ->set('telefon', '0532 123 45 67')
+        ->set('telefon', '')
+        ->assertHasNoErrors();
+
+    expect($this->user->cvProfili()->sole()->telefon)->toBeNull();
+});
+
+test('orcid alanı her zaman orcid maskesiyle çizilir; web adresi sorulmaz', function () {
+    $this->get(route('cv-olusturucu'))
+        ->assertSee('x-mask="9999-9999-9999-999*"', escape: false)
+        ->assertSee('placeholder="0000-0000-0000-0000"', escape: false)
+        ->assertDontSee('ORCID / Web');
+});
+
+test('geçerli orcid büyük X ile saklanır; web adresi ve yanlış kontrol hanesi saklanmaz', function () {
+    $bilesen = Livewire::test(CvOlusturucu::class)
+        ->set('orcid', '0000-0002-1694-233x')
+        ->assertHasNoErrors();
+
+    expect($this->user->cvProfili()->sole()->orcid)->toBe('0000-0002-1694-233X');
+
+    $bilesen->set('orcid', 'https://ahmet.example.edu')
+        ->assertHasErrors(['orcid'])
+        ->assertSee('ORCID kimliğini 0000-0000-0000-0000 biçiminde girin.');
+
+    $bilesen->set('orcid', '0000-0002-1825-0098')
+        ->assertHasErrors(['orcid'])
+        ->assertSee('Bu ORCID kimliği geçerli değil');
+
+    expect($this->user->cvProfili()->sole()->orcid)->toBe('0000-0002-1694-233X');
+});
+
+test('profildeki orcid cvye yalnızca geçerliyse taşınır', function (?string $profilde, ?string $cvde) {
+    $this->user->update(['orcid' => $profilde]);
+    $this->user->cvProfili()->delete();
+
+    Livewire::test(CvOlusturucu::class)->assertSet('orcid', (string) $cvde);
+})->with([
+    'çıplak kimlik' => ['0000-0002-1825-0097', '0000-0002-1825-0097'],
+    'orcid.org adresi' => ['https://orcid.org/0000-0002-1694-233x', '0000-0002-1694-233X'],
+    'yanlış kontrol hanesi' => ['0000-0002-1825-0098', null],
+    'web adresi' => ['https://ahmet.example.edu', null],
+]);
+
+test('migration orcid adreslerini kimliğe indirir, orcid olmayan değeri temizler', function () {
+    $tasima = require database_path('migrations/'.collect(scandir(database_path('migrations')))
+        ->first(fn (string $dosya) => str_contains($dosya, 'cv_profillerinde_web_yerine_orcid')));
+
+    // Kayıtlar yeni şemayla açılıyor, sonra eski şemaya dönülüp eski değerler yazılıyor.
+    $adres = CvProfili::factory()->create();
+    $web = CvProfili::factory()->create();
+
+    $tasima->down();
+
+    DB::table('cv_profilleri')->where('id', $adres->id)->update(['web' => 'https://orcid.org/0000-0002-1694-233x']);
+    DB::table('cv_profilleri')->where('id', $web->id)->update(['web' => 'https://ahmet.example.edu']);
+
+    $tasima->up();
+
+    expect($adres->refresh()->orcid)->toBe('0000-0002-1694-233X')
+        ->and($web->refresh()->orcid)->toBeNull();
+});
+
+test('unvan elle yazılmaz, profildeki listeden seçilir', function () {
+    $bilesen = Livewire::test(CvOlusturucu::class)
+        ->assertSeeHtml('wire:model.live="unvan"')
+        ->assertSee(User::UNVANLAR)
+        ->set('unvan', 'Prof. Dr.')
+        ->assertHasNoErrors();
+
+    expect($this->user->cvProfili()->sole()->unvan)->toBe('Prof. Dr.');
+
+    $bilesen->set('unvan', 'Prof. Dr. Dr. h.c.')->assertHasErrors(['unvan']);
+
+    expect($this->user->cvProfili()->sole()->unvan)->toBe('Prof. Dr.');
+});
+
+test('listede olmayan eski unvan seçenek olarak kalır ve silinmez', function () {
+    CvProfili::kullaniciIcin($this->user)->update(['unvan' => 'Uzm. Dr.']);
+
+    Livewire::test(CvOlusturucu::class)
+        ->assertSet('unvan', 'Uzm. Dr.')
+        ->assertSeeHtml('value="Uzm. Dr."')
+        ->set('ozet', 'Başka bir alan kaydediliyor.');
+
+    expect($this->user->cvProfili()->sole()->unvan)->toBe('Uzm. Dr.');
 });
 
 test('başka kullanıcının cvsi sızmaz', function () {

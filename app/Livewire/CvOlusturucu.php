@@ -7,10 +7,14 @@ use App\Enums\CvSablonu;
 use App\Enums\CvYaziTipi;
 use App\Models\CvProfili;
 use App\Models\Faaliyet;
+use App\Models\User;
+use App\Rules\GecerliOrcid;
 use Flux\Flux;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\In;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -59,7 +63,8 @@ class CvOlusturucu extends Component
     #[Validate('nullable|string|max:120')]
     public string $ad = '';
 
-    #[Validate('nullable|string|max:60')]
+    /** Onboarding ve profille aynı kapalı liste ({@see User::UNVANLAR}). */
+    #[Validate(['nullable', new In(User::UNVANLAR)])]
     public string $unvan = '';
 
     #[Validate('nullable|string|max:160')]
@@ -71,14 +76,17 @@ class CvOlusturucu extends Component
     #[Validate('nullable|string|max:160')]
     public string $eposta = '';
 
-    #[Validate('nullable|string|max:40')]
+    /** Formdaki maskeyle aynı biçim: 0xxx xxx xx xx (cep: 05xx xxx xx xx). */
+    #[Validate('nullable|string|regex:/^0\d{3} \d{3} \d{2} \d{2}$/', message: ['regex' => 'Telefonu 05xx xxx xx xx biçiminde girin.'])]
     public string $telefon = '';
 
-    #[Validate('nullable|string|max:80')]
+    /** Adres. Adı `sehir` kaldı: sütun adı, alan önce yalnızca şehir soruyordu. */
+    #[Validate('nullable|string|max:200')]
     public string $sehir = '';
 
-    #[Validate('nullable|string|max:200')]
-    public string $web = '';
+    /** ORCID kimliği; biçimi ve kontrol hanesi sınanır. */
+    #[Validate(['nullable', 'string', new GecerliOrcid])]
+    public string $orcid = '';
 
     #[Validate('nullable|string|max:1500')]
     public string $ozet = '';
@@ -133,7 +141,7 @@ class CvOlusturucu extends Component
         $this->eposta = (string) $profil->eposta;
         $this->telefon = (string) $profil->telefon;
         $this->sehir = (string) $profil->sehir;
-        $this->web = (string) $profil->web;
+        $this->orcid = (string) $profil->orcid;
         $this->ozet = (string) $profil->ozet;
         // JSON sütunları ham geliyor: eksik anahtarlı ya da bozuk bir satır
         // şablonda "undefined index" değil, SESSİZ bir boş alan üretirdi.
@@ -422,8 +430,8 @@ class CvOlusturucu extends Component
                 'bolum' => $this->bolum,
                 'eposta' => $this->eposta,
                 'telefon' => $this->telefon,
-                'sehir' => $this->sehir,
-                'web' => $this->web,
+                'adres' => $this->sehir,
+                'orcid' => $this->orcid,
                 'ozet' => $this->ozet,
             ],
             'egitimler' => $this->egitimler,
@@ -584,15 +592,7 @@ class CvOlusturucu extends Component
     private function kaydet(): void
     {
         $this->profil->update([
-            'ad' => $this->ad ?: null,
-            'unvan' => $this->unvan ?: null,
-            'kurum' => $this->kurum ?: null,
-            'bolum' => $this->bolum ?: null,
-            'eposta' => $this->eposta ?: null,
-            'telefon' => $this->telefon ?: null,
-            'sehir' => $this->sehir ?: null,
-            'web' => $this->web ?: null,
-            'ozet' => $this->ozet ?: null,
+            ...$this->gecerliKunye(),
             'egitimler' => $this->egitimler,
             'deneyimler' => $this->deneyimler,
             'beceriler' => $this->beceriler,
@@ -604,6 +604,42 @@ class CvOlusturucu extends Component
             'yazi_tipi' => $this->yaziTipi,
             'bolumler' => $this->bolumler,
         ]);
+    }
+
+    /**
+     * Künye alanlarının yazılacak değerleri. Kuralına uymayan alan için
+     * KAYITLI değer korunur: `#[Validate]` hatayı gösteriyor ama otomatik
+     * kaydı durdurmuyordu, yarım bir telefon ya da sınırı aşan bir adres
+     * veritabanına yazılıyordu. Aday yazdığını formda hatasıyla görmeye devam
+     * eder; düzelttiğinde kaydedilir.
+     *
+     * @return array<string, string|null>
+     */
+    private function gecerliKunye(): array
+    {
+        $alanlar = ['ad', 'unvan', 'kurum', 'bolum', 'eposta', 'telefon', 'sehir', 'orcid', 'ozet'];
+        $degerler = [];
+
+        foreach ($alanlar as $alan) {
+            $degerler[$alan] = $this->{$alan};
+        }
+
+        $gecersiz = Validator::make($degerler, array_intersect_key($this->getRules(), $degerler))
+            ->errors()
+            ->keys();
+
+        foreach ($alanlar as $alan) {
+            $degerler[$alan] = in_array($alan, $gecersiz, true)
+                ? $this->profil->{$alan}
+                : ($degerler[$alan] ?: null);
+        }
+
+        // ORCID kontrol hanesi büyük X yazılır; maske küçüğünü de kabul ediyor.
+        if (! in_array('orcid', $gecersiz, true) && $degerler['orcid'] !== null) {
+            $degerler['orcid'] = GecerliOrcid::kimlik($degerler['orcid']);
+        }
+
+        return $degerler;
     }
 
     /**
@@ -622,7 +658,7 @@ class CvOlusturucu extends Component
             'eposta' => $this->eposta,
             'telefon' => $this->telefon,
             'sehir' => $this->sehir,
-            'web' => $this->web,
+            'orcid' => $this->orcid,
             'ozet' => $this->ozet,
             'egitimler' => $this->egitimler,
             'deneyimler' => $this->deneyimler,

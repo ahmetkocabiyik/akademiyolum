@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\CvBolumu;
 use App\Enums\CvSablonu;
 use App\Enums\CvYaziTipi;
+use App\Rules\GecerliOrcid;
 use Database\Factories\CvProfiliFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $eposta
  * @property string|null $telefon
  * @property string|null $sehir
- * @property string|null $web
+ * @property string|null $orcid
  * @property string|null $ozet
  * @property string|null $foto
  * @property array<int, mixed> $egitimler
@@ -36,7 +37,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array<string, mixed> $bolumler
  */
 #[Fillable([
-    'ad', 'unvan', 'kurum', 'bolum', 'eposta', 'telefon', 'sehir', 'web', 'ozet', 'foto',
+    'ad', 'unvan', 'kurum', 'bolum', 'eposta', 'telefon', 'sehir', 'orcid', 'ozet', 'foto',
     'egitimler', 'deneyimler', 'beceriler', 'diller', 'haric_faaliyetler',
     'sablon', 'renk', 'cizgi_renk', 'yazi_tipi', 'bolumler',
 ])]
@@ -135,7 +136,8 @@ class CvProfili extends Model
             'kurum' => $user->universite,
             'bolum' => collect([$user->fakulte, $user->bolum])->filter()->implode(' — ') ?: null,
             'eposta' => $user->email,
-            'web' => $user->orcid,
+            // Profildeki ORCID serbest metin; yalnızca geçerli bir kimlik taşınır.
+            'orcid' => GecerliOrcid::kimlik($user->orcid),
             'egitimler' => self::egitimTaslagi($user),
             'deneyimler' => [],
             'beceriler' => [],

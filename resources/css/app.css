@@ -214,7 +214,7 @@
 .cv-foto-gorsel { object-fit: cover; object-position: center 30%; }
 .cv-ad { font-size: 21pt; font-weight: 700; line-height: 1.15; color: var(--cv-renk); }
 .cv-unvan { margin-top: 2px; font-size: 11pt; color: #4b5563; }
-.cv-iletisim { margin-top: 3px; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 8.5pt; color: #6b7280; }
+.cv-iletisim { margin-top: 3px; display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 8.5pt; color: #6b7280; }
 .cv-iletisim-parca { display: inline-flex; align-items: center; gap: 4px; }
 .cv-iletisim-ikon { width: 1.15em; height: 1.15em; flex-shrink: 0; opacity: 0.8; }
 

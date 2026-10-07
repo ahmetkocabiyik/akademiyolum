@@ -7,6 +7,7 @@
     'faaliyetler',
     'haricFaaliyetler',
     'foto',
+    'unvan',
 ])
 
 @use('App\Models\CvProfili')
@@ -14,7 +15,9 @@
 {{--
     SOL PANEL — CV'nin içeriği.
 
-    Künye alanları `.blur` ile bağlı, listeler ise eylemlerle değişiyor; her
+    Künye alanları `.live.blur` ile bağlı (Livewire 4.1+'da yalnız `.blur`
+    sunucuya istek GÖNDERMİYOR, değer bir sonraki eyleme kadar tarayıcıda
+    bekliyordu), listeler ise eylemlerle değişiyor; her
     ikisi de anında kaydediliyor (bkz. CvOlusturucu::updated). Alttaki Kaydet
     düğmesi bunu teyit ediyor. Panel dört
     sekmeye bölündü çünkü tek kolonda alt alta dizilince aday yayın listesine
@@ -73,23 +76,41 @@
                     </div>
                 </div>
 
-                <flux:input wire:model.blur="ad" label="Ad Soyad" size="sm" />
-                <flux:input wire:model.blur="unvan" label="Unvan" size="sm" />
-                <flux:input wire:model.blur="kurum" label="Kurum" size="sm" />
-                <flux:input wire:model.blur="bolum" label="Bölüm / Anabilim Dalı" size="sm" />
+                <flux:input wire:model.live.blur="ad" label="Ad Soyad" size="sm" />
+                {{-- Unvan kapalı listeden. Listede olmayan eski bir değer (elle
+                     yazıldığı dönemden) seçenek olarak kalıyor: yoksa tarayıcı ilk
+                     seçeneği seçili gösterir, aday unvanını değişmiş sanırdı. --}}
+                <flux:select wire:model.live="unvan" label="Unvan" size="sm">
+                    <flux:select.option value="">Belirtilmemiş</flux:select.option>
+                    @foreach (\App\Models\User::UNVANLAR as $secenek)
+                        <flux:select.option :value="$secenek">{{ $secenek }}</flux:select.option>
+                    @endforeach
+                    @if ($unvan !== '' && ! in_array($unvan, \App\Models\User::UNVANLAR, true))
+                        <flux:select.option :value="$unvan">{{ $unvan }}</flux:select.option>
+                    @endif
+                </flux:select>
+                <flux:input wire:model.live.blur="kurum" label="Kurum" size="sm" />
+                <flux:input wire:model.live.blur="bolum" label="Bölüm / Anabilim Dalı" size="sm" />
 
                 <flux:separator variant="subtle" text="İletişim" />
 
-                <flux:input wire:model.blur="eposta" label="E-posta" size="sm" />
-                <div class="grid grid-cols-2 gap-2">
-                    <flux:input wire:model.blur="telefon" label="Telefon" size="sm" />
-                    <flux:input wire:model.blur="sehir" label="Şehir" size="sm" />
-                </div>
-                <flux:input wire:model.blur="web" label="ORCID / Web" size="sm" />
+                <flux:input wire:model.live.blur="eposta" label="E-posta" size="sm" />
+                {{-- Maske "0" ile başlıyor, "05" ile değil: ofis numarası (0324 …)
+                     da girilebilsin ve kayıtlı sabit hat numarası maskeye
+                     zorlanırken bozulmasın. Cep numarası yine 05xx biçiminde çıkar. --}}
+                <flux:input wire:model.live.blur="telefon" label="Telefon" size="sm" mask="0999 999 99 99"
+                    placeholder="05xx xxx xx xx" inputmode="tel" />
+                {{-- Alan adı `sehir` kaldı (veritabanı sütunu); ekranda adres soruluyor. --}}
+                <flux:input wire:model.live.blur="sehir" label="Adres" size="sm" placeholder="Örn. Mersin Üniversitesi Çiftlikköy Kampüsü, Yenişehir / Mersin" />
+                {{-- Son hane rakam ya da X olabildiği için `*`; doğrusunu sunucu
+                     (kontrol hanesiyle) sınar. Yapıştırılan orcid.org adresinden
+                     maske kimliğin rakamlarını süzüyor. --}}
+                <flux:input wire:model.live.blur="orcid" label="ORCID" size="sm"
+                    mask="9999-9999-9999-999*" placeholder="0000-0000-0000-0000" />
 
                 <flux:separator variant="subtle" text="Özet" />
 
-                <flux:textarea wire:model.blur="ozet" label="Kısa biyografi" rows="5" size="sm"
+                <flux:textarea wire:model.live.blur="ozet" label="Kısa biyografi" rows="5" size="sm"
                     placeholder="Araştırma alanlarınızı iki üç cümleyle anlatın." />
             </div>
         @endif
@@ -111,12 +132,12 @@
                                     icon="x-mark" aria-label="Eğitim satırını sil" />
                             </div>
                             <div class="flex flex-col gap-2">
-                                <flux:input wire:model.blur="egitimler.{{ $sira }}.derece" placeholder="Derece (Doktora)" size="sm" />
-                                <flux:input wire:model.blur="egitimler.{{ $sira }}.universite" placeholder="Üniversite" size="sm" />
-                                <flux:input wire:model.blur="egitimler.{{ $sira }}.bolum" placeholder="Bölüm" size="sm" />
+                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.derece" placeholder="Derece (Doktora)" size="sm" />
+                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.universite" placeholder="Üniversite" size="sm" />
+                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.bolum" placeholder="Bölüm" size="sm" />
                                 <div class="grid grid-cols-2 gap-2">
-                                    <flux:input wire:model.blur="egitimler.{{ $sira }}.baslangic" placeholder="Başlangıç" size="sm" />
-                                    <flux:input wire:model.blur="egitimler.{{ $sira }}.bitis" placeholder="Bitiş" size="sm" />
+                                    <flux:input wire:model.live.blur="egitimler.{{ $sira }}.baslangic" placeholder="Başlangıç" size="sm" />
+                                    <flux:input wire:model.live.blur="egitimler.{{ $sira }}.bitis" placeholder="Bitiş" size="sm" />
                                 </div>
                             </div>
                         </div>
@@ -139,11 +160,11 @@
                                     icon="x-mark" aria-label="Deneyim satırını sil" />
                             </div>
                             <div class="flex flex-col gap-2">
-                                <flux:input wire:model.blur="deneyimler.{{ $sira }}.pozisyon" placeholder="Pozisyon" size="sm" />
-                                <flux:input wire:model.blur="deneyimler.{{ $sira }}.kurum" placeholder="Kurum" size="sm" />
+                                <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.pozisyon" placeholder="Pozisyon" size="sm" />
+                                <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.kurum" placeholder="Kurum" size="sm" />
                                 <div class="grid grid-cols-2 gap-2">
-                                    <flux:input wire:model.blur="deneyimler.{{ $sira }}.baslangic" placeholder="Başlangıç" size="sm" />
-                                    <flux:input wire:model.blur="deneyimler.{{ $sira }}.bitis" placeholder="Bitiş (boşsa devam)" size="sm" />
+                                    <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.baslangic" placeholder="Başlangıç" size="sm" />
+                                    <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.bitis" placeholder="Bitiş (boşsa devam)" size="sm" />
                                 </div>
                             </div>
                         </div>

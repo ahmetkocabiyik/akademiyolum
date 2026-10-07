@@ -25,6 +25,7 @@
             :faaliyetler="$this->faaliyetler"
             :haric-faaliyetler="$haricFaaliyetler"
             :foto="$this->fotoAdresi()"
+            :unvan="$unvan"
             class="yazdirma-gizle xl:max-h-[calc(100dvh-9rem)] xl:sticky xl:top-4" />
 
         {{-- Önizleme sütuna SIĞDIRILIYOR: sayfa gerçek A4 genişliğinde (210mm)
