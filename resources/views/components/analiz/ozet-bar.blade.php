@@ -12,8 +12,9 @@
     {{-- Sayaçlar aynı zamanda filtre: bir duruma tıklamak listeyi o duruma
          daraltır, aynı sayaca yeniden tıklamak geri alır. Sayıların KENDİSİ
          daralmaz — hep tüm dağılımı gösterir, yoksa "Yetersiz"e tıklayan aday
-         diğerlerini sıfır görürdü. "Toplam" filtreyi temizleyen sayaç. --}}
-    <div class="flex items-center gap-3">
+         diğerlerini sıfır görürdü. "Toplam" filtreyi temizleyen sayaç.
+         Dar ekranda altı sayaç sığmıyor; satır yatay kayıyor, kesilmiyor. --}}
+    <div class="-mx-1 flex min-w-0 max-w-full items-center gap-3 overflow-x-auto px-1">
         @foreach ([
             ['Toplam', $ozet['toplam'], 'var(--color-ink)', ''],
             [Analiz::ETIKET['yetersiz'], $ozet['yetersiz'], Analiz::RENK['yetersiz'], 'yetersiz'],
@@ -22,14 +23,14 @@
             [Analiz::ETIKET['uygun'], $ozet['uygun'], Analiz::RENK['uygun'], 'uygun'],
             ['Ölçüt Yok', $ozet['alan_yok'], 'var(--color-ink-subtle)', 'alan_yok'],
         ] as [$etiket, $sayi, $renk, $durum])
-            @if (! $loop->first)<div class="h-8 w-px bg-line"></div>@endif
+            @if (! $loop->first)<div class="h-8 w-px shrink-0 bg-line"></div>@endif
             @php $secili = $durumFiltre === $durum; @endphp
             <button type="button"
                 wire:click="{{ $durum === '' ? "\$set('durumFiltre', '')" : "durumSec('{$durum}')" }}"
                 aria-pressed="{{ $secili ? 'true' : 'false' }}"
                 aria-label="{{ $durum === '' ? 'Durum filtresini temizle' : $etiket.' olanları göster' }}"
                 @class([
-                    'rounded-lg px-2 py-1 text-center transition',
+                    'shrink-0 rounded-lg px-2 py-1 text-center transition',
                     'bg-canvas ring-1 ring-inset ring-line' => $secili,
                     'hover:bg-canvas' => ! $secili,
                 ])>

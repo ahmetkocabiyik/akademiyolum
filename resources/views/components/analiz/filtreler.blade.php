@@ -22,13 +22,11 @@
     </flux:select>
 
     {{-- Yalnız yönergesi girili üniversitelerin şehirleri; sonuç vermeyecek
-         bir şehir listede görünmemeli. --}}
-    <flux:select wire:model.live="sehirFiltre" label="Şehir">
-        <flux:select.option value="">Tüm şehirler</flux:select.option>
-        @foreach ($sehirler as $sehir)
-            <flux:select.option :value="$sehir">{{ $sehir }}</flux:select.option>
-        @endforeach
-    </flux:select>
+         bir şehir listede görünmemeli. Liste uzun (onlarca il): yazarak
+         süzülüyor, filtre ancak listeden seçilince uygulanıyor. --}}
+    <x-combobox model="sehirFiltre" :secenekler="$sehirler" label="Şehir"
+        placeholder="Tüm şehirler" tumu-etiketi="Tüm şehirler" :secim-zorunlu="true"
+        bos="Bu adla yönergesi girilmiş bir şehir yok." :sinir="100" />
 
     <flux:text class="text-xs text-ink-subtle">Analiz <strong>{{ $kadrolar[$hedefKadro] }}</strong> kadrosuna atama kriterlerine göredir.</flux:text>
 </flux:card>

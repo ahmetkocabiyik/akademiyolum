@@ -7,6 +7,10 @@
     'description' => null,
     'sinir' => 50,
     'bos' => null,
+    /** Değer yalnızca listeden seçilerek değişir ve hemen sunucuya gider (filtreler için). */
+    'secimZorunlu' => false,
+    /** Seçim zorunluyken boş değerin etiketi, listenin başında seçenek olarak ("Tüm şehirler"). */
+    'tumuEtiketi' => null,
 ])
 
 {{--
@@ -30,10 +34,21 @@
     Serbest metne izin var: kutu değeri doğrulamıyor, yalnızca bulmayı
     kolaylaştırıyor. Değerin geçerliliğini kullanan ekran söylüyor (jüri
     analizinde "yönergesi girilmiş bir kurum seçin" uyarısı gibi).
+
+    `secimZorunlu` FİLTRELER için: yazılan metin yalnızca listeyi süzer,
+    değer ancak listeden seçilince değişir ve hemen sunucuya gider. Serbest
+    metin bir filtre olsaydı "Ank" yazan aday hiç sonuç görmezdi. Kutu
+    kapanınca yazı seçili değere döner.
 --}}
 <div
     x-data="{
-        sorgu: @entangle($model),
+        @if ($secimZorunlu)
+            secili: @entangle($model).live,
+            sorgu: '',
+        @else
+            sorgu: @entangle($model),
+        @endif
+        zorunlu: @js((bool) $secimZorunlu),
         acik: false,
         yazildi: false,
         vurgu: -1,
@@ -49,13 +64,26 @@
             }
             return liste.slice(0, {{ (int) $sinir }});
         },
-        sec(s) { this.sorgu = s; this.acik = false; this.yazildi = false; this.vurgu = -1; },
+        init() {
+            if (! this.zorunlu) return;
+            this.sorgu = this.secili || '';
+            // Değer dışarıdan değişirse (sıfırlama gibi) yazı da izlesin.
+            this.$watch('secili', v => { if (! this.acik) this.sorgu = v || ''; });
+        },
+        sec(s) {
+            if (this.zorunlu) this.secili = s;
+            this.sorgu = s; this.acik = false; this.yazildi = false; this.vurgu = -1;
+        },
+        kapat() {
+            this.acik = false; this.yazildi = false; this.vurgu = -1;
+            if (this.zorunlu) this.sorgu = this.secili || '';
+        },
         asagi() { this.acik = true; if (this.vurgu < this.sonuclar.length - 1) this.vurgu++; },
         yukari() { if (this.vurgu > 0) this.vurgu--; },
-        enter() { if (this.acik && this.vurgu >= 0 && this.sonuclar[this.vurgu]) { this.sec(this.sonuclar[this.vurgu]); } else { this.acik = false; } },
+        enter() { if (this.acik && this.vurgu >= 0 && this.sonuclar[this.vurgu]) { this.sec(this.sonuclar[this.vurgu]); } else { this.kapat(); } },
     }"
-    @click.outside="acik = false"
-    x-on:keydown.escape="acik = false"
+    @click.outside="kapat()"
+    x-on:keydown.escape="kapat()"
     {{ $attributes->class('relative') }}
 >
     <flux:input
@@ -63,7 +91,10 @@
         :placeholder="$placeholder"
         :description="$description"
         x-model="sorgu"
-        x-on:focus="acik = true"
+        {{-- Seçim zorunluyken yazı seçili gelir: aday yazmaya başlayınca eski
+             değer silinir, aramaya baştan başlar. (Koşul Alpine'de; bileşen
+             etiketinin içinde Blade @if derlenmiyor.) --}}
+        x-on:focus="acik = true; if (zorunlu) $event.target.select()"
         x-on:input="acik = true; yazildi = true; vurgu = -1"
         x-on:keydown.arrow-down.prevent="asagi()"
         x-on:keydown.arrow-up.prevent="yukari()"
@@ -71,8 +102,14 @@
         autocomplete="off"
     />
 
-    <div x-show="acik && sonuclar.length" x-transition.opacity x-cloak
+    <div x-show="acik && (sonuclar.length || (@js($tumuEtiketi !== null) && ! yazildi))" x-transition.opacity x-cloak
         class="absolute z-20 mt-1 max-h-64 w-full overflow-auto rounded-lg border border-line bg-surface py-1 shadow-lg">
+        @if ($tumuEtiketi !== null)
+            {{-- Filtreyi kaldırma yolu: aday yazmaya başlamadıysa listenin başında. --}}
+            <button type="button" x-show="! yazildi" @click="sec('')"
+                class="block w-full truncate border-b border-line px-3 py-2 text-start text-sm"
+                :class="! secili ? 'bg-canvas font-medium text-ink' : 'text-ink-muted hover:bg-canvas'">{{ $tumuEtiketi }}</button>
+        @endif
         <template x-for="(s, idx) in sonuclar" :key="s">
             <button type="button" @click="sec(s)" @mouseenter="vurgu = idx"
                 class="block w-full truncate px-3 py-2 text-start text-sm"

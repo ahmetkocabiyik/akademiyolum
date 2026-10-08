@@ -344,6 +344,17 @@ class YonergeAnalizi extends Component
     }
 
     /**
+     * Şehir yalnızca listeden seçilebiliyor; listede olmayan bir değer (serbest
+     * metin, eski bir istek) filtreyi hiç sonuç vermeyen bir şehre kilitlerdi.
+     */
+    public function updatedSehirFiltre(): void
+    {
+        if ($this->sehirFiltre !== '' && ! in_array($this->sehirFiltre, $this->sehirler(), true)) {
+            $this->sehirFiltre = '';
+        }
+    }
+
+    /**
      * Filtre seçeneği olarak şehirler: yalnız yönergesi girili üniversitelerin
      * şehirleri, Türkçe alfabe sırasında.
      *

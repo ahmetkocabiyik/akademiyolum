@@ -208,6 +208,25 @@ test('şehir filtresi listeyi o şehirle sınırlar', function () {
     expect($adlar)->toBe(['İstanbul 29 Mayıs Üniversitesi', 'Marmara Üniversitesi']);
 });
 
+test('şehir filtresi listede olmayan değeri kabul etmez', function (string $deger) {
+    // Kutu yazarak süzülüyor ama filtre yalnızca listeden seçilince değişmeli;
+    // yarım bir metin filtre olsaydı aday hiç sonuç görmezdi.
+    Livewire::test(YonergeAnalizi::class)
+        ->set('sehirFiltre', $deger)
+        ->assertSet('sehirFiltre', '');
+})->with(['yarım metin' => 'İst', 'yönergesi olmayan şehir' => 'Van']);
+
+test('şehir kutusu aranabilir: tüm şehirler seçeneğiyle, seçim zorunlu', function () {
+    Livewire::test(YonergeAnalizi::class)
+        ->assertSeeHtml('secili: window.Livewire')
+        ->assertSee('Tüm şehirler')
+        ->assertSee('Bu adla yönergesi girilmiş bir şehir yok.')
+        // Odak işleyicisi derlenmiş JS olmalı; bileşen etiketinde Blade @if
+        // ham metin olarak kalıyor ve liste hiç açılmıyordu.
+        ->assertSeeHtml('x-on:focus="acik = true; if (zorunlu) $event.target.select()"')
+        ->assertDontSeeHtml('@if ($secimZorunlu)');
+});
+
 test('şehir seçenekleri Türkçe alfabe sırasında', function () {
     // PHP'nin düz `sort()`u 'İstanbul'u listenin DİBİNE atar (İ çok baytlı,
     // z'den büyük görünür). Sıra bozulursa bu test kırılır.

@@ -25,14 +25,17 @@
 {{-- data-kart: filtre/sıralama sonrası kartın yeni yerine KAYARAK gitmesini
      sağlayan FLIP kancası (resources/js/app.js). Değeri kartın kimliği; morph
      öncesi ölçülen konumlarla morph sonrasını bu anahtar eşliyor. --}}
-{{-- Sabit yükseklik: 6 koşullu bir kartın (Mersin) doğal boyu, büyütülmüş
-     yazı ölçeğiyle (sm = 15px). Sabit kısımlar ~190px, kalan ~146px tam 6
-     satırlık liste demek. Uyarı satırı ya da
+{{-- Sabit yükseklik: korpustaki EN UZUN kartın doğal boyu (388px; 6 koşul,
+     "+N koşul daha", iki not satırı ve detay ipucu), büyütülmüş yazı
+     ölçeğiyle (sm = 15px). Tüm kartlar ölçülerek seçildi: ilk sıradaki
+     kartlara göre ayarlanınca 122 kartın 29'unda detay ipucu kesiliyordu.
+     1400–1680px arasında üç sütun ~270px'e daralıyor, notlar iki satıra
+     kırılıyor ve en uzun kart 438px istiyor; o aralıkta kart daha uzun. Uyarı satırı ya da
      yönerge düğmesi olan kartlarda liste payı azalır ve kendi içinde kayar —
      kart boyu değişmez, içerik de kırpılmaz. --}}
 <flux:card @class([
     'flex cursor-pointer flex-col overflow-hidden !p-0 transition duration-200 hover:-translate-y-0.5 hover:border-brand/40 active:translate-y-0',
-    'h-[22.5rem]' => $gorunum === 'grid',
+    'h-[24.5rem] min-[87.5rem]:h-[27.5rem] min-[105rem]:h-[24.5rem]' => $gorunum === 'grid',
 ])
     wire:key="uni-{{ $uni->id }}"
     data-kart="{{ $uni->id }}"
