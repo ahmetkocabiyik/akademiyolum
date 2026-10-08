@@ -3,8 +3,39 @@
 
     <flux:heading class="sr-only">{{ __('Profile settings') }}</flux:heading>
 
-    <x-settings.layout :heading="__('Profile')" :subheading="__('Update your name and email address')">
+    <x-settings.layout aktif="profil" :heading="__('Profile')" subheading="Fotoğrafınızı, kişisel ve akademik bilgilerinizi güncelleyin">
+ {{-- Profil fotoğrafı formun DIŞINDA: seçilir seçilmez saklanıyor
+             (Profile::updatedYeniFoto), "Kaydet"e bağlı değil. Kenar çubuğundaki
+             avatar da baş harflerin yerine bunu gösteriyor. --}}
+        <div class="mt-6 flex items-center gap-4">
+            <div class="flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-canvas text-xl font-semibold text-ink-subtle">
+                @if ($fotoAdresi)
+                    <img src="{{ $fotoAdresi }}" alt="Profil fotoğrafı" class="size-full object-cover">
+                @else
+                    {{ auth()->user()->initials() }}
+                @endif
+            </div>
+
+            <div class="flex min-w-0 flex-col gap-1.5">
+                <div class="flex flex-wrap items-center gap-2">
+                    <label class="cursor-pointer">
+                        <input type="file" wire:model="yeniFoto" accept="image/jpeg,image/png,image/webp" class="sr-only">
+                        <span class="inline-flex h-10 items-center rounded-lg border border-line bg-surface px-4 text-sm font-medium text-ink transition hover:bg-canvas">
+                            {{ $fotoAdresi ? 'Fotoğrafı değiştir' : 'Fotoğraf yükle' }}
+                        </span>
+                    </label>
+                    @if ($fotoAdresi)
+                        <flux:button wire:click="fotoKaldir" variant="ghost">Kaldır</flux:button>
+                    @endif
+                </div>
+                <span wire:loading wire:target="yeniFoto" class="text-xs text-ink-subtle">Yükleniyor…</span>
+                <span wire:loading.remove wire:target="yeniFoto" class="text-xs text-ink-subtle">JPG, PNG veya WebP · en fazla 10 MB</span>
+                @error('yeniFoto') <span class="text-xs text-cat-red">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
         <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
+            <div class="grid gap-6 sm:grid-cols-2">
             <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
 
             <div>
@@ -22,6 +53,7 @@
 
                     </div>
                 @endif
+            </div>
             </div>
 
             <flux:separator variant="subtle" />
@@ -46,6 +78,8 @@
                 </flux:select>
             @endif
 
+            {{-- Yan yana: unvan / temel alan, fakülte / bölüm. --}}
+            <div class="grid gap-6 sm:grid-cols-2">
             {{-- Yalnızca kimlik bilgisi değil: Yönerge Analizi varsayılan hedef
                  kadroyu bundan türetiyor (Dr. Öğr. Üyesi → doçentlik gibi). --}}
             <flux:select wire:model="unvan" label="Akademik Unvan" placeholder="Unvan seçin..."
@@ -78,6 +112,7 @@
                     @endforeach
                 </flux:select>
             @endif
+            </div>
 
             <flux:separator variant="subtle" />
 

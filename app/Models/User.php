@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Contracts\PasskeyUser;
 use Laravel\Fortify\PasskeyAuthenticatable;
@@ -40,6 +41,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property int|null $yurtdisi_ay
  * @property string|null $orcid
  * @property string|null $avesis_id
+ * @property string|null $profil_foto `local` diskteki yol; toplu atamaya kapalı, yalnızca yükleme yazar.
  * @property Carbon|null $onboarded_at
  * @property string $email
  * @property Carbon|null $email_verified_at
@@ -171,6 +173,29 @@ class User extends Authenticatable implements PasskeyUser
     public function juriRaporlari(): HasMany
     {
         return $this->hasMany(JuriRaporu::class);
+    }
+
+    /**
+     * Profil fotoğrafı silinmiş kullanıcının diskinde kalmasın.
+     */
+    protected static function booted(): void
+    {
+        static::deleting(function (User $user): void {
+            if ($user->profil_foto !== null) {
+                Storage::disk('local')->delete($user->profil_foto);
+            }
+        });
+    }
+
+    /**
+     * Profil fotoğrafının adresi; yoksa null (arayüz baş harfleri gösterir).
+     * Dosya adı her yüklemede değiştiği için sorgu parametresi önbelleği kırıyor.
+     */
+    public function profilFotoAdresi(): ?string
+    {
+        return $this->profil_foto === null
+            ? null
+            : route('profil.foto', ['v' => basename($this->profil_foto)]);
     }
 
     /**

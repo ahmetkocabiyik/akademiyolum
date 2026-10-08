@@ -48,7 +48,7 @@
 
             <flux:dropdown position="top" align="start">
                 <button type="button" class="sb-user" data-test="sidebar-menu-button">
-                    <div class="sb-avatar">{{ auth()->user()->initials() }}</div>
+                    <div class="sb-avatar"><x-kullanici-avatari /></div>
                     <div class="min-w-0 flex-1">
                         <div class="sb-name truncate">{{ auth()->user()->name }}</div>
                         <div class="sb-uni truncate">{{ auth()->user()->universite ?? auth()->user()->email }}</div>
@@ -88,11 +88,11 @@
             <flux:spacer />
 
             <flux:dropdown position="bottom" align="end">
-                <button type="button" class="sb-avatar !size-9" data-test="mobile-menu-button">{{ auth()->user()->initials() }}</button>
+                <button type="button" class="sb-avatar !size-9" data-test="mobile-menu-button"><x-kullanici-avatari /></button>
 
                 <flux:menu class="app-user-menu">
                     <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-                        <flux:avatar circle :name="auth()->user()->name" :initials="auth()->user()->initials()" />
+                        <flux:avatar circle :name="auth()->user()->name" :initials="auth()->user()->initials()" :src="auth()->user()->profilFotoAdresi()" />
                         <div class="grid flex-1 text-start text-sm leading-tight">
                             <flux:heading class="truncate">{{ auth()->user()->name }}</flux:heading>
                             <flux:text class="truncate">{{ auth()->user()->universite ?? auth()->user()->email }}</flux:text>

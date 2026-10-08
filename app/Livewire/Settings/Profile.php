@@ -12,15 +12,28 @@ use Carbon\CarbonInterface;
 use Flux\Flux;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Livewire\WithFileUploads;
 
 #[Title('Profil ayarları')]
 class Profile extends Component
 {
     use ProfileValidationRules;
+    use WithFileUploads;
+
+    /**
+     * Seçilen profil fotoğrafının geçici yüklemesi. Seçildiği an kalıcı diske
+     * yazılıp boşaltılıyor ({@see updatedYeniFoto()}); formun "Kaydet"ine
+     * bağlı değil, CV fotoğrafıyla aynı davranış.
+     */
+    #[Validate('nullable|image|mimes:jpg,jpeg,png,webp|max:10240')]
+    public ?TemporaryUploadedFile $yeniFoto = null;
 
     public string $name = '';
 
@@ -259,6 +272,43 @@ class Profile extends Component
         return $user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail();
     }
 
+    public function updatedYeniFoto(): void
+    {
+        $this->validateOnly('yeniFoto');
+
+        if ($this->yeniFoto === null) {
+            return;
+        }
+
+        $user = Auth::user();
+        $eski = $user->profil_foto;
+
+        $user->profil_foto = $this->yeniFoto->store('profil-fotolar', 'local');
+        $user->save();
+        $this->yeniFoto = null;
+
+        if ($eski !== null) {
+            Storage::disk('local')->delete($eski);
+        }
+
+        // Kenar çubuğu Livewire dışında; avatarı olayla güncelleniyor.
+        $this->dispatch('profil-foto-guncellendi', adres: $user->profilFotoAdresi());
+    }
+
+    public function fotoKaldir(): void
+    {
+        $user = Auth::user();
+
+        if ($user->profil_foto !== null) {
+            Storage::disk('local')->delete($user->profil_foto);
+        }
+
+        $user->profil_foto = null;
+        $user->save();
+
+        $this->dispatch('profil-foto-guncellendi', adres: null);
+    }
+
     #[Computed]
     public function showDeleteUser(): bool
     {
@@ -277,6 +327,7 @@ class Profile extends Component
             'programDilleri' => self::programDilleri(),
             'unvanlar' => self::unvanlar(),
             'birimler' => $this->birimSecenekleri(),
+            'fotoAdresi' => Auth::user()->profilFotoAdresi(),
         ]);
     }
 }

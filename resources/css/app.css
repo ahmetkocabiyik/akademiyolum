@@ -578,6 +578,7 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
+    overflow: hidden;
     background: rgba(201, 168, 76, 0.2);
     border: 1.5px solid var(--color-gold);
     display: flex;

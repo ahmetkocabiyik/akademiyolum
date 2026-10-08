@@ -280,3 +280,16 @@ test('profil sayfası durumu Yönerge Analizi ile aynı adla anıyor', function 
         ->assertSee('Kriter Onaylanmalı')
         ->assertDontSee('eksik bilgi');
 });
+
+test('ayarlar menüsünde profil seçili görünür; livewire güncellemesinden sonra da', function () {
+    $this->actingAs(User::factory()->create());
+
+    $secili = fn (string $html) => preg_match('/<a[^>]*data-current[^>]*>\s*(?:<[^>]+>\s*)*Profil/u', $html) === 1;
+
+    expect($secili($this->get(route('profile.edit'))->getContent()))->toBeTrue();
+
+    // Güncelleme isteği livewire/update'ten gelir; işaret rota adına bağlı olsaydı kaybolurdu.
+    $bilesen = Livewire::test(Profile::class)->set('name', 'Yeni Ad');
+
+    expect($secili($bilesen->html()))->toBeTrue();
+});
