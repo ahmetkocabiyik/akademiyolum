@@ -194,6 +194,10 @@ class FaaliyetEkle extends Component
         $this->rol = '';
         $this->yayinTuru = 'ozgun_makale';
 
+        // Girilmiş yazarlar kategori değişince duruyor; tek yazarsa yeni
+        // kategoride de rol kendiliğinden "Tek yazar".
+        $this->roluDogrula();
+
         // Tez ilişkisi yalnızca yayın türlerinde soruluyor; kategori değişince
         // eski değer görünmez biçimde kaydedilmesin.
         if (! $this->tezIliskisiSorulur()) {
@@ -283,9 +287,22 @@ class FaaliyetEkle extends Component
         $this->roluDogrula();
     }
 
+    /**
+     * Rolü yazar listesiyle uyumlu tutar. Tek yazar girilmişse geçerli tek
+     * seçenek "Tek yazar"; seçtirmek yerine kendisi seçiliyor (kaydederken de
+     * zaten öyle yazılıyordu, ekranda başka bir rol görünmesi yanıltıyordu).
+     */
     private function roluDogrula(): void
     {
-        if ($this->rol !== '' && ! array_key_exists($this->rol, $this->rolSecenekleri())) {
+        $secenekler = $this->rolSecenekleri();
+
+        if (array_keys($secenekler) === ['tek']) {
+            $this->rol = 'tek';
+
+            return;
+        }
+
+        if ($this->rol !== '' && ! array_key_exists($this->rol, $secenekler)) {
             $this->rol = '';
         }
     }

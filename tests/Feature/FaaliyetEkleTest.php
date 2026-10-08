@@ -382,6 +382,43 @@ test('yazar silinince geçersiz kalan rol temizlenir', function () {
         ->assertSet('rol', '');
 });
 
+test('tek yazar girilince rol kendiliğinden tek yazar olur, ikinci yazarla temizlenir', function () {
+    actingAs(User::factory()->create());
+
+    Livewire::test(FaaliyetEkle::class)
+        ->set('kategori', 'makale')
+        ->assertSet('rol', '')
+        ->set('yazarlar', ['Ada Lovelace'])
+        ->assertSet('rol', 'tek')
+        // İkinci yazar: "Tek yazar" artık geçerli değil, aday sırasını seçer.
+        ->set('yazarlar', ['Ada Lovelace', 'Alan Turing'])
+        ->assertSet('rol', '')
+        ->set('rol', 'yazar_2')
+        // İkinci yazar silinince tek seçenek yine "Tek yazar".
+        ->call('yazarSil', 1)
+        ->assertSet('rol', 'tek');
+});
+
+test('kategori değişince tek yazarlık rolü yeni kategoride de seçili gelir', function () {
+    actingAs(User::factory()->create());
+
+    Livewire::test(FaaliyetEkle::class)
+        ->set('kategori', 'makale')
+        ->set('yazarlar', ['Ada Lovelace'])
+        ->set('kategori', 'kitap')
+        ->assertSet('rol', 'tek')
+        // Yazarlık rolü olmayan kategoride rol boş.
+        ->set('kategori', 'proje')
+        ->assertSet('rol', '');
+});
+
+test('yazar adı alandan çıkınca sunucuya gider: rol seçenekleri güncel sayıyla çizilir', function () {
+    // Düz wire:model (Livewire 4) adı bir sonraki isteğe kadar tarayıcıda
+    // tutuyor; rol listesi eski yazar sayısıyla çiziliyordu.
+    $this->get(route('faaliyetler.ekle'))
+        ->assertSee('wire:model.live.blur="yazarlar.0"', escape: false);
+});
+
 test('yazar alanı, sıra seçenekleri süzülse de görünür kalır', function () {
     actingAs(User::factory()->create());
 

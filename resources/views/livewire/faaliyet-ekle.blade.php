@@ -116,7 +116,11 @@
                             @foreach ($yazarlar as $i => $yazar)
                                 <div class="flex items-center gap-2" wire:key="yazar-{{ $i }}">
                                     <div class="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-light text-[10px] font-semibold text-brand">{{ $i + 1 }}</div>
-                                    <flux:input wire:model="yazarlar.{{ $i }}" placeholder="Yazar adı..." class="flex-1" />
+                                    {{-- .live.blur: rol seçenekleri sunucuda yazar SAYISINDAN hesaplanıyor.
+                                         Düz wire:model (Livewire 4) adı başka bir istek gidene
+                                         kadar tarayıcıda tuttuğu için rol listesi eski sayıyla
+                                         çiziliyordu: bazen tüm roller, bazen yalnız "Tek yazar". --}}
+                                    <flux:input wire:model.live.blur="yazarlar.{{ $i }}" placeholder="Yazar adı..." class="flex-1" />
                                     @if (count($yazarlar) > 1)
                                         <button type="button" wire:click="yazarSil({{ $i }})" aria-label="Yazarı sil"
                                             class="flex size-9 shrink-0 items-center justify-center rounded-lg border border-line text-ink-subtle transition hover:border-cat-red hover:bg-cat-red-light hover:text-cat-red">
