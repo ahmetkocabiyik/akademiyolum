@@ -10,10 +10,14 @@ use App\Services\AI\OpenAiSaglayici;
 use App\Services\AI\SohbetSaglayici;
 use App\Services\AI\StubJuriSaglayici;
 use App\Services\AI\StubSaglayici;
+use App\Services\Eposta\EpostaGonderici;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Yayin\CrossrefArama;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
@@ -143,6 +147,23 @@ class AppServiceProvider extends ServiceProvider
 
             $olay->user->forceFill(['son_giris_at' => now()])->saveQuietly();
         });
+
+        // Yeni kayıt: kullanıcıya hoş geldin, yöneticilere bildirim (kuyrukta).
+        Event::listen(function (Registered $olay): void {
+            if ($olay->user instanceof User) {
+                app(EpostaGonderici::class)->kayit($olay->user);
+            }
+        });
+
+        // Şifre sıfırlama ve doğrulama Laravel'in bildirimleriyle gidiyor (anahtar,
+        // bekleme süresi, imzalı bağlantı onlarda); yalnızca METİN panelden
+        // düzenlenen şablondan. Bağlantı Laravel'in varsayılanıyla aynı.
+        ResetPassword::toMailUsing(fn (User $kullanici, string $anahtar) => app(EpostaGonderici::class)->sifreSifirlama(
+            $kullanici,
+            url(route('password.reset', ['token' => $anahtar, 'email' => $kullanici->getEmailForPasswordReset()], false)),
+        ));
+
+        VerifyEmail::toMailUsing(fn (User $kullanici, string $adres) => app(EpostaGonderici::class)->epostaDogrulama($kullanici, $adres));
     }
 
     /**

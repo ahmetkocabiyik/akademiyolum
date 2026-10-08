@@ -16,6 +16,8 @@ enum YoneticiIslemi: string
     case KullaniciyiSildi = 'kullaniciyi_sildi';
     case AbonelikEkledi = 'abonelik_ekledi';
     case AbonelikIptalEtti = 'abonelik_iptal_etti';
+    case SablonGuncelledi = 'sablon_guncelledi';
+    case SablonSifirladi = 'sablon_sifirladi';
 
     public function etiket(): string
     {
@@ -29,6 +31,8 @@ enum YoneticiIslemi: string
             self::KullaniciyiSildi => 'Kullanıcıyı sildi',
             self::AbonelikEkledi => 'Abonelik ekledi',
             self::AbonelikIptalEtti => 'Aboneliği iptal etti',
+            self::SablonGuncelledi => 'E-posta şablonunu güncelledi',
+            self::SablonSifirladi => 'E-posta şablonunu varsayılana döndürdü',
         };
     }
 

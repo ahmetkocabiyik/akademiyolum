@@ -29,6 +29,8 @@ use Illuminate\Support\Carbon;
  * @property string|null $not
  * @property int|null $olusturan_id
  * @property Carbon|null $iptal_edildi_at
+ * @property Carbon|null $hatirlatma_gonderildi_at
+ * @property Carbon|null $bitis_bildirimi_gonderildi_at
  * @property Carbon|null $created_at
  */
 #[Fillable(['plan', 'baslangic', 'bitis', 'kaynak', 'tutar_kurus', 'not', 'olusturan_id'])]
@@ -49,6 +51,8 @@ class Abonelik extends Model
             'baslangic' => 'immutable_date',
             'bitis' => 'immutable_date',
             'iptal_edildi_at' => 'datetime',
+            'hatirlatma_gonderildi_at' => 'datetime',
+            'bitis_bildirimi_gonderildi_at' => 'datetime',
             'tutar_kurus' => 'integer',
         ];
     }
@@ -118,6 +122,24 @@ class Abonelik extends Model
             $this->bitis !== null && $this->bitis->lessThan($bugun) => 'bitti',
             default => 'aktif',
         };
+    }
+
+    /**
+     * Kullanıcının bu dönemden SONRA da geçerli bir aboneliği var mı (yenilenmiş)?
+     * Varsa "bitiyor" ve "sona erdi" mailleri gitmez.
+     */
+    public function yenilendiMi(): bool
+    {
+        if ($this->bitis === null) {
+            return true;
+        }
+
+        return self::query()
+            ->where('user_id', $this->user_id)
+            ->whereKeyNot($this->id)
+            ->whereNull('iptal_edildi_at')
+            ->where(fn (Builder $q) => $q->whereNull('bitis')->orWhereDate('bitis', '>', $this->bitis->toDateString()))
+            ->exists();
     }
 
     /** Bitişe kalan gün; süresizse ya da bitmişse null. */

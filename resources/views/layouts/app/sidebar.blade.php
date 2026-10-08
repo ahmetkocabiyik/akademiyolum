@@ -28,6 +28,10 @@
                     <flux:icon name="credit-card" />
                     <span>Abonelikler</span>
                 </a>
+                <a href="{{ route('admin.eposta-sablonlari') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.eposta-sablon*')])>
+                    <flux:icon name="envelope" />
+                    <span>E-posta Şablonları</span>
+                </a>
                 <a href="{{ route('admin.islemler') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.islemler')])>
                     <flux:icon name="clipboard-document-check" />
                     <span>İşlem Kaydı</span>

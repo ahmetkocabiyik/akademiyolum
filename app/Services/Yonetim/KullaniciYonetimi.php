@@ -7,6 +7,7 @@ use App\Enums\YoneticiIslemi;
 use App\Models\Abonelik;
 use App\Models\IslemKaydi;
 use App\Models\User;
+use App\Services\Eposta\EpostaGonderici;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
@@ -21,6 +22,8 @@ use InvalidArgumentException;
  */
 class KullaniciYonetimi
 {
+    public function __construct(private readonly EpostaGonderici $eposta) {}
+
     public function askiyaAl(User $hedef, User $yonetici, ?string $neden = null): void
     {
         $this->korumaliMi($hedef, $yonetici);
@@ -32,6 +35,7 @@ class KullaniciYonetimi
         DB::transaction(function () use ($hedef, $yonetici, $neden): void {
             $hedef->forceFill(['askiya_alindi_at' => now()])->save();
             IslemKaydi::yaz(YoneticiIslemi::AskiyaAldi, $yonetici, $hedef, array_filter(['neden' => $neden]));
+            $this->eposta->askiyaAlindi($hedef, $neden);
         });
     }
 
@@ -44,6 +48,7 @@ class KullaniciYonetimi
         DB::transaction(function () use ($hedef, $yonetici): void {
             $hedef->forceFill(['askiya_alindi_at' => null])->save();
             IslemKaydi::yaz(YoneticiIslemi::AskidanCikardi, $yonetici, $hedef);
+            $this->eposta->askidanCikarildi($hedef);
         });
     }
 
@@ -61,6 +66,9 @@ class KullaniciYonetimi
                 'ad' => $hedef->name,
                 'faaliyet_sayisi' => $hedef->faaliyetler()->count(),
             ]);
+
+            // Ad ve e-posta silmeden ÖNCE alınıyor; mail işlem tamamlanınca gider.
+            $this->eposta->hesapSilindi($hedef->name, $hedef->email);
 
             $hedef->delete();
         });
@@ -105,6 +113,10 @@ class KullaniciYonetimi
                 'tutar_kurus' => $tutarKurus,
             ]);
 
+            // Kullanıcıya ve yöneticilere bildirim. Mail işlem tamamlanınca
+            // kuyruğa düşer (SablonluEposta::afterCommit); işlem geri alınırsa gitmez.
+            $this->eposta->abonelik($abonelik->setRelation('user', $hedef)->setRelation('olusturan', $yonetici));
+
             return $abonelik;
         });
     }
@@ -115,8 +127,17 @@ class KullaniciYonetimi
             return;
         }
 
-        DB::transaction(function () use ($abonelik, $yonetici): void {
+        // Bitmiş bir dönemi iptal etmek kullanıcı için bir şey değiştirmiyor; mail
+        // yalnızca aktif ya da başlamamış abonelikte gider.
+        $etkili = in_array($abonelik->durum(), ['aktif', 'baslamadi'], true);
+
+        DB::transaction(function () use ($abonelik, $yonetici, $etkili): void {
             $abonelik->forceFill(['iptal_edildi_at' => now()])->save();
+
+            if ($etkili) {
+                $this->eposta->abonelikIptal($abonelik);
+            }
+
             IslemKaydi::yaz(YoneticiIslemi::AbonelikIptalEtti, $yonetici, $abonelik->user, [
                 'abonelik_id' => $abonelik->id,
                 'plan' => $abonelik->plan->value,
