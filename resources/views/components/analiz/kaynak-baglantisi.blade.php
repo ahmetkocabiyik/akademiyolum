@@ -13,7 +13,7 @@
     </div>
     <div class="min-w-0 flex-1">
         <div class="text-xs font-semibold text-ink">{{ $baslik }}</div>
-        <div class="truncate text-[11px] text-ink-subtle" title="{{ $altBaslik }}">
+        <div class="truncate text-xs text-ink-subtle" title="{{ $altBaslik }}">
             {{ $altBaslik }}
         </div>
     </div>

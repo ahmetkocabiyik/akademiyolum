@@ -28,7 +28,7 @@
 
         <span class="min-w-0 flex-1">
             <span class="block truncate text-sm font-semibold text-ink">{{ $adim->baslik() }}</span>
-            <span class="mt-0.5 block truncate text-[11px] text-ink-subtle">{{ $adim->altBaslik() }}</span>
+            <span class="mt-0.5 block truncate text-xs text-ink-subtle">{{ $adim->altBaslik() }}</span>
         </span>
 
         <flux:badge :color="$agirlik->rozet()" size="sm" class="shrink-0">

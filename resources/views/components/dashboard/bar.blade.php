@@ -22,5 +22,5 @@
         <div class="baraj-cubuk h-full rounded-full"
             style="width: {{ $dolu }}%; background: {{ $color }}; --cubuk-gecikme: {{ $gecikme }}ms"></div>
     </div>
-    <span class="w-10 text-right text-[11px] font-medium text-ink-muted">%{{ $yuzde }}</span>
+    <span class="w-10 text-right text-xs font-medium text-ink-muted">%{{ $yuzde }}</span>
 </div>

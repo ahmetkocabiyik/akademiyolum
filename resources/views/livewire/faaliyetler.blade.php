@@ -1,6 +1,6 @@
 <div>
     <x-topbar title="Faaliyetler" :pill="$faaliyetler->count() . ' kayıt'">
-        <flux:button :href="route('faaliyetler.ekle')" wire:navigate variant="primary" size="sm" icon="plus">Faaliyet Ekle</flux:button>
+        <flux:button :href="route('faaliyetler.ekle')" wire:navigate variant="primary" icon="plus">Faaliyet Ekle</flux:button>
     </x-topbar>
 
     <div class="flex flex-col gap-4">
@@ -22,13 +22,13 @@
                 <div class="flex flex-col items-center gap-2 py-12 text-center">
                     <flux:icon name="document-plus" class="size-8 text-ink-subtle" />
                     <flux:text>Kayıt bulunamadı.</flux:text>
-                    <flux:button :href="route('faaliyetler.ekle')" wire:navigate size="sm" variant="primary" icon="plus">Faaliyet ekle</flux:button>
+                    <flux:button :href="route('faaliyetler.ekle')" wire:navigate variant="primary" icon="plus">Faaliyet ekle</flux:button>
                 </div>
             @else
                 <div class="overflow-x-auto">
                     <table class="w-full border-collapse text-sm">
                         <thead>
-                            <tr class="border-b border-line text-left text-[10px] uppercase tracking-wide text-ink-subtle">
+                            <tr class="border-b border-line text-left text-2xs uppercase tracking-wide text-ink-subtle">
                                 <th class="px-2 py-2 font-semibold">Başlık</th>
                                 <th class="px-2 py-2 font-semibold">Kategori</th>
                                 <th class="px-2 py-2 font-semibold">Tür / Kaynak</th>
@@ -54,19 +54,19 @@
                                     <td class="max-w-[260px] truncate px-2 py-2.5 font-medium text-ink">
                                         <a href="{{ route('faaliyetler.duzenle', $f) }}" wire:navigate x-ref="duzenle"
                                             class="hover:text-brand">{{ $f->baslik }}</a>
-                                        <div class="text-[10px] text-ink-subtle">{{ $f->yazarlar }}</div>
+                                        <div class="text-2xs text-ink-subtle">{{ $f->yazarlar }}</div>
                                     </td>
                                     <td class="px-2 py-2.5"><flux:badge size="sm">{{ $f->kategori->label() }}</flux:badge></td>
                                     <td class="px-2 py-2.5 text-ink-muted">
                                         {{ $f->tur }}
-                                        @if ($f->kaynak)<div class="text-[10px] text-ink-subtle">{{ $f->kaynak }}</div>@endif
+                                        @if ($f->kaynak)<div class="text-2xs text-ink-subtle">{{ $f->kaynak }}</div>@endif
                                     </td>
                                     {{-- Dönem koşulları bu tarihe bakıyor; boşsa aday görüp tamamlayabilsin. --}}
                                     <td class="px-2 py-2.5 text-ink-muted">
                                         @if ($f->tarih)
                                             {{ $f->tarih->format('d.m.Y') }}
                                         @else
-                                            <span class="text-[11px] text-cat-amber-text">girilmemiş</span>
+                                            <span class="text-xs text-cat-amber-text">girilmemiş</span>
                                         @endif
                                     </td>
                                     <td class="px-2 py-2.5 font-serif font-bold text-brand">{{ $f->puan }}</td>

@@ -61,7 +61,7 @@
 
         <a href="https://doi.org/{{ $y['doi'] }}" target="_blank" rel="noopener"
             x-on:click.stop
-            class="mt-1 inline-flex items-center gap-1 text-[11px] text-ink-subtle underline hover:text-brand">
+            class="mt-1 inline-flex items-center gap-1 text-xs text-ink-subtle underline hover:text-brand">
             <flux:icon name="arrow-top-right-on-square" class="size-3" />{{ $y['doi'] }}
         </a>
     </div>

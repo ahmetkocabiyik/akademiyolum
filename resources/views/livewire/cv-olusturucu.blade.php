@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ \App\Enums\CvYaziTipi::webFontlari() }}">
 
     <x-topbar class="yazdirma-gizle" title="CV Oluşturucu" :pill="$this->secilenler->count().' faaliyet CV\'de'">
-        <flux:button x-on:click="window.print()" size="sm" variant="primary" icon="arrow-down-tray">
+        <flux:button x-on:click="window.print()" variant="primary" icon="arrow-down-tray">
             PDF İndir
         </flux:button>
     </x-topbar>

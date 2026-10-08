@@ -9,7 +9,7 @@
 <flux:card class="overflow-x-auto !p-0">
     <table class="w-full border-collapse text-sm">
         <thead>
-            <tr class="border-b border-line text-left text-[10px] uppercase tracking-wide text-ink-subtle">
+            <tr class="border-b border-line text-left text-2xs uppercase tracking-wide text-ink-subtle">
                 <th class="px-4 py-2.5 font-semibold">Üniversite</th>
                 <th class="px-4 py-2.5 font-semibold">Kadro</th>
                 <th class="px-4 py-2.5 font-semibold">Min. Baraj</th>
@@ -31,7 +31,7 @@
                             <span class="font-medium text-ink">{{ $s['universite']->ad }}</span>
                             <flux:icon name="check-badge" variant="solid" class="size-3.5 text-brand" title="Doğrulandı" />
                         </div>
-                        <div class="text-[11px] text-ink-subtle">{{ $s['universite']->sehir }} · {{ $s['universite']->tur === 'vakif' ? 'Vakıf' : 'Devlet' }}</div>
+                        <div class="text-xs text-ink-subtle">{{ $s['universite']->sehir }} · {{ $s['universite']->tur === 'vakif' ? 'Vakıf' : 'Devlet' }}</div>
                     </td>
                     <td class="px-4 py-2.5 text-ink-muted">{{ $kadroEtiketi }}</td>
                     <td class="px-4 py-2.5 font-serif font-bold text-ink">{{ $s['baraj'] ?? '—' }}</td>

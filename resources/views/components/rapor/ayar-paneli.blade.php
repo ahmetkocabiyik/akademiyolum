@@ -35,7 +35,7 @@
                     </span>
                     <span class="block px-3 py-2">
                         <span @class(['block text-xs', 'font-semibold text-brand' => $secili, 'text-ink' => ! $secili])>{{ $secenek['etiket'] }}</span>
-                        <span class="mt-0.5 block text-[10px] leading-tight text-ink-subtle">{{ $secenek['aciklama'] }}</span>
+                        <span class="mt-0.5 block text-2xs leading-tight text-ink-subtle">{{ $secenek['aciklama'] }}</span>
                     </span>
                 </button>
             @endforeach
@@ -46,24 +46,24 @@
     <div class="flex flex-col gap-3">
         <flux:heading size="sm">Rapor Bilgileri</flux:heading>
 
-        <flux:input wire:model.live.debounce.400ms="baslik" label="Rapor Başlığı" size="sm" />
+        <flux:input wire:model.live.debounce.400ms="baslik" label="Rapor Başlığı" />
 
         <div>
-            <flux:select wire:model.live="aralik" label="Tarih Aralığı" size="sm">
+            <flux:select wire:model.live="aralik" label="Tarih Aralığı">
                 @foreach (RaporDerleyici::ARALIKLAR as $deger => $etiket)
                     <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
                 @endforeach
             </flux:select>
-            <flux:text class="!mt-1 !text-[11px]">Yalnızca listeleri daraltır; puan ve hedef analizi tüm onaylı faaliyetlerle hesaplanır.</flux:text>
+            <flux:text class="!mt-1 !text-xs">Yalnızca listeleri daraltır; puan ve hedef analizi tüm onaylı faaliyetlerle hesaplanır.</flux:text>
         </div>
 
-        <flux:select wire:model.live="hedefKadro" label="Hedef Kadro" size="sm">
+        <flux:select wire:model.live="hedefKadro" label="Hedef Kadro">
             @foreach (Kadro::etiketler() as $deger => $etiket)
                 <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
             @endforeach
         </flux:select>
 
-        <flux:select wire:model.live="hedefKurum" label="Hedef Kurum" size="sm">
+        <flux:select wire:model.live="hedefKurum" label="Hedef Kurum">
             <flux:select.option value="">Hedef yok</flux:select.option>
             @foreach ($kurumlar as $kurum)
                 <flux:select.option :value="$kurum">{{ $kurum }}</flux:select.option>
@@ -71,7 +71,7 @@
         </flux:select>
 
         @if ($hedefKurum === '')
-            <flux:text class="!text-[11px]">Hedef kurum seçilmeden puan ve koşullar basılmaz; yalnızca faaliyetler ve başvurulabilir üniversiteler listelenir.</flux:text>
+            <flux:text class="!text-xs">Hedef kurum seçilmeden puan ve koşullar basılmaz; yalnızca faaliyetler ve başvurulabilir üniversiteler listelenir.</flux:text>
         @endif
     </div>
 
@@ -87,7 +87,7 @@
                     class="flex items-center justify-between gap-3 border-b border-line py-2.5 text-start last:border-0">
                     <span class="min-w-0">
                         <span class="block text-xs font-medium text-ink">{{ $secenek['etiket'] }}</span>
-                        <span class="block text-[11px] text-ink-subtle">
+                        <span class="block text-xs text-ink-subtle">
                             {{-- Jüri özeti YZ'ye yeniden yazdırılmıyor; rapor yoksa adaya nereden üreteceği söyleniyor. --}}
                             @if ($bolum === 'juri' && ! $juriVar)
                                 Bu hedef için jüri raporu yok; YZ Jüri Analizi'nden üretin.

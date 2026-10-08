@@ -14,6 +14,25 @@
     --font-sans: 'DM Sans', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-serif: Georgia, 'Times New Roman', ui-serif, serif;
 
+    /* ── YAZI ÖLÇEĞİ ──
+       Tailwind varsayılanının bir kademe üstü: arayüz 12-14px'lik küçük
+       yazılarla sıkışık görünüyordu. Flux bileşenleri de bu değişkenleri
+       kullandığı için tek yerden bütün arayüze yayılıyor. `2xs` eskiden
+       elle yazılan 10-11px'lik etiketlerin yerine (rozet, dipnot). CV ve
+       rapor sayfaları kendi pt ölçüleriyle çizildiği için ETKİLENMEZ. */
+    --text-2xs: 0.75rem;
+    --text-2xs--line-height: 1rem;
+    --text-xs: 0.8125rem;
+    --text-xs--line-height: 1.125rem;
+    --text-sm: 0.9375rem;
+    --text-sm--line-height: 1.375rem;
+    --text-base: 1.0625rem;
+    --text-base--line-height: 1.625rem;
+    --text-lg: 1.25rem;
+    --text-lg--line-height: 1.75rem;
+    --text-xl: 1.375rem;
+    --text-xl--line-height: 1.875rem;
+
     /* Akademiyolum marka paleti (prototip) */
     --color-navy: #0a1628;
     --color-gold: #c9a84c;
@@ -124,6 +143,18 @@
 
 [x-cloak] { display: none !important; }
 
+/* ── DÜZ (FLAT) GÖRÜNÜM ──
+   Flux butonları, giriş kutuları ve kartları ince gölgelerle geliyor;
+   ayrımı gölge değil kenar çizgisi ve renk yapıyor. Katmansız kural:
+   Tailwind'in @layer utilities içindeki shadow-* sınıflarını kendiliğinden
+   ezer, !important gerekmez. */
+[data-flux-button],
+[data-flux-control],
+[data-flux-card],
+[data-flux-select-button] {
+    box-shadow: none;
+}
+
 /* Marka yazısı — ana sayfa logosuyla aynı (Playfair Display) */
 .brand-wordmark {
     font-family: 'Playfair Display', ui-serif, Georgia, serif;
@@ -143,7 +174,7 @@
 /* Jüri raporu adım içeriği. Sohbet balonundan ayrı bir kural seti, çünkü rapor
    Markdown TABLO basıyor (kriter-profil eşleştirmesi) ve tablo sığmadığında
    sayfanın kendisi değil kutunun içi kaymalı. */
-.juri-icerik { font-size: 13px; line-height: 1.75; color: var(--color-ink-muted); }
+.juri-icerik { font-size: 15px; line-height: 1.75; color: var(--color-ink-muted); }
 .juri-icerik > *:first-child { margin-top: 0; }
 .juri-icerik > *:last-child { margin-bottom: 0; }
 .juri-icerik p { margin: 0.6rem 0; }
@@ -427,12 +458,12 @@
 
 /* Tablolar kutunun içinde yatay kayar; .juri-tablo sarmalayıcısı overflow verir. */
 .juri-tablo { margin: 0.8rem 0; overflow-x: auto; }
-.juri-icerik table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.juri-icerik table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .juri-icerik th {
     text-align: start;
     padding: 6px 8px;
     border-bottom: 1px solid var(--color-line);
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--color-ink-subtle);
     white-space: nowrap;
@@ -484,16 +515,16 @@
 .sb-nav {
     flex: 1;
     overflow-y: auto;
-    padding: 14px 12px;
+    padding: 16px 14px;
 }
 .sb-sect {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 1px;
     color: rgba(255, 255, 255, 0.3);
     text-transform: uppercase;
-    padding: 0 8px;
-    margin: 14px 0 5px;
+    padding: 0 10px;
+    margin: 18px 0 6px;
 }
 .sb-sect:first-child {
     margin-top: 0;
@@ -501,12 +532,12 @@
 .sb-link {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 9px 10px;
-    border-radius: 8px;
-    margin-bottom: 2px;
+    gap: 12px;
+    padding: 11px 12px;
+    border-radius: 10px;
+    margin-bottom: 3px;
     border: 1px solid transparent;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
     transition: background 0.15s, color 0.15s;
 }
@@ -514,21 +545,20 @@
     background: rgba(255, 255, 255, 0.06);
 }
 .sb-link.active {
-    background: rgba(26, 86, 219, 0.25);
-    border-color: rgba(26, 86, 219, 0.3);
+    background: var(--color-brand);
 }
 .sb-link > svg {
-    width: 15px;
-    height: 15px;
+    width: 19px;
+    height: 19px;
     opacity: 0.6;
     flex-shrink: 0;
 }
 .sb-link.active > svg {
     opacity: 1;
-    color: #60a5fa;
+    color: #fff;
 }
 .sb-link span {
-    font-size: 13px;
+    font-size: 15px;
     color: inherit;
 }
 .sb-link.active span {
@@ -545,26 +575,26 @@
     text-align: start;
 }
 .sb-avatar {
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: rgba(201, 168, 76, 0.2);
     border: 1.5px solid var(--color-gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--color-gold);
     flex-shrink: 0;
 }
 .sb-name {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
     color: #fff;
 }
 .sb-uni {
-    font-size: 11px;
+    font-size: 13px;
     color: rgba(255, 255, 255, 0.4);
     margin-top: 1px;
 }

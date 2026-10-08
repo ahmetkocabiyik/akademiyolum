@@ -52,7 +52,7 @@
             ['Min. Baraj', $d['baraj'] === null ? 'Baraj yok' : $d['baraj'].' pt'],
         ] as [$etiket, $deger])
             <div class="bg-surface px-3 py-2.5">
-                <div class="text-[10px] uppercase tracking-wide text-ink-subtle">{{ $etiket }}</div>
+                <div class="text-2xs uppercase tracking-wide text-ink-subtle">{{ $etiket }}</div>
                 <div class="mt-0.5 truncate text-sm font-semibold text-ink" title="{{ $deger }}">{{ $deger }}</div>
             </div>
         @endforeach
@@ -98,10 +98,10 @@
         {{-- Belirsizliğin gerekçesi: motor tahmin yürütmüyor. --}}
         @if (count($belirsizler) > 0)
             <div class="mt-3 rounded-xl border border-cat-purple/30 bg-cat-purple/5 p-3">
-                <div class="mb-1.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-cat-purple">
+                <div class="mb-1.5 flex items-center gap-1.5 text-2xs font-semibold uppercase tracking-wider text-cat-purple">
                     <flux:icon name="question-mark-circle" class="size-3.5" />Değerlendirilemeyen Koşullar
                 </div>
-                <flux:text class="!text-[11px] leading-relaxed">
+                <flux:text class="!text-xs leading-relaxed">
                     Aşağıdaki koşullar <strong>sağlanmadığı için değil</strong>, veri eksik olduğu için
                     karara bağlanamadı. Faaliyet tarihlerini ve
                     <a href="{{ route('profile.edit') }}" wire:navigate class="font-medium text-brand underline">akademik profilinizi</a>
@@ -116,7 +116,7 @@
     {{-- Asgari koşullar: yönergenin kendi şart ağacı, olduğu gibi --}}
     <div>
         <flux:heading size="sm">Asgari Koşullar</flux:heading>
-        <flux:text class="!mt-0.5 !text-[11px] text-ink-subtle">Yönergenin kendi koşul yapısı; iç içe geçmiş koşullar ve telafi seçenekleri dâhil.</flux:text>
+        <flux:text class="!mt-0.5 !text-xs text-ink-subtle">Yönergenin kendi koşul yapısı; iç içe geçmiş koşullar ve telafi seçenekleri dâhil.</flux:text>
 
         <div class="mt-3 flex flex-col gap-3">
             @foreach ($d['sonuc']->kosullar() as $i => $kosul)
@@ -165,11 +165,11 @@
 
     {{-- Aksiyonlar --}}
     <div class="flex flex-wrap items-center justify-between gap-2">
-        <flux:text class="!text-[11px] text-ink-subtle">
+        <flux:text class="!text-xs text-ink-subtle">
             {{ $uni->ad }} · {{ $kadroEtiketi }} · cetvel: {{ $esik['cetvel'] }}
         </flux:text>
         <flux:modal.close>
-            <flux:button variant="filled" size="sm">Kapat</flux:button>
+            <flux:button variant="filled">Kapat</flux:button>
         </flux:modal.close>
     </div>
 </div>

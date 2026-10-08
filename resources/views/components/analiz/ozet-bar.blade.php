@@ -35,7 +35,7 @@
                 ])>
                 <div class="font-serif text-lg font-bold leading-none" style="color: {{ $renk }}">{{ $sayi }}</div>
                 <div @class([
-                    'mt-1 text-[10px] leading-tight',
+                    'mt-1 text-2xs leading-tight',
                     'font-semibold text-ink' => $secili,
                     'text-ink-subtle' => ! $secili,
                 ])>{{ $etiket }}</div>
@@ -44,7 +44,7 @@
     </div>
 
     <div class="flex items-center gap-2">
-        <flux:select wire:model.live="siralama" size="sm" class="w-40">
+        <flux:select wire:model.live="siralama" class="w-52">
             <flux:select.option value="oran">Eşleşme Oranı</flux:select.option>
             <flux:select.option value="baraj_artan">Puan Barajı (Artan)</flux:select.option>
             <flux:select.option value="baraj_azalan">Puan Barajı (Azalan)</flux:select.option>

@@ -5,7 +5,7 @@
 
 {{-- Mevcut Profilim (05_yonerge_analizi.html: navy zeminli) --}}
 <div class="rounded-xl bg-navy p-4">
-    <div class="mb-3 text-[10px] font-semibold uppercase tracking-wider text-white/40">Mevcut Profilim</div>
+    <div class="mb-3 text-2xs font-semibold uppercase tracking-wider text-white/40">Mevcut Profilim</div>
     <div class="flex flex-col gap-1.5">
         <div class="flex items-center justify-between gap-2">
             <span class="text-xs text-white/55">Bölüm</span>
@@ -41,7 +41,7 @@
     </div>
     @if ($doluluk < 100)
         <a href="{{ route('profile.edit') }}" wire:navigate
-            class="mt-2 flex items-center gap-1 text-[11px] font-medium text-gold/80 transition hover:text-gold">
+            class="mt-2 flex items-center gap-1 text-xs font-medium text-gold/80 transition hover:text-gold">
             <flux:icon name="pencil-square" class="size-3" />
             Eksik bilgileri tamamla
         </a>

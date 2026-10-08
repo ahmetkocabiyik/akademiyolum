@@ -13,7 +13,7 @@
 --}}
 <div data-kart-listesi>
     <x-topbar title="Yönerge Analizi" :pill="count($this->listelenen) . ' üniversite'">
-        <flux:button wire:click="$toggle('karsilastirma')" size="sm" :variant="$karsilastirma ? 'filled' : 'primary'" icon="table-cells">
+        <flux:button wire:click="$toggle('karsilastirma')" :variant="$karsilastirma ? 'filled' : 'primary'" icon="table-cells">
             {{ $karsilastirma ? 'Kartlara Dön' : 'Üniversite Karşılaştır' }}
         </flux:button>
     </x-topbar>
@@ -62,7 +62,7 @@
                              yolu da elin altında olmalı, yoksa boş ekranda kalan
                              aday nereye tıklayacağını bilmiyor. --}}
                         @if ($durumFiltre !== '')
-                            <flux:button wire:click="$set('durumFiltre', '')" size="sm" variant="ghost" class="mt-3">
+                            <flux:button wire:click="$set('durumFiltre', '')" variant="ghost" class="mt-3">
                                 Durum filtresini kaldır
                             </flux:button>
                         @endif
@@ -72,7 +72,7 @@
                         :satirlar="$this->listelenen"
                         :kadro-etiketi="$kadrolar[$hedefKadro]" />
                 @else
-                    <div @class(['grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4' => $gorunum === 'grid', 'flex flex-col gap-2' => $gorunum === 'list'])>
+                    <div @class(['grid gap-3 md:grid-cols-2 min-[1700px]:grid-cols-3 min-[2200px]:grid-cols-4' => $gorunum === 'grid', 'flex flex-col gap-2' => $gorunum === 'list'])>
                         @foreach ($this->listelenen as $s)
                             <x-analiz.universite-karti :satir="$s" :gorunum="$gorunum" />
                         @endforeach

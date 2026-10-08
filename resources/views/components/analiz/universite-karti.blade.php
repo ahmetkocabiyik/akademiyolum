@@ -25,13 +25,14 @@
 {{-- data-kart: filtre/sıralama sonrası kartın yeni yerine KAYARAK gitmesini
      sağlayan FLIP kancası (resources/js/app.js). Değeri kartın kimliği; morph
      öncesi ölçülen konumlarla morph sonrasını bu anahtar eşliyor. --}}
-{{-- Sabit yükseklik: 6 koşullu bir kartın (Mersin) doğal boyu. Sabit kısımlar
-     160px tutuyor, kalan ~128px tam 6 satırlık liste demek. Uyarı satırı ya da
+{{-- Sabit yükseklik: 6 koşullu bir kartın (Mersin) doğal boyu, büyütülmüş
+     yazı ölçeğiyle (sm = 15px). Sabit kısımlar ~190px, kalan ~146px tam 6
+     satırlık liste demek. Uyarı satırı ya da
      yönerge düğmesi olan kartlarda liste payı azalır ve kendi içinde kayar —
      kart boyu değişmez, içerik de kırpılmaz. --}}
 <flux:card @class([
-    'flex cursor-pointer flex-col overflow-hidden !p-0 transition duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0',
-    'h-[18rem]' => $gorunum === 'grid',
+    'flex cursor-pointer flex-col overflow-hidden !p-0 transition duration-200 hover:-translate-y-0.5 hover:border-brand/40 active:translate-y-0',
+    'h-[22.5rem]' => $gorunum === 'grid',
 ])
     wire:key="uni-{{ $uni->id }}"
     data-kart="{{ $uni->id }}"
@@ -45,7 +46,7 @@
     <div class="flex flex-1 flex-col p-4">
         <div class="flex items-start justify-between gap-3">
             <div class="flex min-w-0 items-center gap-3">
-                <div class="flex size-10 shrink-0 items-center justify-center rounded-lg border border-line bg-canvas text-[11px] font-bold text-ink-muted">{{ $bashkler }}</div>
+                <div class="flex size-10 shrink-0 items-center justify-center rounded-lg border border-line bg-canvas text-xs font-bold text-ink-muted">{{ $bashkler }}</div>
                 <div class="min-w-0">
                     <div class="truncate text-sm font-semibold text-ink">{{ $uni->ad }}</div>
                     <div class="mt-0.5 flex items-center gap-1 text-xs text-ink-subtle">
@@ -56,7 +57,7 @@
             </div>
             <div class="flex shrink-0 flex-col items-end gap-1">
                 <flux:badge :color="Analiz::ROZET[$s['durum']]" size="sm">{{ Analiz::ETIKET[$s['durum']] }}</flux:badge>
-                <span class="inline-flex items-center gap-1 text-[10px] font-medium text-brand">
+                <span class="inline-flex items-center gap-1 text-2xs font-medium text-brand">
                     <flux:icon name="check-badge" variant="solid" class="size-3" />Doğrulandı
                 </span>
             </div>
@@ -111,7 +112,7 @@
             @endforeach
 
             @if ($gizliSayi > 0)
-                <div class="pt-0.5 text-[11px] font-medium text-ink-subtle">
+                <div class="pt-0.5 text-xs font-medium text-ink-subtle">
                     +{{ $gizliSayi }} koşul daha
                 </div>
             @endif
@@ -121,14 +122,14 @@
              işaretlemek · kendi değerlendirmesini yapmak. Tek satırda
              toplanırsa aday nereye gideceğini bilmiyor. --}}
         @if ($s['belirsiz_sayisi'] > 0)
-            <div class="mt-2 flex items-start gap-1 text-[11px] text-cat-purple">
+            <div class="mt-2 flex items-start gap-1 text-xs text-cat-purple">
                 <flux:icon name="question-mark-circle" class="mt-px size-3 shrink-0" />
                 <span>{{ $s['belirsiz_sayisi'] }} koşul için eksik bilgilerinizi tamamlamalısınız.</span>
             </div>
         @endif
 
         @if ($s['beyan_sayisi'] > 0)
-            <div class="mt-2 flex items-start gap-1 text-[11px] text-ink-subtle">
+            <div class="mt-2 flex items-start gap-1 text-xs text-ink-subtle">
                 <flux:icon name="information-circle" class="mt-px size-3 shrink-0" />
                 <span>{{ $s['beyan_sayisi'] }} koşul onayınızı bekliyor.</span>
             </div>
@@ -137,7 +138,7 @@
         {{-- Cetvel eksikliği adayın yapabileceği bir şey DEĞİL; üstteki satırla
              karıştırılırsa aday olmayan bir kutuyu arar. --}}
         @if ($s['cetvel_eksigi_sayisi'] > 0)
-            <div class="mt-2 flex items-start gap-1 text-[11px] text-ink-subtle">
+            <div class="mt-2 flex items-start gap-1 text-xs text-ink-subtle">
                 <flux:icon name="exclamation-circle" class="mt-px size-3 shrink-0 text-cat-amber-text" />
                 <span>{{ $s['cetvel_eksigi_sayisi'] }} koşulu kendiniz değerlendirmelisiniz.</span>
             </div>
@@ -145,7 +146,7 @@
 
         {{-- mt-auto: kartların içeriği farklı uzunlukta olduğu için ipucu
              satırı hepsinde kartın dibine hizalanır. --}}
-        <div class="mt-auto flex items-center justify-center gap-1 pt-2 text-[11px] font-medium text-ink-subtle">
+        <div class="mt-auto flex items-center justify-center gap-1 pt-2 text-xs font-medium text-ink-subtle">
             <flux:icon name="arrows-pointing-out" class="size-3" />
             Detay için karta tıklayın
         </div>

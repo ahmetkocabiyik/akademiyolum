@@ -20,11 +20,11 @@
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <flux:button wire:click="yeniSohbet" size="sm" variant="subtle" icon="plus-circle">
+                <flux:button wire:click="yeniSohbet" variant="subtle" icon="plus-circle">
                     Yeni sohbet
                 </flux:button>
                 {{-- Mobilde sohbet listesini açar --}}
-                <flux:button x-on:click="panelAcik = true" size="sm" variant="subtle" icon="chat-bubble-left-right" class="lg:hidden" aria-label="Sohbetler" />
+                <flux:button x-on:click="panelAcik = true" variant="subtle" icon="chat-bubble-left-right" class="lg:hidden" aria-label="Sohbetler" />
             </div>
         </div>
 
@@ -96,7 +96,7 @@
                 <div class="mb-2 flex flex-wrap gap-1.5">
                     @foreach ($oneriler as $oneri)
                         <button type="button" wire:click="oneriGonder(@js($oneri))" @disabled($bekleniyor)
-                            class="rounded-full border border-line px-3 py-1 text-[11px] font-medium text-ink-subtle transition hover:border-brand hover:text-brand disabled:opacity-50">
+                            class="rounded-full border border-line px-3 py-1 text-xs font-medium text-ink-subtle transition hover:border-brand hover:text-brand disabled:opacity-50">
                             {{ $oneri }}
                         </button>
                     @endforeach
@@ -113,7 +113,7 @@
     <flux:card class="hidden w-80 shrink-0 flex-col overflow-hidden !p-0 lg:flex">
         <div class="flex items-center justify-between gap-2 border-b border-line px-4 py-4">
             <flux:heading size="sm">Sohbetler</flux:heading>
-            <flux:button wire:click="yeniSohbet" size="xs" variant="subtle" icon="plus" aria-label="Yeni sohbet" />
+            <flux:button wire:click="yeniSohbet" size="sm" variant="subtle" icon="plus" aria-label="Yeni sohbet" />
         </div>
 
         @include('livewire.partials.danisman-sohbetler')
@@ -133,8 +133,8 @@
             <div class="flex items-center justify-between gap-2 border-b border-line px-4 py-4">
                 <flux:heading size="sm">Sohbetler</flux:heading>
                 <div class="flex items-center gap-1">
-                    <flux:button wire:click="yeniSohbet" x-on:click="panelAcik = false" size="xs" variant="subtle" icon="plus" aria-label="Yeni sohbet" />
-                    <flux:button x-on:click="panelAcik = false" size="xs" variant="subtle" icon="x-mark" aria-label="Kapat" />
+                    <flux:button wire:click="yeniSohbet" x-on:click="panelAcik = false" size="sm" variant="subtle" icon="plus" aria-label="Yeni sohbet" />
+                    <flux:button x-on:click="panelAcik = false" size="sm" variant="subtle" icon="x-mark" aria-label="Kapat" />
                 </div>
             </div>
 

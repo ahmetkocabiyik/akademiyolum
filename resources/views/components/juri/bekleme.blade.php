@@ -14,7 +14,7 @@
         <flux:text class="!mt-1">YZ jüri şapkasını takıyor ve dosyanızı inceliyor.</flux:text>
     </div>
 
-    <ul class="flex flex-col gap-2 text-start text-[13px] text-ink-muted">
+    <ul class="flex flex-col gap-2 text-start text-sm text-ink-muted">
         @foreach ([
             'Profil ve faaliyet listesi okunuyor',
             'Yönerge koşulları motora veriliyor',

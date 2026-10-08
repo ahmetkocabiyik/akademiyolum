@@ -63,7 +63,7 @@
                     @php $onizleme = $this->tahminiPuan(); @endphp
                     <div class="flex items-center justify-between rounded-xl bg-navy px-5 py-4">
                         <div>
-                            <div class="text-[10px] font-semibold uppercase tracking-wide text-white/40">
+                            <div class="text-2xs font-semibold uppercase tracking-wide text-white/40">
                                 {{ $onizleme === null ? 'Puan Önizlemesi' : auth()->user()->universite.' cetveline göre' }}
                             </div>
                             <div class="flex items-baseline gap-2">
@@ -77,7 +77,7 @@
                         </div>
                         <div class="text-right">
                             <div class="text-sm font-medium text-white">{{ \App\Enums\Kategori::from($kategori)->label() }}</div>
-                            <div class="mt-1 text-[11px] text-white/50">{{ $kaynak ?: 'Dizin seçilmedi' }}</div>
+                            <div class="mt-1 text-xs text-white/50">{{ $kaynak ?: 'Dizin seçilmedi' }}</div>
                         </div>
                     </div>
 
@@ -115,7 +115,7 @@
                         <div class="flex flex-col gap-2">
                             @foreach ($yazarlar as $i => $yazar)
                                 <div class="flex items-center gap-2" wire:key="yazar-{{ $i }}">
-                                    <div class="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-light text-[10px] font-semibold text-brand">{{ $i + 1 }}</div>
+                                    <div class="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-light text-2xs font-semibold text-brand">{{ $i + 1 }}</div>
                                     {{-- .live.blur: rol seçenekleri sunucuda yazar SAYISINDAN hesaplanıyor.
                                          Düz wire:model (Livewire 4) adı başka bir istek gidene
                                          kadar tarayıcıda tuttuğu için rol listesi eski sayıyla
@@ -267,7 +267,7 @@
 
                         {{-- İki sorgunun iki ayrı zayıflığı var; aday hangisinin
                              ne verdiğini bilirse sonucu doğru okur. --}}
-                        <flux:text class="!text-[11px] text-ink-subtle">
+                        <flux:text class="!text-xs text-ink-subtle">
                             ORCID girerseniz o yayınlar <strong>kesin</strong> sizindir ama yayıncı
                             ORCID'inizi göndermediyse bazıları eksik kalır. Ad araması geniştir,
                             aynı adı taşıyan başka yazarların yayınları da gelebilir — işaretlemeden
@@ -300,7 +300,7 @@
                             <flux:text class="!text-xs">
                                 <strong class="text-ink">{{ count($bulunanlar) }} yayın</strong> bulundu
                             </flux:text>
-                            <flux:button wire:click="tumunuSec" size="xs" variant="ghost">Tümünü seç</flux:button>
+                            <flux:button wire:click="tumunuSec" size="sm" variant="ghost">Tümünü seç</flux:button>
                         </div>
 
                         <div class="flex max-h-[28rem] flex-col divide-y divide-line overflow-y-auto">
@@ -345,7 +345,7 @@
                             yukarıdaki arama <strong>2014–2019 öncesi</strong> makalelerin çoğunu göremez.
                             Derginizi verin, arşivini soyadınıza göre tarayalım.
                         </flux:text>
-                        <flux:text class="mt-2 !text-[11px] text-ink-subtle">
+                        <flux:text class="mt-2 !text-xs text-ink-subtle">
                             Yalnız <strong>dergi makaleleri</strong> için. Kitap, bildiri ve tezler DergiPark
                             arşivinde yok; onları <strong>Manuel Ekle</strong> sekmesinden ya da
                             <strong>Kurum Profilimden Çek</strong> ile girebilirsiniz.
@@ -361,7 +361,7 @@
                             <flux:input wire:model="arsivYilSon" type="number" label="Yıl (bitiş)" placeholder="2017" />
                         </div>
 
-                        <flux:text class="!text-[11px] text-ink-subtle">
+                        <flux:text class="!text-xs text-ink-subtle">
                             Yıl aralığı boş bırakılırsa arşivin tamamı taranır; sayılar öbek öbek açılır.
                         </flux:text>
 
@@ -386,7 +386,7 @@
                             </flux:text>
 
                             @if ($arsivKalan)
-                                <flux:button wire:click="arsivDevam" size="xs" variant="filled">
+                                <flux:button wire:click="arsivDevam" size="sm" variant="filled">
                                     <span wire:loading.remove wire:target="arsivDevam">{{ count($arsivKalan) }} sayı daha var — devam et</span>
                                     <span wire:loading wire:target="arsivDevam">Taranıyor…</span>
                                 </flux:button>
@@ -446,7 +446,7 @@
                         <flux:input wire:model="avesisAdres" label="Kurumsal profil adresiniz"
                             placeholder="https://avesis.ktu.edu.tr/kullaniciadi" />
 
-                        <flux:text class="!text-[11px] text-ink-subtle">
+                        <flux:text class="!text-xs text-ink-subtle">
                             Her üniversitede ayrı kurulu — kendi üniversitenizin adresini verin
                             (<span class="font-mono">avesis.…edu.tr/kullaniciadi</span> ya da
                             <span class="font-mono">apbs.mersin.edu.tr/profiles/000000</span>).
@@ -480,7 +480,7 @@
                                     · <span class="text-cat-amber-text">{{ $avesisEksikBolum }} bölüm okunamadı, listeniz eksik olabilir — birazdan yeniden deneyin</span>
                                 @endif
                             </flux:text>
-                            <flux:button wire:click="avesisTumunuSec" size="xs" variant="ghost">Tümünü seç</flux:button>
+                            <flux:button wire:click="avesisTumunuSec" size="sm" variant="ghost">Tümünü seç</flux:button>
                         </div>
 
                         <div class="flex max-h-[32rem] flex-col divide-y divide-line overflow-y-auto">

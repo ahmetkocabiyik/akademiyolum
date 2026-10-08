@@ -15,7 +15,7 @@
     kalıyor.
 --}}
 <div class="rounded-xl border border-line bg-canvas p-3">
-    <div class="mb-2 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-ink-subtle">
+    <div class="mb-2 flex items-center gap-1.5 text-2xs font-semibold uppercase tracking-wider text-ink-subtle">
         <flux:icon name="light-bulb" class="size-3.5" />Bu Yönerge Hakkında
     </div>
 

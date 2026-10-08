@@ -31,7 +31,7 @@
     <flux:card class="overflow-hidden !p-0" style="border-inline-start: 3px solid {{ $karar->renk() }}">
         <div class="flex flex-wrap items-start justify-between gap-4 px-5 py-4">
             <div class="min-w-0">
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-line bg-canvas px-2.5 py-1 text-[11px] font-medium text-ink-muted">
+                <span class="inline-flex items-center gap-1.5 rounded-full border border-line bg-canvas px-2.5 py-1 text-xs font-medium text-ink-muted">
                     <flux:icon :name="$rapor->sapka->ikon()" class="size-3" style="color: {{ $rapor->sapka->renk() }}" />
                     {{ $rapor->sapka->etiket() }} · {{ $rapor->sertlik->etiket() }} ton
                 </span>
@@ -53,7 +53,7 @@
                     <flux:icon :name="$karar->ikon()" class="size-4" />
                     {{ $karar->etiket() }}
                 </div>
-                <div class="mt-1.5 max-w-[17rem] text-[11px] leading-snug text-ink-subtle">
+                <div class="mt-1.5 max-w-[17rem] text-xs leading-snug text-ink-subtle">
                     {{ $karar->aciklama() }}
                 </div>
             </div>
@@ -109,10 +109,10 @@
                 <flux:heading size="lg">{{ $karar->etiket() }}</flux:heading>
                 <flux:text class="!mt-1 leading-relaxed">{{ $rapor->ozet }}</flux:text>
                 <div class="mt-4 flex flex-wrap gap-2">
-                    <flux:button :href="route('yz-danisman')" wire:navigate size="sm" variant="primary" icon="sparkles">
+                    <flux:button :href="route('yz-danisman')" wire:navigate variant="primary" icon="sparkles">
                         YZ Danışmana Sor
                     </flux:button>
-                    <flux:button :href="route('yonerge-analizi')" wire:navigate size="sm" variant="subtle"
+                    <flux:button :href="route('yonerge-analizi')" wire:navigate variant="subtle"
                         icon="document-magnifying-glass">
                         Koşulları Tek Tek Gör
                     </flux:button>

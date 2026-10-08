@@ -67,7 +67,7 @@
                                 </span>
                             </label>
                             @if ($foto)
-                                <flux:button wire:click="fotoKaldir" size="xs" variant="ghost">Kaldır</flux:button>
+                                <flux:button wire:click="fotoKaldir" size="sm" variant="ghost">Kaldır</flux:button>
                             @endif
                         </div>
                         <span wire:loading wire:target="yeniFoto" class="text-xs text-ink-subtle">Yükleniyor…</span>
@@ -76,11 +76,11 @@
                     </div>
                 </div>
 
-                <flux:input wire:model.live.blur="ad" label="Ad Soyad" size="sm" />
+                <flux:input wire:model.live.blur="ad" label="Ad Soyad" />
                 {{-- Unvan kapalı listeden. Listede olmayan eski bir değer (elle
                      yazıldığı dönemden) seçenek olarak kalıyor: yoksa tarayıcı ilk
                      seçeneği seçili gösterir, aday unvanını değişmiş sanırdı. --}}
-                <flux:select wire:model.live="unvan" label="Unvan" size="sm">
+                <flux:select wire:model.live="unvan" label="Unvan">
                     <flux:select.option value="">Belirtilmemiş</flux:select.option>
                     @foreach (\App\Models\User::UNVANLAR as $secenek)
                         <flux:select.option :value="$secenek">{{ $secenek }}</flux:select.option>
@@ -89,28 +89,28 @@
                         <flux:select.option :value="$unvan">{{ $unvan }}</flux:select.option>
                     @endif
                 </flux:select>
-                <flux:input wire:model.live.blur="kurum" label="Kurum" size="sm" />
-                <flux:input wire:model.live.blur="bolum" label="Bölüm / Anabilim Dalı" size="sm" />
+                <flux:input wire:model.live.blur="kurum" label="Kurum" />
+                <flux:input wire:model.live.blur="bolum" label="Bölüm / Anabilim Dalı" />
 
                 <flux:separator variant="subtle" text="İletişim" />
 
-                <flux:input wire:model.live.blur="eposta" label="E-posta" size="sm" />
+                <flux:input wire:model.live.blur="eposta" label="E-posta" />
                 {{-- Maske "0" ile başlıyor, "05" ile değil: ofis numarası (0324 …)
                      da girilebilsin ve kayıtlı sabit hat numarası maskeye
                      zorlanırken bozulmasın. Cep numarası yine 05xx biçiminde çıkar. --}}
-                <flux:input wire:model.live.blur="telefon" label="Telefon" size="sm" mask="0999 999 99 99"
+                <flux:input wire:model.live.blur="telefon" label="Telefon" mask="0999 999 99 99"
                     placeholder="05xx xxx xx xx" inputmode="tel" />
                 {{-- Alan adı `sehir` kaldı (veritabanı sütunu); ekranda adres soruluyor. --}}
-                <flux:input wire:model.live.blur="sehir" label="Adres" size="sm" placeholder="Örn. Mersin Üniversitesi Çiftlikköy Kampüsü, Yenişehir / Mersin" />
+                <flux:input wire:model.live.blur="sehir" label="Adres" placeholder="Örn. Mersin Üniversitesi Çiftlikköy Kampüsü, Yenişehir / Mersin" />
                 {{-- Son hane rakam ya da X olabildiği için `*`; doğrusunu sunucu
                      (kontrol hanesiyle) sınar. Yapıştırılan orcid.org adresinden
                      maske kimliğin rakamlarını süzüyor. --}}
-                <flux:input wire:model.live.blur="orcid" label="ORCID" size="sm"
+                <flux:input wire:model.live.blur="orcid" label="ORCID"
                     mask="9999-9999-9999-999*" placeholder="0000-0000-0000-0000" />
 
                 <flux:separator variant="subtle" text="Özet" />
 
-                <flux:textarea wire:model.live.blur="ozet" label="Kısa biyografi" rows="5" size="sm"
+                <flux:textarea wire:model.live.blur="ozet" label="Kısa biyografi" rows="5"
                     placeholder="Araştırma alanlarınızı iki üç cümleyle anlatın." />
             </div>
         @endif
@@ -121,23 +121,23 @@
                 <div>
                     <div class="mb-2 flex items-center justify-between">
                         <flux:heading size="sm">Eğitim</flux:heading>
-                        <flux:button wire:click="egitimEkle" size="xs" variant="subtle" icon="plus">Ekle</flux:button>
+                        <flux:button wire:click="egitimEkle" size="sm" variant="subtle" icon="plus">Ekle</flux:button>
                     </div>
 
                     @forelse ($egitimler as $sira => $egitim)
                         <div class="mb-2 rounded-xl border border-line p-3" wire:key="egitim-{{ $sira }}">
                             <div class="mb-2 flex items-center justify-between">
-                                <span class="text-[11px] font-medium text-ink-subtle">#{{ $sira + 1 }}</span>
-                                <flux:button wire:click="egitimSil({{ $sira }})" size="xs" variant="subtle"
+                                <span class="text-xs font-medium text-ink-subtle">#{{ $sira + 1 }}</span>
+                                <flux:button wire:click="egitimSil({{ $sira }})" size="sm" variant="subtle"
                                     icon="x-mark" aria-label="Eğitim satırını sil" />
                             </div>
                             <div class="flex flex-col gap-2">
-                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.derece" placeholder="Derece (Doktora)" size="sm" />
-                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.universite" placeholder="Üniversite" size="sm" />
-                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.bolum" placeholder="Bölüm" size="sm" />
+                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.derece" placeholder="Derece (Doktora)" />
+                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.universite" placeholder="Üniversite" />
+                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.bolum" placeholder="Bölüm" />
                                 <div class="grid grid-cols-2 gap-2">
-                                    <flux:input wire:model.live.blur="egitimler.{{ $sira }}.baslangic" placeholder="Başlangıç" size="sm" />
-                                    <flux:input wire:model.live.blur="egitimler.{{ $sira }}.bitis" placeholder="Bitiş" size="sm" />
+                                    <flux:input wire:model.live.blur="egitimler.{{ $sira }}.baslangic" placeholder="Başlangıç" />
+                                    <flux:input wire:model.live.blur="egitimler.{{ $sira }}.bitis" placeholder="Bitiş" />
                                 </div>
                             </div>
                         </div>
@@ -149,22 +149,22 @@
                 <div>
                     <div class="mb-2 flex items-center justify-between">
                         <flux:heading size="sm">Deneyim</flux:heading>
-                        <flux:button wire:click="deneyimEkle" size="xs" variant="subtle" icon="plus">Ekle</flux:button>
+                        <flux:button wire:click="deneyimEkle" size="sm" variant="subtle" icon="plus">Ekle</flux:button>
                     </div>
 
                     @forelse ($deneyimler as $sira => $deneyim)
                         <div class="mb-2 rounded-xl border border-line p-3" wire:key="deneyim-{{ $sira }}">
                             <div class="mb-2 flex items-center justify-between">
-                                <span class="text-[11px] font-medium text-ink-subtle">#{{ $sira + 1 }}</span>
-                                <flux:button wire:click="deneyimSil({{ $sira }})" size="xs" variant="subtle"
+                                <span class="text-xs font-medium text-ink-subtle">#{{ $sira + 1 }}</span>
+                                <flux:button wire:click="deneyimSil({{ $sira }})" size="sm" variant="subtle"
                                     icon="x-mark" aria-label="Deneyim satırını sil" />
                             </div>
                             <div class="flex flex-col gap-2">
-                                <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.pozisyon" placeholder="Pozisyon" size="sm" />
-                                <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.kurum" placeholder="Kurum" size="sm" />
+                                <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.pozisyon" placeholder="Pozisyon" />
+                                <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.kurum" placeholder="Kurum" />
                                 <div class="grid grid-cols-2 gap-2">
-                                    <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.baslangic" placeholder="Başlangıç" size="sm" />
-                                    <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.bitis" placeholder="Bitiş (boşsa devam)" size="sm" />
+                                    <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.baslangic" placeholder="Başlangıç" />
+                                    <flux:input wire:model.live.blur="deneyimler.{{ $sira }}.bitis" placeholder="Bitiş (boşsa devam)" />
                                 </div>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
             <div class="flex flex-col gap-3">
                 <div class="flex items-start gap-2 rounded-xl border border-cat-green/20 bg-cat-green-light p-3">
                     <flux:icon name="check-circle" class="mt-px size-4 shrink-0 text-cat-green" />
-                    <flux:text class="!text-[11px] leading-relaxed">
+                    <flux:text class="!text-xs leading-relaxed">
                         <strong>{{ $faaliyetler->count() }} onaylı kayıt</strong> faaliyetlerinizden otomatik geldi.
                         Çıkardığınız kayıt yalnızca CV'den düşer — faaliyet listenizden ve puanınızdan silinmez.
                     </flux:text>
@@ -195,7 +195,7 @@
                     ]) wire:key="faaliyet-{{ $faaliyet->id }}">
                         <div class="min-w-0 flex-1">
                             <div class="text-xs font-medium text-ink">{{ $faaliyet->baslik }}</div>
-                            <div class="mt-0.5 text-[11px] text-ink-subtle">
+                            <div class="mt-0.5 text-xs text-ink-subtle">
                                 {{ collect([
                                     $faaliyet->kategori->label(),
                                     $faaliyet->kaynak,
@@ -204,7 +204,7 @@
                                 ])->filter()->implode(' · ') }}
                             </div>
                         </div>
-                        <flux:button wire:click="faaliyetDegistir({{ $faaliyet->id }})" size="xs" variant="subtle"
+                        <flux:button wire:click="faaliyetDegistir({{ $faaliyet->id }})" size="sm" variant="subtle"
                             :icon="$haric ? 'plus' : 'x-mark'"
                             :aria-label="$haric ? 'CV\'ye geri ekle' : 'CV\'den çıkar'" />
                     </div>
@@ -225,7 +225,7 @@
                     @if ($beceriler !== [])
                         <div class="mb-2 flex flex-wrap gap-1.5">
                             @foreach ($beceriler as $sira => $beceri)
-                                <span class="inline-flex items-center gap-1 rounded-full border border-line bg-canvas px-2.5 py-1 text-[11px] text-ink-muted"
+                                <span class="inline-flex items-center gap-1 rounded-full border border-line bg-canvas px-2.5 py-1 text-xs text-ink-muted"
                                     wire:key="beceri-{{ $sira }}">
                                     {{ $beceri }}
                                     <button type="button" wire:click="beceriSil({{ $sira }})"
@@ -240,8 +240,8 @@
 
                     <div class="flex gap-2">
                         <flux:input wire:model="yeniBeceri" wire:keydown.enter="beceriEkle"
-                            placeholder="Beceri ekle..." size="sm" class="flex-1" />
-                        <flux:button wire:click="beceriEkle" size="sm" variant="subtle">Ekle</flux:button>
+                            placeholder="Beceri ekle..." class="flex-1" />
+                        <flux:button wire:click="beceriEkle" variant="subtle">Ekle</flux:button>
                     </div>
                 </div>
 
@@ -266,19 +266,19 @@
                                 @endfor
                             </div>
 
-                            <span class="flex-1 truncate text-[10px] text-ink-subtle">
+                            <span class="flex-1 truncate text-2xs text-ink-subtle">
                                 {{ CvProfili::DIL_SEVIYELERI[$dil['seviye']] ?? '' }}
                             </span>
 
-                            <flux:button wire:click="dilSil({{ $sira }})" size="xs" variant="subtle"
+                            <flux:button wire:click="dilSil({{ $sira }})" size="sm" variant="subtle"
                                 icon="x-mark" aria-label="{{ $dil['ad'] }} dilini sil" />
                         </div>
                     @endforeach
 
                     <div class="mt-2 flex gap-2">
                         <flux:input wire:model="yeniDil" wire:keydown.enter="dilEkle"
-                            placeholder="Dil ekle..." size="sm" class="flex-1" />
-                        <flux:button wire:click="dilEkle" size="sm" variant="subtle">Ekle</flux:button>
+                            placeholder="Dil ekle..." class="flex-1" />
+                        <flux:button wire:click="dilEkle" variant="subtle">Ekle</flux:button>
                     </div>
                 </div>
             </div>
@@ -288,6 +288,6 @@
     {{-- Kayıt zaten otomatik; düğme bunu görünür kılıyor. Aday Kaydet
          düğmesi aramış, bulamayınca değişikliklerinin saklanmadığını sanmıştı. --}}
     <div class="flex shrink-0 justify-end border-t border-line px-4 py-3">
-        <flux:button wire:click="kaydetVeBildir" size="sm" variant="primary" icon="check">Kaydet</flux:button>
+        <flux:button wire:click="kaydetVeBildir" variant="primary" icon="check">Kaydet</flux:button>
     </div>
 </flux:card>

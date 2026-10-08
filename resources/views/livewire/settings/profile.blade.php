@@ -93,7 +93,7 @@
                 </flux:text>
                 <div class="mt-3 flex items-start gap-2 rounded-xl border border-line bg-canvas p-3">
                     <flux:icon name="information-circle" class="mt-px size-4 shrink-0 text-ink-subtle" />
-                    <flux:text class="!text-[11px] leading-relaxed">
+                    <flux:text class="!text-xs leading-relaxed">
                         <strong>Atıf, proje ve tez danışmanlığı sayıları burada girilmez.</strong>
                         Bunlar <a href="{{ route('faaliyetler') }}" wire:navigate class="font-medium text-brand underline">Faaliyetler</a>
                         bölümüne eklediğiniz kayıtlardan sayılır — projeyi eklerken fon kaynağını ve

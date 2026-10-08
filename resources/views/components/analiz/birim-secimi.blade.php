@@ -51,7 +51,6 @@
                     wire:model.live="birimSecimleri.{{ $universiteAdi }}"
                     :label="$universiteAdi"
                     placeholder="Birim seçin..."
-                    size="sm"
                 >
                     {{-- Boş seçenek ŞART: yoksa tarayıcı ilk seçeneği seçili
                          gösteriyor, aday onu tıklayınca değer değişmediği için

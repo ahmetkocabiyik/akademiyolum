@@ -23,13 +23,13 @@
         <div class="flex flex-wrap items-center gap-2 rounded-xl border border-line bg-surface px-4 py-3">
             <span class="text-xs text-ink-subtle">Hızlı Ekle:</span>
             @foreach ([Kategori::Makale, Kategori::TezYayini, Kategori::ToplumsalKatki, Kategori::EgitimOgretim] as $k)
-                <flux:button :href="route('faaliyetler.ekle', ['kategori' => $k->value])" wire:navigate size="sm" variant="subtle">
+                <flux:button :href="route('faaliyetler.ekle', ['kategori' => $k->value])" wire:navigate variant="subtle">
                     <x-kategori-icon :kategori="$k" class="size-4" />
                     {{ $k->label() }}
                 </flux:button>
             @endforeach
             <div class="ms-auto">
-                <flux:button :href="route('faaliyetler.ekle')" wire:navigate size="sm" variant="primary" icon="plus">
+                <flux:button :href="route('faaliyetler.ekle')" wire:navigate variant="primary" icon="plus">
                     Faaliyet Ekle
                 </flux:button>
             </div>
@@ -138,7 +138,7 @@
                     @endif
                 </div>
 
-                <flux:button :href="route('juri-analizi')" wire:navigate variant="subtle" size="sm" class="mt-4">
+                <flux:button :href="route('juri-analizi')" wire:navigate variant="subtle" class="mt-4">
                     Eksik Puan Analizi → Jüri Masası
                 </flux:button>
             </flux:card>
@@ -165,7 +165,7 @@
                             </div>
                             <div>
                                 <div class="text-xs font-medium text-ink">{{ $b['baslik'] }}</div>
-                                <div class="text-[11px] text-ink-subtle">{{ $b['aciklama'] }}</div>
+                                <div class="text-xs text-ink-subtle">{{ $b['aciklama'] }}</div>
                             </div>
                         </div>
                     @empty
@@ -194,7 +194,7 @@
                             <div class="font-serif text-lg font-bold text-ink">
                                 {{ $esik ? $satir['puan'].' pt' : $satir['adet'].' kayıt' }}
                             </div>
-                            <div class="mt-1 flex items-center justify-between text-[11px] text-ink-subtle">
+                            <div class="mt-1 flex items-center justify-between text-xs text-ink-subtle">
                                 <span>{{ $satir['adet'] }} kayıt</span>
                                 @if ($esik && $satir['puan'] === 0)
                                     <span class="text-cat-amber-text">cetvelde karşılığı yok</span>
@@ -221,20 +221,20 @@
                     <flux:heading size="lg">Faaliyet Listesi</flux:heading>
                     <flux:text size="sm">Son eklenen faaliyetler</flux:text>
                 </div>
-                <flux:button :href="route('faaliyetler')" wire:navigate size="sm" variant="ghost">Tümünü Yönet →</flux:button>
+                <flux:button :href="route('faaliyetler')" wire:navigate variant="ghost">Tümünü Yönet →</flux:button>
             </div>
 
             @if ($this->faaliyetler->isEmpty())
                 <div class="flex flex-col items-center gap-2 py-10 text-center">
                     <flux:icon name="document-plus" class="size-8 text-ink-subtle" />
                     <flux:text>Henüz faaliyet eklenmemiş.</flux:text>
-                    <flux:button :href="route('faaliyetler.ekle')" wire:navigate size="sm" variant="primary" icon="plus">İlk faaliyeti ekle</flux:button>
+                    <flux:button :href="route('faaliyetler.ekle')" wire:navigate variant="primary" icon="plus">İlk faaliyeti ekle</flux:button>
                 </div>
             @else
                 <div class="mt-3 overflow-x-auto">
                     <table class="w-full border-collapse text-sm">
                         <thead>
-                            <tr class="border-b border-line text-left text-[10px] uppercase tracking-wide text-ink-subtle">
+                            <tr class="border-b border-line text-left text-2xs uppercase tracking-wide text-ink-subtle">
                                 <th class="px-2 py-2 font-semibold">Başlık</th>
                                 <th class="px-2 py-2 font-semibold">Kategori</th>
                                 <th class="px-2 py-2 font-semibold">Kaynak</th>
@@ -247,7 +247,7 @@
                                 <tr class="border-b border-line last:border-0 hover:bg-canvas">
                                     <td class="max-w-[280px] truncate px-2 py-2.5 font-medium text-ink">
                                         {{ $f->baslik }}
-                                        <div class="text-[10px] text-ink-subtle">{{ $f->yazarlar }}</div>
+                                        <div class="text-2xs text-ink-subtle">{{ $f->yazarlar }}</div>
                                     </td>
                                     <td class="px-2 py-2.5">
                                         <flux:badge size="sm">{{ $f->kategori->label() }}</flux:badge>

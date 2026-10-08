@@ -84,7 +84,7 @@
         zorunda değil; kod yalnızca izlenebilirlik için soluk gösterilir.
     --}}
     @if ($dugum->kapsam !== [] || $dugum->madde)
-        <div class="flex flex-wrap items-center gap-1 pl-[22px] text-[10px] leading-tight">
+        <div class="flex flex-wrap items-center gap-1 pl-[22px] text-2xs leading-tight">
             @foreach ($dugum->kapsam as $etiket)
                 <span class="rounded bg-line px-1.5 py-0.5 text-ink-muted">{{ $etiket }}</span>
             @endforeach
@@ -97,7 +97,7 @@
 
     {{-- Sayacı yükselten eşdeğerlikler; aksi hâlde rakam sebepsiz artmış görünür. --}}
     @foreach ($dugum->donusumler as $donusum)
-        <div class="flex items-center gap-1 text-[11px] text-ink-subtle">
+        <div class="flex items-center gap-1 text-xs text-ink-subtle">
             <flux:icon name="arrows-right-left" class="size-3 shrink-0" />
             {{ $donusum }}
         </div>
@@ -105,20 +105,20 @@
 
     {{-- Belirsizlik, koşulun sağlanmadığı anlamına gelmez: veri eksik. --}}
     @if ($gerekceGoster)
-        <div class="text-[11px] text-cat-purple">{{ $dugum->belirsizlikNedeni }}</div>
+        <div class="text-xs text-cat-purple">{{ $dugum->belirsizlikNedeni }}</div>
     @endif
 
     @if ($dugum->kaynakEksik)
-        <div class="text-[11px] text-ink-subtle">
+        <div class="text-xs text-ink-subtle">
             Bu üniversite puanlamayı kendi cetveline değil harici bir ölçeğe dayandırıyor; o ölçek
             henüz sisteme eklenmediği için koşulu sizin değerlendirmeniz gerekiyor.
         </div>
     @elseif ($dugum->beyanOnaylandi)
-        <div class="text-[11px] text-ink-subtle">Belgeniz olduğunu beyan ettiniz; koşul sağlanmış sayılıyor.</div>
+        <div class="text-xs text-ink-subtle">Belgeniz olduğunu beyan ettiniz; koşul sağlanmış sayılıyor.</div>
     @elseif ($beyanKutusu)
-        <div class="text-[11px] text-ink-subtle">Bu koşul otomatik doğrulanamaz. Belgeniz varsa kutuyu işaretleyin.</div>
+        <div class="text-xs text-ink-subtle">Bu koşul otomatik doğrulanamaz. Belgeniz varsa kutuyu işaretleyin.</div>
     @elseif ($dugum->beyan)
-        <div class="text-[11px] text-ink-subtle">Bu koşul otomatik doğrulanamaz, belgeyle teyit edilir.</div>
+        <div class="text-xs text-ink-subtle">Bu koşul otomatik doğrulanamaz, belgeyle teyit edilir.</div>
     @endif
 
     @foreach ($dugum->cocuklar as $i => $cocuk)
@@ -128,7 +128,7 @@
     {{-- Telafi dalı: ana koşul sağlanmadığında yönergenin sunduğu alternatif. --}}
     @if ($dugum->telafi)
         <div class="rounded-lg border border-line bg-canvas p-2">
-            <div class="mb-1 flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-ink-subtle">
+            <div class="mb-1 flex items-center gap-1 text-2xs font-semibold uppercase tracking-wider text-ink-subtle">
                 <flux:icon name="arrow-path-rounded-square" class="size-3" />
                 {{ $dugum->telafiIleSaglandi() ? 'Telafi ile sağlandı' : 'Yönergenin sunduğu telafi' }}
             </div>

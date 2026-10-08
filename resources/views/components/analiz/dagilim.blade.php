@@ -8,7 +8,7 @@
 {{-- Kategori dağılımı (bu yönergenin kendi cetveline göre) --}}
 <div>
     <flux:heading size="sm">Puanımın Dağılımı</flux:heading>
-    <flux:text class="!mt-0.5 !text-[11px] text-ink-subtle">Faaliyetleriniz bu üniversitenin kendi cetveline göre yeniden puanlandı.</flux:text>
+    <flux:text class="!mt-0.5 !text-xs text-ink-subtle">Faaliyetleriniz bu üniversitenin kendi cetveline göre yeniden puanlandı.</flux:text>
 
     @php
         $enYuksek = max(1, collect($dagilim)->max('puan') ?? 1);

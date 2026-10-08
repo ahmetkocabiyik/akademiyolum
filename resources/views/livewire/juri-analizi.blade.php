@@ -12,7 +12,7 @@
     <x-topbar title="YZ Jüri Analizi"
         :pill="$this->rapor ? $this->rapor->universite.' · '.$this->rapor->kadroEtiketi() : null">
         @if ($this->rapor)
-            <flux:button wire:click="analizBaslat" :disabled="$bekleniyor" size="sm" variant="primary" icon="arrow-path">
+            <flux:button wire:click="analizBaslat" :disabled="$bekleniyor" variant="primary" icon="arrow-path">
                 Yeni Analiz
             </flux:button>
         @endif

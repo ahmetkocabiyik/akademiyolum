@@ -30,7 +30,7 @@
                     <span @class(['block text-xs', 'font-semibold text-brand' => $secili, 'text-ink' => ! $secili])>
                         {{ $secenek->etiket() }}
                     </span>
-                    <span class="mt-0.5 block text-[10px] leading-tight text-ink-subtle">{{ $secenek->aciklama() }}</span>
+                    <span class="mt-0.5 block text-2xs leading-tight text-ink-subtle">{{ $secenek->aciklama() }}</span>
                 </button>
             @endforeach
         </div>
@@ -73,7 +73,7 @@
     {{-- Yazı tipi. Seçim wire:model'e değil yaziTipiSec'e gidiyor: değer
          enum'dan geçmeden yazılsaydı uydurma bir değer önizlemeyi çökertirdi. --}}
     <div>
-        <flux:select wire:change="yaziTipiSec($event.target.value)" label="Yazı Tipi" size="sm"
+        <flux:select wire:change="yaziTipiSec($event.target.value)" label="Yazı Tipi"
             :description:trailing="CvYaziTipi::from($yaziTipi)->aciklama()">
             @foreach (CvYaziTipi::cases() as $secenek)
                 <flux:select.option :value="$secenek->value" :selected="$yaziTipi === $secenek->value"
@@ -113,13 +113,13 @@
     <div class="flex flex-col gap-2">
         {{-- PDF tarayıcının yazdırma penceresinden alınıyor: ayrı bir PDF
              şablonu tutulsaydı ekranda görülenle çıktı zamanla ayrışırdı. --}}
-        <flux:button x-on:click="window.print()" icon="arrow-down-tray" class="w-full !bg-navy !text-white">
+        <flux:button x-on:click="window.print()" icon="arrow-down-tray" variant="primary" class="w-full">
             PDF Olarak İndir
         </flux:button>
         <flux:button wire:click="jsonIndir" icon="code-bracket" variant="subtle" class="w-full">
             JSON Olarak Dışa Aktar
         </flux:button>
-        <flux:text class="!text-[11px] leading-relaxed">
+        <flux:text class="!text-xs leading-relaxed">
             PDF, tarayıcının yazdırma penceresinden alınır: açılan pencerede
             hedef olarak <strong>“PDF olarak kaydet”</strong> seçin.
         </flux:text>

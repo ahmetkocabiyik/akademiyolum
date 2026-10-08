@@ -10,7 +10,7 @@
                     <x-app-logo wire:navigate />
                 </div>
 
-                <div class="rounded-2xl border border-line bg-surface p-8 shadow-sm sm:p-10">
+                <div class="rounded-2xl border border-line bg-surface p-8 sm:p-10">
                     <div class="flex flex-col gap-6">
                         {{ $slot }}
                     </div>

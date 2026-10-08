@@ -25,7 +25,7 @@
             </flux:button>
         </form>
 
-        <flux:button :href="route('dashboard')" variant="subtle" size="sm" icon="arrow-left" class="w-full">
+        <flux:button :href="route('dashboard')" variant="subtle" icon="arrow-left" class="w-full">
             {{ __('Panele dön') }}
         </flux:button>
     </div>

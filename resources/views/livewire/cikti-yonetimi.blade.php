@@ -8,7 +8,7 @@
 <div>
     <x-topbar class="yazdirma-gizle" title="Çıktı Yönetimi" :pill="$this->rapor['ozet']['faaliyet'].' onaylı faaliyet'">
         <flux:modal.trigger name="rapor-indir">
-            <flux:button size="sm" variant="primary" icon="arrow-down-tray">Dosyayı İndir</flux:button>
+            <flux:button variant="primary" icon="arrow-down-tray">Dosyayı İndir</flux:button>
         </flux:modal.trigger>
     </x-topbar>
 
@@ -65,7 +65,7 @@
                         <flux:icon name="document-text" />
                     </span>
                     <span class="text-sm font-semibold text-ink">PDF</span>
-                    <span class="text-[11px] leading-tight text-ink-subtle">Ekrandaki rapor, A4</span>
+                    <span class="text-xs leading-tight text-ink-subtle">Ekrandaki rapor, A4</span>
                 </button>
 
                 <button type="button" wire:click="excelIndir" x-on:click="$flux.modal('rapor-indir').close()"
@@ -74,11 +74,11 @@
                         <flux:icon name="table-cells" />
                     </span>
                     <span class="text-sm font-semibold text-ink">Excel</span>
-                    <span class="text-[11px] leading-tight text-ink-subtle">Faaliyet listesi (CSV)</span>
+                    <span class="text-xs leading-tight text-ink-subtle">Faaliyet listesi (CSV)</span>
                 </button>
             </div>
 
-            <flux:text class="!text-[11px] leading-relaxed">
+            <flux:text class="!text-xs leading-relaxed">
                 PDF için açılan yazdırma penceresinde hedef olarak <strong>“PDF olarak kaydet”</strong> seçin.
             </flux:text>
         </div>

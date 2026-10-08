@@ -267,7 +267,6 @@
 
                                 <flux:button
                                     variant="ghost"
-                                    size="sm"
                                     icon="trash"
                                     icon:variant="outline"
                                     wire:click="confirmDelete({{ $passkey['id'] }})"
