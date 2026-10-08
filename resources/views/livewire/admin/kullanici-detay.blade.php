@@ -156,7 +156,8 @@
                 <form wire:submit="abonelikEkle" class="mt-4 flex flex-col gap-4">
                     <flux:select wire:model.live="plan" label="Plan">
                         @foreach (Plan::ucretliler() as $secenek)
-                            <flux:select.option :value="$secenek->value">{{ $secenek->etiket() }} · {{ $secenek->aylikFiyat() }} ₺/ay</flux:select.option>
+                            @php $paket = app(\App\Services\Abonelik\PaketKatalogu::class)->bilgi($secenek); @endphp
+                            <flux:select.option :value="$secenek->value">{{ $paket->ad }} · {{ \App\Models\Paket::fiyatMetni($paket->aylik_fiyat_kurus) }}/ay{{ $paket->satista ? '' : ' (satışta değil)' }}</flux:select.option>
                         @endforeach
                     </flux:select>
 

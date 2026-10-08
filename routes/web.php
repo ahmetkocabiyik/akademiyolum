@@ -59,6 +59,7 @@ Route::middleware(['auth', 'verified', 'super.admin'])->prefix('admin')->name('a
     Route::livewire('kullanicilar', Admin\Kullanicilar::class)->name('kullanicilar');
     Route::livewire('kullanicilar/{user}', Admin\KullaniciDetay::class)->name('kullanici');
     Route::livewire('abonelikler', Admin\Abonelikler::class)->name('abonelikler');
+    Route::livewire('paketler', Admin\Paketler::class)->name('paketler');
     Route::livewire('islemler', Admin\IslemKaydi::class)->name('islemler');
     Route::livewire('eposta-sablonlari', Admin\EpostaSablonlari::class)->name('eposta-sablonlari');
     Route::livewire('eposta-sablonlari/{tur}', Admin\EpostaSablonuDuzenle::class)->name('eposta-sablonu');

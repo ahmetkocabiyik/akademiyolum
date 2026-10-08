@@ -116,7 +116,7 @@ h1 em{font-style:normal;color:var(--blue)}
 .testi-name{font-size:13px;font-weight:600;color:var(--navy)}
 .testi-role{font-size:11px;color:var(--t3)}
 .pricing{padding:100px 5%;background:white}
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:960px;margin:0 auto}
+.pricing-grid{display:grid;grid-template-columns:repeat(var(--paket-sayisi,3),1fr);gap:22px;max-width:960px;margin:0 auto}
 .price-card{border:1px solid var(--border);border-radius:16px;padding:30px;position:relative}
 .price-card.featured{border-color:var(--blue);border-width:2px;box-shadow:0 8px 32px rgba(26,86,219,0.12)}
 .price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:white;font-size:10px;font-weight:600;padding:4px 14px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
@@ -282,10 +282,24 @@ footer{background:#060f1e;padding:56px 5% 28px}
 <section class="pricing" id="pricing">
   <div class="section-inner">
     <div style="text-align:center;margin-bottom:52px"><div class="section-tag">Fiyatlandırma</div><h2 class="section-title" style="margin:0 auto 14px">Şeffaf ve erişilebilir</h2></div>
-    <div class="pricing-grid">
-      <div class="price-card"><div class="price-plan">Ücretsiz</div><div class="price-amount"><span class="price-num">₺0</span><span class="price-period">/ ay</span></div><p class="price-desc">Başlamak için mükemmel.</p><div class="price-divider"></div><ul class="price-features"><li><span class="check">✓</span>10 faaliyete kadar</li><li><span class="check">✓</span>Temel puan hesaplama</li><li><span class="check">✓</span>1 yönerge analizi</li></ul><a class="price-btn price-btn-outline" href="{{ route('register') }}">Ücretsiz Başla</a></div>
-      <div class="price-card featured"><div class="price-badge">En Popüler</div><div class="price-plan">Akademisyen</div><div class="price-amount"><span class="price-num">₺299</span><span class="price-period">/ ay</span></div><p class="price-desc">Aktif kariyer yönetimi için.</p><div class="price-divider"></div><ul class="price-features"><li><span class="check">✓</span>Sınırsız faaliyet</li><li><span class="check">✓</span>YZ Danışman</li><li><span class="check">✓</span>Tüm yönerge analizleri</li><li><span class="check">✓</span>AVESİS & Scholar</li><li><span class="check">✓</span>YZ Jüri Analizi</li><li><span class="check">✓</span>PDF/Word çıktı</li></ul><a class="price-btn price-btn-primary" href="{{ route('register') }}">Planı Seç</a></div>
-      <div class="price-card"><div class="price-plan">Kurumsal</div><div class="price-amount"><span class="price-num">₺999</span><span class="price-period">/ ay</span></div><p class="price-desc">Üniversiteler için kurumsal çözüm.</p><div class="price-divider"></div><ul class="price-features"><li><span class="check">✓</span>50 kullanıcıya kadar</li><li><span class="check">✓</span>Özel yönerge yükleme</li><li><span class="check">✓</span>Kurum panosu</li><li><span class="check">✓</span>API erişimi</li></ul><a class="price-btn price-btn-outline" href="{{ route('register') }}">İletişime Geç</a></div>
+    {{-- Kartlar Yönetim → Paketler'den: ad, fiyat, açıklama, özellikler ve
+         rozet orada düzenleniyor; satışta olmayan paket görünmez. --}}
+    @php $satistakiPaketler = app(\App\Services\Abonelik\PaketKatalogu::class)->satistakiler(); @endphp
+    <div class="pricing-grid" style="--paket-sayisi: {{ max(1, $satistakiPaketler->count()) }}">
+      @foreach ($satistakiPaketler as $paket)
+      <div @class(['price-card', 'featured' => $paket->one_cikan])>
+        @if ($paket->one_cikan)<div class="price-badge">En Popüler</div>@endif
+        <div class="price-plan">{{ $paket->ad }}</div>
+        <div class="price-amount"><span class="price-num">{{ \App\Models\Paket::fiyatMetni($paket->aylik_fiyat_kurus) }}</span><span class="price-period">/ ay</span></div>
+        @if ($paket->yillik_fiyat_kurus !== null)
+        <p class="price-desc" style="margin-bottom:6px">Yıllık {{ \App\Models\Paket::fiyatMetni($paket->yillik_fiyat_kurus) }}@if ($paket->yillikIndirim()) · %{{ $paket->yillikIndirim() }} indirim @endif</p>
+        @endif
+        @if ($paket->aciklama)<p class="price-desc">{{ $paket->aciklama }}</p>@endif
+        <div class="price-divider"></div>
+        <ul class="price-features">@foreach ($paket->ozellikler as $ozellik)<li><span class="check">✓</span>{{ $ozellik }}</li>@endforeach</ul>
+        <a @class(['price-btn', 'price-btn-primary' => $paket->one_cikan, 'price-btn-outline' => ! $paket->one_cikan]) href="{{ route('register') }}">{{ $paket->buton_metni }}</a>
+      </div>
+      @endforeach
     </div>
   </div>
 </section>

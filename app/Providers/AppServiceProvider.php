@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\TaklitController;
 use App\Models\User;
+use App\Services\Abonelik\PaketKatalogu;
 use App\Services\AI\ClaudeSaglayici;
 use App\Services\AI\JuriRaporcu;
 use App\Services\AI\OpenAiSaglayici;
@@ -37,6 +38,11 @@ class AppServiceProvider extends ServiceProvider
         // Testler kendi verisiyle bir örnek bağlayarak üretim verisinden
         // bağımsız senaryo kurabilir.
         $this->app->singleton(SartDeposu::class, fn (): SartDeposu => new SartDeposu);
+
+        // Paket bilgileri istek başına bir kez okunur; scoped: her istek/iş
+        // (ve test) temiz başlar, panelde değiştirilen fiyat bir sonraki
+        // istekte görünür.
+        $this->app->scoped(PaketKatalogu::class);
 
         $this->app->bind(CrossrefArama::class, fn (): CrossrefArama => new CrossrefArama(
             taban: config('services.crossref.taban'),

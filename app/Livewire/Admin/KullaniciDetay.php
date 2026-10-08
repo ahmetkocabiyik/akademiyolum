@@ -6,6 +6,7 @@ use App\Enums\Plan;
 use App\Models\Abonelik;
 use App\Models\IslemKaydi;
 use App\Models\User;
+use App\Services\Abonelik\PaketKatalogu;
 use App\Services\Yonetim\KullaniciYonetimi;
 use Carbon\CarbonImmutable;
 use Flux\Flux;
@@ -67,12 +68,12 @@ class KullaniciDetay extends Component
     {
         $this->user = $user;
         $this->baslangic = app(KullaniciYonetimi::class)->siradakiBaslangic($user)->toDateString();
-        $this->tutar = (string) Plan::Akademisyen->aylikFiyat();
+        $this->tutar = $this->tlMetni(app(PaketKatalogu::class)->onerilenTutar(Plan::Akademisyen, 1));
     }
 
     /**
-     * Plan ya da süre değişince tutar liste fiyatına göre önerilir; admin
-     * isterse değiştirir (indirim, kurum fiyatı).
+     * Plan ya da süre değişince tutar paket fiyatına göre önerilir (12 ayda
+     * yıllık fiyat); admin isterse değiştirir (indirim, kurum fiyatı).
      */
     public function updated(string $alan): void
     {
@@ -81,9 +82,15 @@ class KullaniciDetay extends Component
             $ay = ctype_digit($this->sure) ? (int) $this->sure : null;
 
             if ($plan !== null && $ay !== null) {
-                $this->tutar = (string) ($plan->aylikFiyat() * $ay);
+                $this->tutar = $this->tlMetni(app(PaketKatalogu::class)->onerilenTutar($plan, $ay));
             }
         }
+    }
+
+    /** Kuruşu sayı kutusunun beklediği metne çevirir: 29900 → "299", 29950 → "299.50". */
+    private function tlMetni(int $kurus): string
+    {
+        return $kurus % 100 === 0 ? (string) intdiv($kurus, 100) : number_format($kurus / 100, 2, '.', '');
     }
 
     /**
