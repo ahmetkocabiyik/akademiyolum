@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\TaklitController;
+use App\Models\User;
 use App\Services\AI\ClaudeSaglayici;
 use App\Services\AI\JuriRaporcu;
 use App\Services\AI\OpenAiSaglayici;
@@ -11,8 +13,11 @@ use App\Services\AI\StubSaglayici;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Yayin\CrossrefArama;
 use Carbon\CarbonImmutable;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use RuntimeException;
@@ -118,6 +123,26 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        $this->configureYonetim();
+    }
+
+    /**
+     * Yönetim paneli yetkisi ve son giriş kaydı.
+     */
+    private function configureYonetim(): void
+    {
+        // Askıdaki bir admin de paneli açamaz.
+        Gate::define('super-admin', fn (User $user): bool => $user->super_admin && ! $user->askidaMi());
+
+        // "Kullanıcı olarak gör" de bir Login olayı üretiyor; o, kullanıcının
+        // kendi girişi değil, son giriş tarihini bozmamalı.
+        Event::listen(function (Login $olay): void {
+            if (session()->has(TaklitController::OTURUM_ANAHTARI) || ! $olay->user instanceof User) {
+                return;
+            }
+
+            $olay->user->forceFill(['son_giris_at' => now()])->saveQuietly();
+        });
     }
 
     /**

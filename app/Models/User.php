@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Plan;
 use App\Enums\TemelAlan;
 use App\Services\Scoring\Sart\Profil;
 use App\Services\Scoring\Sart\ProfilCozucu;
@@ -50,6 +51,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string|null $two_factor_recovery_codes
  * @property Carbon|null $two_factor_confirmed_at
  * @property string|null $remember_token
+ * @property bool $super_admin Yalnızca `admin:yap` komutu yazar; toplu atamaya kapalı.
+ * @property Carbon|null $askiya_alindi_at Doluysa hesap askıda.
+ * @property Carbon|null $son_giris_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
@@ -92,6 +96,9 @@ class User extends Authenticatable implements PasskeyUser
             'yds_puani' => 'integer',
             'h_indeksi' => 'integer',
             'yurtdisi_ay' => 'integer',
+            'super_admin' => 'boolean',
+            'askiya_alindi_at' => 'datetime',
+            'son_giris_at' => 'datetime',
         ];
     }
 
@@ -176,13 +183,49 @@ class User extends Authenticatable implements PasskeyUser
     }
 
     /**
-     * Profil fotoğrafı silinmiş kullanıcının diskinde kalmasın.
+     * @return HasMany<Abonelik, $this>
+     */
+    public function abonelikler(): HasMany
+    {
+        return $this->hasMany(Abonelik::class);
+    }
+
+    /**
+     * Bugün geçerli abonelik; birden çok çakışıyorsa en geç biteni (süresiz
+     * en önde). Yoksa null — kullanıcı ücretsiz planda.
+     */
+    public function aktifAbonelik(): ?Abonelik
+    {
+        return $this->abonelikler()
+            ->aktif()
+            ->orderByRaw('bitis is null desc')
+            ->orderByDesc('bitis')
+            ->first();
+    }
+
+    public function plan(): Plan
+    {
+        $abonelik = $this->aktifAbonelik();
+
+        return $abonelik === null ? Plan::Ucretsiz : $abonelik->plan;
+    }
+
+    public function askidaMi(): bool
+    {
+        return $this->askiya_alindi_at !== null;
+    }
+
+    /**
+     * Silinen kullanıcının dosyaları diskinde kalmasın: profil ve CV fotoğrafı
+     * (satırlar yabancı anahtarla silinir, dosyalar silinmez).
      */
     protected static function booted(): void
     {
         static::deleting(function (User $user): void {
-            if ($user->profil_foto !== null) {
-                Storage::disk('local')->delete($user->profil_foto);
+            $dosyalar = array_filter([$user->profil_foto, $user->cvProfili?->foto]);
+
+            if ($dosyalar !== []) {
+                Storage::disk('local')->delete(array_values($dosyalar));
             }
         });
     }

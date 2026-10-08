@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Middleware\EnsureOnboarded;
+use App\Http\Middleware\HesapAktif;
+use App\Http\Middleware\SuperAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -15,7 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'onboarded' => EnsureOnboarded::class,
+            'super.admin' => SuperAdmin::class,
         ]);
+
+        // Askıdaki hesabın oturumu her web isteğinde (Livewire dahil) kapanır.
+        $middleware->web(append: [HesapAktif::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

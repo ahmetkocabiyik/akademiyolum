@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CvFotoController;
+use App\Http\Controllers\TaklitController;
 use App\Http\Controllers\YonergeKaynakController;
+use App\Livewire\Admin;
 use App\Livewire\CiktiYonetimi;
 use App\Livewire\CvOlusturucu;
 use App\Livewire\Dashboard;
@@ -48,5 +50,22 @@ Route::middleware(['auth', 'verified', 'onboarded'])->group(function () {
 
     Route::livewire('cikti-yonetimi', CiktiYonetimi::class)->name('cikti-yonetimi');
 });
+
+// ── YÖNETİM PANELİ ──
+// Yetkisi olmayana 404 (super.admin). Onboarding şartı yok: yönetici
+// uygulamayı akademisyen olarak kullanmıyor olabilir.
+Route::middleware(['auth', 'verified', 'super.admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::livewire('/', Admin\Pano::class)->name('pano');
+    Route::livewire('kullanicilar', Admin\Kullanicilar::class)->name('kullanicilar');
+    Route::livewire('kullanicilar/{user}', Admin\KullaniciDetay::class)->name('kullanici');
+    Route::livewire('abonelikler', Admin\Abonelikler::class)->name('abonelikler');
+    Route::livewire('islemler', Admin\IslemKaydi::class)->name('islemler');
+
+    Route::post('kullanicilar/{user}/olarak-gor', [TaklitController::class, 'baslat'])->name('taklit.baslat');
+});
+
+// Taklit sürerken oturum taklit edilen kullanıcıda; bu yüzden yalnızca
+// `auth` — yöneticinin kimliği oturumdaki anahtardan doğrulanıyor.
+Route::middleware('auth')->post('taklit/bitir', [TaklitController::class, 'bitir'])->name('taklit.bitir');
 
 require __DIR__.'/settings.php';

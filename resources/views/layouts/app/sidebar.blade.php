@@ -1,3 +1,5 @@
+@props(['title' => null, 'yonetim' => false])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -10,6 +12,34 @@
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
+            @if ($yonetim)
+            {{-- Yönetim paneli menüsü: aynı kenar çubuğu, başka bağlantılar. --}}
+            <nav class="sb-nav">
+                <div class="sb-sect">Yönetim</div>
+                <a href="{{ route('admin.pano') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.pano')])>
+                    <flux:icon name="chart-bar" />
+                    <span>Genel Bakış</span>
+                </a>
+                <a href="{{ route('admin.kullanicilar') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.kullanici*')])>
+                    <flux:icon name="users" />
+                    <span>Kullanıcılar</span>
+                </a>
+                <a href="{{ route('admin.abonelikler') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.abonelikler')])>
+                    <flux:icon name="credit-card" />
+                    <span>Abonelikler</span>
+                </a>
+                <a href="{{ route('admin.islemler') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.islemler')])>
+                    <flux:icon name="clipboard-document-check" />
+                    <span>İşlem Kaydı</span>
+                </a>
+
+                <div class="sb-sect">Uygulama</div>
+                <a href="{{ route('dashboard') }}" wire:navigate class="sb-link">
+                    <flux:icon name="arrow-uturn-left" />
+                    <span>Uygulamaya Dön</span>
+                </a>
+            </nav>
+            @else
             <nav class="sb-nav">
                 <div class="sb-sect">{{ __('Ana Menü') }}</div>
                 <a href="{{ route('dashboard') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('dashboard')])>
@@ -44,7 +74,16 @@
                     <flux:icon name="arrow-down-tray" />
                     <span>{{ __('Çıktı Yönetimi') }}</span>
                 </a>
+
+                @can('super-admin')
+                    <div class="sb-sect">Yönetim</div>
+                    <a href="{{ route('admin.pano') }}" wire:navigate class="sb-link">
+                        <flux:icon name="shield-check" />
+                        <span>Yönetim Paneli</span>
+                    </a>
+                @endcan
             </nav>
+            @endif
 
             <flux:dropdown position="top" align="start">
                 <button type="button" class="sb-user" data-test="sidebar-menu-button">
