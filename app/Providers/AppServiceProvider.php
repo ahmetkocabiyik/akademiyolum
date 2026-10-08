@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\TaklitController;
+use App\Models\GizliYonerge;
 use App\Models\User;
 use App\Services\Abonelik\PaketKatalogu;
 use App\Services\AI\ClaudeSaglayici;
@@ -37,7 +38,10 @@ class AppServiceProvider extends ServiceProvider
         // Şart ağaçları ve madde cetvelleri istek başına bir kez okunur.
         // Testler kendi verisiyle bir örnek bağlayarak üretim verisinden
         // bağımsız senaryo kurabilir.
-        $this->app->singleton(SartDeposu::class, fn (): SartDeposu => new SartDeposu);
+        $this->app->singleton(SartDeposu::class, fn (): SartDeposu => new SartDeposu(
+            // Panelden gizlenen yönergeler (Yönetim → Yönergeler).
+            gizliKaynak: fn (): array => array_values(GizliYonerge::query()->get()->map(fn (GizliYonerge $g): string => $g->universite)->all()),
+        ));
 
         // Paket bilgileri istek başına bir kez okunur; scoped: her istek/iş
         // (ve test) temiz başlar, panelde değiştirilen fiyat bir sonraki

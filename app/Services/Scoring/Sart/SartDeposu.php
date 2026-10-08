@@ -3,6 +3,7 @@
 namespace App\Services\Scoring\Sart;
 
 use App\Models\Faaliyet;
+use Closure;
 
 /**
  * Şart ağaçlarını ve madde cetvellerini veri dosyalarından okur, bir eşik için
@@ -64,12 +65,43 @@ class SartDeposu
      * @param  list<Esik>|null  $esikVerisi
      * @param  array<string, Cetvel>|null  $cetvelVerisi
      * @param  array<string, string>|null  $kaynakPdfVerisi  üniversite adı → PDF dosya adı
+     * @param  (Closure(): list<string>)|null  $gizliKaynak  Panelden gizlenmiş üniversiteler;
+     *                                                       verilmezse hiçbiri gizli sayılmaz
      */
     public function __construct(
         private readonly ?array $esikVerisi = null,
         private readonly ?array $cetvelVerisi = null,
         private readonly ?array $kaynakPdfVerisi = null,
+        private readonly ?Closure $gizliKaynak = null,
     ) {}
+
+    /** @var list<string>|null */
+    private ?array $gizliler = null;
+
+    /**
+     * Panelden geçici olarak yayından kaldırılmış üniversiteler.
+     *
+     * Yönerge verisi kodda; gizleme veritabanındaki bir katman
+     * (`gizli_yonergeler`). Kaynak dışarıdan veriliyor: kendi verisiyle
+     * kurulan testlerdeki depo veritabanına dokunmasın.
+     *
+     * @return list<string>
+     */
+    public function gizliUniversiteler(): array
+    {
+        return $this->gizliler ??= $this->gizliKaynak !== null ? ($this->gizliKaynak)() : [];
+    }
+
+    public function gizliMi(string $universite): bool
+    {
+        return in_array($universite, $this->gizliUniversiteler(), true);
+    }
+
+    /** Panelde gizleme değişince aynı istekte de güncel liste okunsun. */
+    public function gizlileriYenile(): void
+    {
+        $this->gizliler = null;
+    }
 
     /**
      * Tüm eşikler. Üniversite başına bir dosya okunur
@@ -268,7 +300,9 @@ class SartDeposu
     {
         return array_values(array_filter(
             $this->esikler(),
-            fn (array $esik) => $esik['durum'] === self::DOGRULANDI,
+            // Gizlenen yönerge adaya hiçbir yoldan görünmez: bütün sorgular
+            // (bul, adaylar, esik, universiteler) buradan geçiyor.
+            fn (array $esik) => $esik['durum'] === self::DOGRULANDI && ! $this->gizliMi($esik['universite']),
         ));
     }
 

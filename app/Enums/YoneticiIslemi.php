@@ -19,6 +19,9 @@ enum YoneticiIslemi: string
     case SablonGuncelledi = 'sablon_guncelledi';
     case SablonSifirladi = 'sablon_sifirladi';
     case PaketGuncelledi = 'paket_guncelledi';
+    case YonergeGizledi = 'yonerge_gizledi';
+    case YonergeYayinaAldi = 'yonerge_yayina_aldi';
+    case UniversiteGuncelledi = 'universite_guncelledi';
 
     public function etiket(): string
     {
@@ -35,6 +38,9 @@ enum YoneticiIslemi: string
             self::SablonGuncelledi => 'E-posta şablonunu güncelledi',
             self::SablonSifirladi => 'E-posta şablonunu varsayılana döndürdü',
             self::PaketGuncelledi => 'Paketi güncelledi',
+            self::YonergeGizledi => 'Yönergeyi yayından kaldırdı',
+            self::YonergeYayinaAldi => 'Yönergeyi yeniden yayına aldı',
+            self::UniversiteGuncelledi => 'Üniversite künyesini güncelledi',
         };
     }
 
@@ -42,7 +48,7 @@ enum YoneticiIslemi: string
     public function rozet(): string
     {
         return match ($this) {
-            self::KullaniciyiSildi, self::AskiyaAldi => 'red',
+            self::KullaniciyiSildi, self::AskiyaAldi, self::YonergeGizledi => 'red',
             self::KullaniciOlarakGirdi, self::KullaniciOlarakCikti => 'amber',
             self::AbonelikEkledi => 'green',
             self::AbonelikIptalEtti => 'orange',

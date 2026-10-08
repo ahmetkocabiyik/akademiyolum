@@ -60,6 +60,11 @@ Route::middleware(['auth', 'verified', 'super.admin'])->prefix('admin')->name('a
     Route::livewire('kullanicilar/{user}', Admin\KullaniciDetay::class)->name('kullanici');
     Route::livewire('abonelikler', Admin\Abonelikler::class)->name('abonelikler');
     Route::livewire('paketler', Admin\Paketler::class)->name('paketler');
+    Route::livewire('yonergeler', Admin\Yonergeler::class)->name('yonergeler');
+    Route::livewire('yonergeler/{universite}', Admin\YonergeDetay::class)->name('yonerge');
+    // Kaynak PDF: kullanıcı tarafındaki rota onboarding istiyor, yönetici
+    // onboarding'i tamamlamamış olabilir.
+    Route::get('yonergeler/{universite}/kaynak', YonergeKaynakController::class)->name('yonerge-kaynak');
     Route::livewire('islemler', Admin\IslemKaydi::class)->name('islemler');
     Route::livewire('eposta-sablonlari', Admin\EpostaSablonlari::class)->name('eposta-sablonlari');
     Route::livewire('eposta-sablonlari/{tur}', Admin\EpostaSablonuDuzenle::class)->name('eposta-sablonu');

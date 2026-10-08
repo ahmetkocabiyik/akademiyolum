@@ -230,12 +230,20 @@ class Dashboard extends Component
         $sonuc = $this->sonuc;
 
         if ($sonuc === null) {
+            // Gizlenen yönerge "girilmedi" değil: veri var, yönetici geçici
+            // olarak yayından kaldırdı (Yönetim → Yönergeler).
+            $gizli = $user->universite !== null && app(SartDeposu::class)->gizliMi($user->universite);
+
             return [[
                 'tip' => 'info',
-                'baslik' => $user->universite === null
-                    ? 'Üniversitenizi seçin'
-                    : $user->universite.' yönergesi henüz girilmedi',
-                'aciklama' => 'Yönerge Analizi ekranından verisi girilmiş üniversiteleri karşılaştırabilirsiniz.',
+                'baslik' => match (true) {
+                    $user->universite === null => 'Üniversitenizi seçin',
+                    $gizli => $user->universite.' yönergesi geçici olarak incelemede',
+                    default => $user->universite.' yönergesi henüz girilmedi',
+                },
+                'aciklama' => $gizli
+                    ? 'Kriterler yeniden doğrulanıyor; kısa süre içinde tekrar görünecek. Bu sırada diğer üniversiteleri Yönerge Analizi\'nden karşılaştırabilirsiniz.'
+                    : 'Yönerge Analizi ekranından verisi girilmiş üniversiteleri karşılaştırabilirsiniz.',
             ]];
         }
 

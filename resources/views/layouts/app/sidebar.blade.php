@@ -28,6 +28,10 @@
                     <flux:icon name="credit-card" />
                     <span>Abonelikler</span>
                 </a>
+                <a href="{{ route('admin.yonergeler') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.yonerge*')])>
+                    <flux:icon name="building-library" />
+                    <span>Yönergeler</span>
+                </a>
                 <a href="{{ route('admin.paketler') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.paketler')])>
                     <flux:icon name="tag" />
                     <span>Paketler</span>
