@@ -19,6 +19,17 @@
 
     <div class="flex flex-col gap-4">
 
+        @if ($talep = $this->bekleyenTalep)
+            <div class="flex items-start gap-3 rounded-xl border border-brand/25 bg-brand-light px-4 py-3 text-sm">
+                <flux:icon name="clock" class="mt-0.5 size-5 shrink-0 text-brand" />
+                <div>
+                    <span class="font-semibold text-ink">{{ $talep->plan->etiket() }} ({{ mb_strtolower($talep->donemEtiketi()) }}) paket talebiniz alındı.</span>
+                    <span class="text-ink-muted">Ödeme bilgilerini {{ auth()->user()->email }} adresine göndereceğiz; ödeme alındığında paketiniz tanımlanır.</span>
+                </div>
+                <flux:link :href="route('abonelik')" wire:navigate class="ms-auto shrink-0 text-sm">Aboneliğim</flux:link>
+            </div>
+        @endif
+
         {{-- Hızlı Ekle --}}
         <div class="flex flex-wrap items-center gap-2 rounded-xl border border-line bg-surface px-4 py-3">
             <span class="text-xs text-ink-subtle">Hızlı Ekle:</span>

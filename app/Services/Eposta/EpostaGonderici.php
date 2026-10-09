@@ -5,8 +5,11 @@ namespace App\Services\Eposta;
 use App\Enums\EpostaTuru;
 use App\Mail\SablonluEposta;
 use App\Models\Abonelik;
+use App\Models\AbonelikTalebi;
 use App\Models\EpostaSablonu;
+use App\Models\Paket;
 use App\Models\User;
+use App\Services\Abonelik\PaketKatalogu;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -95,6 +98,29 @@ class EpostaGonderici
         $this->gonder(EpostaTuru::AbonelikYonetici, $this->yoneticiAdresleri(), $degerler + [
             'ekleyen' => $abonelik->olusturan !== null ? $abonelik->olusturan->name : 'Sistem',
             'kullanici_adresi' => route('admin.kullanici', $user),
+        ]);
+    }
+
+    /**
+     * Ücretli paket talebi: kullanıcıya "alındı", yöneticilere bildirim.
+     */
+    public function talep(AbonelikTalebi $talep): void
+    {
+        $user = $talep->user;
+        $degerler = $this->kullaniciDegerleri($user) + [
+            'plan' => $talep->plan->etiket(),
+            'donem' => $talep->donemEtiketi(),
+            'tutar' => Paket::fiyatMetni(app(PaketKatalogu::class)->onerilenTutar($talep->plan, $talep->ay())),
+        ];
+
+        $this->gonder(EpostaTuru::TalepKullanici, [$user->email], $degerler + [
+            'destek_eposta' => $this->destekAdresi(),
+        ]);
+
+        $this->gonder(EpostaTuru::TalepYonetici, $this->yoneticiAdresleri(), $degerler + [
+            'unvan' => $user->unvan ?? '—',
+            'universite' => $user->universite ?? '—',
+            'talepler_adresi' => route('admin.abonelikler'),
         ]);
     }
 

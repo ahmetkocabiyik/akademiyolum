@@ -22,6 +22,7 @@ enum YoneticiIslemi: string
     case YonergeGizledi = 'yonerge_gizledi';
     case YonergeYayinaAldi = 'yonerge_yayina_aldi';
     case UniversiteGuncelledi = 'universite_guncelledi';
+    case TalebiKapatti = 'talebi_kapatti';
 
     public function etiket(): string
     {
@@ -41,6 +42,7 @@ enum YoneticiIslemi: string
             self::YonergeGizledi => 'Yönergeyi yayından kaldırdı',
             self::YonergeYayinaAldi => 'Yönergeyi yeniden yayına aldı',
             self::UniversiteGuncelledi => 'Üniversite künyesini güncelledi',
+            self::TalebiKapatti => 'Paket talebini kapattı',
         };
     }
 

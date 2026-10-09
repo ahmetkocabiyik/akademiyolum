@@ -7,6 +7,11 @@
 
         <form method="POST" action="{{ route('register.store') }}" class="flex flex-col gap-6">
             @csrf
+            {{-- Tanıtım sayfasındaki paket kartından gelindiyse seçim kurulumun
+                 paket adımına taşınıyor (CreateNewUser oturuma yazar). --}}
+            @if (\App\Enums\Plan::tryFrom((string) request('paket')))
+                <input type="hidden" name="paket" value="{{ request('paket') }}">
+            @endif
             <!-- Name -->
             <flux:input
                 name="name"

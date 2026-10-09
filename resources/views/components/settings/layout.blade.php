@@ -8,6 +8,7 @@
                  güncellemesinde (istek livewire/update'ten gelir) işareti
                  kaybederdi. --}}
             <flux:navlist.item :href="route('profile.edit')" :current="$aktif === 'profil'" wire:navigate>{{ __('Profile') }}</flux:navlist.item>
+            <flux:navlist.item :href="route('abonelik')" :current="$aktif === 'abonelik'" wire:navigate>Abonelik</flux:navlist.item>
             <flux:navlist.item :href="route('security.edit')" :current="$aktif === 'guvenlik'" wire:navigate>{{ __('Security') }}</flux:navlist.item>
         </flux:navlist>
     </div>

@@ -2,19 +2,35 @@
 
 namespace App\Livewire;
 
+use App\Enums\Plan;
 use App\Enums\TemelAlan;
+use App\Models\AbonelikTalebi;
+use App\Models\Paket;
 use App\Models\Universite;
 use App\Models\User;
+use App\Services\Abonelik\AbonelikTalepleri;
+use App\Services\Abonelik\PaketKatalogu;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
+/**
+ * @property-read Collection<string, Paket> $paketler
+ */
 #[Title('Kurulum')]
 #[Layout('layouts.auth')]
 class Onboarding extends Component
 {
+    /** Tanıtım sayfasında seçilen paketin oturum anahtarı (bkz. CreateNewUser). */
+    public const SECILEN_PAKET = 'secilen_paket';
+
+    public const SON_ADIM = 3;
+
     public int $step = 1;
 
     public string $unvan = '';
@@ -30,6 +46,10 @@ class Onboarding extends Component
     public string $temelAlan = 'sosyal';
 
     public string $orcid = '';
+
+    public string $paket = 'ucretsiz';
+
+    public string $donem = 'aylik';
 
     /**
      * Available academic titles.
@@ -49,13 +69,43 @@ class Onboarding extends Component
         }
 
         $this->name = $user->name;
+
+        $secilen = Plan::tryFrom((string) session(self::SECILEN_PAKET));
+
+        if ($secilen !== null && $this->paketler()->has($secilen->value)) {
+            $this->paket = $secilen->value;
+        }
+    }
+
+    /**
+     * Seçilebilecek paketler: satıştakiler. Ücretsiz satıştan kaldırılmış
+     * olsa da her zaman seçilebilir; kimse kuruluma ücretli bir paket
+     * seçmeden giremez durumda kalmasın.
+     *
+     * @return Collection<string, Paket>
+     */
+    #[Computed]
+    public function paketler(): Collection
+    {
+        $katalog = app(PaketKatalogu::class);
+        $satistakiler = $katalog->satistakiler();
+
+        return $katalog->hepsi()->filter(fn (Paket $p): bool => $p->plan === Plan::Ucretsiz || $satistakiler->has($p->plan->value));
+    }
+
+    /** Seçili paketin yıllık fiyatı yoksa dönem aylığa döner. */
+    public function updatedPaket(): void
+    {
+        if ($this->paketler()->get($this->paket)?->yillik_fiyat_kurus === null) {
+            $this->donem = 'aylik';
+        }
     }
 
     public function next(): void
     {
         $this->validate($this->rulesForStep($this->step));
 
-        $this->step = min($this->step + 1, 2);
+        $this->step = min($this->step + 1, self::SON_ADIM);
     }
 
     public function back(): void
@@ -114,7 +164,7 @@ class Onboarding extends Component
 
     public function submit(): void
     {
-        $this->validate($this->rulesForStep(2));
+        $this->validate([...$this->rulesForStep(1), ...$this->rulesForStep(2), ...$this->rulesForStep(3)]);
 
         $user = Auth::user();
 
@@ -128,6 +178,16 @@ class Onboarding extends Component
             'orcid' => $this->orcid ?: null,
             'onboarded_at' => now(),
         ])->save();
+
+        // Ücretli paket: ödeme gelene kadar talep olarak yöneticiye düşer;
+        // kullanıcı bu sırada ücretsiz planda devam eder.
+        $plan = Plan::from($this->paket);
+
+        if ($plan !== Plan::Ucretsiz) {
+            app(AbonelikTalepleri::class)->olustur($user, $plan, $this->donem);
+        }
+
+        session()->forget(self::SECILEN_PAKET);
 
         $this->redirectRoute('dashboard', navigate: true);
     }
@@ -151,11 +211,19 @@ class Onboarding extends Component
                 'temelAlan' => ['required', Rule::enum(TemelAlan::class)],
                 'orcid' => ['nullable', 'string', 'max:255'],
             ],
+            3 => [
+                'paket' => ['required', Rule::in($this->paketler()->keys()->all())],
+                'donem' => ['required', Rule::in(array_keys(AbonelikTalebi::DONEMLER)), function (string $alan, mixed $deger, \Closure $hata): void {
+                    if ($deger === 'yillik' && $this->paketler()->get($this->paket)?->yillik_fiyat_kurus === null) {
+                        $hata('Bu paketin yıllık seçeneği yok.');
+                    }
+                }],
+            ],
             default => [],
         };
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.onboarding', [
             'universiteler' => Universite::query()->orderBy('ad')->pluck('ad'),

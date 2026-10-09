@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\TaklitController;
+use App\Http\Middleware\SuperAdmin;
 use App\Models\GizliYonerge;
 use App\Models\User;
 use App\Services\Abonelik\PaketKatalogu;
@@ -26,6 +27,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Livewire\Livewire;
 use RuntimeException;
 
 class AppServiceProvider extends ServiceProvider
@@ -145,6 +147,12 @@ class AppServiceProvider extends ServiceProvider
      */
     private function configureYonetim(): void
     {
+        // Panel rotasının ara katmanı Livewire'ın sonraki isteklerinde
+        // (livewire/update) de çalışsın: yoksa sayfa açıldıktan sonra yetkisi
+        // alınan ya da başka sekmede "kullanıcı olarak gör"e geçen yöneticinin
+        // açık paneli işlem yapmaya devam ediyordu.
+        Livewire::addPersistentMiddleware([SuperAdmin::class]);
+
         // Askıdaki bir admin de paneli açamaz.
         Gate::define('super-admin', fn (User $user): bool => $user->super_admin && ! $user->askidaMi());
 

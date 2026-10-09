@@ -191,6 +191,20 @@ class User extends Authenticatable implements PasskeyUser
     }
 
     /**
+     * @return HasMany<AbonelikTalebi, $this>
+     */
+    public function abonelikTalepleri(): HasMany
+    {
+        return $this->hasMany(AbonelikTalebi::class);
+    }
+
+    /** Yöneticinin henüz sonuçlandırmadığı paket talebi. */
+    public function bekleyenTalep(): ?AbonelikTalebi
+    {
+        return $this->abonelikTalepleri()->bekleyen()->latest('id')->first();
+    }
+
+    /**
      * Bugün geçerli abonelik; birden çok çakışıyorsa en geç biteni (süresiz
      * en önde). Yoksa null — kullanıcı ücretsiz planda.
      */

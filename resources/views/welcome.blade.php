@@ -297,7 +297,7 @@ footer{background:#060f1e;padding:56px 5% 28px}
         @if ($paket->aciklama)<p class="price-desc">{{ $paket->aciklama }}</p>@endif
         <div class="price-divider"></div>
         <ul class="price-features">@foreach ($paket->ozellikler as $ozellik)<li><span class="check">✓</span>{{ $ozellik }}</li>@endforeach</ul>
-        <a @class(['price-btn', 'price-btn-primary' => $paket->one_cikan, 'price-btn-outline' => ! $paket->one_cikan]) href="{{ route('register') }}">{{ $paket->buton_metni }}</a>
+        <a @class(['price-btn', 'price-btn-primary' => $paket->one_cikan, 'price-btn-outline' => ! $paket->one_cikan]) href="{{ route('register', ['paket' => $paket->plan->value]) }}">{{ $paket->buton_metni }}</a>
       </div>
       @endforeach
     </div>

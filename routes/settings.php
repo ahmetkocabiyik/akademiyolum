@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfilFotoController;
+use App\Livewire\Settings\Abonelik;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Security;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
     Route::livewire('settings/profile', Profile::class)->name('profile.edit');
+    Route::livewire('settings/abonelik', Abonelik::class)->name('abonelik');
 
     // Profil fotoğrafı public/ dışında; yalnızca sahibine bu rotadan akıtılır.
     Route::get('settings/profil-foto', ProfilFotoController::class)->name('profil.foto');

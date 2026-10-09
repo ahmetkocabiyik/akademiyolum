@@ -1,7 +1,7 @@
 <div class="flex w-full flex-col gap-6">
     {{-- Stepper --}}
     <div class="flex items-center justify-center gap-2">
-        @foreach (['Profil', 'Kurum & Alan'] as $i => $label)
+        @foreach (['Profil', 'Kurum & Alan', 'Paket'] as $i => $label)
             @php($n = $i + 1)
             <div class="flex items-center gap-2">
                 <div @class([
@@ -125,7 +125,48 @@
 
             <div class="flex gap-3">
                 <flux:button wire:click="back" class="flex-1">Geri</flux:button>
-                <flux:button variant="primary" wire:click="submit" class="flex-1">Kurulumu Tamamla</flux:button>
+                <flux:button variant="primary" wire:click="next" class="flex-1">Devam Et</flux:button>
+            </div>
+        </div>
+    @endif
+
+    {{-- Step 3: Paket. Online ödeme yok: ücretli seçim yöneticiye talep
+         olarak düşer, kullanıcı bu sırada ücretsiz planda devam eder. --}}
+    @if ($step === 3)
+        @php($secili = $this->paketler->get($paket))
+        <div class="flex flex-col gap-5">
+            <div class="text-center">
+                <flux:heading size="lg">Paketinizi Seçin</flux:heading>
+                <flux:text class="mt-1">Ücretsiz başlayabilir, dilediğiniz zaman yükseltebilirsiniz.</flux:text>
+            </div>
+
+            <x-paket-secimi :paketler="$this->paketler" :secili="$paket" />
+
+            @if ($secili && $secili->aylik_fiyat_kurus > 0)
+                @if ($secili->yillik_fiyat_kurus !== null)
+                    <flux:radio.group wire:model.live="donem" label="Ödeme dönemi" variant="segmented">
+                        <flux:radio value="aylik" label="Aylık · {{ \App\Models\Paket::fiyatMetni($secili->aylik_fiyat_kurus) }}" />
+                        <flux:radio value="yillik" label="Yıllık · {{ \App\Models\Paket::fiyatMetni($secili->yillik_fiyat_kurus) }}{{ $secili->yillikIndirim() ? ' (%'.$secili->yillikIndirim().' indirim)' : '' }}" />
+                    </flux:radio.group>
+                @endif
+
+                <div class="flex items-start gap-2.5 rounded-lg bg-canvas p-3 text-sm text-ink-muted">
+                    <flux:icon name="information-circle" class="mt-0.5 size-5 shrink-0 text-brand" />
+                    <span>
+                        Talebiniz bize iletilir; ödeme bilgilerini e-postayla göndeririz. Ödeme alındığında
+                        <strong class="text-ink">{{ $secili->ad }}</strong> paketiniz tanımlanır. Bu sırada uygulamayı ücretsiz kullanmaya devam edersiniz.
+                    </span>
+                </div>
+            @endif
+
+            <flux:error name="paket" />
+            <flux:error name="donem" />
+
+            <div class="flex gap-3">
+                <flux:button wire:click="back" class="flex-1">Geri</flux:button>
+                <flux:button variant="primary" wire:click="submit" class="flex-1">
+                    {{ $secili && $secili->aylik_fiyat_kurus > 0 ? 'Talep Et ve Tamamla' : 'Kurulumu Tamamla' }}
+                </flux:button>
             </div>
         </div>
     @endif

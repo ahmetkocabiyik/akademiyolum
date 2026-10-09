@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Enums\Kadro;
 use App\Enums\Kategori;
 use App\Enums\TemelAlan;
+use App\Models\AbonelikTalebi;
 use App\Models\BeyanOnayi;
 use App\Models\Faaliyet;
 use App\Services\Scoring\Sart\Durum;
@@ -44,6 +45,7 @@ use Livewire\Component;
  * @property-read int $yuzde
  * @property-read string|null $durum
  * @property-read list<array{tip: string, baslik: string, aciklama: string}> $bildirimler
+ * @property-read AbonelikTalebi|null $bekleyenTalep
  */
 #[Layout('layouts.app')]
 #[Title('Dashboard')]
@@ -296,6 +298,13 @@ class Dashboard extends Component
         }
 
         return $bildirimler;
+    }
+
+    /** Kurulumda seçilen ücretli paket, yönetici sonuçlandırana kadar. */
+    #[Computed]
+    public function bekleyenTalep(): ?AbonelikTalebi
+    {
+        return Auth::user()->bekleyenTalep();
     }
 
     public function kadroEtiketi(): string

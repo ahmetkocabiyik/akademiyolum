@@ -4,9 +4,14 @@ namespace App\Livewire\Admin;
 
 use App\Enums\Plan;
 use App\Models\Abonelik;
+use App\Models\AbonelikTalebi;
+use App\Services\Abonelik\AbonelikTalepleri;
 use Carbon\CarbonImmutable;
+use Flux\Flux;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -20,6 +25,7 @@ use Livewire\WithPagination;
  * sayfasında; burası takip için (süresi yaklaşan, biten).
  *
  * @property-read LengthAwarePaginator<int, Abonelik> $abonelikler
+ * @property-read Collection<int, AbonelikTalebi> $talepler
  */
 #[Layout('layouts.admin')]
 #[Title('Yönetim · Abonelikler')]
@@ -69,6 +75,39 @@ class Abonelikler extends Component
                 fn (Builder $q) => $q->orderByRaw('bitis is null')->orderBy('bitis'),
                 fn (Builder $q) => $q->latest('baslangic')->latest('id'))
             ->paginate(25);
+    }
+
+    /**
+     * Kurulumda ücretli paket seçenlerin bekleyen talepleri, eskisi önde.
+     *
+     * @return Collection<int, AbonelikTalebi>
+     */
+    #[Computed]
+    public function talepler(): Collection
+    {
+        return AbonelikTalebi::query()->bekleyen()->with('user')->oldest('id')->get();
+    }
+
+    /**
+     * Ödeme alındı: talep, paketin güncel fiyatıyla sıradaki boş günden
+     * başlayan aboneliğe çevrilir; kullanıcıya ve yöneticilere mail gider.
+     */
+    public function talebiOnayla(int $talepId): void
+    {
+        $talep = AbonelikTalebi::query()->bekleyen()->findOrFail($talepId);
+        $abonelik = app(AbonelikTalepleri::class)->onayla($talep, Auth::user());
+
+        unset($this->talepler, $this->abonelikler);
+        Flux::toast(variant: 'success', text: "{$talep->user->name} için {$abonelik->plan->etiket()} aboneliği tanımlandı.");
+    }
+
+    public function talebiKapat(int $talepId): void
+    {
+        $talep = AbonelikTalebi::query()->bekleyen()->findOrFail($talepId);
+        app(AbonelikTalepleri::class)->kapat($talep, Auth::user());
+
+        unset($this->talepler);
+        Flux::toast(text: 'Talep kapatıldı.');
     }
 
     public function render(): View

@@ -9,6 +9,37 @@
     <x-topbar title="Abonelikler" :pill="$this->abonelikler->total().' kayıt'" />
 
     <div class="flex flex-col gap-4">
+        @if ($this->talepler->isNotEmpty())
+            <flux:card class="!p-0 border-gold/40">
+                <div class="flex items-center gap-2 border-b border-line px-5 py-3.5">
+                    <flux:heading>Bekleyen paket talepleri</flux:heading>
+                    <flux:badge color="amber" size="sm">{{ $this->talepler->count() }}</flux:badge>
+                    <flux:text class="ms-auto !text-xs">Ödemeyi aldıktan sonra onaylayın; dönem sıradaki boş günden başlar, tutar paketin güncel fiyatı.</flux:text>
+                </div>
+                <div class="divide-y divide-line">
+                    @foreach ($this->talepler as $talep)
+                        <div wire:key="talep-{{ $talep->id }}" class="flex flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3 text-sm">
+                            <a href="{{ route('admin.kullanici', $talep->user) }}" wire:navigate class="min-w-0 flex-1">
+                                <span class="block font-medium text-ink hover:text-brand">{{ $talep->user->name }}</span>
+                                <span class="block text-xs text-ink-subtle">{{ $talep->user->email }} · {{ $talep->user->universite ?? 'Üniversite yok' }}</span>
+                            </a>
+                            <div class="flex items-center gap-2">
+                                <flux:badge :color="$talep->plan->rozet()" size="sm">{{ $talep->plan->etiket() }}</flux:badge>
+                                <span class="text-ink-muted">{{ $talep->donemEtiketi() }} · {{ \App\Models\Paket::fiyatMetni(app(\App\Services\Abonelik\PaketKatalogu::class)->onerilenTutar($talep->plan, $talep->ay())) }}</span>
+                            </div>
+                            <span class="w-28 text-xs text-ink-subtle" title="{{ $talep->created_at?->format('d.m.Y H:i') }}">{{ $talep->created_at?->diffForHumans() }}</span>
+                            <div class="flex gap-2">
+                                <flux:button size="sm" variant="primary" icon="check" wire:click="talebiOnayla({{ $talep->id }})"
+                                    wire:confirm="{{ $talep->user->name }} için {{ $talep->plan->etiket() }} ({{ mb_strtolower($talep->donemEtiketi()) }}) aboneliği tanımlansın mı? Kullanıcıya e-posta gider.">Ödeme alındı, onayla</flux:button>
+                                <flux:button size="sm" variant="ghost" wire:click="talebiKapat({{ $talep->id }})"
+                                    wire:confirm="Talep abonelik tanımlanmadan kapatılsın mı? Kullanıcıya e-posta gitmez.">Kapat</flux:button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </flux:card>
+        @endif
+
         <div class="flex flex-wrap items-end gap-3 rounded-xl border border-line bg-surface p-4">
             <div class="flex flex-wrap gap-1.5">
                 @foreach (Abonelikler::DURUMLAR as $deger => $etiket)

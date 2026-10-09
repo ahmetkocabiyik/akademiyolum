@@ -5,6 +5,7 @@ namespace App\Services\Yonetim;
 use App\Enums\Plan;
 use App\Enums\YoneticiIslemi;
 use App\Models\Abonelik;
+use App\Models\AbonelikTalebi;
 use App\Models\IslemKaydi;
 use App\Models\User;
 use App\Services\Eposta\EpostaGonderici;
@@ -105,7 +106,18 @@ class KullaniciYonetimi
                 'olusturan_id' => $yonetici->id,
             ]);
 
-            IslemKaydi::yaz(YoneticiIslemi::AbonelikEkledi, $yonetici, $hedef, [
+            // Bekleyen paket talebi bu abonelikle karşılanmış sayılır; panelden
+            // talepsiz eklenen abonelik de talebi listeden düşürsün.
+            $talepler = $hedef->abonelikTalepleri()->bekleyen();
+            $talepId = $talepler->value('id');
+            $talepler->update([
+                'durum' => AbonelikTalebi::TAMAMLANDI,
+                'abonelik_id' => $abonelik->id,
+                'sonuclandiran_id' => $yonetici->id,
+                'sonuclandi_at' => now(),
+            ]);
+
+            IslemKaydi::yaz(YoneticiIslemi::AbonelikEkledi, $yonetici, $hedef, array_filter(['talep_id' => $talepId]) + [
                 'abonelik_id' => $abonelik->id,
                 'plan' => $plan->value,
                 'baslangic' => $baslangic->toDateString(),

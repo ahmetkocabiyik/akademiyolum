@@ -24,10 +24,12 @@ enum EpostaTuru: string
     case AbonelikBitiyor = 'abonelik_bitiyor';
     case AbonelikBitti = 'abonelik_bitti';
     case AbonelikIptal = 'abonelik_iptal';
+    case TalepKullanici = 'talep_kullanici';
 
     // Yöneticiye
     case KayitYonetici = 'kayit_yonetici';
     case AbonelikYonetici = 'abonelik_yonetici';
+    case TalepYonetici = 'talep_yonetici';
     case AbonelikBitiyorYonetici = 'abonelik_bitiyor_yonetici';
 
     /** Bitişe bu kadar gün kala hatırlatma gider. */
@@ -46,8 +48,10 @@ enum EpostaTuru: string
             self::AbonelikBitiyor => 'Abonelik bitiyor (hatırlatma)',
             self::AbonelikBitti => 'Abonelik sona erdi',
             self::AbonelikIptal => 'Abonelik iptal edildi',
+            self::TalepKullanici => 'Paket talebi alındı',
             self::KayitYonetici => 'Yeni kayıt bildirimi',
             self::AbonelikYonetici => 'Yeni abonelik bildirimi',
+            self::TalepYonetici => 'Yeni paket talebi bildirimi',
             self::AbonelikBitiyorYonetici => 'Biten abonelikler özeti',
         };
     }
@@ -58,8 +62,8 @@ enum EpostaTuru: string
         return match ($this) {
             self::KayitKullanici, self::SifreSifirlama, self::EpostaDogrulama,
             self::HesapAskiyaAlindi, self::HesapAskidanCikarildi, self::HesapSilindi => 'Hesap (kullanıcıya)',
-            self::AbonelikKullanici, self::AbonelikBitiyor, self::AbonelikBitti, self::AbonelikIptal => 'Abonelik (kullanıcıya)',
-            self::KayitYonetici, self::AbonelikYonetici, self::AbonelikBitiyorYonetici => 'Yöneticiye',
+            self::AbonelikKullanici, self::AbonelikBitiyor, self::AbonelikBitti, self::AbonelikIptal, self::TalepKullanici => 'Abonelik (kullanıcıya)',
+            self::KayitYonetici, self::AbonelikYonetici, self::TalepYonetici, self::AbonelikBitiyorYonetici => 'Yöneticiye',
         };
     }
 
@@ -79,8 +83,10 @@ enum EpostaTuru: string
             self::AbonelikBitiyor => "Aktif aboneliğin bitişine {$gun} gün kala, her gün çalışan zamanlanmış görevle gider. Abonelik yenilenmişse gitmez; bir abonelik için bir kez gider.",
             self::AbonelikBitti => 'Abonelik bitiş gününü geçince gider. Kullanıcının başka aktif aboneliği varsa gitmez.',
             self::AbonelikIptal => 'Yönetici aktif ya da başlamamış bir aboneliği iptal ettiğinde gider.',
+            self::TalepKullanici => 'Kullanıcı kurulumda ücretli bir paket seçtiğinde gider: talebin alındığını ve ödeme için dönüş yapılacağını bildirir.',
             self::KayitYonetici => 'Yeni bir kullanıcı kayıt olduğunda bütün süper adminlere gider.',
             self::AbonelikYonetici => 'Kullanıcıya abonelik tanımlandığında bütün süper adminlere gider.',
+            self::TalepYonetici => 'Kullanıcı ücretli bir paket talep ettiğinde bütün süper adminlere gider; talep Abonelikler sayfasından aboneliğe çevrilir.',
             self::AbonelikBitiyorYonetici => 'Zamanlanmış görev o gün hatırlatma gönderdiyse, bitecek aboneliklerin listesi bütün süper adminlere gider.',
         };
     }
@@ -109,6 +115,12 @@ enum EpostaTuru: string
             'bitis' => 'Bitiş tarihi ("süresiz" olabilir)',
         ];
 
+        $talep = [
+            'plan' => 'Plan adı',
+            'donem' => 'Aylık ya da Yıllık',
+            'tutar' => 'Dönemin paket fiyatı',
+        ];
+
         return match ($this) {
             self::KayitKullanici => $ortak + ['giris_adresi' => 'Giriş sayfasının adresi'],
             self::SifreSifirlama => $ortak + [
@@ -132,6 +144,12 @@ enum EpostaTuru: string
             ],
             self::AbonelikBitti => $ortak + $abonelik + ['destek_eposta' => 'Destek e-posta adresi'],
             self::AbonelikIptal => $ortak + $abonelik + ['destek_eposta' => 'Destek e-posta adresi'],
+            self::TalepKullanici => $ortak + $talep + ['destek_eposta' => 'Destek e-posta adresi'],
+            self::TalepYonetici => $ortak + $talep + [
+                'unvan' => 'Kullanıcının unvanı',
+                'universite' => 'Kullanıcının üniversitesi',
+                'talepler_adresi' => 'Yönetim panelindeki bekleyen talepler',
+            ],
             self::KayitYonetici => $ortak + [
                 'unvan' => 'Kullanıcının unvanı',
                 'universite' => 'Kullanıcının üniversitesi',
@@ -181,6 +199,8 @@ enum EpostaTuru: string
             'panel_adresi' => $this === self::AbonelikBitiyorYonetici ? url('/admin/abonelikler') : route('dashboard'),
             'ekleyen' => 'Panel Yöneticisi',
             'adet' => '2',
+            'donem' => 'Aylık',
+            'talepler_adresi' => url('/admin/abonelikler'),
             'liste' => "- Ayşe Yılmaz (ayse@ornek.edu.tr) · Akademisyen · 15 Ekim 2026\n- Mehmet Demir (mehmet@ornek.edu.tr) · Kurumsal · 15 Ekim 2026",
         ];
 
@@ -200,8 +220,10 @@ enum EpostaTuru: string
             self::AbonelikBitiyor => '{plan} aboneliğiniz {kalan_gun} gün sonra bitiyor',
             self::AbonelikBitti => '{plan} aboneliğiniz sona erdi',
             self::AbonelikIptal => '{plan} aboneliğiniz iptal edildi',
+            self::TalepKullanici => '{plan} paket talebiniz alındı',
             self::KayitYonetici => 'Yeni kayıt: {ad}',
             self::AbonelikYonetici => 'Yeni abonelik: {ad} · {plan}',
+            self::TalepYonetici => 'Paket talebi: {ad} · {plan} ({donem})',
             self::AbonelikBitiyorYonetici => '{adet} abonelik yakında bitiyor',
         };
     }
@@ -312,6 +334,34 @@ enum EpostaTuru: string
                 Bir yanlışlık olduğunu düşünüyorsanız {destek_eposta} adresine yazabilirsiniz.
 
                 {uygulama} ekibi
+                MD,
+            self::TalepKullanici => <<<'MD'
+                Merhaba {ad},
+
+                **{plan}** paketi için talebinizi aldık.
+
+                - **Dönem:** {donem}
+                - **Tutar:** {tutar}
+
+                Ödeme bilgilerini size kısa süre içinde bu adresten ileteceğiz; ödeme alındığında paketiniz tanımlanır ve ayrıca bilgilendirilirsiniz. Bu sırada uygulamayı kullanmaya devam edebilirsiniz.
+
+                Sorularınız için {destek_eposta} adresine yazabilirsiniz.
+
+                {uygulama} ekibi
+                MD,
+            self::TalepYonetici => <<<'MD'
+                Yeni bir paket talebi var.
+
+                - **Kullanıcı:** {ad} ({eposta})
+                - **Unvan:** {unvan}
+                - **Üniversite:** {universite}
+                - **Plan:** {plan}
+                - **Dönem:** {donem}
+                - **Tutar:** {tutar}
+
+                Ödemeyi aldıktan sonra talebi panelden aboneliğe çevirin.
+
+                [Bekleyen talepleri aç]({talepler_adresi})
                 MD,
             self::KayitYonetici => <<<'MD'
                 Yeni bir kullanıcı kayıt oldu.

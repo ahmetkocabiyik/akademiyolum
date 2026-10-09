@@ -27,6 +27,10 @@
                 <a href="{{ route('admin.abonelikler') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.abonelikler')])>
                     <flux:icon name="credit-card" />
                     <span>Abonelikler</span>
+                    @php $bekleyenTalep = \App\Models\AbonelikTalebi::query()->bekleyen()->count(); @endphp
+                    @if ($bekleyenTalep > 0)
+                        <span class="ms-auto rounded-full bg-gold px-2 py-0.5 text-2xs font-semibold text-navy" title="Bekleyen paket talebi">{{ $bekleyenTalep }}</span>
+                    @endif
                 </a>
                 <a href="{{ route('admin.yonergeler') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.yonerge*')])>
                     <flux:icon name="building-library" />
@@ -111,6 +115,9 @@
                     <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>
                         {{ __('Settings') }}
                     </flux:menu.item>
+                    <flux:menu.item :href="route('abonelik')" icon="credit-card" wire:navigate>
+                        Aboneliğim
+                    </flux:menu.item>
 
                     <flux:menu.separator />
 
@@ -154,6 +161,12 @@
 
                     <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>
                         {{ __('Settings') }}
+                    </flux:menu.item>
+
+                    <flux:menu.item :href="route('abonelik')" icon="credit-card" wire:navigate>
+
+                        Aboneliğim
+
                     </flux:menu.item>
 
                     <flux:menu.separator />
