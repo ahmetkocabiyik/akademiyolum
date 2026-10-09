@@ -71,7 +71,7 @@
                         <th class="px-5 py-3 text-start">Ekleyen</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody data-sirali>
                     @forelse ($this->abonelikler as $abonelik)
                         @php [$durumEtiketi, $durumRengi] = $durumRozeti[$abonelik->durum()]; @endphp
                         <tr wire:key="abonelik-{{ $abonelik->id }}" class="border-b border-line last:border-0 hover:bg-canvas">

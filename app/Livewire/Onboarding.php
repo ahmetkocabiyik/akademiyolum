@@ -33,6 +33,9 @@ class Onboarding extends Component
 
     public int $step = 1;
 
+    /** Son adım geçişinin yönü (`ileri`/`geri`): yeni adım o yönden kayarak gelir. */
+    public string $yon = '';
+
     public string $unvan = '';
 
     public string $name = '';
@@ -106,11 +109,13 @@ class Onboarding extends Component
         $this->validate($this->rulesForStep($this->step));
 
         $this->step = min($this->step + 1, self::SON_ADIM);
+        $this->yon = 'ileri';
     }
 
     public function back(): void
     {
         $this->step = max($this->step - 1, 1);
+        $this->yon = 'geri';
     }
 
     public function cikis(): void

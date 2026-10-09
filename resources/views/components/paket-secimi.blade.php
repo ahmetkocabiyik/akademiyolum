@@ -11,7 +11,7 @@
         <button type="button" wire:key="paket-{{ $deger }}" wire:click="$set('{{ $model }}', '{{ $deger }}')"
             role="radio" aria-checked="{{ $secili === $deger ? 'true' : 'false' }}"
             @class([
-                'flex items-start gap-3 rounded-xl border p-4 text-start transition',
+                'kart-tikla flex items-start gap-3 rounded-xl border p-4 text-start',
                 'border-brand bg-brand-light ring-1 ring-brand' => $secili === $deger,
                 'border-line hover:border-ink-subtle' => $secili !== $deger,
             ])>

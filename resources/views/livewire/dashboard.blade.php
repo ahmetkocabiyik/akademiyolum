@@ -47,7 +47,7 @@
         </div>
 
         {{-- İstatistik kartları --}}
-        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div data-sirali class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <x-dashboard.stat label="Toplam Puan" accent="brand">
                 <span class="font-serif text-3xl font-bold text-ink" x-data="sayac">{{ $esik ? $this->toplam : '—' }}</span>
                 <x-slot:meta>
@@ -193,7 +193,7 @@
             </div>
             @php $enYuksek = max(1, collect($this->dagilim)->max('puan') ?: 1); @endphp
             @if (count($this->dagilim))
-                <div class="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+                <div data-sirali class="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
                     @foreach ($this->dagilim as $satir)
                         @php $renk = $satir['kategori']->renk(); @endphp
                         <flux:card class="!p-3.5" wire:key="kat-{{ $satir['kategori']->value }}">

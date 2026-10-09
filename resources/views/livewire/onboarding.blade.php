@@ -21,7 +21,11 @@
                     'text-zinc-400' => $step !== $n,
                 ])>{{ $label }}</span>
                 @unless ($loop->last)
-                    <div class="h-px w-6 bg-zinc-200 sm:w-10"></div>
+                    {{-- Bağlantı çizgisi adım geçildikçe soldan dolar. --}}
+                    <div class="relative h-px w-6 overflow-hidden bg-zinc-200 sm:w-10">
+                        <div class="absolute inset-y-0 start-0 bg-brand transition-[width] duration-[var(--dur-yavas)] ease-[var(--ease-cikis)]"
+                            style="width: {{ $step > $n ? '100%' : '0' }}"></div>
+                    </div>
                 @endunless
             </div>
         @endforeach
@@ -29,7 +33,7 @@
 
     {{-- Step 1: Profil --}}
     @if ($step === 1)
-        <div class="flex flex-col gap-5">
+        <div class="flex flex-col gap-5" wire:key="adim-1" data-adim="{{ $yon }}">
             <div class="text-center">
                 <flux:heading size="lg">Hoş geldiniz 👋</flux:heading>
                 <flux:text class="mt-1">Kariyer analiziniz için birkaç bilgiye ihtiyacımız var.</flux:text>
@@ -49,7 +53,7 @@
 
     {{-- Step 2: Kurum & Alan --}}
     @if ($step === 2)
-        <div class="flex flex-col gap-5">
+        <div class="flex flex-col gap-5" wire:key="adim-2" data-adim="{{ $yon }}">
             <div class="text-center">
                 <flux:heading size="lg">Kurum ve Alanınız</flux:heading>
                 <flux:text class="mt-1">Yönerge eşleştirmesi bu bilgilere göre yapılır.</flux:text>
@@ -134,7 +138,7 @@
          olarak düşer, kullanıcı bu sırada ücretsiz planda devam eder. --}}
     @if ($step === 3)
         @php($secili = $this->paketler->get($paket))
-        <div class="flex flex-col gap-5">
+        <div class="flex flex-col gap-5" wire:key="adim-3" data-adim="{{ $yon }}">
             <div class="text-center">
                 <flux:heading size="lg">Paketinizi Seçin</flux:heading>
                 <flux:text class="mt-1">Ücretsiz başlayabilir, dilediğiniz zaman yükseltebilirsiniz.</flux:text>

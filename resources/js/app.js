@@ -279,3 +279,144 @@ document.addEventListener('livewire:init', () => {
         });
     });
 });
+
+/**
+ * SIRALI GİRİŞ.
+ *
+ * `data-sirali` taşıyan kabın ilk çocukları sayfa açılışında 35 ms arayla
+ * belirir: göz kartları tek tek tarar, ekran bir blok hâlinde "çakılmaz".
+ * Yalnız sayfa açılışında (ilk yükleme ve wire:navigate geçişi);
+ * filtre gibi yerinde güncellemelerde çalışmaz, Yönerge Analizi'nin kendi
+ * kart geçişleriyle çakışmaz.
+ *
+ * İlk SIRALI_SINIR çocuğa uygulanıyor: uzun listede sonuncunun gelmesini
+ * beklemek hareketi süs olmaktan çıkarıp gecikmeye çevirirdi.
+ */
+const SIRALI_SINIR = 10;
+const SIRALI_ARALIK = 35;
+
+const hareketIstenmiyor = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const siraliGiris = () => {
+    if (hareketIstenmiyor()) {
+        return;
+    }
+
+    const kok = getComputedStyle(document.documentElement);
+    const sure = parseFloat(kok.getPropertyValue('--dur-yavas')) || 380;
+    const egri = kok.getPropertyValue('--ease-cikis').trim() || 'ease-out';
+
+    document.querySelectorAll('[data-sirali]').forEach((kap) => {
+        // İlk yüklemede iki tetik de gelebilir; kap bir kez oynar.
+        if (kap.dataset.siraliOynadi) {
+            return;
+        }
+
+        kap.dataset.siraliOynadi = '1';
+
+        [...kap.children].slice(0, SIRALI_SINIR).forEach((cocuk, sira) => {
+            cocuk.animate(
+                [
+                    { opacity: 0, transform: 'translateY(8px)' },
+                    { opacity: 1, transform: 'none' },
+                ],
+                { duration: sure, delay: sira * SIRALI_ARALIK, easing: egri, fill: 'backwards' },
+            );
+        });
+    });
+};
+
+// Tam sayfa yüklemesinde livewire:navigated her zaman gelmiyor; ilk çizim
+// için DOM hazır olunca da çalıştırılıyor.
+document.addEventListener('livewire:navigated', siraliGiris);
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', siraliGiris);
+} else {
+    siraliGiris();
+}
+
+/**
+ * ÇIKIŞ: eleman kayarak solar, söz bitince çağıran işi yapar (ör. silme).
+ * Livewire elemanı morph'ta bir karede kaldırıyor; çıkışı göstermenin yolu
+ * isteği animasyondan SONRA göndermek.
+ *
+ *   x-on:click="cikis($el.closest('tr')).then(() => $wire.sil(id))"
+ */
+window.cikis = (eleman) => {
+    if (!eleman || hareketIstenmiyor()) {
+        return Promise.resolve();
+    }
+
+    const kok = getComputedStyle(document.documentElement);
+
+    return eleman.animate(
+        [
+            { opacity: 1, transform: 'none' },
+            { opacity: 0, transform: 'translateX(-12px)' },
+        ],
+        {
+            duration: parseFloat(kok.getPropertyValue('--dur-normal')) || 260,
+            easing: kok.getPropertyValue('--ease-giris').trim() || 'ease-in',
+            fill: 'forwards',
+        },
+    ).finished.catch(() => {});
+};
+
+/**
+ * TIKLAMA DALGASI.
+ *
+ * Düğmeye basılan noktadan yazı renginde, soluk bir halka yayılıp söner:
+ * basışın "alındığını" söyler. Dalga düğmenin içindeki ayrı bir kapta
+ * (`[data-dalga]`, köşeleri düğmeyle aynı kırpar); düğmenin kendi taşma
+ * ayarına dokunulmuyor.
+ *
+ * Livewire düğmeyi yeniden çizerse kap gider; bir sonraki basışta yeniden
+ * kurulur.
+ */
+const DALGA_HEDEFI = '[data-flux-button], .act-btn';
+
+document.addEventListener('pointerdown', (olay) => {
+    if (olay.button !== 0 || hareketIstenmiyor()) {
+        return;
+    }
+
+    const dugme = olay.target.closest(DALGA_HEDEFI);
+
+    if (!dugme || dugme.disabled || dugme.hasAttribute('data-flux-loading')) {
+        return;
+    }
+
+    let kap = dugme.querySelector(':scope > [data-dalga]');
+
+    if (!kap) {
+        kap = document.createElement('div');
+        kap.setAttribute('data-dalga', '');
+        kap.setAttribute('aria-hidden', 'true');
+        dugme.append(kap);
+    }
+
+    const kutu = dugme.getBoundingClientRect();
+    // Halka en uzak köşeye kadar yayılsın: kenara yakın basışta da düğmeyi doldurur.
+    const yaricap = Math.hypot(
+        Math.max(olay.clientX - kutu.left, kutu.right - olay.clientX),
+        Math.max(olay.clientY - kutu.top, kutu.bottom - olay.clientY),
+    );
+
+    const halka = document.createElement('i');
+    Object.assign(halka.style, {
+        left: `${olay.clientX - kutu.left}px`,
+        top: `${olay.clientY - kutu.top}px`,
+        width: `${yaricap * 2}px`,
+        height: `${yaricap * 2}px`,
+    });
+    kap.append(halka);
+
+    halka.animate(
+        [
+            { transform: 'scale(0)', opacity: 0.28 },
+            { transform: 'scale(1)', opacity: 0 },
+        ],
+        { duration: 550, easing: 'cubic-bezier(0.32, 0.72, 0, 1)' },
+    ).finished.then(() => halka.remove(), () => halka.remove());
+});

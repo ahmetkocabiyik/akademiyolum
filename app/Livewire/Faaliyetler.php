@@ -33,6 +33,9 @@ class Faaliyetler extends Component
             ->get();
     }
 
+    /** Az önce eklenen/düzenlenen faaliyetlerin oturum anahtarı (listede parlar). */
+    public const VURGULANAN = 'vurgulanan_faaliyetler';
+
     public function sil(int $id): void
     {
         Auth::user()->faaliyetler()->findOrFail($id)->delete();
@@ -45,6 +48,7 @@ class Faaliyetler extends Component
         return view('livewire.faaliyetler', [
             'faaliyetler' => $this->faaliyetler(),
             'kategoriler' => Kategori::secenekler(),
+            'vurgulanan' => (array) session(self::VURGULANAN, []),
         ]);
     }
 }

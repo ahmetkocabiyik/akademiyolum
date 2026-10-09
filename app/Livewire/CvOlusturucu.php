@@ -220,6 +220,9 @@ class CvOlusturucu extends Component
         }
 
         $this->kaydet();
+
+        // Üst bardaki "Kaydedildi" işareti bir an görünsün.
+        $this->dispatch('cv-kaydedildi');
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\FaaliyetEkle;
+use App\Livewire\Faaliyetler;
 use App\Models\Faaliyet;
 use App\Models\User;
 use App\Services\Yayin\AvesisProfili;
@@ -230,6 +231,9 @@ test('avesis kaydı kademesiyle birlikte ekleniyor', function () {
 
     // Adres profile yazıldı: aday bir daha girmesin.
     expect($kullanici->fresh()->avesis_id)->toBe('https://avesis.ktu.edu.tr/kullanici');
+
+    // Eklenen üç kayıt listede bir an parlasın.
+    expect(session(Faaliyetler::VURGULANAN))->toEqualCanonicalizing($faaliyetler->pluck('id')->all());
 });
 
 /**

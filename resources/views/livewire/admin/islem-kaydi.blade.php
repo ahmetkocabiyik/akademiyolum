@@ -25,7 +25,7 @@
                         <th class="px-5 py-3 text-start">Ayrıntı</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody data-sirali>
                     @forelse ($this->kayitlar as $kayit)
                         <tr wire:key="kayit-{{ $kayit->id }}" class="border-b border-line align-top last:border-0">
                             <td class="whitespace-nowrap px-5 py-3 text-ink-muted">{{ $kayit->created_at->format('d.m.Y H:i') }}</td>

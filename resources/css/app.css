@@ -478,6 +478,7 @@
 
 /* Tablo aksiyon ikon butonları (düzenle / sil) */
 .act-btn {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -708,6 +709,133 @@ select:focus[data-flux-control] {
     [data-flux-modal][data-detay-flyout] > dialog[open] {
         --flux-flyout-translate: translateX(0);
     }
+}
+
+/* ── SAYFA GEÇİŞİ ──
+   wire:navigate gövdeyi yeniden kurduğu için bu animasyon her sayfa
+   değişiminde kendiliğinden çalışıyor (Livewire'ın yerinde güncellemesinde
+   eleman korunduğundan tekrar etmiyor). Üst bar sabit kalıyor: sayfanın
+   çerçevesi değil, içeriği geliyor. Dolgu `backwards`: bitince transform
+   kalmasın — kalırsa içerideki position:fixed elemanların kabı değişirdi. */
+@keyframes sayfa-giris {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+[data-flux-main] > * > :not([data-topbar]) {
+    animation: sayfa-giris var(--dur-normal) var(--ease-cikis) backwards;
+}
+
+/* ── DOKUNUŞ ──
+   Basılan düğme çok hafif içe göçer. Ayrı `scale` özelliği: Flux'un kendi
+   transform/transition sınıflarına dokunmadan eklenebiliyor. */
+[data-flux-button]:not(:disabled),
+.act-btn {
+    transition-property: color, background-color, border-color, box-shadow, opacity, scale;
+    transition-duration: var(--dur-hizli);
+    transition-timing-function: var(--ease-cikis);
+}
+
+[data-flux-button]:not(:disabled):active,
+.act-btn:active {
+    scale: 0.97;
+}
+
+/* Tıklama dalgası (bkz. app.js): basılan noktadan yayılır, yazı renginde. */
+[data-dalga] {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+[data-dalga] > i {
+    position: absolute;
+    border-radius: 9999px;
+    background: currentColor;
+    opacity: 0;
+    translate: -50% -50%;
+}
+
+/* Tıklanabilir kart: üzerine gelince hafifçe kalkar. Yönerge kartlarındaki
+   davranışın genel adı. */
+.kart-tikla {
+    transition:
+        translate var(--dur-normal) var(--ease-cikis),
+        box-shadow var(--dur-normal) var(--ease-cikis),
+        border-color var(--dur-hizli) var(--ease-cikis),
+        background-color var(--dur-hizli) var(--ease-cikis);
+}
+
+.kart-tikla:hover {
+    translate: 0 -2px;
+    box-shadow: 0 6px 18px -8px color-mix(in srgb, var(--color-navy) 22%, transparent);
+}
+
+.kart-tikla:active {
+    translate: 0 0;
+}
+
+/* ── SATIR VURGUSU ──
+   Az önce eklenen ya da düzenlenen faaliyet listede bir an parlayıp söner:
+   kullanıcı neyin değiştiğini aramadan görür. */
+@keyframes satir-vurgu {
+    0%, 35% {
+        background-color: color-mix(in srgb, var(--color-brand) 12%, transparent);
+    }
+}
+
+[data-vurgu] > td {
+    animation: satir-vurgu 1.8s var(--ease-giris);
+}
+
+/* ── İSKELET ──
+   Yüklenirken içerik yerinde soluk bloklar; üstünden bir ışık geçer. Nabız
+   (animate-pulse) yerine: ışık yönü "bir şey geliyor" diyor, nabız yalnızca
+   "bekle". */
+@keyframes iskelet-isik {
+    to {
+        background-position: -200% 0;
+    }
+}
+
+.iskelet {
+    border-radius: 0.375rem;
+    background: linear-gradient(90deg,
+            var(--color-line) 25%,
+            color-mix(in srgb, var(--color-line) 40%, white) 37%,
+            var(--color-line) 63%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    animation: iskelet-isik 1.4s ease-in-out infinite;
+}
+
+/* ── ONBOARDING ADIMLARI ──
+   İleri giderken yeni adım sağdan, geri dönerken soldan gelir. Adım kökü
+   her geçişte yeniden kurulduğu için animasyon kendiliğinden çalışıyor. */
+@keyframes adim-ileri {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+}
+
+@keyframes adim-geri {
+    from {
+        opacity: 0;
+        transform: translateX(-24px);
+    }
+}
+
+[data-adim="ileri"] {
+    animation: adim-ileri var(--dur-yavas) var(--ease-cikis) backwards;
+}
+
+[data-adim="geri"] {
+    animation: adim-geri var(--dur-yavas) var(--ease-cikis) backwards;
 }
 
 /* ── HAREKET AZALTMA (genel) ──

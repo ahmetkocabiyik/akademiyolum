@@ -864,7 +864,7 @@ class FaaliyetEkle extends Component
         $denetim = app(MukerrerDenetimi::class);
         $kullanici = Auth::user();
         $harita = $denetim->harita($kullanici);
-        $eklenen = 0;
+        $eklenenler = [];
 
         foreach ($secili as $kayit) {
             $kategori = Kategori::from($kategoriZorla ?? $kayit['kategori']);
@@ -877,16 +877,14 @@ class FaaliyetEkle extends Component
                 continue;
             }
 
-            $kullanici->faaliyetler()->create([
+            $eklenenler[] = $kullanici->faaliyetler()->create([
                 'kategori' => $kategori->value,
                 'tur' => $kategori->label(),
                 'baslik' => $baslik,
                 'durum' => 'beklemede',
                 'meta' => $meta,
                 ...$alanlar($kayit, $kategori),
-            ]);
-
-            $eklenen++;
+            ])->id;
 
             // Harita yeniden sorgulanmıyor, yazılan kaydın izleri üstüne
             // ekleniyor: 400 kayıtlık bir partide her ekleme için listenin
@@ -894,7 +892,9 @@ class FaaliyetEkle extends Component
             $harita = [...$harita, ...$denetim->izler($kategori->value, $baslik, $meta, $yil)];
         }
 
-        return $eklenen;
+        session()->flash(Faaliyetler::VURGULANAN, $eklenenler);
+
+        return count($eklenenler);
     }
 
     /**
@@ -976,6 +976,9 @@ class FaaliyetEkle extends Component
         // Puan SAKLANMAZ: her yönerge kendi cetveliyle puanlıyor, tek bir
         // "doğru" puan yok. Motor daima cetvelden hesaplar.
         Auth::user()->faaliyetler()->save($faaliyet);
+
+        // Listede bir an parlasın: aday neyin değiştiğini aramasın.
+        session()->flash(Faaliyetler::VURGULANAN, [$faaliyet->id]);
 
         Flux::toast(variant: 'success', text: $this->faaliyet !== null ? 'Faaliyet güncellendi.' : 'Faaliyet eklendi.');
 

@@ -38,7 +38,7 @@
                                 <th class="px-2 py-2 text-right font-semibold">İşlem</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody data-sirali>
                             @foreach ($faaliyetler as $f)
                                 {{--
                                     Satırın tamamı düzenlemeye götürür. Başlık gerçek bir <a>
@@ -48,6 +48,7 @@
                                     isteği aynı anda düzenlemeye de giderdi.
                                 --}}
                                 <tr wire:key="faaliyet-{{ $f->id }}"
+                                    @if (in_array($f->id, $vurgulanan, true)) data-vurgu @endif
                                     x-data
                                     x-on:click="$event.target.closest('a, button') || $refs.duzenle.click()"
                                     class="cursor-pointer border-b border-line last:border-0 hover:bg-canvas">
@@ -80,7 +81,7 @@
                                             <a href="{{ route('faaliyetler.duzenle', $f) }}" wire:navigate class="act-btn" title="Düzenle" aria-label="Düzenle">
                                                 <flux:icon name="pencil-square" />
                                             </a>
-                                            <button type="button" wire:click="sil({{ $f->id }})" wire:confirm="Bu faaliyet silinsin mi?" class="act-btn act-del" title="Sil" aria-label="Sil">
+                                            <button type="button" x-on:click="confirm('Bu faaliyet silinsin mi?') && cikis($el.closest('tr')).then(() => $wire.sil({{ $f->id }}))" class="act-btn act-del" title="Sil" aria-label="Sil">
                                                 <flux:icon name="trash" />
                                             </button>
                                         </div>

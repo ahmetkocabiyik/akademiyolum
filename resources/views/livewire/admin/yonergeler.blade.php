@@ -40,7 +40,7 @@
                         <th class="px-5 py-3 text-end">Kullanıcı</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody data-sirali>
                     @forelse ($this->satirlar as $satir)
                         <tr wire:key="yonerge-{{ md5($satir['ad']) }}" class="border-b border-line last:border-0 hover:bg-canvas">
                             <td class="px-5 py-3">

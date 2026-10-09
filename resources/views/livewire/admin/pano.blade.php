@@ -2,14 +2,14 @@
     <x-topbar title="Genel Bakış" />
 
     <div class="flex flex-col gap-6">
-        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div data-sirali class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             @foreach ([
                 ['Toplam kullanıcı', $this->sayilar['kullanici'], 'users', 'var(--color-brand)', route('admin.kullanicilar')],
                 ['Son 30 günde kayıt', $this->sayilar['yeni'], 'user-plus', 'var(--color-cat-green)', route('admin.kullanicilar', ['siralama' => 'yeni'])],
                 ['Aktif ücretli abone', $this->sayilar['abone'], 'credit-card', 'var(--color-gold)', route('admin.abonelikler')],
                 ['Askıdaki hesap', $this->sayilar['askida'], 'no-symbol', 'var(--color-cat-red)', route('admin.kullanicilar', ['durum' => 'askida'])],
             ] as [$etiket, $sayi, $ikon, $renk, $adres])
-                <a href="{{ $adres }}" wire:navigate class="rounded-xl border border-line bg-surface p-5 transition hover:border-brand/40">
+                <a href="{{ $adres }}" wire:navigate class="kart-tikla rounded-xl border border-line bg-surface p-5 hover:border-brand/40">
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-ink-muted">{{ $etiket }}</span>
                         <flux:icon :name="$ikon" class="size-5" style="color: {{ $renk }}" />

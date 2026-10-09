@@ -12,7 +12,7 @@
         @foreach ($gruptakiler as $tur)
             @php $kayit = $this->kayitlar->get($tur->value); @endphp
             <a href="{{ route('admin.eposta-sablonu', $tur) }}" wire:navigate wire:key="sablon-{{ $tur->value }}"
-                class="flex flex-col gap-2 rounded-xl border border-line bg-surface p-5 transition hover:border-brand/40">
+                class="kart-tikla flex flex-col gap-2 rounded-xl border border-line bg-surface p-5 hover:border-brand/40">
                 <div class="flex items-start justify-between gap-3">
                     <span class="font-semibold text-ink">{{ $tur->etiket() }}</span>
                     <span class="flex shrink-0 gap-1">

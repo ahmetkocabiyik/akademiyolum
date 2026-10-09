@@ -76,7 +76,7 @@
                          (87.5rem = 1400px, 125rem = 2000px): Tailwind piksel
                          yazılan min-[…] varyantını rem tabanlı md'den ÖNCE basıyor,
                          md:grid-cols-2 onu eziyor ve eşik hiç devreye girmiyordu. --}}
-                    <div @class(['grid gap-3 md:grid-cols-2 min-[87.5rem]:grid-cols-3 min-[125rem]:grid-cols-4' => $gorunum === 'grid', 'flex flex-col gap-2' => $gorunum === 'list'])>
+                    <div data-sirali @class(['grid gap-3 md:grid-cols-2 min-[87.5rem]:grid-cols-3 min-[125rem]:grid-cols-4' => $gorunum === 'grid', 'flex flex-col gap-2' => $gorunum === 'list'])>
                         @foreach ($this->listelenen as $s)
                             <x-analiz.universite-karti :satir="$s" :gorunum="$gorunum" />
                         @endforeach

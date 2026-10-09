@@ -72,7 +72,7 @@ h1 em{font-style:normal;color:var(--blue)}
 .prog-track{background:#e2e8f0;border-radius:100px;height:4px;overflow:hidden}
 .prog-fill{height:100%;border-radius:100px}
 .pf-blue{background:var(--blue);width:65%}.pf-gold{background:var(--gold);width:28%}.pf-green{background:#16a34a;width:45%}
-.floating-pill{position:absolute;background:white;border:1px solid var(--border);border-radius:100px;padding:7px 13px;font-size:11px;font-weight:500;color:var(--navy);box-shadow:0 4px 16px rgba(0,0,0,0.08);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.floating-pill{position:absolute;z-index:2;background:white;border:1px solid var(--border);border-radius:100px;padding:7px 13px;font-size:11px;font-weight:500;color:var(--navy);box-shadow:0 4px 16px rgba(0,0,0,0.08);display:flex;align-items:center;gap:6px;white-space:nowrap}
 .fp1{top:-14px;left:-18px;animation:float2 3.5s ease-in-out infinite}
 .fp2{bottom:-10px;right:-14px;animation:float2 4s ease-in-out infinite .8s}
 @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -165,6 +165,19 @@ footer{background:#060f1e;padding:56px 5% 28px}
   .footer-top{grid-template-columns:1fr 1fr}
   .section-title,.how-title,.cta-section h2{font-size:32px}
 }
+
+/* ── HAREKET ──
+   Bölümler görünür alana girince bir kez, kardeşler arası küçük gecikmeyle
+   belirir. Gizleme yalnız JS çalışınca (html.hareket): betik yüklenmezse
+   içerik zaten görünür. Hareketi azaltma ayarında hiç devreye girmez. */
+html.hareket .belir{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.32,.72,0,1),transform .6s cubic-bezier(.32,.72,0,1);transition-delay:var(--belir-gecikme,0ms)}
+html.hareket .belir.gorundu{opacity:1;transform:none}
+.price-card{transition:transform .25s cubic-bezier(.32,.72,0,1),box-shadow .25s cubic-bezier(.32,.72,0,1)}
+.price-card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(10,22,40,0.10)}
+.price-card.featured:hover{box-shadow:0 16px 40px rgba(26,86,219,0.18)}
+.testi-card{transition:transform .25s cubic-bezier(.32,.72,0,1),box-shadow .25s cubic-bezier(.32,.72,0,1)}
+.testi-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(10,22,40,0.08)}
+@media (prefers-reduced-motion: reduce){.price-card,.testi-card{transition:none}.price-card:hover,.testi-card:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -330,5 +343,39 @@ footer{background:#060f1e;padding:56px 5% 28px}
     </div>
   </div>
 </footer>
+<script>
+(() => {
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('hareket');
+  const hedefler = document.querySelectorAll([
+    '.hero-content > div > *', '.hero-visual',
+    '.section-tag', '.section-title', '.how-title', '.how-sub',
+    '.feature-card', '.step', '.testi-card', '.price-card',
+    '.cta-section > *',
+  ].join(','));
+  hedefler.forEach((el) => {
+    // Aynı kaptaki kardeşler sırayla gelsin (kart ızgaraları, hero satırları).
+    const sira = [...el.parentElement.children].indexOf(el);
+    el.style.setProperty('--belir-gecikme', Math.min(sira, 6) * 80 + 'ms');
+    el.classList.add('belir');
+  });
+  const gozcu = new IntersectionObserver((girisler) => {
+    girisler.forEach((giris) => {
+      if (giris.isIntersecting) {
+        const el = giris.target;
+        el.classList.add('gorundu');
+        gozcu.unobserve(el);
+        // Giriş bitince sınıflar sökülür: kartın kendi hover geçişi
+        // (feature/price kartları) gecikmesiz ve kendi süresiyle dönsün.
+        setTimeout(() => {
+          el.classList.remove('belir', 'gorundu');
+          el.style.removeProperty('--belir-gecikme');
+        }, 600 + 6 * 80 + 50);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  hedefler.forEach((el) => gozcu.observe(el));
+})();
+</script>
 </body>
 </html>

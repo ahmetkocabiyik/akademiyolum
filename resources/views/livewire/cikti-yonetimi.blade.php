@@ -60,7 +60,7 @@
 
             <div class="grid grid-cols-2 gap-3">
                 <button type="button" x-on:click="$flux.modal('rapor-indir').close(); $nextTick(() => window.print())"
-                    class="flex flex-col items-center gap-2 rounded-xl border border-line p-4 text-center transition hover:border-brand hover:bg-brand-light">
+                    class="kart-tikla flex flex-col items-center gap-2 rounded-xl border border-line p-4 text-center hover:border-brand hover:bg-brand-light">
                     <span class="flex size-10 items-center justify-center rounded-lg bg-cat-red-light text-cat-red">
                         <flux:icon name="document-text" />
                     </span>
@@ -69,7 +69,7 @@
                 </button>
 
                 <button type="button" wire:click="excelIndir" x-on:click="$flux.modal('rapor-indir').close()"
-                    class="flex flex-col items-center gap-2 rounded-xl border border-line p-4 text-center transition hover:border-brand hover:bg-brand-light">
+                    class="kart-tikla flex flex-col items-center gap-2 rounded-xl border border-line p-4 text-center hover:border-brand hover:bg-brand-light">
                     <span class="flex size-10 items-center justify-center rounded-lg bg-cat-green-light text-cat-green">
                         <flux:icon name="table-cells" />
                     </span>

@@ -4,7 +4,7 @@
 ])
 
 {{-- flux:main padding'inden (p-6 lg:p-8) taşarak tam-genişlik topbar (05_yonerge_analizi.html) --}}
-<div {{ $attributes->class('-mx-6 -mt-6 mb-6 flex h-16 items-center justify-between gap-4 border-b border-line bg-surface px-6 lg:-mx-8 lg:-mt-8 lg:mb-8 lg:px-8') }}>
+<div data-topbar {{ $attributes->class('-mx-6 -mt-6 mb-6 flex h-16 items-center justify-between gap-4 border-b border-line bg-surface px-6 lg:-mx-8 lg:-mt-8 lg:mb-8 lg:px-8') }}>
     <div class="flex min-w-0 items-center gap-3">
         @if ($title)
             <h1 class="truncate text-lg font-semibold text-ink">{{ $title }}</h1>

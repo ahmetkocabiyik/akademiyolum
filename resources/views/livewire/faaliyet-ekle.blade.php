@@ -283,6 +283,8 @@
                     </form>
                 </flux:card>
 
+                <x-iskelet-liste wire:loading.flex wire:target="yayinAra" class="hidden" />
+
                 @if ($aramaHatasi)
                     <flux:callout variant="danger" icon="exclamation-triangle" heading="{{ $aramaHatasi }}" />
                 @elseif ($arandi && $bulunanlar === [])
@@ -374,6 +376,8 @@
                     </form>
                 </flux:card>
 
+                <x-iskelet-liste wire:loading.flex wire:target="arsivTara" class="hidden" />
+
                 @if ($arsivHatasi)
                     <flux:callout variant="danger" icon="exclamation-triangle" heading="{{ $arsivHatasi }}" />
                 @elseif ($arsivArandi && $arsivKisaltma)
@@ -461,6 +465,8 @@
                         </div>
                     </form>
                 </flux:card>
+
+                <x-iskelet-liste wire:loading.flex wire:target="avesisGetir" class="hidden" />
 
                 @if ($avesisHatasi)
                     <flux:callout variant="danger" icon="exclamation-triangle" heading="{{ $avesisHatasi }}" />

@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="{{ \App\Enums\CvYaziTipi::webFontlari() }}">
 
     <x-topbar class="yazdirma-gizle" title="CV Oluşturucu" :pill="$this->secilenler->count().' faaliyet CV\'de'">
+        {{-- Otomatik kaydın teyidi: her kayıtta bir an görünüp söner. --}}
+        <span x-data="{ gorunur: false, zamanlayici: null }"
+            x-on:cv-kaydedildi.window="gorunur = true; clearTimeout(zamanlayici); zamanlayici = setTimeout(() => gorunur = false, 1600)"
+            x-show="gorunur" x-cloak
+            x-transition:enter="transition duration-200 ease-out" x-transition:enter-start="opacity-0 translate-y-1"
+            x-transition:leave="transition duration-500 ease-in" x-transition:leave-end="opacity-0"
+            class="inline-flex items-center gap-1 text-sm font-medium text-cat-green" role="status">
+            <flux:icon name="check-circle" variant="mini" class="size-4" /> Kaydedildi
+        </span>
         <flux:button x-on:click="window.print()" variant="primary" icon="arrow-down-tray">
             PDF İndir
         </flux:button>

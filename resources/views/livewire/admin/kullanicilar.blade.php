@@ -41,7 +41,7 @@
                         <th class="px-5 py-3 text-start">Durum</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody data-sirali>
                     @forelse ($this->kullanicilar as $kullanici)
                         @php $abonelik = $kullanici->abonelikler->first(); @endphp
                         <tr wire:key="kullanici-{{ $kullanici->id }}" class="border-b border-line last:border-0 hover:bg-canvas">
