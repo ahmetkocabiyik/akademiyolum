@@ -9,7 +9,6 @@
         <flux:sidebar sticky collapsible="mobile" class="sidebar-dark border-e border-white/10 bg-navy !gap-0 !p-0">
             <flux:sidebar.header class="border-b border-white/[0.07] px-5 pt-[18px] pb-4">
                 <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
-                <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
             @if ($yonetim)
@@ -150,7 +149,8 @@
 
                 <flux:menu class="app-user-menu">
                     <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-                        <flux:avatar circle :name="auth()->user()->name" :initials="auth()->user()->initials()" :src="auth()->user()->profilFotoAdresi()" />
+                        {{-- flux:avatar burada .sidebar-dark kapsamında koyu zemin alıyor, .app-user-menu da yazıyı koyuya çekiyordu. --}}
+                        <div class="sb-avatar"><x-kullanici-avatari /></div>
                         <div class="grid flex-1 text-start text-sm leading-tight">
                             <flux:heading class="truncate">{{ auth()->user()->name }}</flux:heading>
                             <flux:text class="truncate">{{ auth()->user()->universite ?? auth()->user()->email }}</flux:text>

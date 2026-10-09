@@ -3,26 +3,28 @@
     x-on:sohbet-kaydir.window="panelAcik = false; $nextTick(() => { const el = $refs.akis; if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' }); })">
 
     {{-- Sohbet alanı --}}
-    <flux:card class="flex flex-1 flex-col overflow-hidden !p-0">
+    <flux:card class="flex min-w-0 flex-1 flex-col overflow-hidden !p-0">
 
         {{-- Başlık --}}
-        <div class="flex items-center justify-between gap-4 border-b border-line px-5 py-4">
-            <div class="flex items-center gap-3">
-                <div class="flex size-10 items-center justify-center rounded-xl bg-navy text-gold">
+        <div class="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:gap-4 sm:px-5 sm:py-4">
+            <div class="flex min-w-0 items-center gap-3">
+                <div class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-navy text-gold">
                     <flux:icon name="sparkles" variant="solid" class="size-5" />
                 </div>
-                <div>
-                    <flux:heading size="lg">YZ Akademik Danışman</flux:heading>
+                <div class="min-w-0">
+                    <flux:heading size="lg" class="truncate">YZ Akademik Danışman</flux:heading>
                     <div class="mt-0.5 flex items-center gap-1.5 text-xs text-ink-subtle">
-                        <span class="size-1.5 rounded-full bg-cat-green"></span>
-                        {{ auth()->user()->yonerge ?? 'Yönerge seçili değil' }}
+                        <span class="size-1.5 shrink-0 rounded-full bg-cat-green"></span>
+                        <span class="truncate">{{ auth()->user()->yonerge ?? 'Yönerge seçili değil' }}</span>
                     </div>
                 </div>
             </div>
-            <div class="flex items-center gap-2">
-                <flux:button wire:click="yeniSohbet" variant="subtle" icon="plus-circle">
+            <div class="flex shrink-0 items-center gap-1 sm:gap-2">
+                {{-- Dar ekranda yalnız simge: etiketli düğme başlığı kelime kelime kırıyordu. --}}
+                <flux:button wire:click="yeniSohbet" variant="subtle" icon="plus-circle" class="max-sm:hidden">
                     Yeni sohbet
                 </flux:button>
+                <flux:button wire:click="yeniSohbet" variant="subtle" icon="plus-circle" class="sm:hidden" aria-label="Yeni sohbet" />
                 {{-- Mobilde sohbet listesini açar --}}
                 <flux:button x-on:click="panelAcik = true" variant="subtle" icon="chat-bubble-left-right" class="lg:hidden" aria-label="Sohbetler" />
             </div>

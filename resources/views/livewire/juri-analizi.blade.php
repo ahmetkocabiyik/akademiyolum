@@ -18,7 +18,7 @@
         @endif
     </x-topbar>
 
-    <div class="grid gap-4 lg:grid-cols-[300px_1fr]">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-[300px_minmax(0,1fr)]">
 
         <x-juri.ayar-paneli
             :kurumlar="$this->kurumlar"

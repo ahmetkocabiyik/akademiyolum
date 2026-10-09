@@ -14,13 +14,19 @@
 <div data-kart-listesi>
     <x-topbar title="Yönerge Analizi" :pill="count($this->listelenen) . ' üniversite'">
         <flux:button wire:click="$toggle('karsilastirma')" :variant="$karsilastirma ? 'filled' : 'primary'" icon="table-cells">
-            {{ $karsilastirma ? 'Kartlara Dön' : 'Üniversite Karşılaştır' }}
+            @if ($karsilastirma)
+                Kartlara Dön
+            @else
+                {{-- Dar ekranda tam etiket sayfa başlığını "Yönerge An…" diye kesiyordu. --}}
+                <span class="sm:hidden">Karşılaştır</span>
+                <span class="max-sm:hidden">Üniversite Karşılaştır</span>
+            @endif
         </flux:button>
     </x-topbar>
 
     <div class="flex flex-col gap-4">
 
-        <div class="grid gap-4 lg:grid-cols-[260px_1fr]">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-[260px_minmax(0,1fr)]">
 
             {{-- Sol panel: profil + filtreler --}}
             <div class="flex flex-col gap-4">

@@ -7,8 +7,8 @@
 
         {{-- Araç çubuğu --}}
         <div class="flex flex-wrap items-center gap-2">
-            <flux:input wire:model.live.debounce.300ms="arama" icon="magnifying-glass" placeholder="Başlıkta ara..." class="max-w-xs" />
-            <flux:select wire:model.live="kategoriFiltre" placeholder="Tüm kategoriler" class="max-w-xs">
+            <flux:input wire:model.live.debounce.300ms="arama" icon="magnifying-glass" placeholder="Başlıkta ara..." class="sm:max-w-xs" />
+            <flux:select wire:model.live="kategoriFiltre" placeholder="Tüm kategoriler" class="sm:max-w-xs">
                 <flux:select.option value="">Tüm kategoriler</flux:select.option>
                 @foreach ($kategoriler as $deger => $etiket)
                     <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
@@ -30,11 +30,11 @@
                         <thead>
                             <tr class="border-b border-line text-left text-2xs uppercase tracking-wide text-ink-subtle">
                                 <th class="px-2 py-2 font-semibold">Başlık</th>
-                                <th class="px-2 py-2 font-semibold">Kategori</th>
-                                <th class="px-2 py-2 font-semibold">Tür / Kaynak</th>
-                                <th class="px-2 py-2 font-semibold">Tarih</th>
+                                <th class="px-2 py-2 font-semibold max-md:hidden">Kategori</th>
+                                <th class="px-2 py-2 font-semibold max-md:hidden">Tür / Kaynak</th>
+                                <th class="px-2 py-2 font-semibold max-md:hidden">Tarih</th>
                                 <th class="px-2 py-2 font-semibold">Puan</th>
-                                <th class="px-2 py-2 font-semibold">Durum</th>
+                                <th class="px-2 py-2 font-semibold max-md:hidden">Durum</th>
                                 <th class="px-2 py-2 text-right font-semibold">İşlem</th>
                             </tr>
                         </thead>
@@ -52,18 +52,30 @@
                                     x-data
                                     x-on:click="$event.target.closest('a, button') || $refs.duzenle.click()"
                                     class="cursor-pointer border-b border-line last:border-0 hover:bg-canvas">
-                                    <td class="max-w-[260px] truncate px-2 py-2.5 font-medium text-ink">
+                                    <td class="px-2 py-2.5 font-medium text-ink md:max-w-[260px] md:truncate">
                                         <a href="{{ route('faaliyetler.duzenle', $f) }}" wire:navigate x-ref="duzenle"
-                                            class="hover:text-brand">{{ $f->baslik }}</a>
-                                        <div class="text-2xs text-ink-subtle">{{ $f->yazarlar }}</div>
+                                            class="hover:text-brand max-md:line-clamp-2">{{ $f->baslik }}</a>
+                                        <div class="truncate text-2xs text-ink-subtle">{{ $f->yazarlar }}</div>
+                                        {{-- Dar ekranda gizlenen sütunların özeti: tablo yatay kaymasın. --}}
+                                        <div class="mt-1.5 flex flex-wrap items-center gap-1.5 md:hidden">
+                                            <flux:badge size="sm">{{ $f->kategori->label() }}</flux:badge>
+                                            <flux:badge :color="$f->durum === 'onaylandi' ? 'green' : 'amber'" size="sm">
+                                                {{ $f->durum === 'onaylandi' ? 'Onaylandı' : 'Beklemede' }}
+                                            </flux:badge>
+                                            @if ($f->tarih)
+                                                <span class="text-2xs text-ink-subtle">{{ $f->tarih->format('d.m.Y') }}</span>
+                                            @else
+                                                <span class="text-2xs text-cat-amber-text">tarih girilmemiş</span>
+                                            @endif
+                                        </div>
                                     </td>
-                                    <td class="px-2 py-2.5"><flux:badge size="sm">{{ $f->kategori->label() }}</flux:badge></td>
-                                    <td class="px-2 py-2.5 text-ink-muted">
+                                    <td class="px-2 py-2.5 max-md:hidden"><flux:badge size="sm">{{ $f->kategori->label() }}</flux:badge></td>
+                                    <td class="px-2 py-2.5 text-ink-muted max-md:hidden">
                                         {{ $f->tur }}
                                         @if ($f->kaynak)<div class="text-2xs text-ink-subtle">{{ $f->kaynak }}</div>@endif
                                     </td>
                                     {{-- Dönem koşulları bu tarihe bakıyor; boşsa aday görüp tamamlayabilsin. --}}
-                                    <td class="px-2 py-2.5 text-ink-muted">
+                                    <td class="px-2 py-2.5 text-ink-muted max-md:hidden">
                                         @if ($f->tarih)
                                             {{ $f->tarih->format('d.m.Y') }}
                                         @else
@@ -71,7 +83,7 @@
                                         @endif
                                     </td>
                                     <td class="px-2 py-2.5 font-serif font-bold text-brand">{{ $f->puan }}</td>
-                                    <td class="px-2 py-2.5">
+                                    <td class="px-2 py-2.5 max-md:hidden">
                                         <flux:badge :color="$f->durum === 'onaylandi' ? 'green' : 'amber'" size="sm">
                                             {{ $f->durum === 'onaylandi' ? 'Onaylandı' : 'Beklemede' }}
                                         </flux:badge>
