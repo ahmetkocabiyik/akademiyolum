@@ -57,7 +57,7 @@ enum Plan: string
                 'aciklama' => 'Aktif kariyer yönetimi için.',
                 'aylik_fiyat_kurus' => 29900,
                 'yillik_fiyat_kurus' => null,
-                'ozellikler' => ['Sınırsız faaliyet', 'YZ Danışman', 'Tüm yönerge analizleri', 'AVESİS & Scholar', 'YZ Jüri Analizi', 'PDF/Word çıktı'],
+                'ozellikler' => ['Sınırsız faaliyet', 'YZ Danışman', 'Tüm yönerge analizleri', 'Kurum profilinden aktarım', 'YZ Jüri Analizi', 'PDF/Word çıktı'],
                 'buton_metni' => 'Planı Seç',
                 'one_cikan' => true,
             ],

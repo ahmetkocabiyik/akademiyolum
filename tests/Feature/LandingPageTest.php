@@ -29,3 +29,17 @@ test('giriş yapmış kullanıcı panele git bağlantısını görür', function
         ->assertSee('Panele Git')
         ->assertDontSee('Giriş Yap');
 });
+
+test('içe aktarma tanıtımı mevcut kaynakları anlatır, olmayan Scholar entegrasyonundan söz etmez', function () {
+    $this->get(route('home'))
+        ->assertOk()
+        ->assertSee('Otomatik Faaliyet Aktarımı')
+        ->assertSee('Kurum profilinizden')
+        ->assertDontSee('Scholar');
+});
+
+test('sayfa geçişi yükleme çubuğu marka mavisinde', function () {
+    actingAs(User::factory()->onboarded()->create())
+        ->get(route('dashboard'))
+        ->assertSee('--livewire-progress-bar-color: #1a56db', false);
+});

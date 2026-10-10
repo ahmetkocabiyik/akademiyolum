@@ -102,7 +102,7 @@ h1 em{font-style:normal;color:var(--blue)}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
 .steps::before{content:'';position:absolute;top:30px;left:10%;right:10%;height:1px;background:rgba(255,255,255,0.15)}
 .step{text-align:center;padding:0 18px;position:relative}
-.step-num{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold);position:relative;z-index:1}
+.step-num{width:60px;height:60px;border-radius:50%;background:linear-gradient(rgba(255,255,255,0.06),rgba(255,255,255,0.06)),var(--navy);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold);position:relative;z-index:1}
 .step h4{font-size:15px;font-weight:600;color:white;margin-bottom:9px}
 .step p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6}
 .testimonials{padding:100px 5%;background:#f8f9ff}
@@ -258,7 +258,7 @@ html.hareket .belir.gorundu{opacity:1;transform:none}
       <div class="feature-card"><div class="feature-icon fi-blue">📊</div><h3>Otomatik Puan Hesaplama</h3><p>Makale, bildiri, kitap, proje, patent — tüm faaliyetlerinizi ekleyin; ÜAK ve üniversite yönergelerine göre puanlarınız anında hesaplansın. Tez dışı bağımsız / tezden üretilmiş ayrımı otomatik uygulanır.</p></div>
       <div class="feature-card"><div class="feature-icon fi-gold">🤖</div><h3>YZ Akademik Danışman</h3><p>Yapay zeka destekli danışmanınız, hangi faaliyetlere odaklanmanız gerektiğini ve eksiklerinizi açıklar.</p></div>
       <div class="feature-card"><div class="feature-icon fi-green">📋</div><h3>Yönerge Analizi</h3><p>Türkiye'deki tüm üniversite yönergelerini analiz edin. Doktora mezunundan profesörlüğe dört kariyer basamağı.</p></div>
-      <div class="feature-card"><div class="feature-icon fi-blue">📚</div><h3>AVESİS & Scholar Entegrasyonu</h3><p>Faaliyet listenizi manuel girmek zorunda değilsiniz. AVESİS ve Google Scholar'dan otomatik içe aktarın.</p></div>
+      <div class="feature-card"><div class="feature-icon fi-blue">📚</div><h3>Otomatik Faaliyet Aktarımı</h3><p>Faaliyetlerinizi tek tek girmek zorunda değilsiniz. Kurum profilinizden (AVESİS ve benzeri sistemler) tümünü çekin; DOI'li yayınlarınızı ve DergiPark makalelerinizi aratıp bulun. Mükerrer kayıtlar otomatik ayıklanır.</p></div>
       <div class="feature-card"><div class="feature-icon fi-gold">⚖️</div><h3>YZ Jüri Analizi</h3><p>YZ, dosyanızı gerçek bir jüri üyesi gibi 10 maddede değerlendirir. Net karar: Başvurabilir / Başvuramaz.</p></div>
       <div class="feature-card"><div class="feature-icon fi-green">📄</div><h3>CV & Çıktı Yönetimi</h3><p>Tüm akademik dosyanızı PDF veya Word formatında, başvuruya hazır şekilde bir tıklamayla oluşturun.</p></div>
     </div>
@@ -274,7 +274,7 @@ html.hareket .belir.gorundu{opacity:1;transform:none}
     </div>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><h4>Kayıt & Profil</h4><p>Üniversitenizi, temel alanınızı ve kariyer basamağınızı seçin.</p></div>
-      <div class="step"><div class="step-num">2</div><h4>Faaliyetleri İçe Aktar</h4><p>AVESİS veya Scholar'dan mevcut faaliyetlerinizi otomatik alın.</p></div>
+      <div class="step"><div class="step-num">2</div><h4>Faaliyetleri İçe Aktar</h4><p>Kurum profilinizden ya da yayın aramasıyla mevcut faaliyetlerinizi otomatik alın.</p></div>
       <div class="step"><div class="step-num">3</div><h4>Analizi Görün</h4><p>Puan dağılımınızı, eksik kriterlerinizi anlık takip edin.</p></div>
       <div class="step"><div class="step-num">4</div><h4>Hedefe Ulaş</h4><p>YZ rehberliğinde dosyanızı hazırlayın ve başvurunuzu yapın.</p></div>
     </div>

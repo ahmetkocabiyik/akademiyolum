@@ -191,6 +191,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Date::use(CarbonImmutable::class);
 
+        // wire:navigate yükleme çubuğu düğmelerin marka mavisinde
+        // (--color-brand); Livewire varsayılanı turkuaz #2299dd. Yapılandırma
+        // dosyasını yayımlamak yerine tek anahtar burada değiştiriliyor.
+        config(['livewire.navigate.progress_bar_color' => '#1a56db']);
+
         DB::prohibitDestructiveCommands(
             app()->isProduction(),
         );
