@@ -93,6 +93,8 @@ jobs:
             # Laravel Artisan
             # php artisan migrate:fresh --seed --force
             php artisan migrate --force
+            # Üniversite listesi (kurulumdaki arama); updateOrCreate, tekrar çalışması güvenli.
+            php artisan db:seed --class=UniversiteSeeder --force
             php artisan config:cache
             php artisan route:cache
             php artisan view:clear
