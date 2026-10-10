@@ -39,6 +39,10 @@
                     <flux:icon name="tag" />
                     <span>Paketler</span>
                 </a>
+                <a href="{{ route('admin.yz-ayarlari') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.yz-ayarlari')])>
+                    <flux:icon name="cpu-chip" />
+                    <span>YZ Ayarları</span>
+                </a>
                 <a href="{{ route('admin.eposta-sablonlari') }}" wire:navigate @class(['sb-link', 'active' => request()->routeIs('admin.eposta-sablon*')])>
                     <flux:icon name="envelope" />
                     <span>E-posta Şablonları</span>

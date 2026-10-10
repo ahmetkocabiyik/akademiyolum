@@ -60,6 +60,7 @@ Route::middleware(['auth', 'verified', 'super.admin'])->prefix('admin')->name('a
     Route::livewire('kullanicilar/{user}', Admin\KullaniciDetay::class)->name('kullanici');
     Route::livewire('abonelikler', Admin\Abonelikler::class)->name('abonelikler');
     Route::livewire('paketler', Admin\Paketler::class)->name('paketler');
+    Route::livewire('yz-ayarlari', Admin\YzAyarlari::class)->name('yz-ayarlari');
     Route::livewire('yonergeler', Admin\Yonergeler::class)->name('yonergeler');
     Route::livewire('yonergeler/{universite}', Admin\YonergeDetay::class)->name('yonerge');
     // Kaynak PDF: kullanıcı tarafındaki rota onboarding istiyor, yönetici

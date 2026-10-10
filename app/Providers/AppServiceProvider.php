@@ -2,17 +2,15 @@
 
 namespace App\Providers;
 
+use App\Enums\YzOzelligi;
 use App\Http\Controllers\TaklitController;
 use App\Http\Middleware\SuperAdmin;
 use App\Models\GizliYonerge;
 use App\Models\User;
 use App\Services\Abonelik\PaketKatalogu;
-use App\Services\AI\ClaudeSaglayici;
 use App\Services\AI\JuriRaporcu;
-use App\Services\AI\OpenAiSaglayici;
 use App\Services\AI\SohbetSaglayici;
-use App\Services\AI\StubJuriSaglayici;
-use App\Services\AI\StubSaglayici;
+use App\Services\AI\YzAyarlari;
 use App\Services\Eposta\EpostaGonderici;
 use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Yayin\CrossrefArama;
@@ -28,7 +26,6 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Livewire;
-use RuntimeException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -55,82 +52,15 @@ class AppServiceProvider extends ServiceProvider
             posta: config('services.crossref.posta'),
         ));
 
-        $this->app->bind(SohbetSaglayici::class, function (): SohbetSaglayici {
-            if (config('ai.saglayici') === 'claude') {
-                $anahtar = config('ai.claude.anahtar');
+        // Sağlayıcı panelden seçiliyor (Yönetim → YZ Ayarları); seçim yoksa
+        // .env'deki AI_SAGLAYICI.
+        $this->app->bind(SohbetSaglayici::class, fn (): SohbetSaglayici => app(YzAyarlari::class)->saglayici(YzOzelligi::Danisman));
 
-                if (blank($anahtar)) {
-                    throw new RuntimeException('ANTHROPIC_API_KEY tanımlı değil.');
-                }
-
-                return new ClaudeSaglayici(
-                    anahtar: $anahtar,
-                    model: config('ai.claude.model'),
-                    maxTokens: config('ai.claude.max_tokens'),
-                );
-            }
-
-            if (config('ai.saglayici') === 'openai') {
-                $anahtar = config('ai.openai.anahtar');
-
-                if (blank($anahtar)) {
-                    throw new RuntimeException('OPENAI_API_KEY tanımlı değil.');
-                }
-
-                return new OpenAiSaglayici(
-                    anahtar: $anahtar,
-                    model: config('ai.openai.model'),
-                    maxTokens: config('ai.openai.max_tokens'),
-                );
-            }
-
-            return new StubSaglayici;
-        });
-
-        // Jüri raporu aynı sağlayıcıyı kullanır ama tek yanıtta on adım yazdığı
-        // için sohbetin token tavanı yetmiyor; sahte sağlayıcısı da ayrı, çünkü
-        // jüri katmanı metin değil JSON okuyor.
+        // Jüri raporunun sağlayıcısı ayrı seçiliyor; tek yanıtta on adım yazdığı
+        // için sohbetin token tavanı yetmiyor.
         $this->app->when(JuriRaporcu::class)
             ->needs(SohbetSaglayici::class)
-            ->give(fn (): SohbetSaglayici => $this->juriSaglayicisi());
-    }
-
-    /**
-     * Jüri raporu için sağlayıcı: sohbetle aynı seçim, yüksek token tavanı.
-     */
-    private function juriSaglayicisi(): SohbetSaglayici
-    {
-        $maxTokens = (int) config('ai.juri.max_tokens');
-
-        if (config('ai.saglayici') === 'claude') {
-            $anahtar = config('ai.claude.anahtar');
-
-            if (blank($anahtar)) {
-                throw new RuntimeException('ANTHROPIC_API_KEY tanımlı değil.');
-            }
-
-            return new ClaudeSaglayici(
-                anahtar: $anahtar,
-                model: config('ai.claude.model'),
-                maxTokens: $maxTokens,
-            );
-        }
-
-        if (config('ai.saglayici') === 'openai') {
-            $anahtar = config('ai.openai.anahtar');
-
-            if (blank($anahtar)) {
-                throw new RuntimeException('OPENAI_API_KEY tanımlı değil.');
-            }
-
-            return new OpenAiSaglayici(
-                anahtar: $anahtar,
-                model: config('ai.openai.model'),
-                maxTokens: $maxTokens,
-            );
-        }
-
-        return new StubJuriSaglayici;
+            ->give(fn (): SohbetSaglayici => app(YzAyarlari::class)->saglayici(YzOzelligi::Juri, (int) config('ai.juri.max_tokens')));
     }
 
     /**
