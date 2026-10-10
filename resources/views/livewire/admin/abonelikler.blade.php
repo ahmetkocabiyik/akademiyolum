@@ -40,18 +40,20 @@
             </flux:card>
         @endif
 
-        <div class="flex flex-wrap items-end gap-3 rounded-xl border border-line bg-surface p-4">
-            <div class="flex flex-wrap gap-1.5">
+        {{-- Telefonda durum düğmeleri tek satırda yana kayar, plan seçimi tam
+             genişlikte; geniş ekranda düğmeler sarılır, seçim sağda. --}}
+        <div class="flex flex-col gap-3 rounded-xl border border-line bg-surface p-4 sm:flex-row sm:flex-wrap sm:items-end">
+            <div class="-mx-4 flex gap-1.5 overflow-x-auto px-4 [mask-image:linear-gradient(to_right,black_85%,transparent)] [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 sm:[mask-image:none]">
                 @foreach (Abonelikler::DURUMLAR as $deger => $etiket)
                     <button type="button" wire:click="$set('durum', '{{ $deger }}')"
                         @class([
-                            'rounded-lg px-3 py-2 text-sm font-medium transition',
+                            'shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition',
                             'bg-brand text-white' => $durum === $deger,
                             'text-ink-muted hover:bg-canvas' => $durum !== $deger,
                         ])>{{ $etiket }}</button>
                 @endforeach
             </div>
-            <flux:select wire:model.live="plan" class="ms-auto w-48">
+            <flux:select wire:model.live="plan" class="w-full sm:ms-auto sm:w-48">
                 <flux:select.option value="">Tüm planlar</flux:select.option>
                 @foreach (Plan::ucretliler() as $secenek)
                     <flux:select.option :value="$secenek->value">{{ $secenek->etiket() }}</flux:select.option>

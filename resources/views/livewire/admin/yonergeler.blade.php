@@ -14,14 +14,16 @@
     </flux:text>
 
     <div class="flex flex-col gap-4">
-        <div class="flex flex-wrap items-center gap-3 rounded-xl border border-line bg-surface p-4">
-            <flux:input wire:model.live.debounce.300ms="arama" icon="magnifying-glass" placeholder="Üniversite ya da şehir..." clearable class="min-w-64 flex-1" />
-            <div class="flex flex-wrap gap-1.5">
-                <button type="button" wire:click="$set('durum', '')" @class(['rounded-lg px-3 py-2 text-sm font-medium transition', 'bg-brand text-white' => $durum === '', 'text-ink-muted hover:bg-canvas' => $durum !== ''])>
+        {{-- Telefonda durum düğmeleri tek satırda yana kayar; geniş ekranda
+             aramanın yanında sarılır. --}}
+        <div class="flex flex-col gap-3 rounded-xl border border-line bg-surface p-4 sm:flex-row sm:flex-wrap sm:items-center">
+            <flux:input wire:model.live.debounce.300ms="arama" icon="magnifying-glass" placeholder="Üniversite ya da şehir..." clearable class="w-full sm:w-auto sm:min-w-64 sm:flex-1" />
+            <div class="-mx-4 flex gap-1.5 overflow-x-auto px-4 [mask-image:linear-gradient(to_right,black_85%,transparent)] [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 sm:[mask-image:none]">
+                <button type="button" wire:click="$set('durum', '')" @class(['shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition', 'bg-brand text-white' => $durum === '', 'text-ink-muted hover:bg-canvas' => $durum !== ''])>
                     Tümü <span class="opacity-70">{{ count($this->tumu) }}</span>
                 </button>
                 @foreach (Yonergeler::DURUMLAR as $deger => $etiket)
-                    <button type="button" wire:click="$set('durum', '{{ $deger }}')" @class(['rounded-lg px-3 py-2 text-sm font-medium transition', 'bg-brand text-white' => $durum === $deger, 'text-ink-muted hover:bg-canvas' => $durum !== $deger])>
+                    <button type="button" wire:click="$set('durum', '{{ $deger }}')" @class(['shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition', 'bg-brand text-white' => $durum === $deger, 'text-ink-muted hover:bg-canvas' => $durum !== $deger])>
                         {{ $etiket }} <span class="opacity-70">{{ $this->sayilar[$deger] }}</span>
                     </button>
                 @endforeach
