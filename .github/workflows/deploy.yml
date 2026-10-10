@@ -94,7 +94,7 @@ jobs:
             php artisan view:clear
             php artisan storage:link
 
-            # Sahiplik EN SON düzeltilir: composer ve artisan komutları root
+            # Sahiplik en son düzeltilir: composer ve artisan komutları root
             # olarak çalıştığı için ürettikleri dosyalar (bootstrap/cache/*.php,
             # public/storage bağlantısı) aksi hâlde root sahipli kalıyor ve site
             # kullanıcısı bir daha yazamıyor. Site dizininin KENDİSİ CyberPanel
