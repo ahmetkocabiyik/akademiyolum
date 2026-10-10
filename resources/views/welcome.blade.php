@@ -23,6 +23,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 .nav-links a{font-size:14px;font-weight:500;color:var(--t2);padding:8px 14px;border-radius:8px;transition:all .2s}
 .nav-links a:hover{color:var(--navy);background:#f1f5f9}
 .nav-cta{display:flex;align-items:center;gap:10px}
+.nav-cta a{white-space:nowrap}
 .btn-outline{font-size:14px;font-weight:500;color:var(--navy);border:1.5px solid var(--navy);padding:8px 20px;border-radius:8px;transition:all .2s;cursor:pointer;background:transparent}
 .btn-outline:hover{background:var(--navy);color:white}
 .btn-primary{font-size:14px;font-weight:600;color:white;background:var(--blue);padding:9px 22px;border-radius:8px;transition:all .2s;cursor:pointer;border:none}
@@ -164,6 +165,17 @@ footer{background:#060f1e;padding:56px 5% 28px}
   .steps::before{display:none}
   .footer-top{grid-template-columns:1fr 1fr}
   .section-title,.how-title,.cta-section h2{font-size:32px}
+}
+/* Telefonda logo ve iki buton tek satıra sığsın: butonlar küçülür, en
+   darda logo yazısı gizlenir (simge marka olarak kalır). */
+@media (max-width:600px){
+  nav{padding:0 16px;gap:12px}
+  .nav-cta{gap:8px}
+  .nav-cta .btn-outline,.nav-cta .btn-primary{font-size:13px;padding:7px 12px}
+  .nav-logo-text{font-size:18px}
+}
+@media (max-width:440px){
+  .nav-logo-text{display:none}
 }
 
 /* ── HAREKET ──
