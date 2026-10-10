@@ -77,6 +77,10 @@ jobs:
             git config --global --get-all safe.directory | grep -qxF /home/akademiyolum.com/test.akademiyolum.com \
               || git config --global --add safe.directory /home/akademiyolum.com/test.akademiyolum.com
 
+            # rsync bu dizinleri göndermiyor (bkz. exclude); ilk deploy'da yoklar
+            # ve Laravel bootstrap/cache yazılamazsa package:discover düşüyor.
+            mkdir -p bootstrap/cache storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs
+
             # Composer
             COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
 
