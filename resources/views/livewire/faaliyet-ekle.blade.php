@@ -12,13 +12,15 @@
         {{-- Sekme navigasyonu — yalnız YENİ kayıtta. Düzenlerken sekme
              değiştirmek formdaki değişikliği sessizce çöpe atıyordu. --}}
         @unless ($faaliyet)
-        <div class="mx-auto flex rounded-full border border-line bg-surface p-1">
-            @foreach (['manuel' => 'Manuel Ekle', 'yayin' => 'Yayınlarımı Bul', 'avesis' => 'Kurum Profilimden Çek'] as $anahtar => $etiket)
+        {{-- Telefonda tam genişlikte üç eşit sütun ve kapatma düğmesinin
+             altında; geniş ekranda ortalanmış hap. --}}
+        <div class="mt-11 grid w-full grid-cols-3 gap-1 rounded-2xl border border-line bg-surface p-1 sm:mx-auto sm:mt-0 sm:flex sm:w-auto sm:gap-0 sm:rounded-full">
+            @foreach (['manuel' => ['Manuel Ekle', 'Manuel'], 'yayin' => ['Yayınlarımı Bul', 'Yayın Bul'], 'avesis' => ['Kurum Profilimden Çek', 'Kurum Profili']] as $anahtar => [$etiket, $kisaEtiket])
                 <button type="button" wire:click="$set('sekme', '{{ $anahtar }}')" @class([
-                    'rounded-full px-5 py-2 text-sm font-medium transition',
+                    'rounded-xl px-2 py-2 text-center text-[13px] leading-tight font-medium transition sm:rounded-full sm:px-5 sm:text-sm sm:leading-normal',
                     'bg-navy text-white' => $sekme === $anahtar,
                     'text-ink-muted hover:text-ink' => $sekme !== $anahtar,
-                ])>{{ $etiket }}</button>
+                ])><span class="sm:hidden">{{ $kisaEtiket }}</span><span class="hidden sm:inline">{{ $etiket }}</span></button>
             @endforeach
         </div>
         @endunless
