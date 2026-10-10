@@ -1,0 +1,106 @@
+name: Deploy - test.akademiyolum.com
+
+on:
+  push:
+    branches: [main]
+
+# Arka arkaya gelen push'larda iki deploy paralel koşmasın: biri rsync ile dosya
+# silerken diğeri migrate çalıştırabilir. Yarıda kesmek yerine sıraya alıyoruz.
+concurrency:
+  group: deploy-test-akademiyolum
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: Install Composer Dependencies
+        run: COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Frontend Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Server
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          # bootstrap/cache ve storage/framework yerelde/CI'da üretilen, ortama
+          # bağlı dosyalar tutuyor: paket bildirimi dev bağımlılıkları listeler,
+          # derlenmiş view'lar mutlak yol taşır. Gönderilirse üretim 500 verir.
+          switches: >-
+            -avzr --delete
+            --exclude='.env'
+            --exclude='/vendor/'
+            --exclude='/node_modules/'
+            --exclude='/bootstrap/cache/'
+            --exclude='/storage/framework/'
+            --exclude='/storage/logs/'
+            --exclude='/public/hot'
+            --exclude='/.git/'
+            --exclude='/.github/'
+            --exclude='/tests/'
+          path: ./
+          remote_path: /home/akademiyolum.com/test.akademiyolum.com/
+          remote_host: ${{ secrets.SERVER_HOST }}
+          remote_port: 2222
+          remote_user: ${{ secrets.SERVER_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Post Deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: 2222
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd /home/akademiyolum.com/test.akademiyolum.com
+
+            # Git safe directory (her deploy'da tekrar satır eklenmesin)
+            git config --global --get-all safe.directory | grep -qxF /home/akademiyolum.com/test.akademiyolum.com \
+              || git config --global --add safe.directory /home/akademiyolum.com/test.akademiyolum.com
+
+            # Composer
+            COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
+
+            # .env kontrolü
+            php artisan env
+
+            # Paket bildirimi ortama göre yeniden üretilsin
+            php artisan package:discover
+
+            # Laravel Artisan
+            # php artisan migrate:fresh --seed --force
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:clear
+            php artisan storage:link
+
+            # Sahiplik EN SON düzeltilir: composer ve artisan komutları root
+            # olarak çalıştığı için ürettikleri dosyalar (bootstrap/cache/*.php,
+            # public/storage bağlantısı) aksi hâlde root sahipli kalıyor ve site
+            # kullanıcısı bir daha yazamıyor. Site dizininin KENDİSİ CyberPanel
+            # düzeninde nogroup grubunda kalmalı: LiteSpeed `nobody:nogroup`
+            # olarak çalışıyor ve dizin 750 olunca ancak grup üzerinden girebiliyor.
+            chown -R akade4106:akade4106 /home/akademiyolum.com/test.akademiyolum.com
+            chown akade4106:nogroup /home/akademiyolum.com/test.akademiyolum.com
+
+
