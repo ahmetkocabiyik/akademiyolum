@@ -23,9 +23,13 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Livewire;
+use Symfony\Component\Mailer\Bridge\Brevo\Transport\BrevoTransportFactory;
+use Symfony\Component\Mailer\Transport\Dsn;
+use Symfony\Component\Mailer\Transport\TransportInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -69,7 +73,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        $this->configureMail();
         $this->configureYonetim();
+    }
+
+    /**
+     * Brevo taşıyıcısı (MAIL_MAILER=brevo): Laravel'de yerleşik değil,
+     * Symfony'nin Brevo köprüsüyle HTTP API üzerinden gönderir.
+     */
+    private function configureMail(): void
+    {
+        Mail::extend('brevo', fn (): TransportInterface => (new BrevoTransportFactory)->create(
+            new Dsn('brevo+api', 'default', (string) config('services.brevo.key')),
+        ));
     }
 
     /**

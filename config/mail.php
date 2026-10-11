@@ -53,6 +53,12 @@ return [
             'transport' => 'ses',
         ],
 
+        // Brevo HTTP API (AppServiceProvider'da kayıtlı taşıyıcı; anahtar
+        // services.brevo.key).
+        'brevo' => [
+            'transport' => 'brevo',
+        ],
+
         'postmark' => [
             'transport' => 'postmark',
             // 'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),

@@ -23,6 +23,10 @@ return [
         'posta' => env('CROSSREF_MAILTO', env('MAIL_FROM_ADDRESS')),
     ],
 
+    'brevo' => [
+        'key' => env('BREVO_API_KEY'),
+    ],
+
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],
