@@ -6,6 +6,31 @@
         kapattığınız şablon hiç gönderilmez.
     </flux:text>
 
+    {{-- Bağlantı testi: e-posta gönderimi gerçekten çalışıyor mu? --}}
+    <flux:card class="mb-6 flex flex-col gap-4">
+        <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+                <flux:heading size="lg">E-posta bağlantı testi</flux:heading>
+                <flux:text class="!text-sm">Kuyruğa atmadan anında gönderir; gönderim başarısızsa hatanın kendisi burada görünür.</flux:text>
+            </div>
+            <div class="flex flex-wrap gap-1">
+                <flux:badge :color="in_array($surucu, \App\Livewire\Admin\EpostaSablonlari::GONDERMEYEN_SURUCULER, true) ? 'amber' : 'green'" size="sm">Sürücü: {{ $surucu }}</flux:badge>
+                <flux:badge color="zinc" size="sm">Gönderen: {{ $gonderen ?: '—' }}</flux:badge>
+            </div>
+        </div>
+
+        <form wire:submit="baglantiTesti" class="flex flex-col gap-3 sm:flex-row sm:items-start">
+            <flux:input wire:model="testAdresi" type="email" placeholder="ornek@alanadi.com" class="sm:flex-1" />
+            <flux:button type="submit" variant="primary" icon="paper-airplane" class="shrink-0">Test e-postası gönder</flux:button>
+        </form>
+
+        @if ($testSonucu)
+            <flux:callout :variant="$testSonucu['tur']" :icon="$testSonucu['tur'] === 'success' ? 'check-circle' : 'exclamation-triangle'">
+                <flux:callout.text class="break-words">{{ $testSonucu['mesaj'] }}</flux:callout.text>
+            </flux:callout>
+        @endif
+    </flux:card>
+
     @foreach (collect($turler)->groupBy(fn ($tur) => $tur->grup()) as $grup => $gruptakiler)
     <flux:heading size="sm" class="mb-3 mt-6 first-of-type:mt-0">{{ $grup }}</flux:heading>
     <div class="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
