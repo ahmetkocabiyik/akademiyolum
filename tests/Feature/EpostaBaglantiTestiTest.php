@@ -66,13 +66,12 @@ test('geçersiz adres reddedilir, sık deneme sınırlanır', function () {
     $bilesen->call('baglantiTesti')->assertSet('testSonucu.tur', 'danger')->assertSee('Çok sık deneme');
 });
 
-test('şablonlu e-postada başlık logosu gömülü görsel olarak gider', function () {
+test('şablonlu e-postada başlık logosu siteden bağlantıyla yüklenir, ek olarak gitmez', function () {
     (new SablonluEposta('Konu', '<p>Gövde</p>', 'Gövde'))->to('alici@ornek.test')->send(Mail::mailer('array'));
 
     $eposta = Mail::mailer('array')->getSymfonyTransport()->messages()[0]->getOriginalMessage();
-    $gomulu = collect($eposta->getAttachments())->filter(fn ($ek) => $ek->getDisposition() === 'inline');
 
-    expect($gomulu)->toHaveCount(1)
-        ->and($gomulu->first()->getMediaType().'/'.$gomulu->first()->getMediaSubtype())->toBe('image/png')
-        ->and($eposta->getHtmlBody())->toMatch('/<img src="cid:[^"]+"/');
+    // Brevo API'si gömülü görseli düz eke çeviriyor; ek hiç olmamalı.
+    expect($eposta->getAttachments())->toBeEmpty()
+        ->and($eposta->getHtmlBody())->toContain('<img src="'.asset('apple-touch-icon.png').'"');
 });

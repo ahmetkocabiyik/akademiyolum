@@ -218,11 +218,11 @@ test('önizleme örnek değerlerle, tanımsız değişken uyarısıyla çizilir'
         ->assertSee('Bu şablonda tanımlı olmayan değişken');
 });
 
-test('önizlemede başlık logosu satır içi görsel', function () {
+test('önizlemede başlık logosu görünür', function () {
     actingAs($this->admin);
 
     Livewire::test(EpostaSablonuDuzenle::class, ['tur' => EpostaTuru::KayitYonetici])
-        ->assertSee('data:image/png;base64,', false);
+        ->assertSee(asset('apple-touch-icon.png'), false);
 });
 
 test('test gönderimi ekrandaki hâli yöneticinin kendi adresine yollar', function () {
