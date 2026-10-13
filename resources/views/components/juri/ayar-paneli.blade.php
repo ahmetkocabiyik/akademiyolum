@@ -32,11 +32,7 @@
         </flux:text>
     </div>
 
-    <flux:select wire:model.live="hedefKadro" label="Hedef Kadro">
-        @foreach ($kadrolar as $deger => $etiket)
-            <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-        @endforeach
-    </flux:select>
+    <x-secim-listesi model="hedefKadro" canli label="Hedef Kadro" :secenekler="$kadrolar" />
 
     @if ($kurumlar === [])
         <div class="rounded-xl border border-line bg-canvas p-3">

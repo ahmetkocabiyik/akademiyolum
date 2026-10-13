@@ -53,12 +53,8 @@
                         ])>{{ $etiket }}</button>
                 @endforeach
             </div>
-            <flux:select wire:model.live="plan" class="w-full sm:ms-auto sm:w-48">
-                <flux:select.option value="">Tüm planlar</flux:select.option>
-                @foreach (Plan::ucretliler() as $secenek)
-                    <flux:select.option :value="$secenek->value">{{ $secenek->etiket() }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="plan" canli class="w-full sm:ms-auto sm:w-48" placeholder="Tüm planlar"
+                :secenekler="['' => 'Tüm planlar'] + collect(Plan::ucretliler())->mapWithKeys(fn ($p) => [$p->value => $p->etiket()])->all()" />
         </div>
 
         <flux:card class="overflow-x-auto !p-0">

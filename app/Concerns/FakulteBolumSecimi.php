@@ -25,6 +25,15 @@ trait FakulteBolumSecimi
 {
     private const KASKAD_ALANLARI = ['universite', 'temelAlan', 'fakulte'];
 
+    /** Temel alan listesinin sonundaki "Alanım listede yok…" seçeneğinin değeri. */
+    public const TUM_ALANLAR = '__tum_alanlar';
+
+    /** Yönergenin tanımlamadığı alanlar da listelensin mi (aday "listede yok" dedi). */
+    public bool $tumAlanlar = false;
+
+    /** "Listede yok" seçilince geri konacak temel alan. */
+    private ?string $oncekiTemelAlan = null;
+
     /** @var list<string>|null Güncellemeden önceki fakülte seçenekleri. */
     private ?array $oncekiFakulteler = null;
 
@@ -43,9 +52,12 @@ trait FakulteBolumSecimi
      * Temel alanlar, üniversitenin yönergesine göre iki grupta: ölçüt
      * tanımlananlar ve tanımlanmayanlar. Yönerge yoksa hepsi ilk grupta.
      *
-     * Tanımlanmayanlar gizlenmez: temel alan kişinin kendi disiplini ve
-     * yönerge verisinde eksik kalmış bir alan da olabilir; listede bulamayan
-     * aday yanlış alanı seçerdi.
+     * Tanımlanmayanlar varsayılan olarak listede yok ama "Alanım listede
+     * yok…" ile açılıyor (bkz. tanimsizAlanlarGorunsun). Silinmemelerinin
+     * sebebi: temel alan kişinin kendi disiplini ve Yönerge Analizi onu BÜTÜN
+     * üniversitelerde kullanıyor. Ayrıca "tanımlı değil" her zaman "o alanda
+     * kimse yok" demek değil: İKÇÜ yönergesi dört geniş grup yazıyor, orada
+     * mühendislik fakültesi var ama `muhendislik` eşiği yok.
      *
      * @return array{tanimli: array<string, string>, tanimsiz: array<string, string>}
      */
@@ -63,6 +75,16 @@ trait FakulteBolumSecimi
         return ['tanimli' => $tanimli, 'tanimsiz' => array_diff_key($tumu, $tanimli)];
     }
 
+    /**
+     * Tanımsız alanlar listelensin mi: aday istediyse ya da seçili alan zaten
+     * onlardan biriyse (yoksa seçili değer listede bulunmaz, kutu yanlış alanı
+     * gösterirdi).
+     */
+    public function tanimsizAlanlarGorunsun(): bool
+    {
+        return $this->tumAlanlar || $this->temelAlanTanimsiz();
+    }
+
     /** Seçili temel alan, üniversitenin yönergesinin ölçüt tanımlamadığı bir alan mı? */
     public function temelAlanTanimsiz(): bool
     {
@@ -77,8 +99,14 @@ trait FakulteBolumSecimi
         return app(BirimKatalogu::class)->bolumler($this->universite, $this->fakulte);
     }
 
-    public function updatingFakulteBolumSecimi(string $alan): void
+    public function updatingFakulteBolumSecimi(string $alan, mixed $deger): void
     {
+        if ($alan === 'temelAlan' && $deger === self::TUM_ALANLAR) {
+            $this->oncekiTemelAlan = $this->temelAlan;
+
+            return;
+        }
+
         if (in_array($alan, self::KASKAD_ALANLARI, true)) {
             $this->oncekiFakulteler = $this->fakulteSecenekleri();
             $this->oncekiBolumler = $this->bolumSecenekleri();
@@ -87,6 +115,18 @@ trait FakulteBolumSecimi
 
     public function updatedFakulteBolumSecimi(string $alan): void
     {
+        if ($alan === 'temelAlan' && $this->oncekiTemelAlan !== null) {
+            $this->temelAlan = $this->oncekiTemelAlan;
+            $this->oncekiTemelAlan = null;
+            $this->tumAlanlar = true;
+
+            return;
+        }
+
+        if ($alan === 'universite') {
+            $this->tumAlanlar = false;
+        }
+
         if (! in_array($alan, self::KASKAD_ALANLARI, true) || $this->oncekiFakulteler === null) {
             return;
         }

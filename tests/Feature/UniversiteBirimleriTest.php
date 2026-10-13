@@ -208,7 +208,7 @@ test('seeder yeni adlı satırı önce açtıysa eski satır silinir, bağlantı
 
 // ── TEMEL ALAN ────────────────────────────────────────────────────────────
 
-test('temel alanlar üniversitenin yönergesine göre iki grupta gelir', function () {
+test('temel alan listesinde yalnızca yönergenin tanımladığı alanlar ve "listede yok" seçeneği var', function () {
     actingAs(User::factory()->create());
 
     $bilesen = Livewire::test(Onboarding::class)
@@ -221,9 +221,36 @@ test('temel alanlar üniversitenin yönergesine göre iki grupta gelir', functio
         ->and($gruplar['tanimsiz'])->toHaveKey('ilahiyat')
         ->and(count($gruplar['tanimli']) + count($gruplar['tanimsiz']))->toBe(count(TemelAlan::cases()));
 
-    $bilesen->assertSee('Abdullah Gül Üniversitesi yönergesinde tanımlı')
-        ->assertSee('Bu yönergede tanımlı değil')
+    $bilesen->assertSee('Alanım listede yok')
+        ->assertDontSee('İlahiyat')
+        ->assertDontSee('Bu yönergede tanımlı değil')
         ->assertDontSee('ölçüt tanımlamıyor');
+});
+
+test('"listede yok" seçilince seçili alan korunur ve bütün alanlar açılır', function () {
+    actingAs(User::factory()->create());
+
+    Livewire::test(Onboarding::class)
+        ->set('step', 2)
+        ->set('universite', 'Abdullah Gül Üniversitesi')
+        ->set('temelAlan', 'fen')
+        ->set('temelAlan', Onboarding::TUM_ALANLAR)
+        ->assertSet('temelAlan', 'fen')
+        ->assertSet('tumAlanlar', true)
+        ->assertSee('İlahiyat')
+        ->assertSee('Bu yönergede tanımlı değil')
+        ->assertDontSee('Alanım listede yok')
+        ->set('universite', 'Gebze Teknik Üniversitesi')
+        ->assertSet('tumAlanlar', false);
+});
+
+test('"listede yok" kurulumda seçim sayılmaz; varsayılan alan hâlâ yönergeye uyar', function () {
+    actingAs(User::factory()->create());
+
+    Livewire::test(Onboarding::class)
+        ->set('temelAlan', Onboarding::TUM_ALANLAR)
+        ->assertSet('temelAlan', 'sosyal')
+        ->assertSet('temelAlanSecildi', false);
 });
 
 test('yönergenin tanımlamadığı alan seçilebilir, uyarı gösterilir ve üniversite değişince alan korunur', function () {
@@ -244,6 +271,7 @@ test('yönergesi olmayan üniversitede bütün alanlar tek grupta gelir', functi
 
     Livewire::test(Profile::class)
         ->assertDontSee('Bu yönergede tanımlı değil')
+        ->assertDontSee('Alanım listede yok')
         ->assertSee('İlahiyat');
 });
 

@@ -154,20 +154,18 @@
                 </flux:text>
 
                 <form wire:submit="abonelikEkle" class="mt-4 flex flex-col gap-4">
-                    <flux:select wire:model.live="plan" label="Plan">
-                        @foreach (Plan::ucretliler() as $secenek)
-                            @php $paket = app(\App\Services\Abonelik\PaketKatalogu::class)->bilgi($secenek); @endphp
-                            <flux:select.option :value="$secenek->value">{{ $paket->ad }} · {{ \App\Models\Paket::fiyatMetni($paket->aylik_fiyat_kurus) }}/ay{{ $paket->satista ? '' : ' (satışta değil)' }}</flux:select.option>
-                        @endforeach
-                    </flux:select>
+                    @php
+                        $planSecenekleri = collect(Plan::ucretliler())->mapWithKeys(function (Plan $p): array {
+                            $paket = app(\App\Services\Abonelik\PaketKatalogu::class)->bilgi($p);
+                    
+                            return [$p->value => $paket->ad.' · '.\App\Models\Paket::fiyatMetni($paket->aylik_fiyat_kurus).'/ay'.($paket->satista ? '' : ' (satışta değil)')];
+                        })->all();
+                    @endphp
+                    <x-secim-listesi model="plan" canli label="Plan" :secenekler="$planSecenekleri" />
 
                     <div class="grid grid-cols-2 gap-3">
                         <flux:input wire:model="baslangic" type="date" label="Başlangıç" />
-                        <flux:select wire:model.live="sure" label="Süre">
-                            @foreach (KullaniciDetay::SURELER as $deger => $etiket)
-                                <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                            @endforeach
-                        </flux:select>
+                        <x-secim-listesi model="sure" canli label="Süre" :secenekler="KullaniciDetay::SURELER" />
                     </div>
 
                     @if ($sure === 'ozel')

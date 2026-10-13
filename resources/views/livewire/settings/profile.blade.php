@@ -69,26 +69,18 @@
                  Seçenekler yönerge verisinden gelir, o yüzden yalnızca gerçekten
                  programa göre yazılmış yönergesi olan üniversitelerde çıkar. --}}
             @if ($birimler)
-                <flux:select wire:model="birim" label="Program" placeholder="Program seçin..."
-                    description="{{ auth()->user()->universite }} yönergesi kriterleri programa göre belirliyor. Başka üniversitelerin programı Yönerge Analizi ekranında ayrıca sorulur; birim adları üniversiteden üniversiteye değiştiği için buradaki seçim onlara taşınmaz.">
-                    <flux:select.option value="">Belirtilmemiş</flux:select.option>
-                    @foreach ($birimler as $b)
-                        <flux:select.option :value="$b">{{ $b }}</flux:select.option>
-                    @endforeach
-                </flux:select>
+                <x-secim-listesi model="birim" label="Program" placeholder="Program seçin..."
+                    description="{{ auth()->user()->universite }} yönergesi kriterleri programa göre belirliyor. Başka üniversitelerin programı Yönerge Analizi ekranında ayrıca sorulur; birim adları üniversiteden üniversiteye değiştiği için buradaki seçim onlara taşınmaz."
+                    :secenekler="['' => 'Belirtilmemiş'] + collect($birimler)->mapWithKeys(fn ($b) => [$b => $b])->all()" />
             @endif
 
             {{-- Yan yana: unvan / temel alan, fakülte / bölüm. --}}
             <div class="grid gap-6 sm:grid-cols-2">
             {{-- Yalnızca kimlik bilgisi değil: Yönerge Analizi varsayılan hedef
                  kadroyu bundan türetiyor (Dr. Öğr. Üyesi → doçentlik gibi). --}}
-            <flux:select wire:model="unvan" label="Akademik Unvan" placeholder="Unvan seçin..."
-                description="Yönerge analizinde varsayılan hedef kadronuz buna göre belirlenir.">
-                <flux:select.option value="">Belirtilmemiş</flux:select.option>
-                @foreach ($unvanlar as $u)
-                    <flux:select.option :value="$u">{{ $u }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="unvan" label="Akademik Unvan" placeholder="Unvan seçin..."
+                description="Yönerge analizinde varsayılan hedef kadronuz buna göre belirlenir."
+                :secenekler="['' => 'Belirtilmemiş'] + array_combine($unvanlar, $unvanlar)" />
 
             @include('partials.temel-alan-secimi', ['aciklama' => 'Yönerge analizi buna göre yapılır.'])
 
@@ -118,13 +110,9 @@
                 </div>
             </div>
 
-            <flux:select wire:model="akademik.program_dili" label="Biriminizin öğretim dili"
-                description="Yabancı dil barajı buna göre değişir (ör. Türkçe 65, %100 yabancı dilde 85).">
-                <flux:select.option value="">Seçiniz</flux:select.option>
-                @foreach ($programDilleri as $deger => $etiket)
-                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="akademik.program_dili" label="Biriminizin öğretim dili"
+                description="Yabancı dil barajı buna göre değişir (ör. Türkçe 65, %100 yabancı dilde 85)."
+                :secenekler="['' => 'Seçiniz'] + $programDilleri" />
 
             <div class="grid gap-4 sm:grid-cols-2">
                 @foreach ($akademikAlanlar as $alan => [$etiket, $tip, $ipucu])

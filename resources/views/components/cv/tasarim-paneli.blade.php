@@ -73,13 +73,10 @@
     {{-- Yazı tipi. Seçim wire:model'e değil yaziTipiSec'e gidiyor: değer
          enum'dan geçmeden yazılsaydı uydurma bir değer önizlemeyi çökertirdi. --}}
     <div>
-        <flux:select wire:change="yaziTipiSec($event.target.value)" label="Yazı Tipi"
-            :description:trailing="CvYaziTipi::from($yaziTipi)->aciklama()">
-            @foreach (CvYaziTipi::cases() as $secenek)
-                <flux:select.option :value="$secenek->value" :selected="$yaziTipi === $secenek->value"
-                    style="font-family: {{ $secenek->yigin() }}">{{ $secenek->etiket() }}</flux:select.option>
-            @endforeach
-        </flux:select>
+        <x-secim-listesi eylem="yaziTipiSec" :deger="$yaziTipi" label="Yazı Tipi"
+            :description-trailing="CvYaziTipi::from($yaziTipi)->aciklama()"
+            :secenekler="collect(CvYaziTipi::cases())->mapWithKeys(fn ($y) => [$y->value => $y->etiket()])->all()"
+            :stiller="collect(CvYaziTipi::cases())->mapWithKeys(fn ($y) => [$y->value => 'font-family: '.$y->yigin()])->all()" />
     </div>
 
     {{-- Bölümler --}}

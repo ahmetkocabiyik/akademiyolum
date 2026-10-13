@@ -80,15 +80,9 @@
                 {{-- Unvan kapalı listeden. Listede olmayan eski bir değer (elle
                      yazıldığı dönemden) seçenek olarak kalıyor: yoksa tarayıcı ilk
                      seçeneği seçili gösterir, aday unvanını değişmiş sanırdı. --}}
-                <flux:select wire:model.live="unvan" label="Unvan">
-                    <flux:select.option value="">Belirtilmemiş</flux:select.option>
-                    @foreach (\App\Models\User::UNVANLAR as $secenek)
-                        <flux:select.option :value="$secenek">{{ $secenek }}</flux:select.option>
-                    @endforeach
-                    @if ($unvan !== '' && ! in_array($unvan, \App\Models\User::UNVANLAR, true))
-                        <flux:select.option :value="$unvan">{{ $unvan }}</flux:select.option>
-                    @endif
-                </flux:select>
+                {{-- Listede olmayan kayıtlı unvan (eski veri) da seçenek olarak kalır. --}}
+                <x-secim-listesi model="unvan" canli label="Unvan"
+                    :secenekler="['' => 'Belirtilmemiş'] + array_combine(\App\Models\User::UNVANLAR, \App\Models\User::UNVANLAR) + ($unvan !== '' ? [$unvan => $unvan] : [])" />
                 <flux:input wire:model.live.blur="kurum" label="Kurum" />
                 <flux:input wire:model.live.blur="bolum" label="Bölüm / Anabilim Dalı" />
 

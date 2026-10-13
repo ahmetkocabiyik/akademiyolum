@@ -8,12 +8,8 @@
         {{-- Araç çubuğu --}}
         <div class="flex flex-wrap items-center gap-2">
             <flux:input wire:model.live.debounce.300ms="arama" icon="magnifying-glass" placeholder="Başlıkta ara..." class="sm:max-w-xs" />
-            <flux:select wire:model.live="kategoriFiltre" placeholder="Tüm kategoriler" class="sm:max-w-xs">
-                <flux:select.option value="">Tüm kategoriler</flux:select.option>
-                @foreach ($kategoriler as $deger => $etiket)
-                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="kategoriFiltre" canli class="sm:max-w-xs" placeholder="Tüm kategoriler"
+                :secenekler="['' => 'Tüm kategoriler'] + $kategoriler" />
         </div>
 
         {{-- Liste --}}

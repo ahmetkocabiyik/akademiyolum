@@ -47,19 +47,10 @@
 
         <div class="grid gap-3 sm:grid-cols-2">
             @foreach ($secenekler as $universiteAdi => $birimler)
-                <flux:select
-                    wire:model.live="birimSecimleri.{{ $universiteAdi }}"
-                    :label="$universiteAdi"
-                    placeholder="Birim seçin..."
-                >
-                    {{-- Boş seçenek ŞART: yoksa tarayıcı ilk seçeneği seçili
-                         gösteriyor, aday onu tıklayınca değer değişmediği için
-                         ekran güncellenmiyor. --}}
-                    <flux:select.option value="">Birim seçilmedi</flux:select.option>
-                    @foreach ($birimler as $b)
-                        <flux:select.option value="{{ $b }}">{{ $b }}</flux:select.option>
-                    @endforeach
-                </flux:select>
+                {{-- Boş seçenek ŞART: aday seçimi geri alabilmeli. --}}
+                <x-secim-listesi model="birimSecimleri.{{ $universiteAdi }}" canli
+                    :label="$universiteAdi" placeholder="Birim seçin..."
+                    :secenekler="['' => 'Birim seçilmedi'] + collect($birimler)->mapWithKeys(fn ($b) => [$b => $b])->all()" />
             @endforeach
         </div>
     </div>

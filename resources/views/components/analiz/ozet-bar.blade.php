@@ -45,12 +45,12 @@
     </div>
 
     <div class="flex items-center gap-2">
-        <flux:select wire:model.live="siralama" class="w-52">
-            <flux:select.option value="oran">Eşleşme Oranı</flux:select.option>
-            <flux:select.option value="baraj_artan">Puan Barajı (Artan)</flux:select.option>
-            <flux:select.option value="baraj_azalan">Puan Barajı (Azalan)</flux:select.option>
-            <flux:select.option value="alfabetik">Alfabetik</flux:select.option>
-        </flux:select>
+        <x-secim-listesi model="siralama" canli class="w-52" :secenekler="[
+            'oran' => 'Eşleşme Oranı',
+            'baraj_artan' => 'Puan Barajı (Artan)',
+            'baraj_azalan' => 'Puan Barajı (Azalan)',
+            'alfabetik' => 'Alfabetik',
+        ]" />
 
         @unless ($karsilastirma)
             <div class="flex rounded-lg border border-line p-0.5">

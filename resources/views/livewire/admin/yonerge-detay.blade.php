@@ -123,11 +123,7 @@
                 <flux:text class="mt-1 !text-xs">Ad değiştirilemez: yönerge dosyaları üniversiteyi adıyla tanıyor.</flux:text>
                 <form wire:submit="kunyeKaydet" class="mt-4 flex flex-col gap-4">
                     <flux:input wire:model="sehir" label="Şehir" />
-                    <flux:select wire:model="tur" label="Tür">
-                        @foreach (YonergeDetay::TURLER as $deger => $etiket)
-                            <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                        @endforeach
-                    </flux:select>
+                    <x-secim-listesi model="tur" label="Tür" :secenekler="YonergeDetay::TURLER" />
                     <flux:input wire:model="yonergeUrl" type="url" label="Resmi yönerge bağlantısı" placeholder="https://" />
                     <flux:button type="submit" variant="primary" icon="check">Künyeyi kaydet</flux:button>
                 </form>

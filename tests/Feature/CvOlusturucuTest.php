@@ -310,7 +310,7 @@ test('kaldırılan şablonu seçmiş cv minimal e taşınır', function () {
 
 test('yazı tipi açılır listeden seçilir; poppins, montserrat ve raleway de sunulur', function (string $deger, string $aile) {
     $bilesen = Livewire::test(CvOlusturucu::class)
-        ->assertSeeHtml('<select')
+        ->assertSeeHtml('data-secim="yaziTipiSec"')
         ->assertSee(['Poppins', 'Montserrat', 'Raleway'])
         ->call('yaziTipiSec', $deger);
 
@@ -503,7 +503,7 @@ test('migration orcid adreslerini kimliğe indirir, orcid olmayan değeri temizl
 
 test('unvan elle yazılmaz, profildeki listeden seçilir', function () {
     $bilesen = Livewire::test(CvOlusturucu::class)
-        ->assertSeeHtml('wire:model.live="unvan"')
+        ->assertSeeHtml('data-secim="unvan"')
         ->assertSee(User::UNVANLAR)
         ->set('unvan', 'Prof. Dr.')
         ->assertHasNoErrors();
@@ -520,7 +520,7 @@ test('listede olmayan eski unvan seçenek olarak kalır ve silinmez', function (
 
     Livewire::test(CvOlusturucu::class)
         ->assertSet('unvan', 'Uzm. Dr.')
-        ->assertSeeHtml('value="Uzm. Dr."')
+        ->assertSeeHtml('data-deger="Uzm. Dr."')
         ->set('ozet', 'Başka bir alan kaydediliyor.');
 
     expect($this->user->cvProfili()->sole()->unvan)->toBe('Uzm. Dr.');

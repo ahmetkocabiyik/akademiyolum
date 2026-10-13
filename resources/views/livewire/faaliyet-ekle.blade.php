@@ -104,11 +104,7 @@
                         makale ve tezden üretilmiş yayında sorulur.
                     --}}
                     @if ($yayinTurleri !== [])
-                        <flux:select wire:model.live="yayinTuru" label="Yayın Türü">
-                            @foreach ($yayinTurleri as $deger => $etiket)
-                                <flux:select.option value="{{ $deger }}">{{ $etiket }}</flux:select.option>
-                            @endforeach
-                        </flux:select>
+                        <x-secim-listesi model="yayinTuru" canli label="Yayın Türü" :secenekler="$yayinTurleri" />
                     @endif
 
                     {{-- Yazarlar (03_yayin_ekleme.html: çoklu yazar listesi) --}}
@@ -142,16 +138,12 @@
 
                     {{-- Rol: yayında yazarlık, projede görev, tezde danışmanlık --}}
                     @if (count($roller))
-                        <flux:select wire:model="rol"
+                        <x-secim-listesi model="rol"
                             :label="$yazarliMi ? 'Yazarlık rolünüz' : 'Bu faaliyetteki rolünüz'"
                             :description="$yazarliMi
                                 ? 'Yönerge alt-koşullarında başlıca/tek yazarlık ayrıca değerlendirilir.'
-                                : 'Yönergeler proje ve tez danışmanlığı koşullarını role göre ayırıyor.'">
-                            <flux:select.option value="">Seçiniz</flux:select.option>
-                            @foreach ($roller as $deger => $etiket)
-                                <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                            @endforeach
-                        </flux:select>
+                                : 'Yönergeler proje ve tez danışmanlığı koşullarını role göre ayırıyor.'"
+                            :secenekler="['' => 'Seçiniz'] + $roller" />
                     @endif
 
                     {{-- İndeks önerisi: yalnız DÜZENLEMEDE ve kademe boşken.
@@ -210,15 +202,8 @@
                              ÜAK "lisansüstü tezlerden üretilmiş". Yüksek lisans
                              tezinden üretilen yayın birincisine sayılır. --}}
                         @if ($tezIliskisi)
-                            <flux:select wire:model="donem" label="Tez İlişkisi" placeholder="Belirtilmemiş">
-                                <flux:select.option value="">Belirtilmemiş</flux:select.option>
-                                @foreach (\App\Models\Faaliyet::tezIliskileri() as $deger => $etiket)
-                                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                                @endforeach
-                                @if ($donem === 'tezden')
-                                    <flux:select.option value="tezden">Tezden üretilmiş (düzey belirtilmemiş)</flux:select.option>
-                                @endif
-                            </flux:select>
+                            <x-secim-listesi model="donem" label="Tez İlişkisi" placeholder="Belirtilmemiş"
+                                :secenekler="['' => 'Belirtilmemiş'] + \App\Models\Faaliyet::tezIliskileri() + ($donem === 'tezden' ? ['tezden' => 'Tezden üretilmiş (düzey belirtilmemiş)'] : [])" />
                         @endif
                     </div>
 
@@ -229,12 +214,9 @@
                     {{-- Yalnız düzenlemede: yeni kayıt onaylı başlıyor, içe
                          aktarılan kayıt beklemede iniyor ve aday onu burada onaylıyor. --}}
                     @if ($faaliyet)
-                        <flux:select wire:model="durum" label="Durum"
-                            description="Beklemedeki faaliyetler puanlamaya, yönerge analizine ve CV'ye katılmaz.">
-                            @foreach (\App\Models\Faaliyet::durumlar() as $deger => $etiket)
-                                <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                            @endforeach
-                        </flux:select>
+                        <x-secim-listesi model="durum" label="Durum"
+                            description="Beklemedeki faaliyetler puanlamaya, yönerge analizine ve CV'ye katılmaz."
+                            :secenekler="\App\Models\Faaliyet::durumlar()" />
                     @endif
                     </div>
                 </flux:card>

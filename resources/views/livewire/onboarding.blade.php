@@ -41,11 +41,7 @@
 
             <flux:input wire:model="name" label="Ad Soyad" placeholder="Örn. Ahmet Kocabıyık" />
 
-            <flux:select wire:model="unvan" label="Akademik Unvan" placeholder="Unvan seçin">
-                @foreach ($unvanlar as $u)
-                    <flux:select.option :value="$u">{{ $u }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="unvan" label="Akademik Unvan" placeholder="Unvan seçin" :secenekler="array_combine($unvanlar, $unvanlar)" />
 
             <flux:button variant="primary" wire:click="next" class="w-full">Devam Et</flux:button>
         </div>

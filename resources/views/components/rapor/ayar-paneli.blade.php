@@ -49,26 +49,14 @@
         <flux:input wire:model.live.debounce.400ms="baslik" label="Rapor Başlığı" />
 
         <div>
-            <flux:select wire:model.live="aralik" label="Tarih Aralığı">
-                @foreach (RaporDerleyici::ARALIKLAR as $deger => $etiket)
-                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="aralik" canli label="Tarih Aralığı" :secenekler="RaporDerleyici::ARALIKLAR" />
             <flux:text class="!mt-1 !text-xs">Yalnızca listeleri daraltır; puan ve hedef analizi tüm onaylı faaliyetlerle hesaplanır.</flux:text>
         </div>
 
-        <flux:select wire:model.live="hedefKadro" label="Hedef Kadro">
-            @foreach (Kadro::etiketler() as $deger => $etiket)
-                <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-            @endforeach
-        </flux:select>
+        <x-secim-listesi model="hedefKadro" canli label="Hedef Kadro" :secenekler="Kadro::etiketler()" />
 
-        <flux:select wire:model.live="hedefKurum" label="Hedef Kurum">
-            <flux:select.option value="">Hedef yok</flux:select.option>
-            @foreach ($kurumlar as $kurum)
-                <flux:select.option :value="$kurum">{{ $kurum }}</flux:select.option>
-            @endforeach
-        </flux:select>
+        <x-secim-listesi model="hedefKurum" canli label="Hedef Kurum"
+            :secenekler="['' => 'Hedef yok'] + collect($kurumlar)->mapWithKeys(fn ($k) => [$k => $k])->all()" />
 
         @if ($hedefKurum === '')
             <flux:text class="!text-xs">Hedef kurum seçilmeden puan ve koşullar basılmaz; yalnızca faaliyetler ve başvurulabilir üniversiteler listelenir.</flux:text>

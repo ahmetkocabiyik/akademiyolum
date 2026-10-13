@@ -128,9 +128,12 @@ class Onboarding extends Component
         $this->yon = 'geri';
     }
 
-    public function updatedTemelAlan(): void
+    /** "Alanım listede yok…" bir seçim değil, yalnızca listeyi genişletir. */
+    public function updatingTemelAlan(mixed $deger): void
     {
-        $this->temelAlanSecildi = true;
+        if ($deger !== self::TUM_ALANLAR) {
+            $this->temelAlanSecildi = true;
+        }
     }
 
     /**

@@ -6,12 +6,8 @@
     <div class="flex flex-col gap-4">
         <div class="grid gap-3 rounded-xl border border-line bg-surface p-4 md:grid-cols-[minmax(0,1fr)_16rem]">
             <flux:input wire:model.live.debounce.300ms="arama" icon="magnifying-glass" placeholder="Yönetici ya da kullanıcı e-postası..." clearable />
-            <flux:select wire:model.live="islem">
-                <flux:select.option value="">Tüm işlemler</flux:select.option>
-                @foreach (YoneticiIslemi::cases() as $secenek)
-                    <flux:select.option :value="$secenek->value">{{ $secenek->etiket() }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="islem" canli placeholder="Tüm işlemler"
+                :secenekler="['' => 'Tüm işlemler'] + collect(YoneticiIslemi::cases())->mapWithKeys(fn ($i) => [$i->value => $i->etiket()])->all()" />
         </div>
 
         <flux:card class="overflow-x-auto !p-0">

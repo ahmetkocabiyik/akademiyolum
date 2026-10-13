@@ -8,24 +8,12 @@
         <div class="grid gap-3 rounded-xl border border-line bg-surface p-4 md:grid-cols-[minmax(0,1fr)_12rem_12rem_12rem]">
             <flux:input wire:model.live.debounce.300ms="arama" icon="magnifying-glass" placeholder="Ad, e-posta ya da üniversite..." clearable />
 
-            <flux:select wire:model.live="plan">
-                <flux:select.option value="">Tüm planlar</flux:select.option>
-                @foreach (Plan::cases() as $secenek)
-                    <flux:select.option :value="$secenek->value">{{ $secenek->etiket() }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="plan" canli placeholder="Tüm planlar"
+                :secenekler="['' => 'Tüm planlar'] + collect(Plan::cases())->mapWithKeys(fn ($p) => [$p->value => $p->etiket()])->all()" />
 
-            <flux:select wire:model.live="durum">
-                @foreach (Kullanicilar::DURUMLAR as $deger => $etiket)
-                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="durum" canli :secenekler="Kullanicilar::DURUMLAR" />
 
-            <flux:select wire:model.live="siralama">
-                @foreach (Kullanicilar::SIRALAMALAR as $deger => $etiket)
-                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            <x-secim-listesi model="siralama" canli :secenekler="Kullanicilar::SIRALAMALAR" />
         </div>
 
         <flux:card class="overflow-x-auto !p-0">
