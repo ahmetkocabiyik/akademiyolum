@@ -288,7 +288,6 @@ class Profile extends Component
     {
         return view('livewire.settings.profile', [
             'universiteler' => Universite::query()->orderBy('ad')->pluck('ad'),
-            'temelAlanlar' => TemelAlan::secenekler(),
             'fakulteler' => $this->fakulteSecenekleri(),
             'bolumler' => $this->bolumSecenekleri(),
             'akademikAlanlar' => self::akademikAlanlar(),

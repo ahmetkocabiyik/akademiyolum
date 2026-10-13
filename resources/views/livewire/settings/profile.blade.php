@@ -90,12 +90,7 @@
                 @endforeach
             </flux:select>
 
-            <flux:select wire:model.live="temelAlan" label="Temel Alan (yönerge grubu)"
-                description="Yönerge analizi buna göre yapılır.">
-                @foreach ($temelAlanlar as $deger => $etiket)
-                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            @include('partials.temel-alan-secimi', ['aciklama' => 'Yönerge analizi buna göre yapılır.'])
 
             @include('partials.fakulte-bolum-secimi')
             </div>

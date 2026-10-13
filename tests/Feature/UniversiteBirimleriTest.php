@@ -1,6 +1,7 @@
 <?php
 
 use App\Console\Commands\UniversiteBirimleriCek;
+use App\Enums\TemelAlan;
 use App\Livewire\Onboarding;
 use App\Livewire\Settings\Profile;
 use App\Models\Universite;
@@ -203,4 +204,62 @@ test('seeder yeni adlı satırı önce açtıysa eski satır silinir, bağlantı
     $gocu->up();
 
     expect(Universite::query()->sole()->only('ad', 'yonerge_url'))->toBe(['ad' => $gocu::YENI, 'yonerge_url' => 'https://ornek.test/kavram.pdf']);
+});
+
+// ── TEMEL ALAN ────────────────────────────────────────────────────────────
+
+test('temel alanlar üniversitenin yönergesine göre iki grupta gelir', function () {
+    actingAs(User::factory()->create());
+
+    $bilesen = Livewire::test(Onboarding::class)
+        ->set('step', 2)
+        ->set('universite', 'Abdullah Gül Üniversitesi');
+
+    $gruplar = $bilesen->instance()->temelAlanGruplari();
+
+    expect(array_keys($gruplar['tanimli']))->toBe(['sosyal', 'fen', 'muhendislik', 'filoloji', 'mimarlik'])
+        ->and($gruplar['tanimsiz'])->toHaveKey('ilahiyat')
+        ->and(count($gruplar['tanimli']) + count($gruplar['tanimsiz']))->toBe(count(TemelAlan::cases()));
+
+    $bilesen->assertSee('Abdullah Gül Üniversitesi yönergesinde tanımlı')
+        ->assertSee('Bu yönergede tanımlı değil')
+        ->assertDontSee('ölçüt tanımlamıyor');
+});
+
+test('yönergenin tanımlamadığı alan seçilebilir, uyarı gösterilir ve üniversite değişince alan korunur', function () {
+    actingAs(User::factory()->create());
+
+    Livewire::test(Onboarding::class)
+        ->set('step', 2)
+        ->set('universite', 'Abdullah Gül Üniversitesi')
+        ->set('temelAlan', 'ilahiyat')
+        ->assertSee('Abdullah Gül Üniversitesi yönergesi bu temel alan için ölçüt tanımlamıyor')
+        ->set('universite', 'Listede Olmayan Üniversite')
+        ->assertSet('temelAlan', 'ilahiyat')
+        ->assertDontSee('ölçüt tanımlamıyor');
+});
+
+test('yönergesi olmayan üniversitede bütün alanlar tek grupta gelir', function () {
+    actingAs(User::factory()->create(['universite' => 'Listede Olmayan Üniversite']));
+
+    Livewire::test(Profile::class)
+        ->assertDontSee('Bu yönergede tanımlı değil')
+        ->assertSee('İlahiyat');
+});
+
+test('kurulumda elle seçilmemiş varsayılan alan yönergenin ilk alanına geçer, elle seçilen korunur', function () {
+    actingAs(User::factory()->create());
+
+    $saglik = 'Lokman Hekim Üniversitesi';
+    expect(app(SartDeposu::class)->alanlar($saglik))->not->toContain('sosyal');
+
+    Livewire::test(Onboarding::class)
+        ->assertSet('temelAlan', 'sosyal')
+        ->set('universite', $saglik)
+        ->assertSet('temelAlan', 'saglik');
+
+    Livewire::test(Onboarding::class)
+        ->set('temelAlan', 'sosyal')
+        ->set('universite', $saglik)
+        ->assertSet('temelAlan', 'sosyal');
 });

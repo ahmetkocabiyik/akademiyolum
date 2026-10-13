@@ -64,11 +64,7 @@
             <x-combobox model="universite" :secenekler="$universiteler" gonder
                 label="Üniversite" placeholder="Üniversite adı yazın..." />
 
-            <flux:select wire:model.live="temelAlan" label="Temel Alan (yönerge grubu)">
-                @foreach ($temelAlanlar as $deger => $etiket)
-                    <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
-                @endforeach
-            </flux:select>
+            @include('partials.temel-alan-secimi')
 
             @include('partials.fakulte-bolum-secimi')
 

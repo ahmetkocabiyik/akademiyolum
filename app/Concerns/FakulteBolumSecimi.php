@@ -4,9 +4,10 @@ namespace App\Concerns;
 
 use App\Enums\TemelAlan;
 use App\Services\Kurum\BirimKatalogu;
+use App\Services\Scoring\Sart\SartDeposu;
 
 /**
- * Kurulum ve profil ekranlarının ortak fakülte/bölüm seçimi.
+ * Kurulum ve profil ekranlarının ortak temel alan, fakülte ve bölüm seçimi.
  *
  * Seçenekler üniversiteye göre gelir (bkz. BirimKatalogu) ama kutular serbest
  * metne izin verir: atlas yalnızca öğrenci alan birimleri listeliyor,
@@ -36,6 +37,36 @@ trait FakulteBolumSecimi
     public function fakulteSecenekleri(): array
     {
         return app(BirimKatalogu::class)->fakulteler($this->universite, TemelAlan::tryFrom($this->temelAlan) ?? TemelAlan::Sosyal);
+    }
+
+    /**
+     * Temel alanlar, üniversitenin yönergesine göre iki grupta: ölçüt
+     * tanımlananlar ve tanımlanmayanlar. Yönerge yoksa hepsi ilk grupta.
+     *
+     * Tanımlanmayanlar gizlenmez: temel alan kişinin kendi disiplini ve
+     * yönerge verisinde eksik kalmış bir alan da olabilir; listede bulamayan
+     * aday yanlış alanı seçerdi.
+     *
+     * @return array{tanimli: array<string, string>, tanimsiz: array<string, string>}
+     */
+    public function temelAlanGruplari(): array
+    {
+        $tumu = TemelAlan::secenekler();
+        $alanlar = app(SartDeposu::class)->alanlar($this->universite);
+
+        if ($alanlar === []) {
+            return ['tanimli' => $tumu, 'tanimsiz' => []];
+        }
+
+        $tanimli = array_intersect_key($tumu, array_flip($alanlar));
+
+        return ['tanimli' => $tanimli, 'tanimsiz' => array_diff_key($tumu, $tanimli)];
+    }
+
+    /** Seçili temel alan, üniversitenin yönergesinin ölçüt tanımlamadığı bir alan mı? */
+    public function temelAlanTanimsiz(): bool
+    {
+        return array_key_exists($this->temelAlan, $this->temelAlanGruplari()['tanimsiz']);
     }
 
     /**

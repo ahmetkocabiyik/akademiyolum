@@ -339,6 +339,27 @@ class SartDeposu
     }
 
     /**
+     * Bir üniversitenin yönergesinin ölçüt tanımladığı temel alanlar.
+     *
+     * Boş dönerse üniversitenin doğrulanmış yönergesi yoktur; hangi alanların
+     * geçerli olduğu bilinmiyor demektir, "hiçbiri" değil.
+     *
+     * @return list<string>
+     */
+    public function alanlar(string $universite): array
+    {
+        $alanlar = [];
+
+        foreach ($this->dogrulanmisEsikler() as $esik) {
+            if ($esik['universite'] === $universite) {
+                $alanlar[$esik['alan']] = true;
+            }
+        }
+
+        return array_keys($alanlar);
+    }
+
+    /**
      * Bir üniversitenin program bazlı eşiklerindeki birim adları.
      *
      * Boş dönerse yönerge programdan bağımsızdır ve kullanıcıya program

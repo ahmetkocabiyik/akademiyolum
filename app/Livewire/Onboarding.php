@@ -51,6 +51,13 @@ class Onboarding extends Component
 
     public string $temelAlan = 'sosyal';
 
+    /**
+     * Temel alan kullanıcı tarafından seçildi mi? Seçilmediyse varsayılan
+     * ("sosyal") üniversitenin yönergesine göre değişebilir; seçildiyse
+     * dokunulmaz, çünkü temel alan kişinin kendi disiplini.
+     */
+    public bool $temelAlanSecildi = false;
+
     public string $orcid = '';
 
     public string $paket = 'ucretsiz';
@@ -119,6 +126,23 @@ class Onboarding extends Component
     {
         $this->step = max($this->step - 1, 1);
         $this->yon = 'geri';
+    }
+
+    public function updatedTemelAlan(): void
+    {
+        $this->temelAlanSecildi = true;
+    }
+
+    /**
+     * Varsayılan alan seçilen üniversitenin yönergesinde yoksa yönergenin ilk
+     * alanına geçilir; yoksa aday hiçbir şey seçmeden "ölçüt tanımlamıyor"
+     * uyarısıyla karşılaşırdı (sağlık bilimleri üniversitesinde "sosyal").
+     */
+    public function updatedUniversite(): void
+    {
+        if (! $this->temelAlanSecildi && $this->temelAlanTanimsiz()) {
+            $this->temelAlan = (string) array_key_first($this->temelAlanGruplari()['tanimli']);
+        }
     }
 
     public function cikis(): void
@@ -195,7 +219,6 @@ class Onboarding extends Component
     {
         return view('livewire.onboarding', [
             'universiteler' => Universite::query()->orderBy('ad')->pluck('ad'),
-            'temelAlanlar' => TemelAlan::secenekler(),
             'fakulteler' => $this->fakulteSecenekleri(),
             'bolumler' => $this->bolumSecenekleri(),
         ]);
