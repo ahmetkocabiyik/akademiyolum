@@ -11,6 +11,8 @@
     'secimZorunlu' => false,
     /** Seçim zorunluyken boş değerin etiketi, listenin başında seçenek olarak ("Tüm şehirler"). */
     'tumuEtiketi' => null,
+    /** Serbest metin kutusunda seçim yapılınca ya da kutu kapanınca değeri sunucuya gönderir (bağlı listeler için). */
+    'gonder' => false,
 ])
 
 {{--
@@ -39,6 +41,11 @@
     değer ancak listeden seçilince değişir ve hemen sunucuya gider. Serbest
     metin bir filtre olsaydı "Ank" yazan aday hiç sonuç görmezdi. Kutu
     kapanınca yazı seçili değere döner.
+
+    `gonder` BAĞLI LİSTELER için (üniversite → fakülte → bölüm): değer her
+    tuşta değil, seçim yapılınca ya da kutudan çıkılınca bir kez gönderilir;
+    sunucu alttaki listeyi yeniden çizer. Bağlı kutu `wire:key`'ini listeye
+    göre değiştirmeli, yoksa Alpine eski listeyi tutar.
 --}}
 <div
     x-data="{
@@ -49,6 +56,8 @@
             sorgu: @entangle($model),
         @endif
         zorunlu: @js((bool) $secimZorunlu),
+        gonder: @js((bool) $gonder),
+        gonderilen: null,
         acik: false,
         yazildi: false,
         vurgu: -1,
@@ -65,6 +74,7 @@
             return liste.slice(0, {{ (int) $sinir }});
         },
         init() {
+            this.gonderilen = this.sorgu;
             if (! this.zorunlu) return;
             this.sorgu = this.secili || '';
             // Değer dışarıdan değişirse (sıfırlama gibi) yazı da izlesin.
@@ -73,10 +83,17 @@
         sec(s) {
             if (this.zorunlu) this.secili = s;
             this.sorgu = s; this.acik = false; this.yazildi = false; this.vurgu = -1;
+            this.gonderGerekirse();
         },
         kapat() {
             this.acik = false; this.yazildi = false; this.vurgu = -1;
             if (this.zorunlu) this.sorgu = this.secili || '';
+            this.gonderGerekirse();
+        },
+        gonderGerekirse() {
+            if (! this.gonder || this.zorunlu || this.sorgu === this.gonderilen) return;
+            this.gonderilen = this.sorgu;
+            this.$wire.$commit();
         },
         asagi() { this.acik = true; if (this.vurgu < this.sonuclar.length - 1) this.vurgu++; },
         yukari() { if (this.vurgu > 0) this.vurgu--; },
@@ -99,6 +116,7 @@
         x-on:keydown.arrow-down.prevent="asagi()"
         x-on:keydown.arrow-up.prevent="yukari()"
         x-on:keydown.enter.prevent="enter()"
+        x-on:keydown.tab="kapat()"
         autocomplete="off"
     />
 

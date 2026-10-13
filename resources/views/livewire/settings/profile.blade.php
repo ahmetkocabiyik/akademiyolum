@@ -61,7 +61,7 @@
             <flux:heading size="sm">Akademik Bilgiler</flux:heading>
 
             {{-- Üniversite: yazılabilir seçim kutusu (bkz. components/combobox). --}}
-            <x-combobox model="universite" :secenekler="$universiteler"
+            <x-combobox model="universite" :secenekler="$universiteler" gonder
                 label="Üniversite" placeholder="Üniversite adı yazın..." />
 
             {{-- Program bazlı yönergelerde (ör. Sabancı) aynı temel alanda birden
@@ -91,27 +91,13 @@
             </flux:select>
 
             <flux:select wire:model.live="temelAlan" label="Temel Alan (yönerge grubu)"
-                description="Yönerge analizi buna göre yapılır. Fakülte seçenekleri de buna göre gelir.">
+                description="Yönerge analizi buna göre yapılır.">
                 @foreach ($temelAlanlar as $deger => $etiket)
                     <flux:select.option :value="$deger">{{ $etiket }}</flux:select.option>
                 @endforeach
             </flux:select>
 
-            <flux:select wire:model.live="fakulte" label="Fakülte (opsiyonel)" placeholder="Fakülte seçin...">
-                <flux:select.option value="">Seçiniz (opsiyonel)</flux:select.option>
-                @foreach (\App\Enums\TemelAlan::from($temelAlan)->fakulteler() as $f)
-                    <flux:select.option :value="$f">{{ $f }}</flux:select.option>
-                @endforeach
-            </flux:select>
-
-            @if ($fakulte && count($bolumler[$fakulte] ?? []))
-                <flux:select wire:model.live="bolum" label="Bölüm (opsiyonel)" placeholder="Bölüm seçin...">
-                    <flux:select.option value="">Seçiniz (opsiyonel)</flux:select.option>
-                    @foreach ($bolumler[$fakulte] as $b)
-                        <flux:select.option :value="$b">{{ $b }}</flux:select.option>
-                    @endforeach
-                </flux:select>
-            @endif
+            @include('partials.fakulte-bolum-secimi')
             </div>
 
             <flux:separator variant="subtle" />

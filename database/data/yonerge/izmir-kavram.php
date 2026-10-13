@@ -4,6 +4,8 @@ use App\Services\Scoring\Sart\Kalip;
 
 /**
  * İZMİR KAVRAM MESLEK YÜKSEKOKULU — Yükseltme ve Atama Yönergesi
+ * Kurumun adı 31.01.2026'da "İzmir Konak Meslek Yüksekokulu" oldu (RG, CK
+ * 10929); kayıtlar yeni adla, kaynak belge ve dosya adı eski adla.
  * Kaynak: pdf/1766066729695.izmir-kavram-myo-kriter-18122025.pdf (7 sayfa)
  *
  * Cetvel: cetvel/izmir-kavram-2025.php (üç varyant)
@@ -65,7 +67,7 @@ $kayitlar = function (string $ekAdi, string $cetvel, array $alanlar, int $yenide
     return [
         [
             'anahtar' => "izmir-kavram-{$ekAdi}-dr",
-            'universite' => 'İzmir Kavram Meslek Yüksekokulu',
+            'universite' => 'İzmir Konak Meslek Yüksekokulu',
             'kadro' => 'dr_ogr_uyesi',
             'alan' => $alanlar,
             'birim' => null,
@@ -80,7 +82,7 @@ $kayitlar = function (string $ekAdi, string $cetvel, array $alanlar, int $yenide
         ],
         [
             'anahtar' => "izmir-kavram-{$ekAdi}-dr-yeniden",
-            'universite' => 'İzmir Kavram Meslek Yüksekokulu',
+            'universite' => 'İzmir Konak Meslek Yüksekokulu',
             'kadro' => 'dr_ogr_uyesi_yeniden',
             'alan' => $alanlar,
             'birim' => null,
@@ -99,7 +101,7 @@ $kayitlar = function (string $ekAdi, string $cetvel, array $alanlar, int $yenide
         ],
         [
             'anahtar' => "izmir-kavram-{$ekAdi}-docentlik",
-            'universite' => 'İzmir Kavram Meslek Yüksekokulu',
+            'universite' => 'İzmir Konak Meslek Yüksekokulu',
             'kadro' => 'docentlik',
             'alan' => $alanlar,
             'birim' => null,
@@ -115,7 +117,7 @@ $kayitlar = function (string $ekAdi, string $cetvel, array $alanlar, int $yenide
         ],
         [
             'anahtar' => "izmir-kavram-{$ekAdi}-profesorluk",
-            'universite' => 'İzmir Kavram Meslek Yüksekokulu',
+            'universite' => 'İzmir Konak Meslek Yüksekokulu',
             'kadro' => 'profesorluk',
             'alan' => $alanlar,
             'birim' => null,

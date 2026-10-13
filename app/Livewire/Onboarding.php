@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Concerns\FakulteBolumSecimi;
 use App\Enums\Plan;
 use App\Enums\TemelAlan;
 use App\Models\AbonelikTalebi;
@@ -26,6 +27,8 @@ use Livewire\Component;
 #[Layout('layouts.auth')]
 class Onboarding extends Component
 {
+    use FakulteBolumSecimi;
+
     /** Tanıtım sayfasında seçilen paketin oturum anahtarı (bkz. CreateNewUser). */
     public const SECILEN_PAKET = 'secilen_paket';
 
@@ -127,46 +130,6 @@ class Onboarding extends Component
         $this->redirectRoute('login');
     }
 
-    public function updatedTemelAlan(): void
-    {
-        $this->tutarliligiSagla();
-    }
-
-    public function updatedFakulte(): void
-    {
-        $this->tutarliligiSagla();
-    }
-
-    public function updatedBolum(): void
-    {
-        $this->tutarliligiSagla();
-    }
-
-    /**
-     * Kaskad tutarlılık: temel alan → fakülte → bölüm.
-     * Bir üst seçim değişince alt seçim listede yoksa sıfırlanır.
-     */
-    private function tutarliligiSagla(): void
-    {
-        $fakulteler = TemelAlan::tryFrom($this->temelAlan)?->fakulteler() ?? [];
-        if (! in_array($this->fakulte, $fakulteler, true)) {
-            $this->fakulte = '';
-        }
-
-        $bolumler = $this->bolumHaritasi()[$this->fakulte] ?? [];
-        if (! in_array($this->bolum, $bolumler, true)) {
-            $this->bolum = '';
-        }
-    }
-
-    /**
-     * @return array<string, list<string>>
-     */
-    private function bolumHaritasi(): array
-    {
-        return require database_path('data/bolumler.php');
-    }
-
     public function submit(): void
     {
         $this->validate([...$this->rulesForStep(1), ...$this->rulesForStep(2), ...$this->rulesForStep(3)]);
@@ -233,7 +196,8 @@ class Onboarding extends Component
         return view('livewire.onboarding', [
             'universiteler' => Universite::query()->orderBy('ad')->pluck('ad'),
             'temelAlanlar' => TemelAlan::secenekler(),
-            'bolumler' => $this->bolumHaritasi(),
+            'fakulteler' => $this->fakulteSecenekleri(),
+            'bolumler' => $this->bolumSecenekleri(),
         ]);
     }
 }

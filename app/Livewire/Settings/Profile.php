@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Settings;
 
+use App\Concerns\FakulteBolumSecimi;
 use App\Concerns\ProfileValidationRules;
 use App\Enums\TemelAlan;
 use App\Models\Universite;
@@ -24,6 +25,7 @@ use Livewire\WithFileUploads;
 #[Title('Profil ayarları')]
 class Profile extends Component
 {
+    use FakulteBolumSecimi;
     use ProfileValidationRules;
     use WithFileUploads;
 
@@ -160,41 +162,6 @@ class Profile extends Component
         }
     }
 
-    public function updatedTemelAlan(): void
-    {
-        $this->kaskadiSagla();
-    }
-
-    public function updatedFakulte(): void
-    {
-        $this->kaskadiSagla();
-    }
-
-    /**
-     * Kaskad tutarlılık: temel alan → fakülte → bölüm.
-     * Bir üst seçim değişince alt seçim listede yoksa sıfırlanır.
-     */
-    private function kaskadiSagla(): void
-    {
-        $fakulteler = TemelAlan::tryFrom($this->temelAlan)?->fakulteler() ?? [];
-        if (! in_array($this->fakulte, $fakulteler, true)) {
-            $this->fakulte = '';
-        }
-
-        $bolumler = $this->bolumHaritasi()[$this->fakulte] ?? [];
-        if (! in_array($this->bolum, $bolumler, true)) {
-            $this->bolum = '';
-        }
-    }
-
-    /**
-     * @return array<string, list<string>>
-     */
-    private function bolumHaritasi(): array
-    {
-        return require database_path('data/bolumler.php');
-    }
-
     /**
      * Update the profile information for the currently authenticated user.
      */
@@ -322,7 +289,8 @@ class Profile extends Component
         return view('livewire.settings.profile', [
             'universiteler' => Universite::query()->orderBy('ad')->pluck('ad'),
             'temelAlanlar' => TemelAlan::secenekler(),
-            'bolumler' => $this->bolumHaritasi(),
+            'fakulteler' => $this->fakulteSecenekleri(),
+            'bolumler' => $this->bolumSecenekleri(),
             'akademikAlanlar' => self::akademikAlanlar(),
             'programDilleri' => self::programDilleri(),
             'unvanlar' => self::unvanlar(),

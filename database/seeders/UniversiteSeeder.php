@@ -23,5 +23,9 @@ class UniversiteSeeder extends Seeder
         foreach ($universiteler as [$ad, $sehir, $tur]) {
             Universite::query()->updateOrCreate(['ad' => $ad], ['sehir' => $sehir, 'tur' => $tur]);
         }
+
+        // Fakülte/bölüm seçenekleri üniversitelere bağlı; deploy yalnızca bu
+        // seeder'ı çalıştırıyor, birimler de onunla güncel kalsın.
+        $this->call(UniversiteBirimiSeeder::class);
     }
 }

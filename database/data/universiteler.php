@@ -140,6 +140,9 @@ return [
     ['Yozgat Bozok Üniversitesi', 'Yozgat', 'devlet'],
     ['Zonguldak Bülent Ecevit Üniversitesi', 'Zonguldak', 'devlet'],
 
+    // 2026 YÖK Atlas kılavuzunda olup listede eksik olanlar (bkz. universite:birimleri-cek).
+    ['Türk-Japon Bilim ve Teknoloji Üniversitesi', 'İstanbul', 'devlet'],
+
     // ── Vakıf Üniversiteleri ──
     ['Acıbadem Mehmet Ali Aydınlar Üniversitesi', 'İstanbul', 'vakif'],
     ['Alanya Üniversitesi', 'Antalya', 'vakif'],
@@ -175,13 +178,13 @@ return [
     ['İstanbul Okan Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Rumeli Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Sabahattin Zaim Üniversitesi', 'İstanbul', 'vakif'],
-    ['İstanbul Şehir Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Ticaret Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Topkapı Üniversitesi', 'İstanbul', 'vakif'],
     ['İstanbul Yeni Yüzyıl Üniversitesi', 'İstanbul', 'vakif'],
     ['İstinye Üniversitesi', 'İstanbul', 'vakif'],
     ['İzmir Ekonomi Üniversitesi', 'İzmir', 'vakif'],
-    ['İzmir Kavram Meslek Yüksekokulu', 'İzmir', 'vakif'],
+    // Eski adı İzmir Kavram MYO (RG 31.01.2026, CK 10929).
+    ['İzmir Konak Meslek Yüksekokulu', 'İzmir', 'vakif'],
     ['Kadir Has Üniversitesi', 'İstanbul', 'vakif'],
     ['Kocaeli Sağlık ve Teknoloji Üniversitesi', 'Kocaeli', 'vakif'],
     ['Koç Üniversitesi', 'İstanbul', 'vakif'],
@@ -196,7 +199,6 @@ return [
     ['Piri Reis Üniversitesi', 'İstanbul', 'vakif'],
     ['Sabancı Üniversitesi', 'İstanbul', 'vakif'],
     ['SANKO Üniversitesi', 'Gaziantep', 'vakif'],
-    ['Süleyman Şah Üniversitesi', 'İstanbul', 'vakif'],
     ['TED Üniversitesi', 'Ankara', 'vakif'],
     ['TOBB Ekonomi ve Teknoloji Üniversitesi', 'Ankara', 'vakif'],
     ['Toros Üniversitesi', 'Mersin', 'vakif'],
@@ -204,4 +206,23 @@ return [
     ['Üsküdar Üniversitesi', 'İstanbul', 'vakif'],
     ['Yaşar Üniversitesi', 'İzmir', 'vakif'],
     ['Yeditepe Üniversitesi', 'İstanbul', 'vakif'],
+
+    // 2026 YÖK Atlas kılavuzunda olup listede eksik olanlar (bkz. universite:birimleri-cek).
+    ['Ankara Medipol Üniversitesi', 'Ankara', 'vakif'],
+    ['Antalya Belek Üniversitesi', 'Antalya', 'vakif'],
+    ['Avrasya Üniversitesi', 'Trabzon', 'vakif'],
+    ['Demiroğlu Bilim Üniversitesi', 'İstanbul', 'vakif'],
+    ['Hasan Kalyoncu Üniversitesi', 'Gaziantep', 'vakif'],
+    ['İstanbul Esenyurt Üniversitesi', 'İstanbul', 'vakif'],
+    ['İstanbul Gelişim Üniversitesi', 'İstanbul', 'vakif'],
+    ['İstanbul Kent Üniversitesi', 'İstanbul', 'vakif'],
+    ['İstanbul Sağlık ve Sosyal Bilimler Meslek Yüksekokulu', 'İstanbul', 'vakif'],
+    ['İstanbul Sağlık ve Teknoloji Üniversitesi', 'İstanbul', 'vakif'],
+    ['İstanbul Şişli Meslek Yüksekokulu', 'İstanbul', 'vakif'],
+    ['İzmir Tınaztepe Üniversitesi', 'İzmir', 'vakif'],
+    ['Kapadokya Üniversitesi', 'Nevşehir', 'vakif'],
+    ['Mudanya Üniversitesi', 'Bursa', 'vakif'],
+    ['Nuh Naci Yazgan Üniversitesi', 'Kayseri', 'vakif'],
+    ['Türk Hava Kurumu Üniversitesi', 'Ankara', 'vakif'],
+    ['Yüksek İhtisas Üniversitesi', 'Ankara', 'vakif'],
 ];
