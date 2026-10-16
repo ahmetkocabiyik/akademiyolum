@@ -3,10 +3,8 @@
 namespace App\Livewire;
 
 use App\Enums\Kategori;
-use App\Enums\TemelAlan;
 use App\Models\Faaliyet;
 use App\Services\Scoring\Sart\MaddeKatalogu;
-use App\Services\Scoring\Sart\SartDeposu;
 use App\Services\Yayin\AdEslestirici;
 use App\Services\Yayin\AramaException;
 use App\Services\Yayin\CrossrefArama;
@@ -343,21 +341,7 @@ class FaaliyetEkle extends Component
      */
     private function katalog(): ?MaddeKatalogu
     {
-        $user = Auth::user();
-
-        if ($user->universite === null) {
-            return null;
-        }
-
-        $depo = app(SartDeposu::class);
-        $esik = $depo->bul(
-            $user->universite,
-            'dr_ogr_uyesi',
-            ($user->temel_alan ?? TemelAlan::Sosyal)->value,
-            $user->birim,
-        );
-
-        return $esik !== null ? $depo->katalog($esik['cetvel']) : null;
+        return Auth::user()->puanCetveli();
     }
 
     /**

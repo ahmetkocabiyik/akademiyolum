@@ -94,6 +94,34 @@ test('puan faaliyette saklanmaz, kendi üniversitesinin cetvelinden hesaplanır'
     expect(Livewire::test(Dashboard::class)->instance()->toplam())->toBe(10);
 });
 
+test('faaliyet listesindeki puan saklanan sütundan değil cetvelden gelir', function () {
+    Universite::factory()->create(['ad' => 'Test Üniversitesi']);
+    app()->instance(SartDeposu::class, dashboardDeposu());
+
+    $user = User::factory()->onboarded()->create(['universite' => 'Test Üniversitesi', 'unvan' => 'Arş. Gör.']);
+
+    // Sütun 0 kalıyordu: dağılım kartı 10 derken listede 0 yazıyordu.
+    Faaliyet::factory()->for($user)->create(['kaynak' => 'TR Dizin', 'durum' => 'onaylandi', 'puan' => 0]);
+
+    actingAs($user);
+
+    Livewire::test(Dashboard::class)
+        ->assertSeeHtml('data-faaliyet-puani>10</td>')
+        ->assertDontSeeHtml('data-faaliyet-puani>0</td>');
+});
+
+test('yönergesi yoksa listede puan yerine tire görünür', function () {
+    Universite::factory()->create(['ad' => 'Verisi Olmayan Üni']);
+    app()->instance(SartDeposu::class, dashboardDeposu());
+
+    $user = User::factory()->onboarded()->create(['universite' => 'Verisi Olmayan Üni', 'unvan' => 'Arş. Gör.']);
+    Faaliyet::factory()->for($user)->create(['kaynak' => 'TR Dizin', 'durum' => 'onaylandi']);
+
+    actingAs($user);
+
+    Livewire::test(Dashboard::class)->assertSeeHtml('data-faaliyet-puani>—</td>');
+});
+
 test('yönergesi girilmemiş üniversitede puan gösterilmez', function () {
     Universite::factory()->create(['ad' => 'Verisi Olmayan Üni']);
     app()->instance(SartDeposu::class, dashboardDeposu());

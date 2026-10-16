@@ -40,6 +40,7 @@ use Livewire\Component;
  * @property-read Esik|null $esik
  * @property-read SartSonucu|null $sonuc
  * @property-read list<array{kategori: Kategori, puan: int, adet: int}> $dagilim
+ * @property-read array<int, int>|null $puanlar
  * @property-read int $toplam
  * @property-read int|null $baraj
  * @property-read int $yuzde
@@ -176,6 +177,17 @@ class Dashboard extends Component
         usort($satirlar, fn (array $a, array $b) => $b['puan'] <=> $a['puan'] ?: $b['adet'] <=> $a['adet']);
 
         return $satirlar;
+    }
+
+    /**
+     * Listedeki her faaliyetin kendi cetvelindeki puanı. Yönerge yoksa null.
+     *
+     * @return array<int, int>|null
+     */
+    #[Computed]
+    public function puanlar(): ?array
+    {
+        return Auth::user()->puanCetveli()?->faaliyetPuanlari($this->faaliyetler->take(8));
     }
 
     #[Computed]

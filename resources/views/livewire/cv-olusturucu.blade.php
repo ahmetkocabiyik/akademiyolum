@@ -32,6 +32,7 @@
             :beceriler="$beceriler"
             :diller="$diller"
             :faaliyetler="$this->faaliyetler"
+            :puanlar="$this->puanlar"
             :haric-faaliyetler="$haricFaaliyetler"
             :foto="$this->fotoAdresi()"
             :unvan="$unvan"

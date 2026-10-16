@@ -3,7 +3,9 @@
 use App\Enums\Kategori;
 use App\Livewire\Faaliyetler;
 use App\Models\Faaliyet;
+use App\Models\Universite;
 use App\Models\User;
+use App\Services\Scoring\Sart\SartDeposu;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Livewire;
 
@@ -74,4 +76,28 @@ test('listedeki satır faaliyetin düzenleme sayfasına bağlanır', function ()
         ->assertSeeHtml('href="'.route('faaliyetler.duzenle', $faaliyet).'"')
         // Satır tıklaması o bağlantıyı tetikler, işlem düğmeleri hariç tutulur.
         ->assertSeeHtml("closest('a, button') || \$refs.duzenle.click()");
+});
+
+test('listedeki puan kendi üniversitesinin cetvelinden hesaplanır', function () {
+    Universite::factory()->create(['ad' => 'Test Üniversitesi']);
+    app()->instance(SartDeposu::class, new SartDeposu(
+        esikVerisi: [[
+            'anahtar' => 'test-dr-ilahiyat', 'universite' => 'Test Üniversitesi',
+            'kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat', 'birim' => null,
+            'cetvel' => 'test-cetvel', 'notlar' => '',
+            'sart' => ['tip' => 'puan', 'rol' => 'toplam', 'aciklama' => 'Toplam',
+                'maddeler' => ['*'], 'min_puan' => 50],
+        ]],
+        cetvelVerisi: ['test-cetvel' => ['maddeler' => [
+            'M1' => ['baslik' => 'TR Dizin makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
+        ]]],
+    ));
+    $this->user->update(['universite' => 'Test Üniversitesi', 'unvan' => 'Arş. Gör.']);
+
+    // Puan saklanmıyor; sütundaki değer gösterilmemeli.
+    Faaliyet::factory()->for($this->user)->create(['kaynak' => 'TR Dizin', 'durum' => 'onaylandi', 'puan' => 0]);
+
+    Livewire::test(Faaliyetler::class)
+        ->assertSeeHtml('data-faaliyet-puani>10</td>')
+        ->assertDontSeeHtml('data-faaliyet-puani>0</td>');
 });

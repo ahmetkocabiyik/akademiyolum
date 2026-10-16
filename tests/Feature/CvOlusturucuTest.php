@@ -7,7 +7,9 @@ use App\Enums\Kategori;
 use App\Livewire\CvOlusturucu;
 use App\Models\CvProfili;
 use App\Models\Faaliyet;
+use App\Models\Universite;
 use App\Models\User;
+use App\Services\Scoring\Sart\SartDeposu;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
@@ -629,4 +631,30 @@ test('yazdırmada cv sayfasının arka plan renkleri korunur', function () {
     expect($yazdirma[1] ?? '')
         ->toMatch('/#cv-sayfa\s*\{[^}]*(?<!-)print-color-adjust:\s*exact/')
         ->toMatch('/#cv-sayfa\s*\{[^}]*-webkit-print-color-adjust:\s*exact/');
+});
+
+test('faaliyet listesindeki puan saklanan sütundan değil kendi cetvelinden gelir', function () {
+    Universite::factory()->create(['ad' => 'Test Üniversitesi']);
+    app()->instance(SartDeposu::class, new SartDeposu(
+        esikVerisi: [[
+            'anahtar' => 'test-dr-ilahiyat', 'universite' => 'Test Üniversitesi',
+            'kadro' => 'dr_ogr_uyesi', 'alan' => 'ilahiyat', 'birim' => null,
+            'cetvel' => 'test-cetvel', 'notlar' => '',
+            'sart' => ['tip' => 'puan', 'rol' => 'toplam', 'aciklama' => 'Toplam',
+                'maddeler' => ['*'], 'min_puan' => 50],
+        ]],
+        cetvelVerisi: ['test-cetvel' => ['maddeler' => [
+            'M1' => ['baslik' => 'TR Dizin makale', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10],
+        ]]],
+    ));
+    $this->user->update(['universite' => 'Test Üniversitesi', 'unvan' => 'Arş. Gör.']);
+    $this->makale->update(['puan' => 0]);
+
+    $bilesen = Livewire::test(CvOlusturucu::class)->set('sekme', 'faaliyet')->assertSee('TR Dizin · 10 pt');
+
+    ob_start();
+    $bilesen->instance()->jsonIndir()->sendContent();
+    $veri = json_decode((string) ob_get_clean(), true);
+
+    expect(collect($veri['faaliyetler'])->firstWhere('baslik', 'Anadolu Tasavvuf Geleneği')['puan'])->toBe(10);
 });

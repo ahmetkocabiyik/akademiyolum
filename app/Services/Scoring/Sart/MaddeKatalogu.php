@@ -718,6 +718,25 @@ readonly class MaddeKatalogu
     }
 
     /**
+     * Her faaliyetin bu cetveldeki puanı, faaliyet kimliğine göre. Listeler
+     * bunu gösterir; kategori dağılımıyla aynı hesap.
+     *
+     * @param  iterable<Faaliyet>  $faaliyetler
+     * @return array<int, int>
+     */
+    public function faaliyetPuanlari(iterable $faaliyetler): array
+    {
+        $kodlar = array_keys($this->maddeler);
+        $puanlar = [];
+
+        foreach ($faaliyetler as $faaliyet) {
+            $puanlar[$faaliyet->id] = $this->puan($faaliyet, $kodlar);
+        }
+
+        return $puanlar;
+    }
+
+    /**
      * Faaliyetlerin bu cetvele göre kategori bazlı puan ve adet dağılımı.
      * Analiz ekranındaki dağılım grafiği bunu kullanır.
      *

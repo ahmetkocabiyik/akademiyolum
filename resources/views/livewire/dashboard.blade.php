@@ -264,7 +264,7 @@
                                         <flux:badge size="sm">{{ $f->kategori->label() }}</flux:badge>
                                     </td>
                                     <td class="px-2 py-2.5 text-ink-muted">{{ $f->kaynak ?? '—' }}</td>
-                                    <td class="px-2 py-2.5 font-serif font-bold text-brand">{{ $f->puan }}</td>
+                                    <td class="px-2 py-2.5 font-serif font-bold text-brand" data-faaliyet-puani>{{ $this->puanlar[$f->id] ?? '—' }}</td>
                                     <td class="px-2 py-2.5">
                                         <flux:badge :color="$f->durum === 'onaylandi' ? 'green' : 'amber'" size="sm">
                                             {{ $f->durum === 'onaylandi' ? 'Onaylandı' : 'Beklemede' }}

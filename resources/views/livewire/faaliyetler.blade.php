@@ -78,7 +78,7 @@
                                             <span class="text-xs text-cat-amber-text">girilmemiş</span>
                                         @endif
                                     </td>
-                                    <td class="px-2 py-2.5 font-serif font-bold text-brand">{{ $f->puan }}</td>
+                                    <td class="px-2 py-2.5 font-serif font-bold text-brand" data-faaliyet-puani>{{ $puanlar[$f->id] ?? '—' }}</td>
                                     <td class="px-2 py-2.5 max-md:hidden">
                                         <flux:badge :color="$f->durum === 'onaylandi' ? 'green' : 'amber'" size="sm">
                                             {{ $f->durum === 'onaylandi' ? 'Onaylandı' : 'Beklemede' }}

@@ -46,7 +46,9 @@ class Faaliyetler extends Component
     public function render()
     {
         return view('livewire.faaliyetler', [
-            'faaliyetler' => $this->faaliyetler(),
+            'faaliyetler' => $faaliyetler = $this->faaliyetler(),
+            // Puan saklanmıyor; kendi cetvelinden hesaplanır. Yönerge yoksa null.
+            'puanlar' => Auth::user()->puanCetveli()?->faaliyetPuanlari($faaliyetler),
             'kategoriler' => Kategori::secenekler(),
             'vurgulanan' => (array) session(self::VURGULANAN, []),
         ]);

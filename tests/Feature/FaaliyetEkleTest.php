@@ -30,8 +30,10 @@ beforeEach(function () {
         ]]],
     ));
 
+    // Arş. Gör. → hedef Dr. Öğr. Üyesi; önizleme hedef kadronun cetvelini kullanır.
     $this->user = User::factory()->onboarded()->create([
         'universite' => 'Test Üniversitesi',
+        'unvan' => 'Arş. Gör.',
     ]);
     actingAs($this->user);
 });
@@ -117,6 +119,32 @@ test('canlı puan önizlemesi kullanıcının kendi cetvelinden gelir', function
         ->set('kaynak', 'TR Dizin');
 
     expect($component->instance()->tahminiPuan())->toBe(10);
+});
+
+test('puan önizlemesi hedef kadronun cetvelini kullanır', function () {
+    // KTÜ ve Piri Reis her kadroya ayrı cetvel yazıyor; önizleme Dashboard ile
+    // aynı cetvelden gelmeli (eskiden hep Dr. Öğr. Üyesi cetveline bakıyordu).
+    app()->instance(SartDeposu::class, new SartDeposu(
+        esikVerisi: collect(['dr_ogr_uyesi' => 'cetvel-dr', 'docentlik' => 'cetvel-docent'])
+            ->map(fn (string $cetvel, string $kadro): array => [
+                'anahtar' => "test-{$kadro}", 'universite' => 'Test Üniversitesi',
+                'kadro' => $kadro, 'alan' => 'ilahiyat', 'birim' => null,
+                'cetvel' => $cetvel, 'notlar' => '',
+                'sart' => ['tip' => 'puan', 'rol' => 'toplam', 'aciklama' => 'Toplam',
+                    'maddeler' => ['*'], 'min_puan' => 50],
+            ])->values()->all(),
+        cetvelVerisi: [
+            'cetvel-dr' => ['maddeler' => ['M1' => ['baslik' => 'TR Dizin', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 10]]],
+            'cetvel-docent' => ['maddeler' => ['M1' => ['baslik' => 'TR Dizin', 'kategori' => 'makale', 'kaynaklar' => ['TR Dizin'], 'puan' => 4]]],
+        ],
+    ));
+    $this->user->update(['unvan' => 'Dr. Öğr. Üyesi']);
+
+    $component = Livewire::test(FaaliyetEkle::class)
+        ->set('kategori', Kategori::Makale->value)
+        ->set('kaynak', 'TR Dizin');
+
+    expect($component->instance()->tahminiPuan())->toBe(4);
 });
 
 test('yönergesi girilmemiş üniversitede puan önizlemesi gösterilmez', function () {

@@ -5,6 +5,8 @@
     'beceriler',
     'diller',
     'faaliyetler',
+    /** array<int, int>|null — faaliyet kimliği → kendi cetvelindeki puan. */
+    'puanlar' => null,
     'haricFaaliyetler',
     'foto',
     'unvan',
@@ -194,7 +196,7 @@
                                     $faaliyet->kategori->label(),
                                     $faaliyet->kaynak,
                                     $faaliyet->tarih?->format('Y'),
-                                    $faaliyet->puan.' pt',
+                                    isset($puanlar[$faaliyet->id]) ? $puanlar[$faaliyet->id].' pt' : null,
                                 ])->filter()->implode(' · ') }}
                             </div>
                         </div>

@@ -45,6 +45,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  * @property-read Collection<int, Faaliyet> $faaliyetler
  * @property-read Collection<int, Faaliyet> $secilenler
  * @property-read array<string, Collection<int, Faaliyet>> $gruplu
+ * @property-read array<int, int>|null $puanlar
  */
 #[Layout('layouts.app')]
 #[Title('CV Oluşturucu')]
@@ -179,6 +180,18 @@ class CvOlusturucu extends Component
             ->onaylanmis()
             ->orderByDesc('tarih')
             ->get();
+    }
+
+    /**
+     * Faaliyetlerin kendi üniversitesinin cetvelindeki puanı. Puan
+     * saklanmadığı için sütun 0 kalıyordu; yönerge yoksa null.
+     *
+     * @return array<int, int>|null
+     */
+    #[Computed]
+    public function puanlar(): ?array
+    {
+        return Auth::user()->puanCetveli()?->faaliyetPuanlari($this->faaliyetler);
     }
 
     /**
@@ -448,7 +461,7 @@ class CvOlusturucu extends Component
                 'yazarlar' => $f->yazarlar,
                 'kaynak' => $f->kaynak,
                 'tarih' => $f->tarih?->toDateString(),
-                'puan' => $f->puan,
+                'puan' => $this->puanlar[$f->id] ?? null,
             ])->values()->all(),
         ];
 

@@ -3,10 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Kadro;
 use App\Enums\Plan;
 use App\Enums\TemelAlan;
+use App\Services\Scoring\Sart\MaddeKatalogu;
 use App\Services\Scoring\Sart\Profil;
 use App\Services\Scoring\Sart\ProfilCozucu;
+use App\Services\Scoring\Sart\SartDeposu;
 use Carbon\CarbonInterface;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -113,6 +116,31 @@ class User extends Authenticatable implements PasskeyUser
     public function sartProfili(?iterable $faaliyetler = null): Profil
     {
         return (new ProfilCozucu)->coz($this, $faaliyetler);
+    }
+
+    /**
+     * Kendi üniversitesinin, hedef kadrosuna ait puan cetveli. Yönergesi
+     * girilmemişse null: puan uydurulmaz, ekran "veri yok" der.
+     *
+     * Faaliyet puanı SAKLANMIYOR (her yönerge kendi cetveliyle puanlıyor);
+     * listelerde gösterilen puan buradan hesaplanmalı. Kadro önemli: KTÜ ve
+     * Piri Reis her kadroya ayrı cetvel yazıyor.
+     */
+    public function puanCetveli(): ?MaddeKatalogu
+    {
+        if ($this->universite === null) {
+            return null;
+        }
+
+        $depo = app(SartDeposu::class);
+        $esik = $depo->bul(
+            $this->universite,
+            Kadro::hedef($this->unvan)->value,
+            ($this->temel_alan ?? TemelAlan::Sosyal)->value,
+            $this->birim,
+        );
+
+        return $esik !== null ? $depo->katalog($esik['cetvel']) : null;
     }
 
     /**
