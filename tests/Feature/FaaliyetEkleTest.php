@@ -459,3 +459,82 @@ test('yazar alanı, sıra seçenekleri süzülse de görünür kalır', function
         ->assertSee('Yazarlar')
         ->assertSee('2. yazar');
 });
+
+test('künye bilgileri meta içinde saklanır ve düzenlemede geri yüklenir', function () {
+    Livewire::test(FaaliyetEkle::class)
+        ->set('kategori', Kategori::Makale->value)
+        ->set('baslik', 'Künyeli makale')
+        ->assertSeeHtml('data-kunye')
+        ->set('kunye.dergi', 'Dinbilimleri Dergisi')
+        ->set('kunye.cilt', '12')
+        ->set('kunye.sayi', '2')
+        ->set('kunye.sayfa', '45-67')
+        ->call('kaydet')
+        ->assertHasNoErrors();
+
+    $faaliyet = $this->user->faaliyetler()->sole();
+
+    expect($faaliyet->meta)->toMatchArray(['dergi' => 'Dinbilimleri Dergisi', 'cilt' => '12', 'sayi' => '2', 'sayfa' => '45-67']);
+
+    Livewire::test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
+        ->assertSet('kunye.dergi', 'Dinbilimleri Dergisi')
+        ->assertSet('kunye.sayfa', '45-67');
+});
+
+test('düzenleyip kaydetmek içe aktarma kimliğini silmez', function () {
+    // Önceden meta yalnız DOI ve açıklamayla baştan yazılıyordu; AVESİS
+    // kimliği silinince mükerrer denetimi kaydı bir daha tanımıyordu.
+    $faaliyet = Faaliyet::factory()->for($this->user)->create([
+        'kategori' => Kategori::Makale,
+        'meta' => ['avesis_id' => 'abc-123', 'kaynak_sistem' => 'avesis', 'kunye' => 'Ham künye'],
+    ]);
+
+    Livewire::test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
+        ->set('kunye.dergi', 'Yeni Dergi')
+        ->call('kaydet')
+        ->assertHasNoErrors();
+
+    expect($faaliyet->refresh()->meta)->toMatchArray([
+        'avesis_id' => 'abc-123', 'kaynak_sistem' => 'avesis', 'kunye' => 'Ham künye', 'dergi' => 'Yeni Dergi',
+    ]);
+});
+
+test('kategori değişince eski kategorinin künye alanı kaydedilmez', function () {
+    $faaliyet = Faaliyet::factory()->for($this->user)->create([
+        'kategori' => Kategori::Makale,
+        'meta' => ['dergi' => 'Eski Dergi'],
+    ]);
+
+    Livewire::test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
+        ->set('kategori', Kategori::Bildiri->value)
+        ->set('kunye.toplanti', 'Uluslararası Kongre')
+        ->call('kaydet')
+        ->assertHasNoErrors();
+
+    expect($faaliyet->refresh()->meta)->toBe(['toplanti' => 'Uluslararası Kongre']);
+});
+
+test('ders künyesi: sayı ve dönem alanları doğrulanır', function () {
+    Livewire::test(FaaliyetEkle::class)
+        ->set('kategori', Kategori::EgitimOgretim->value)
+        ->set('baslik', 'Kelam Tarihi')
+        ->set('kunye.teorik', 'iki')
+        ->set('kunye.yariyil', 'Kış')
+        ->call('kaydet')
+        ->assertHasErrors(['kunye.teorik', 'kunye.yariyil'])
+        ->set('kunye.teorik', '2')
+        ->set('kunye.yariyil', 'Güz')
+        ->set('kunye.akademik_yil', '2025-2026')
+        ->call('kaydet')
+        ->assertHasNoErrors();
+
+    expect($this->user->faaliyetler()->sole()->meta)
+        ->toMatchArray(['teorik' => '2', 'yariyil' => 'Güz', 'akademik_yil' => '2025-2026']);
+});
+
+test('her kategorinin künye alanı içe aktarma meta anahtarıyla çakışmaz', function () {
+    foreach (Kategori::cases() as $kategori) {
+        expect(array_keys($kategori->kunyeAlanlari()))
+            ->not->toContain('kunye', 'doi', 'aciklama', 'apbs_id', 'avesis_id', 'kaynak_sistem');
+    }
+});

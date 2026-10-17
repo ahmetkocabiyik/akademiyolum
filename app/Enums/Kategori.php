@@ -492,6 +492,89 @@ enum Kategori: string
     }
 
     /**
+     * Kategorinin künye alanları — YÖK EK-4A özgeçmişinin ve YÖKSİS'in
+     * bir kaydı tam yazabilmek için istediği ayrıntılar (dergi, cilt, sayı,
+     * sayfa; bildirinin sunulduğu toplantı; kitabın yayınevi; dersin saati).
+     *
+     * Değerler `faaliyetler.meta` içinde bu anahtarlarla duruyor; puanlamaya
+     * girmiyorlar (puan `kaynak`, `rol`, `yayin_turu` ve tarihten geliyor).
+     * Başlık, yazarlar, tarih ve DOI ayrı alanlar olduğu için burada yok.
+     * Anahtarlar içe aktarmanın meta anahtarlarıyla (`kunye`, `doi`,
+     * `apbs_id`, `avesis_id`, `kaynak_sistem`) çakışmamalı.
+     *
+     * @return array<string, array{etiket: string, tip: 'metin'|'sayi'|'tarih'|'secim', ipucu?: string, secenekler?: list<string>}>
+     */
+    public function kunyeAlanlari(): array
+    {
+        return match ($this) {
+            self::Makale => [
+                'dergi' => ['etiket' => 'Dergi adı', 'tip' => 'metin'],
+                'cilt' => ['etiket' => 'Cilt', 'tip' => 'metin'],
+                'sayi' => ['etiket' => 'Sayı', 'tip' => 'metin'],
+                'sayfa' => ['etiket' => 'Sayfa aralığı', 'tip' => 'metin', 'ipucu' => 'Örn. 123-145 veya makale no'],
+            ],
+            self::TezYayini => [
+                'dergi' => ['etiket' => 'Dergi / kitap adı', 'tip' => 'metin'],
+                'cilt' => ['etiket' => 'Cilt', 'tip' => 'metin'],
+                'sayi' => ['etiket' => 'Sayı', 'tip' => 'metin'],
+                'sayfa' => ['etiket' => 'Sayfa aralığı', 'tip' => 'metin'],
+            ],
+            self::Bildiri => [
+                'toplanti' => ['etiket' => 'Bilimsel toplantının adı', 'tip' => 'metin', 'ipucu' => 'Kongre, sempozyum, konferans'],
+                'yer' => ['etiket' => 'Yer', 'tip' => 'metin', 'ipucu' => 'Şehir, ülke'],
+                'sayfa' => ['etiket' => 'Bildiri kitabı sayfaları', 'tip' => 'metin'],
+            ],
+            self::Kitap => [
+                'kitap_adi' => ['etiket' => 'Kitabın adı (bölüm ise)', 'tip' => 'metin', 'ipucu' => 'Bölüm veya madde yazdıysanız içinde yer aldığı kitap'],
+                'editor' => ['etiket' => 'Editör(ler) (bölüm ise)', 'tip' => 'metin'],
+                'yayinevi' => ['etiket' => 'Yayınevi', 'tip' => 'metin'],
+                'yer' => ['etiket' => 'Basım yeri', 'tip' => 'metin'],
+                'isbn' => ['etiket' => 'ISBN', 'tip' => 'metin'],
+                'sayfa' => ['etiket' => 'Sayfa (aralığı / sayısı)', 'tip' => 'metin'],
+            ],
+            self::Proje => [
+                'kurum' => ['etiket' => 'Destekleyen kurum / program', 'tip' => 'metin', 'ipucu' => 'Örn. TÜBİTAK 1001'],
+                'proje_no' => ['etiket' => 'Proje numarası', 'tip' => 'metin'],
+                'bitis' => ['etiket' => 'Bitiş tarihi', 'tip' => 'tarih', 'ipucu' => 'Sürüyorsa boş bırakın'],
+            ],
+            self::Patent => [
+                'patent_no' => ['etiket' => 'Patent / tescil numarası', 'tip' => 'metin'],
+                'kurum' => ['etiket' => 'Tescil eden kurum', 'tip' => 'metin', 'ipucu' => 'Örn. TÜRKPATENT, EPO'],
+            ],
+            self::TezDanismanligi => [
+                'ogrenci' => ['etiket' => 'Öğrencinin adı', 'tip' => 'metin'],
+                'universite' => ['etiket' => 'Üniversite / enstitü', 'tip' => 'metin'],
+            ],
+            self::EgitimOgretim => [
+                'akademik_yil' => ['etiket' => 'Akademik yıl', 'tip' => 'metin', 'ipucu' => 'Örn. 2025-2026'],
+                'yariyil' => ['etiket' => 'Dönem', 'tip' => 'secim', 'secenekler' => ['Güz', 'Bahar', 'Yaz']],
+                'teorik' => ['etiket' => 'Haftalık teorik saat', 'tip' => 'sayi'],
+                'uygulama' => ['etiket' => 'Haftalık uygulama saati', 'tip' => 'sayi'],
+                'ogrenci_sayisi' => ['etiket' => 'Öğrenci sayısı', 'tip' => 'sayi'],
+            ],
+            self::Editorluk => [
+                'yayin' => ['etiket' => 'Dergi / kitap adı', 'tip' => 'metin'],
+                'bitis' => ['etiket' => 'Bitiş tarihi', 'tip' => 'tarih', 'ipucu' => 'Sürüyorsa boş bırakın'],
+            ],
+            self::Odul => [
+                'kurum' => ['etiket' => 'Ödülü veren kurum', 'tip' => 'metin'],
+            ],
+            self::IdariGorev => [
+                'kurum' => ['etiket' => 'Birim / kurum', 'tip' => 'metin'],
+                'bitis' => ['etiket' => 'Bitiş tarihi', 'tip' => 'tarih', 'ipucu' => 'Sürüyorsa boş bırakın'],
+            ],
+            self::SanatselEtkinlik => [
+                'yer' => ['etiket' => 'Mekân / şehir', 'tip' => 'metin'],
+            ],
+            self::Diger => [
+                'toplanti' => ['etiket' => 'Etkinliğin adı', 'tip' => 'metin'],
+                'yer' => ['etiket' => 'Yer', 'tip' => 'metin'],
+            ],
+            self::Atif, self::ToplumsalKatki => [],
+        };
+    }
+
+    /**
      * Yayın sayılan kategoriler — yönergelerin "yayın" dediği küme.
      *
      * @return list<self>

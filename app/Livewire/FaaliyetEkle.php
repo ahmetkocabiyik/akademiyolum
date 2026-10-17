@@ -144,6 +144,14 @@ class FaaliyetEkle extends Component
     public string $aciklama = '';
 
     /**
+     * Künye ayrıntıları (dergi, cilt, sayfa, toplantı, yayınevi, ders
+     * saati…); hangi anahtarların sorulduğu {@see Kategori::kunyeAlanlari()}.
+     *
+     * @var array<string, string>
+     */
+    public array $kunye = [];
+
+    /**
      * Onay durumu. Yalnız beklemede olmayan kayıtlar puanlamaya, analize ve
      * CV'ye giriyor; içe aktarılanlar beklemede iniyor ve aday buradan onaylıyor.
      */
@@ -168,6 +176,10 @@ class FaaliyetEkle extends Component
             $this->doi = (string) ($faaliyet->meta['doi'] ?? '');
             $this->aciklama = (string) ($faaliyet->meta['aciklama'] ?? '');
             $this->durum = $faaliyet->durum;
+
+            foreach (array_keys($faaliyet->kategori->kunyeAlanlari()) as $alan) {
+                $this->kunye[$alan] = (string) ($faaliyet->meta[$alan] ?? '');
+            }
 
             return;
         }
@@ -885,6 +897,58 @@ class FaaliyetEkle extends Component
     }
 
     /**
+     * Seçili kategorinin künye alanlarının kuralları.
+     *
+     * @return array<string, list<mixed>>
+     */
+    private function kunyeKurallari(): array
+    {
+        $kurallar = ['kunye' => ['array']];
+
+        foreach (Kategori::from($this->kategori)->kunyeAlanlari() as $alan => $tanim) {
+            $kurallar["kunye.{$alan}"] = match ($tanim['tip']) {
+                'sayi' => ['nullable', 'integer', 'min:0', 'max:100000'],
+                'tarih' => ['nullable', 'date'],
+                'secim' => ['nullable', Rule::in($tanim['secenekler'] ?? [])],
+                default => ['nullable', 'string', 'max:255'],
+            };
+        }
+
+        return $kurallar;
+    }
+
+    /**
+     * Kaydedilecek meta: formun yönettiği anahtarlar güncellenir, GERİSİ
+     * KORUNUR. Önceden meta yalnız DOI ve açıklamayla baştan yazılıyordu;
+     * içe aktarılan kaydı düzenleyip kaydetmek AVESİS/APBS kimliğini ve ham
+     * künyeyi siliyordu, mükerrer denetimi o kaydı bir daha tanımıyordu.
+     *
+     * Başka kategorinin künye anahtarı (kategori değiştirildiyse) düşer.
+     *
+     * @param  array<string, mixed>  $veri
+     * @return array<string, mixed>
+     */
+    private function yeniMeta(Kategori $kategori, array $veri): array
+    {
+        $tumKunyeAnahtarlari = [];
+
+        foreach (Kategori::cases() as $k) {
+            $tumKunyeAnahtarlari += $k->kunyeAlanlari();
+        }
+
+        $meta = array_diff_key((array) ($this->faaliyet?->meta ?? []), $tumKunyeAnahtarlari, ['doi' => 1, 'aciklama' => 1]);
+
+        $yeni = ['doi' => $veri['doi'] ?: null, 'aciklama' => $veri['aciklama'] ?: null];
+
+        foreach (array_keys($kategori->kunyeAlanlari()) as $alan) {
+            $deger = trim((string) ($this->kunye[$alan] ?? ''));
+            $yeni[$alan] = $deger === '' ? null : $deger;
+        }
+
+        return [...$meta, ...array_filter($yeni, fn (?string $deger): bool => $deger !== null)];
+    }
+
+    /**
      * Derginin indeks bilgisini getirir.
      *
      * `wire:init` ile çağrılıyor: form önce çiziliyor, dış servis sonra
@@ -930,6 +994,7 @@ class FaaliyetEkle extends Component
             'doi' => ['nullable', 'string', 'max:255'],
             'aciklama' => ['nullable', 'string', 'max:1000'],
             'durum' => ['required', Rule::in(array_keys(Faaliyet::durumlar()))],
+            ...$this->kunyeKurallari(),
         ]);
 
         $kategori = Kategori::from($veri['kategori']);
@@ -954,10 +1019,7 @@ class FaaliyetEkle extends Component
             'donem' => $this->tezIliskisiSorulur() ? ($veri['donem'] ?: null) : null,
             'tarih' => $veri['tarih'] ?: null,
             'kaynak' => $veri['kaynak'] ?: null,
-            'meta' => array_filter([
-                'doi' => $veri['doi'] ?: null,
-                'aciklama' => $veri['aciklama'] ?: null,
-            ]),
+            'meta' => $this->yeniMeta($kategori, $veri),
         ]);
 
         // Puan SAKLANMAZ: her yönerge kendi cetveliyle puanlıyor, tek bir

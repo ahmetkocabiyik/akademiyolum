@@ -96,6 +96,7 @@
                         // 'tek' düşüyor — süzülmüş listeye bakmak yazar alanını
                         // kullanıcının gözü önünde yok ederdi.
                         $yazarliMi = isset($kat->roller()['tek']);
+                        $kunyeAlanlari = $kat->kunyeAlanlari();
                     @endphp
 
                     {{--
@@ -206,6 +207,29 @@
                                 :secenekler="['' => 'Belirtilmemiş'] + \App\Models\Faaliyet::tezIliskileri() + ($donem === 'tezden' ? ['tezden' => 'Tezden üretilmiş (düzey belirtilmemiş)'] : [])" />
                         @endif
                     </div>
+
+                    {{-- Künye: YÖK EK-4A özgeçmişinin ve CV'nin bir kaydı tam yazması için
+                         (dergi, cilt, sayfa, toplantı, yayınevi, ders saati…). Puanı etkilemez. --}}
+                    @if ($kunyeAlanlari !== [])
+                        <div data-kunye class="rounded-xl border border-line p-4">
+                            <flux:text class="text-sm font-medium text-ink-muted">Künye bilgileri</flux:text>
+                            <flux:text class="mt-0.5 !text-xs">Puanı etkilemez; CV'de ve YÖK formatlı özgeçmişte kaydı eksiksiz yazmak için kullanılır.</flux:text>
+                            <div class="mt-3 grid gap-3 sm:grid-cols-2">
+                                @foreach ($kunyeAlanlari as $alan => $tanim)
+                                    @if ($tanim['tip'] === 'secim')
+                                        <x-secim-listesi model="kunye.{{ $alan }}" :label="$tanim['etiket']" placeholder="Seçiniz"
+                                            wire:key="kunye-{{ $kategori }}-{{ $alan }}"
+                                            :secenekler="['' => 'Seçiniz'] + array_combine($tanim['secenekler'], $tanim['secenekler'])" />
+                                    @else
+                                        <flux:input wire:model="kunye.{{ $alan }}" wire:key="kunye-{{ $kategori }}-{{ $alan }}"
+                                            :label="$tanim['etiket']" :placeholder="$tanim['ipucu'] ?? null"
+                                            :type="match ($tanim['tip']) { 'sayi' => 'number', 'tarih' => 'date', default => 'text' }"
+                                            :min="$tanim['tip'] === 'sayi' ? 0 : null" />
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
 
                     <flux:input wire:model="doi" label="DOI Numarası" placeholder="10.xxxx/xxxxx" />
 
