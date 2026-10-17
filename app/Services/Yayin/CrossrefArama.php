@@ -26,10 +26,18 @@ use Illuminate\Support\Facades\Http;
  *     hiçbir yazarda geçmediği yayınlar da dönüyor (gerçek sorguda 30
  *     sonucun yarısı başka kişilerindi).
  * İkisi birleştiriliyor; ORCID'den gelen hiç elenmiyor, ad sorgusundan gelen
- * ise yazarlarından biri SOYADI taşımıyorsa atılıyor. Ölçüt neden soyad:
- * "herhangi bir kelime" denendi ve tutmadı — "Kasım" yaygın bir ad, başka
- * kişilerin yayınları süzgeçten geçiyordu. Tam ad eşleşmesi de aranmıyor,
- * künyelerde "K. Binici" gibi kısaltmalar var.
+ * ise adayla UYUMLU bir yazarı yoksa atılıyor: aynı yazar soyadı ve adı (tam
+ * ya da baş harf, "K. Binici") taşımalı ({@see AdEslestirici::esles()}).
+ * Yalnız soyada bakmak yetmedi: "Eşref Şahin" aramasında 28 sonucun 23'ü
+ * Enes, Elif, Gözde Şahin'lerindi.
+ *
+ * KAPSAM: ad sorgusu ilk 200 sonuca bakıyor. Eskiden 30'du; Crossref alakaya
+ * göre sıraladığı için yaygın bir adda adayın kendi yayınları ilk 30'a hiç
+ * girmiyor, ORCID'siz yayınlar "hiç çıkmıyor"du. Ad Türkçe harf taşıyorsa
+ * ASCII yazımıyla ("Esref Sahin") da aranıyor; künyelerde bu da geçiyor.
+ *
+ * Crossref'te yalnız DOI'li yayın var. DOI'siz makale için DergiPark arşiv
+ * taraması ve kurum profili (AVESİS/APBS) var.
  *
  * @phpstan-type Yayin array{
  *     doi: string,
@@ -39,6 +47,7 @@ use Illuminate\Support\Facades\Http;
  *     tarih: string|null,
  *     yazarlar: list<string>,
  *     sira: int|null,
+ *     uyumlu: bool,
  *     yakin: bool,
  *     kategori: string,
  *     kesin: bool,
@@ -71,7 +80,7 @@ class CrossrefArama
     /**
      * @return list<Yayin> yıl azalan sırada, DOI'ye göre tekilleştirilmiş
      */
-    public function ara(string $ad, ?string $orcid = null, int $adet = 30): array
+    public function ara(string $ad, ?string $orcid = null, int $adet = 200): array
     {
         $ad = trim($ad);
         $orcid = $this->orcidDuzelt($orcid);
@@ -90,8 +99,10 @@ class CrossrefArama
         }
 
         if ($ad !== '') {
-            foreach ($this->sorgula(['query.author' => $ad], $adet) as $ham) {
-                $this->biriktir($yayinlar, $ham, $ad, kesin: false);
+            foreach (array_unique([$ad, self::ascii($ad)]) as $sorgu) {
+                foreach ($this->sorgula(['query.author' => $sorgu], $adet) as $ham) {
+                    $this->biriktir($yayinlar, $ham, $ad, kesin: false);
+                }
             }
         }
 
@@ -104,6 +115,12 @@ class CrossrefArama
             <=> [$a['kesin'], $a['sira'] !== null, $a['yil'] ?? 0]);
 
         return $yayinlar;
+    }
+
+    /** Türkçe harfler ASCII karşılığına ("Eşref Şahin" → "Esref Sahin"). */
+    private static function ascii(string $ad): string
+    {
+        return strtr($ad, ['ı' => 'i', 'İ' => 'I', 'ş' => 's', 'Ş' => 'S', 'ğ' => 'g', 'Ğ' => 'G', 'ü' => 'u', 'Ü' => 'U', 'ö' => 'o', 'Ö' => 'O', 'ç' => 'c', 'Ç' => 'C', 'â' => 'a', 'î' => 'i', 'û' => 'u']);
     }
 
     /**
@@ -124,7 +141,7 @@ class CrossrefArama
         try {
             $yanit = Http::acceptJson()
                 ->withUserAgent($this->kimlik())
-                ->timeout(15)
+                ->timeout(25)
                 ->retry(2, 300, throw: false)
                 ->get("{$this->taban}/works", $parametre);
         } catch (ConnectionException) {
@@ -152,9 +169,9 @@ class CrossrefArama
             return;
         }
 
-        // Ad sorgusunun gürültüsü: yazarlarının hiçbiri adla kelime
-        // paylaşmıyorsa bu yayın adayın olamaz. ORCID'den gelen elenmez.
-        if (! $kesin && ! $kayit['yakin']) {
+        // Ad sorgusunun gürültüsü: adayla uyumlu (aynı soyad ve ad) bir yazarı
+        // yoksa bu yayın adayın olamaz. ORCID'den gelen elenmez.
+        if (! $kesin && ! $kayit['uyumlu']) {
             return;
         }
 
@@ -192,6 +209,7 @@ class CrossrefArama
             'tarih' => $this->tarih($ham),
             'yazarlar' => $yazarlar,
             'sira' => $esleme['sira'],
+            'uyumlu' => $esleme['uyumlu'],
             'yakin' => $esleme['yakin'],
             'kategori' => $kategori,
             'kesin' => $kesin,

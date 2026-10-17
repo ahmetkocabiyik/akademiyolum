@@ -277,9 +277,12 @@
                              ne verdiğini bilirse sonucu doğru okur. --}}
                         <flux:text class="!text-xs text-ink-subtle">
                             ORCID girerseniz o yayınlar <strong>kesin</strong> sizindir ama yayıncı
-                            ORCID'inizi göndermediyse bazıları eksik kalır. Ad araması geniştir,
-                            aynı adı taşıyan başka yazarların yayınları da gelebilir — işaretlemeden
-                            önce kontrol edin.
+                            ORCID'inizi göndermediyse bazıları eksik kalır; ORCID'siz yayınlar
+                            <strong>ad aramasıyla</strong> bulunur (tam ad ya da baş harf, "E. Şahin").
+                            Birebir aynı adı taşıyan başka bir yazarın yayını da gelebilir — işaretlemeden
+                            önce kontrol edin. <strong>DOI'si olmayan</strong> makaleler bu veritabanında yoktur:
+                            onları aşağıdaki DergiPark arşiv taramasıyla ya da <strong>Kurum Profilimden Çek</strong>
+                            sekmesiyle bulabilirsiniz.
                         </flux:text>
 
                         <div>

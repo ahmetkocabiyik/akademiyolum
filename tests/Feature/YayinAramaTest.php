@@ -95,6 +95,48 @@ test('adla kelime paylaşmayan yayın ad sorgusundan elenir', function () {
 });
 
 /**
+ * MÜŞTERİ GERİ BİLDİRİMİ: "ORCID numarası olmayan makaleler aramada hiç
+ * çıkmıyor." Ad araması yalnız soyada bakıyordu ve ilk 30 sonuçla
+ * sınırlıydı: yaygın soyadında başka kişilerin yayınları adayınkileri
+ * listeden itiyordu. Artık AYNI yazar soyad ve adı (tam ya da baş harf)
+ * taşımalı.
+ */
+test('aynı soyadlı başka kişinin yayını elenir, baş harfli künye kalır', function () {
+    crossrefDonsun([
+        kunye(['DOI' => '10.1/enes', 'author' => [['given' => 'Enes', 'family' => 'Şahin']]]),
+        // Ad bir yazarda, soyad başka yazarda: aynı kişi değil.
+        kunye(['DOI' => '10.1/karisik', 'author' => [['given' => 'Gözde', 'family' => 'Şahin'], ['given' => 'Eşref', 'family' => 'Adalı']]]),
+        kunye(['DOI' => '10.1/bas-harf', 'author' => [['given' => 'E.', 'family' => 'ŞAHİN']]]),
+        kunye(['DOI' => '10.1/ikinci-ad', 'author' => [['given' => 'Mehmet Eşref', 'family' => 'Şahin']]]),
+        kunye(['DOI' => '10.1/tam', 'author' => [['given' => 'Eşref', 'family' => 'Şahin']]]),
+    ]);
+
+    expect(array_column(arama()->ara('Eşref Şahin'), 'doi'))
+        ->toEqualCanonicalizing(['10.1/bas-harf', '10.1/ikinci-ad', '10.1/tam']);
+});
+
+test('ad sorgusu 200 sonuca bakar ve Türkçe harfli ad ASCII yazımıyla da aranır', function () {
+    crossrefDonsun([kunye(['author' => [['given' => 'Esref', 'family' => 'Sahin']]])]);
+
+    $yayinlar = arama()->ara('Eşref Şahin');
+
+    $sorgular = collect(Http::recorded())->map(fn (array $kayit) => $kayit[0]->data());
+
+    expect($sorgular->map(fn (array $veri) => $veri['query.author'] ?? null)->all())->toBe(['Eşref Şahin', 'Esref Sahin'])
+        ->and($sorgular->pluck('rows')->unique()->all())->toBe(['200'])
+        // Künyedeki ASCII yazım da aynı kişi.
+        ->and($yayinlar)->toHaveCount(1);
+});
+
+test('ASCII adla aranınca ikinci sorgu atılmaz', function () {
+    crossrefDonsun([]);
+
+    arama()->ara('Kasim Binici');
+
+    expect(Http::recorded())->toHaveCount(1);
+});
+
+/**
  * ORCID süzgecinden gelen yayın ELENMEZ: künyede adı hiç yazmamış olabilir
  * (yalnız ORCID gönderilmiş ya da soyadı değişmiş) ama yayın yine onun.
  */

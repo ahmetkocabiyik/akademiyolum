@@ -13,27 +13,33 @@ class AdEslestirici
     /**
      * Adayı yazar listesinde arar.
      *
-     * İki ayrı soru, iki ayrı kesinlik:
-     *   sira  — TAM eşleşme. Rolü belirliyor ve bazı yönergelerde puanı
-     *           doğrudan değiştiriyor, o yüzden zorlanmıyor: bulunamazsa null.
-     *   yakin — SOYADI taşıyan bir yazar var mı. Geniş aramaların gürültüsünü
-     *           eliyor ama "K. Binici" gibi kısaltmaları atmıyor.
+     * Üç ayrı soru, üç ayrı kesinlik:
+     *   sira    — TAM eşleşme. Rolü belirliyor ve bazı yönergelerde puanı
+     *             doğrudan değiştiriyor, o yüzden zorlanmıyor: bulunamazsa null.
+     *   uyumlu  — AYNI yazar hem soyadı hem adı taşıyor; ad tam ya da baş harf
+     *             ("Eşref Şahin", "E. Şahin", "Mehmet Eşref Şahin"). "Enes
+     *             Şahin" uyumlu değil. Crossref ad aramasının süzgeci bu:
+     *             yalnız soyada bakınca 28 sonucun 23'ü başka kişilerindi.
+     *   yakin   — SOYADI taşıyan bir yazar var mı. En gevşek ölçüt; tek bir
+     *             derginin arşivini tararken yeterli.
      *
      * @param  list<string>  $yazarlar
-     * @return array{sira: int|null, yakin: bool}
+     * @return array{sira: int|null, uyumlu: bool, yakin: bool}
      */
     public function esles(array $yazarlar, string $ad): array
     {
         $aranan = $this->kelimeler($ad);
 
         if ($aranan === []) {
-            return ['sira' => null, 'yakin' => false];
+            return ['sira' => null, 'uyumlu' => false, 'yakin' => false];
         }
 
         $anahtar = implode(' ', $aranan);
         $soyad = $this->soyad($ad);
+        $adlar = array_values(array_diff($aranan, $soyad));
 
         $sira = null;
+        $uyumlu = false;
         $yakin = false;
 
         foreach ($yazarlar as $i => $yazar) {
@@ -45,10 +51,39 @@ class AdEslestirici
 
             if ($soyad !== [] && array_intersect($soyad, $yazarKelimeleri) !== []) {
                 $yakin = true;
+                $uyumlu = $uyumlu || self::adUyar($adlar, array_diff($yazarKelimeleri, $soyad));
             }
         }
 
-        return ['sira' => $sira, 'yakin' => $yakin];
+        return ['sira' => $sira, 'uyumlu' => $uyumlu || $sira !== null, 'yakin' => $yakin];
+    }
+
+    /**
+     * Aranan adlardan biri yazarda tam ya da baş harf olarak geçiyor mu
+     * (baş harf hangi tarafta olursa olsun)?
+     * Aranan yalnız soyadıysa ad karşılaştırılmaz.
+     *
+     * @param  list<string>  $adlar  aranan kişinin adları (soyad hariç)
+     * @param  array<int, string>  $yazarAdlari  yazarın adları (soyad hariç)
+     */
+    private static function adUyar(array $adlar, array $yazarAdlari): bool
+    {
+        if ($adlar === []) {
+            return true;
+        }
+
+        foreach ($yazarAdlari as $kelime) {
+            foreach ($adlar as $ad) {
+                // Baş harf iki yönde: künyede "E. Şahin" ya da aranan "K. Binici".
+                if ($kelime === $ad
+                    || (mb_strlen($kelime) === 1 && str_starts_with($ad, $kelime))
+                    || (mb_strlen($ad) === 1 && str_starts_with($kelime, $ad))) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
