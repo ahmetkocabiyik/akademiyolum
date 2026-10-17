@@ -93,8 +93,10 @@ class KunyeYazici
     /**
      * Yayının EK-4A ortamı ve kapsamı: ['dergi'|'bildiri'|'kitap'|null, 'uluslararasi'|'ulusal'|null].
      *
-     * Kapsam önce `kaynak`tan (dizin), o boşsa içe aktarılan ham künyenin
-     * sonundaki "Uluslararası / Ulusal" etiketinden okunuyor (AVESİS bunu yazıyor).
+     * Kapsam önce içe aktarılan ham künyenin sonundaki "Uluslararası / Ulusal"
+     * etiketinden okunuyor: bu YÖKSİS'in kendi sınıflandırması ve EK-4A'nın
+     * "uluslararası / ulusal hakemli dergi" ayrımı da odur (bir TR Dizin
+     * dergisi uluslararası olabiliyor). Etiket yoksa `kaynak`tan (dizin).
      *
      * @return array{0: 'dergi'|'bildiri'|'kitap'|null, 1: 'uluslararasi'|'ulusal'|null}
      */
@@ -115,8 +117,8 @@ class KunyeYazici
             default => null,
         };
 
-        $kapsam = match (true) {
-            $kaynak === '' => self::hamKunyeKapsami($f),
+        $kapsam = self::hamKunyeKapsami($f) ?? match (true) {
+            $kaynak === '' => null,
             // "Uluslararası/Ulusal Kitap": yönerge ikisini birlikte puanlıyor, kapsam bilinmiyor.
             str_contains($kaynak, 'Uluslararası/Ulusal') => null,
             self::ileBaslar($kaynak, self::ULUSAL_DERGI), str_contains($kaynak, 'Ulusal)'), str_starts_with($kaynak, 'Ulusal') => 'ulusal',

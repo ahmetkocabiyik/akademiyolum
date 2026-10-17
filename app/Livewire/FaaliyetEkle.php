@@ -10,6 +10,7 @@ use App\Services\Yayin\AramaException;
 use App\Services\Yayin\CrossrefArama;
 use App\Services\Yayin\DergiParkArsivi;
 use App\Services\Yayin\KaynakOnerici;
+use App\Services\Yayin\KunyeAyristirici;
 use App\Services\Yayin\MukerrerDenetimi;
 use App\Services\Yayin\ProfilOkuyuculari;
 use Flux\Flux;
@@ -425,9 +426,18 @@ class FaaliyetEkle extends Component
         $harita = $this->mukerrerHaritasi();
 
         $this->bulunanlar = array_map(function (array $yayin) use ($harita): array {
+            $kitap = $yayin['kategori'] === Kategori::Kitap->value;
+
+            // Kitap bölümünde Crossref'in `container-title`ı kitabın adı.
             $meta = array_filter([
                 'doi' => $yayin['doi'],
-                'dergi' => $yayin['dergi'] ?: null,
+                'dergi' => $kitap ? null : ($yayin['dergi'] ?: null),
+                'kitap_adi' => $kitap ? ($yayin['dergi'] ?: null) : null,
+                'cilt' => $kitap ? null : (($yayin['cilt'] ?? '') ?: null),
+                'sayi' => $kitap ? null : (($yayin['sayi'] ?? '') ?: null),
+                'sayfa' => ($yayin['sayfa'] ?? '') ?: null,
+                'yayinevi' => $kitap ? (($yayin['yayinevi'] ?? '') ?: null) : null,
+                'isbn' => $kitap ? (($yayin['isbn'] ?? '') ?: null) : null,
                 'kaynak_sistem' => 'crossref',
             ]);
 
@@ -614,6 +624,7 @@ class FaaliyetEkle extends Component
 
                 $meta = array_filter([
                     'dergi' => $this->arsivAdi ?: null,
+                    ...app(KunyeAyristirici::class)->dergiParkSayisi((string) ($sayiTarihleri[$sayiId]['etiket'] ?? '')),
                     'dergipark' => $this->arsivKisaltma,
                     'dergipark_makale' => $makale['id'],
                     'kaynak_sistem' => 'dergipark',
@@ -868,7 +879,9 @@ class FaaliyetEkle extends Component
         foreach ($secili as $kayit) {
             $kategori = Kategori::from($kategoriZorla ?? $kayit['kategori']);
             $baslik = mb_substr($kayit['baslik'], 0, 255);
-            $meta = $kayit['meta'];
+            // Ham künyeden okunabilen künye alanları (AVESİS/APBS); kaynağın
+            // kendisinin verdiği alan (Crossref, DergiPark) önce gelir.
+            $meta = $kayit['meta'] + app(KunyeAyristirici::class)->ayristir($kategori, (string) ($kayit['meta']['kunye'] ?? ''));
 
             $yil = $kayit['yil'] ?? null;
 

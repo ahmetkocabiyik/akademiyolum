@@ -60,7 +60,7 @@ class CrossrefArama
     ];
 
     /** Crossref'ten yalnız kullandığımız alanlar isteniyor. */
-    private const ALANLAR = 'DOI,title,container-title,ISSN,issued,author,type';
+    private const ALANLAR = 'DOI,title,container-title,ISSN,issued,author,type,volume,issue,page,publisher,ISBN';
 
     public function __construct(
         private readonly AdEslestirici $adlar = new AdEslestirici,
@@ -182,6 +182,12 @@ class CrossrefArama
             'doi' => $doi,
             'baslik' => $baslik,
             'dergi' => trim((string) (($ham['container-title'] ?? [])[0] ?? '')),
+            // Künye ayrıntısı (CV ve YÖK EK-4A özgeçmişi için).
+            'cilt' => trim((string) ($ham['volume'] ?? '')),
+            'sayi' => trim((string) ($ham['issue'] ?? '')),
+            'sayfa' => trim((string) ($ham['page'] ?? '')),
+            'yayinevi' => trim((string) ($ham['publisher'] ?? '')),
+            'isbn' => trim((string) (($ham['ISBN'] ?? [])[0] ?? '')),
             'yil' => $this->yil($ham),
             'tarih' => $this->tarih($ham),
             'yazarlar' => $yazarlar,

@@ -66,7 +66,9 @@ test('kapsam kaynaktan, kaynak boşsa ham künyenin etiketinden okunur', functio
         ->and($yazici->siniflandir(kunyeFaaliyeti(Kategori::Bildiri, ['kaynak' => 'Ulusal Özet/Poster'])))->toBe(['bildiri', 'ulusal'])
         ->and($yazici->siniflandir(kunyeFaaliyeti(Kategori::Kitap, ['kaynak' => 'Uluslararası/Ulusal Kitap'])))->toBe(['kitap', null])
         ->and($yazici->siniflandir(kunyeFaaliyeti(Kategori::TezYayini, ['kaynak' => 'CPCI Bildiri'])))->toBe(['bildiri', 'uluslararasi'])
-        ->and($yazici->siniflandir(kunyeFaaliyeti(Kategori::Makale, ['meta' => ['kunye' => 'Dergi · Ulusal']])))->toBe(['dergi', 'ulusal']);
+        ->and($yazici->siniflandir(kunyeFaaliyeti(Kategori::Makale, ['meta' => ['kunye' => 'Dergi · Ulusal']])))->toBe(['dergi', 'ulusal'])
+        // YÖKSİS'in sınıflandırması dizinden önce: TR Dizin dergisi uluslararası olabilir.
+        ->and($yazici->siniflandir(kunyeFaaliyeti(Kategori::Makale, ['kaynak' => 'TR Dizin', 'meta' => ['kunye' => 'Dergi, vol. 1 · Uluslararası']])))->toBe(['dergi', 'uluslararasi']);
 });
 
 test('EK-4A yayınları 7.1–7.6ya dağıtır; kapsamı bilinmeyen 7.6ya düşer, hiçbiri kaybolmaz', function () {

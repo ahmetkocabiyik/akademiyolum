@@ -236,7 +236,7 @@ class ApbsProfili implements ProfilOkuyucu
                     continue;
                 }
 
-                $kayit = $this->oge($bolum, $sekme, $oge);
+                $kayit = $this->oge($bolum, $sekme, self::ilkDiv($oge));
 
                 if ($kayit !== null) {
                     $kayitlar[] = $kayit;
@@ -731,6 +731,33 @@ class ApbsProfili implements ProfilOkuyucu
         }
 
         return $rozetler;
+    }
+
+    /**
+     * Parçayı ilk `<div>`inin kapandığı yerde keser.
+     *
+     * Kutular bir sonraki kutunun başından bölünüyor; SON kutunun ardından
+     * sayfanın geri kalanı (alt bilgi, "Bu sistemdeki veriler…", "BAUM 2024
+     * © Mersin Üniversitesi") da parçaya giriyordu. Kitapta yazar satırı
+     * SON satır olduğu için alt bilgi yazar diye kaydediliyordu.
+     */
+    private static function ilkDiv(string $html): string
+    {
+        if (preg_match_all('~<(/?)div\b[^>]*>~i', $html, $etiketler, PREG_OFFSET_CAPTURE) === 0) {
+            return $html;
+        }
+
+        $derinlik = 0;
+
+        foreach ($etiketler[0] as $sira => [$etiket, $konum]) {
+            $derinlik += $etiketler[1][$sira][0] === '/' ? -1 : 1;
+
+            if ($derinlik === 0) {
+                return substr($html, 0, $konum + strlen($etiket));
+            }
+        }
+
+        return $html;
     }
 
     /**

@@ -340,3 +340,24 @@ test('düzenleme ekranında arama sekmesi yok', function () {
     Livewire::actingAs($kullanici)->test(FaaliyetEkle::class, ['faaliyet' => $faaliyet])
         ->assertDontSee('Yayınlarımı Bul');
 });
+
+test('crossref künyesindeki cilt, sayı ve sayfa faaliyete yazılır; kitap bölümünde kitap adı', function () {
+    $kullanici = User::factory()->create(['name' => 'Kasım Binici', 'orcid' => null]);
+    crossrefDonsun([
+        kunye(['volume' => '12', 'issue' => '3', 'page' => '45-67']),
+        kunye(['DOI' => '10.1234/bolum.1', 'type' => 'book-chapter', 'title' => ['Bir Bölüm'], 'container-title' => ['Kelam El Kitabı'], 'publisher' => 'Routledge', 'ISBN' => ['978-1-23'], 'page' => '10-30']),
+    ]);
+
+    Livewire::actingAs($kullanici)->test(FaaliyetEkle::class)
+        ->set('sekme', 'yayin')
+        ->call('yayinAra')
+        ->set('secilenler', ['10.1234/ornek.1', '10.1234/bolum.1'])
+        ->call('yayinlariEkle');
+
+    $makale = $kullanici->faaliyetler()->where('baslik', 'Bir Örnek Makale')->sole();
+    $bolum = $kullanici->faaliyetler()->where('baslik', 'Bir Bölüm')->sole();
+
+    expect($makale->meta)->toMatchArray(['dergi' => 'Bilgi Dünyası', 'cilt' => '12', 'sayi' => '3', 'sayfa' => '45-67'])
+        ->and($bolum->meta)->toMatchArray(['kitap_adi' => 'Kelam El Kitabı', 'yayinevi' => 'Routledge', 'isbn' => '978-1-23', 'sayfa' => '10-30'])
+        ->and($bolum->meta)->not->toHaveKey('dergi');
+});

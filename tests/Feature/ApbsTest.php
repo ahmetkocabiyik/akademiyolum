@@ -722,6 +722,8 @@ test('apbs adresi ekrandan okunup faaliyete çevriliyor', function () {
         ->and($faaliyet->durum)->toBe('onaylandi')
         ->and($faaliyet->meta['kaynak_sistem'])->toBe('apbs')
         ->and($faaliyet->meta['apbs_id'])->not->toBeEmpty()
+        // Ham künye kayıt sırasında künye alanlarına ayrılıyor (CV, EK-4A).
+        ->and($faaliyet->meta)->toMatchArray(['dergi' => 'JOURNAL OF DIGITAL EARTH', 'cilt' => '19'])
         ->and($faaliyet->tarih->year)->toBe(2024);
 
     // Adres profile kaydediliyor: aday bir daha yazmasın.
@@ -905,4 +907,28 @@ test('uzun yazar listesi kesilmeden kaydediliyor', function () {
         ->call('avesistenEkle');
 
     expect(Faaliyet::query()->where('user_id', $kullanici->id)->sole()->yazarlar)->toBe($yazarlar);
+});
+
+test('son kutudan sonraki sayfa alt bilgisi kitabın yazarı sanılmaz', function () {
+    // Kutular bir sonraki kutunun başından bölünüyor; SON kutu sayfanın
+    // sonuna kadar uzanınca alt bilgi ("BAUM 2024 © …") yazar diye
+    // kaydediliyordu (kitapta yazar satırı son satır).
+    $sayfa = apbsSayfa([[
+        'id' => 'ulusal',
+        'etiket' => 'Kitap',
+        'kutular' => [[
+            'baslik' => 'Varlık Düşüncesi',
+            'satirlar' => ['Yayın Evi: Akademisyen Yayınevi, ISBN: 9786052581568, Sayfa Sayısı: 160', 'ŞAHİN EŞREF'],
+            'rozet' => ['success' => '2018', 'info' => 'Bilimsel Kitap'],
+        ]],
+    ]]);
+    $sayfa = str_replace('</body>', '<div class="footer"><p>Mersin Üniversitesi</p><p>Bu sistemdeki veriler Yöksis, Doi.org, Web of Science, TRDizin den alınmaktadır.</p><p>BAUM 2024 © Mersin Üniversitesi</p></div></body>', $sayfa);
+
+    apbsTaklidi(['kitaplar' => $sayfa]);
+
+    $kayit = apbs()->kayitlar(apbsAdresi())[0];
+
+    expect($kayit['yazarlar'])->toBe('ŞAHİN EŞREF')
+        ->and($kayit['kunye'])->not->toContain('Bu sistemdeki veriler')
+        ->and($kayit['kunye'])->not->toContain('©');
 });
