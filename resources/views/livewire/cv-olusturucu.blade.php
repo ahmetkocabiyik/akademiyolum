@@ -58,7 +58,13 @@
             x-init="$nextTick(() => { hesapla(); new ResizeObserver(() => hesapla()).observe($refs.kap); new ResizeObserver(() => hesapla()).observe($refs.sayfa); })">
             <div x-ref="kap" class="overflow-hidden" :style="`height: ${yukseklik}px`">
                 <div x-ref="sayfa" class="cv-olcek mx-auto w-fit" :style="`transform: scale(${olcek}); --cv-olcek: ${olcek}`">
-                    <x-cv.onizleme :cv="$this->onizleme()" />
+                    @php $cvVerisi = $this->onizleme(); @endphp
+                    {{-- Resmî format (EK-4A) kendi düzeniyle; tasarımlı şablonlar ortak önizlemeyle. --}}
+                    @if ($cvVerisi['sablon']->resmi())
+                        <x-cv.ek4a :cv="$cvVerisi" />
+                    @else
+                        <x-cv.onizleme :cv="$cvVerisi" />
+                    @endif
                 </div>
             </div>
         </div>

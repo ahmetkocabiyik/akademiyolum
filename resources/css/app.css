@@ -276,6 +276,12 @@
 .cv-satir-baslik { font-size: 10pt; font-weight: 600; color: #111827; }
 .cv-satir-alt { font-size: 8.5pt; color: #6b7280; margin-top: 1px; }
 .cv-metin { font-size: 9.5pt; color: #374151; }
+/* Künye listesi: YÖKSİS gibi numaralı, numara asılı girintide. */
+.cv-kunyeler { list-style: decimal; padding-left: 1.4em; margin: 0; }
+.cv-kunye { font-size: 9pt; line-height: 1.4; color: #1f2937; padding-left: 0.2em; }
+.cv-kunye::marker { color: #6b7280; font-size: 8.5pt; }
+.cv-kunye + .cv-kunye { margin-top: 5px; }
+.cv-kunye .cv-rozet { margin-left: 4px; vertical-align: 1px; }
 
 .cv-rozet {
     display: inline-block;
@@ -305,6 +311,29 @@
 .cv-prestijli .cv-unvan, .cv-prestijli .cv-iletisim { color: rgb(255 255 255 / 0.72); }
 .cv-prestijli .cv-foto { background: rgb(255 255 255 / 0.12); color: #fff; border-color: var(--color-gold); }
 .cv-prestijli .cv-govde { padding-top: 10mm; }
+
+/* YÖK EK-4A: resmî form görünümü. Renk ve yazı tipi değişkenleri kullanılmıyor;
+   formun kendisi Times New Roman, siyah, çizgili tablolar. */
+.cv-ek4a { font-family: 'Times New Roman', Times, serif; color: #000; font-size: 11pt; line-height: 1.35; padding: 16mm 20mm; }
+.cv-ek4a .ek4a-ek { text-align: center; font-weight: 700; font-size: 11pt; }
+.cv-ek4a .ek4a-baslik { text-align: center; font-weight: 700; font-size: 12pt; margin: 2mm 0 6mm; }
+.cv-ek4a .ek4a-kunye { border-collapse: collapse; margin-bottom: 2mm; }
+.cv-ek4a .ek4a-kunye th { text-align: left; font-weight: 700; padding: 1px 12px 1px 0; vertical-align: top; white-space: nowrap; width: 45mm; }
+.cv-ek4a .ek4a-kunye td { padding: 1px 0; vertical-align: top; }
+.cv-ek4a .ek4a-alt-baslik { padding-top: 3mm !important; }
+.cv-ek4a .ek4a-madde { font-weight: 700; margin: 5mm 0 2mm; break-after: avoid; }
+.cv-ek4a .ek4a-alt-madde { font-weight: 700; margin: 3mm 0 1.5mm 6mm; break-after: avoid; }
+.cv-ek4a .ek4a-tablo { width: 100%; border-collapse: collapse; font-size: 10.5pt; }
+.cv-ek4a .ek4a-tablo th, .cv-ek4a .ek4a-tablo td { border: 1px solid #000; padding: 3px 6px; text-align: center; vertical-align: middle; }
+.cv-ek4a .ek4a-tablo th { font-weight: 700; }
+.cv-ek4a .ek4a-tablo td { text-align: left; }
+.cv-ek4a .ek4a-dersler td { text-align: center; }
+.cv-ek4a .ek4a-dersler td.ek4a-sol { text-align: left; }
+.cv-ek4a .ek4a-tablo tr { break-inside: avoid; }
+.cv-ek4a .ek4a-liste { list-style: decimal; margin: 0 0 0 6mm; padding-left: 6mm; text-align: justify; }
+.cv-ek4a .ek4a-liste li { margin-bottom: 1.5mm; break-inside: avoid; }
+.cv-ek4a .ek4a-bos { height: 4mm; }
+.cv-ek4a .ek4a-dipnot { font-size: 9.5pt; margin-top: 2mm; }
 
 /* ── Akademik faaliyet raporu (Çıktı Yönetimi) ─────────────────────────────
    CV sayfasıyla aynı ilke: gerçek A4 genişliğinde çizilir, önizlemede
@@ -430,6 +459,18 @@
        rapora verilince ardından gelen boş bir kutu bile yeni (varsayılan)
        bir sayfa açıyor, PDF'in sonuna boş bir A4 ekleniyordu. */
     body:has(#rapor-sayfa) { page: rapor; }
+    /* EK-4A çok sayfalı resmî belge: sonraki sayfalar da üst/alt boşlukla
+       başlasın. Yan boşluk sayfanın kendi dolgusunda; ilk sayfanın üstü
+       sayfa dolgusundan geliyor. */
+    /* Tasarımlı CV künyelerle birden çok sayfaya taşabiliyor: sonraki
+       sayfalar kâğıdın tepesine yapışmasın. İlk sayfanın üstü sıfır, Kurumsal
+       bandı kâğıdın tepesine otursun (raporla aynı yaklaşım). */
+    body:has(#cv-sayfa:not(.cv-ek4a)) { page: cv; }
+    @page cv { margin: 14mm 0; }
+    @page cv:first { margin-top: 0; }
+    body:has(.cv-ek4a) { page: ek4a; }
+    #cv-sayfa.cv-ek4a { padding-top: 0; padding-bottom: 0; }
+    @page ek4a { margin: 16mm 0; }
     #rapor-sayfa {
         width: 210mm;
         min-height: 0;

@@ -9,6 +9,7 @@ use App\Models\CvProfili;
 use App\Models\Faaliyet;
 use App\Models\User;
 use App\Rules\GecerliOrcid;
+use App\Services\Cv\CvDuzeni;
 use Flux\Flux;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +45,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  * @property-read CvProfili $profil
  * @property-read Collection<int, Faaliyet> $faaliyetler
  * @property-read Collection<int, Faaliyet> $secilenler
- * @property-read array<string, Collection<int, Faaliyet>> $gruplu
  * @property-read array<int, int>|null $puanlar
  */
 #[Layout('layouts.app')]
@@ -224,22 +224,6 @@ class CvOlusturucu extends Component
         return $this->faaliyetler->reject(
             fn (Faaliyet $f) => in_array($f->id, $this->haricFaaliyetler, true),
         );
-    }
-
-    /**
-     * CV'deki faaliyetler, kategorisine göre gruplu.
-     *
-     * Düz bir liste jüriye "yayın" diye ders ve ödül de gösteriyordu; CV'de
-     * akademik âdet başlıklara ayırmak.
-     *
-     * @return array<string, Collection<int, Faaliyet>>
-     */
-    #[Computed]
-    public function gruplu(): array
-    {
-        return $this->secilenler
-            ->groupBy(fn (Faaliyet $f) => $f->kategori->label())
-            ->all();
     }
 
     /**
@@ -427,7 +411,7 @@ class CvOlusturucu extends Component
             $this->haricFaaliyetler[] = $faaliyetId;
         }
 
-        unset($this->secilenler, $this->gruplu);
+        unset($this->secilenler);
         $this->kaydet();
     }
 
@@ -760,7 +744,9 @@ class CvOlusturucu extends Component
             'uyelikler' => $this->uyelikler,
             'beceriler' => $this->beceriler,
             'diller' => $this->diller,
-            'gruplu' => $this->gruplu,
+            // Tasarımlı şablonların YÖKSİS bölümleri ve resmî EK-4A düzeni.
+            'yoksis' => app(CvDuzeni::class)->yoksis($this->secilenler),
+            'ek4a' => app(CvDuzeni::class)->ek4a($this->secilenler, now()),
             'sablon' => CvSablonu::from($this->sablon),
             'renk' => $this->renk,
             'cizgiRenk' => $this->cizgiRenk,

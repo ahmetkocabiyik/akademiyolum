@@ -171,29 +171,22 @@
                 </div>
             @endif
 
-            {{-- Faaliyetler kategorisine göre ayrı başlıklar altında: düz bir
-                 "Yayınlar" listesi derslerle ödülleri de yayın gibi gösteriyordu. --}}
+            {{-- Faaliyetler YÖKSİS'in bölümlerine ve sırasına göre (App\Services\Cv\CvDuzeni),
+                 her kayıt tam künyesiyle (App\Services\Cv\KunyeYazici). --}}
             @if ($acik(CvBolumu::Yayinlar))
-                @foreach ($cv['gruplu'] as $kategori => $kayitlar)
+                @foreach ($cv['yoksis'] as $bolum)
                     <div>
-                        <div class="cv-baslik">{{ $kategori }}</div>
-                        @foreach ($kayitlar as $kayit)
-                            <div class="cv-satir">
-                                <div class="cv-satir-baslik">
-                                    {{ $kayit->baslik }}
-                                    @if ($kayit->kaynak)
-                                        <span class="cv-rozet">{{ $kayit->kaynak }}</span>
+                        <div class="cv-baslik">{{ $bolum['baslik'] }}</div>
+                        <ol class="cv-kunyeler">
+                            @foreach ($bolum['kayitlar'] as $kayit)
+                                <li class="cv-kunye">
+                                    {{ $kayit['kunye'] }}
+                                    @if ($kayit['rozet'])
+                                        <span class="cv-rozet">{{ $kayit['rozet'] }}</span>
                                     @endif
-                                </div>
-                                <div class="cv-satir-alt">
-                                    {{ collect([
-                                        $kayit->yazarlar,
-                                        $kayit->tur,
-                                        $kayit->tarih?->format('Y'),
-                                    ])->filter()->implode(' · ') }}
-                                </div>
-                            </div>
-                        @endforeach
+                                </li>
+                            @endforeach
+                        </ol>
                     </div>
                 @endforeach
             @endif

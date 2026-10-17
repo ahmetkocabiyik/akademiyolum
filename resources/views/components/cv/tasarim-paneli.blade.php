@@ -36,74 +36,87 @@
         </div>
     </div>
 
-    {{-- Renk --}}
-    <div>
-        <flux:label class="!mb-1.5 block">Renk</flux:label>
-        <div class="flex flex-wrap gap-2">
-            @foreach (CvProfili::RENKLER as $secenek)
-                <button type="button" wire:click="renkSec('{{ $secenek }}')"
-                    aria-pressed="{{ $renk === $secenek ? 'true' : 'false' }}"
-                    aria-label="Renk {{ $secenek }}"
-                    class="size-7 rounded-full transition"
-                    @style([
-                        'background: '.$secenek,
-                        'box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px '.$secenek => $renk === $secenek,
-                    ])></button>
-            @endforeach
+    {{-- Resmî formatta (EK-4A) biçim sabit: renk, yazı tipi ve bölüm seçimi uygulanmıyor. --}}
+    @if (CvSablonu::from($sablon)->resmi())
+        <div data-resmi-not class="flex items-start gap-2 rounded-xl border border-line bg-canvas p-3">
+            <flux:icon name="information-circle" class="mt-px size-4 shrink-0 text-ink-subtle" />
+            <flux:text class="!text-xs leading-relaxed">
+                <strong>YÖK EK-4A</strong> atama başvurusunda istenen resmî özgeçmiştir; başlıkları ve biçimi sabittir.
+                Yayınlar kaynak türüne göre (uluslararası / ulusal) 7.1–7.6'ya kendiliğinden dağılır;
+                kapsamı belirsiz olanlar “Diğer yayınlar”a düşer. Ders tablosu, faaliyetlerinizdeki son iki
+                akademik yılın derslerinden gelir.
+            </flux:text>
         </div>
-    </div>
-
-    {{-- Çizgi rengi: bölüm başlıklarının alt çizgisi. --}}
-    <div>
-        <flux:label class="!mb-1.5 block">Çizgi Rengi</flux:label>
-        <div class="flex flex-wrap gap-2">
-            @foreach (CvProfili::CIZGI_RENKLERI as $secenek)
-                <button type="button" wire:click="cizgiRenkSec('{{ $secenek }}')"
-                    aria-pressed="{{ $cizgiRenk === $secenek ? 'true' : 'false' }}"
-                    aria-label="Çizgi rengi {{ $secenek }}"
-                    class="size-7 rounded-full border border-line transition"
-                    @style([
-                        'background: '.$secenek,
-                        'box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px '.$secenek => $cizgiRenk === $secenek,
-                    ])></button>
-            @endforeach
+    @else
+        {{-- Renk --}}
+        <div>
+            <flux:label class="!mb-1.5 block">Renk</flux:label>
+            <div class="flex flex-wrap gap-2">
+                @foreach (CvProfili::RENKLER as $secenek)
+                    <button type="button" wire:click="renkSec('{{ $secenek }}')"
+                        aria-pressed="{{ $renk === $secenek ? 'true' : 'false' }}"
+                        aria-label="Renk {{ $secenek }}"
+                        class="size-7 rounded-full transition"
+                        @style([
+                            'background: '.$secenek,
+                            'box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px '.$secenek => $renk === $secenek,
+                        ])></button>
+                @endforeach
+            </div>
         </div>
-    </div>
 
-    {{-- Yazı tipi. Seçim wire:model'e değil yaziTipiSec'e gidiyor: değer
-         enum'dan geçmeden yazılsaydı uydurma bir değer önizlemeyi çökertirdi. --}}
-    <div>
-        <x-secim-listesi eylem="yaziTipiSec" :deger="$yaziTipi" label="Yazı Tipi"
-            :description-trailing="CvYaziTipi::from($yaziTipi)->aciklama()"
-            :secenekler="collect(CvYaziTipi::cases())->mapWithKeys(fn ($y) => [$y->value => $y->etiket()])->all()"
-            :stiller="collect(CvYaziTipi::cases())->mapWithKeys(fn ($y) => [$y->value => 'font-family: '.$y->yigin()])->all()" />
-    </div>
+        {{-- Çizgi rengi: bölüm başlıklarının alt çizgisi. --}}
+        <div>
+            <flux:label class="!mb-1.5 block">Çizgi Rengi</flux:label>
+            <div class="flex flex-wrap gap-2">
+                @foreach (CvProfili::CIZGI_RENKLERI as $secenek)
+                    <button type="button" wire:click="cizgiRenkSec('{{ $secenek }}')"
+                        aria-pressed="{{ $cizgiRenk === $secenek ? 'true' : 'false' }}"
+                        aria-label="Çizgi rengi {{ $secenek }}"
+                        class="size-7 rounded-full border border-line transition"
+                        @style([
+                            'background: '.$secenek,
+                            'box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px '.$secenek => $cizgiRenk === $secenek,
+                        ])></button>
+                @endforeach
+            </div>
+        </div>
 
-    {{-- Bölümler --}}
-    <div>
-        <flux:label class="!mb-1.5 block">Gösterilen Bölümler</flux:label>
-        <div class="flex flex-col">
-            @foreach (CvBolumu::cases() as $bolum)
-                @php $acik = (bool) ($bolumler[$bolum->value] ?? true); @endphp
-                <button type="button" wire:click="bolumDegistir('{{ $bolum->value }}')"
-                    role="switch" aria-checked="{{ $acik ? 'true' : 'false' }}"
-                    class="flex items-center justify-between border-b border-line py-2 last:border-0">
-                    <span class="text-xs text-ink-muted">{{ $bolum->etiket() }}</span>
-                    <span @class([
-                        'relative h-5 w-9 shrink-0 rounded-full transition',
-                        'bg-brand' => $acik,
-                        'bg-line-strong' => ! $acik,
-                    ])>
+        {{-- Yazı tipi. Seçim wire:model'e değil yaziTipiSec'e gidiyor: değer
+             enum'dan geçmeden yazılsaydı uydurma bir değer önizlemeyi çökertirdi. --}}
+        <div>
+            <x-secim-listesi eylem="yaziTipiSec" :deger="$yaziTipi" label="Yazı Tipi"
+                :description-trailing="CvYaziTipi::from($yaziTipi)->aciklama()"
+                :secenekler="collect(CvYaziTipi::cases())->mapWithKeys(fn ($y) => [$y->value => $y->etiket()])->all()"
+                :stiller="collect(CvYaziTipi::cases())->mapWithKeys(fn ($y) => [$y->value => 'font-family: '.$y->yigin()])->all()" />
+        </div>
+
+        {{-- Bölümler --}}
+        <div>
+            <flux:label class="!mb-1.5 block">Gösterilen Bölümler</flux:label>
+            <div class="flex flex-col">
+                @foreach (CvBolumu::cases() as $bolum)
+                    @php $acik = (bool) ($bolumler[$bolum->value] ?? true); @endphp
+                    <button type="button" wire:click="bolumDegistir('{{ $bolum->value }}')"
+                        role="switch" aria-checked="{{ $acik ? 'true' : 'false' }}"
+                        class="flex items-center justify-between border-b border-line py-2 last:border-0">
+                        <span class="text-xs text-ink-muted">{{ $bolum->etiket() }}</span>
                         <span @class([
-                            'absolute top-0.5 size-4 rounded-full bg-white transition-all',
-                            'start-[18px]' => $acik,
-                            'start-0.5' => ! $acik,
-                        ])></span>
-                    </span>
-                </button>
-            @endforeach
+                            'relative h-5 w-9 shrink-0 rounded-full transition',
+                            'bg-brand' => $acik,
+                            'bg-line-strong' => ! $acik,
+                        ])>
+                            <span @class([
+                                'absolute top-0.5 size-4 rounded-full bg-white transition-all',
+                                'start-[18px]' => $acik,
+                                'start-0.5' => ! $acik,
+                            ])></span>
+                        </span>
+                    </button>
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
 
     <flux:separator variant="subtle" />
 

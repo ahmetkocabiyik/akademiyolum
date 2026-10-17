@@ -278,14 +278,14 @@ test('veritabanında listeden çıkmış bir çizgi rengi style a yazılmaz', fu
     Livewire::test(CvOlusturucu::class)->assertDontSee('red;x:url(y)', escape: false);
 });
 
-test('yalnızca minimal ve prestijli şablonlar sunulur; yeni cv minimal başlar', function () {
-    expect(array_map(fn (CvSablonu $sablon) => $sablon->value, CvSablonu::cases()))->toBe(['minimal', 'prestijli']);
+test('minimal, kurumsal ve YÖK formatı sunulur; eski şablon değerleri reddedilir; yeni cv minimal başlar', function () {
+    expect(array_map(fn (CvSablonu $sablon) => $sablon->value, CvSablonu::cases()))->toBe(['minimal', 'prestijli', 'yok_ek4a']);
 
     Livewire::test(CvOlusturucu::class)
         ->assertSet('sablon', 'minimal')
         ->assertSee('Kurumsal')
+        ->assertSee('YÖK Formatı')
         ->assertDontSee('Prestijli')
-        ->assertDontSee('Resmî')
         ->call('sablonSec', 'resmi')
         ->call('sablonSec', 'sade')
         ->assertSet('sablon', 'minimal');
