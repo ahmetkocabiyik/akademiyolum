@@ -73,9 +73,15 @@ class User extends Authenticatable implements PasskeyUser
     /**
      * Akademik unvanlar — onboarding ve profil aynı listeyi kullanır.
      *
+     * "Doktora Öğrencisi" unvan değil statü (kadrosu olmayan aday); hedefi
+     * Arş. Gör. gibi Dr. Öğr. Üyeliği ({@see Kadro::hedef()}).
+     *
      * @var list<string>
      */
-    public const UNVANLAR = ['Arş. Gör.', 'Öğr. Gör.', 'Dr. Öğr. Üyesi', 'Doç. Dr.', 'Prof. Dr.'];
+    public const UNVANLAR = ['Doktora Öğrencisi', 'Arş. Gör.', 'Öğr. Gör.', 'Dr. Öğr. Üyesi', 'Doç. Dr.', 'Prof. Dr.'];
+
+    /** Ada önek olarak yazılmayan, ardından parantezle yazılan statüler. */
+    private const AD_ONEKI_OLMAYANLAR = ['Doktora Öğrencisi'];
 
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
@@ -281,6 +287,21 @@ class User extends Authenticatable implements PasskeyUser
         return $this->profil_foto === null
             ? null
             : route('profil.foto', ['v' => basename($this->profil_foto)]);
+    }
+
+    /**
+     * Ad ve unvan birlikte: "Dr. Öğr. Üyesi Ayşe Kaya", ama "Ayşe Kaya
+     * (Doktora Öğrencisi)" — statü ada önek olarak okunmuyor.
+     */
+    public function unvanliAd(): string
+    {
+        if ($this->unvan === null || $this->unvan === '') {
+            return $this->name;
+        }
+
+        return in_array($this->unvan, self::AD_ONEKI_OLMAYANLAR, true)
+            ? "{$this->name} ({$this->unvan})"
+            : "{$this->unvan} {$this->name}";
     }
 
     /**

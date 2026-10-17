@@ -184,6 +184,24 @@ test('akademik unvan profilden görüntülenir ve güncellenir', function () {
     expect($user->fresh()->unvan)->toBe('Doç. Dr.');
 });
 
+test('profilde doktora öğrencisi seçilebilir', function () {
+    $user = User::factory()->create(['unvan' => 'Arş. Gör.', 'temel_alan' => 'sosyal']);
+
+    Livewire::actingAs($user)->test(Profile::class)
+        ->assertSeeHtml('data-deger="Doktora Öğrencisi"')
+        ->set('unvan', 'Doktora Öğrencisi')
+        ->call('updateProfileInformation')
+        ->assertHasNoErrors();
+
+    expect($user->fresh()->unvan)->toBe('Doktora Öğrencisi');
+});
+
+test('unvanlı ad: unvan önek, doktora öğrencisi parantez', function () {
+    expect(User::factory()->make(['name' => 'Ayşe Kaya', 'unvan' => 'Doç. Dr.'])->unvanliAd())->toBe('Doç. Dr. Ayşe Kaya')
+        ->and(User::factory()->make(['name' => 'Ayşe Kaya', 'unvan' => 'Doktora Öğrencisi'])->unvanliAd())->toBe('Ayşe Kaya (Doktora Öğrencisi)')
+        ->and(User::factory()->make(['name' => 'Ayşe Kaya', 'unvan' => null])->unvanliAd())->toBe('Ayşe Kaya');
+});
+
 test('listede olmayan unvan reddedilir', function () {
     $user = User::factory()->create(['temel_alan' => 'sosyal']);
 

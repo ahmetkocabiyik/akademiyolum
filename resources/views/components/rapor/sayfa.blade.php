@@ -34,7 +34,7 @@
         </div>
         <h1 class="rapor-baslik">{{ $baslik !== '' ? $baslik : 'Akademik Faaliyet Raporu' }}</h1>
         <div class="rapor-kimlik">
-            {{ collect([$kullanici->unvan, $kullanici->name])->filter()->implode(' ') }}
+            {{ $kullanici->unvanliAd() }}
             <span>·</span>
             {{ collect([$kullanici->universite, $kullanici->bolum])->filter()->implode(' · ') }}
         </div>

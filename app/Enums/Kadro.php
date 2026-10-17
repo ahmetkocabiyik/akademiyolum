@@ -50,7 +50,7 @@ enum Kadro: string
     /**
      * Adayın unvanına göre HEDEF kadro: bir üst basamak.
      *
-     * Arş. Gör. ve Öğr. Gör. için hedef Dr. Öğr. Üyeliği; profesör için daha
+     * Doktora öğrencisi, Arş. Gör. ve Öğr. Gör. için hedef Dr. Öğr. Üyeliği; profesör için daha
      * üst kadro olmadığından profesörlük şartları gösterilir (aday kadro
      * değiştirmek ya da başka kurumda aynı kadroya başvurmak isteyebilir).
      */

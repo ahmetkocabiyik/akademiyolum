@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Kadro;
 use App\Livewire\Onboarding;
 use App\Models\User;
 use Livewire\Livewire;
@@ -135,4 +136,25 @@ test('already onboarded user visiting onboarding is redirected to dashboard', fu
 
     Livewire::test(Onboarding::class)
         ->assertRedirect(route('dashboard'));
+});
+
+test('kayıtta doktora öğrencisi seçilebilir; hedefi Dr. Öğr. Üyeliği', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+
+    Livewire::test(Onboarding::class)
+        ->assertSeeHtml('data-deger="Doktora Öğrencisi"')
+        ->set('name', 'Ayşe Kaya')
+        ->set('unvan', 'Doktora Öğrencisi')
+        ->call('next')
+        ->assertHasNoErrors()
+        ->set('universite', 'Mersin Üniversitesi')
+        ->set('temelAlan', 'ilahiyat')
+        ->call('submit')
+        ->assertRedirect(route('dashboard'));
+
+    expect($user->refresh()->unvan)->toBe('Doktora Öğrencisi')
+        ->and(Kadro::hedef($user->unvan))->toBe(Kadro::DrOgrUyesi)
+        // Statü ada önek olarak yazılmaz.
+        ->and($user->unvanliAd())->toBe('Ayşe Kaya (Doktora Öğrencisi)');
 });
