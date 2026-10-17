@@ -71,6 +71,12 @@
         "types:check": [
             "phpstan analyse"
         ],
+        "pdf:yukle": [
+            "Composer\\Config::disableProcessTimeout",
+            "test -n \"$AKADEMIYOLUM_SSH\" || (echo 'AKADEMIYOLUM_SSH tanımlı değil (ör. root@sunucu)'; exit 1)",
+            "rsync -az --stats -e 'ssh -p 2222' pdf/ \"$AKADEMIYOLUM_SSH\":/home/akademiyolum.com/test.akademiyolum.com/pdf/",
+            "ssh -p 2222 \"$AKADEMIYOLUM_SSH\" 'cd /home/akademiyolum.com/test.akademiyolum.com && chown -R akade4106:akade4106 pdf && find pdf -type f -exec chmod 644 {} +'"
+        ],
         "test": [
             "@php artisan config:clear --ansi",
             "@lint:check",

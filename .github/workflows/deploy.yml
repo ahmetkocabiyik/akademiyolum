@@ -43,9 +43,14 @@ jobs:
           # bootstrap/cache ve storage/framework yerelde/CI'da üretilen, ortama
           # bağlı dosyalar tutuyor: paket bildirimi dev bağımlılıkları listeler,
           # derlenmiş view'lar mutlak yol taşır. Gönderilirse üretim 500 verir.
+          #
+          # /pdf/ (yönerge kaynak PDF'leri, ~180 MB) git'te yok; sunucuya ayrıca
+          # `composer pdf:yukle` ile gönderiliyor. Hariç tutulmazsa --delete her
+          # deploy'da siler ve "Kaynak belge" bağlantıları 404 verir.
           switches: >-
             -avzr --delete
             --exclude='.env'
+            --exclude='/pdf/'
             --exclude='/vendor/'
             --exclude='/node_modules/'
             --exclude='/bootstrap/cache/'
