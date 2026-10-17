@@ -122,6 +122,27 @@ test('yönergesi yoksa listede puan yerine tire görünür', function () {
     Livewire::test(Dashboard::class)->assertSeeHtml('data-faaliyet-puani>—</td>');
 });
 
+test('hedef analizi puanın kendi üniversitesinin yönergesine göre olduğunu söyler', function () {
+    Universite::factory()->create(['ad' => 'Test Üniversitesi']);
+    app()->instance(SartDeposu::class, dashboardDeposu());
+
+    $user = User::factory()->onboarded()->create(['universite' => 'Test Üniversitesi', 'unvan' => 'Arş. Gör.']);
+    actingAs($user);
+
+    Livewire::test(Dashboard::class)
+        ->assertSeeHtml('data-hesap-kaynagi')
+        ->assertSeeInOrder(['kendi üniversitenizin', '(Test Üniversitesi)', 'ÜAK']);
+});
+
+test('yönergesi yoksa hesap kaynağı notu çıkmaz', function () {
+    Universite::factory()->create(['ad' => 'Verisi Olmayan Üni']);
+    app()->instance(SartDeposu::class, dashboardDeposu());
+
+    actingAs(User::factory()->onboarded()->create(['universite' => 'Verisi Olmayan Üni', 'unvan' => 'Arş. Gör.']));
+
+    Livewire::test(Dashboard::class)->assertDontSeeHtml('data-hesap-kaynagi');
+});
+
 test('yönergesi girilmemiş üniversitede puan gösterilmez', function () {
     Universite::factory()->create(['ad' => 'Verisi Olmayan Üni']);
     app()->instance(SartDeposu::class, dashboardDeposu());

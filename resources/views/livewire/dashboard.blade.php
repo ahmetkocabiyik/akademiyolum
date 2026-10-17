@@ -108,6 +108,8 @@
                         <flux:text size="sm">
                             @if ($this->baraj !== null)
                                 {{ auth()->user()->universite }} · {{ $this->kadroEtiketi() }} · {{ $this->baraj }} puan barajı
+                            @elseif ($esik)
+                                {{ auth()->user()->universite }} · {{ $this->kadroEtiketi() }} · puan barajı yok
                             @else
                                 Üniversitenizin yönergesi girildiğinde burada barajınız görünecek
                             @endif
@@ -115,6 +117,22 @@
                     </div>
                     <flux:badge color="green" size="sm">2026 Güncel</flux:badge>
                 </div>
+                {{-- Puanın hangi ölçüte göre olduğu açık yazılmalı: adaylar
+                     (özellikle doçentlikte) bunu ÜAK puanı sanabiliyor. --}}
+                @if ($esik)
+                    <div data-hesap-kaynagi class="mt-2 flex items-start gap-1.5 text-xs text-ink-muted">
+                        <flux:icon name="building-library" variant="micro" class="mt-px shrink-0 text-brand" />
+                        <span>
+                            Puan, <span class="font-medium text-ink">kendi üniversitenizin</span> ({{ auth()->user()->universite }})
+                            atama ve yükseltme yönergesine göre hesaplanır.
+                            @if ($this->hedefKadro === \App\Enums\Kadro::Docentlik->value)
+                                Üniversitelerarası Kurul'un (ÜAK) doçentlik başvuru puanı değildir.
+                            @else
+                                Üniversitelerarası Kurul (ÜAK) ölçütlerine göre değildir.
+                            @endif
+                        </span>
+                    </div>
+                @endif
 
                 <div class="my-4 flex justify-center">
                     <svg width="200" height="116" viewBox="0 0 180 105">
