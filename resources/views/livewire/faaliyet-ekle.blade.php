@@ -212,7 +212,7 @@
                         <flux:textarea wire:model="aciklama" label="Kısa Açıklama" placeholder="Faaliyet hakkında kısa bir not ekleyin..." rows="3" />
 
                     {{-- Yalnız düzenlemede: yeni kayıt onaylı başlıyor, içe
-                         aktarılan kayıt beklemede iniyor ve aday onu burada onaylıyor. --}}
+                         aktarılan kayıt (kurum profili hariç) beklemede iniyor ve aday onu burada onaylıyor. --}}
                     @if ($faaliyet)
                         <x-secim-listesi model="durum" label="Durum"
                             description="Beklemedeki faaliyetler puanlamaya, yönerge analizine ve CV'ye katılmaz."
@@ -484,7 +484,7 @@
                         <flux:text class="!text-xs">
                             Kademesi okunabilen kayıtlar <strong class="text-ink">dolu</strong> gelir;
                             çeyrekliği (Q1–Q4) {{ $avesisSistemAdi }} yazmıyorsa o kayıtlar boş kalır.
-                            Hepsi <strong class="text-ink">beklemede</strong> iner, onay sizde.
+                            Hepsi <strong class="text-ink">onaylı</strong> iner; listeden tek tıkla beklemeye alabilirsiniz.
                         </flux:text>
                         <flux:button wire:click="avesistenEkle" variant="primary" icon="plus" class="shrink-0">
                             {{ count($avesisSecilenler) }} kaydı ekle

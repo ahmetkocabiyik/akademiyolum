@@ -776,7 +776,10 @@ class FaaliyetEkle extends Component
      * kademeler (SCIE/SSCI, Scopus) yine boş kalıyor — çeyreklik burada da
      * yazmıyor ve uydurulmuyor.
      *
-     * Durum yine "beklemede": okunan kademe adayın onayından geçmeli.
+     * Durum "onaylandi": kayıtlar adayın kendi kurum profilinden geliyor,
+     * yani zaten beyan ettiği faaliyetler. Kademesi boş kalan (çeyrekli)
+     * kayıt onaylı da olsa puan almaz; aday düzenleyip kademe seçer.
+     * Listede beklemeye almak tek tık (bkz. Faaliyetler::durumDegistir).
      */
     public function avesistenEkle(): void
     {
@@ -803,11 +806,11 @@ class FaaliyetEkle extends Component
             // aynı yıl içinde kayıt lehe değil aleyhe düşer.
             'tarih' => $kayit['yil'] === null ? null : sprintf('%04d-01-01', $kayit['yil']),
             'kaynak' => $kayit['kaynak'],
-        ]);
+        ], durum: 'onaylandi');
 
         Flux::toast(
             variant: 'success',
-            text: $eklenen.' kayıt beklemede eklendi. Kademeleri kontrol edip onaylayın.',
+            text: $eklenen.' kayıt onaylı eklendi. Kademesi boş kalanları düzenleyip seçin.',
         );
 
         $this->redirectRoute('faaliyetler', navigate: true);
@@ -843,7 +846,7 @@ class FaaliyetEkle extends Component
      * @param  list<array<string, mixed>>  $secili
      * @param  callable(array<string, mixed>, Kategori): array<string, mixed>  $alanlar
      */
-    private function ekle(array $secili, callable $alanlar, ?string $kategoriZorla = null): int
+    private function ekle(array $secili, callable $alanlar, ?string $kategoriZorla = null, string $durum = 'beklemede'): int
     {
         $denetim = app(MukerrerDenetimi::class);
         $kullanici = Auth::user();
@@ -865,7 +868,7 @@ class FaaliyetEkle extends Component
                 'kategori' => $kategori->value,
                 'tur' => $kategori->label(),
                 'baslik' => $baslik,
-                'durum' => 'beklemede',
+                'durum' => $durum,
                 'meta' => $meta,
                 ...$alanlar($kayit, $kategori),
             ])->id;

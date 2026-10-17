@@ -101,3 +101,26 @@ test('listedeki puan kendi üniversitesinin cetvelinden hesaplanır', function (
         ->assertSeeHtml('data-faaliyet-puani>10</td>')
         ->assertDontSeeHtml('data-faaliyet-puani>0</td>');
 });
+
+test('onay anahtarı faaliyeti onaylandı ile beklemede arasında değiştirir', function () {
+    $faaliyet = Faaliyet::factory()->for($this->user)->create(['durum' => 'onaylandi']);
+
+    $bilesen = Livewire::test(Faaliyetler::class)
+        ->assertSeeHtml('data-onay-anahtari="'.$faaliyet->id.'"')
+        ->call('durumDegistir', $faaliyet->id);
+
+    expect($faaliyet->refresh()->durum)->toBe('beklemede');
+
+    $bilesen->call('durumDegistir', $faaliyet->id);
+
+    expect($faaliyet->refresh()->durum)->toBe('onaylandi');
+});
+
+test('başka kullanıcının faaliyetinin durumu değiştirilemez', function () {
+    $baskasi = Faaliyet::factory()->create(['durum' => 'beklemede']);
+
+    expect(fn () => Livewire::test(Faaliyetler::class)->call('durumDegistir', $baskasi->id))
+        ->toThrow(ModelNotFoundException::class);
+
+    expect($baskasi->refresh()->durum)->toBe('beklemede');
+});

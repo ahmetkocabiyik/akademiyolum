@@ -193,8 +193,8 @@ test('projeler fon programıyla okunuyor', function () {
 /**
  * DİĞER İKİ YOLDAN FARKI: kademe dolu iniyor.
  *
- * Crossref ile DergiPark dergi indeksini bilmiyordu; AVESİS biliyor. Yine
- * de durum "beklemede": okunan kademe adayın onayından geçmeli.
+ * Crossref ile DergiPark dergi indeksini bilmiyordu; AVESİS biliyor. Durum
+ * "onaylandi": kayıt adayın kendi kurum profilinden geliyor.
  */
 test('avesis kaydı kademesiyle birlikte ekleniyor', function () {
     $kullanici = User::factory()->create(['avesis_id' => null]);
@@ -221,7 +221,7 @@ test('avesis kaydı kademesiyle birlikte ekleniyor', function () {
 
     expect($faaliyetler)->toHaveCount(3)
         ->and($faaliyetler['ESCI makalem']->kaynak)->toBe('ESCI')
-        ->and($faaliyetler['ESCI makalem']->durum)->toBe('beklemede')
+        ->and($faaliyetler['ESCI makalem']->durum)->toBe('onaylandi')
         ->and($faaliyetler['ESCI makalem']->yazarlar)->toBe('KURT A.')
         ->and($faaliyetler['ESCI makalem']->meta['avesis_id'])->toBe(uuid(1))
         // Çeyreklik bilinmiyor: kademe boş.
@@ -617,7 +617,7 @@ test('ödül ve kongre kayıtları ekranda listeleniyor', function () {
 
     expect($faaliyet->kategori->value)->toBe('odul')
         ->and($faaliyet->kaynak)->toBe('TÜBİTAK / TÜBA Ödülü')
-        ->and($faaliyet->durum)->toBe('beklemede');
+        ->and($faaliyet->durum)->toBe('onaylandi');
 });
 
 // ────────────────── PATENT / TASARIM ──────────────────
@@ -758,7 +758,7 @@ test('sanatsal etkinlik ekranda listeleniyor ve eklenebiliyor', function () {
 
     expect($faaliyet->kategori->value)->toBe('sanatsal_etkinlik')
         ->and($faaliyet->kaynak)->toBeNull()
-        ->and($faaliyet->durum)->toBe('beklemede')
+        ->and($faaliyet->durum)->toBe('onaylandi')
         ->and($faaliyet->tarih->format('Y-m-d'))->toBe('2024-01-01')
         ->and($faaliyet->meta['avesis_id'])->toBe(uuid(3));
 });

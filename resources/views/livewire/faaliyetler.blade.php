@@ -85,7 +85,27 @@
                                         </flux:badge>
                                     </td>
                                     <td class="px-2 py-2.5">
-                                        <div class="flex justify-end gap-1.5">
+                                        <div class="flex items-center justify-end gap-1.5">
+                                            {{-- Onay anahtarı: beklemedeki kayıt puana girmiyor. --}}
+                                            @php $onayli = $f->durum === 'onaylandi'; @endphp
+                                            <button type="button" wire:click="durumDegistir({{ $f->id }})"
+                                                role="switch" aria-checked="{{ $onayli ? 'true' : 'false' }}"
+                                                data-onay-anahtari="{{ $f->id }}"
+                                                title="{{ $onayli ? 'Onaylı — beklemeye al' : 'Beklemede — onayla' }}"
+                                                aria-label="{{ $onayli ? 'Onaylı; beklemeye al' : 'Beklemede; onayla' }}"
+                                                class="me-1 inline-flex items-center rounded-full p-1">
+                                                <span @class([
+                                                    'relative h-5 w-9 shrink-0 rounded-full transition',
+                                                    'bg-cat-green' => $onayli,
+                                                    'bg-line-strong' => ! $onayli,
+                                                ])>
+                                                    <span @class([
+                                                        'absolute top-0.5 size-4 rounded-full bg-white shadow-sm transition-all',
+                                                        'start-[18px]' => $onayli,
+                                                        'start-0.5' => ! $onayli,
+                                                    ])></span>
+                                                </span>
+                                            </button>
                                             <a href="{{ route('faaliyetler.duzenle', $f) }}" wire:navigate class="act-btn" title="Düzenle" aria-label="Düzenle">
                                                 <flux:icon name="pencil-square" />
                                             </a>

@@ -718,8 +718,8 @@ test('apbs adresi ekrandan okunup faaliyete çevriliyor', function () {
     expect($faaliyet->baslik)->toBe('Spatiotemporal dust storm risk mapping')
         ->and($faaliyet->kategori->value)->toBe('makale')
         ->and($faaliyet->kaynak)->toBe('SCIE/SSCI (Q1)')
-        // Okunan kademe adayın onayından geçmeli.
-        ->and($faaliyet->durum)->toBe('beklemede')
+        // Kurum profilinden gelen kayıt onaylı iner.
+        ->and($faaliyet->durum)->toBe('onaylandi')
         ->and($faaliyet->meta['kaynak_sistem'])->toBe('apbs')
         ->and($faaliyet->meta['apbs_id'])->not->toBeEmpty()
         ->and($faaliyet->tarih->year)->toBe(2024);

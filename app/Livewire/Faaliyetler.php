@@ -43,6 +43,18 @@ class Faaliyetler extends Component
         Flux::toast(variant: 'success', text: 'Faaliyet silindi.');
     }
 
+    /**
+     * Listeden tek tıkla onaylandı ↔ beklemede. Beklemedeki kayıt puana,
+     * analize ve CV'ye girmiyor; içe aktarılanları gözden geçirirken her
+     * birini düzenleme sayfasında açmak gerekmesin.
+     */
+    public function durumDegistir(int $id): void
+    {
+        $faaliyet = Auth::user()->faaliyetler()->findOrFail($id);
+
+        $faaliyet->update(['durum' => $faaliyet->durum === 'onaylandi' ? 'beklemede' : 'onaylandi']);
+    }
+
     public function render()
     {
         return view('livewire.faaliyetler', [
