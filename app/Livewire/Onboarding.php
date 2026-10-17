@@ -11,6 +11,7 @@ use App\Models\Universite;
 use App\Models\User;
 use App\Services\Abonelik\AbonelikTalepleri;
 use App\Services\Abonelik\PaketKatalogu;
+use App\Services\Scoring\Sart\ProfilGereksinimleri;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -183,6 +184,16 @@ class Onboarding extends Component
         }
 
         session()->forget(self::SECILEN_PAKET);
+
+        // Kendi yönergesinin gerektirdiği akademik bilgiler (doktora tarihi,
+        // yabancı dil puanı…) eksikse önce oraya: boşken koşullar "belirsiz"
+        // kalıyor ve ilk gördüğü puan durumu yanıltıcı oluyor. Tam sayfa
+        // yükleme: wire:navigate adresteki #akademik-profil'e kaydırmıyor.
+        if (app(ProfilGereksinimleri::class)->eksikler($user) !== []) {
+            $this->redirect(route('profile.edit').'#akademik-profil');
+
+            return;
+        }
 
         $this->redirectRoute('dashboard', navigate: true);
     }

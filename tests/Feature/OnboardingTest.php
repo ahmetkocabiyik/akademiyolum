@@ -100,7 +100,8 @@ test('onboarding flow saves profile and completes', function () {
         ->set('fakulte', 'İlahiyat Fakültesi')
         ->set('bolum', 'Temel İslam Bilimleri')
         ->call('submit')
-        ->assertRedirect(route('dashboard'));
+        // Mersin yönergesi doktora tarihi ve yabancı dil istiyor; profil boş.
+        ->assertRedirect(route('profile.edit').'#akademik-profil');
 
     $user->refresh();
 
@@ -151,7 +152,8 @@ test('kayıtta doktora öğrencisi seçilebilir; hedefi Dr. Öğr. Üyeliği', f
         ->set('universite', 'Mersin Üniversitesi')
         ->set('temelAlan', 'ilahiyat')
         ->call('submit')
-        ->assertRedirect(route('dashboard'));
+        // Mersin yönergesi yabancı dil puanı istiyor; profil boş.
+        ->assertRedirect(route('profile.edit').'#akademik-profil');
 
     expect($user->refresh()->unvan)->toBe('Doktora Öğrencisi')
         ->and(Kadro::hedef($user->unvan))->toBe(Kadro::DrOgrUyesi)

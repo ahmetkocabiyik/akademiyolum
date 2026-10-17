@@ -8,6 +8,7 @@ use App\Enums\TemelAlan;
 use App\Models\Universite;
 use App\Models\User;
 use App\Services\Scoring\Sart\ProfilCozucu;
+use App\Services\Scoring\Sart\ProfilGereksinimleri;
 use App\Services\Scoring\Sart\SartDeposu;
 use Carbon\CarbonInterface;
 use Flux\Flux;
@@ -291,6 +292,8 @@ class Profile extends Component
             'fakulteler' => $this->fakulteSecenekleri(),
             'bolumler' => $this->bolumSecenekleri(),
             'akademikAlanlar' => self::akademikAlanlar(),
+            // Kayıtlı değerlere göre: aday kaydedince işaret kalkar.
+            'eksikAlanlar' => app(ProfilGereksinimleri::class)->eksikler(Auth::user()),
             'programDilleri' => self::programDilleri(),
             'unvanlar' => self::unvanlar(),
             'birimler' => $this->birimSecenekleri(),

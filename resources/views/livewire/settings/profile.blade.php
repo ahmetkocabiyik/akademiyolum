@@ -92,13 +92,24 @@
             {{-- Akademik profil: yönerge analizindeki dönem ve sayaç koşullarının
                  girdisi. Boş bırakılan alan koşulu "sağlanmadı" yapmaz; o koşul
                  "belirsiz" olarak işaretlenir. --}}
-            <div>
+            <div id="akademik-profil" class="scroll-mt-6">
                 <flux:heading size="sm">Akademik Profil</flux:heading>
                 <flux:text class="!mt-1 !text-xs">
                     Yönerge analizi bu değerleri kullanır. Boş bıraktığınız her alan, ona bağlı koşulu
                     <strong>belirsiz</strong> bırakır ve üniversite <strong>“Kriter Onaylanmalı”</strong> olarak
                     işaretlenir — koşul sağlanmamış sayılmaz, değerlendirilemez.
                 </flux:text>
+                {{-- Adayın kendi yönergesinin ve unvanının gerektirdiği boş alanlar
+                     (App\Services\Scoring\Sart\ProfilGereksinimleri). --}}
+                @if ($eksikAlanlar !== [])
+                    <div data-profil-eksik-liste class="mt-3 flex items-start gap-2 rounded-xl border border-cat-amber/40 bg-cat-amber-light p-3">
+                        <flux:icon name="exclamation-triangle" class="mt-px size-4 shrink-0 text-cat-amber-text" />
+                        <flux:text class="!text-xs leading-relaxed !text-ink">
+                            <strong>Doğru hesaplama için şu bilgiler gerekli:</strong>
+                            {{ implode(', ', $eksikAlanlar) }}. Aşağıda <strong>(gerekli)</strong> diye işaretli.
+                        </flux:text>
+                    </div>
+                @endif
                 <div class="mt-3 flex items-start gap-2 rounded-xl border border-line bg-canvas p-3">
                     <flux:icon name="information-circle" class="mt-px size-4 shrink-0 text-ink-subtle" />
                     <flux:text class="!text-xs leading-relaxed">
@@ -110,7 +121,7 @@
                 </div>
             </div>
 
-            <x-secim-listesi model="akademik.program_dili" label="Biriminizin öğretim dili"
+            <x-secim-listesi model="akademik.program_dili" :label="'Biriminizin öğretim dili'.(isset($eksikAlanlar['program_dili']) ? ' (gerekli)' : '')"
                 description="Yabancı dil barajı buna göre değişir (ör. Türkçe 65, %100 yabancı dilde 85)."
                 :secenekler="['' => 'Seçiniz'] + $programDilleri" />
 
@@ -120,7 +131,7 @@
                         wire:key="akademik-{{ $alan }}"
                         wire:model="akademik.{{ $alan }}"
                         :type="$tip"
-                        :label="$etiket"
+                        :label="$etiket.(isset($eksikAlanlar[$alan]) ? ' (gerekli)' : '')"
                         :description="$ipucu ?: null"
                         :min="$tip === 'number' ? 0 : null"
                         placeholder="—" />
