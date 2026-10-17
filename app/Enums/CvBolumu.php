@@ -13,6 +13,8 @@ enum CvBolumu: string
     case Ozet = 'ozet';
     case Egitim = 'egitim';
     case Deneyim = 'deneyim';
+    case AkademikUnvanlar = 'akademik_unvanlar';
+    case Uyelikler = 'uyelikler';
     case Yayinlar = 'yayinlar';
     case Beceriler = 'beceriler';
     case Diller = 'diller';
@@ -24,6 +26,8 @@ enum CvBolumu: string
             self::Ozet => 'Özet / Biyografi',
             self::Egitim => 'Eğitim',
             self::Deneyim => 'Deneyim',
+            self::AkademikUnvanlar => 'Akademik Unvanlar',
+            self::Uyelikler => 'Bilimsel Kuruluş Üyelikleri',
             self::Yayinlar => 'Yayınlar ve Faaliyetler',
             self::Beceriler => 'Uzmanlık Alanları',
             self::Diller => 'Diller',

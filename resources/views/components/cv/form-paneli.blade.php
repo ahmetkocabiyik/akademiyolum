@@ -2,6 +2,8 @@
     'sekme',
     'egitimler',
     'deneyimler',
+    'akademikUnvanlar' => [],
+    'uyelikler' => [],
     'beceriler',
     'diller',
     'faaliyetler',
@@ -31,13 +33,14 @@
         @foreach ([
             'kisisel' => 'Kişisel',
             'egitim' => 'Eğitim',
-            'faaliyet' => 'Faaliyetler',
+            'kariyer' => 'Kariyer',
+            'faaliyet' => 'Faaliyet',
             'beceri' => 'Beceri',
         ] as $deger => $etiket)
             <button type="button" wire:click="$set('sekme', '{{ $deger }}')"
                 aria-pressed="{{ $sekme === $deger ? 'true' : 'false' }}"
                 @class([
-                    'flex-1 border-b-2 px-3 py-3.5 text-sm font-medium transition',
+                    'flex-1 whitespace-nowrap border-b-2 px-1 py-3.5 text-[13px] font-medium transition',
                     'border-brand text-brand' => $sekme === $deger,
                     'border-transparent text-ink-subtle hover:text-ink' => $sekme !== $deger,
                 ])>{{ $etiket }}</button>
@@ -79,6 +82,9 @@
                 </div>
 
                 <flux:input wire:model.live.blur="ad" label="Ad Soyad" />
+                {{-- YÖK EK-4A özgeçmişi soruyor; tasarımlı şablonlarda basılmıyor. --}}
+                <flux:input wire:model.live.blur="dogumTarihi" type="date" label="Doğum tarihi"
+                    description:trailing="Yalnız YÖK formatında" max="{{ now()->subDay()->format('Y-m-d') }}" />
                 {{-- Unvan kapalı listeden. Listede olmayan eski bir değer (elle
                      yazıldığı dönemden) seçenek olarak kalıyor: yoksa tarayıcı ilk
                      seçeneği seçili gösterir, aday unvanını değişmiş sanırdı. --}}
@@ -130,15 +136,50 @@
                             <div class="flex flex-col gap-2">
                                 <flux:input wire:model.live.blur="egitimler.{{ $sira }}.derece" placeholder="Derece (Doktora)" />
                                 <flux:input wire:model.live.blur="egitimler.{{ $sira }}.universite" placeholder="Üniversite" />
-                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.bolum" placeholder="Bölüm" />
+                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.bolum" placeholder="Bölüm / alan" />
                                 <div class="grid grid-cols-2 gap-2">
                                     <flux:input wire:model.live.blur="egitimler.{{ $sira }}.baslangic" placeholder="Başlangıç" />
                                     <flux:input wire:model.live.blur="egitimler.{{ $sira }}.bitis" placeholder="Bitiş" />
                                 </div>
+                                {{-- Lisansüstü derecede YÖKSİS tezi de yazıyor. --}}
+                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.tez_adi" placeholder="Tez adı (lisansüstü)" />
+                                <flux:input wire:model.live.blur="egitimler.{{ $sira }}.danisman" placeholder="Tez danışmanı" />
                             </div>
                         </div>
                     @empty
                         <flux:text class="!text-xs">Henüz eğitim satırı yok.</flux:text>
+                    @endforelse
+                </div>
+
+            </div>
+        @endif
+
+        {{-- KARİYER: EK-4A madde 5 (akademik unvanlar), görevler ve madde 10 (üyelikler).
+             İdari görevler faaliyetlerden geliyor (İdari Görev kategorisi). --}}
+        @if ($sekme === 'kariyer')
+            <div class="flex flex-col gap-5">
+                <div>
+                    <div class="mb-2 flex items-center justify-between">
+                        <flux:heading size="sm">Akademik Unvanlar</flux:heading>
+                        <flux:button wire:click="unvanEkle" size="sm" variant="subtle" icon="plus">Ekle</flux:button>
+                    </div>
+
+                    @forelse ($akademikUnvanlar as $sira => $satir)
+                        <div class="mb-2 rounded-xl border border-line p-3" wire:key="akademikUnvanlar-{{ $sira }}">
+                            <div class="mb-2 flex items-center justify-between">
+                                <span class="text-xs font-medium text-ink-subtle">#{{ $sira + 1 }}</span>
+                                <flux:button wire:click="unvanSil({{ $sira }})" size="sm" variant="subtle"
+                                    icon="x-mark" aria-label="Akademik Unvanlar satırını sil" />
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <flux:input wire:model.live.blur="akademikUnvanlar.{{ $sira }}.unvan" placeholder="Unvan (Doçent, Profesör)" />
+                                <flux:input wire:model.live.blur="akademikUnvanlar.{{ $sira }}.kurum" placeholder="Veren kurum (ÜAK, üniversite)" />
+                                <flux:input wire:model.live.blur="akademikUnvanlar.{{ $sira }}.alan" placeholder="Bilim alanı" />
+                                <flux:input wire:model.live.blur="akademikUnvanlar.{{ $sira }}.yil" placeholder="Yıl" />
+                            </div>
+                        </div>
+                    @empty
+                        <flux:text class="!text-xs">Henüz akademik unvan satırı yok.</flux:text>
                     @endforelse
                 </div>
 
@@ -166,6 +207,30 @@
                         </div>
                     @empty
                         <flux:text class="!text-xs">Henüz deneyim satırı yok.</flux:text>
+                    @endforelse
+                </div>
+
+                <div>
+                    <div class="mb-2 flex items-center justify-between">
+                        <flux:heading size="sm">Bilimsel Kuruluş Üyelikleri</flux:heading>
+                        <flux:button wire:click="uyelikEkle" size="sm" variant="subtle" icon="plus">Ekle</flux:button>
+                    </div>
+
+                    @forelse ($uyelikler as $sira => $satir)
+                        <div class="mb-2 rounded-xl border border-line p-3" wire:key="uyelikler-{{ $sira }}">
+                            <div class="mb-2 flex items-center justify-between">
+                                <span class="text-xs font-medium text-ink-subtle">#{{ $sira + 1 }}</span>
+                                <flux:button wire:click="uyelikSil({{ $sira }})" size="sm" variant="subtle"
+                                    icon="x-mark" aria-label="Bilimsel Kuruluş Üyelikleri satırını sil" />
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <flux:input wire:model.live.blur="uyelikler.{{ $sira }}.kurulus" placeholder="Kuruluş / dernek" />
+                                <flux:input wire:model.live.blur="uyelikler.{{ $sira }}.gorev" placeholder="Görev (üye, yönetim kurulu…)" />
+                                <flux:input wire:model.live.blur="uyelikler.{{ $sira }}.yil" placeholder="Yıl (başlangıç)" />
+                            </div>
+                        </div>
+                    @empty
+                        <flux:text class="!text-xs">Henüz üyelik satırı yok.</flux:text>
                     @endforelse
                 </div>
             </div>

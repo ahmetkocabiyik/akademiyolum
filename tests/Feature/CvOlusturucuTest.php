@@ -658,3 +658,79 @@ test('faaliyet listesindeki puan saklanan sütundan değil kendi cetvelinden gel
 
     expect(collect($veri['faaliyetler'])->firstWhere('baslik', 'Anadolu Tasavvuf Geleneği')['puan'])->toBe(10);
 });
+
+test('doğum tarihi kaydedilir; geçersizse kayıtlı değer korunur', function () {
+    $bilesen = Livewire::test(CvOlusturucu::class)->set('dogumTarihi', '1985-04-12');
+
+    expect($this->user->cvProfili->refresh()->dogum_tarihi->toDateString())->toBe('1985-04-12');
+
+    $bilesen->set('dogumTarihi', now()->addYear()->toDateString())->assertHasErrors('dogumTarihi');
+
+    expect($this->user->cvProfili->refresh()->dogum_tarihi->toDateString())->toBe('1985-04-12');
+});
+
+test('eğitim satırı tez adı ve danışmanı taşır; eski satırlar yeni anahtarlarla açılır', function () {
+    CvProfili::factory()->for($this->user)->create([
+        // Tez adı eklenmeden önce kaydedilmiş satır.
+        'egitimler' => [['derece' => 'Doktora', 'universite' => 'Ankara Üniversitesi', 'bolum' => 'Kelam', 'baslangic' => '2012', 'bitis' => '2018']],
+    ]);
+
+    $bilesen = Livewire::test(CvOlusturucu::class)
+        ->assertSet('egitimler.0.tez_adi', '')
+        ->set('egitimler.0.tez_adi', 'Mâtürîdî Kelamında Bilgi')
+        ->set('egitimler.0.danisman', 'Prof. Dr. Ali Veli');
+
+    expect($this->user->cvProfili->refresh()->egitimler[0])
+        ->toMatchArray(['tez_adi' => 'Mâtürîdî Kelamında Bilgi', 'danisman' => 'Prof. Dr. Ali Veli']);
+
+    $bilesen->assertSee('Tez: Mâtürîdî Kelamında Bilgi · Danışman: Prof. Dr. Ali Veli');
+});
+
+test('akademik unvan ve üyelik satırları eklenir, kaydedilir, silinir ve önizlemede görünür', function () {
+    $bilesen = Livewire::test(CvOlusturucu::class)
+        ->set('sekme', 'kariyer')
+        ->call('unvanEkle')
+        ->set('akademikUnvanlar.0.unvan', 'Doçent')
+        ->set('akademikUnvanlar.0.kurum', 'ÜAK')
+        ->set('akademikUnvanlar.0.alan', 'Kelam')
+        ->set('akademikUnvanlar.0.yil', '2021')
+        ->call('uyelikEkle')
+        ->set('uyelikler.0.kurulus', 'Kelam Araştırmaları Derneği')
+        ->set('uyelikler.0.gorev', 'Üye');
+
+    $profil = $this->user->cvProfili->refresh();
+
+    expect($profil->akademik_unvanlar)->toBe([['unvan' => 'Doçent', 'kurum' => 'ÜAK', 'alan' => 'Kelam', 'yil' => '2021']])
+        ->and($profil->uyelikler[0]['kurulus'])->toBe('Kelam Araştırmaları Derneği');
+
+    $bilesen->assertSee('Akademik Unvanlar')
+        ->assertSee('Doçent — Kelam')
+        ->assertSee('Bilimsel Kuruluş Üyelikleri');
+
+    $bilesen->call('unvanSil', 0)->call('uyelikSil', 0);
+
+    $profil->refresh();
+    expect($profil->akademik_unvanlar)->toBe([])->and($profil->uyelikler)->toBe([]);
+});
+
+test('ilk oluşturmada doçentlik tarihi akademik unvan satırı olarak gelir', function () {
+    $user = User::factory()->onboarded()->create(['docentlik_tarihi' => '2021-05-10']);
+
+    expect(CvProfili::kullaniciIcin($user)->akademik_unvanlar)
+        ->toBe([['unvan' => 'Doçent', 'kurum' => 'ÜAK', 'alan' => null, 'yil' => '2021']]);
+});
+
+test('json dışa aktarım yeni alanları içerir', function () {
+    $bilesen = Livewire::test(CvOlusturucu::class)
+        ->set('dogumTarihi', '1985-04-12')
+        ->call('uyelikEkle')
+        ->set('uyelikler.0.kurulus', 'Türk Felsefe Derneği');
+
+    ob_start();
+    $bilesen->instance()->jsonIndir()->sendContent();
+    $veri = json_decode((string) ob_get_clean(), true);
+
+    expect($veri['kunye']['dogum_tarihi'])->toBe('1985-04-12')
+        ->and($veri['uyelikler'][0]['kurulus'])->toBe('Türk Felsefe Derneği')
+        ->and($veri)->toHaveKey('akademik_unvanlar');
+});

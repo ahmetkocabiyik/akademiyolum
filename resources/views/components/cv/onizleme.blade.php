@@ -117,6 +117,24 @@
                                     collect([$egitim['baslangic'] ?? null, $egitim['bitis'] ?? null])->filter()->implode('–'),
                                 ])->filter()->implode(' · ') }}
                             </div>
+                            @if (filled($egitim['tez_adi'] ?? null))
+                                <div class="cv-satir-alt">
+                                    {{ collect(['Tez: '.$egitim['tez_adi'], filled($egitim['danisman'] ?? null) ? 'Danışman: '.$egitim['danisman'] : null])->filter()->implode(' · ') }}
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            @php $unvanlar = collect($cv['akademikUnvanlar'] ?? [])->filter(fn (array $u) => filled($u['unvan'])); @endphp
+            @if ($acik(CvBolumu::AkademikUnvanlar) && $unvanlar->isNotEmpty())
+                <div>
+                    <div class="cv-baslik">Akademik Unvanlar</div>
+                    @foreach ($unvanlar as $u)
+                        <div class="cv-satir">
+                            <div class="cv-satir-baslik">{{ collect([$u['unvan'], $u['alan']])->filter()->implode(' — ') }}</div>
+                            <div class="cv-satir-alt">{{ collect([$u['kurum'], $u['yil']])->filter()->implode(' · ') }}</div>
                         </div>
                     @endforeach
                 </div>
@@ -135,6 +153,19 @@
                                     ? $deneyim['baslangic'].' – '.(($deneyim['bitis'] ?? '') !== '' ? $deneyim['bitis'] : 'devam ediyor')
                                     : '' }}
                             </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            @php $uyelikler = collect($cv['uyelikler'] ?? [])->filter(fn (array $u) => filled($u['kurulus'])); @endphp
+            @if ($acik(CvBolumu::Uyelikler) && $uyelikler->isNotEmpty())
+                <div>
+                    <div class="cv-baslik">Bilimsel Kuruluş Üyelikleri</div>
+                    @foreach ($uyelikler as $u)
+                        <div class="cv-satir">
+                            <div class="cv-satir-baslik">{{ $u['kurulus'] }}</div>
+                            <div class="cv-satir-alt">{{ collect([$u['gorev'], $u['yil']])->filter()->implode(' · ') }}</div>
                         </div>
                     @endforeach
                 </div>

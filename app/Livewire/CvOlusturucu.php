@@ -54,15 +54,25 @@ class CvOlusturucu extends Component
     use WithFileUploads;
 
     /** Yeni eklenen satırların iskeleti; anahtar kümesi şablonun beklediğiyle aynı. */
-    private const BOS_EGITIM = ['derece' => '', 'universite' => '', 'bolum' => '', 'baslangic' => '', 'bitis' => ''];
+    private const BOS_EGITIM = ['derece' => '', 'universite' => '', 'bolum' => '', 'baslangic' => '', 'bitis' => '', 'tez_adi' => '', 'danisman' => ''];
 
     private const BOS_DENEYIM = ['pozisyon' => '', 'kurum' => '', 'baslangic' => '', 'bitis' => ''];
+
+    /** EK-4A madde 5: Doçent, Profesör… Hangi kurum (ÜAK, üniversite), hangi alanda, hangi yıl. */
+    private const BOS_UNVAN = ['unvan' => '', 'kurum' => '', 'alan' => '', 'yil' => ''];
+
+    /** EK-4A madde 10: bilimsel kuruluş üyelikleri. */
+    private const BOS_UYELIK = ['kurulus' => '', 'gorev' => '', 'yil' => ''];
 
     /** Form panelindeki etkin sekme. */
     public string $sekme = 'kisisel';
 
     #[Validate('nullable|string|max:120')]
     public string $ad = '';
+
+    /** Y-m-d; EK-4A özgeçmişi soruyor, tasarımlı şablonlarda basılmıyor. */
+    #[Validate('nullable|date|before:today|after:1900-01-01')]
+    public string $dogumTarihi = '';
 
     /** Onboarding ve profille aynı kapalı liste ({@see User::UNVANLAR}). */
     #[Validate(['nullable', new In(User::UNVANLAR)])]
@@ -106,6 +116,12 @@ class CvOlusturucu extends Component
     /** @var list<array{pozisyon: string, kurum: string, baslangic: string, bitis: string}> */
     public array $deneyimler = [];
 
+    /** @var list<array{unvan: string, kurum: string, alan: string, yil: string}> */
+    public array $akademikUnvanlar = [];
+
+    /** @var list<array{kurulus: string, gorev: string, yil: string}> */
+    public array $uyelikler = [];
+
     /** @var list<string> */
     public array $beceriler = [];
 
@@ -136,6 +152,7 @@ class CvOlusturucu extends Component
         $profil = CvProfili::kullaniciIcin(Auth::user());
 
         $this->ad = (string) $profil->ad;
+        $this->dogumTarihi = $profil->dogum_tarihi?->toDateString() ?? '';
         $this->unvan = (string) $profil->unvan;
         $this->kurum = (string) $profil->kurum;
         $this->bolum = (string) $profil->bolum;
@@ -149,6 +166,8 @@ class CvOlusturucu extends Component
         // Satırlar burada tek tek şekline sokuluyor.
         $this->egitimler = $this->egitimSatirlari($profil->egitimler);
         $this->deneyimler = $this->deneyimSatirlari($profil->deneyimler);
+        $this->akademikUnvanlar = self::satirlar($profil->akademik_unvanlar ?? [], self::BOS_UNVAN);
+        $this->uyelikler = self::satirlar($profil->uyelikler ?? [], self::BOS_UYELIK);
         $this->beceriler = $this->metinListesi($profil->beceriler);
         $this->diller = $this->dilSatirlari($profil->diller);
         $this->haricFaaliyetler = $this->sayiListesi($profil->haric_faaliyetler);
@@ -316,6 +335,30 @@ class CvOlusturucu extends Component
         $this->kaydet();
     }
 
+    public function unvanEkle(): void
+    {
+        $this->akademikUnvanlar[] = self::BOS_UNVAN;
+        $this->kaydet();
+    }
+
+    public function unvanSil(int $sira): void
+    {
+        $this->akademikUnvanlar = self::satirlar($this->disinda($this->akademikUnvanlar, $sira), self::BOS_UNVAN);
+        $this->kaydet();
+    }
+
+    public function uyelikEkle(): void
+    {
+        $this->uyelikler[] = self::BOS_UYELIK;
+        $this->kaydet();
+    }
+
+    public function uyelikSil(int $sira): void
+    {
+        $this->uyelikler = self::satirlar($this->disinda($this->uyelikler, $sira), self::BOS_UYELIK);
+        $this->kaydet();
+    }
+
     public function beceriEkle(): void
     {
         $beceri = trim($this->yeniBeceri);
@@ -441,6 +484,7 @@ class CvOlusturucu extends Component
         $veri = [
             'kunye' => [
                 'ad' => $this->ad,
+                'dogum_tarihi' => $this->dogumTarihi ?: null,
                 'unvan' => $this->unvan,
                 'kurum' => $this->kurum,
                 'bolum' => $this->bolum,
@@ -452,6 +496,8 @@ class CvOlusturucu extends Component
             ],
             'egitimler' => $this->egitimler,
             'deneyimler' => $this->deneyimler,
+            'akademik_unvanlar' => $this->akademikUnvanlar,
+            'uyelikler' => $this->uyelikler,
             'beceriler' => $this->beceriler,
             'diller' => $this->diller,
             'faaliyetler' => $this->secilenler->map(fn (Faaliyet $f) => [
@@ -495,9 +541,26 @@ class CvOlusturucu extends Component
 
     /**
      * @param  iterable<mixed>  $ham
-     * @return list<array{derece: string, universite: string, bolum: string, baslangic: string, bitis: string}>
+     * @return list<array{derece: string, universite: string, bolum: string, baslangic: string, bitis: string, tez_adi: string, danisman: string}>
      */
     private function egitimSatirlari(iterable $ham): array
+    {
+        return self::satirlar($ham, self::BOS_EGITIM);
+    }
+
+    /**
+     * JSON listesini verilen iskeletin anahtarlarına göre şekline sokar:
+     * eksik anahtar boş metin olur, fazlası atılır, dizi olmayan satır düşer.
+     * Eski kayıtlardaki satırlar (ör. tez adı eklenmeden önceki eğitim
+     * satırları) böylece yeni anahtarlarla açılıyor.
+     *
+     * @template T of array<string, string>
+     *
+     * @param  iterable<mixed>  $ham
+     * @param  T  $iskelet
+     * @return list<T>
+     */
+    private static function satirlar(iterable $ham, array $iskelet): array
     {
         $satirlar = [];
 
@@ -506,13 +569,10 @@ class CvOlusturucu extends Component
                 continue;
             }
 
-            $satirlar[] = [
-                'derece' => (string) ($satir['derece'] ?? ''),
-                'universite' => (string) ($satir['universite'] ?? ''),
-                'bolum' => (string) ($satir['bolum'] ?? ''),
-                'baslangic' => (string) ($satir['baslangic'] ?? ''),
-                'bitis' => (string) ($satir['bitis'] ?? ''),
-            ];
+            $satirlar[] = array_map(
+                fn (string $anahtar): string => (string) ($satir[$anahtar] ?? ''),
+                array_combine(array_keys($iskelet), array_keys($iskelet)),
+            );
         }
 
         return $satirlar;
@@ -609,8 +669,11 @@ class CvOlusturucu extends Component
     {
         $this->profil->update([
             ...$this->gecerliKunye(),
+            'dogum_tarihi' => $this->gecerliDogumTarihi(),
             'egitimler' => $this->egitimler,
             'deneyimler' => $this->deneyimler,
+            'akademik_unvanlar' => $this->akademikUnvanlar,
+            'uyelikler' => $this->uyelikler,
             'beceriler' => $this->beceriler,
             'diller' => $this->diller,
             'haric_faaliyetler' => $this->haricFaaliyetler,
@@ -620,6 +683,20 @@ class CvOlusturucu extends Component
             'yazi_tipi' => $this->yaziTipi,
             'bolumler' => $this->bolumler,
         ]);
+    }
+
+    /**
+     * Geçersiz doğum tarihi yazılmaz, kayıtlı değer korunur ({@see gecerliKunye()} ile aynı kural).
+     */
+    private function gecerliDogumTarihi(): ?string
+    {
+        if ($this->dogumTarihi === '') {
+            return null;
+        }
+
+        $gecersiz = Validator::make(['dogumTarihi' => $this->dogumTarihi], ['dogumTarihi' => $this->getRules()['dogumTarihi']])->fails();
+
+        return $gecersiz ? $this->profil->dogum_tarihi?->toDateString() : $this->dogumTarihi;
     }
 
     /**
@@ -668,6 +745,7 @@ class CvOlusturucu extends Component
     {
         return [
             'ad' => $this->ad,
+            'dogumTarihi' => $this->dogumTarihi,
             'unvan' => $this->unvan,
             'kurum' => $this->kurum,
             'bolum' => $this->bolum,
@@ -678,6 +756,8 @@ class CvOlusturucu extends Component
             'ozet' => $this->ozet,
             'egitimler' => $this->egitimler,
             'deneyimler' => $this->deneyimler,
+            'akademikUnvanlar' => $this->akademikUnvanlar,
+            'uyelikler' => $this->uyelikler,
             'beceriler' => $this->beceriler,
             'diller' => $this->diller,
             'gruplu' => $this->gruplu,

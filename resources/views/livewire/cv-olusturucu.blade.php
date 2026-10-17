@@ -29,6 +29,8 @@
             :sekme="$sekme"
             :egitimler="$egitimler"
             :deneyimler="$deneyimler"
+            :akademik-unvanlar="$akademikUnvanlar"
+            :uyelikler="$uyelikler"
             :beceriler="$beceriler"
             :diller="$diller"
             :faaliyetler="$this->faaliyetler"

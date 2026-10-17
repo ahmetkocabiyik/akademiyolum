@@ -6,6 +6,7 @@ use App\Enums\CvBolumu;
 use App\Enums\CvSablonu;
 use App\Enums\CvYaziTipi;
 use App\Rules\GecerliOrcid;
+use Carbon\CarbonInterface;
 use Database\Factories\CvProfiliFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property int $user_id
  * @property string|null $ad
+ * @property CarbonInterface|null $dogum_tarihi
  * @property string|null $unvan
  * @property string|null $kurum
  * @property string|null $bolum
@@ -27,6 +29,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $foto
  * @property array<int, mixed> $egitimler
  * @property array<int, mixed> $deneyimler
+ * @property array<int, mixed>|null $akademik_unvanlar
+ * @property array<int, mixed>|null $uyelikler
  * @property array<int, mixed> $beceriler
  * @property array<int, mixed> $diller
  * @property array<int, mixed> $haric_faaliyetler
@@ -37,8 +41,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array<string, mixed> $bolumler
  */
 #[Fillable([
-    'ad', 'unvan', 'kurum', 'bolum', 'eposta', 'telefon', 'sehir', 'orcid', 'ozet', 'foto',
-    'egitimler', 'deneyimler', 'beceriler', 'diller', 'haric_faaliyetler',
+    'ad', 'dogum_tarihi', 'unvan', 'kurum', 'bolum', 'eposta', 'telefon', 'sehir', 'orcid', 'ozet', 'foto',
+    'egitimler', 'deneyimler', 'akademik_unvanlar', 'uyelikler', 'beceriler', 'diller', 'haric_faaliyetler',
     'sablon', 'renk', 'cizgi_renk', 'yazi_tipi', 'bolumler',
 ])]
 class CvProfili extends Model
@@ -96,8 +100,11 @@ class CvProfili extends Model
     protected function casts(): array
     {
         return [
+            'dogum_tarihi' => 'date',
             'egitimler' => 'array',
             'deneyimler' => 'array',
+            'akademik_unvanlar' => 'array',
+            'uyelikler' => 'array',
             'beceriler' => 'array',
             'diller' => 'array',
             'haric_faaliyetler' => 'array',
@@ -140,6 +147,8 @@ class CvProfili extends Model
             'orcid' => GecerliOrcid::kimlik($user->orcid),
             'egitimler' => self::egitimTaslagi($user),
             'deneyimler' => [],
+            'akademik_unvanlar' => self::unvanTaslagi($user),
+            'uyelikler' => [],
             'beceriler' => [],
             'diller' => [],
             'haric_faaliyetler' => [],
@@ -177,10 +186,32 @@ class CvProfili extends Model
                 'bolum' => null,
                 'baslangic' => null,
                 'bitis' => (string) $tarih->year,
+                'tez_adi' => null,
+                'danisman' => null,
             ];
         }
 
         return $satirlar;
+    }
+
+    /**
+     * Profildeki doçentlik tarihinden akademik unvan satırı (EK-4A madde 5).
+     * Doktora bir unvan değil, öğrenim; o eğitim satırında.
+     *
+     * @return list<array<string, string|null>>
+     */
+    private static function unvanTaslagi(User $user): array
+    {
+        if ($user->docentlik_tarihi === null) {
+            return [];
+        }
+
+        return [[
+            'unvan' => 'Doçent',
+            'kurum' => 'ÜAK',
+            'alan' => null,
+            'yil' => (string) $user->docentlik_tarihi->year,
+        ]];
     }
 
     public function bolumAcik(CvBolumu $bolum): bool

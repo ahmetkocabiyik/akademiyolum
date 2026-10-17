@@ -32,6 +32,8 @@ class CvProfiliFactory extends Factory
             'ozet' => null,
             'egitimler' => [],
             'deneyimler' => [],
+            'akademik_unvanlar' => [],
+            'uyelikler' => [],
             'beceriler' => [],
             'diller' => [],
             'haric_faaliyetler' => [],
