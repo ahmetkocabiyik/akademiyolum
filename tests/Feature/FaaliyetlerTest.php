@@ -75,7 +75,7 @@ test('listedeki satır faaliyetin düzenleme sayfasına bağlanır', function ()
         // Başlık gerçek bir bağlantı: klavye ve ekran okuyucu erişimi korunur.
         ->assertSeeHtml('href="'.route('faaliyetler.duzenle', $faaliyet).'"')
         // Satır tıklaması o bağlantıyı tetikler, işlem düğmeleri hariç tutulur.
-        ->assertSeeHtml("closest('a, button') || \$refs.duzenle.click()");
+        ->assertSeeHtml("closest('a, button, input, label') || \$refs.duzenle.click()");
 });
 
 test('listedeki puan kendi üniversitesinin cetvelinden hesaplanır', function () {
@@ -123,4 +123,84 @@ test('başka kullanıcının faaliyetinin durumu değiştirilemez', function () 
         ->toThrow(ModelNotFoundException::class);
 
     expect($baskasi->refresh()->durum)->toBe('beklemede');
+});
+
+test('seçilen faaliyetler topluca onaylanır ve beklemeye alınır', function () {
+    $a = Faaliyet::factory()->for($this->user)->beklemede()->create();
+    $b = Faaliyet::factory()->for($this->user)->beklemede()->create();
+    $secilmeyen = Faaliyet::factory()->for($this->user)->beklemede()->create();
+
+    $bilesen = Livewire::test(Faaliyetler::class)
+        ->set('secili', [(string) $a->id, (string) $b->id])
+        ->assertSeeHtml('data-toplu-islem')
+        ->call('topluDurum', 'onaylandi')
+        ->assertSet('secili', []);
+
+    expect($a->refresh()->durum)->toBe('onaylandi')
+        ->and($b->refresh()->durum)->toBe('onaylandi')
+        ->and($secilmeyen->refresh()->durum)->toBe('beklemede');
+
+    $bilesen->set('secili', [$a->id])->call('topluDurum', 'beklemede');
+
+    expect($a->refresh()->durum)->toBe('beklemede');
+});
+
+test('seçilen faaliyetler topluca silinir', function () {
+    $a = Faaliyet::factory()->for($this->user)->create();
+    $b = Faaliyet::factory()->for($this->user)->create();
+    $kalan = Faaliyet::factory()->for($this->user)->create();
+
+    Livewire::test(Faaliyetler::class)
+        ->set('secili', [$a->id, $b->id])
+        ->call('topluSil');
+
+    expect($this->user->faaliyetler()->pluck('id')->all())->toBe([$kalan->id]);
+});
+
+test('toplu işlem başka kullanıcının ve filtrede gizlenen kaydına dokunmaz', function () {
+    $baskasi = Faaliyet::factory()->create();
+    $gizlenen = Faaliyet::factory()->for($this->user)->kategori(Kategori::Kitap)->create();
+    $gorunen = Faaliyet::factory()->for($this->user)->kategori(Kategori::Makale)->create();
+
+    // Kimlikler istekte elle gönderilse bile süzülür.
+    Livewire::test(Faaliyetler::class)
+        ->set('kategoriFiltre', Kategori::Makale->value)
+        ->set('secili', [$baskasi->id, $gizlenen->id, $gorunen->id])
+        ->call('topluSil');
+
+    expect(Faaliyet::find($baskasi->id))->not->toBeNull()
+        ->and(Faaliyet::find($gizlenen->id))->not->toBeNull()
+        ->and(Faaliyet::find($gorunen->id))->toBeNull();
+});
+
+test('filtre değişince seçim sıfırlanır', function () {
+    $a = Faaliyet::factory()->for($this->user)->create();
+
+    Livewire::test(Faaliyetler::class)
+        ->set('secili', [$a->id])
+        ->set('arama', 'x')
+        ->assertSet('secili', []);
+});
+
+test('tümünü seç görünenleri işaretler, ikinci tıklama temizler', function () {
+    $makale = Faaliyet::factory()->for($this->user)->kategori(Kategori::Makale)->create();
+    Faaliyet::factory()->for($this->user)->kategori(Kategori::Kitap)->create();
+
+    Livewire::test(Faaliyetler::class)
+        ->set('kategoriFiltre', Kategori::Makale->value)
+        ->call('tumunuSecDegistir')
+        ->assertSet('secili', [$makale->id])
+        ->call('tumunuSecDegistir')
+        ->assertSet('secili', []);
+});
+
+test('geçersiz toplu durum reddedilir', function () {
+    $a = Faaliyet::factory()->for($this->user)->create(['durum' => 'onaylandi']);
+
+    Livewire::test(Faaliyetler::class)
+        ->set('secili', [$a->id])
+        ->call('topluDurum', 'silindi')
+        ->assertStatus(422);
+
+    expect($a->refresh()->durum)->toBe('onaylandi');
 });

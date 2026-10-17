@@ -31,7 +31,8 @@ test('eklenen faaliyet listede vurgulanır, diğerleri vurgulanmaz', function ()
 
     $html = Livewire::test(Faaliyetler::class)->html();
     expect(substr_count($html, 'data-vurgu'))->toBe(1)
-        ->and($html)->toMatch('/data-vurgu[^>]*>\s*<td[^>]*>\s*<a[^>]*>Yeni makale/');
+        ->and($html)// İlk hücre seçim kutusu, başlık bağlantısı ikincide.
+        ->toMatch('/data-vurgu[^>]*>\s*<td[^>]*>\s*<input[^>]*>\s*<\/td>\s*<td[^>]*>\s*<a[^>]*>Yeni makale/');
 
     // Silme, satır kayarak çıktıktan SONRA gönderiliyor.
     expect($html)->toContain("cikis(\$el.closest('tr')).then(() => \$wire.sil({$eski->id}))");
