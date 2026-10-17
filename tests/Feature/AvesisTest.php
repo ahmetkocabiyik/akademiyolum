@@ -6,6 +6,7 @@ use App\Models\Faaliyet;
 use App\Models\User;
 use App\Services\Yayin\AvesisProfili;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Livewire\Livewire;
 
 /**
@@ -105,9 +106,14 @@ test('yalnız avesis alan adları kabul ediliyor', function (string $girdi, ?arr
     ['https://avesis.ktu.edu.tr/bc.demirbag', ['taban' => 'https://avesis.ktu.edu.tr', 'kullanici' => 'bc.demirbag']],
     ['avesis.deu.edu.tr/mehmetyilmaz', ['taban' => 'https://avesis.deu.edu.tr', 'kullanici' => 'mehmetyilmaz']],
     ['https://avesis.ktu.edu.tr/bc.demirbag/yayinlar', ['taban' => 'https://avesis.ktu.edu.tr', 'kullanici' => 'bc.demirbag']],
+    // `www.` öneki ve arayüzün dil öneki (eskiden kullanıcı adı "en" sanılıyordu).
+    ['https://www.avesis.ktu.edu.tr/bc.demirbag', ['taban' => 'https://avesis.ktu.edu.tr', 'kullanici' => 'bc.demirbag']],
+    ['https://avesis.ktu.edu.tr/en/bc.demirbag', ['taban' => 'https://avesis.ktu.edu.tr', 'kullanici' => 'bc.demirbag']],
+    ['https://avesis.ktu.edu.tr/tr/bc.demirbag/yayinlar', ['taban' => 'https://avesis.ktu.edu.tr', 'kullanici' => 'bc.demirbag']],
     // Başka sunucu: reddedilmeli.
     ['https://evil.example.com/x', null],
     ['https://avesis.ktu.edu.tr.evil.com/x', null],
+    ['https://www.avesis.ktu.edu.tr.evil.com/x', null],
     ['http://127.0.0.1/admin', null],
     // Sitenin kendi sayfaları profil değil.
     ['https://avesis.ktu.edu.tr/arama?q=x', null],
@@ -306,8 +312,37 @@ test('avesis dışı adres istek atmadan reddediliyor', function () {
         ->set('avesisAdres', 'https://evil.example.com/profil')
         ->call('avesisGetir')
         ->assertOk()
+        ->assertSee('Bu adres (evil.example.com) henüz desteklenmiyor');
+
+    Http::assertNothingSent();
+});
+
+/**
+ * MÜŞTERİ GERİ BİLDİRİMİ: "Doğru adres yapıştırılsa bile 'Adresi tanıyamadım'
+ * uyarısı veriyor." Doğru ama desteklenmeyen sistemin (YÖK Akademik,
+ * üniversitenin başka bir yazılımı) adresiydi; ileti adayı suçluyordu.
+ */
+test('desteklenmeyen sistemin adresi açıkça söylenir ve log a yazılır', function () {
+    $kullanici = User::factory()->create();
+    Http::fake();
+    Log::spy();
+
+    Livewire::actingAs($kullanici)->test(FaaliyetEkle::class)
+        ->set('sekme', 'avesis')
+        ->set('avesisAdres', 'https://akademik.yok.gov.tr/AkademikArama/AkademisyenGorevOgrenimBilgileri?authorId=ABC')
+        ->call('avesisGetir')
+        ->assertSee('YÖK Akademik profilleri henüz okunamıyor')
+        ->assertSee('Yayınlarımı Bul')
+        ->set('avesisAdres', 'https://unis.beykoz.edu.tr/akademisyen-detay/birisi')
+        ->call('avesisGetir')
+        ->assertSee('Bu adres (unis.beykoz.edu.tr) henüz desteklenmiyor')
+        ->set('avesisAdres', 'adres değil')
+        ->call('avesisGetir')
         ->assertSee('Adresi tanıyamadım');
 
+    // Yalnız sunucu adı; yol kullanıcı adı taşıyor.
+    Log::shouldHaveReceived('info')->with('Tanınmayan kurum profili adresi', ['sunucu' => 'akademik.yok.gov.tr'])->once();
+    Log::shouldHaveReceived('info')->with('Tanınmayan kurum profili adresi', ['sunucu' => 'unis.beykoz.edu.tr'])->once();
     Http::assertNothingSent();
 });
 

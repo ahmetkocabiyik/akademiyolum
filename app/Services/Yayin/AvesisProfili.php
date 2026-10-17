@@ -116,7 +116,9 @@ class AvesisProfili implements ProfilOkuyucu
     {
         $girdi = trim($girdi);
 
-        if (preg_match('~^(?:https?://)?(avesis\.[a-z0-9\-]+(?:\.[a-z0-9\-]+)*\.edu\.tr)/([A-Za-z0-9._\-]{2,60})~i', $girdi, $esles) !== 1) {
+        // `www.` öneki ve İngilizce/Türkçe arayüzün dil öneki (`/en/kullanici`)
+        // atlanıyor: ikincisi eskiden kullanıcı adı "en" sanılıyordu.
+        if (preg_match('~^(?:https?://)?(?:www\.)?(avesis\.[a-z0-9\-]+(?:\.[a-z0-9\-]+)*\.edu\.tr)/(?:(?:en|tr)/)?([A-Za-z0-9._\-]{2,60})~i', $girdi, $esles) !== 1) {
             return null;
         }
 

@@ -120,42 +120,79 @@ class KunyeAyristirici
     }
 
     /**
-     * APBS: "Sempozyum Adı (25.04.2025 - 30.04.2025)". AVESİS: "Kongre,
-     * Şehir, Ülke, 25 - 27 Nisan 2025, ss.12-20". Toplantı adı ilk parça;
-     * yer, tarihten önceki parçalar; sayfa ss./pp. işaretinden.
+     * APBS: "Sempozyum Adı (25.04.2025 - 30.04.2025)". AVESİS: "Kongre Adı,
+     * Şehir, Ülke, 19 - 22 Haziran 2019, ss.12-20, (Özet Bildiri)".
+     *
+     * Kongre adı virgül içerebiliyor ("International Learning, Teaching and
+     * Educational Research Congress"), o yüzden ad baştan değil SONDAN
+     * kuruluyor: tarih parçasından hemen önceki bir ya da iki parça yer
+     * (ülke; tek kelimeyse önündeki şehir), kalanı ad. Ayrımın emin
+     * olunamadığı yerde (tarih yok, tek parça) yer boş kalıyor.
      *
      * @return array<string, string>
      */
     private function bildiri(string $metin): array
     {
         $metin = trim(preg_replace('/\s*\(\d{1,2}\.\d{1,2}\.\d{4}\s*-\s*\d{1,2}\.\d{1,2}\.\d{4}\)\s*/u', ' ', $metin) ?? $metin);
-        $tokenlar = array_map('trim', explode(',', $metin));
-        $alanlar = ['toplanti' => array_shift($tokenlar) ?? ''];
-        $yer = [];
-        $yerBitti = false;
+        $tokenlar = array_values(array_filter(array_map('trim', explode(',', $metin)), fn (string $t) => $t !== ''));
+        $alanlar = [];
 
         foreach ($tokenlar as $token) {
             if (preg_match('/^(?:pp|ss|s|p)\.\s*(.+)$/iu', $token, $m) === 1) {
                 $alanlar['sayfa'] = $m[1];
+            }
+        }
 
+        // Ad + yer: tarih, sayfa ya da parantezli tür parçasına kadar olanlar.
+        // İlk parça hep ad: "EJERCongress 2019" yıl taşıyor ama tarih değil.
+        $once = [];
+
+        foreach ($tokenlar as $i => $token) {
+            if ($i > 0 && (self::tarihParcasi($token) || preg_match('/^(?:pp|ss|s|p)\./iu', $token) === 1 || str_starts_with($token, '('))) {
                 break;
             }
 
-            // Tarih ya da yıl görülünce yer bitti; sayfa işareti aranmaya devam.
-            if ($yerBitti || preg_match('/\d/', $token) === 1) {
-                $yerBitti = true;
-
-                continue;
-            }
-
-            $yer[] = $token;
+            $once[] = $token;
         }
 
-        if ($yer !== [] && count($yer) <= 3) {
+        $tarihVar = count($once) < count($tokenlar);
+        $yer = [];
+
+        if ($tarihVar && count($once) >= 2 && self::yerAdi(end($once))) {
+            array_unshift($yer, array_pop($once));
+
+            // Şehir: tek kelimeyse ve önünde hâlâ ad kalıyorsa.
+            if (count($once) >= 2 && self::yerAdi(end($once)) && ! str_contains(end($once), ' ')) {
+                array_unshift($yer, array_pop($once));
+            }
+        }
+
+        $alanlar['toplanti'] = implode(', ', $once);
+
+        if ($yer !== []) {
             $alanlar['yer'] = implode(', ', $yer);
         }
 
         return $alanlar;
+    }
+
+    /**
+     * Toplantı tarihi parçası: gün aralığı ("19 - 22 Haziran 2019") ya da ay adı.
+     */
+    private static function tarihParcasi(string $parca): bool
+    {
+        return preg_match('/\b\d{1,2}\s*-\s*\d{1,2}\b/u', $parca) === 1
+            || preg_match('/\b(?:Ocak|Şubat|Mart|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık|January|February|March|April|May|June|July|August|September|October|November|December)\b/iu', $parca) === 1;
+    }
+
+    /**
+     * Yer adı gibi mi: büyük harfle başlayan, en çok iki kelime, toplantı
+     * adı sözcüğü taşımayan ("Ankara", "Türkiye", "New York").
+     */
+    private static function yerAdi(string $parca): bool
+    {
+        return preg_match("/^\p{Lu}[\p{L}.'\-]*(?: \p{Lu}[\p{L}.'\-]*)?$/u", $parca) === 1
+            && preg_match('/\b(?:Congress|Conference|Symposium|Workshop|Meeting|Kongre|Sempozyum|Konferans|Çalıştay|and|ve|of)\b/iu', $parca) !== 1;
     }
 
     /**
@@ -201,8 +238,14 @@ class KunyeAyristirici
 
         $alanlar = [];
 
-        // Ad gibi görünüyorsa: tire yok, en fazla beş sözcük.
-        if (! str_contains($parcalar[0], ' - ') && count(preg_split('/\s+/u', $parcalar[0]) ?: []) <= 5) {
+        // AVESİS: "Yönetilen Tezler · CAN G. (Danışman) H.Hakan(Öğrenci), Doktora, 2020".
+        if (preg_match('/(?:\)|^|·)\s*([^()·]+?)\s*\(Öğrenci\)/u', implode(' · ', $parcalar), $m) === 1) {
+            return ['ogrenci' => self::baslikHarfi(trim($m[1]))];
+        }
+
+        // APBS: ad gibi görünüyorsa (tire yok, en fazla beş sözcük, "tez" değil).
+        if (! str_contains($parcalar[0], ' - ') && count(preg_split('/\s+/u', $parcalar[0]) ?: []) <= 5
+            && preg_match('/\btez/iu', $parcalar[0]) !== 1) {
             $alanlar['ogrenci'] = self::baslikHarfi($parcalar[0]);
         }
 
@@ -218,8 +261,15 @@ class KunyeAyristirici
      */
     private static function baslikHarfi(string $metin): string
     {
-        return mb_strtoupper($metin, 'UTF-8') === $metin && preg_match('/\p{L}/u', $metin) === 1
-            ? UniversiteBirimleriCek::baslikHarfi($metin)
-            : $metin;
+        if (mb_strtoupper($metin, 'UTF-8') !== $metin || preg_match('/\p{L}/u', $metin) !== 1) {
+            return $metin;
+        }
+
+        // "A.GÜL" tek kelime sayılıyor; noktadan sonraki harf de büyük olsun.
+        return (string) preg_replace_callback(
+            '/\.(\p{Ll})/u',
+            fn (array $m): string => '.'.($m[1] === 'i' ? 'İ' : mb_strtoupper($m[1], 'UTF-8')),
+            UniversiteBirimleriCek::baslikHarfi($metin),
+        );
     }
 }

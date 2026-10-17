@@ -15,6 +15,7 @@ use App\Services\Yayin\MukerrerDenetimi;
 use App\Services\Yayin\ProfilOkuyuculari;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -706,8 +707,7 @@ class FaaliyetEkle extends Component
         $cozum = $okuyucular->coz($this->avesisAdres);
 
         if ($cozum === null) {
-            $this->avesisHatasi = 'Adresi tanıyamadım. Kurumsal profil adresinizi olduğu gibi yapıştırın, örnek: '
-                .implode(' ya da ', $okuyucular->ornekAdresler());
+            $this->avesisHatasi = $this->taninmayanAdresIletisi($okuyucular->ornekAdresler());
 
             return;
         }
@@ -788,6 +788,39 @@ class FaaliyetEkle extends Component
             fn (array $kayit): string => $kayit['id'],
             array_filter($this->avesisBulunanlar, fn (array $kayit): bool => $kayit['ekli_sebep'] === null),
         ));
+    }
+
+    /**
+     * Okunamayan adres için ileti. Eskiden her durumda "Adresi tanıyamadım"
+     * deniyordu; YÖK Akademik ya da üniversitenin başka bir sistemindeki
+     * DOĞRU profil adresini yapıştıran aday özelliği bozuk sanıyordu.
+     * Desteklenmeyen sistem adayın hatası değil, açıkça söyleniyor.
+     *
+     * Sunucu adı log'a yazılıyor (yol değil: kullanıcı adı taşıyor). Hangi
+     * sistemlerin istendiğini görüp sıradakini ona göre eklemek için.
+     *
+     * @param  list<string>  $ornekler
+     */
+    private function taninmayanAdresIletisi(array $ornekler): string
+    {
+        $sunucu = mb_strtolower((string) parse_url(str_contains($this->avesisAdres, '://') ? trim($this->avesisAdres) : 'https://'.trim($this->avesisAdres), PHP_URL_HOST));
+        $sunucu = (string) preg_replace('/^www\./', '', $sunucu);
+        $ornek = implode(' ya da ', $ornekler);
+
+        if ($sunucu === '' || ! str_contains($sunucu, '.')) {
+            return "Adresi tanıyamadım. Kurumsal profil adresinizi olduğu gibi yapıştırın, örnek: {$ornek}";
+        }
+
+        Log::info('Tanınmayan kurum profili adresi', ['sunucu' => $sunucu]);
+
+        if (str_ends_with($sunucu, 'yok.gov.tr')) {
+            return 'YÖK Akademik profilleri henüz okunamıyor. Üniversitenizin AVESİS ya da APBS profil adresini girin '
+                ."(örnek: {$ornek}); yoksa yayınlarınızı \"Yayınlarımı Bul\" sekmesinden adınızla bulabilirsiniz.";
+        }
+
+        return "Bu adres ({$sunucu}) henüz desteklenmiyor: şu an AVESİS ve APBS profilleri okunabiliyor "
+            ."(örnek: {$ornek}). Üniversitenizin AVESİS ya da APBS adresi yoksa yayınlarınızı \"Yayınlarımı Bul\" "
+            .'sekmesinden adınızla bulabilirsiniz.';
     }
 
     /**

@@ -136,6 +136,8 @@ test('yalnız apbs alan adları kabul ediliyor', function (string $girdi, ?array
     expect(apbs()->adres($girdi))->toBe($beklenen);
 })->with([
     ['https://apbs.mersin.edu.tr/profiles/410660', ['taban' => 'https://apbs.mersin.edu.tr', 'kullanici' => '410660']],
+    ['https://www.apbs.mersin.edu.tr/profiles/410660', ['taban' => 'https://apbs.mersin.edu.tr', 'kullanici' => '410660']],
+    ['https://www.apbs.mersin.edu.tr.evil.com/profiles/1', null],
     ['apbs.mersin.edu.tr/profiles/137993', ['taban' => 'https://apbs.mersin.edu.tr', 'kullanici' => '137993']],
     // Bölüm sayfasını yapıştıran aday da tanınmalı.
     ['https://apbs.mersin.edu.tr/profiles/410660/makaleler', ['taban' => 'https://apbs.mersin.edu.tr', 'kullanici' => '410660']],

@@ -144,7 +144,7 @@ class ApbsProfili implements ProfilOkuyucu
     {
         $girdi = trim($girdi);
 
-        if (preg_match('~^(?:https?://)?(apbs\.[a-z0-9\-]+(?:\.[a-z0-9\-]+)*\.edu\.tr)/profiles/(\d{1,12})~i', $girdi, $esles) !== 1) {
+        if (preg_match('~^(?:https?://)?(?:www\.)?(apbs\.[a-z0-9\-]+(?:\.[a-z0-9\-]+)*\.edu\.tr)/profiles/(\d{1,12})~i', $girdi, $esles) !== 1) {
             return null;
         }
 
